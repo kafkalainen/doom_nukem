@@ -55,9 +55,8 @@
 # define k_q SDLK_q
 # define k_e SDLK_e
 
-# include "SDL2/SDL.h"
-# include <SDL2/SDL.h>
-# include <libc.h>
+# include "SDL.h"
+# include <io.h>
 # include <stdio.h>
 
 typedef struct		s_window

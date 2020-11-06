@@ -18,7 +18,7 @@ void    ft_die(char *msg)
     exit(0);
 }
 
-int  main()
+int  main(int argc, char **argv)
 {
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
         ft_die("Fatal: SDL Initalization failed.");
