@@ -125,7 +125,7 @@ typedef struct		s_texture
 
 typedef struct		s_home
 {
-	t_window		*win;
+	t_window		win;
 	t_map			*map;
 	t_texture		*texture;
 	SDL_Renderer	*ren;
@@ -141,7 +141,7 @@ t_xy			vec2_mul(t_xy v, double scalar);
 double			vec2_dot(t_xy a, t_xy b);
 double			ft_map(double in, t_range from, t_range to);
 
-void    		ft_die(char *msg, t_home *home);
+void    		ft_die(char *msg, t_home home);
 void			key_input(t_xyz	position);
 
 #endif

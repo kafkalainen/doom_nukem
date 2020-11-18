@@ -12,10 +12,10 @@
 
 #include "doom_nukem.h"
 
-void    ft_die(char *msg, t_home *home)
+void    ft_die(char *msg, t_home home)
 {
-    SDL_DestroyRenderer(home->ren);
-    SDL_DestroyWindow(home->win->window);
+    SDL_DestroyRenderer(home.ren);
+    SDL_DestroyWindow(home.win.window);
     printf("%s\n", msg);
     exit(0);
 }
@@ -71,24 +71,24 @@ int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Renderer *ren)
 
 int  main(int argc, char **argv)
 {
-    t_home *home;
+    t_home home;
     SDL_Event e;
-	SDL_Renderer *ren;
+
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
         ft_die("Fatal: SDL Initalization failed.", home);
-    home->win->window = SDL_CreateWindow("Hello World!", 100, 100, 640, 480, 0);
-    if (home->win->window == NULL)
+    home.win.window = SDL_CreateWindow("Hello World!", 100, 100, 640, 480, 0);
+    if (home.win.window == NULL)
        ft_die("Fatal: Failed to create a window.", home);
-    ren = SDL_CreateRenderer(home->win->window, -1, SDL_RENDERER_ACCELERATED);
-    if (ren == NULL)
+    home.ren = SDL_CreateRenderer(home.win.window, -1, SDL_RENDERER_ACCELERATED);
+    if (home.ren == NULL)
       ft_die("Fatal: Failed to create a renderer.", home);
     while(1)
     {
         if (SDL_PollEvent(&e) && e.type == SDL_QUIT)
 			break;
         //SDL_RenderClear(home->ren);
-		//ft_draw_line((t_xy){32, 64}, (t_xy){50, 124}, 0xFF8000, home->ren);
-        SDL_RenderPresent(ren);
+		ft_draw_line((t_xy){32, 64}, (t_xy){50, 124}, 0xFF8000, home.ren);
+        SDL_RenderPresent(home.ren);
     }
     SDL_Quit();
     printf("Kossua!\n");
