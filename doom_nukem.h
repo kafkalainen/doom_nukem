@@ -14,6 +14,8 @@
 # define DOOM_NUKEM_H
 
 # define BUFF_SIZE 16
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 480
 
 # define MAX_INT (2147483647)
 # define MIN_INT (-MAX_INT - 1)
@@ -55,9 +57,51 @@
 # define k_q SDLK_q
 # define k_e SDLK_e
 
-# include "SDL.h"
-# include <io.h>
-# include <stdio.h>
+# ifdef __unix__
+#  include <libc.h>
+#  include <string.h>
+# elif defined(_WIN32) || defined(WIN32)
+#  include "SDL.h"
+#  include <io.h>
+#  include <stdio.h>
+# endif
+
+typedef struct s_argb
+{
+	int a;
+	int r;
+	int g;
+	int b;
+}				t_argb;
+
+
+typedef struct		s_xy
+{
+	double		x;
+	double		y;
+}					t_xy;
+
+typedef t_xy		t_range;
+
+typedef struct		s_xyz
+{
+	double		x;
+	double		y;
+	double		z;
+}					t_xyz;
+
+typedef	struct		s_item
+{
+	double		x;
+	double		y;
+	double		z;
+}					t_item;
+
+typedef struct		s_player
+{
+	t_xyz			pos;
+	t_xy			dir;
+}					t_player;
 
 typedef struct		s_window
 {
@@ -69,36 +113,24 @@ typedef struct		s_window
 
 typedef struct		s_map
 {
-	int				*bitmap;
+	float			*bitmap;
+	float			*heightmap;
 }					t_map;
 
 typedef struct		s_texture
 {
 	SDL_Surface		wall;
 	SDL_Surface		sprite;
-}				t_texture;
+}					t_texture;
 
-typedef struct	s_home
+typedef struct		s_home
 {
 	t_window		*win;
 	t_map			*map;
 	t_texture		*texture;
-}				t_home;
+	SDL_Renderer	*ren;
+}					t_home;
 
-typedef struct s_xy
-{
-	double		x;
-	double		y;
-}				t_xy;
-
-typedef t_xy	t_range;
-
-typedef struct	s_xyz
-{
-	double		x;
-	double		y;
-	double		z;
-}				t_xyz;
 
 t_xy			vec2(double x, double y);
 t_xy			vec2_add(t_xy a, t_xy b);
@@ -109,7 +141,7 @@ t_xy			vec2_mul(t_xy v, double scalar);
 double			vec2_dot(t_xy a, t_xy b);
 double			ft_map(double in, t_range from, t_range to);
 
-void			ft_die(char *msg);
-SDL_Texture		*new_surface_to_texture(char *filename, SDL_Renderer *ren);
+void    		ft_die(char *msg, t_home *home);
+void			key_input(t_xyz	position);
 
 #endif
