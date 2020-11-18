@@ -69,6 +69,24 @@ int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Renderer *ren)
 	return (TRUE);
 }
 
+void	draw_grid(int h, int v, t_home home)
+{
+	int i;
+
+	i = 0;
+	while (i < SCREEN_WIDTH)
+	{
+		ft_draw_line((t_xy){i, 0}, (t_xy){i, SCREEN_HEIGHT}, 0xFF8000, home.ren);
+		i += h;
+	}
+	i = 0;
+	while (i < SCREEN_HEIGHT)
+	{
+		ft_draw_line((t_xy){0, i}, (t_xy){SCREEN_WIDTH, i}, 0xFF8000, home.ren);
+		i += v;
+	}
+}
+
 int  main(int argc, char **argv)
 {
     t_home home;
@@ -87,7 +105,7 @@ int  main(int argc, char **argv)
         if (SDL_PollEvent(&e) && e.type == SDL_QUIT)
 			break;
         //SDL_RenderClear(home->ren);
-		ft_draw_line((t_xy){32, 64}, (t_xy){50, 124}, 0xFF8000, home.ren);
+		draw_grid(32, 32, home);
         SDL_RenderPresent(home.ren);
     }
     SDL_Quit();
