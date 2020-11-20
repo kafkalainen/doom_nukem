@@ -60,10 +60,12 @@
 # ifdef __unix__
 #  include <libc.h>
 #  include <string.h>
+#  include <time.h>
 # elif defined(_WIN32) || defined(WIN32)
 #  include "SDL.h"
 #  include <io.h>
 #  include <stdio.h>
+#  include <time.h>
 # endif
 
 typedef struct s_argb
@@ -131,6 +133,16 @@ typedef struct		s_home
 	SDL_Renderer	*ren;
 }					t_home;
 
+/*
+** Libft functions (recoded libc functions)
+*/
+
+int		ft_numlen(long number);
+char	*ft_itoa(long long number);
+
+/*
+** Vector functions
+*/
 
 t_xy			vec2(double x, double y);
 t_xy			vec2_add(t_xy a, t_xy b);
@@ -141,7 +153,38 @@ t_xy			vec2_mul(t_xy v, double scalar);
 double			vec2_dot(t_xy a, t_xy b);
 double			ft_map(double in, t_range from, t_range to);
 
-void    		ft_die(char *msg, t_home home);
+/*
+** Drawing functions
+*/
+
+int				ft_put_pixel(double x, double y, int color, SDL_Renderer *ren);
+int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Renderer *ren);
+void			draw_grid(int h, int v, t_home home);
+void			draw_rect_center(t_xy xy, t_xy wh, t_home home);
+
+/*
+** Color manipulation
+*/
+
+t_argb			int2argb(int color);
+
+/*
+** Player
+*/
+
+void			init_player(t_player *plr, t_xy pos);
+void			update_player(t_player *plr, t_home home, SDL_Event e);
+
+/*
+** Event handlers
+*/
+
 void			key_input(t_player *plr, SDL_Event e, t_home home);
+
+/*
+** Miscellanious
+*/
+
+void			ft_die(char *msg, t_home home);
 
 #endif

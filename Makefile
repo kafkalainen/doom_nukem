@@ -2,6 +2,11 @@ SRCS =	main.c \
 		keyboard.c \
 		srcs/vec2_a.c \
 		srcs/vec2_b.c \
+		srcs/player.c \
+		srcs/draw1.c \
+		srcs/color.c \
+		srcs/die.c \
+		srcs/libft/ft_itoa.c \
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
 WIN_INCLUDE_PATHS = -IC:\mingw_dev_lib\include\SDL2
