@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom_nukem.h"
+#include "../doom_nukem.h"
 
 void		key_input(t_player *plr, SDL_Event e, t_home home)
 {
@@ -22,14 +22,14 @@ void		key_input(t_player *plr, SDL_Event e, t_home home)
 			ft_die("User closed the window", home);
 		// else if (e.type SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE)
 		// 	position.z == "insert jump function";
-		// else if (e.type SDL_KEYDOWN && e.key.keysym.sym == SDLK_UP)
-		// 	position.y += "insert movement rate";
+		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == k_up)
+			plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 4));
 		// else if (e.type SDL_KEYDOWN && e.key.keysym.sym == SDLK_DOWN)
 		// 	position.y -= "insert movement rate backwards";
 		// else if (e.type SDL_KEYDOWN && e.key.keysym.sym == SDLK_LEFT)
 		// 	position.x -= "insert strafe left ratio";
-		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == k_right)
-			plr->pos.x += 1;
+		else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == k_right)
+			plr->dir = vec2_rot(plr->dir, -60 * DEG_TO_RAD);
 		// else if (e.type SDL_KEYDOWN && e.key.keysym.sym == SDLK_w)
 		// 	position.y += "insert movement rate";
 		// else if (e.type SDL_KEYDOWN && e.key.keysym.sym == SDLK_s)

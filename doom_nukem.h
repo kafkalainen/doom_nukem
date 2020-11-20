@@ -68,41 +68,50 @@
 #  include <time.h>
 # endif
 
-typedef struct s_argb
+typedef struct		s_argb
 {
-	int a;
-	int r;
-	int g;
-	int b;
-}				t_argb;
+	int				a;
+	int				r;
+	int				g;
+	int				b;
+}					t_argb;
 
+typedef struct		s_time
+{
+	clock_t			beginfps;
+	clock_t			endfps;
+	clock_t			delta_time;
+	size_t			frames;
+	long int		fps;
+}					t_time;
 
 typedef struct		s_xy
 {
-	double		x;
-	double		y;
+	double			x;
+	double			y;
 }					t_xy;
 
 typedef t_xy		t_range;
 
 typedef struct		s_xyz
 {
-	double		x;
-	double		y;
-	double		z;
+	double			x;
+	double			y;
+	double			z;
 }					t_xyz;
 
 typedef	struct		s_item
 {
-	double		x;
-	double		y;
-	double		z;
+	double			x;
+	double			y;
+	double			z;
 }					t_item;
 
 typedef struct		s_player
 {
-	t_xyz			pos;
+	t_xy			pos;
 	t_xy			dir;
+	double			z;
 }					t_player;
 
 typedef struct		s_window
@@ -131,6 +140,7 @@ typedef struct		s_home
 	t_map			*map;
 	t_texture		*texture;
 	SDL_Renderer	*ren;
+	t_time			t;
 }					t_home;
 
 /*

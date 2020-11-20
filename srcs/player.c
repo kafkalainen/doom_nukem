@@ -16,8 +16,8 @@ void	init_player(t_player *plr, t_xy pos)
 {
 	plr->pos.x = pos.x;
 	plr->pos.y = pos.y;
-	plr->pos.z = 0;
-	plr->dir.x = 0;
+	plr->z = 0;
+	plr->dir.x = 1;
 	plr->dir.y = 0;
 }
 

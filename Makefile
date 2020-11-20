@@ -1,11 +1,11 @@
 SRCS =	main.c \
-		keyboard.c \
 		srcs/vec2_a.c \
 		srcs/vec2_b.c \
 		srcs/player.c \
 		srcs/draw1.c \
 		srcs/color.c \
 		srcs/die.c \
+		srcs/keyboard.c \
 		srcs/libft/ft_itoa.c \
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
