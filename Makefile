@@ -1,6 +1,7 @@
 SRCS =	main.c \
+		keyboard.c \
 		srcs/vec2_a.c \
-		srcs/vec2_b.c
+		srcs/vec2_b.c \
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
 WIN_INCLUDE_PATHS = -IC:\mingw_dev_lib\include\SDL2

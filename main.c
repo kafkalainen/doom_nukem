@@ -62,7 +62,8 @@ int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Renderer *ren)
 	pos.y = start.y;
 	while (pixels-- > 0)
 	{
-		ft_put_pixel(pos.x, pos.y, color, ren);
+		if (pos.x >= 0 && pos.x < SCREEN_WIDTH && pos.y >= 0 && pos.y < SCREEN_HEIGHT)
+			ft_put_pixel(pos.x, pos.y, color, ren);
 		pos.x += ratio.x * ((start.x < end.x) ? 1 : -1);
 		pos.y += ratio.y * ((start.y < end.y) ? 1 : -1);
 	}
@@ -87,10 +88,38 @@ void	draw_grid(int h, int v, t_home home)
 	}
 }
 
+void	draw_rect_center(t_xy xy, t_xy wh, t_home home)
+{
+	double j;
+	double i;
+
+	i = -wh.x / 2;
+	j = -wh.y / 2;
+	while (j < wh.y / 2 && i < SCREEN_WIDTH && j < SCREEN_HEIGHT)
+	{
+			ft_draw_line(vec2(xy.x + i, xy.y + j), vec2(xy.x + fabs(i), xy.y + j), 0x00A000, home.ren);
+			j++;
+	}
+}
+
+void	init_player(t_player *plr, t_xy pos)
+{
+	plr->pos.x = pos.x;
+	plr->pos.y = pos.y;
+	plr->pos.z = 0;
+}
+
+void	update_player(t_player *plr, t_home home, SDL_Event e)
+{
+	key_input(plr, e, home);
+	draw_rect_center(vec2(plr->pos.x, plr->pos.y), vec2(16, 16), home);
+}
+
 int  main(int argc, char **argv)
 {
-    t_home home;
-    SDL_Event e;
+    t_home		home;
+	t_player	plr;
+    SDL_Event	e;
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
         ft_die("Fatal: SDL Initalization failed.", home);
@@ -100,12 +129,15 @@ int  main(int argc, char **argv)
     home.ren = SDL_CreateRenderer(home.win.window, -1, SDL_RENDERER_ACCELERATED);
     if (home.ren == NULL)
       ft_die("Fatal: Failed to create a renderer.", home);
+	init_player(&plr, vec2(128, 128));
     while(1)
     {
+		SDL_SetRenderDrawColor(home.ren, 0, 0, 0, 255);
+		SDL_RenderClear(home.ren);
         if (SDL_PollEvent(&e) && e.type == SDL_QUIT)
 			break;
-        //SDL_RenderClear(home->ren);
 		draw_grid(32, 32, home);
+		update_player(&plr, home, e);
         SDL_RenderPresent(home.ren);
     }
     SDL_Quit();

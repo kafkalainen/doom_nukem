@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom_nuke.h"
+#include "doom_nukem.h"
 
-void		key_input(t_xyz	position, SDL_Event e)
+void		key_input(t_player *plr, SDL_Event e, t_home home)
 {
 	while(SDL_PollEvent(&e) != 0)
 	{
 		if (e.type == SDL_QUIT)
-			ft_die("User closed the window");
+			ft_die("User closed the window", home);
 		else if (e.type == SDLK_ESCAPE)
-			ft_die("User closed the window");
+			ft_die("User closed the window", home);
 		// else if (e.type == SDLK_SPACE)
 		// 	position.z == "insert jump function";
 		// else if (e.type == SDLK_UP)
@@ -28,8 +28,8 @@ void		key_input(t_xyz	position, SDL_Event e)
 		// 	position.y -= "insert movement rate backwards";
 		// else if (e.type == SDLK_LEFT)
 		// 	position.x -= "insert strafe left ratio";
-		// else if (e.type == SDLK_RIGHT)
-		// 	position.x += "insert strafe right ratio";
+		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == k_right)
+			plr->pos.x += 1;
 		// else if (e.type == SDLK_w)
 		// 	position.y += "insert movement rate";
 		// else if (e.type == SDLK_s)

@@ -142,6 +142,6 @@ double			vec2_dot(t_xy a, t_xy b);
 double			ft_map(double in, t_range from, t_range to);
 
 void    		ft_die(char *msg, t_home home);
-void			key_input(t_xyz	position);
+void			key_input(t_player *plr, SDL_Event e, t_home home);
 
 #endif
