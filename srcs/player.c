@@ -25,4 +25,7 @@ void	update_player(t_player *plr, t_home *home, SDL_Event e)
 {
 	key_input(plr, e, home);
 	draw_rect_center(vec2(plr->pos.x, plr->pos.y), vec2(16, 16), home);
+	ft_draw_line(vec2(plr->pos.x, plr->pos.y),
+		vec2_add(vec2(plr->pos.x, plr->pos.y),
+		vec2_mul(vec2(plr->dir.x, plr->dir.y), 64)), 0xFFFFFF, home->surf);
 }

@@ -71,6 +71,7 @@ void			stress_test(int max, int x, int y, t_home *home)
 	while (i < max)
 	{
 		draw_rect_center(vec2(x, y), vec2(4, 4), home);
+		i++;
 	}
 }
 
@@ -88,7 +89,7 @@ int  			main(int argc, char **argv)
 	{
 		home.t.beginfps = clock();
 		draw_grid(32, 32, &home);
-		//stress_test(1000, rand(SCREEN_WIDTH), rand(SCREEN_HEIGHT), &home);
+		//stress_test(5000, rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT, &home);
 		update_player(&plr, &home, e);
 		SDL_SetWindowTitle(home.win.window, ft_itoa(home.t.fps));
 		SDL_UpdateWindowSurface(home.win.window);
