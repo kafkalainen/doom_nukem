@@ -19,11 +19,17 @@ void	init_player(t_player *plr, t_xy pos)
 	plr->z = 0;
 	plr->dir.x = 1;
 	plr->dir.y = 0;
+	plr->input.down = 0;
+	plr->input.up = 0;
+	plr->input.right = 0;
+	plr->input.left = 0;
+	plr->time = 0;
 }
 
 void	update_player(t_player *plr, t_home *home, SDL_Event e)
 {
 	key_input(plr, e, home);
+	movement(plr);
 	draw_rect_center(vec2(plr->pos.x, plr->pos.y), vec2(16, 16), home);
 	ft_draw_line(vec2(plr->pos.x, plr->pos.y),
 		vec2_add(vec2(plr->pos.x, plr->pos.y),

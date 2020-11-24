@@ -6,6 +6,7 @@ SRCS =	main.c \
 		srcs/color.c \
 		srcs/die.c \
 		srcs/keyboard.c \
+		srcs/movement.c \
 		srcs/libft/ft_itoa.c \
 
 #INCLUDE_PATHS specifies the additional include paths we'll need

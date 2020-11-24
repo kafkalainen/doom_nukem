@@ -68,6 +68,15 @@
 #  include <time.h>
 # endif
 
+typedef struct		s_input
+{
+	int				right;
+	int				left;
+	int				up;
+	int				down;
+}					t_input;
+
+
 typedef struct		s_argb
 {
 	int				a;
@@ -112,6 +121,8 @@ typedef struct		s_player
 	t_xy			pos;
 	t_xy			dir;
 	double			z;
+	t_input			input;
+	clock_t			time;
 }					t_player;
 
 typedef struct		s_window
@@ -187,6 +198,7 @@ t_argb			int2argb(int color);
 
 void			init_player(t_player *plr, t_xy pos);
 void			update_player(t_player *plr, t_home *home, SDL_Event e);
+void			movement(t_player *plr);
 
 /*
 ** Event handlers
