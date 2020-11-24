@@ -21,7 +21,7 @@ void	init_player(t_player *plr, t_xy pos)
 	plr->dir.y = 0;
 }
 
-void	update_player(t_player *plr, t_home home, SDL_Event e)
+void	update_player(t_player *plr, t_home *home, SDL_Event e)
 {
 	key_input(plr, e, home);
 	draw_rect_center(vec2(plr->pos.x, plr->pos.y), vec2(16, 16), home);

@@ -140,6 +140,7 @@ typedef struct		s_home
 	t_map			*map;
 	t_texture		*texture;
 	SDL_Renderer	*ren;
+	SDL_Surface		*surf;
 	t_time			t;
 }					t_home;
 
@@ -168,9 +169,11 @@ double			ft_map(double in, t_range from, t_range to);
 */
 
 int				ft_put_pixel(double x, double y, int color, SDL_Renderer *ren);
-int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Renderer *ren);
-void			draw_grid(int h, int v, t_home home);
-void			draw_rect_center(t_xy xy, t_xy wh, t_home home);
+int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Surface *surf);
+void			draw_grid(int h, int v, t_home *home);
+void			draw_rect_center(t_xy xy, t_xy wh, t_home *home);
+void			put_pixel(SDL_Surface *surf, int x, int y, int color);
+void			modify_pixel_add(SDL_Surface *surf, int x, int y, int color);
 
 /*
 ** Color manipulation
@@ -183,18 +186,18 @@ t_argb			int2argb(int color);
 */
 
 void			init_player(t_player *plr, t_xy pos);
-void			update_player(t_player *plr, t_home home, SDL_Event e);
+void			update_player(t_player *plr, t_home *home, SDL_Event e);
 
 /*
 ** Event handlers
 */
 
-void			key_input(t_player *plr, SDL_Event e, t_home home);
+void			key_input(t_player *plr, SDL_Event e, t_home *home);
 
 /*
 ** Miscellanious
 */
 
-void			ft_die(char *msg, t_home home);
+void			ft_die(char *msg, t_home *home);
 
 #endif

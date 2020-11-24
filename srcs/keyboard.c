@@ -12,7 +12,7 @@
 
 #include "../doom_nukem.h"
 
-void		key_input(t_player *plr, SDL_Event e, t_home home)
+void		key_input(t_player *plr, SDL_Event e, t_home *home)
 {
 	while(SDL_PollEvent(&e) != 0)
 	{

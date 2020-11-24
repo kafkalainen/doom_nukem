@@ -12,10 +12,10 @@
 
 #include "../doom_nukem.h"
 
-void    ft_die(char *msg, t_home home)
+void    ft_die(char *msg, t_home *home)
 {
-    SDL_DestroyRenderer(home.ren);
-    SDL_DestroyWindow(home.win.window);
+    SDL_DestroyRenderer(home->ren);
+    SDL_DestroyWindow(home->win.window);
     printf("%s\n", msg);
     exit(0);
 }
