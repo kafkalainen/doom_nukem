@@ -75,22 +75,57 @@ void			stress_test(int max, int x, int y, t_home *home)
 	}
 }
 
+void			init_map(char *mapname, t_map *map)
+{
+	char	*line;
+	int		i;
+	size_t	shortest;
+	int		fd;
+	char	buf[2];
+
+	if ((fd = _open(mapname, _O_RDONLY)) < 0)
+		ft_die_destroy("Failed to load the map");
+	if (read(fd, buf, 1) < 0)
+		ft_die_destroy("Error loading the map file.");
+	close(fd);
+	fd = _open(mapname, _O_RDONLY);
+	i = 0;
+	shortest = -1;
+	while (ft_get_next_line(fd, &line) && i < MAP_MAX_LINES)
+	{
+		if (ft_strlen(line) < shortest)
+			shortest = ft_strlen(line);
+		map->data[i] = ft_strdup(line);
+		free(line);
+		++i;
+	}
+	map->size.y = i;
+	map->size.x = (int)shortest;
+}
+
+void			setup(char *mapname, t_home *home, t_player *plr)
+{
+	init_map(mapname, &home->map);
+	init_player(plr, &home->map);
+}
+
 int  			main(int argc, char **argv)
 {
 	t_home		home;
 	t_player	plr;
 	SDL_Event	e;
 
+	if (argc != 2)
+		ft_die_destroy("usage: .\\play [map file name]\n");
 	home = initialize_sdl();
 	home.t.fps = 0;
 	home.t.frames = 0;
-	init_player(&plr, vec2(128, 128));
+	setup(argv[1], &home, &plr);
 	while(1)
 	{
 		home.t.beginfps = clock();
-		draw_grid(32, 32, &home);
-		//stress_test(5000, rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT, &home);
 		update_player(&plr, &home, e);
+		draw_top_view(home.map.size, plr.pos, plr.dir, &home);
 		SDL_SetWindowTitle(home.win.window, ft_itoa(home.t.fps));
 		SDL_UpdateWindowSurface(home.win.window);
 		clear_surface(home.surf);

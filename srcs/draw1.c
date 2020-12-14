@@ -57,7 +57,7 @@ int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Surface *surf)
 	return (TRUE);
 }
 
-void	draw_grid(int h, int v, t_home *home)
+void	draw_grid2(int h, int v, t_home *home)
 {
 	int i;
 

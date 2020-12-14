@@ -3,11 +3,16 @@ SRCS =	main.c \
 		srcs/vec2_b.c \
 		srcs/player.c \
 		srcs/draw1.c \
+		srcs/draw2.c \
 		srcs/color.c \
 		srcs/die.c \
 		srcs/keyboard.c \
 		srcs/movement.c \
+		srcs/minimap.c \
 		srcs/libft/ft_itoa.c \
+		srcs/libft/ft_strings1.c \
+		srcs/libft/memory.c \
+		srcs/libft/ft_get_next_line.c
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
 WIN_INCLUDE_PATHS = -IC:\mingw_dev_lib\include\SDL2
@@ -18,7 +23,8 @@ WIN_LIBRARY_PATHS = -LC:\mingw_dev_lib\lib
 #COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
 # -Wl,-subsystem,windows gets rid of the console window
-WIN_COMPILER_FLAGS = -w -Wl,-subsystem,windows
+WIN_COMPILER_FLAGS = -w
+# -Wl,-subsystem,windows
 
 #LINKER_FLAGS specifies the libraries we're linking against
 WIN_LINK_FLAGS = -lmingw32 -lSDL2main -lSDL2

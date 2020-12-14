@@ -17,6 +17,9 @@
 # define SCREEN_WIDTH 640
 # define SCREEN_HEIGHT 480
 
+# define MAP_MAX_LINES 128
+# define MINIMAP_SIZE 10
+
 # define MAX_INT (2147483647)
 # define MIN_INT (-MAX_INT - 1)
 # define MAX_UINT ((unsigned int)-1)
@@ -61,11 +64,13 @@
 #  include <libc.h>
 #  include <string.h>
 #  include <time.h>
+#  include <fcntl.h>
 # elif defined(_WIN32) || defined(WIN32)
 #  include "SDL.h"
 #  include <io.h>
 #  include <stdio.h>
 #  include <time.h>
+#  include <fcntl.h>
 # endif
 
 typedef struct		s_input
@@ -137,6 +142,8 @@ typedef struct		s_map
 {
 	float			*bitmap;
 	float			*heightmap;
+	char			*data[MAP_MAX_LINES];
+	t_xy			size;
 }					t_map;
 
 typedef struct		s_texture
@@ -148,7 +155,7 @@ typedef struct		s_texture
 typedef struct		s_home
 {
 	t_window		win;
-	t_map			*map;
+	t_map			map;
 	t_texture		*texture;
 	SDL_Renderer	*ren;
 	SDL_Surface		*surf;
@@ -159,8 +166,26 @@ typedef struct		s_home
 ** Libft functions (recoded libc functions)
 */
 
-int		ft_numlen(long number);
-char	*ft_itoa(long long number);
+int				ft_numlen(long number);
+char			*ft_itoa(long long number);
+
+size_t			ft_strlen(const char *str);
+size_t			ft_strclen(const char *str, int c);
+void			ft_strdel(char **p);
+char			*ft_strchr(const char *str, int c);
+char			*ft_strdup(const char *str);
+char			*ft_strcpy(char *dst, const char *str);
+int				ft_strcmp(const char *str1, const char *str2);
+char			*ft_strsub(const char *str, unsigned int start, size_t n);
+char			*ft_strnew(size_t size);
+char			*ft_strcat(char *dst, const char *str);
+char			*ft_strjoin(const char *s1, const char *s2);
+
+void			*ft_memset(void *dst, int c, size_t n);
+void			ft_memdel(void **p);
+
+int				ft_get_next_line(const int fd, char **out);
+
 
 /*
 ** Vector functions
@@ -181,8 +206,8 @@ double			ft_map(double in, t_range from, t_range to);
 
 int				ft_put_pixel(double x, double y, int color, SDL_Renderer *ren);
 int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Surface *surf);
-void			draw_grid(int h, int v, t_home *home);
 void			draw_rect_center(t_xy xy, t_xy wh, t_home *home);
+void			draw_rect(t_xy xy, t_xy wh, t_home *home, int color);
 void			put_pixel(SDL_Surface *surf, int x, int y, int color);
 void			modify_pixel_add(SDL_Surface *surf, int x, int y, int color);
 
@@ -196,7 +221,7 @@ t_argb			int2argb(int color);
 ** Player
 */
 
-void			init_player(t_player *plr, t_xy pos);
+void			init_player(t_player *plr, t_map *map);
 void			update_player(t_player *plr, t_home *home, SDL_Event e);
 void			movement(t_player *plr);
 
@@ -211,5 +236,16 @@ void			key_input(t_player *plr, SDL_Event e, t_home *home);
 */
 
 void			ft_die(char *msg, t_home *home);
+void		    ft_die_destroy(char *msg);
+
+/*
+** Minimap
+*/
+
+t_xy			scale(t_xy a);
+void			draw_top_view(t_xy size, t_xy pos, t_xy dir, t_home *home);
+void			draw_grid(t_home *home);
+void			draw_grid2(int h, int v, t_home *home);
+
 
 #endif

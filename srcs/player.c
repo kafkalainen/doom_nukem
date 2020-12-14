@@ -12,10 +12,37 @@
 
 #include "../doom_nukem.h" 
 
-void	init_player(t_player *plr, t_xy pos)
+static void		set_player_position(t_player *plr, t_map *map)
 {
-	plr->pos.x = pos.x;
-	plr->pos.y = pos.y;
+	int x;
+	int y;
+
+	y = 0;
+	while (y < map->size.y)
+	{
+		x = 0;
+		while (x < map->size.x)
+		{
+			if (map->data[y][x] == 'P')
+			{
+				plr->pos.x = x + 0.5;
+				plr->pos.y = y + 0.5;
+				return ;
+			}
+			++x;
+		}
+		++y;
+	}
+	ft_die_destroy("Player not found in the map.");
+}
+
+void	init_player(t_player *plr, t_map *map)
+{
+	printf("Y: %f, X: %f\n", map->size.y, map->size.x);
+	for (int i = 0; i < map->size.y; i++) {
+		printf("%s\n", map->data[i]);
+	}
+	set_player_position(plr, map);
 	plr->z = 0;
 	plr->dir.x = 1;
 	plr->dir.y = 0;

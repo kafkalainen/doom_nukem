@@ -19,3 +19,9 @@ void    ft_die(char *msg, t_home *home)
     printf("%s\n", msg);
     exit(0);
 }
+
+void    ft_die_destroy(char *msg)
+{
+    printf("%s\n", msg);
+	exit(0);
+}
