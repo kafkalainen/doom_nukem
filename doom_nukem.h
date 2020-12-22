@@ -17,8 +17,14 @@
 # define SCREEN_WIDTH 640
 # define SCREEN_HEIGHT 480
 
+# define WALL_HEIGHT 0.5
+# define TEX_SIZE 64
+# define FOV 90.0
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
+
+# define HORIZONTAL_WALL 1
+# define VERTICAL_WALL 0
 
 # define MAX_INT (2147483647)
 # define MIN_INT (-MAX_INT - 1)
@@ -126,6 +132,7 @@ typedef struct		s_player
 	t_xy			pos;
 	t_xy			dir;
 	double			z;
+	double			height;
 	t_input			input;
 	clock_t			time;
 }					t_player;
@@ -146,11 +153,38 @@ typedef struct		s_map
 	t_xy			size;
 }					t_map;
 
+typedef struct		s_raycast
+{
+	t_xy			sideDist;
+	t_xy			deltaDist;
+	t_xy			step;
+	int				side;
+	double			perpWallDist;
+}					t_raycast;
+
+typedef struct		s_tex_col
+{
+	int				scr_col;
+	int				tex_col;
+	int				top;
+	int				bot;
+	int				line_height;
+	double			step;
+	SDL_Surface		*tex;
+}					t_tex_col;
+
 typedef struct		s_texture
 {
 	SDL_Surface		wall;
 	SDL_Surface		sprite;
 }					t_texture;
+
+typedef struct		s_wall
+{
+	t_xy			hit;
+	double			distance;
+	int				side;
+}					t_wall;
 
 typedef struct		s_home
 {
@@ -159,6 +193,7 @@ typedef struct		s_home
 	t_texture		*texture;
 	SDL_Renderer	*ren;
 	SDL_Surface		*surf;
+	SDL_Surface		*wall[4];
 	t_time			t;
 }					t_home;
 
@@ -210,6 +245,20 @@ void			draw_rect_center(t_xy xy, t_xy wh, t_home *home);
 void			draw_rect(t_xy xy, t_xy wh, t_home *home, int color);
 void			put_pixel(SDL_Surface *surf, int x, int y, int color);
 void			modify_pixel_add(SDL_Surface *surf, int x, int y, int color);
+int				get_pixel(SDL_Surface *screen, int x, int y);
+
+/*
+** Raycaster
+*/
+
+void			ft_draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf);
+void			ft_draw_wall(int col, t_wall wall, t_xy ray, t_home *home, SDL_Surface *surf, t_player *plr);
+
+
+t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, double angle);
+t_wall			cast_ray(t_xy pos, t_xy ray, t_map *map);
+void			draw_fov(t_home *home, t_player *plr, SDL_Surface *surf);
+int				get_wall_side(t_wall wall, t_player *plr);
 
 /*
 ** Color manipulation
@@ -222,7 +271,7 @@ t_argb			int2argb(int color);
 */
 
 void			init_player(t_player *plr, t_map *map);
-void			update_player(t_player *plr, t_home *home, SDL_Event e);
+void			update_player(t_player *plr, t_home *home, SDL_Event e, SDL_Surface *surf);
 void			movement(t_player *plr);
 
 /*

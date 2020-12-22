@@ -107,6 +107,10 @@ void			setup(char *mapname, t_home *home, t_player *plr)
 {
 	init_map(mapname, &home->map);
 	init_player(plr, &home->map);
+	home->wall[0] = SDL_LoadBMP("wall1.bmp");
+	home->wall[1] = SDL_LoadBMP("wall1.bmp");
+	home->wall[2] = SDL_LoadBMP("wall1.bmp");
+	home->wall[3] = SDL_LoadBMP("wall1.bmp");
 }
 
 int  			main(int argc, char **argv)
@@ -124,7 +128,7 @@ int  			main(int argc, char **argv)
 	while(1)
 	{
 		home.t.beginfps = clock();
-		update_player(&plr, &home, e);
+		update_player(&plr, &home, e, home.surf);
 		draw_top_view(home.map.size, plr.pos, plr.dir, &home);
 		SDL_SetWindowTitle(home.win.window, ft_itoa(home.t.fps));
 		SDL_UpdateWindowSurface(home.win.window);

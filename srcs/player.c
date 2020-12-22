@@ -51,9 +51,10 @@ void	init_player(t_player *plr, t_map *map)
 	plr->input.right = 0;
 	plr->input.left = 0;
 	plr->time = 0;
+	plr->height = 0.5;
 }
 
-void	update_player(t_player *plr, t_home *home, SDL_Event e)
+void	update_player(t_player *plr, t_home *home, SDL_Event e, SDL_Surface *surf)
 {
 	key_input(plr, e, home);
 	movement(plr);
@@ -61,4 +62,5 @@ void	update_player(t_player *plr, t_home *home, SDL_Event e)
 	ft_draw_line(vec2(plr->pos.x, plr->pos.y),
 		vec2_add(vec2(plr->pos.x, plr->pos.y),
 		vec2_mul(vec2(plr->dir.x, plr->dir.y), 64)), 0xFFFFFF, home->surf);
+	draw_fov(home, plr, surf);
 }

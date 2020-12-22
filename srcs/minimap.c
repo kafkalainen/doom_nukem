@@ -60,7 +60,6 @@ void			draw_top_view(t_xy size, t_xy pos, t_xy dir, t_home *home)
 		}
 		++y;
 	}
-	printf("ASD2\n");
 	pos = vec2(pos.x * MINIMAP_SIZE, pos.y * MINIMAP_SIZE);
 	dir = vec2(dir.x * MINIMAP_SIZE, dir.y * MINIMAP_SIZE);
 	draw_rect_center(pos, vec2(5, 5), home);

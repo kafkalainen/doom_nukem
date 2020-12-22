@@ -9,6 +9,8 @@ SRCS =	main.c \
 		srcs/keyboard.c \
 		srcs/movement.c \
 		srcs/minimap.c \
+		srcs/render_raycaster.c \
+		srcs/draw_wall.c \
 		srcs/libft/ft_itoa.c \
 		srcs/libft/ft_strings1.c \
 		srcs/libft/memory.c \
