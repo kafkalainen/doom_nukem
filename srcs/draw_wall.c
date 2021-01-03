@@ -28,11 +28,12 @@ void			ft_draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf)
 			++texy;
 			continue;
 		}
-		//color = tex->tex->pixels[texy * TEX_SIZE + tex->tex_col];
+		//color = tex->tex->data[texy * TEX_SIZE + tex->tex_col]; mlx version
+		//color = tex->tex->pixels + texy * TEX_SIZE + tex->tex_col;
 		color = 0xFF8000;
 		ft_draw_line(
 			vec2(tex->scr_col, ceil(screeny)),
-			vec2(tex->scr_col, ceil(screeny + tex->step)), color, surf);
+			vec2(tex->scr_col, ceil(screeny + tex->step)), &color, surf);
 		screeny += tex->step;
 		++texy;
 		if (screeny > SCREEN_HEIGHT)

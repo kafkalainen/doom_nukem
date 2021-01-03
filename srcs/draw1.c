@@ -21,27 +21,6 @@ int				ft_put_pixel(double x, double y, int color, SDL_Renderer *ren)
 	SDL_RenderDrawPoint(ren, x, y);
 }
 
-int		get_pixel(SDL_Surface *screen, int x, int y)
-{
-	int		*pixel;
-	Uint8	red;
-	Uint8	green;
-	Uint8	blue;
-	Uint8	bpp;
-
-	if (x > SCREEN_WIDTH - 1 || y > SCREEN_HEIGHT - 1)
-		return (0);
-	bpp = screen->format->BytesPerPixel;
-	pixel = screen->pixels + y * screen->pitch + x * bpp;
-	if (bpp == 1)
-		SDL_GetRGB((Uint8)*pixel, screen->format, &red, &green, &blue);
-	else if (bpp == 2)
-		SDL_GetRGB((Uint16) * pixel, screen->format, &red, &green, &blue);
-	else
-		SDL_GetRGB(*pixel, screen->format, &red, &green, &blue);
-	return (red * 256 * 256 + green * 256 + blue);
-}
-
 void	put_pixel(SDL_Surface *surf, int x, int y, int color)
 {
 	int *pixel;

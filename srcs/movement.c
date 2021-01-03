@@ -27,7 +27,7 @@ void		movement(t_player *plr)
 	else if (plr->input.up == 1)
 		plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 10 * delta_time));
 	if (plr->input.right == 1)
-		plr->dir = vec2_rot(plr->dir, 25 * DEG_TO_RAD * delta_time);
+		plr->dir = vec2_rot(plr->dir, 60 * DEG_TO_RAD * delta_time);
 	if (plr->input.left == 1)
-		plr->dir = vec2_rot(plr->dir, -25 * DEG_TO_RAD * delta_time);
+		plr->dir = vec2_rot(plr->dir, -60 * DEG_TO_RAD * delta_time);
 }
