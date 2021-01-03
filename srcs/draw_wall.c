@@ -28,15 +28,9 @@ void			ft_draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf)
 			++texy;
 			continue;
 		}
-		//color = tex->tex->data[texy * TEX_SIZE + tex->tex_col]; mlx version
-		//printf("Color: %u\n", tex->tex->pixels + 32);
 		SDL_LockSurface(tex->tex);
-		//color = tex->tex->pixels + texy * TEX_SIZE + tex->tex_col;
 		color = getpixel(tex->tex, tex->tex_col, texy);
-		//602929
-		//printf("3: %x\n42: %x\n", tex->tex->pixels + 2);
 		SDL_UnlockSurface(tex->tex);
-		//color = 0xFF8000;
 		ft_draw_line(
 			vec2(tex->scr_col, ceil(screeny)),
 			vec2(tex->scr_col, ceil(screeny + tex->step)), color, surf);

@@ -14,25 +14,25 @@
 
 void		arrow_keys_down(t_player *plr, SDL_KeyCode sym)
 {
-	if (sym == k_down)
+	if (sym == k_s)
 		plr->input.down = 1;
-	if (sym == k_up)
+	if (sym == k_w)
 		plr->input.up = 1;
-	if (sym == k_right)		
+	if (sym == k_d)		
 		plr->input.right = 1;
-	if (sym == k_left)
+	if (sym == k_a)
 		plr->input.left = 1;
 }
 
 void		arrow_keys_up(t_player *plr, SDL_KeyCode sym)
 {
-	if (sym == k_down)
+	if (sym == k_s)
 		plr->input.down = 0;
-	if (sym == k_up)
+	if (sym == k_w)
 		plr->input.up = 0;
-	if (sym == k_right)		
+	if (sym == k_d)		
 		plr->input.right = 0;
-	if (sym == k_left)
+	if (sym == k_a)
 		plr->input.left = 0;
 }
 

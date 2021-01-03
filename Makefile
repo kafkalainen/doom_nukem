@@ -7,6 +7,7 @@ SRCS =	main.c \
 		srcs/color.c \
 		srcs/die.c \
 		srcs/keyboard.c \
+		srcs/mouse.c \
 		srcs/movement.c \
 		srcs/minimap.c \
 		srcs/render_raycaster.c \

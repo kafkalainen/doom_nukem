@@ -57,6 +57,7 @@ void	init_player(t_player *plr, t_map *map)
 void	update_player(t_player *plr, t_home *home, SDL_Event e, SDL_Surface *surf)
 {
 	key_input(plr, e, home);
+	mouse_handle(plr, home);
 	movement(plr);
 	draw_rect_center(vec2(plr->pos.x, plr->pos.y), vec2(16, 16), home);
 	ft_draw_line(vec2(plr->pos.x, plr->pos.y),

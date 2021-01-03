@@ -280,6 +280,7 @@ void			movement(t_player *plr);
 */
 
 void			key_input(t_player *plr, SDL_Event e, t_home *home);
+void			mouse_handle(t_player *plr, t_home *home);
 
 /*
 ** Miscellanious
