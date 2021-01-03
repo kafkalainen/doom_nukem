@@ -245,7 +245,8 @@ void			draw_rect_center(t_xy xy, t_xy wh, t_home *home);
 void			draw_rect(t_xy xy, t_xy wh, t_home *home, int color);
 void			put_pixel(SDL_Surface *surf, int x, int y, int color);
 void			modify_pixel_add(SDL_Surface *surf, int x, int y, int color);
-int				get_pixel(SDL_Surface *screen, int x, int y);
+Uint32			getpixel(SDL_Surface *surface, int x, int y);
+
 
 /*
 ** Raycaster

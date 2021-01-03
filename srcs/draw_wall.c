@@ -16,7 +16,7 @@ void			ft_draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf)
 {
 	int		texy;
 	double	screeny;
-	int		color;
+	Uint32		color;
 
 	texy = 0;
 	screeny = tex->top;
@@ -29,11 +29,17 @@ void			ft_draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf)
 			continue;
 		}
 		//color = tex->tex->data[texy * TEX_SIZE + tex->tex_col]; mlx version
+		//printf("Color: %u\n", tex->tex->pixels + 32);
+		SDL_LockSurface(tex->tex);
 		//color = tex->tex->pixels + texy * TEX_SIZE + tex->tex_col;
-		color = 0xFF8000;
+		color = getpixel(tex->tex, tex->tex_col, texy);
+		//602929
+		//printf("3: %x\n42: %x\n", tex->tex->pixels + 2);
+		SDL_UnlockSurface(tex->tex);
+		//color = 0xFF8000;
 		ft_draw_line(
 			vec2(tex->scr_col, ceil(screeny)),
-			vec2(tex->scr_col, ceil(screeny + tex->step)), &color, surf);
+			vec2(tex->scr_col, ceil(screeny + tex->step)), color, surf);
 		screeny += tex->step;
 		++texy;
 		if (screeny > SCREEN_HEIGHT)
@@ -58,6 +64,6 @@ void			ft_draw_wall(int col, t_wall wall, t_xy ray, t_home *home, SDL_Surface *s
 	tex.tex_col = (int)(wall_x * TEX_SIZE);
 	tex.line_height = tex.bot - tex.top;
 	tex.step = tex.line_height / (double)TEX_SIZE;
-	tex.tex = &home->wall[get_wall_side(wall, home)];
+	tex.tex = home->wall[get_wall_side(wall, home)];
 	ft_draw_tex_col(&tex, wall.distance, surf);
 }

@@ -12,24 +12,35 @@
 
 #include "doom_nukem.h"
 
-void	modify_pixel_add(SDL_Surface *surf, int x, int y, int color)
+Uint32 getpixel(SDL_Surface *surface, int x, int y)
 {
-	int *pixel;
-	int	red;
-	int	green;
-	int	blue;
+    int bpp = surface->format->BytesPerPixel;
+    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
-	if (x > SCREEN_WIDTH - 1 || y > SCREEN_HEIGHT - 1 || x < 0 || y < 0)
-		return ;
-	pixel = surf->pixels + y * surf->pitch +
-		x * surf->format->BytesPerPixel;
-	red = (*pixel / 256 / 256 % 256) + (color / 256 / 256 % 256);
-	green = (*pixel / 256 % 256) + (color / 256 % 256);
-	blue = (*pixel % 256) + (color % 256);
-	red = red > 255 ? 255 : red;
-	green = green > 255 ? 255 : green;
-	blue = blue > 255 ? 255 : blue;
-	*pixel = blue + green * 256 + red * 256 * 256;
+switch (bpp)
+{
+    case 1:
+        return *p;
+        break;
+
+    case 2:
+        return *(Uint16 *)p;
+        break;
+
+    case 3:
+        if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+            return p[0] << 16 | p[1] << 8 | p[2];
+        else
+            return p[0] | p[1] << 8 | p[2] << 16;
+            break;
+
+        case 4:
+            return *(Uint32 *)p;
+            break;
+
+        default:
+            return 0;       /* shouldn't happen, but avoids warnings */
+      }
 }
 
 void	clear_surface(SDL_Surface *surface)
