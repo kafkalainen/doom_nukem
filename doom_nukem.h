@@ -239,21 +239,23 @@ double			ft_map(double in, t_range from, t_range to);
 ** Drawing functions
 */
 
+
+void			clear_surface(SDL_Surface *surface);
 int				ft_put_pixel(double x, double y, int color, SDL_Renderer *ren);
 int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Surface *surf);
 void			draw_rect_center(t_xy xy, t_xy wh, t_home *home);
 void			draw_rect(t_xy xy, t_xy wh, t_home *home, int color);
 void			put_pixel(SDL_Surface *surf, int x, int y, int color);
 void			modify_pixel_add(SDL_Surface *surf, int x, int y, int color);
-Uint32			getpixel(SDL_Surface *surface, int x, int y);
+Uint32			get_pixel(SDL_Surface *surface, int x, int y);
 
 
 /*
 ** Raycaster
 */
 
-void			ft_draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf);
-void			ft_draw_wall(int col, t_wall wall, t_xy ray, t_home *home, SDL_Surface *surf, t_player *plr);
+void			draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf);
+void			draw_wall(int col, t_wall wall, t_xy ray, t_home *home, SDL_Surface *surf, t_player *plr);
 
 
 t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, double angle);
@@ -286,17 +288,18 @@ void			mouse_handle(t_player *plr, t_home *home);
 ** Miscellanious
 */
 
-void			ft_die(char *msg, t_home *home);
-void		    ft_die_destroy(char *msg);
+void			update_screen(t_home *home, t_player *plr);
+void			setup(char *mapname, t_home *home, t_player *plr);
+void			error_output_sdl(char *msg, t_home *home);
+void		    error_output(char *msg);
 
 /*
 ** Minimap
 */
 
 t_xy			scale(t_xy a);
-void			draw_top_view(t_xy size, t_xy pos, t_xy dir, t_home *home);
+void			draw_minimap(t_xy size, t_xy pos, t_xy dir, t_home *home);
 void			draw_grid(t_home *home);
-void			draw_grid2(int h, int v, t_home *home);
 
 
 #endif

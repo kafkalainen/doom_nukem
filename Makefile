@@ -1,17 +1,18 @@
 SRCS =	main.c \
-		srcs/vec2_a.c \
-		srcs/vec2_b.c \
-		srcs/player.c \
-		srcs/draw1.c \
-		srcs/draw2.c \
+		srcs/vec_math/vec2_a.c \
+		srcs/vec_math/vec2_b.c \
+		srcs/update_player/key_input.c \
+		srcs/update_player/mouse_handle.c \
+		srcs/update_player/movement.c \
+		srcs/update_player/update_player.c \
+		srcs/update_screen/draw_fov.c \
+		srcs/update_screen/draw_minimap.c \
+		srcs/update_screen/draw_wall.c \
+		srcs/update_screen/put_pixel.c \
+		srcs/update_screen/update_screen.c \
 		srcs/color.c \
-		srcs/die.c \
-		srcs/keyboard.c \
-		srcs/mouse.c \
-		srcs/movement.c \
-		srcs/minimap.c \
-		srcs/render_raycaster.c \
-		srcs/draw_wall.c \
+		srcs/utilities/error_output.c \
+		srcs/utilities/setup.c \
 		srcs/libft/ft_itoa.c \
 		srcs/libft/ft_strings1.c \
 		srcs/libft/memory.c \
