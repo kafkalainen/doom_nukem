@@ -10,7 +10,6 @@ SRCS =	main.c \
 		srcs/update_screen/draw_wall.c \
 		srcs/update_screen/put_pixel.c \
 		srcs/update_screen/update_screen.c \
-		srcs/color.c \
 		srcs/utilities/error_output.c \
 		srcs/utilities/setup.c \
 		srcs/libft/ft_itoa.c \

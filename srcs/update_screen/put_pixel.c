@@ -23,7 +23,7 @@ void	clear_surface(SDL_Surface *surface)
 Uint32	get_pixel(SDL_Surface *surface, int x, int y)
 {
 	int bpp = surface->format->BytesPerPixel;
-    Uint32 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+    Uint32 *p = (Uint32 *)((Uint8 *)surface->pixels + y * surface->pitch + x * bpp);
 	return (*p);
 }
 

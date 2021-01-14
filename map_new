@@ -1,0 +1,45 @@
+//Lines with comments ignored
+//Parse next line after #MAP# is found until #OBJ#
+//
+//MAP is map data and format is:
+// X-X-X-X-X [TYPE, ANGLE, Z, HEIGHT, TEXTURE]
+//Example: B-0-0-10-A is a standard block, angle 0, starting z 0, height 10, texture "A".
+//Height is divided by 10, making the wall 1 unit high.
+// TYPES:
+// B - Standard 1 unit block
+// F - Right angled floor
+// FC - floor and ceiling (z is the floor z, height is the ceiling z)
+// R - Ramp (angle is the direction of the slope[must be 0/90/180/270], z is the starting height, height is the ending height)
+// AB - Standard block with see thru -textures. Rays dont stop on hit.
+//
+//OBJ represents object and enemy starting points. Format:
+// X - wherein X is a number representing an object or enemy. Exception "P" which is player starting point.
+#MAP#
+B-0-0-10-A B-0-0-10-A B-0-0-10-A B-0-0-10-A B-0-0-10-A B-0-0-10-A
+B-0-0-10-A F-0-0-0-B F-0-0-0-B F-0-0-0-B F-0-0-0-B B-0-0-10-A
+B-0-0-10-A F-0-0-0-B F-0-0-0-B F-0-0-0-B F-0-0-0-B B-0-0-10-A
+B-0-0-10-A F-0-0-0-B F-0-0-0-B F-0-0-0-B F-0-0-0-B B-0-0-10-A
+B-0-0-10-A F-0-0-0-B F-0-0-0-B F-0-0-0-B F-0-0-0-B B-0-0-10-A
+B-0-0-10-A F-0-0-0-B F-0-0-0-B F-0-0-0-B F-0-0-0-B B-0-0-10-A
+B-0-0-10-A F-0-0-0-B F-0-0-0-B F-0-0-0-B F-0-0-0-B B-0-0-10-A
+B-0-0-10-A F-0-0-0-B F-0-0-0-B F-0-0-0-B F-0-0-0-B B-0-0-10-A
+B-0-0-10-A B-0-0-10-A B-0-0-10-A B-0-0-10-A B-0-0-10-A B-0-0-10-A
+#OBJ#
+0 0 0 0 0 0
+0 0 P 0 0 0
+0 0 0 0 0 0
+0 0 1 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 2 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+#END#
+//Maybe a struct for each tile and store map data as an array of said structs?
+//typedef struct s_tile {
+//	char type[3];
+//	int angle;
+//	float z;
+//	float height;
+//	char texture; 
+//}	t_tile
