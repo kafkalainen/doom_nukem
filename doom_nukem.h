@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2020/11/05 19:30:44 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/01/14 14:33:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,16 @@
 # define k_e SDLK_e
 
 # ifdef __unix__
-#  include <libc.h>
+#  define OPEN_FILE open
+#  define READ_ONLY O_RDONLY
+#  include "include/SDL2/SDL.h"
 #  include <string.h>
 #  include <time.h>
 #  include <fcntl.h>
+#  include <unistd.h>
 # elif defined(_WIN32) || defined(WIN32)
+#  define OPEN_FILE _open
+#  define READ_ONLY _O_RDONLY
 #  include "SDL.h"
 #  include <io.h>
 #  include <stdio.h>

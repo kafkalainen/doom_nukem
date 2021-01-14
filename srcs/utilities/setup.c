@@ -21,12 +21,12 @@ void			init_map(char *mapname, t_map *map)
 	int		fd;
 	char	buf[2];
 
-	if ((fd = _open(mapname, _O_RDONLY)) < 0)
+	if ((fd = OPEN_FILE(mapname, READ_ONLY)) < 0)
 		error_output("Failed to load the map");
 	if (read(fd, buf, 1) < 0)
 		error_output("Error loading the map file.");
 	close(fd);
-	fd = _open(mapname, _O_RDONLY);
+	fd = OPEN_FILE(mapname, READ_ONLY);
 	i = 0;
 	shortest = -1;
 	while (ft_get_next_line(fd, &line) && i < MAP_MAX_LINES)
