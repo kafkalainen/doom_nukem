@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/14 14:33:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/15 12:05:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,12 @@ typedef struct		s_time
 	size_t			frames;
 	long int		fps;
 }					t_time;
+
+typedef struct		s_screen_xy
+{
+	int				x;
+	int				y;
+}					t_screen_xy;
 
 typedef struct		s_xy
 {
@@ -287,7 +293,8 @@ void			movement(t_player *plr);
 */
 
 void			key_input(t_player *plr, SDL_Event e, t_home *home);
-void			mouse_handle(t_player *plr, t_home *home);
+void			mouse_handle_unix(t_player *plr, t_home *home);
+void			mouse_handle_win(t_player *plr, t_home *home);
 
 /*
 ** Miscellanious
