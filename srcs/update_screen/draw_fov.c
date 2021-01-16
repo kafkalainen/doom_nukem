@@ -72,13 +72,9 @@ void			draw_fov(t_home *home, t_player *plr)
 	t_xy			ray;
 	int				i;
 
-	draw_rect_center(vec2(plr->pos.x, plr->pos.y), vec2(16, 16), home);
-	ft_draw_line(vec2(plr->pos.x, plr->pos.y),
-	vec2_add(vec2(plr->pos.x, plr->pos.y),
-	vec2_mul(vec2(plr->dir.x, plr->dir.y), 64)), 0xFFFFFF, home->draw_surf);
+	draw_fov_floor(home, plr);
 	plane = vec2_rot(plr->dir, FOV * DEG_TO_RAD);
 	left = vec2_dec(vec2_add(plr->pos, plr->dir), plane);
-	draw_fov_floor(home, plr);
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{

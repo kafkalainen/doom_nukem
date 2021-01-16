@@ -15,14 +15,14 @@
 #include "../../doom_nukem.h"
 
 static void ft_draw_tex_pixel(SDL_Surface *tex, t_screen_xy pixel, \
-	t_screen_xy coord, SDL_Surface *surf)
+	t_screen_xy coord, SDL_Surface *draw_surf)
 {
 	Uint32		color;
 
 	SDL_LockSurface(tex);
 	color = get_pixel(tex, (int)pixel.y, (int)pixel.x);
 	SDL_UnlockSurface(tex);
-	put_pixel(surf, coord.x, coord.y, color);
+	put_pixel(draw_surf, coord.x, coord.y, color);
 }
 
 static t_xy real_world_floor(int y, t_player *plr, t_home *home)
@@ -39,10 +39,10 @@ static t_xy real_world_floor(int y, t_player *plr, t_home *home)
 
 	coord.x = 0;
 	coord.y = y;
-	row_dist = (y - SCREEN_HEIGHT * 0.5) / (0.5 * SCREEN_HEIGHT);
+	row_dist = (0.5 * SCREEN_HEIGHT) / (y - SCREEN_HEIGHT * 0.5);
 	plane = vec2_rot(plr->dir, FOV * DEG_TO_RAD);
-	left = vec2_add(plr->dir, plane);
-	right = vec2_dec(plr->dir, plane);
+	left = vec2_dec(plr->dir, plane);
+	right = vec2_add(plr->dir, plane);
 	floor_step.x = row_dist * (right.x - left.x) / SCREEN_WIDTH;
 	floor_step.y = row_dist * (right.y - left.y) / SCREEN_WIDTH;
 	step.x = plr->pos.x + row_dist * left.x;
