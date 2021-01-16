@@ -49,7 +49,7 @@ int				get_wall_side(t_wall wall, t_player *plr)
 		return ((wall.hit.y < plr->pos.y) ? 2 : 3);
 }
 
-void			draw_wall(int col, t_wall wall, t_xy ray, t_home *home, SDL_Surface *surf, t_player *plr)
+void			draw_wall(int col, t_wall wall, t_xy ray, t_home *home, t_player *plr)
 {
 	t_tex_col	tex;
 	int			height;
@@ -67,5 +67,5 @@ void			draw_wall(int col, t_wall wall, t_xy ray, t_home *home, SDL_Surface *surf
 	tex.line_height = tex.bot - tex.top;
 	tex.step = tex.line_height / (double)TEX_SIZE;
 	tex.tex = home->wall[get_wall_side(wall, home)];
-	ft_draw_tex_col(&tex, wall.distance, surf);
+	ft_draw_tex_col(&tex, wall.distance, home->draw_surf);
 }

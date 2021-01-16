@@ -64,7 +64,7 @@ t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, double angle)
 	return (ray);
 }
 
-void			draw_fov(t_home *home, t_player *plr, SDL_Surface *surf)
+void			draw_fov(t_home *home, t_player *plr)
 {
 	static double	step = 2.0 / SCREEN_WIDTH;
 	t_xy			plane;
@@ -82,7 +82,7 @@ void			draw_fov(t_home *home, t_player *plr, SDL_Surface *surf)
 	while (i < SCREEN_WIDTH)
 	{
 		ray = init_ray(plr->pos, plane, left, step * i);
-		draw_wall(i, cast_ray(plr->pos, ray, &home->map), ray, home, surf, plr);
+		draw_wall(i, cast_ray(plr->pos, ray, &home->map), ray, home, plr);
 		++i;
 	}
 }
