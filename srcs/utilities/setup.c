@@ -96,6 +96,7 @@ void			setup(char *mapname, t_home *home, t_player *plr)
 	home->wall[1] = SDL_LoadBMP("wall1.bmp");
 	home->wall[2] = SDL_LoadBMP("wall1.bmp");
 	home->wall[3] = SDL_LoadBMP("wall1.bmp");
+	home->ground = SDL_LoadBMP("wall1.bmp");
 	init_map(mapname, &home->map);
 	init_player(plr, &home->map);
 }

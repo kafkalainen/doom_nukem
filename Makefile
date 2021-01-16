@@ -6,6 +6,7 @@ SRCS =	main.c \
 		srcs/update_player/movement.c \
 		srcs/update_player/update_player.c \
 		srcs/update_screen/draw_fov.c \
+		srcs/update_screen/draw_floor.c \
 		srcs/update_screen/draw_minimap.c \
 		srcs/update_screen/draw_wall.c \
 		srcs/update_screen/put_pixel.c \

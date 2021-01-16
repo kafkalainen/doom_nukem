@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_raycaster.c                                 :+:      :+:    :+:   */
+/*   draw_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 13:24:37 by tmaarela          #+#    #+#             */
-/*   Updated: 2020/12/22 13:24:37 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/01/16 11:02:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void			draw_fov(t_home *home, t_player *plr)
 	vec2_mul(vec2(plr->dir.x, plr->dir.y), 64)), 0xFFFFFF, home->draw_surf);
 	plane = vec2_rot(plr->dir, FOV * DEG_TO_RAD);
 	left = vec2_dec(vec2_add(plr->pos, plr->dir), plane);
+	draw_fov_floor(home, plr);
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{
