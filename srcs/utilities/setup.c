@@ -9,8 +9,8 @@ static t_home	*init_sdl(t_home *home)
 		error_output_sdl("Fatal: Failed to create a window.", &home);
 	SDL_SetWindowPosition(home->win.window,
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-	home->surf = SDL_GetWindowSurface(home->win.window);
-	if (!home->surf)
+	home->draw_surf = SDL_GetWindowSurface(home->win.window);
+	if (!home->draw_surf)
 		error_output_sdl("Fatal: Failed to get window surface", &home);
 	return (home);
 }

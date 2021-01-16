@@ -75,7 +75,7 @@ void			draw_fov(t_home *home, t_player *plr, SDL_Surface *surf)
 	draw_rect_center(vec2(plr->pos.x, plr->pos.y), vec2(16, 16), home);
 	ft_draw_line(vec2(plr->pos.x, plr->pos.y),
 	vec2_add(vec2(plr->pos.x, plr->pos.y),
-	vec2_mul(vec2(plr->dir.x, plr->dir.y), 64)), 0xFFFFFF, home->surf);
+	vec2_mul(vec2(plr->dir.x, plr->dir.y), 64)), 0xFFFFFF, home->draw_surf);
 	plane = vec2_rot(plr->dir, FOV * DEG_TO_RAD);
 	left = vec2_dec(vec2_add(plr->pos, plr->dir), plane);
 	i = 0;

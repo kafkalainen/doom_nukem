@@ -46,7 +46,7 @@ void	draw_rect(t_xy xy, t_xy wh, t_home *home, int color)
 	j = xy.y;
 	while (j < wh.y + xy.y)
 	{
-		ft_draw_line(vec2(i, j), vec2(i + wh.x, j), color, home->surf);
+		ft_draw_line(vec2(i, j), vec2(i + wh.x, j), color, home->draw_surf);
 		j++;
 	}
 }
@@ -60,7 +60,7 @@ void	draw_rect_center(t_xy xy, t_xy wh, t_home *home)
 	j = -wh.y / 2;
 	while (j < wh.y / 2 && i < SCREEN_WIDTH && j < SCREEN_HEIGHT)
 	{
-			ft_draw_line(vec2(xy.x + i, xy.y + j), vec2(xy.x + fabs(i), xy.y + j), 0x00A000, home->surf);
+			ft_draw_line(vec2(xy.x + i, xy.y + j), vec2(xy.x + fabs(i), xy.y + j), 0x00A000, home->draw_surf);
 			j++;
 	}
 }
@@ -76,7 +76,7 @@ void			draw_grid(t_home *home)
 	{
 		ft_draw_line(
 			vec2(0, i * MINIMAP_SIZE),
-			vec2(dim.x * MINIMAP_SIZE, i * MINIMAP_SIZE), 0xFFFFFF, home->surf);
+			vec2(dim.x * MINIMAP_SIZE, i * MINIMAP_SIZE), 0xFFFFFF, home->draw_surf);
 		++i;
 	}
 	i = 0;
@@ -84,7 +84,7 @@ void			draw_grid(t_home *home)
 	{
 		ft_draw_line(
 			vec2(i * MINIMAP_SIZE, 0),
-			vec2(i * MINIMAP_SIZE, dim.y * MINIMAP_SIZE), 0xFFFFFF, home->surf);
+			vec2(i * MINIMAP_SIZE, dim.y * MINIMAP_SIZE), 0xFFFFFF, home->draw_surf);
 		++i;
 	}
 }
@@ -111,5 +111,5 @@ void			draw_minimap(t_xy size, t_xy pos, t_xy dir, t_home *home)
 	pos = vec2(pos.x * MINIMAP_SIZE, pos.y * MINIMAP_SIZE);
 	dir = vec2(dir.x * MINIMAP_SIZE, dir.y * MINIMAP_SIZE);
 	draw_rect_center(pos, vec2(5, 5), home);
-	ft_draw_line(pos, vec2_add(pos, dir), 0xA8C256, home->surf);
+	ft_draw_line(pos, vec2_add(pos, dir), 0xA8C256, home->draw_surf);
 }

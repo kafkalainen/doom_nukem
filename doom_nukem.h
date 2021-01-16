@@ -66,7 +66,9 @@
 # define k_q SDLK_q
 # define k_e SDLK_e
 
-# ifdef __unix__
+
+
+# ifdef __unix__ || __APPLE__
 #  define OPEN_FILE open
 #  define READ_ONLY O_RDONLY
 #  include "include/SDL2/SDL.h"
@@ -203,7 +205,7 @@ typedef struct		s_home
 	t_map			map;
 	t_texture		*texture;
 	SDL_Renderer	*ren;
-	SDL_Surface		*surf;
+	SDL_Surface		*draw_surf;
 	SDL_Surface		*wall[4];
 	t_time			t;
 }					t_home;

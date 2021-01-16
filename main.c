@@ -38,11 +38,12 @@ int  			main(int argc, char **argv)
 	while(1)
 	{
 		home.t.beginfps = clock();
-		update_player(&plr, &home, e, home.surf);
+		update_player(&plr, &home, e, home.draw_surf);
 		update_screen(&home, &plr);
 		SDL_SetWindowTitle(home.win.window, ft_itoa(home.t.fps));
 		SDL_UpdateWindowSurface(home.win.window);
-		clear_surface(home.surf);
+		clear_surface(home.draw_surf);
+		SDL_FreeSurface(home.draw_surf);
 		home.t.endfps = clock();
 		home.t.delta_time = home.t.endfps - home.t.beginfps;
 		home.t.fps = CLOCKS_PER_SEC / home.t.delta_time;

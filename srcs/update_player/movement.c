@@ -20,7 +20,7 @@ void		movement(t_player *plr)
 	ctime = clock();
 	delta_time = ((ctime - plr->time) / (double)CLOCKS_PER_SEC);
 	if (delta_time < 0.0166667)
-		return (1);
+		return;
 	plr->time = ctime;
 	if (plr->input.down == 1)
 		plr->pos = vec2_dec(plr->pos, vec2_mul(plr->dir, 10 * delta_time));
