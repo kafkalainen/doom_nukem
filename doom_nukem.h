@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/18 12:08:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/18 15:17:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,7 +285,7 @@ void			draw_tex_pixel(SDL_Surface *tex, t_screen_xy pixel,
 	t_screen_xy coord, SDL_Surface *draw_surf);
 t_step			*steplen(t_step *ground, int current_y, t_ray_floor hor,
 	t_player *plr);
-void			draw_world_floor(int index, int y, t_player *plr, t_home *home,
+void			draw_world_floor(int y, t_player *plr, t_home *home,
 	t_ray_floor hor);
 void			modify_pixel_add(SDL_Surface *surf, int x, int y, int color);
 Uint32			get_pixel(SDL_Surface *surface, int x, int y);
@@ -297,7 +297,7 @@ Uint32			get_pixel(SDL_Surface *surface, int x, int y);
 
 void			draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf);
 void			draw_wall(int col, t_wall wall, t_xy ray, t_home *home, t_player *plr);
-void			draw_fov_floor(int index, t_home *home, t_player *plr);
+void			draw_fov_floor(t_home *home, t_player *plr);
 
 t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, double angle);
 t_wall			cast_ray(t_xy pos, t_xy ray, t_map *map);

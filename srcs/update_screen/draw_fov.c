@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 13:24:37 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/16 11:02:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/18 15:19:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void			draw_fov(t_home *home, t_player *plr)
 	t_xy			ray;
 	int				i;
 
-	draw_fov_floor(0, home, plr);
+	draw_fov_floor(home, plr);
 	plane = vec2_rot(plr->dir, FOV * DEG_TO_RAD);
 	left = vec2_dec(vec2_add(plr->pos, plr->dir), plane);
 	i = 0;

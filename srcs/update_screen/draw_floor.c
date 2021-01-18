@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:33:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/18 11:51:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/18 15:17:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void			draw_fov_floor(int index, t_home *home, t_player *plr)
+void			draw_fov_floor(t_home *home, t_player *plr)
 {
 	t_ray_floor	horizontal;
 	int			j;
@@ -23,7 +23,7 @@ void			draw_fov_floor(int index, t_home *home, t_player *plr)
 	horizontal.right = vec2_add(plr->dir, horizontal.plane);
 	while (j < SCREEN_HEIGHT)
 	{
-		draw_world_floor(index, j, plr, home, horizontal);
+		draw_world_floor(j, plr, home, horizontal);
 		j++;
 	}
 }
