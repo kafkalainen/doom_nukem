@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 15:33:56 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/15 12:07:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/18 10:27:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define MOUSE_HANDLE mouse_handle_win
 # endif
 
-void	update_player(t_player *plr, t_home *home, SDL_Event e, SDL_Surface *surf)
+void	update_player(t_player *plr, t_home *home, SDL_Event e)
 {
 	key_input(plr, e, home);
 	MOUSE_HANDLE(plr, home);

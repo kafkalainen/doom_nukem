@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/16 11:02:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/18 10:28:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,15 @@
 
 
 
-# ifdef __unix__ || __APPLE__
+# ifdef __unix__
+#  define OPEN_FILE open
+#  define READ_ONLY O_RDONLY
+#  include "include/SDL2/SDL.h"
+#  include <string.h>
+#  include <time.h>
+#  include <fcntl.h>
+#  include <unistd.h>
+# elif __APPLE__
 #  define OPEN_FILE open
 #  define READ_ONLY O_RDONLY
 #  include "include/SDL2/SDL.h"
@@ -174,6 +182,19 @@ typedef struct		s_raycast
 	int				side;
 	double			perpWallDist;
 }					t_raycast;
+
+typedef struct		s_ray_floor
+{
+	t_xy			plane;
+	t_xy			left;
+	t_xy			right;
+}					t_ray_floor;
+
+typedef struct		s_step
+{
+	t_xy			cur_step;
+	t_xy			step_len;
+}					t_step;
 
 typedef struct		s_tex_col
 {
@@ -288,7 +309,7 @@ t_argb			int2argb(int color);
 */
 
 void			init_player(t_player *plr, t_map *map);
-void			update_player(t_player *plr, t_home *home, SDL_Event e, SDL_Surface *surf);
+void			update_player(t_player *plr, t_home *home, SDL_Event e);
 void			movement(t_player *plr);
 
 /*
@@ -297,7 +318,7 @@ void			movement(t_player *plr);
 
 void			key_input(t_player *plr, SDL_Event e, t_home *home);
 void			mouse_handle_unix(t_player *plr, t_home *home);
-void			mouse_handle_win(t_player *plr, t_home *home);
+void			mouse_handle_win(t_player *plr);
 
 /*
 ** Miscellanious

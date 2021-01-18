@@ -34,7 +34,7 @@ LINUX_LIBRARY_PATHS = -L/lib/
 # -Wl,-subsystem,windows gets rid of the console window
 WIN_COMPILER_FLAGS = -w
 #LINUX_COMPILER_FLAGS = -Wall -Wextra -Werror
-LINUX_COMPILER_FLAGS =
+LINUX_COMPILER_FLAGS = -Wall -Wextra -Werror
 # -Wl,-subsystem,windows
 
 #LINKER_FLAGS specifies the libraries we're linking against

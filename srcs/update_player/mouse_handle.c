@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/15 12:04:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/18 10:29:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void	mouse_handle_win(t_player *plr, t_home *home)
+void	mouse_handle_win(t_player *plr)
 {
 	SDL_Event	me;
 
@@ -23,12 +23,10 @@ void	mouse_handle_win(t_player *plr, t_home *home)
 
 void	mouse_handle_unix(t_player *plr, t_home *home)
 {
-	SDL_Event	me;
 	t_xy		mouse;
 	t_screen_xy	mouse_screen;
-	int			error;
 
-	error = SDL_CaptureMouse(SDL_TRUE);
+	SDL_CaptureMouse(SDL_TRUE);
 	SDL_GetMouseState(&mouse_screen.x, &mouse_screen.y);
 	mouse.x = (double)mouse_screen.x;
 	mouse.y = (double)mouse_screen.y;

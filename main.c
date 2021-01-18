@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/15 09:30:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/18 10:28:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int  			main(int argc, char **argv)
 	t_home		home;
 	t_player	plr;
 	SDL_Event	e;
+	char		*fps;
 
 	if (argc != 2)
 		error_output("usage: .\\play [map file name]\n");
@@ -38,9 +39,11 @@ int  			main(int argc, char **argv)
 	while(1)
 	{
 		home.t.beginfps = clock();
-		update_player(&plr, &home, e, home.draw_surf);
+		update_player(&plr, &home, e);
 		update_screen(&home, &plr);
-		SDL_SetWindowTitle(home.win.window, ft_itoa(home.t.fps));
+		fps = ft_itoa(home.t.fps);
+		SDL_SetWindowTitle(home.win.window, fps);
+		free(fps);
 		SDL_UpdateWindowSurface(home.win.window);
 		clear_surface(home.draw_surf);
 		SDL_FreeSurface(home.draw_surf);
