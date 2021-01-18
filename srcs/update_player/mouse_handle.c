@@ -16,8 +16,6 @@ void	mouse_handle_win(t_player *plr)
 {
 	SDL_Event	me;
 
-	me.type = 0;
-	me.motion.xrel = 0;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	if (me.type == SDL_MOUSEMOTION)
 		plr->dir = vec2_rot(plr->dir, DEG_TO_RAD * me.motion.xrel);
