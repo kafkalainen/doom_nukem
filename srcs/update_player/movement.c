@@ -21,19 +21,34 @@ static int			valid_location(t_xy pos, t_map *map)
 
 void			player_move_forward(t_player *plr, t_map *map, double delta_time)
 {
-	if (valid_location(plr->pos, map))
+	t_xy check_pos;
+
+	check_pos = plr->pos;
+	check_pos = vec2_add(check_pos, vec2_mul(plr->dir, 8 * delta_time));
+	if (valid_location(check_pos, map))
 		plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 4 * delta_time));
 }
 
 void			player_move_backwards(t_player *plr, t_map *map, double delta_time)
 {
-	if (valid_location(vec2_mul(plr->pos, 1.0), map))
+	t_xy check_pos;
+
+	check_pos = plr->pos;
+	check_pos = vec2_dec(check_pos, vec2_mul(plr->dir, 8 * delta_time));
+	if (valid_location(check_pos, map))
 		plr->pos = vec2_dec(plr->pos, vec2_mul(plr->dir, 4 * delta_time));
 }
 
 void			player_move_strafe(t_player *plr, t_map *map, double delta_time, char ad)
 {
-	if (valid_location(vec2_mul(plr->pos, 1.0), map))
+	t_xy check_pos;
+
+	check_pos = plr->pos;
+	check_pos = (ad == 'd') ? vec2_add(plr->pos, vec2_mul(vec2_rot(
+				plr->dir, 90 * DEG_TO_RAD), 8 * delta_time))
+				: vec2_dec(plr->pos, vec2_mul(vec2_rot(
+				plr->dir, 90 * DEG_TO_RAD), 8 * delta_time));
+	if (valid_location(vec2_mul(check_pos, 1.0), map))
 	{
 		if (ad == 'd')
 			plr->pos = vec2_add(plr->pos, vec2_mul(vec2_rot(
