@@ -3,15 +3,15 @@
 static t_home	*init_sdl(t_home *home)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
-    	error_output_sdl("Fatal: SDL Initalization failed.", &home);
+    	error_output_sdl("Fatal: SDL Initalization failed.", home);
     home->win.window = SDL_CreateWindow("Hello World!", 100, 100, home->win.width, home->win.height, 0);
     if (home->win.window == NULL)
-		error_output_sdl("Fatal: Failed to create a window.", &home);
+		error_output_sdl("Fatal: Failed to create a window.", home);
 	SDL_SetWindowPosition(home->win.window,
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	home->draw_surf = SDL_GetWindowSurface(home->win.window);
 	if (!home->draw_surf)
-		error_output_sdl("Fatal: Failed to get window surface", &home);
+		error_output_sdl("Fatal: Failed to get window surface", home);
 	return (home);
 }
 

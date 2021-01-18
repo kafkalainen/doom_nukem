@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 13:25:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2020/12/22 13:25:48 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/01/18 10:23:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void			ft_draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf)
+void			ft_draw_tex_col(t_tex_col *tex, SDL_Surface *surf)
 {
 	int		texy;
 	double	screeny;
@@ -66,6 +66,6 @@ void			draw_wall(int col, t_wall wall, t_xy ray, t_home *home, t_player *plr)
 	tex.tex_col = (int)(wall_x * TEX_SIZE);
 	tex.line_height = tex.bot - tex.top;
 	tex.step = tex.line_height / (double)TEX_SIZE;
-	tex.tex = home->wall[get_wall_side(wall, home)];
-	ft_draw_tex_col(&tex, wall.distance, home->draw_surf);
+	tex.tex = home->wall[get_wall_side(wall, plr)];
+	ft_draw_tex_col(&tex, home->draw_surf);
 }
