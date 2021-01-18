@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:45:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/18 15:19:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/18 15:24:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,7 @@ void		draw_world_floor(int y, t_player *plr, t_home *home,
 		cell.y = (int)ground.cur_step.y;
 		tex.x = (int)(TEX_SIZE * (ground.cur_step.x - cell.x)) & (TEX_SIZE - 1);
 		tex.y = (int)(TEX_SIZE * (ground.cur_step.y - cell.y)) & (TEX_SIZE - 1);
-<<<<<<< HEAD
-		draw_tex_pixel(home->ground[0],
-			tex, coord, home->draw_surf);
-=======
 		draw_tex_pixel(home->ground[(cell.x % 2 == 0)], tex, coord, home->draw_surf);
->>>>>>> 1f96becc26b11455740170e4074dbdd471c87c7c
 		ground.cur_step = vec2_add(ground.cur_step, ground.step_len);
 		coord.x++;
 	}
