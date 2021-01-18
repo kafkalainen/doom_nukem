@@ -12,7 +12,39 @@
 
 #include "../../doom_nukem.h"
 
-void		movement(t_player *plr)
+static int			valid_location(t_xy pos, t_map *map)
+{
+	return ((((int)pos.x > 0) && ((int)pos.x < map->size.x))
+		&& (((int)pos.y > 0) && ((int)pos.y < map->size.y))
+		&& (map->data[(int)pos.y][(int)pos.x] != '#'));
+}
+
+void			player_move_forward(t_player *plr, t_map *map, double delta_time)
+{
+	if (valid_location(plr->pos, map))
+		plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 4 * delta_time));
+}
+
+void			player_move_backwards(t_player *plr, t_map *map, double delta_time)
+{
+	if (valid_location(vec2_mul(plr->pos, 1.0), map))
+		plr->pos = vec2_dec(plr->pos, vec2_mul(plr->dir, 4 * delta_time));
+}
+
+void			player_move_strafe(t_player *plr, t_map *map, double delta_time, char ad)
+{
+	if (valid_location(vec2_mul(plr->pos, 1.0), map))
+	{
+		if (ad == 'd')
+			plr->pos = vec2_add(plr->pos, vec2_mul(vec2_rot(
+				plr->dir, 90 * DEG_TO_RAD), 4 * delta_time));
+		else
+			plr->pos = vec2_dec(plr->pos, vec2_mul(vec2_rot(
+				plr->dir, 90 * DEG_TO_RAD), 4 * delta_time));
+	}
+}
+
+void				movement(t_player *plr, t_map *map)
 {
 	double		delta_time;
 	clock_t		ctime;
@@ -23,11 +55,11 @@ void		movement(t_player *plr)
 		return;
 	plr->time = ctime;
 	if (plr->input.down == 1)
-		plr->pos = vec2_dec(plr->pos, vec2_mul(plr->dir, 10 * delta_time));
+		player_move_backwards(plr, map, delta_time);
 	else if (plr->input.up == 1)
-		plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 10 * delta_time));
+		player_move_forward(plr, map, delta_time);
 	if (plr->input.right == 1)
-		plr->pos = vec2_add(plr->pos, vec2_mul(vec2_rot(plr->dir, 90 * DEG_TO_RAD), 10 * delta_time));
+		player_move_strafe(plr, map, delta_time, 'd');
 	if (plr->input.left == 1)
-		plr->pos = vec2_dec(plr->pos, vec2_mul(vec2_rot(plr->dir, 90 * DEG_TO_RAD), 10 * delta_time));
+		player_move_strafe(plr, map, delta_time, 'a');
 }

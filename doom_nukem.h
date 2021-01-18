@@ -14,8 +14,8 @@
 # define DOOM_NUKEM_H
 
 # define BUFF_SIZE 16
-# define SCREEN_WIDTH 320
-# define SCREEN_HEIGHT 240
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 480
 
 # define WALL_HEIGHT 0.5
 # define TEX_SIZE 128
@@ -316,7 +316,10 @@ t_argb			int2argb(int color);
 
 void			init_player(t_player *plr, t_map *map);
 void			update_player(t_player *plr, t_home *home, SDL_Event e);
-void			movement(t_player *plr);
+void			movement(t_player *plr, t_map *map);
+void			player_move_forward(t_player *plr, t_map *map, double delta_time);
+void			player_move_strafe(t_player *plr, t_map *map, double delta_time, char ad);
+void			player_move_backwards(t_player *plr, t_map *map, double delta_time);
 
 /*
 ** Event handlers
