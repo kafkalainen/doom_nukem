@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/18 10:28:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/18 11:16:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define SCREEN_HEIGHT 480
 
 # define WALL_HEIGHT 0.5
-# define TEX_SIZE 64
+# define TEX_SIZE 128
 # define FOV 90.0
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
