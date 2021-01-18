@@ -72,7 +72,7 @@ void			draw_fov(t_home *home, t_player *plr)
 	t_xy			ray;
 	int				i;
 
-	draw_fov_floor(home, plr);
+	draw_fov_floor(0, home, plr);
 	plane = vec2_rot(plr->dir, FOV * DEG_TO_RAD);
 	left = vec2_dec(vec2_add(plr->pos, plr->dir), plane);
 	i = 0;

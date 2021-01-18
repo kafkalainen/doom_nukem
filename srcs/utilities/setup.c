@@ -87,8 +87,8 @@ void	init_player(t_player *plr, t_map *map)
 
 void			setup(char *mapname, t_home *home, t_player *plr)
 {
-	home->win.width = 640;
-	home->win.height = 480;
+	home->win.width = SCREEN_WIDTH;
+	home->win.height = SCREEN_HEIGHT;
 	home->t.fps = 0;
 	home->t.frames = 0;
 	home = init_sdl(home);
@@ -96,7 +96,8 @@ void			setup(char *mapname, t_home *home, t_player *plr)
 	home->wall[1] = SDL_LoadBMP("textures/wall_bricks.bmp");
 	home->wall[2] = SDL_LoadBMP("textures/wall_bricks.bmp");
 	home->wall[3] = SDL_LoadBMP("textures/wall_bricks.bmp");
-	home->ground = SDL_LoadBMP("textures/floor1.bmp");
+	home->ground[0] = SDL_LoadBMP("textures/floor1.bmp");
+	home->ground[1] = SDL_LoadBMP("textures/tiles1.bmp");
 	init_map(mapname, &home->map);
 	init_player(plr, &home->map);
 }

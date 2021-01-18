@@ -12,7 +12,7 @@
 
 #include "../../doom_nukem.h"
 
-void		draw_world_floor(int y, t_player *plr, t_home *home,
+void		draw_world_floor(int index, int y, t_player *plr, t_home *home,
 	t_ray_floor hor)
 {
 	t_step		ground;
@@ -29,7 +29,7 @@ void		draw_world_floor(int y, t_player *plr, t_home *home,
 		cell.y = (int)ground.cur_step.y;
 		tex.x = (int)(TEX_SIZE * (ground.cur_step.x - cell.x)) & (TEX_SIZE - 1);
 		tex.y = (int)(TEX_SIZE * (ground.cur_step.y - cell.y)) & (TEX_SIZE - 1);
-		draw_tex_pixel(home->ground, tex, coord, home->draw_surf);
+		draw_tex_pixel(home->ground[index], tex, coord, home->draw_surf);
 		ground.cur_step = vec2_add(ground.cur_step, ground.step_len);
 		coord.x++;
 	}

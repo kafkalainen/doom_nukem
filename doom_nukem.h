@@ -14,8 +14,8 @@
 # define DOOM_NUKEM_H
 
 # define BUFF_SIZE 16
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGHT 480
+# define SCREEN_WIDTH 320
+# define SCREEN_HEIGHT 240
 
 # define WALL_HEIGHT 0.5
 # define TEX_SIZE 128
@@ -228,7 +228,7 @@ typedef struct		s_home
 	SDL_Renderer	*ren;
 	SDL_Surface		*draw_surf;
 	SDL_Surface		*wall[4];
-	SDL_Surface		*ground;
+	SDL_Surface		*ground[4];
 	t_time			t;
 }					t_home;
 
@@ -285,7 +285,7 @@ void			draw_tex_pixel(SDL_Surface *tex, t_screen_xy pixel,
 	t_screen_xy coord, SDL_Surface *draw_surf);
 t_step			*steplen(t_step *ground, int current_y, t_ray_floor hor,
 	t_player *plr);
-void			draw_world_floor(int y, t_player *plr, t_home *home,
+void			draw_world_floor(int index, int y, t_player *plr, t_home *home,
 	t_ray_floor hor);
 void			modify_pixel_add(SDL_Surface *surf, int x, int y, int color);
 Uint32			get_pixel(SDL_Surface *surface, int x, int y);
@@ -297,7 +297,7 @@ Uint32			get_pixel(SDL_Surface *surface, int x, int y);
 
 void			draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf);
 void			draw_wall(int col, t_wall wall, t_xy ray, t_home *home, t_player *plr);
-void			draw_fov_floor(t_home *home, t_player *plr);
+void			draw_fov_floor(int index, t_home *home, t_player *plr);
 
 t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, double angle);
 t_wall			cast_ray(t_xy pos, t_xy ray, t_map *map);
