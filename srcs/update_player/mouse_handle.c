@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/18 10:54:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/18 12:07:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	mouse_handle_win(t_player *plr)
 	me.motion.xrel = 0;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	if (me.type == SDL_MOUSEMOTION)
-	plr->dir = vec2_rot(plr->dir, DEG_TO_RAD * me.motion.xrel);
+		plr->dir = vec2_rot(plr->dir, DEG_TO_RAD * me.motion.xrel);
 }
 
 void	mouse_handle_unix(t_player *plr, t_home *home)

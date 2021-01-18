@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_floor.c                                       :+:      :+:    :+:   */
+/*   draw_tex_pixel.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/18 11:33:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/18 11:51:52 by jnivala          ###   ########.fr       */
+/*   Created: 2021/01/18 11:27:22 by jnivala           #+#    #+#             */
+/*   Updated: 2021/01/18 11:51:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void			draw_fov_floor(t_home *home, t_player *plr)
+void		draw_tex_pixel(SDL_Surface *tex, t_screen_xy pixel,
+	t_screen_xy coord, SDL_Surface *draw_surf)
 {
-	t_ray_floor	horizontal;
-	int			j;
+	Uint32		color;
 
-	j = 0;
-	horizontal.plane = vec2_rot(plr->dir, FOV * DEG_TO_RAD);
-	horizontal.left = vec2_dec(plr->dir, horizontal.plane);
-	horizontal.right = vec2_add(plr->dir, horizontal.plane);
-	while (j < SCREEN_HEIGHT)
-	{
-		draw_world_floor(j, plr, home, horizontal);
-		j++;
-	}
+	SDL_LockSurface(tex);
+	color = get_pixel(tex, pixel.y, pixel.x);
+	SDL_UnlockSurface(tex);
+	put_pixel(draw_surf, coord.x, coord.y, color);
 }

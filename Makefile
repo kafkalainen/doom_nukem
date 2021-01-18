@@ -11,6 +11,9 @@ SRCS =	main.c \
 		srcs/update_screen/draw_wall.c \
 		srcs/update_screen/put_pixel.c \
 		srcs/update_screen/update_screen.c \
+		srcs/update_screen/draw_tex_pixel.c \
+		srcs/update_screen/draw_world_floor.c \
+		srcs/update_screen/steplen.c \
 		srcs/utilities/error_output.c \
 		srcs/utilities/setup.c \
 		srcs/libft/ft_itoa.c \
@@ -34,7 +37,7 @@ LINUX_LIBRARY_PATHS = -L/lib/
 # -Wl,-subsystem,windows gets rid of the console window
 WIN_COMPILER_FLAGS = -w
 #LINUX_COMPILER_FLAGS = -Wall -Wextra -Werror
-LINUX_COMPILER_FLAGS = -Wall -Wextra -Werror
+LINUX_COMPILER_FLAGS = -Wall -Wextra
 # -Wl,-subsystem,windows
 
 #LINKER_FLAGS specifies the libraries we're linking against
