@@ -21,5 +21,6 @@ typedef struct		s_sector
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;
-	int				height;
+	double			ground;
+	double			ceiling;
 }					t_sector;
