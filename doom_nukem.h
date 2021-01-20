@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/20 13:02:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/20 14:06:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ typedef struct		s_home
 {
 	t_window		win;
 	t_map			map;
-	void			*sectors;
+	t_sector		**sectors;
 	t_texture		*texture;
 	SDL_Renderer	*ren;
 	SDL_Surface		*draw_surf;
@@ -166,7 +166,6 @@ typedef struct		s_home
 	SDL_Surface		*ground[4];
 	t_time			t;
 }					t_home;
-
 /*
 ** Libft functions (recoded libc functions)
 */
