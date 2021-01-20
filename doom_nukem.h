@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/20 14:06:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/20 14:59:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,7 @@ t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, double angle);
 t_wall			cast_ray(t_xy pos, t_xy ray, t_map *map);
 void			draw_fov(t_home *home, t_player *plr);
 int				get_wall_side(t_wall wall, t_player *plr);
+void			draw_2d(t_home *home, t_player *plr);
 
 /*
 ** Color manipulation

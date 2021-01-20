@@ -14,6 +14,8 @@ SRCS =	main.c \
 		srcs/update_screen/draw_tex_pixel.c \
 		srcs/update_screen/draw_world_floor.c \
 		srcs/update_screen/steplen.c \
+		srcs/update_screen/draw_2d.c \
+		srcs/update_screen/update_sector.c \
 		srcs/utilities/error_output.c \
 		srcs/utilities/setup.c \
 		srcs/libft/ft_itoa.c \

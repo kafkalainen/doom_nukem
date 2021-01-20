@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 18:08:50 by tmaarela          #+#    #+#             */
-/*   Updated: 2020/11/24 18:08:50 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/01/20 16:30:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void			player_move_forward(t_player *plr, t_map *map, double delta_time)
 
 	check_pos = plr->pos;
 	check_pos = vec2_add(check_pos, vec2_mul(plr->dir, 8 * delta_time));
-	if (valid_location(check_pos, map))
-		plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 4 * delta_time));
+	//if (valid_location(check_pos, map))
+		plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 40 * delta_time));
 }
 
 void			player_move_backwards(t_player *plr, t_map *map, double delta_time)
@@ -35,8 +35,8 @@ void			player_move_backwards(t_player *plr, t_map *map, double delta_time)
 
 	check_pos = plr->pos;
 	check_pos = vec2_dec(check_pos, vec2_mul(plr->dir, 8 * delta_time));
-	if (valid_location(check_pos, map))
-		plr->pos = vec2_dec(plr->pos, vec2_mul(plr->dir, 4 * delta_time));
+	//if (valid_location(check_pos, map))
+		plr->pos = vec2_dec(plr->pos, vec2_mul(plr->dir, 40 * delta_time));
 }
 
 void			player_move_strafe(t_player *plr, t_map *map, double delta_time, char ad)
@@ -48,15 +48,15 @@ void			player_move_strafe(t_player *plr, t_map *map, double delta_time, char ad)
 				plr->dir, 90 * DEG_TO_RAD), 8 * delta_time))
 				: vec2_dec(plr->pos, vec2_mul(vec2_rot(
 				plr->dir, 90 * DEG_TO_RAD), 8 * delta_time));
-	if (valid_location(vec2_mul(check_pos, 1.0), map))
-	{
+	//if (valid_location(vec2_mul(check_pos, 1.0), map))
+	//{
 		if (ad == 'd')
 			plr->pos = vec2_add(plr->pos, vec2_mul(vec2_rot(
 				plr->dir, 90 * DEG_TO_RAD), 4 * delta_time));
 		else
 			plr->pos = vec2_dec(plr->pos, vec2_mul(vec2_rot(
 				plr->dir, 90 * DEG_TO_RAD), 4 * delta_time));
-	}
+	//}
 }
 
 void				movement(t_player *plr, t_map *map)

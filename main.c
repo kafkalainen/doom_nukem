@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/18 10:28:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/20 15:34:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int  			main(int argc, char **argv)
 	if (argc != 2)
 		error_output("usage: .\\play [map file name]\n");
 	setup(argv[1], &home, &plr);
+	update_sector(&home);
 	while(1)
 	{
 		//home.t.beginfps = clock();

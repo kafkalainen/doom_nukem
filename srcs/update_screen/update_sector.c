@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/20 14:37:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/20 16:20:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,18 @@ static void		assign_polygons(t_sector *sector)
 	int			walls;
 
 	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
-	coord[0].x = 0.0;
+	coord[0].x = 100.0;
 	coord[0].y = 0.0;
-	coord[1].x = 5.0;
+	coord[1].x = 200.0;
 	coord[1].y = 0.0;
-	coord[2].x = 5.0;
-	coord[2].y = 5.0;
-	coord[3].x = 0.0;
-	coord[3].y = 5.0;
+	coord[2].x = 200.0;
+	coord[2].y = 200.0;
+	coord[3].x = 40.0;
+	coord[3].y = 200.0;
 	walls = sector->nb_of_walls;
 	sector->polygons = new_polygon(coord[walls - 1], 1);
 	temp = sector->polygons;
+	walls--;
 	while (walls)
 	{
 		new = new_polygon(
@@ -114,6 +115,6 @@ static void		print_polygons(t_sector *sector)
 int				update_sector(t_home *home)
 {
 	assign_sectors(home);
-	print_polygons(home->sectors[0]);
+	//print_polygons(home->sectors[0]);
 	return (0);
 }
