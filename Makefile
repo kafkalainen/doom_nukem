@@ -23,6 +23,7 @@ SRCS =	main.c \
 
 HEADERS = \
 		doom_nukem.h\
+		dn_map.h\
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
 WIN_INCLUDE_PATHS = -IC:\mingw_dev_lib\include\SDL2

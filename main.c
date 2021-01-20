@@ -38,18 +38,18 @@ int  			main(int argc, char **argv)
 	setup(argv[1], &home, &plr);
 	while(1)
 	{
-		home.t.beginfps = clock();
+		//home.t.beginfps = clock();
 		update_player(&plr, &home, e);
 		update_screen(&home, &plr);
-		fps = ft_itoa(home.t.fps);
-		SDL_SetWindowTitle(home.win.window, fps);
-		free(fps);
+		//fps = ft_itoa(home.t.fps);
+		//SDL_SetWindowTitle(home.win.window, fps);
+		//free(fps);
 		SDL_UpdateWindowSurface(home.win.window);
 		clear_surface(home.draw_surf);
 		SDL_FreeSurface(home.draw_surf);
-		home.t.endfps = clock();
-		home.t.delta_time = home.t.endfps - home.t.beginfps;
-		home.t.fps = CLOCKS_PER_SEC / home.t.delta_time;
+		//home.t.endfps = clock();
+		//home.t.delta_time = home.t.endfps - home.t.beginfps;
+		//home.t.fps = CLOCKS_PER_SEC / home.t.delta_time;
 	}
 	SDL_Quit();
 	return 0;

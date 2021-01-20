@@ -10,17 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DN_MAP_H
-# define DN_MAP_H
-# include "doom_nukem.h"
+#ifndef SECTOR_H
+# define SECTOR_H
 
-
-typedef struct			t_p_data
+typedef struct			s_p_data
 {
 	t_xy				x0;
 	t_xy				normal;
 	int					connection;
-}
+}						t_p_data;
 
 typedef struct			s_polygon
 {
@@ -42,7 +40,5 @@ typedef struct		s_sector
 	double			ground;
 	double			ceiling;
 }					t_sector;
-
-int		update_sector(t_home *home);
 
 #endif
