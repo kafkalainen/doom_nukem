@@ -22,22 +22,21 @@
 # include "entity.h"
 # include "sector.h"
 
+#  include <time.h>
+#  include <fcntl.h>
+
 # ifdef __unix__
 #  define OPEN_FILE open
 #  define READ_ONLY O_RDONLY
 #  include <math.h>
 #  include "include/SDL2/SDL.h"
 #  include <string.h>
-#  include <time.h>
-#  include <fcntl.h>
 #  include <unistd.h>
 # elif __APPLE__
 #  define OPEN_FILE open
 #  define READ_ONLY O_RDONLY
 #  include "include/SDL2/SDL.h"
 #  include <string.h>
-#  include <time.h>
-#  include <fcntl.h>
 #  include <unistd.h>
 # elif defined(_WIN32) || defined(WIN32)
 #  define OPEN_FILE _open
@@ -45,8 +44,7 @@
 #  include "SDL.h"
 #  include <io.h>
 #  include <stdio.h>
-#  include <time.h>
-#  include <fcntl.h>
+
 # endif
 
 typedef struct		s_input
