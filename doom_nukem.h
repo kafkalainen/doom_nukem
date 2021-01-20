@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/18 15:17:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/20 13:02:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,10 @@
 # define k_d SDLK_d
 # define k_q SDLK_q
 # define k_e SDLK_e
-
-
-
 # ifdef __unix__
 #  define OPEN_FILE open
 #  define READ_ONLY O_RDONLY
+#  include <math.h>
 #  include "include/SDL2/SDL.h"
 #  include <string.h>
 #  include <time.h>
@@ -220,10 +218,18 @@ typedef struct		s_wall
 	int				side;
 }					t_wall;
 
+typedef struct		s_enemy
+{
+	int				hp;
+}					t_enemy;
+
+typedef struct		t_sector;
+
 typedef struct		s_home
 {
 	t_window		win;
 	t_map			map;
+	t_sector		*sectors;
 	t_texture		*texture;
 	SDL_Renderer	*ren;
 	SDL_Surface		*draw_surf;

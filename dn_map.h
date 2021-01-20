@@ -1,17 +1,35 @@
-#include "doom_nukem.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dn_map.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/20 10:12:53 by jnivala           #+#    #+#             */
+/*   Updated: 2021/01/20 13:14:17 by jnivala          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct		s_enemy
-{
-	int				hp;
-}					t_enemy;
+#ifndef DN_MAP_H
+# define DN_MAP_H
+# include "doom_nukem.h"
 
-typedef struct		s_polygon
+
+typedef struct			t_p_data
 {
-	t_xy			x0;
-	t_xy			normal;
-	int				idx_tex;
-	int				connection;
-}					t_polygon;
+	t_xy				x0;
+	t_xy				normal;
+	int					connection;
+}
+
+typedef struct			s_polygon
+{
+	t_xy				x0;
+	t_xy				normal;
+	int					idx;
+	int					connection;
+	struct s_polygon	*next;
+}						t_polygon;
 
 typedef struct		s_sector
 {
@@ -24,3 +42,7 @@ typedef struct		s_sector
 	double			ground;
 	double			ceiling;
 }					t_sector;
+
+int		update_sector(t_home *home);
+
+#endif
