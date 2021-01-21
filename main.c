@@ -12,20 +12,6 @@
 
 #include "doom_nukem.h"
 
-/*		Do you still need this shit?
-void			stress_test(int max, int x, int y, t_home *home)
-{
-	int		i = 0;
-
-	while (i < max)
-	{
-		draw_rect_center(vec2(x, y), vec2(4, 4), home);
-		i++;
-	}
-}
-*/
-
-
 int  			main(int argc, char **argv)
 {
 	t_home		home;

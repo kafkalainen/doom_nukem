@@ -24,4 +24,8 @@ typedef	struct		s_intersection
 	float	pos;
 }					t_intersection;
 
+void		calc_intersection(t_polygon *pgon, t_xy *pos, t_xy *dir, 
+					t_intersection *sect);
+t_xy		line_intersection(t_intersection *sect);
+
 #endif

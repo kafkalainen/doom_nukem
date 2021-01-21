@@ -37,5 +37,7 @@ void			draw_2d(t_home *home, t_player *plr, t_intersection *sect)
 	ft_draw_line(temp->x0, home->sectors[0]->polygons->x0, fuchsia, home->draw_surf);
 	draw_rect_center(plr->pos, vec2(5, 5), home);
 	dir = vec2(plr->dir.x * MINIMAP_SIZE, plr->dir.y * MINIMAP_SIZE);
-	ft_draw_line(plr->pos, vec2_add(plr->pos, dir), lightgreen, home->draw_surf);
+	ft_draw_line(plr->pos, vec2_add(plr->pos, vec2_mul(dir, 20)), lightgreen, home->draw_surf);
+	//calc_intersection(home->sectors[0]->polygons, &plr->pos, &plr->dir, sect);
+	//draw_rect_center(line_intersection(sect), vec2(16, 16), home);
 }

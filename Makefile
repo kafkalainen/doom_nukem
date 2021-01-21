@@ -23,6 +23,7 @@ SRCS =	main.c \
 		srcs/libft/memory.c \
 		srcs/libft/ft_get_next_line.c \
 		srcs/libft/ft_putendl_fd.c \
+		srcs/raycaster/raycaster.c
 
 HEADERS = \
 		doom_nukem.h\
