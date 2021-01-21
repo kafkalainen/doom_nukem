@@ -6,12 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/21 12:21:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/21 15:57:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOOM_NUKEM_H
 # define DOOM_NUKEM_H
+# define MINIAUDIO_IMPLEMENTATION
 
 /*
 **	Non-standard includes
@@ -23,6 +24,7 @@
 # include "sector.h"
 # include "calculations.h"
 # include "colours.h"
+# include "miniaudio.h"
 
 #  include <time.h>
 #  include <fcntl.h>
@@ -267,5 +269,15 @@ t_xy			scale(t_xy a);
 void			draw_minimap(t_xy size, t_xy pos, t_xy dir, t_home *home);
 void			draw_grid(t_home *home);
 int				update_sector(t_home *home);
+
+/*
+** Audio
+*/
+void	data_callback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount);
+int		setup_music(const char *audio_file, t_home *home);
+int		init_audiodevice(ma_device *device, ma_decoder *decoder, ma_device_config *device_config, t_home *home);
+int		device_start(ma_device *device, ma_decoder *decoder, t_home *home);
+int		unmount_audiodevice(ma_device *device, ma_decoder *decoder);
+
 
 #endif
