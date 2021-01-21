@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/21 12:21:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/21 17:15:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@
 # include "colours.h"
 # include "player.h"
 # include "calculations.h"
+# include "miniaudio.h"
+
 
 typedef	struct		s_item
 {
