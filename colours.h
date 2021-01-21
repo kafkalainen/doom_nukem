@@ -13,7 +13,16 @@
 
 #ifndef COLOURS_H
 # define COLOURS_H
-enum	e_colour {
+
+typedef struct		s_argb
+{
+	int				a;
+	int				r;
+	int				g;
+	int				b;
+}					t_argb;
+
+enum				e_colour {
 	lightpink = 0xffb6c1,
 	pink = 0xffc0cb,
 	crimson = 0xdc143c,
