@@ -21,6 +21,7 @@
 # include "vectors.h"
 # include "entity.h"
 # include "sector.h"
+# include "calculations.h"
 # include "colours.h"
 
 #  include <time.h>
@@ -222,7 +223,7 @@ t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, float angle);
 t_wall			cast_ray(t_xy pos, t_xy ray, t_map *map);
 void			draw_fov(t_home *home, t_player *plr);
 int				get_wall_side(t_wall wall, t_player *plr);
-void			draw_2d(t_home *home, t_player *plr);
+void			draw_2d(t_home *home, t_player *plr, t_intersection *sect);
 
 /*
 ** Color manipulation

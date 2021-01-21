@@ -12,7 +12,7 @@
 
 #include "../../doom_nukem.h"
 
-void			draw_2d(t_home *home, t_player *plr)
+void			draw_2d(t_home *home, t_player *plr, t_intersection *sect)
 {
 	int i;
 	t_polygon	*temp;

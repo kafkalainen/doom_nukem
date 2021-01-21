@@ -1,24 +1,29 @@
-#include "doom_nukem.h"
+#include "../../doom_nukem.h"
 
-static int		cast(t_xy *pos, t_xy *dir, t_polygon *polygons)
+t_xy		line_intersection(t_intersection *sect)
 {
-	float x1 = polygons->x0.x;
-	float y1 = polygons->x0.y;
-	float x2 = polygons->next->x0.x;
-	float y2 = polygons->next->x0.y;
+	t_xy point;
+	
+	if (sect->neg > 0 && sect->neg < 1 && sect->pos > 0)
+	{
+		point.x = (sect->x1 + sect->neg * (sect->x2 - sect->x1));
+		point.y = (sect->y1 + sect->neg * (sect->y2 - sect->y1));
+	}
+	return (point);
+}
 
-	float x3 = pos->x;
-	float y3 = pos->y;
-	float x4 = pos->x + dir->x;
-	float y4 = pos->y + dir->y;
+void		calc_intersection(t_polygon *pgon, t_xy *pos, t_xy *dir, 
+					t_intersection *sect)
+{
+	sect->x1 = pgon->x0.x;
+	sect->x2 = pgon->next->x0.x;
+	sect->y1 = pgon->x0.y;
+	sect->y2 = pgon->next->x0.y;
 
-	float den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-	if (den == 0)
-		return (0);
-	float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
-	float u = -((x1 - x2) * (y1- y3) - (y1 - y2) * (x1 - x3)) / den;
-	if (t > 0 && t < 1 && u > 0)
-		return (1);
-	else
-		return (-1);
+	sect->den = ((sect->x1 - sect->x2) * (-dir->y) - 
+				(sect->y1 - sect->y2) * (-dir->x));
+	sect->neg = ((sect->x1 - pos->x) * (-dir->y) - (sect->y1 - pos->y) *
+				(-dir->x)) / sect->den;
+	sect->pos = -((sect->x1 - sect->x2) * (sect->y1 - pos->y) -
+				(sect->x1 - pos->x)) / sect->den;
 }
