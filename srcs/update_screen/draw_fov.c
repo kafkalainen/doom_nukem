@@ -54,7 +54,7 @@ t_wall			cast_ray(t_xy pos, t_xy ray, t_map *map)
 	return ((t_wall){vec2(map_x, map_y), rc.perpWallDist, rc.side});
 }
 
-t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, double angle)
+t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, float angle)
 {
 	t_xy	point;
 	t_xy	ray;
@@ -66,7 +66,7 @@ t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, double angle)
 
 void			draw_fov(t_home *home, t_player *plr)
 {
-	static double	step = 2.0 / SCREEN_WIDTH;
+	static float	step = 2.0 / SCREEN_WIDTH;
 	t_xy			plane;
 	t_xy			left;
 	t_xy			ray;

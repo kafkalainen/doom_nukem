@@ -12,7 +12,7 @@
 
 #include "../../doom_nukem.h"
 
-t_xy			vec2_rot(t_xy v, double angle)
+t_xy			vec2_rot(t_xy v, float angle)
 {
 	return ((t_xy){
 		v.x * cos(angle) - v.y * sin(angle),
@@ -22,7 +22,7 @@ t_xy			vec2_rot(t_xy v, double angle)
 
 t_xy			vec2_norm(t_xy v)
 {
-	double mag;
+	float mag;
 
 	mag = sqrt((v.x * v.x) + (v.y * v.y));
 	return ((t_xy){
@@ -31,7 +31,7 @@ t_xy			vec2_norm(t_xy v)
 	});
 }
 
-t_xy			vec2_mul(t_xy v, double scalar)
+t_xy			vec2_mul(t_xy v, float scalar)
 {
 	return ((t_xy){
 		v.x * scalar,
@@ -39,12 +39,12 @@ t_xy			vec2_mul(t_xy v, double scalar)
 	});
 }
 
-double			vec2_dot(t_xy a, t_xy b)
+float			vec2_dot(t_xy a, t_xy b)
 {
 	return (a.x * b.x + a.y * b.y);
 }
 
-double			ft_map(double in, t_range from, t_range to)
+float			ft_map(float in, t_range from, t_range to)
 {
 	return (to.x + ((in - from.x) * (to.y - to.x)) / (from.y - from.x));
 }

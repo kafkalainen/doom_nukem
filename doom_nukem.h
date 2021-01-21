@@ -75,17 +75,17 @@ typedef struct		s_time
 
 typedef	struct		s_item
 {
-	double			x;
-	double			y;
-	double			z;
+	float			x;
+	float			y;
+	float			z;
 }					t_item;
 
 typedef struct		s_player
 {
 	t_xy			pos;
 	t_xy			dir;
-	double			z;
-	double			height;
+	float			z;
+	float			height;
 	t_input			input;
 	clock_t			time;
 }					t_player;
@@ -112,7 +112,7 @@ typedef struct		s_raycast
 	t_xy			deltaDist;
 	t_xy			step;
 	int				side;
-	double			perpWallDist;
+	float			perpWallDist;
 }					t_raycast;
 
 typedef struct		s_ray_floor
@@ -135,7 +135,7 @@ typedef struct		s_tex_col
 	int				top;
 	int				bot;
 	int				line_height;
-	double			step;
+	float			step;
 	SDL_Surface		*tex;
 }					t_tex_col;
 
@@ -148,7 +148,7 @@ typedef struct		s_texture
 typedef struct		s_wall
 {
 	t_xy			hit;
-	double			distance;
+	float			distance;
 	int				side;
 }					t_wall;
 
@@ -194,7 +194,7 @@ int				ft_get_next_line(const int fd, char **out);
 
 
 void			clear_surface(SDL_Surface *surface);
-int				ft_put_pixel(double x, double y, int color, SDL_Renderer *ren);
+int				ft_put_pixel(float x, float y, int color, SDL_Renderer *ren);
 int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Surface *surf);
 void			draw_rect_center(t_xy xy, t_xy wh, t_home *home);
 void			draw_rect(t_xy xy, t_xy wh, t_home *home, int color);
@@ -213,11 +213,11 @@ Uint32			get_pixel(SDL_Surface *surface, int x, int y);
 ** Raycaster
 */
 
-void			draw_tex_col(t_tex_col *tex, double distance, SDL_Surface *surf);
+void			draw_tex_col(t_tex_col *tex, float distance, SDL_Surface *surf);
 void			draw_wall(int col, t_wall wall, t_xy ray, t_home *home, t_player *plr);
 void			draw_fov_floor(t_home *home, t_player *plr);
 
-t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, double angle);
+t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, float angle);
 t_wall			cast_ray(t_xy pos, t_xy ray, t_map *map);
 void			draw_fov(t_home *home, t_player *plr);
 int				get_wall_side(t_wall wall, t_player *plr);
@@ -236,9 +236,9 @@ t_argb			int2argb(int color);
 void			init_player(t_player *plr, t_map *map);
 void			update_player(t_player *plr, t_home *home, SDL_Event e);
 void			movement(t_player *plr, t_map *map);
-void			player_move_forward(t_player *plr, t_map *map, double delta_time);
-void			player_move_strafe(t_player *plr, t_map *map, double delta_time, char ad);
-void			player_move_backwards(t_player *plr, t_map *map, double delta_time);
+void			player_move_forward(t_player *plr, t_map *map, float delta_time);
+void			player_move_strafe(t_player *plr, t_map *map, float delta_time, char ad);
+void			player_move_backwards(t_player *plr, t_map *map, float delta_time);
 
 /*
 ** Event handlers

@@ -1,22 +1,22 @@
 #include "doom_nukem.h"
 
-static int		cast(t_ray ray, t_line line)
+static int		cast(t_xy *pos, t_xy *dir, t_polygon *polygons)
 {
-	double x1 = line.start.x;
-	double y1 = line.start.y;
-	double x2 = line.end.x;
-	double y2 = line.end.y;
+	float x1 = polygons->x0.x;
+	float y1 = polygons->x0.y;
+	float x2 = polygons->next->x0.x;
+	float y2 = polygons->next->x0.y;
 
-	double x3 = ray.pos.x;
-	double y3 = ray.pos.y;
-	double x4 = ray.pos.x + ray.dir.x;
-	double y4 = ray.pos.y + ray.dir.y;
+	float x3 = pos->x;
+	float y3 = pos->y;
+	float x4 = pos->x + dir->x;
+	float y4 = pos->y + dir->y;
 
-	double den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+	float den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
 	if (den == 0)
 		return (0);
-	double t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
-	double u = -((x1 - x2) * (y1- y3) - (y1 - y2) * (x1 - x3)) / den;
+	float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
+	float u = -((x1 - x2) * (y1- y3) - (y1 - y2) * (x1 - x3)) / den;
 	if (t > 0 && t < 1 && u > 0)
 		return (1);
 	else

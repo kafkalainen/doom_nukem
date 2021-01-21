@@ -12,7 +12,7 @@
 
 #include "../../doom_nukem.h"
 
-t_xy			vec2(double x, double y)
+t_xy			vec2(float x, float y)
 {
 	return ((t_xy){x, y});
 }

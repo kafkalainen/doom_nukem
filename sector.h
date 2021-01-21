@@ -13,13 +13,6 @@
 #ifndef SECTOR_H
 # define SECTOR_H
 
-typedef struct			s_p_data
-{
-	t_xy				x0;
-	t_xy				normal;
-	int					connection;
-}						t_p_data;
-
 typedef struct			s_polygon
 {
 	t_xy				x0;
@@ -37,8 +30,8 @@ typedef struct		s_sector
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;
-	double			ground;
-	double			ceiling;
+	float			ground;
+	float			ceiling;
 }					t_sector;
 
 #endif
