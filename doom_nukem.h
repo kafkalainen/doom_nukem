@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/20 14:59:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/21 09:40:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "vectors.h"
 # include "entity.h"
 # include "sector.h"
+# include "colours.h"
 
 #  include <time.h>
 #  include <fcntl.h>

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/18 12:07:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/21 09:44:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	mouse_handle_win(t_player *plr)
 {
 	SDL_Event	me;
 
+	me.type = 0;
+	me.motion.xrel = 0;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	if (me.type == SDL_MOUSEMOTION)
 		plr->dir = vec2_rot(plr->dir, DEG_TO_RAD * me.motion.xrel);
@@ -26,6 +28,7 @@ void	mouse_handle_unix(t_player *plr, t_home *home)
 	t_xy		mouse;
 	t_screen_xy	mouse_screen;
 
+	SDL_ShowCursor(SDL_DISABLE);
 	SDL_CaptureMouse(SDL_TRUE);
 	SDL_GetMouseState(&mouse_screen.x, &mouse_screen.y);
 	mouse.x = (double)mouse_screen.x;
