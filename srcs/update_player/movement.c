@@ -19,7 +19,7 @@ static int			valid_location(t_xy pos, t_map *map)
 		&& (map->data[(int)pos.y][(int)pos.x] != '#'));
 }
 
-void			player_move_forward(t_player *plr, t_map *map, double delta_time)
+void			player_move_forward(t_player *plr, t_map *map, float delta_time)
 {
 	t_xy check_pos;
 
@@ -29,7 +29,7 @@ void			player_move_forward(t_player *plr, t_map *map, double delta_time)
 		plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 40 * delta_time));
 }
 
-void			player_move_backwards(t_player *plr, t_map *map, double delta_time)
+void			player_move_backwards(t_player *plr, t_map *map, float delta_time)
 {
 	t_xy check_pos;
 
@@ -39,7 +39,7 @@ void			player_move_backwards(t_player *plr, t_map *map, double delta_time)
 		plr->pos = vec2_dec(plr->pos, vec2_mul(plr->dir, 40 * delta_time));
 }
 
-void			player_move_strafe(t_player *plr, t_map *map, double delta_time, char ad)
+void			player_move_strafe(t_player *plr, t_map *map, float delta_time, char ad)
 {
 	t_xy check_pos;
 
@@ -61,11 +61,11 @@ void			player_move_strafe(t_player *plr, t_map *map, double delta_time, char ad)
 
 void				movement(t_player *plr, t_map *map)
 {
-	double		delta_time;
+	float		delta_time;
 	clock_t		ctime;
 
 	ctime = clock();
-	delta_time = ((ctime - plr->time) / (double)CLOCKS_PER_SEC);
+	delta_time = ((ctime - plr->time) / (float)CLOCKS_PER_SEC);
 	if (delta_time < 0.0166667)
 		return;
 	plr->time = ctime;
