@@ -62,7 +62,7 @@ static void		assign_polygons(t_sector *sector)
 	coord[0].y = 0.0;
 	coord[1].x = 200.0;
 	coord[1].y = 0.0;
-	coord[2].x = 200.0;
+	coord[2].x = 250.0;
 	coord[2].y = 200.0;
 	coord[3].x = 40.0;
 	coord[3].y = 200.0;

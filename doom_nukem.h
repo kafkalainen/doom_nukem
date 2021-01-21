@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/21 15:57:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/21 16:05:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,31 +51,13 @@
 
 # endif
 
-typedef struct		s_input
-{
-	int				right;
-	int				left;
-	int				up;
-	int				down;
-}					t_input;
-
-
-typedef struct		s_argb
-{
-	int				a;
-	int				r;
-	int				g;
-	int				b;
-}					t_argb;
-
-typedef struct		s_time
-{
-	clock_t			beginfps;
-	clock_t			endfps;
-	clock_t			delta_time;
-	size_t			frames;
-	long int		fps;
-}					t_time;
+# include "macros.h"
+# include "vectors.h"
+# include "entity.h"
+# include "sector.h"
+# include "colours.h"
+# include "player.h"
+# include "calculations.h"
 
 typedef	struct		s_item
 {
@@ -83,16 +65,6 @@ typedef	struct		s_item
 	float			y;
 	float			z;
 }					t_item;
-
-typedef struct		s_player
-{
-	t_xy			pos;
-	t_xy			dir;
-	float			z;
-	float			height;
-	t_input			input;
-	clock_t			time;
-}					t_player;
 
 typedef struct		s_window
 {
