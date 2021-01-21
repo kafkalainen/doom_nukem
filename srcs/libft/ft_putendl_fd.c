@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_output.c                                     :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/20 15:43:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/21 12:27:00 by jnivala          ###   ########.fr       */
+/*   Created: 2020/06/12 09:43:51 by jnivala           #+#    #+#             */
+/*   Updated: 2021/01/21 11:53:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void	error_output_sdl(char *msg, t_home *home)
+static void		ft_putchar_fd(char c, int fd)
 {
-	SDL_DestroyWindow(home->win.window);
-	ft_putendl_fd(msg, 2);
-	exit(0);
+	write(fd, &c, 1);
 }
 
-void	error_output(char *msg)
+static void	ft_putstr_fd(char const *s, int fd)
 {
-	ft_putendl_fd(msg, 2);
-	exit(0);
+	write(fd, s, ft_strlen(s));
+}
+
+void		ft_putendl_fd(char const *s, int fd)
+{
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }
