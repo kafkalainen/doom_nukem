@@ -19,21 +19,25 @@ void			draw_2d(t_home *home, t_player *plr, t_intersection *sect)
 	t_polygon	*perkele;
 	t_xy		dir;
 
-	i = 1;
-	temp = home->sectors[0]->polygons;
-	while (temp)
+	i = 0;
+	while(i < 2)
 	{
-		if (temp->idx > 0)
+		temp = home->sectors[i]->polygons;
+		while (temp)
 		{
-			perkele = (temp->next == NULL) ? home->sectors[0]->polygons : temp->next;
-			calc_intersection(temp, home->sectors[0]->polygons, plr, sect);
-			ft_draw_line(
-				temp->x0, perkele->x0, fuchsia, home->draw_surf);
+			if (temp->idx)
+			{
+				perkele = (temp->next == NULL) ? home->sectors[i]->polygons : temp->next;
+				calc_intersection(temp, home->sectors[i]->polygons, plr, sect);
+				ft_draw_line(
+					temp->x0, perkele->x0, fuchsia, home->draw_surf);
+			}
+			if (temp->idx > -1)
+				draw_rect_center(line_intersection(sect), vec2(16, 16), home);
+			if (temp->next == NULL)
+				break ;
+			temp = temp->next;
 		}
-		draw_rect_center(line_intersection(sect), vec2(16, 16), home);
-		if (temp->next == NULL)
-			break ;
-		temp = temp->next;
 		i++;
 	}
 	//ft_draw_line(temp->x0, home->sectors[0]->polygons->x0, fuchsia, home->draw_surf);

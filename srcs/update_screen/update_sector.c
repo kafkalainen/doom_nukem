@@ -58,24 +58,65 @@ static void		assign_polygons(t_sector *sector)
 	int			walls;
 
 	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
-	coord[0].x = 100.0;
-	coord[0].y = 0.0;
-	coord[1].x = 200.0;
-	coord[1].y = 0.0;
-	coord[2].x = 250.0;
-	coord[2].y = 200.0;
-	coord[3].x = 40.0;
-	coord[3].y = 200.0;
+	coord[3].x = 100.0;
+	coord[3].y = 0.0;
+	coord[2].x = 200.0;
+	coord[2].y = 0.0;
+	coord[1].x = 250.0;
+	coord[1].y = 200.0;
+	coord[0].x = 40.0;
+	coord[0].y = 200.0;
 	walls = sector->nb_of_walls;
-	sector->polygons = new_polygon(coord[walls - 1], 1);
+	sector->polygons = new_polygon(coord[walls - 1], -1);
 	temp = sector->polygons;
 	walls--;
 	while (walls)
 	{
-		new = new_polygon(
+		if (walls == 3)
+			new = new_polygon(
+				coord[walls - 1],
+				1);
+		else
+			new = new_polygon(
 			coord[walls - 1],
-			1
-		);
+			-1);
+		temp->next = new;
+		temp = temp->next;
+		walls--;
+	}
+	free(coord);
+}
+
+static void		assign_polygons1(t_sector *sector)
+{
+	t_polygon	*temp;
+	t_polygon	*new;
+	t_xy		*coord;
+	int			walls;
+
+	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
+	coord[3].x = 200.0;
+	coord[3].y = 0.0;
+	coord[2].x = 300.0;
+	coord[2].y = 0.0;
+	coord[1].x = 300.0;
+	coord[1].y = 250.0;
+	coord[0].x = 250.0;
+	coord[0].y = 200.0;
+	walls = sector->nb_of_walls;
+	sector->polygons = new_polygon(coord[walls - 1], -1);
+	temp = sector->polygons;
+	walls--;
+	while (walls)
+	{
+		if (walls == 1)
+			new = new_polygon(
+			coord[walls - 1],
+				0);
+		else
+			new = new_polygon(
+			coord[walls - 1],
+			-1);
 		temp->next = new;
 		temp = temp->next;
 		walls--;
@@ -85,13 +126,21 @@ static void		assign_polygons(t_sector *sector)
 
 static int		assign_sectors(t_home *home)
 {
+	int i;
+
+	i = 0;
 	home->sectors = (t_sector**)malloc(sizeof(t_sector));
-	home->sectors[0] = (t_sector*)malloc(sizeof(t_sector));
-	home->sectors[0]->ceiling = 1.0;
-	home->sectors[0]->ground = 0.0;
-	home->sectors[0]->idx_sector = 0;
-	home->sectors[0]->nb_of_walls = 4;
+	while(i < 2)
+	{
+		home->sectors[i] = (t_sector*)malloc(sizeof(t_sector));
+		home->sectors[i]->ceiling = 1.0;
+		home->sectors[i]->ground = 0.0;
+		home->sectors[i]->idx_sector = i;
+		home->sectors[i]->nb_of_walls = 4;
+		i++;
+	}
 	assign_polygons(home->sectors[0]);
+	assign_polygons1(home->sectors[1]);
 	return (0);
 }
 
