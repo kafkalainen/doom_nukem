@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/21 10:32:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/22 10:10:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,21 @@ void			draw_2d(t_home *home, t_player *plr, t_intersection *sect)
 {
 	int i;
 	t_polygon	*temp;
+	t_polygon	*perkele;
 	t_xy		dir;
 
 	i = 1;
 	temp = home->sectors[0]->polygons;
 	while (temp)
 	{
-		t_polygon *perkele = (temp->next == NULL) ? home->sectors[0]->polygons : temp->next;
 		if (temp->idx > 0)
 		{
-			calc_intersection(temp, home->sectors[0]->polygons, plr, &sect);
+			perkele = (temp->next == NULL) ? home->sectors[0]->polygons : temp->next;
+			calc_intersection(temp, home->sectors[0]->polygons, plr, sect);
 			ft_draw_line(
 				temp->x0, perkele->x0, fuchsia, home->draw_surf);
 		}
-		draw_rect_center(line_intersection(&sect), vec2(16, 16), home);
+		draw_rect_center(line_intersection(sect), vec2(16, 16), home);
 		if (temp->next == NULL)
 			break ;
 		temp = temp->next;

@@ -31,11 +31,11 @@ HEADERS = \
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
 WIN_INCLUDE_PATHS = -IC:\mingw_dev_lib\include\SDL2
-LINUX_INCLUDE_PATHS = -I/include/SDL2/
+LINUX_INCLUDE_PATHS = -I/include/SDL2/ -I/usr/local/include
 
 #LIBRARY_PATHS specifies the additional library paths we'll need
 WIN_LIBRARY_PATHS = -LC:\mingw_dev_lib\lib
-LINUX_LIBRARY_PATHS = -L/lib/
+LINUX_LIBRARY_PATHS = -L/lib/ -L/usr/local/lib
 
 #COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
@@ -47,7 +47,7 @@ LINUX_COMPILER_FLAGS = -Wall -Wextra
 
 #LINKER_FLAGS specifies the libraries we're linking against
 WIN_LINK_FLAGS = -lmingw32 -lSDL2main -lSDL2
-LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lm -g
+LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lm -lrt -lasound -ljack -pthread -g
 
 .PHONY: all clean fclean re
 
