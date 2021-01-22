@@ -13,9 +13,9 @@ static t_home	*init_sdl(t_home *home)
 	home->draw_surf = SDL_GetWindowSurface(home->win.window);
 	if (!home->draw_surf)
 		error_output_sdl("Fatal: Failed to get window surface", home);
-	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	//if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 		//error_output_sdl("Fatal: SDL_mixer could not initialize!", home);
-		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+	//	printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 	return (home);
 }
 

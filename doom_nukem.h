@@ -26,7 +26,7 @@
 #  define READ_ONLY O_RDONLY
 #  include <math.h>
 #  include "include/SDL2/SDL.h"
-#  include "/usr/local/include/SDL2/SDL_mixer.h"
+//#  include "/usr/local/include/SDL2/SDL_mixer.h"
 #  include <string.h>
 #  include <unistd.h>
 # elif __APPLE__
