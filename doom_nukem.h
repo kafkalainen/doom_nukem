@@ -6,7 +6,7 @@
 /*   By: zukala <zukaa@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/22 13:35:53 by rzukala          ###   ########.fr       */
+/*   Updated: 2021/01/25 12:08:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #  define READ_ONLY O_RDONLY
 #  include <math.h>
 #  include "include/SDL2/SDL.h"
-//#  include "/usr/local/include/SDL2/SDL_mixer.h"
+#  include "/usr/local/include/SDL2/SDL_mixer.h"
 #  include <string.h>
 #  include <unistd.h>
 # elif __APPLE__

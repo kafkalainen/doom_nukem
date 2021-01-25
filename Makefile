@@ -16,6 +16,7 @@ SRCS =	main.c \
 		srcs/update_screen/update_sector.c \
 		srcs/utilities/error_output.c \
 		srcs/utilities/setup.c \
+		srcs/utilities/audio.c \
 		srcs/libft/ft_itoa.c \
 		srcs/libft/ft_atoi.c \
 		srcs/libft/ft_strings1.c \
@@ -47,7 +48,7 @@ LINUX_COMPILER_FLAGS = -Wall -Wextra
 
 #LINKER_FLAGS specifies the libraries we're linking against
 WIN_LINK_FLAGS = -lmingw32 -lSDL2main -lSDL2
-LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lm -g
+LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lSDL2_mixer -lm -g
 
 .PHONY: all clean fclean re
 

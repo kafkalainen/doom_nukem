@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/22 16:54:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/25 12:10:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct		s_player
 	float			height;
 	t_input			input;
 	clock_t			time;
-//	t_audio			audio;
+	t_audio			audio;
 }					t_player;
 
 #endif
