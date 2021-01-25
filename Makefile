@@ -33,7 +33,7 @@ mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir := $(dir $(mkfile_path))
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
-WIN_INCLUDE_PATHS = -I$(mkfile_dir)\include\SDL2
+WIN_INCLUDE_PATHS = -I$(mkfile_dir)include\SDL2
 LINUX_INCLUDE_PATHS = -I/include/SDL2/
 
 #LIBRARY_PATHS specifies the additional library paths we'll need
