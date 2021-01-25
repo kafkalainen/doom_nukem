@@ -6,7 +6,7 @@
 /*   By: zukala <zukaa@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/25 12:08:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/25 12:29:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			update_screen(t_home *home, t_player *plr);
 void			setup(char *mapname, t_home *home, t_player *plr);
 void			error_output_sdl(char *msg, t_home *home);
 void		    error_output(char *msg);
+void        	load_audio(t_audio *audio);
 
 /*
 ** Minimap

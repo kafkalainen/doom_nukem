@@ -13,17 +13,13 @@ static t_home	*init_sdl(t_home *home)
 	home->draw_surf = SDL_GetWindowSurface(home->win.window);
 	if (!home->draw_surf)
 		error_output_sdl("Fatal: Failed to get window surface", home);
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		error_output_sdl("Fatal: SDL_mixer could not initialize!", home);
 	return (home);
 }
 
 void	init_player(t_player *plr, t_map *map)
 {
-	printf("Y: %f, X: %f\n", map->size.y, map->size.x);
-	for (int i = 0; i < map->size.y; i++) {
-		printf("%s\n", map->data[i]);
-	}
 	plr->pos = vec2(1, 1);
 	plr->z = 0;
 	plr->dir.x = 1;
