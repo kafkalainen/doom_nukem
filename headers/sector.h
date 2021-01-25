@@ -34,4 +34,6 @@ typedef struct		s_sector
 	float			ceiling;
 }					t_sector;
 
+t_polygon	*new_polygon(t_xy x0, int idx);
+
 #endif
