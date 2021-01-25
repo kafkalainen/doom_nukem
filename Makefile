@@ -16,7 +16,6 @@ SRCS =	main.c \
 		srcs/update_screen/update_sector.c \
 		srcs/utilities/error_output.c \
 		srcs/utilities/setup.c \
-		srcs/utilities/audio.c \
 		srcs/libft/ft_itoa.c \
 		srcs/libft/ft_atoi.c \
 		srcs/libft/ft_strings1.c \
@@ -30,12 +29,15 @@ HEADERS = \
 		doom_nukem.h\
 		dn_map.h\
 
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+mkfile_dir := $(dir $(mkfile_path))
+
 #INCLUDE_PATHS specifies the additional include paths we'll need
-WIN_INCLUDE_PATHS = -IC:\mingw_dev_lib\include\SDL2
-LINUX_INCLUDE_PATHS = -I/include/SDL2/ -I/usr/local/include
+WIN_INCLUDE_PATHS = -I$(mkfile_dir)\include\SDL2
+LINUX_INCLUDE_PATHS = -I/include/SDL2/
 
 #LIBRARY_PATHS specifies the additional library paths we'll need
-WIN_LIBRARY_PATHS = -LC:\mingw_dev_lib\lib
+WIN_LIBRARY_PATHS = -L$(mkfile_dir)lib
 LINUX_LIBRARY_PATHS = -L/lib/ -L/usr/local/lib
 
 # COMPILER_FLAGS specifies the additional compilation options we're using

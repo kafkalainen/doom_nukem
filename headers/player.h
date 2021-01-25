@@ -29,7 +29,7 @@ typedef struct		s_player
 	float			height;
 	t_input			input;
 	clock_t			time;
-	t_audio			audio;
+	//t_audio			audio;
 }					t_player;
 
 #endif

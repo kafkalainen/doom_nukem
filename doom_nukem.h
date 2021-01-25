@@ -17,7 +17,7 @@
 **	Non-standard includes
 */
 
-
+#  include "include/SDL2/SDL.h"
 #  include <time.h>
 #  include <fcntl.h>
 
@@ -25,20 +25,17 @@
 #  define OPEN_FILE open
 #  define READ_ONLY O_RDONLY
 #  include <math.h>
-#  include "include/SDL2/SDL.h"
 #  include "/usr/local/include/SDL2/SDL_mixer.h"
 #  include <string.h>
 #  include <unistd.h>
 # elif __APPLE__
 #  define OPEN_FILE open
 #  define READ_ONLY O_RDONLY
-#  include "include/SDL2/SDL.h"
 #  include <string.h>
 #  include <unistd.h>
 # elif defined(_WIN32) || defined(WIN32)
 #  define OPEN_FILE _open
 #  define READ_ONLY _O_RDONLY
-#  include "SDL.h"
 #  include <io.h>
 #  include <stdio.h>
 
@@ -51,7 +48,7 @@
 # include "headers/calculations.h"
 # include "headers/colours.h"
 # include "headers/program.h"
-# include "headers/audio.h"
+//# include "headers/audio.h"
 # include "headers/player.h"
 
 # include "headers/libft.h"
@@ -70,7 +67,7 @@ void			update_screen(t_home *home, t_player *plr);
 void			setup(char *mapname, t_home *home, t_player *plr);
 void			error_output_sdl(char *msg, t_home *home);
 void		    error_output(char *msg);
-void        	load_audio(t_audio *audio);
+//void        	load_audio(t_audio *audio);
 
 /*
 ** Minimap
