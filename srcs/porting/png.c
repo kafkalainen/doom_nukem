@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/01/22 14:19:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/25 16:55:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Uint32	swap_channels(Uint32 color)
 	return (rgba);
 }
 
-void	*memory_copy(Uint32 *dest, SDL_Surface *image)
+void	*convert_to_uint32(Uint32 *dest, SDL_Surface *image)
 {
 	int		x;
 	int		y;
@@ -67,4 +67,33 @@ void	init_textures(t_home *home)
 	load_texture("textures/redbrick.png", home, 1);
 	load_texture("textures/wood.png", home, 2);
 	load_texture("textures/eagle.png", home, 3);
+}
+
+/*
+** 1st pass at loading char* and converting to uint32. Need to see text output before making further changes
+** 1st index = pitch, after that comes texture height separated by ' ' followed by uint32 data
+*/
+
+Uint32	*load_texture_from_map_data(char *line)
+{
+	int 	i;
+	int 	pitch;
+	int 	h;
+	Uint32	*tex;
+
+	pitch = ft_atoi(line);
+	while (*line != ' ')
+		*line++;
+	h = ft_atoi(line);
+	while (*line != ' ')
+		*line++;
+	if (!(tex = (Uint32*)malloc(sizeof(Uint32) * (pitch * h))))
+		error_output("Memory allocation failed when loading texture from map data\n");
+	i = 0;
+	while (line[i])
+	{
+		tex[i] = ft_atoi(line[i]);
+		i++;
+	}
+	return (tex);
 }
