@@ -19,6 +19,7 @@
 
 int				ft_numlen(long number);
 char			*ft_itoa(long long number);
+int				ft_atoi(const char *str);
 
 size_t			ft_strlen(const char *str);
 size_t			ft_strclen(const char *str, int c);

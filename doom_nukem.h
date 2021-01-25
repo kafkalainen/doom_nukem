@@ -60,6 +60,7 @@
 # include "headers/events.h"
 # include "headers/player_functions.h"
 # include "headers/porting.h"
+# include "headers/parsing.h"
 
 /*
 ** Miscellanious

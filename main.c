@@ -20,6 +20,7 @@ int  			main(int argc, char **argv)
 
 	// if (argc != 2)
 	// 	error_output("usage: .\\play [map file name]\n");
+	new_sector("    4 5\n");
 	setup(argv[1], &home, &plr);
 	update_sector(&home);
 	while(1)

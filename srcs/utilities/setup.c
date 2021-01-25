@@ -19,65 +19,13 @@ static t_home	*init_sdl(t_home *home)
 	return (home);
 }
 
-void			init_map(char *mapname, t_map *map)
-{
-	char	*line;
-	int		i;
-	size_t	shortest;
-	int		fd;
-	char	buf[2];
-
-	if ((fd = OPEN_FILE(mapname, READ_ONLY)) < 0)
-		error_output("Failed to load the map");
-	if (read(fd, buf, 1) < 0)
-		error_output("Error loading the map file.");
-	close(fd);
-	fd = OPEN_FILE(mapname, READ_ONLY);
-	i = 0;
-	shortest = -1;
-	while (ft_get_next_line(fd, &line) && i < MAP_MAX_LINES)
-	{
-		if (ft_strlen(line) < shortest)
-			shortest = ft_strlen(line);
-		map->data[i] = ft_strdup(line);
-		free(line);
-		++i;
-	}
-	map->size.y = i;
-	map->size.x = (int)shortest;
-}
-
-static void		set_player_position(t_player *plr, t_map *map)
-{
-	int x;
-	int y;
-
-	y = 0;
-	while (y < map->size.y)
-	{
-		x = 0;
-		while (x < map->size.x)
-		{
-			if (map->data[y][x] == 'P')
-			{
-				plr->pos.x = x + 0.5;
-				plr->pos.y = y + 0.5;
-				return ;
-			}
-			++x;
-		}
-		++y;
-	}
-	error_output("Player not found in the map.");
-}
-
 void	init_player(t_player *plr, t_map *map)
 {
 	printf("Y: %f, X: %f\n", map->size.y, map->size.x);
 	for (int i = 0; i < map->size.y; i++) {
 		printf("%s\n", map->data[i]);
 	}
-	set_player_position(plr, map);
+	plr->pos = vec2(1, 1);
 	plr->z = 0;
 	plr->dir.x = 1;
 	plr->dir.y = 0;
@@ -97,6 +45,5 @@ void			setup(char *mapname, t_home *home, t_player *plr)
 	home->t.frames = 0;
 	home = init_sdl(home);
 	// init_textures(home);
-	init_map(mapname, &home->map);
 	init_player(plr, &home->map);
 }
