@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/26 14:31:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/26 15:05:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,21 @@ void		cleanup_audio(t_audio *audio)
 
 void		play_footsteps(t_player *plr)
 {
-	float			current_time;
-	static float	last_time;
+	Uint32			current_time;
+	static Uint32	last_time;
 	static int		i;
 
 	current_time = SDL_GetTicks();
-	if (current_time > last_time + 500)
+	if (current_time > last_time + 600)
 	{
 		if (i)
 		{
-			Mix_PlayChannel(-1, plr->audio.footstep2, 0);
+			Mix_PlayChannel(-1, plr->audio.footstep1, 0);
 			i = 0;
 		}
 		else
 		{
-			Mix_PlayChannel(-1, plr->audio.footstep1, 0);
+			Mix_PlayChannel(-1, plr->audio.footstep2, 0);
 			i = 1;
 		}
 		last_time = current_time;
