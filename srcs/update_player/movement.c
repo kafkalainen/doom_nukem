@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 18:08:50 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/20 16:30:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/26 13:51:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void			player_move_forward(t_player *plr, t_map *map, float delta_time)
 
 	check_pos = plr->pos;
 	check_pos = vec2_add(check_pos, vec2_mul(plr->dir, 8 * delta_time));
+	play_footsteps(plr);
 	//if (valid_location(check_pos, map))
 		plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 40 * delta_time));
 }
