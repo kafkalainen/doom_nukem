@@ -22,9 +22,8 @@ void			draw_wall(int col, t_wall wall, t_xy ray, t_home *home, t_player *plr);
 void			draw_fov_floor(t_home *home, t_player *plr);
 
 t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, float angle);
-t_wall			cast_ray(t_xy pos, t_xy ray, t_map *map);
+t_wall			cast_ray(t_xy pos, t_xy ray);
 void			draw_fov(t_home *home, t_player *plr);
-int				get_wall_side(t_wall wall, t_player *plr);
 void			draw_2d(t_home *home, t_player *plr, t_intersection *sect);
 
 #endif

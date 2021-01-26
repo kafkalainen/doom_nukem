@@ -59,6 +59,7 @@
 # include "headers/player_functions.h"
 # include "headers/porting.h"
 # include "headers/parsing.h"
+# include "headers/map.h"
 
 /*
 ** Miscellanious
