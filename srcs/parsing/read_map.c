@@ -24,6 +24,7 @@ static void			store_polygons(char *line, int numwalls, t_sector *sect)
 	t_xy		pos;
 	int			texid;
 
+
 	temp = sect->polygons;
 	while (numwalls > 0)
 	{
@@ -48,6 +49,7 @@ t_sector			new_sector(char *line)
 	int			i;
 
 	i = 0;
+	sect.polygons = (t_polygon*)malloc(sizeof(*sect.polygons));
 	temp.polygons = sect.polygons;
 	while (*line != ' ')
 		line++;
