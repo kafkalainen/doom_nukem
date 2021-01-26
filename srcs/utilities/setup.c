@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setup.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
+/*   Updated: 2021/01/26 15:17:36 by jnivala          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../doom_nukem.h"
 
 static t_home	*init_sdl(t_home *home)
 {
-	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
 		error_output_sdl("Fatal: SDL Initalization failed.", home);
 	home->win.window = SDL_CreateWindow("Hello World!", 100, 100,
 		home->win.width, home->win.height, 0);
@@ -18,7 +30,7 @@ static t_home	*init_sdl(t_home *home)
 	return (home);
 }
 
-void	init_player(t_player *plr)
+void			init_player(t_player *plr)
 {
 	plr->pos = vec2(1, 1);
 	plr->z = 0;
@@ -42,6 +54,6 @@ void			setup(char *mapname, t_home *home, t_player *plr)
 	load_audio(&plr->audio);
 	if (Mix_PlayingMusic() == 0)
 		Mix_PlayMusic(plr->audio.music, -1);
-	//init_textures(home);
+	/*init_textures(home);*/
 	init_player(plr);
 }

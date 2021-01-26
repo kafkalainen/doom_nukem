@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/26 15:05:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/26 15:15:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void		load_audio(t_audio *audio)
 	audio->music = Mix_LoadMUS("srcs/utilities/menacing.wav");
 	if (!audio->music)
 		error_output("Failed to load beat music! SDL_mixer Error");
-	audio->footstep1 = Mix_LoadWAV("srcs/utilities/footstep1.wav" );
+	audio->footstep1 = Mix_LoadWAV("srcs/utilities/footstep1.wav");
 	if (!audio->footstep1)
 		error_output("Failed to load scratch sound effect!");
-	audio->footstep2 = Mix_LoadWAV("srcs/utilities/footstep2.wav" );
+	audio->footstep2 = Mix_LoadWAV("srcs/utilities/footstep2.wav");
 	if (!audio->footstep2)
 		error_output("Failed to load scratch sound effect!");
 }
