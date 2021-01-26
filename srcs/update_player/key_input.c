@@ -41,9 +41,15 @@ void		key_input(t_player *plr, SDL_Event e, t_home *home)
 	while(SDL_PollEvent(&e) != 0)
 	{
 		if (e.type == SDL_QUIT)
+		{
+			cleanup_audio(&plr->audio);
 			error_output_sdl("User closed the window", home);
+		}
 		else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == k_esc)
+		{
+			cleanup_audio(&plr->audio);
 			error_output_sdl("User closed the window", home);
+		}
 		else if (e.type == SDL_KEYDOWN)
 			arrow_keys_down(plr, e.key.keysym.sym);
 		else if (e.type == SDL_KEYUP)
