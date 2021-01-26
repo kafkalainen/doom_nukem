@@ -13,8 +13,8 @@ static t_home	*init_sdl(t_home *home)
 	home->draw_surf = SDL_GetWindowSurface(home->win.window);
 	if (!home->draw_surf)
 		error_output_sdl("Fatal: Failed to get window surface", home);
-	/*if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
-		error_output_sdl("Fatal: SDL_mixer could not initialize!", home);*/
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+		error_output_sdl("Fatal: SDL_mixer could not initialize!", home);
 	return (home);
 }
 
@@ -39,9 +39,9 @@ void			setup(char *mapname, t_home *home, t_player *plr)
 	home->t.fps = 0;
 	home->t.frames = 0;
 	home = init_sdl(home);
-	/*load_audio(&plr->audio);
+	load_audio(&plr->audio);
 	if (Mix_PlayingMusic() == 0)
-		Mix_PlayMusic(plr->audio.music, -1);*/
-	// init_textures(home);
+		Mix_PlayMusic(plr->audio.music, -1);
+	//init_textures(home);
 	init_player(plr, &home->map);
 }

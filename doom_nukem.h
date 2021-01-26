@@ -17,7 +17,8 @@
 **	Non-standard includes
 */
 
-#  include "include/SDL2/SDL.h"
+#  include "SDL2/include/SDL2/SDL.h"
+#  include "SDL2_mixer_win/include/SDL2/SDL_mixer.h"
 #  include <time.h>
 #  include <fcntl.h>
 
@@ -48,7 +49,7 @@
 # include "headers/calculations.h"
 # include "headers/colours.h"
 # include "headers/program.h"
-//# include "headers/audio.h"
+# include "headers/audio.h"
 # include "headers/player.h"
 
 # include "headers/libft.h"
@@ -67,7 +68,7 @@ void			update_screen(t_home *home, t_player *plr);
 void			setup(char *mapname, t_home *home, t_player *plr);
 void			error_output_sdl(char *msg, t_home *home);
 void		    error_output(char *msg);
-//void        	load_audio(t_audio *audio);
+void        	load_audio(t_audio *audio);
 
 /*
 ** Minimap
