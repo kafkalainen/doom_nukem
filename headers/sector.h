@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dn_map.h                                           :+:      :+:    :+:   */
+/*   sector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:12:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/20 13:14:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/26 14:07:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef struct			s_polygon
 	t_xy				x0;
 	t_xy				normal;
 	int					idx;
-	int					connection;
+	float				wall_rad;
 	struct s_polygon	*next;
 }						t_polygon;
 
