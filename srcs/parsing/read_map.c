@@ -37,7 +37,7 @@ static void			store_polygons(char *line, int numwalls, t_sector *sect)
 		line += 3 + ft_numlen(pos.x) + ft_numlen(pos.y) + ft_numlen(texid);
 		numwalls--;
 	}
-	new = new_polygon(sect->polygons->next->x0, texid);
+	new = new_polygon(sect->polygons->next->x0, ft_atoi(line));
 	temp->next = new;
 	temp = temp->next;
 }
@@ -67,13 +67,6 @@ t_sector			new_sector(char *line)
 	line += 1 + ft_numlen(sect.tex_ceil);
 	store_polygons(line, sect.nb_of_walls, &sect);
 	sect.polygons = sect.polygons->next;
-	printf("Walls: %d\nZ: %f\nHeight: %f\nFloorTex: %d\nCeilingTex: %d\n",
-			sect.nb_of_walls, sect.ground, sect.ceiling, sect.tex_floor, sect.tex_ceil);
-	while (sect.polygons != NULL)
-	{
-		printf("Polygon: %f, %f, %d\n", sect.polygons->x0.x, sect.polygons->x0.y, sect.polygons->idx);
-		sect.polygons = sect.polygons->next;
-	}
 	sect.polygons = temp.polygons;
 	return sect;
 }

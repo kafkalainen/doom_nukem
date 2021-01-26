@@ -20,7 +20,7 @@ int  			main(int argc, char **argv)
 
 	// if (argc != 2)
 	// 	error_output("usage: .\\play [map file name]\n");
-	new_sector("sector00 4 5 10 -3 -4 40,200,1 250,200,2 200,0,1 90,0,-10\n");
+	new_sector("sector00 4 5 10 -3 -4 40,200,1 250,200,2 200,0,1 90,0,-10 -5\n");
 	setup(argv[1], &home, &plr);
 	update_sector(&home);
 	while(1)

@@ -18,7 +18,7 @@ static t_home	*init_sdl(t_home *home)
 	return (home);
 }
 
-void	init_player(t_player *plr, t_map *map)
+void	init_player(t_player *plr)
 {
 	plr->pos = vec2(1, 1);
 	plr->z = 0;
@@ -43,5 +43,5 @@ void			setup(char *mapname, t_home *home, t_player *plr)
 	if (Mix_PlayingMusic() == 0)
 		Mix_PlayMusic(plr->audio.music, -1);
 	//init_textures(home);
-	init_player(plr, &home->map);
+	init_player(plr);
 }

@@ -21,5 +21,5 @@ void	update_player(t_player *plr, t_home *home, SDL_Event e)
 {
 	key_input(plr, e, home);
 	MOUSE_HANDLE;
-	movement(plr, &home->map);
+	movement(plr);
 }

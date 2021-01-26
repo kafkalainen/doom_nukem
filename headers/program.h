@@ -28,14 +28,6 @@ typedef struct		s_window
 	int				height;
 }					t_window;
 
-typedef struct		s_map
-{
-	float			*bitmap;
-	float			*heightmap;
-	char			*data[MAP_MAX_LINES];
-	t_xy			size;
-}					t_map;
-
 typedef struct		s_raycast
 {
 	t_xy			sideDist;
@@ -86,7 +78,6 @@ typedef struct		s_wall
 typedef struct		s_home
 {
 	t_window		win;
-	t_map			map;
 	t_sector		**sectors;
 	SDL_Surface		*draw_surf;
 	t_texture		**editor_textures;
