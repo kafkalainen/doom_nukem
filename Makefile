@@ -16,6 +16,7 @@ SRCS =	main.c \
 		srcs/update_screen/update_sector.c \
 		srcs/utilities/error_output.c \
 		srcs/utilities/setup.c \
+		srcs/utilities/audio.c \
 		srcs/libft/ft_itoa.c \
 		srcs/libft/ft_atoi.c \
 		srcs/libft/ft_strings1.c \
@@ -33,11 +34,11 @@ mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir := $(dir $(mkfile_path))
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
-WIN_INCLUDE_PATHS = -I$(mkfile_dir)include\SDL2
+WIN_INCLUDE_PATHS = -I$(mkfile_dir)SDL2\include\SDL2 -I$(mkfile_dir)SDL2_mixer_win\include\SDL2
 LINUX_INCLUDE_PATHS = -I/include/SDL2/
 
 #LIBRARY_PATHS specifies the additional library paths we'll need
-WIN_LIBRARY_PATHS = -L$(mkfile_dir)lib
+WIN_LIBRARY_PATHS = -L$(mkfile_dir)SDL2\lib -L$(mkfile_dir)SDL2_mixer_win\lib
 LINUX_LIBRARY_PATHS = -L/lib/ -L/usr/local/lib
 
 # COMPILER_FLAGS specifies the additional compilation options we're using
@@ -49,7 +50,7 @@ LINUX_COMPILER_FLAGS = -Wall -Wextra
 # -Wl,-subsystem,windows
 
 #LINKER_FLAGS specifies the libraries we're linking against
-WIN_LINK_FLAGS = -lmingw32 -lSDL2main -lSDL2
+WIN_LINK_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer
 LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lSDL2_mixer -lm -g
 
 .PHONY: all clean fclean re
