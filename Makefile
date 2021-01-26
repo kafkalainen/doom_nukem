@@ -34,11 +34,11 @@ mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir := $(dir $(mkfile_path))
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
-WIN_INCLUDE_PATHS = -I$(mkfile_dir)SDL2\include\SDL2 -I$(mkfile_dir)SDL2_mixer_win\include\SDL2
+WIN_INCLUDE_PATHS = -ISDL2\include\SDL2 -ISDL2_mixer_win\include\SDL2
 LINUX_INCLUDE_PATHS = -I/include/SDL2/
 
 #LIBRARY_PATHS specifies the additional library paths we'll need
-WIN_LIBRARY_PATHS = -L$(mkfile_dir)SDL2\lib -L$(mkfile_dir)SDL2_mixer_win\lib
+WIN_LIBRARY_PATHS = -LSDL2\lib -LSDL2_mixer_win\lib
 LINUX_LIBRARY_PATHS = -L/lib/ -L/usr/local/lib
 
 # COMPILER_FLAGS specifies the additional compilation options we're using

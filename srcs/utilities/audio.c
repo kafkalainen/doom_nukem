@@ -22,3 +22,11 @@ void		load_audio(t_audio *audio)
 //	if (!audio->footstep)
 //		error_output("Failed to load scratch sound effect!");
 }
+
+void		cleanup_audio(t_audio *audio)
+{
+	/*Mix_FreeChunk(audio->footstep);
+	audio->footstep = NULL;*/
+    Mix_FreeMusic(audio->music);
+	audio->music = NULL;
+}
