@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/20 13:44:38 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/01/26 17:53:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,27 @@ typedef struct		s_xyz
 	float			z;
 }					t_xyz;
 
+typedef struct		s_ray
+{
+	t_xy			pos;
+	t_xy			dir;
+}					t_ray;
+
+typedef struct		s_maxpoints
+{
+	t_xy			left;
+	t_xy			right;
+}					t_maxpoints;
+
+
+
+typedef struct		s_ray_fov
+{
+	t_ray			ray_left;
+	t_ray			ray_right;
+	t_xy			left_point;
+	t_xy			right_point;
+}					t_ray_fov;
 /*
 ** Vector functions
 */

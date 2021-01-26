@@ -60,6 +60,7 @@
 # include "headers/porting.h"
 # include "headers/parsing.h"
 # include "headers/map.h"
+# include "headers/raycast.h"
 
 /*
 ** Miscellanious
