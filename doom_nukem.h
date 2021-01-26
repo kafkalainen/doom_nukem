@@ -6,7 +6,7 @@
 /*   By: zukala <zukaa@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/25 12:29:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/26 10:23:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 */
 
 #  include "SDL2/include/SDL2/SDL.h"
-#  include "SDL2_mixer_win/include/SDL2/SDL_mixer.h"
 #  include <time.h>
 #  include <fcntl.h>
 
@@ -37,6 +36,7 @@
 # elif defined(_WIN32) || defined(WIN32)
 #  define OPEN_FILE _open
 #  define READ_ONLY _O_RDONLY
+#  include "SDL2_mixer_win/include/SDL2/SDL_mixer.h"
 #  include <io.h>
 #  include <stdio.h>
 
