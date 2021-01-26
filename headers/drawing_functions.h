@@ -25,8 +25,6 @@ void			draw_rect(t_xy xy, t_xy wh, t_home *home, int color);
 void			put_pixel(SDL_Surface *surf, int x, int y, int color);
 t_step			*steplen(t_step *ground, int current_y, t_ray_floor hor,
 	t_player *plr);
-void			draw_world_floor(int y, t_player *plr, t_home *home,
-	t_ray_floor hor);
 Uint32			get_pixel(SDL_Surface *surface, int x, int y);
 
 #endif

@@ -6,11 +6,10 @@ SRCS =	main.c \
 		srcs/update_player/movement.c \
 		srcs/update_player/update_player.c \
 		srcs/update_screen/draw_floor.c \
-		srcs/update_screen/draw_minimap.c \
+		srcs/update_screen/draw_shapes.c \
 		srcs/update_screen/put_pixel.c \
 		srcs/update_screen/update_screen.c \
 		srcs/update_screen/draw_tex_pixel.c \
-		srcs/update_screen/draw_world_floor.c \
 		srcs/update_screen/steplen.c \
 		srcs/update_screen/draw_2d.c \
 		srcs/update_screen/update_sector.c \

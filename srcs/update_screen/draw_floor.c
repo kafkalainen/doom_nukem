@@ -23,7 +23,7 @@ void			draw_fov_floor(t_home *home, t_player *plr)
 	horizontal.right = vec2_add(plr->dir, horizontal.plane);
 	while (j < SCREEN_HEIGHT)
 	{
-		draw_world_floor(j, plr, home, horizontal);
+		//draw_world_floor(j, plr, home, horizontal);
 		j++;
 	}
 }

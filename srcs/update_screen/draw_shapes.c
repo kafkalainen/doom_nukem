@@ -70,7 +70,7 @@ void			draw_grid(t_home *home)
 	int		i;
 	t_xy	dim;
 
-	dim = home->map.size;
+	dim = vec2(1, 1);//home->map.size;
 	i = 0;
 	while (i < dim.y)
 	{
@@ -87,29 +87,4 @@ void			draw_grid(t_home *home)
 			vec2(i * MINIMAP_SIZE, dim.y * MINIMAP_SIZE), 0xFFFFFF, home->draw_surf);
 		++i;
 	}
-}
-
-void			draw_minimap(t_xy size, t_xy pos, t_xy dir, t_home *home)
-{
-	int x;
-	int y;
-
-	y = 0;
-	while (y < size.y)
-	{
-		x = 0;
-		while (x < size.x)
-		{
-			if (home->map.data[y][x] == '#')
-				draw_rect(
-					vec2(x * MINIMAP_SIZE, y * MINIMAP_SIZE),
-					vec2(MINIMAP_SIZE, MINIMAP_SIZE), home, 0xFF00FF);
-			++x;
-		}
-		++y;
-	}
-	pos = vec2(pos.x * MINIMAP_SIZE, pos.y * MINIMAP_SIZE);
-	dir = vec2(dir.x * MINIMAP_SIZE, dir.y * MINIMAP_SIZE);
-	draw_rect_center(pos, vec2(5, 5), home);
-	ft_draw_line(pos, vec2_add(pos, dir), 0xA8C256, home->draw_surf);
 }
