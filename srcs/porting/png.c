@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/01/25 16:55:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/01/26 10:07:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ void	load_texture(char *path, t_home *home, int i)
 		error_output("PNG image file loading failed\n");
 	else
 	{
-		SDL_LockSurface(image);
-		if (!(home->textures[i] = malloc(sizeof(Uint32) *
+		home->editor_textures[i]->pitch = image->pitch;
+		home->editor_textures[i]->h = image->h;
+		if (!(home->editor_textures[i]->tex = malloc(sizeof(Uint32) *
 			(image->pitch * image->h))))
 				error_output("Memory allocation failed\n");
-		memory_copy(home->textures[i], image);
+		SDL_LockSurface(image);
+		convert_to_uint32(home->editor_textures[i]->tex, image);
 		SDL_UnlockSurface(image);
 	}
 	SDL_FreeSurface(image);
@@ -63,6 +65,16 @@ void	load_texture(char *path, t_home *home, int i)
 
 void	init_textures(t_home *home)
 {
+	int i;
+
+	if (!(home->editor_textures = (t_texture**)malloc(sizeof(t_texture*) * NUM_TEX)))
+		error_output("failed to allocate memory to editor textures\n");
+	i = -1;
+	while (++i < NUM_TEX)
+	{
+		if (!(home->editor_textures[i] = (t_texture*)malloc(sizeof(t_texture))))
+			error_output("failed to allocate memory to editor textures\n");
+	}
 	load_texture("textures/greybrick.png", home, 0);
 	load_texture("textures/redbrick.png", home, 1);
 	load_texture("textures/wood.png", home, 2);

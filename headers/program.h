@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/22 14:28:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/26 09:39:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ typedef struct		s_tex_col
 
 typedef struct		s_texture
 {
-	SDL_Surface		wall;
-	SDL_Surface		sprite;
+	Uint32			*tex;
+	int				pitch;
+	int				h;
 }					t_texture;
 
 typedef struct		s_wall
@@ -87,9 +88,8 @@ typedef struct		s_home
 	t_window		win;
 	t_map			map;
 	t_sector		**sectors;
-	t_texture		*texture;
 	SDL_Surface		*draw_surf;
-	Uint32			*textures[NUM_TEX];
+	t_texture		**editor_textures;
 	t_time			t;
 }					t_home;
 
