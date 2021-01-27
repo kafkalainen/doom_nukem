@@ -54,6 +54,9 @@ void			draw_2d(t_home *home, t_player *plr, t_intersection *sect)
 			{
 				perkele = (temp->next == NULL) ? home->sectors[i]->polygons : temp->next;
 				fov = get_fov_points(temp, home, plr, i);
+				draw_rect_center(fov.left_point, vec2(16, 16), home);
+				draw_rect_center(fov.right_point, vec2(16, 16), home);
+
 				if (fov.left_point.x > 0)
 				{
 					if (fov.right_point.x > 0)

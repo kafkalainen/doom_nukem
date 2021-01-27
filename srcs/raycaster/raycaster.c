@@ -44,12 +44,16 @@ void		calc_intersection(t_polygon *pgon, t_polygon *first, t_ray *ray,
 		sect->x2 = pgon->next->x0.x;
 		sect->y2 = pgon->next->x0.y;
 	}
+	sect->neg = ((sect->x1 - ray->pos.x) * (-ray->dir.y) - (sect->y1 - ray->pos.y) *
+				(-ray->dir.x));
+	sect->pos = ((sect->x2 - sect->x1) * (sect->y1 - ray->pos.y) -
+				(sect->y2 - sect->y1) * (sect->x1 - ray->pos.x));
+	if ((sect->pos < 0 && sect->neg > 0) || (sect->pos > 0 && sect->neg < 0))
+		return ;
 	sect->den = ((sect->x1 - sect->x2) * (-ray->dir.y) -
 				(sect->y1 - sect->y2) * (-ray->dir.x));
-	sect->neg = ((sect->x1 - ray->pos.x) * (-ray->dir.y) - (sect->y1 - ray->pos.y) *
-				(-ray->dir.x)) / sect->den;
-	sect->pos = ((sect->x2 - sect->x1) * (sect->y1 - ray->pos.y) -
-				(sect->y2 - sect->y1) * (sect->x1 - ray->pos.x)) / sect->den;
+	sect->neg /= sect->den;
+	sect->pos /= sect->den;
 }
 
 // void			get_max_points(t_home *home, t_player *plr, t_intersection *sect)
