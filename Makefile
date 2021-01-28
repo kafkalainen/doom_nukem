@@ -5,7 +5,6 @@ SRCS =	main.c \
 		srcs/update_player/mouse_handle.c \
 		srcs/update_player/movement.c \
 		srcs/update_player/update_player.c \
-		srcs/update_screen/draw_floor.c \
 		srcs/update_screen/draw_shapes.c \
 		srcs/update_screen/put_pixel.c \
 		srcs/update_screen/update_screen.c \
@@ -57,7 +56,10 @@ LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lSDL2_mixer -lSDL2_ttf -lm -g
 win:
 	gcc $(SRCS) -o play $(WIN_INCLUDE_PATHS) $(WIN_LIBRARY_PATHS) $(WIN_COMPILER_FLAGS) $(WIN_LINK_FLAGS)
 
-linux:
+dependencies:
+	sudo apt-get install libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-ttf-2.0-0
+
+linux: dependencies
 	gcc $(SRCS) -o play $(LINUX_INCLUDE_PATHS) $(LINUX_LIBRARY_PATHS) $(LINUX_COMPILER_FLAGS) $(LINUX_LINK_FLAGS)
 
 all:

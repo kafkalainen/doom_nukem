@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/20 16:20:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/28 13:03:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,22 +144,22 @@ static int		assign_sectors(t_home *home)
 	return (0);
 }
 
-static void		print_polygons(t_sector *sector)
-{
-	int		i;
-	t_polygon	*temp;
+// static void		print_polygons(t_sector *sector)
+// {
+// 	int		i;
+// 	t_polygon	*temp;
 
-	i = 0;
-	temp = sector->polygons;
-	while (temp)
-	{
-		printf("x%d\n", i);
-		printf("%f\n", temp->x0.x);
-		printf("%f\n", temp->x0.y);
-		temp = temp->next;
-		i++;
-	}
-}
+// 	i = 0;
+// 	temp = sector->polygons;
+// 	while (temp)
+// 	{
+// 		printf("x%d\n", i);
+// 		printf("%f\n", temp->x0.x);
+// 		printf("%f\n", temp->x0.y);
+// 		temp = temp->next;
+// 		i++;
+// 	}
+// }
 
 int				update_sector(t_home *home)
 {
