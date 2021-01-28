@@ -14,7 +14,7 @@
 
 void		load_audio(t_audio *audio)
 {
-	audio->music = Mix_LoadMUS("srcs/utilities/menacing.wav");
+	audio->music = Mix_LoadMUS("kaivollinen.wav");
 	if (!audio->music)
 		error_output("Failed to load beat music! SDL_mixer Error");
 	audio->footstep1 = Mix_LoadWAV("srcs/utilities/footstep1.wav");
