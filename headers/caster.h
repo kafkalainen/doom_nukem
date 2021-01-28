@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:51:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/22 14:01:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/28 13:19:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void			draw_fov_floor(t_home *home, t_player *plr);
 t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, float angle);
 t_wall			cast_ray(t_xy pos, t_xy ray);
 void			draw_fov(t_home *home, t_player *plr);
-void			draw_2d(t_home *home, t_player *plr, t_intersection *sect);
+void			draw_2d(t_home *home, t_player *plr);
 
 #endif

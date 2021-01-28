@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/26 18:01:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/01/28 13:24:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void			draw_2d_fov(t_home *home, t_player *plr)
 ** 3. Move to the next polygon.
 */
 
-void			draw_text(t_home *home, int size, char *text, t_xy pos)
+void			draw_text(t_home *home, char *text, t_xy pos)
 {
 	SDL_Rect	rect;
 
-	SDL_Color color = { 255, 80, 0 };
+	SDL_Color color = {255, 80, 0, 0};
 	home->text_surf = TTF_RenderText_Solid(home->font, text, color);
 	rect.x = pos.x;
 	rect.y = pos.y;
@@ -47,12 +47,11 @@ void			draw_text(t_home *home, int size, char *text, t_xy pos)
 	SDL_FreeSurface(home->text_surf);
 }
 
-void			draw_2d(t_home *home, t_player *plr, t_intersection *sect)
+void			draw_2d(t_home *home, t_player *plr)
 {
 	int i;
 	t_polygon	*temp;
 	t_polygon	*perkele;
-	t_xy		dir;
 	t_ray_fov	fov;
 
 	i = 0;
@@ -66,7 +65,7 @@ void			draw_2d(t_home *home, t_player *plr, t_intersection *sect)
 				perkele = (temp->next == NULL) ? home->sectors[i]->polygons : temp->next;
 				fov = get_fov_points(temp, home, plr, i);
 				draw_rect_center(fov.left_point, vec2(16, 16), home);
-				draw_text(home, 18, ft_itoa(fov.left_point.x), vec2(fov.left_point.x + 32, fov.left_point.y + 32));
+				draw_text(home, ft_itoa(fov.left_point.x), vec2(fov.left_point.x + 32, fov.left_point.y + 32));
 				draw_rect_center(fov.right_point, vec2(16, 16), home);
 
 				if (fov.left_point.x > 0)

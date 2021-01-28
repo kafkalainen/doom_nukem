@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 11:03:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/25 11:03:47 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/01/28 13:03:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ t_sector			new_sector(char *line)
 {
 	t_sector	sect;
 	t_sector	temp;
-	int			i;
 
-	i = 0;
 	sect.polygons = (t_polygon*)malloc(sizeof(*sect.polygons));
 	temp.polygons = sect.polygons;
 	while (*line != ' ')
