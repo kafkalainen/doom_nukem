@@ -17,6 +17,7 @@ SRCS =	main.c \
 		srcs/utilities/setup.c \
 		srcs/utilities/audio.c \
 		srcs/libft/ft_itoa.c \
+		srcs/libft/ft_ftoa.c \
 		srcs/libft/ft_atoi.c \
 		srcs/libft/ft_strings1.c \
 		srcs/libft/memory.c \
