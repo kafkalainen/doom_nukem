@@ -74,4 +74,7 @@ void			draw_2d(t_home *home, t_player *plr, t_intersection *sect)
 	//ft_draw_line(temp->x0, home->sectors[0]->polygons->x0, fuchsia, home->draw_surf);
 	draw_rect_center(plr->pos, vec2(5, 5), home);
 	draw_2d_fov(home, plr);
+	SDL_Color color = { 255, 255, 255 };
+	home->text_surf = TTF_RenderText_Solid(home->font, "Text test!", color);
+	SDL_BlitSurface(home->text_surf, NULL, home->draw_surf, NULL);
 }

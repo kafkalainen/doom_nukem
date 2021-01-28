@@ -38,6 +38,7 @@ int  			main(int argc, char **argv)
 		//home.t.delta_time = home.t.endfps - home.t.beginfps;
 		//home.t.fps = CLOCKS_PER_SEC / home.t.delta_time;
 	}
+	TTF_Quit();
 	SDL_Quit();
 	return 0;
 }

@@ -49,7 +49,7 @@ LINUX_COMPILER_FLAGS = -Wall -Wextra
 # -Wl,-subsystem,windows
 
 #LINKER_FLAGS specifies the libraries we're linking against
-WIN_LINK_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer
+WIN_LINK_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_ttf
 LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lSDL2_mixer -lm -g
 
 .PHONY: all clean fclean re

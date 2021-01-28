@@ -80,6 +80,8 @@ typedef struct		s_home
 	t_window		win;
 	t_sector		**sectors;
 	SDL_Surface		*draw_surf;
+	SDL_Surface		*text_surf;
+	TTF_Font		*font;
 	t_texture		**editor_textures;
 	t_time			t;
 }					t_home;

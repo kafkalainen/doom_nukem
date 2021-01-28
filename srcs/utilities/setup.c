@@ -51,6 +51,9 @@ void			setup(char *mapname, t_home *home, t_player *plr)
 	home->t.fps = 0;
 	home->t.frames = 0;
 	home = init_sdl(home);
+	if (TTF_Init() < 0)
+		printf("HELP\n");
+	home->font = TTF_OpenFont("../../../Windows/Fonts/arial.ttf", 24);
 	load_audio(&plr->audio);
 	if (Mix_PlayingMusic() == 0)
 		Mix_PlayMusic(plr->audio.music, -1);

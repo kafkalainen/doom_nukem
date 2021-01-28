@@ -17,9 +17,10 @@
 **	Non-standard includes
 */
 
-#  include "SDL2/include/SDL2/SDL.h"
-#  include <time.h>
-#  include <fcntl.h>
+# include "SDL2/include/SDL2/SDL.h"
+# include "SDL2/include/SDL2/SDL_ttf.h"
+# include <time.h>
+# include <fcntl.h>
 
 # ifdef __unix__
 #  define OPEN_FILE open
