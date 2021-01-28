@@ -85,5 +85,5 @@ void			draw_2d(t_home *home, t_player *plr)
 	//ft_draw_line(temp->x0, home->sectors[0]->polygons->x0, fuchsia, home->draw_surf);
 	draw_rect_center(plr->pos, vec2(5, 5), home);
 	draw_2d_fov(home, plr);
-	draw_text(home, 15, ft_ftoa(plr->dir.x, 4, 1), vec2(plr->pos.x, plr->pos.y - 16));
+	draw_text(home, ft_ftoa(plr->dir.x, 4, 1), vec2(plr->pos.x, plr->pos.y - 16));
 }
