@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/01 13:40:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 13:59:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,23 @@ void			draw_2d(t_home *home, t_player *plr)
 			if (temp->idx)
 			{
 				perkele = (temp->next == NULL) ? home->sectors[i]->points : temp->next;
-				ft_draw_line(vec2_add(temp->x0, home->offset), vec2_add(perkele->x0, home->offset), green, home->draw_surf);
-				fov = get_fov_points(temp, home, plr, i);
-				draw_rect_center(vec2_add(fov.left_point, home->offset), vec2(16, 16), home);
+				if (temp->x0.y >= 0 || perkele->x0.y >= 0)
+				{
+					ft_draw_line(vec2_add(temp->x0, home->offset), vec2_add(perkele->x0, home->offset), green, home->draw_surf);
+					fov = get_fov_points(temp, home, plr, i);
+					draw_rect_center(vec2_add(fov.left_point, home->offset), vec2(16, 16), home);
+					draw_rect_center(vec2_add(fov.right_point, home->offset), vec2(16, 16), home);
 				// draw_text(home, ft_itoa(fov.left_point.x), vec2(fov.left_point.x + 32, fov.left_point.y + 32));
 				// draw_text(home, ft_ftoa(plr->angle, 5, '.'), vec2(50, 50));
 				// draw_rect_center(fov.right_point, vec2(16, 16), home);
-				// if (fov.left_point.x > 0)
-				// {
+				if (fov.left_point.x > 0)
+				{
 				// 	if (fov.right_point.x > 0)
 				// 		ft_draw_line(fov.left_point, fov.right_point, green, home->draw_surf);
 				// 	else
 				// 		ft_draw_line(fov.left_point, perkele->x0, green, home->draw_surf);
 				// }
+				}
 			}
 			if (temp->next == NULL)
 				break ;
