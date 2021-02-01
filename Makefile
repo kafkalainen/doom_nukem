@@ -12,6 +12,7 @@ SRCS =	main.c \
 		srcs/update_screen/steplen.c \
 		srcs/update_screen/draw_2d.c \
 		srcs/update_screen/update_sector.c \
+		srcs/update_screen/transform_matrix_2d.c \
 		srcs/utilities/error_output.c \
 		srcs/utilities/setup.c \
 		srcs/utilities/audio.c \
@@ -57,10 +58,10 @@ LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lSDL2_mixer -lSDL2_ttf -lm -g
 win:
 	gcc $(SRCS) -o play $(WIN_INCLUDE_PATHS) $(WIN_LIBRARY_PATHS) $(WIN_COMPILER_FLAGS) $(WIN_LINK_FLAGS)
 
-dependencies:
-	sudo apt-get install libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-ttf-2.0-0
+#dependencies:
+#	sudo apt-get install libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-ttf-2.0-0
 
-linux: dependencies
+linux: #dependencies
 	gcc $(SRCS) -o play $(LINUX_INCLUDE_PATHS) $(LINUX_LIBRARY_PATHS) $(LINUX_COMPILER_FLAGS) $(LINUX_LINK_FLAGS)
 
 all:

@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.h                                          :+:      :+:    :+:   */
+/*   linkedlist.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/01 12:11:17 by jnivala          ###   ########.fr       */
+/*   Created: 2021/01/29 08:49:54 by jnivala           #+#    #+#             */
+/*   Updated: 2021/02/01 12:12:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAYCAST_H
-# define RAYCAST_H
+#include "../../doom_nukem.h"
 
-t_ray_fov			get_fov_points(t_point *plgn, t_home *home, t_player *plr, int i);
-void				calc_intersection(t_point *pgon, t_point *first, t_ray *ray,
-						t_intersection *sect);
-t_xy				line_intersection(t_intersection *sect);
-#endif
+t_point	*back_to_start(t_point *x0, t_home *home, int index)
+{
+	return ((x0->next == NULL) ? home->sectors[index]->points : x0->next);
+}

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 11:03:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/28 13:03:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 12:11:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 
 #include "../../doom_nukem.h"
 
-static void			store_polygons(char *line, int numwalls, t_sector *sect)
+static void			store_points(char *line, int numwalls, t_sector *sect)
 {
-	t_polygon	*new;
-	t_polygon	*temp;
+	t_point	*new;
+	t_point	*temp;
 	t_xy		pos;
 	int			texid;
 
 
-	temp = sect->polygons;
+	temp = sect->points;
 	while (numwalls > 0)
 	{
 		pos.x = ft_atoi(line);
@@ -37,7 +37,7 @@ static void			store_polygons(char *line, int numwalls, t_sector *sect)
 		line += 3 + ft_numlen(pos.x) + ft_numlen(pos.y) + ft_numlen(texid);
 		numwalls--;
 	}
-	new = new_polygon(sect->polygons->next->x0, ft_atoi(line));
+	new = new_polygon(sect->points->next->x0, ft_atoi(line));
 	temp->next = new;
 	temp = temp->next;
 }
@@ -47,8 +47,8 @@ t_sector			new_sector(char *line)
 	t_sector	sect;
 	t_sector	temp;
 
-	sect.polygons = (t_polygon*)malloc(sizeof(*sect.polygons));
-	temp.polygons = sect.polygons;
+	sect.points = (t_point*)malloc(sizeof(*sect.points));
+	temp.points = sect.points;
 	while (*line != ' ')
 		line++;
 	while (*line == ' ')
@@ -63,8 +63,8 @@ t_sector			new_sector(char *line)
 	line += 1 + ft_numlen(sect.tex_floor);
 	sect.tex_ceil = ft_atoi(line);
 	line += 1 + ft_numlen(sect.tex_ceil);
-	store_polygons(line, sect.nb_of_walls, &sect);
-	sect.polygons = sect.polygons->next;
-	sect.polygons = temp.polygons;
+	store_points(line, sect.nb_of_walls, &sect);
+	sect.points = sect.points->next;
+	sect.points = temp.points;
 	return sect;
 }

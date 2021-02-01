@@ -1,6 +1,6 @@
 #include "../../doom_nukem.h"
 
-t_ray_fov			get_fov_points(t_polygon *plgn, t_home *home, t_player *plr, int i)
+t_ray_fov			get_fov_points(t_point *plgn, t_home *home, t_player *plr, int i)
 {
 	t_ray_fov		ray;
 	t_intersection	sect[2];
@@ -9,8 +9,8 @@ t_ray_fov			get_fov_points(t_polygon *plgn, t_home *home, t_player *plr, int i)
 	ray.ray_right.pos = plr->pos;
 	ray.ray_left.dir = vec2_rot(plr->dir, DEG_TO_RAD * -FOV * 0.5);
 	ray.ray_right.dir = vec2_rot(plr->dir, DEG_TO_RAD * FOV * 0.5);
-	calc_intersection(plgn, home->sectors[i]->polygons, &ray.ray_left, &sect[0]);
-	calc_intersection(plgn, home->sectors[i]->polygons, &ray.ray_right, &sect[1]);
+	calc_intersection(plgn, home->sectors[i]->points, &ray.ray_left, &sect[0]);
+	calc_intersection(plgn, home->sectors[i]->points, &ray.ray_right, &sect[1]);
 	ray.left_point = line_intersection(&sect[0]);
 	ray.right_point = line_intersection(&sect[1]);
 	return (ray);
@@ -29,7 +29,7 @@ t_xy		line_intersection(t_intersection *sect)
 	return (vec2(-1, -1));
 }
 
-void		calc_intersection(t_polygon *pgon, t_polygon *first, t_ray *ray,
+void		calc_intersection(t_point *pgon, t_point *first, t_ray *ray,
 					t_intersection *sect)
 {
 	sect->y1 = pgon->x0.y;
@@ -59,20 +59,20 @@ void		calc_intersection(t_polygon *pgon, t_polygon *first, t_ray *ray,
 // void			get_max_points(t_home *home, t_player *plr, t_intersection *sect)
 // {
 // 	int i;
-// 	t_polygon	*current;
-// 	t_polygon	*next;
+// 	t_point	*current;
+// 	t_point	*next;
 // 	t_maxpoints	max;
 // 	t_ray_fov	fov;
 
 // 	i = 0;
 // 	while(i < 2)
 // 	{
-// 		current = home->sectors[i]->polygons;
+// 		current = home->sectors[i]->points;
 // 		while (current)
 // 		{
 // 			if (current->idx)
 // 			{
-// 				next = (current->next == NULL) ? home->sectors[i]->polygons : current->next;
+// 				next = (current->next == NULL) ? home->sectors[i]->points : current->next;
 // 				fov = get_fov_points(current, home, plr, i);
 // 				if (fov.left_point.x > 0)
 // 					max.left = fov.left_point;
