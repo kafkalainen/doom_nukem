@@ -19,6 +19,6 @@
 
 void			key_input(t_player *plr, SDL_Event e, t_home *home);
 void			mouse_handle_unix(t_player *plr, t_home *home);
-void			mouse_handle_win(t_player *plr);
+void			mouse_handle_win(t_player *plr, t_home *home);
 
 #endif

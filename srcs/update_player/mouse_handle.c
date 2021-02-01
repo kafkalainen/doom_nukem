@@ -12,13 +12,13 @@
 
 #include "../../doom_nukem.h"
 
-void	mouse_handle_win(t_player *plr)
+void	mouse_handle_win(t_player *plr, t_home *home)
 {
 	SDL_Event	me;
 
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	if (me.type == SDL_MOUSEMOTION)
-		plr->dir = vec2_rot(plr->dir, DEG_TO_RAD * me.motion.xrel);
+		transform_world_view(plr, home, me.motion.xrel * DEG_TO_RAD);
 }
 
 void	mouse_handle_unix(t_player *plr, t_home *home)

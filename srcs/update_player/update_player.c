@@ -14,7 +14,7 @@
 # ifdef __unix__
 #  define MOUSE_HANDLE mouse_handle_unix(plr, home)
 # elif defined(_WIN32) || defined(WIN32)
-#  define MOUSE_HANDLE mouse_handle_win(plr)
+#  define MOUSE_HANDLE mouse_handle_win(plr, home)
 # endif
 
 void	update_player(t_player *plr, t_home *home, SDL_Event e)

@@ -50,6 +50,11 @@ void			draw_text(t_home *home, char *text, t_xy pos)
 	SDL_FreeSurface(home->text_surf);
 }
 
+int				hypotenuse(int opposite, int adjacent)
+{
+	return (sqrt(opposite * opposite + adjacent * adjacent));
+}
+
 void			draw_2d(t_home *home, t_player *plr)
 {
 	int i;
@@ -73,6 +78,9 @@ void			draw_2d(t_home *home, t_player *plr)
 					fov = get_fov_points(temp, home, plr, i);
 					draw_rect_center(vec2_add(fov.left_point, home->offset), vec2(16, 16), home);
 					draw_rect_center(vec2_add(fov.right_point, home->offset), vec2(16, 16), home);
+					ft_draw_line(vec2_add(fov.right_point, home->offset), vec2_add(fov.left_point, home->offset), 0xFF8000, home->draw_surf);
+					draw_text(home, ft_itoa(hypotenuse(fov.left_point.x - fov.right_point.x, fov.left_point.y - fov.right_point.y)),
+					vec2_add(vec2((fov.left_point.x - fov.right_point.x) / 2, (fov.left_point.y - fov.right_point.y) / 2), home->offset));
 				// draw_text(home, ft_itoa(fov.left_point.x), vec2(fov.left_point.x + 32, fov.left_point.y + 32));
 				// draw_text(home, ft_ftoa(plr->angle, 5, '.'), vec2(50, 50));
 				// draw_rect_center(fov.right_point, vec2(16, 16), home);
@@ -89,8 +97,7 @@ void			draw_2d(t_home *home, t_player *plr)
 				break ;
 			temp = temp->next;
 		}
-	// 	i++;
-	// }
+	}
 	//ft_draw_line(vec2_add(temp->x0, vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f)), vec2_add(temp->next->x0, vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f)), fuchsia, home->draw_surf);
 	draw_text(home, ft_ftoa(plr->angle, 5, '.'), vec2(50, 50));
 	draw_2d_fov(home, plr);
