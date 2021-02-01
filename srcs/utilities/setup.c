@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/01 10:33:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 13:37:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void			setup(char *mapname, t_home *home, t_player *plr)
 	home->win.height = SCREEN_HEIGHT;
 	home->t.fps = 0;
 	home->t.frames = 0;
+	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	home = init_sdl(home);
 	if (TTF_Init() < 0)
 		error_output_sdl("Fatal: Failed to init TTF.", home);
