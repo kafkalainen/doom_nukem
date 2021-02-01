@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:10:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/01 11:34:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 12:14:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ static void		translate_matrix_2d(t_xy pos, t_xy *vertex)
 
 void			transform_world_view(t_player *plr, t_home *home, float angle)
 {
-	t_polygon	*x0;
+	t_point		*current_point;
 	int			i;
 
 	i = 0;
 	while (i < 2)
 	{
-		x0 = home->sectors[i]->polygons;
-		while (x0)
+		current_point = home->sectors[i]->points;
+		while (current_point)
 		{
-			transform_matrix_2d(plr->pos, &x0->x0, angle);
-			x0 = x0->next;
+			transform_matrix_2d(plr->pos, &current_point->x0, angle);
+			current_point = current_point->next;
 		}
 		i++;
 	}
@@ -51,17 +51,17 @@ void			transform_world_view(t_player *plr, t_home *home, float angle)
 
 void			translate_world_view(t_xy step, t_home *home)
 {
-	t_polygon	*x0;
+	t_point		*current_point;
 	int			i;
 
 	i = 0;
 	while (i < 2)
 	{
-		x0 = home->sectors[i]->polygons;
-		while (x0)
+		current_point = home->sectors[i]->points;
+		while (current_point)
 		{
-			translate_matrix_2d(step, &x0->x0);
-			x0 = x0->next;
+			translate_matrix_2d(step, &current_point->x0);
+			current_point = current_point->next;
 		}
 		i++;
 	}

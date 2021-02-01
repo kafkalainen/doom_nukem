@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:12:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/26 14:07:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 12:11:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ typedef struct			s_polygon
 	int					idx;
 	float				wall_rad;
 	struct s_polygon	*next;
-}						t_polygon;
+}						t_point;
 
 typedef struct		s_sector
 {
-	t_polygon		*polygons;
+	t_point		*points;
 	t_enemy			*enemies;
 	int				nb_of_walls;
 	int				idx_sector;
@@ -34,6 +34,6 @@ typedef struct		s_sector
 	float			ceiling;
 }					t_sector;
 
-t_polygon	*new_polygon(t_xy x0, int idx);
+t_point	*new_polygon(t_xy x0, int idx);
 
 #endif

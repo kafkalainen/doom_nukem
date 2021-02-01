@@ -6,17 +6,17 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/01 10:33:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 12:12:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-t_polygon	*new_polygon(t_xy x0, int idx)
+t_point	*new_polygon(t_xy x0, int idx)
 {
-	t_polygon		*new;
+	t_point		*new;
 
-	new = (t_polygon*)malloc(sizeof(*new));
+	new = (t_point*)malloc(sizeof(*new));
 	if (new != NULL)
 	{
 		new->x0 = x0;
@@ -32,28 +32,28 @@ t_polygon	*new_polygon(t_xy x0, int idx)
 	return (new);
 }
 
-// static void		create_sector_polygons(t_sector *sector)
+// static void		create_sector_points(t_sector *sector)
 // {
 // 	int			walls;
-// 	t_polygon	*temp;
-// 	t_polygon	*new;
+// 	t_point	*temp;
+// 	t_point	*new;
 
 // 	walls = sector->nb_of_walls;
 // 	while (walls)
 // 	{
 // 		new = new_polygon(
-// 			sector->polygons[walls - 1].x0,
-// 			sector->polygons[walls - 1].idx
+// 			sector->points[walls - 1].x0,
+// 			sector->points[walls - 1].idx
 // 		);
 // 		temp->next = new;
 // 		walls--;
 // 	}
 // }
 
-static void		assign_polygons(t_sector *sector)
+static void		assign_points(t_sector *sector)
 {
-	t_polygon	*temp;
-	t_polygon	*new;
+	t_point	*temp;
+	t_point	*new;
 	t_xy		*coord;
 	int			walls;
 
@@ -67,8 +67,8 @@ static void		assign_polygons(t_sector *sector)
 	coord[0].x = 40.0;
 	coord[0].y = 200.0;
 	walls = sector->nb_of_walls;
-	sector->polygons = new_polygon(coord[walls - 1], -1);
-	temp = sector->polygons;
+	sector->points = new_polygon(coord[walls - 1], -1);
+	temp = sector->points;
 	walls--;
 	while (walls)
 	{
@@ -87,10 +87,10 @@ static void		assign_polygons(t_sector *sector)
 	free(coord);
 }
 
-static void		assign_polygons1(t_sector *sector)
+static void		assign_points1(t_sector *sector)
 {
-	t_polygon	*temp;
-	t_polygon	*new;
+	t_point	*temp;
+	t_point	*new;
 	t_xy		*coord;
 	int			walls;
 
@@ -104,8 +104,8 @@ static void		assign_polygons1(t_sector *sector)
 	coord[0].x = 250.0;
 	coord[0].y = 200.0;
 	walls = sector->nb_of_walls;
-	sector->polygons = new_polygon(coord[walls - 1], -1);
-	temp = sector->polygons;
+	sector->points = new_polygon(coord[walls - 1], -1);
+	temp = sector->points;
 	walls--;
 	while (walls)
 	{
@@ -139,18 +139,18 @@ static int		assign_sectors(t_home *home)
 		home->sectors[i]->nb_of_walls = 4;
 		i++;
 	}
-	assign_polygons(home->sectors[0]);
-	assign_polygons1(home->sectors[1]);
+	assign_points(home->sectors[0]);
+	assign_points1(home->sectors[1]);
 	return (0);
 }
 
-// static void		print_polygons(t_sector *sector)
+// static void		print_points(t_sector *sector)
 // {
 // 	int		i;
-// 	t_polygon	*temp;
+// 	t_point	*temp;
 
 // 	i = 0;
-// 	temp = sector->polygons;
+// 	temp = sector->points;
 // 	while (temp)
 // 	{
 // 		printf("x%d\n", i);
@@ -164,6 +164,6 @@ static int		assign_sectors(t_home *home)
 int				update_sector(t_home *home)
 {
 	assign_sectors(home);
-	//print_polygons(home->sectors[0]);
+	//print_points(home->sectors[0]);
 	return (0);
 }

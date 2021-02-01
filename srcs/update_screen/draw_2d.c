@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/01 08:26:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 12:11:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ void			draw_text(t_home *home, char *text, t_xy pos)
 void			draw_2d(t_home *home, t_player *plr)
 {
 	int i;
-	t_polygon	*temp;
-	t_polygon	*perkele;
+	t_point	*temp;
+	t_point	*perkele;
 	t_ray_fov	fov;
 
 	i = 0;
 	// while(i < 2)
 	// {
-	temp = home->sectors[i]->polygons;
+	temp = home->sectors[i]->points;
 		// while (temp)
 		// {
 			// if (temp->idx)
 			// {
-				// perkele = (temp->next == NULL) ? home->sectors[i]->polygons : temp->next;
+				// perkele = (temp->next == NULL) ? home->sectors[i]->points : temp->next;
 				// fov = get_fov_points(temp, home, plr, i);
 	// 			draw_rect_center(fov.left_point, vec2(16, 16), home);
 	// 			draw_text(home, ft_itoa(fov.left_point.x), vec2(fov.left_point.x + 32, fov.left_point.y + 32));
