@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.h                                           :+:      :+:    :+:   */
+/*   vec2_c.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/29 16:26:22 by jnivala          ###   ########.fr       */
+/*   Created: 2021/01/28 16:14:05 by jnivala           #+#    #+#             */
+/*   Updated: 2021/01/28 19:26:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#include "../../doom_nukem.h"
 
-typedef struct		s_input
+t_xy	vec2_perpendicular(t_xy x0, t_xy x1)
 {
-	int				right;
-	int				left;
-	int				up;
-	int				down;
-}					t_input;
+	t_xy	vector;
 
-typedef struct		s_player
-{
-	t_xy			pos;
-	t_xy			dir;
-	float			z;
-	float			height;
-	t_input			input;
-	clock_t			time;
-	t_audio			audio;
-	float			angle;
-}					t_player;
-
-#endif
+	vector = vec2_dec(x1, x0);
+	return (vec2(-vector.y, vector.x));
+}

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/28 13:20:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 10:33:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,17 @@ static t_home	*init_sdl(t_home *home)
 
 void			init_player(t_player *plr)
 {
-	plr->pos = vec2(1, 1);
+	plr->pos = vec2(0, 0);
 	plr->z = 0;
-	plr->dir.x = 1;
-	plr->dir.y = 0;
+	plr->dir.x = 0;
+	plr->dir.y = 1;
 	plr->input.down = 0;
 	plr->input.up = 0;
 	plr->input.right = 0;
 	plr->input.left = 0;
 	plr->time = 0;
 	plr->height = 0.5;
+	plr->angle = 0;
 }
 
 void			setup(char *mapname, t_home *home, t_player *plr)

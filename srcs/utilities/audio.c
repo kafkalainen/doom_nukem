@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/26 15:15:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 08:11:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		load_audio(t_audio *audio)
 {
-	audio->music = Mix_LoadMUS("kaivollinen.wav");
+	audio->music = Mix_LoadMUS("srcs/utilities/menacing.wav");
 	if (!audio->music)
 		error_output("Failed to load beat music! SDL_mixer Error");
 	audio->footstep1 = Mix_LoadWAV("srcs/utilities/footstep1.wav");

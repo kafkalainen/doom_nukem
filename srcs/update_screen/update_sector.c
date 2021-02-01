@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/28 13:03:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 10:33:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ static void		assign_polygons(t_sector *sector)
 	int			walls;
 
 	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
-	coord[3].x = 100.0;
-	coord[3].y = 0.0;
-	coord[2].x = 200.0;
-	coord[2].y = 0.0;
+	coord[3].x = -100.0;
+	coord[3].y = 100.0;
+	coord[2].x = 100.0;
+	coord[2].y = 100.0;
 	coord[1].x = 250.0;
 	coord[1].y = 200.0;
 	coord[0].x = 40.0;

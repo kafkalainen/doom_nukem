@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 15:33:56 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/20 16:30:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 10:55:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	update_player(t_player *plr, t_home *home, SDL_Event e)
 {
 	key_input(plr, e, home);
 	MOUSE_HANDLE;
-	movement(plr);
+	movement(plr, home);
 }

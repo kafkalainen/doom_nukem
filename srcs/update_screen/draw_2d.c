@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/28 13:24:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/01 08:26:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ void			draw_2d_fov(t_home *home, t_player *plr)
 	t_xy fov_left;
 	t_xy fov_right;
 	t_xy dir;
+	t_xy offset;
 
+	offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	dir = vec2(plr->dir.x * MINIMAP_SIZE, plr->dir.y * MINIMAP_SIZE);
 	fov_left = vec2_rot(dir, DEG_TO_RAD * -FOV * 0.5);
 	fov_right = vec2_rot(dir, DEG_TO_RAD * FOV * 0.5);
-	ft_draw_line(plr->pos, vec2_add(plr->pos, vec2_mul(fov_left, 20)), lightgreen, home->draw_surf);
-	ft_draw_line(plr->pos, vec2_add(plr->pos, vec2_mul(fov_right, 20)), lightgreen, home->draw_surf);
-	ft_draw_line(plr->pos, vec2_add(plr->pos, vec2_mul(dir, 20)), lightgreen, home->draw_surf);
+	draw_rect_center(vec2_add(plr->pos, offset), vec2(5, 5), home);
+	ft_draw_line(vec2_add(plr->pos, offset), vec2_add(vec2_add(plr->pos, vec2_mul(fov_left, 20)), offset), lightgreen, home->draw_surf);
+	ft_draw_line(vec2_add(plr->pos, offset), vec2_add(vec2_add(plr->pos, vec2_mul(fov_right, 20)), offset), lightgreen, home->draw_surf);
+	ft_draw_line(vec2_add(plr->pos, offset), vec2_add(vec2_add(plr->pos, vec2_mul(dir, 20)), offset), lightgreen, home->draw_surf);
 }
 
 /* 1. Test if leftmost ray hits the polygon.
@@ -55,35 +58,35 @@ void			draw_2d(t_home *home, t_player *plr)
 	t_ray_fov	fov;
 
 	i = 0;
-	while(i < 2)
-	{
-		temp = home->sectors[i]->polygons;
-		while (temp)
-		{
-			if (temp->idx)
-			{
-				perkele = (temp->next == NULL) ? home->sectors[i]->polygons : temp->next;
-				fov = get_fov_points(temp, home, plr, i);
-				draw_rect_center(fov.left_point, vec2(16, 16), home);
-				draw_text(home, ft_itoa(fov.left_point.x), vec2(fov.left_point.x + 32, fov.left_point.y + 32));
-				draw_rect_center(fov.right_point, vec2(16, 16), home);
-
-				if (fov.left_point.x > 0)
-				{
-					if (fov.right_point.x > 0)
-						ft_draw_line(fov.left_point, fov.right_point, green, home->draw_surf);
-					else
-						ft_draw_line(fov.left_point, perkele->x0, green, home->draw_surf);
-				}
-			}
-			if (temp->next == NULL)
-				break ;
-			temp = temp->next;
-		}
-		i++;
-	}
-	//ft_draw_line(temp->x0, home->sectors[0]->polygons->x0, fuchsia, home->draw_surf);
-	draw_rect_center(plr->pos, vec2(5, 5), home);
+	// while(i < 2)
+	// {
+	temp = home->sectors[i]->polygons;
+		// while (temp)
+		// {
+			// if (temp->idx)
+			// {
+				// perkele = (temp->next == NULL) ? home->sectors[i]->polygons : temp->next;
+				// fov = get_fov_points(temp, home, plr, i);
+	// 			draw_rect_center(fov.left_point, vec2(16, 16), home);
+	// 			draw_text(home, ft_itoa(fov.left_point.x), vec2(fov.left_point.x + 32, fov.left_point.y + 32));
+	// 			draw_text(home, ft_ftoa(plr->angle, 5, '.'), vec2(50, 50));
+	// 			draw_rect_center(fov.right_point, vec2(16, 16), home);
+	// 			if (fov.left_point.x > 0)
+	// 			{
+	// 				if (fov.right_point.x > 0)
+	// 					ft_draw_line(fov.left_point, fov.right_point, green, home->draw_surf);
+	// 				else
+	// 					ft_draw_line(fov.left_point, perkele->x0, green, home->draw_surf);
+	// 			}
+	// 		}
+	// 		if (temp->next == NULL)
+	// 			break ;
+	// 		temp = temp->next;
+	// 	}
+	// 	i++;
+	// }
+	ft_draw_line(vec2_add(temp->x0, vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f)), vec2_add(temp->next->x0, vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f)), fuchsia, home->draw_surf);
+	draw_text(home, ft_ftoa(plr->angle, 5, '.'), vec2(50, 50));
 	draw_2d_fov(home, plr);
-	draw_text(home, ft_ftoa(plr->dir.x, 4, 1), vec2(plr->pos.x, plr->pos.y - 16));
+	// draw_text(home, ft_ftoa(plr->dir.x, 4, 1), vec2(plr->pos.x, plr->pos.y - 16));
 }

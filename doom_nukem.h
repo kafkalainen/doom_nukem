@@ -83,5 +83,7 @@ t_xy			scale(t_xy a);
 void			draw_minimap(t_xy size, t_xy pos, t_xy dir, t_home *home);
 void			draw_grid(t_home *home);
 int				update_sector(t_home *home);
+void			translate_world_view(t_xy step, t_home *home);
+void			transform_world_view(t_player *plr, t_home *home, float angle);
 
 #endif
