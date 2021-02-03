@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:16:10 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/02 08:59:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/02 16:37:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ t_xy			vec2_mul(t_xy v, float scalar)
 float			vec2_dot(t_xy a, t_xy b)
 {
 	return (a.x * b.x + a.y * b.y);
+}
+
+float			vec2_mag(t_xy a)
+{
+	return sqrt(a.x * a.x + a.y * a.y);
+}
+
+float			vec2_angle(t_xy a, t_xy b)
+{
+	return acos(vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b)));
 }
 
 float			ft_map(float in, t_range from, t_range to)

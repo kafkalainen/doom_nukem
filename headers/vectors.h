@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/26 17:53:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/02 15:54:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,6 @@ typedef struct		s_maxpoints
 	t_xy			right;
 }					t_maxpoints;
 
-
-
-typedef struct		s_ray_fov
-{
-	t_ray			ray_left;
-	t_ray			ray_right;
-	t_xy			left_point;
-	t_xy			right_point;
-}					t_ray_fov;
 /*
 ** Vector functions
 */
@@ -67,5 +58,8 @@ t_xy			vec2_norm(t_xy v);
 t_xy			vec2_mul(t_xy v, float scalar);
 float			vec2_dot(t_xy a, t_xy b);
 float			ft_map(float in, t_range from, t_range to);
+float			vec2_dot(t_xy a, t_xy b);
+float			vec2_mag(t_xy a);
+float			vec2_angle(t_xy a, t_xy b);
 
 #endif

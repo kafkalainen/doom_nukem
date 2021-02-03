@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																																						*/
-/*																												:::		  ::::::::   */
-/*   sector.h																				   :+:		  :+:		:+:   */
-/*																										+:+ +:+				 +:+		 */
-/*   By: jnivala <jnivala@student.hive.fi>				  +#+  +:+		   +#+				*/
-/*																								+#+#+#+#+#+   +#+				   */
-/*   Created: 2021/01/20 10:12:53 by jnivala				   #+#		#+#						 */
-/*   Updated: 2021/02/02 08:35:31 by jnivala				  ###   ########.fr		   */
-/*																																						*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sector.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
+/*   Updated: 2021/02/02 14:10:13 by jnivala          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SECTOR_H
@@ -22,14 +22,6 @@ typedef struct			s_point
 	struct s_point		*next;
 }						t_point;
 
-typedef struct			s_max
-{
-	t_xy				left_cut_point;
-	t_xy				right_cut_point;
-	t_point				*left_point;
-	t_point				*right_point;
-}						t_max;
-
 typedef struct		s_sector
 {
 	t_point			*points;
@@ -42,6 +34,7 @@ typedef struct		s_sector
 	float			ceiling;
 }					t_sector;
 
-t_point	*new_polygon(t_xy x0, int idx);
+t_point			*new_polygon(t_xy x0, int idx);
+t_point			*loop_list(t_point *head, t_point *current);
 
 #endif

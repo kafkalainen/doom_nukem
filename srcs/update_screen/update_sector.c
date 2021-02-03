@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/01 12:12:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/03 09:09:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_point	*new_polygon(t_xy x0, int idx)
 		new->x0 = x0;
 		new->normal = vec2_norm(x0);
 		new->idx = idx;
+		new->wall_rad = 0;
 		new->next = NULL;
 	}
 	else
@@ -59,9 +60,9 @@ static void		assign_points(t_sector *sector)
 
 	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
 	coord[3].x = -100.0;
-	coord[3].y = 100.0;
+	coord[3].y = -100.0;
 	coord[2].x = 100.0;
-	coord[2].y = 100.0;
+	coord[2].y = -100.0;
 	coord[1].x = 250.0;
 	coord[1].y = 200.0;
 	coord[0].x = 40.0;

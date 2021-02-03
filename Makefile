@@ -16,6 +16,7 @@ SRCS =	main.c \
 		srcs/utilities/error_output.c \
 		srcs/utilities/setup.c \
 		srcs/utilities/audio.c \
+		srcs/utilities/linkedlist.c \
 		srcs/libft/ft_itoa.c \
 		srcs/libft/ft_ftoa.c \
 		srcs/libft/ft_atoi.c \
@@ -24,6 +25,7 @@ SRCS =	main.c \
 		srcs/libft/ft_get_next_line.c \
 		srcs/libft/ft_putendl_fd.c \
 		srcs/raycaster/raycaster.c \
+		srcs/raycaster/get_fov.c \
 		srcs/parsing/read_map.c
 
 HEADERS = \
