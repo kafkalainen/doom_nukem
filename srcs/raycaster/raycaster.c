@@ -32,8 +32,13 @@ t_xy		line_intersection(t_intersection *sect)
 void		calc_intersection(t_point *pgon, t_point *first, t_ray *ray,
 					t_intersection *sect)
 {
+	// t_point		*temp;
+
 	sect->y1 = pgon->x0.y;
 	sect->x1 = pgon->x0.x;
+	// temp = loop_list(first, pgon->next);
+	// sect->x2 = temp->x0.x;
+	// sect->y2 = temp->x0.x;
 	if (pgon->next == NULL)
 	{
 		sect->x2 = first->x0.x;

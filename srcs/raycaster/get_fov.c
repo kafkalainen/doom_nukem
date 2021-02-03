@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:12:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/03 09:38:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/03 13:59:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,31 @@ t_ray_fov			get_fov(t_home *home, t_player *plr, int i)
 	t_ray_fov		ray;
 	t_intersection	sect;
 
-	ray.left_point.y = -1;
-	ray.right_point.y = -1;
+	ray.ray_right.pos = vec2(0, 0);
+	ray.ray_left.pos = vec2(0, 0);
+	ray.left_point = vec2(-1, -1);
+	ray.right_point = vec2(-1, -1);
 	p0 = home->sectors[i]->points;
-	while (p0 && ray.left_point.y == -1)
+	while (ray.left_point.y == -1.0f)
+	// while (p0 && ray.left_point.y == -1.0f)
 	{
-		ray.ray_left.pos = vec2(0, 0);
-		ray.ray_left.dir = vec2_rot(plr->dir, DEG_TO_RAD * -FOV * 0.5);
-		calc_intersection(p0, loop_list(home->sectors[i]->points, p0->next), &ray.ray_left, &sect);
+		ray.ray_left.dir = vec2_rot(plr->dir, DEG_TO_RAD * -FOV * 0.5f);
+		calc_intersection(p0, home->sectors[i]->points, &ray.ray_left, &sect);
 		ray.left_point = line_intersection(&sect);
-		if (ray.left_point.y == -1)
+		if (ray.left_point.y == -1.0f)
+			// p0 = p0->next;
 			p0 = loop_list(home->sectors[i]->points, p0->next);
 	}
 	ray.left_wall = p0;
 	p0 = home->sectors[i]->points;
-	while (p0 && ray.right_point.y == -1)
+	while (ray.right_point.y == -1.0f)
+	// while (p0 && ray.right_point.y == -1.0f)
 	{
-		ray.ray_right.pos = vec2(0, 0);
-		ray.ray_right.dir = vec2_rot(plr->dir, DEG_TO_RAD * FOV * 0.5);
-		calc_intersection(p0, loop_list(home->sectors[i]->points, p0->next), &ray.ray_right, &sect);
+		ray.ray_right.dir = vec2_rot(plr->dir, DEG_TO_RAD * FOV * 0.5f);
+		calc_intersection(p0, home->sectors[i]->points, &ray.ray_right, &sect);
 		ray.right_point = line_intersection(&sect);
-		if (ray.right_point.y == -1)
+		if (ray.right_point.y == -1.0f)
+			// p0 = p0->next;
 			p0 = loop_list(home->sectors[i]->points, p0->next);
 	}
 	ray.right_wall = p0;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/03 10:07:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/03 13:54:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			draw_2d(t_home *home, t_player *plr)
 	// translate_world_view(plr, home);
 	p0 = home->sectors[i]->points;
 	fov = get_fov(home, plr, i);
-	draw_angles(home, home->sectors[i], &fov);
+	//draw_angles(home, home->sectors[i], &fov);
 	while (p0)
 		{
 			if (p0->idx)
@@ -99,12 +99,13 @@ void			draw_2d(t_home *home, t_player *plr)
 				{
 					// draw_text(home, ft_ftoa(vec2_angle(p0->x0, p1->x0), 5, '.'), vec2_add(p0->x0, home->offset));
 					ft_draw_line(vec2_add(p0->x0, home->offset), vec2_add(p1->x0, home->offset), green, home->draw_surf);
+					// draw_text(home, ft_ftoa(p0->x0.y, 5, '.'), vec2_add(p0->x0, home->offset));
 					//fov = get_fov_points(p0, home, plr, i);
 					// draw_rect_center(vec2_add(fov.left_point, home->offset), vec2(16, 16), home);
 					// draw_rect_center(vec2_add(fov.right_point, home->offset), vec2(16, 16), home);
-					ft_draw_line(vec2_add(fov.right_point, home->offset), vec2_add(fov.left_point, home->offset), 0xFF8000, home->draw_surf);
-					draw_text(home, ft_itoa(hypotenuse(fov.left_point.x - fov.right_point.x, fov.left_point.y - fov.right_point.y)),
-					vec2_add(vec2((fov.left_point.x - fov.right_point.x) / 2, (fov.left_point.y - fov.right_point.y) / 2), home->offset));
+					//ft_draw_line(vec2_add(fov.right_point, home->offset), vec2_add(fov.left_point, home->offset), 0xFF8000, home->draw_surf);
+					//draw_text(home, ft_itoa(hypotenuse(fov.left_point.x - fov.right_point.x, fov.left_point.y - fov.right_point.y)),
+					//vec2_add(vec2((fov.left_point.x - fov.right_point.x) / 2, (fov.left_point.y - fov.right_point.y) / 2), home->offset));
 					//perspective_transformation(p0, p1, home, i);
 					//draw_text(home, ft_itoa(fov.left_point.x), vec2(fov.left_point.x + 32, fov.left_point.y + 32));
 					//draw_text(home, ft_ftoa(plr->angle, 5, '.'), vec2(50, 50));
