@@ -61,7 +61,7 @@ t_ray_fov			get_fov(t_home *home, t_player *plr, int i)
 		calc_intersection(p0, loop_list(home->sectors[i]->points, p0->next), &ray.ray_left, &sect);
 		ray.left_point = line_intersection(&sect);
 		if (ray.left_point.y == -1)
-			p0 = p0->next;
+			p0 = loop_list(home->sectors[i]->points, p0->next);
 	}
 	ray.left_wall = p0;
 	p0 = home->sectors[i]->points;
@@ -72,7 +72,7 @@ t_ray_fov			get_fov(t_home *home, t_player *plr, int i)
 		calc_intersection(p0, loop_list(home->sectors[i]->points, p0->next), &ray.ray_right, &sect);
 		ray.right_point = line_intersection(&sect);
 		if (ray.right_point.y == -1)
-			p0 = p0->next;
+			p0 = loop_list(home->sectors[i]->points, p0->next);
 	}
 	ray.right_wall = p0;
 	return (ray);
