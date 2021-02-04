@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/02 15:54:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/04 08:10:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_ray
 {
 	t_xy			pos;
 	t_xy			dir;
+	t_xy			cutpoint;
 }					t_ray;
 
 typedef struct		s_maxpoints
