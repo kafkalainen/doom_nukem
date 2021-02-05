@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/05 11:06:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 12:20:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 			green,
 			frame->draw_surf
 		);
+		new_fov = new_fov < MARGIN ? 1 : new_fov;
 		frame->offset = new_fov + frame->offset;
 	}
 }
