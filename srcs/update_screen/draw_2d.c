@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/05 13:43:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 14:51:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int				hypotenuse(int opposite, int adjacent)
 void			draw_2d(t_home *home, t_frame *frame)
 {
 	frame->idx = 0;
+	frame->old_idx = -1;
 	frame->max_fov = 640;
 	frame->offset = 0;
 	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5);

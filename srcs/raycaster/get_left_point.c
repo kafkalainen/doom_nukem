@@ -6,25 +6,24 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:33:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/05 13:27:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 15:13:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
 /*
-** NOTE:
-** If(wall_index == frame_idx) skip point.
+** TODO:
 */
-void		get_left_point(t_point *start, t_ray_fov *fov, int offset)
+void		get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame)
 {
 	t_ray			ray;
 	t_intersection	sect;
 	t_point			*p0;
 
 	ray.pos = vec2(0, 0);
-	ray.dir = vec2(0.70710678118, 0.70710678118);
-	if (offset != 0)
+	ray.dir = vec2(0.785389163, 0.785389163);
+	if (frame->offset != 0 || frame->idx == frame->old_idx)
 	{
 		fov->left_wall = loop_list(start, fov->left_wall->next);
 		fov->left_point = fov->left_wall->x0;

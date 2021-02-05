@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/05 11:01:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 15:02:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,20 @@ static void		assign_points(t_sector *sector)
 	coord[3].y = -100.0;
 	coord[2].x = 100.0;
 	coord[2].y = -100.0;
-	coord[1].x = 250.0;
-	coord[1].y = 200.0;
-	coord[0].x = 40.0;
-	coord[0].y = 200.0;
+	coord[1].x = 100.0;
+	coord[1].y = 100.0;
+	coord[0].x = -100.0;
+	coord[0].y = 100.0;
 	walls = sector->nb_of_walls;
 	sector->points = new_polygon(coord[walls - 1], -1);
 	temp = sector->points;
 	walls--;
 	while (walls)
 	{
-		if (walls == 3)
+		if (walls == 2)
 			new = new_polygon(
 				coord[walls - 1],
-				-1);
+				1);
 		else
 			new = new_polygon(
 			coord[walls - 1],
@@ -96,24 +96,24 @@ static void		assign_points1(t_sector *sector)
 	int			walls;
 
 	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
-	coord[3].x = 200.0;
-	coord[3].y = 0.0;
-	coord[2].x = 300.0;
-	coord[2].y = 0.0;
-	coord[1].x = 300.0;
-	coord[1].y = 250.0;
-	coord[0].x = 250.0;
-	coord[0].y = 200.0;
+	coord[3].x = 100.0;
+	coord[3].y = 100.0;
+	coord[2].x = -100.0;
+	coord[2].y = 100.0;
+	coord[1].x = 100.0;
+	coord[1].y = 300.0;
+	coord[0].x = -100.0;
+	coord[0].y = 300.0;
 	walls = sector->nb_of_walls;
 	sector->points = new_polygon(coord[walls - 1], -1);
 	temp = sector->points;
 	walls--;
 	while (walls)
 	{
-		if (walls == 1)
+		if (walls == 3)
 			new = new_polygon(
 			coord[walls - 1],
-				-1);
+				0);
 		else
 			new = new_polygon(
 			coord[walls - 1],
