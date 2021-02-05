@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:33:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/05 15:13:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 15:21:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void		get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame)
 	t_ray			ray;
 	t_intersection	sect;
 	t_point			*p0;
+	static int		i = 0;
 
+	i++;
 	ray.pos = vec2(0, 0);
 	ray.dir = vec2(0.785389163, 0.785389163);
 	if (frame->offset != 0 || frame->idx == frame->old_idx)
