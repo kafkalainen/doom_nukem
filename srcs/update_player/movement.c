@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 18:08:50 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/01 13:26:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 13:38:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void			player_move_forward(t_player *plr, t_home *home, float delta_time)
 {
 	play_footsteps(plr);
 	//plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 40 * delta_time));
-	translate_world_view(plr, home, vec2_mul(plr->dir, 40 * delta_time));
+	translate_world_view(home, vec2_mul(plr->dir, 40 * delta_time));
 }
 
 void			player_move_backwards(t_player *plr, t_home *home, float delta_time)
 {
 	play_footsteps(plr);
 	//plr->pos = vec2_add(plr->pos, vec2_mul(plr->dir, 40 * delta_time));
-	translate_world_view(plr, home, vec2_mul(plr->dir, -40 * delta_time));
+	translate_world_view(home, vec2_mul(plr->dir, -40 * delta_time));
 }
 
 void			player_move_strafe(t_player *plr, t_home *home, float delta_time, char ad)
@@ -33,7 +33,7 @@ void			player_move_strafe(t_player *plr, t_home *home, float delta_time, char ad
 		{
 			// plr->pos = vec2_add(plr->pos, vec2_mul(vec2_rot(
 			//plr->dir, 90 * DEG_TO_RAD), 4 * delta_time));
-			translate_world_view(plr, home, vec2_mul(vec2_rot(
+			translate_world_view(home, vec2_mul(vec2_rot(
 			plr->dir, 90 * DEG_TO_RAD), 40 * delta_time));
 			// step = vec2(1, 0);
 			// translate_world_view(step, home);
@@ -42,7 +42,7 @@ void			player_move_strafe(t_player *plr, t_home *home, float delta_time, char ad
 		{
 			// plr->pos = vec2_dec(plr->pos, vec2_mul(vec2_rot(
 			// 	plr->dir, 90 * DEG_TO_RAD), 4 * delta_time));
-			translate_world_view(plr, home, vec2_mul(vec2_rot(
+			translate_world_view(home, vec2_mul(vec2_rot(
 			plr->dir, 90 * DEG_TO_RAD), -40 * delta_time));
 			// step = vec2(-1, 0);
 			// translate_world_view(step, home);

@@ -6,20 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:33:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/05 11:51:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 13:27:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
 /*
-** Counter-clockwise
-** Segfault line 43
-** Segfault happens due line-line intersection will not find intersection point.
-** Clockwise
-** Infinite loop
 ** NOTE:
-** Plr dir is a constant, we don't have to count it any longer. Use enum or define instead.
 ** If(wall_index == frame_idx) skip point.
 */
 void		get_left_point(t_point *start, t_ray_fov *fov, int offset)

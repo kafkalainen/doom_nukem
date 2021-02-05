@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:10:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/01 13:42:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 13:35:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void			transform_world_view(t_player *plr, t_home *home, float delta_dir)
+void			transform_world_view(t_home *home, float delta_dir)
 {
 	t_point		*current_point;
 	int			i;
@@ -31,7 +31,7 @@ void			transform_world_view(t_player *plr, t_home *home, float delta_dir)
 }
 
 
-void			translate_world_view(t_player *plr, t_home *home, t_xy step)
+void			translate_world_view(t_home *home, t_xy step)
 {
 	t_point		*current_point;
 	int			i;

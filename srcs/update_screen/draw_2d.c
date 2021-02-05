@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/05 11:29:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 13:43:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void			draw_2d_fov(t_frame *frame)
 {
 	t_xy fov_left;
 	t_xy fov_right;
-	t_xy dir;
 	t_xy offset;
 	t_xy plr;
 
@@ -27,7 +26,6 @@ void			draw_2d_fov(t_frame *frame)
 	draw_rect_center(vec2_add(vec2(0,0), offset), vec2(5, 5), frame);
 	ft_draw_line(vec2_add(plr, offset), vec2_add(vec2_add(plr, vec2_mul(fov_left, 400)), offset), lightgreen, frame->draw_surf);
 	ft_draw_line(vec2_add(plr, offset), vec2_add(vec2_add(plr, vec2_mul(fov_right, 400)), offset), lightgreen, frame->draw_surf);
-	ft_draw_line(vec2_add(plr, offset), vec2_add(vec2_add(plr, vec2_mul(dir, 200)), offset), lightgreen, frame->draw_surf);
 }
 
 /* 1. Test if leftmost ray hits the polygon.

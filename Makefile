@@ -24,11 +24,9 @@ SRCS =	main.c \
 		srcs/libft/memory.c \
 		srcs/libft/ft_get_next_line.c \
 		srcs/libft/ft_putendl_fd.c \
-		srcs/raycaster/raycaster.c \
-		srcs/raycaster/get_fov.c \
+		srcs/raycaster/line_line_intersection.c \
 		srcs/raycaster/scan_fov.c \
 		srcs/raycaster/get_left_point.c \
-		srcs/raycaster/get_right_point.c \
 		srcs/raycaster/setup_frame.c \
 		srcs/parsing/read_map.c
 

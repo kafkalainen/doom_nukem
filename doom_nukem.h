@@ -83,8 +83,8 @@ t_xy			scale(t_xy a);
 void			draw_minimap(t_xy size, t_xy pos, t_xy dir, t_home *home);
 void			draw_grid(t_frame *frame);
 int				update_sector(t_home *home);
-void			translate_world_view(t_player *plr, t_home *home, t_xy step);
-void			transform_world_view(t_player *plr, t_home *home, float delta_dir);
+void			translate_world_view(t_home *home, t_xy step);
+void			transform_world_view(t_home *home, float delta_dir);
 void			perspective_transformation(t_point *x0, t_point *x1, t_home *home, int idx);
 
 
