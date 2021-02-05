@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/01 13:28:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 09:19:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	mouse_handle_unix(t_player *plr, t_home *home)
 		return ;
 	else
 		mouse.x = 0.05235987756;
-	//plr->dir = vec2_rot(plr->dir, mouse.x);
 	transform_world_view(plr, home, mouse.x);
 	SDL_WarpMouseInWindow(home->win.window, (int)(SCREEN_WIDTH * 0.5),
 		(int)(SCREEN_HEIGHT * 0.5));

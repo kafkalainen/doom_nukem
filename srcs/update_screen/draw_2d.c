@@ -6,27 +6,28 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/04 17:01:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 11:29:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void			draw_2d_fov(t_home *home, t_player *plr)
+void			draw_2d_fov(t_frame *frame)
 {
 	t_xy fov_left;
 	t_xy fov_right;
 	t_xy dir;
 	t_xy offset;
+	t_xy plr;
 
+	plr = vec2(0,0);
 	offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
-	dir = vec2(plr->dir.x * MINIMAP_SIZE, plr->dir.y * MINIMAP_SIZE);
-	fov_left = vec2_rot(dir, DEG_TO_RAD * -FOV * 0.5);
-	fov_right = vec2_rot(dir, DEG_TO_RAD * FOV * 0.5);
-	draw_rect_center(vec2_add(plr->pos, offset), vec2(5, 5), home);
-	ft_draw_line(vec2_add(plr->pos, offset), vec2_add(vec2_add(plr->pos, vec2_mul(fov_left, 20)), offset), lightgreen, home->draw_surf);
-	ft_draw_line(vec2_add(plr->pos, offset), vec2_add(vec2_add(plr->pos, vec2_mul(fov_right, 20)), offset), lightgreen, home->draw_surf);
-	ft_draw_line(vec2_add(plr->pos, offset), vec2_add(vec2_add(plr->pos, vec2_mul(dir, 20)), offset), lightgreen, home->draw_surf);
+	fov_left = vec2(0.70711, 0.70711);
+	fov_right = vec2(-0.70711, 0.70711);
+	draw_rect_center(vec2_add(vec2(0,0), offset), vec2(5, 5), frame);
+	ft_draw_line(vec2_add(plr, offset), vec2_add(vec2_add(plr, vec2_mul(fov_left, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr, offset), vec2_add(vec2_add(plr, vec2_mul(fov_right, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr, offset), vec2_add(vec2_add(plr, vec2_mul(dir, 200)), offset), lightgreen, frame->draw_surf);
 }
 
 /* 1. Test if leftmost ray hits the polygon.
@@ -38,7 +39,7 @@ void			draw_2d_fov(t_home *home, t_player *plr)
 ** 3. Move to the next polygon.
 */
 
-void			draw_text(t_home *home, char *text, t_xy pos)
+void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos)
 {
 	SDL_Rect	rect;
 
@@ -46,7 +47,7 @@ void			draw_text(t_home *home, char *text, t_xy pos)
 	home->text_surf = TTF_RenderText_Solid(home->font, text, color);
 	rect.x = pos.x;
 	rect.y = pos.y;
-	SDL_BlitSurface(home->text_surf, NULL, home->draw_surf, &rect);
+	SDL_BlitSurface(home->text_surf, NULL, frame->draw_surf, &rect);
 	SDL_FreeSurface(home->text_surf);
 }
 
@@ -55,9 +56,14 @@ int				hypotenuse(int opposite, int adjacent)
 	return (sqrt(opposite * opposite + adjacent * adjacent));
 }
 
-void			draw_2d(t_home *home, t_player *plr)
+void			draw_2d(t_home *home, t_frame *frame)
 {
-	scan_fov(home, plr, 0, 640);
+	frame->idx = 0;
+	frame->max_fov = 640;
+	frame->offset = 0;
+	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5);
+	scan_fov(home, frame);
+	draw_2d_fov(frame);
 	// int			i;
 	// t_point		*p0;
 	// t_point		*p1;

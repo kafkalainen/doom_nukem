@@ -67,8 +67,8 @@
 ** Miscellanious
 */
 
-void			update_screen(t_home *home, t_player *plr);
-void			setup(char *mapname, t_home *home, t_player *plr);
+void			update_screen(t_home *home, t_frame *frame);
+void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame);
 void			error_output_sdl(char *msg, t_home *home);
 void			error_output(char *msg);
 void			load_audio(t_audio *audio);
@@ -81,7 +81,7 @@ void			play_footsteps(t_player *plr);
 
 t_xy			scale(t_xy a);
 void			draw_minimap(t_xy size, t_xy pos, t_xy dir, t_home *home);
-void			draw_grid(t_home *home);
+void			draw_grid(t_frame *frame);
 int				update_sector(t_home *home);
 void			translate_world_view(t_player *plr, t_home *home, t_xy step);
 void			transform_world_view(t_player *plr, t_home *home, float delta_dir);

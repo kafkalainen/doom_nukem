@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/04 17:10:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 11:01:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-t_point	*new_polygon(t_xy x0, int idx)
+t_point			*new_polygon(t_xy x0, int idx)
 {
 	t_point		*new;
 
@@ -76,7 +76,7 @@ static void		assign_points(t_sector *sector)
 		if (walls == 3)
 			new = new_polygon(
 				coord[walls - 1],
-				1);
+				-1);
 		else
 			new = new_polygon(
 			coord[walls - 1],
@@ -113,7 +113,7 @@ static void		assign_points1(t_sector *sector)
 		if (walls == 1)
 			new = new_polygon(
 			coord[walls - 1],
-				0);
+				-1);
 		else
 			new = new_polygon(
 			coord[walls - 1],

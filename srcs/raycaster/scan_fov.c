@@ -6,36 +6,35 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/04 17:07:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 11:06:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-
-static int		offset = 0;
-
-void			scan_fov(t_home *home, t_player *plr, int idx, int max_fov)
+void			scan_fov(t_home *home, t_frame *frame)
 {
 	t_ray_fov	fov;
+	t_frame		new_frame;
 	float		angle;
 	int			new_fov;
 
-	while (offset < max_fov)
+	while (frame->offset < frame->max_fov)
 	{
-		get_left_point(home->sectors[idx]->points, plr, &fov, offset);
+		get_left_point(home->sectors[frame->idx]->points, &fov, frame->offset);
 		angle = vec2_angle(fov.left_point, fov.right_point);
-		if ((new_fov = SCREEN_WIDTH * angle / (FOV * DEG_TO_RAD) < max_fov))
+		new_fov = SCREEN_WIDTH * angle / (FOV * DEG_TO_RAD);
+		if (fov.left_wall->idx > 0)
 		{
-			if (fov.left_wall->idx > 0)
-				scan_fov(home, plr, fov.left_wall->idx, new_fov);
-			ft_draw_line(
-				vec2_add(fov.left_point, home->offset),
-				vec2_add(fov.right_point, home->offset),
-				green,
-				home->draw_surf
-			);
-			offset = new_fov + offset;
+			setup_frame(frame, &new_frame, fov.left_wall->idx, new_fov);
+			scan_fov(home, &new_frame);
 		}
+		ft_draw_line(
+			vec2_add(fov.left_point, home->offset),
+			vec2_add(fov.right_point, home->offset),
+			green,
+			frame->draw_surf
+		);
+		frame->offset = new_fov + frame->offset;
 	}
 }

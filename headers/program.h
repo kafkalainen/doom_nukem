@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/01 13:36:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/05 09:58:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,20 @@ typedef struct		s_wall
 	int				side;
 }					t_wall;
 
+
+typedef struct		s_frame
+{
+	int				idx;
+	int				max_fov;
+	int				offset;
+	SDL_Surface		*draw_surf;
+	t_xy			plr_offset;
+}					t_frame;
+
 typedef struct		s_home
 {
 	t_window		win;
 	t_sector		**sectors;
-	SDL_Surface		*draw_surf;
 	SDL_Surface		*text_surf;
 	TTF_Font		*font;
 	t_texture		**editor_textures;
