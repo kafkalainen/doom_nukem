@@ -17,7 +17,8 @@ void		setup_frame(t_frame *frame, t_frame *new_frame,
 {
 	int		new_fov;
 
-	new_fov = SCREEN_WIDTH * fov_angle;
+	new_fov = SCREEN_WIDTH / FOV * (fov_angle * RAD_TO_DEG);
+	new_fov = new_fov < MARGIN ? 2 : new_fov;
 	new_frame->idx = idx;
 	new_frame->old_idx = frame->idx;
 	new_frame->offset = frame->offset;

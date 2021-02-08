@@ -24,7 +24,7 @@ void		continue_from_last_sector(t_point *start, t_ray_fov *fov, t_frame *frame)
 		{
 			if (check_connection(p0, frame))
 			{
-				fov->left_wall = p0;
+				fov->left_wall = p0->next;
 				break ;
 			}
 			p0 = p0->next;

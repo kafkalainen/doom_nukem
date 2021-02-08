@@ -14,7 +14,7 @@
 
 int		check_if_portal(t_point *p0, t_frame *frame)
 {
-	if (p0->idx >= 0 && p0->idx != frame->old_idx)
+	if (p0->idx >= 0)
 		return (TRUE);
 	else
 		return (FALSE);
