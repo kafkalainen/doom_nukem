@@ -28,6 +28,10 @@ SRCS =	main.c \
 		srcs/raycaster/scan_fov.c \
 		srcs/raycaster/get_left_point.c \
 		srcs/raycaster/setup_frame.c \
+		srcs/raycaster/continue_from_next_point.c \
+		srcs/raycaster/continue_from_last_sector.c \
+		srcs/raycaster/check_connection.c \
+		srcs/raycaster/check_if_portal.c \
 		srcs/parsing/read_map.c
 
 HEADERS = \

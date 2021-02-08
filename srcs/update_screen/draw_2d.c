@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/05 14:51:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/08 11:37:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void			draw_2d(t_home *home, t_frame *frame)
 	frame->max_fov = 640;
 	frame->offset = 0;
 	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5);
+	frame->fov_angle = FOV * DEG_TO_RAD;
 	scan_fov(home, frame);
 	draw_2d_fov(frame);
 	// int			i;

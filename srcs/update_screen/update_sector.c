@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/08 08:20:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/08 09:58:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ static void		assign_points1(t_sector *sector)
 	int			walls;
 
 	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
-	coord[3].x = 100.0;
+	coord[3].x = -100.0;
 	coord[3].y = 100.0;
-	coord[2].x = -100.0;
+	coord[2].x = 100.0;
 	coord[2].y = 100.0;
 	coord[1].x = 100.0;
 	coord[1].y = 300.0;
