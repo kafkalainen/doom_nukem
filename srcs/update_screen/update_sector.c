@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/05 15:23:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/08 08:20:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static void		assign_points(t_sector *sector)
 		temp = temp->next;
 		walls--;
 	}
+	temp->next = sector->points;
 	free(coord);
 }
 
@@ -121,6 +122,7 @@ static void		assign_points1(t_sector *sector)
 		temp = temp->next;
 		walls--;
 	}
+	temp->next = sector->points;
 	free(coord);
 }
 
