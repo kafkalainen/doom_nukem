@@ -12,6 +12,21 @@
 
 #include "../../doom_nukem.h"
 
+static void		ft_draw_wall(float offset, float current_angle, float min_step, int color, SDL_Surface *draw_surf)
+{
+	float		width;
+	int			i;
+
+	i = 0;
+	width =	SCREEN_WIDTH / FOV * (current_angle * RAD_TO_DEG);
+	offset = SCREEN_WIDTH / FOV * (offset * RAD_TO_DEG);
+	while (i < (int)width)
+	{
+		ft_draw_line(vec2(offset + i, 200), vec2(offset + i, 400), color, draw_surf);
+		i++;
+	}
+}
+
 void			scan_fov(t_home *home, t_frame *frame)
 {
 	t_ray_fov	fov;
@@ -41,6 +56,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 				vec2_add(fov.right_point, home->offset),
 				green,
 				frame->draw_surf);
+			ft_draw_wall(frame->offset, current_angle, frame->min_step, 0xFF8000 + frame->offset * RAD_TO_DEG * 10, frame->draw_surf);
 			current_angle = (current_angle < frame->min_step) ? frame->min_step : current_angle;
 			frame->offset = frame->offset - current_angle;
 		}
