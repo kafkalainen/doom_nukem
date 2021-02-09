@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/09 09:56:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/09 11:05:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void			draw_2d_fov(t_frame *frame, t_player *plr)
 	draw_rect_center(vec2_add(vec2(0,0), offset), vec2(5, 5), frame);
 	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(fov_left, 400)), offset), lightgreen, frame->draw_surf);
 	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(fov_right, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(plr->dir, 400)), offset), lightgreen, frame->draw_surf);
 }
 
 /* 1. Test if leftmost ray hits the polygon.
@@ -58,8 +59,8 @@ void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
 {
 	frame->idx = 0;
 	frame->old_idx = -1;
-	frame->max_fov = FOV * DEG_TO_RAD;
-	frame->offset = 0;
+	frame->max_fov = 0;
+	frame->offset = 1.57079633;
 	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5);
 	scan_fov(home, frame);
 	draw_2d_fov(frame, plr);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/08 15:57:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/09 11:21:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct		s_frame
 	int				idx;
 	float			max_fov;
 	float			offset;
+	float			min_step;
 	int				old_idx;
 	SDL_Surface		*draw_surf;
 	t_xy			plr_offset;
