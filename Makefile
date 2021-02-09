@@ -32,6 +32,7 @@ SRCS =	main.c \
 		srcs/raycaster/continue_from_last_sector.c \
 		srcs/raycaster/check_connection.c \
 		srcs/raycaster/check_if_portal.c \
+		srcs/raycaster/check_if_same_point.c \
 		srcs/parsing/read_map.c
 
 HEADERS = \

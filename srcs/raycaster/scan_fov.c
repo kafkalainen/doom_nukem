@@ -6,23 +6,24 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/09 11:36:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/09 14:44:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-static void		ft_draw_wall(float offset, float current_angle, float min_step, int color, SDL_Surface *draw_surf)
+static void		ft_draw_wall(t_frame *frame, float current_angle, int color)
 {
-	float		width;
+	float		screen_width;
+	float		screen_offset;
 	int			i;
 
 	i = 0;
-	width =	SCREEN_WIDTH / FOV * (current_angle * RAD_TO_DEG);
-	offset = SCREEN_WIDTH / FOV * (offset * RAD_TO_DEG);
-	while (i < (int)width)
+	screen_width =	SCREEN_WIDTH / FOV * (current_angle * RAD_TO_DEG);
+	screen_offset = SCREEN_WIDTH / FOV * (FOV - frame->offset * RAD_TO_DEG);
+	while (i < (int)screen_width)
 	{
-		ft_draw_line(vec2(offset + i, 200), vec2(offset + i, 400), color, draw_surf);
+		ft_draw_line(vec2(screen_offset + i, 0), vec2(screen_offset + i, 100), color, frame->draw_surf);
 		i++;
 	}
 }
@@ -43,7 +44,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 		if (current_angle != 0)
 			continue_from_next_point(fov.left_wall, &fov, frame);
 		current_angle = vec2_angle(fov.left_point, fov.right_point);
-		if (check_if_portal(fov.left_wall, frame))
+		if (check_if_portal(fov.left_wall, frame) && !check_if_same_point(current_angle, &fov))
 		{
 			setup_frame(frame, &new_frame, current_angle, fov.left_wall->idx);
 			scan_fov(home, &new_frame);
@@ -56,7 +57,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 				vec2_add(fov.right_point, home->offset),
 				green,
 				frame->draw_surf);
-			ft_draw_wall(frame->offset, current_angle, frame->min_step, 0xFF8000 + frame->offset * RAD_TO_DEG * 10, frame->draw_surf);
+			ft_draw_wall(frame, current_angle, 0xFF8000 + frame->offset * RAD_TO_DEG * 100);
 			current_angle = (current_angle < frame->min_step) ? frame->min_step : current_angle;
 			frame->offset = frame->offset - current_angle;
 		}
