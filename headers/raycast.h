@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/09 14:43:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/09 15:23:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct		s_ray_fov
 	t_point			*right_wall;
 }					t_ray_fov;
 
+
+float				get_distance(t_xy p1, t_xy p2);
 t_ray_fov			get_fov_points(t_point *plgn, t_home *home, t_player *plr, int i);
 void				calc_intersection(t_point *pgon, t_point *first, t_ray *ray,
 						t_intersection *sect);

@@ -6,21 +6,23 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/09 14:44:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/09 15:24:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-static void		ft_draw_wall(t_frame *frame, float current_angle, int color)
+static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_angle, int color)
 {
 	float		screen_width;
 	float		screen_offset;
+	float		distance;
 	int			i;
 
 	i = 0;
 	screen_width =	SCREEN_WIDTH / FOV * (current_angle * RAD_TO_DEG);
 	screen_offset = SCREEN_WIDTH / FOV * (FOV - frame->offset * RAD_TO_DEG);
+	distance = get_distance(left, right);
 	while (i < (int)screen_width)
 	{
 		ft_draw_line(vec2(screen_offset + i, 0), vec2(screen_offset + i, 100), color, frame->draw_surf);
@@ -57,7 +59,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 				vec2_add(fov.right_point, home->offset),
 				green,
 				frame->draw_surf);
-			ft_draw_wall(frame, current_angle, 0xFF8000 + frame->offset * RAD_TO_DEG * 100);
+			ft_draw_wall(fov.left_point, fov.right_point, frame, current_angle, 0xFF8000 + frame->offset * RAD_TO_DEG * 100);
 			current_angle = (current_angle < frame->min_step) ? frame->min_step : current_angle;
 			frame->offset = frame->offset - current_angle;
 		}
