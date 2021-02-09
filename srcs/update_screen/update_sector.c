@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/08 09:58:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/08 14:26:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,12 @@ static void		assign_points1(t_sector *sector)
 	coord[0].x = -100.0;
 	coord[0].y = 300.0;
 	walls = sector->nb_of_walls;
-	sector->points = new_polygon(coord[walls - 1], -1);
+	sector->points = new_polygon(coord[3], 0);
 	temp = sector->points;
 	walls--;
 	while (walls)
 	{
-		if (walls == 3)
-			new = new_polygon(
-			coord[walls - 1],
-				0);
-		else
-			new = new_polygon(
+		new = new_polygon(
 			coord[walls - 1],
 			-1);
 		temp->next = new;

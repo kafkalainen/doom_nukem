@@ -6,10 +6,10 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 16:07:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/05 13:29:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/09 09:39:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-int				draw_walls(t_xy start, t_xy end, int color, SDL_Surface *surf);
+int				draw_wall(t_frame *frame, float angle);

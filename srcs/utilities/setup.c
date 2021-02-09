@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/05 10:11:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/09 09:41:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void			init_player(t_player *plr)
 {
 	plr->pos = vec2(0, 0);
 	plr->z = 0;
-	plr->dir.x = 0;
-	plr->dir.y = 1;
+	plr->dir.x = 0.785398163;
+	plr->dir.y = 0.785398163;
 	plr->input.down = 0;
 	plr->input.up = 0;
 	plr->input.right = 0;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:33:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/08 11:37:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/08 16:19:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@
 ** - Make linked list into a loop. Check.
 ** - Function that checks left point is our portal connected to the same sector.
 ** - Simplify get_left_point just to check the intersection left point.
+** - Use only floats.
 */
-void		get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls)
+int		get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls)
 {
 	t_ray			ray;
 	t_intersection	sect;
 	t_point			*p0;
+	float			angle;
 
 	ray.pos = vec2(0, 0);
-	ray.dir = vec2(frame->fov_angle * 0.5, frame->fov_angle * 0.5);
+	angle = (frame->max_fov - frame->offset) * 0.5;
+	ray.dir = vec2(angle, angle);
 	p0 = start;
 	while (walls)
 	{
@@ -41,4 +44,5 @@ void		get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls)
 	}
 	fov->left_wall = p0;
 	fov->right_point = fov->left_wall->next->x0;
+	return (1);
 }
