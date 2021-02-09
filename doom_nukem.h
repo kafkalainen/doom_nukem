@@ -67,7 +67,7 @@
 ** Miscellanious
 */
 
-void			update_screen(t_home *home, t_frame *frame);
+void			update_screen(t_home *home, t_frame *frame, t_player *plr);
 void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame);
 void			error_output_sdl(char *msg, t_home *home);
 void			error_output(char *msg);

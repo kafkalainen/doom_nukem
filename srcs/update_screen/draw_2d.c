@@ -6,26 +6,26 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/09 09:43:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/09 09:56:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void			draw_2d_fov(t_frame *frame)
+void			draw_2d_fov(t_frame *frame, t_player *plr)
 {
 	t_xy fov_left;
 	t_xy fov_right;
 	t_xy offset;
-	t_xy plr;
+	t_xy plr_pos;
 
-	plr = vec2(0,0);
+	plr_pos = plr->pos;
 	offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
-	fov_left = vec2(1.0, 0);
-	fov_right = vec2(0, 1.0);
+	fov_left = vec2_rot(plr->dir, DEG_TO_RAD * -FOV * 0.5);
+	fov_right = vec2_rot(plr->dir, DEG_TO_RAD * FOV * 0.5);
 	draw_rect_center(vec2_add(vec2(0,0), offset), vec2(5, 5), frame);
-	ft_draw_line(vec2_add(plr, offset), vec2_add(vec2_add(plr, vec2_mul(fov_left, 400)), offset), lightgreen, frame->draw_surf);
-	ft_draw_line(vec2_add(plr, offset), vec2_add(vec2_add(plr, vec2_mul(fov_right, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(fov_left, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(fov_right, 400)), offset), lightgreen, frame->draw_surf);
 }
 
 /* 1. Test if leftmost ray hits the polygon.
@@ -54,7 +54,7 @@ int				hypotenuse(int opposite, int adjacent)
 	return (sqrt(opposite * opposite + adjacent * adjacent));
 }
 
-void			draw_2d(t_home *home, t_frame *frame)
+void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
 {
 	frame->idx = 0;
 	frame->old_idx = -1;
@@ -62,7 +62,7 @@ void			draw_2d(t_home *home, t_frame *frame)
 	frame->offset = 0;
 	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5);
 	scan_fov(home, frame);
-	draw_2d_fov(frame);
+	draw_2d_fov(frame, plr);
 }
 
 // void			perspective_transformation(t_point *x0, t_point *x1, t_home *home, int idx)
