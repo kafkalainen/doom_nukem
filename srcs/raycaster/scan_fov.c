@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/10 10:24:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/10 10:51:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 	if ((int)distance_left == 0)
 		wall_height_left = 0;
 	else
-		wall_height_left = 1000 / distance_left * 10;
+		wall_height_left = 500 / distance_left * 10;
 	if ((int)distance_right == 0)
 		wall_height_right = 0;
 	else
-		wall_height_right = 1000 / distance_right * 10;
+		wall_height_right = 500 / distance_right * 10;
 	diff = wall_height_left - wall_height_right;
 	step = diff / screen_wall;
 	while (i < (int)screen_wall)
