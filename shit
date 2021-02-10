@@ -1,0 +1,49 @@
+static float	ft_interpolate_y(t_xy p0, t_xy p1)
+{
+	if (p1.x - p0.x == 0)
+		return (0);
+	return (p0.y + (0 - p0.x) * ((p1.y - p0.y) / (p1.x - p0.x)));
+}
+
+static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_angle, int color, t_home *home)
+{
+	float		screen_width;
+	float		screen_offset;
+	float		distance;
+	float		cur_height;
+	float		height_start;
+	float		height_end;
+	int			i;
+	char		sign;
+
+	if (right.x < 1)
+	{
+		right.y = ft_interpolate_y(left, right);
+		right.x = 1;
+		current_angle = vec2_angle(left, right);
+	}
+	i = 0;
+	t_xy plrdir = vec2(45 * DEG_TO_RAD, 45 * DEG_TO_RAD);
+	t_xy dirl = vec2_rot(vec2(1, 1), atan2(left.y, left.x));
+	t_xy dirr = vec2_rot(vec2(1, 1), atan2(right.y, right.x));
+
+	screen_width =	SCREEN_WIDTH / FOV * (current_angle * RAD_TO_DEG);
+	screen_offset = SCREEN_WIDTH / FOV * (FOV - frame->offset * RAD_TO_DEG);
+	sign = (get_distance(vec2(0, 0), left) > get_distance(vec2(0, 0), right)) ? -1 : 1;
+	height_start = (sign == 1) ? SCREEN_HEIGHT / get_distance(vec2(0, 0), right) * 10 : SCREEN_HEIGHT / get_distance(vec2(0, 0), left) * 10;
+	height_end = (sign == -1) ? SCREEN_HEIGHT / get_distance(vec2(0, 0), right) * 10 : SCREEN_HEIGHT / get_distance(vec2(0, 0), left) * 10;
+	cur_height = height_start;
+	distance = height_end - height_start;
+	//distance *= cos(current_angle);
+	float factor = distance / screen_width;
+	while (i < (int)screen_width)
+	{
+		ft_draw_line(vec2(screen_offset + i, 320 - cur_height), vec2(screen_offset + i, 320 + cur_height), color, frame->draw_surf);
+		cur_height -= factor * sign;
+		draw_text(home, ft_ftoa(get_distance(vec2(0, 0), left), 1, 1), frame, vec2(screen_offset + 64, 300));
+		draw_text(home, ft_ftoa(get_distance(vec2(0, 0), right), 1, 1), frame, vec2(screen_offset + 64, 330));
+		draw_text(home, ft_ftoa(height_start, 8, 1), frame, vec2(screen_offset + 64, 360));
+		draw_text(home, ft_ftoa(height_end, 8, 1), frame, vec2(screen_offset + 64, 390));
+		i++;
+	}
+}
