@@ -6,27 +6,61 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/09 15:24:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/10 10:24:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
+
+static float	ft_interpolate_y(t_xy p0, t_xy p1)
+{
+	if (p1.x - p0.x == 0)
+		return (0);
+	return (p0.y + (0 - p0.x) * ((p1.y - p0.y) / (p1.x - p0.x)));
+}
+
 static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_angle, int color)
 {
-	float		screen_width;
+	float		screen_wall;
 	float		screen_offset;
-	float		distance;
+	float		wall_height_left;
+	float		wall_height_right;
+	float		distance_left;
+	float		distance_right;
+	float		diff;
+	float		step;
 	int			i;
 
 	i = 0;
-	screen_width =	SCREEN_WIDTH / FOV * (current_angle * RAD_TO_DEG);
+	screen_wall = SCREEN_WIDTH / FOV * (current_angle * RAD_TO_DEG);
 	screen_offset = SCREEN_WIDTH / FOV * (FOV - frame->offset * RAD_TO_DEG);
-	distance = get_distance(left, right);
-	while (i < (int)screen_width)
+	distance_left = vec2_mag(left);
+	if (right.x < 0)
 	{
-		ft_draw_line(vec2(screen_offset + i, 0), vec2(screen_offset + i, 100), color, frame->draw_surf);
+		right.x = 0;
+		right.y = ft_interpolate_y(left, right);
+	}
+	distance_right = vec2_mag(right);
+	if ((int)distance_left == 0)
+		wall_height_left = 0;
+	else
+		wall_height_left = 1000 / distance_left * 10;
+	if ((int)distance_right == 0)
+		wall_height_right = 0;
+	else
+		wall_height_right = 1000 / distance_right * 10;
+	diff = wall_height_left - wall_height_right;
+	step = diff / screen_wall;
+	while (i < (int)screen_wall)
+	{
+		ft_draw_line(
+			vec2(screen_offset + i, 50 - wall_height_left),
+			vec2(screen_offset + i, 50 + wall_height_left),
+			color,
+			frame->draw_surf);
 		i++;
+		wall_height_left = wall_height_left - step;
 	}
 }
 
