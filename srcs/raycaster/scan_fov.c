@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/11 16:01:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/11 17:28:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,56 +16,14 @@
 static float	ft_interpolate_y(t_xy p0, t_xy p1)
 {
 	if (p1.x - p0.x == 0)
-		return (0);
+		return (p1.y - p0.y);
 	return (p0.y + (0 - p0.x) * ((p1.y - p0.y) / (p1.x - p0.x)));
 }
 
-// static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_angle, int color, t_home *home)
-// {
-// 	float		screen_width;
-// 	float		screen_offset;
-// 	float		distance;
-// 	float		cur_height;
-// 	float		height_start;
-// 	float		height_end;
-// 	int			i;
-// 	char		sign;
-
-// 	if (right.x < 1)
-// 	{
-// 		right.y = ft_interpolate_y(left, right);
-// 		right.x = 1;
-// 		current_angle = vec2_angle(left, right);
-// 	}
-// 	i = 0;
-// 	t_xy plrdir = vec2(45 * DEG_TO_RAD, 45 * DEG_TO_RAD);
-// 	t_xy dirl = vec2_rot(vec2(1, 1), atan2(left.y, left.x));
-// 	t_xy dirr = vec2_rot(vec2(1, 1), atan2(right.y, right.x));
-
-// 	screen_width =	SCREEN_WIDTH / FOV * current_angle;
-// 	screen_offset = SCREEN_WIDTH / FOV * (FOV - frame->offset * RAD_TO_DEG);
-// 	sign = (get_distance(vec2(0, 0), left) > get_distance(vec2(0, 0), right)) ? -1 : 1;
-// 	height_start = (sign == 1) ? SCREEN_HEIGHT / get_distance(vec2(0, 0), right) * 10 : SCREEN_HEIGHT / get_distance(vec2(0, 0), left) * 10;
-// 	height_end = (sign == -1) ? SCREEN_HEIGHT / get_distance(vec2(0, 0), right) * 10 : SCREEN_HEIGHT / get_distance(vec2(0, 0), left) * 10;
-// 	cur_height = height_start;
-// 	distance = height_end - height_start;
-// 	//distance *= cos(current_angle);
-// 	float factor = distance / screen_width;
-// 	while (i < (int)screen_width)
-// 	{
-// 		ft_draw_line(vec2(screen_offset + i, 320 - cur_height), vec2(screen_offset + i, 320 + cur_height), color, frame->draw_surf);
-// 		cur_height -= factor * sign;
-// 		draw_text(home, ft_ftoa(get_distance(vec2(0, 0), left), 1, 1), frame, vec2(screen_offset + 64, 300));
-// 		draw_text(home, ft_ftoa(get_distance(vec2(0, 0), right), 1, 1), frame, vec2(screen_offset + 64, 330));
-// 		draw_text(home, ft_ftoa(height_start, 8, 1), frame, vec2(screen_offset + 64, 360));
-// 		draw_text(home, ft_ftoa(height_end, 8, 1), frame, vec2(screen_offset + 64, 390));
-// 		i++;
-// 	}
-//
-
 /*
-** - Rightmost wall current_angle is wrong, when x < 0.
 **
+** Almost working.
+** Curved walls: wall_height_left = wall_height_left - step + i * 0.0012944174;
 */
 static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_angle, int color, t_home *home)
 {
@@ -111,8 +69,8 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 			vec2(screen_offset + i, 240 + wall_height_left),
 			color,
 			frame->draw_surf);
+		wall_height_left = wall_height_left - step - i * 0.00022944174;
 		i++;
-		wall_height_left = wall_height_left - step;
 	}
 }
 
@@ -193,7 +151,6 @@ void			scan_fov(t_home *home, t_frame *frame)
 				green,
 				frame->draw_surf);
 			ft_draw_wall(fov.left_point, fov.right_point, frame, current_angle, 0xFF8000 + frame->offset * RAD_TO_DEG * 100, home);
-			// calc_perp_wall(fov.left_point, fov.right_point, current_angle, frame, home);
 			current_angle = (current_angle < frame->min_step) ? frame->min_step : current_angle;
 			frame->offset = frame->offset - current_angle;
 		}
