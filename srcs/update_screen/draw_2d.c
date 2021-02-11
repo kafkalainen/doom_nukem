@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/09 11:05:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/11 10:56:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void			draw_2d_fov(t_frame *frame, t_player *plr)
 
 	plr_pos = plr->pos;
 	offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
-	fov_left = vec2_rot(plr->dir, DEG_TO_RAD * -FOV * 0.5);
-	fov_right = vec2_rot(plr->dir, DEG_TO_RAD * FOV * 0.5);
+	fov_left = vec2_rot(plr->dir, -FOV * 0.5);
+	fov_right = vec2_rot(plr->dir, FOV * 0.5);
 	draw_rect_center(vec2_add(vec2(0,0), offset), vec2(5, 5), frame);
 	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(fov_left, 400)), offset), lightgreen, frame->draw_surf);
 	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(fov_right, 400)), offset), lightgreen, frame->draw_surf);
