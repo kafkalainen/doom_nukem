@@ -24,6 +24,7 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 {
 	float		screen_wall;
 	float		screen_offset;
+	float		euc_offset;
 	float		wall_height_left;
 	float		wall_height_right;
 	float		distance_left;
@@ -35,26 +36,27 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 	i = 0;
 	screen_wall = SCREEN_WIDTH / FOV * (current_angle * RAD_TO_DEG);
 	screen_offset = SCREEN_WIDTH / FOV * (FOV - frame->offset * RAD_TO_DEG);
-	distance_left = vec2_mag(left);
+	euc_offset = screen_offset < 319 ? screen_offset - 320 : screen_offset;
+	distance_left = vec2_mag(left) * (1 - euc_offset * .00224966501709f);
 	if (right.x < 0)
 	{
-		right.x = 0;
 		right.y = ft_interpolate_y(left, right);
+		right.x = 0;
 	}
-	distance_right = vec2_mag(right);
+	distance_right = vec2_mag(right) * (1 - (euc_offset + screen_wall) * 0.0009152913088125);
 	if ((int)left.y == 0)
 		wall_height_left = 0;
 	else
-		wall_height_left = 500 / left.y / 0.70710678118 * 10;
+		wall_height_left = 500 / left.y * 10;
 	if ((int)right.y == 0)
 		wall_height_right = 0;
 	else
-		wall_height_right = 500 / right.y / 0.70710678118 * 10;
+		wall_height_right = 500 / right.y * 10;
 	diff = wall_height_left - wall_height_right;
 	step = diff / screen_wall;
 	while (i < (int)screen_wall)
 	{
-		ft_draw_line(
+		draw_horizon(
 			vec2(screen_offset + i, 50 - wall_height_left),
 			vec2(screen_offset + i, 50 + wall_height_left),
 			color,
@@ -62,6 +64,31 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 		i++;
 		wall_height_left = wall_height_left - step;
 	}
+}
+
+int				draw_horizon(t_xy start, t_xy end, int color, SDL_Surface *surf)
+{
+	t_xy	length;
+	t_xy	ratio;
+	int		pixels;
+	t_xy	pos;
+
+	length = vec2(fabs(end.x - start.x), fabs(end.y - start.y));
+	pixels = (length.x > length.y) ? (length.x) : (length.y);
+	ratio.x = (start.y != end.y) ? (length.x / length.y) : 1;
+	ratio.y = (start.x != end.x) ? (length.y / length.x) : 1;
+	ratio.x = (ratio.x > ratio.y) ? 1 : (ratio.x);
+	ratio.y = (ratio.y > ratio.x) ? 1 : (ratio.y);
+	pos.x = start.x;
+	pos.y = start.y;
+	while (pixels-- > 0)
+	{
+		if (pos.x >= 0 && pos.x < SCREEN_WIDTH && pos.y >= 0 && pos.y < SCREEN_HEIGHT)
+			put_pixel(surf, pos.x, pos.y, color);
+		pos.x += ratio.x * ((start.x < end.x) ? 1 : -1);
+		pos.y += ratio.y * ((start.y < end.y) ? 1 : -1);
+	}
+	return (TRUE);
 }
 
 void			scan_fov(t_home *home, t_frame *frame)
