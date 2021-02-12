@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/11 10:56:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/12 15:12:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos)
 {
 	SDL_Rect	rect;
 
-	SDL_Color color = {255, 80, 0, 0};
+	SDL_Color color = {255, 255, 255, 255};
 	home->text_surf = TTF_RenderText_Solid(home->font, text, color);
 	rect.x = pos.x;
 	rect.y = pos.y;

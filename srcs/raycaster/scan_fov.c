@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/12 14:30:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/12 15:31:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 		wall_height_left = wall_height_left - step + angle_mult;
 		i++;
 	}
+	draw_text(home, ft_ftoa(frame->offset, 5, 1), frame, vec2(screen_offset, 240));
 }
 
 void			scan_fov(t_home *home, t_frame *frame)
@@ -82,6 +83,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 	fov.left_wall = home->sectors[frame->idx]->points;
 	continue_from_last_sector(fov.left_wall, &fov, frame);
 	get_left_point(fov.left_wall, &fov, frame, home->sectors[frame->idx]->nb_of_walls);
+	draw_text(home, ft_ftoa(frame->max_fov, 5, 1), frame, vec2(15, 350 + frame->idx * 20));
 	while (frame->offset >= frame->max_fov)
 	{
 		if (current_angle != 0)

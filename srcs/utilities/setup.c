@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/12 14:31:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/12 15:16:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	home = init_sdl(home, frame);
 	if (TTF_Init() < 0)
 		error_output_sdl("Fatal: Failed to init TTF.", home);
-	home->font = TTF_OpenFont("arial.ttf", 24);
+	home->font = TTF_OpenFont("arial.ttf", 12);
 	if (home->font == NULL)
 		error_output_sdl("Fatal: Failed to init given font.", home);
 	load_audio(&plr->audio);
