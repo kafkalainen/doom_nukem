@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/12 12:00:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/12 13:57:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,21 @@ static void		assign_points(t_sector *sector)
 	t_xy		*coord;
 	int			walls;
 
-	coord = (t_xy*)malloc(sizeof(t_xy) * 5);
-	coord[4].x = 200.0;
-	coord[4].y = 0.0;
-	coord[3].x = 100.0;
-	coord[3].y = 200.0;
-	coord[2].x = -50.0;
-	coord[2].y = 200.0;
-	coord[1].x = -200.0;
-	coord[1].y = 0.0;
-	coord[0].x = 0.0;
-	coord[0].y = -100.0;
+	coord = (t_xy*)malloc(sizeof(t_xy) * 6);
+	coord[5].x = 30.0;
+	coord[5].y = 100.0;
+	coord[4].x = -30.0;
+	coord[4].y = 100.0;
+	coord[3].x = -100.0;
+	coord[3].y = 100.0;
+	coord[2].x = -100.0;
+	coord[2].y = -100.0;
+	coord[1].x = 100.0;
+	coord[1].y = -100.0;
+	coord[0].x = 100.0;
+	coord[0].y = 100.0;
 	walls = sector->nb_of_walls;
-	sector->points = new_polygon(coord[4], 1);
+	sector->points = new_polygon(coord[5], 1);
 	temp = sector->points;
 	walls--;
 	while (walls)
@@ -75,26 +77,22 @@ static void		assign_points1(t_sector *sector)
 	t_xy		*coord;
 	int			walls;
 
-	coord = (t_xy*)malloc(sizeof(t_xy) * 6);
-	coord[5].x = 100.0;
-	coord[5].y = 200.0;
-	coord[4].x = 200.0;
-	coord[4].y = 0.0;
-	coord[3].x = 300.0;
-	coord[3].y = 50.0;
-	coord[2].x = 300.0;
-	coord[2].y = 200.0;
-	coord[1].x = 250.0;
-	coord[1].y = 400.0;
-	coord[0].x = 100.0;
-	coord[0].y = 400.0;
+	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
+	coord[3].x = -30.0;
+	coord[3].y = 100.0;
+	coord[2].x = 30.0;
+	coord[2].y = 100.0;
+	coord[1].x = 30.0;
+	coord[1].y = 300.0;
+	coord[0].x = -30.0;
+	coord[0].y = 300.0;
 	walls = sector->nb_of_walls;
-	sector->points = new_polygon(coord[5], 0);
+	sector->points = new_polygon(coord[3], 0);
 	temp = sector->points;
 	walls--;
 	while (walls)
 	{
-		if (walls == 3)
+		if (walls == 2)
 		{
 			new = new_polygon(
 				coord[walls - 1],
@@ -121,23 +119,73 @@ static void		assign_points2(t_sector *sector)
 	t_xy		*coord;
 	int			walls;
 
-	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
-	coord[3].x = 250.0;
-	coord[3].y = 400.0;
-	coord[2].x = 300.0;
-	coord[2].y = 200.0;
-	coord[1].x = 500.0;
+	coord = (t_xy*)malloc(sizeof(t_xy) * 8);
+	coord[7].x = -30.0;
+	coord[7].y = 300.0;
+	coord[6].x = 30.0;
+	coord[6].y = 300.0;
+	coord[5].x = 100.0;
+	coord[5].y = 300.0;
+	coord[4].x = 100.0;
+	coord[4].y = 500.0;
+	coord[3].x = 20.0;
+	coord[3].y = 500.0;
+	coord[2].x = -20.0;
+	coord[2].y = 500.0;
+	coord[1].x = -100.0;
 	coord[1].y = 500.0;
-	coord[0].x = 450.0;
-	coord[0].y = 600.0;
+	coord[0].x = -100.0;
+	coord[0].y = 300.0;
 	walls = sector->nb_of_walls;
-	sector->points = new_polygon(coord[3], 1);
+	sector->points = new_polygon(coord[7], 1);
+	temp = sector->points;
+	walls--;
+	while (walls)
+	{
+		if (walls == 4)
+		{
+			new = new_polygon(
+				coord[walls - 1],
+				3);
+		}
+		else
+		{
+			new = new_polygon(
+				coord[walls - 1],
+				-1);
+		}
+		temp->next = new;
+		temp = temp->next;
+		walls--;
+	}
+	temp->next = sector->points;
+	free(coord);
+}
+
+static void		assign_points3(t_sector *sector)
+{
+	t_point		*temp;
+	t_point		*new;
+	t_xy		*coord;
+	int			walls;
+
+	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
+	coord[3].x = -20.0;
+	coord[3].y = 500.0;
+	coord[2].x = 20.0;
+	coord[2].y = 500.0;
+	coord[1].x = 20.0;
+	coord[1].y = 700.0;
+	coord[0].x = -20.0;
+	coord[0].y = 700.0;
+	walls = sector->nb_of_walls;
+	sector->points = new_polygon(coord[3], 2);
 	temp = sector->points;
 	walls--;
 	while (walls)
 	{
 		new = new_polygon(
-		coord[walls - 1],
+			coord[walls - 1],
 		-1);
 		temp->next = new;
 		temp = temp->next;
@@ -153,8 +201,8 @@ static int		assign_sectors(t_home *home)
 
 	i = 0;
 	home->sectors = (t_sector**)malloc(sizeof(t_sector));
-	home->nb_of_sectors = 3;
-	while(i < 3)
+	home->nb_of_sectors = 4;
+	while(i < 4)
 	{
 		home->sectors[i] = (t_sector*)malloc(sizeof(t_sector));
 		home->sectors[i]->ceiling = 1.0;
@@ -163,12 +211,14 @@ static int		assign_sectors(t_home *home)
 		home->sectors[i]->nb_of_walls = 4;
 		i++;
 	}
-	home->sectors[0]->nb_of_walls = 5;
-	home->sectors[1]->nb_of_walls = 6;
-	home->sectors[2]->nb_of_walls = 4;
+	home->sectors[0]->nb_of_walls = 6;
+	home->sectors[1]->nb_of_walls = 4;
+	home->sectors[2]->nb_of_walls = 8;
+	home->sectors[3]->nb_of_walls = 4;
 	assign_points(home->sectors[0]);
 	assign_points1(home->sectors[1]);
 	assign_points2(home->sectors[2]);
+	assign_points3(home->sectors[3]);
 	return (0);
 }
 

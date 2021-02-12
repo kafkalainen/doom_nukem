@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/11 17:28:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/12 13:41:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,13 @@ void			scan_fov(t_home *home, t_frame *frame)
 		}
 		else
 		{
+			ft_draw_wall(fov.left_point, fov.right_point, frame, current_angle, 0xFF8000 + frame->offset * RAD_TO_DEG * 100, home);
 			ft_draw_line(
 				vec2_add(fov.left_point, home->offset),
 				vec2_add(fov.right_point, home->offset),
 				green,
 				frame->draw_surf);
-			ft_draw_wall(fov.left_point, fov.right_point, frame, current_angle, 0xFF8000 + frame->offset * RAD_TO_DEG * 100, home);
+			current_angle = current_angle == 0 ? frame->min_step : current_angle;
 			frame->offset = frame->offset - current_angle;
 		}
 	}
