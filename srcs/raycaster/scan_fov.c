@@ -22,7 +22,7 @@ static float	ft_interpolate_y(t_xy p0, t_xy p1)
 
 /*
 **
-** Almost working.
+** Almost working. only issue is a very small correction error on left/right near walls.
 ** Curved walls: wall_height_left = wall_height_left - step + i * 0.0012944174;
 */
 static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_angle, int color, t_home *home)
@@ -56,12 +56,14 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 	angle_mult_right = 1.4142135624 - (euc_offset + screen_wall) * .0012944174;
 	distance_left = vec2_mag(left);
 	distance_right = vec2_mag(right);
-	wall_height_left = 480 / (fabs(left.x + left.y) * SQR2) * 20;
-	wall_height_right = 480 / (fabs(right.x + right.y) * SQR2) * 20;
+	wall_height_left = 480 / (fabs(left.x + left.y)) * 20;
+	wall_height_right = 480 / (fabs(right.x + right.y)) * 20;
 	diff = wall_height_left - wall_height_right;
 	step = diff / screen_wall;
 	// draw_text(home, ft_ftoa(wall_height_left, 5, 1), frame, vec2(screen_offset, 420));
 	// draw_text(home, ft_ftoa(wall_height_right, 5, 1), frame, vec2(screen_offset + screen_wall, 450));
+	angle_mult_left -= angle_mult_right;
+	angle_mult_left /= screen_wall; 
 	while (i < (int)screen_wall)
 	{
 		draw_horizon(
@@ -69,7 +71,7 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 			vec2(screen_offset + i, 240 + wall_height_left),
 			color,
 			frame->draw_surf);
-		wall_height_left = wall_height_left - step - i * 0.00022944174;
+		wall_height_left = wall_height_left - step + angle_mult_left;
 		i++;
 	}
 }

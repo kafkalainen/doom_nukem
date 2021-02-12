@@ -59,9 +59,9 @@ static void		assign_points(t_sector *sector)
 
 	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
 	coord[3].x = -100.0;
-	coord[3].y = -100.0;
+	coord[3].y = -1000.0;
 	coord[2].x = 100.0;
-	coord[2].y = -100.0;
+	coord[2].y = -1000.0;
 	coord[1].x = 100.0;
 	coord[1].y = 100.0;
 	coord[0].x = -100.0;
