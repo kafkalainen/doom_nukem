@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/12 13:41:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/12 14:30:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 				vec2_add(fov.right_point, home->offset),
 				green,
 				frame->draw_surf);
-			current_angle = current_angle == 0 ? frame->min_step : current_angle;
+			current_angle = (current_angle == 0) ? frame->min_step * 0.5 : current_angle;
 			frame->offset = frame->offset - current_angle;
 		}
 	}
