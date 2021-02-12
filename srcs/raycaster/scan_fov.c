@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/12 15:31:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/12 16:08:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static float	angle_offset(float current_angle, float screen_offset, float screen
 **
 ** Almost working. only issue is a very small correction error on left/right near walls.
 ** Curved walls: wall_height_left = wall_height_left - step + i * 0.0012944174;
+** Angle does not work.
 */
 static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_angle, int color, t_home *home)
 {
@@ -69,7 +70,8 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 		wall_height_left = wall_height_left - step + angle_mult;
 		i++;
 	}
-	draw_text(home, ft_ftoa(frame->offset, 5, 1), frame, vec2(screen_offset, 240));
+	//draw_text(home, ft_ftoa(frame->offset, 5, 1), frame, vec2(screen_offset, 240));
+	draw_text(home, ft_ftoa(current_angle, 5, 1), frame, vec2(screen_offset, 240));
 }
 
 void			scan_fov(t_home *home, t_frame *frame)
