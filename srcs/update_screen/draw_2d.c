@@ -60,7 +60,7 @@ void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
 	frame->idx = 0;
 	frame->old_idx = -1;
 	frame->max_fov = 0;
-	frame->offset = 1.57079633;
+	frame->offset = 1.570796f;
 	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5);
 	scan_fov(home, frame);
 	draw_2d_fov(frame, plr);

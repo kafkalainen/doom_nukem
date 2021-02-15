@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/15 14:10:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/11 17:28:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static float	angle_offset(float current_angle, float screen_offset, float screen
 **
 ** Almost working. only issue is a very small correction error on left/right near walls.
 ** Curved walls: wall_height_left = wall_height_left - step + i * 0.0012944174;
-** Angle does not work.
 */
 static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_angle, int color, t_home *home)
 {
@@ -59,7 +58,7 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 	wall_height_left = 480 / (fabs(left.x + left.y)) * 20;
 	wall_height_right = 480 / (fabs(right.x + right.y)) * 20;
 	step = (wall_height_left - wall_height_right) / screen_wall;
-	angle_mult = angle_offset(current_angle, screen_offset, screen_wall);
+	angle_mult = angle_offset(current_angle, screen_offset, step);
 	while (i < (int)screen_wall)
 	{
 		ft_draw_line(
@@ -67,24 +66,9 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 			vec2(screen_offset + i, 240 + wall_height_left),
 			color,
 			frame->draw_surf);
-		wall_height_left = wall_height_left - step;
+		wall_height_left = wall_height_left - step + angle_mult;
 		i++;
 	}
-}
-
-static float	round_angle(float angle)
-{
-	float	temp;
-	int		trunc;
-
-	angle /= .002454369f;
-	trunc = angle;
-	temp = angle - trunc;
-
-	if (temp >= 0.5f)
-		return(((float)trunc + 1) * .002454369f);
-	else
-		return((float)trunc * .002454369f);
 }
 
 void			scan_fov(t_home *home, t_frame *frame)
@@ -98,30 +82,26 @@ void			scan_fov(t_home *home, t_frame *frame)
 	fov.left_wall = home->sectors[frame->idx]->points;
 	continue_from_last_sector(fov.left_wall, &fov, frame);
 	get_left_point(fov.left_wall, &fov, frame, home->sectors[frame->idx]->nb_of_walls);
-	draw_text(home, ft_ftoa(frame->max_fov, 5, 1), frame, vec2(15, 350 + frame->idx * 20));
-	while (frame->offset > frame->max_fov)
+	while (frame->offset >= frame->max_fov)
 	{
 		if (current_angle != 0)
 			continue_from_next_point(fov.left_wall, &fov, frame);
-		current_angle = round_angle(vec2_angle(fov.left_point, fov.right_point));
+		current_angle = vec2_angle(fov.left_point, fov.right_point);
 		if (check_if_portal(fov.left_wall, frame) && !check_if_same_point(current_angle, &fov))
 		{
-			current_angle += frame->min_step;
 			setup_frame(frame, &new_frame, current_angle, fov.left_wall->idx);
 			scan_fov(home, &new_frame);
 			frame->offset = new_frame.offset;
 		}
 		else
 		{
-			ft_draw_wall(fov.left_point, fov.right_point, frame, current_angle, 0xFF8000 + frame->offset * RAD_TO_DEG * 100, home);
 			ft_draw_line(
 				vec2_add(fov.left_point, home->offset),
 				vec2_add(fov.right_point, home->offset),
 				green,
 				frame->draw_surf);
-			current_angle = + frame->min_step;
+			ft_draw_wall(fov.left_point, fov.right_point, frame, current_angle, 0xFF8000 + frame->offset * RAD_TO_DEG * 100, home);
 			frame->offset = frame->offset - current_angle;
-			draw_text(home, ft_ftoa(frame->offset, 5, 1), frame, vec2(frame->offset, 240));
 		}
 	}
 }

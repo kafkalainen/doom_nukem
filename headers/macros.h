@@ -19,7 +19,7 @@
 
 # define WALL_HEIGHT 0.5f
 # define TEX_SIZE 128
-# define FOV 1.57079633f
+# define FOV 1.57079616f
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
 
