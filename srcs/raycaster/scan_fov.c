@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/15 14:10:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/17 16:27:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static float	angle_offset(float current_angle, float screen_offset, float screen
 	angle_mult_right = FOV - (euc_offset + screen_wall) * .00178373853125f;
 	return ((angle_mult_left - angle_mult_right) / screen_wall);
 }
+
 /*
-**
 ** Almost working. only issue is a very small correction error on left/right near walls.
 ** Curved walls: wall_height_left = wall_height_left - step + i * 0.0012944174;
 ** Angle does not work.
@@ -47,13 +47,13 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 	float		angle_mult;
 	int			i;
 
+	i = 0;
 	if (right.x < 0)
 	{
 		right.y = ft_interpolate_y(left, right);
 		right.x = 0;
 		current_angle = vec2_angle(left, right);
 	}
-	i = 0;
 	screen_wall = SCREEN_WIDTH / FOV * current_angle;
 	screen_offset = SCREEN_WIDTH / FOV * (FOV - frame->offset);
 	wall_height_left = 480 / (fabs(left.x + left.y)) * 20;
@@ -74,42 +74,64 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 
 static float	round_angle(float angle)
 {
-	float	temp;
-	int		trunc;
+	static float	temp = 0.0f;
+	int				trunc;
 
 	angle /= .002454369f;
 	trunc = angle;
-	temp = angle - trunc;
+	// if (temp != 0.0f)
+	// 	temp += angle - trunc;
+	// else
+	// 	temp = angle - trunc;
+	// if (temp > 1.0f)
+	// {
+	// 	temp = temp - 1.0f;
+	// 	return ((float)(trunc + 1.0f) * .002454369f);
+	// }
+	// else
+		return ((float)trunc * .002454369f);
+}
 
-	if (temp >= 0.5f)
-		return(((float)trunc + 1) * .002454369f);
+int				check_if_same_wall(t_xy a, t_xy b)
+{
+	if (a.x == b.x && a.y == b.y)
+		return (1);
 	else
-		return((float)trunc * .002454369f);
+		return (0);
 }
 
 void			scan_fov(t_home *home, t_frame *frame)
 {
 	t_ray_fov	fov;
+	t_ray_fov	fov2;
 	t_frame		new_frame;
 	float		current_angle;
 
 	current_angle = 0.0f;
 	fov.left_point = vec2(-1,-1);
+	fov2.right_point = vec2(-1,-1);
 	fov.left_wall = home->sectors[frame->idx]->points;
+	fov2.left_wall = home->sectors[frame->idx]->points;
 	continue_from_last_sector(fov.left_wall, &fov, frame);
 	get_left_point(fov.left_wall, &fov, frame, home->sectors[frame->idx]->nb_of_walls);
-	draw_text(home, ft_ftoa(frame->max_fov, 5, 1), frame, vec2(15, 350 + frame->idx * 20));
+	get_right_point(fov2.left_wall, &fov2, frame, home->sectors[frame->idx]->nb_of_walls);
 	while (frame->offset > frame->max_fov)
 	{
 		if (current_angle != 0)
+		{
 			continue_from_next_point(fov.left_wall, &fov, frame);
-		current_angle = round_angle(vec2_angle(fov.left_point, fov.right_point));
+			if (check_if_same_wall(fov.left_wall->x0, fov2.left_wall->x0))
+				fov.right_point = fov2.right_point;
+		}
+		current_angle = vec2_angle(fov.left_point, fov.right_point);
+		draw_rect_center(vec2_add(fov.left_point, home->offset), vec2(8, 8), frame);
+		draw_rect_center(vec2_add(fov.right_point, home->offset), vec2(8, 8), frame);
 		if (check_if_portal(fov.left_wall, frame) && !check_if_same_point(current_angle, &fov))
 		{
 			current_angle += frame->min_step;
 			setup_frame(frame, &new_frame, current_angle, fov.left_wall->idx);
 			scan_fov(home, &new_frame);
-			frame->offset = new_frame.offset;
+			frame->offset = new_frame.offset + frame->min_step;
 		}
 		else
 		{
@@ -119,9 +141,8 @@ void			scan_fov(t_home *home, t_frame *frame)
 				vec2_add(fov.right_point, home->offset),
 				green,
 				frame->draw_surf);
-			current_angle = + frame->min_step;
+			current_angle += frame->min_step;
 			frame->offset = frame->offset - current_angle;
-			draw_text(home, ft_ftoa(frame->offset, 5, 1), frame, vec2(frame->offset, 240));
 		}
 	}
 }
