@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/18 11:17:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/18 11:51:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,6 @@ void			scan_fov(t_home *home, t_frame *frame)
 		draw_rect_center(vec2_add(fov2.right_point, home->offset), vec2(8, 8), frame);
 		if (check_if_portal(fov.left_wall, frame) && !check_if_same_point(current_angle, &fov))
 		{
-			if (check_if_same_wall(fov.left_wall->x0, fov2.left_wall->next->x0))
-				fov.right_point = fov2.right_point;
-			current_angle = vec2_angle(fov.left_point, fov.right_point);
 			current_angle += frame->min_step;
 			setup_frame(frame, &new_frame, current_angle, fov.left_wall->idx);
 			scan_fov(home, &new_frame);
