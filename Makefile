@@ -51,7 +51,7 @@ LINUX_INCLUDE_PATHS = -I/include/SDL2/
 
 #LIBRARY_PATHS specifies the additional library paths we'll need
 WIN_LIBRARY_PATHS = -LSDL2\lib -LSDL2_mixer_win\lib
-LINUX_LIBRARY_PATHS = -L/lib/ -L/usr/local/lib
+LINUX_LIBRARY_PATHS = -L/lib/ -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/
 
 # COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
@@ -70,8 +70,8 @@ LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lSDL2_mixer -lSDL2_ttf -lm -g
 win:
 	gcc $(SRCS) -o play $(WIN_INCLUDE_PATHS) $(WIN_LIBRARY_PATHS) $(WIN_COMPILER_FLAGS) $(WIN_LINK_FLAGS)
 
-#dependencies:
-#	sudo apt-get install libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-ttf-2.0-0
+# dependencies:
+# 	sudo apt-get install libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-ttf-dev
 
 linux: #dependencies
 	gcc $(SRCS) -o play $(LINUX_INCLUDE_PATHS) $(LINUX_LIBRARY_PATHS) $(LINUX_COMPILER_FLAGS) $(LINUX_LINK_FLAGS)
