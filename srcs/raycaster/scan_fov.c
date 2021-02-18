@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/18 15:22:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/18 17:32:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,20 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 
 static float	round_angle(float angle)
 {
+	float			angle_as_pixels;
 	static float	temp = 0.0f;
 	int				trunc;
 
-	angle /= .002454369f;
-	trunc = (int)angle;
-	if (temp != 0.0f)
-		temp += angle - trunc;
-	else
-		temp = angle - trunc;
-	if (temp > 1.0f)
-		return ((float)trunc * .002454369f);
+	angle_as_pixels = angle / .002454369f;
+	trunc = (int)angle_as_pixels;
+	// temp = temp + angle_as_pixels - trunc;
+	// if (temp >= 1.0f)
+	// {
+	// 	temp = temp - 1;
+	return ((float)(trunc + 1) * .002454369f);
+	// }
+	// else
+	// 	return ((float)trunc * .002454369f);
 }
 
 int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
@@ -112,13 +115,15 @@ void			scan_fov(t_home *home, t_frame *frame)
 	get_right_point(fov_left.left_wall, &fov_right, frame, home->sectors[frame->idx]->nb_of_walls);
 	while (frame->offset > frame->max_fov)
 	{
+		if ((frame->offset - frame->max_fov) < 0.0025)
+			break ;
 		if (current_angle != 0)
 			continue_from_next_point(fov_left.left_wall, &fov_left, frame);
 		if (check_if_same_wall(fov_left.left_wall->x0, fov_right.left_wall->x0, fov_right.right_point))
 			fov_left.right_point = fov_right.right_point;
-		current_angle = vec2_angle(fov_left.left_point, fov_left.right_point);
-		draw_rect_center(vec2_add(fov_left.left_point, home->offset), vec2(8, 8), frame);
-		draw_rect_center(vec2_add(fov_right.right_point, home->offset), vec2(8, 8), frame);
+		current_angle = round_angle(vec2_angle(fov_left.left_point, fov_left.right_point));
+		// draw_rect_center(vec2_add(fov_left.left_point, home->offset), vec2(8, 8), frame);
+		// draw_rect_center(vec2_add(fov_right.right_point, home->offset), vec2(8, 8), frame);
 		if (check_if_portal(fov_left.left_wall, frame) && !check_if_same_point(current_angle, &fov_left))
 		{
 			current_angle += frame->min_step;
