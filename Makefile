@@ -34,6 +34,7 @@ SRCS =	main.c \
 		srcs/raycaster/check_connection.c \
 		srcs/raycaster/check_if_portal.c \
 		srcs/raycaster/check_if_same_point.c \
+		srcs/raycaster/calc_visible_walls.c \
 		srcs/raycaster/get_distance.c \
 		srcs/parsing/read_map.c
 

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/18 11:48:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/18 14:01:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ static void		assign_points1(t_sector *sector)
 	coord[2].x = 30.0;
 	coord[2].y = 100.0;
 	coord[1].x = 30.0;
-	coord[1].y = 300.0;
+	coord[1].y = 150.0;
 	coord[0].x = -30.0;
-	coord[0].y = 300.0;
+	coord[0].y = 150.0;
 	walls = sector->nb_of_walls;
 	sector->points = new_polygon(coord[3], 0);
 	temp = sector->points;
@@ -121,21 +121,21 @@ static void		assign_points2(t_sector *sector)
 
 	coord = (t_xy*)malloc(sizeof(t_xy) * 8);
 	coord[7].x = -30.0;
-	coord[7].y = 300.0;
+	coord[7].y = 150.0;
 	coord[6].x = 30.0;
-	coord[6].y = 300.0;
+	coord[6].y = 150.0;
 	coord[5].x = 100.0;
-	coord[5].y = 300.0;
+	coord[5].y = 150.0;
 	coord[4].x = 100.0;
-	coord[4].y = 500.0;
+	coord[4].y = 250.0;
 	coord[3].x = 20.0;
-	coord[3].y = 500.0;
+	coord[3].y = 250.0;
 	coord[2].x = -20.0;
-	coord[2].y = 500.0;
+	coord[2].y = 250.0;
 	coord[1].x = -100.0;
-	coord[1].y = 500.0;
+	coord[1].y = 250.0;
 	coord[0].x = -100.0;
-	coord[0].y = 300.0;
+	coord[0].y = 150.0;
 	walls = sector->nb_of_walls;
 	sector->points = new_polygon(coord[7], 1);
 	temp = sector->points;
@@ -146,7 +146,7 @@ static void		assign_points2(t_sector *sector)
 		{
 			new = new_polygon(
 				coord[walls - 1],
-				-1);
+				3);
 		}
 		else
 		{
@@ -171,13 +171,13 @@ static void		assign_points3(t_sector *sector)
 
 	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
 	coord[3].x = -20.0;
-	coord[3].y = 500.0;
+	coord[3].y = 250.0;
 	coord[2].x = 20.0;
-	coord[2].y = 500.0;
+	coord[2].y = 250.0;
 	coord[1].x = 20.0;
-	coord[1].y = 700.0;
+	coord[1].y = 350.0;
 	coord[0].x = -20.0;
-	coord[0].y = 700.0;
+	coord[0].y = 350.0;
 	walls = sector->nb_of_walls;
 	sector->points = new_polygon(coord[3], 2);
 	temp = sector->points;
