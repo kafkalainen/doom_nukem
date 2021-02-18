@@ -1,15 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_walls.c                                       :+:      :+:    :+:   */
+/*   continue_from_next_point.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/04 16:07:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/09 09:39:39 by jnivala          ###   ########.fr       */
+/*   Created: 2021/02/08 08:33:17 by jnivala           #+#    #+#             */
+/*   Updated: 2021/02/08 10:09:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
-
-int				draw_wall(t_frame *frame, float angle);
+void		continue_from_next_point(t_point *start, t_ray_fov *fov, t_frame *frame)
+{
+	fov->left_wall = fov->left_wall->next;
+	fov->left_point = fov->left_wall->x0;
+	fov->right_point = fov->left_wall->next->x0;
+}

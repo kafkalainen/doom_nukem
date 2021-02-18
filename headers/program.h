@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/05 09:58:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/12 11:07:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,10 @@ typedef struct		s_wall
 typedef struct		s_frame
 {
 	int				idx;
-	int				max_fov;
-	int				offset;
+	float			max_fov;
+	float			offset;
+	float			min_step;
+	int				old_idx;
 	SDL_Surface		*draw_surf;
 	t_xy			plr_offset;
 }					t_frame;
@@ -94,6 +96,7 @@ typedef struct		s_home
 	t_texture		**editor_textures;
 	t_time			t;
 	t_xy			offset;
+	int				nb_of_sectors;
 }					t_home;
 
 #endif

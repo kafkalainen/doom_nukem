@@ -20,9 +20,8 @@ void		calc_intersection(t_point *pgon, t_point *first, t_ray *ray,
 
 	sect->y1 = pgon->x0.y;
 	sect->x1 = pgon->x0.x;
-	temp = loop_list(first, pgon->next);
-	sect->x2 = temp->x0.x;
-	sect->y2 = temp->x0.y;
+	sect->x2 = pgon->next->x0.x;
+	sect->y2 = pgon->next->x0.y;
 	sect->neg = ((sect->x1 - ray->pos.x) * (-ray->dir.y) - (sect->y1 - ray->pos.y) *
 				(-ray->dir.x));
 	sect->pos = ((sect->x2 - sect->x1) * (sect->y1 - ray->pos.y) -

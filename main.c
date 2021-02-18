@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/05 13:31:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/09 09:50:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int  			main(int argc, char **argv)
 	{
 		//home.t.beginfps = clock();
 		update_player(&plr, &home, e);
-		update_screen(&home, &frame);
+		update_screen(&home, &frame, &plr);
 		//fps = ft_itoa(home.t.fps);
 		//SDL_SetWindowTitle(home.win.window, fps);
 		//free(fps);

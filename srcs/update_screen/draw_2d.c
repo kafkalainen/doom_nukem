@@ -6,26 +6,27 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/05 13:43:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/12 15:12:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void			draw_2d_fov(t_frame *frame)
+void			draw_2d_fov(t_frame *frame, t_player *plr)
 {
 	t_xy fov_left;
 	t_xy fov_right;
 	t_xy offset;
-	t_xy plr;
+	t_xy plr_pos;
 
-	plr = vec2(0,0);
+	plr_pos = plr->pos;
 	offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
-	fov_left = vec2(0.70711, 0.70711);
-	fov_right = vec2(-0.70711, 0.70711);
+	fov_left = vec2_rot(plr->dir, -FOV * 0.5);
+	fov_right = vec2_rot(plr->dir, FOV * 0.5);
 	draw_rect_center(vec2_add(vec2(0,0), offset), vec2(5, 5), frame);
-	ft_draw_line(vec2_add(plr, offset), vec2_add(vec2_add(plr, vec2_mul(fov_left, 400)), offset), lightgreen, frame->draw_surf);
-	ft_draw_line(vec2_add(plr, offset), vec2_add(vec2_add(plr, vec2_mul(fov_right, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(fov_left, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(fov_right, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(plr->dir, 400)), offset), lightgreen, frame->draw_surf);
 }
 
 /* 1. Test if leftmost ray hits the polygon.
@@ -41,7 +42,7 @@ void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos)
 {
 	SDL_Rect	rect;
 
-	SDL_Color color = {255, 80, 0, 0};
+	SDL_Color color = {255, 255, 255, 255};
 	home->text_surf = TTF_RenderText_Solid(home->font, text, color);
 	rect.x = pos.x;
 	rect.y = pos.y;
@@ -54,118 +55,16 @@ int				hypotenuse(int opposite, int adjacent)
 	return (sqrt(opposite * opposite + adjacent * adjacent));
 }
 
-void			draw_2d(t_home *home, t_frame *frame)
+void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
 {
 	frame->idx = 0;
-	frame->max_fov = 640;
-	frame->offset = 0;
+	frame->old_idx = -1;
+	frame->max_fov = 0;
+	frame->offset = 1.570796f;
 	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5);
 	scan_fov(home, frame);
-	draw_2d_fov(frame);
-	// int			i;
-	// t_point		*p0;
-	// t_point		*p1;
-	// t_xy		fov_left;
-	// t_xy		fov_right;
-	// t_xy		cut_left;
-	// t_xy		cut_right;
-	// float		width;
-
-	// i = 0;
-	// fov_left = vec2_rot(plr->dir, DEG_TO_RAD * -FOV * 0.5);
-	// fov_right = vec2_rot(plr->dir, DEG_TO_RAD * FOV * 0.5);
-	// p0 = home->sectors[i]->points;
-	// while (p0)
-	// {
-	// 	p1 = loop_list(home->sectors[i]->points, p0->next);
-	// 	ft_draw_line(vec2_add(p0->x0, home->offset), vec2_add(p1->x0, home->offset), green, home->draw_surf);
-	// 	cut_left = get_left_point(p0, home->sectors[i]->points, plr);
-	// 	if (cut_left.y != -1)
-	// 	{
-	// 		cut_right = get_right_point(p0, home->sectors[i]->points, plr);
-	// 		if (cut_right.y != -1)
-	// 			width = SCREEN_WIDTH;
-	// 		else
-	// 			width = SCREEN_WIDTH * vec2_angle(cut_left, p1->x0) / (FOV * DEG_TO_RAD);
-	// 		draw_text(home, ft_ftoa(width, 5, 1), vec2_add(p1->x0, home->offset));
-	// 	}
-	// 	ft_draw_line(vec2_add(vec2(0,0), home->offset), vec2_add(p0->x0, home->offset), green, home->draw_surf);
-	// 	draw_rect_center(vec2_add(plr->pos, home->offset), vec2(5, 5), home);
-	// 	ft_draw_line(vec2_add(plr->pos, home->offset), vec2_add(vec2_add(plr->pos, vec2_mul(fov_left, 200)), home->offset), lightgreen, home->draw_surf);
-	// 	ft_draw_line(vec2_add(plr->pos, home->offset), vec2_add(vec2_add(plr->pos, vec2_mul(fov_right, 200)), home->offset), lightgreen, home->draw_surf);
-	// 	if (p0->next == NULL)
-	// 		break ;
-	// 	p0 = p0->next;
-	// }
+	draw_2d_fov(frame, plr);
 }
-
-// void			draw_angles(t_home *home, t_sector *sector, t_ray_fov *fov)
-// {
-// 	t_point		*current;
-
-// 	calc_angles(fov, sector);
-// 	ft_draw_line(vec2_add(vec2(0,0), home->offset), vec2_add(fov->left_point, home->offset), pink, home->draw_surf);
-// 	ft_draw_line(vec2_add(vec2(0,0), home->offset), vec2_add(fov->right_point, home->offset), pink, home->draw_surf);
-// 	current = loop_list(sector->points, fov->left_wall->next);
-// 	while (current != fov->right_wall)
-// 	{
-// 		ft_draw_line(vec2_add(vec2(0,0), home->offset), vec2_add(current->x0, home->offset), pink, home->draw_surf);
-// 		current = loop_list(sector->points, current->next);
-// 	}
-// 	// while (temp)
-// 	// {
-// 	// 	draw_text(home, ft_ftoa(sector->points->wall_rad, 5, '.'), vec2_add(temp->x0, home->offset));
-
-// 	// 	temp = temp->next;
-// 	// }
-// }
-
-// void			draw_2d(t_home *home, t_player *plr)
-// {
-// 	// draw_2d_fov(home, plr);
-// 	// ft_draw_sector(home, plr, 0, 0.0f);
-// 	int i;
-// 	t_point		*p0;
-// 	t_point		*p1;
-// 	t_ray_fov	fov;
-// 	i = 0;
-// 	// while(i < 2)
-// 	// {
-// 	//translate_world_view(plr, home);
-// 	p0 = home->sectors[i]->points;
-// 	fov = get_fov(home, plr, i);
-// 	//draw_angles(home, home->sectors[i], &fov);
-// 	while (p0)
-// 		{
-// 			if (p0->idx)
-// 			{
-// 				p1 = (p0->next == NULL) ? home->sectors[i]->points : p0->next;
-// 				// if (p0->x0.y >= 0 || p1->x0.y >= 0)
-// 				// {
-// 					// draw_text(home, ft_ftoa(vec2_angle(p0->x0, p1->x0), 5, '.'), vec2_add(p0->x0, home->offset));
-// 					ft_draw_line(vec2_add(p0->x0, home->offset), vec2_add(p1->x0, home->offset), green, home->draw_surf);
-// 					// draw_text(home, ft_ftoa(p0->x0.y, 5, '.'), vec2_add(p0->x0, home->offset));
-// 					//fov = get_fov_points(p0, home, plr, i);
-// 					// draw_rect_center(vec2_add(fov.left_point, home->offset), vec2(16, 16), home);
-// 					// draw_rect_center(vec2_add(fov.right_point, home->offset), vec2(16, 16), home);
-// 					//ft_draw_line(vec2_add(fov.right_point, home->offset), vec2_add(fov.left_point, home->offset), 0xFF8000, home->draw_surf);
-// 					//draw_text(home, ft_itoa(hypotenuse(fov.left_point.x - fov.right_point.x, fov.left_point.y - fov.right_point.y)),
-// 					//vec2_add(vec2((fov.left_point.x - fov.right_point.x) / 2, (fov.left_point.y - fov.right_point.y) / 2), home->offset));
-// 					//perspective_transformation(p0, p1, home, i);
-// 					//draw_text(home, ft_itoa(fov.left_point.x), vec2(fov.left_point.x + 32, fov.left_point.y + 32));
-// 					//draw_text(home, ft_ftoa(plr->angle, 5, '.'), vec2(50, 50));
-// 					//draw_rect_center(fov.right_point, vec2(16, 16), home);
-// 				}
-// 			if (p0->next == NULL)
-// 				break ;
-// 			p0 = p0->next;
-// 			}
-// 		// }
-// 	// ft_draw_line(vec2_add(temp->x0, vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f)), vec2_add(temp->next->x0, vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f)), fuchsia, home->draw_surf);
-// 	// draw_text(home, ft_ftoa(plr->angle, 5, '.'), vec2(50, 50));
-// 	// draw_2d_fov(home, plr);
-// 	// draw_text(home, ft_ftoa(plr->dir.x, 4, 1), vec2(plr->pos.x, plr->pos.y - 16));
-// }
 
 // void			perspective_transformation(t_point *x0, t_point *x1, t_home *home, int idx)
 // {

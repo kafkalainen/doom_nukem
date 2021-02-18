@@ -1,15 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_walls.c                                       :+:      :+:    :+:   */
+/*   check_if_same_point.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/04 16:07:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/09 09:39:39 by jnivala          ###   ########.fr       */
+/*   Created: 2021/02/09 14:40:02 by jnivala           #+#    #+#             */
+/*   Updated: 2021/02/09 15:25:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-int				draw_wall(t_frame *frame, float angle);
+int				check_if_same_point(float current_angle, t_ray_fov *fov)
+{
+
+	if (current_angle == 0.0f
+		&& get_distance(fov->left_point, fov->right_point) < 0.001)
+		return (TRUE);
+	else
+		return (FALSE);
+}

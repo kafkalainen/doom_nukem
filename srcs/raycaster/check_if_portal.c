@@ -1,15 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_walls.c                                       :+:      :+:    :+:   */
+/*   check_if_portal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/04 16:07:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/09 09:39:39 by jnivala          ###   ########.fr       */
+/*   Created: 2021/02/08 10:38:07 by jnivala           #+#    #+#             */
+/*   Updated: 2021/02/09 14:55:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-int				draw_wall(t_frame *frame, float angle);
+int		check_if_portal(t_point *p0, t_frame *frame)
+{
+	if (p0->idx >= 0)
+		return (TRUE);
+	else
+		return (FALSE);
+}

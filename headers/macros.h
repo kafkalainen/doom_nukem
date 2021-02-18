@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/05 12:11:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/11 15:54:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # define SCREEN_WIDTH 640
 # define SCREEN_HEIGHT 480
 
-# define WALL_HEIGHT 0.5
+# define WALL_HEIGHT 0.5f
 # define TEX_SIZE 128
-# define FOV 90.0
+# define FOV 1.57079616f
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
 
@@ -37,6 +37,7 @@
 # define RAD_TO_DEG (57.295779513082320876798154814105f)
 # define DEG_TO_RAD (0.017453292519943295769236907684886f)
 # define MARGIN (1.3799628608)
+# define SQR2 (0.7071067812)
 
 # define TRUE (1)
 # define FALSE (0)

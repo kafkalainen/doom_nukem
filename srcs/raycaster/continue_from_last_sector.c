@@ -1,15 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_walls.c                                       :+:      :+:    :+:   */
+/*   continue_from_last_sector.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/04 16:07:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/09 09:39:39 by jnivala          ###   ########.fr       */
+/*   Created: 2021/02/08 10:01:11 by jnivala           #+#    #+#             */
+/*   Updated: 2021/02/08 14:29:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../../doom_nukem.h"
 
-int				draw_wall(t_frame *frame, float angle);
+void		continue_from_last_sector(t_point *start, t_ray_fov *fov, t_frame *frame)
+{
+	t_point *p0;
+
+	p0 = start;
+	if (frame->old_idx != -1)
+	{
+		while (p0)
+		{
+			if (check_connection(p0, frame))
+			{
+				fov->left_wall = p0->next;
+				return ;
+			}
+			p0 = p0->next;
+		}
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/05 10:11:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/16 14:57:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 	frame->draw_surf = SDL_GetWindowSurface(home->win.window);
 	if (!frame->draw_surf)
 		error_output_sdl("Fatal: Failed to get window surface", home);
+	frame->min_step = .002454369f;
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		error_output_sdl("Fatal: SDL_mixer could not initialize!", home);
 	return (home);
@@ -34,8 +35,8 @@ void			init_player(t_player *plr)
 {
 	plr->pos = vec2(0, 0);
 	plr->z = 0;
-	plr->dir.x = 0;
-	plr->dir.y = 1;
+	plr->dir.x = 0.785398163;
+	plr->dir.y = 0.785398163;
 	plr->input.down = 0;
 	plr->input.up = 0;
 	plr->input.right = 0;
@@ -56,12 +57,12 @@ void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	home = init_sdl(home, frame);
 	if (TTF_Init() < 0)
 		error_output_sdl("Fatal: Failed to init TTF.", home);
-	home->font = TTF_OpenFont("arial.ttf", 24);
+	home->font = TTF_OpenFont("arial.ttf", 12);
 	if (home->font == NULL)
 		error_output_sdl("Fatal: Failed to init given font.", home);
 	load_audio(&plr->audio);
-	if (Mix_PlayingMusic() == 0)
-		Mix_PlayMusic(plr->audio.music, -1);
+	// if (Mix_PlayingMusic() == 0)
+	// 	Mix_PlayMusic(plr->audio.music, -1);
 	/*init_textures(home);*/
 	init_player(plr);
 }
