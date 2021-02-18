@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/18 17:32:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/18 17:39:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ static float	round_angle(float angle)
 
 	angle_as_pixels = angle / .002454369f;
 	trunc = (int)angle_as_pixels;
-	// temp = temp + angle_as_pixels - trunc;
-	// if (temp >= 1.0f)
-	// {
-	// 	temp = temp - 1;
-	return ((float)(trunc + 1) * .002454369f);
-	// }
-	// else
-	// 	return ((float)trunc * .002454369f);
+	temp = temp + angle_as_pixels - trunc;
+	if (temp >= 0.9999999999f)
+	{
+		temp = temp - 1;
+		return ((float)(trunc + 1) * .002454369f);
+	}
+	else
+		return ((float)trunc * .002454369f);
 }
 
 int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
