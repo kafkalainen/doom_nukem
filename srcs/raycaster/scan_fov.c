@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/18 11:51:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/18 12:33:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,9 @@ void			scan_fov(t_home *home, t_frame *frame)
 	while (frame->offset > frame->max_fov)
 	{
 		if (current_angle != 0)
-		{
 			continue_from_next_point(fov.left_wall, &fov, frame);
-			if (check_if_same_wall(fov.left_wall->x0, fov2.left_wall->x0))
-				fov.right_point = fov2.right_point;
-		}
+		if (check_if_same_wall(fov.left_wall->x0, fov2.left_wall->x0))
+			fov.right_point = fov2.right_point;
 		current_angle = vec2_angle(fov.left_point, fov.right_point);
 		draw_rect_center(vec2_add(fov.left_point, home->offset), vec2(8, 8), frame);
 		draw_rect_center(vec2_add(fov2.right_point, home->offset), vec2(8, 8), frame);
