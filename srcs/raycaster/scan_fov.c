@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/18 12:33:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/18 13:02:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,15 @@ static float	round_angle(float angle)
 		return ((float)trunc * .002454369f);
 }
 
-int				check_if_same_wall(t_xy a, t_xy b)
+int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
 {
 	if (a.x == b.x && a.y == b.y)
-		return (1);
+	{
+		if (right_point.x != -1 && right_point.y != -1)
+			return (1);
+		else
+			return (0);
+	}
 	else
 		return (0);
 }
@@ -119,7 +124,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 	{
 		if (current_angle != 0)
 			continue_from_next_point(fov.left_wall, &fov, frame);
-		if (check_if_same_wall(fov.left_wall->x0, fov2.left_wall->x0))
+		if (check_if_same_wall(fov.left_wall->x0, fov2.left_wall->x0, fov2.right_point))
 			fov.right_point = fov2.right_point;
 		current_angle = vec2_angle(fov.left_point, fov.right_point);
 		draw_rect_center(vec2_add(fov.left_point, home->offset), vec2(8, 8), frame);
