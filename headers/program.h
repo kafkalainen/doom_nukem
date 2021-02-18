@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/12 11:07:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/18 16:10:36 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,6 @@ typedef struct		s_tex_col
 	float			step;
 	SDL_Surface		*tex;
 }					t_tex_col;
-
-typedef struct		s_texture
-{
-	Uint32			*tex;
-	int				pitch;
-	int				h;
-}					t_texture;
 
 typedef struct		s_wall
 {

@@ -49,6 +49,8 @@
 # include "headers/sector.h"
 # include "headers/calculations.h"
 # include "headers/colours.h"
+# include "headers/png_parser.h"
+# include "headers/parser_structs.h"
 # include "headers/program.h"
 # include "headers/audio.h"
 # include "headers/player.h"

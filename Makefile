@@ -24,6 +24,7 @@ SRCS =	main.c \
 		srcs/libft/memory.c \
 		srcs/libft/ft_get_next_line.c \
 		srcs/libft/ft_putendl_fd.c \
+		srcs/libft/ft_memcpy.c \
 		srcs/raycaster/line_line_intersection.c \
 		srcs/raycaster/scan_fov.c \
 		srcs/raycaster/get_left_point.c \
@@ -36,7 +37,20 @@ SRCS =	main.c \
 		srcs/raycaster/check_if_same_point.c \
 		srcs/raycaster/calc_visible_walls.c \
 		srcs/raycaster/get_distance.c \
-		srcs/parsing/read_map.c
+		srcs/parsing/read_map.c	\
+		# srcs/png_parser/color_utils.c \
+		# srcs/png_parser/crc.c \
+		# srcs/png_parser/filters.c \
+		# srcs/png_parser/header.c \
+		# srcs/png_parser/inflate_setups.c \
+		# srcs/png_parser/inflate_trees.c \
+		# srcs/png_parser/inflate_utils.c \
+		# srcs/png_parser/inflate_utils2.c \
+		# srcs/png_parser/inflate.c \
+		# srcs/png_parser/parser.c \
+		# srcs/png_parser/texture.c \
+		# srcs/png_parser/unfilter.c \
+		# srcs/png_parser/utils.c
 
 HEADERS = \
 		doom_nukem.h\
