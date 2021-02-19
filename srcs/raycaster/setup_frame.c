@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 10:26:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 14:37:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 15:25:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		setup_frame(t_frame *frame, t_frame *new_frame,
 	new_frame->idx = idx;
 	new_frame->old_idx = frame->idx;
 	new_frame->min_step = frame->min_step;
-	/*max_fov needs to be properly bounded.*/
+	/*max_fov needs to be properly bounded. If min_step is not added, calculation is stuck in an infinite loop.*/
 	new_frame->max_fov = (frame->offset - current_angle < 0) ? 0.0f : frame->offset - current_angle + frame->min_step;
 	/*If this value is changed to just offset, the calculation will be stuck in the infinite loop.*/
 	new_frame->offset = frame->offset - frame->min_step;
