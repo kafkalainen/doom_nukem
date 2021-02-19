@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 16:04:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 16:10:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static float	round_angle(float angle, float *pxl_offset)
 		return ((float)(trunc + 1.0f) * 0.002454369f);
 	}
 	else
-		return ((float)trunc * 0.002454369096f);
+		return ((float)trunc * 0.002454369f);
 }
 
 int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
@@ -136,7 +136,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 				vec2_add(fov_left.right_point, home->offset),
 				green,
 				frame->draw_surf);
-			//current_angle = current_angle + frame->min_step;
+			current_angle = current_angle + frame->min_step;
 			frame->offset = frame->offset - current_angle;
 		}
 	}
