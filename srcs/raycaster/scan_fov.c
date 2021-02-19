@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 11:22:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 12:13:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ void			scan_fov(t_home *home, t_frame *frame)
 		{
 			current_angle += frame->min_step;
 			setup_frame(frame, &new_frame, current_angle, fov_left.left_wall->idx);
-			round_to_nearest_pixel(new_frame.max_fov);
 			scan_fov(home, &new_frame);
 			frame->offset = new_frame.offset;
 			frame->pxl_offset = new_frame.pxl_offset;
@@ -155,7 +154,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 				green,
 				frame->draw_surf);
 			current_angle += frame->min_step;
-			frame->offset = round_to_nearest_pixel(frame->offset - current_angle);
+			frame->offset = frame->offset - current_angle;
 		}
 	}
 }
