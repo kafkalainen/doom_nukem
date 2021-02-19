@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:33:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/18 15:07:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 14:07:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls)
 		p0 = p0->next;
 		walls--;
 	}
-	fov->left_wall = p0;
-	fov->right_point = fov->left_wall->next->x0;
+	fov->wall = p0;
+	fov->right_point = fov->wall->next->x0;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/18 14:01:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 13:22:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_point			*new_polygon(t_xy x0, int idx)
 	{
 		new->x0 = x0;
 		new->idx = idx;
-		new->wall_rad = 0;
 		new->next = NULL;
 	}
 	else

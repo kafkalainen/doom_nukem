@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/04 08:10:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 13:12:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ typedef struct		s_screen_xy
 
 typedef struct		s_xy
 {
-	float			x;
-	float			y;
+	double			x;
+	double			y;
 }					t_xy;
 
 typedef t_xy		t_range;
 
 typedef struct		s_xyz
 {
-	float			x;
-	float			y;
-	float			z;
+	double			x;
+	double			y;
+	double			z;
 }					t_xyz;
 
 typedef struct		s_ray
@@ -51,16 +51,16 @@ typedef struct		s_maxpoints
 ** Vector functions
 */
 
-t_xy			vec2(float x, float y);
+t_xy			vec2(double x, double y);
 t_xy			vec2_add(t_xy a, t_xy b);
 t_xy			vec2_dec(t_xy a, t_xy b);
-t_xy			vec2_rot(t_xy v, float angle);
+t_xy			vec2_rot(t_xy v, double angle);
 t_xy			vec2_norm(t_xy v);
-t_xy			vec2_mul(t_xy v, float scalar);
-float			vec2_dot(t_xy a, t_xy b);
-float			ft_map(float in, t_range from, t_range to);
-float			vec2_dot(t_xy a, t_xy b);
-float			vec2_mag(t_xy a);
-float			vec2_angle(t_xy a, t_xy b);
+t_xy			vec2_mul(t_xy v, double scalar);
+double			vec2_dot(t_xy a, t_xy b);
+double			ft_map(double in, t_range from, t_range to);
+double			vec2_dot(t_xy a, t_xy b);
+double			vec2_mag(t_xy a);
+double			vec2_angle(t_xy a, t_xy b);
 
 #endif

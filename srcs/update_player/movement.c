@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 18:08:50 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/19 10:31:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 13:16:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void			player_move_strafe(t_player *plr, t_home *home, float delta_time, char ad
 
 void				movement(t_player *plr, t_home *home)
 {
-	float		delta_time;
+	double		delta_time;
 	clock_t		ctime;
 
 	ctime = clock();
-	delta_time = ((ctime - plr->time) / (float)CLOCKS_PER_SEC);
+	delta_time = ((ctime - plr->time) / (double)CLOCKS_PER_SEC);
 	if (delta_time < 0.0166667)
 		return;
 	plr->time = ctime;
