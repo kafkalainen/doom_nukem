@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/18 16:10:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/19 11:26:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,13 @@ typedef struct		s_wall
 typedef struct		s_frame
 {
 	int				idx;
-	float			max_fov;
-	float			offset;
+	int				max_fov;
+	int				offset;
 	float			min_step;
 	int				old_idx;
 	SDL_Surface		*draw_surf;
 	t_xy			plr_offset;
+	float			pxl_offset;
 }					t_frame;
 
 typedef struct		s_home

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/09 09:50:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 10:48:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int  			main(int argc, char **argv)
 	new_sector("sector00 4 5 10 -3 -4 40,200,1 250,200,2 200,0,1 90,0,-10 -5\n");
 	setup(argv[1], &home, &plr, &frame);
 	update_sector(&home);
+	/*Sets player position in the world to the wall error position*/
+	translate_world_view(&home, vec2_mul(vec2_rot(plr.dir, FOV), -40 * 2.40f));
+	transform_world_view(&home, -134 * DEG_TO_RAD);
+	translate_world_view(&home, vec2_mul(vec2_rot(plr.dir, FOV), -40 * 3.80f));
 	while(1)
 	{
 		//home.t.beginfps = clock();
