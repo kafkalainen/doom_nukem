@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:29:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/18 11:51:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 14:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_step	*steplen(t_step *ground, int current_y, t_ray_floor hor,
 	t_player *plr)
 {
-	double		row_dist;
+	float		row_dist;
 
 	row_dist = (0.5 * SCREEN_HEIGHT) / (current_y - SCREEN_HEIGHT * 0.5);
 	ground->step_len.x = row_dist * (hor.right.x - hor.left.x) / SCREEN_WIDTH;

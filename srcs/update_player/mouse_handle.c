@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/05 13:38:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 14:37:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	mouse_handle_unix(t_player *plr, t_home *home)
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_CaptureMouse(SDL_TRUE);
 	SDL_GetMouseState(&mouse_screen.x, &mouse_screen.y);
-	mouse.x = (double)mouse_screen.x;
-	mouse.y = (double)mouse_screen.y;
+	mouse.x = (float)mouse_screen.x;
+	mouse.y = (float)mouse_screen.y;
 	mouse.x = (mouse.x - SCREEN_WIDTH * 0.5) / SCREEN_WIDTH * 0.5;
 	if (mouse.x < 0)
 		mouse.x = -0.05235987756;

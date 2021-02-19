@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/05 10:55:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 14:37:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Surface *surf)
 
 void	draw_rect(t_xy xy, t_xy wh, t_frame *frame, int color)
 {
-	double j;
-	double i;
+	float j;
+	float i;
 
 	i = xy.x;
 	j = xy.y;
@@ -53,8 +53,8 @@ void	draw_rect(t_xy xy, t_xy wh, t_frame *frame, int color)
 
 void	draw_rect_center(t_xy xy, t_xy wh, t_frame *frame)
 {
-	double j;
-	double i;
+	float j;
+	float i;
 
 	i = -wh.x / 2;
 	j = -wh.y / 2;

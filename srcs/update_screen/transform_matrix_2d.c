@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:10:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 13:16:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 14:37:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void			transform_world_view(t_home *home, double delta_dir)
+void			transform_world_view(t_home *home, float delta_dir)
 {
 	t_point		*current_point;
 	int			i;
