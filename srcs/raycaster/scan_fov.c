@@ -32,7 +32,7 @@ static float	angle_offset(float current_angle, float screen_offset, float screen
 	return ((angle_mult_left - angle_mult_right) / screen_wall);
 }
 
-static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_pxl, int color, t_home *home)
+static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_pxl, int color, t_home *home, t_player *plr)
 {
 	float		screen_wall;
 	float		screen_offset;
@@ -58,8 +58,8 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_p
 	while (i < (int)screen_wall)
 	{
 		ft_draw_line(
-			vec2(screen_offset + i, 240 - wall_height_left),
-			vec2(screen_offset + i, 240 + wall_height_left),
+			vec2(screen_offset + i, plr->pitch - wall_height_left),
+			vec2(screen_offset + i, plr->pitch + wall_height_left),
 			color,
 			frame->draw_surf);
 		wall_height_left = wall_height_left - step;
@@ -97,7 +97,7 @@ int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
 		return (0);
 }
 
-void			scan_fov(t_home *home, t_frame *frame)
+void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {
 	t_ray_fov	fov_left;
 	t_ray_fov	fov_right;
@@ -123,13 +123,13 @@ void			scan_fov(t_home *home, t_frame *frame)
 		{
 			current_pxl++;
 			setup_frame(frame, &new_frame, current_pxl, fov_left.wall->idx);
-			scan_fov(home, &new_frame);
+			scan_fov(home, &new_frame, plr);
 			frame->offset = new_frame.offset;
 			frame->pxl_offset = new_frame.pxl_offset;
 		}
 		else
 		{
-			ft_draw_wall(fov_left.left_point, fov_left.right_point, frame, current_pxl, 0xFF8000 + frame->offset * RAD_TO_DEG * 100, home);
+			ft_draw_wall(fov_left.left_point, fov_left.right_point, frame, current_pxl, 0xFF8000 + get_distance(fov_left.left_point, fov_right.right_point) * 100, home, plr);
 			ft_draw_line(
 				vec2_add(fov_left.left_point, home->offset),
 				vec2_add(fov_left.right_point, home->offset),

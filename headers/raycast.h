@@ -31,7 +31,7 @@ t_xy				line_intersection(t_intersection *sect);
 int					get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls);
 int					get_right_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls);
 void				continue_from_next_point(t_point *start, t_ray_fov *fov, t_frame *frame);
-void				scan_fov(t_home *home, t_frame *frame);
+void				scan_fov(t_home *home, t_frame *frame, t_player *plr);
 void				setup_frame(t_frame *frame, t_frame *new_frame, int current_pxl, int idx);
 int					check_connection(t_point *point, t_frame *frame);
 int					check_if_portal(t_point *point, t_frame *frame);

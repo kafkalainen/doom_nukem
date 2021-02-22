@@ -18,7 +18,10 @@ void	mouse_handle_win(t_player *plr, t_home *home)
 
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	if (me.type == SDL_MOUSEMOTION)
-		transform_world_view(home, me.motion.xrel * DEG_TO_RAD);
+	{
+		transform_world_view(home, -me.motion.xrel * DEG_TO_RAD);
+		plr->pitch = MIN(MAX(plr->pitch - me.motion.yrel, 0), 480);
+	}
 }
 
 void	mouse_handle_unix(t_player *plr, t_home *home)

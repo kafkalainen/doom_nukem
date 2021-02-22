@@ -35,6 +35,7 @@ void			init_player(t_player *plr)
 {
 	plr->pos = vec2(0, 0);
 	plr->z = 0;
+	plr->pitch = 240;
 	plr->dir.x = 0.785398163;
 	plr->dir.y = 0.785398163;
 	plr->input.down = 0;
