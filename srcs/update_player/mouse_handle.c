@@ -6,11 +6,27 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/22 14:11:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 14:57:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
+
+float	mouse_acceleration(float mouse, char c)
+{
+	int		speed;
+	if (c == 'x')
+		speed = 100;
+	else
+		speed = 10000;
+	if (mouse < 0)
+		return (0.05235987756 * -mouse * speed);
+	else if (mouse == 0)
+		return (0);
+	else
+		return (-0.05235987756 * mouse * speed);
+
+}
 
 void	mouse_handle_win(t_player *plr, t_home *home)
 {
@@ -35,15 +51,9 @@ void	mouse_handle_unix(t_player *plr, t_home *home)
 	mouse.x = (float)mouse_screen.x;
 	mouse.y = (float)mouse_screen.y;
 	mouse.x = (mouse.x - SCREEN_WIDTH * 0.5) / SCREEN_WIDTH * 0.5;
-	//mouse.y = (mouse.y - SCREEN_HEIGHT * 0.5) / SCREEN_HEIGHT * 0.5;
-	if (mouse.x < 0)
-		mouse.x = 0.05235987756;
-	else if (mouse.x == 0)
-		return ;
-	else
-		mouse.x = -0.05235987756;
-	transform_world_view(home, mouse.x);
-	plr->pitch = MIN(MAX(plr->pitch - mouse.y * 2, 0), 480);
+	mouse.y = (mouse.y - SCREEN_HEIGHT * 0.5) / SCREEN_HEIGHT * 0.5;
+	transform_world_view(home, mouse_acceleration(mouse.x, 'x'));
+	plr->pitch = MIN(MAX(plr->pitch + mouse_acceleration(mouse.y, 'y'), 0), 480);
 	SDL_WarpMouseInWindow(home->win.window, (int)(SCREEN_WIDTH * 0.5),
 		(int)(SCREEN_HEIGHT * 0.5));
 }

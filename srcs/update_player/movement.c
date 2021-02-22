@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 18:08:50 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/19 14:37:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 14:59:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				check_collision(t_sector *sector, float delta_time, t_player *plr)
 	p0 = start;
 	while (i < sector->nb_of_walls)
 	{
-		calc_intersection(p0, start, &ray, &isect);
+		calc_intersection(p0, &ray, &isect);
 		point = line_intersection(&isect);
 		if (point.x != -1 && point.y != -1)
 		{
