@@ -6,21 +6,20 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/22 10:57:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 14:19:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
+// static float	ft_interpolate_y(t_xy p0, t_xy p1)
+// {
+// 	if (p1.x - p0.x == 0)
+// 		return (p1.y - p0.y);
+// 	return (p0.y + (0 - p0.x) * ((p1.y - p0.y) / (p1.x - p0.x)));
+// }
 
-static float	ft_interpolate_y(t_xy p0, t_xy p1)
-{
-	if (p1.x - p0.x == 0)
-		return (p1.y - p0.y);
-	return (p0.y + (0 - p0.x) * ((p1.y - p0.y) / (p1.x - p0.x)));
-}
-
-static float	angle_offset(float current_angle, float screen_offset, float screen_wall)
+static float	angle_offset(float screen_offset, int screen_wall)
 {
 	float		angle_mult_left;
 	float		angle_mult_right;
@@ -32,9 +31,8 @@ static float	angle_offset(float current_angle, float screen_offset, float screen
 	return ((angle_mult_left - angle_mult_right) / screen_wall);
 }
 
-static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_pxl, int color, t_home *home, t_player *plr)
+static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, int color, t_home *home, t_player *plr)
 {
-	float		screen_wall;
 	float		screen_offset;
 	float		wall_height_left;
 	float		wall_height_right;
@@ -44,20 +42,13 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_p
 	int			i;
 
 	i = 0;
-	// if (right.x < 0)
-	// {
-	// 	right.y = ft_interpolate_y(left, right);
-	// 	right.x = 0;
-	// 	current_angle = vec2_angle(left, right);
-	// }
-	screen_wall = current_pxl;
 	z_step = get_distance(plr->pos, left) / get_distance(plr->pos, right);
 	screen_offset = SCREEN_WIDTH - frame->offset;
 	wall_height_left = 480 / (fabs(left.x + left.y) * SQR2) * 20;
 	wall_height_right = 480 / (fabs(right.x + right.y) * SQR2) * 20;
-	step = (wall_height_left - wall_height_right) / screen_wall;
-	angle_mult = angle_offset(current_pxl, screen_offset, screen_wall);
-	while (i < (int)screen_wall)
+	step = (wall_height_left - wall_height_right) / wall_len;
+	angle_mult = angle_offset(screen_offset, wall_len);
+	while (i < wall_len)
 	{
 		ft_draw_line(
 			vec2(screen_offset + i, plr->pitch - wall_height_left),
@@ -65,7 +56,7 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_p
 			color,
 			frame->draw_surf);
 		wall_height_left = wall_height_left - step + angle_mult;
-		z_step -= screen_wall * z_step;
+		z_step -= wall_len * z_step;
 		i++;
 	}
 }
@@ -87,18 +78,7 @@ static float	round_angle(float angle, float *pxl_offset)
 		return ((float)trunc);
 }
 
-int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
-{
-	if (a.x == b.x && a.y == b.y)
-	{
-		if (right_point.x != -1 && right_point.y != -1)
-			return (1);
-		else
-			return (0);
-	}
-	else
-		return (0);
-}
+
 
 void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {
@@ -119,11 +99,11 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	while (frame->offset > frame->max_fov)
 	{
 		if (current_pxl != 0)
-			continue_from_next_point(fov_left.wall, &fov_left, frame);
+			continue_from_next_point(&fov_left);
 		if (check_if_same_wall(fov_left.wall->x0, fov_right.wall->x0, fov_right.right_point))
 			fov_left.right_point = fov_right.right_point;
 		current_pxl = round_angle(vec2_angle(fov_left.left_point, fov_left.right_point), &frame->pxl_offset);
-		if (check_if_portal(fov_left.wall, frame) && !check_if_same_point(current_pxl, &fov_left))
+		if (check_if_portal(fov_left.wall) && !check_if_same_point(current_pxl, &fov_left))
 		{
 			current_pxl++;
 			setup_frame(frame, &new_frame, current_pxl, fov_left.wall->idx);

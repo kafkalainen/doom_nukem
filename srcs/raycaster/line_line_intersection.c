@@ -13,11 +13,8 @@ t_xy		line_intersection(t_intersection *sect)
 	return (vec2(-1, -1));
 }
 
-void		calc_intersection(t_point *pgon, t_point *first, t_ray *ray,
-					t_intersection *sect)
+void		calc_intersection(t_point *pgon, t_ray *ray, t_intersection *sect)
 {
-	t_point		*temp;
-
 	sect->y1 = pgon->x0.y;
 	sect->x1 = pgon->x0.x;
 	sect->x2 = pgon->next->x0.x;
