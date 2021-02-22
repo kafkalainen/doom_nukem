@@ -6,20 +6,20 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 10:26:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 17:13:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 10:35:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
 void		setup_frame(t_frame *frame, t_frame *new_frame,
-	float current_angle, int idx)
+	int current_pxl, int idx)
 {
 	new_frame->idx = idx;
 	new_frame->old_idx = frame->idx;
 	new_frame->min_step = frame->min_step;
 	/*max_fov needs to be properly bounded. If min_step is not added, calculation is stuck in an infinite loop.*/
-	new_frame->max_fov = frame->offset - current_angle;
+	new_frame->max_fov = frame->offset - current_pxl;
 	// new_frame->max_fov = (frame->offset - current_angle < 0) ? 0.0f : frame->offset - current_angle + frame->min_step;
 	/*If this value is changed to just offset, the calculation will be stuck in the infinite loop.*/
 	//new_frame->offset = frame->offset - frame->min_step;

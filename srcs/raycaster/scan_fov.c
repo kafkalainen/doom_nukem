@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/22 10:03:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 10:35:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,19 @@ int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
 		return (0);
 }
 
+int			angle_to_pxls(float angle)
+{
+	return (angle / 0.002454369f);
+}
+
 void			scan_fov(t_home *home, t_frame *frame)
 {
 	t_ray_fov	fov_left;
 	t_ray_fov	fov_right;
 	t_frame		new_frame;
-	float		current_angle;
-	float		current_pxl;
+	int			current_pxl;
 
-	current_angle = 0.0f;
+	current_pxl = 0;
 	fov_left.left_point = vec2(-1,-1);
 	fov_right.right_point = vec2(-1,-1);
 	fov_left.wall = home->sectors[frame->idx]->points;
@@ -115,15 +119,15 @@ void			scan_fov(t_home *home, t_frame *frame)
 	get_right_point(fov_left.wall, &fov_right, frame, home->sectors[frame->idx]->nb_of_walls);
 	while (frame->offset > frame->max_fov)
 	{
-		if (current_angle != 0)
+		if (current_pxl != 0)
 			continue_from_next_point(fov_left.wall, &fov_left, frame);
 		if (check_if_same_wall(fov_left.wall->x0, fov_right.wall->x0, fov_right.right_point))
 			fov_left.right_point = fov_right.right_point;
-		current_angle = round_angle(vec2_angle(fov_left.left_point, fov_left.right_point), &frame->pxl_offset);
-		if (check_if_portal(fov_left.wall, frame) && !check_if_same_point(current_angle, &fov_left))
+		current_pxl = angle_to_pixels(round_angle(vec2_angle(fov_left.left_point, fov_left.right_point), &frame->pxl_offset));
+		if (check_if_portal(fov_left.wall, frame) && !check_if_same_point(current_pxl, &fov_left))
 		{
-			current_angle += frame->min_step;
-			setup_frame(frame, &new_frame, current_angle, fov_left.wall->idx);
+			current_pxl++;
+			setup_frame(frame, &new_frame, current_pxl, fov_left.wall->idx);
 			scan_fov(home, &new_frame);
 			frame->offset = new_frame.offset;
 			frame->pxl_offset = new_frame.pxl_offset;
@@ -143,7 +147,6 @@ void			scan_fov(t_home *home, t_frame *frame)
 			printf("%f\n", current_angle / 0.002454369f);
 			printf("After rounding to next pixel:");
 			printf("%f\n", current_angle / 0.002454369f);
-			current_angle = ceil_to_pixel(current_angle);
 			frame->offset = frame->offset - current_angle;
 		}
 	}
