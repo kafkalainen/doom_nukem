@@ -68,4 +68,8 @@ void				movement(t_player *plr, t_home *home)
 		player_move_strafe(plr, home, delta_time, 'd');
 	if (plr->input.left == 1)
 		player_move_strafe(plr, home, delta_time, 'a');
+	if (plr->input.z == 1)
+		plr->z += 0.1;
+	if (plr->input.x == 1)
+		plr->z -= 0.1;
 }

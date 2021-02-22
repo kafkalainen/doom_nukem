@@ -36,6 +36,22 @@ void		arrow_keys_up(t_player *plr, SDL_KeyCode sym)
 		plr->input.left = 0;
 }
 
+void		flight_keys_down(t_player *plr, SDL_KeyCode sym)
+{
+	if (sym == k_z)
+		plr->input.z = 1;
+	if (sym == k_x)
+		plr->input.x = 1;
+}
+
+void		flight_keys_up(t_player *plr, SDL_KeyCode sym)
+{
+	if (sym == k_z)
+		plr->input.z = 0;
+	if (sym == k_x)
+		plr->input.x = 0;
+}
+
 void		key_input(t_player *plr, SDL_Event e, t_home *home)
 {
 	while(SDL_PollEvent(&e) != 0)
@@ -51,8 +67,14 @@ void		key_input(t_player *plr, SDL_Event e, t_home *home)
 			error_output_sdl("User closed the window", home);
 		}
 		else if (e.type == SDL_KEYDOWN)
+		{
 			arrow_keys_down(plr, e.key.keysym.sym);
+			flight_keys_down(plr, e.key.keysym.sym);
+		}
 		else if (e.type == SDL_KEYUP)
+		{
 			arrow_keys_up(plr, e.key.keysym.sym);
+			flight_keys_up(plr, e.key.keysym.sym);
+		}
 	}
 }
