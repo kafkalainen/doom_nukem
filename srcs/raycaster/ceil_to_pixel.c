@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_if_same_point.c                              :+:      :+:    :+:   */
+/*   ceil_to_pixel.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/09 14:40:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/22 10:34:41 by jnivala          ###   ########.fr       */
+/*   Created: 2021/02/22 09:07:39 by jnivala           #+#    #+#             */
+/*   Updated: 2021/02/22 10:07:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
-
-int				check_if_same_point(int current_pxl, t_ray_fov *fov)
+float	ceil_to_pixel(float	nb)
 {
+	int		nb_as_integer;
+	float	fraction;
 
-	if (current_pxl == 0
-		&& get_distance(fov->left_point, fov->right_point) < 0.001)
-		return (TRUE);
+	fraction = nb / 0.002454369f;
+	nb_as_integer = (int)fraction;
+	fraction = fraction - nb_as_integer;
+	if (fraction)
+		return ((nb_as_integer + 1.0f) * 0.002454369f);
 	else
-		return (FALSE);
+		return (nb);
 }

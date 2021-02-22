@@ -15,8 +15,6 @@
 
 # include "libft.h"
 # include <fcntl.h>
-# include <unistd.h>
-# include <SDL2/SDL.h>
 # include <math.h>
 # include <stdlib.h>
 # include "parser_structs.h"

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/19 12:02:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 10:43:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos)
 
 int				hypotenuse(int opposite, int adjacent)
 {
-	return (sqrt(opposite * opposite + adjacent * adjacent));
+	return (sqrtf(opposite * opposite + adjacent * adjacent));
 }
 
 void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
@@ -51,9 +51,9 @@ void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
 	frame->idx = 0;
 	frame->old_idx = -1;
 	frame->max_fov = 0;
-	frame->offset = 1.5707963f;
-	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5);
+	frame->offset = 640;
+	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	frame->pxl_offset = 0.0f;
-	scan_fov(home, frame);
+	scan_fov(home, frame, plr);
 	draw_2d_fov(frame, plr);
 }
