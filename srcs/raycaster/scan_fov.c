@@ -64,7 +64,7 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_p
 			vec2(screen_offset + i, plr->pitch + wall_height_left),
 			color,
 			frame->draw_surf);
-		wall_height_left = wall_height_left - step;
+		wall_height_left = wall_height_left - step + angle_mult;
 		z_step -= screen_wall * z_step;
 		i++;
 	}
