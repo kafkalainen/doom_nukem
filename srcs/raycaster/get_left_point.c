@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:33:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/22 10:44:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 14:07:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls)
 	{
 		if (p0->x0.y >= 0 || p0->next->x0.y >= 0)
 		{
-			calc_intersection(p0, start, &ray, &sect);
+			calc_intersection(p0, &ray, &sect);
 			fov->left_point = line_intersection(&sect);
 			if (fov->left_point.y != -1)
 				break ;

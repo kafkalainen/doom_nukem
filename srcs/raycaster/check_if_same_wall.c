@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_if_portal.c                                  :+:      :+:    :+:   */
+/*   check_if_same_wall.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:38:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/22 14:19:04 by jnivala          ###   ########.fr       */
+/*   Created: 2021/02/22 14:15:04 by jnivala           #+#    #+#             */
+/*   Updated: 2021/02/22 14:15:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-int		check_if_portal(t_point *p0)
+int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
 {
-	if (p0->idx >= 0)
-		return (TRUE);
+	if (a.x == b.x && a.y == b.y)
+	{
+		if (right_point.x != -1 && right_point.y != -1)
+			return (1);
+		else
+			return (0);
+	}
 	else
-		return (FALSE);
+		return (0);
 }
