@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/19 14:37:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 11:47:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,18 @@ void	mouse_handle_unix(t_player *plr, t_home *home)
 	mouse.x = (float)mouse_screen.x;
 	mouse.y = (float)mouse_screen.y;
 	mouse.x = (mouse.x - SCREEN_WIDTH * 0.5) / SCREEN_WIDTH * 0.5;
+	mouse.y = (mouse.y - SCREEN_HEIGHT * 0.5) / SCREEN_HEIGHT * 0.5;
+	printf("%f\n", mouse.y);
 	if (mouse.x < 0)
-		mouse.x = -0.05235987756;
+	{
+		mouse.x = 0.05235987756;
+	}
 	else if (mouse.x == 0)
 		return ;
 	else
-		mouse.x = 0.05235987756;
+		mouse.x = -0.05235987756;
 	transform_world_view(home, mouse.x);
+	plr->pitch = MIN(MAX(plr->pitch - mouse.y, 0), 480);
 	SDL_WarpMouseInWindow(home->win.window, (int)(SCREEN_WIDTH * 0.5),
 		(int)(SCREEN_HEIGHT * 0.5));
 }
