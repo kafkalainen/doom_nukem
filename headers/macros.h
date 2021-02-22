@@ -69,5 +69,7 @@
 # define k_d SDLK_d
 # define k_q SDLK_q
 # define k_e SDLK_e
+# define k_z SDLK_z
+# define k_x SDLK_x
 
 #endif

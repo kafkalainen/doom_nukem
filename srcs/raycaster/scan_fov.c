@@ -39,6 +39,7 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_p
 	float		wall_height_left;
 	float		wall_height_right;
 	float		step;
+	float		z_step;
 	float		angle_mult;
 	int			i;
 
@@ -50,6 +51,7 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_p
 	// 	current_angle = vec2_angle(left, right);
 	// }
 	screen_wall = current_pxl;
+	z_step = get_distance(plr->pos, left) / get_distance(plr->pos, right);
 	screen_offset = SCREEN_WIDTH - frame->offset;
 	wall_height_left = 480 / (fabs(left.x + left.y) * SQR2) * 20;
 	wall_height_right = 480 / (fabs(right.x + right.y) * SQR2) * 20;
@@ -63,6 +65,7 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_p
 			color,
 			frame->draw_surf);
 		wall_height_left = wall_height_left - step;
+		z_step -= screen_wall * z_step;
 		i++;
 	}
 }
@@ -112,6 +115,7 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	continue_from_last_sector(fov_left.wall, &fov_left, frame);
 	get_left_point(fov_left.wall, &fov_left, frame, home->sectors[frame->idx]->nb_of_walls);
 	get_right_point(fov_left.wall, &fov_right, frame, home->sectors[frame->idx]->nb_of_walls);
+	draw_text(home, ft_ftoa(plr->z, 2, 1), frame, vec2(32, 32));
 	while (frame->offset > frame->max_fov)
 	{
 		if (current_pxl != 0)

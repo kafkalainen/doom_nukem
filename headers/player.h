@@ -19,6 +19,8 @@ typedef struct		s_input
 	int				left;
 	int				up;
 	int				down;
+	int				z;
+	int				x;
 }					t_input;
 
 typedef struct		s_player
