@@ -12,7 +12,7 @@
 
 #include "../../doom_nukem.h"
 
-int				check_collision(t_sector *sector, float delta_time, t_player *plr)
+int				check_collision(t_sector *sector, float delta_time, t_player *plr, t_home *home)
 {
 	t_ray			ray;
 	t_intersection	isect;
@@ -22,22 +22,23 @@ int				check_collision(t_sector *sector, float delta_time, t_player *plr)
 
 	i = 0;
 	ray.dir = vec2(0.785398163, 0.785398163);
-	ray.pos = vec2(-1, -1);
+	ray.pos = vec2(0, 0);
 	t_point *start = &sector->points[0];
 	p0 = start;
 	while (i < sector->nb_of_walls)
 	{
 		calc_intersection(p0, &ray, &isect);
 		point = line_intersection(&isect);
-		if (point.x != -1 && point.y != -1)
+		if (point.x > 0 && point.y > 0)
 		{
-			if (get_distance(vec2(0, 0), point) < 5 && (p0->idx < 0))
-				return (1);
-			else if (get_distance(vec2(0, 0), point) < 3 && (p0->idx >= 0))
+			if (get_distance(vec2(0, 0), point) < 1 && (p0->idx >= 0))
 			{
 				plr->current_sector = p0->idx;
+				translate_world_view(home, vec2_mul(plr->dir, 1));
 				return (0);
 			}
+			else if (get_distance(vec2(0, 0), point) < 5 && (p0->idx < 0))
+				return (1);
 		}
 		p0 = p0->next;
 		i++;
@@ -48,7 +49,7 @@ int				check_collision(t_sector *sector, float delta_time, t_player *plr)
 void			player_move_forward(t_player *plr, t_home *home, float delta_time)
 {
 	play_footsteps(plr);
-	if (!check_collision(home->sectors[plr->current_sector], delta_time, plr))
+	if (!check_collision(home->sectors[plr->current_sector], delta_time, plr, home))
 		translate_world_view(home, vec2_mul(plr->dir, 40 * delta_time));
 }
 
