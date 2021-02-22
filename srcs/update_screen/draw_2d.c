@@ -48,7 +48,7 @@ int				hypotenuse(int opposite, int adjacent)
 
 void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
 {
-	frame->idx = 0;
+	frame->idx = plr->current_sector;
 	frame->old_idx = -1;
 	frame->max_fov = 0;
 	frame->offset = 640;

@@ -45,6 +45,7 @@ void			init_player(t_player *plr)
 	plr->time = 0;
 	plr->height = 0.5;
 	plr->angle = 0;
+	plr->current_sector = 0;
 }
 
 void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)

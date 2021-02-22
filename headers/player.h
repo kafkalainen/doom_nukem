@@ -34,6 +34,7 @@ typedef struct		s_player
 	clock_t			time;
 	t_audio			audio;
 	float			angle;
+	int				current_sector;
 }					t_player;
 
 #endif
