@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:33:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 14:07:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 10:44:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls)
 	t_point			*p0;
 
 	ray.pos = vec2(0, 0);
-	ray.dir = vec2_rot(vec2(0, 1), -frame->offset);
+	ray.dir = vec2_rot(vec2(0, 1), -frame->offset * frame->min_step);
 	p0 = start;
 	while (walls)
 	{

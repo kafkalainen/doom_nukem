@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/22 10:35:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 10:57:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static float	angle_offset(float current_angle, float screen_offset, float screen
 	return ((angle_mult_left - angle_mult_right) / screen_wall);
 }
 
-static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_angle, int color, t_home *home)
+static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_pxl, int color, t_home *home)
 {
 	float		screen_wall;
 	float		screen_offset;
@@ -49,12 +49,12 @@ static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, float current_a
 	// 	right.x = 0;
 	// 	current_angle = vec2_angle(left, right);
 	// }
-	screen_wall = SCREEN_WIDTH / FOV * current_angle;
-	screen_offset = SCREEN_WIDTH / FOV * (FOV - frame->offset);
+	screen_wall = current_pxl;
+	screen_offset = SCREEN_WIDTH - frame->offset;
 	wall_height_left = 480 / (fabs(left.x + left.y) * SQR2) * 20;
 	wall_height_right = 480 / (fabs(right.x + right.y) * SQR2) * 20;
 	step = (wall_height_left - wall_height_right) / screen_wall;
-	angle_mult = angle_offset(current_angle, screen_offset, screen_wall);
+	angle_mult = angle_offset(current_pxl, screen_offset, screen_wall);
 	while (i < (int)screen_wall)
 	{
 		ft_draw_line(
@@ -78,10 +78,10 @@ static float	round_angle(float angle, float *pxl_offset)
 	if (*pxl_offset >= 1.0f)
 	{
 		*pxl_offset = *pxl_offset - 1.0f;
-		return ((float)(trunc + 1.0f) * 0.002454369f);
+		return ((float)(trunc + 1.0f));
 	}
 	else
-		return ((float)trunc * 0.002454369f);
+		return ((float)trunc);
 }
 
 int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
@@ -95,11 +95,6 @@ int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
 	}
 	else
 		return (0);
-}
-
-int			angle_to_pxls(float angle)
-{
-	return (angle / 0.002454369f);
 }
 
 void			scan_fov(t_home *home, t_frame *frame)
@@ -123,7 +118,7 @@ void			scan_fov(t_home *home, t_frame *frame)
 			continue_from_next_point(fov_left.wall, &fov_left, frame);
 		if (check_if_same_wall(fov_left.wall->x0, fov_right.wall->x0, fov_right.right_point))
 			fov_left.right_point = fov_right.right_point;
-		current_pxl = angle_to_pixels(round_angle(vec2_angle(fov_left.left_point, fov_left.right_point), &frame->pxl_offset));
+		current_pxl = round_angle(vec2_angle(fov_left.left_point, fov_left.right_point), &frame->pxl_offset);
 		if (check_if_portal(fov_left.wall, frame) && !check_if_same_point(current_pxl, &fov_left))
 		{
 			current_pxl++;
@@ -134,20 +129,14 @@ void			scan_fov(t_home *home, t_frame *frame)
 		}
 		else
 		{
-			ft_draw_wall(fov_left.left_point, fov_left.right_point, frame, current_angle, 0xFF8000 + frame->offset * RAD_TO_DEG * 100, home);
+			ft_draw_wall(fov_left.left_point, fov_left.right_point, frame, current_pxl, 0xFF8000 + frame->offset * RAD_TO_DEG * 100, home);
 			ft_draw_line(
 				vec2_add(fov_left.left_point, home->offset),
 				vec2_add(fov_left.right_point, home->offset),
 				green,
 				frame->draw_surf);
-			printf("Width using current angle:");
-			printf("%f\n", current_angle / 0.002454369f);
-			current_angle = current_angle + frame->min_step;
-			printf("After adding min_step:");
-			printf("%f\n", current_angle / 0.002454369f);
-			printf("After rounding to next pixel:");
-			printf("%f\n", current_angle / 0.002454369f);
-			frame->offset = frame->offset - current_angle;
+			current_pxl++;
+			frame->offset = frame->offset - current_pxl;
 		}
 	}
 }

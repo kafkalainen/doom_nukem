@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/22 10:34:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 10:47:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int					get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls
 int					get_right_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls);
 void				continue_from_next_point(t_point *start, t_ray_fov *fov, t_frame *frame);
 void				scan_fov(t_home *home, t_frame *frame);
-void				setup_frame(t_frame *frame, t_frame *new_frame, float fov_angle, int idx);
+void				setup_frame(t_frame *frame, t_frame *new_frame, int current_pxl, int idx);
 int					check_connection(t_point *point, t_frame *frame);
 int					check_if_portal(t_point *point, t_frame *frame);
 int					check_if_same_point(int current_pxl, t_ray_fov *fov);
