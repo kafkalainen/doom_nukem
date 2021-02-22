@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 16:10:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 10:03:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,14 @@ void			scan_fov(t_home *home, t_frame *frame)
 				vec2_add(fov_left.right_point, home->offset),
 				green,
 				frame->draw_surf);
+			printf("Width using current angle:");
+			printf("%f\n", current_angle / 0.002454369f);
 			current_angle = current_angle + frame->min_step;
+			printf("After adding min_step:");
+			printf("%f\n", current_angle / 0.002454369f);
+			printf("After rounding to next pixel:");
+			printf("%f\n", current_angle / 0.002454369f);
+			current_angle = ceil_to_pixel(current_angle);
 			frame->offset = frame->offset - current_angle;
 		}
 	}

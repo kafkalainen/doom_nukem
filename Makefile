@@ -37,6 +37,7 @@ SRCS =	main.c \
 		srcs/raycaster/check_if_same_point.c \
 		srcs/raycaster/calc_visible_walls.c \
 		srcs/raycaster/get_distance.c \
+		srcs/raycaster/ceil_to_pixel.c \
 		srcs/parsing/read_map.c	\
 		# srcs/png_parser/color_utils.c \
 		# srcs/png_parser/crc.c \

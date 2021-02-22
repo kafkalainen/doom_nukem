@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 16:05:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/19 16:51:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 	frame->draw_surf = SDL_GetWindowSurface(home->win.window);
 	if (!frame->draw_surf)
 		error_output_sdl("Fatal: Failed to get window surface", home);
-	frame->min_step = .002454369f;
+	frame->min_step = .002454369;
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		error_output_sdl("Fatal: SDL_mixer could not initialize!", home);
 	return (home);

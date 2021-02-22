@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 14:37:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/22 09:30:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int					check_if_portal(t_point *point, t_frame *frame);
 int					check_if_same_point(float current_angle, t_ray_fov *fov);
 void				continue_from_last_sector(t_point *start, t_ray_fov *fov, t_frame *frame);
 int					calc_visible_walls(t_sector *sector);
+float				ceil_to_pixel(float nb);
 
 
 #endif
