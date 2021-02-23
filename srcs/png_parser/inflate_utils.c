@@ -6,11 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:01:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 16:15:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:56:19 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/png_parser.h"
+#include "../../doom_nukem.h"
 
 unsigned char	ft_read_bit(unsigned long *bitp,
 	const unsigned char *bitstream)

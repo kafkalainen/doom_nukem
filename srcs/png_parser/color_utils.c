@@ -6,11 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:35:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 16:15:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:55:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/png_parser.h"
+#include "../../doom_nukem.h"
 
 int		get_color_luma(int color_depth)
 {

@@ -6,18 +6,12 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 16:22:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:54:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PNG_PARSER_H
 # define PNG_PARSER_H
-
-# include "libft.h"
-# include <fcntl.h>
-# include <math.h>
-# include <stdlib.h>
-# include "parser_structs.h"
 
 # define MAX_SIZE 16777216
 # define COLOR_LUM 0

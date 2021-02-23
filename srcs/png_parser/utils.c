@@ -6,11 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:23:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 16:15:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:57:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/png_parser.h"
+#include "../../doom_nukem.h"
 
 void	get_current_chunk(t_chunk *chunk, unsigned char *buf, int i)
 {

@@ -6,11 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:51:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 16:15:35 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:56:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/png_parser.h"
+#include "../../doom_nukem.h"
 
 void	validate_signature(unsigned char *buf)
 {
