@@ -91,4 +91,6 @@ void			perspective_transformation(t_point *x0, t_point *x1, t_home *home, int id
 
 void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 t_ray_fov		get_fov(t_home *home, t_player *plr, int i);
+float			angle_offset(float screen_offset, int screen_wall);
+
 #endif

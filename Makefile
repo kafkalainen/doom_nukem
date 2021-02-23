@@ -40,6 +40,7 @@ SRCS =	main.c \
 		srcs/raycaster/calc_visible_walls.c \
 		srcs/raycaster/get_distance.c \
 		srcs/raycaster/ceil_to_pixel.c \
+		srcs/raycaster/ft_draw_wall.c \
 		srcs/parsing/read_map.c	\
 		srcs/png_parser/color_utils.c \
 		srcs/png_parser/crc.c \
