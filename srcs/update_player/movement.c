@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 18:08:50 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/22 14:59:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/23 12:31:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ int				check_collision(t_sector *sector, t_player *plr, t_home *home)
 
 	i = 0;
 	p0 = &sector->points[0];
+	ray.pos = plr->pos;
+	ray.dir = plr->dir;
 	while (i < sector->nb_of_walls)
 	{
-		calc_intersection(p0, plr, &isect);
+		calc_intersection(p0, &ray, &isect);
 		point = line_intersection(&isect);
 		if (point.x > 0 && point.y > 0)
 		{
