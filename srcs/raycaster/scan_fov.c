@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/22 14:19:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/23 12:39:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,6 @@ static float	angle_offset(float screen_offset, int screen_wall)
 	return ((angle_mult_left - angle_mult_right) / screen_wall);
 }
 
-static void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, int color, t_home *home, t_player *plr)
-{
-	float		screen_offset;
-	float		wall_height_left;
-	float		wall_height_right;
-	float		step;
-	float		z_step;
-	float		angle_mult;
-	int			i;
-
-	i = 0;
-	z_step = get_distance(plr->pos, left) / get_distance(plr->pos, right);
-	screen_offset = SCREEN_WIDTH - frame->offset;
-	wall_height_left = 480 / (fabs(left.x + left.y) * SQR2) * 20;
-	wall_height_right = 480 / (fabs(right.x + right.y) * SQR2) * 20;
-	step = (wall_height_left - wall_height_right) / wall_len;
-	angle_mult = angle_offset(screen_offset, wall_len);
-	while (i < wall_len)
-	{
-		ft_draw_line(
-			vec2(screen_offset + i, plr->pitch - wall_height_left),
-			vec2(screen_offset + i, plr->pitch + wall_height_left),
-			color,
-			frame->draw_surf);
-		wall_height_left = wall_height_left - step + angle_mult;
-		z_step -= wall_len * z_step;
-		i++;
-	}
-}
-
 static float	round_angle(float angle, float *pxl_offset)
 {
 	float			angle_as_pixels;
@@ -77,8 +47,6 @@ static float	round_angle(float angle, float *pxl_offset)
 	else
 		return ((float)trunc);
 }
-
-
 
 void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {
