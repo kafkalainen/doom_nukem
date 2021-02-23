@@ -6,11 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:12:55 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 16:15:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:56:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/png_parser.h"
+#include "../../doom_nukem.h"
 
 void	convert_to_pixels(t_png *png)
 {

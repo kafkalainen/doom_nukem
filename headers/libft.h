@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:47:04 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/22 14:01:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:59:30 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char			*ft_strnew(size_t size);
 char			*ft_strcat(char *dst, const char *str);
 char			*ft_strjoin(const char *s1, const char *s2);
 
+void			*ft_memalloc(size_t size);
 void			*ft_memset(void *dst, int c, size_t n);
 void			ft_memdel(void **p);
 

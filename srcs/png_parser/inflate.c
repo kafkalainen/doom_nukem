@@ -6,11 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:40:20 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 16:15:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:56:30 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/png_parser.h"
+#include "../../doom_nukem.h"
 
 void	ft_inflate_huffman(t_png *png, const unsigned char *in, t_huffman *h)
 {

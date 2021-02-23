@@ -6,11 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:44:53 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 16:15:42 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:55:54 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/png_parser.h"
+#include "../../doom_nukem.h"
 
 void			init_crc_table(t_crc *crc)
 {

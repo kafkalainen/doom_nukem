@@ -6,11 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:13:42 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 16:15:20 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:56:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/png_parser.h"
+#include "../../doom_nukem.h"
 
 void			fill_nodes(t_tree_helper *h, t_huffman_tree *tree,
 	const unsigned int *bitlen)

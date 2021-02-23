@@ -6,11 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:38:29 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 16:15:38 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:55:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/png_parser.h"
+#include "../../doom_nukem.h"
 
 void	sub(unsigned char *out, unsigned char *sl, t_scan_helper s)
 {
