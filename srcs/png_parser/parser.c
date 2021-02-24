@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 12:11:12 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 12:22:45 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_texture	*png_parser(char *path)
 		error_output("Failed to open file\n");
 	else
 	{
-		png.source.size = read(fd, png.source.buf, MAX_SIZE);
+		png.source.size = READ_FILE(fd, png.source.buf, MAX_SIZE);
 		if (png.source.size <= 0)
 			error_output("Failed to read file\n");
 		else if (png.source.size >= MAX_SIZE)
