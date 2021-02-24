@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:40:20 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 13:59:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:46:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,30 +100,27 @@ void	go_go_huffman(t_png *png, const unsigned char *in, t_huffman *h)
 
 void	ft_inflate_data(t_png *png)
 {
-	t_huffman	*h;
+	t_huffman	h;
 	int			done;
 
-	if (!(h = (t_huffman *)malloc(sizeof(t_huffman))))
-		error_output("malloc failed\n");
-	h->bit_p = 0;
-	h->pos = 0;
+	h.bit_p = 0;
+	h.pos = 0;
 	done = 0;
 	while (done == 0)
 	{
-		if ((h->bit_p >> 3) > png->compressed_size)
+		if ((h.bit_p >> 3) > png->compressed_size)
 			error_output("bit pointing outside memory pointer\n");
-		done = ft_read_bit(&h->bit_p, &png->compressed[2]);
-		h->type = ft_read_bit(&h->bit_p, &png->compressed[2]) |
-			(ft_read_bit(&h->bit_p, &png->compressed[2]) << 1);
-		if (h->type == 3)
+		done = ft_read_bit(&h.bit_p, &png->compressed[2]);
+		h.type = ft_read_bit(&h.bit_p, &png->compressed[2]) |
+			(ft_read_bit(&h.bit_p, &png->compressed[2]) << 1);
+		if (h.type == 3)
 			error_output("Zlib type error\n");
-		else if (h->type == 0)
+		else if (h.type == 0)
 			ft_inflate_uncompressed(png, &png->compressed[2],
-				&h->bit_p, &h->pos);
+				&h.bit_p, &h.pos);
 		else
-			go_go_huffman(png, &png->compressed[2], h);
+			go_go_huffman(png, &png->compressed[2], &h);
 	}
-	free(h);
 }
 
 void	ft_inflate(t_png *png)
