@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:51:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 13:14:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 13:32:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	validate_signature(unsigned char *buf)
 {
 	int						i;
-	static unsigned char	sig[8] = {0x89, 'P', 'N',
-							'G', '\r', '\n', 0x1a, '\n'};
+	static unsigned char	sig[8] = {0x89, 0x50, 0x4E,
+							0x47, 0x0D, 0x0A, 0x1A, 0x0A};
 
 	i = -1;
 	while (++i < 8)
