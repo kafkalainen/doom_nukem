@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 12:58:03 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 11:56:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:01:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ unsigned int	*get_fixed_deflate_codetree(void)
 */
 
 void			ft_get_tree_inflate_dynamic(t_huffman *h,
-	const unsigned char *in, unsigned long inlength)
+	const unsigned char *in, unsigned int inlength)
 {
 	t_dynamic_helper d;
 

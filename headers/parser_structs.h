@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:04:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/18 15:11:42 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 13:55:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef	struct		s_png
 typedef	struct		s_crc
 {
 	int				flag;
-	unsigned long	crc_table[256];
+	unsigned int	crc_table[256];
 }					t_crc;
 
 typedef	struct		s_texture
@@ -105,9 +105,9 @@ typedef	struct		s_texture
 
 typedef	struct		s_huffman_tree
 {
-	unsigned		*tree2d;
-	unsigned		maxbitlen;
-	unsigned		numcodes;
+	unsigned int	*tree2d;
+	unsigned int	maxbitlen;
+	unsigned int	numcodes;
 }					t_huffman_tree;
 
 typedef	struct		s_tree_helper
@@ -144,11 +144,11 @@ typedef	struct		s_huffman_helper
 	unsigned int	code_dst;
 	unsigned int	distance;
 	unsigned int	num_extra_bits_dst;
-	unsigned long	length;
-	unsigned long	start;
-	unsigned long	forward;
-	unsigned long	backward;
-	unsigned long	numextrabits;
+	unsigned int	length;
+	unsigned int	start;
+	unsigned int	forward;
+	unsigned int	backward;
+	unsigned int	numextrabits;
 }					t_huffman_helper;
 
 typedef	struct		s_huffman
@@ -159,8 +159,8 @@ typedef	struct		s_huffman
 	t_huffman_tree	codetree;
 	t_huffman_tree	codetree_dst;
 	t_huffman_tree	code_length_tree;
-	unsigned long	bit_p;
-	unsigned long	pos;
+	unsigned int	bit_p;
+	unsigned int	pos;
 	unsigned int	type;
 }					t_huffman;
 

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:44:53 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 11:55:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:05:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void			init_crc_table(t_crc *crc)
 {
 	int				i;
 	int				j;
-	unsigned long	k;
+	unsigned int	k;
 
 	i = -1;
 	while (++i < 256)
 	{
-		k = (unsigned long)i;
+		k = (unsigned int)i;
 		j = -1;
 		while (++j < 8)
 		{
@@ -35,10 +35,10 @@ void			init_crc_table(t_crc *crc)
 	crc->flag = 1;
 }
 
-unsigned long	update_crc(unsigned long crcbuf, unsigned char *buf,
+unsigned int	update_crc(unsigned int crcbuf, unsigned char *buf,
 	int size, t_crc *crc)
 {
-	unsigned long	i;
+	unsigned int	i;
 	int				x;
 
 	i = crcbuf;
@@ -52,7 +52,7 @@ unsigned long	update_crc(unsigned long crcbuf, unsigned char *buf,
 	return (i);
 }
 
-unsigned long	calculate_crc(unsigned char *buf, int size, t_crc *crc)
+unsigned int	calculate_crc(unsigned char *buf, int size, t_crc *crc)
 {
 	return (update_crc(0xffffffffL, buf, size, crc) ^ 0xffffffffL);
 }

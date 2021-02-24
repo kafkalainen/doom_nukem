@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:40:20 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 11:56:30 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 13:59:09 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	ft_inflate_huffman(t_png *png, const unsigned char *in, t_huffman *h)
 }
 
 void	ft_inflate_uncompressed(t_png *png, const unsigned char *in,
-	unsigned long *bp, unsigned long *pos)
+	unsigned int *bp, unsigned int *pos)
 {
-	unsigned long	p;
+	unsigned int	p;
 	unsigned int	len;
 	unsigned int	nlen;
 	unsigned int	n;

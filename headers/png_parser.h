@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 11:54:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:05:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void			sub(unsigned char *out, unsigned char *sl,
 
 void			verify_crc(unsigned char *crc_buf, unsigned char *buf,
 				int size, t_crc *crc);
-unsigned long	calculate_crc(unsigned char *buf, int size, t_crc *crc);
-unsigned long	update_crc(unsigned long crcbuf, unsigned char *buf,
+unsigned int	calculate_crc(unsigned char *buf, int size, t_crc *crc);
+unsigned int	update_crc(unsigned int crcbuf, unsigned char *buf,
 				int size, t_crc *crc);
 void			init_crc_table(t_crc *crc);
 
@@ -107,37 +107,37 @@ void			convert_to_pixels(t_png *png);
 **	Inflate algorithm functions
 */
 
-unsigned		ft_read_bits(unsigned long *bitp,
-				const unsigned char *bitstream, unsigned long nbits);
-unsigned char	ft_read_bit(unsigned long *bitp,
+unsigned		ft_read_bits(unsigned int *bitp,
+				const unsigned char *bitstream, unsigned int nbits);
+unsigned char	ft_read_bit(unsigned int *bitp,
 				const unsigned char *bitstream);
 void			ft_inflate(t_png *png);
 void			ft_inflate_data(t_png *png);
 void			go_go_huffman(t_png *png, const unsigned char *in,
 				t_huffman *h);
 void			ft_inflate_uncompressed(t_png *png, const unsigned char *in,
-				unsigned long *bp, unsigned long *pos);
+				unsigned int *bp, unsigned int *pos);
 void			ft_inflate_huffman(t_png *png, const unsigned char *in,
 				t_huffman *h);
 unsigned int	get_deflate_tree_one(int i);
 void			fill_out(t_png *png, t_huffman_helper *s,
 				t_huffman *h, const unsigned char *in);
 void			dynamic_code_cycle(t_dynamic_helper *d, const unsigned char *in,
-				unsigned long *bp);
+				unsigned int *bp);
 unsigned int	ft_huffman_decode_symbol(const unsigned char *in,
-				unsigned long *bp, t_huffman_tree *codetree,
-				unsigned long inlength);
+				unsigned int *bp, t_huffman_tree *codetree,
+				unsigned int inlength);
 void			fill_nodes(t_tree_helper *h, t_huffman_tree *tree,
 				const unsigned int *bitlen);
 void			check_code(t_huffman_helper *s, t_png *png, t_huffman *h);
 void			repeat_codes(t_dynamic_helper *d, const unsigned char *in,
-				unsigned long *bp);
-void			get_nbits_replength(unsigned long *nbits, unsigned int code,
+				unsigned int *bp);
+void			get_nbits_replength(unsigned int *nbits, unsigned int code,
 				unsigned int *replength);
 void			ft_huffman_tree_create_lengths(t_huffman_tree *tree,
 				const unsigned int *bitlen);
 void			ft_get_tree_inflate_dynamic(t_huffman *h,
-				const unsigned char *in, unsigned long inlength);
+				const unsigned char *in, unsigned int inlength);
 unsigned int	*get_fixed_deflate_codetree(void);
 void			init_huffman_tree(t_huffman_tree *tree,
 				unsigned int *buffer,
@@ -147,12 +147,12 @@ void			init_huffman_tree_codetree_fixed(t_huffman_tree *tree,
 unsigned int	get_deflate_tree_zero(int i);
 void			get_dst_base_extra(unsigned int *distance,
 				unsigned int *num_extra_bits_dst, unsigned int code_dst);
-void			get_length_base_extra(unsigned long *length,
-				unsigned long *num_extra_bits_dst, unsigned int code);
+void			get_length_base_extra(unsigned int *length,
+				unsigned int *num_extra_bits_dst, unsigned int code);
 void			setup_tree_helper(t_tree_helper *h, const unsigned *bitlen,
 				t_huffman_tree *tree);
 void			setup_dynamic_helper(t_dynamic_helper *d,
-				const unsigned char *in, unsigned long *bp);
+				const unsigned char *in, unsigned int *bp);
 /*
 ** Utility functions
 */
