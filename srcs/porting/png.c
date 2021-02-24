@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 11:24:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 11:50:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_textures(t_home *home)
 	load_texture("textures/redbrick.png", home, 1);
 	load_texture("textures/wood.png", home, 2);
 	load_texture("textures/eagle.png", home, 3);
-	load_texture("emal_floor_texture.png", home, 4);
+	load_texture("textures/emal_floor_texture.png", home, 4);
 }
 
 /*
