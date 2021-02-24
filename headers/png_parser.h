@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 14:05:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:12:09 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void			convert_to_pixels(t_png *png);
 **	Inflate algorithm functions
 */
 
-unsigned		ft_read_bits(unsigned int *bitp,
+unsigned int	ft_read_bits(unsigned int *bitp,
 				const unsigned char *bitstream, unsigned int nbits);
 unsigned char	ft_read_bit(unsigned int *bitp,
 				const unsigned char *bitstream);
@@ -149,7 +149,7 @@ void			get_dst_base_extra(unsigned int *distance,
 				unsigned int *num_extra_bits_dst, unsigned int code_dst);
 void			get_length_base_extra(unsigned int *length,
 				unsigned int *num_extra_bits_dst, unsigned int code);
-void			setup_tree_helper(t_tree_helper *h, const unsigned *bitlen,
+void			setup_tree_helper(t_tree_helper *h, const unsigned int *bitlen,
 				t_huffman_tree *tree);
 void			setup_dynamic_helper(t_dynamic_helper *d,
 				const unsigned char *in, unsigned int *bp);

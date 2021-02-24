@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:01:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 14:05:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:14:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ unsigned char	ft_read_bit(unsigned int *bitp,
 	return (result);
 }
 
-unsigned		ft_read_bits(unsigned int *bitp,
+unsigned int	ft_read_bits(unsigned int *bitp,
 	const unsigned char *bitstream, unsigned int nbits)
 {
 	unsigned int	result;
@@ -31,7 +31,7 @@ unsigned		ft_read_bits(unsigned int *bitp,
 	result = 0;
 	i = -1;
 	while (++i < nbits)
-		result |= ((unsigned)ft_read_bit(bitp, bitstream)) << i;
+		result |= ((unsigned int)ft_read_bit(bitp, bitstream)) << i;
 	return (result);
 }
 
