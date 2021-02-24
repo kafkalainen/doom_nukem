@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 12:29:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 13:21:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		parse_data(t_png *png)
 		png->i += png->chunk.size + 12;
 	}
 	png->i = 33;
-	if (!(png->compressed = (unsigned char *)malloc(png->compressed_size)))
+	if (!(png->compressed = (unsigned char *)malloc(sizeof(unsigned char) * png->compressed_size)))
 		error_output("Malloc failed\n");
 	while (png->i < png->source.size)
 	{
@@ -75,7 +75,7 @@ void		decode_png(t_png *png)
 {
 	png->inflated_size = ((png->width * (png->height * png->bpp + 7)) / 8) +
 		png->height;
-	if (!(png->inflated = (unsigned char *)malloc(png->inflated_size)))
+	if (!(png->inflated = (unsigned char *)malloc(sizeof(unsigned char) * png->inflated_size)))
 		error_output("Malloc failed\n");
 	ft_inflate(png);
 	free(png->compressed);
@@ -85,7 +85,7 @@ void		decode_png(t_png *png)
 
 void		setup_parser(t_png *png)
 {
-	if (!(png->source.buf = (unsigned char *)malloc(sizeof(char) * MAX_SIZE)))
+	if (!(png->source.buf = (unsigned char *)malloc(sizeof(unsigned char) * MAX_SIZE)))
 		error_output("Malloc failed\n");
 	png->state = 0;
 	png->i = 8;
