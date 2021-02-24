@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 12:22:45 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 12:29:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_texture	*png_parser(char *path)
 			error_output("Failed to read file\n");
 		else if (png.source.size >= MAX_SIZE)
 			error_output("File is too large\n");
-		if (close(fd) == -1)
+		if (CLOSE_FILE(fd) == -1)
 			error_output("Could not close file\n");
 		validate_signature(png.source.buf);
 		parse_data(&png);

@@ -25,6 +25,7 @@
 # ifdef __unix__
 #  define OPEN_FILE open
 #  define READ_FILE read
+#  define CLOSE_FILE close
 #  define READ_ONLY O_RDONLY
 #  include <math.h>
 #  include "/usr/local/include/SDL2/SDL_mixer.h"
@@ -38,6 +39,7 @@
 # elif defined(_WIN32) || defined(WIN32)
 #  define OPEN_FILE _open
 #  define READ_FILE _read
+#  define CLOSE_FILE _close
 #  define READ_ONLY _O_RDONLY
 #  include "SDL2_mixer_win/include/SDL2/SDL_mixer.h"
 #  include <io.h>
