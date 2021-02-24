@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_sector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 13:22:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/24 10:44:08 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void		assign_points(t_sector *sector)
 
 		new = new_polygon(
 		coord[walls - 1],
-		-1);
+		-4);
 		temp->next = new;
 		temp = temp->next;
 		walls--;
@@ -151,7 +151,7 @@ static void		assign_points2(t_sector *sector)
 		{
 			new = new_polygon(
 				coord[walls - 1],
-				-1);
+				-2);
 		}
 		temp->next = new;
 		temp = temp->next;
@@ -185,7 +185,7 @@ static void		assign_points3(t_sector *sector)
 	{
 		new = new_polygon(
 			coord[walls - 1],
-		-1);
+		-3);
 		temp->next = new;
 		temp = temp->next;
 		walls--;

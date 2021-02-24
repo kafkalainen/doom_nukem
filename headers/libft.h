@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:47:04 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/23 12:30:21 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 13:55:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void			*ft_memalloc(size_t size);
 void			*ft_memset(void *dst, int c, size_t n);
 void			ft_memdel(void **p);
 void			*ft_memcpy(void *dest, const void *src, size_t count);
+void			ft_putnbr(int n);
+void			ft_putchar(char c);
 
 int				ft_get_next_line(const int fd, char **out);
 void			ft_putendl_fd(char const *s, int fd);

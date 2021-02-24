@@ -53,7 +53,11 @@ SRCS =	main.c \
 		srcs/png_parser/parser.c \
 		srcs/png_parser/texture.c \
 		srcs/png_parser/unfilter.c \
-		srcs/png_parser/utils.c
+		srcs/png_parser/utils.c \
+		srcs/porting/png.c \
+		srcs/raycaster/ft_draw_wall.c \
+		srcs/libft/ft_putnbr.c \
+		srcs/libft/ft_putchar.c
 
 HEADERS = \
 		doom_nukem.h\

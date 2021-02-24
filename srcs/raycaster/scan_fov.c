@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/23 12:39:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/24 09:04:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // 	return (p0.y + (0 - p0.x) * ((p1.y - p0.y) / (p1.x - p0.x)));
 // }
 
-static float	angle_offset(float screen_offset, int screen_wall)
+float			angle_offset(float screen_offset, int screen_wall)
 {
 	float		angle_mult_left;
 	float		angle_mult_right;

@@ -6,24 +6,13 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/01/26 11:34:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 11:24:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-Uint32	swap_channels(Uint32 color)
-{
-	Uint32 rgba;
-
-	rgba = (((color & 0xFF) & 0xFF) << 16) |
-		((((color >> 8)  & 0xFF) & 0xFF) << 8 )|
-		(((color >> 16)  & 0xFF) & 0xFF) |
-		((((color >> 24) & 0xFF) & 0xFF) << 24);
-	return (rgba);
-}
-
-void	*convert_to_uint32(Uint32 *dest, SDL_Surface *image)
+void	*convert_to_uint32(Uint32 *dest, t_texture *image)
 {
 	int		x;
 	int		y;
@@ -42,43 +31,34 @@ void	*convert_to_uint32(Uint32 *dest, SDL_Surface *image)
 	return (dest);
 }
 
+Uint32		get_texel(int x, int y, t_texture *tex)
+{
+	int offset_x;
+	int offset_y;
+
+	offset_x = x % tex->w;
+	offset_y = y % tex->h;
+	return ((Uint32)tex->pixels[(offset_y * tex->w) + offset_x]);
+}
+
 void	load_texture(char *path, t_home *home, int i)
 {
-	SDL_Surface		*image;
-
-	image = IMG_Load(path);
-	if (image == NULL)
+	home->editor_textures[i] = png_parser(path);
+	if (home->editor_textures[i] == NULL)
 		error_output("PNG image file loading failed\n");
 	else
-	{
-		home->editor_textures[i]->pitch = image->pitch;
-		home->editor_textures[i]->h = image->h;
-		if (!(home->editor_textures[i]->tex = malloc(sizeof(Uint32) *
-			(image->pitch * image->h))))
-				error_output("Memory allocation failed\n");
-		SDL_LockSurface(image);
-		convert_to_uint32(home->editor_textures[i]->tex, image);
-		SDL_UnlockSurface(image);
-	}
-	SDL_FreeSurface(image);
+		convert_to_uint32(home->editor_textures[i]->pixels, home->editor_textures[i]);
 }
 
 void	init_textures(t_home *home)
 {
-	int i;
-
-	if (!(home->editor_textures = (t_texture**)malloc(sizeof(t_texture*) * NUM_TEX)))
+	if (!(home->editor_textures = (t_texture**)malloc(sizeof(t_texture*) * 5)))
 		error_output("failed to allocate memory to editor textures\n");
-	i = -1;
-	while (++i < NUM_TEX)
-	{
-		if (!(home->editor_textures[i] = (t_texture*)malloc(sizeof(t_texture))))
-			error_output("failed to allocate memory to editor textures\n");
-	}
 	load_texture("textures/greybrick.png", home, 0);
 	load_texture("textures/redbrick.png", home, 1);
 	load_texture("textures/wood.png", home, 2);
 	load_texture("textures/eagle.png", home, 3);
+	load_texture("emal_floor_texture.png", home, 4);
 }
 
 /*
@@ -86,7 +66,7 @@ void	init_textures(t_home *home)
 ** 1st index = pitch, after that comes texture height separated by ' ' followed by uint32 data
 */
 
-Uint32	*load_texture_from_map_data(char *line)
+unsigned int	*load_texture_from_map_data(char *line)
 {
 	int 	i;
 	int 	pitch;

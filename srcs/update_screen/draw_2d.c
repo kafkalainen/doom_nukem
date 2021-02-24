@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/22 10:43:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/24 09:44:45 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
 	frame->offset = 640;
 	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	frame->pxl_offset = 0.0f;
-	scan_fov(home, frame, plr);
+	tex_scan_fov(home, frame, plr);
+	// scan_fov(home, frame, plr);
 	draw_2d_fov(frame, plr);
 }

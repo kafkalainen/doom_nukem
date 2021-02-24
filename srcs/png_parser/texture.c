@@ -6,13 +6,13 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 11:56:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/23 16:04:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-unsigned int	swap_channels(unsigned int color)
+Uint32			swap_channels(unsigned int color)
 {
 	unsigned int red;
 	unsigned int green;
