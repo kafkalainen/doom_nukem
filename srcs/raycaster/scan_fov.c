@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/23 14:02:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/02/24 11:19:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,6 @@
 // 	if (p1.x - p0.x == 0)
 // 		return (p1.y - p0.y);
 // 	return (p0.y + (0 - p0.x) * ((p1.y - p0.y) / (p1.x - p0.x)));
-// }
-
-// float			perspective_offset(float frame_offset, int screen_wall)
-// {
-// 	float		left_mult;
-// 	float		right_mult;
-
-// 	left_mult = SCREEN_WIDTH - frame_offset;
-// 	right_mult = SCREEN_WIDTH - frame_offset + screen_wall;
-// 	if (left_mult <= 320)
-// 		left_mult = ((0.5 * SCREEN_WIDTH - left_mult) * 0.00129441738f + 1);
-// 	else
-// 		left_mult = ((left_mult - 0.5 * SCREEN_WIDTH) * 0.00129441738f + 1);
-// 	if (right_mult <= 320)
-// 		right_mult = ((0.5 * SCREEN_WIDTH - right_mult) * 0.00129441738f + 1);
-// 	else
-// 		right_mult = ((right_mult - 0.5 * SCREEN_WIDTH) * 0.00129441738f + 1);
-// 	return ((right_mult + left_mult) / 2);
 // }
 
 float			angle_offset(float screen_offset, int screen_wall)
@@ -60,10 +42,10 @@ static float	round_angle(float angle, float *pxl_offset, int screen_offset)
 	if (*pxl_offset >= 1.0f)
 	{
 		*pxl_offset = *pxl_offset - 1.0f;
-		return ((int)(trunc + 1) * perspective_offset(screen_offset, trunc + 1));
+		return ((int)(trunc + 1));
 	}
 	else
-		return ((int)trunc * perspective_offset(screen_offset, trunc));
+		return ((int)trunc);
 }
 
 void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
@@ -72,6 +54,7 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	t_ray_fov	fov_right;
 	t_frame		new_frame;
 	int			current_pxl;
+	float		angle;
 
 	current_pxl = 0;
 	fov_left.left_point = vec2(-1,-1);
@@ -88,7 +71,10 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
 			continue_from_next_point(&fov_left);
 		if (check_if_same_wall(fov_left.wall->x0, fov_right.wall->x0, fov_right.right_point))
 			fov_left.right_point = fov_right.right_point;
-		current_pxl = round_angle(vec2_angle(fov_left.left_point, fov_left.right_point), &frame->pxl_offset, frame->offset);
+		angle = vec2_angle(fov_left.left_point, fov_left.right_point);
+		//angle = angle * perspective_offset(frame->offset, current_pxl);
+		current_pxl = round_angle(angle, &frame->pxl_offset, frame->offset);
+		draw_text(home, ft_ftoa(angle, 6, 1), frame, vec2(SCREEN_WIDTH - frame->offset + current_pxl * 0.5, 50));
 		if (check_if_portal(fov_left.wall) && !check_if_same_point(current_pxl, &fov_left))
 		{
 			current_pxl++;
@@ -99,13 +85,12 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		}
 		else
 		{
-			ft_draw_wall(fov_left.left_point, fov_left.right_point, frame, current_pxl, 0xFF8000 + get_distance(fov_left.left_point, fov_right.right_point) * 100, home, plr);
+			current_pxl = ft_draw_wall(fov_left.left_point, fov_left.right_point, frame, current_pxl, 0xFF8000 + get_distance(fov_left.left_point, fov_right.right_point) * 100, home, plr);
 			ft_draw_line(
 				vec2_add(fov_left.left_point, home->offset),
 				vec2_add(fov_left.right_point, home->offset),
 				green,
 				frame->draw_surf);
-			current_pxl++;
 			frame->offset = frame->offset - current_pxl;
 		}
 	}

@@ -41,6 +41,7 @@ SRCS =	main.c \
 		srcs/raycaster/get_distance.c \
 		srcs/raycaster/ceil_to_pixel.c \
 		srcs/raycaster/ft_draw_wall.c \
+		srcs/raycaster/perspective_offset.c \
 		srcs/parsing/read_map.c	\
 		srcs/png_parser/color_utils.c \
 		srcs/png_parser/crc.c \
