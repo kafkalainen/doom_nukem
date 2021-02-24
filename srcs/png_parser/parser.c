@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 12:07:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 12:11:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_texture	*png_parser(char *path)
 	t_texture	*tex;
 
 	setup_parser(&png);
-	if ((fd = open(path, READ_ONLY)) < 0)
+	if ((fd = OPEN_FILE(path, READ_ONLY)) < 0)
 		error_output("Failed to open file\n");
 	else
 	{
