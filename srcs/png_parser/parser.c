@@ -76,7 +76,7 @@ void		decode_png(t_png *png)
 	png->inflated_size = ((png->width * (png->height * png->bpp + 7)) / 8) +
 		png->height;
 	if (!(png->inflated = (unsigned char *)malloc(sizeof(unsigned char) * png->inflated_size)))
-		error_output("Malloc failed\n");
+		error_output("Malloc failed1\n");
 	ft_inflate(png);
 	free(png->compressed);
 	convert_to_pixels(png);
