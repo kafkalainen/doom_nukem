@@ -40,7 +40,7 @@
 #  define OPEN_FILE _open
 #  define READ_FILE _read
 #  define CLOSE_FILE _close
-#  define READ_ONLY _O_RDONLY
+#  define READ_ONLY _O_BINARY
 #  include "SDL2_mixer_win/include/SDL2/SDL_mixer.h"
 #  include <io.h>
 #  include <stdio.h>
