@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw_wall.c                                     :+:      :+:    :+:   */
+/*   tex_scan_fov.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/24 10:45:52 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/25 09:04:28 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,10 @@ static float	round_angle(float angle, float *pxl_offset)
 
 t_texture		*get_texture(int idx, t_texture	**textures)
 {
+	if (idx >= 0)
+		error_output("idx larger or equal to zero\n");
 	return (textures[abs(idx)]);
+	
 }
 
 void			tex_scan_fov(t_home *home, t_frame *frame, t_player *plr)
