@@ -19,18 +19,6 @@
 // 	return (p0.y + (0 - p0.x) * ((p1.y - p0.y) / (p1.x - p0.x)));
 // }
 
-float			angle_offset(float screen_offset, int screen_wall)
-{
-	float		angle_mult_left;
-	float		angle_mult_right;
-	float		euc_offset;
-
-	euc_offset = screen_offset >= 320 ? screen_offset - 320 : screen_offset;
-	angle_mult_left = FOV - euc_offset * .00178373853125f;
-	angle_mult_right = FOV - (euc_offset + screen_wall) * .00178373853125f;
-	return ((angle_mult_left - angle_mult_right) / screen_wall);
-}
-
 static float	round_angle(float angle, float *pxl_offset)
 {
 	float			angle_as_pixels;

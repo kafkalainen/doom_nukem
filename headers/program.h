@@ -68,19 +68,6 @@ typedef struct		s_wall
 	int				side;
 }					t_wall;
 
-
-typedef struct		s_frame
-{
-	int				idx;
-	int				max_fov;
-	int				offset;
-	double			min_step;
-	int				old_idx;
-	SDL_Surface		*draw_surf;
-	t_xy			plr_offset;
-	float			pxl_offset;
-}					t_frame;
-
 typedef struct		s_home
 {
 	t_window		win;

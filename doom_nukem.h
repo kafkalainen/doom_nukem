@@ -60,14 +60,14 @@
 # include "headers/player.h"
 
 # include "headers/libft.h"
+# include "headers/player_functions.h"
+# include "headers/raycast.h"
 # include "headers/drawing_functions.h"
 # include "headers/caster.h"
 # include "headers/events.h"
-# include "headers/player_functions.h"
 # include "headers/porting.h"
 # include "headers/parsing.h"
 # include "headers/map.h"
-# include "headers/raycast.h"
 
 /*
 ** Miscellanious

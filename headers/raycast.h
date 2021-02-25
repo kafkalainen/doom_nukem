@@ -22,6 +22,19 @@ typedef struct		s_ray_fov
 	t_point			*wall;
 }					t_ray_fov;
 
+typedef struct		s_frame
+{
+	int				idx;
+	int				max_fov;
+	int				offset;
+	double			min_step;
+	int				old_idx;
+	SDL_Surface		*draw_surf;
+	t_xy			plr_offset;
+	float			pxl_offset;
+	t_ray_fov		left;
+	t_ray_fov		right;
+}					t_frame;
 
 float				get_distance(t_xy p1, t_xy p2);
 t_ray_fov			get_fov_points(t_point *plgn, t_home *home, t_player *plr, int i);
@@ -40,5 +53,7 @@ void				continue_from_last_sector(t_point *start, t_ray_fov *fov, t_frame *frame
 int					calc_visible_walls(t_sector *sector);
 float				ceil_to_pixel(float nb);
 void				ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, int color, t_home *home, t_player *plr);
+int					tex_ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, t_texture *tex, t_home *home, t_player *plr);
+void				tex_scan_fov(t_home *home, t_frame *frame, t_player *plr);
 
 #endif

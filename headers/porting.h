@@ -25,8 +25,7 @@ Uint32	swap_channels(Uint32 color);
 Uint32	*load_texture_from_map_data(char *line);
 Uint32	get_texel(int x, int y, t_texture *tex);
 void	put_texel(Uint32 *buffer, int x, int y, Uint32 color);
-void	tex_ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, t_texture *tex, t_home *home, t_player *plr);
-void	tex_scan_fov(t_home *home, t_frame *frame, t_player *plr);
+
 /*
 ** Audio Encode/Decode funtions
 */
