@@ -55,7 +55,7 @@ SRCS =	main.c \
 		srcs/png_parser/unfilter.c \
 		srcs/png_parser/utils.c \
 		srcs/porting/png.c \
-		srcs/raycaster/ft_draw_wall.c \
+		srcs/raycaster/tex_scan_fov.c \
 		srcs/libft/ft_putnbr.c \
 		srcs/libft/ft_putchar.c
 
