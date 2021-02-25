@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:12:55 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 13:22:55 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/25 08:47:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	convert_to_pixels(t_png *png)
 {
 	png->final_size = (png->height * png->width * png->bpp + 7) / 8;
 	if (!(png->pixels = (unsigned char *)ft_memalloc(sizeof(unsigned char) * png->final_size)))
-		error_output("Malloc error\n");
+		error_output("Memory allocation of filtered pixel pointer failed\n");
 	if (png->bpp < 8 && png->bpp * png->width !=
 		((png->width * png->bpp + 7) / 8) * 8)
 	{

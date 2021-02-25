@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:40:20 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 14:46:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/25 08:47:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	ft_inflate_data(t_png *png)
 		h.type = ft_read_bit(&h.bit_p, &png->compressed[2]) |
 			(ft_read_bit(&h.bit_p, &png->compressed[2]) << 1);
 		if (h.type == 3)
-			error_output("Zlib type error\n");
+			error_output("zlib type error\n");
 		else if (h.type == 0)
 			ft_inflate_uncompressed(png, &png->compressed[2],
 				&h.bit_p, &h.pos);

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 13:21:42 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/25 08:43:09 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		parse_data(t_png *png)
 	}
 	png->i = 33;
 	if (!(png->compressed = (unsigned char *)malloc(sizeof(unsigned char) * png->compressed_size)))
-		error_output("Malloc failed\n");
+		error_output("Memory allocation of compressed data pointer failed\n");
 	while (png->i < png->source.size)
 	{
 		get_current_chunk(&png->chunk, png->source.buf, png->i);
@@ -76,7 +76,7 @@ void		decode_png(t_png *png)
 	png->inflated_size = ((png->width * (png->height * png->bpp + 7)) / 8) +
 		png->height;
 	if (!(png->inflated = (unsigned char *)malloc(sizeof(unsigned char) * png->inflated_size)))
-		error_output("Malloc failed1\n");
+		error_output("Memory allocation of inflated data pointer failed\n");
 	ft_inflate(png);
 	free(png->compressed);
 	convert_to_pixels(png);
@@ -86,7 +86,7 @@ void		decode_png(t_png *png)
 void		setup_parser(t_png *png)
 {
 	if (!(png->source.buf = (unsigned char *)malloc(sizeof(unsigned char) * MAX_SIZE)))
-		error_output("Malloc failed\n");
+		error_output("Memory allocation of source buffer failed\n");
 	png->state = 0;
 	png->i = 8;
 	png->compressed_size = 0;

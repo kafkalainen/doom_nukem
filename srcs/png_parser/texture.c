@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 16:04:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/25 08:46:26 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_texture		*create_texture(t_png *png)
 	t_texture	*tex;
 
 	if (!(tex = (t_texture*)malloc(sizeof(t_texture))))
-		error_output("malloc error\n");
+		error_output("Memory allocation of t_texture struct failed\n");
 	tex->h = png->height;
 	tex->w = png->width;
 	tex->bpp = (png->depth / 8) * png->channels;
@@ -78,7 +78,7 @@ t_texture		*create_texture(t_png *png)
 	tex->pitch = (tex->w * tex->bpp);
 	if (!(tex->pixels = (unsigned int *)malloc(sizeof(unsigned int) *
 		(tex->h * tex->pitch))))
-		error_output("malloc error\n");
+		error_output("Memory allocation of pixel pointer failed\n");
 	convert_to_unsigned_int(tex, png);
 	return (tex);
 }
