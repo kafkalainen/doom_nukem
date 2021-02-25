@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 11:50:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/25 15:59:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ void	load_texture(char *path, t_home *home, int i)
 
 void	init_textures(t_home *home)
 {
-	if (!(home->editor_textures = (t_texture**)malloc(sizeof(t_texture*) * 5)))
+	if (!(home->editor_textures = (t_texture**)malloc(sizeof(t_texture*) * 6)))
 		error_output("failed to allocate memory to editor textures\n");
-	load_texture("textures/greybrick.png", home, 0);
-	load_texture("textures/redbrick.png", home, 1);
-	load_texture("textures/wood.png", home, 2);
-	load_texture("textures/eagle.png", home, 3);
-	load_texture("textures/emal_floor_texture.png", home, 4);
+	home->editor_textures[0] = NULL;
+	load_texture("textures/greybrick.png", home, 1);
+	load_texture("textures/redbrick.png", home, 2);
+	load_texture("textures/wood.png", home, 3);
+	load_texture("textures/eagle.png", home, 4);
+	load_texture("textures/emal_floor_texture.png", home, 5);
 }
 
 /*
