@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:04:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 13:55:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/26 09:52:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef	struct		s_crc
 typedef	struct		s_texture
 {
 	unsigned int	*pixels;
+	unsigned char	*map_pixels;
 	int				w;
 	int				h;
 	int				size;
