@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/25 08:46:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/26 10:00:45 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ t_texture		*create_texture(t_png *png)
 
 	if (!(tex = (t_texture*)malloc(sizeof(t_texture))))
 		error_output("Memory allocation of t_texture struct failed\n");
+	if (!(tex->map_pixels = (unsigned char *)malloc(sizeof(unsigned char) * png->final_size)))
+		error_output("Memory allocation of editor pixel pointer failed\n");
+	ft_memcpy(tex->map_pixels, png->pixels, png->final_size);
 	tex->h = png->height;
 	tex->w = png->width;
 	tex->bpp = (png->depth / 8) * png->channels;

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:47:04 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/23 13:55:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/26 10:58:13 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char			*ft_strsub(const char *str, unsigned int start, size_t n);
 char			*ft_strnew(size_t size);
 char			*ft_strcat(char *dst, const char *str);
 char			*ft_strjoin(const char *s1, const char *s2);
+char			*ft_strncpy(char *dest, const char *src, size_t count);
+char			**ft_strsplit(char const *s, char c);
 
 void			*ft_memalloc(size_t size);
 void			*ft_memset(void *dst, int c, size_t n);

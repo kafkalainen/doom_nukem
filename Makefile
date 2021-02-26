@@ -57,7 +57,9 @@ SRCS =	main.c \
 		srcs/porting/png.c \
 		srcs/raycaster/tex_scan_fov.c \
 		srcs/libft/ft_putnbr.c \
-		srcs/libft/ft_putchar.c
+		srcs/libft/ft_putchar.c \
+		srcs/libft/ft_strncpy.c \
+		srcs/libft/ft_strsplit.c
 
 HEADERS = \
 		doom_nukem.h\
