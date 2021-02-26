@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/24 09:54:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/26 11:59:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	home = init_sdl(home, frame);
 	if (TTF_Init() < 0)
 		error_output_sdl("Fatal: Failed to init TTF.", home);
-	home->font = TTF_OpenFont("arial.ttf", 12);
+	home->font = TTF_OpenFont("arial.ttf", 18);
 	if (home->font == NULL)
 		error_output_sdl("Fatal: Failed to init given font.", home);
 	load_audio(&plr->audio);

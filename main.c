@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/25 09:50:30 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/25 15:52:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int  			main(int argc, char **argv)
 	setup(argv[1], &home, &plr, &frame);
 	update_sector(&home);
 	/*Sets player position in the world to the wall error position*/
-	translate_world_view(&home, vec2_mul(vec2_rot(plr.dir, FOV), -96.000000f)); // why are we passing constants as parameters?!?!
-	transform_world_view(&home, -134 * DEG_TO_RAD);  // why are we passing constants as parameters?!?!
-	translate_world_view(&home, vec2_mul(vec2_rot(plr.dir, FOV), -152.000000f));  // why are we passing constants as parameters?!?!
+	// translate_world_view(&home, vec2_mul(vec2_rot(plr.dir, FOV), -96.000000f)); // why are we passing constants as parameters?!?!
+	transform_world_view(&home, -45 * DEG_TO_RAD);  // why are we passing constants as parameters?!?!
+	// translate_world_view(&home, vec2_mul(vec2_rot(plr.dir, FOV), -152.000000f));  // why are we passing constants as parameters?!?!
 	while(1)
 	{
 		//home.t.beginfps = clock();

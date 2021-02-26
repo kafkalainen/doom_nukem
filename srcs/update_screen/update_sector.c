@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_sector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/24 10:44:08 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/26 11:57:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void		assign_points1(t_sector *sector)
 		{
 			new = new_polygon(
 				coord[walls - 1],
-				2);
+				-1);
 		}
 		else
 		{
