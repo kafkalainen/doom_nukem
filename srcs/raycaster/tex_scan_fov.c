@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/01 20:51:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/01 21:14:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,11 @@ int				tex_ft_draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *
 	float		wall_len;
 
 	i = 0;
-	left_perp_dist = (480 / fabs(frame->left.left_point.x + frame->left.left_point.y) * SQR2);
-	right_perp_dist = (480 / fabs(frame->left.right_point.x + frame->left.right_point.y) * SQR2);
+	left_perp_dist = fabs(frame->left.left_point.x + frame->left.left_point.y) * SQR2;
+	right_perp_dist = fabs(frame->left.right_point.x + frame->left.right_point.y) * SQR2;
 	z_step = get_distance(plr->pos, frame->left.left_point) / get_distance(plr->pos, frame->left.left_point);
-	wall_x1 = SCREEN_WIDTH * 0.5 - ((480 / left_perp_dist) * frame->left.left_point.x);
-	wall_x2 = SCREEN_WIDTH * 0.5 - ((480 / right_perp_dist) * frame->left.right_point.x);
+	wall_x1 = SCREEN_WIDTH - ((480 / left_perp_dist) * frame->left.left_point.x);
+	wall_x2 = SCREEN_WIDTH - ((480 / right_perp_dist) * frame->left.right_point.x);
 	wall_len = wall_x2 - wall_x1;
 	wall_height_left = 480 / left_perp_dist * 20;
 	wall_height_right = 480 / right_perp_dist * 20;
