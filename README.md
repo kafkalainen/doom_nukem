@@ -11,4 +11,19 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Pixel offset
 - Is right point needed to properly render the space?
 - Segfault in renderer when the function returns back to the same portal it came from.
+
 Fabien's Sanglard's tutorial for Building Duke Nukem Graphics Engine [Link](https://fabiensanglard.net/duke3d/build_engine_internals.php)
+
+# TO-DO
+Riku
+- Refactor PNG parser.
+- Reading map data from level editor.
+
+Joonas
+
+# Done
+- Tested to change int values in the tex_ft_draw_wall perspective_fix function, to no avail.
+- We need to change angle, before it is normalized.
+
+# Thoughts
+- Half of the wall length needs to be added to the calculation in perspective fix.

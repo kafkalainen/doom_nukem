@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/23 12:41:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/01 12:26:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void				continue_from_last_sector(t_point *start, t_ray_fov *fov, t_frame *frame
 int					calc_visible_walls(t_sector *sector);
 float				ceil_to_pixel(float nb);
 void				ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, int color, t_home *home, t_player *plr);
-int					tex_ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, t_texture *tex, t_home *home, t_player *plr);
+int					tex_ft_draw_wall(t_xy left, t_xy right, int wall_len, t_frame *frame, t_texture *tex, t_home *home, t_player *plr);
 void				tex_scan_fov(t_home *home, t_frame *frame, t_player *plr);
 
 #endif

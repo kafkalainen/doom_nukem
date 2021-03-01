@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 13:11:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/01 13:31:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct			s_point
 {
 	t_xy				x0;
 	int					idx;
+	char				c;
 	struct s_point		*next;
 }						t_point;
 
