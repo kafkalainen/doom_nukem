@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/01 14:54:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/01 20:51:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,28 @@ void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, int colo
 	float		z_step;
 	float		angle_mult;
 	int			i;
+	float		wall_x1;
+	float		wall_x2;
 
 	i = 0;
 	z_step = get_distance(plr->pos, left) / get_distance(plr->pos, right);
 	screen_offset = SCREEN_WIDTH - frame->offset;
+	wall_x1 = (480 / fabs(left.x + left.y) * SQR2) * left.x;
+	wall_x2 = (480 / fabs(right.x + right.y) * SQR2) * right.x;
 	wall_height_left = 480 / (fabs(left.x + left.y) * SQR2) * 20;
 	wall_height_right = 480 / (fabs(right.x + right.y) * SQR2) * 20;
 	step = (wall_height_left - wall_height_right) / wall_len;
 	angle_mult = angle_offset(screen_offset, wall_len);
-	while (i < wall_len)
+	while (wall_x1 < wall_x2)
 	{
 		ft_draw_line(
-			vec2(screen_offset + i, plr->pitch - wall_height_left),
-			vec2(screen_offset + i, plr->pitch + wall_height_left),
+			vec2(wall_x1, plr->pitch - wall_height_left),
+			vec2(wall_x1, plr->pitch + wall_height_left),
 			color,
 			frame->draw_surf);
 		wall_height_left = wall_height_left - step + angle_mult;
 		z_step -= wall_len * z_step;
-		i++;
+		wall_x1++;
 	}
 }
 
@@ -86,36 +90,42 @@ int				tex_ft_draw_line(t_xy start, t_xy end, t_texture *tex, SDL_Surface *surf)
 	return (TRUE);
 }
 
-int				tex_ft_draw_wall(t_xy left, t_xy right, int wall_len, t_frame *frame, t_texture *tex, t_home *home, t_player *plr)
+int				tex_ft_draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr)
 {
-	float		screen_offset;
 	float		wall_height_left;
 	float		wall_height_right;
 	float		step;
 	float		z_step;
 	float		angle_mult;
-	int			new_wall_len;
 	int			i;
+	float		wall_x1;
+	float		wall_x2;
+	float		left_perp_dist;
+	float		right_perp_dist;
+	float		wall_len;
 
 	i = 0;
-	z_step = get_distance(plr->pos, left) / get_distance(plr->pos, right);
-	screen_offset = SCREEN_WIDTH - frame->offset;
-	wall_height_left = 480 / (fabs(left.x + left.y) * SQR2) * 20;
-	wall_height_right = 480 / (fabs(right.x + right.y) * SQR2) * 20;
+	left_perp_dist = (480 / fabs(frame->left.left_point.x + frame->left.left_point.y) * SQR2);
+	right_perp_dist = (480 / fabs(frame->left.right_point.x + frame->left.right_point.y) * SQR2);
+	z_step = get_distance(plr->pos, frame->left.left_point) / get_distance(plr->pos, frame->left.left_point);
+	wall_x1 = SCREEN_WIDTH * 0.5 - ((480 / left_perp_dist) * frame->left.left_point.x);
+	wall_x2 = SCREEN_WIDTH * 0.5 - ((480 / right_perp_dist) * frame->left.right_point.x);
+	wall_len = wall_x2 - wall_x1;
+	wall_height_left = 480 / left_perp_dist * 20;
+	wall_height_right = 480 / right_perp_dist * 20;
 	step = (wall_height_left - wall_height_right) / wall_len;
-	angle_mult = angle_offset(screen_offset, wall_len);
-	while (i < wall_len)
+	while (wall_x1 < wall_x2)
 	{
 		tex_ft_draw_line(
-			vec2(screen_offset + i, plr->pitch - wall_height_left),
-			vec2(screen_offset + i, plr->pitch + wall_height_left),
+			vec2(wall_x1, plr->pitch - wall_height_left),
+			vec2(wall_x1, plr->pitch + wall_height_left),
 			tex,
 			frame->draw_surf);
-		wall_height_left = wall_height_left - step + angle_mult;
+		wall_height_left = wall_height_left - step;
 		z_step -= wall_len * z_step;
-		i++;
+		wall_x1++;
 	}
-	draw_text(home, ft_itoa(wall_len), frame, vec2(screen_offset + (wall_len * 0.5), 240));
+	//draw_text(home, ft_itoa(wall_len), frame, vec2(screen_offset + (wall_len * 0.5), 240));
 	return (wall_len + 1);
 }
 
@@ -141,17 +151,6 @@ t_texture		*get_texture(int idx, t_texture	**textures)
 	if (idx >= 0)
 		error_output("idx larger or equal to zero\n");
 	return (textures[abs(idx)]);
-
-}
-
-float			angle_fix(float angle, int offset)
-{
-	int		angle_as_pixels;
-	if (offset == 0)
-		return (angle);
-	angle_as_pixels = angle / 0.002454369f;
-	offset = offset + angle_as_pixels * 0.5;
-	offset = offset > 320 ? offset - SCREEN_WIDTH * 0.5 : offset;
 
 }
 
@@ -187,11 +186,11 @@ void			tex_scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		}
 		else
 		{
-			tex_ft_draw_wall(frame->left.left_point, frame->left.right_point, current_pxl, frame, get_texture(frame->left.wall->idx, home->editor_textures), home, plr);
+			tex_ft_draw_wall(frame, get_texture(frame->left.wall->idx, home->editor_textures), home, plr);
 			current_pxl++;
 			draw_text(home, ft_itoa(SCREEN_WIDTH - frame->offset + current_pxl/2), frame, vec2(SCREEN_WIDTH - frame->offset + (current_pxl * 0.5), 200));
-			if (frame->left.wall->c == 'b')
-				printf("%f %d\n", angle, SCREEN_WIDTH - frame->offset + current_pxl / 2);
+			// if (frame->left.wall->c == 'b')
+			// 	printf("%f %d\n", angle, SCREEN_WIDTH - frame->offset + current_pxl / 2);
 			ft_draw_line(
 				vec2_add(frame->left.left_point, home->offset),
 				vec2_add(frame->left.right_point, home->offset),
