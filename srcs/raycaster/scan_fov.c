@@ -94,11 +94,11 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl)
 	t_frame		new_frame;
 
 	frame->left.wall = home->sectors[frame->idx]->points;
+	frame->right.wall = home->sectors[frame->idx]->points;
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
 	while (frame->offset > frame->max_fov)
 	{
-		get_wall_pts(frame->left.wall, &frame->left, frame, 
-					home->sectors[frame->idx]->nb_of_walls);
+		get_wall_pts(frame, home->sectors[frame->idx]->nb_of_walls, current_pxl);
 		current_pxl = round_angle(vec2_ang(frame->left.l_pt, frame->left.r_pt), 
 					&frame->pxl_offset);
 		if (check_if_portal(frame->left.wall) && 
