@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/01 13:33:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/02 09:46:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void		assign_points1(t_sector *sector)
 		{
 			new = new_polygon(
 				coord[walls - 1],
-				-1);
+				2);
 		}
 		else
 		{

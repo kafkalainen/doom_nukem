@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 07:59:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/24 09:04:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/02 09:31:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		}
 		else
 		{
-			ft_draw_wall(fov_left.left_point, fov_left.right_point, frame, current_pxl, 0xFF8000 + get_distance(fov_left.left_point, fov_right.right_point) * 100, home, plr);
+			// ft_draw_wall(fov_left.left_point, fov_left.right_point, frame, current_pxl, 0xFF8000 + get_distance(fov_left.left_point, fov_right.right_point) * 100, home, plr);
 			ft_draw_line(
 				vec2_add(fov_left.left_point, home->offset),
 				vec2_add(fov_left.right_point, home->offset),

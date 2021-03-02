@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/01 20:45:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/02 09:40:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ typedef struct		s_frame
 	float			pxl_offset;
 	t_ray_fov		left;
 	t_ray_fov		right;
+	float			wall_x1;
+	float			wall_x2;
+	float			left_perp_dist;
+	float			right_perp_dist;
+	float			wall_len;
+	float			wall_height_left;
+	float			wall_height_right;
 }					t_frame;
 
 float				get_distance(t_xy p1, t_xy p2);
@@ -53,7 +60,8 @@ void				continue_from_last_sector(t_point *start, t_ray_fov *fov, t_frame *frame
 int					calc_visible_walls(t_sector *sector);
 float				ceil_to_pixel(float nb);
 void				ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, int color, t_home *home, t_player *plr);
-int					tex_ft_draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr);
+void				tex_ft_draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr);
 void				tex_scan_fov(t_home *home, t_frame *frame, t_player *plr);
+void				ft_calc_distances(t_frame *frame);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/26 11:07:06 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/02 10:06:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void		convert_editor_tex(t_texture *tex)
 	unsigned int y;
 
 	y = -1;
-	while (++y < tex->h)
+	while (++y < (unsigned int)tex->h)
 	{
 		x = -1;
-		while (++x < tex->w)
+		while (++x < (unsigned int)tex->w)
 		{
 			tex->pixels[(y * tex->w) + x] = add_pixel(tex->map_pixels, tex->bpp,
 				((y * tex->pitch) + x * tex->bpp));
@@ -91,7 +91,7 @@ void		free_array(unsigned char **array)
 	i = 0;
 	while (array[i] != NULL)
 	{
-		ft_strdel(&array[i]);
+		ft_strdel((char**)&array[i]);
 		i++;
 	}
 	free(array);
@@ -110,19 +110,19 @@ void		free_array(unsigned char **array)
 t_texture	*load_texture_from_map_data(char *line)
 {
 	t_texture		*tex;
-	unsigned char	**elems;		
+	unsigned char	**elems;
 
 	if (!(tex = (t_texture*)malloc(sizeof(t_texture))))
 		error_output("Memory allocation of t_texture struct failed\n");
-	elems = ft_strsplit(line, ','); // break character should be a unique character that will not appear in any of the actual data
-	tex->w = ft_atoi(elems[0]);
-	tex->h = ft_atoi(elems[1]);
-	tex->size = ft_atoi(elems[2]);
-	tex->color_type = ft_atoi(elems[3]);
-	tex->color_depth = ft_atoi(elems[4]);
-	tex->format = ft_atoi(elems[5]);
-	tex->bpp = ft_atoi(elems[6]);
-	tex->pitch = ft_atoi(elems[7]);
+	elems = (unsigned char**)ft_strsplit(line, ','); // break character should be a unique character that will not appear in any of the actual data
+	tex->w = ft_atoi((const char*)elems[0]);
+	tex->h = ft_atoi((const char*)elems[1]);
+	tex->size = ft_atoi((const char*)elems[2]);
+	tex->color_type = ft_atoi((const char*)elems[3]);
+	tex->color_depth = ft_atoi((const char*)elems[4]);
+	tex->format = ft_atoi((const char*)elems[5]);
+	tex->bpp = ft_atoi((const char*)elems[6]);
+	tex->pitch = ft_atoi((const char*)elems[7]);
 	if (!(tex->map_pixels = (unsigned char *)malloc(sizeof(unsigned char) * tex->size)))
 		error_output("Memory allocation of editor pixel pointer failed\n");
 	ft_memcpy(tex->map_pixels, elems[8], tex->size);

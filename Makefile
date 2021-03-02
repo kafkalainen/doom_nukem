@@ -56,6 +56,7 @@ SRCS =	main.c \
 		srcs/png_parser/utils.c \
 		srcs/porting/png.c \
 		srcs/raycaster/tex_scan_fov.c \
+		srcs/raycaster/ft_calc_distances.c \
 		srcs/libft/ft_putnbr.c \
 		srcs/libft/ft_putchar.c \
 		srcs/libft/ft_strncpy.c \

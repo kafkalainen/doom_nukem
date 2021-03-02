@@ -6,52 +6,12 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/01 21:14:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/02 10:04:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../doom_nukem.h"
-#include <stdio.h>
-
-void		ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, int color, t_home *home, t_player *plr)
-{
-	float		screen_offset;
-	float		wall_height_left;
-	float		wall_height_right;
-	float		step;
-	float		z_step;
-	float		angle_mult;
-	int			i;
-	float		wall_x1;
-	float		wall_x2;
-
-	i = 0;
-	z_step = get_distance(plr->pos, left) / get_distance(plr->pos, right);
-	screen_offset = SCREEN_WIDTH - frame->offset;
-	wall_x1 = (480 / fabs(left.x + left.y) * SQR2) * left.x;
-	wall_x2 = (480 / fabs(right.x + right.y) * SQR2) * right.x;
-	wall_height_left = 480 / (fabs(left.x + left.y) * SQR2) * 20;
-	wall_height_right = 480 / (fabs(right.x + right.y) * SQR2) * 20;
-	step = (wall_height_left - wall_height_right) / wall_len;
-	angle_mult = angle_offset(screen_offset, wall_len);
-	while (wall_x1 < wall_x2)
-	{
-		ft_draw_line(
-			vec2(wall_x1, plr->pitch - wall_height_left),
-			vec2(wall_x1, plr->pitch + wall_height_left),
-			color,
-			frame->draw_surf);
-		wall_height_left = wall_height_left - step + angle_mult;
-		z_step -= wall_len * z_step;
-		wall_x1++;
-	}
-}
-
-float			vec2_ang_offset(t_xy a, t_xy b, int offset)
-{
-	return acosf(vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b)));
-}
 
 float			angle_offset(float screen_offset, int screen_wall)
 {
@@ -90,46 +50,28 @@ int				tex_ft_draw_line(t_xy start, t_xy end, t_texture *tex, SDL_Surface *surf)
 	return (TRUE);
 }
 
-int				tex_ft_draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr)
+void			tex_ft_draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr)
 {
-	float		wall_height_left;
-	float		wall_height_right;
 	float		step;
 	float		z_step;
-	float		angle_mult;
-	int			i;
-	float		wall_x1;
-	float		wall_x2;
-	float		left_perp_dist;
-	float		right_perp_dist;
-	float		wall_len;
 
-	i = 0;
-	left_perp_dist = fabs(frame->left.left_point.x + frame->left.left_point.y) * SQR2;
-	right_perp_dist = fabs(frame->left.right_point.x + frame->left.right_point.y) * SQR2;
 	z_step = get_distance(plr->pos, frame->left.left_point) / get_distance(plr->pos, frame->left.left_point);
-	wall_x1 = SCREEN_WIDTH - ((480 / left_perp_dist) * frame->left.left_point.x);
-	wall_x2 = SCREEN_WIDTH - ((480 / right_perp_dist) * frame->left.right_point.x);
-	wall_len = wall_x2 - wall_x1;
-	wall_height_left = 480 / left_perp_dist * 20;
-	wall_height_right = 480 / right_perp_dist * 20;
-	step = (wall_height_left - wall_height_right) / wall_len;
-	while (wall_x1 < wall_x2)
+	step = (frame->wall_height_left - frame->wall_height_right) / frame->wall_len;
+	while (frame->wall_x1 < frame->wall_x2)
 	{
 		tex_ft_draw_line(
-			vec2(wall_x1, plr->pitch - wall_height_left),
-			vec2(wall_x1, plr->pitch + wall_height_left),
+			vec2(frame->wall_x1, plr->pitch - frame->wall_height_left),
+			vec2(frame->wall_x1, plr->pitch + frame->wall_height_left),
 			tex,
 			frame->draw_surf);
-		wall_height_left = wall_height_left - step;
-		z_step -= wall_len * z_step;
-		wall_x1++;
+		frame->wall_height_left = frame->wall_height_left - step;
+		z_step -= frame->wall_len * z_step;
+		frame->wall_x1 = frame->wall_x1 + 1.0f;
 	}
-	//draw_text(home, ft_itoa(wall_len), frame, vec2(screen_offset + (wall_len * 0.5), 240));
-	return (wall_len + 1);
+	draw_text(home, ft_ftoa(frame->wall_len, 9, 1), frame, vec2(frame->wall_x2 - frame->wall_len * 0.5, 240));
 }
 
-static float	round_angle(float angle, float *pxl_offset, int offset)
+static float	round_angle(float angle, float *pxl_offset)
 {
 	float			angle_as_pixels;
 	int				trunc;
@@ -158,7 +100,6 @@ void			tex_scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {
 	t_frame		new_frame;
 	int			current_pxl;
-	float		angle;
 
 	current_pxl = 0;
 	frame->left.wall = home->sectors[frame->idx]->points;
@@ -172,13 +113,10 @@ void			tex_scan_fov(t_home *home, t_frame *frame, t_player *plr)
 			continue_from_next_point(&frame->left);
 		if (check_if_same_wall(frame->left.wall->x0, frame->right.wall->x0, frame->right.right_point))
 			frame->left.right_point = frame->right.right_point;
-		angle = vec2_angle(frame->left.left_point, frame->left.right_point);
-		//angle = perspective_fix(angle, frame->offset);
-		current_pxl = round_angle(angle, &frame->pxl_offset, SCREEN_WIDTH - frame->offset);
+		current_pxl = round_angle(vec2_angle(frame->left.left_point, frame->left.right_point), &frame->pxl_offset);
 		if (check_if_portal(frame->left.wall) && !check_if_same_point(current_pxl, &frame->left))
 		{
 			current_pxl++;
-			draw_text(home, ft_itoa(current_pxl), frame, vec2(SCREEN_WIDTH - frame->offset + (current_pxl * 0.5), 240));
 			setup_frame(frame, &new_frame, current_pxl, frame->left.wall->idx);
 			tex_scan_fov(home, &new_frame, plr);
 			frame->offset = new_frame.offset;
@@ -186,18 +124,9 @@ void			tex_scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		}
 		else
 		{
+			ft_calc_distances(frame);
 			tex_ft_draw_wall(frame, get_texture(frame->left.wall->idx, home->editor_textures), home, plr);
-			current_pxl++;
-			draw_text(home, ft_itoa(SCREEN_WIDTH - frame->offset + current_pxl/2), frame, vec2(SCREEN_WIDTH - frame->offset + (current_pxl * 0.5), 200));
-			// if (frame->left.wall->c == 'b')
-			// 	printf("%f %d\n", angle, SCREEN_WIDTH - frame->offset + current_pxl / 2);
-			ft_draw_line(
-				vec2_add(frame->left.left_point, home->offset),
-				vec2_add(frame->left.right_point, home->offset),
-				green,
-				frame->draw_surf);
-			draw_text(home, ft_ftoa(angle, 9, 1), frame, vec2(SCREEN_WIDTH - frame->offset + (current_pxl * 0.5), 220));
-			frame->offset = frame->offset - current_pxl;
+			frame->offset = frame->offset - ++current_pxl;
 		}
 	}
 }
