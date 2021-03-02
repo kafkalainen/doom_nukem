@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 15:33:56 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/01 10:55:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/02 11:05:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 # ifdef __unix__
 #  define MOUSE_HANDLE mouse_handle_unix(plr, home)
 # elif defined(_WIN32) || defined(WIN32)
-#  define MOUSE_HANDLE mouse_handle_win(plr, home)
+#  define MOUSE_HANDLE mouse_handle_win(plr, home, e)
 # endif
 
-void	update_player(t_player *plr, t_home *home, SDL_Event e)
+void	update_player(t_player *plr, t_home *home, SDL_Event *e)
 {
-	key_input(plr, e, home);
-	MOUSE_HANDLE;
+	while (SDL_PollEvent(e) != 0)
+	{
+		key_input(plr, e, home);
+		MOUSE_HANDLE;
+	}
 	movement(plr, home);
 }
