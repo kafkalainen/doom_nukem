@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/26 10:53:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/02 13:51:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ Uint32		swap_channels(Uint32 color);
 t_texture	*load_texture_from_map_data(char *line);
 Uint32		get_texel(int x, int y, t_texture *tex);
 void		put_texel(Uint32 *buffer, int x, int y, Uint32 color);
+void		free_array(unsigned char **array);
 
 /*
 ** Audio Encode/Decode funtions
