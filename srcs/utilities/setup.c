@@ -25,7 +25,7 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 	frame->draw_surf = SDL_GetWindowSurface(home->win.window);
 	if (!frame->draw_surf)
 		error_output_sdl("Fatal: Failed to get window surface", home);
-	frame->min_step = .002454369;
+	frame->min_step = .002454369f;
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		error_output_sdl("Fatal: SDL_mixer could not initialize!", home);
 	return (home);
