@@ -54,8 +54,6 @@ void		flight_keys_up(t_player *plr, SDL_KeyCode sym)
 
 void		key_input(t_player *plr, SDL_Event *e, t_home *home)
 {
-	while(SDL_PollEvent(e) != 0)
-	{
 		if (e->type == SDL_QUIT)
 		{
 			cleanup_audio(&plr->audio);
@@ -76,5 +74,4 @@ void		key_input(t_player *plr, SDL_Event *e, t_home *home)
 			arrow_keys_up(plr, e->key.keysym.sym);
 			flight_keys_up(plr, e->key.keysym.sym);
 		}
-	}
 }

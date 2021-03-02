@@ -25,7 +25,7 @@ int  			main(int argc, char **argv)
 	setup(argv[1], &home, &plr, &frame);
 	update_sector(&home);
 	transform_world_view(&home, -45 * DEG_TO_RAD);
-	while(1)
+	while (1)
 	{
 		//home.t.beginfps = clock();
 		update_player(&plr, &home, &e);
