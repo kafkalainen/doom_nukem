@@ -13,7 +13,7 @@
 
 #include "../../doom_nukem.h"
 
-void		continue_from_last_sector(t_point *start, t_ray_fov *fov, t_frame *frame)
+void		continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame)
 {
 	t_point *p0;
 

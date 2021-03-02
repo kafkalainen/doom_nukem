@@ -20,7 +20,6 @@
 void			clear_surface(SDL_Surface *surface);
 int				ft_put_pixel(float x, float y, int color, SDL_Renderer *ren);
 int				ft_draw_line(t_xy start, t_xy end, int color, SDL_Surface *surf);
-// int				ft_draw_line(t_xy start, t_xy end, t_texture *tex, SDL_Surface *surf);
 void			draw_rect_center(t_xy xy, t_xy wh, t_frame *frame);
 void			draw_rect(t_xy xy, t_xy wh, t_frame *frame, int color);
 void			put_pixel(SDL_Surface *surf, int x, int y, int color);

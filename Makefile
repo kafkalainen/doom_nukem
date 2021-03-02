@@ -27,19 +27,18 @@ SRCS =	main.c \
 		srcs/libft/ft_memcpy.c \
 		srcs/libft/ft_memalloc.c \
 		srcs/raycaster/line_line_intersection.c \
-		srcs/raycaster/scan_fov.c \
-		srcs/raycaster/get_left_point.c \
-		srcs/raycaster/get_right_point.c \
+		srcs/raycaster/get_wall_points.c \
 		srcs/raycaster/setup_frame.c \
-		srcs/raycaster/continue_from_next_point.c \
 		srcs/raycaster/continue_from_last_sector.c \
 		srcs/raycaster/check_connection.c \
 		srcs/raycaster/check_if_portal.c \
-		srcs/raycaster/check_if_same_point.c \
+		srcs/raycaster/check_if_same_pt.c \
 		srcs/raycaster/check_if_same_wall.c \
 		srcs/raycaster/calc_visible_walls.c \
 		srcs/raycaster/get_distance.c \
 		srcs/raycaster/ceil_to_pixel.c \
+		srcs/raycaster/scan_fov.c \
+		srcs/raycaster/ft_calc_distances.c \
 		srcs/parsing/read_map.c	\
 		srcs/png_parser/color_utils.c \
 		srcs/png_parser/crc.c \
@@ -55,8 +54,6 @@ SRCS =	main.c \
 		srcs/png_parser/unfilter.c \
 		srcs/png_parser/utils.c \
 		srcs/porting/png.c \
-		srcs/raycaster/tex_scan_fov.c \
-		srcs/raycaster/ft_calc_distances.c \
 		srcs/libft/ft_putnbr.c \
 		srcs/libft/ft_putchar.c \
 		srcs/libft/ft_strncpy.c \

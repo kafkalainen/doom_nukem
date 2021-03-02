@@ -14,11 +14,15 @@
 
 void	ft_calc_distances(t_frame *frame)
 {
-	frame->left_perp_dist = fabs(frame->left.left_point.x + frame->left.left_point.y) * SQR2;
-	frame->right_perp_dist = fabs(frame->left.right_point.x + frame->left.right_point.y) * SQR2;
-	frame->wall_x1 = SCREEN_WIDTH - ((SCREEN_HEIGHT / frame->left_perp_dist) * frame->left.left_point.x);
-	frame->wall_x2 = SCREEN_WIDTH - ((SCREEN_HEIGHT / frame->right_perp_dist) * frame->left.right_point.x);
+	frame->l_perp_dist = fabs(frame->left.l_pt.x + 
+		frame->left.l_pt.y) * SQR2;
+	frame->r_perp_dist = fabs(frame->left.r_pt.x + 
+		frame->left.r_pt.y) * SQR2;
+	frame->wall_x1 = SCREEN_WIDTH - ((SCREEN_HEIGHT / 
+		frame->l_perp_dist) * frame->left.l_pt.x);
+	frame->wall_x2 = SCREEN_WIDTH - ((SCREEN_HEIGHT / 
+		frame->r_perp_dist) * frame->left.r_pt.x);
 	frame->wall_len = frame->wall_x2 - frame->wall_x1;
-	frame->wall_height_left = SCREEN_HEIGHT / frame->left_perp_dist * 20;
-	frame->wall_height_right = SCREEN_HEIGHT / frame->right_perp_dist * 20;
+	frame->wall_h_l = SCREEN_HEIGHT / frame->l_perp_dist * 20;
+	frame->wall_h_r = SCREEN_HEIGHT / frame->r_perp_dist * 20;
 }

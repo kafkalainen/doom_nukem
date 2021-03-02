@@ -43,18 +43,18 @@ Uint32		get_texel(int x, int y, t_texture *tex)
 
 void	load_texture(char *path, t_home *home, int i)
 {
-	home->editor_textures[i] = png_parser(path);
-	if (home->editor_textures[i] == NULL)
+	home->editor_tex[i] = png_parser(path);
+	if (home->editor_tex[i] == NULL)
 		error_output("PNG image file loading failed\n");
 	else
-		convert_to_uint32(home->editor_textures[i]->pixels, home->editor_textures[i]);
+		convert_to_uint32(home->editor_tex[i]->pixels, home->editor_tex[i]);
 }
 
 void	init_textures(t_home *home)
 {
-	if (!(home->editor_textures = (t_texture**)malloc(sizeof(t_texture*) * 6)))
+	if (!(home->editor_tex = (t_texture**)malloc(sizeof(t_texture*) * 6)))
 		error_output("failed to allocate memory to editor textures\n");
-	home->editor_textures[0] = NULL;
+	home->editor_tex[0] = NULL;
 	load_texture("textures/greybrick.png", home, 1);
 	load_texture("textures/redbrick.png", home, 2);
 	load_texture("textures/wood.png", home, 3);

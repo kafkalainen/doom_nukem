@@ -12,11 +12,11 @@
 
 #include "../../doom_nukem.h"
 
-int				check_if_same_wall(t_xy a, t_xy b, t_xy right_point)
+int				check_if_same_wall(t_xy a, t_xy b, t_xy r_point)
 {
 	if (a.x == b.x && a.y == b.y)
 	{
-		if (right_point.x != -1 && right_point.y != -1)
+		if (r_point.x != -1 && r_point.y != -1)
 			return (1);
 		else
 			return (0);

@@ -13,14 +13,14 @@
 #ifndef RAYCAST_H
 # define RAYCAST_H
 
-typedef struct		s_ray_fov
+typedef struct		s_ray_pt
 {
-	t_ray			ray_left;
-	t_ray			ray_right;
-	t_xy			left_point;
-	t_xy			right_point;
+	t_ray			ray_l;
+	t_ray			ray_r;
+	t_xy			l_pt;
+	t_xy			r_pt;
 	t_point			*wall;
-}					t_ray_fov;
+}					t_ray_pt;
 
 typedef struct		s_frame
 {
@@ -32,36 +32,32 @@ typedef struct		s_frame
 	SDL_Surface		*draw_surf;
 	t_xy			plr_offset;
 	float			pxl_offset;
-	t_ray_fov		left;
-	t_ray_fov		right;
+	t_ray_pt		left;
+	t_ray_pt		right;
 	float			wall_x1;
 	float			wall_x2;
-	float			left_perp_dist;
-	float			right_perp_dist;
+	float			l_perp_dist;
+	float			r_perp_dist;
 	float			wall_len;
-	float			wall_height_left;
-	float			wall_height_right;
+	float			wall_h_l;
+	float			wall_h_r;
 }					t_frame;
 
 float				get_distance(t_xy p1, t_xy p2);
-t_ray_fov			get_fov_points(t_point *plgn, t_home *home, t_player *plr, int i);
 void				calc_intersection(t_point *pgon, t_ray *ray, t_intersection *sect);
 t_xy				line_intersection(t_intersection *sect);
-int					get_left_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls);
-int					get_right_point(t_point *start, t_ray_fov *fov, t_frame *frame, int walls);
-void				continue_from_next_point(t_ray_fov *fov);
+int					get_wall_points(t_point *start, t_ray_pt *fov, t_frame *frame, int walls);
+int					get_right_point(t_point *start, t_ray_pt *fov, t_frame *frame, int walls);
 void				scan_fov(t_home *home, t_frame *frame, t_player *plr);
 void				setup_frame(t_frame *frame, t_frame *new_frame, int current_pxl, int idx);
 int					check_connection(t_point *point, t_frame *frame);
 int					check_if_portal(t_point *point);
-int					check_if_same_point(int current_pxl, t_ray_fov *fov);
+int					check_if_same_point(int current_pxl, t_ray_pt *fov);
 int					check_if_same_wall(t_xy a, t_xy b, t_xy right_point);
-void				continue_from_last_sector(t_point *start, t_ray_fov *fov, t_frame *frame);
-int					calc_visible_walls(t_sector *sector);
+void				continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame);
 float				ceil_to_pixel(float nb);
-void				ft_draw_wall(t_xy left, t_xy right, t_frame *frame, int wall_len, int color, t_home *home, t_player *plr);
-void				tex_ft_draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr);
-void				tex_scan_fov(t_home *home, t_frame *frame, t_player *plr);
+void				draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr);
+void				scan_fov(t_home *home, t_frame *frame, t_player *plr);
 void				ft_calc_distances(t_frame *frame);
 
 #endif

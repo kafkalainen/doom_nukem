@@ -12,11 +12,11 @@
 
 #include "../../doom_nukem.h"
 
-int				check_if_same_point(int current_pxl, t_ray_fov *fov)
+int				check_if_same_pt(int current_pxl, t_ray_pt *fov)
 {
 
 	if (current_pxl == 0
-		&& get_distance(fov->left_point, fov->right_point) < 0.001)
+		&& get_distance(fov->l_pt, fov->r_pt) < 0.001)
 		return (TRUE);
 	else
 		return (FALSE);

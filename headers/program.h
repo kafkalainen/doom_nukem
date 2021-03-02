@@ -74,7 +74,7 @@ typedef struct		s_home
 	t_sector		**sectors;
 	SDL_Surface		*text_surf;
 	TTF_Font		*font;
-	t_texture		**editor_textures;
+	t_texture		**editor_tex;
 	t_time			t;
 	t_xy			offset;
 	int				nb_of_sectors;
