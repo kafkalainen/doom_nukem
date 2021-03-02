@@ -61,6 +61,6 @@ float			vec2_dot(t_xy a, t_xy b);
 float			ft_map(float in, t_range from, t_range to);
 float			vec2_dot(t_xy a, t_xy b);
 float			vec2_mag(t_xy a);
-float			vec2_angle(t_xy a, t_xy b);
+float			vec2_ang(t_xy a, t_xy b);
 
 #endif

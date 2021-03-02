@@ -19,11 +19,12 @@ void		calc_intersection(t_point *pgon, t_ray *ray, t_intersection *sect)
 	sect->x1 = pgon->x0.x;
 	sect->x2 = pgon->next->x0.x;
 	sect->y2 = pgon->next->x0.y;
-	sect->neg = ((sect->x1 - ray->pos.x) * (-ray->dir.y) - (sect->y1 - ray->pos.y) *
-				(-ray->dir.x));
+	sect->neg = ((sect->x1 - ray->pos.x) * (-ray->dir.y) - 
+				(sect->y1 - ray->pos.y) * (-ray->dir.x));
 	sect->pos = ((sect->x2 - sect->x1) * (sect->y1 - ray->pos.y) -
 				(sect->y2 - sect->y1) * (sect->x1 - ray->pos.x));
-	if (sect->pos >= 0.0f && sect->pos <= 1.0f && sect->neg >= 0.0f && sect->neg <= 1.0f)
+	if (sect->pos >= 0.0f && sect->pos <= 1.0f && 
+		sect->neg >= 0.0f && sect->neg <= 1.0f)
 		return ;
 	sect->den = ((sect->x1 - sect->x2) * (-ray->dir.y) -
 				(sect->y1 - sect->y2) * (-ray->dir.x));

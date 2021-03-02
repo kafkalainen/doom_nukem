@@ -16,7 +16,7 @@
 ** TODO:
 */
 
-int		get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
+void		get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 {
 	t_ray			ray;
 	t_intersection	sect;
@@ -42,7 +42,7 @@ int		get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	return (1);
 }
 
-int		get_wall_pts(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
+void	get_wall_pts(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 {
 	t_ray			ray;
 	t_intersection	sect;
@@ -66,5 +66,7 @@ int		get_wall_pts(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	fov->wall = p0;
 	fov->r_pt = fov->wall->next->x0;
 	get_r_pt(frame->left.wall, &frame->right, frame, walls);
-	return (1);
+	if (check_if_same_wall(frame->left.wall->x0, 
+		frame->right.wall->x0, frame->right.r_pt))
+		frame->left.r_pt = frame->right.r_pt;
 }

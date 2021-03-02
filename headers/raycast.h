@@ -48,7 +48,6 @@ void				calc_intersection(t_point *pgon, t_ray *ray, t_intersection *sect);
 t_xy				line_intersection(t_intersection *sect);
 int					get_wall_points(t_point *start, t_ray_pt *fov, t_frame *frame, int walls);
 int					get_right_point(t_point *start, t_ray_pt *fov, t_frame *frame, int walls);
-void				scan_fov(t_home *home, t_frame *frame, t_player *plr);
 void				setup_frame(t_frame *frame, t_frame *new_frame, int current_pxl, int idx);
 int					check_connection(t_point *point, t_frame *frame);
 int					check_if_portal(t_point *point);
@@ -57,7 +56,7 @@ int					check_if_same_wall(t_xy a, t_xy b, t_xy right_point);
 void				continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame);
 float				ceil_to_pixel(float nb);
 void				draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr);
-void				scan_fov(t_home *home, t_frame *frame, t_player *plr);
+void				scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl);
 void				ft_calc_distances(t_frame *frame);
 
 #endif

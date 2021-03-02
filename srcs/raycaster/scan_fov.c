@@ -13,7 +13,8 @@
 
 #include "../../doom_nukem.h"
 
-int				draw_tex_line(t_xy start, t_xy end, t_texture *tex, SDL_Surface *surf)
+int				draw_tex_line(t_xy start, t_xy end, 
+								t_texture *tex, SDL_Surface *surf)
 {
 	t_xy	length;
 	t_xy	ratio;
@@ -30,7 +31,8 @@ int				draw_tex_line(t_xy start, t_xy end, t_texture *tex, SDL_Surface *surf)
 	pos.y = start.y;
 	while (pixels-- > 0)
 	{
-		if (pos.x >= 0 && pos.x < SCREEN_WIDTH && pos.y >= 0 && pos.y < SCREEN_HEIGHT)
+		if (pos.x >= 0 && pos.x < SCREEN_WIDTH && 
+			pos.y >= 0 && pos.y < SCREEN_HEIGHT)
 			put_pixel(surf, pos.x, pos.y, get_texel(pos.x, pos.y, tex));
 		pos.x += ratio.x * ((start.x < end.x) ? 1 : -1);
 		pos.y += ratio.y * ((start.y < end.y) ? 1 : -1);
@@ -38,13 +40,15 @@ int				draw_tex_line(t_xy start, t_xy end, t_texture *tex, SDL_Surface *surf)
 	return (TRUE);
 }
 
-void			draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr)
+void			draw_wall(t_frame *frame, t_texture *tex, 
+							t_home *home, t_player *plr)
 {
 	float		step;
 	float		z_step;
 
 	ft_calc_distances(frame);
-	z_step = get_distance(plr->pos, frame->left.l_pt) / get_distance(plr->pos, frame->left.l_pt);
+	z_step = get_distance(plr->pos, frame->left.l_pt) / 
+				get_distance(plr->pos, frame->left.l_pt);
 	step = (frame->wall_h_l - frame->wall_h_r) / frame->wall_len;
 	while (frame->wall_x1 < frame->wall_x2)
 	{
@@ -77,7 +81,7 @@ static float	round_angle(float angle, float *pxl_offset)
 		return ((float)trunc);
 }
 
-t_texture		*get_texture(int idx, t_texture	**textures)
+t_texture		*get_tex(int idx, t_texture	**textures)
 {
 	if (idx >= 0)
 		error_output("idx larger or equal to zero\n");
@@ -85,31 +89,30 @@ t_texture		*get_texture(int idx, t_texture	**textures)
 
 }
 
-void			scan_fov(t_home *home, t_frame *frame, t_player *plr)
+void			scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl)
 {
 	t_frame		new_frame;
-	int			current_pxl;
 
-	current_pxl = 0;
 	frame->left.wall = home->sectors[frame->idx]->points;
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
 	while (frame->offset > frame->max_fov)
 	{
-		get_wall_pts(frame->left.wall, &frame->left, frame, home->sectors[frame->idx]->nb_of_walls);
-		if (check_if_same_wall(frame->left.wall->x0, frame->right.wall->x0, frame->right.r_pt))
-			frame->left.r_pt = frame->right.r_pt;
-		current_pxl = round_angle(vec2_angle(frame->left.l_pt, frame->left.r_pt), &frame->pxl_offset);
-		if (check_if_portal(frame->left.wall) && !check_if_same_pt(current_pxl, &frame->left))
+		get_wall_pts(frame->left.wall, &frame->left, frame, 
+					home->sectors[frame->idx]->nb_of_walls);
+		current_pxl = round_angle(vec2_ang(frame->left.l_pt, frame->left.r_pt), 
+					&frame->pxl_offset);
+		if (check_if_portal(frame->left.wall) && 
+			!check_if_same_pt(current_pxl, &frame->left))
 		{
 			current_pxl++;
 			setup_frame(frame, &new_frame, current_pxl, frame->left.wall->idx);
-			scan_fov(home, &new_frame, plr);
+			scan_fov(home, &new_frame, plr, 0);
 			frame->offset = new_frame.offset;
 			frame->pxl_offset = new_frame.pxl_offset;
 		}
 		else
 		{
-			draw_wall(frame, get_texture(frame->left.wall->idx, home->editor_tex), home, plr);
+			draw_wall(frame, get_tex(frame->left.wall->idx, home->editor_tex), home, plr);
 			frame->offset = frame->offset - ++current_pxl;
 		}
 	}
