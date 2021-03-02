@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/01 20:18:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/02 10:49:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_home	*init_sdl(t_home *home, t_frame *frame)
 {
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) < 0)
 		error_output_sdl("Fatal: SDL Initalization failed.", home);
 	home->win.window = SDL_CreateWindow("Hello World!", 100, 100,
 		home->win.width, home->win.height, 0);

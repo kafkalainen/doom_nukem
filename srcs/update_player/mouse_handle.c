@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/22 14:57:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/02 11:06:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,13 @@ float	mouse_acceleration(float mouse, char c)
 
 }
 
-void	mouse_handle_win(t_player *plr, t_home *home)
+void	mouse_handle_win(t_player *plr, t_home *home, SDL_Event *e)
 {
-	SDL_Event	me;
-
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	if (me.type == SDL_MOUSEMOTION)
+	if (e->type == SDL_MOUSEMOTION)
 	{
-		transform_world_view(home, -me.motion.xrel * DEG_TO_RAD);
-		plr->pitch = MIN(MAX(plr->pitch - me.motion.yrel, 0), 480);
+		transform_world_view(home, -e->motion.xrel * DEG_TO_RAD);
+		plr->pitch = MIN(MAX(plr->pitch - e->motion.yrel, 0), 480);
 	}
 }
 
