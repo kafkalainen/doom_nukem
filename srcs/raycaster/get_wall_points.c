@@ -12,10 +12,6 @@
 
 #include "../../doom_nukem.h"
 
-/*
-** TODO:
-*/
-
 void		get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 {
 	t_ray			ray;
@@ -39,7 +35,6 @@ void		get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	}
 	fov->wall = p0;
 	fov->l_pt = fov->wall->x0;
-	return (1);
 }
 
 void	get_wall_pts(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
@@ -66,7 +61,7 @@ void	get_wall_pts(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	fov->wall = p0;
 	fov->r_pt = fov->wall->next->x0;
 	get_r_pt(frame->left.wall, &frame->right, frame, walls);
-	if (check_if_same_wall(frame->left.wall->x0, 
+	if (check_if_same_wall(frame->left.wall->x0,
 		frame->right.wall->x0, frame->right.r_pt))
 		frame->left.r_pt = frame->right.r_pt;
 }
