@@ -12,7 +12,21 @@
 
 #include "../../doom_nukem.h"
 
-void		get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
+
+static int		check_if_same_wall(t_xy a, t_xy b, t_xy r_point)
+{
+	if (a.x == b.x && a.y == b.y)
+	{
+		if (r_point.x != -1 && r_point.y != -1)
+			return (1);
+		else
+			return (0);
+	}
+	else
+		return (0);
+}
+
+static void		get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 {
 	t_ray			ray;
 	t_intersection	sect;
@@ -37,7 +51,7 @@ void		get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	fov->l_pt = fov->wall->x0;
 }
 
-void	get_l_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
+static void		get_l_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 {
 	t_ray			ray;
 	t_intersection	sect;
@@ -60,12 +74,11 @@ void	get_l_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	}
 	fov->wall = p0;
 	fov->r_pt = fov->wall->next->x0;
-<<<<<<< HEAD
 }
 
-void	get_wall_pts(t_frame *frame, int walls, int current_pxl)
+void			get_wall_pts(t_frame *frame, int walls, int current_pxl)
 {
-	if(current_pxl == 0)
+	if (current_pxl == 0)
 	{
 		get_l_pt(frame->left.wall, &frame->left, frame, walls);
 		get_r_pt(frame->left.wall, &frame->right, frame, walls);
@@ -77,10 +90,6 @@ void	get_wall_pts(t_frame *frame, int walls, int current_pxl)
 		frame->left.r_pt = frame->left.wall->next->x0;
 	}
 	if (check_if_same_wall(frame->left.wall->x0, 
-=======
-	get_r_pt(frame->left.wall, &frame->right, frame, walls);
-	if (check_if_same_wall(frame->left.wall->x0,
->>>>>>> cfb26cb6ba6f2a9a865c527c7e1dcd648ec93874
 		frame->right.wall->x0, frame->right.r_pt))
 		frame->left.r_pt = frame->right.r_pt;
 }

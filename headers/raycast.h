@@ -46,13 +46,11 @@ typedef struct		s_frame
 float				get_distance(t_xy p1, t_xy p2);
 void				calc_intersection(t_point *pgon, t_ray *ray, t_intersection *sect);
 t_xy				line_intersection(t_intersection *sect);
-void				get_wall_pts(t_point *start, t_ray_pt *fov, t_frame *frame, int walls);
-void				get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls);
+void				get_wall_pts(t_frame *frame, int walls, int current_pxl);
 void				setup_frame(t_frame *frame, t_frame *new_frame, int current_pxl, int idx);
 int					check_connection(t_point *point, t_frame *frame);
 int					check_if_portal(t_point *point);
 int					check_if_same_pt(int current_pxl, t_ray_pt *fov);
-int					check_if_same_wall(t_xy a, t_xy b, t_xy right_point);
 void				continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame);
 float				ceil_to_pixel(float nb);
 void				draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr);

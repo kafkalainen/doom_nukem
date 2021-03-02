@@ -33,7 +33,6 @@ SRCS =	main.c \
 		srcs/raycaster/check_connection.c \
 		srcs/raycaster/check_if_portal.c \
 		srcs/raycaster/check_if_same_pt.c \
-		srcs/raycaster/check_if_same_wall.c \
 		srcs/raycaster/calc_visible_walls.c \
 		srcs/raycaster/get_distance.c \
 		srcs/raycaster/ceil_to_pixel.c \
