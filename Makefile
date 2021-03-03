@@ -22,6 +22,7 @@ SRCS =	main.c \
 		srcs/libft/ft_atoi.c \
 		srcs/libft/ft_strings1.c \
 		srcs/libft/ft_strings2.c \
+		srcs/libft/ft_strclen.c \
 		srcs/libft/memory.c \
 		srcs/libft/ft_get_next_line.c \
 		srcs/libft/ft_putendl_fd.c \
