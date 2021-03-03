@@ -24,9 +24,12 @@ void			draw_2d_fov(t_frame *frame, t_player *plr)
 	fov_left = vec2_rot(plr->dir, -FOV * 0.5);
 	fov_right = vec2_rot(plr->dir, FOV * 0.5);
 	draw_rect_center(vec2_add(vec2(0,0), offset), vec2(5, 5), frame);
-	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(fov_left, 400)), offset), lightgreen, frame->draw_surf);
-	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(fov_right, 400)), offset), lightgreen, frame->draw_surf);
-	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, vec2_mul(plr->dir, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, 
+		vec2_mul(fov_left, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, 
+		vec2_mul(fov_right, 400)), offset), lightgreen, frame->draw_surf);
+	ft_draw_line(vec2_add(plr_pos, offset), vec2_add(vec2_add(plr_pos, 
+		vec2_mul(plr->dir, 400)), offset), lightgreen, frame->draw_surf);
 }
 
 void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos)
@@ -41,10 +44,10 @@ void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos)
 	SDL_FreeSurface(home->text_surf);
 }
 
-int				hypotenuse(int opposite, int adjacent)
-{
-	return (sqrtf(opposite * opposite + adjacent * adjacent));
-}
+//int				hypotenuse(int opposite, int adjacent)
+//{
+//	return (sqrtf(opposite * opposite + adjacent * adjacent));
+//}
 
 void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
 {
