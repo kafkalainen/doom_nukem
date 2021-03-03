@@ -35,10 +35,7 @@ SRCS =	main.c \
 		srcs/raycaster/line_line_intersection.c \
 		srcs/raycaster/get_wall_points.c \
 		srcs/raycaster/setup_frame.c \
-		srcs/raycaster/continue_from_last_sector.c \
-		srcs/raycaster/check_connection.c \
-		srcs/raycaster/check_if_portal.c \
-		srcs/raycaster/check_if_same_pt.c \
+		srcs/raycaster/recursion_checks.c \
 		srcs/raycaster/get_distance.c \
 		srcs/raycaster/ceil_to_pixel.c \
 		srcs/raycaster/scan_fov.c \
