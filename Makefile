@@ -90,8 +90,9 @@ LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lSDL2_mixer -lSDL2_ttf -lm -g
 win:
 	gcc $(SRCS) -o play $(WIN_INCLUDE_PATHS) $(WIN_LIBRARY_PATHS) $(WIN_COMPILER_FLAGS) $(WIN_LINK_FLAGS)
 
-# dependencies:
-# 	sudo apt-get install libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-ttf-dev
+#dependencies:
+#	sudo apt-get install libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-ttf-dev && \
+#	cd SDL_mixer && ./configure && make && sudo make install
 
 linux: #dependencies
 	gcc $(SRCS) -o play $(LINUX_INCLUDE_PATHS) $(LINUX_LIBRARY_PATHS) $(LINUX_COMPILER_FLAGS) $(LINUX_LINK_FLAGS)
