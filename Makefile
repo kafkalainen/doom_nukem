@@ -21,11 +21,16 @@ SRCS =	main.c \
 		srcs/libft/ft_ftoa.c \
 		srcs/libft/ft_atoi.c \
 		srcs/libft/ft_strings1.c \
+		srcs/libft/ft_strings2.c \
 		srcs/libft/memory.c \
 		srcs/libft/ft_get_next_line.c \
 		srcs/libft/ft_putendl_fd.c \
 		srcs/libft/ft_memcpy.c \
 		srcs/libft/ft_memalloc.c \
+		srcs/libft/ft_putnbr.c \
+		srcs/libft/ft_putchar.c \
+		srcs/libft/ft_strncpy.c \
+		srcs/libft/ft_strsplit.c \
 		srcs/raycaster/line_line_intersection.c \
 		srcs/raycaster/get_wall_points.c \
 		srcs/raycaster/setup_frame.c \
@@ -52,10 +57,6 @@ SRCS =	main.c \
 		srcs/png_parser/unfilter.c \
 		srcs/png_parser/utils.c \
 		srcs/porting/png.c \
-		srcs/libft/ft_putnbr.c \
-		srcs/libft/ft_putchar.c \
-		srcs/libft/ft_strncpy.c \
-		srcs/libft/ft_strsplit.c
 
 HEADERS = \
 		doom_nukem.h\
