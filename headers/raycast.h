@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/02 14:05:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/04 15:42:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,14 @@ int					check_connection(t_point *point, t_frame *frame);
 int					check_if_portal(t_point *point);
 int					check_if_same_pt(int current_pxl, t_ray_pt *fov);
 void				continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame);
+void				draw_ground(t_player *plr, t_frame *frame, t_home *home);
 void				draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr);
+int					draw_tex_line(t_xy start, t_xy end, 
+								t_texture *tex, SDL_Surface *surf);
+t_texture			*get_tex(int idx, t_texture	**textures);
 void				scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl);
 void				ft_calc_distances(t_frame *frame);
+void				draw_segment(t_frame *frame, t_texture *tex, 
+								t_home *home, t_player *plr);
 
 #endif

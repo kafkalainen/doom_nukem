@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_player.c                                    :+:      :+:    :+:   */
+/*   ft_fmax.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/20 15:33:56 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/04 15:59:36 by jnivala          ###   ########.fr       */
+/*   Created: 2021/03/03 15:32:04 by jnivala           #+#    #+#             */
+/*   Updated: 2021/03/03 15:33:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
-
-void	update_player(t_player *plr, t_home *home, SDL_Event *e)
+float	ft_fmax(float a, float b)
 {
-	while (SDL_PollEvent(e) != 0)
-	{
-		key_input(plr, e, home);
-		mouse_handle(plr, home, e);
-	}
-	movement(plr, home);
+	if (a > b)
+		return (a);
+	else
+		return (b);
 }

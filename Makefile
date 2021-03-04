@@ -19,6 +19,8 @@ SRCS =	main.c \
 		srcs/utilities/linkedlist.c \
 		srcs/libft/ft_itoa.c \
 		srcs/libft/ft_ftoa.c \
+		srcs/libft/ft_fmin.c \
+		srcs/libft/ft_fmax.c \
 		srcs/libft/ft_atoi.c \
 		srcs/libft/ft_strings1.c \
 		srcs/libft/ft_strings2.c \
@@ -39,6 +41,8 @@ SRCS =	main.c \
 		srcs/raycaster/get_distance.c \
 		srcs/raycaster/scan_fov.c \
 		srcs/raycaster/ft_calc_distances.c \
+		srcs/raycaster/draw_ground.c \
+		srcs/raycaster/draw_segment.c \
 		srcs/parsing/read_map.c	\
 		srcs/png_parser/color_utils.c \
 		srcs/png_parser/crc.c \
