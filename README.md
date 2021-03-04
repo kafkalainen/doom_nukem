@@ -83,11 +83,11 @@ within.
 - [ ] Just like in the original games, you must pack in a single file all the elements you’re going to need for the game: the level’s design, textures and gameplay elements. One file per level is accepted, but it must be self-sufficient. The doom-nukem binary and the chosen level file must be self-sufficient.
 
 # Expected bonuses
-[ ] A menu to choose the level or some difficulty options.
-[ ] A genuine aesthetic research, an atmosphere, neat and detailed sceneries.
-[ ] A complex and researched story and scenario.
-[ ] Many useless interactions and animations that contribute to the immersion into the world (phone booth, vending machines, public toilets, projectile stains on the walls, etc).
-[ ] You can play in network with other players with a lobby, team/solo modes, capture
+- [ ] A menu to choose the level or some difficulty options.
+- [ ] A genuine aesthetic research, an atmosphere, neat and detailed sceneries.
+- [ ] A complex and researched story and scenario.
+- [ ] Many useless interactions and animations that contribute to the immersion into the world (phone booth, vending machines, public toilets, projectile stains on the walls, etc).
+- [ ] You can play in network with other players with a lobby, team/solo modes, capture
 the flag mode, etc.
-[ ] Multithreaded rendering using pthread.
-[ ] Plenty of other things we haven’t even imagined yet!
+- [ ] Multithreaded rendering using pthread.
+- [ ] Plenty of other things we haven’t even imagined yet!
