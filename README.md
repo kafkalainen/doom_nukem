@@ -3,7 +3,7 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 
 # Design Reasonings
 - We decided to pursue a track of creating Duke Nukem engine.
-- Calculate angles as radians, player field of vision is calculated as radians, and are then translated to pixels using how much they use screen space in ratio to the whole field of vision in radians (approx. 1.57)s
+- Player field of vision is calculated as radians, and are then translated to pixels using how much they use screen space.
 
 # Biggest blocks
 - Linked list to Cycle list
@@ -11,12 +11,11 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Pixel offset
 - Is right point needed to properly render the space?
 - Segfault in renderer when the function returns back to the same portal it came from.
-- Wall distorted because only angle is used. Solved using perpentual distance to the wall.
+- Wall distorted because only angle is used. Solved using perpentual distance to the wall, and scaling it to the view.
 
 # TO-DO
 ## Riku
-- Refactor PNG parser.
-- Reading map data from level editor.
+- Refactor the project to read all map data from files (textures, audio data, sectors)
 
 ## Joonas
 - Write draw_floor function.
@@ -26,7 +25,8 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 
 ## Elias
 - Cleans and Normes code.
-- Moves on to work on the map editor. 
+- Fixes game loop.
+- Remove one pixel error.
 
 # Done
 - Tested to change int values in the tex_ft_draw_wall perspective_fix function, to no avail.
@@ -34,12 +34,11 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 
 # Thoughts
 - Half of the wall length needs to be added to the calculation in perspective fix.
--
 
 # Wolf3d features that you must include:
 - [x] You can move through the universe in real time via the keyboard arrows, just like in the two original games. 360-degree rotation, forward and back move.
 - [x] Pressing the ESC key must close the window and exit the program properly.
-- [x] Clicking the red cross on the window border must clsoe the window and exit the program properly.
+- [x] Clicking the red cross on the window border must close the window and exit the program properly.
 - [x] There are textures on the walls.
 
 # New features
@@ -92,4 +91,4 @@ the flag mode, etc.
 - [ ] Plenty of other things we haven’t even imagined yet!
 
 # Links
--Fabien's Sanglard's tutorial for Building Duke Nukem Graphics Engine [Link](https://fabiensanglard.net/duke3d/build_engine_internals.php)
+- Fabien's Sanglard's tutorial for Building Duke Nukem Graphics Engine [Link](https://fabiensanglard.net/duke3d/build_engine_internals.php)
