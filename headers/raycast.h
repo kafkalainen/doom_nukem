@@ -52,7 +52,6 @@ int					check_connection(t_point *point, t_frame *frame);
 int					check_if_portal(t_point *point);
 int					check_if_same_pt(int current_pxl, t_ray_pt *fov);
 void				continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame);
-float				ceil_to_pixel(float nb);
 void				draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr);
 void				scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl);
 void				ft_calc_distances(t_frame *frame);

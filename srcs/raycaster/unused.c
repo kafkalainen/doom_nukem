@@ -31,3 +31,18 @@ int		calc_visible_walls(t_sector *sector)
 	}
 	return (visible_walls);
 }
+
+float	ceil_to_pixel(float	nb)
+{
+	int		nb_as_integer;
+	float	fraction;
+
+	fraction = nb / 0.002454369f;
+	nb_as_integer = (int)fraction;
+	fraction = fraction - nb_as_integer;
+	if (fraction)
+		return ((nb_as_integer + 1.0f) * 0.002454369f);
+	else
+		return (nb);
+}
+

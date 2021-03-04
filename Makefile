@@ -37,7 +37,6 @@ SRCS =	main.c \
 		srcs/raycaster/setup_frame.c \
 		srcs/raycaster/recursion_checks.c \
 		srcs/raycaster/get_distance.c \
-		srcs/raycaster/ceil_to_pixel.c \
 		srcs/raycaster/scan_fov.c \
 		srcs/raycaster/ft_calc_distances.c \
 		srcs/parsing/read_map.c	\
