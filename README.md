@@ -12,7 +12,6 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Is right point needed to properly render the space?
 - Segfault in renderer when the function returns back to the same portal it came from.
 - Wall distorted because only angle is used. Solved using perpentual distance to the wall.
-Fabien's Sanglard's tutorial for Building Duke Nukem Graphics Engine [Link](https://fabiensanglard.net/duke3d/build_engine_internals.php)
 
 # TO-DO
 ## Riku
@@ -91,3 +90,6 @@ within.
 the flag mode, etc.
 - [ ] Multithreaded rendering using pthread.
 - [ ] Plenty of other things we haven’t even imagined yet!
+
+# Links
+- Fabien's Sanglard's tutorial for Building Duke Nukem Graphics Engine [Link](https://fabiensanglard.net/duke3d/build_engine_internals.php)
