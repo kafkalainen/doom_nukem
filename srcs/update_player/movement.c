@@ -51,31 +51,19 @@ static t_xy		check_player_dir(t_player *plr)
 
 	def = 0.785398163;
 	if (plr->input.up == 1)
-	{
 		if (plr->input.left == 1)
-		{
 			return (vec2_rot(vec2(def, def), -45 * DEG_TO_RAD));
-		}
 		else if (plr->input.right == 1)
-		{
 			return (vec2_rot(vec2(def, def), 45 * DEG_TO_RAD));
-		}
 		else
 			return (vec2(def, def));
-	}
 	if (plr->input.down == 1)
-	{
 		if (plr->input.left == 1)
-		{
 			return (vec2_rot(vec2(def, def), -135 * DEG_TO_RAD));
-		}
 		else if (plr->input.right == 1)
-		{
 			return (vec2_rot(vec2(def, def), 135 * DEG_TO_RAD));
-		}
 		else
 			return (vec2_rot(vec2(def, def), 180 * DEG_TO_RAD));
-	}
 	if (plr->input.left == 1)
 		return (vec2_rot(vec2(def, def), -90 * DEG_TO_RAD));
 	if (plr->input.right == 1)
@@ -85,7 +73,6 @@ static t_xy		check_player_dir(t_player *plr)
 void			player_move(t_player *plr, t_home *home, float delta_time)
 {
 	plr->move_dir = check_player_dir(plr);
-		printf("MOVE_DIR: %f - %f\n", plr->move_dir.x, plr->move_dir.y);
 	play_footsteps(plr);
 	if (!check_collision(home->sectors[plr->current_sector], plr, home))
 		translate_world_view(home, vec2_mul(plr->move_dir, 40 * delta_time));
