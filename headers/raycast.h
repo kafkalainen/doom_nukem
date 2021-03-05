@@ -46,6 +46,8 @@ typedef struct		s_frame
 float				get_distance(t_xy p1, t_xy p2);
 void				calc_intersection(t_point *pgon, t_ray *ray, t_intersection *sect);
 t_xy				line_intersection(t_intersection *sect);
+void				calc_intersection_raw(t_point *pgon, t_ray *ray, t_intersection *sect);
+t_xy				line_intersection_raw(t_intersection *sect);
 void				get_wall_pts(t_frame *frame, int walls, int current_pxl);
 void				setup_frame(t_frame *frame, t_frame *new_frame, int current_pxl, int idx);
 int					check_connection(t_point *point, t_frame *frame);

@@ -26,8 +26,8 @@ int				check_collision(t_sector *sector, t_player *plr, t_home *home)
 	ray.dir = plr->move_dir;
 	while (i < sector->nb_of_walls)
 	{
-		calc_intersection(p0, &ray, &isect);
-		point = line_intersection(&isect);
+		calc_intersection_raw(p0, &ray, &isect);
+		point = line_intersection_raw(&isect);
 		if (point.x >= 0 || point.y >= 0)
 		{
 			if (get_distance(vec2(0, 0), point) < 2 && (p0->idx >= 0))
