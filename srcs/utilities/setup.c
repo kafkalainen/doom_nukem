@@ -38,6 +38,8 @@ void			init_player(t_player *plr)
 	plr->pitch = 240;
 	plr->dir.x = 0.785398163;
 	plr->dir.y = 0.785398163;
+	plr->move_dir.x = 0.785398163;
+	plr->move_dir.y = 0.785398163;
 	plr->input.down = 0;
 	plr->input.up = 0;
 	plr->input.right = 0;
