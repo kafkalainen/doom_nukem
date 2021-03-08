@@ -12,6 +12,7 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Is right point needed to properly render the space?
 - Segfault in renderer when the function returns back to the same portal it came from.
 - Wall distorted because only angle is used. Solved using perpentual distance to the wall, and scaling it to the view.
+- Getting correct offset for wall textures.
 
 # TO-DO
 ## Riku
@@ -27,7 +28,6 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Cleans and Normes code.
 - Fixes game loop.
 - Remove one pixel error.
-
 # Done
 - Tested to change int values in the tex_ft_draw_wall perspective_fix function, to no avail.
 - We need to change angle, before it is normalized.
