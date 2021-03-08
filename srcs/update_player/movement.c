@@ -37,7 +37,7 @@ int				check_collision(t_sector *sector, t_player *plr, t_home *home)
 				return (0);
 			}
 			else if (get_distance(vec2(0, 0), point) < 5 && (p0->idx < 0))
-				return (1);
+				return ((int)(vec2_ang(p0->x0, p0->next->x0) * RAD_TO_DEG));
 		}
 		p0 = p0->next;
 		i++;
@@ -72,10 +72,20 @@ static t_xy		check_player_dir(t_player *plr)
 
 void			player_move(t_player *plr, t_home *home, float delta_time)
 {
+	int		collision;
+	t_xy	col_dir;
+
+	collision = check_collision(home->sectors[plr->current_sector], plr, home);
+	col_dir = vec2(1, 1);
+	col_dir = vec2_rot(col_dir, collision * DEG_TO_RAD);
 	plr->move_dir = check_player_dir(plr);
 	play_footsteps(plr);
-	if (!check_collision(home->sectors[plr->current_sector], plr, home))
+	if (!collision)
 		translate_world_view(home, vec2_mul(plr->move_dir, 40 * delta_time));
+	else
+	{
+		printf("col dir x: %f, col dir y: %f\n", col_dir.x, col_dir.y);
+	}
 }
 
 void				movement(t_player *plr, t_home *home)
