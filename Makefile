@@ -40,7 +40,7 @@ SRCS =	main.c \
 		srcs/raycaster/recursion_checks.c \
 		srcs/raycaster/get_distance.c \
 		srcs/raycaster/scan_fov.c \
-		srcs/raycaster/ft_calc_distances.c \
+		srcs/raycaster/calc_distances.c \
 		srcs/raycaster/draw_ground.c \
 		srcs/raycaster/draw_segment.c \
 		srcs/parsing/read_map.c	\
