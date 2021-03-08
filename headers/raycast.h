@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/04 15:42:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/05 14:16:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,14 @@ typedef struct		s_frame
 	t_ray_pt		right;
 	float			wall_x1;
 	float			wall_x2;
+	float			full_wall_x1;
+	float			full_wall_x2;
 	float			l_perp_dist;
 	float			r_perp_dist;
+	float			l_full_perp_dist;
+	float			r_full_perp_dist;
 	float			wall_len;
+	float			full_wall_len;
 	float			wall_h_l;
 	float			wall_h_r;
 }					t_frame;
