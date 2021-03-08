@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 18:08:50 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/23 12:31:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/08 09:01:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,28 @@ static t_xy		check_player_dir(t_player *plr)
 
 	def = 0.785398163;
 	if (plr->input.up == 1)
+	{
 		if (plr->input.left == 1)
 			return (vec2_rot(vec2(def, def), -45 * DEG_TO_RAD));
 		else if (plr->input.right == 1)
 			return (vec2_rot(vec2(def, def), 45 * DEG_TO_RAD));
 		else
 			return (vec2(def, def));
+	}
 	if (plr->input.down == 1)
+	{
 		if (plr->input.left == 1)
 			return (vec2_rot(vec2(def, def), -135 * DEG_TO_RAD));
 		else if (plr->input.right == 1)
 			return (vec2_rot(vec2(def, def), 135 * DEG_TO_RAD));
 		else
 			return (vec2_rot(vec2(def, def), 180 * DEG_TO_RAD));
+	}
 	if (plr->input.left == 1)
 		return (vec2_rot(vec2(def, def), -90 * DEG_TO_RAD));
 	if (plr->input.right == 1)
 		return (vec2_rot(vec2(def, def), 90 * DEG_TO_RAD));
+	return vec2(-1, -1);
 }
 
 void			player_move(t_player *plr, t_home *home, float delta_time)

@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/04 16:09:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/08 09:01:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,30 @@ int				draw_tex_line(t_xy start, t_xy end,
 	return (TRUE);
 }
 
-void			draw_wall(t_frame *frame, t_texture *tex, 
-							t_home *home, t_player *plr)
-{
-	float		step;
-	float		z_step;
+// void			draw_wall(t_frame *frame, t_texture *tex, 
+// 							t_home *home, t_player *plr)
+// {
+// 	float		step;
+// 	float		z_step;
 
-	ft_calc_distances(frame);
-	z_step = get_distance(plr->pos, frame->left.l_pt) / 
-				get_distance(plr->pos, frame->left.l_pt);
-	step = (frame->wall_h_l - frame->wall_h_r) / frame->wall_len;
-	while (frame->wall_x1 < frame->wall_x2)
-	{
-		draw_tex_line(
-			vec2(frame->wall_x1, plr->pitch - frame->wall_h_l),
-			vec2(frame->wall_x1, plr->pitch + frame->wall_h_l),
-			tex,
-			frame->draw_surf);
-		frame->wall_h_l = frame->wall_h_l - step;
-		z_step -= frame->wall_len * z_step;
-		frame->wall_x1 = frame->wall_x1 + 1.0f;
-	}
-	draw_text(home, ft_ftoa(frame->wall_len, 9, 1), frame, vec2(frame->wall_x2 - frame->wall_len * 0.5, 240));
-}
+// 	ft_calc_distances(frame);
+// 	z_step = get_distance(plr->pos, frame->left.l_pt) / 
+// 				get_distance(plr->pos, frame->left.l_pt);
+// 	step = (frame->wall_h_l - frame->wall_h_r) / frame->wall_len;
+// 	while (frame->wall_x1 < frame->wall_x2)
+// 	{
+// 		draw_tex_line(
+// 			vec2(frame->wall_x1, plr->pitch - frame->wall_h_l),
+// 			vec2(frame->wall_x1, plr->pitch + frame->wall_h_l),
+// 			tex,
+// 			frame->draw_surf);
+// 		frame->wall_h_l = frame->wall_h_l - step;
+// 		z_step -= frame->wall_len * z_step;
+// 		frame->wall_x1 = frame->wall_x1 + 1.0f;
+// 	}
+// 	// if (frame->left.wall->c == 'b')
+// 	// 	draw_text(home, ft_ftoa(frame->wall_angle, 9, 1), frame, vec2(frame->wall_x2 - frame->wall_len * 0.5, 240));
+// }
 
 static float	round_angle(float angle, float *pxl_offset)
 {
@@ -112,7 +113,7 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl)
 		}
 		else
 		{
-			draw_wall(frame, get_tex(frame->left.wall->idx, home->editor_tex), home, plr);
+			draw_segment(frame, get_tex(frame->left.wall->idx, home->editor_tex), home, plr);
 			frame->offset = frame->offset - ++current_pxl;
 		}
 	}
