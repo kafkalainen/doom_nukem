@@ -23,17 +23,17 @@ int				check_collision(t_sector *sector, t_player *plr, t_home *home)
 	i = 0;
 	p0 = &sector->points[0];
 	ray.pos = plr->pos;
-	ray.dir = plr->dir;
+	ray.dir = plr->move_dir;
 	while (i < sector->nb_of_walls)
 	{
-		calc_intersection(p0, &ray, &isect);
-		point = line_intersection(&isect);
-		if (point.x > 0 && point.y > 0)
+		calc_intersection_raw(p0, &ray, &isect);
+		point = line_intersection_raw(&isect);
+		if (point.x >= 0 || point.y >= 0)
 		{
-			if (get_distance(vec2(0, 0), point) < 1 && (p0->idx >= 0))
+			if (get_distance(vec2(0, 0), point) < 2 && (p0->idx >= 0))
 			{
 				plr->current_sector = p0->idx;
-				translate_world_view(home, vec2_mul(plr->dir, 1));
+				translate_world_view(home, vec2_mul(plr->move_dir, 2));
 				return (0);
 			}
 			else if (get_distance(vec2(0, 0), point) < 5 && (p0->idx < 0))
@@ -45,32 +45,37 @@ int				check_collision(t_sector *sector, t_player *plr, t_home *home)
 	return (0);
 }
 
-void			player_move_forward(t_player *plr, t_home *home, float delta_time)
+static t_xy		check_player_dir(t_player *plr)
 {
+	float		def;
+
+	def = 0.785398163;
+	if (plr->input.up == 1)
+		if (plr->input.left == 1)
+			return (vec2_rot(vec2(def, def), -45 * DEG_TO_RAD));
+		else if (plr->input.right == 1)
+			return (vec2_rot(vec2(def, def), 45 * DEG_TO_RAD));
+		else
+			return (vec2(def, def));
+	if (plr->input.down == 1)
+		if (plr->input.left == 1)
+			return (vec2_rot(vec2(def, def), -135 * DEG_TO_RAD));
+		else if (plr->input.right == 1)
+			return (vec2_rot(vec2(def, def), 135 * DEG_TO_RAD));
+		else
+			return (vec2_rot(vec2(def, def), 180 * DEG_TO_RAD));
+	if (plr->input.left == 1)
+		return (vec2_rot(vec2(def, def), -90 * DEG_TO_RAD));
+	if (plr->input.right == 1)
+		return (vec2_rot(vec2(def, def), 90 * DEG_TO_RAD));
+}
+
+void			player_move(t_player *plr, t_home *home, float delta_time)
+{
+	plr->move_dir = check_player_dir(plr);
 	play_footsteps(plr);
 	if (!check_collision(home->sectors[plr->current_sector], plr, home))
-		translate_world_view(home, vec2_mul(plr->dir, 40 * delta_time));
-}
-
-void			player_move_backwards(t_player *plr, t_home *home, float delta_time)
-{
-	play_footsteps(plr);
-	translate_world_view(home, vec2_mul(plr->dir, -40 * delta_time));
-}
-
-void			player_move_strafe(t_player *plr, t_home *home, float delta_time, char ad)
-{
-	t_xy	step;
-	if (ad == 'd')
-	{
-		translate_world_view(home, vec2_mul(vec2_rot(
-		plr->dir, FOV), 40 * delta_time));
-	}
-	else
-	{
-		translate_world_view(home, vec2_mul(vec2_rot(
-		plr->dir, FOV), -40 * delta_time));
-	}
+		translate_world_view(home, vec2_mul(plr->move_dir, 40 * delta_time));
 }
 
 void				movement(t_player *plr, t_home *home)
@@ -83,14 +88,9 @@ void				movement(t_player *plr, t_home *home)
 	if (delta_time < 0.0166667)
 		return;
 	plr->time = ctime;
-	if (plr->input.down == 1)
-		player_move_backwards(plr, home, delta_time);
-	else if (plr->input.up == 1)
-		player_move_forward(plr, home, delta_time);
-	if (plr->input.right == 1)
-		player_move_strafe(plr, home, delta_time, 'd');
-	if (plr->input.left == 1)
-		player_move_strafe(plr, home, delta_time, 'a');
+	if (plr->input.up == 1 || plr->input.down == 1
+		|| plr->input.left == 1 || plr->input.right == 1)
+		player_move(plr, home, delta_time);
 	if (plr->input.z == 1)
 		plr->z += 0.1;
 	if (plr->input.x == 1)
