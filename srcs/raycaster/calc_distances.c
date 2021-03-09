@@ -6,13 +6,13 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/09 10:47:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/09 14:18:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void	calc_distances(t_frame *frame)
+void	calc_distances(t_frame *frame, t_texture *tex)
 {
 	frame->l_perp_dist = fabs(frame->left.l_pt.x + 
 		frame->left.l_pt.y) * SQR2;
@@ -26,6 +26,7 @@ void	calc_distances(t_frame *frame)
 	frame->full_wall_dist = get_distance(frame->left.wall->x0, frame->left.wall->next->x0);
 	frame->wall_len = frame->wall_x2 - frame->wall_x1;
 	frame->full_wall_len = frame->wall_len * (frame->full_wall_dist / frame->visible_wall_dist);
+	frame->tex_mult = frame->full_wall_dist / tex->w;
 	if (frame->left.wall == frame->right.wall)
 	{
 		frame->wall_fract_len = frame->full_wall_len

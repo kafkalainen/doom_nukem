@@ -6,11 +6,39 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/09 13:46:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/09 14:20:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
+
+
+static void		debug_wall(t_home *home, t_frame *frame)
+{	
+	if (frame->left.wall->c == 'b')
+	{
+		draw_text(home, "LEFT", frame, vec2(frame->wall_x1, 220));
+		draw_text(home, ft_ftoa(frame->wall_x1, 2, 1), frame, vec2(frame->wall_x1, 240));
+		draw_text(home, "LEFT_PT: X and Y", frame, vec2(20, 260));
+		draw_text(home, ft_ftoa(frame->left.l_pt.x, 2, 1), frame, vec2(frame->wall_x1, 280));
+		draw_text(home, ft_ftoa(frame->left.l_pt.y, 2, 1), frame, vec2(frame->wall_x1, 300));
+		draw_text(home, "FULL_LEN_LEFT_PT: X and Y", frame, vec2(20, 320));
+		draw_text(home, ft_ftoa(frame->left.wall->x0.x, 2, 1), frame, vec2(frame->wall_x1, 340));
+		draw_text(home, ft_ftoa(frame->left.wall->x0.y, 2, 1), frame, vec2(frame->wall_x1, 360));
+		draw_text(home, "RIGHT", frame, vec2(frame->wall_x2 * 0.75, 220));
+		draw_text(home, ft_ftoa(frame->wall_x2, 2, 1), frame, vec2(frame->wall_x2, 240));
+		draw_text(home, "RIGHT_PT: X and Y", frame, vec2(frame->wall_x2 * 0.75, 260));
+		draw_text(home, ft_ftoa(frame->left.r_pt.x, 2, 1), frame, vec2(frame->wall_x2, 280));
+		draw_text(home, ft_ftoa(frame->left.r_pt.y, 2, 1), frame, vec2(frame->wall_x2, 300));
+		draw_text(home, "FULL_LEN_RIGHT_PT: X and Y", frame, vec2(frame->wall_x2, 320));
+		draw_text(home, ft_ftoa(frame->left.wall->next->x0.x, 2, 1), frame, vec2(frame->wall_x2, 340));
+		draw_text(home, ft_ftoa(frame->left.wall->next->x0.y, 2, 1), frame, vec2(frame->wall_x2, 360));
+		draw_text(home, "FULL_WALL_LEN", frame, vec2(frame->wall_x2 * 0.5, 160));
+		draw_text(home, ft_ftoa(frame->full_wall_len, 4, 1), frame, vec2(frame->wall_x2 * 0.5, 180));
+		draw_text(home, "WALL_LEN", frame, vec2(frame->wall_x2 * 0.5, 200));
+		draw_text(home, ft_ftoa(frame->wall_len, 4, 1), frame, vec2(frame->wall_x2 * 0.5, 220));	
+	}
+}
 
 // static void		draw_horizontal_line(t_xy p0, t_xy p1,
 // 							t_texture *tex, SDL_Surface *surf)
@@ -43,32 +71,21 @@
 // }
 
 
-/*
-** Stuff to fix:
-** - left_wall is shifted when player is moving closer to the wall.
-** - Solved by using wall offset.
-** - full_wall_len runs out of control. When we are closing zero, it will cause full_wall_len to get as high as int_max,
-**   and get negative values as well.
-** - Solved by using ratios. We know the length of the wall, and we know the length of the visible wall, and the part that is not
-** visible is full_len - wall_len.
-** - Drawing walls is off by 15 px.
-*/
 static t_xy		calc_vert_texture(t_xy current, float height, t_frame *frame, t_texture *tex)
 {
-	float	frac_x_traveled;
-	float	frac_y_traveled;
+	float	tex_x;
+	float	tex_y;
 	t_xy	tex_pixel;
-	int		flag;
 
-	frac_y_traveled = current.y / height * tex->h;
+	tex_y = current.y / height * tex->h;
 	if (frame->left.wall->x0.x == frame->left.l_pt.x
 		&& frame->left.wall->x0.y == frame->left.l_pt.y)
-		frac_x_traveled = current.x / frame->full_wall_len * tex->w;
+		tex_x = current.x / frame->full_wall_len * tex->w * frame->tex_mult;
 	else if (frame->left.wall == frame->right.wall)
-		frac_x_traveled = (frame->wall_fract_len + current.x) / frame->full_wall_len * tex->w;
+		tex_x = (frame->wall_fract_len + current.x) / frame->full_wall_len * tex->w * frame->tex_mult;
 	else 
-		frac_x_traveled = (frame->full_wall_len - frame->wall_len + current.x) / frame->full_wall_len * tex->w;
-	tex_pixel = vec2(frac_x_traveled, frac_y_traveled);
+		tex_x = (frame->full_wall_len - frame->wall_len + current.x) / frame->full_wall_len * tex->w * frame->tex_mult;
+	tex_pixel = vec2(tex_x, tex_y);
 	return (tex_pixel);
 }
 
@@ -106,7 +123,7 @@ void			draw_segment(t_frame *frame, t_texture *tex,
 	float		obj_x;
 
 	obj_x = 0.0f;
-	calc_distances(frame);
+	calc_distances(frame, tex);
 	z_step = get_distance(plr->pos, frame->left.l_pt) / 
 				get_distance(plr->pos, frame->left.l_pt);
 	step = (frame->wall_h_l - frame->wall_h_r) / frame->wall_len;
@@ -129,36 +146,8 @@ void			draw_segment(t_frame *frame, t_texture *tex,
 			vec2(obj_x, plr->pitch + frame->wall_h_l),
 			tex,
 			frame); /*drawing a wall*/
-		// draw_tex_line(
-		// 	vec2(frame->wall_x1, plr->pitch - frame->wall_h_l),
-		// 	vec2(frame->wall_x1, plr->pitch + frame->wall_h_l),
-		// 	tex,
-		// 	frame->draw_surf);
 		frame->wall_h_l = frame->wall_h_l - step;
 		z_step -= frame->wall_len * z_step;
 		obj_x++;
-	}
-	if (frame->left.wall->c == 'b')
-	{
-		// draw_text(home, "LEFT", frame, vec2(frame->wall_x1, 220));
-		// draw_text(home, ft_ftoa(frame->wall_x1, 2, 1), frame, vec2(frame->wall_x1, 240));
-		// draw_text(home, "LEFT_PT: X and Y", frame, vec2(20, 260));
-		// draw_text(home, ft_ftoa(frame->left.l_pt.x, 2, 1), frame, vec2(frame->wall_x1, 280));
-		// draw_text(home, ft_ftoa(frame->left.l_pt.y, 2, 1), frame, vec2(frame->wall_x1, 300));
-		// draw_text(home, "FULL_LEN_LEFT_PT: X and Y", frame, vec2(20, 320));
-		// draw_text(home, ft_ftoa(frame->left.wall->x0.x, 2, 1), frame, vec2(frame->wall_x1, 340));
-		// draw_text(home, ft_ftoa(frame->left.wall->x0.y, 2, 1), frame, vec2(frame->wall_x1, 360));
-		// draw_text(home, "RIGHT", frame, vec2(frame->wall_x2 * 0.75, 220));
-		// draw_text(home, ft_ftoa(frame->wall_x2, 2, 1), frame, vec2(frame->wall_x2, 240));
-		// draw_text(home, "RIGHT_PT: X and Y", frame, vec2(frame->wall_x2 * 0.75, 260));
-		// draw_text(home, ft_ftoa(frame->left.r_pt.x, 2, 1), frame, vec2(frame->wall_x2, 280));
-		// draw_text(home, ft_ftoa(frame->left.r_pt.y, 2, 1), frame, vec2(frame->wall_x2, 300));
-		// draw_text(home, "FULL_LEN_RIGHT_PT: X and Y", frame, vec2(frame->wall_x2, 320));
-		// draw_text(home, ft_ftoa(frame->left.wall->next->x0.x, 2, 1), frame, vec2(frame->wall_x2, 340));
-		// draw_text(home, ft_ftoa(frame->left.wall->next->x0.y, 2, 1), frame, vec2(frame->wall_x2, 360));
-		draw_text(home, "FULL_WALL_LEN", frame, vec2(frame->wall_x2 * 0.5, 160));
-		draw_text(home, ft_ftoa(frame->full_wall_len, 4, 1), frame, vec2(frame->wall_x2 * 0.5, 180));
-		draw_text(home, "WALL_LEN", frame, vec2(frame->wall_x2 * 0.5, 200));
-		draw_text(home, ft_ftoa(frame->wall_len, 4, 1), frame, vec2(frame->wall_x2 * 0.5, 220));	
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/09 10:39:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/09 14:20:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_frame
 	float			full_wall_len;
 	float			wall_h_l;
 	float			wall_h_r;
+	float			tex_mult;
 }					t_frame;
 
 float				get_distance(t_xy p1, t_xy p2);
@@ -64,7 +65,7 @@ int					draw_tex_line(t_xy start, t_xy end,
 								t_texture *tex, SDL_Surface *surf);
 t_texture			*get_tex(int idx, t_texture	**textures);
 void				scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl);
-void				calc_distances(t_frame *frame);
+void				calc_distances(t_frame *frame, t_texture *tex);
 void				draw_segment(t_frame *frame, t_texture *tex, 
 								t_home *home, t_player *plr);
 
