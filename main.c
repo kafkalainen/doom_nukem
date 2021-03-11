@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/08 14:03:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/11 09:30:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int  			main(int argc, char **argv)
 	t_player	plr;
 	t_frame		frame;
 	SDL_Event	e;
+	char		*fps;
 
 	if (argc > 1)
 	 	error_output("usage: .\\play [map file name]\n");
@@ -27,12 +28,12 @@ int  			main(int argc, char **argv)
 	transform_world_view(&home, -45 * DEG_TO_RAD);
 	while (1)
 	{
-		//home.t.beginfps = clock();
+		home.t.beginfps = clock();
 		update_player(&plr, &home, &e);
 		update_screen(&home, &frame, &plr);
-		//fps = ft_itoa(home.t.fps);
-		//SDL_SetWindowTitle(home.win.window, fps);
-		//free(fps);
+		fps = ft_itoa(home.t.fps);
+		SDL_SetWindowTitle(home.win.window, fps);
+		free(fps);
 		SDL_UpdateWindowSurface(home.win.window);
 		clear_surface(frame.draw_surf);
 		SDL_FreeSurface(frame.draw_surf);

@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 14:59:22 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/04 14:01:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/11 13:23:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	assign_ground(t_step *ground, int y, t_frame *frame)
 	float		row_dist;
 	
 	row_dist = fabsf((float)(SCREEN_HEIGHT * 0.5 / (y - SCREEN_HEIGHT * 0.5)));
-	ground->step_len.x = row_dist * frame->wall_len / SCREEN_WIDTH;
-	ground->step_len.y = row_dist * frame->wall_len / SCREEN_WIDTH;
+	ground->step_len.x = row_dist * frame->screen_wall_len / SCREEN_WIDTH;
+	ground->step_len.y = row_dist * frame->screen_wall_len / SCREEN_WIDTH;
 	ground->cur_step = vec2(frame->wall_x1, y);
 }
 

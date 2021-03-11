@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/08 09:01:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/11 13:23:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				draw_tex_line(t_xy start, t_xy end,
 // 	ft_calc_distances(frame);
 // 	z_step = get_distance(plr->pos, frame->left.l_pt) / 
 // 				get_distance(plr->pos, frame->left.l_pt);
-// 	step = (frame->wall_h_l - frame->wall_h_r) / frame->wall_len;
+// 	step = (frame->wall_h_l - frame->wall_h_r) / frame->screen_wall_len;
 // 	while (frame->wall_x1 < frame->wall_x2)
 // 	{
 // 		draw_tex_line(
@@ -58,11 +58,11 @@ int				draw_tex_line(t_xy start, t_xy end,
 // 			tex,
 // 			frame->draw_surf);
 // 		frame->wall_h_l = frame->wall_h_l - step;
-// 		z_step -= frame->wall_len * z_step;
+// 		z_step -= frame->screen_wall_len * z_step;
 // 		frame->wall_x1 = frame->wall_x1 + 1.0f;
 // 	}
 // 	// if (frame->left.wall->c == 'b')
-// 	// 	draw_text(home, ft_ftoa(frame->wall_angle, 9, 1), frame, vec2(frame->wall_x2 - frame->wall_len * 0.5, 240));
+// 	// 	draw_text(home, ft_ftoa(frame->wall_angle, 9, 1), frame, vec2(frame->wall_x2 - frame->screen_wall_len * 0.5, 240));
 // }
 
 static float	round_angle(float angle, float *pxl_offset)

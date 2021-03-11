@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/19 14:36:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/11 12:29:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ float			ft_map(float in, t_range from, t_range to);
 float			vec2_dot(t_xy a, t_xy b);
 float			vec2_mag(t_xy a);
 float			vec2_ang(t_xy a, t_xy b);
+float			vec2_perp_dist(t_xy a);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/09 14:20:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/11 13:23:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ typedef struct		s_frame
 	float			pxl_offset;
 	t_ray_pt		left;
 	t_ray_pt		right;
+	t_xyz			top_left;
+	t_xyz			top_right;
+	t_xyz			bottom_left;
+	t_xyz			bottom_right;
 	float			wall_x1;
 	float			wall_x2;
 	float			full_wall_dist;
@@ -41,11 +45,12 @@ typedef struct		s_frame
 	float			l_perp_dist;
 	float			r_perp_dist;
 	float			wall_fract_len;
-	float			wall_len;
+	float			screen_wall_len;
 	float			full_wall_len;
 	float			wall_h_l;
 	float			wall_h_r;
 	float			tex_mult;
+	float			ratio;
 }					t_frame;
 
 float				get_distance(t_xy p1, t_xy p2);
@@ -65,7 +70,7 @@ int					draw_tex_line(t_xy start, t_xy end,
 								t_texture *tex, SDL_Surface *surf);
 t_texture			*get_tex(int idx, t_texture	**textures);
 void				scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl);
-void				calc_distances(t_frame *frame, t_texture *tex);
+void				calc_distances(t_frame *frame, t_texture *tex, t_player *plr);
 void				draw_segment(t_frame *frame, t_texture *tex, 
 								t_home *home, t_player *plr);
 

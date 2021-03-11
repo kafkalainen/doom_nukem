@@ -1,6 +1,7 @@
 SRCS =	main.c \
 		srcs/vec_math/vec2_a.c \
 		srcs/vec_math/vec2_b.c \
+		srcs/vec_math/vec2_c.c \
 		srcs/update_player/key_input.c \
 		srcs/update_player/mouse_handle.c \
 		srcs/update_player/movement.c \

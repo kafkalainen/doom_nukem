@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vec2_c.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:14:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/28 19:26:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/11 12:31:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-t_xy	vec2_perpendicular(t_xy x0, t_xy x1)
+float	vec2_perp_dist(t_xy a)
 {
-	t_xy	vector;
-
-	vector = vec2_dec(x1, x0);
-	return (vec2(-vector.y, vector.x));
+	return (fabsf(a.x + a.y) * SQR2);
 }
