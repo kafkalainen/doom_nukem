@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/11 13:32:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/12 15:40:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,81 +79,35 @@ static void		debug_wall(t_home *home, t_frame *frame)
 // 	return (vec2(current_perp_dist, 0));
 // }
 
-static t_xy		calc_vert_texture(t_xy current, float height,
+
+static t_xy		calc_vert_texture(t_xyz current, float height,
 							t_frame *frame, t_texture *tex)
 {
 	float	tex_x;
 	float	tex_y;
-	float	offset;
-	float 	current_perp_dist;
-	float	perp_dist_step;
+	float	z;
 
+	// current = inv_z(current);
+	// z = 1 / current.z;
+	// tex_x = current.x * z;
+	// tex_y = current.y * z;
 	tex_y = current.y / height * tex->h;
-	offset = frame->tex_mult;
-	current_perp_dist = frame->l_perp_dist - frame->r_perp_dist;
-	perp_dist_step = current_perp_dist / frame->screen_wall_len;
-	current_perp_dist = frame->l_perp_dist + perp_dist_step * current.x;
-	// tex_x = current.x;
-	//offset = frame->ratio * frame->tex_mult;
 	if (frame->left.wall->x0.x == frame->left.l_pt.x
 		&& frame->left.wall->x0.y == frame->left.l_pt.y)
-		tex_x = (current.x / frame->full_wall_len * tex->w * offset / current_perp_dist) / (1 / current_perp_dist);
+		tex_x = current.x / frame->full_wall_len * tex->w * frame->tex_mult;
 	else if (frame->left.wall == frame->right.wall)
-		// tex_x = (current.x / frame->screen_wall_len + frame->wall_fract_len) * tex->w * offset;
-		tex_x = ((frame->wall_fract_len + current.x) / frame->full_wall_len * tex->w * frame->tex_mult / current_perp_dist) / (1 / current_perp_dist);
-		//tex_x = 1/
+		tex_x =  (frame->wall_fract_len + current.x) / frame->full_wall_len * tex->w * frame->tex_mult;
 	else
-		//tex_x = 1;
-		// tex_x =  current.x / frame->screen_wall_len * tex->w * offset;
-		tex_x = ((frame->full_wall_len - frame->screen_wall_len + current.x) /
-		 		frame->full_wall_len * tex->w * frame->tex_mult / current_perp_dist) / (1 / current_perp_dist);
+		tex_x = (frame->full_wall_len - frame->screen_wall_len + current.x) /
+		 		frame->full_wall_len * tex->w * frame->tex_mult;
 	return (vec2(tex_x, tex_y));
-}
-
-/*
-**
-** full_wall_len grows way too fast, when player is closer to the wall.
-** Result is the same when using just view ratios, which does not make any sense.
-** This is due perspective divide, we are using naive texture mapping or affine texture mapping currently to map the textures.
-** We need to correct the textures using perspective divide.
-**
-*/
-static void		draw_vertical_line(t_xy p0, t_xy p1,
-							t_texture *tex, t_frame *frame)
-{
-	float	min;
-	float	max;
-	float	height;
-	t_xy	obj;
-	t_xy	tex_pixel;
-
-	if (p0.x != p1.x)
-		return ;
-	obj.x = p0.x;
-	obj.y = 0.0f;
-	min = ft_fmin(p0.y, p1.y);
-	max = ft_fmax(p0.y, p1.y);
-	height = max - min;
-	// if (frame->left.wall->c == 'b')
-	// 	printf("%f\n", height);
-	while (obj.y < height)
-	{
-		tex_pixel = calc_vert_texture(vec2(obj.x, obj.y), height, frame, tex);
-		if (obj.x + frame->wall_x1 >= 0 &&
-			obj.x + frame->wall_x1 < SCREEN_WIDTH &&
-			obj.y + min >= 0 &&
-			obj.y + min < SCREEN_HEIGHT)
-			put_pixel(frame->draw_surf, obj.x + frame->wall_x1,
-				obj.y + min, get_texel(tex_pixel.x, tex_pixel.y, tex));
-		obj.y++;
-	}
 }
 
 static void		draw_horizontal_line(t_xy p0, t_xy p1,
 							t_texture *tex, t_frame *frame)
 {
 	float	min;
-	t_xy	obj;
+	t_xyz	obj;
 	t_xy	tex_pixel;
 
 	if (p0.y != p1.y)
@@ -163,7 +117,7 @@ static void		draw_horizontal_line(t_xy p0, t_xy p1,
 	min = ft_fmin(p0.y, p1.y);
 	while (obj.x < frame->screen_wall_len)
 	{
-		tex_pixel = calc_vert_texture(vec2(obj.x, obj.y), frame->screen_wall_len, frame, tex);
+		tex_pixel = calc_vert_texture(vec3(obj.x, obj.y, obj.z), frame->screen_wall_len, frame, tex);
 		if (obj.x + frame->wall_x1 >= 0 &&
 			obj.x + frame->wall_x1 < SCREEN_WIDTH &&
 			obj.y + frame->wall_h_l >= 0 && obj.y + frame->wall_h_l < SCREEN_HEIGHT)
@@ -173,46 +127,55 @@ static void		draw_horizontal_line(t_xy p0, t_xy p1,
 	}
 }
 
+/*
+**
+** full_wall_len grows way too fast, when player is closer to the wall.
+** Result is the same when using just view ratios, which does not make any sense.
+** This is due perspective divide, we are using naive texture mapping or affine texture mapping currently to map the textures.
+** We need to correct the textures using perspective divide 1 / z by every 16 px.
+*/
+static void		draw_vertical_line(t_xyz p0, t_xyz p1,
+							t_texture *tex, t_frame *frame)
+{
+	float	min;
+	float	max;
+	float	height;
+	t_xy	tex_pixel;
+
+	if (p0.x != p1.x)
+		return ;
+	min = ft_fmin(p0.y, p1.y);
+	max = ft_fmax(p0.y, p1.y);
+	height = max - min;
+	while (min < max)
+	{
+		tex_pixel = calc_vert_texture(p0, height, frame, tex);
+		if (p0.x >= 0 && p0.x < SCREEN_WIDTH &&
+			p1.y >= 0 && p1.y < SCREEN_HEIGHT)
+			put_pixel(frame->draw_surf, p0.x,
+				min, get_texel(tex_pixel.x, tex_pixel.y, tex));
+		min++;
+	}
+}
+
 void			draw_segment(t_frame *frame, t_texture *tex,
 							t_home *home, t_player *plr)
 {
-	float		x_step;
-	float		y_step;
-	size_t		obj_x;
-	float		obj_y;
-	float		counter;
-	float		height;
+	t_xyz		current;
 
-	obj_x = 0;
-	obj_y = 0.0f;
-	counter = frame->wall_x1;
 	calc_distances(frame, tex, plr);
-	y_step = (frame->top_left.y - frame->bottom_left.y) / frame->screen_wall_len;
-	x_step = (frame->top_left.x - frame->top_left.x) / (frame->wall_h_l - frame->wall_h_r);
-	// while (obj_y < frame->wall_h_l)
-	// {
-	// 	draw_horizontal_line(
-	// 		vec2(frame->wall_x1 + counter, plr->pitch - frame->wall_h_l - obj_y),
-	// 		vec2(frame->wall_x2 - counter, plr->pitch - frame->wall_h_l - obj_y),
-	// 		get_tex(-3, home->editor_tex), frame);
-	// 	counter = counter + x_step;  
-	// 	obj_y++;
-	// }
-	while (obj_x + frame->top_left.x < frame->top_right.x)
+	current = (t_xyz){0.0f, 0.0f, frame->top_left.z};
+	frame->step.x = 1.0f;
+	frame->step.y = (frame->top_left.y - frame->top_right.y) / frame->screen_wall_len;
+	frame->step.z = (frame->top_left.z - frame->top_right.z) / frame->screen_wall_len;
+	while (current.x + frame->top_left.x < frame->top_right.x)
 	{
-		/*draw_tex_line(
-			vec2(frame->wall_x1, plr->pitch + frame->wall_h_l),
-			vec2(frame->wall_x1, 0),
-			get_tex(-3, home->editor_tex),
-			frame->draw_surf
-		); drawing a floor*/
 		draw_vertical_line(
-			vec2(obj_x, frame->top_left.y + obj_y),
-			vec2(obj_x, frame->bottom_left.y - obj_y),
+			vec3(current.x + frame->top_left.x, frame->top_left.y - current.y, current.z),
+			vec3(current.x + frame->top_left.x, frame->bottom_left.y + current.y, current.z),
 			tex,
 			frame);
-		obj_x++;
-		obj_y += y_step;
+		current = vec3_add(current, frame->step);
 	}
-	// debug_wall(home, frame);
+	debug_wall(home, frame);
 }

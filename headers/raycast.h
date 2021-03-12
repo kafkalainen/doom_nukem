@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/11 13:23:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/12 14:00:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_frame
 	t_xyz			top_right;
 	t_xyz			bottom_left;
 	t_xyz			bottom_right;
+	t_xyz			step;
 	float			wall_x1;
 	float			wall_x2;
 	float			full_wall_dist;
