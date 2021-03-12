@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:14:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/12 13:33:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/12 16:06:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,9 @@ t_xyz	inv_z(t_xyz a)
 	a.y = a.y / a.z;
 	a.z = 1.0f / a.z;
 	return (a);
+}
+
+float	vec2_to_screen_space(float x, float z)
+{
+	return (SCREEN_WIDTH - ((SCREEN_HEIGHT / z) * x) + 15);
 }

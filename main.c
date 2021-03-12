@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/11 09:30:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/12 16:25:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int  			main(int argc, char **argv)
 	new_sector("sector00 4 5 10 -3 -4 40,200,1 250,200,2 200,0,1 90,0,-10 -5\n");
 	setup(argv[1], &home, &plr, &frame);
 	update_sector(&home);
-	transform_world_view(&home, -45 * DEG_TO_RAD);
+	transform_world_view(&home, 45 * DEG_TO_RAD);
 	while (1)
 	{
 		home.t.beginfps = clock();
