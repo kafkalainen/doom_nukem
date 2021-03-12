@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/12 16:13:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/12 17:09:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 void	calc_distances(t_frame *frame, t_texture *tex, t_player *plr)
 {
-	frame->top_left.z = vec2_perp_dist(frame->left.l_pt);
-	frame->top_right.z = vec2_perp_dist(frame->left.r_pt);
+	float	z1;
+	float	z2;
+	
+	z1 = vec2_perp_dist(frame->left.l_pt);
+	z2 = vec2_perp_dist(frame->left.r_pt);
 	frame->top_left.x = SCREEN_WIDTH - ((SCREEN_HEIGHT /
-		frame->top_left.z) * frame->left.l_pt.x) + 15;
+		z1) * frame->left.l_pt.x) + 15;
 	frame->top_right.x = SCREEN_WIDTH - ((SCREEN_HEIGHT /
-		frame->top_right.z) * frame->left.r_pt.x) + 15;
+		z2) * frame->left.r_pt.x) + 15;
 	frame->bottom_left = frame->top_left;
 	frame->bottom_right = frame->top_right;
-	frame->top_left.y = plr->pitch - SCREEN_HEIGHT / frame->top_left.z * 20;
-	frame->top_right.y = plr->pitch - SCREEN_HEIGHT / frame->top_right.z * 20;
-	frame->bottom_left.y = plr->pitch + SCREEN_HEIGHT / frame->bottom_left.z * 20;
-	frame->bottom_right.y = plr->pitch + SCREEN_HEIGHT / frame->bottom_right.z * 20;
+	frame->top_left.y = plr->pitch - SCREEN_HEIGHT / z1 * 20;
+	frame->top_right.y = plr->pitch - SCREEN_HEIGHT / z2 * 20;
+	frame->bottom_left.y = plr->pitch + SCREEN_HEIGHT / z1 * 20;
+	frame->bottom_right.y = plr->pitch + SCREEN_HEIGHT / z2 * 20;
 	frame->visible_wall_dist = get_distance(frame->left.l_pt, frame->left.r_pt);
 	frame->full_wall_dist = get_distance(frame->left.wall->x0, frame->left.wall->next->x0);
 	frame->screen_wall_len = frame->top_right.x - frame->top_left.x;

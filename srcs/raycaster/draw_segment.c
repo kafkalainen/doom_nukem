@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/12 16:42:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/12 17:06:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,26 +124,55 @@ static void		draw_vertical_line(t_xy p0, t_xy p1,
 	}
 }
 
+// void			draw_segment(t_frame *frame, t_texture *tex,
+// 							t_home *home, t_player *plr)
+// {
+// 	t_xyz		current;
+// 	if (frame->left.wall->c != 'b')
+// 		return ;
+		
+// 	calc_distances(frame, tex, plr);
+// 	current = (t_xyz){0.0f, 0.0f, frame->top_left.z};
+// 	frame->step.x = 1.0f;
+// 	frame->step.y = (frame->top_left.y - frame->top_right.y) / frame->screen_wall_len;
+// 	frame->step.z = (frame->top_left.z - frame->top_right.z) / frame->screen_wall_len;
+// 	while (current.x + frame->top_left.x < frame->top_right.x)
+// 	{
+// 		draw_vertical_line(
+// 			vec2(current.x + frame->top_left.x, frame->top_left.y - current.y),
+// 			vec2(current.x + frame->top_left.x, frame->bottom_left.y + current.y),
+// 			tex,
+// 			frame);
+// 		current = vec3_add(current, frame->step);
+// 	}
+// 	debug_wall(home, frame);
+// }
+
 void			draw_segment(t_frame *frame, t_texture *tex,
 							t_home *home, t_player *plr)
 {
-	t_xyz		current;
-	if (frame->left.wall->c != 'b')
-		return ;
-		
+	float		x_step;
+	float		y_step;
+	size_t		obj_x;
+	size_t		obj_y;
+	float		height;
+
+	obj_x = 0;
+	obj_y = 0;
 	calc_distances(frame, tex, plr);
-	current = (t_xyz){0.0f, 0.0f, frame->top_left.z};
-	frame->step.x = 1.0f;
-	frame->step.y = (frame->top_left.y - frame->top_right.y) / frame->screen_wall_len;
-	frame->step.z = (frame->top_left.z - frame->top_right.z) / frame->screen_wall_len;
-	while (current.x + frame->top_left.x < frame->top_right.x)
-	{
-		draw_vertical_line(
-			vec2(current.x + frame->top_left.x, frame->top_left.y - current.y),
-			vec2(current.x + frame->top_left.x, frame->bottom_left.y + current.y),
-			tex,
-			frame);
-		current = vec3_add(current, frame->step);
-	}
-	debug_wall(home, frame);
+	y_step = (frame->top_left.y - frame->top_right.y) / frame->screen_wall_len;
+	ft_draw_line(frame->top_left, frame->top_right, greenyellow, frame->draw_surf);
+	ft_draw_line(frame->top_left, frame->bottom_left, greenyellow, frame->draw_surf);
+	ft_draw_line(frame->top_right, frame->bottom_right, greenyellow, frame->draw_surf);
+	ft_draw_line(frame->bottom_left, frame->bottom_right, greenyellow, frame->draw_surf);
+	// while (obj_x + frame->top_left.x < frame->top_right.x)
+	// {
+	// 	draw_vertical_line(
+	// 		vec2(obj_x, plr->pitch - frame->top_left.y),
+	// 		vec2(obj_x, plr->pitch + frame->top_left.y),
+	// 		tex,
+	// 		frame);
+	// 	frame->top_left.y = frame->top_left.y - y_step;
+	// 	obj_x++;
+	// }
 }

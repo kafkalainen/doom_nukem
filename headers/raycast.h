@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/12 14:00:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/12 17:00:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ typedef struct		s_frame
 	float			pxl_offset;
 	t_ray_pt		left;
 	t_ray_pt		right;
-	t_xyz			top_left;
-	t_xyz			top_right;
-	t_xyz			bottom_left;
-	t_xyz			bottom_right;
+	t_xy			top_left;
+	t_xy			top_right;
+	t_xy			bottom_left;
+	t_xy			bottom_right;
 	t_xyz			step;
 	float			wall_x1;
 	float			wall_x2;
