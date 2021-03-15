@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:14:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/12 16:06:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/13 11:59:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ t_xyz	vec3(float x, float y, float z)
 
 t_xyz	inv_z(t_xyz a)
 {
-	a.x = a.x / a.z;
-	a.y = a.y / a.z;
 	a.z = 1.0f / a.z;
+	a.x = a.x * a.z;
+	a.y = a.y * a.z;
 	return (a);
 }
 

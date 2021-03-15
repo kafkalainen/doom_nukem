@@ -49,7 +49,7 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - [ ] The floor and ceiling may not be horizontal but inclined planes.
 - [ ] The floors and ceilings have textures.
 - [ ] There can be a sky instead of a ceiling.
-- [x] Walls can be partially transparent, unveiling the room behind.
+- [ ] Walls can be partially transparent, unveiling the room behind.
 - [ ] Decorative elements can be placed on the walls over the main texture (paintings, posters... ).
 - [ ] Objects or characters can be placed in the world as sprites that always face the player.
 - [ ] Objects or characters can be placed in the world as multiple sprites displayed according to the orientation between the object and the player (you’ll see the object or character from behind and from the side as you walk around it).
