@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/16 17:18:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/16 18:03:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		create_map_file(t_home *home)
 	int		fd;
 	char	*tmp = "./map_files/test.DATA";
 
-	fd = OPEN_FILE(tmp, WRITE_ONLY | CREATE_FILE | O_TRUNC | CHECK_EXIST, 0644);
+	fd = OPEN_FILE(tmp, WRITE_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST, 0644);
 	if (fd < 0)
 		return (-1);
 	write_texture_data(fd, home);

@@ -32,6 +32,7 @@
 #  define APPEND_FILE O_APPEND
 #  define CHECK_EXIST O_EXCL
 #  define CREATE_FILE O_CREAT
+#  define TRUNCATE O_TRUNC
 #  include <math.h>
 #  include "/usr/local/include/SDL2/SDL_mixer.h"
 #  include <string.h>
@@ -50,6 +51,7 @@
 #  define CHECK_EXIST _O_EXCL
 #  define APPEND_FILE _O_APPEND
 #  define CREATE_FILE _O_CREAT
+#  define TRUNCATE _O_TRUNC
 #  include "SDL2_mixer_win/include/SDL2/SDL_mixer.h"
 #  include <io.h>
 #  include <stdio.h>
