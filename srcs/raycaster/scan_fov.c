@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/04 16:09:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/09 14:45:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,18 @@ static float	round_angle(float angle, float *pxl_offset)
 
 t_texture		*get_tex(int idx, t_texture	**textures)
 {
+	int i;
+
 	if (idx >= 0)
 		error_output("idx larger or equal to zero\n");
-	return (textures[abs(idx)]);
-
+	i = 1;
+	while (textures[i])
+	{
+		if (textures[i]->idx == idx)
+			return (textures[i]);
+		i++;
+	}
+	return (NULL);
 }
 
 void			scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl)

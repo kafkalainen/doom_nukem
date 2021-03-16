@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/26 10:00:45 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/16 17:10:26 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ t_texture		*create_texture(t_png *png)
 
 	if (!(tex = (t_texture*)malloc(sizeof(t_texture))))
 		error_output("Memory allocation of t_texture struct failed\n");
-	if (!(tex->map_pixels = (unsigned char *)malloc(sizeof(unsigned char) * png->final_size)))
+	if (!(tex->source = (unsigned char *)malloc(sizeof(unsigned char) * png->source.size)))
 		error_output("Memory allocation of editor pixel pointer failed\n");
-	ft_memcpy(tex->map_pixels, png->pixels, png->final_size);
+	ft_memcpy(tex->source, png->source.buf, png->source.size);
 	tex->h = png->height;
 	tex->w = png->width;
 	tex->bpp = (png->depth / 8) * png->channels;
@@ -78,6 +78,7 @@ t_texture		*create_texture(t_png *png)
 	tex->color_depth = png->depth;
 	tex->color_type = png->color_type;
 	tex->format = png->format;
+	tex->source_size = png->source.size;
 	tex->pitch = (tex->w * tex->bpp);
 	if (!(tex->pixels = (unsigned int *)malloc(sizeof(unsigned int) *
 		(tex->h * tex->pitch))))

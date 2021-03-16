@@ -34,6 +34,8 @@ SRCS =	main.c \
 		srcs/libft/ft_putchar.c \
 		srcs/libft/ft_strncpy.c \
 		srcs/libft/ft_strsplit.c \
+		srcs/libft/ft_strstr.c \
+		srcs/libft/ft_strncmp.c \
 		srcs/raycaster/line_line_intersection.c \
 		srcs/raycaster/get_wall_points.c \
 		srcs/raycaster/setup_frame.c \
@@ -58,6 +60,8 @@ SRCS =	main.c \
 		srcs/png_parser/unfilter.c \
 		srcs/png_parser/utils.c \
 		srcs/porting/png.c \
+		srcs/porting/create_mapfile.c \
+		srcs/porting/open_file.c
 
 HEADERS = \
 		doom_nukem.h\
@@ -96,7 +100,7 @@ win:
 #	cd SDL_mixer && ./configure && make && sudo make install
 
 linux: #dependencies
-	gcc $(SRCS) -o play $(LINUX_INCLUDE_PATHS) $(LINUX_LIBRARY_PATHS) $(LINUX_COMPILER_FLAGS) $(LINUX_LINK_FLAGS)
+	gcc $(SRCS) -g -o play $(LINUX_INCLUDE_PATHS) $(LINUX_LIBRARY_PATHS) $(LINUX_COMPILER_FLAGS) $(LINUX_LINK_FLAGS)
 
 all:
 	gcc $(SRCS) -o play -I include -L lib -l SDL2-2.0.0

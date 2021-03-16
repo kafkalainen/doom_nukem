@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/02 13:51:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/16 17:41:00 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,15 @@ void		free_array(unsigned char **array);
 /*
 ** Audio Encode/Decode funtions
 */
+
+/*
+** File creation, writing and reading functions
+*/
+
+# define WRITE_BREAKER "#"
+# define READ_BREAKER '#'
+
+int		create_map_file(t_home *home);
+int		open_file(t_home *home, char *path);
 
 #endif

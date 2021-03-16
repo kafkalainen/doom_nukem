@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/02 10:49:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/16 17:30:13 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	load_audio(&plr->audio);
 	if (Mix_PlayingMusic() == 0)
 		Mix_PlayMusic(plr->audio.music, -1);
-	init_textures(home);
+	// init_textures(home);
 	init_player(plr);
 }

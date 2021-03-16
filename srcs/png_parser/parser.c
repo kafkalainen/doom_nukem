@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/25 11:57:21 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/15 16:58:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_texture	*png_parser(char *path)
 	tex = create_texture(&png);
 	free(png.pixels);
 	free(png.source.buf);
+	free(png.compressed);
 	return (tex);
 }
 
@@ -78,7 +79,6 @@ void		decode_png(t_png *png)
 	if (!(png->inflated = (unsigned char *)malloc(sizeof(unsigned char) * png->inflated_size)))
 		error_output("Memory allocation of inflated data pointer failed\n");
 	ft_inflate(png);
-	free(png->compressed);
 	convert_to_pixels(png);
 	free(png->inflated);
 }

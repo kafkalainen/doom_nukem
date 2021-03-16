@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/24 09:54:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/09 13:11:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct		s_home
 	t_time			t;
 	t_xy			offset;
 	int				nb_of_sectors;
+	int				nbr_of_textures;
 }					t_home;
 
 #endif
