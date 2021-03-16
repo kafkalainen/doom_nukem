@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/15 13:37:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/16 18:45:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,16 @@ static t_xy		calc_vert_texture(t_xyz current, float height,
 {
 	t_xyz	ndc;
 
-	ndc.z = current.z;
+	// ndc.z = current.z;
 	ndc.y = current.y / height;
 	if (frame->left.wall->x0.x == frame->left.l_pt.x
 		&& frame->left.wall->x0.y == frame->left.l_pt.y)
 		ndc.x = (current.x / frame->screen_wall_len) * frame->ratio;
 	else
 		ndc.x = frame->unvisible_l_side + (current.x / frame->screen_wall_len * frame->ratio);
-	ndc = inv_z(ndc);
-	ndc.x = ndc.x / ndc.z;
-	ndc.y = ndc.y / ndc.z;
+	// ndc = inv_z(ndc);
+	// ndc.x = ndc.x / ndc.z;
+	// ndc.y = ndc.y / ndc.z;
 	return (vec2(ndc.x * tex->w * frame->tex_mult, ndc.y * tex->h));
 }
 
@@ -137,8 +137,8 @@ static void		draw_vertical_line(t_xyz p0, t_xyz p1,
 void			draw_segment(t_frame *frame, t_texture *tex,
 							t_home *home, t_player *plr)
 {
-	if (frame->left.wall->c != 'b')
-		return ;
+	// if (frame->left.wall->c != 'b')
+	// 	return ;
 	float		x_step;
 	float		y_step;
 	float		z_step;
