@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/16 17:40:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:26:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,11 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos)
 	png.compressed_index = 0;
 	png.inflated_size = 0;
 	png.final_size = 0;
-	validate_signature(png.source.buf);
-	parse_data(&png);
-	decode_png(&png);
+	parse_png(&png);
 	tex = create_texture(&png);
+	free_png(png);
 	tex->idx = idx;
 	convert_to_uint32(tex->pixels, tex);
-	free(png.pixels);
-	free(png.source.buf);
-	free(png.compressed);
 	return (tex);
 }
 

@@ -58,7 +58,8 @@ SRCS =	main.c \
 		srcs/png_parser/parser.c \
 		srcs/png_parser/texture.c \
 		srcs/png_parser/unfilter.c \
-		srcs/png_parser/utils.c \
+		srcs/png_parser/parser_utils.c \
+		srcs/png_parser/parser_utils2.c \
 		srcs/porting/png.c \
 		srcs/porting/create_mapfile.c \
 		srcs/porting/open_file.c

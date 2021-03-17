@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 14:12:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:24:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void			verify_chunks(t_png *png);
 void			setup_parser(t_png *png);
 void			decode_png(t_png *png);
 void			parse_data(t_png *png);
-t_texture		*png_parser(char *path);
+void			parse_png(t_png *png);
+t_png			png_parser(char *path);
 
 /*
 ** t_texture struct functions
@@ -168,5 +169,6 @@ int				get_color_rgb(int depth);
 int				get_color_lum(int depth);
 int				get_color_luma(int color_depth);
 void			error_output(char *msg);
+void			free_png(t_png png);
 
 #endif

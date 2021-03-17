@@ -6,19 +6,16 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/15 16:58:40 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:21:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-
-
-t_texture	*png_parser(char *path)
+t_png		png_parser(char *path)
 {
 	int			fd;
 	t_png		png;
-	t_texture	*tex;
 
 	setup_parser(&png);
 	if ((fd = OPEN_FILE(path, READ_ONLY)) < 0)
@@ -32,15 +29,9 @@ t_texture	*png_parser(char *path)
 			error_output("File is too large\n");
 		if (CLOSE_FILE(fd) == -1)
 			error_output("Could not close file\n");
-		validate_signature(png.source.buf);
-		parse_data(&png);
-		decode_png(&png);
+		parse_png(&png);
 	}
-	tex = create_texture(&png);
-	free(png.pixels);
-	free(png.source.buf);
-	free(png.compressed);
-	return (tex);
+	return (png);
 }
 
 void		parse_data(t_png *png)
@@ -80,7 +71,6 @@ void		decode_png(t_png *png)
 		error_output("Memory allocation of inflated data pointer failed\n");
 	ft_inflate(png);
 	convert_to_pixels(png);
-	free(png->inflated);
 }
 
 void		setup_parser(t_png *png)
