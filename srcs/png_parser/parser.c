@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/17 15:21:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:38:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_png		png_parser(char *path)
 	int			fd;
 	t_png		png;
 
-	setup_parser(&png);
+	setup_parser(&png, MAX_SIZE);
 	if ((fd = OPEN_FILE(path, READ_ONLY)) < 0)
 		error_output("Failed to open file\n");
 	else
@@ -73,9 +73,9 @@ void		decode_png(t_png *png)
 	convert_to_pixels(png);
 }
 
-void		setup_parser(t_png *png)
+void		setup_parser(t_png *png, unsigned int size)
 {
-	if (!(png->source.buf = (unsigned char *)malloc(sizeof(unsigned char) * MAX_SIZE)))
+	if (!(png->source.buf = (unsigned char *)malloc(sizeof(unsigned char) * size)))
 		error_output("Memory allocation of source buffer failed\n");
 	png->state = 0;
 	png->i = 8;

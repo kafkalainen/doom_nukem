@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/16 17:10:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:41:51 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void			convert_to_unsigned_int(t_texture *tex, t_png *png)
 	}
 }
 
-t_texture		*create_texture(t_png *png)
+t_texture		*create_texture(t_png *png, int idx)
 {
 	t_texture	*tex;
 
@@ -80,6 +80,7 @@ t_texture		*create_texture(t_png *png)
 	tex->format = png->format;
 	tex->source_size = png->source.size;
 	tex->pitch = (tex->w * tex->bpp);
+	tex->idx = idx;
 	if (!(tex->pixels = (unsigned int *)malloc(sizeof(unsigned int) *
 		(tex->h * tex->pitch))))
 		error_output("Memory allocation of pixel pointer failed\n");

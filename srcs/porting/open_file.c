@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/17 15:26:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:41:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos)
 	int			i;
 	int			idx;
 
-	i = 0;
-	while (i < 3)
+	i = -1;
+	while (++i < 3)
 	{
 		(*pos) += get_next_breaker(buf + (*pos)) + 1;
 		if (i == 0)
@@ -64,23 +64,14 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos)
 			png.source.size = ft_atoi(buf + (*pos));
 		else if (i == 2)
 		{
-			if (!(png.source.buf = (unsigned char *)malloc(sizeof(unsigned char) * png.source.size)))
-				error_output("Memory allocation of source buffer failed\n");
+			setup_parser(&png, png.source.size);
 			ft_memcpy(png.source.buf, buf + *pos, png.source.size);
 			(*pos) += png.source.size;
 		}
-		i++;
 	}
-	png.state = 0;
-	png.i = 8;
-	png.compressed_size = 0;
-	png.compressed_index = 0;
-	png.inflated_size = 0;
-	png.final_size = 0;
 	parse_png(&png);
-	tex = create_texture(&png);
+	tex = create_texture(&png, idx);
 	free_png(png);
-	tex->idx = idx;
 	convert_to_uint32(tex->pixels, tex);
 	return (tex);
 }

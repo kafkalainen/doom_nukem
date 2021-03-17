@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/17 15:24:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:42:45 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void			validate_signature(unsigned char *buf);
 */
 
 void			verify_chunks(t_png *png);
-void			setup_parser(t_png *png);
+void			setup_parser(t_png *png, unsigned int size);
 void			decode_png(t_png *png);
 void			parse_data(t_png *png);
 void			parse_png(t_png *png);
@@ -86,7 +86,7 @@ t_png			png_parser(char *path);
 ** t_texture struct functions
 */
 
-t_texture		*create_texture(t_png *png);
+t_texture		*create_texture(t_png *png, int idx);
 void			convert_to_unsigned_int(t_texture *tex, t_png *png);
 unsigned int	add_pixel(unsigned char *data, int bpp, int pos);
 unsigned int	swap_channels(unsigned int pixel);
