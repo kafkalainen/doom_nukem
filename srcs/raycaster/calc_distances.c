@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/17 11:07:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:18:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,8 @@ void	calc_distances(t_frame *frame, t_texture *tex, t_player *plr)
 	frame->top_right.y = plr->pitch - SCREEN_HEIGHT / right_z * 20;
 	frame->bottom_left.y = plr->pitch + SCREEN_HEIGHT / left_z * 20;
 	frame->bottom_right.y = plr->pitch + SCREEN_HEIGHT / right_z * 20;
+	frame->step.y = interpolate_points(frame->top_right.y, frame->top_left.y,
+		frame->top_left.x, frame->top_right.x);
+	frame->step.z = interpolate_points(frame->top_left.y, frame->top_right.y,
+		frame->top_left.x, frame->top_right.x);
 }

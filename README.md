@@ -13,7 +13,7 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Segfault in renderer when the function returns back to the same portal it came from.
 - Wall distorted because only angle is used. Solved using perpentual distance to the wall, and scaling it to the view.
 - Getting correct offset for wall textures.
-- Correcting walls by perspective-correct interpolation from affine texture coordinates.  
+- Correcting walls by perspective-correct interpolation from affine texture coordinates.
 
 # TO-DO
 ## Riku

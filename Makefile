@@ -18,6 +18,7 @@ SRCS =	main.c \
 		srcs/utilities/setup.c \
 		srcs/utilities/audio.c \
 		srcs/utilities/linkedlist.c \
+		srcs/utilities/debugging.c \
 		srcs/libft/ft_itoa.c \
 		srcs/libft/ft_ftoa.c \
 		srcs/libft/ft_fmin.c \
