@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 10:50:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/17 12:43:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/17 13:40:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,19 @@ static void		calc_offsets(t_frame *frame)
 	}
 	else if (frame->left.wall == frame->right.wall)
 	{
-		frame->uv_top_left = inv_z((t_xyz){frame->unvisible_l_side, 0.0f, frame->top_left.z});
-		frame->uv_bottom_left = inv_z((t_xyz){frame->unvisible_l_side, 1.0f, frame->bottom_left.z});
-		frame->uv_top_right = inv_z((t_xyz){1.0f, 0.0f, frame->top_right.z});
-		frame->uv_bottom_right = inv_z((t_xyz){1.0f, 1.0f, frame->bottom_right.z});
-
+		frame->uv_top_left = inv_z((t_xyz){frame->unvisible_l_side * frame->tex_mult, 0.0f, frame->top_left.z});
+		frame->uv_bottom_left = inv_z((t_xyz){frame->unvisible_l_side  * frame->tex_mult, 1.0f, frame->bottom_left.z});
+		frame->uv_top_right = inv_z((t_xyz){(frame->unvisible_l_side + frame->ratio) * frame->tex_mult, 0.0f, frame->top_right.z});
+		frame->uv_bottom_right = inv_z((t_xyz){(frame->unvisible_l_side + frame->ratio) * frame->tex_mult, 1.0f, frame->bottom_right.z});
 	} else {
-		frame->uv_top_left = inv_z((t_xyz){frame->unvisible_l_side, 0.0f, frame->top_left.z});
-		frame->uv_bottom_left = inv_z((t_xyz){frame->unvisible_l_side, 1.0f, frame->bottom_left.z});
-		frame->uv_top_right = inv_z((t_xyz){frame->tex_mult - frame->unvisible_l_side, 0.0f, frame->top_right.z});
-		frame->uv_bottom_right = inv_z((t_xyz){frame->tex_mult - frame->unvisible_l_side, 1.0f, frame->bottom_right.z});
+		frame->uv_top_left = inv_z((t_xyz){frame->unvisible_l_side * frame->tex_mult, 0.0f, frame->top_left.z});
+		frame->uv_bottom_left = inv_z((t_xyz){frame->unvisible_l_side * frame->tex_mult, 1.0f, frame->bottom_left.z});
+		// frame->uv_top_right = inv_z((t_xyz){frame->tex_mult - frame->unvisible_l_side, 0.0f, frame->top_right.z});
+		// frame->uv_bottom_right = inv_z((t_xyz){frame->tex_mult - frame->unvisible_l_side, 1.0f, frame->bottom_right.z});
+		// frame->uv_top_right = inv_z((t_xyz){(frame->unvisible_l_side + frame->ratio + frame->unvisible_r_side) * frame->tex_mult, 0.0f, frame->top_right.z});
+		// frame->uv_bottom_right = inv_z((t_xyz){(frame->unvisible_l_side + frame->ratio + frame->unvisible_r_side) * frame->tex_mult, 1.0f, frame->bottom_right.z});
+		frame->uv_top_right = inv_z((t_xyz){frame->tex_mult, 0.0f, frame->top_right.z});
+		frame->uv_bottom_right = inv_z((t_xyz){frame->tex_mult, 1.0f, frame->bottom_right.z});
 	}
 }
 
