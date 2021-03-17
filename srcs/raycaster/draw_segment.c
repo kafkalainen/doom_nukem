@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/16 18:45:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/17 12:15:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,75 @@ static void		debug_wall(t_home *home, t_frame *frame)
 		// 	vec2(frame->wall_x2, 340));
 		// draw_text(home, ft_ftoa(frame->left.wall->next->x0.y, 2, 1), frame,
 		// 	vec2(frame->wall_x2, 360));
-		draw_text(home, "FULL_WALL_LEN", frame,
-			vec2(frame->wall_x2 * 0.5, 160));
-		draw_text(home, ft_ftoa(frame->full_wall_len, 4, 1), frame,
-			vec2(frame->wall_x2 * 0.5, 180));
-		draw_text(home, "WALL_LEN", frame, vec2(frame->wall_x2 * 0.5, 200));
-		draw_text(home, ft_ftoa(frame->screen_wall_len, 4, 1), frame,
-			vec2(frame->wall_x2 * 0.5, 220));
-		draw_text(home, "FULL_WALL_DIST", frame,
-			vec2(frame->wall_x2 * 0.5, 240));
-		draw_text(home, ft_ftoa(frame->full_wall_dist, 4, 1), frame,
-			vec2(frame->wall_x2 * 0.5, 260));
-		draw_text(home, "VISIBLE_WALL_DIST", frame, vec2(frame->wall_x2 * 0.5, 280));
-		draw_text(home, ft_ftoa(frame->visible_wall_dist, 4, 1), frame,
-			vec2(frame->wall_x2 * 0.5, 300));
-		draw_text(home, "RATIO", frame, vec2(frame->wall_x2 * 0.5, 320));
-		draw_text(home, ft_ftoa(frame->ratio, 4, 1), frame,
-			vec2(frame->wall_x2 * 0.5, 340));
-		draw_text(home, "UNVISIBLE LEFTSIDE", frame, vec2(frame->wall_x2 * 0.5, 360));
-		draw_text(home, ft_ftoa(frame->unvisible_l_side, 4, 1), frame,
-			vec2(frame->wall_x2 * 0.5, 380));
-		draw_text(home, "INVZ", frame, vec2(frame->wall_x2 * 0.5, 400));
-		draw_text(home, ft_ftoa(frame->top_left.z, 4, 1), frame,
-			vec2(frame->wall_x2 * 0.5, 420));
-		draw_text(home, "UNVISIBLE RIGHTSIDE", frame, vec2(frame->wall_x2 * 0.5, 440));
-		draw_text(home, ft_ftoa(frame->unvisible_r_side, 4, 1), frame,
-			vec2(frame->wall_x2 * 0.5, 460));
+		// draw_text(home, "FULL_WALL_LEN", frame,
+		// 	vec2(frame->wall_x2 * 0.5, 160));
+		// draw_text(home, ft_ftoa(frame->full_wall_len, 4, 1), frame,
+		// 	vec2(frame->wall_x2 * 0.5, 180));
+		// draw_text(home, "WALL_LEN", frame, vec2(frame->wall_x2 * 0.5, 200));
+		// draw_text(home, ft_ftoa(frame->screen_wall_len, 4, 1), frame,
+		// 	vec2(frame->wall_x2 * 0.5, 220));
+		// draw_text(home, "FULL_WALL_DIST", frame,
+		// 	vec2(frame->wall_x2 * 0.5, 240));
+		// draw_text(home, ft_ftoa(frame->full_wall_dist, 4, 1), frame,
+		// 	vec2(frame->wall_x2 * 0.5, 260));
+		// draw_text(home, "VISIBLE_WALL_DIST", frame, vec2(frame->wall_x2 * 0.5, 280));
+		// draw_text(home, ft_ftoa(frame->visible_wall_dist, 4, 1), frame,
+		// 	vec2(frame->wall_x2 * 0.5, 300));
+		// draw_text(home, "RATIO", frame, vec2(frame->wall_x2 * 0.5, 320));
+		// draw_text(home, ft_ftoa(frame->ratio, 4, 1), frame,
+		// 	vec2(frame->wall_x2 * 0.5, 340));
+		// draw_text(home, "UNVISIBLE LEFTSIDE", frame, vec2(frame->wall_x2 * 0.5, 360));
+		// draw_text(home, ft_ftoa(frame->unvisible_l_side, 4, 1), frame,
+		// 	vec2(frame->wall_x2 * 0.5, 380));
+		// draw_text(home, "INVZ", frame, vec2(frame->wall_x2 * 0.5, 400));
+		// draw_text(home, ft_ftoa(frame->top_left.z, 4, 1), frame,
+		// 	vec2(frame->wall_x2 * 0.5, 420));
+		// draw_text(home, "UNVISIBLE RIGHTSIDE", frame, vec2(frame->wall_x2 * 0.5, 440));
+		// draw_text(home, ft_ftoa(frame->unvisible_r_side, 4, 1), frame,
+		// 	vec2(frame->wall_x2 * 0.5, 460));
 		// draw_text(home, "WALL_FRACT_LEN", frame, vec2(frame->wall_x2 * 0.5, 400));
 		// draw_text(home, ft_ftoa(frame->wall_fract_len, 4, 1), frame,
 		// 	vec2(frame->wall_x2 * 0.5, 420));
+		draw_text(home, "TOP_LEFT_UV: X", frame,
+			vec2(frame->top_left.x, 20));
+		draw_text(home, ft_ftoa(frame->uv_top_left.x, 4, 1), frame,
+			vec2(frame->top_left.x, 40));
+		draw_text(home, "TOP_LEFT_UV: Y", frame,
+			vec2(frame->top_left.x, 60));
+		draw_text(home, ft_ftoa(frame->uv_top_left.y, 4, 1), frame,
+			vec2(frame->top_left.x, 80));
+		draw_text(home, "TOP_LEFT_UV: Z", frame,
+			vec2(frame->top_left.x, 100));
+		draw_text(home, ft_ftoa(frame->uv_top_left.z, 4, 1), frame,
+			vec2(frame->top_left.x, 120));
+		draw_text(home, "BOTTOM_LEFT_UV: X", frame,
+			vec2(frame->top_left.x, 400));
+		draw_text(home, ft_ftoa(frame->uv_bottom_left.x, 4, 1), frame,
+			vec2(frame->top_left.x, 420));
+		draw_text(home, "BOTTOM_LEFT_UV: Y", frame,
+			vec2(frame->top_left.x, 440));
+		draw_text(home, ft_ftoa(frame->uv_bottom_left.y, 4, 1), frame,
+			vec2(frame->top_left.x, 460));
+		draw_text(home, "TOP_RIGHT_UV: X", frame,
+			vec2(frame->top_right.x, 20));
+		draw_text(home, ft_ftoa(frame->uv_top_right.x, 4, 1), frame,
+			vec2(frame->top_right.x, 40));
+		draw_text(home, "TOP_RIGHT_UV: Y", frame,
+			vec2(frame->top_right.x, 60));
+		draw_text(home, ft_ftoa(frame->uv_top_right.y, 4, 1), frame,
+			vec2(frame->top_right.x, 80));
+		draw_text(home, "TOP_RIGHT_UV: Z", frame,
+			vec2(frame->top_right.x, 100));
+		draw_text(home, ft_ftoa(frame->uv_top_right.z, 4, 1), frame,
+			vec2(frame->top_right.x, 120));
+		draw_text(home, "BOTTOM_RIGHT_UV: X", frame,
+			vec2(frame->top_right.x, 400));
+		draw_text(home, ft_ftoa(frame->uv_bottom_right.x, 4, 1), frame,
+			vec2(frame->top_right.x, 420));
+		draw_text(home, "BOTTOM_RIGHT_UV: Y", frame,
+			vec2(frame->top_right.x, 440));
+		draw_text(home, ft_ftoa(frame->uv_bottom_right.y, 4, 1), frame,
+			vec2(frame->top_right.x, 460));
 	}
 }
 
@@ -113,24 +153,30 @@ static void		draw_vertical_line(t_xyz p0, t_xyz p1,
 	float	height;
 	t_xyz	obj;
 	t_xy	tex_pixel;
+	t_xyz	corr_texel;
+	t_xyz	texel;
 
 	if (p0.x != p1.x)
 		return ;
 	obj.x = p0.x - frame->top_left.x;
 	obj.y = 0.0f;
 	obj.z = p0.z;
+	texel.x = frame->uv_top_left.x;
+	texel.y = frame->uv_top_left.y;
+	texel.z = frame->uv_top_left.z;
 	min = ft_fmin(p0.y, p1.y);
 	max = ft_fmax(p0.y, p1.y);
 	height = max - min;
 	while (obj.y < height)
 	{
-		tex_pixel = calc_vert_texture(vec3(obj.x, obj.y, obj.z), height, frame, tex);
+		corr_texel = inv_z(texel);
 		if (p0.x >= 0 &&
 			p0.x < SCREEN_WIDTH &&
 			obj.y + min >= 0 && obj.y + min < SCREEN_HEIGHT)
 			put_pixel(frame->draw_surf, p0.x,
-				obj.y + min, get_texel(tex_pixel.x, tex_pixel.y, tex));
+				obj.y + min, get_texel(corr_texel.x * tex->w, corr_texel.y * tex->h, tex));
 		obj.y++;
+		texel.y += frame->uv_step.y;
 	}
 }
 
@@ -139,9 +185,6 @@ void			draw_segment(t_frame *frame, t_texture *tex,
 {
 	// if (frame->left.wall->c != 'b')
 	// 	return ;
-	float		x_step;
-	float		y_step;
-	float		z_step;
 	size_t		obj_x;
 	size_t		obj_y;
 	size_t		obj_z;
@@ -150,19 +193,22 @@ void			draw_segment(t_frame *frame, t_texture *tex,
 	obj_x = 0;
 	obj_y = 0;
 	calc_distances(frame, tex, plr);
-	y_step = (frame->top_left.y - frame->top_right.y) / frame->screen_wall_len;
-	z_step = (frame->top_left.z - frame->top_right.z) / frame->screen_wall_len;
+	calc_texels(frame, tex);
+	frame->step.y = (frame->top_left.y - frame->top_right.y) / frame->screen_wall_len;
+	frame->step.z = (frame->top_left.z - frame->top_right.z) / frame->screen_wall_len;
 	while (obj_x + frame->top_left.x < frame->top_right.x)
 	{
 		draw_vertical_line(
-			vec3(frame->top_left.x + obj_x, frame->top_left.y, frame->top_left.z),
-			vec3(frame->top_left.x + obj_x, frame->bottom_left.y, frame->top_left.z),
+			vec3(frame->top_left.x + obj_x, frame->top_left.y, 0.0f),
+			vec3(frame->top_left.x + obj_x, frame->bottom_left.y, 0.0f),
 			tex,
 			frame);
-		frame->top_left.y = frame->top_left.y - y_step;
-		frame->bottom_left.y = frame->bottom_left.y + y_step;
-		frame->top_left.z = frame->top_left.z - z_step;
+		frame->top_left.y = frame->top_left.y - frame->step.y;
+		frame->bottom_left.y = frame->bottom_left.y + frame->step.y;
+		frame->top_left.z = frame->top_left.z - frame->step.z;
 		obj_x++;
+		frame->uv_top_left.x += frame->uv_step.x;
+		frame->uv_top_left.z += frame->uv_step.z;
 	}
-	debug_wall(home, frame);
+	// debug_wall(home, frame);
 }
