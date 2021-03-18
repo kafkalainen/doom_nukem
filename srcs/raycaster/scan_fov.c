@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/11 13:23:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/18 12:29:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl)
 			current_pxl++;
 			setup_frame(frame, &new_frame, current_pxl, frame->left.wall->idx);
 			scan_fov(home, &new_frame, plr, 0);
+			draw_segment(frame, get_tex(-3, home->editor_tex), home, plr);
 			frame->offset = new_frame.offset;
 			frame->pxl_offset = new_frame.pxl_offset;
 		}

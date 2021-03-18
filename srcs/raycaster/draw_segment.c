@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/17 16:07:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/18 12:37:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,47 @@ void			draw_wall_vertically(t_frame *frame, t_texture *tex,
 	}
 }
 
-void			draw_ceil_horizontally(t_frame *frame, t_texture *tex,
+void			draw_floor_horizontally(t_frame *frame, t_texture *tex,
 	t_home *home, t_player *plr)
 {
 	t_xyz		obj;
+	float		y_min;
+	t_xyz		floor_step;
 
-	obj = (t_xyz){0.0f, 0.0f, 0.0f};
-	while (obj.z < frame->top_right.z)
+	obj = (t_xyz){0.0f, 480.0f, 0.0f};
+	y_min = ft_fmin(frame->bottom_left.y, frame->bottom_right.y);
+	while (obj.y > y_min)
 	{
-		frame->top_left.y = frame->top_left.y - frame->step.y;
-		frame->top_left.z = frame->top_left.z - frame->step.z;
-		frame->uv_top_left.x += frame->uv_step.x;
-		frame->uv_top_left.z += frame->uv_step.z;
-		obj.z += frame->uv_step.z;
+		obj.x = frame->bottom_left.x;
+		while (obj.x < frame->bottom_right.x)
+		{
+			put_pixel(frame->draw_surf, obj.x,
+				obj.y, get_texel(1, 1, tex));
+			obj.x++;
+		}
+		obj.y--;
 	}
 }
 
+
+/*
+**	Should the whole sector be drawn?
+**	Use only horizontal drawing. 
+**	What if scan_fov is flipped by 90 degrees?
+**	Floor drawing must be done after scan_fov returns from the portal.
+**	
+**
+*/
 void			draw_segment(t_frame *frame, t_texture *tex,
 							t_home *home, t_player *plr)
 {
+	// if (frame->left.wall->c != 'b')
+	// 	return ;
 	calc_distances(frame, tex, plr);
 	calc_texels(frame, tex);
-	draw_wall_vertically(frame, tex, home, plr);
+	draw_floor_horizontally(frame,
+		get_tex(home->sectors[frame->idx]->tex_floor, home->editor_tex),
+		home, plr);
+	if (frame->left.wall->idx < 0)
+		draw_wall_vertically(frame, tex, home, plr);
 }

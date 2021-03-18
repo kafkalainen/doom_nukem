@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/15 10:10:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/18 12:40:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,10 @@ static int		assign_sectors(t_home *home)
 	home->sectors[1]->nb_of_walls = 4;
 	home->sectors[2]->nb_of_walls = 8;
 	home->sectors[3]->nb_of_walls = 4;
+	home->sectors[0]->tex_floor = -5;
+	home->sectors[1]->tex_floor = -4;
+	home->sectors[2]->tex_floor = -3;
+	home->sectors[3]->tex_floor = -5;
 	assign_points(home->sectors[0]);
 	assign_points1(home->sectors[1]);
 	assign_points2(home->sectors[2]);
