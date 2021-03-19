@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/18 12:40:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/19 11:51:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,36 @@ static int		assign_sectors(t_home *home)
 	return (0);
 }
 
+static int		assign_orig_sectors(t_home *home)
+{
+	int i;
+
+	i = 0;
+	home->orig_sectors = (t_sector**)malloc(sizeof(t_sector));
+	while(i < 4)
+	{
+		home->orig_sectors[i] = (t_sector*)malloc(sizeof(t_sector));
+		home->orig_sectors[i]->ceiling = 1.0;
+		home->orig_sectors[i]->ground = 0.0;
+		home->orig_sectors[i]->idx_sector = i;
+		home->orig_sectors[i]->nb_of_walls = 4;
+		i++;
+	}
+	home->orig_sectors[0]->nb_of_walls = 6;
+	home->orig_sectors[1]->nb_of_walls = 4;
+	home->orig_sectors[2]->nb_of_walls = 8;
+	home->orig_sectors[3]->nb_of_walls = 4;
+	home->orig_sectors[0]->tex_floor = -5;
+	home->orig_sectors[1]->tex_floor = -4;
+	home->orig_sectors[2]->tex_floor = -3;
+	home->orig_sectors[3]->tex_floor = -5;
+	assign_points(home->orig_sectors[0]);
+	assign_points1(home->orig_sectors[1]);
+	assign_points2(home->orig_sectors[2]);
+	assign_points3(home->orig_sectors[3]);
+	return (0);
+}
+
 // static void		print_points(t_sector *sector)
 // {
 // 	int		i;
@@ -252,6 +282,7 @@ static int		assign_sectors(t_home *home)
 int				update_sector(t_home *home)
 {
 	assign_sectors(home);
+	assign_orig_sectors(home);
 	//print_points(home->sectors[0]);
 	return (0);
 }

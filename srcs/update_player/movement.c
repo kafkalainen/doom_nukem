@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 18:08:50 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/10 17:37:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/19 14:29:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int				check_collision(t_sector *sector, t_player *plr, t_home *home)
 			if (get_distance(vec2(0, 0), point) < 2 && (p0->idx >= 0))
 			{
 				plr->current_sector = p0->idx;
+				// plr->pos = vec2_add(plr->pos, vec2_mul(plr->move_dir, 2));
 				translate_world_view(home, vec2_mul(plr->move_dir, 2));
 				return (0);
 			}
@@ -87,7 +88,10 @@ void			player_move(t_player *plr, t_home *home, float delta_time)
 	plr->move_dir = check_player_dir(plr);
 	play_footsteps(plr);
 	if (!collision)
+	{
+		// plr->pos = vec2_add(plr->pos, vec2_mul(plr->move_dir, 40 * delta_time));
 		translate_world_view(home, vec2_mul(plr->move_dir, 40 * delta_time));
+	}
 	else
 	{
 		printf("col dir x: %f, col dir y: %f\n", col_dir.x, col_dir.y);

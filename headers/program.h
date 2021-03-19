@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/24 09:54:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/19 12:08:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct		s_home
 {
 	t_window		win;
 	t_sector		**sectors;
+	t_sector		**orig_sectors;
 	SDL_Surface		*text_surf;
 	TTF_Font		*font;
 	t_texture		**editor_tex;

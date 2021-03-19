@@ -91,6 +91,7 @@ void			draw_grid(t_frame *frame);
 int				update_sector(t_home *home);
 void			translate_world_view(t_home *home, t_xy step);
 void			transform_world_view(t_home *home, float delta_dir);
+void			trans_world_view(t_home *home, t_xy step, float delta_dir);
 
 void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 #endif
