@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:14:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/17 11:54:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/19 09:39:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,9 @@ float	vec2_to_screen_space(float x, float z)
 float	interpolate_points(float x0, float x1, float y0, float y1)
 {
 	return ((x1 - x0) / (y1 - y0));
+}
+
+t_xy	vec3_to_vec2(t_xyz a)
+{
+	return ((t_xy){a.x, a.y});
 }

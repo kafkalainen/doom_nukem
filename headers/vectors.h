@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/17 11:10:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/19 09:39:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ t_xyz			vec3(float x, float y, float z);
 t_xyz			vec3_add(t_xyz a, t_xyz b);
 t_xyz			inv_z(t_xyz a);
 float			interpolate_points(float x0, float x1, float y0, float y1);
-
+t_xy			vec3_to_vec2(t_xyz a);
 
 #endif

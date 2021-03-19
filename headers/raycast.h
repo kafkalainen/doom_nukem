@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/18 11:24:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/19 10:54:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,12 @@ typedef struct		s_frame
 	t_xyz			uv_bottom_left;
 	t_xyz			uv_bottom_right;
 	t_xyz			uv_step;
+	t_xyz			floor_uv_step;
 	t_xyz			step;
 	float			full_wall_dist;
 	float			visible_wall_dist;
-	float			l_perp_dist;
-	float			r_perp_dist;
 	float			unvisible_l_side;
-	float			unvisible_r_side;
 	float			screen_wall_len;
-	float			full_wall_len;
-	float			wall_h_l;
-	float			wall_h_r;
 	float			tex_mult;
 	float			ratio;
 }					t_frame;
@@ -71,13 +66,14 @@ int					check_if_same_pt(int current_pxl, t_ray_pt *fov);
 void				continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame);
 void				draw_ground(t_player *plr, t_frame *frame, t_home *home);
 void				draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr);
-int					draw_tex_line(t_xy start, t_xy end, 
+int					draw_tex_line(t_xy start, t_xy end,
 								t_texture *tex, SDL_Surface *surf);
 t_texture			*get_tex(int idx, t_texture	**textures);
 void				scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl);
 void				calc_distances(t_frame *frame, t_texture *tex, t_player *plr);
-void				calc_texels(t_frame *frame, t_texture *tex);
-void				draw_segment(t_frame *frame, t_texture *tex, 
-								t_home *home, t_player *plr);
+void				calc_wall_texels(t_frame *frame, t_texture *tex);
+void				calc_ground_texels(t_frame *frame, t_texture *tex);
+void				draw_segment(t_frame *frame, t_home *home, t_player *plr);
+void				calc_sector_texels(t_sector *sector, t_frame *frame, t_home *home);
 
 #endif

@@ -43,6 +43,8 @@ SRCS =	main.c \
 		srcs/raycaster/get_distance.c \
 		srcs/raycaster/scan_fov.c \
 		srcs/raycaster/calc_distances.c \
+		srcs/raycaster/calc_ground_texels.c \
+		srcs/raycaster/calc_sector_texels.c \
 		srcs/raycaster/calc_texels.c \
 		srcs/raycaster/draw_ground.c \
 		srcs/raycaster/draw_segment.c \

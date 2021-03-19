@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 10:50:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/17 16:12:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/19 10:52:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		calc_offsets(t_frame *frame)
 	}
 }
 
-void			calc_texels(t_frame *frame, t_texture *tex)
+void			calc_wall_texels(t_frame *frame, t_texture *tex)
 {
 	frame->visible_wall_dist = get_distance(frame->left.l_pt, frame->left.r_pt);
 	frame->full_wall_dist = get_distance(frame->left.wall->x0,
@@ -59,8 +59,6 @@ void			calc_texels(t_frame *frame, t_texture *tex)
 	frame->tex_mult = frame->full_wall_dist / tex->w;
 	frame->unvisible_l_side = get_distance(frame->left.wall->x0,
 		frame->left.l_pt) / frame->full_wall_dist;
-	frame->unvisible_r_side = get_distance(frame->left.wall->next->x0,
-		frame->left.r_pt) / frame->full_wall_dist;
 	calc_offsets(frame);
 	frame->uv_step.x = interpolate_points(frame->uv_top_left.x,
 		frame->uv_top_right.x, frame->top_left.x, frame->top_right.x);

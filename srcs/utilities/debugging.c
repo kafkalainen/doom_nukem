@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 13:49:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/17 13:50:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/18 15:06:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ void		debug_wall(t_home *home, t_frame *frame)
 		// 	vec2(frame->wall_x2, 340));
 		// draw_text(home, ft_ftoa(frame->left.wall->next->x0.y, 2, 1), frame,
 		// 	vec2(frame->wall_x2, 360));
-		// draw_text(home, "FULL_WALL_LEN", frame,
-		// 	vec2(frame->wall_x2 * 0.5, 160));
-		// draw_text(home, ft_ftoa(frame->full_wall_len, 4, 1), frame,
-		// 	vec2(frame->wall_x2 * 0.5, 180));
 		// draw_text(home, "WALL_LEN", frame, vec2(frame->wall_x2 * 0.5, 200));
 		// draw_text(home, ft_ftoa(frame->screen_wall_len, 4, 1), frame,
 		// 	vec2(frame->wall_x2 * 0.5, 220));
@@ -66,9 +62,6 @@ void		debug_wall(t_home *home, t_frame *frame)
 		// draw_text(home, "INVZ", frame, vec2(frame->wall_x2 * 0.5, 400));
 		// draw_text(home, ft_ftoa(frame->top_left.z, 4, 1), frame,
 		// 	vec2(frame->wall_x2 * 0.5, 420));
-		// draw_text(home, "UNVISIBLE RIGHTSIDE", frame, vec2(frame->wall_x2 * 0.5, 440));
-		// draw_text(home, ft_ftoa(frame->unvisible_r_side, 4, 1), frame,
-		// 	vec2(frame->wall_x2 * 0.5, 460));
 		// draw_text(home, "WALL_FRACT_LEN", frame, vec2(frame->wall_x2 * 0.5, 400));
 		// draw_text(home, ft_ftoa(frame->wall_fract_len, 4, 1), frame,
 		// 	vec2(frame->wall_x2 * 0.5, 420));

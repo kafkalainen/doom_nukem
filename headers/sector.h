@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/01 13:31:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/18 15:54:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ typedef struct		s_sector
 	int				tex_ceil;
 	float			ground;
 	float			ceiling;
+	t_xyz			floor_top_left;
+	t_xyz			floor_top_right;
+	t_xyz			floor_bottom_left;
+	t_xyz			floor_bottom_right;
 }					t_sector;
 
 t_point			*new_polygon(t_xy x0, int idx);
