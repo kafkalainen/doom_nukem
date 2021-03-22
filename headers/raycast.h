@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/19 10:54:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/22 09:24:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,12 @@ typedef struct		s_frame
 	t_xyz			uv_top_right;
 	t_xyz			uv_bottom_left;
 	t_xyz			uv_bottom_right;
+	t_xyz			ground_uv_t_l;
+	t_xyz			ground_uv_t_r;
+	t_xyz			ground_uv_b_l;
+	t_xyz			ground_uv_b_r;
 	t_xyz			uv_step;
-	t_xyz			floor_uv_step;
+	t_xyz			ground_uv_step;
 	t_xyz			step;
 	float			full_wall_dist;
 	float			visible_wall_dist;
@@ -72,8 +76,8 @@ t_texture			*get_tex(int idx, t_texture	**textures);
 void				scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl);
 void				calc_distances(t_frame *frame, t_texture *tex, t_player *plr);
 void				calc_wall_texels(t_frame *frame, t_texture *tex);
-void				calc_ground_texels(t_frame *frame, t_texture *tex);
+void				calc_ground_texels(t_sector *sector, t_frame *frame, t_texture *tex);
 void				draw_segment(t_frame *frame, t_home *home, t_player *plr);
-void				calc_sector_texels(t_sector *sector, t_frame *frame, t_home *home);
+void				calc_sector_texels(t_sector *sector);
 
 #endif

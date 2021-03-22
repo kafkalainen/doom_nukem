@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/19 11:16:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/22 14:26:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,23 @@ static void		draw_vertical_floor_strip(t_xyz offset, size_t height,
 	if (offset.x < 0 || offset.x > SCREEN_WIDTH)
 		return ;
 	cur_y = 0;
-	texel = frame->uv_top_left;
+	texel = frame->ground_uv_t_l;
 	while (cur_y < height)
 	{
-		current_distance = SCREEN_HEIGHT / ((2.0f * (cur_y + offset.y + height)) - SCREEN_HEIGHT) / SQR2;
+		// corr_texel = inv_z(texel);
+		current_distance = SCREEN_HEIGHT / ((2.0f * (cur_y + offset.y + height)) - SCREEN_HEIGHT);
 		weight = current_distance / offset.z;
-		corr_texel.x = weight * offset.x + (1.0f - weight) * 320;
-		corr_texel.y = weight * offset.y + (1.0f - weight) * 240;
+		corr_texel.x = weight * texel.x + (1.0f - weight) * 320;
+		corr_texel.y = weight * texel.y + (1.0f - weight) * 240;
 		if (cur_y + offset.y >= 0 && cur_y + offset.y < SCREEN_HEIGHT)
+			// put_pixel(frame->draw_surf, offset.x,
+			// 	cur_y + offset.y, get_texel(corr_texel.x * tex->w,
+			// 	corr_texel.y * tex->h, tex));
 			put_pixel(frame->draw_surf, offset.x,
 				cur_y + offset.y, get_texel(corr_texel.x * tex->w,
 				corr_texel.y * tex->h, tex));
 		cur_y++;
-		texel.y += frame->uv_step.y;
+		texel.y += frame->ground_uv_step.y;
 	}
 }
 
@@ -99,20 +103,12 @@ void			draw_vertically(t_frame *frame, t_home *home, t_player *plr)
 		start.z = start.z - frame->step.z;
 		frame->uv_top_left.x += frame->uv_step.x;
 		frame->uv_top_left.z += frame->uv_step.z;
+		frame->ground_uv_t_l.x += frame->ground_uv_step.x;
+		frame->ground_uv_t_l.z += frame->ground_uv_step.z;
 		obj_x++;
 	}
 }
 
-/*
-**	Should the whole sector be drawn?
-**	Floor texture mapping is done to the whole sector.
-**	Use only horizontal drawing.
-**	What if scan_fov is flipped by 90 degrees?
-**	Floor drawing must be done after scan_fov returns from the portal.
-**	Start by streching the floor tile across the entire sector.
-**	Floor tiles are handled as vertical objects
-**	Plr->pos and plr->dir are accummulated values, and only applied to the coordinates when calculating world points.
-*/
 void			draw_segment(t_frame *frame, t_home *home, t_player *plr)
 {
 	// if (frame->left.wall->c != 'b')
@@ -124,7 +120,7 @@ void			draw_segment(t_frame *frame, t_home *home, t_player *plr)
 		wall_tex = get_tex(-3, home->editor_tex);
 	calc_distances(frame, wall_tex, plr);
 	calc_wall_texels(frame, wall_tex);
+	calc_ground_texels(home->sectors[frame->idx], frame,
+		get_tex(home->sectors[frame->idx]->tex_floor, home->editor_tex));
 	draw_vertically(frame, home, plr);
-	// draw_floor_vertically(frame, tex, home, plr);
-
 }
