@@ -6,18 +6,18 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 08:08:52 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/23 13:34:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/23 15:17:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-void				parse_sector_data(unsigned char *buf,
-	unsigned int size, t_home *home)
+void	parse_sector_data(unsigned char *buf, unsigned int size, t_home *home)
 {
 	unsigned int	pos;
 	unsigned int	i;
 
+	i = 0;
 	pos = 0;
 	if (!(buf = ft_strstr((const char*)buf, "doom_sectors")))
 		error_output("ERROR: No sector dataheader found");
@@ -26,7 +26,6 @@ void				parse_sector_data(unsigned char *buf,
 	pos += ft_numlen(home->nbr_of_sectors);
 	if (!(home->sectors = (t_sector**)malloc(sizeof(t_sector*) * (home->nbr_of_sectors + 1))))
 		error_output("ERROR: Failed to allocate memory for game sectors\n");
-	i = 0;
 	while (i < home->nbr_of_sectors)
 	{
 		home->sectors[i] = get_sector_data(buf, &pos);
