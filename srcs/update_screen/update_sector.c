@@ -6,30 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/02 09:46:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/23 09:46:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
-
-t_point			*new_polygon(t_xy x0, int idx)
-{
-	t_point		*new;
-
-	new = (t_point*)malloc(sizeof(*new));
-	if (new != NULL)
-	{
-		new->x0 = x0;
-		new->idx = idx;
-		new->next = NULL;
-	}
-	else
-	{
-		free(new);
-		new = NULL;
-	}
-	return (new);
-}
 
 static void		assign_points(t_sector *sector)
 {
@@ -52,12 +33,12 @@ static void		assign_points(t_sector *sector)
 	coord[0].x = 100.0;
 	coord[0].y = 100.0;
 	walls = sector->nb_of_walls;
-	sector->points = new_polygon(coord[5], 1);
+	sector->points = new_point(coord[5], 1);
 	temp = sector->points;
 	walls--;
 	while (walls)
 	{
-		new = new_polygon(
+		new = new_point(
 			coord[walls - 1],
 			-4);
 		if (walls == 1)
@@ -87,20 +68,20 @@ static void		assign_points1(t_sector *sector)
 	coord[0].x = -30.0;
 	coord[0].y = 150.0;
 	walls = sector->nb_of_walls;
-	sector->points = new_polygon(coord[3], 0);
+	sector->points = new_point(coord[3], 0);
 	temp = sector->points;
 	walls--;
 	while (walls)
 	{
 		if (walls == 2)
 		{
-			new = new_polygon(
+			new = new_point(
 				coord[walls - 1],
 				2);
 		}
 		else
 		{
-			new = new_polygon(
+			new = new_point(
 				coord[walls - 1],
 				-1);
 		}
@@ -137,20 +118,20 @@ static void		assign_points2(t_sector *sector)
 	coord[0].x = -100.0;
 	coord[0].y = 150.0;
 	walls = sector->nb_of_walls;
-	sector->points = new_polygon(coord[7], 1);
+	sector->points = new_point(coord[7], 1);
 	temp = sector->points;
 	walls--;
 	while (walls)
 	{
 		if (walls == 4)
 		{
-			new = new_polygon(
+			new = new_point(
 				coord[walls - 1],
 				3);
 		}
 		else
 		{
-			new = new_polygon(
+			new = new_point(
 				coord[walls - 1],
 				-2);
 		}
@@ -179,12 +160,12 @@ static void		assign_points3(t_sector *sector)
 	coord[0].x = -20.0;
 	coord[0].y = 350.0;
 	walls = sector->nb_of_walls;
-	sector->points = new_polygon(coord[3], 2);
+	sector->points = new_point(coord[3], 2);
 	temp = sector->points;
 	walls--;
 	while (walls)
 	{
-		new = new_polygon(
+		new = new_point(
 			coord[walls - 1],
 		-3);
 		temp->next = new;
@@ -201,7 +182,7 @@ static int		assign_sectors(t_home *home)
 
 	i = 0;
 	home->sectors = (t_sector**)malloc(sizeof(t_sector));
-	home->nb_of_sectors = 4;
+	home->nbr_of_sectors = 4;
 	while(i < 4)
 	{
 		home->sectors[i] = (t_sector*)malloc(sizeof(t_sector));
@@ -241,7 +222,9 @@ static int		assign_sectors(t_home *home)
 
 int				update_sector(t_home *home)
 {
-	assign_sectors(home);
+	// open_map_file(home, "map_files/map_error_noheader.TEST");
+	open_map_file(home, "map_files/map.TEST");
+	// assign_sectors(home);
 	//print_points(home->sectors[0]);
 	return (0);
 }

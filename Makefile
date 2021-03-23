@@ -62,7 +62,8 @@ SRCS =	main.c \
 		srcs/png_parser/parser_utils2.c \
 		srcs/porting/png.c \
 		srcs/porting/create_mapfile.c \
-		srcs/porting/open_file.c
+		srcs/porting/open_file1.c \
+		srcs/porting/open_file2.c \
 
 HEADERS = \
 		doom_nukem.h\
