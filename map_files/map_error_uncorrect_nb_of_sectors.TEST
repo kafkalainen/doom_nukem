@@ -1,0 +1,2 @@
+#doom_sectors#2 	   	   NUMWALLS	Z	HEIGHT	FLOOR_TEX	CEILING_TEX           wall_points
+#sector0               3    	0       10         -3           -4            10,20,-1        100,20,-2     50,100,1

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   porting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/16 17:41:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/23 09:30:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void		free_array(unsigned char **array);
 
 int		create_map_file(t_home *home);
 int		open_file(t_home *home, char *path);
+int		open_map_file(t_home *home, char *path);
 
 #endif

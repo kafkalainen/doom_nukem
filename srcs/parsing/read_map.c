@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 11:03:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/01 12:11:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/23 09:18:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ static void			store_points(char *line, int numwalls, t_sector *sect)
 		pos.x = ft_atoi(line);
 		pos.y = ft_atoi(line + 1 + ft_numlen(pos.x));
 		texid = ft_atoi(line + 2 + ft_numlen(pos.x) + ft_numlen(pos.y));
-		new = new_polygon(pos, texid);
+		new = new_point(pos, texid);
 		temp->next = new;
 		temp = temp->next;
 		line += 3 + ft_numlen(pos.x) + ft_numlen(pos.y) + ft_numlen(texid);
 		numwalls--;
 	}
-	new = new_polygon(sect->points->next->x0, ft_atoi(line));
+	new = new_point(sect->points->next->x0, ft_atoi(line));
 	temp->next = new;
 	temp = temp->next;
 }

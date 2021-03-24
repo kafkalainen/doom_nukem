@@ -46,6 +46,7 @@ SRCS =	main.c \
 		srcs/raycaster/draw_ground.c \
 		srcs/raycaster/draw_segment.c \
 		srcs/parsing/read_map.c	\
+		srcs/parsing/parse_sector.c \
 		srcs/png_parser/color_utils.c \
 		srcs/png_parser/crc.c \
 		srcs/png_parser/filters.c \
@@ -62,7 +63,8 @@ SRCS =	main.c \
 		srcs/png_parser/parser_utils2.c \
 		srcs/porting/png.c \
 		srcs/porting/create_mapfile.c \
-		srcs/porting/open_file.c
+		srcs/porting/open_file1.c \
+		srcs/porting/open_file2.c \
 
 HEADERS = \
 		doom_nukem.h\
