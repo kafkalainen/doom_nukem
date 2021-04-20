@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 09:53:33 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/30 16:08:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:21:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 || *s2)
 	{

@@ -6,19 +6,19 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 10:21:23 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/25 12:44:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 19:01:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 
-void		ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
 	size_t	i;
 	char	*temp;
 
 	i = 0;
-	temp = (char*)s;
+	temp = (char *)s;
 	while (i < n)
 	{
 		temp[i] = '\0';

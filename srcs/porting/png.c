@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   png.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/17 15:43:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/20 17:16:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	*convert_to_uint32(Uint32 *dest, t_texture *image)
 {

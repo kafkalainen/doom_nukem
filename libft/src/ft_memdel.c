@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 13:30:45 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/26 12:56:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 19:00:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void		ft_memdel(void **ap)
+void	ft_memdel(void **ap)
 {
 	if (*ap != NULL)
 	{

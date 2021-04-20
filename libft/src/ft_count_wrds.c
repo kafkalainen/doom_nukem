@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 11:15:06 by jnivala           #+#    #+#             */
-/*   Updated: 2020/10/24 12:31:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:57:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 #include <string.h>
 
 size_t	ft_count_wrds(const char *s, int d)

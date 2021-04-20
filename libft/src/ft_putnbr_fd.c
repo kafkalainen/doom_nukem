@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 08:55:58 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/01 14:31:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:27:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 
-void		ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)
 	{

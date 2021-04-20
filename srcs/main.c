@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/20 16:03:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 17:23:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int  			main(int argc, char **argv)
 		//home.t.delta_time = home.t.endfps - home.t.beginfps;
 		//home.t.fps = CLOCKS_PER_SEC / home.t.delta_time;
 	}
-	TTF_Quit();
 	SDL_Quit();
 	return 0;
 }

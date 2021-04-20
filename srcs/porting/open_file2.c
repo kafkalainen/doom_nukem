@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   open_file2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/23 08:10:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 17:16:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 /*
 ** Open file, read everything to buffer, then go through it byte by byte

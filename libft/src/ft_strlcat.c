@@ -6,18 +6,18 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 09:53:28 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/01 14:15:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:42:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 
-size_t		ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t		i;
-	size_t		src_len;
-	size_t		dst_len;
-	size_t		space_left;
+	size_t	i;
+	size_t	src_len;
+	size_t	dst_len;
+	size_t	space_left;
 
 	i = 0;
 	dst_len = 0;

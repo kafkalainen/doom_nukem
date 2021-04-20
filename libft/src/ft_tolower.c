@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 08:20:16 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/29 10:30:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:17:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+int	ft_tolower(int c)
 {
 	if (c >= 65 && c <= 90)
 		return (c + 32);

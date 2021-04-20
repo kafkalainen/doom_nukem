@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 08:19:15 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/26 13:01:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:17:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
+int	ft_toupper(int c)
 {
 	if (c >= 97 && c <= 122)
 		return (c - 32);

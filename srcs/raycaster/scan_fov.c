@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 16:15:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:51:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static float	round_angle(float angle, float *pxl_offset)
 		return ((int)trunc);
 }
 
-t_texture		*get_tex(int idx, t_texture	**textures)
+t_texture	*get_tex(int idx, t_texture	**textures)
 {
-	int i;
+	int	i;
 
 	if (idx >= 0)
 		error_output("idx larger or equal to zero\n");
@@ -45,7 +45,7 @@ t_texture		*get_tex(int idx, t_texture	**textures)
 	return (NULL);
 }
 
-void			scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl)
+void	scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl)
 {
 	t_frame		new_frame;
 

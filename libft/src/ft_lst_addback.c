@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_addback.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:25:44 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/15 14:25:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:59:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 
 void	ft_lst_addback(t_list **alst, t_list *new)
 {

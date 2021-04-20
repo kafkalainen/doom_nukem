@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 15:47:41 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/20 15:01:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 19:13:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 #include <stdlib.h>
 
 char	***ft_str3darrdel(char ****a3d, size_t z, size_t y)

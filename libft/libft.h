@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/10 17:24:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:38:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 # define LIBFT_H
 # include <string.h>
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
-}					t_list;
+}				t_list;
 
-typedef struct		s_complex {
+typedef struct s_complex
+{
 	double			re;
 	double			im;
-}					t_complex;
+}				t_complex;
 
 typedef const char	t_c_char;
 
@@ -81,6 +82,7 @@ void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 size_t				ft_replace_char(char *s, int c, int rep);
 float				ft_roundf(float nb, int prec);
+char				*ft_skipc(char *str, char c);
 double				ft_sqrt(double base);
 char				**ft_strarrnew(size_t arr_len, char const *str);
 char				**ft_strarrdel(char ***as, size_t size);

@@ -6,16 +6,16 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 13:40:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/29 10:20:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 19:07:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 #include <stdlib.h>
 
-static void		ft_between_0_and_minus1(float nb, char **integer)
+static void	ft_between_0_and_minus1(float nb, char **integer)
 {
-	char *new_integer;
+	char	*new_integer;
 
 	if (nb < 0 && nb > -1)
 	{
@@ -25,7 +25,7 @@ static void		ft_between_0_and_minus1(float nb, char **integer)
 	}
 }
 
-char			*ft_ftoa(float nb, int precision)
+char	*ft_ftoa(float nb, int precision)
 {
 	char	*integer;
 	char	fraction[23];

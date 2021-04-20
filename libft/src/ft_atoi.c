@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 13:47:24 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/01 09:58:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 19:06:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 
-static int		ft_static_isspace(int c)
+static int	ft_static_isspace(int c)
 {
 	if (c == ' ')
 		return (8192);
@@ -30,7 +30,7 @@ static int		ft_static_isspace(int c)
 		return (0);
 }
 
-int				ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
 	size_t			i;
 	long int		integer;

@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 08:48:46 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/18 16:21:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:20:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void		ft_striter(char *s, void (*f)(char *))
+void	ft_striter(char *s, void (*f)(char *))
 {
 	unsigned int	i;
 

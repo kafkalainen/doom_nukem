@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:21:36 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/17 08:48:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:47:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 #include <stdlib.h>
 
-static int		ft_intlen(int value, int base)
+static int	ft_intlen(int value, int base)
 {
 	int		len;
 
@@ -30,7 +30,7 @@ static int		ft_intlen(int value, int base)
 	return (len);
 }
 
-static void		ft_handle_special(int *pvalue, int *plen, int base, char **str)
+static void	ft_handle_special(int *pvalue, int *plen, int base, char **str)
 {
 	if (base == 10 && *pvalue == -2147483648)
 	{
@@ -45,7 +45,7 @@ static void		ft_handle_special(int *pvalue, int *plen, int base, char **str)
 	}
 }
 
-char			*ft_itoa_base(int value, int base)
+char	*ft_itoa_base(int value, int base)
 {
 	char	arr[17];
 	char	*ret_arr;
@@ -55,7 +55,8 @@ char			*ft_itoa_base(int value, int base)
 		return (0);
 	ft_strcpy(arr, "0123456789ABCDEF");
 	value_len = ft_intlen(value, base);
-	if (!(ret_arr = (char*)malloc(sizeof(*ret_arr) * (value_len + 1))))
+	ret_arr = (char *)malloc(sizeof(*ret_arr) * (value_len + 1));
+	if (!ret_arr)
 		return (NULL);
 	ft_handle_special(&value, &value_len, base, &ret_arr);
 	if (value_len > 0)

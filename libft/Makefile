@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 13:08:18 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/13 11:59:37 by jnivala          ###   ########.fr        #
+#    Updated: 2021/04/20 16:49:34 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,6 @@ SRC_LIST = \
 	$(SLASH)ft_strarrdel.c \
 	$(SLASH)ft_strndup.c \
 	$(SLASH)ft_itoa_base.c \
-	$(SLASH)get_next_line.c \
 	$(SLASH)ft_str3darrdel.c \
 	$(SLASH)ft_strlcpy.c\
 	$(SLASH)ft_abs.c\
@@ -123,7 +122,7 @@ SRC_LIST = \
 	$(SLASH)ft_roundf.c\
 	$(SLASH)ft_ineg.c\
 
-HEADERS = ./libft.h ./get_next_line.h
+HEADERS = ./libft.h
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror

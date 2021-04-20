@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 18:56:51 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/15 19:14:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:27:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 #include <unistd.h>
 
-void		ft_putstr(char const *s)
+void	ft_putstr(char const *s)
 {
 	write(1, s, ft_strlen(s));
 }

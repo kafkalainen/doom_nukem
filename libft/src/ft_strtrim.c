@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 15:01:24 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/30 09:27:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:17:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 
-char		*ft_strtrim(char const *s)
+char	*ft_strtrim(char const *s)
 {
 	char				*trimmed_str;
 	unsigned int		i;

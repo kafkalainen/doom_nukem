@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:06:56 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/26 12:54:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:58:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isascii(int c)
+int	ft_isascii(int c)
 {
 	if (c <= 127 && c >= 0)
 		return (1);

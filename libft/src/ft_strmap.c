@@ -6,20 +6,20 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 10:46:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 11:36:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:54:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 #include <stdlib.h>
 
-char		*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strmap(char const *s, char (*f)(char))
 {
 	unsigned int	i;
 	char			*new_str;
 
 	i = 0;
-	new_str = (char*)malloc(sizeof(*new_str) * (ft_strlen(s) + 1));
+	new_str = (char *)malloc(sizeof(*new_str) * (ft_strlen(s) + 1));
 	if (new_str != NULL)
 	{
 		while (s[i] != '\0')

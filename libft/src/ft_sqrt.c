@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 10:44:59 by jnivala           #+#    #+#             */
-/*   Updated: 2020/10/30 18:42:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:44:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 double	ft_sqrt(double base)
 {
-	double n;
-	double list;
+	double	n;
+	double	list;
 
 	n = base / 2.0;
 	list = 0.0;

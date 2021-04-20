@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_mapfile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/16 18:03:40 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/20 17:09:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 /*
 ** Separate functions for creating, writing to and reading from map files
@@ -21,7 +21,7 @@
 unsigned char	*create_write_buffer(t_texture *tex)
 {
 	unsigned char	*buf;
-	
+
 	buf = NULL;
 	buf = ft_strjoin(WRITE_BREAKER, ft_itoa(tex->idx));
 	buf = ft_strjoin(buf, WRITE_BREAKER);

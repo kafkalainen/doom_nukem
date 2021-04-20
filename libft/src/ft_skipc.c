@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_skipc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 12:32:05 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/14 16:11:20 by jnivala          ###   ########.fr       */
+/*   Created: 2021/04/17 18:33:32 by jnivala           #+#    #+#             */
+/*   Updated: 2021/04/17 18:37:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 42
-# include <stdlib.h>
-# include <unistd.h>
+#include "../libft.h"
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+char	*ft_skipc(char *str, char c)
+{
+	while (*str == c && *str != '\0')
+		str++;
+	return (str);
+}

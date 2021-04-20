@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 08:08:52 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/23 15:17:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 17:09:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	parse_sector_data(unsigned char *buf, unsigned int size, t_home *home)
 {

@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 09:43:51 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/12 09:54:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:26:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 
-void		ft_putendl_fd(char const *s, int fd)
+void	ft_putendl_fd(char const *s, int fd)
 {
 	ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n', fd);

@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 19:11:23 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/01 16:28:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:14:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isspace(int c)
+int	ft_isspace(int c)
 {
 	if (c == ' ')
 		return (1);

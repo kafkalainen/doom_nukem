@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 10:13:15 by jnivala           #+#    #+#             */
-/*   Updated: 2020/12/16 18:48:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:56:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 double	ft_cabs(t_complex c)
 {

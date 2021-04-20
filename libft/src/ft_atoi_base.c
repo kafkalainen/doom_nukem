@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 16:02:00 by jnivala           #+#    #+#             */
-/*   Updated: 2020/10/23 18:18:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:55:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 
-static int		ft_static_base(const char *legal, int c, int base)
+static int	ft_static_base(const char *legal, int c, int base)
 {
 	int		i;
 
@@ -27,7 +27,7 @@ static int		ft_static_base(const char *legal, int c, int base)
 	return (-1);
 }
 
-static int		ft_static_isspace(int c)
+static int	ft_static_isspace(int c)
 {
 	if (c == ' ')
 		return (8192);
@@ -45,7 +45,7 @@ static int		ft_static_isspace(int c)
 		return (0);
 }
 
-int				ft_atoi_base(const char *nptr, int base)
+int	ft_atoi_base(const char *nptr, int base)
 {
 	long int		integer;
 	int				sign;

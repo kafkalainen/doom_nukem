@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   inflate_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:13:42 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/15 17:32:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/20 17:15:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void			fill_nodes(t_tree_helper *h, t_huffman_tree *tree,
 	const unsigned int *bitlen)

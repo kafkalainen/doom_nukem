@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 08:51:18 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/09 11:55:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 19:09:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 #include <stdlib.h>
 
-static void		ft_lst_push_back(t_list **alst, t_list *new)
+static void	ft_lst_push_back(t_list **alst, t_list *new)
 {
 	t_list	*temp;
 
@@ -31,7 +31,7 @@ static void		ft_lst_push_back(t_list **alst, t_list *new)
 
 static t_list	*ft_lstdelbasicelement(t_list **alst)
 {
-	t_list *item;
+	t_list	*item;
 
 	while (*alst != NULL)
 	{
@@ -45,7 +45,7 @@ static t_list	*ft_lstdelbasicelement(t_list **alst)
 	return (NULL);
 }
 
-t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
 	t_list	*new;
 	t_list	*temp;

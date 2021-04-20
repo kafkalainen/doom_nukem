@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 17:01:20 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/29 15:36:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:58:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	ft_int_len(int n)
 	return (i);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int		original_len;
 	int		len;
@@ -61,7 +61,7 @@ char		*ft_itoa(int n)
 
 	len = ft_int_len(n);
 	original_len = len;
-	str = (char*)malloc(sizeof(*str) * (len + 1));
+	str = (char *)malloc(sizeof(*str) * (len + 1));
 	if (str != NULL)
 	{
 		if (n == -2147483648)

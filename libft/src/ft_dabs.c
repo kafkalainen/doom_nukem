@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 11:46:00 by jnivala           #+#    #+#             */
-/*   Updated: 2020/12/15 11:46:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:23:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-double		ft_dabs(double i)
+double	ft_dabs(double i)
 {
 	if (i < 0.0)
 		return (-i);

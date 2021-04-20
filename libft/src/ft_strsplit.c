@@ -6,12 +6,12 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 08:09:16 by jnivala           #+#    #+#             */
-/*   Updated: 2020/07/20 11:48:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:48:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft.h"
+#include "../libft.h"
 
 static size_t	ft_word_counter(char const *s, char c)
 {
@@ -42,7 +42,7 @@ static size_t	ft_word_len(char const *s, char c)
 	return (len);
 }
 
-static int		ft_divide_word(char const *s, size_t i, size_t len, char **arr)
+static int	ft_divide_word(char const *s, size_t i, size_t len, char **arr)
 {
 	if (len > 0)
 	{
@@ -55,7 +55,7 @@ static int		ft_divide_word(char const *s, size_t i, size_t len, char **arr)
 	return (1);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char	**ft_strsplit(char const *s, char c)
 {
 	size_t			i;
 	size_t			word_len;
@@ -66,12 +66,12 @@ char			**ft_strsplit(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	word_count = ft_word_counter(s, c);
-	if ((arr = (char**)malloc(sizeof(*arr) * (word_count + 1))))
+	arr = (char **)malloc(sizeof(*arr) * (word_count + 1));
+	if (!arr)
 	{
 		while (i < word_count)
 		{
-			while (*s == c && *s != '\0')
-				s++;
+			s = ft_skipc((char *)s, c);
 			word_len = ft_word_len(s, c);
 			while (*s != c && *s != '\0')
 				s++;

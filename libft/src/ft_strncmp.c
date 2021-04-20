@@ -6,15 +6,15 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 10:48:48 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/30 19:09:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 19:13:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	while ((*s1 || *s2) && i < n)

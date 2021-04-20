@@ -6,15 +6,15 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/11 16:18:59 by jnivala           #+#    #+#             */
-/*   Updated: 2020/06/29 15:17:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/17 18:21:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "../libft.h"
 
-void		ft_strclr(char *s)
+void	ft_strclr(char *s)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	if (s != NULL)
