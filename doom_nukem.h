@@ -24,6 +24,8 @@
 
 # ifdef __unix__
 #  define OPEN_FILE open
+#  define READ_FILE read
+#  define CLOSE_FILE close
 #  define READ_ONLY O_RDONLY
 #  include <math.h>
 #  include "/usr/local/include/SDL2/SDL_mixer.h"
@@ -36,7 +38,9 @@
 #  include <unistd.h>
 # elif defined(_WIN32) || defined(WIN32)
 #  define OPEN_FILE _open
-#  define READ_ONLY _O_RDONLY
+#  define READ_FILE _read
+#  define CLOSE_FILE _close
+#  define READ_ONLY _O_BINARY
 #  include "SDL2_mixer_win/include/SDL2/SDL_mixer.h"
 #  include <io.h>
 #  include <stdio.h>
@@ -56,14 +60,14 @@
 # include "headers/player.h"
 
 # include "headers/libft.h"
+# include "headers/player_functions.h"
+# include "headers/raycast.h"
 # include "headers/drawing_functions.h"
 # include "headers/caster.h"
 # include "headers/events.h"
-# include "headers/player_functions.h"
 # include "headers/porting.h"
 # include "headers/parsing.h"
 # include "headers/map.h"
-# include "headers/raycast.h"
 
 /*
 ** Miscellanious
@@ -87,10 +91,7 @@ void			draw_grid(t_frame *frame);
 int				update_sector(t_home *home);
 void			translate_world_view(t_home *home, t_xy step);
 void			transform_world_view(t_home *home, float delta_dir);
-void			perspective_transformation(t_point *x0, t_point *x1, t_home *home, int idx);
+void			trans_world_view(t_home *home, t_xy step, float delta_dir);
 
 void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
-t_ray_fov		get_fov(t_home *home, t_player *plr, int i);
-float			angle_offset(float screen_offset, int screen_wall);
-
 #endif

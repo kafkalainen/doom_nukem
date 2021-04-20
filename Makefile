@@ -1,6 +1,7 @@
 SRCS =	main.c \
 		srcs/vec_math/vec2_a.c \
 		srcs/vec_math/vec2_b.c \
+		srcs/vec_math/vec2_c.c \
 		srcs/update_player/key_input.c \
 		srcs/update_player/mouse_handle.c \
 		srcs/update_player/movement.c \
@@ -17,30 +18,35 @@ SRCS =	main.c \
 		srcs/utilities/setup.c \
 		srcs/utilities/audio.c \
 		srcs/utilities/linkedlist.c \
+		srcs/utilities/debugging.c \
 		srcs/libft/ft_itoa.c \
 		srcs/libft/ft_ftoa.c \
+		srcs/libft/ft_fmin.c \
+		srcs/libft/ft_fmax.c \
 		srcs/libft/ft_atoi.c \
 		srcs/libft/ft_strings1.c \
+		srcs/libft/ft_strings2.c \
+		srcs/libft/ft_strclen.c \
 		srcs/libft/memory.c \
 		srcs/libft/ft_get_next_line.c \
 		srcs/libft/ft_putendl_fd.c \
 		srcs/libft/ft_memcpy.c \
 		srcs/libft/ft_memalloc.c \
+		srcs/libft/ft_putnbr.c \
+		srcs/libft/ft_putchar.c \
+		srcs/libft/ft_strncpy.c \
+		srcs/libft/ft_strsplit.c \
 		srcs/raycaster/line_line_intersection.c \
-		srcs/raycaster/scan_fov.c \
-		srcs/raycaster/get_left_point.c \
-		srcs/raycaster/get_right_point.c \
+		srcs/raycaster/get_wall_points.c \
 		srcs/raycaster/setup_frame.c \
-		srcs/raycaster/continue_from_next_point.c \
-		srcs/raycaster/continue_from_last_sector.c \
-		srcs/raycaster/check_connection.c \
-		srcs/raycaster/check_if_portal.c \
-		srcs/raycaster/check_if_same_point.c \
-		srcs/raycaster/check_if_same_wall.c \
-		srcs/raycaster/calc_visible_walls.c \
+		srcs/raycaster/recursion_checks.c \
 		srcs/raycaster/get_distance.c \
-		srcs/raycaster/ceil_to_pixel.c \
-		srcs/raycaster/ft_draw_wall.c \
+		srcs/raycaster/scan_fov.c \
+		srcs/raycaster/calc_distances.c \
+		srcs/raycaster/calc_ground_texels.c \
+		srcs/raycaster/calc_sector_texels.c \
+		srcs/raycaster/calc_wall_texels.c \
+		srcs/raycaster/draw_segment.c \
 		srcs/parsing/read_map.c	\
 		srcs/png_parser/color_utils.c \
 		srcs/png_parser/crc.c \
@@ -54,7 +60,8 @@ SRCS =	main.c \
 		srcs/png_parser/parser.c \
 		srcs/png_parser/texture.c \
 		srcs/png_parser/unfilter.c \
-		srcs/png_parser/utils.c
+		srcs/png_parser/utils.c \
+		srcs/porting/png.c \
 
 HEADERS = \
 		doom_nukem.h\
@@ -88,8 +95,9 @@ LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lSDL2_mixer -lSDL2_ttf -lm -g
 win:
 	gcc $(SRCS) -o play $(WIN_INCLUDE_PATHS) $(WIN_LIBRARY_PATHS) $(WIN_COMPILER_FLAGS) $(WIN_LINK_FLAGS)
 
-# dependencies:
-# 	sudo apt-get install libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-ttf-dev
+#dependencies:
+#	sudo apt-get install libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-ttf-dev && \
+#	cd SDL_mixer && ./configure && make && sudo make install
 
 linux: #dependencies
 	gcc $(SRCS) -o play $(LINUX_INCLUDE_PATHS) $(LINUX_LIBRARY_PATHS) $(LINUX_COMPILER_FLAGS) $(LINUX_LINK_FLAGS)

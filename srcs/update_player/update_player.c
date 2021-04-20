@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   update_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 15:33:56 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/01 10:55:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/04 15:59:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
-# ifdef __unix__
-#  define MOUSE_HANDLE mouse_handle_unix(plr, home)
-# elif defined(_WIN32) || defined(WIN32)
-#  define MOUSE_HANDLE mouse_handle_win(plr, home)
-# endif
 
-void	update_player(t_player *plr, t_home *home, SDL_Event e)
+void	update_player(t_player *plr, t_home *home, SDL_Event *e)
 {
-	key_input(plr, e, home);
-	MOUSE_HANDLE;
+	while (SDL_PollEvent(e) != 0)
+	{
+		key_input(plr, e, home);
+		mouse_handle(plr, home, e);
+	}
 	movement(plr, home);
 }

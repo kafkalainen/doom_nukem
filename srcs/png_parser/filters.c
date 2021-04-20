@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:38:29 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 11:55:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:00:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sub(unsigned char *out, unsigned char *sl, t_scan_helper s)
 {
-	unsigned long i;
+	unsigned int i;
 
 	i = -1;
 	while (++i < s.byte_width)
@@ -26,7 +26,7 @@ void	sub(unsigned char *out, unsigned char *sl, t_scan_helper s)
 
 void	up(unsigned char *out, unsigned char *sl, t_scan_helper s)
 {
-	unsigned long i;
+	unsigned int i;
 
 	i = -1;
 	if (s.prev)
@@ -43,7 +43,7 @@ void	up(unsigned char *out, unsigned char *sl, t_scan_helper s)
 
 void	avg(unsigned char *out, unsigned char *sl, t_scan_helper s)
 {
-	unsigned long i;
+	unsigned int i;
 
 	i = -1;
 	if (s.prev)
@@ -86,7 +86,7 @@ int		predict(int a, int b, int c)
 void	paeth(unsigned char *out, unsigned char *sl,
 	t_scan_helper s)
 {
-	unsigned long i;
+	unsigned int i;
 
 	i = -1;
 	if (s.prev)

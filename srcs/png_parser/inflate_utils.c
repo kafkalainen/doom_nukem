@@ -6,13 +6,13 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:01:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 11:56:19 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:14:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-unsigned char	ft_read_bit(unsigned long *bitp,
+unsigned char	ft_read_bit(unsigned int *bitp,
 	const unsigned char *bitstream)
 {
 	unsigned char result;
@@ -22,8 +22,8 @@ unsigned char	ft_read_bit(unsigned long *bitp,
 	return (result);
 }
 
-unsigned		ft_read_bits(unsigned long *bitp,
-	const unsigned char *bitstream, unsigned long nbits)
+unsigned int	ft_read_bits(unsigned int *bitp,
+	const unsigned char *bitstream, unsigned int nbits)
 {
 	unsigned int	result;
 	unsigned int	i;
@@ -31,11 +31,11 @@ unsigned		ft_read_bits(unsigned long *bitp,
 	result = 0;
 	i = -1;
 	while (++i < nbits)
-		result |= ((unsigned)ft_read_bit(bitp, bitstream)) << i;
+		result |= ((unsigned int)ft_read_bit(bitp, bitstream)) << i;
 	return (result);
 }
 
-void			get_nbits_replength(unsigned long *nbits, unsigned int code,
+void			get_nbits_replength(unsigned int *nbits, unsigned int code,
 	unsigned int *replength)
 {
 	if (code == 16)
@@ -56,10 +56,10 @@ void			get_nbits_replength(unsigned long *nbits, unsigned int code,
 }
 
 void			repeat_codes(t_dynamic_helper *d, const unsigned char *in,
-	unsigned long *bp)
+	unsigned int *bp)
 {
 	unsigned int	value;
-	unsigned long	nbits;
+	unsigned int	nbits;
 
 	get_nbits_replength(&nbits, d->code, &d->replength);
 	if (d->code == 16)

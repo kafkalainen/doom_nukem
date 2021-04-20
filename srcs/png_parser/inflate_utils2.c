@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:13:42 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 11:56:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:02:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			fill_nodes(t_tree_helper *h, t_huffman_tree *tree,
 }
 
 unsigned int	ft_huffman_decode_symbol(const unsigned char *in,
-	unsigned long *bp, t_huffman_tree *codetree, unsigned long inlength)
+	unsigned int *bp, t_huffman_tree *codetree, unsigned int inlength)
 {
 	unsigned int	treepos;
 	unsigned int	ct;
@@ -62,7 +62,7 @@ unsigned int	ft_huffman_decode_symbol(const unsigned char *in,
 }
 
 void			dynamic_code_cycle(t_dynamic_helper *d, const unsigned char *in,
-	unsigned long *bp)
+	unsigned int *bp)
 {
 	if (d->code <= 15)
 	{
