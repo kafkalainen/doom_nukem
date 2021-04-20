@@ -40,7 +40,7 @@ int				draw_tex_line(t_xy start, t_xy end,
 	return (TRUE);
 }
 
-static float	round_angle(float angle, float *pxl_offset)
+static float	round_angle(float angle, float *pxl_offset, int screen_offset)
 {
 	float			angle_as_pixels;
 	int				trunc;
@@ -51,10 +51,10 @@ static float	round_angle(float angle, float *pxl_offset)
 	if (*pxl_offset >= 1.0f)
 	{
 		*pxl_offset = *pxl_offset - 1.0f;
-		return ((float)(trunc + 1.0f));
+		return ((int)(trunc + 1) * perspective_offset(screen_offset, trunc + 1));
 	}
 	else
-		return ((float)trunc);
+		return ((int)trunc * perspective_offset(screen_offset, trunc));
 }
 
 t_texture		*get_tex(int idx, t_texture	**textures)
