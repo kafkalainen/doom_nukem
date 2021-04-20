@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 13:47:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 20:01:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ typedef struct		s_frame
 	float			tex_mult;
 	float			ratio;
 }					t_frame;
+
+enum			e_lines {
+	colinear = 0,
+	clockwise = 1,
+	c_clockwise = 2,
+};
 
 float				get_distance(t_xy p1, t_xy p2);
 void				calc_intersection(t_point *pgon, t_ray *ray, t_intersection *sect);

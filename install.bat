@@ -1,6 +1,6 @@
 @ECHO OFF
 setlocal
-ECHO This will install Wolf3d project dependencies.
+ECHO This will install DoomNukem project dependencies.
 ECHO Before install, you have to install MingW gcc compiler for Windows.
 ECHO Download the installer from https://sourceforge.net/projects/mingw/files/Installer/
 ECHO Project assumes that it is installed to C:\MinGW

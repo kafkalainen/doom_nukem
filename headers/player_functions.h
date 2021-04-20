@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:53:57 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/02 11:02:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 19:50:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void			movement(t_player *plr, t_home *home);
 void			player_move_forward(t_player *plr, t_home *home, float delta_time);
 void			player_move_strafe(t_player *plr, t_home *home, float delta_time, char ad);
 void			player_move_backwards(t_player *plr, t_home *home, float delta_time);
+int				plr_inside(t_sector *sector, t_xy *pos);
 
 #endif

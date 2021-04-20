@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_2d.c                                          :+:      :+:    :+:   */
+/*   validate_sectors_data_2.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/20 18:33:45 by jnivala          ###   ########.fr       */
+/*   Created: 2021/04/09 19:09:10 by jnivala           #+#    #+#             */
+/*   Updated: 2021/04/20 19:17:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
+int			check_if_lines_cut(t_sector *sector)
 {
-	static t_xy	prev_pos;
+	unsigned int	i;
+	t_point			*temp;
 
-	frame->idx = plr->current_sector;
-	frame->old_idx = -1;
-	frame->max_fov = 0;
-	frame->offset = 640;
-	frame->left.l_pt = vec2(-1,-1);
-	frame->right.r_pt = vec2(-1,-1);
-	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
-	frame->pxl_offset = 0.0f;
-	scan_fov(home, frame, plr, 0);
+	i = 0;
+	temp = sector->points;
+	if (sector->nb_of_walls < 4)
+		return (0);
+	while (i < sector->nb_of_walls)
+	{
+		if (check_if_lseg_intersects(temp,
+			&temp->next->next->x0, &temp->next->next->next->x0))
+			return (1);
+		temp = temp->next;
+		i++;
+	}
+	return (0);
 }

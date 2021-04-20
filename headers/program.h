@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/23 08:15:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 17:08:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct		s_home
 	t_sector		**sectors;
 	t_sector		**orig_sectors;
 	SDL_Surface		*text_surf;
-	TTF_Font		*font;
 	t_texture		**editor_tex;
 	t_time			t;
 	t_xy			offset;

@@ -6,66 +6,76 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/20 16:08:53 by jnivala          ###   ########.fr        #
+#    Updated: 2021/04/20 19:59:16 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = doom_nukem
+NAME = doom-nukem
 
-SRCS =	main.c \
-	srcs$(SLASH)vec_math$(SLASH)vec2_a.c \
-	srcs$(SLASH)vec_math$(SLASH)vec2_b.c \
-	srcs$(SLASH)vec_math$(SLASH)vec2_c.c \
-	srcs$(SLASH)update_player$(SLASH)key_input.c \
-	srcs$(SLASH)update_player$(SLASH)mouse_handle.c \
-	srcs$(SLASH)update_player$(SLASH)movement.c \
-	srcs$(SLASH)update_player$(SLASH)update_player.c \
-	srcs$(SLASH)update_screen$(SLASH)draw_shapes.c \
-	srcs$(SLASH)update_screen$(SLASH)put_pixel.c \
-	srcs$(SLASH)update_screen$(SLASH)update_screen.c \
-	srcs$(SLASH)update_screen$(SLASH)draw_tex_pixel.c \
-	srcs$(SLASH)update_screen$(SLASH)steplen.c \
-	srcs$(SLASH)update_screen$(SLASH)draw_2d.c \
-	srcs$(SLASH)update_screen$(SLASH)update_sector.c \
-	srcs$(SLASH)update_screen$(SLASH)transform_matrix_2d.c \
-	srcs$(SLASH)utilities$(SLASH)error_output.c \
-	srcs$(SLASH)utilities$(SLASH)setup.c \
-	srcs$(SLASH)utilities$(SLASH)audio.c \
-	srcs$(SLASH)utilities$(SLASH)linkedlist.c \
-	srcs$(SLASH)utilities$(SLASH)debugging.c \
-	srcs$(SLASH)raycaster$(SLASH)line_line_intersection.c \
-	srcs$(SLASH)raycaster$(SLASH)get_wall_points.c \
-	srcs$(SLASH)raycaster$(SLASH)setup_frame.c \
-	srcs$(SLASH)raycaster$(SLASH)recursion_checks.c \
-	srcs$(SLASH)raycaster$(SLASH)get_distance.c \
-	srcs$(SLASH)raycaster$(SLASH)scan_fov.c \
-	srcs$(SLASH)raycaster$(SLASH)calc_distances.c \
-	srcs$(SLASH)raycaster$(SLASH)calc_ground_texels.c \
-	srcs$(SLASH)raycaster$(SLASH)calc_sector_texels.c \
-	srcs$(SLASH)raycaster$(SLASH)calc_wall_texels.c \
-	srcs$(SLASH)raycaster$(SLASH)draw_segment.c \
-	srcs$(SLASH)parsing$(SLASH)read_map.c	\
-	srcs$(SLASH)parsing$(SLASH)parse_sector.c \
-	srcs$(SLASH)png_parser$(SLASH)color_utils.c \
-	srcs$(SLASH)png_parser$(SLASH)crc.c \
-	srcs$(SLASH)png_parser$(SLASH)filters.c \
-	srcs$(SLASH)png_parser$(SLASH)header.c \
-	srcs$(SLASH)png_parser$(SLASH)inflate_setups.c \
-	srcs$(SLASH)png_parser$(SLASH)inflate_trees.c \
-	srcs$(SLASH)png_parser$(SLASH)inflate_utils.c \
-	srcs$(SLASH)png_parser$(SLASH)inflate_utils2.c \
-	srcs$(SLASH)png_parser$(SLASH)inflate.c \
-	srcs$(SLASH)png_parser$(SLASH)parser.c \
-	srcs$(SLASH)png_parser$(SLASH)texture.c \
-	srcs$(SLASH)png_parser$(SLASH)unfilter.c \
-	srcs$(SLASH)png_parser$(SLASH)parser_utils.c \
-	srcs$(SLASH)png_parser$(SLASH)parser_utils2.c \
-	srcs$(SLASH)porting$(SLASH)png.c \
-	srcs$(SLASH)porting$(SLASH)create_mapfile.c \
-	srcs$(SLASH)porting$(SLASH)open_file1.c \
-	srcs$(SLASH)porting$(SLASH)open_file2.c \
+SRCS = \
+	main.c \
+	vec_math$(SLASH)vec2_a.c \
+	vec_math$(SLASH)vec2_b.c \
+	vec_math$(SLASH)vec2_c.c \
+	update_player$(SLASH)key_input.c \
+	update_player$(SLASH)mouse_handle.c \
+	update_player$(SLASH)movement.c \
+	update_player$(SLASH)update_player.c \
+	update_player$(SLASH)player_move.c \
+	update_screen$(SLASH)draw_shapes.c \
+	update_screen$(SLASH)put_pixel.c \
+	update_screen$(SLASH)update_screen.c \
+	update_screen$(SLASH)draw_tex_pixel.c \
+	update_screen$(SLASH)steplen.c \
+	update_screen$(SLASH)draw_2d.c \
+	update_screen$(SLASH)transform_matrix_2d.c \
+	utilities$(SLASH)error_output.c \
+	utilities$(SLASH)setup.c \
+	utilities$(SLASH)audio.c \
+	utilities$(SLASH)linkedlist.c \
+	utilities$(SLASH)pxl_alphabet.c \
+	utilities$(SLASH)pxl_numbers.c \
+	utilities$(SLASH)str_pxl.c \
+	raycaster$(SLASH)calc_distances.c \
+	raycaster$(SLASH)calc_ground_texels.c \
+	raycaster$(SLASH)calc_sector_texels.c \
+	raycaster$(SLASH)calc_wall_texels.c \
+	raycaster$(SLASH)draw_segment.c \
+	raycaster$(SLASH)get_distance.c \
+	raycaster$(SLASH)get_wall_points.c \
+	raycaster$(SLASH)line_line_intersection.c \
+	raycaster$(SLASH)line_segment_check.c \
+	raycaster$(SLASH)perspective_offset.c \
+	raycaster$(SLASH)recursion_checks.c \
+	raycaster$(SLASH)scan_fov.c \
+	raycaster$(SLASH)setup_frame.c \
+	parsing$(SLASH)calc_norm_vectors.c \
+	parsing$(SLASH)free_sector.c \
+	parsing$(SLASH)parse_number_data.c \
+	parsing$(SLASH)parse_sector.c \
+	png_parser$(SLASH)color_utils.c \
+	png_parser$(SLASH)crc.c \
+	png_parser$(SLASH)filters.c \
+	png_parser$(SLASH)header.c \
+	png_parser$(SLASH)inflate_setups.c \
+	png_parser$(SLASH)inflate_trees.c \
+	png_parser$(SLASH)inflate_utils.c \
+	png_parser$(SLASH)inflate_utils2.c \
+	png_parser$(SLASH)inflate.c \
+	png_parser$(SLASH)parser.c \
+	png_parser$(SLASH)texture.c \
+	png_parser$(SLASH)unfilter.c \
+	png_parser$(SLASH)parser_utils.c \
+	png_parser$(SLASH)parser_utils2.c \
+	porting$(SLASH)png.c \
+	porting$(SLASH)create_mapfile.c \
+	porting$(SLASH)open_file1.c \
+	porting$(SLASH)open_file2.c \
+	porting$(SLASH)validate_sectors_data.c \
+	porting$(SLASH)validate_sectors_data_2.c \
 
 HEADERS = \
+	libft$(SLASH)libft.h \
 	headers$(SLASH)doom_nukem.h \
 	headers$(SLASH)audio.h \
 	headers$(SLASH)calculations.h \
@@ -74,7 +84,6 @@ HEADERS = \
 	headers$(SLASH)drawing_functions.h \
 	headers$(SLASH)entity.h \
 	headers$(SLASH)events.h \
-	headers$(SLASH)libft.h \
 	headers$(SLASH)macros.h \
 	headers$(SLASH)map.h \
 	headers$(SLASH)parser_structs.h \
@@ -91,26 +100,27 @@ HEADERS = \
 ABS_DIR = $(shell pwd)
 SDL_ORIG = $(ABS_DIR)/SDL2-2.0.14/
 SDL_NEW = $(ABS_DIR)/SDL2/
-SDL_INC = -I ./SDL2/include/SDL2/
+SDL_INC = SDL2/include/SDL2/
 SDL_MIXER_ORIG = $(ABS_DIR)/SDL2_mixer-2.0.4/
 SDL_MIXER_NEW = $(ABS_DIR)/SDL2_mixer/
-SDL_MIXER_INC = -I ./SDL2_mixer/include/SDL2/
+SDL_MIXER_INC = SDL2_mixer/include/SDL2/
 
 WIN_INCLUDE_PATHS = \
 	-ISDL2-2.0.14\i686-w64-mingw32\include\SDL2 \
 	-ISDL2_mixer-2.0.4\i686-w64-mingw32\include\SDL2 \
 	-Ilibft
-LINUX_INCLUDE_PATHS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --includes) $(SDL_MIXER_INC) -Ilibft
+LINUX_INCLUDE_PATHS = -I$(SDL_INC) -I$(SDL_MIXER_INC) -Ilibft/
 
 WIN_LIBRARY_PATHS = \
 	-LSDL2-2.0.14\i686-w64-mingw32\lib \
 	-LSDL2_mixer-2.0.4\i686-w64-mingw32\lib \
 	-Llibft
-LINUX_LIBRARY_PATHS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)/lib
-LINUX_LIBRARY_PATHS += -lSDL2_mixer -Llibft -lft -lm -g
+LINUX_LIBRARY_PATHS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
+LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lm -g
 
+CC = gcc
 WIN_CFLAGS = -Wall -Wextra -Werror -O3
-LINUX_CFLAGS = -Wall -Wextra -Werror -O3
+LINUX_CFLAGS = -Wall -Wextra  -O3
 LINUX_CFLAGS += $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
 
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lm
@@ -130,17 +140,15 @@ else
 endif
 
 ifeq ($(TARGET_SYSTEM),Windows)
-	NAME = wolf3d.exe
+	NAME = doom-nukem.exe
 	INCLUDES = $(WIN_INCLUDE_PATHS)
 	LIBS = $(WIN_LIBRARY_PATHS)
-	CFLAGS = $(WIN_COMPILER_FLAGS)
-	LDFLAGS = $(WIN_LINK_FLAGS)
-	LIBFT = $(LIBFT_WIN)
+	CFLAGS = $(WIN_CFLAGS)
+	LDFLAGS = $(WIN_LFLAGS)
 	SDL2_BUILD := .\SDL2-2.0.14\i686-w64-mingw32
 	SLASH = \\
 	MKDIR = mkdir
 	RM = del $(SLASH)s/q
-	WGET_EXISTS := wget_not_needed
 	RESET :=
 	RED :=
 	GREEN :=
@@ -152,15 +160,11 @@ ifeq ($(TARGET_SYSTEM),Windows)
 else
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	LIBS = $(LINUX_LIBRARY_PATHS)
-	CFLAGS = $(LINUX_COMPILER_FLAGS)
+	CFLAGS = $(LINUX_CFLAGS)
 	LDFLAGS = $(LINUX_LINK_FLAGS)
-	LIBFT = $(LIBFT_LINUX)
-	SDL2_BUILD = SDL2-2.0.14/build
-	SDL2_FULL_PATH = $(shell pwd)/$(SDL2_BUILD)
 	SLASH = /
 	MKDIR := mkdir -p
 	RM = /bin/rm -rf
-	WGET_EXISTS := $(shell command -v wget 2> /dev/null)
 	RESET = "\033[0m"
 	RED = "\033[0;31m"
 	GREEN = "\033[0;32m"
@@ -171,30 +175,21 @@ else
 	WHITE = "\033[0;37m"
 endif
 
+S = srcs$(SLASH)
+O = objs$(SLASH)
 LIBFT = libft$(SLASH)libft.a
+SRC = $(addprefix $S, $(SRCS))
+OBJ = $(SRC:$S%=$O%.o)
 
 .PHONY: all clean fclean re sdl sdl-mixer
 
 all: $(NAME)
 
-$O:
-	$(MKDIR) $@
-	$(MKDIR) $@$(SLASH)utilities
-	$(MKDIR) $@$(SLASH)update_player
-	$(MKDIR) $@$(SLASH)update_screen
-	$(MKDIR) $@$(SLASH)parsing
-	$(MKDIR) $@$(SLASH)png_parser
-	$(MKDIR) $@$(SLASH)porting
-	$(MKDIR) $@$(SLASH)raycaster
-	$(MKDIR) $@$(SLASH)vec_math
-
-$(OBJ): | $O
-
-$(OBJ): $O%.o: $S% $(HEADERS)
-	$(CC) -c -o $@ $(CFLAGS) $(INCLUDES) $<
-
-$(LIBFT):
-	make -C libft
+echo:
+	echo INCLUDES: $(INCLUDES)
+	echo LIBS:  $(LIBS)
+	echo CFLAGS: $(CFLAGS)
+	echo LDFLAGS: $(LDFLAGS)
 
 sdl:
 ifeq ($(TARGET_SYSTEM), Linux)
@@ -243,6 +238,25 @@ else
 	@IF NOT EXIST "SDL2-2.0.14\x86_64-w64-mingw32" ( install.bat )\
 	ELSE ECHO $(GREEN)"Folder exists."$(RESET)
 endif
+
+$O:
+	$(MKDIR) $@
+	$(MKDIR) $@$(SLASH)utilities
+	$(MKDIR) $@$(SLASH)update_player
+	$(MKDIR) $@$(SLASH)update_screen
+	$(MKDIR) $@$(SLASH)parsing
+	$(MKDIR) $@$(SLASH)png_parser
+	$(MKDIR) $@$(SLASH)porting
+	$(MKDIR) $@$(SLASH)raycaster
+	$(MKDIR) $@$(SLASH)vec_math
+
+$(OBJ): | $O
+
+$(OBJ): $O%.o: $S% $(HEADERS)
+	$(CC) -c -o $@ $(CFLAGS) $(INCLUDES) $<
+
+$(LIBFT):
+	make -C libft
 
 $(NAME): $(LIBFT) sdl sdl-mixer $(OBJ)
 	$(CC) -o $@ $(INCLUDES) $(LIBS) $(CFLAGS) $(OBJ) $(LDFLAGS)

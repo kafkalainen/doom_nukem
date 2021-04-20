@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:16:10 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/20 16:20:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 19:22:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,10 @@ float			vec2_ang(t_xy a, t_xy b)
 float			ft_map(float in, t_range from, t_range to)
 {
 	return (to.x + ((in - from.x) * (to.y - to.x)) / (from.y - from.x));
+}
+
+
+t_xy			vec2_normal(t_xy p0, t_xy p1)
+{
+	return ((t_xy){(p1.y - p0.y), -(p1.x - p0.x)});
 }

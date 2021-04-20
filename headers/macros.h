@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/18 17:21:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 19:21:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define NUM_TEX 8
 
 # define PLR_DIR 0.785398163f
-
+# define INV_PI_BY_TWO 0.1591549367f
 # define MAX_INT (2147483647)
 # define MIN_INT (-MAX_INT - 1)
 # define MAX_UINT ((unsigned int)-1)

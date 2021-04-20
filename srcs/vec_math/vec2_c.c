@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:14:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 16:20:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 20:03:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,15 @@ float	interpolate_points(float x0, float x1, float y0, float y1)
 t_xy	vec3_to_vec2(t_xyz a)
 {
 	return ((t_xy){a.x, a.y});
+}
+
+float	vec2_cross(t_xy a, t_xy b)
+{
+	return (a.x * b.y - a.y * b.x);
+}
+
+float	vec2_eucl_dist(t_xy p1, t_xy p2)
+{
+	return (sqrtf((p2.x - p1.x) * (p2.x - p1.x)
+		+ (p2.y - p1.y) * (p2.y - p1.y)));
 }
