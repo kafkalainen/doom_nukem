@@ -72,6 +72,7 @@ typedef struct		s_home
 {
 	t_window		win;
 	t_sector		**sectors;
+	t_sector		**orig_sectors;
 	SDL_Surface		*text_surf;
 	TTF_Font		*font;
 	t_texture		**editor_tex;

@@ -1,6 +1,7 @@
 SRCS =	main.c \
 		srcs/vec_math/vec2_a.c \
 		srcs/vec_math/vec2_b.c \
+		srcs/vec_math/vec2_c.c \
 		srcs/update_player/key_input.c \
 		srcs/update_player/mouse_handle.c \
 		srcs/update_player/movement.c \
@@ -17,6 +18,7 @@ SRCS =	main.c \
 		srcs/utilities/setup.c \
 		srcs/utilities/audio.c \
 		srcs/utilities/linkedlist.c \
+		srcs/utilities/debugging.c \
 		srcs/libft/ft_itoa.c \
 		srcs/libft/ft_ftoa.c \
 		srcs/libft/ft_fmin.c \
@@ -42,8 +44,10 @@ SRCS =	main.c \
 		srcs/raycaster/recursion_checks.c \
 		srcs/raycaster/get_distance.c \
 		srcs/raycaster/scan_fov.c \
-		srcs/raycaster/ft_calc_distances.c \
-		srcs/raycaster/draw_ground.c \
+		srcs/raycaster/calc_distances.c \
+		srcs/raycaster/calc_ground_texels.c \
+		srcs/raycaster/calc_sector_texels.c \
+		srcs/raycaster/calc_wall_texels.c \
 		srcs/raycaster/draw_segment.c \
 		srcs/parsing/read_map.c	\
 		srcs/parsing/parse_sector.c \

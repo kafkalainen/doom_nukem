@@ -12,6 +12,8 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Is right point needed to properly render the space?
 - Segfault in renderer when the function returns back to the same portal it came from.
 - Wall distorted because only angle is used. Solved using perpentual distance to the wall, and scaling it to the view.
+- Getting correct offset for wall textures.
+- Correcting walls by perspective-correct interpolation from affine texture coordinates.
 
 # TO-DO
 ## Riku
@@ -27,7 +29,6 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Cleans and Normes code.
 - Fixes game loop.
 - Remove one pixel error.
-
 # Done
 - Tested to change int values in the tex_ft_draw_wall perspective_fix function, to no avail.
 - We need to change angle, before it is normalized.
@@ -48,7 +49,7 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - [ ] The floor and ceiling may not be horizontal but inclined planes.
 - [ ] The floors and ceilings have textures.
 - [ ] There can be a sky instead of a ceiling.
-- [x] Walls can be partially transparent, unveiling the room behind.
+- [ ] Walls can be partially transparent, unveiling the room behind.
 - [ ] Decorative elements can be placed on the walls over the main texture (paintings, posters... ).
 - [ ] Objects or characters can be placed in the world as sprites that always face the player.
 - [ ] Objects or characters can be placed in the world as multiple sprites displayed according to the orientation between the object and the player (you’ll see the object or character from behind and from the side as you walk around it).
@@ -92,3 +93,6 @@ the flag mode, etc.
 
 # Links
 - Fabien's Sanglard's tutorial for Building Duke Nukem Graphics Engine [Link](https://fabiensanglard.net/duke3d/build_engine_internals.php)
+- Perspective Texture Mapping by Mikael Kalms [Link](https://www.lysator.liu.se/~mikaelk/doc/perspectivetexture/)
+- Perspective Texture Mapping article series by Chris Hecker [Link] http://www.chrishecker.com/Miscellaneous_Technical_Articles
+- Floor and Ceiling Drawing tutorial by Lodev. Idea of continuing drawing after the wall has been drawn stems from here! [Link](https://lodev.org/cgtutor/raycasting2.html)

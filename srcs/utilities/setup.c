@@ -38,6 +38,8 @@ void			init_player(t_player *plr)
 	plr->pitch = 240;
 	plr->dir.x = 0.785398163;
 	plr->dir.y = 0.785398163;
+	plr->move_dir.x = 0.785398163;
+	plr->move_dir.y = 0.785398163;
 	plr->input.down = 0;
 	plr->input.up = 0;
 	plr->input.right = 0;
@@ -59,7 +61,7 @@ void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	home = init_sdl(home, frame);
 	if (TTF_Init() < 0)
 		error_output_sdl("Fatal: Failed to init TTF.", home);
-	home->font = TTF_OpenFont("arial.ttf", 18);
+	home->font = TTF_OpenFont("Cybrpnuk2.ttf", 16);
 	if (home->font == NULL)
 		error_output_sdl("Fatal: Failed to init given font.", home);
 	load_audio(&plr->audio);
