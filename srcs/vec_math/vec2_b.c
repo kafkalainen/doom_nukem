@@ -49,7 +49,7 @@ float			vec2_mag(t_xy a)
 	return sqrtf(a.x * a.x + a.y * a.y);
 }
 
-float			vec2_angle(t_xy a, t_xy b)
+float			vec2_ang(t_xy a, t_xy b)
 {
 	return acosf(vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b)));
 }

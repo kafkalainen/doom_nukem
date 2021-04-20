@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_if_portal.c                                  :+:      :+:    :+:   */
+/*   ft_fmin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:38:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/22 14:19:04 by jnivala          ###   ########.fr       */
+/*   Created: 2021/03/03 15:33:25 by jnivala           #+#    #+#             */
+/*   Updated: 2021/03/03 15:33:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
-
-int		check_if_portal(t_point *p0)
+float	ft_fmin(float a, float b)
 {
-	if (p0->idx >= 0)
-		return (TRUE);
+	if (a < b)
+		return (a);
 	else
-		return (FALSE);
+		return (b);
 }

@@ -3,57 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/22 14:57:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/19 14:28:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-float	mouse_acceleration(float mouse, char c)
+void	mouse_handle(t_player *plr, t_home *home, SDL_Event *e)
 {
-	int		speed;
-	if (c == 'x')
-		speed = 100;
-	else
-		speed = 10000;
-	if (mouse < 0)
-		return (0.05235987756 * -mouse * speed);
-	else if (mouse == 0)
-		return (0);
-	else
-		return (-0.05235987756 * mouse * speed);
-
-}
-
-void	mouse_handle_win(t_player *plr, t_home *home)
-{
-	SDL_Event	me;
-
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	if (me.type == SDL_MOUSEMOTION)
+	if (e->type == SDL_MOUSEMOTION)
 	{
-		transform_world_view(home, -me.motion.xrel * DEG_TO_RAD);
-		plr->pitch = MIN(MAX(plr->pitch - me.motion.yrel, 0), 480);
+		// plr->dir.x += -e->motion.xrel * DEG_TO_RAD * 0.1;
+		// plr->dir.y += -e->motion.xrel * DEG_TO_RAD * 0.1;
+		// if (plr->dir.x > 2 * PI)
+		// {
+		// 	plr->dir.x = 0.0f;
+		// 	plr->dir.y = 0.0f;
+		// }
+		// if (plr->dir.x < 0)
+		// {
+		// 	plr->dir.x = 2 * PI;
+		// 	plr->dir.y = 2 * PI;
+		// }
+		transform_world_view(home, -e->motion.xrel * DEG_TO_RAD * 0.1);
+		plr->pitch = ft_fmin(ft_fmax((plr->pitch - e->motion.yrel), 0), 480);
 	}
-}
-
-void	mouse_handle_unix(t_player *plr, t_home *home)
-{
-	t_xy		mouse;
-	t_screen_xy	mouse_screen;
-
-	SDL_ShowCursor(SDL_DISABLE);
-	SDL_CaptureMouse(SDL_TRUE);
-	SDL_GetMouseState(&mouse_screen.x, &mouse_screen.y);
-	mouse.x = (float)mouse_screen.x;
-	mouse.y = (float)mouse_screen.y;
-	mouse.x = (mouse.x - SCREEN_WIDTH * 0.5) / SCREEN_WIDTH * 0.5;
-	mouse.y = (mouse.y - SCREEN_HEIGHT * 0.5) / SCREEN_HEIGHT * 0.5;
-	transform_world_view(home, mouse_acceleration(mouse.x, 'x'));
-	plr->pitch = MIN(MAX(plr->pitch + mouse_acceleration(mouse.y, 'y'), 0), 480);
-	SDL_WarpMouseInWindow(home->win.window, (int)(SCREEN_WIDTH * 0.5),
-		(int)(SCREEN_HEIGHT * 0.5));
 }

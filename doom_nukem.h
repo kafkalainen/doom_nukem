@@ -73,7 +73,6 @@
 ** Miscellanious
 */
 
-float			angle_offset(float screen_offset, int screen_wall);
 void			update_screen(t_home *home, t_frame *frame, t_player *plr);
 void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame);
 void			error_output_sdl(char *msg, t_home *home);
@@ -92,8 +91,7 @@ void			draw_grid(t_frame *frame);
 int				update_sector(t_home *home);
 void			translate_world_view(t_home *home, t_xy step);
 void			transform_world_view(t_home *home, float delta_dir);
-void			perspective_transformation(t_point *x0, t_point *x1, t_home *home, int idx);
+void			trans_world_view(t_home *home, t_xy step, float delta_dir);
 
 void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
-t_ray_fov		get_fov(t_home *home, t_player *plr, int i);
 #endif

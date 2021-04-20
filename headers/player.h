@@ -27,6 +27,7 @@ typedef struct		s_player
 {
 	t_xy			pos;
 	t_xy			dir;
+	t_xy			move_dir;
 	float			pitch;
 	float			z;
 	float			height;

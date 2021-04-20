@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/26 11:59:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/22 08:58:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_home	*init_sdl(t_home *home, t_frame *frame)
 {
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) < 0)
 		error_output_sdl("Fatal: SDL Initalization failed.", home);
 	home->win.window = SDL_CreateWindow("Hello World!", 100, 100,
 		home->win.width, home->win.height, 0);
@@ -25,7 +25,7 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 	frame->draw_surf = SDL_GetWindowSurface(home->win.window);
 	if (!frame->draw_surf)
 		error_output_sdl("Fatal: Failed to get window surface", home);
-	frame->min_step = .002454369;
+	frame->min_step = .002454369f;
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		error_output_sdl("Fatal: SDL_mixer could not initialize!", home);
 	return (home);
@@ -38,6 +38,8 @@ void			init_player(t_player *plr)
 	plr->pitch = 240;
 	plr->dir.x = 0.785398163;
 	plr->dir.y = 0.785398163;
+	plr->move_dir.x = 0.785398163;
+	plr->move_dir.y = 0.785398163;
 	plr->input.down = 0;
 	plr->input.up = 0;
 	plr->input.right = 0;
@@ -59,7 +61,7 @@ void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	home = init_sdl(home, frame);
 	if (TTF_Init() < 0)
 		error_output_sdl("Fatal: Failed to init TTF.", home);
-	home->font = TTF_OpenFont("arial.ttf", 18);
+	home->font = TTF_OpenFont("Cybrpnuk2.ttf", 16);
 	if (home->font == NULL)
 		error_output_sdl("Fatal: Failed to init given font.", home);
 	load_audio(&plr->audio);

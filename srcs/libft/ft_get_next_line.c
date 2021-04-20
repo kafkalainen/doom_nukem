@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:44:59 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/16 12:58:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/02 10:33:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@ int			ft_get_next_line(const int fd, char **out)
 	else if ((bytes == 0) && (file[fd] != NULL))
 		return (buffer_to_line(file, fd, out));
 	else
-		return ((int)(*out = NULL));
+	{
+		*out = NULL;
+		return (0);
+	}
 }

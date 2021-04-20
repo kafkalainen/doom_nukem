@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_connection.c                                 :+:      :+:    :+:   */
+/*   ft_fmax.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/08 09:41:56 by jnivala          ###   ########.fr       */
+/*   Created: 2021/03/03 15:32:04 by jnivala           #+#    #+#             */
+/*   Updated: 2021/03/03 15:33:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
-
-int		check_connection(t_point *point, t_frame *frame)
+float	ft_fmax(float a, float b)
 {
-	return ((point->idx == frame->old_idx) ? TRUE : FALSE);
+	if (a > b)
+		return (a);
+	else
+		return (b);
 }

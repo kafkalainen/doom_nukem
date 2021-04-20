@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_sector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:11:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/01 13:33:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/19 11:51:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void		assign_points(t_sector *sector)
 	coord[1].x = 100.0;
 	coord[1].y = -100.0;
 	coord[0].x = 100.0;
-	coord[0].y = 100.0;
+	coord[0].y = 50.0;
 	walls = sector->nb_of_walls;
 	sector->points = new_polygon(coord[5], 1);
 	temp = sector->points;
@@ -60,7 +60,7 @@ static void		assign_points(t_sector *sector)
 		new = new_polygon(
 			coord[walls - 1],
 			-4);
-		if (walls == 1)
+		if (walls == 2)
 			new->c = 'b';
 		temp->next = new;
 		temp = temp->next;
@@ -96,7 +96,7 @@ static void		assign_points1(t_sector *sector)
 		{
 			new = new_polygon(
 				coord[walls - 1],
-				-1);
+				2);
 		}
 		else
 		{
@@ -128,9 +128,9 @@ static void		assign_points2(t_sector *sector)
 	coord[5].y = 150.0;
 	coord[4].x = 100.0;
 	coord[4].y = 250.0;
-	coord[3].x = 20.0;
+	coord[3].x = 30.0;
 	coord[3].y = 250.0;
-	coord[2].x = -20.0;
+	coord[2].x = -30.0;
 	coord[2].y = 250.0;
 	coord[1].x = -100.0;
 	coord[1].y = 250.0;
@@ -147,6 +147,12 @@ static void		assign_points2(t_sector *sector)
 			new = new_polygon(
 				coord[walls - 1],
 				3);
+		}
+		else if (walls == 5)
+		{
+			new = new_polygon(
+				coord[walls - 1],
+				-3);
 		}
 		else
 		{
@@ -170,9 +176,9 @@ static void		assign_points3(t_sector *sector)
 	int			walls;
 
 	coord = (t_xy*)malloc(sizeof(t_xy) * 4);
-	coord[3].x = -20.0;
+	coord[3].x = -30.0;
 	coord[3].y = 250.0;
-	coord[2].x = 20.0;
+	coord[2].x = 30.0;
 	coord[2].y = 250.0;
 	coord[1].x = 20.0;
 	coord[1].y = 350.0;
@@ -215,10 +221,44 @@ static int		assign_sectors(t_home *home)
 	home->sectors[1]->nb_of_walls = 4;
 	home->sectors[2]->nb_of_walls = 8;
 	home->sectors[3]->nb_of_walls = 4;
+	home->sectors[0]->tex_floor = -5;
+	home->sectors[1]->tex_floor = -4;
+	home->sectors[2]->tex_floor = -3;
+	home->sectors[3]->tex_floor = -5;
 	assign_points(home->sectors[0]);
 	assign_points1(home->sectors[1]);
 	assign_points2(home->sectors[2]);
 	assign_points3(home->sectors[3]);
+	return (0);
+}
+
+static int		assign_orig_sectors(t_home *home)
+{
+	int i;
+
+	i = 0;
+	home->orig_sectors = (t_sector**)malloc(sizeof(t_sector));
+	while(i < 4)
+	{
+		home->orig_sectors[i] = (t_sector*)malloc(sizeof(t_sector));
+		home->orig_sectors[i]->ceiling = 1.0;
+		home->orig_sectors[i]->ground = 0.0;
+		home->orig_sectors[i]->idx_sector = i;
+		home->orig_sectors[i]->nb_of_walls = 4;
+		i++;
+	}
+	home->orig_sectors[0]->nb_of_walls = 6;
+	home->orig_sectors[1]->nb_of_walls = 4;
+	home->orig_sectors[2]->nb_of_walls = 8;
+	home->orig_sectors[3]->nb_of_walls = 4;
+	home->orig_sectors[0]->tex_floor = -5;
+	home->orig_sectors[1]->tex_floor = -4;
+	home->orig_sectors[2]->tex_floor = -3;
+	home->orig_sectors[3]->tex_floor = -5;
+	assign_points(home->orig_sectors[0]);
+	assign_points1(home->orig_sectors[1]);
+	assign_points2(home->orig_sectors[2]);
+	assign_points3(home->orig_sectors[3]);
 	return (0);
 }
 
@@ -242,6 +282,7 @@ static int		assign_sectors(t_home *home)
 int				update_sector(t_home *home)
 {
 	assign_sectors(home);
+	assign_orig_sectors(home);
 	//print_points(home->sectors[0]);
 	return (0);
 }
