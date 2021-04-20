@@ -6,13 +6,13 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 11:56:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/26 10:00:45 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-unsigned int	swap_channels(unsigned int color)
+Uint32			swap_channels(unsigned int color)
 {
 	unsigned int red;
 	unsigned int green;
@@ -67,7 +67,10 @@ t_texture		*create_texture(t_png *png)
 	t_texture	*tex;
 
 	if (!(tex = (t_texture*)malloc(sizeof(t_texture))))
-		error_output("malloc error\n");
+		error_output("Memory allocation of t_texture struct failed\n");
+	if (!(tex->map_pixels = (unsigned char *)malloc(sizeof(unsigned char) * png->final_size)))
+		error_output("Memory allocation of editor pixel pointer failed\n");
+	ft_memcpy(tex->map_pixels, png->pixels, png->final_size);
 	tex->h = png->height;
 	tex->w = png->width;
 	tex->bpp = (png->depth / 8) * png->channels;
@@ -78,7 +81,7 @@ t_texture		*create_texture(t_png *png)
 	tex->pitch = (tex->w * tex->bpp);
 	if (!(tex->pixels = (unsigned int *)malloc(sizeof(unsigned int) *
 		(tex->h * tex->pitch))))
-		error_output("malloc error\n");
+		error_output("Memory allocation of pixel pointer failed\n");
 	convert_to_unsigned_int(tex, png);
 	return (tex);
 }

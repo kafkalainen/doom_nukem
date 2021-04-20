@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/22 10:29:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/19 12:08:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,26 +68,14 @@ typedef struct		s_wall
 	int				side;
 }					t_wall;
 
-
-typedef struct		s_frame
-{
-	int				idx;
-	int				max_fov;
-	int				offset;
-	double			min_step;
-	int				old_idx;
-	SDL_Surface		*draw_surf;
-	t_xy			plr_offset;
-	float			pxl_offset;
-}					t_frame;
-
 typedef struct		s_home
 {
 	t_window		win;
 	t_sector		**sectors;
+	t_sector		**orig_sectors;
 	SDL_Surface		*text_surf;
 	TTF_Font		*font;
-	t_texture		**editor_textures;
+	t_texture		**editor_tex;
 	t_time			t;
 	t_xy			offset;
 	int				nb_of_sectors;

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:04:19 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/23 11:55:28 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/02/24 14:01:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 */
 
 void			setup_dynamic_helper(t_dynamic_helper *d,
-	const unsigned char *in, unsigned long *bp)
+	const unsigned char *in, unsigned int *bp)
 {
 	static unsigned int	clcl[NUM_CODE_LENGTH_CODES] = { 16, 17, 18, 0, 8,
 		7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15 };
@@ -52,7 +52,7 @@ void			setup_dynamic_helper(t_dynamic_helper *d,
 ** there are as many columns as codes
 */
 
-void			setup_tree_helper(t_tree_helper *h, const unsigned *bitlen,
+void			setup_tree_helper(t_tree_helper *h, const unsigned int *bitlen,
 	t_huffman_tree *tree)
 {
 	h->nodefilled = 0;
@@ -83,8 +83,8 @@ void			setup_tree_helper(t_tree_helper *h, const unsigned *bitlen,
 ** part 2: get extra bits and add the value of that to length
 */
 
-void			get_length_base_extra(unsigned long *length,
-	unsigned long *num_extra_bits_dst, unsigned int code)
+void			get_length_base_extra(unsigned int *length,
+	unsigned int *num_extra_bits_dst, unsigned int code)
 {
 	static unsigned int	length_base[29] = { 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15,
 		17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227,

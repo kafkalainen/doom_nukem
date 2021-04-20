@@ -3,27 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   png.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/01/26 11:34:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/02 10:06:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-Uint32	swap_channels(Uint32 color)
-{
-	Uint32 rgba;
-
-	rgba = (((color & 0xFF) & 0xFF) << 16) |
-		((((color >> 8)  & 0xFF) & 0xFF) << 8 )|
-		(((color >> 16)  & 0xFF) & 0xFF) |
-		((((color >> 24) & 0xFF) & 0xFF) << 24);
-	return (rgba);
-}
-
-void	*convert_to_uint32(Uint32 *dest, SDL_Surface *image)
+void	*convert_to_uint32(Uint32 *dest, t_texture *image)
 {
 	int		x;
 	int		y;
@@ -42,70 +31,107 @@ void	*convert_to_uint32(Uint32 *dest, SDL_Surface *image)
 	return (dest);
 }
 
+Uint32		get_texel(int x, int y, t_texture *tex)
+{
+	int offset_x;
+	int offset_y;
+
+	offset_x = x % tex->w;
+	offset_y = y % tex->h;
+	return ((Uint32)tex->pixels[(offset_y * tex->w) + offset_x]);
+}
+
 void	load_texture(char *path, t_home *home, int i)
 {
-	SDL_Surface		*image;
-
-	image = IMG_Load(path);
-	if (image == NULL)
+	home->editor_tex[i] = png_parser(path);
+	if (home->editor_tex[i] == NULL)
 		error_output("PNG image file loading failed\n");
 	else
-	{
-		home->editor_textures[i]->pitch = image->pitch;
-		home->editor_textures[i]->h = image->h;
-		if (!(home->editor_textures[i]->tex = malloc(sizeof(Uint32) *
-			(image->pitch * image->h))))
-				error_output("Memory allocation failed\n");
-		SDL_LockSurface(image);
-		convert_to_uint32(home->editor_textures[i]->tex, image);
-		SDL_UnlockSurface(image);
-	}
-	SDL_FreeSurface(image);
+		convert_to_uint32(home->editor_tex[i]->pixels, home->editor_tex[i]);
 }
 
 void	init_textures(t_home *home)
 {
-	int i;
-
-	if (!(home->editor_textures = (t_texture**)malloc(sizeof(t_texture*) * NUM_TEX)))
+	if (!(home->editor_tex = (t_texture**)malloc(sizeof(t_texture*) * 6)))
 		error_output("failed to allocate memory to editor textures\n");
-	i = -1;
-	while (++i < NUM_TEX)
-	{
-		if (!(home->editor_textures[i] = (t_texture*)malloc(sizeof(t_texture))))
-			error_output("failed to allocate memory to editor textures\n");
-	}
-	load_texture("textures/greybrick.png", home, 0);
-	load_texture("textures/redbrick.png", home, 1);
-	load_texture("textures/wood.png", home, 2);
-	load_texture("textures/eagle.png", home, 3);
+	home->editor_tex[0] = NULL;
+	load_texture("textures/greybrick.png", home, 1);
+	load_texture("textures/redbrick.png", home, 2);
+	load_texture("textures/wood.png", home, 3);
+	load_texture("textures/eagle.png", home, 4);
+	load_texture("textures/emal_floor_texture.png", home, 5);
 }
 
 /*
-** 1st pass at loading char* and converting to uint32. Need to see text output before making further changes
-** 1st index = pitch, after that comes texture height separated by ' ' followed by uint32 data
+** 1st pass at loading char* and converting back to t_texture. Need to see text output before making further changes
 */
 
-Uint32	*load_texture_from_map_data(char *line)
+void		convert_editor_tex(t_texture *tex)
 {
-	int 	i;
-	int 	pitch;
-	int 	h;
-	Uint32	*tex;
+	unsigned int x;
+	unsigned int y;
 
-	pitch = ft_atoi(line);
-	while (*line != ' ')
-		*line++;
-	h = ft_atoi(line);
-	while (*line != ' ')
-		*line++;
-	if (!(tex = (Uint32*)malloc(sizeof(Uint32) * (pitch * h))))
-		error_output("Memory allocation failed when loading texture from map data\n");
-	i = 0;
-	while (line[i])
+	y = -1;
+	while (++y < (unsigned int)tex->h)
 	{
-		tex[i] = ft_atoi(line[i]);
+		x = -1;
+		while (++x < (unsigned int)tex->w)
+		{
+			tex->pixels[(y * tex->w) + x] = add_pixel(tex->map_pixels, tex->bpp,
+				((y * tex->pitch) + x * tex->bpp));
+		}
+	}
+	convert_to_uint32(tex->pixels, tex);
+}
+
+void		free_array(unsigned char **array)
+{
+	int i;
+
+	i = 0;
+	while (array[i] != NULL)
+	{
+		ft_strdel((char**)&array[i]);
 		i++;
 	}
+	free(array);
+}
+
+/*
+	** Each map data element type is separated by a element tag (eg. #TEX for textures)
+	** element tag line for all elements will include element tag, total number of element components (eg. #TEX 9)
+	** each element component line will include everything that specific component will need to fully initialize,
+	** they will be separated with a break character
+	** texture element example:
+	** [width] [height] [size] [color_type] [color_depth] [format] [bits_per_pixel] [pitch] [unsigned char *pixel data]
+	** tex idx is determined by the order by which elements are saved into the map data file
+	*/
+
+t_texture	*load_texture_from_map_data(char *line)
+{
+	t_texture		*tex;
+	unsigned char	**elems;
+
+	if (!(tex = (t_texture*)malloc(sizeof(t_texture))))
+		error_output("Memory allocation of t_texture struct failed\n");
+	elems = (unsigned char**)ft_strsplit(line, ','); // break character should be a unique character that will not appear in any of the actual data
+	tex->w = ft_atoi((const char*)elems[0]);
+	tex->h = ft_atoi((const char*)elems[1]);
+	tex->size = ft_atoi((const char*)elems[2]);
+	tex->color_type = ft_atoi((const char*)elems[3]);
+	tex->color_depth = ft_atoi((const char*)elems[4]);
+	tex->format = ft_atoi((const char*)elems[5]);
+	tex->bpp = ft_atoi((const char*)elems[6]);
+	tex->pitch = ft_atoi((const char*)elems[7]);
+	if (!(tex->map_pixels = (unsigned char *)malloc(sizeof(unsigned char) * tex->size)))
+		error_output("Memory allocation of editor pixel pointer failed\n");
+	ft_memcpy(tex->map_pixels, elems[8], tex->size);
+	if (!(tex->pixels = (unsigned int *)malloc(sizeof(unsigned int) *
+		(tex->h * tex->pitch))))
+		error_output("Memory allocation of pixel pointer failed\n");
+	convert_editor_tex(tex);
+	free(tex->map_pixels);
+	tex->map_pixels = NULL;
+	free_array(elems);
 	return (tex);
 }
