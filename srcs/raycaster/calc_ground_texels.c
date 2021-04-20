@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   calc_ground_texels.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:54:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/22 14:57:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:16:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 static void		calc_dist_traveled(t_sector *sector, t_frame *frame, t_texture *tex)
 {

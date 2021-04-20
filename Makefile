@@ -1,113 +1,297 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
+#    Updated: 2021/04/20 16:08:53 by jnivala          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = doom_nukem
+
 SRCS =	main.c \
-		srcs/vec_math/vec2_a.c \
-		srcs/vec_math/vec2_b.c \
-		srcs/vec_math/vec2_c.c \
-		srcs/update_player/key_input.c \
-		srcs/update_player/mouse_handle.c \
-		srcs/update_player/movement.c \
-		srcs/update_player/update_player.c \
-		srcs/update_screen/draw_shapes.c \
-		srcs/update_screen/put_pixel.c \
-		srcs/update_screen/update_screen.c \
-		srcs/update_screen/draw_tex_pixel.c \
-		srcs/update_screen/steplen.c \
-		srcs/update_screen/draw_2d.c \
-		srcs/update_screen/update_sector.c \
-		srcs/update_screen/transform_matrix_2d.c \
-		srcs/utilities/error_output.c \
-		srcs/utilities/setup.c \
-		srcs/utilities/audio.c \
-		srcs/utilities/linkedlist.c \
-		srcs/utilities/debugging.c \
-		srcs/libft/ft_itoa.c \
-		srcs/libft/ft_ftoa.c \
-		srcs/libft/ft_fmin.c \
-		srcs/libft/ft_fmax.c \
-		srcs/libft/ft_atoi.c \
-		srcs/libft/ft_strings1.c \
-		srcs/libft/ft_strings2.c \
-		srcs/libft/ft_strclen.c \
-		srcs/libft/memory.c \
-		srcs/libft/ft_get_next_line.c \
-		srcs/libft/ft_putendl_fd.c \
-		srcs/libft/ft_memcpy.c \
-		srcs/libft/ft_memalloc.c \
-		srcs/libft/ft_putnbr.c \
-		srcs/libft/ft_putchar.c \
-		srcs/libft/ft_strncpy.c \
-		srcs/libft/ft_strsplit.c \
-		srcs/libft/ft_strstr.c \
-		srcs/libft/ft_strncmp.c \
-		srcs/raycaster/line_line_intersection.c \
-		srcs/raycaster/get_wall_points.c \
-		srcs/raycaster/setup_frame.c \
-		srcs/raycaster/recursion_checks.c \
-		srcs/raycaster/get_distance.c \
-		srcs/raycaster/scan_fov.c \
-		srcs/raycaster/calc_distances.c \
-		srcs/raycaster/calc_ground_texels.c \
-		srcs/raycaster/calc_sector_texels.c \
-		srcs/raycaster/calc_wall_texels.c \
-		srcs/raycaster/draw_segment.c \
-		srcs/parsing/read_map.c	\
-		srcs/parsing/parse_sector.c \
-		srcs/png_parser/color_utils.c \
-		srcs/png_parser/crc.c \
-		srcs/png_parser/filters.c \
-		srcs/png_parser/header.c \
-		srcs/png_parser/inflate_setups.c \
-		srcs/png_parser/inflate_trees.c \
-		srcs/png_parser/inflate_utils.c \
-		srcs/png_parser/inflate_utils2.c \
-		srcs/png_parser/inflate.c \
-		srcs/png_parser/parser.c \
-		srcs/png_parser/texture.c \
-		srcs/png_parser/unfilter.c \
-		srcs/png_parser/parser_utils.c \
-		srcs/png_parser/parser_utils2.c \
-		srcs/porting/png.c \
-		srcs/porting/create_mapfile.c \
-		srcs/porting/open_file1.c \
-		srcs/porting/open_file2.c \
+	srcs$(SLASH)vec_math$(SLASH)vec2_a.c \
+	srcs$(SLASH)vec_math$(SLASH)vec2_b.c \
+	srcs$(SLASH)vec_math$(SLASH)vec2_c.c \
+	srcs$(SLASH)update_player$(SLASH)key_input.c \
+	srcs$(SLASH)update_player$(SLASH)mouse_handle.c \
+	srcs$(SLASH)update_player$(SLASH)movement.c \
+	srcs$(SLASH)update_player$(SLASH)update_player.c \
+	srcs$(SLASH)update_screen$(SLASH)draw_shapes.c \
+	srcs$(SLASH)update_screen$(SLASH)put_pixel.c \
+	srcs$(SLASH)update_screen$(SLASH)update_screen.c \
+	srcs$(SLASH)update_screen$(SLASH)draw_tex_pixel.c \
+	srcs$(SLASH)update_screen$(SLASH)steplen.c \
+	srcs$(SLASH)update_screen$(SLASH)draw_2d.c \
+	srcs$(SLASH)update_screen$(SLASH)update_sector.c \
+	srcs$(SLASH)update_screen$(SLASH)transform_matrix_2d.c \
+	srcs$(SLASH)utilities$(SLASH)error_output.c \
+	srcs$(SLASH)utilities$(SLASH)setup.c \
+	srcs$(SLASH)utilities$(SLASH)audio.c \
+	srcs$(SLASH)utilities$(SLASH)linkedlist.c \
+	srcs$(SLASH)utilities$(SLASH)debugging.c \
+	srcs$(SLASH)raycaster$(SLASH)line_line_intersection.c \
+	srcs$(SLASH)raycaster$(SLASH)get_wall_points.c \
+	srcs$(SLASH)raycaster$(SLASH)setup_frame.c \
+	srcs$(SLASH)raycaster$(SLASH)recursion_checks.c \
+	srcs$(SLASH)raycaster$(SLASH)get_distance.c \
+	srcs$(SLASH)raycaster$(SLASH)scan_fov.c \
+	srcs$(SLASH)raycaster$(SLASH)calc_distances.c \
+	srcs$(SLASH)raycaster$(SLASH)calc_ground_texels.c \
+	srcs$(SLASH)raycaster$(SLASH)calc_sector_texels.c \
+	srcs$(SLASH)raycaster$(SLASH)calc_wall_texels.c \
+	srcs$(SLASH)raycaster$(SLASH)draw_segment.c \
+	srcs$(SLASH)parsing$(SLASH)read_map.c	\
+	srcs$(SLASH)parsing$(SLASH)parse_sector.c \
+	srcs$(SLASH)png_parser$(SLASH)color_utils.c \
+	srcs$(SLASH)png_parser$(SLASH)crc.c \
+	srcs$(SLASH)png_parser$(SLASH)filters.c \
+	srcs$(SLASH)png_parser$(SLASH)header.c \
+	srcs$(SLASH)png_parser$(SLASH)inflate_setups.c \
+	srcs$(SLASH)png_parser$(SLASH)inflate_trees.c \
+	srcs$(SLASH)png_parser$(SLASH)inflate_utils.c \
+	srcs$(SLASH)png_parser$(SLASH)inflate_utils2.c \
+	srcs$(SLASH)png_parser$(SLASH)inflate.c \
+	srcs$(SLASH)png_parser$(SLASH)parser.c \
+	srcs$(SLASH)png_parser$(SLASH)texture.c \
+	srcs$(SLASH)png_parser$(SLASH)unfilter.c \
+	srcs$(SLASH)png_parser$(SLASH)parser_utils.c \
+	srcs$(SLASH)png_parser$(SLASH)parser_utils2.c \
+	srcs$(SLASH)porting$(SLASH)png.c \
+	srcs$(SLASH)porting$(SLASH)create_mapfile.c \
+	srcs$(SLASH)porting$(SLASH)open_file1.c \
+	srcs$(SLASH)porting$(SLASH)open_file2.c \
 
 HEADERS = \
-		doom_nukem.h\
-		dn_map.h\
+	headers$(SLASH)doom_nukem.h \
+	headers$(SLASH)audio.h \
+	headers$(SLASH)calculations.h \
+	headers$(SLASH)caster.h \
+	headers$(SLASH)colours.h \
+	headers$(SLASH)drawing_functions.h \
+	headers$(SLASH)entity.h \
+	headers$(SLASH)events.h \
+	headers$(SLASH)libft.h \
+	headers$(SLASH)macros.h \
+	headers$(SLASH)map.h \
+	headers$(SLASH)parser_structs.h \
+	headers$(SLASH)parsing.h \
+	headers$(SLASH)player_functions.h \
+	headers$(SLASH)player.h \
+	headers$(SLASH)png_parser.h \
+	headers$(SLASH)porting.h \
+	headers$(SLASH)program.h \
+	headers$(SLASH)raycast.h \
+	headers$(SLASH)sector.h \
+	headers$(SLASH)vectors.h \
 
-mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
-mkfile_dir := $(dir $(mkfile_path))
+ABS_DIR = $(shell pwd)
+SDL_ORIG = $(ABS_DIR)/SDL2-2.0.14/
+SDL_NEW = $(ABS_DIR)/SDL2/
+SDL_INC = -I ./SDL2/include/SDL2/
+SDL_MIXER_ORIG = $(ABS_DIR)/SDL2_mixer-2.0.4/
+SDL_MIXER_NEW = $(ABS_DIR)/SDL2_mixer/
+SDL_MIXER_INC = -I ./SDL2_mixer/include/SDL2/
 
-#INCLUDE_PATHS specifies the additional include paths we'll need
-WIN_INCLUDE_PATHS = -ISDL2\include\SDL2 -ISDL2_mixer_win\include\SDL2
-LINUX_INCLUDE_PATHS = -I/include/SDL2/
+WIN_INCLUDE_PATHS = \
+	-ISDL2-2.0.14\i686-w64-mingw32\include\SDL2 \
+	-ISDL2_mixer-2.0.4\i686-w64-mingw32\include\SDL2 \
+	-Ilibft
+LINUX_INCLUDE_PATHS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --includes) $(SDL_MIXER_INC) -Ilibft
 
-#LIBRARY_PATHS specifies the additional library paths we'll need
-WIN_LIBRARY_PATHS = -LSDL2\lib -LSDL2_mixer_win\lib
-LINUX_LIBRARY_PATHS = -L/lib/ -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/
+WIN_LIBRARY_PATHS = \
+	-LSDL2-2.0.14\i686-w64-mingw32\lib \
+	-LSDL2_mixer-2.0.4\i686-w64-mingw32\lib \
+	-Llibft
+LINUX_LIBRARY_PATHS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)/lib
+LINUX_LIBRARY_PATHS += -lSDL2_mixer -Llibft -lft -lm -g
 
-# COMPILER_FLAGS specifies the additional compilation options we're using
-# -w suppresses all warnings
-# -Wl,-subsystem,windows gets rid of the console window
-WIN_COMPILER_FLAGS = -w
-#LINUX_COMPILER_FLAGS = -Wall -Wextra -Werror
-LINUX_COMPILER_FLAGS = -Wall -Wextra
-# -Wl,-subsystem,windows
+WIN_CFLAGS = -Wall -Wextra -Werror -O3
+LINUX_CFLAGS = -Wall -Wextra -Werror -O3
+LINUX_CFLAGS += $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
 
-#LINKER_FLAGS specifies the libraries we're linking against
-WIN_LINK_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_ttf
-LINUX_LINK_FLAGS = -lSDL2 -lSDL2main -lSDL2_mixer -lSDL2_ttf -lm -g
+WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lm
 
-.PHONY: all clean fclean re
+CORES = $(shell echo 2+$(shell cat /proc/cpuinfo | grep processor | wc -l) | bc)
 
-win:
-	gcc $(SRCS) -o play $(WIN_INCLUDE_PATHS) $(WIN_LIBRARY_PATHS) $(WIN_COMPILER_FLAGS) $(WIN_LINK_FLAGS)
+#mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+#mkfile_dir := $(dir $(mkfile_path))
 
-#dependencies:
-#	sudo apt-get install libsdl2-dev libsdl2-mixer-2.0-0 libsdl2-ttf-dev && \
-#	cd SDL_mixer && ./configure && make && sudo make install
+ifeq ($(OS),Windows_NT)
+	TARGET_SYSTEM := Windows
+else
+	TARGET_SYSTEM := $(shell uname -s)
+	TARGET_SYSTEM := $(patsubst CYGWIN%,Cygwin,$(TARGET_SYSTEM))
+	TARGET_SYSTEM := $(patsubst MSYS%,MSYS,$(TARGET_SYSTEM))
+	TARGET_SYSTEM := $(patsubst MINGW%,MSYS,$(TARGET_SYSTEM))
+endif
 
-linux: #dependencies
-	gcc $(SRCS) -g -o play $(LINUX_INCLUDE_PATHS) $(LINUX_LIBRARY_PATHS) $(LINUX_COMPILER_FLAGS) $(LINUX_LINK_FLAGS)
+ifeq ($(TARGET_SYSTEM),Windows)
+	NAME = wolf3d.exe
+	INCLUDES = $(WIN_INCLUDE_PATHS)
+	LIBS = $(WIN_LIBRARY_PATHS)
+	CFLAGS = $(WIN_COMPILER_FLAGS)
+	LDFLAGS = $(WIN_LINK_FLAGS)
+	LIBFT = $(LIBFT_WIN)
+	SDL2_BUILD := .\SDL2-2.0.14\i686-w64-mingw32
+	SLASH = \\
+	MKDIR = mkdir
+	RM = del $(SLASH)s/q
+	WGET_EXISTS := wget_not_needed
+	RESET :=
+	RED :=
+	GREEN :=
+	YELLOW :=
+	BLUE :=
+	MAGENTA :=
+	CYAN :=
+	WHITE :=
+else
+	INCLUDES = $(LINUX_INCLUDE_PATHS)
+	LIBS = $(LINUX_LIBRARY_PATHS)
+	CFLAGS = $(LINUX_COMPILER_FLAGS)
+	LDFLAGS = $(LINUX_LINK_FLAGS)
+	LIBFT = $(LIBFT_LINUX)
+	SDL2_BUILD = SDL2-2.0.14/build
+	SDL2_FULL_PATH = $(shell pwd)/$(SDL2_BUILD)
+	SLASH = /
+	MKDIR := mkdir -p
+	RM = /bin/rm -rf
+	WGET_EXISTS := $(shell command -v wget 2> /dev/null)
+	RESET = "\033[0m"
+	RED = "\033[0;31m"
+	GREEN = "\033[0;32m"
+	YELLOW = "\033[0;33m"
+	BLUE = "\033[0;34m"
+	MAGENTA = "\033[0;35m"
+	CYAN = "\033[0;36m"
+	WHITE = "\033[0;37m"
+endif
 
-all:
-	gcc $(SRCS) -o play -I include -L lib -l SDL2-2.0.0
+LIBFT = libft$(SLASH)libft.a
+
+.PHONY: all clean fclean re sdl sdl-mixer
+
+all: $(NAME)
+
+$O:
+	$(MKDIR) $@
+	$(MKDIR) $@$(SLASH)utilities
+	$(MKDIR) $@$(SLASH)update_player
+	$(MKDIR) $@$(SLASH)update_screen
+	$(MKDIR) $@$(SLASH)parsing
+	$(MKDIR) $@$(SLASH)png_parser
+	$(MKDIR) $@$(SLASH)porting
+	$(MKDIR) $@$(SLASH)raycaster
+	$(MKDIR) $@$(SLASH)vec_math
+
+$(OBJ): | $O
+
+$(OBJ): $O%.o: $S% $(HEADERS)
+	$(CC) -c -o $@ $(CFLAGS) $(INCLUDES) $<
+
+$(LIBFT):
+	make -C libft
+
+sdl:
+ifeq ($(TARGET_SYSTEM), Linux)
+	@if [ ! $(shell command -v wget 2> /dev/null) ]; then \
+	sudo apt-get install wget -y; \
+	fi
+	@if [ ! -f "SDL2-2.0.14.tar.gz" ]; then \
+	wget https://www.libsdl.org/release/SDL2-2.0.14.tar.gz; \
+	fi
+	@if [ ! -d "$(SDL_ORIG)" ]; then \
+	tar -xzf SDL2-2.0.14.tar.gz; \
+	fi
+	@if [ ! -d "$(SDL_NEW)" ] ; then \
+	mkdir -p $(SDL_NEW); \
+	cd $(SDL_NEW) && \
+	$(SDL_ORIG)./configure --prefix=$(SDL_NEW) && \
+	make -j$(CORES) && make install ; \
+	else    \
+	make -j$(CORES) -C $(SDL_NEW) ; \
+	fi
+else
+	@IF NOT EXIST "SDL2-2.0.14\x86_64-w64-mingw32" ( install.bat )\
+	ELSE ECHO $(GREEN)"Folder exists."$(RESET)
+endif
+
+sdl-mixer:
+ifeq ($(TARGET_SYSTEM), Linux)
+	@if [ ! $(shell command -v wget 2> /dev/null) ]; then \
+	sudo apt-get install wget -y; \
+	fi
+	@if [ ! -f "SDL2_mixer-2.0.4.tar.gz" ]; then \
+	wget https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.4.tar.gz; \
+	fi
+	@if [ ! -d "$(SDL_MIXER_ORIG)" ]; then \
+	tar -xzf SDL2_mixer-2.0.4.tar.gz; \
+	fi
+	@if [ ! -d "$(SDL_MIXER_NEW)" ] ; then \
+	mkdir -p $(SDL_MIXER_NEW); \
+	cd $(SDL_MIXER_NEW) && \
+	$(SDL_MIXER_ORIG)./configure --prefix $(SDL_MIXER_NEW) && \
+	make -j$(CORES) && make install; \
+	else \
+	make -j$(CORES) -C $(SDL_MIXER_NEW) ; \
+	fi
+else
+	@IF NOT EXIST "SDL2-2.0.14\x86_64-w64-mingw32" ( install.bat )\
+	ELSE ECHO $(GREEN)"Folder exists."$(RESET)
+endif
+
+$(NAME): $(LIBFT) sdl sdl-mixer $(OBJ)
+	$(CC) -o $@ $(INCLUDES) $(LIBS) $(CFLAGS) $(OBJ) $(LDFLAGS)
+	@echo $(GREEN)Compiled executable $(NAME).
+	@echo Run the map files $(NAME) map_files/map.TEST.
+	@echo Running tests.sh tests executable with invalid maps.$(RESET)
+
+cleanobj:
+ifneq ($(wildcard $(OBJ)),)
+	@$(RM) $(wildcard $(OBJ))
+endif
+
+cleanobjdir: cleanobj
+ifeq ($(TARGET_SYSTEM), Linux)
+	@$(RM) $O
+else
+	@IF EXIST $O ( rd /s /q "$O" )
+endif
+
+clean: cleanobjdir
+ifeq ($(TARGET_SYSTEM), Linux)
+	@if [ -d "$(SDL_NEW)" ] ; then \
+	make -C $(SDL_NEW) clean ; \
+	fi;
+	@if [ -d "$(SDL_MIXER_NEW)" ] ; then \
+	make -C $(SDL_MIXER_NEW) clean ; \
+	fi;
+endif
+	@make -C libft clean
+	@echo $(GREEN)Cleaned projects from object files.$(RESET)
+
+fclean: clean
+ifeq ($(TARGET_SYSTEM), Windows)
+	@IF EXIST SDL2-2.0.14 ( $(RM) "SDL2-2.0.14" )
+	@IF EXIST SDL2-2.0.14 ( rd /s /q "SDL2-2.0.14" )
+	@IF EXIST SDL2_mixer-2.0.4 ( $(RM) "SDL2_mixer-2.0.4" )
+	@IF EXIST SDL2_mixer-2.0.4 ( rd /s /q "SDL2_mixer-2.0.4" )
+	@IF EXIST $(NAME) ( $(RM) "$(NAME)") \
+	ELSE ( ECHO $(CYAN)No binary to remove. $(RESET) )
+else
+	@$(RM) $(NAME)
+	@$(RM) $(SDL_NEW)
+	@$(RM) $(SDL_MIXER_NEW)
+	@$(RM) $(SDL_ORIG)
+	@$(RM) $(SDL_MIXER_ORIG)
+	@$(RM) SDL2_mixer-2.0.4.tar.gz
+	@$(RM) SDL2-2.0.14.tar.gz
+endif
+	@make -C libft fclean
+	@echo $(GREEN)Removed binaries and libraries.$(RESET)
+
+re: fclean all

@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 15:43:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/21 12:27:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:20:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	error_output_sdl(char *msg, t_home *home)
 {

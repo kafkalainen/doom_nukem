@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   inflate_trees.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 12:58:03 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 14:01:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:18:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void			init_huffman_tree_codetree_fixed(t_huffman_tree *tree,
 	unsigned int num_codes, unsigned int maxbitlen)

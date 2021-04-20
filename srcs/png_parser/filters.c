@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   filters.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:38:29 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 14:00:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:18:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	sub(unsigned char *out, unsigned char *sl, t_scan_helper s)
 {

@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:22:31 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/19 14:40:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:16:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 float	get_distance(t_xy p1, t_xy p2)
 {

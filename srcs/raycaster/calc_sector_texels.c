@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   calc_sector_texels.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 15:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/19 15:34:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:16:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 static void		find_biggest_square(t_sector *sector)
 {

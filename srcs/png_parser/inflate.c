@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   inflate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:40:20 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/15 17:13:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:18:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	ft_inflate_huffman(t_png *png, const unsigned char *in, t_huffman *h)
 {

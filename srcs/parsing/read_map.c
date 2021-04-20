@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 11:03:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/23 09:18:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:22:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 ** into memory for later use. (included later)]
 */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 static void			store_points(char *line, int numwalls, t_sector *sect)
 {

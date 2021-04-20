@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 18:08:50 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/19 14:29:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:14:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
-#include <stdio.h>
+#include "../../headers/doom_nukem.h"
 
 int				check_collision(t_sector *sector, t_player *plr, t_home *home)
 {
@@ -94,7 +93,7 @@ void			player_move(t_player *plr, t_home *home, float delta_time)
 	}
 	else
 	{
-		printf("col dir x: %f, col dir y: %f\n", col_dir.x, col_dir.y);
+		// printf("col dir x: %f, col dir y: %f\n", col_dir.x, col_dir.y);
 	}
 }
 

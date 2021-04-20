@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:15:12 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/02/19 14:37:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:20:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 t_xy			vec2(float x, float y)
 {

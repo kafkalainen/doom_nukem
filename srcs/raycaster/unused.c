@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_visible_walls.c                               :+:      :+:    :+:   */
+/*   unused.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 14:22:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/02/18 14:44:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:22:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 int		calc_visible_walls(t_sector *sector)
 {
@@ -45,4 +45,3 @@ float	ceil_to_pixel(float	nb)
 	else
 		return (nb);
 }
-

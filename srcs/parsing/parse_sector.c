@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 13:32:52 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/23 13:33:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:11:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 t_point				*new_point(t_xy x0, int idx)
 {

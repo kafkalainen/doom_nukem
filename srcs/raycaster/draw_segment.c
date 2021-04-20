@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/23 14:16:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:16:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 static void		draw_vertical_wall_strip(t_xy offset, size_t height,
 							t_texture *tex, t_frame *frame)

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   calc_distances.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/17 15:18:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:16:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	calc_distances(t_frame *frame, t_texture *tex, t_player *plr)
 {
 	float	left_z;
 	float	right_z;
-	
+
 	left_z = vec2_perp_dist(frame->left.l_pt);
 	right_z = vec2_perp_dist(frame->left.r_pt);
 	frame->top_left.x = SCREEN_WIDTH - ((SCREEN_HEIGHT /

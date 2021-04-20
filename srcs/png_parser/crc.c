@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   crc.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:44:53 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 14:05:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:18:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void			init_crc_table(t_crc *crc)
 {

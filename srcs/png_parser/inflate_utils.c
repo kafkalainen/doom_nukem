@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   inflate_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:01:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/24 14:14:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:18:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 unsigned char	ft_read_bit(unsigned int *bitp,
 	const unsigned char *bitstream)

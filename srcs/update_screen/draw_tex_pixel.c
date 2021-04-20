@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:27:22 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/18 11:51:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:14:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void		draw_tex_pixel(SDL_Surface *tex, t_screen_xy pixel,
 	t_screen_xy coord, SDL_Surface *draw_surf)

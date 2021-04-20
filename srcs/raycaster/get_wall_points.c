@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../doom_nukem.h"
-
+#include "../../headers/doom_nukem.h"
 
 static int		check_if_same_wall(t_xy a, t_xy b, t_xy r_point)
 {
@@ -89,7 +88,7 @@ void			get_wall_pts(t_frame *frame, int walls, int current_pxl)
 		frame->left.l_pt = frame->left.wall->x0;
 		frame->left.r_pt = frame->left.wall->next->x0;
 	}
-	if (check_if_same_wall(frame->left.wall->x0, 
+	if (check_if_same_wall(frame->left.wall->x0,
 		frame->right.wall->x0, frame->right.r_pt))
 		frame->left.r_pt = frame->right.r_pt;
 }
