@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   porting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/02 13:51:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/23 09:30:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,16 @@ void		free_array(unsigned char **array);
 /*
 ** Audio Encode/Decode funtions
 */
+
+/*
+** File creation, writing and reading functions
+*/
+
+# define WRITE_BREAKER "#"
+# define READ_BREAKER '#'
+
+int		create_map_file(t_home *home);
+int		open_file(t_home *home, char *path);
+int		open_map_file(t_home *home, char *path);
 
 #endif

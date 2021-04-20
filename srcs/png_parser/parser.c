@@ -6,21 +6,18 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/02/25 11:57:21 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:38:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../doom_nukem.h"
 
-
-
-t_texture	*png_parser(char *path)
+t_png		png_parser(char *path)
 {
 	int			fd;
 	t_png		png;
-	t_texture	*tex;
 
-	setup_parser(&png);
+	setup_parser(&png, MAX_SIZE);
 	if ((fd = OPEN_FILE(path, READ_ONLY)) < 0)
 		error_output("Failed to open file\n");
 	else
@@ -32,14 +29,9 @@ t_texture	*png_parser(char *path)
 			error_output("File is too large\n");
 		if (CLOSE_FILE(fd) == -1)
 			error_output("Could not close file\n");
-		validate_signature(png.source.buf);
-		parse_data(&png);
-		decode_png(&png);
+		parse_png(&png);
 	}
-	tex = create_texture(&png);
-	free(png.pixels);
-	free(png.source.buf);
-	return (tex);
+	return (png);
 }
 
 void		parse_data(t_png *png)
@@ -78,14 +70,12 @@ void		decode_png(t_png *png)
 	if (!(png->inflated = (unsigned char *)malloc(sizeof(unsigned char) * png->inflated_size)))
 		error_output("Memory allocation of inflated data pointer failed\n");
 	ft_inflate(png);
-	free(png->compressed);
 	convert_to_pixels(png);
-	free(png->inflated);
 }
 
-void		setup_parser(t_png *png)
+void		setup_parser(t_png *png, unsigned int size)
 {
-	if (!(png->source.buf = (unsigned char *)malloc(sizeof(unsigned char) * MAX_SIZE)))
+	if (!(png->source.buf = (unsigned char *)malloc(sizeof(unsigned char) * size)))
 		error_output("Memory allocation of source buffer failed\n");
 	png->state = 0;
 	png->i = 8;

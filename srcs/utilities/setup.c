@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/03/22 08:58:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:45:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	if (home->font == NULL)
 		error_output_sdl("Fatal: Failed to init given font.", home);
 	load_audio(&plr->audio);
-	// if (Mix_PlayingMusic() == 0)
-	// 	Mix_PlayMusic(plr->audio.music, -1);
-	init_textures(home);
+	if (Mix_PlayingMusic() == 0)
+		Mix_PlayMusic(plr->audio.music, -1);
+	// init_textures(home);
 	init_player(plr);
 }

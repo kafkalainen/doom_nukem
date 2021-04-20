@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/19 12:08:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/23 08:15:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ typedef struct		s_home
 	t_texture		**editor_tex;
 	t_time			t;
 	t_xy			offset;
-	int				nb_of_sectors;
+	int				nbr_of_sectors;
+	int				nbr_of_textures;
 }					t_home;
 
 #endif

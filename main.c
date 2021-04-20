@@ -6,7 +6,7 @@
 /*   By: jnivala <joonas.hj.nivala@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/03/19 12:13:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/03/23 15:16:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ int  			main(int argc, char **argv)
 
 	if (argc > 1)
 	 	error_output("usage: .\\play [map file name]\n");
-	new_sector("sector00 4 5 10 -3 -4 40,200,1 250,200,2 200,0,1 90,0,-10 -5\n");
+	//new_sector("sector00 4 5 10 -3 -4 40,200,1 250,200,2 200,0,1 90,0,-10 -5\n");
 	setup(argv[1], &home, &plr, &frame);
 	update_sector(&home);
-	transform_world_view(&home, 45 * DEG_TO_RAD);
+	// if (create_map_file(&home) < 0)
+	//  	printf("File creation failed\n");
+	if (open_file(&home, "map_files/test.DATA") < 0)
+	 	printf("Could not successfully open map file\n");
+	transform_world_view(&home, -45 * DEG_TO_RAD);
 	while (1)
 	{
 		home.t.beginfps = clock();
