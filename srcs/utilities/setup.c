@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 11:27:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 19:04:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 	return (home);
 }
 
-void			init_player(t_player *plr)
+void	init_player(t_player *plr)
 {
 	plr->pos = vec2(0, 0);
 	plr->pitch = 240;
@@ -41,18 +41,18 @@ void			init_player(t_player *plr)
 	plr->input.up = 0;
 	plr->input.right = 0;
 	plr->input.left = 0;
-	// plr->input.rot_right = 0;
-	// plr->input.rot_left = 0;
-	// plr->input.quit = 0;
-	// plr->input.wireframe = 1;
-	// plr->input.minimap = 1;
-	// plr->input.info = 1;
-	// plr->input.mouse = 1;
+	plr->input.rot_right = 0;
+	plr->input.rot_left = 0;
+	plr->input.quit = 0;
+	plr->input.wireframe = 1;
+	plr->input.minimap = 1;
+	plr->input.info = 1;
+	plr->input.mouse = 1;
 	plr->time = 0;
 	plr->current_sector = 0;
 }
 
-void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
+void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 {
 	int		ret;
 
@@ -62,34 +62,28 @@ void			setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	transform_world_view(home, -PLR_DIR);
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
-	// home->t.frame_times = (Uint32*)malloc(sizeof(Uint32) * 11);
-	// home->t.frame_count = 0;
-	// home->t.fps = 0;
-	// home->t.frames = 0;
+	home->t.frame_times = (Uint32*)malloc(sizeof(Uint32) * 11);
+	home->t.frame_count = 0;
+	home->t.fps = 0;
+	home->t.frame_time_last = SDL_GetTicks();
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	home = init_sdl(home, frame);
-	// if (TTF_Init() < 0)
-	// 	error_output_sdl("Fatal: Failed to init TTF.", home);
-	// home->font = TTF_OpenFont("Cybrpnuk2.ttf", 16);
-	// if (home->font == NULL)
-	// 	error_output_sdl("Fatal: Failed to init given font.", home);
 	ret = load_audio(&plr->audio);
 	if (ret)
 	{
 		cleanup_audio(&plr->audio);
 		SDL_Quit();
-		clean_up(home, 5);
+		clean_up(home);
 	}
 	if (Mix_PlayingMusic() == 0)
 		Mix_PlayMusic(plr->audio.music, -1);
-	// init_textures(home);
+	//init_textures(home);
 	init_player(plr);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
-void			clean_up(t_home *home, int ret)
+void	clean_up(t_home *home)
 {
-	// free_textures(&home->editor_tex, ret);
 	free_sectors(home);
 	// if (home->t.frame_times)
 	// 	free(home->t.frame_times);

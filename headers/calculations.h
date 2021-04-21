@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/22 14:05:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 19:01:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 typedef struct		s_time
 {
-	clock_t			beginfps;
-	clock_t			endfps;
-	clock_t			delta_time;
-	size_t			frames;
-	long int		fps;
+	Uint32	*frame_times;
+	Uint32	frame_time_last;
+	Uint32	frame_count;
+	float	fps;
 }					t_time;
+
 
 typedef	struct		s_intersection
 {

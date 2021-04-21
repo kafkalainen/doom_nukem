@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_distance.c                                     :+:      :+:    :+:   */
+/*   get_floor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/09 15:22:31 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 16:16:03 by jnivala          ###   ########.fr       */
+/*   Created: 2021/04/21 17:09:18 by jnivala           #+#    #+#             */
+/*   Updated: 2021/04/21 17:12:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-float	get_distance(t_xy p1, t_xy p2)
+int			get_floor(int floor_colour)
 {
-	return (sqrtf((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)));
+	if (floor_colour == -1)
+		return (darkolivegreen);
+	else if (floor_colour == -2)
+		return (steelblue);
+	else if (floor_colour == -3)
+		return (darkturquoise);
+	else if (floor_colour == -4)
+		return (snow);
+	else if (floor_colour == -5)
+		return (dimgray);
+	else
+		return (green);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/21 12:34:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 13:46:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,19 @@
 # define K_X SDLK_x
 # define K_C SDLK_c
 # define K_M SDLK_m
+
+/*
+** Compass directions
+*/
+
+# define N 6.28318530718f
+# define NW 0.7853981634f
+# define W 1.5707963268f
+# define SW 2.3561944902f
+# define S 3.14159265359f
+# define SE 3.926990817f
+# define E 4.71238898039f
+# define NE 5.49778714378f
+
 
 #endif

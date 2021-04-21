@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 16:16:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 14:04:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	calc_distances(t_frame *frame, t_texture *tex, t_player *plr)
+void	calc_distances(t_frame *frame, t_player *plr)
 {
 	float	left_z;
 	float	right_z;
@@ -35,4 +35,5 @@ void	calc_distances(t_frame *frame, t_texture *tex, t_player *plr)
 		frame->top_left.x, frame->top_right.x);
 	frame->step.z = interpolate_points(frame->top_left.y, frame->top_right.y,
 		frame->top_left.x, frame->top_right.x);
+	frame->pitch = plr->pitch;
 }

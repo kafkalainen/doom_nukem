@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 19:17:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 16:52:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct		s_sector
 {
 	t_point			*points;
 	t_enemy			*enemies;
-	int				nb_of_walls;
+	unsigned int	nb_of_walls;
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;
@@ -38,6 +38,10 @@ typedef struct		s_sector
 	t_xyz			floor_bottom_left;
 	t_xyz			floor_bottom_right;
 }					t_sector;
+
+enum				e_sector_info {
+	old_sector = -6666
+};
 
 t_point			*new_point(t_xy x0, int idx);
 void			add_point(t_point **point, t_point *new);

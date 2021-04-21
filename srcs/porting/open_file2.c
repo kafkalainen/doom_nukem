@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 17:16:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 18:51:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 ** finally transfer all data to t_texture structure
 */
 
-int		get_next_breaker(unsigned char *buf)
+int	get_next_breaker(unsigned char *buf)
 {
 	int i;
 
@@ -35,6 +35,7 @@ int		get_next_breaker(unsigned char *buf)
 			return (i);
 		i++;
 	}
+	return (-1);
 }
 
 /*
@@ -59,9 +60,9 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos)
 	{
 		(*pos) += get_next_breaker(buf + (*pos)) + 1;
 		if (i == 0)
-			idx = ft_atoi(buf + (*pos));
+			idx = ft_atoi((char *)(buf + (*pos)));
 		else if (i == 1)
-			png.source.size = ft_atoi(buf + (*pos));
+			png.source.size = ft_atoi((char *)(buf + (*pos)));
 		else if (i == 2)
 		{
 			setup_parser(&png, png.source.size);
@@ -76,15 +77,15 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos)
 	return (tex);
 }
 
-void	parse_map_data(unsigned char *buf, unsigned int size, t_home *home)
+void	parse_map_data(unsigned char *buf, t_home *home)
 {
 	unsigned int	pos;
 	int				i;
 
 	pos = 0;
-	buf = ft_strstr(buf, "doom_textures");
+	buf = (unsigned char *)ft_strstr((char *)buf, "doom_textures");
 	pos += get_next_breaker(buf + pos) + 1;
-	home->nbr_of_textures = ft_atoi(buf + pos);
+	home->nbr_of_textures = ft_atoi((char *)buf + pos);
 	if (!(home->editor_tex = (t_texture**)malloc(sizeof(t_texture*) * (home->nbr_of_textures + 1))))
 		error_output("failed to allocate memory to editor textures\n");
 	home->editor_tex[0] = NULL;
@@ -96,7 +97,7 @@ void	parse_map_data(unsigned char *buf, unsigned int size, t_home *home)
 	}
 }
 
-int		open_file(t_home *home, char *path)
+int	open_file(t_home *home, char *path)
 {
 	int				fd;
 	unsigned char	*buf;
@@ -115,7 +116,7 @@ int		open_file(t_home *home, char *path)
 			error_output("File is too large\n");
 		if (CLOSE_FILE(fd) == -1)
 			error_output("Could not close file\n");
-		parse_map_data(buf, size, home);
+		parse_map_data(buf, home);
 		free(buf);
 	}
 	return (1);

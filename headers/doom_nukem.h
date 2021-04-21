@@ -79,27 +79,17 @@
 ** Miscellanious
 */
 
-void	clean_up(t_home *home, int ret);
+void	clean_up(t_home *home);
 void	cleanup_audio(t_audio *audio);
+void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
 void	error_output_sdl(char *msg, t_home *home);
-void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame);
+void	fps_timer(t_time *t);
 int		load_audio(t_audio *audio);
 void	map_error_output(int i, t_home *home);
 void	play_footsteps(t_player *plr);
+void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame);
+void	translate_world_view(t_home *home, t_xy step);
+void	transform_world_view(t_home *home, float delta_dir);
 void	update_screen(t_home *home, t_frame *frame, t_player *plr);
-
-
-/*
-** Minimap
-*/
-
-t_xy			scale(t_xy a);
-void			draw_minimap(t_xy size, t_xy pos, t_xy dir, t_home *home);
-void			draw_grid(t_frame *frame);
-void			translate_world_view(t_home *home, t_xy step);
-void			transform_world_view(t_home *home, float delta_dir);
-void			trans_world_view(t_home *home, t_xy step, float delta_dir);
-
-void			draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 #endif

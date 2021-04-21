@@ -6,11 +6,16 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/21 12:52:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 19:09:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/doom_nukem.h"
+
+/*
+** if (create_map_file(&home) < 0)
+**	 	ft_putendl_fd("File creation failed\n", 2);
+*/
 
 int	main(int argc, char **argv)
 {
@@ -20,14 +25,13 @@ int	main(int argc, char **argv)
 	SDL_Event	e;
 
 	if (argc != 2)
-	 	error_output("usage: .\\play [map file name]\n");
+		error_output("usage: ./doom-nukem [path to mapfile]");
 	setup(argv[1], &home, &plr, &frame);
 	if (open_file(&home, "map_files/test.DATA") < 0)
-	 	error_output("Could not successfully open map file\n");
-	// if (create_map_file(&home) < 0)
-	// 	ft_putendl_fd("File creation failed\n", 2);
+		error_output("Could not successfully open map file.");
 	while (!plr.input.quit)
 	{
+		fps_timer(&home.t);
 		update_player(&plr, &home, &e);
 		update_screen(&home, &frame, &plr);
 		SDL_UpdateWindowSurface(home.win.window);

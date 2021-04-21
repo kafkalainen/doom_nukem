@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 17:16:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 17:44:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,18 @@ void	load_texture(char *path, t_home *home, int i)
 	free_png(png);
 }
 
-static void		get_tex_count(int *i, DIR *dir, struct dirent *dir_entry)
+static void		get_tex_count(int *i, DIR **dir, struct dirent **dir_entry)
 {
 	char	*found;
 
 	(*i) = 0;
-	while ((dir_entry = readdir(dir)) != NULL)
+	while ((*dir_entry = readdir(*dir)) != NULL)
 	{
-		if ((found = ft_strstr(dir_entry->d_name, ".png")) != NULL)
+		found = ft_strstr((*dir_entry)->d_name, ".png");
+		if (found != NULL)
 			(*i)++;
 	}
-	rewinddir(dir);
+	rewinddir(*dir);
 }
 
 /*
@@ -81,7 +82,7 @@ void	init_textures(t_home *home)
 
 	if ((dir = opendir("textures/")) == NULL)
 		error_output("Failed to open textures directory\n");
-	get_tex_count(&home->nbr_of_textures, dir, dir_entry);
+	get_tex_count(&home->nbr_of_textures, &dir, &dir_entry);
 	if (!(home->editor_tex = (t_texture**)malloc(sizeof(t_texture*) * (home->nbr_of_textures + 1))))
 		error_output("failed to allocate memory to editor textures\n");
 	home->editor_tex[0] = NULL;

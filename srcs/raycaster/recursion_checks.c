@@ -6,18 +6,18 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 16:15:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 18:54:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void		continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame)
+void	continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame)
 {
 	t_point *p0;
 
 	p0 = start;
-	if (frame->old_idx != -1)
+	if (frame->old_idx != old_sector)
 	{
 		while (p0)
 		{
@@ -39,17 +39,24 @@ int		check_if_portal(t_point *p0)
 		return (FALSE);
 }
 
-int				check_if_same_pt(int current_pxl, t_ray_pt *fov)
+int		check_if_same_pt(int *current_pxl, t_ray_pt *fov)
 {
-
-	if (current_pxl == 0
-		&& get_distance(fov->l_pt, fov->r_pt) < 0.001)
+	if (*current_pxl < 1 && vec2_eucl_dist(fov->l_pt, fov->r_pt) < 0.001)
 		return (TRUE);
 	else
+	{
+		if (*current_pxl == 0)
+		{
+			*current_pxl = 1;
+		}
 		return (FALSE);
+	}
 }
 
 int		check_connection(t_point *point, t_frame *frame)
 {
-	return ((point->idx == frame->old_idx) ? TRUE : FALSE);
+	if (point->idx == frame->old_idx)
+		return (TRUE);
+	else
+		return (FALSE);
 }

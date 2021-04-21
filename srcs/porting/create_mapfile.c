@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 17:09:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 17:50:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ unsigned char	*create_write_buffer(t_texture *tex)
 	unsigned char	*buf;
 
 	buf = NULL;
-	buf = ft_strjoin(WRITE_BREAKER, ft_itoa(tex->idx));
-	buf = ft_strjoin(buf, WRITE_BREAKER);
-	buf = ft_strjoin(buf, ft_itoa(tex->source_size));
-	buf = ft_strjoin(buf, WRITE_BREAKER);
+	buf = (unsigned char *)ft_strjoin(WRITE_BREAKER, ft_itoa(tex->idx));
+	buf = (unsigned char *)ft_strjoin((const char *)buf, WRITE_BREAKER);
+	buf = (unsigned char *)ft_strjoin((const char *)buf,
+		ft_itoa(tex->source_size));
+	buf = (unsigned char *)ft_strjoin((const char *)buf, WRITE_BREAKER);
 	return (buf);
 }
 
@@ -36,23 +37,24 @@ void	write_texture_data(int fd, t_home *home)
 	unsigned char	*buf;
 
 	buf = NULL;
-	buf = ft_strjoin("doom_textures #", ft_itoa(home->nbr_of_textures));
-	buf = ft_strjoin(buf, "\n");
-	if (write(fd, buf, strlen(buf)) == -1)
+	buf = (unsigned char *)ft_strjoin("doom_textures #",
+		(const char *)ft_itoa(home->nbr_of_textures));
+	buf = (unsigned char *)ft_strjoin((const char *)buf, "\n");
+	if (write(fd, buf, ft_strlen((const char *)buf)) == -1)
 			printf("failed to add texture numbers\n");
-	ft_strdel(&buf);
+	ft_strdel((char **)&buf);
 	i = 1;
 	while (i <= home->nbr_of_textures)
 	{
 		if ((buf = create_write_buffer(home->editor_tex[i])) == NULL)
 			printf("failed to create write buffer\n");
-		if (write(fd, buf, strlen(buf)) == -1)
+		if (write(fd, buf, ft_strlen((const char *)buf)) == -1)
 			printf("failed to write texture\n");
 		if (write(fd, home->editor_tex[i]->source, home->editor_tex[i]->source_size) == -1)
 			printf("failed to write texture\n");
 		if (write(fd, "\n", 1) == -1)
 			printf("failed to write texture\n");
-		ft_strdel(&buf);
+		ft_strdel((char **)&buf);
 		i++;
 	}
 	// if (write(fd, "/doom_textures\n", strlen("/doom_textures\n")) == -1)

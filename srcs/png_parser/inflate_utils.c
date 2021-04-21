@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:01:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 16:18:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 17:35:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 unsigned char	ft_read_bit(unsigned int *bitp,
 	const unsigned char *bitstream)
 {
-	unsigned char result;
+	unsigned char	result;
 
 	result = (unsigned char)((bitstream[(*bitp) >> 3] >> ((*bitp) & 0x7)) & 1);
 	(*bitp)++;
@@ -35,7 +35,7 @@ unsigned int	ft_read_bits(unsigned int *bitp,
 	return (result);
 }
 
-void			get_nbits_replength(unsigned int *nbits, unsigned int code,
+void	get_nbits_replength(unsigned int *nbits, unsigned int code,
 	unsigned int *replength)
 {
 	if (code == 16)
@@ -55,12 +55,13 @@ void			get_nbits_replength(unsigned int *nbits, unsigned int code,
 	}
 }
 
-void			repeat_codes(t_dynamic_helper *d, const unsigned char *in,
+void	repeat_codes(t_dynamic_helper *d, const unsigned char *in,
 	unsigned int *bp)
 {
 	unsigned int	value;
 	unsigned int	nbits;
 
+	nbits = 2;
 	get_nbits_replength(&nbits, d->code, &d->replength);
 	if (d->code == 16)
 		value = d->value;
@@ -80,7 +81,7 @@ void			repeat_codes(t_dynamic_helper *d, const unsigned char *in,
 	}
 }
 
-void			check_code(t_huffman_helper *s, t_png *png, t_huffman *h)
+void	check_code(t_huffman_helper *s, t_png *png, t_huffman *h)
 {
 	if (s->code == 256)
 		s->done = 1;

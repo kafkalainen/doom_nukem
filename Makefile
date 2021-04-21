@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/21 12:36:34 by jnivala          ###   ########.fr        #
+#    Updated: 2021/04/21 19:11:37 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,40 +14,6 @@ NAME = doom-nukem
 
 SRCS = \
 	main.c \
-	vec_math$(SLASH)vec2_a.c \
-	vec_math$(SLASH)vec2_b.c \
-	vec_math$(SLASH)vec2_c.c \
-	update_player$(SLASH)key_input.c \
-	update_player$(SLASH)mouse_handle.c \
-	update_player$(SLASH)player_move.c \
-	update_player$(SLASH)update_player.c \
-	update_screen$(SLASH)draw_shapes.c \
-	update_screen$(SLASH)put_pixel.c \
-	update_screen$(SLASH)update_screen.c \
-	update_screen$(SLASH)draw_tex_pixel.c \
-	update_screen$(SLASH)steplen.c \
-	update_screen$(SLASH)draw_2d.c \
-	update_screen$(SLASH)transform_matrix_2d.c \
-	utilities$(SLASH)error_output.c \
-	utilities$(SLASH)setup.c \
-	utilities$(SLASH)audio.c \
-	utilities$(SLASH)linkedlist.c \
-	utilities$(SLASH)pxl_alphabet.c \
-	utilities$(SLASH)pxl_numbers.c \
-	utilities$(SLASH)str_pxl.c \
-	raycaster$(SLASH)calc_distances.c \
-	raycaster$(SLASH)calc_ground_texels.c \
-	raycaster$(SLASH)calc_sector_texels.c \
-	raycaster$(SLASH)calc_wall_texels.c \
-	raycaster$(SLASH)draw_segment.c \
-	raycaster$(SLASH)get_distance.c \
-	raycaster$(SLASH)get_wall_points.c \
-	raycaster$(SLASH)line_line_intersection.c \
-	raycaster$(SLASH)line_segment_check.c \
-	raycaster$(SLASH)perspective_offset.c \
-	raycaster$(SLASH)recursion_checks.c \
-	raycaster$(SLASH)scan_fov.c \
-	raycaster$(SLASH)setup_frame.c \
 	parsing$(SLASH)calc_norm_vectors.c \
 	parsing$(SLASH)free_sector.c \
 	parsing$(SLASH)parse_number_data.c \
@@ -72,6 +38,43 @@ SRCS = \
 	porting$(SLASH)open_file2.c \
 	porting$(SLASH)validate_sectors_data.c \
 	porting$(SLASH)validate_sectors_data_2.c \
+	raycaster$(SLASH)calc_distances.c \
+	raycaster$(SLASH)calc_ground_texels.c \
+	raycaster$(SLASH)calc_sector_texels.c \
+	raycaster$(SLASH)calc_wall_texels.c \
+	raycaster$(SLASH)colour_scale.c \
+	raycaster$(SLASH)get_floor.c \
+	raycaster$(SLASH)get_wall_points.c \
+	raycaster$(SLASH)line_line_intersection.c \
+	raycaster$(SLASH)line_segment_check.c \
+	raycaster$(SLASH)perspective_offset.c \
+	raycaster$(SLASH)recursion_checks.c \
+	raycaster$(SLASH)scan_fov.c \
+	raycaster$(SLASH)setup_frame.c \
+	raycaster$(SLASH)step_one.c \
+	update_screen$(SLASH)draw_frame.c \
+	update_screen$(SLASH)draw_segment.c \
+	update_screen$(SLASH)draw_shapes.c \
+	update_screen$(SLASH)draw_tex_pixel.c \
+	update_player$(SLASH)key_input.c \
+	update_player$(SLASH)mouse_handle.c \
+	update_player$(SLASH)player_move.c \
+	update_screen$(SLASH)put_pixel.c \
+	update_screen$(SLASH)steplen.c \
+	update_screen$(SLASH)matrix_2d.c \
+	update_player$(SLASH)update_player.c \
+	update_screen$(SLASH)update_screen.c \
+	utilities$(SLASH)audio.c \
+	utilities$(SLASH)error_output.c \
+	utilities$(SLASH)fps_timer.c \
+	utilities$(SLASH)linkedlist.c \
+	utilities$(SLASH)pxl_alphabet.c \
+	utilities$(SLASH)pxl_numbers.c \
+	utilities$(SLASH)setup.c \
+	utilities$(SLASH)str_pxl.c \
+	vec_math$(SLASH)vec2_a.c \
+	vec_math$(SLASH)vec2_b.c \
+	vec_math$(SLASH)vec2_c.c \
 
 HEADERS = \
 	libft$(SLASH)libft.h \
@@ -119,7 +122,7 @@ LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lm -g
 
 CC = gcc
 WIN_CFLAGS = -Wall -Wextra -Werror -O3
-LINUX_CFLAGS = -Wall -Wextra  -O3 -g
+LINUX_CFLAGS = -Wall -Wextra -Werror -O3 -g
 LINUX_CFLAGS += $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
 
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lm
@@ -148,14 +151,14 @@ ifeq ($(TARGET_SYSTEM),Windows)
 	SLASH = \\
 	MKDIR = mkdir
 	RM = del $(SLASH)s/q
-	RESET :=
-	RED :=
-	GREEN :=
-	YELLOW :=
-	BLUE :=
-	MAGENTA :=
-	CYAN :=
-	WHITE :=
+	RESET := [0m
+	RED := [31m
+	GREEN := [32m
+	YELLOW := [33m
+	BLUE := [34m
+	MAGENTA := [35m
+	CYAN := [36m
+	WHITE := [37m
 else
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	LIBS = $(LINUX_LIBRARY_PATHS)
@@ -190,7 +193,7 @@ echo:
 	echo CFLAGS: $(CFLAGS)
 	echo LDFLAGS: $(LDFLAGS)
 
-sdl:
+$(SDL_NEW):
 ifeq ($(TARGET_SYSTEM), Linux)
 	@if [ ! $(shell command -v wget 2> /dev/null) ]; then \
 	sudo apt-get install wget -y; \
@@ -214,7 +217,7 @@ else
 	ELSE ECHO $(GREEN)"Folder exists."$(RESET)
 endif
 
-sdl-mixer:
+$(SDL_MIXER_NEW):
 ifeq ($(TARGET_SYSTEM), Linux)
 	@if [ ! $(shell command -v wget 2> /dev/null) ]; then \
 	sudo apt-get install wget -y; \
@@ -257,7 +260,7 @@ $(OBJ): $O%.o: $S% $(HEADERS)
 $(LIBFT):
 	make -C libft
 
-$(NAME): $(LIBFT) sdl sdl-mixer $(OBJ)
+$(NAME): $(LIBFT) $(SDL_NEW) $(SDL_MIXER_NEW) $(OBJ)
 	$(CC) -o $@ $(INCLUDES) $(LIBS) $(CFLAGS) $(OBJ) $(LDFLAGS)
 	@echo $(GREEN)Compiled executable $(NAME).
 	@echo Run the map files $(NAME) map_files/map.TEST.

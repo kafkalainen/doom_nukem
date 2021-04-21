@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 20:01:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 18:55:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCAST_H
 # define RAYCAST_H
 
-typedef struct		s_ray_pt
+typedef struct s_ray_pt
 {
 	t_ray			ray_l;
 	t_ray			ray_r;
@@ -22,7 +22,7 @@ typedef struct		s_ray_pt
 	t_point			*wall;
 }					t_ray_pt;
 
-typedef struct		s_frame
+typedef struct s_frame
 {
 	int				idx;
 	int				max_fov;
@@ -55,35 +55,46 @@ typedef struct		s_frame
 	float			screen_wall_len;
 	float			tex_mult;
 	float			ratio;
+	int				pitch;
 }					t_frame;
 
-enum			e_lines {
+enum e_lines
+{
 	colinear = 0,
 	clockwise = 1,
 	c_clockwise = 2,
 };
 
-float				get_distance(t_xy p1, t_xy p2);
-void				calc_intersection(t_point *pgon, t_ray *ray, t_intersection *sect);
-t_xy				line_intersection(t_intersection *sect);
-void				calc_intersection_raw(t_point *pgon, t_ray *ray, t_intersection *sect);
-t_xy				line_intersection_raw(t_intersection *sect);
-void				get_wall_pts(t_frame *frame, int walls, int current_pxl);
-void				setup_frame(t_frame *frame, t_frame *new_frame, int current_pxl, int idx);
-int					check_connection(t_point *point, t_frame *frame);
-int					check_if_portal(t_point *point);
-int					check_if_same_pt(int current_pxl, t_ray_pt *fov);
-void				continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame);
-void				draw_ground(t_player *plr, t_frame *frame, t_home *home);
-void				draw_wall(t_frame *frame, t_texture *tex, t_home *home, t_player *plr);
-int					draw_tex_line(t_xy start, t_xy end,
-								t_texture *tex, SDL_Surface *surf);
-t_texture			*get_tex(int idx, t_texture	**textures);
-void				scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl);
-void				calc_distances(t_frame *frame, t_texture *tex, t_player *plr);
-void				calc_wall_texels(t_frame *frame, t_texture *tex);
-void				calc_ground_texels(t_sector *sector, t_frame *frame, t_texture *tex);
-void				draw_segment(t_frame *frame, t_home *home, t_player *plr);
-void				calc_sector_texels(t_sector *sector);
+void		calc_intersection(t_point *pgon, t_ray *ray,
+				t_intersection *sect);
+void		calc_intersection_raw(t_point *pgon, t_ray *ray,
+				t_intersection *sect);
+void		calc_sector_texels(t_sector *sector);
+int			check_connection(t_point *point, t_frame *frame);
+int			check_if_portal(t_point *point);
+int			check_if_same_pt(int *current_pxl, t_ray_pt *fov);
+void		draw_ground(t_player *plr, t_frame *frame, t_home *home);
+int			draw_tex_line(t_xy start, t_xy end,
+				t_texture *tex, SDL_Surface *surf);
+void		draw_wall(t_frame *frame, t_texture *tex, t_home *home,
+				t_player *plr);
+t_texture	*get_tex(int idx, t_texture	**textures);
+void		get_wall_pts(t_frame *frame, int walls, int current_pxl);
+t_xy		line_intersection(t_intersection *sect);
+t_xy		line_intersection_raw(t_intersection *sect);
+void		setup_frame(t_frame *frame, t_frame *new_frame,
+				int current_pxl, int idx);
+void		continue_from_last_sector(t_point *start, t_ray_pt *fov,
+				t_frame *frame);
+void		scan_fov(t_home *home, t_frame *frame, t_player *plr,
+				int current_pxl);
+void		calc_distances(t_frame *frame, t_player *plr);
+void		calc_wall_texels(t_frame *frame, t_texture *tex);
+void		calc_ground_texels(t_sector *sector, t_frame *frame);
+void		draw_segment(t_frame *frame, t_home *home, t_player *plr,
+				int wall);
+void		step_one(t_xyz *start, t_xyz *bottom, size_t *obj_x,
+				t_frame *frame);
+int			check_if_lseg_intersects(t_point *p0, t_xy *pos, t_xy *dir);
 
 #endif

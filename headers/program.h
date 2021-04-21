@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/20 17:08:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 14:08:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct		s_home
 	t_texture		**editor_tex;
 	t_time			t;
 	t_xy			offset;
-	int				nbr_of_sectors;
+	unsigned int	nbr_of_sectors;
 	int				nbr_of_textures;
 }					t_home;
 

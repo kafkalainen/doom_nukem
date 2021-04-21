@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_2d.c                                          :+:      :+:    :+:   */
+/*   colour_scale.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/20 18:33:45 by jnivala          ###   ########.fr       */
+/*   Created: 2021/04/21 17:03:27 by jnivala           #+#    #+#             */
+/*   Updated: 2021/04/21 17:05:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void			draw_2d(t_home *home, t_frame *frame, t_player *plr)
+Uint32	colour_scale(Uint32 hex, float scale)
 {
-	static t_xy	prev_pos;
+	t_argb	argb;
 
-	frame->idx = plr->current_sector;
-	frame->old_idx = -1;
-	frame->max_fov = 0;
-	frame->offset = 640;
-	frame->left.l_pt = vec2(-1,-1);
-	frame->right.r_pt = vec2(-1,-1);
-	frame->plr_offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
-	frame->pxl_offset = 0.0f;
-	scan_fov(home, frame, plr, 0);
+	argb.a = (hex & 0xFF000000);
+	argb.r = (hex & 0x00FF0000) * scale;
+	argb.g = (hex & 0x0000FF00) * scale;
+	argb.b = (hex & 0x000000FF) * scale;
+	return ((argb.a | (argb.r & 0x00FF0000) |
+		(argb.g & 0x0000FF00) | (argb.b & 0x000000FF)));
 }

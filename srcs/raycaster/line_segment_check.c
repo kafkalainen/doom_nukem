@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:03:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 20:01:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 16:53:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** is on the wall.
 */
 
-int		point_is_on_the_lseg(t_xy a, t_xy c, t_xy b)
+int	point_is_on_the_lseg(t_xy a, t_xy c, t_xy b)
 {
 	t_xy	vec_ab;
 	t_xy	vec_ac;
@@ -39,7 +39,7 @@ int		point_is_on_the_lseg(t_xy a, t_xy c, t_xy b)
 		return (0);
 }
 
-int		orientation_of_three_points(t_xy a, t_xy b, t_xy c)
+int	orientation_of_three_points(t_xy a, t_xy b, t_xy c)
 {
 	float	slope;
 
@@ -52,7 +52,7 @@ int		orientation_of_three_points(t_xy a, t_xy b, t_xy c)
 		return (c_clockwise);
 }
 
-int		check_if_lseg_intersects(t_point *p0, t_xy *pos, t_xy *dir)
+int	check_if_lseg_intersects(t_point *p0, t_xy *pos, t_xy *dir)
 {
 	int		pos_orientation;
 	int		dir_orientation;

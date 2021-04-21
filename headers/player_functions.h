@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:53:57 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/21 12:37:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 17:15:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 void	init_player(t_player *plr);
 void	update_player(t_player *plr, t_home *home, SDL_Event *e);
-int	plr_inside(t_sector *sector, t_xy *pos);
+int		plr_inside(t_sector *sector, t_xy *pos);
+int		player_move(t_player *plr, t_home *home, t_xy *dir);
 
 #endif

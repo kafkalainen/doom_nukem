@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 16:51:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 18:59:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static float	round_angle(float angle, float *pxl_offset)
 {
-	float			angle_as_pixels;
-	int				trunc;
+	float	angle_as_pixels;
+	int		trunc;
 
 	angle_as_pixels = angle / 0.002454369f;
 	trunc = (int)angle_as_pixels;
@@ -45,33 +45,48 @@ t_texture	*get_tex(int idx, t_texture	**textures)
 	return (NULL);
 }
 
-void	scan_fov(t_home *home, t_frame *frame, t_player *plr, int current_pxl)
+static void	handle_portal(t_home *home, t_frame *frame, t_player *plr,
+	int *cur_pxl)
 {
-	t_frame		new_frame;
+	t_frame	new_frame;
 
+	*cur_pxl = *cur_pxl + 1;
+	setup_frame(frame, &new_frame, *cur_pxl, frame->left.wall->idx);
+	scan_fov(home, &new_frame, plr, 0);
+	draw_segment(frame, home, plr, 0);
+	frame->offset = new_frame.offset;
+	frame->pxl_offset = new_frame.pxl_offset;
+}
+
+/*
+**	Are we in a first sector? If not, then proceed to next one.
+**	While offset is larger than maximum field of view, call drawing functions.
+**	Recursion after recursion?
+**	calc_sector_texels(home->sectors[frame->idx]);
+*/
+
+void	scan_fov(t_home *home, t_frame *frame, t_player *plr, int cur_pxl)
+{
 	frame->left.wall = home->sectors[frame->idx]->points;
 	frame->right.wall = home->sectors[frame->idx]->points;
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
-	// calc_sector_texels(home->sectors[frame->idx]);
 	while (frame->offset > frame->max_fov)
 	{
-		get_wall_pts(frame, home->sectors[frame->idx]->nb_of_walls, current_pxl);
-		current_pxl = round_angle(vec2_ang(frame->left.l_pt, frame->left.r_pt),
-					&frame->pxl_offset);
-		if (check_if_portal(frame->left.wall) &&
-			!check_if_same_pt(current_pxl, &frame->left))
+		get_wall_pts(frame, home->sectors[frame->idx]->nb_of_walls, cur_pxl);
+		cur_pxl = round_angle(vec2_ang(frame->left.l_pt, frame->left.r_pt),
+				&frame->pxl_offset);
+		if (frame->left.wall->idx == frame->old_idx)
 		{
-			current_pxl++;
-			setup_frame(frame, &new_frame, current_pxl, frame->left.wall->idx);
-			scan_fov(home, &new_frame, plr, 0);
-			// draw_segment(frame, home, plr);
-			frame->offset = new_frame.offset;
-			frame->pxl_offset = new_frame.pxl_offset;
+			cur_pxl++;
+			break ;
 		}
+		if (check_if_portal(frame->left.wall)
+			&& !check_if_same_pt(&cur_pxl, &frame->left))
+			handle_portal(home, frame, plr, &cur_pxl);
 		else
 		{
-			draw_segment(frame, home, plr);
-			frame->offset = frame->offset - ++current_pxl;
+			draw_segment(frame, home, plr, 1);
+			frame->offset = frame->offset - ++cur_pxl;
 		}
 	}
 }
