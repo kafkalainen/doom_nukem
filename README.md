@@ -16,19 +16,18 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Correcting walls by perspective-correct interpolation from affine texture coordinates.
 
 # TO-DO
-## Riku
-- Refactor the project to read all map data from files (textures, audio data, sectors)
+## Riku & Elias
+- Scanfov-refactoring
+- optimization pass
+- pthread
 
 ## Joonas
-- Write draw_floor function.
+- Port features from Wolf3d
+- Github best-practises + norminette action
 
 ## Tomppa
 - Map editor
 
-## Elias
-- Cleans and Normes code.
-- Fixes game loop.
-- Remove one pixel error.
 # Done
 - Tested to change int values in the tex_ft_draw_wall perspective_fix function, to no avail.
 - We need to change angle, before it is normalized.
