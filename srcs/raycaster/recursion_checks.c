@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 18:54:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 20:39:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame)
 {
-	t_point *p0;
+	t_point	*p0;
 
 	p0 = start;
 	if (frame->old_idx != old_sector)
@@ -31,7 +31,7 @@ void	continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame)
 	}
 }
 
-int		check_if_portal(t_point *p0)
+int	check_if_portal(t_point *p0)
 {
 	if (p0->idx >= 0)
 		return (TRUE);
@@ -39,7 +39,7 @@ int		check_if_portal(t_point *p0)
 		return (FALSE);
 }
 
-int		check_if_same_pt(int *current_pxl, t_ray_pt *fov)
+int	check_if_same_pt(int *current_pxl, t_ray_pt *fov)
 {
 	if (*current_pxl < 1 && vec2_eucl_dist(fov->l_pt, fov->r_pt) < 0.001)
 		return (TRUE);
@@ -53,7 +53,7 @@ int		check_if_same_pt(int *current_pxl, t_ray_pt *fov)
 	}
 }
 
-int		check_connection(t_point *point, t_frame *frame)
+int	check_connection(t_point *point, t_frame *frame)
 {
 	if (point->idx == frame->old_idx)
 		return (TRUE);

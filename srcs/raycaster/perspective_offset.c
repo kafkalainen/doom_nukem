@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:04:55 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 16:15:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 20:34:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-float			perspective_offset(float frame_offset, int screen_wall)
+float	perspective_offset(float frame_offset, int screen_wall)
 {
 	float		left_mult;
 	float		right_mult;

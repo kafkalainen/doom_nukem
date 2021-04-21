@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 18:55:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 20:35:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ enum e_lines
 };
 
 void		calc_intersection(t_point *pgon, t_ray *ray,
-				t_intersection *sect);
-void		calc_intersection_raw(t_point *pgon, t_ray *ray,
 				t_intersection *sect);
 void		calc_sector_texels(t_sector *sector);
 int			check_connection(t_point *point, t_frame *frame);

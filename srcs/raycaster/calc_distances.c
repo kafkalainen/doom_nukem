@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 14:04:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 20:37:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	calc_distances(t_frame *frame, t_player *plr)
 
 	left_z = vec2_perp_dist(frame->left.l_pt);
 	right_z = vec2_perp_dist(frame->left.r_pt);
-	frame->top_left.x = SCREEN_WIDTH - ((SCREEN_HEIGHT /
-		left_z) * frame->left.l_pt.x) + 15;
-	frame->top_right.x = SCREEN_WIDTH - ((SCREEN_HEIGHT /
-		right_z) * frame->left.r_pt.x) + 15;
+	frame->top_left.x = SCREEN_WIDTH - ((SCREEN_HEIGHT
+				/ left_z) * frame->left.l_pt.x) + 15;
+	frame->top_right.x = SCREEN_WIDTH - ((SCREEN_HEIGHT
+				/ right_z) * frame->left.r_pt.x) + 15;
 	frame->top_left.z = left_z;
 	frame->top_right.z = right_z;
 	frame->bottom_left = frame->top_left;
@@ -32,8 +32,8 @@ void	calc_distances(t_frame *frame, t_player *plr)
 	frame->bottom_left.y = plr->pitch + SCREEN_HEIGHT / left_z * 20;
 	frame->bottom_right.y = plr->pitch + SCREEN_HEIGHT / right_z * 20;
 	frame->step.y = interpolate_points(frame->top_right.y, frame->top_left.y,
-		frame->top_left.x, frame->top_right.x);
+			frame->top_left.x, frame->top_right.x);
 	frame->step.z = interpolate_points(frame->top_left.y, frame->top_right.y,
-		frame->top_left.x, frame->top_right.x);
+			frame->top_left.x, frame->top_right.x);
 	frame->pitch = plr->pitch;
 }

@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 17:09:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 17:12:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 20:34:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int			get_floor(int floor_colour)
+int	get_floor(int floor_colour)
 {
 	if (floor_colour == -1)
 		return (darkolivegreen);
