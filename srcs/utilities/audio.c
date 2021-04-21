@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 11:43:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 19:20:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,20 @@ void		play_footsteps(t_player *plr)
 {
 	Uint32			current_time;
 	static Uint32	last_time;
-	static int		i;
+	static int		step;
 
 	current_time = SDL_GetTicks();
 	if (current_time > last_time + 600)
 	{
-		if (i)
+		if (step)
 		{
 			Mix_PlayChannel(-1, plr->audio.footstep1, 0);
-			i = 0;
+			step = 0;
 		}
 		else
 		{
 			Mix_PlayChannel(-1, plr->audio.footstep2, 0);
-			i = 1;
+			step = 1;
 		}
 		last_time = current_time;
 	}
