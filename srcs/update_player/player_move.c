@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 20:06:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 12:25:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static int		plr_in_corner(t_sector *sector, t_xy *pos)
+static int	plr_in_corner(t_sector *sector, t_xy *pos)
 {
 	unsigned int	i;
 	t_point			*temp;
@@ -29,7 +29,7 @@ static int		plr_in_corner(t_sector *sector, t_xy *pos)
 	return (open_space);
 }
 
-static int		check_if_wall(t_sector *sector, t_xy *dir, t_xy *pos)
+static int	check_if_wall(t_sector *sector, t_xy *dir, t_xy *pos)
 {
 	unsigned int	i;
 	t_point			*temp;
@@ -46,7 +46,7 @@ static int		check_if_wall(t_sector *sector, t_xy *dir, t_xy *pos)
 	return (open_space);
 }
 
-int				plr_inside(t_sector *sector, t_xy *pos)
+int	plr_inside(t_sector *sector, t_xy *pos)
 {
 	unsigned int	i;
 	t_xy			dir;
@@ -66,31 +66,31 @@ int				plr_inside(t_sector *sector, t_xy *pos)
 	return (walls_crossed % 2);
 }
 
-// int				player_move(t_player *plr, t_home *home, t_xy *dir)
-// {
-// 	int			crossing;
-// 	t_xy		pos;
+int	player_move(t_player *plr, t_home *home, t_xy *dir)
+{
+	int			crossing;
+	t_xy		pos;
 
-// 	pos = (t_xy){0.0f, 0.0f};
-// 	crossing = check_if_wall(home->sectors[plr->current_sector], dir, &pos);
-// 	if (crossing >= 0)
-// 	{
-// 		if (plr_in_corner(home->sectors[crossing], &pos) != open_space)
-// 			return (0);
-// 		translate_world_view(home, *dir);
-// 		plr->current_sector = crossing;
-// 	}
-// 	else if (crossing == open_space)
-// 	{
-// 		pos = vec2_mul(*dir, 8);
-// 		crossing = check_if_wall(home->sectors[plr->current_sector], dir, &pos);
-// 		if (crossing < 0 && crossing != open_space)
-// 			return (0);
-// 		if (plr_in_corner(home->sectors[plr->current_sector], &pos)
-// 			!= open_space)
-// 			return (0);
-// 		if (plr_inside(home->sectors[plr->current_sector], &(t_xy){0.0f, 0.0f}))
-// 			translate_world_view(home, *dir);
-// 	}
-// 	return (1);
-// }
+	pos = (t_xy){0.0f, 0.0f};
+	crossing = check_if_wall(home->sectors[plr->current_sector], dir, &pos);
+	if (crossing >= 0)
+	{
+		if (plr_in_corner(home->sectors[crossing], &pos) != open_space)
+			return (0);
+		translate_world_view(home, *dir);
+		plr->current_sector = crossing;
+	}
+	else if (crossing == open_space)
+	{
+		pos = vec2_mul(*dir, 8);
+		crossing = check_if_wall(home->sectors[plr->current_sector], dir, &pos);
+		if (crossing < 0 && crossing != open_space)
+			return (0);
+		if (plr_in_corner(home->sectors[plr->current_sector], &pos)
+			!= open_space)
+			return (0);
+		if (plr_inside(home->sectors[plr->current_sector], &(t_xy){0.0f, 0.0f}))
+			translate_world_view(home, *dir);
+	}
+	return (1);
+}

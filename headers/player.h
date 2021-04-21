@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/20 19:49:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 12:33:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ typedef struct		s_input
 	int				left;
 	int				up;
 	int				down;
-	int				z;
-	int				x;
+	int				rot_right;
+	int				rot_left;
+	int				wireframe;
+	int				minimap;
+	int				info;
+	int				quit;
+	int				mouse;
 }					t_input;
 
 typedef struct		s_player

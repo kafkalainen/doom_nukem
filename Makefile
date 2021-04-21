@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/21 11:51:45 by jnivala          ###   ########.fr        #
+#    Updated: 2021/04/21 12:36:34 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,8 @@ SRCS = \
 	vec_math$(SLASH)vec2_c.c \
 	update_player$(SLASH)key_input.c \
 	update_player$(SLASH)mouse_handle.c \
-	update_player$(SLASH)movement.c \
-	update_player$(SLASH)update_player.c \
 	update_player$(SLASH)player_move.c \
+	update_player$(SLASH)update_player.c \
 	update_screen$(SLASH)draw_shapes.c \
 	update_screen$(SLASH)put_pixel.c \
 	update_screen$(SLASH)update_screen.c \

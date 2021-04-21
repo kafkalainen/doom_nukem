@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/20 19:21:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 12:34:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,19 @@
 
 # define NUM_TEX 8
 
+# define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
 # define INV_PI_BY_TWO 0.1591549367f
-# define MAX_INT (2147483647)
-# define MIN_INT (-MAX_INT - 1)
-# define MAX_UINT ((unsigned int)-1)
-# define MAX_ULONG ((unsigned long)-1)
-# define MAX_ULLONG ((unsigned long long)-1)
-
-# define PI (3.1415926535f)
-# define PI_BY_TWO (1.570796326f)
-# define TWO_PI (6.283185307f)
-# define RAD_TO_DEG (57.29577951f)
-# define DEG_TO_RAD (0.0174532925f)
-# define SQR2 (0.7071067812)
-
-# define TRUE (1)
-# define FALSE (0)
-# define AND (&&)
-# define OR (||)
-
-# define MAX(a, b) ((a) > (b) ? (a) : (b))
-# define MIN(a, b) ((a) < (b) ? (a) : (b))
+# define PI 3.1415926535f
+# define PI_BY_TWO 1.570796326f
+# define TWO_PI 6.283185307f
+# define RAD_TO_DEG 57.29577951f
+# define DEG_TO_RAD 0.0174532925f
+# define SQR2 0.7071067812f
+# define TRUE 1
+# define FALSE 0
+# define AND &&
+# define OR ||
 
 /*
 **
@@ -54,23 +45,25 @@
 **
 */
 
-# define k_esc SDLK_ESCAPE
-# define k_space SDLK_SPACE
-# define k_ctrl SDLK_LCTRL
-# define k_shift SDLK_LSHIFT
+# define K_ESC SDLK_ESCAPE
+# define K_SPACE SDLK_SPACE
+# define K_CTRL SDLK_LCTRL
+# define K_SHIFT SDLK_LSHIFT
 
-# define k_up SDLK_UP
-# define k_down SDLK_DOWN
-# define k_left SDLK_LEFT
-# define k_right SDLK_RIGHT
+# define K_UP SDLK_UP
+# define K_DOWN SDLK_DOWN
+# define K_LEFT SDLK_LEFT
+# define K_RIGHT SDLK_RIGHT
 
-# define k_w SDLK_w
-# define k_s SDLK_s
-# define k_a SDLK_a
-# define k_d SDLK_d
-# define k_q SDLK_q
-# define k_e SDLK_e
-# define k_z SDLK_z
-# define k_x SDLK_x
+# define K_W SDLK_w
+# define K_S SDLK_s
+# define K_A SDLK_a
+# define K_D SDLK_d
+# define K_Q SDLK_q
+# define K_E SDLK_e
+# define K_Z SDLK_z
+# define K_X SDLK_x
+# define K_C SDLK_c
+# define K_M SDLK_m
 
 #endif

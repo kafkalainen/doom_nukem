@@ -6,72 +6,79 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/20 16:22:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 12:23:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void		arrow_keys_down(t_player *plr, SDL_KeyCode sym)
+static void	action_keys(t_player *plr, SDL_KeyCode *sym)
 {
-	if (sym == k_s)
+	if (*sym == K_Z && plr->input.wireframe == 1)
+		plr->input.wireframe = 0;
+	else if (*sym == K_Z && plr->input.wireframe == 0)
+		plr->input.wireframe = 1;
+	if (*sym == K_X && plr->input.minimap == 1)
+		plr->input.minimap = 0;
+	else if (*sym == K_X && plr->input.minimap == 0)
+		plr->input.minimap = 1;
+	if (*sym == K_C && plr->input.info == 1)
+		plr->input.info = 0;
+	else if (*sym == K_C && plr->input.info == 0)
+		plr->input.info = 1;
+	if (*sym == K_M && plr->input.mouse == 0)
+	{
+		SDL_SetRelativeMouseMode(SDL_TRUE);
+		plr->input.mouse = 1;
+	}
+	else if (*sym == K_M && plr->input.mouse == 1)
+	{
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+		plr->input.mouse = 0;
+	}
+}
+
+void	keys_down(t_player *plr, SDL_KeyCode sym, SDL_Event *e)
+{
+	if (sym == K_S)
 		plr->input.down = 1;
-	if (sym == k_w)
+	if (sym == K_W)
 		plr->input.up = 1;
-	if (sym == k_d)
+	if (sym == K_D)
 		plr->input.right = 1;
-	if (sym == k_a)
+	if (sym == K_A)
 		plr->input.left = 1;
+	if (sym == K_Q)
+		plr->input.rot_left = 1;
+	if (sym == K_E)
+		plr->input.rot_right = 1;
+	action_keys(plr, &sym);
+	if (sym == K_ESC || e->type == SDL_QUIT)
+		plr->input.quit = 1;
 }
 
-void		arrow_keys_up(t_player *plr, SDL_KeyCode sym)
+void	keys_up(t_player *plr, SDL_KeyCode sym)
 {
-	if (sym == k_s)
+	if (sym == K_S)
 		plr->input.down = 0;
-	if (sym == k_w)
+	if (sym == K_W)
 		plr->input.up = 0;
-	if (sym == k_d)
+	if (sym == K_D)
 		plr->input.right = 0;
-	if (sym == k_a)
+	if (sym == K_A)
 		plr->input.left = 0;
+	if (sym == K_Q)
+		plr->input.rot_left = 0;
+	if (sym == K_E)
+		plr->input.rot_right = 0;
 }
 
-void		flight_keys_down(t_player *plr, SDL_KeyCode sym)
+void	key_input(t_player *plr, SDL_Event *e)
 {
-	if (sym == k_z)
-		plr->input.z = 1;
-	if (sym == k_x)
-		plr->input.x = 1;
-}
-
-void		flight_keys_up(t_player *plr, SDL_KeyCode sym)
-{
-	if (sym == k_z)
-		plr->input.z = 0;
-	if (sym == k_x)
-		plr->input.x = 0;
-}
-
-void		key_input(t_player *plr, SDL_Event *e, t_home *home)
-{
-		if (e->type == SDL_QUIT)
-		{
-			cleanup_audio(&plr->audio);
-			error_output_sdl("User closed the window", home);
-		}
-		else if (e->type == SDL_KEYDOWN && e->key.keysym.sym == k_esc)
-		{
-			cleanup_audio(&plr->audio);
-			error_output_sdl("User closed the window", home);
-		}
-		else if (e->type == SDL_KEYDOWN)
-		{
-			arrow_keys_down(plr, e->key.keysym.sym);
-			flight_keys_down(plr, e->key.keysym.sym);
-		}
-		else if (e->type == SDL_KEYUP)
-		{
-			arrow_keys_up(plr, e->key.keysym.sym);
-			flight_keys_up(plr, e->key.keysym.sym);
-		}
+	if (e->type == SDL_KEYDOWN)
+		keys_down(plr, e->key.keysym.sym, e);
+	else if (e->type == SDL_KEYUP)
+		keys_up(plr, e->key.keysym.sym);
+	else
+		return ;
 }
