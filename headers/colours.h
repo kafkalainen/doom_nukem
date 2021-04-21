@@ -6,23 +6,23 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:37:29 by jnivala           #+#    #+#             */
-/*   Updated: 2021/01/22 14:01:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 20:24:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef COLOURS_H
 # define COLOURS_H
 
-typedef struct		s_argb
+typedef struct s_argb
 {
-	int				a;
-	int				r;
-	int				g;
-	int				b;
-}					t_argb;
+	int		a;
+	int		r;
+	int		g;
+	int		b;
+}			t_argb;
 
-enum				e_colour {
+enum e_colour
+{
 	lightpink = 0xffb6c1,
 	pink = 0xffc0cb,
 	crimson = 0xdc143c,
@@ -163,6 +163,6 @@ enum				e_colour {
 	black = 0x000000
 };
 
-t_argb			int2argb(int color);
+t_argb	int2argb(int color);
 
 #endif

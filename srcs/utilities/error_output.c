@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:39:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 17:06:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 20:17:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	error_output_sdl(char *msg, t_home *home)
 		SDL_Quit();
 	}
 	ft_putendl_fd(msg, 2);
-	// clean_up(home, 5);
+	clean_up(home);
 }
 
 void	error_output(char *msg)

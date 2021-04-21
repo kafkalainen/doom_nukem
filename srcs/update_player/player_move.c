@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 12:25:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 20:22:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,5 @@ int	player_move(t_player *plr, t_home *home, t_xy *dir)
 		if (plr_inside(home->sectors[plr->current_sector], &(t_xy){0.0f, 0.0f}))
 			translate_world_view(home, *dir);
 	}
-	return (1);
+	return (TRUE);
 }
