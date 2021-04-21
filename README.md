@@ -75,7 +75,7 @@ within.
 - [ ] There is a story with a mission, a goal to reach, a target (save the earth, get rich,... even something very simple, check out Doom).
 - [ ] There is a beginning and an end for each level.
 - [x] There are sound effects.
-- [ ] There’s music.
+- [x] There’s music.
 
 # Other considerations:
 - [ ] A level editor is mandatory. It can be integrated with the main executable and activated by a command line option, or it can be a separate binary. It can be used to completely define a level: the areas and the differences in height between them, the textures, the actions and interactions, etc.
