@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 18:58:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 11:42:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ void		parse_sector_data(unsigned char *buf, t_home *home)
 
 	i = 0;
 	pos = 0;
-	if (!(buf = (unsigned char*)ft_strstr((const char*)buf, "wolf3d_sectors")))
+	buf = (unsigned char*)ft_strstr((const char*)buf, "doom_nukem_sectors");
+	if (!buf)
 		error_output("ERROR: No sector dataheader found");
 	pos += get_next_breaker(buf + pos) + 1;
 	home->nbr_of_sectors = ft_atoi((const char*)buf + pos);
 	pos += ft_nb_len(home->nbr_of_sectors, 10);
-	if (!(home->sectors = (t_sector**)malloc(sizeof(t_sector) *
-		(home->nbr_of_sectors + 1))))
+	home->sectors = (t_sector**)malloc(sizeof(t_sector) * (home->nbr_of_sectors + 1));
+	if (!home->sectors)
 		error_output("ERROR: Failed to allocate memory for game sectors\n");
 	while (i < home->nbr_of_sectors)
 	{

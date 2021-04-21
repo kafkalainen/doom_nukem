@@ -1,6 +1,17 @@
-#doom_sectors#4
-		NUMWALLS	Z	HEIGHT	FLOOR_TEX	CEILING_TEX   wall_points
+This is an example mapfile for the Wolf3d project. Coordinates can be changed via issuing depth, height, and changing the texture.
+Data is in following order:
+
+Z: depth
+HEIGHT: height of the wall.
+FLOOR_TEX: Floor texture for the entire sector.
+CEILING_TEX: Texture for the entire ceiling.
+WALL_POINTS: points of the wall in xy grid, where last element is texture of the wall.
+
+Happy editing!
+
+#doom_nukem_sectors#5
 #sector0	6	0	10	-5	-4	20,100,1	-20,100,-4	-100,100,-4	-100,-100,-4	100,-100,-4	100,50,-4
 #sector1	4	0	10	-4	-4	-20,100,0	20,100,-1	50,150,2	-50,150,-1
-#sector2	8	0	10	-3	-4	-50,150,1	50,150,-2	100,150,-2	100,250,-3	30,250,3	-30,250,-2	-100,250,-2	-100,150,-2
-#sector3	4	0	10	-5	-4	-50,250,2	50,250,-3	20,350,-3	-20,350,-3
+#sector2	8	0	10	-3	-4	-50,150,1	50,150,-2	100,150,-2	100,250,-3	50,250,3	-50,250,-2	-100,250,-2	-100,150,-2
+#sector3	4	0	10	-5	-4	-50,250,2	50,250,-3	20,350,4	-20,350,-3
+#sector4	4	0	10	-5	-4	-20,350,3	20,350,-3	100,500,-3	-100,500,-3

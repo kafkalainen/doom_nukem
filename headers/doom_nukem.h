@@ -79,6 +79,7 @@
 ** Miscellanious
 */
 
+void	clean_up(t_home *home, int ret);
 void	cleanup_audio(t_audio *audio);
 void	error_output(char *msg);
 void	error_output_sdl(char *msg, t_home *home);
@@ -87,6 +88,7 @@ int		load_audio(t_audio *audio);
 void	map_error_output(int i, t_home *home);
 void	play_footsteps(t_player *plr);
 void	update_screen(t_home *home, t_frame *frame, t_player *plr);
+
 
 /*
 ** Minimap

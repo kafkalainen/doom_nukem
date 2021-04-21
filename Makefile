@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/20 19:59:16 by jnivala          ###   ########.fr        #
+#    Updated: 2021/04/21 11:51:45 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,7 +120,7 @@ LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lm -g
 
 CC = gcc
 WIN_CFLAGS = -Wall -Wextra -Werror -O3
-LINUX_CFLAGS = -Wall -Wextra  -O3
+LINUX_CFLAGS = -Wall -Wextra  -O3 -g
 LINUX_CFLAGS += $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
 
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lm
@@ -175,10 +175,10 @@ else
 	WHITE = "\033[0;37m"
 endif
 
-S = srcs$(SLASH)
-O = objs$(SLASH)
+S = srcs
+O = objs
 LIBFT = libft$(SLASH)libft.a
-SRC = $(addprefix $S, $(SRCS))
+SRC = $(addprefix $S$(SLASH), $(SRCS))
 OBJ = $(SRC:$S%=$O%.o)
 
 .PHONY: all clean fclean re sdl sdl-mixer

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 18:44:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 11:43:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			load_audio(t_audio *audio)
 {
-	audio->music = Mix_LoadMUS("resources/eerie_by_eparviai.wav");
+	audio->music = Mix_LoadMUS("audio/eerie_by_eparviai.wav");
 	if (!audio->music)
 	{
 		ft_putendl_fd("Failed to load beat music! SDL_mixer Error", 2);
@@ -22,14 +22,14 @@ int			load_audio(t_audio *audio)
 		audio->footstep2 = NULL;
 		return (771);
 	}
-	audio->footstep1 = Mix_LoadWAV("resources/footstep1.wav");
+	audio->footstep1 = Mix_LoadWAV("audio/footstep1.wav");
 	if (!audio->footstep1)
 	{
 		ft_putendl_fd("Failed to load scratch sound effect!", 2);
 		audio->footstep2 = NULL;
 		return (772);
 	}
-	audio->footstep2 = Mix_LoadWAV("resources/footstep2.wav");
+	audio->footstep2 = Mix_LoadWAV("audio/footstep2.wav");
 	if (!audio->footstep2)
 	{
 		ft_putendl_fd("Failed to load scratch sound effect!", 2);
