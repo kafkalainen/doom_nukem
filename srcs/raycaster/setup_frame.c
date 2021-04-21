@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 10:26:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 20:39:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/21 20:53:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,4 @@ void	setup_frame(t_frame *frame, t_frame *new_frame,
 	new_frame->offset = frame->offset - 1;
 	new_frame->draw_surf = frame->draw_surf;
 	new_frame->pxl_offset = frame->pxl_offset;
+}
