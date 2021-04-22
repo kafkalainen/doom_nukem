@@ -138,10 +138,11 @@ ifeq ($(TARGET_SYSTEM),Windows)
 	LIBS = $(WIN_LIBRARY_PATHS)
 	CFLAGS = $(WIN_CFLAGS)
 	LDFLAGS = $(WIN_LFLAGS)
-	SDL2_BUILD := .\SDL2-2.0.14\i686-w64-mingw32
+	SDL_NEW = .\SDL2-2.0.14\i686-w64-mingw32
+	SDL_MIXER_NEW = .\SDL2_mixer-2.0.4\i686-w64-mingw32
 	SLASH = \\
 	MKDIR = mkdir
-	RM = del $(SLASH)s/q
+	RM = del /s/q
 	RESET := [0m
 	RED := [31m
 	GREEN := [32m
@@ -182,7 +183,7 @@ LIBFT = libft$(SLASH)libft.a
 SRC = $(addprefix $S$(SLASH), $(SRCS))
 OBJ = $(SRC:$S%=$O%.o)
 
-.PHONY: all clean fclean re sdl sdl-mixer
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
@@ -206,7 +207,7 @@ ifeq ($(TARGET_SYSTEM), Linux)
 	make -j$(CORES) -C $(SDL_NEW) ; \
 	fi
 else
-	@IF NOT EXIST "SDL2-2.0.14\x86_64-w64-mingw32" ( install.bat )\
+	@IF NOT EXIST $(SDL_NEW) ( install.bat )\
 	ELSE ECHO $(GREEN)"Folder exists."$(RESET)
 endif
 
@@ -230,7 +231,7 @@ ifeq ($(TARGET_SYSTEM), Linux)
 	make -j$(CORES) -C $(SDL_MIXER_NEW) ; \
 	fi
 else
-	@IF NOT EXIST "SDL2-2.0.14\x86_64-w64-mingw32" ( install.bat )\
+	@IF NOT EXIST $(SDL_MIXER_NEW) ( install_mixer.bat )\
 	ELSE ECHO $(GREEN)"Folder exists."$(RESET)
 endif
 
@@ -264,9 +265,6 @@ ifneq ($(wildcard $(OBJ)),)
 	@$(RM) $(wildcard $(OBJ))
 endif
 
-echo:
-	ECHO "$(OBJ)"
-
 cleanobjdir: cleanobj
 ifeq ($(TARGET_SYSTEM), Linux)
 	@$(RM) $O
@@ -292,6 +290,8 @@ ifeq ($(TARGET_SYSTEM), Windows)
 	@IF EXIST SDL2-2.0.14 ( rd /s /q "SDL2-2.0.14" )
 	@IF EXIST SDL2_mixer-2.0.4 ( $(RM) "SDL2_mixer-2.0.4" )
 	@IF EXIST SDL2_mixer-2.0.4 ( rd /s /q "SDL2_mixer-2.0.4" )
+	@IF EXIST "SDL2_mixer-devel-2.0.4-mingw.tar.gz" ( $(RM) "SDL2_mixer-devel-2.0.4-mingw.tar.gz" )
+	@IF EXIST "SDL2-devel-2.0.14-mingw.tar.gz" ( $(RM) "SDL2-devel-2.0.14-mingw.tar.gz" )
 	@IF EXIST $(NAME) ( $(RM) "$(NAME)") \
 	ELSE ( ECHO $(CYAN)No binary to remove. $(RESET) )
 else
