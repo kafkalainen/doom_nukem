@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/22 16:45:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/22 17:22:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int argc, char **argv)
 		update_screen(&home, &frame, &plr);
 		render_buffer(frame.buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
-		clear_surface(frame.buffer);
 	}
 	free_sectors(&home);
 	free(frame.buffer);
