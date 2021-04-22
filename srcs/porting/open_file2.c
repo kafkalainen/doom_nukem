@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/21 18:51:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 13:25:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,20 +101,21 @@ int	open_file(t_home *home, char *path)
 {
 	int				fd;
 	unsigned char	*buf;
-	unsigned int	size;
+	ssize_t			size;
 
-	if ((fd = OPEN_FILE(path, READ_ONLY)) < 0)
+	doom_open(&fd, (const char **)&path, READ_ONLY);
+	if (fd < 0)
 		error_output("Failed to open file\n");
 	else
 	{
 		if (!(buf = (unsigned char *)malloc(sizeof(unsigned char) * MAX_SIZE))) // tone down the MAX_SIZE for this once we know the avg range of file sizes
 			error_output("Memory allocation of source buffer failed\n");
-		size = READ_FILE(fd, buf, MAX_SIZE);
+		doom_read(&size, &fd, (void **)&buf, MAX_SIZE);
 		if (size <= 0)
 			error_output("Failed to read file\n");
 		else if (size >= MAX_SIZE)
 			error_output("File is too large\n");
-		if (CLOSE_FILE(fd) == -1)
+		if (doom_close(&fd) == -1)
 			error_output("Could not close file\n");
 		parse_map_data(buf, home);
 		free(buf);

@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/21 19:11:37 by jnivala          ###   ########.fr        #
+#    Updated: 2021/04/22 12:46:48 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ SRCS = \
 	utilities$(SLASH)pxl_numbers.c \
 	utilities$(SLASH)setup.c \
 	utilities$(SLASH)str_pxl.c \
+	utilities$(SLASH)system_calls.c \
 	vec_math$(SLASH)vec2_a.c \
 	vec_math$(SLASH)vec2_b.c \
 	vec_math$(SLASH)vec2_c.c \
@@ -97,6 +98,8 @@ HEADERS = \
 	headers$(SLASH)program.h \
 	headers$(SLASH)raycast.h \
 	headers$(SLASH)sector.h \
+	headers$(SLASH)syscalls_windows.h \
+	headers$(SLASH)syscalls_linux.h \
 	headers$(SLASH)vectors.h \
 
 ABS_DIR = $(shell pwd)

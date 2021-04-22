@@ -17,9 +17,7 @@
 # include <dirent.h>
 # include "time.h"
 # ifdef __unix__
-#  define OPEN_FILE open
-#  define READ_FILE read
-#  define CLOSE_FILE close
+#  define OS_WINDOWS 0
 #  define READ_ONLY O_RDONLY
 #  define WRITE_ONLY O_WRONLY
 #  define APPEND_FILE O_APPEND
@@ -27,28 +25,27 @@
 #  define CREATE_FILE O_CREAT
 #  define TRUNCATE O_TRUNC
 #  include <math.h>
-#  include "../SDL2/include/SDL2/SDL.h"
-#  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include <string.h>
 #  include <unistd.h>
+#  include "../SDL2/include/SDL2/SDL.h"
+#  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
+#  include "../headers/syscalls_windows.h"
 # elif __APPLE__
-#  define OPEN_FILE open
 #  define READ_ONLY O_RDONLY
 #  include <string.h>
 #  include <unistd.h>
 # elif defined(_WIN32) || defined(WIN32)
-#  define OPEN_FILE _open
-#  define READ_FILE _read
-#  define CLOSE_FILE _close
+#  define OS_WINDOWS 1
 #  define READ_ONLY _O_BINARY
 #  define WRITE_ONLY _O_WRONLY
 #  define CHECK_EXIST _O_EXCL
 #  define APPEND_FILE _O_APPEND
 #  define CREATE_FILE _O_CREAT
 #  define TRUNCATE _O_TRUNC
-#  include "SDL2_mixer_win/include/SDL2/SDL_mixer.h"
 #  include <io.h>
 #  include <stdio.h>
+#  include "SDL2_mixer_win/include/SDL2/SDL_mixer.h"
+#  include "../headers/syscalls_linux.h"
 
 # endif
 
@@ -81,6 +78,9 @@
 
 void	clean_up(t_home *home);
 void	cleanup_audio(t_audio *audio);
+int		doom_close(int *fd);
+void	doom_open(int *fd, const char **path, int mode);
+void	doom_read(ssize_t *read_bytes, int *fd, void **buf, size_t nb_of_bytes);
 void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
 void	error_output_sdl(char *msg, t_home *home);

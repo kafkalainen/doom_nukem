@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/21 17:50:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 13:24:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,14 @@ int		create_map_file(t_home *home)
 	int		fd;
 	char	*tmp = "./map_files/test.DATA";
 
-	fd = OPEN_FILE(tmp, WRITE_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST, 0644);
+	doom_open(&fd, (const char**)&tmp,
+		WRITE_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST);
 	if (fd < 0)
 		return (-1);
 	write_texture_data(fd, home);
 	// write audio data
 	// write sector data
-	if (CLOSE_FILE(fd) == -1)
+	if (doom_close(&fd) == -1)
 		return (-1);
 	return (1);
 }

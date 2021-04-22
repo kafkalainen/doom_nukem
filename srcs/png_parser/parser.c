@@ -6,35 +6,37 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 16:17:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 13:05:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_png		png_parser(char *path)
+t_png	png_parser(char *path)
 {
 	int			fd;
 	t_png		png;
 
 	setup_parser(&png, MAX_SIZE);
-	if ((fd = OPEN_FILE(path, READ_ONLY)) < 0)
+	doom_open(&fd, (const char **)&path, READ_ONLY);
+	if (fd < 0)
 		error_output("Failed to open file\n");
 	else
 	{
-		png.source.size = READ_FILE(fd, png.source.buf, MAX_SIZE);
+		doom_read((ssize_t *)&png.source.size, &fd,
+			(void **)&png.source.buf, MAX_SIZE);
 		if (png.source.size <= 0)
 			error_output("Failed to read file\n");
 		else if (png.source.size >= MAX_SIZE)
 			error_output("File is too large\n");
-		if (CLOSE_FILE(fd) == -1)
+		if (doom_close(&fd) == -1)
 			error_output("Could not close file\n");
 		parse_png(&png);
 	}
 	return (png);
 }
 
-void		parse_data(t_png *png)
+void	parse_data(t_png *png)
 {
 	t_crc crc;
 

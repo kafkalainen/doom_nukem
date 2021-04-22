@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/17 15:42:45 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/22 11:44:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,24 @@
 */
 
 void			paeth(unsigned char *out, unsigned char *sl,
-				t_scan_helper s);
+					t_scan_helper s);
 int				predict(int a, int b, int c);
 void			avg(unsigned char *out, unsigned char *sl,
-				t_scan_helper s);
+					t_scan_helper s);
 void			up(unsigned char *out, unsigned char *sl,
-				t_scan_helper s);
+					t_scan_helper s);
 void			sub(unsigned char *out, unsigned char *sl,
-				t_scan_helper s);
+					t_scan_helper s);
 
 /*
 ** CRC functions
 */
 
 void			verify_crc(unsigned char *crc_buf, unsigned char *buf,
-				int size, t_crc *crc);
+					int size, t_crc *crc);
 unsigned int	calculate_crc(unsigned char *buf, int size, t_crc *crc);
 unsigned int	update_crc(unsigned int crcbuf, unsigned char *buf,
-				int size, t_crc *crc);
+					int size, t_crc *crc);
 void			init_crc_table(t_crc *crc);
 
 /*
@@ -96,12 +96,12 @@ unsigned int	swap_channels(unsigned int pixel);
 */
 
 void			process_scanline(unsigned char *out,
-				unsigned char *sl, t_scan_helper s);
+					unsigned char *sl, t_scan_helper s);
 void			remove_padding(t_png *png, unsigned char *out,
-				unsigned char *in);
+					unsigned char *in);
 void			setup_padding_helper(t_padding_helper *h, t_png *png);
 void			unfilter_scanlines(t_png *png, unsigned char *out,
-				unsigned char *in);
+					unsigned char *in);
 void			convert_to_pixels(t_png *png);
 
 /*
@@ -109,51 +109,51 @@ void			convert_to_pixels(t_png *png);
 */
 
 unsigned int	ft_read_bits(unsigned int *bitp,
-				const unsigned char *bitstream, unsigned int nbits);
+					const unsigned char *bitstream, unsigned int nbits);
 unsigned char	ft_read_bit(unsigned int *bitp,
-				const unsigned char *bitstream);
+					const unsigned char *bitstream);
 void			ft_inflate(t_png *png);
 void			ft_inflate_data(t_png *png);
 void			go_go_huffman(t_png *png, const unsigned char *in,
-				t_huffman *h);
+					t_huffman *h);
 void			ft_inflate_uncompressed(t_png *png, const unsigned char *in,
-				unsigned int *bp, unsigned int *pos);
+					unsigned int *bp, unsigned int *pos);
 void			ft_inflate_huffman(t_png *png, const unsigned char *in,
-				t_huffman *h);
+					t_huffman *h);
 unsigned int	get_deflate_tree_one(int i);
 void			fill_out(t_png *png, t_huffman_helper *s,
-				t_huffman *h, const unsigned char *in);
+					t_huffman *h, const unsigned char *in);
 void			dynamic_code_cycle(t_dynamic_helper *d, const unsigned char *in,
-				unsigned int *bp);
+					unsigned int *bp);
 unsigned int	ft_huffman_decode_symbol(const unsigned char *in,
-				unsigned int *bp, t_huffman_tree *codetree,
-				unsigned int inlength);
+					unsigned int *bp, t_huffman_tree *codetree,
+					unsigned int inlength);
 void			fill_nodes(t_tree_helper *h, t_huffman_tree *tree,
-				const unsigned int *bitlen);
+					const unsigned int *bitlen);
 void			check_code(t_huffman_helper *s, t_png *png, t_huffman *h);
 void			repeat_codes(t_dynamic_helper *d, const unsigned char *in,
-				unsigned int *bp);
+					unsigned int *bp);
 void			get_nbits_replength(unsigned int *nbits, unsigned int code,
-				unsigned int *replength);
+					unsigned int *replength);
 void			ft_huffman_tree_create_lengths(t_huffman_tree *tree,
-				const unsigned int *bitlen);
+					const unsigned int *bitlen);
 void			ft_get_tree_inflate_dynamic(t_huffman *h,
-				const unsigned char *in, unsigned int inlength);
+					const unsigned char *in, unsigned int inlength);
 unsigned int	*get_fixed_deflate_codetree(void);
 void			init_huffman_tree(t_huffman_tree *tree,
-				unsigned int *buffer,
-				unsigned int num_codes, unsigned int maxbitlen);
+					unsigned int *buffer,
+					unsigned int num_codes, unsigned int maxbitlen);
 void			init_huffman_tree_codetree_fixed(t_huffman_tree *tree,
-				unsigned int num_codes, unsigned int maxbitlen);
+					unsigned int num_codes, unsigned int maxbitlen);
 unsigned int	get_deflate_tree_zero(int i);
 void			get_dst_base_extra(unsigned int *distance,
-				unsigned int *num_extra_bits_dst, unsigned int code_dst);
+					unsigned int *num_extra_bits_dst, unsigned int code_dst);
 void			get_length_base_extra(unsigned int *length,
-				unsigned int *num_extra_bits_dst, unsigned int code);
+					unsigned int *num_extra_bits_dst, unsigned int code);
 void			setup_tree_helper(t_tree_helper *h, const unsigned int *bitlen,
-				t_huffman_tree *tree);
+					t_huffman_tree *tree);
 void			setup_dynamic_helper(t_dynamic_helper *d,
-				const unsigned char *in, unsigned int *bp);
+					const unsigned char *in, unsigned int *bp);
 /*
 ** Utility functions
 */
@@ -163,7 +163,7 @@ void			check_end(t_png *png);
 int				check_depth(int depth);
 int				get_big_endian(unsigned char *buf);
 void			get_current_chunk(t_chunk *chunk,
-				unsigned char *buf, int i);
+					unsigned char *buf, int i);
 int				get_color_rgba(int depth);
 int				get_color_rgb(int depth);
 int				get_color_lum(int depth);

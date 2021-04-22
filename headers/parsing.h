@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 19:08:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 15:13:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void		add_point(t_point **point, t_point *new);
 int			add_points(t_sector *sector, unsigned char *buf,
-	unsigned int **pos);
+				unsigned int **pos);
 void		calc_normal_vectors(t_home *home);
 int			check_if_lines_cut(t_sector *sector);
 void		close_linkedlist(t_point **point);
@@ -28,9 +28,10 @@ t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos);
 t_point		*new_point(t_xy x0, int idx);
 char		*parse_colour_data(char *ptr, t_texture *tex);
 int			parse_coordinates(t_xy	*coord, int *tex_id,
-	unsigned int ***pos, unsigned char **buf);
+				unsigned int ***pos, unsigned char **buf);
 int			parse_number_data(t_sector *new_sector, unsigned char *buf,
-	unsigned int *pos);
+				unsigned int *pos);
+void		parse_sector_data(unsigned char *buf, t_home *home);
 int			parse_pixel_data(char *ptr, t_texture *tex);
 int			parse_xpm_data(unsigned char *buf, t_texture **tex);
 

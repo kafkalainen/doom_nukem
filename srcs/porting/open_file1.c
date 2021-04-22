@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 11:42:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 15:14:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void		free_sectors_and_exit(int error_code, t_home *home, size_t n)
+void	free_sectors_and_exit(int error_code, t_home *home, size_t n)
 {
 	if (error_code == 1)
 	{
@@ -27,7 +27,7 @@ void		free_sectors_and_exit(int error_code, t_home *home, size_t n)
 	exit(EXIT_FAILURE);
 }
 
-void		parse_sector_data(unsigned char *buf, t_home *home)
+void	parse_sector_data(unsigned char *buf, t_home *home)
 {
 	unsigned int	pos;
 	unsigned int	i;
@@ -55,26 +55,28 @@ void		parse_sector_data(unsigned char *buf, t_home *home)
 	home->sectors[i] = NULL;
 }
 
-int			load_map_file(t_home *home, char *path)
+int	load_map_file(t_home *home, char *path)
 {
 	int				fd;
-	unsigned char	buf[BUF_SIZE + 1];
-	int				size;
+	unsigned char	*buf;
+	ssize_t			size;
 
-	if ((fd = OPEN_FILE(path, READ_ONLY)) < 0)
+	buf = (unsigned char *)malloc(sizeof(unsigned char) * (BUF_SIZE + 1));
+	if (!buf)
+		error_output("ERROR: Failed allocate memory for the map.");
+	doom_open(&fd, (const char **)&path, READ_ONLY);
+	if (fd < 0)
 		error_output("ERROR: Failed to open map");
 	else
 	{
-		size = READ_FILE(fd, buf, BUF_SIZE);
+		doom_read(&size, &fd, (void **)&buf, BUF_SIZE);
 		if (size <= 0)
 			error_output("ERROR: Failed to read map.");
-		else if (size >= BUF_SIZE)
-			error_output("ERROR: Map is too large.");
-		if (CLOSE_FILE(fd) == -1)
+		if (doom_close(&fd) == -1)
 			error_output("ERROR: Could not close the file.");
 		buf[size] = '\0';
-		ft_putendl("Mapdata read to buffer, proceeding.");
 		parse_sector_data(buf, home);
+		free(buf);
 		validate_sectors_data(home);
 		calc_normal_vectors(home);
 	}
