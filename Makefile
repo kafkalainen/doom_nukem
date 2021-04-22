@@ -102,14 +102,6 @@ HEADERS = \
 	headers$(SLASH)syscalls_linux.h \
 	headers$(SLASH)vectors.h \
 
-ABS_DIR = $(shell pwd)
-SDL_ORIG = $(ABS_DIR)/SDL2-2.0.14/
-SDL_NEW = $(ABS_DIR)/SDL2/
-SDL_INC = SDL2/include/SDL2/
-SDL_MIXER_ORIG = $(ABS_DIR)/SDL2_mixer-2.0.4/
-SDL_MIXER_NEW = $(ABS_DIR)/SDL2_mixer/
-SDL_MIXER_INC = SDL2_mixer/include/SDL2/
-
 WIN_INCLUDE_PATHS = \
 	-ISDL2-2.0.14\i686-w64-mingw32\include\SDL2 \
 	-ISDL2_mixer-2.0.4\i686-w64-mingw32\include\SDL2 \
@@ -120,17 +112,13 @@ WIN_LIBRARY_PATHS = \
 	-LSDL2-2.0.14\i686-w64-mingw32\lib \
 	-LSDL2_mixer-2.0.4\i686-w64-mingw32\lib \
 	-Llibft
-LINUX_LIBRARY_PATHS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
 LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lm -g
 
 CC = gcc
-WIN_CFLAGS = -Wall -Wextra -Werror -O3
-LINUX_CFLAGS = -Wall -Wextra -Werror -O3 -g
-LINUX_CFLAGS += $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
+WIN_CFLAGS = -Wall -Wextra -Werror -O3 -g
+LINUX_CFLAGS = 
 
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lm
-
-CORES = $(shell echo 2+$(shell cat /proc/cpuinfo | grep processor | wc -l) | bc)
 
 #mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 #mkfile_dir := $(dir $(mkfile_path))
@@ -164,8 +152,8 @@ ifeq ($(TARGET_SYSTEM),Windows)
 	WHITE := [37m
 else
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
-	LIBS = $(LINUX_LIBRARY_PATHS)
-	CFLAGS = $(LINUX_CFLAGS)
+	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
+	CFLAGS = -Wall -Wextra -Werror -O3 -g $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
 	MKDIR := mkdir -p
@@ -178,6 +166,14 @@ else
 	MAGENTA = "\033[0;35m"
 	CYAN = "\033[0;36m"
 	WHITE = "\033[0;37m"
+	ABS_DIR = $(shell pwd)
+	SDL_ORIG = $(ABS_DIR)/SDL2-2.0.14/
+	SDL_NEW = $(ABS_DIR)/SDL2/
+	SDL_INC = SDL2/include/SDL2/
+	SDL_MIXER_ORIG = $(ABS_DIR)/SDL2_mixer-2.0.4/
+	SDL_MIXER_NEW = $(ABS_DIR)/SDL2_mixer/
+	SDL_MIXER_INC = SDL2_mixer/include/SDL2/
+	CORES = $(shell echo 2+$(shell cat /proc/cpuinfo | grep processor | wc -l) | bc)
 endif
 
 S = srcs
@@ -189,12 +185,6 @@ OBJ = $(SRC:$S%=$O%.o)
 .PHONY: all clean fclean re sdl sdl-mixer
 
 all: $(NAME)
-
-echo:
-	echo INCLUDES: $(INCLUDES)
-	echo LIBS:  $(LIBS)
-	echo CFLAGS: $(CFLAGS)
-	echo LDFLAGS: $(LDFLAGS)
 
 $(SDL_NEW):
 ifeq ($(TARGET_SYSTEM), Linux)
@@ -273,6 +263,9 @@ cleanobj:
 ifneq ($(wildcard $(OBJ)),)
 	@$(RM) $(wildcard $(OBJ))
 endif
+
+echo:
+	ECHO "$(OBJ)"
 
 cleanobjdir: cleanobj
 ifeq ($(TARGET_SYSTEM), Linux)

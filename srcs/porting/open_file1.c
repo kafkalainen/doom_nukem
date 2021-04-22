@@ -71,7 +71,7 @@ int	load_map_file(t_home *home, char *path)
 	buf = (unsigned char *)malloc(sizeof(unsigned char) * (BUF_SIZE + 1));
 	if (!buf)
 		error_output("ERROR: Failed allocate memory for the map.");
-	doom_open(&fd, (const char **)&path, READ_ONLY);
+	doom_open(&fd, (const char **)&path, TEXT_ONLY);
 	if (fd < 0)
 		error_output("ERROR: Failed to open map");
 	else
