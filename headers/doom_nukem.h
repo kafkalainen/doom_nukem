@@ -16,6 +16,7 @@
 # include <fcntl.h>
 # include <dirent.h>
 # include "time.h"
+# include "math.h"
 # ifdef __unix__
 #  define OS_WINDOWS 0
 #  define READ_ONLY O_RDONLY
@@ -24,7 +25,6 @@
 #  define CHECK_EXIST O_EXCL
 #  define CREATE_FILE O_CREAT
 #  define TRUNCATE O_TRUNC
-#  include <math.h>
 #  include <string.h>
 #  include <unistd.h>
 #  include "../SDL2/include/SDL2/SDL.h"
@@ -44,8 +44,9 @@
 #  define TRUNCATE _O_TRUNC
 #  include <io.h>
 #  include <stdio.h>
-#  include "SDL2_mixer_win/include/SDL2/SDL_mixer.h"
-#  include "../headers/syscalls_linux.h"
+#  include <stdlib.h>
+#  include "../SDL2-2.0.14/i686-w64-mingw32/include/SDL2/SDL.h"
+#  include "../SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2/SDL_mixer.h"
 
 # endif
 
