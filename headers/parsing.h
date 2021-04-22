@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 15:13:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 15:45:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		close_linkedlist(t_point **point);
 int			free_points(t_point **head, unsigned int nbr_of_walls);
 void		free_sectors(t_home *home);
 int			set_to_null(t_texture **tex, int error);
-void		free_sectors_and_exit(int error_code, t_home *home, size_t n);
+int			free_sectors_and_exit(int error_code, t_home *home, size_t n);
 void		free_sectors_n(t_home *home, size_t	n);
 t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos);
 t_point		*new_point(t_xy x0, int idx);
@@ -31,7 +31,7 @@ int			parse_coordinates(t_xy	*coord, int *tex_id,
 				unsigned int ***pos, unsigned char **buf);
 int			parse_number_data(t_sector *new_sector, unsigned char *buf,
 				unsigned int *pos);
-void		parse_sector_data(unsigned char *buf, t_home *home);
+int			parse_sector_data(unsigned char *buf, t_home *home);
 int			parse_pixel_data(char *ptr, t_texture *tex);
 int			parse_xpm_data(unsigned char *buf, t_texture **tex);
 
