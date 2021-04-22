@@ -116,8 +116,6 @@ LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lm -g
 
 CC = gcc
 WIN_CFLAGS = -Wall -Wextra -Werror -O3 -g
-LINUX_CFLAGS = 
-
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lm
 
 #mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -138,8 +136,8 @@ ifeq ($(TARGET_SYSTEM),Windows)
 	LIBS = $(WIN_LIBRARY_PATHS)
 	CFLAGS = $(WIN_CFLAGS)
 	LDFLAGS = $(WIN_LFLAGS)
-	SDL_NEW = .\SDL2-2.0.14\i686-w64-mingw32
-	SDL_MIXER_NEW = .\SDL2_mixer-2.0.4\i686-w64-mingw32
+	SDL_NEW = SDL2-2.0.14\i686-w64-mingw32
+	SDL_MIXER_NEW = SDL2_mixer-2.0.4\i686-w64-mingw32
 	SLASH = \\
 	MKDIR = mkdir
 	RM = del /s/q
