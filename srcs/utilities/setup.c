@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 19:04:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 15:00:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 		error_output_sdl("Fatal: Failed to create a window.", home);
 	SDL_SetWindowPosition(home->win.window,
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-	frame->draw_surf = SDL_GetWindowSurface(home->win.window);
-	if (frame->draw_surf == NULL)
+	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
+	if (home->win.ScreenSurface == NULL)
 		error_output_sdl("Fatal: Failed to get window surface", home);
 	frame->min_step = 0.002454369f;
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
@@ -67,6 +67,9 @@ void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	home->t.fps = 0;
 	home->t.frame_time_last = SDL_GetTicks();
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
+	if (!(frame->buffer = (Uint32*)malloc(sizeof(Uint32) *
+		(Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT)))
+		error_output("Memory allocation failed!\n");
 	home = init_sdl(home, frame);
 	ret = load_audio(&plr->audio);
 	if (ret)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/21 13:51:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 14:45:00 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		draw_minimap(t_home *home, t_frame *frame)
 		{
 			draw_line(center_to_screen(temp->x0),
 				center_to_screen(temp->next->x0),
-				greenyellow, frame->draw_surf);
+				greenyellow, frame->buffer);
 			temp = temp->next;
 			j++;
 		}
@@ -57,10 +57,10 @@ static void		draw_player(t_frame *frame)
 		(t_xy){3.0f, 3.0f}, frame, yellow);
 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
 		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
-		vec2_mul((t_xy){1.0f, 0.0f}, 400))), lightgreen, frame->draw_surf);
+		vec2_mul((t_xy){1.0f, 0.0f}, 400))), lightgreen, frame->buffer);
 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
 		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
-		vec2_mul((t_xy){0.0f, 1.0f}, 400))), lightgreen, frame->draw_surf);
+		vec2_mul((t_xy){0.0f, 1.0f}, 400))), lightgreen, frame->buffer);
 }
 
 static void		draw_info(t_frame *frame, t_player *plr, int nb_fps)

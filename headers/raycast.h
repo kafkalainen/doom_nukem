@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 20:35:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 14:35:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_frame
 	int				offset;
 	float			min_step;
 	int				old_idx;
-	SDL_Surface		*draw_surf;
+	Uint32			*buffer;
 	t_xy			plr_offset;
 	float			pxl_offset;
 	t_ray_pt		left;

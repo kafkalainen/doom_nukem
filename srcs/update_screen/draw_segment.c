@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_segment.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 14:06:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 14:48:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ static void	draw_vertical_floor_strip(t_xyz offset, int height,
 	while (cur_y < height)
 	{
 		if (cur_y + offset.y >= 0 && cur_y + offset.y < SCREEN_HEIGHT)
-			put_pixel(frame->draw_surf, offset.x,
+			put_pixel(frame->buffer, offset.x,
 				cur_y + offset.y,
 				colour_scale(colour, scale > 1 ? 1 : scale));
 		cur_y++;
@@ -235,12 +235,12 @@ void	draw_segment(t_frame *frame, t_home *home, t_player *plr, int wall)
 	{
 		colour = get_floor(home->sectors[frame->idx]->tex_floor);
 		draw_line(vec3_to_vec2(frame->top_left),
-			vec3_to_vec2(frame->top_right), colour, frame->draw_surf);
+			vec3_to_vec2(frame->top_right), colour, frame->buffer);
 		draw_line(vec3_to_vec2(frame->bottom_left),
-			vec3_to_vec2(frame->bottom_right), colour, frame->draw_surf);
+			vec3_to_vec2(frame->bottom_right), colour, frame->buffer);
 		draw_line(vec3_to_vec2(frame->top_left),
-			vec3_to_vec2(frame->bottom_left), colour, frame->draw_surf);
+			vec3_to_vec2(frame->bottom_left), colour, frame->buffer);
 		draw_line(vec3_to_vec2(frame->top_right),
-			vec3_to_vec2(frame->bottom_right), colour, frame->draw_surf);
+			vec3_to_vec2(frame->bottom_right), colour, frame->buffer);
 	}
 }

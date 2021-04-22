@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/21 19:09:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/22 16:45:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ int	main(int argc, char **argv)
 		fps_timer(&home.t);
 		update_player(&plr, &home, &e);
 		update_screen(&home, &frame, &plr);
+		render_buffer(frame.buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
-		clear_surface(frame.draw_surf);
-		SDL_FreeSurface(frame.draw_surf);
+		clear_surface(frame.buffer);
 	}
 	free_sectors(&home);
+	free(frame.buffer);
 	cleanup_audio(&plr.audio);
 	ft_putendl("User closed the window");
 	SDL_Quit();
