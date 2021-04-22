@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/21 19:11:37 by jnivala          ###   ########.fr        #
+#    Updated: 2021/04/22 12:46:48 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ SRCS = \
 	utilities$(SLASH)pxl_numbers.c \
 	utilities$(SLASH)setup.c \
 	utilities$(SLASH)str_pxl.c \
+	utilities$(SLASH)system_calls.c \
 	vec_math$(SLASH)vec2_a.c \
 	vec_math$(SLASH)vec2_b.c \
 	vec_math$(SLASH)vec2_c.c \
@@ -97,15 +98,9 @@ HEADERS = \
 	headers$(SLASH)program.h \
 	headers$(SLASH)raycast.h \
 	headers$(SLASH)sector.h \
+	headers$(SLASH)syscalls_windows.h \
+	headers$(SLASH)syscalls_linux.h \
 	headers$(SLASH)vectors.h \
-
-ABS_DIR = $(shell pwd)
-SDL_ORIG = $(ABS_DIR)/SDL2-2.0.14/
-SDL_NEW = $(ABS_DIR)/SDL2/
-SDL_INC = SDL2/include/SDL2/
-SDL_MIXER_ORIG = $(ABS_DIR)/SDL2_mixer-2.0.4/
-SDL_MIXER_NEW = $(ABS_DIR)/SDL2_mixer/
-SDL_MIXER_INC = SDL2_mixer/include/SDL2/
 
 WIN_INCLUDE_PATHS = \
 	-ISDL2-2.0.14\i686-w64-mingw32\include\SDL2 \
@@ -117,17 +112,13 @@ WIN_LIBRARY_PATHS = \
 	-LSDL2-2.0.14\i686-w64-mingw32\lib \
 	-LSDL2_mixer-2.0.4\i686-w64-mingw32\lib \
 	-Llibft
-LINUX_LIBRARY_PATHS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
 LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lm -g
 
 CC = gcc
-WIN_CFLAGS = -Wall -Wextra -Werror -O3
-LINUX_CFLAGS = -Wall -Wextra -Werror -O3 -g
-LINUX_CFLAGS += $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
+WIN_CFLAGS = -Wall -Wextra -Werror -O3 -g
+LINUX_CFLAGS = 
 
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lm
-
-CORES = $(shell echo 2+$(shell cat /proc/cpuinfo | grep processor | wc -l) | bc)
 
 #mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 #mkfile_dir := $(dir $(mkfile_path))
@@ -147,10 +138,11 @@ ifeq ($(TARGET_SYSTEM),Windows)
 	LIBS = $(WIN_LIBRARY_PATHS)
 	CFLAGS = $(WIN_CFLAGS)
 	LDFLAGS = $(WIN_LFLAGS)
-	SDL2_BUILD := .\SDL2-2.0.14\i686-w64-mingw32
+	SDL_NEW = .\SDL2-2.0.14\i686-w64-mingw32
+	SDL_MIXER_NEW = .\SDL2_mixer-2.0.4\i686-w64-mingw32
 	SLASH = \\
 	MKDIR = mkdir
-	RM = del $(SLASH)s/q
+	RM = del /s/q
 	RESET := [0m
 	RED := [31m
 	GREEN := [32m
@@ -161,8 +153,8 @@ ifeq ($(TARGET_SYSTEM),Windows)
 	WHITE := [37m
 else
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
-	LIBS = $(LINUX_LIBRARY_PATHS)
-	CFLAGS = $(LINUX_CFLAGS)
+	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
+	CFLAGS = -Wall -Wextra -Werror -O3 -g $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
 	MKDIR := mkdir -p
@@ -175,6 +167,14 @@ else
 	MAGENTA = "\033[0;35m"
 	CYAN = "\033[0;36m"
 	WHITE = "\033[0;37m"
+	ABS_DIR = $(shell pwd)
+	SDL_ORIG = $(ABS_DIR)/SDL2-2.0.14/
+	SDL_NEW = $(ABS_DIR)/SDL2/
+	SDL_INC = SDL2/include/SDL2/
+	SDL_MIXER_ORIG = $(ABS_DIR)/SDL2_mixer-2.0.4/
+	SDL_MIXER_NEW = $(ABS_DIR)/SDL2_mixer/
+	SDL_MIXER_INC = SDL2_mixer/include/SDL2/
+	CORES = $(shell echo 2+$(shell cat /proc/cpuinfo | grep processor | wc -l) | bc)
 endif
 
 S = srcs
@@ -183,15 +183,9 @@ LIBFT = libft$(SLASH)libft.a
 SRC = $(addprefix $S$(SLASH), $(SRCS))
 OBJ = $(SRC:$S%=$O%.o)
 
-.PHONY: all clean fclean re sdl sdl-mixer
+.PHONY: all clean fclean re
 
 all: $(NAME)
-
-echo:
-	echo INCLUDES: $(INCLUDES)
-	echo LIBS:  $(LIBS)
-	echo CFLAGS: $(CFLAGS)
-	echo LDFLAGS: $(LDFLAGS)
 
 $(SDL_NEW):
 ifeq ($(TARGET_SYSTEM), Linux)
@@ -213,7 +207,7 @@ ifeq ($(TARGET_SYSTEM), Linux)
 	make -j$(CORES) -C $(SDL_NEW) ; \
 	fi
 else
-	@IF NOT EXIST "SDL2-2.0.14\x86_64-w64-mingw32" ( install.bat )\
+	@IF NOT EXIST $(SDL_NEW) ( install.bat )\
 	ELSE ECHO $(GREEN)"Folder exists."$(RESET)
 endif
 
@@ -237,7 +231,7 @@ ifeq ($(TARGET_SYSTEM), Linux)
 	make -j$(CORES) -C $(SDL_MIXER_NEW) ; \
 	fi
 else
-	@IF NOT EXIST "SDL2-2.0.14\x86_64-w64-mingw32" ( install.bat )\
+	@IF NOT EXIST $(SDL_MIXER_NEW) ( install_mixer.bat )\
 	ELSE ECHO $(GREEN)"Folder exists."$(RESET)
 endif
 
@@ -296,6 +290,8 @@ ifeq ($(TARGET_SYSTEM), Windows)
 	@IF EXIST SDL2-2.0.14 ( rd /s /q "SDL2-2.0.14" )
 	@IF EXIST SDL2_mixer-2.0.4 ( $(RM) "SDL2_mixer-2.0.4" )
 	@IF EXIST SDL2_mixer-2.0.4 ( rd /s /q "SDL2_mixer-2.0.4" )
+	@IF EXIST "SDL2_mixer-devel-2.0.4-mingw.tar.gz" ( $(RM) "SDL2_mixer-devel-2.0.4-mingw.tar.gz" )
+	@IF EXIST "SDL2-devel-2.0.14-mingw.tar.gz" ( $(RM) "SDL2-devel-2.0.14-mingw.tar.gz" )
 	@IF EXIST $(NAME) ( $(RM) "$(NAME)") \
 	ELSE ( ECHO $(CYAN)No binary to remove. $(RESET) )
 else

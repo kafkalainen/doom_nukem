@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 15:00:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/22 17:03:30 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 
 	ft_putstr("You chose: ");
 	ft_putendl_fd(mapname, 1);
-	load_map_file(home, mapname);
+	if (load_map_file(home, mapname))
+		exit(EXIT_FAILURE);
 	transform_world_view(home, -PLR_DIR);
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
