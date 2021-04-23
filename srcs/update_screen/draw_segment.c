@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 14:48:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/23 15:02:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,20 +170,23 @@ static void	draw_vertical_wall_strip(t_xy offset, size_t height,
 	size_t	cur_y;
 	t_xyz	corr_texel;
 	t_xyz	texel;
-	int		i;
+	Uint32	colour;
 
-	i = 0;
 	cur_y = 0;
 	texel = frame->uv_top_left;
 	corr_texel = texel;
 	fit_to_screen_space(&offset, &texel, &height, &frame->uv_step.y);
 	while (cur_y < height)
 	{
-		if (i++ % 16)
+		if (cur_y % 16)
 			corr_texel = inv_z(texel);
 		if (cur_y + offset.y >= 0 && cur_y + offset.y < SCREEN_HEIGHT)
-			draw_tex_pixel(tex, corr_texel,
-				(t_xy){offset.x, cur_y + offset.y}, frame);
+		{
+			colour = colour_scale(get_texel(corr_texel.x * (tex->w - 1),
+				corr_texel.y * (tex->h - 1), tex),
+				frame->left.wall->wall_facing);
+			put_pixel(frame->buffer, offset.x, cur_y + offset.y, colour);
+		}
 		cur_y++;
 		texel.y += frame->uv_step.y;
 	}
@@ -228,7 +231,7 @@ void	draw_segment(t_frame *frame, t_home *home, t_player *plr, int wall)
 	if (wall)
 		wall_tex = get_tex(frame->left.wall->idx, home->editor_tex);
 	calc_distances(frame, plr);
-	calc_wall_texels(frame, wall_tex);
+	calc_wall_texels(frame, wall_tex->w);
 	if (plr->input.wireframe == 1)
 		draw_vertically(frame, home, wall_tex, wall);
 	else

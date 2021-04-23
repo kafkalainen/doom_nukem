@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_wall_texels.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 20:33:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 13:02:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ static void	calc_offsets(t_frame *frame)
 		set_offset_from_left_side(frame);
 }
 
-void	calc_wall_texels(t_frame *frame, t_texture *tex)
+void	calc_wall_texels(t_frame *frame, int tex_width)
 {
 	frame->visible_wall_dist = vec2_eucl_dist(frame->left.l_pt,
 			frame->left.r_pt);
 	frame->full_wall_dist = vec2_eucl_dist(frame->left.wall->x0,
 			frame->left.wall->next->x0);
 	frame->ratio = frame->visible_wall_dist / frame->full_wall_dist;
-	frame->tex_mult = frame->full_wall_dist / tex->w;
+	frame->tex_mult = frame->full_wall_dist / tex_width;
 	frame->unvisible_l_side = vec2_eucl_dist(frame->left.wall->x0,
 			frame->left.l_pt) / frame->full_wall_dist;
 	calc_offsets(frame);

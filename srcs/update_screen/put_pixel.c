@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:34:26 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/22 16:52:55 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/22 17:22:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,4 @@ void			put_pixel(Uint32 *buffer, int x, int y, int color)
 	// buffer[(SCREEN_WIDTH * y) + x] = color;
 	pixel = buffer + (SCREEN_WIDTH * y) + x;
 	*pixel = color;
-}
-
-void			clear_surface(Uint32 *buffer)
-{
-	int		i;
-	int		pixel_amount;
-
-	i = 0;
-	pixel_amount = SCREEN_HEIGHT * SCREEN_WIDTH;
-	while (i < pixel_amount)
-	{
-		*buffer++ = 0xFF000000;
-		i++;
-	}
 }
