@@ -1,6 +1,8 @@
 name: Norminette-beta CI
 
 on:
+  push:
+    branches: [ jnivala ]
   pull_request:
     branches: [ main ]
 
