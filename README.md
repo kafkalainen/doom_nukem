@@ -22,7 +22,8 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - pthread
 
 ## Joonas
-- Github best-practises + norminette action
+- Github best-practises
+- Merging filereading
 
 ## Tomppa
 - Map editor

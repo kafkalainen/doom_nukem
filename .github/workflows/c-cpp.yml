@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Test build on Ubuntu based systems.
 
 on:
   pull_request:
@@ -7,8 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SDL2_CONFIG: /home/runner/work/Doom-Nukem/Doom-Nukem/SDL2/sdl2-config
     steps:
     - uses: actions/checkout@v2
     - name: make
       run: make
-    
