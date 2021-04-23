@@ -17,8 +17,7 @@ jobs:
         architecture: 'x64'
     - name: configure
       run: |
-        python3 -m pip install --upgrade pip setuptools
-        sudo mkdir -p /usr/local/share/norminette-beta && cd /usr/local/share/norminette-beta
+        mkdir -p /usr/local/share/norminette-beta && cd /usr/local/share/norminette-beta
         python3 -m venv venv
         source venv/bin/activate
         pip install norminette
