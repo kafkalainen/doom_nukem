@@ -22,7 +22,6 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - pthread
 
 ## Joonas
-- Port features from Wolf3d
 - Github best-practises + norminette action
 
 ## Tomppa
