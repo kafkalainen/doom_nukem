@@ -1,8 +1,6 @@
-name: C/C++ CI
+name: Test build on Ubuntu based systems.
 
 on:
-  push:
-    branches: [ jnivala ]
   pull_request:
     branches: [ main ]
 
