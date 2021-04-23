@@ -91,6 +91,7 @@ void	fps_timer(t_time *t);
 int		load_audio(t_audio *audio);
 void	map_error_output(int i, t_home *home);
 void	play_footsteps(t_player *plr);
+void	read_error_output(char *msg, unsigned char **line);
 void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame);
 void	translate_world_view(t_home *home, t_xy step);
 void	transform_world_view(t_home *home, float delta_dir);

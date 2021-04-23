@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:35:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 16:18:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:35:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int		get_color_luma(int color_depth)
+int	get_color_luma(int color_depth)
 {
 	if (color_depth == 1)
 		return (LUM_ALPHA_1);
@@ -26,7 +26,7 @@ int		get_color_luma(int color_depth)
 		return (-1);
 }
 
-int		get_color_lum(int depth)
+int	get_color_lum(int depth)
 {
 	if (depth == 1)
 		return (LUM_1);
@@ -40,7 +40,7 @@ int		get_color_lum(int depth)
 		return (-1);
 }
 
-int		get_color_rgb(int depth)
+int	get_color_rgb(int depth)
 {
 	if (depth == 8)
 		return (RGB_8);
@@ -50,7 +50,7 @@ int		get_color_rgb(int depth)
 		return (-1);
 }
 
-int		get_color_rgba(int depth)
+int	get_color_rgba(int depth)
 {
 	if (depth == 8)
 		return (RGBA_8);

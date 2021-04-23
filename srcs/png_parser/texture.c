@@ -6,18 +6,18 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 17:15:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:15:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32			swap_channels(unsigned int color)
+Uint32	swap_channels(unsigned int color)
 {
-	unsigned int red;
-	unsigned int green;
-	unsigned int blue;
-	unsigned int alpha;
+	unsigned int	red;
+	unsigned int	green;
+	unsigned int	blue;
+	unsigned int	alpha;
 
 	red = (color & 0xFF000000) >> 24;
 	green = (color & 0x00FF0000) >> 16;
@@ -43,10 +43,10 @@ unsigned int	add_pixel(unsigned char *data, int bpp, int pos)
 	return (pixel);
 }
 
-void			convert_to_unsigned_int(t_texture *tex, t_png *png)
+void	convert_to_unsigned_int(t_texture *tex, t_png *png)
 {
-	unsigned int x;
-	unsigned int y;
+	unsigned int	x;
+	unsigned int	y;
 
 	y = 0;
 	while (y < png->height)
@@ -55,20 +55,23 @@ void			convert_to_unsigned_int(t_texture *tex, t_png *png)
 		while (x < png->width)
 		{
 			tex->pixels[(y * tex->w) + x] = add_pixel(png->pixels, tex->bpp,
-				((y * tex->pitch) + x * tex->bpp));
+					((y * tex->pitch) + x * tex->bpp));
 			x++;
 		}
 		y++;
 	}
 }
 
-t_texture		*create_texture(t_png *png, int idx)
+t_texture	*create_texture(t_png *png, int idx)
 {
 	t_texture	*tex;
 
-	if (!(tex = (t_texture*)malloc(sizeof(t_texture))))
+	tex = (t_texture *)malloc(sizeof(t_texture));
+	if (!tex)
 		error_output("Memory allocation of t_texture struct failed\n");
-	if (!(tex->source = (unsigned char *)malloc(sizeof(unsigned char) * png->source.size)))
+	tex->source = (unsigned char *)malloc(sizeof(unsigned char)
+			* png->source.size);
+	if (!tex->source)
 		error_output("Memory allocation of editor pixel pointer failed\n");
 	ft_memcpy(tex->source, png->source.buf, png->source.size);
 	tex->h = png->height;
@@ -81,8 +84,9 @@ t_texture		*create_texture(t_png *png, int idx)
 	tex->source_size = png->source.size;
 	tex->pitch = (tex->w * tex->bpp);
 	tex->idx = idx;
-	if (!(tex->pixels = (unsigned int *)malloc(sizeof(unsigned int) *
-		(tex->h * tex->pitch))))
+	tex->pixels = (unsigned int *)malloc(sizeof(unsigned int)
+			* (tex->h * tex->pitch));
+	if (!tex->pixels)
 		error_output("Memory allocation of pixel pointer failed\n");
 	convert_to_unsigned_int(tex, png);
 	return (tex);

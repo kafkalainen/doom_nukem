@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:23:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 16:18:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:21:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	get_current_chunk(t_chunk *chunk, unsigned char *buf, int i)
 	ft_memcpy(chunk->type, buf + i + 4, 4);
 }
 
-int		get_big_endian(unsigned char *buf)
+int	get_big_endian(unsigned char *buf)
 {
-	return ((buf[0] << 24) |
-		(buf[1] << 16) |
-		(buf[2] << 8) |
-		buf[3]);
+	return ((buf[0] << 24)
+		| (buf[1] << 16)
+		| (buf[2] << 8)
+		| buf[3]);
 }
 
-int		check_depth(int depth)
+int	check_depth(int depth)
 {
 	return ((depth == 1 || depth == 2 || depth == 4 ||
 		depth == 8 || depth == 16 ? 1 : 0));

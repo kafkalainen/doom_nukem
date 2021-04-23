@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/22 13:25:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 14:58:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 int	get_next_breaker(unsigned char *buf)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (buf[i] != '\0')
@@ -39,13 +39,16 @@ int	get_next_breaker(unsigned char *buf)
 }
 
 /*
-** Each map data element type is separated by a element tag (eg. doom_textures for textures)
-** element tag line for all elements will include element tag, total number of element components (eg. doom_textures #9)
-** each element component line will include everything that specific component will need to fully initialize,
-** they will be separated with a break character
-** texture element example:
-** [idx] [width] [height] [size] [color_type] [color_depth] [format] [bits_per_pixel] [pitch] [compressed_size] [unsigned char *pixel data]
-** tex idx is determined by the order by which elements are saved into the map data file
+** Each map data element type is separated by a element tag
+** (eg. doom_textures for textures) element tag line for all elements will
+** include element tag, total number of element components
+** (eg. doom_textures #9) each element component line will include
+** everything that specific component will need to fully initialize,
+** they will be separated with a break character texture element
+** example: [idx] [width] [height] [size] [color_type] [color_depth]
+** [format] [bits_per_pixel] [pitch] [compressed_size] [unsigned char
+** *pixel data] tex idx is determined by the order by which elements
+** are saved into the map data file
 */
 
 t_texture	*get_texture(unsigned char *buf, unsigned int *pos)
@@ -86,7 +89,9 @@ void	parse_map_data(unsigned char *buf, t_home *home)
 	buf = (unsigned char *)ft_strstr((char *)buf, "doom_textures");
 	pos += get_next_breaker(buf + pos) + 1;
 	home->nbr_of_textures = ft_atoi((char *)buf + pos);
-	if (!(home->editor_tex = (t_texture**)malloc(sizeof(t_texture*) * (home->nbr_of_textures + 1))))
+	home->editor_tex = (t_texture **)malloc(sizeof(t_texture *)
+			* (home->nbr_of_textures + 1));
+	if (!home->editor_tex)
 		error_output("failed to allocate memory to editor textures\n");
 	home->editor_tex[0] = NULL;
 	i = 1;
@@ -96,6 +101,11 @@ void	parse_map_data(unsigned char *buf, t_home *home)
 		i++;
 	}
 }
+
+/*
+** // Buffer mallocing:
+** // tone down the MAX_SIZE for this once we know the avg range of file sizes
+*/
 
 int	open_file(t_home *home, char *path)
 {
@@ -108,7 +118,8 @@ int	open_file(t_home *home, char *path)
 		error_output("Failed to open file\n");
 	else
 	{
-		if (!(buf = (unsigned char *)malloc(sizeof(unsigned char) * MAX_SIZE))) // tone down the MAX_SIZE for this once we know the avg range of file sizes
+		buf = (unsigned char *)malloc(sizeof(unsigned char) * MAX_SIZE);
+		if (!buf)
 			error_output("Memory allocation of source buffer failed\n");
 		doom_read(&size, &fd, (void **)&buf, MAX_SIZE);
 		if (size <= 0)

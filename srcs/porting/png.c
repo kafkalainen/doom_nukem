@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/21 17:44:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 14:52:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,24 @@ void	*convert_to_uint32(Uint32 *dest, t_texture *image)
 	int		y;
 	Uint32	*pixels;
 
-	pixels = (Uint32*)image->pixels;
+	pixels = (Uint32 *)image->pixels;
 	y = -1;
 	while (++y < image->h)
 	{
 		x = -1;
 		while (++x < image->w)
 		{
-			dest[(y * image->w) + x] = swap_channels(pixels[(y * image->w) + x]);
+			dest[(y * image->w) + x] = swap_channels(pixels[(y
+						* image->w) + x]);
 		}
 	}
 	return (dest);
 }
 
-Uint32		get_texel(int x, int y, t_texture *tex)
+Uint32	get_texel(int x, int y, t_texture *tex)
 {
-	int offset_x;
-	int offset_y;
+	int	offset_x;
+	int	offset_y;
 
 	offset_x = x % tex->w;
 	offset_y = y % tex->h;
@@ -54,12 +55,13 @@ void	load_texture(char *path, t_home *home, int i)
 	free_png(png);
 }
 
-static void		get_tex_count(int *i, DIR **dir, struct dirent **dir_entry)
+static void	get_tex_count(int *i, DIR **dir, struct dirent **dir_entry)
 {
 	char	*found;
 
 	(*i) = 0;
-	while ((*dir_entry = readdir(*dir)) != NULL)
+	*dir_entry = readdir(*dir);
+	while (*dir_entry != NULL)
 	{
 		found = ft_strstr((*dir_entry)->d_name, ".png");
 		if (found != NULL)
@@ -80,16 +82,21 @@ void	init_textures(t_home *home)
 	char			*found;
 	char			*buf;
 
-	if ((dir = opendir("textures/")) == NULL)
-		error_output("Failed to open textures directory\n");
+	dir = opendir("textures/");
+	if (dir == NULL)
+		error_output("Failed to open textures directory.\n");
 	get_tex_count(&home->nbr_of_textures, &dir, &dir_entry);
-	if (!(home->editor_tex = (t_texture**)malloc(sizeof(t_texture*) * (home->nbr_of_textures + 1))))
-		error_output("failed to allocate memory to editor textures\n");
+	home->editor_tex = (t_texture **)malloc(sizeof(t_texture *)
+			* (home->nbr_of_textures + 1));
+	if (!home->editor_tex)
+		error_output("Failed to allocate memory to editor textures.\n");
 	home->editor_tex[0] = NULL;
 	i = 1;
-	while ((dir_entry = readdir(dir)) != NULL)
+	dir_entry = readdir(dir);
+	while (dir_entry != NULL)
 	{
-		if ((found = ft_strstr(dir_entry->d_name, ".png")) != NULL)
+		found = ft_strstr(dir_entry->d_name, ".png");
+		if (found != NULL)
 		{
 			buf = ft_strjoin("textures/", dir_entry->d_name);
 			load_texture(buf, home, i++);
@@ -97,21 +104,4 @@ void	init_textures(t_home *home)
 		}
 	}
 	closedir(dir);
-}
-
-/*
-** 1st pass at loading char* and converting back to t_texture. Need to see text output before making further changes
-*/
-
-void		free_array(unsigned char **array)
-{
-	int i;
-
-	i = 0;
-	while (array[i] != NULL)
-	{
-		ft_strdel((char**)&array[i]);
-		i++;
-	}
-	free(array);
 }

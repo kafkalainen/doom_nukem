@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:51:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 16:18:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:31:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	validate_signature(unsigned char *buf)
 	}
 }
 
-int		get_format(int color_type, int color_depth)
+int	get_format(int color_type, int color_depth)
 {
 	if (color_type == COLOR_LUM)
 	{
@@ -71,15 +71,15 @@ void	get_header_elements(t_png *png)
 	}
 }
 
-int		color_depth_restrictions(int color, int depth)
+int	color_depth_restrictions(int color, int depth)
 {
-	if (color == 0 && (depth == 1 || depth == 2 ||
-		depth == 4 || depth == 8 || depth == 16))
+	if (color == 0 && (depth == 1 || depth == 2
+			|| depth == 4 || depth == 8 || depth == 16))
 		return (1);
 	else if (color == 2 && (depth == 8 || depth == 16))
 		return (1);
-	else if (color == 3 && (depth == 1 || depth == 2 ||
-		depth == 4 || depth == 8))
+	else if (color == 3 && (depth == 1 || depth == 2
+			|| depth == 4 || depth == 8))
 		return (1);
 	else if (color == 4 && (depth == 8 || depth == 16))
 		return (1);

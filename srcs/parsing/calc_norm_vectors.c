@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 19:16:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:50:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void		calc_normal_vectors(t_home *home)
+void	calc_normal_vectors(t_home *home)
 {
 	unsigned int	i;
 	unsigned int	j;

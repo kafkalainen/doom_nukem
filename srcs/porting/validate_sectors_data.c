@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:06:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 19:18:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 14:40:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	check_if_portals_connected(int i, t_home *home)
 			if (home->nbr_of_sectors == 1)
 				return (1);
 			if (!(check_valid_connection(&temp->next->x0, &temp->x0,
-				home->sectors[temp->idx], i)))
+						home->sectors[temp->idx], i)))
 				return (1);
 		}
 		temp = temp->next;
@@ -117,7 +117,7 @@ static int	check_if_convex(t_sector *sector)
 	return (1);
 }
 
-int			validate_sectors_data(t_home *home)
+int	validate_sectors_data(t_home *home)
 {
 	unsigned int	i;
 

@@ -6,17 +6,17 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:13:42 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 17:15:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:25:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void			fill_nodes(t_tree_helper *h, t_huffman_tree *tree,
+void	fill_nodes(t_tree_helper *h, t_huffman_tree *tree,
 	const unsigned int *bitlen)
 {
-	h->bit = (unsigned char)((h->tree1d[h->n] >>
-		(bitlen[h->n] - h->i - 1)) & 1);
+	h->bit = (unsigned char)((h->tree1d[h->n]
+				>> (bitlen[h->n] - h->i - 1)) & 1);
 	if (h->treepos > tree->numcodes - 2)
 		error_output("treeposition mismatch\n");
 	if (tree->tree2d[2 * h->treepos + h->bit] == 32767)
@@ -29,8 +29,8 @@ void			fill_nodes(t_tree_helper *h, t_huffman_tree *tree,
 		else
 		{
 			h->nodefilled++;
-			tree->tree2d[2 * h->treepos + h->bit] = h->nodefilled +
-				tree->numcodes;
+			tree->tree2d[2 * h->treepos + h->bit] = h->nodefilled
+				+ tree->numcodes;
 			h->treepos = h->nodefilled;
 		}
 	}
@@ -61,7 +61,7 @@ unsigned int	ft_huffman_decode_symbol(const unsigned char *in,
 	}
 }
 
-void			dynamic_code_cycle(t_dynamic_helper *d, const unsigned char *in,
+void	dynamic_code_cycle(t_dynamic_helper *d, const unsigned char *in,
 	unsigned int *bp)
 {
 	if (d->code <= 15)
@@ -87,7 +87,7 @@ void			dynamic_code_cycle(t_dynamic_helper *d, const unsigned char *in,
 		error_output("FLY YOU FOOLS\n");
 }
 
-void			fill_out(t_png *png, t_huffman_helper *s,
+void	fill_out(t_png *png, t_huffman_helper *s,
 	t_huffman *h, const unsigned char *in)
 {
 	s->distance += ft_read_bits(&h->bit_p, in, s->num_extra_bits_dst);
@@ -107,7 +107,7 @@ void			fill_out(t_png *png, t_huffman_helper *s,
 
 unsigned int	get_deflate_tree_one(int i)
 {
-	static unsigned int deflate_code_tree_one[NUM_DEFLATE_CODE_SYMBOLS] = {
+	static unsigned int	deflate_code_tree_one[NUM_DEFLATE_CODE_SYMBOLS] = {
 	140, 141, 142, 143, 435, 483,
 	436, 452, 568, 437, 438, 445, 439, 442, 440, 441, 144, 145, 146, 147, 443,
 	444, 148, 149, 150, 151, 446, 449, 447, 448, 152, 153, 154, 155, 450, 451,
