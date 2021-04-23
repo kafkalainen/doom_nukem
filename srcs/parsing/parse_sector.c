@@ -6,17 +6,17 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 18:46:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:47:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_point				*new_point(t_xy x0, int idx)
+t_point	*new_point(t_xy x0, int idx)
 {
-	t_point		*new;
+	t_point	*new;
 
-	new = (t_point*)malloc(sizeof(*new));
+	new = (t_point *)malloc(sizeof(*new));
 	if (new != NULL)
 	{
 		new->x0 = x0;
@@ -31,9 +31,9 @@ t_point				*new_point(t_xy x0, int idx)
 	return (new);
 }
 
-void				add_point(t_point **point, t_point *new)
+void	add_point(t_point **point, t_point *new)
 {
-	t_point *temp;
+	t_point	*temp;
 
 	if (new == NULL)
 		return ;
@@ -51,9 +51,9 @@ void				add_point(t_point **point, t_point *new)
 	}
 }
 
-void				close_linkedlist(t_point **head)
+void	close_linkedlist(t_point **head)
 {
-	t_point *temp;
+	t_point	*temp;
 
 	temp = *head;
 	while (temp->next)
@@ -61,7 +61,7 @@ void				close_linkedlist(t_point **head)
 	temp->next = *head;
 }
 
-int					add_points(t_sector *sector,
+int	add_points(t_sector *sector,
 	unsigned char *buf, unsigned int **pos)
 {
 	unsigned int	i;
@@ -90,7 +90,7 @@ int					add_points(t_sector *sector,
 	return (0);
 }
 
-t_sector			*get_sector_data(unsigned char *buf, unsigned int *pos)
+t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos)
 {
 	t_sector		*new_sector;
 	int				ret;
@@ -98,13 +98,15 @@ t_sector			*get_sector_data(unsigned char *buf, unsigned int *pos)
 	if (!buf)
 		return (NULL);
 	*pos += get_next_breaker(buf + *pos) + 1;
-	if (!ft_strstr((const char*)(buf + *pos), "sector"))
+	if (!ft_strstr((const char *)(buf + *pos), "sector"))
 		return (NULL);
 	*pos += 6;
-	if (!(new_sector = (t_sector*)malloc(sizeof(t_sector))))
+	new_sector = (t_sector *)malloc(sizeof(t_sector));
+	if (!new_sector)
 		return (NULL);
 	parse_number_data(new_sector, buf, pos);
-	if ((ret = add_points(new_sector, buf, &pos)))
+	ret = add_points(new_sector, buf, &pos);
+	if (ret)
 	{
 		free(new_sector);
 		return (NULL);

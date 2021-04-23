@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 12:58:03 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 16:18:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:27:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void			init_huffman_tree_codetree_fixed(t_huffman_tree *tree,
+void	init_huffman_tree_codetree_fixed(t_huffman_tree *tree,
 	unsigned int num_codes, unsigned int maxbitlen)
 {
 	tree->tree2d = get_fixed_deflate_codetree();
@@ -20,7 +20,7 @@ void			init_huffman_tree_codetree_fixed(t_huffman_tree *tree,
 	tree->maxbitlen = maxbitlen;
 }
 
-void			init_huffman_tree(t_huffman_tree *tree, unsigned int *buffer,
+void	init_huffman_tree(t_huffman_tree *tree, unsigned int *buffer,
 	unsigned int num_codes, unsigned int maxbitlen)
 {
 	tree->tree2d = buffer;
@@ -52,10 +52,10 @@ unsigned int	*get_fixed_deflate_codetree(void)
 ** and the function is done
 */
 
-void			ft_get_tree_inflate_dynamic(t_huffman *h,
+void	ft_get_tree_inflate_dynamic(t_huffman *h,
 	const unsigned char *in, unsigned int inlength)
 {
-	t_dynamic_helper d;
+	t_dynamic_helper	d;
 
 	if ((h->bit_p) >> 3 >= inlength - 2)
 		error_output("bit pointer jumps past memory\n");
@@ -65,7 +65,7 @@ void			ft_get_tree_inflate_dynamic(t_huffman *h,
 	while (d.i < (d.hlit + d.hdist))
 	{
 		d.code = ft_huffman_decode_symbol(in, &h->bit_p,
-			&h->code_length_tree, inlength);
+				&h->code_length_tree, inlength);
 		if ((h->bit_p) >> 3 >= inlength)
 			error_output("bit pointer jumps past memory\n");
 		dynamic_code_cycle(&d, in, &h->bit_p);
@@ -76,10 +76,10 @@ void			ft_get_tree_inflate_dynamic(t_huffman *h,
 	ft_huffman_tree_create_lengths(&h->codetree_dst, d.bitlen_dst);
 }
 
-void			ft_huffman_tree_create_lengths(t_huffman_tree *tree,
+void	ft_huffman_tree_create_lengths(t_huffman_tree *tree,
 	const unsigned int *bitlen)
 {
-	t_tree_helper h;
+	t_tree_helper	h;
 
 	setup_tree_helper(&h, bitlen, tree);
 	h.n = -1;

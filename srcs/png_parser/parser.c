@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/22 13:05:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:18:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_png	png_parser(char *path)
 
 void	parse_data(t_png *png)
 {
-	t_crc crc;
+	t_crc	crc;
 
 	crc.flag = 0;
 	while (png->i < png->source.size && png->state != 2)
@@ -50,7 +50,9 @@ void	parse_data(t_png *png)
 		png->i += png->chunk.size + 12;
 	}
 	png->i = 33;
-	if (!(png->compressed = (unsigned char *)malloc(sizeof(unsigned char) * png->compressed_size)))
+	png->compressed = (unsigned char *)malloc(sizeof(unsigned char)
+			* png->compressed_size);
+	if (!png->compressed)
 		error_output("Memory allocation of compressed data pointer failed\n");
 	while (png->i < png->source.size)
 	{
@@ -65,19 +67,22 @@ void	parse_data(t_png *png)
 	}
 }
 
-void		decode_png(t_png *png)
+void	decode_png(t_png *png)
 {
-	png->inflated_size = ((png->width * (png->height * png->bpp + 7)) / 8) +
-		png->height;
-	if (!(png->inflated = (unsigned char *)malloc(sizeof(unsigned char) * png->inflated_size)))
+	png->inflated_size = ((png->width * (png->height * png->bpp + 7)) / 8)
+		+ png->height;
+	png->inflated = (unsigned char *)malloc(sizeof(unsigned char)
+			* png->inflated_size);
+	if (!png->inflated)
 		error_output("Memory allocation of inflated data pointer failed\n");
 	ft_inflate(png);
 	convert_to_pixels(png);
 }
 
-void		setup_parser(t_png *png, unsigned int size)
+void	setup_parser(t_png *png, unsigned int size)
 {
-	if (!(png->source.buf = (unsigned char *)malloc(sizeof(unsigned char) * size)))
+	png->source.buf = (unsigned char *)malloc(sizeof(unsigned char) * size);
+	if (!png->source.buf)
 		error_output("Memory allocation of source buffer failed\n");
 	png->state = 0;
 	png->i = 8;
@@ -87,7 +92,7 @@ void		setup_parser(t_png *png, unsigned int size)
 	png->final_size = 0;
 }
 
-void		verify_chunks(t_png *png)
+void	verify_chunks(t_png *png)
 {
 	if (ft_strcmp(png->chunk.type, "IHDR") == 0)
 		check_header(png);

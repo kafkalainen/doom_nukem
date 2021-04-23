@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:38:29 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 16:18:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:34:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sub(unsigned char *out, unsigned char *sl, t_scan_helper s)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = -1;
 	while (++i < s.byte_width)
@@ -26,7 +26,7 @@ void	sub(unsigned char *out, unsigned char *sl, t_scan_helper s)
 
 void	up(unsigned char *out, unsigned char *sl, t_scan_helper s)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = -1;
 	if (s.prev)
@@ -43,7 +43,7 @@ void	up(unsigned char *out, unsigned char *sl, t_scan_helper s)
 
 void	avg(unsigned char *out, unsigned char *sl, t_scan_helper s)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = -1;
 	if (s.prev)
@@ -64,12 +64,12 @@ void	avg(unsigned char *out, unsigned char *sl, t_scan_helper s)
 	}
 }
 
-int		predict(int a, int b, int c)
+int	predict(int a, int b, int c)
 {
-	int p;
-	int pa;
-	int pb;
-	int pc;
+	int	p;
+	int	pa;
+	int	pb;
+	int	pc;
 
 	p = a + b - c;
 	pa = p > a ? p - a : a - p;
@@ -86,7 +86,7 @@ int		predict(int a, int b, int c)
 void	paeth(unsigned char *out, unsigned char *sl,
 	t_scan_helper s)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = -1;
 	if (s.prev)
@@ -96,7 +96,7 @@ void	paeth(unsigned char *out, unsigned char *sl,
 		i = s.byte_width - 1;
 		while (++i < s.line_bytes)
 			out[i] = (unsigned char)(sl[i] + predict(out[i - s.byte_width],
-				s.prev[i], s.prev[i - s.byte_width]));
+						s.prev[i], s.prev[i - s.byte_width]));
 	}
 	else
 	{
@@ -104,7 +104,7 @@ void	paeth(unsigned char *out, unsigned char *sl,
 			out[i] = sl[i];
 		i = s.byte_width - 1;
 		while (++i < s.line_bytes)
-			out[i] = (unsigned char)(sl[i] +
-				predict(out[i - s.byte_width], 0, 0));
+			out[i] = (unsigned char)(sl[i]
+					+ predict(out[i - s.byte_width], 0, 0));
 	}
 }

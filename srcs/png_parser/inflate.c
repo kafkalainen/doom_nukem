@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:40:20 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 16:18:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:23:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void	ft_inflate_huffman(t_png *png, const unsigned char *in, t_huffman *h)
 	while (s.done == 0)
 	{
 		s.code = ft_huffman_decode_symbol(in, &h->bit_p,
-			&h->codetree, png->compressed_size);
+				&h->codetree, png->compressed_size);
 		check_code(&s, png, h);
-		if (s.code >= FIRST_LENGTH_CODE_INDEX &&
-			s.code <= LAST_LENGTH_CODE_INDEX)
+		if (s.code >= FIRST_LENGTH_CODE_INDEX
+			&& s.code <= LAST_LENGTH_CODE_INDEX)
 		{
 			get_length_base_extra(&s.length, &s.numextrabits, s.code);
 			if ((h->bit_p >> 3) >= png->compressed_size)
 				error_output("bit pointer will jump past memory\n");
 			s.length += ft_read_bits(&h->bit_p, in, s.numextrabits);
 			s.code_dst = ft_huffman_decode_symbol(in, &h->bit_p,
-				&h->codetree_dst, png->compressed_size);
+					&h->codetree_dst, png->compressed_size);
 			if (s.code_dst > 29)
 				error_output("invalid distance code\n");
 			get_dst_base_extra(&s.distance, &s.num_extra_bits_dst, s.code_dst);
@@ -72,7 +72,7 @@ void	ft_inflate_uncompressed(t_png *png, const unsigned char *in,
 
 void	go_go_huffman(t_png *png, const unsigned char *in, t_huffman *h)
 {
-	static unsigned int fixed_distance_tree[NUM_DISTANCE_SYMBOLS * 2] = {
+	static unsigned int	fixed_distance_tree[2 * NUM_DISTANCE_SYMBOLS] = {
 	33, 48, 34, 41, 35, 38, 36, 37, 0, 1, 2, 3, 39, 40, 4, 5, 6, 7, 42, 45, 43,
 	44, 8, 9, 10, 11, 46, 47, 12, 13, 14, 15, 49, 56, 50, 53, 51, 52, 16, 17,
 	18, 19, 54, 55, 20, 21, 22, 23, 57, 60, 58, 59, 24, 25, 26, 27, 61, 62, 28,
@@ -111,8 +111,8 @@ void	ft_inflate_data(t_png *png)
 		if ((h.bit_p >> 3) > png->compressed_size)
 			error_output("bit pointing outside memory pointer\n");
 		done = ft_read_bit(&h.bit_p, &png->compressed[2]);
-		h.type = ft_read_bit(&h.bit_p, &png->compressed[2]) |
-			(ft_read_bit(&h.bit_p, &png->compressed[2]) << 1);
+		h.type = ft_read_bit(&h.bit_p, &png->compressed[2])
+			| (ft_read_bit(&h.bit_p, &png->compressed[2]) << 1);
 		if (h.type == 3)
 			error_output("zlib type error\n");
 		else if (h.type == 0)

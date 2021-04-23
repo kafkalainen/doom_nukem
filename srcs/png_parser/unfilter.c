@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:12:55 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 16:17:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:10:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	convert_to_pixels(t_png *png)
 {
 	png->final_size = (png->height * png->width * png->bpp + 7) / 8;
-	if (!(png->pixels = (unsigned char *)ft_memalloc(sizeof(unsigned char) * png->final_size)))
-		error_output("Memory allocation of filtered pixel pointer failed\n");
-	if (png->bpp < 8 && png->bpp * png->width !=
-		((png->width * png->bpp + 7) / 8) * 8)
+	png->pixels = (unsigned char *)ft_memalloc(sizeof(unsigned char)
+			* png->final_size);
+	if (!png->pixels)
+		error_output("Memory allocation of filtered pixel pointer failed.");
+	if (png->bpp < 8 && png->bpp * png->width
+		!= ((png->width * png->bpp + 7) / 8) * 8)
 	{
 		unfilter_scanlines(png, png->inflated, png->inflated);
 		remove_padding(png, png->pixels, png->inflated);
@@ -62,7 +64,7 @@ void	setup_padding_helper(t_padding_helper *h, t_png *png)
 
 void	remove_padding(t_png *png, unsigned char *out, unsigned char *in)
 {
-	t_padding_helper h;
+	t_padding_helper	h;
 
 	setup_padding_helper(&h, png);
 	while (h.line < png->height)
@@ -70,12 +72,12 @@ void	remove_padding(t_png *png, unsigned char *out, unsigned char *in)
 		h.x = 0;
 		while (h.x < h.out_linebits)
 		{
-			h.bit = (unsigned char)((in[(h.in_bit_p) >> 3] >>
-				(7 - ((h.in_bit_p) & 0x7))) & 1);
+			h.bit = (unsigned char)((in[(h.in_bit_p) >> 3]
+						>> (7 - ((h.in_bit_p) & 0x7))) & 1);
 			h.in_bit_p++;
 			if (h.bit == 0)
-				out[(h.out_bit_p) >> 3] |= (unsigned char)(~(1 << (7 -
-						((h.in_bit_p) & 0x7))) & 1);
+				out[(h.out_bit_p) >> 3] |= (unsigned char)(~(1 << (7
+								- ((h.in_bit_p) & 0x7))) & 1);
 			else
 				out[(h.out_bit_p) >> 3] |= (1 << (7 - ((h.out_bit_p) & 0x7)));
 			h.out_bit_p++;
@@ -89,7 +91,7 @@ void	remove_padding(t_png *png, unsigned char *out, unsigned char *in)
 void	process_scanline(unsigned char *out,
 	unsigned char *sl, t_scan_helper s)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	if (s.filter == 0)
 	{

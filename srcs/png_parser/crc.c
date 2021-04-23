@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:44:53 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 16:18:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:35:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void			init_crc_table(t_crc *crc)
+void	init_crc_table(t_crc *crc)
 {
 	int				i;
 	int				j;
@@ -57,7 +57,7 @@ unsigned int	calculate_crc(unsigned char *buf, int size, t_crc *crc)
 	return (update_crc(0xffffffffL, buf, size, crc) ^ 0xffffffffL);
 }
 
-void			verify_crc(unsigned char *crc_buf, unsigned char *buf,
+void	verify_crc(unsigned char *crc_buf, unsigned char *buf,
 	int size, t_crc *crc)
 {
 	int	current_crc;

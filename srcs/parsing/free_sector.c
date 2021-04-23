@@ -6,15 +6,15 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 14:05:23 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 19:20:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:50:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int		free_points(t_point **head, unsigned int nbr_of_walls)
+int	free_points(t_point **head, unsigned int nbr_of_walls)
 {
-	t_point *item;
+	t_point	*item;
 
 	while (nbr_of_walls--)
 	{
