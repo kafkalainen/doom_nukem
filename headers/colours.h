@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colours.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:37:29 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 20:24:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 13:53:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 typedef struct s_argb
 {
-	int		a;
-	int		r;
-	int		g;
-	int		b;
+	Uint8		a;
+	Uint8		r;
+	Uint8		g;
+	Uint8		b;
 }			t_argb;
 
 enum e_colour
