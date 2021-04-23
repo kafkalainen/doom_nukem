@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/23 14:51:32 by jnivala          ###   ########.fr        #
+#    Updated: 2021/04/23 16:24:19 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,9 +119,6 @@ CC = gcc
 WIN_CFLAGS = -Wall -Wextra -Werror -O3 -g
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lm
 
-#mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
-#mkfile_dir := $(dir $(mkfile_path))
-
 ifeq ($(OS),Windows_NT)
 	TARGET_SYSTEM := Windows
 else
@@ -151,6 +148,7 @@ ifeq ($(TARGET_SYSTEM),Windows)
 	CYAN := [36m
 	WHITE := [37m
 else
+	ABS_DIR = $(shell pwd)
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
 	CFLAGS = -Wall -Wextra -Werror -O3 -g $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
@@ -166,7 +164,6 @@ else
 	MAGENTA = "\033[0;35m"
 	CYAN = "\033[0;36m"
 	WHITE = "\033[0;37m"
-	ABS_DIR = $(shell pwd)
 	SDL_ORIG = $(ABS_DIR)/SDL2-2.0.14/
 	SDL_NEW = $(ABS_DIR)/SDL2/
 	SDL_INC = SDL2/include/SDL2/
