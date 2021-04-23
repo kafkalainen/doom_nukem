@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 13:36:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 17:31:30 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/22 17:38:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*optimized_memcpy(void *pixels, void *src, size_t size)
 	while (i < size)
 	{
 		d[i] = s[i];
-		s[i] = 0;
+		s[i] = 0; // might be inefficient
 		i++;
 	}
 	return (d);

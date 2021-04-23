@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 14:35:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/23 13:03:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		continue_from_last_sector(t_point *start, t_ray_pt *fov,
 void		scan_fov(t_home *home, t_frame *frame, t_player *plr,
 				int current_pxl);
 void		calc_distances(t_frame *frame, t_player *plr);
-void		calc_wall_texels(t_frame *frame, t_texture *tex);
+void		calc_wall_texels(t_frame *frame, int tex_width);
 void		calc_ground_texels(t_sector *sector, t_frame *frame);
 void		draw_segment(t_frame *frame, t_home *home, t_player *plr,
 				int wall);

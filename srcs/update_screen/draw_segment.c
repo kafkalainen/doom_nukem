@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 14:48:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/23 13:02:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ void	draw_segment(t_frame *frame, t_home *home, t_player *plr, int wall)
 	if (wall)
 		wall_tex = get_tex(frame->left.wall->idx, home->editor_tex);
 	calc_distances(frame, plr);
-	calc_wall_texels(frame, wall_tex);
+	calc_wall_texels(frame, wall_tex->w);
 	if (plr->input.wireframe == 1)
 		draw_vertically(frame, home, wall_tex, wall);
 	else
