@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_sectors_data_2.c                          :+:      :+:    :+:   */
+/*   mem_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 19:09:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/23 14:39:40 by jnivala          ###   ########.fr       */
+/*   Created: 2021/04/23 14:50:27 by jnivala           #+#    #+#             */
+/*   Updated: 2021/04/23 14:50:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	check_if_lines_cut(t_sector *sector)
+/*
+** 1st pass at loading char* and converting back to t_texture.
+** Need to see text output before making further changes
+*/
+
+void	free_array(unsigned char **array)
 {
-	unsigned int	i;
-	t_point			*temp;
+	int i;
 
 	i = 0;
-	temp = sector->points;
-	if (sector->nb_of_walls < 4)
-		return (0);
-	while (i < sector->nb_of_walls)
+	while (array[i] != NULL)
 	{
-		if (check_if_lseg_intersects(temp,
-			&temp->next->next->x0, &temp->next->next->next->x0))
-			return (1);
-		temp = temp->next;
+		ft_strdel((char**)&array[i]);
 		i++;
 	}
-	return (0);
+	free(array);
 }

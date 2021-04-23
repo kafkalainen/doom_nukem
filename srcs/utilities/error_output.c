@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:39:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 20:17:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 14:24:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ void	error_output_sdl(char *msg, t_home *home)
 
 void	error_output(char *msg)
 {
+	ft_putendl_fd(msg, 2);
+	exit(EXIT_FAILURE);
+}
+
+void	read_error_output(char *msg, unsigned char **buf)
+{
+	ft_strdel((char **)buf);
 	ft_putendl_fd(msg, 2);
 	exit(EXIT_FAILURE);
 }

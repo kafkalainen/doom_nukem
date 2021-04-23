@@ -6,11 +6,18 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 15:44:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/23 14:38:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+static void	get_nbr_of_sectors(unsigned int *pos, unsigned char *buf,
+	unsigned int *nbr_of_sectors)
+{
+	*nbr_of_sectors = ft_atoi((const char *)buf + *pos);
+	*pos += ft_nb_len(*nbr_of_sectors, 10);
+}
 
 int	free_sectors_and_exit(int error_code, t_home *home, size_t n)
 {
@@ -38,8 +45,7 @@ int	parse_sector_data(unsigned char *buf, t_home *home)
 	if (!buf)
 		return (1);
 	pos += get_next_breaker(buf + pos) + 1;
-	home->nbr_of_sectors = ft_atoi((const char *)buf + pos);
-	pos += ft_nb_len(home->nbr_of_sectors, 10);
+	get_nbr_of_sectors(&pos, buf, &home->nbr_of_sectors);
 	home->sectors = (t_sector **)malloc(sizeof(t_sector)
 			* (home->nbr_of_sectors + 1));
 	if (!home->sectors)
@@ -77,15 +83,13 @@ int	load_map_file(t_home *home, char *path)
 	else
 	{
 		doom_read(&size, &fd, (void **)&buf, BUF_SIZE);
-		if (size <= 0)
-			error_output("ERROR: Failed to read map.");
-		if (doom_close(&fd) == -1)
-			error_output("ERROR: Could not close the file.");
+		if (size <= 0 || size == BUF_SIZE || doom_close(&fd) == -1)
+			read_error_output("ERROR: Failed to read map.", &buf);
 		buf[size] = '\0';
 		ret = parse_sector_data(buf, home);
 		free(buf);
 		if (ret)
-			return (1);
+			error_output("ERROR: Failed to read map.");
 		validate_sectors_data(home);
 		calc_normal_vectors(home);
 	}
