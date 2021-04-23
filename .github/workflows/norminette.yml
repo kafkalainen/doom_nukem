@@ -18,3 +18,6 @@ jobs:
     - name: configure
       run: |
         python3 -m pip install norminette
+    - name: norminette
+      run:
+        norminette headers/ srcs/ libft/
