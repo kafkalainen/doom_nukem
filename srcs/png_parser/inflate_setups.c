@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inflate_setups.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:04:19 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 12:29:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 11:53:51 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ void	setup_dynamic_helper(t_dynamic_helper *d,
 	d->hlit = ft_read_bits(bp, in, 5) + 257;
 	d->hdist = ft_read_bits(bp, in, 5) + 1;
 	d->hclen = ft_read_bits(bp, in, 4) + 4;
-	d->i = -1;
-	while (++d->i < NUM_CODE_LENGTH_CODES)
+	d->i = 0;
+	while (d->i < NUM_CODE_LENGTH_CODES)
 	{
 		if (d->i < d->hclen)
 			d->codelengthcode[clcl[d->i]] = ft_read_bits(bp, in, 3);
 		else
 			d->codelengthcode[clcl[d->i]] = 0;
+		d->i++;
 	}
 }
 
@@ -59,21 +60,22 @@ void	setup_tree_helper(t_tree_helper *h, const unsigned int *bitlen,
 	h->treepos = 0;
 	ft_memset(h->blcount, 0, sizeof(h->blcount));
 	ft_memset(h->nextcode, 0, sizeof(h->nextcode));
-	h->n = -1;
-	while (++h->n < tree->numcodes)
-		h->blcount[bitlen[h->n]]++;
+	h->n = 0;
+	while (h->n < tree->numcodes)
+		h->blcount[bitlen[h->n++]]++;
 	h->n = 0;
 	while (++h->n <= tree->maxbitlen)
 		h->nextcode[h->n] = (h->nextcode[h->n - 1] + h->blcount[h->n - 1]) << 1;
-	h->n = -1;
-	while (++h->n < tree->numcodes)
+	h->n = 0;
+	while (h->n < tree->numcodes)
 	{
 		if (bitlen[h->n] != 0)
 			h->tree1d[h->n] = h->nextcode[bitlen[h->n]]++;
+		h->n++;
 	}
-	h->n = -1;
-	while (++h->n < (tree->numcodes * 2))
-		tree->tree2d[h->n] = 32767;
+	h->n = 0;
+	while (h->n < (tree->numcodes * 2))
+		tree->tree2d[h->n++] = 32767;
 }
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inflate_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:13:42 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 12:25:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 12:06:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,14 @@ void	fill_out(t_png *png, t_huffman_helper *s,
 	s->backward = s->start - s->distance;
 	if (h->pos + s->length >= png->inflated_size)
 		error_output("bail\n");
-	s->forward = -1;
-	while (++s->forward < s->length)
+	s->forward = 0;
+	while (s->forward < s->length)
 	{
 		png->inflated[h->pos++] = png->inflated[s->backward];
 		s->backward++;
 		if (s->backward >= s->start)
 			s->backward = s->start - s->distance;
+		s->forward++;
 	}
 }
 
