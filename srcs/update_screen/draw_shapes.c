@@ -12,7 +12,7 @@
 
 #include "../../headers/doom_nukem.h"
 
-int	draw_line(t_xy p0, t_xy p1, int colour, Uint32 *buffer)
+int	draw_line(t_xy p0, t_xy p1, Uint32 colour, Uint32 *buffer)
 {
 	t_xy		delta;
 	t_xy		pixel;
@@ -35,7 +35,7 @@ int	draw_line(t_xy p0, t_xy p1, int colour, Uint32 *buffer)
 	return (TRUE);
 }
 
-void	draw_rect(t_xy xy, t_xy wh, t_frame *frame, int color)
+void	draw_rect(t_xy xy, t_xy wh, t_frame *frame, Uint32 color)
 {
 	float j;
 	float i;

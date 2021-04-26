@@ -12,7 +12,7 @@
 
 #include "../../headers/doom_nukem.h"
 
-int	get_floor(int floor_colour)
+Uint32	get_floor(int floor_colour)
 {
 	if (floor_colour == -1)
 		return (darkolivegreen);

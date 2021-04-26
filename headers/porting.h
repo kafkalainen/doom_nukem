@@ -19,7 +19,7 @@
 
 int	create_map_file(t_home *home);
 int	get_next_breaker(unsigned char *buf);
-int	get_floor(int floor_colour);
+Uint32	get_floor(int floor_colour);
 int	load_map_file(t_home *home, char *path);
 int	validate_sectors_data(t_home *home);
 

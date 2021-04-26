@@ -129,7 +129,7 @@
 // }
 
 static void	draw_vertical_floor_strip(t_xyz offset, int height,
-							int colour, t_frame *frame)
+							Uint32 colour, t_frame *frame)
 {
 	int		cur_y;
 	float	scale;
@@ -192,14 +192,14 @@ static void	draw_vertical_wall_strip(t_xy offset, size_t height,
 	}
 }
 
-void	draw_vertically(t_frame *frame, t_home *home,
+void	draw_vertically(t_frame *frame, t_sector *sector,
 	t_texture *wall_tex, int wall)
 {
 	size_t		obj_x;
 	t_xyz		start;
 	t_xyz		end;
 	t_xyz		bottom;
-	int			tex_floor;
+	Uint32		tex_floor;
 
 	obj_x = 0;
 	start = frame->top_left;
@@ -207,7 +207,7 @@ void	draw_vertically(t_frame *frame, t_home *home,
 	bottom = frame->bottom_left;
 	while (obj_x + start.x < 0)
 		step_one(&start, &bottom, &obj_x, frame);
-	tex_floor = get_floor(home->sectors[frame->idx]->tex_floor);
+	tex_floor = get_floor(sector->tex_floor);
 	while (obj_x + start.x < end.x)
 	{
 		if (wall)
@@ -225,7 +225,7 @@ void	draw_vertically(t_frame *frame, t_home *home,
 void	draw_segment(t_frame *frame, t_home *home, t_player *plr, int wall)
 {
 	t_texture	*wall_tex;
-	int			colour;
+	Uint32		colour;
 
 	wall_tex = get_tex(-1, home->editor_tex);
 	if (wall)
@@ -233,7 +233,7 @@ void	draw_segment(t_frame *frame, t_home *home, t_player *plr, int wall)
 	calc_distances(frame, plr);
 	calc_wall_texels(frame, wall_tex->w);
 	if (plr->input.wireframe == 1)
-		draw_vertically(frame, home, wall_tex, wall);
+		draw_vertically(frame, home->sectors[frame->idx], wall_tex, wall);
 	else
 	{
 		colour = get_floor(home->sectors[frame->idx]->tex_floor);
