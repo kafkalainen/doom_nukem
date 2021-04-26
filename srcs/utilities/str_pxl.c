@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 19:15:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 12:20:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_pxl_c	letter_logic(int c)
 	return (pxl_numbers(' ', black, white));
 }
 
-static void		handle_letter(t_frame *frame, t_xy coord, int c)
+static void	handle_letter(t_frame *frame, t_xy coord, int c)
 {
 	t_xy	cur;
 	t_pxl_c	letter;
@@ -50,7 +50,7 @@ static void		handle_letter(t_frame *frame, t_xy coord, int c)
 	}
 }
 
-void			str_pxl(t_frame *frame, t_xy coord, char *str)
+void	str_pxl(t_frame *frame, t_xy coord, char *str)
 {
 	int		c;
 

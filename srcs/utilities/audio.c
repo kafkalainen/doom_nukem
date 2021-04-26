@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 19:20:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 12:19:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int			load_audio(t_audio *audio)
+int	load_audio(t_audio *audio)
 {
 	audio->music = Mix_LoadMUS("audio/eerie_by_eparviai.wav");
 	if (!audio->music)
@@ -38,7 +38,7 @@ int			load_audio(t_audio *audio)
 	return (0);
 }
 
-void		cleanup_audio(t_audio *audio)
+void	cleanup_audio(t_audio *audio)
 {
 	Mix_FreeChunk(audio->footstep1);
 	audio->footstep1 = NULL;
@@ -49,7 +49,7 @@ void		cleanup_audio(t_audio *audio)
 	Mix_CloseAudio();
 }
 
-void		play_footsteps(t_player *plr)
+void	play_footsteps(t_player *plr)
 {
 	Uint32			current_time;
 	static Uint32	last_time;

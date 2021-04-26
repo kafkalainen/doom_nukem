@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 09:42:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 19:13:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 12:09:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,86 +15,86 @@
 static t_pxl_c	letter_012345(int l, int b, int c)
 {
 	if (l == '0')
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, c, b, c, b, b, c, b,
-							c, b, b, c, b, c, b, b, c, c, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, c, b, c, b, b, c, b,
+				c, b, b, c, b, c, b, b, c, c, c, b, b, b, b, b, b}});
 	else if (l == '1')
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, b, b, b, b, c, b, b, b, b, c,
-							b, b, b, b, c, b, b, b, c, c, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, b, b, b, b, c, b, b, b, b, c,
+				b, b, b, b, c, b, b, b, c, c, c, b, b, b, b, b, b}});
 	else if (l == '2')
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, b, b, c, b, b, c, c,
-							c, b, b, c, b, b, b, b, c, c, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, b, b, c, b, b, c, c,
+				c, b, b, c, b, b, b, b, c, c, c, b, b, b, b, b, b}});
 	else if (l == '3')
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, b, b, c, b, b, b, c,
-							c, b, b, b, b, c, b, b, c, c, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, b, b, c, b, b, b, c,
+				c, b, b, b, b, c, b, b, c, c, c, b, b, b, b, b, b}});
 	else if (l == '4')
-		return (t_pxl_c){{b, b, b, b, b, b, c, b, c, b, b, c, b, c, b, b, c, c,
-							c, b, b, b, b, c, b, b, b, b, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, b, c, b, b, c, b, c, b, b, c, c,
+				c, b, b, b, b, c, b, b, b, b, c, b, b, b, b, b, b}});
 	else
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, c, b, b, b, b, c, c,
-							c, b, b, b, b, c, b, b, c, c, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, c, b, b, b, b, c, c,
+				c, b, b, b, b, c, b, b, c, c, c, b, b, b, b, b, b}});
 }
 
 static t_pxl_c	letter_6789(int l, int b, int c)
 {
 	if (l == '6')
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, c, b, b, b, b, c, c,
-							c, b, b, c, b, c, b, b, c, c, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, c, b, b, b, b, c, c,
+				c, b, b, c, b, c, b, b, c, c, c, b, b, b, b, b, b}});
 	else if (l == '7')
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, b, b, c, b, b, b, c,
-							c, b, b, b, b, c, b, b, b, b, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, b, b, c, b, b, b, c,
+				c, b, b, b, b, c, b, b, b, b, c, b, b, b, b, b, b}});
 	else if (l == '8')
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, c, b, c, b, b, c, c,
-							c, b, b, c, b, c, b, b, c, c, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, c, b, c, b, b, c, c,
+				c, b, b, c, b, c, b, b, c, c, c, b, b, b, b, b, b}});
 	else if (l == '9')
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, c, b, c, b, b, c, c,
-							c, b, b, b, b, c, b, b, b, b, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, c, b, b, c, b, c, b, b, c, c,
+				c, b, b, b, b, c, b, b, b, b, c, b, b, b, b, b, b}});
 	else if (l == '+')
-		return (t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, c,
-							b, b, b, c, c, c, b, b, b, c, b, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, c,
+				b, b, b, c, c, c, b, b, b, c, b, b, b, b, b, b, b}});
 	else
-		return (t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, c, c,
-							c, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, c, c,
+				c, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b}});
 }
 
 static t_pxl_c	letter_special_1(int l, int b, int c)
 {
 	if (l == '?')
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, b, b, b, b, b, c, b, b, b, c,
-							b, b, b, b, b, b, b, b, b, c, b, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, b, b, b, b, b, c, b, b, b, c,
+				b, b, b, b, b, b, b, b, b, c, b, b, b, b, b, b, b}});
 	else if (l == '!')
-		return (t_pxl_c){{b, b, b, b, b, b, b, c, b, b, b, b, c, b, b, b, b, c,
-							b, b, b, b, b, b, b, b, b, c, b, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, b, c, b, b, b, b, c, b, b, b, b, c,
+				b, b, b, b, b, b, b, b, b, c, b, b, b, b, b, b, b}});
 	else if (l == ':')
-		return (t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, c, b, b, b, b, b,
-							b, b, b, b, c, b, b, b, b, b, b, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, c, b, b, b, b, b,
+				b, b, b, b, c, b, b, b, b, b, b, b, b, b, b, b, b}});
 	else if (l == '\'')
-		return (t_pxl_c){{b, b, b, b, b, b, c, c, b, b, b, b, c, b, b, b, b, b,
-							b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, c, b, b, b, b, c, b, b, b, b, b,
+				b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b}});
 	else
-		return (t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b,
-							b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b,
+				b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b}});
 }
 
 static t_pxl_c	letter_special_2(int l, int b, int c)
 {
 	if (l == '.')
-		return (t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b,
-							b, b, b, b, b, b, b, b, b, b, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b,
+				b, b, b, b, b, b, b, b, b, b, c, b, b, b, b, b, b}});
 	else if (l == ',')
-		return (t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b,
-							b, b, b, b, b, c, c, b, b, b, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b,
+				b, b, b, b, b, c, c, b, b, b, c, b, b, b, b, b, b}});
 	else if (l == '(')
-		return (t_pxl_c){{b, b, b, b, b, b, b, b, c, b, b, b, c, b, b, b, b, c,
-							b, b, b, b, c, b, b, b, b, b, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, b, b, c, b, b, b, c, b, b, b, b, c,
+				b, b, b, b, c, b, b, b, b, b, c, b, b, b, b, b, b}});
 	else if (l == ')')
-		return (t_pxl_c){{b, b, b, b, b, b, c, b, b, b, b, b, c, b, b, b, b, c,
-							b, b, b, b, c, b, b, b, c, b, b, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, b, b, b, b, b, c, b, b, b, b, c,
+				b, b, b, b, c, b, b, b, c, b, b, b, b, b, b, b, b}});
 	else
-		return (t_pxl_c){{b, b, b, b, b, b, c, b, c, b, b, b, b, c, b, b, b, c,
-							b, b, b, c, b, b, b, b, c, b, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, c, b, c, b, b, b, b, c, b, b, b, c,
+				b, b, b, c, b, b, b, b, c, b, c, b, b, b, b, b, b}});
 }
 
-t_pxl_c			pxl_numbers(int l, int b, int c)
+t_pxl_c	pxl_numbers(int l, int b, int c)
 {
 	if (l >= '0' && l <= '5')
 		return (letter_012345(l, b, c));
@@ -105,6 +105,6 @@ t_pxl_c			pxl_numbers(int l, int b, int c)
 	else if (l == '.' || l == ',' || l == '(' || l == ')' || l == '%')
 		return (letter_special_2(l, b, c));
 	else
-		return (t_pxl_c){{b, b, b, b, b, b, b, c, b, b, b, b, c, b, b, b, c, c,
-							c, b, b, c, b, c, b, b, c, b, c, b, b, b, b, b, b}};
+		return ((t_pxl_c){{b, b, b, b, b, b, b, c, b, b, b, b, c, b, b, b, c, c,
+				c, b, b, c, b, c, b, b, c, b, c, b, b, b, b, b, b}});
 }
