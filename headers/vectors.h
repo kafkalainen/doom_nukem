@@ -6,42 +6,42 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 14:43:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:40:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_H
-# define VECTOR_H
+#ifndef VECTORS_H
+# define VECTORS_H
 
-typedef struct		s_screen_xy
+typedef struct s_screen_xy
 {
 	int				x;
 	int				y;
 }					t_screen_xy;
 
-typedef struct		s_xy
+typedef struct s_xy
 {
 	float			x;
 	float			y;
 }					t_xy;
 
-typedef t_xy		t_range;
+typedef t_xy	t_range;
 
-typedef struct		s_xyz
+typedef struct s_xyz
 {
 	float			x;
 	float			y;
 	float			z;
 }					t_xyz;
 
-typedef struct		s_ray
+typedef struct s_ray
 {
 	t_xy			pos;
 	t_xy			dir;
 	t_xy			cutpoint;
 }					t_ray;
 
-typedef struct		s_maxpoints
+typedef struct s_maxpoints
 {
 	t_xy			left;
 	t_xy			right;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_structs.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:04:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/16 17:10:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:34:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@
 # define DISTANCE_BUFFER_SIZE 64
 # define CODE_LENGTH_BUFFER_SIZE 64
 
-typedef	struct		s_chunk
+typedef struct s_chunk
 {
 	int				size;
 	unsigned char	length[4];
 	char			type[5];
 }					t_chunk;
 
-typedef	struct		s_source
+typedef struct s_source
 {
 	unsigned char	*buf;
 	unsigned int	size;
 }					t_source;
 
-typedef	struct		s_padding_helper
+typedef struct s_padding_helper
 {
 	unsigned int	out_linebits;
 	unsigned int	in_linebits;
@@ -47,7 +47,7 @@ typedef	struct		s_padding_helper
 	unsigned char	bit;
 }					t_padding_helper;
 
-typedef	struct		s_scan_helper
+typedef struct s_scan_helper
 {
 	unsigned int	line;
 	unsigned char	*prev;
@@ -58,7 +58,7 @@ typedef	struct		s_scan_helper
 	unsigned char	filter;
 }					t_scan_helper;
 
-typedef	struct		s_png
+typedef struct s_png
 {
 	unsigned int	i;
 	unsigned int	width;
@@ -84,13 +84,13 @@ typedef	struct		s_png
 	unsigned char	*inflated;
 }					t_png;
 
-typedef	struct		s_crc
+typedef struct s_crc
 {
 	int				flag;
 	unsigned int	crc_table[256];
 }					t_crc;
 
-typedef	struct		s_texture
+typedef struct s_texture
 {
 	unsigned int	*pixels;
 	unsigned char	*source;
@@ -106,14 +106,14 @@ typedef	struct		s_texture
 	int				pitch;
 }					t_texture;
 
-typedef	struct		s_huffman_tree
+typedef struct s_huffman_tree
 {
 	unsigned int	*tree2d;
 	unsigned int	maxbitlen;
 	unsigned int	numcodes;
 }					t_huffman_tree;
 
-typedef	struct		s_tree_helper
+typedef struct s_tree_helper
 {
 	unsigned int	tree1d[MAX_SYMBOLS];
 	unsigned int	blcount[MAX_BIT_LENGTH];
@@ -125,7 +125,7 @@ typedef	struct		s_tree_helper
 	unsigned int	treepos;
 }					t_tree_helper;
 
-typedef	struct		s_dynamic_helper
+typedef struct s_dynamic_helper
 {
 	unsigned int	codelengthcode[NUM_CODE_LENGTH_CODES];
 	unsigned int	bitlen[NUM_DEFLATE_CODE_SYMBOLS];
@@ -140,7 +140,7 @@ typedef	struct		s_dynamic_helper
 	unsigned int	code;
 }					t_dynamic_helper;
 
-typedef	struct		s_huffman_helper
+typedef struct s_huffman_helper
 {
 	unsigned int	done;
 	unsigned int	code;
@@ -154,7 +154,7 @@ typedef	struct		s_huffman_helper
 	unsigned int	numextrabits;
 }					t_huffman_helper;
 
-typedef	struct		s_huffman
+typedef struct s_huffman
 {
 	unsigned int	codetree_buffer[DEFLATE_CODE_BUFFER_SIZE];
 	unsigned int	codetree_dst_buffer[DISTANCE_BUFFER_SIZE];
