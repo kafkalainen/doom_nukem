@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inflate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:40:20 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 12:23:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 12:07:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_inflate_uncompressed(t_png *png, const unsigned char *in,
 	unsigned int	nlen;
 	unsigned int	n;
 
-	n = -1;
+	n = 0;
 	while (((*bp) & 0x7) != 0)
 		(*bp)++;
 	p = (*bp) / 8;
@@ -65,8 +65,11 @@ void	ft_inflate_uncompressed(t_png *png, const unsigned char *in,
 		error_output("size error\n");
 	if ((p + len) > png->compressed_size)
 		error_output("size error\n");
-	while (++n < len)
+	while (n < len)
+	{
 		png->inflated[(*pos)++] = in[p++];
+		n++;
+	}
 	(*bp) = p * 8;
 }
 

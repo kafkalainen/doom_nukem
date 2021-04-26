@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inflate_trees.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 12:58:03 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 12:27:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 12:02:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,22 @@ void	ft_huffman_tree_create_lengths(t_huffman_tree *tree,
 	t_tree_helper	h;
 
 	setup_tree_helper(&h, bitlen, tree);
-	h.n = -1;
-	while (++h.n < tree->numcodes)
+	h.n = 0;
+	while (h.n < tree->numcodes)
 	{
-		h.i = -1;
-		while (++h.i < bitlen[h.n])
+		h.i = 0;
+		while (h.i < bitlen[h.n])
+		{
 			fill_nodes(&h, tree, bitlen);
+			h.i++;
+		}
+		h.n++;
 	}
-	h.n = -1;
-	while (++h.n < (tree->numcodes * 2))
+	h.n = 0;
+	while (h.n < (tree->numcodes * 2))
 	{
 		if (tree->tree2d[h.n] == 32767)
 			tree->tree2d[h.n] = 0;
+		h.n++;
 	}
 }

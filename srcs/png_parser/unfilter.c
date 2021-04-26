@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unfilter.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:12:55 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 12:10:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 12:00:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	remove_padding(t_png *png, unsigned char *out, unsigned char *in)
 void	process_scanline(unsigned char *out,
 	unsigned char *sl, t_scan_helper s)
 {
-	unsigned int	i;
+	int	i;
 
 	if (s.filter == 0)
 	{

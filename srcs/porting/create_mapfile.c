@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   create_mapfile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
 /*   Updated: 2021/04/26 15:17:52 by jnivala          ###   ########.fr       */
