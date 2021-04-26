@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inflate_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:01:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/21 17:35:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 12:05:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ unsigned int	ft_read_bits(unsigned int *bitp,
 	unsigned int	i;
 
 	result = 0;
-	i = -1;
-	while (++i < nbits)
+	i = 0;
+	while (i < nbits)
+	{
 		result |= ((unsigned int)ft_read_bit(bitp, bitstream)) << i;
+		i++;
+	}
 	return (result);
 }
 
@@ -68,8 +71,8 @@ void	repeat_codes(t_dynamic_helper *d, const unsigned char *in,
 	else
 		value = 0;
 	d->replength += ft_read_bits(bp, in, nbits);
-	d->n = -1;
-	while (++d->n < d->replength)
+	d->n = 0;
+	while (d->n < d->replength)
 	{
 		if (d->i >= (d->hlit + d->hdist))
 			error_output("i is larger than the amount of codes\n");
@@ -78,6 +81,7 @@ void	repeat_codes(t_dynamic_helper *d, const unsigned char *in,
 		else
 			d->bitlen_dst[d->i - d->hlit] = value;
 		d->i++;
+		d->n++;
 	}
 }
 

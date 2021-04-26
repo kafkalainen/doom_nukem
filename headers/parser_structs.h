@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:04:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/03/16 17:10:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/26 11:59:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef	struct		s_scan_helper
 {
 	unsigned int	line;
 	unsigned char	*prev;
-	unsigned int	byte_width;
-	unsigned int	line_bytes;
+	int				byte_width;
+	int				line_bytes;
 	unsigned int	out_index;
 	unsigned int	in_index;
 	unsigned char	filter;
