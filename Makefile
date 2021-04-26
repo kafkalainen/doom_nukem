@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/23 16:24:19 by jnivala          ###   ########.fr        #
+#    Updated: 2021/04/26 12:19:54 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,6 @@ SRCS = \
 	utilities$(SLASH)audio.c \
 	utilities$(SLASH)error_output.c \
 	utilities$(SLASH)fps_timer.c \
-	utilities$(SLASH)linkedlist.c \
 	utilities$(SLASH)mem_functions.c \
 	utilities$(SLASH)pxl_alphabet.c \
 	utilities$(SLASH)pxl_numbers.c \
