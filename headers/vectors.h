@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/20 20:05:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 14:43:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ t_xy	vec2_mul(t_xy v, float scalar);
 t_xy	vec2_norm(t_xy v);
 t_xy	vec2_normal(t_xy p0, t_xy p1);
 t_xy	vec2_rot(t_xy v, float angle);
-float	ft_map(float in, t_range from, t_range to);
 float	vec2_perp_dist(t_xy a);
 t_xyz	vec3(float x, float y, float z);
 t_xyz	vec3_add(t_xyz a, t_xyz b);

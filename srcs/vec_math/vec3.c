@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2_b.c                                           :+:      :+:    :+:   */
+/*   vec3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 19:16:10 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 14:47:03 by jnivala          ###   ########.fr       */
+/*   Created: 2021/04/26 14:39:36 by jnivala           #+#    #+#             */
+/*   Updated: 2021/04/26 14:42:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_xy	vec2_mul(t_xy v, float scalar)
+t_xyz	vec3(float x, float y, float z)
 {
-	return ((t_xy){
-		v.x * scalar,
-		v.y * scalar
-	});
+	return ((t_xyz){x, y, z});
 }
 
-float	vec2_dot(t_xy a, t_xy b)
+t_xyz	vec3_add(t_xyz a, t_xyz b)
 {
-	return (a.x * b.x + a.y * b.y);
+	return ((t_xyz){a.x + b.x, a.y + b.y, a.z + b.z});
 }
 
-float	vec2_mag(t_xy a)
+t_xy	vec3_to_vec2(t_xyz a)
 {
-	return (sqrtf(a.x * a.x + a.y * a.y));
+	return ((t_xy){a.x, a.y});
 }
 
-float	vec2_ang(t_xy a, t_xy b)
+t_xyz	inv_z(t_xyz a)
 {
-	return (acosf(vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b))));
-}
-
-t_xy	vec2_normal(t_xy p0, t_xy p1)
-{
-	return ((t_xy){(p1.y - p0.y), -(p1.x - p0.x)});
+	a.z = 1.0f / a.z;
+	a.x = a.x * a.z;
+	a.y = a.y * a.z;
+	return (a);
 }
