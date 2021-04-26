@@ -28,7 +28,7 @@ Uint32			get_pixel(SDL_Surface *surface, int x, int y)
 	return (*p);
 }
 
-void			put_pixel(Uint32 *buffer, int x, int y, int color)
+void			put_pixel(Uint32 *buffer, int x, int y, Uint32 color)
 {
 	Uint32		*pixel;
 
