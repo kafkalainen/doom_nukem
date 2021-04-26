@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/21 12:33:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:47:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
 
-typedef struct		s_input
+typedef struct s_input
 {
 	int				right;
 	int				left;
@@ -28,7 +28,7 @@ typedef struct		s_input
 	int				mouse;
 }					t_input;
 
-typedef struct		s_player
+typedef struct s_player
 {
 	t_xy			pos;
 	t_xy			dir;
@@ -43,7 +43,8 @@ typedef struct		s_player
 	int				current_sector;
 }					t_player;
 
-enum				e_movement {
+enum e_movement
+{
 	open_space = -9999
 };
 

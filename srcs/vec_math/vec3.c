@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_sectors_data_2.c                          :+:      :+:    :+:   */
+/*   vec3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 19:09:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/26 15:11:10 by jnivala          ###   ########.fr       */
+/*   Created: 2021/04/26 14:39:36 by jnivala           #+#    #+#             */
+/*   Updated: 2021/04/26 14:42:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	check_if_lines_cut(t_sector *sector)
+t_xyz	vec3(float x, float y, float z)
 {
-	unsigned int	i;
-	t_point			*temp;
+	return ((t_xyz){x, y, z});
+}
 
-	i = 0;
-	temp = sector->points;
-	if (sector->nb_of_walls < 4)
-		return (0);
-	while (i < sector->nb_of_walls)
-	{
-		if (check_if_lseg_intersects(temp,
-				&temp->next->next->x0, &temp->next->next->next->x0))
-			return (1);
-		temp = temp->next;
-		i++;
-	}
-	return (0);
+t_xyz	vec3_add(t_xyz a, t_xyz b)
+{
+	return ((t_xyz){a.x + b.x, a.y + b.y, a.z + b.z});
+}
+
+t_xy	vec3_to_vec2(t_xyz a)
+{
+	return ((t_xy){a.x, a.y});
+}
+
+t_xyz	inv_z(t_xyz a)
+{
+	a.z = 1.0f / a.z;
+	a.x = a.x * a.z;
+	a.y = a.y * a.z;
+	return (a);
 }

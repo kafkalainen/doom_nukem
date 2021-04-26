@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/22 14:45:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:03:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static char		*compass_direction(t_xy *dir)
+static char	*compass_direction(t_xy *dir)
 {
 	if (dir->x <= NW && dir->x > 0)
 		return (ft_strdup("North"));
@@ -28,7 +28,7 @@ static char		*compass_direction(t_xy *dir)
 		return (ft_strdup("NO DIR"));
 }
 
-static void		draw_minimap(t_home *home, t_frame *frame)
+static void	draw_minimap(t_home *home, t_frame *frame)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -51,19 +51,21 @@ static void		draw_minimap(t_home *home, t_frame *frame)
 	}
 }
 
-static void		draw_player(t_frame *frame)
+static void	draw_player(t_frame *frame)
 {
 	draw_rect(center_to_screen((t_xy){0.0f, 0.0f}),
 		(t_xy){3.0f, 3.0f}, frame, yellow);
 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
 		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
-		vec2_mul((t_xy){1.0f, 0.0f}, 400))), lightgreen, frame->buffer);
+				vec2_mul((t_xy){1.0f, 0.0f}, 400))),
+		lightgreen, frame->buffer);
 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
 		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
-		vec2_mul((t_xy){0.0f, 1.0f}, 400))), lightgreen, frame->buffer);
+				vec2_mul((t_xy){0.0f, 1.0f}, 400))),
+		lightgreen, frame->buffer);
 }
 
-static void		draw_info(t_frame *frame, t_player *plr, int nb_fps)
+static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 {
 	char	*sector;
 	char	*compass;
@@ -87,7 +89,7 @@ static void		draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	free(compass);
 }
 
-void			draw_frame(t_home *home, t_frame *frame, t_player *plr)
+void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
 	frame->idx = plr->current_sector;
 	frame->old_idx = old_sector;

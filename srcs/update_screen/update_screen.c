@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   update_screen.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 13:36:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 17:38:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:00:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
+/*
+**		Line 31 nulling:
+**		might be inefficient
+*/
 void	*optimized_memcpy(void *pixels, void *src, size_t size)
 {
 	size_t	i;
@@ -24,7 +28,7 @@ void	*optimized_memcpy(void *pixels, void *src, size_t size)
 	while (i < size)
 	{
 		d[i] = s[i];
-		s[i] = 0; // might be inefficient
+		s[i] = 0;
 		i++;
 	}
 	return (d);
@@ -33,7 +37,8 @@ void	*optimized_memcpy(void *pixels, void *src, size_t size)
 void	render_buffer(Uint32 *buffer, SDL_Surface *screen_surface)
 {
 	SDL_LockSurface(screen_surface);
-	optimized_memcpy(screen_surface->pixels, buffer, screen_surface->pitch * screen_surface->h);
+	optimized_memcpy(screen_surface->pixels,
+		buffer, screen_surface->pitch * screen_surface->h);
 	SDL_UnlockSurface(screen_surface);
 }
 

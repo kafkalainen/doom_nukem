@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/21 13:46:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:55:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,6 @@
 # define OR ||
 
 /*
-**
-*** Keyboard and Mouse macros
-**
-*/
-
-# define K_ESC SDLK_ESCAPE
-# define K_SPACE SDLK_SPACE
-# define K_CTRL SDLK_LCTRL
-# define K_SHIFT SDLK_LSHIFT
-
-# define K_UP SDLK_UP
-# define K_DOWN SDLK_DOWN
-# define K_LEFT SDLK_LEFT
-# define K_RIGHT SDLK_RIGHT
-
-# define K_W SDLK_w
-# define K_S SDLK_s
-# define K_A SDLK_a
-# define K_D SDLK_d
-# define K_Q SDLK_q
-# define K_E SDLK_e
-# define K_Z SDLK_z
-# define K_X SDLK_x
-# define K_C SDLK_c
-# define K_M SDLK_m
-
-/*
 ** Compass directions
 */
 
@@ -78,6 +51,5 @@
 # define SE 3.926990817f
 # define E 4.71238898039f
 # define NE 5.49778714378f
-
 
 #endif
