@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_mapfile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/22 13:24:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 11:09:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-/*
-** Separate functions for creating, writing to and reading from map files
-** states: 0 = initialized; 1 = file creation done successfully; 2 = successfully wrote texture/audio/sector data to file
-** [idx][width] [height] [size] [color_type] [color_depth] [format] [bits_per_pixel] [pitch] [compressed_size] [unsigned char *pixel data]
-*/
 
 unsigned char	*create_write_buffer(t_texture *tex)
 {
@@ -57,8 +51,6 @@ void	write_texture_data(int fd, t_home *home)
 		ft_strdel((char **)&buf);
 		i++;
 	}
-	// if (write(fd, "/doom_textures\n", strlen("/doom_textures\n")) == -1)
-	// 		printf("failed to add texture ending marker\n");
 }
 
 int		create_map_file(t_home *home)
