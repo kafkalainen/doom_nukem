@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_mapfile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/26 15:17:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/27 14:14:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	create_map_file(t_home *home)
 	char	*tmp = "./map_files/test.DATA";
 
 	doom_open(&fd, (const char **)&tmp,
-		WRITE_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST);
+		WRITE_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST, 0644);
 	if (fd < 0)
 		return (-1);
 	write_texture_data(fd, home);

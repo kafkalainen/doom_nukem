@@ -28,6 +28,8 @@
 #  define TRUNCATE O_TRUNC
 #  include <string.h>
 #  include <unistd.h>
+#  include <sys/types.h>
+#  include <sys/stat.h>
 #  include "../SDL2/include/SDL2/SDL.h"
 #  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include "../headers/syscalls_windows.h"
@@ -82,7 +84,7 @@
 void	clean_up(t_home *home);
 void	cleanup_audio(t_audio *audio);
 int		doom_close(int *fd);
-void	doom_open(int *fd, const char **path, int mode);
+void	doom_open(int *fd, const char **path, int mode, mode_t rights);
 void	doom_read(ssize_t *read_bytes, int *fd, void **buf, size_t nb_of_bytes);
 void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
