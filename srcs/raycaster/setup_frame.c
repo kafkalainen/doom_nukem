@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_frame.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 10:26:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 14:47:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/27 12:39:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	setup_frame(t_frame *frame, t_frame *new_frame,
 	if ((frame->offset - current_pxl) < 0)
 		new_frame->max_fov = 0.0f;
 	else
-		new_frame->max_fov = frame->offset - current_pxl + 1;
-	new_frame->offset = frame->offset - 1;
+		new_frame->max_fov = frame->offset - current_pxl;
+	new_frame->offset = frame->offset;
 	new_frame->buffer = frame->buffer;
 	new_frame->pxl_offset = frame->pxl_offset;
 }
