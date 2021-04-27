@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 14:58:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/27 14:15:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	open_file(t_home *home, char *path)
 	unsigned char	*buf;
 	ssize_t			size;
 
-	doom_open(&fd, (const char **)&path, READ_ONLY);
+	doom_open(&fd, (const char **)&path, READ_ONLY, 0644);
 	if (fd < 0)
 		error_output("Failed to open file\n");
 	else

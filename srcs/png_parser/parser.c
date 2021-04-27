@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 12:18:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/27 14:15:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_png	png_parser(char *path)
 	t_png		png;
 
 	setup_parser(&png, MAX_SIZE);
-	doom_open(&fd, (const char **)&path, READ_ONLY);
+	doom_open(&fd, (const char **)&path, READ_ONLY, 0644);
 	if (fd < 0)
 		error_output("Failed to open file\n");
 	else
