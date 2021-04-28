@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/26 15:41:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/28 11:24:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_sector
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;
-	float			ground;
-	float			ceiling;
+	int				ground;
+	int				ceiling;
 	t_xyz			floor_top_left;
 	t_xyz			floor_top_right;
 	t_xyz			floor_bottom_left;
