@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/26 12:19:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/28 13:49:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ int	load_audio(t_audio *audio)
 	}
 	return (0);
 }
+
+/*
+**	Should FreeWAV(t_chunk*) be used here?
+*/
 
 void	cleanup_audio(t_audio *audio)
 {

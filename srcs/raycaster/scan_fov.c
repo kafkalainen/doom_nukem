@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 18:59:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/28 11:17:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	handle_portal(t_home *home, t_frame *frame, t_player *plr,
 {
 	t_frame	new_frame;
 
-	*cur_pxl = *cur_pxl + 1;
 	setup_frame(frame, &new_frame, *cur_pxl, frame->left.wall->idx);
 	scan_fov(home, &new_frame, plr, 0);
 	draw_segment(frame, home, plr, 0);

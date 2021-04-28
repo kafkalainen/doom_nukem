@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/23 13:03:18 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/04/28 14:29:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 
 typedef struct s_ray_pt
 {
-	t_ray			ray_l;
-	t_ray			ray_r;
 	t_xy			l_pt;
 	t_xy			r_pt;
 	t_point			*wall;
 }					t_ray_pt;
+
+typedef struct s_plgn
+{
+	t_xyz			top_left;
+	t_xyz			top_right;
+	t_xyz			bottom_left;
+	t_xyz			bottom_right;
+}					t_plgn;
 
 typedef struct s_frame
 {
@@ -30,25 +36,19 @@ typedef struct s_frame
 	float			min_step;
 	int				old_idx;
 	Uint32			*buffer;
-	t_xy			plr_offset;
 	float			pxl_offset;
 	t_ray_pt		left;
 	t_ray_pt		right;
-	t_xyz			top_left;
-	t_xyz			top_right;
-	t_xyz			bottom_left;
-	t_xyz			bottom_right;
-	t_xyz			uv_top_left;
-	t_xyz			uv_top_right;
-	t_xyz			uv_bottom_left;
-	t_xyz			uv_bottom_right;
+	t_plgn			box;
+	t_plgn			uv;
 	t_xyz			ground_uv_t_l;
 	t_xyz			ground_uv_t_r;
 	t_xyz			ground_uv_b_l;
 	t_xyz			ground_uv_b_r;
 	t_xyz			uv_step;
 	t_xyz			ground_uv_step;
-	t_xyz			step;
+	t_xyz			step_top;
+	t_xyz			step_bot;
 	float			full_wall_dist;
 	float			visible_wall_dist;
 	float			unvisible_l_side;
@@ -86,7 +86,7 @@ void		continue_from_last_sector(t_point *start, t_ray_pt *fov,
 				t_frame *frame);
 void		scan_fov(t_home *home, t_frame *frame, t_player *plr,
 				int current_pxl);
-void		calc_distances(t_frame *frame, t_player *plr);
+void		calc_distances(t_frame *frame, t_player *plr, int *ground, int *ceiling);
 void		calc_wall_texels(t_frame *frame, int tex_width);
 void		calc_ground_texels(t_sector *sector, t_frame *frame);
 void		draw_segment(t_frame *frame, t_home *home, t_player *plr,
