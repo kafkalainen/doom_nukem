@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/28 15:45:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:03:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	calc_distances(t_frame *frame, t_player *plr, int *ground,
 				/ frame->box.top_right.z) * frame->left.r_pt.x) + 15;
 	frame->box.bottom_left = frame->box.top_left;
 	frame->box.bottom_right = frame->box.top_right;
-	frame->box.top_left.y = plr->pitch - SCREEN_HEIGHT /
+	frame->box.top_left.y = (plr->pitch + plr->height) - SCREEN_HEIGHT /
 		frame->box.top_left.z * *ceiling;
-	frame->box.top_right.y = plr->pitch - SCREEN_HEIGHT /
+	frame->box.top_right.y = (plr->pitch + plr->height) - SCREEN_HEIGHT /
 		frame->box.top_right.z * *ceiling;
-	frame->box.bottom_left.y = plr->pitch + SCREEN_HEIGHT /
+	frame->box.bottom_left.y = (plr->pitch + plr->height) + SCREEN_HEIGHT /
 		frame->box.top_left.z * (*ceiling - *ground);
-	frame->box.bottom_right.y = plr->pitch + SCREEN_HEIGHT /
+	frame->box.bottom_right.y = (plr->pitch + plr->height) + SCREEN_HEIGHT /
 		frame->box.top_right.z * (*ceiling - *ground);
 	frame->step_top.y = interpolate_points(frame->box.top_right.y, frame->box.top_left.y,
 			frame->box.top_left.x, frame->box.top_right.x);
