@@ -205,7 +205,7 @@ void	draw_vertically(t_frame *frame, t_sector *sector,
 	start = frame->top_left;
 	end = frame->top_right;
 	bottom = frame->bottom_left;
-	while (obj_x + (start.x - 2) < 0)
+	while (obj_x + (start.x + 1) < 0)
 		step_one(&start, &bottom, &obj_x, frame);
 	tex_floor = get_floor(sector->tex_floor);
 	while (obj_x + start.x < end.x)
