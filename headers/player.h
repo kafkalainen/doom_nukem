@@ -21,6 +21,7 @@ typedef struct s_input
 	int				down;
 	int				rot_right;
 	int				rot_left;
+	int				crouch;
 	int				wireframe;
 	int				minimap;
 	int				info;
@@ -30,17 +31,19 @@ typedef struct s_input
 
 typedef struct s_player
 {
-	t_xy			pos;
-	t_xy			dir;
-	t_xy			move_dir;
 	float			pitch;
 	float			z;
 	float			height;
+	float			angle;
+	float			acceleration;
+	int				gravity;
+	int				current_sector;
+	t_xy			pos;
+	t_xy			dir;
+	t_xy			move_dir;
 	t_input			input;
 	clock_t			time;
 	t_audio			audio;
-	float			angle;
-	int				current_sector;
 }					t_player;
 
 enum e_movement

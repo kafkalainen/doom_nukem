@@ -46,11 +46,11 @@ t_texture	*get_tex(int idx, t_texture	**textures)
 }
 
 static void	handle_portal(t_home *home, t_frame *frame, t_player *plr,
-	int *cur_pxl)
+	int cur_pxl)
 {
 	t_frame	new_frame;
 
-	setup_frame(frame, &new_frame, *cur_pxl, frame->left.wall->idx);
+	setup_frame(frame, &new_frame, cur_pxl, frame->left.wall->idx);
 	scan_fov(home, &new_frame, plr, 0);
 	draw_segment(frame, home, plr, 0);
 	frame->offset = new_frame.offset;
@@ -81,7 +81,7 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr, int cur_pxl)
 		}
 		if (check_if_portal(frame->left.wall)
 			&& !check_if_same_pt(&cur_pxl, &frame->left))
-			handle_portal(home, frame, plr, &cur_pxl);
+			handle_portal(home, frame, plr, cur_pxl);
 		else
 		{
 			draw_segment(frame, home, plr, 1);

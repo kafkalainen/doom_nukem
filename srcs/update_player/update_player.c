@@ -39,7 +39,24 @@ static void	check_player_dir(t_player *plr, t_xy *dir)
 	}
 }
 
-static void	movement(t_player *plr, t_home *home)
+void	gravity_func(t_player *plr, int floor_height, float gravity)
+{
+	plr->z = plr->z - gravity;
+	if (plr->z < floor_height)
+		plr->z = floor_height;
+	if(plr->acceleration > 0)
+	{
+		plr->acceleration = plr->acceleration - gravity;
+		plr->pitch += plr->acceleration; 
+	}
+	if(plr->acceleration < 0)
+	{
+		plr->acceleration = 0;
+		plr->pitch = 240;
+	}
+}
+
+static void	movement(t_player *plr, t_home *home, int floor_height)
 {
 	Uint32	current_time;
 	Uint32	delta_time;
@@ -50,6 +67,7 @@ static void	movement(t_player *plr, t_home *home)
 	if (delta_time < 1)
 		return ;
 	plr->time = current_time;
+	gravity_func(plr, floor_height, (delta_time * 0.05));
 	if (plr->input.up == 1 || plr->input.down == 1
 		|| plr->input.left == 1 || plr->input.right == 1)
 	{
@@ -72,5 +90,5 @@ void	update_player(t_player *plr, t_home *home, SDL_Event *e)
 		transform_world_view(home, DEG_TO_RAD * 0.5);
 	if (plr->input.rot_right == 1)
 		transform_world_view(home, DEG_TO_RAD * -0.5);
-	movement(plr, home);
+	movement(plr, home, home->sectors[plr->current_sector]->ground);
 }
