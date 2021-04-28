@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/27 13:36:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/28 14:47:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	draw_vertical_wall_strip(t_xy offset, size_t height,
 	Uint32	colour;
 
 	cur_y = 0;
-	texel = frame->uv_top_left;
+	texel = frame->uv.top_left;
 	corr_texel = texel;
 	fit_to_screen_space(&offset, &texel, &height, &frame->uv_step.y);
 	while (cur_y < height)
@@ -87,10 +87,11 @@ void	draw_vertically(t_frame *frame, t_sector *sector, t_texture *wall_tex,
 	Uint32		tex_floor;
 
 	obj_x = 0;
-	start = frame->top_left;
-	end = frame->top_right;
-	bottom = frame->bottom_left;
-	while (obj_x + start.x < 0)
+	sector = sector;
+	start = frame->box.top_left;
+	end = frame->box.top_right;
+	bottom = frame->box.bottom_left;
+	while (obj_x + (start.x - 2) < 0)
 		step_one(&start, &bottom, &obj_x, frame);
 	tex_floor = get_floor(sector->tex_floor);
 	while (obj_x + start.x < end.x)
@@ -115,20 +116,21 @@ void	draw_segment(t_frame *frame, t_home *home, t_player *plr, int wall)
 	wall_tex = get_tex(-1, home->editor_tex);
 	if (wall)
 		wall_tex = get_tex(frame->left.wall->idx, home->editor_tex);
-	calc_distances(frame, plr);
+	calc_distances(frame, plr, &home->sectors[frame->idx]->ground,
+		&home->sectors[frame->idx]->ceiling);
 	calc_wall_texels(frame, wall_tex->w);
-	if (plr->input.wireframe == 1)
+	if (plr->input.wireframe == 0)
 		draw_vertically(frame, home->sectors[frame->idx], wall_tex, wall);
 	else
 	{
 		colour = get_floor(home->sectors[frame->idx]->tex_floor);
-		draw_line(vec3_to_vec2(frame->top_left),
-			vec3_to_vec2(frame->top_right), colour, frame->buffer);
-		draw_line(vec3_to_vec2(frame->bottom_left),
-			vec3_to_vec2(frame->bottom_right), colour, frame->buffer);
-		draw_line(vec3_to_vec2(frame->top_left),
-			vec3_to_vec2(frame->bottom_left), colour, frame->buffer);
-		draw_line(vec3_to_vec2(frame->top_right),
-			vec3_to_vec2(frame->bottom_right), colour, frame->buffer);
+		draw_line(vec3_to_vec2(frame->box.top_left),
+			vec3_to_vec2(frame->box.top_right), colour, frame->buffer);
+		draw_line(vec3_to_vec2(frame->box.bottom_left),
+			vec3_to_vec2(frame->box.bottom_right), colour, frame->buffer);
+		draw_line(vec3_to_vec2(frame->box.top_left),
+			vec3_to_vec2(frame->box.bottom_left), colour, frame->buffer);
+		draw_line(vec3_to_vec2(frame->box.top_right),
+			vec3_to_vec2(frame->box.bottom_right), colour, frame->buffer);
 	}
 }
