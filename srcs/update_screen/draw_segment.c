@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/28 14:47:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:00:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	draw_vertically(t_frame *frame, t_sector *sector, t_texture *wall_tex,
 	obj_x = 0;
 	start = frame->box.top_left;
 	end = frame->box.top_right;
-	bottom = frame->bottom_left;
+	bottom = frame->box.bottom_left;
 	while (obj_x + (start.x + 1) < 0)
 		step_one(&start, &bottom, &obj_x, frame);
 	tex_floor = get_floor(sector->tex_floor);
