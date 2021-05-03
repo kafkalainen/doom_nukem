@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/03 14:07:14 by jnivala          ###   ########.fr        #
+#    Updated: 2021/05/03 15:30:33 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS = \
 	raycaster$(SLASH)calc_wall_texels.c \
 	raycaster$(SLASH)colour_scale.c \
 	raycaster$(SLASH)get_floor.c \
+	raycaster$(SLASH)get_next_wall_tex.c \
 	raycaster$(SLASH)get_wall_points.c \
 	raycaster$(SLASH)line_line_intersection.c \
 	raycaster$(SLASH)line_segment_check.c \
