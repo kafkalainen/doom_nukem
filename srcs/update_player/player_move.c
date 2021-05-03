@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 20:22:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/03 14:09:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	player_move(t_player *plr, t_home *home, t_xy *dir)
 	if (crossing >= 0)
 	{
 		if (plr_in_corner(home->sectors[crossing], &pos) != open_space)
+			return (0);
+		if (check_height_diff(home->sectors[plr->current_sector], home->sectors[crossing]))
 			return (0);
 		translate_world_view(home, *dir);
 		plr->current_sector = crossing;

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_functions.h                                 :+:      :+:    :+:   */
+/*   check_height_diff.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/22 13:53:57 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/03 14:07:43 by jnivala          ###   ########.fr       */
+/*   Created: 2021/05/03 14:01:12 by jnivala           #+#    #+#             */
+/*   Updated: 2021/05/03 14:11:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_FUNCTIONS_H
-# define PLAYER_FUNCTIONS_H
+#include "../../headers/doom_nukem.h"
 
-/*
-** Player functions
-*/
-
-void	init_player(t_player *plr);
-void	update_player(t_player *plr, t_home *home, SDL_Event *e);
-int		plr_inside(t_sector *sector, t_xy *pos);
-int		player_move(t_player *plr, t_home *home, t_xy *dir);
-int		check_height_diff(t_sector *from, t_sector *to);
-
-
-#endif
+int	check_height_diff(t_sector *from, t_sector *to)
+{
+	if (from->ground - to->ground < -5)
+		return (1);
+	else if (to->ceiling - to->ground < 3)
+		return (1);
+	else
+		return (0);
+}

@@ -33,10 +33,6 @@
 #  include "../SDL2/include/SDL2/SDL.h"
 #  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include "../headers/syscalls_windows.h"
-# elif __APPLE__
-#  define READ_ONLY O_RDONLY
-#  include <string.h>
-#  include <unistd.h>
 # elif defined(_WIN32) || defined(WIN32)
 #  define OS_WINDOWS 1
 #  define READ_ONLY _O_BINARY
