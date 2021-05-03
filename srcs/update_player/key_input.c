@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 15:55:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/03 12:48:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ static void	action_keys(t_player *plr, SDL_KeyCode *sym)
 
 /*
 **
-**	Must change plr height standard to something to just assign default value, Going to put it now to 6 and 3.
+**	Must change plr height standard to something to just assign default value,
+**	Going to put it now to 6 and 3.
 **	To create jump function, we need to make "gravity function", first.
-**	Jumping creates a froce that gradually falls until you are at max height, gravity pulling the player at all times
+**	Jumping creates a froce that gradually falls until you are at max height,
+**	gravity pulling the player at all times
 **	at a constant rate, lets say 0,2z per 10 frames.
 **
 */

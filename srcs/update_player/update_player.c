@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/28 16:02:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/03 12:47:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	gravity_func(t_player *plr, int floor_height, float gravity)
 	plr->z = plr->z - gravity;
 	if (plr->z < floor_height)
 		plr->z = floor_height;
-	if(plr->acceleration > 0)
+	if (plr->acceleration > 0)
 	{
 		plr->acceleration = plr->acceleration - gravity;
 		plr->height += plr->acceleration;
 	}
-	if(plr->acceleration < 0)
+	if (plr->acceleration < 0)
 	{
 		plr->acceleration = 0;
 		plr->height = 0;

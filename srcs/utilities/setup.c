@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/28 14:58:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/03 11:05:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 		SDL_Quit();
 		clean_up(home);
 	}
-	if (Mix_PlayingMusic() == 0)
-		Mix_PlayMusic(plr->audio.music, -1);
+	// if (Mix_PlayingMusic() == 0)
+	// 	Mix_PlayMusic(plr->audio.music, -1);
 	init_player(plr);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }

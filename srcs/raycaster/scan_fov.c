@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/28 11:17:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:30:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,10 @@ static void	handle_portal(t_home *home, t_frame *frame, t_player *plr,
 
 	setup_frame(frame, &new_frame, cur_pxl, frame->left.wall->idx);
 	scan_fov(home, &new_frame, plr, 0);
-	draw_segment(frame, home, plr, 0);
+	draw_segment(frame, home, plr);
 	frame->offset = new_frame.offset;
 	frame->pxl_offset = new_frame.pxl_offset;
 }
-
-/*
-**	Are we in a first sector? If not, then proceed to next one.
-**	While offset is larger than maximum field of view, call drawing functions.
-**	Recursion after recursion?
-**	calc_sector_texels(home->sectors[frame->idx]);
-*/
 
 void	scan_fov(t_home *home, t_frame *frame, t_player *plr, int cur_pxl)
 {
@@ -84,7 +77,7 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr, int cur_pxl)
 			handle_portal(home, frame, plr, cur_pxl);
 		else
 		{
-			draw_segment(frame, home, plr, 1);
+			draw_segment(frame, home, plr);
 			frame->offset = frame->offset - ++cur_pxl;
 		}
 	}
