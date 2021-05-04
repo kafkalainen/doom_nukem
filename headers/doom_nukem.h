@@ -70,9 +70,9 @@
 # include "drawing_functions.h"
 # include "caster.h"
 # include "events.h"
+# include "map.h"
 # include "porting.h"
 # include "parsing.h"
-# include "map.h"
 # include "typewriter.h"
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 14:58:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/04 14:51:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_next_breaker(unsigned char *buf)
 	int	i;
 
 	i = 0;
-	while (buf[i] != '\0')
+	while (buf[i])
 	{
 		if (buf[i] == READ_BREAKER)
 			return (i);
@@ -51,7 +51,7 @@ int	get_next_breaker(unsigned char *buf)
 ** are saved into the map data file
 */
 
-t_texture	*get_texture(unsigned char *buf, unsigned int *pos)
+t_texture	*get_texture(unsigned char *buf, unsigned int *pos, ssize_t size)
 {
 	t_texture	*tex;
 	t_png		png;
@@ -62,6 +62,8 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos)
 	while (++i < 3)
 	{
 		(*pos) += get_next_breaker(buf + (*pos)) + 1;
+		if (*pos > size)
+			error_output("Pointer points outside memory address\n");
 		if (i == 0)
 			idx = ft_atoi((char *)(buf + (*pos)));
 		else if (i == 1)
@@ -71,6 +73,8 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos)
 			setup_parser(&png, png.source.size);
 			ft_memcpy(png.source.buf, buf + *pos, png.source.size);
 			(*pos) += png.source.size;
+			if (*pos > size)
+				error_output("Pointer points outside memory address\n");
 		}
 	}
 	parse_png(&png);
@@ -80,15 +84,16 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos)
 	return (tex);
 }
 
-void	parse_map_data(unsigned char *buf, t_home *home)
+void	parse_texture_data(unsigned char *buf, t_home *home, unsigned int *pos, ssize_t size)
 {
-	unsigned int	pos;
 	int				i;
 
-	pos = 0;
+	*pos = 0;
 	buf = (unsigned char *)ft_strstr((char *)buf, "doom_textures");
-	pos += get_next_breaker(buf + pos) + 1;
-	home->nbr_of_textures = ft_atoi((char *)buf + pos);
+	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > size)
+		error_output("Pointer points outside memory address\n");
+	home->nbr_of_textures = ft_atoi((char *)buf + *pos);
 	home->editor_tex = (t_texture **)malloc(sizeof(t_texture *)
 			* (home->nbr_of_textures + 1));
 	if (!home->editor_tex)
@@ -97,9 +102,32 @@ void	parse_map_data(unsigned char *buf, t_home *home)
 	i = 1;
 	while (i <= home->nbr_of_textures)
 	{
-		home->editor_tex[i] = get_texture(buf, &pos);
+		home->editor_tex[i] = get_texture(buf, pos, size);
 		i++;
 	}
+}
+
+void	parse_audio_data(unsigned char *buf, unsigned int *pos, char *path, ssize_t size)
+{
+	t_audio_asset	asset;
+
+	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > size)
+		error_output("Pointer points outside memory address\n");
+	asset.size = ft_atoi((char *)buf + *pos);
+	asset.buf = malloc(sizeof(unsigned char *) * asset.size);
+	if (!asset.buf)
+		error_output("failed to allocate memory to music buffer\n");
+	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > size)
+		error_output("Pointer points outside memory address\n");
+	ft_memcpy(asset.buf, buf + *pos, asset.size);
+	*pos += asset.size;
+	if (*pos > size)
+		error_output("Pointer points outside memory address\n");
+	if (create_temp_audio_file(asset.buf, asset.size, path) == -1)
+		error_output("Failed to create temp audio file\n");
+	free(asset.buf);
 }
 
 /*
@@ -107,11 +135,12 @@ void	parse_map_data(unsigned char *buf, t_home *home)
 ** // tone down the MAX_SIZE for this once we know the avg range of file sizes
 */
 
-int	open_file(t_home *home, char *path)
+int	open_file(t_home *home, char *path, t_player *plr)
 {
 	int				fd;
 	unsigned char	*buf;
 	ssize_t			size;
+	unsigned int	pos;
 
 	doom_open(&fd, (const char **)&path, READ_ONLY);
 	if (fd < 0)
@@ -128,7 +157,12 @@ int	open_file(t_home *home, char *path)
 			error_output("File is too large\n");
 		if (doom_close(&fd) == -1)
 			error_output("Could not close file\n");
-		parse_map_data(buf, home);
+		parse_texture_data(buf, home, &pos, size);
+		if (mkdir("./temp", 0777) == -1)
+			printf("Failed to create temporary directory\n");
+		parse_audio_data(buf, &pos, "./temp/music.wav", size);
+		parse_audio_data(buf, &pos, "./temp/footstep1.wav", size);
+		parse_audio_data(buf, &pos, "./temp/footstep2.wav", size);
 		free(buf);
 	}
 	return (1);

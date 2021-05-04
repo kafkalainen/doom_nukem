@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 19:20:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/04 14:50:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int			load_audio(t_audio *audio)
 {
-	audio->music = Mix_LoadMUS("audio/eerie_by_eparviai.wav");
-	if (!audio->music)
-	{
-		ft_putendl_fd("Failed to load beat music! SDL_mixer Error", 2);
-		audio->footstep1 = NULL;
-		audio->footstep2 = NULL;
-		return (771);
-	}
+	// audio->music = Mix_LoadMUS("audio/eerie_by_eparviai.wav");
+	// if (!audio->music)
+	// {
+	// 	ft_putendl_fd("Failed to load beat music! SDL_mixer Error", 2);
+	// 	audio->footstep1 = NULL;
+	// 	audio->footstep2 = NULL;
+	// 	return (771);
+	// }
 	audio->footstep1 = Mix_LoadWAV("audio/footstep1.wav");
 	if (!audio->footstep1)
 	{
