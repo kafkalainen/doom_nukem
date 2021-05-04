@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/03 15:26:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/04 10:29:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_frame
 	int				draw_top;
 	int				draw_middle;
 	int				draw_bottom;
+	int				draw_incline;
 	float			min_step;
 	int				old_idx;
 	Uint32			*buffer;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/03 14:25:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/04 10:55:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	calc_dimensions(t_frame *frame, t_player *plr, t_home *home)
 	frame->draw_top = 0;
 	frame->draw_bottom = 0;
 	frame->draw_middle = 0;
+	frame->draw_incline = 0;
 	if (frame->left.wall->idx < 0)
 		frame->draw_middle = 1;
 	if (frame->left.wall->idx >= 0)
@@ -78,6 +79,8 @@ void	calc_dimensions(t_frame *frame, t_player *plr, t_home *home)
 	if (frame->left.wall->idx >= 0)
 		frame->draw_bottom = home->sectors[frame->idx]->ground
 			- home->sectors[frame->left.wall->idx]->ground;
+	if (frame->left.wall->idx == 1)
+		frame->draw_incline = 1;
 	calc_z_x(&frame->outer_box, &frame->left.l_pt, &frame->left.r_pt);
 	calc_z_x(&frame->inner_box, &frame->left.l_pt, &frame->left.r_pt);
 	if (frame->draw_top || frame->draw_bottom)

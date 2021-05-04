@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/03 15:29:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/04 10:04:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ void	draw_vertically(t_frame *frame, t_sector *sector, t_texture *wall_tex)
 void	draw_segment(t_frame *frame, t_home *home, t_player *plr)
 {
 	t_texture	*wall_tex;
-	Uint32		colour;
 
 	wall_tex = get_tex(-1, home->editor_tex);
 	if (frame->left.wall->idx < 0)
@@ -147,31 +146,5 @@ void	draw_segment(t_frame *frame, t_home *home, t_player *plr)
 	if (plr->input.wireframe == 0)
 		draw_vertically(frame, home->sectors[frame->idx], wall_tex);
 	else
-	{
-		colour = get_floor(home->sectors[frame->idx]->tex_floor);
-		if (frame->draw_top)
-		{
-			draw_line(vec3_to_vec2(frame->inner_box.top_left),
-				vec3_to_vec2(frame->inner_box.top_right),
-				limegreen, frame->buffer);
-			draw_line(vec3_to_vec2(frame->outer_box.top_left),
-				vec3_to_vec2(frame->outer_box.top_right),
-				colour, frame->buffer);
-		}
-		if (frame->draw_middle)
-		{
-			draw_line(vec3_to_vec2(frame->outer_box.top_left),
-				vec3_to_vec2(frame->outer_box.top_right), colour,
-				frame->buffer);
-			draw_line(vec3_to_vec2(frame->outer_box.bottom_left),
-				vec3_to_vec2(frame->outer_box.bottom_right),
-				colour, frame->buffer);
-			draw_line(vec3_to_vec2(frame->outer_box.top_left),
-				vec3_to_vec2(frame->outer_box.bottom_left),
-				colour, frame->buffer);
-			draw_line(vec3_to_vec2(frame->outer_box.top_right),
-				vec3_to_vec2(frame->outer_box.bottom_right),
-				colour, frame->buffer);
-		}
-	}
+		draw_wireframe(frame, get_floor(home->sectors[frame->idx]->tex_floor));
 }
