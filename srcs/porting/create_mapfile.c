@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/04 15:57:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/04 16:42:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	write_audio_data(int fd, char *path, char *asset_name)
 		printf("Failed to write audio data\n");
 	if (write(fd, "\n", 1) == -1)
 		printf("failed to audio data\n");
-	ft_strdel(&tmp);
+	free(tmp);
 	free(asset.buf);
 }
 

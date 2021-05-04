@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/04 16:05:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/04 16:43:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	// if (Mix_PlayingMusic() == 0)
 	// 	Mix_PlayMusic(plr->audio.music, -1);
 	init_player(plr);
-	init_textures(home);
+	// init_textures(home);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/04 16:04:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/04 16:34:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,11 @@ int	open_file(t_home *home, char *path)
 		if (doom_close(&fd) == -1)
 			error_output("Could not close file\n");
 		parse_texture_data(buf, home, &pos, size);
-		// if (mkdir("./temp", 0777) == -1)
-		// 	printf("Failed to create temporary directory\n");
-		// parse_audio_data(buf, &pos, "./temp/music.wav", size);
-		// parse_audio_data(buf, &pos, "./temp/footstep1.wav", size);
-		// parse_audio_data(buf, &pos, "./temp/footstep2.wav", size);
+		if (mkdir("./temp", 0777) == -1)
+			printf("Failed to create temporary directory\n");
+		parse_audio_data(buf, &pos, "./temp/music.wav", size);
+		parse_audio_data(buf, &pos, "./temp/footstep1.wav", size);
+		parse_audio_data(buf, &pos, "./temp/footstep2.wav", size);
 		free(buf);
 	}
 	return (1);
