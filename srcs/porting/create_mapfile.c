@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/04 14:51:08 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/04 15:57:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ void	write_texture_data(int fd, t_home *home)
 	}
 }
 
-<<<<<<< Updated upstream
-int		create_map_file(t_home *home)
-=======
 void	write_audio_data(int fd, char *path, char *asset_name)
 {
 	t_audio_asset	asset;
@@ -81,21 +78,16 @@ void	write_audio_data(int fd, char *path, char *asset_name)
 **	Add writing map and audio data for the mapfile.
 */
 
-int	create_map_file(t_home *home, t_player *plr)
->>>>>>> Stashed changes
+int	create_map_file(t_home *home)
 {
 	int		fd;
 	char	*tmp = "./map_files/test.DATA";
 
 	doom_open(&fd, (const char**)&tmp,
-		WRITE_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST);
+		WRITE_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST, 0644);
 	if (fd < 0)
 		return (-1);
 	write_texture_data(fd, home);
-<<<<<<< Updated upstream
-	// write audio data
-	// write sector data
-=======
 	write_audio_data(fd, "./audio/eerie_by_eparviai.wav", "doom_music #");
 	write_audio_data(fd, "./audio/footstep1.wav", "doom_footstep1 #");
 	write_audio_data(fd, "./audio/footstep2.wav", "doom_footstep2 #");
@@ -113,7 +105,6 @@ int		create_temp_audio_file(unsigned char *buf, ssize_t size, char *path)
 		return (-1);
 	if (write(fd, buf, size) == -1)
 		return (-1);
->>>>>>> Stashed changes
 	if (doom_close(&fd) == -1)
 		return (-1);
 	return (1);

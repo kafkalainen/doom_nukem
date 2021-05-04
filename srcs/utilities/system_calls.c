@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   system_calls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 11:53:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 13:09:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/04 15:54:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	doom_open(int *fd, const char **path, int mode)
+void	doom_open(int *fd, const char **path, int mode, mode_t rights)
 {
 	if (OS_WINDOWS)
-		*fd = _open(*path, mode);
+		*fd = _open(*path, mode, rights);
 	else
-		*fd = open(*path, mode);
+		*fd = open(*path, mode, rights);
 }
 
 int	doom_close(int *fd)

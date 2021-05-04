@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/04 14:18:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/04 16:05:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error_output("usage: ./doom-nukem [path to mapfile]");
 	setup(argv[1], &home, &plr, &frame);
-	// if (create_map_file(&home, &plr) < 0)
-	// 	error_output("Failed to create map file\n");
-	if (open_file(&home, "map_files/test.DATA", &plr) < 0)
-		error_output("Could not successfully open map file.");
+	if (create_map_file(&home) < 0)
+		error_output("Failed to create map file\n");
+	// if (open_file(&home, "map_files/test.DATA") < 0)
+	// 	error_output("Could not successfully open map file.");
 	while (!plr.input.quit)
 	{
 		fps_timer(&home.t);
