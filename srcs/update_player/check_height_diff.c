@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 14:01:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/05 13:15:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/05 16:14:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 /*
 **	We need to linearally interpolate at which point player is
-**	crossing to another sector.
+**	crossing to another sector, check line-line intersection.
+**	lerp procentually to the height.
 **
 */
 
