@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/04 10:29:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/05 13:34:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ typedef struct s_plgn
 	t_xyz			bottom_left;
 	t_xyz			bottom_right;
 }					t_plgn;
+
+typedef struct s_diffs
+{
+	int				from_ground;
+	int				to_ground;
+	int				from_ceiling;
+	int				to_ceiling;
+}					t_diffs;
 
 typedef struct s_frame
 {
@@ -97,6 +105,7 @@ void		draw_wall(t_frame *frame, t_texture *tex, t_home *home,
 int			get_next_wall_tex(t_point **current_head, int nbr_of_walls);
 t_texture	*get_tex(int idx, t_texture	**textures);
 void		get_wall_pts(t_frame *frame, int walls, int current_pxl);
+t_point		*get_portal_by_idx(int idx, t_sector *sector);
 t_xy		line_intersection(t_intersection *sect);
 t_xy		line_intersection_raw(t_intersection *sect);
 void		scan_fov(t_home *home, t_frame *frame, t_player *plr,

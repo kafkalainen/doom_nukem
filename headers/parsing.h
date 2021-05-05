@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/22 15:45:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/05 12:02:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ int			set_to_null(t_texture **tex, int error);
 int			free_sectors_and_exit(int error_code, t_home *home, size_t n);
 void		free_sectors_n(t_home *home, size_t	n);
 t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos);
-t_point		*new_point(t_xy x0, int idx);
 char		*parse_colour_data(char *ptr, t_texture *tex);
-int			parse_coordinates(t_xy	*coord, int *tex_id,
-				unsigned int ***pos, unsigned char **buf);
+int			parse_coordinates(t_point_data *data, unsigned int ***pos,
+				unsigned char **buf);
 int			parse_number_data(t_sector *new_sector, unsigned char *buf,
 				unsigned int *pos);
 int			parse_sector_data(unsigned char *buf, t_home *home);

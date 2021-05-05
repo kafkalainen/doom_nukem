@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_functions.h                                 :+:      :+:    :+:   */
+/*   get_portal_by_idx.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/22 13:53:57 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/05 13:15:05 by jnivala          ###   ########.fr       */
+/*   Created: 2021/05/05 13:28:18 by jnivala           #+#    #+#             */
+/*   Updated: 2021/05/05 13:33:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_FUNCTIONS_H
-# define PLAYER_FUNCTIONS_H
+#include "../../headers/doom_nukem.h"
 
-/*
-** Player functions
-*/
+t_point	*get_portal_by_idx(int idx, t_sector *sector)
+{
+	t_point			*temp;
+	unsigned int	i;
 
-void	init_player(t_player *plr);
-void	update_player(t_player *plr, t_home *home, SDL_Event *e);
-int		plr_inside(t_sector *sector, t_xy *pos);
-int		player_move(t_player *plr, t_home *home, t_xy *dir);
-int		check_height_diff(float *z, t_point *to);
-
-
-#endif
+	if (sector == NULL)
+		return (NULL);
+	i = 0;
+	temp = sector->points;
+	while (i < sector->nb_of_walls)
+	{
+		if (temp->idx == idx)
+			return (temp);
+		temp = temp->next;
+		i++;
+	}
+	return (NULL);
+}
