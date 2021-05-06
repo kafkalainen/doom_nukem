@@ -6,12 +6,19 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 15:40:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/06 12:19:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTORS_H
 # define VECTORS_H
+
+
+typedef struct s_height
+{
+	float			ground;
+	float			ceiling;
+}					t_height;
 
 typedef struct s_screen_xy
 {
@@ -40,12 +47,6 @@ typedef struct s_ray
 	t_xy			dir;
 	t_xy			cutpoint;
 }					t_ray;
-
-typedef struct s_maxpoints
-{
-	t_xy			left;
-	t_xy			right;
-}					t_maxpoints;
 
 /*
 ** Vector functions

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 15:03:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/06 16:14:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,19 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	char	*sector;
 	char	*compass;
 	char	*fps;
+	char	*plr_z;
 
 	compass = compass_direction(&plr->dir);
 	sector = ft_itoa(plr->current_sector);
 	fps = ft_itoa(nb_fps);
+	plr_z = ft_ftoa(plr->z, 6);
 	str_pxl(frame, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps);
 	str_pxl(frame, (t_xy){0, 50}, "dir: ");
 	str_pxl(frame, (t_xy){50, 50}, compass);
 	str_pxl(frame, (t_xy){0, 70}, "sector:");
 	str_pxl(frame, (t_xy){0, 90}, sector);
+	str_pxl(frame, (t_xy){0, 90}, "current z:");
+	str_pxl(frame, (t_xy){0, 110}, plr_z);
 	str_pxl(frame, (t_xy){0, 380}, "Press z to switch to wireframe");
 	str_pxl(frame, (t_xy){0, 400}, "Press x to close minimap");
 	str_pxl(frame, (t_xy){0, 420}, "Press c to close info");
@@ -87,6 +91,7 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	free(fps);
 	free(sector);
 	free(compass);
+	free(plr_z);
 }
 
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)

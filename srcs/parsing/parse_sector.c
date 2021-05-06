@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/05 12:02:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/06 12:23:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_point	*new_point(t_point_data *data)
 		new->x0.x = data->x;
 		new->x0.y = data->y;
 		new->idx = data->idx;
-		new->ground = data->ground;
-		new->ceiling = data->ceiling;
+		new->height.ground = data->ground;
+		new->height.ceiling = data->ceiling;
 		new->next = NULL;
 	}
 	else

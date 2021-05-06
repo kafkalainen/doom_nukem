@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_height_diff.c                                :+:      :+:    :+:   */
+/*   vec2_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 14:01:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/06 16:17:27 by jnivala          ###   ########.fr       */
+/*   Created: 2021/05/06 11:36:35 by jnivala           #+#    #+#             */
+/*   Updated: 2021/05/06 15:08:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	check_height_diff(t_xy *dir, float *z, t_point *to)
+void	interpolate_y(t_height *height, t_xy cutpoint, t_point *p0, t_point *p1)
 {
-	t_intersection	sect;
-	t_ray			plr;
-	t_height		height;
+	float	full_mag;
+	float	cut_mag;
 
-	plr.pos = vec2(0, 0);
-	plr.dir = *dir;
-	calc_intersection(to, &plr, &sect);
-	plr.cutpoint = line_intersection(&sect);
-	interpolate_y(&height, plr.cutpoint, to, to->next);
-	if (height.ground - *z < 6)
-	{
-		*z = height.ground - *z;
-		return (0);
-	}
-	else
-		return (1);
+	full_mag = vec2_mag(vec2_dec(p1->x0, p0->x0));
+	cut_mag = vec2_mag(vec2_dec(p1->x0, cutpoint));
+	height->ground = p1->height.ground - (p1->height.ground - p0->height.ground)
+		* (cut_mag / full_mag);
+	height->ceiling = p1->height.ceiling - (p1->height.ceiling - p0->height.ceiling)
+		* (cut_mag / full_mag);
 }
