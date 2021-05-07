@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/04 16:34:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/07 13:40:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,22 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos, ssize_t size)
 	return (tex);
 }
 
+t_texture	*assign_empty_texture(void)
+{
+	t_texture	*tex;
+
+	tex = (t_texture *)malloc(sizeof(t_texture));
+	if (!tex)
+		error_output("Memory allocation of t_texture struct failed\n");
+	tex->source = (unsigned char *)malloc(sizeof(unsigned char) * 1);
+	if (!tex->source)
+		error_output("Memory allocation of editor pixel pointer failed\n");
+	tex->pixels = (unsigned int *)malloc(sizeof(unsigned int) * 1);
+	if (!tex->pixels)
+		error_output("Memory allocation of pixel pointer failed\n");
+	return (tex);
+}
+
 void	parse_texture_data(unsigned char *buf, t_home *home, unsigned int *pos, ssize_t size)
 {
 	int				i;
@@ -98,7 +114,7 @@ void	parse_texture_data(unsigned char *buf, t_home *home, unsigned int *pos, ssi
 			* (home->nbr_of_textures + 1));
 	if (!home->editor_tex)
 		error_output("failed to allocate memory to editor textures\n");
-	home->editor_tex[0] = NULL;
+	home->editor_tex[0] = assign_empty_texture();
 	i = 1;
 	while (i <= home->nbr_of_textures)
 	{

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/26 11:51:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/07 12:37:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,11 @@ t_texture	*create_texture(t_png *png, int idx)
 		error_output("Memory allocation of pixel pointer failed\n");
 	convert_to_unsigned_int(tex, png);
 	return (tex);
+}
+
+void	free_texture(t_texture *tex)
+{
+	free(tex->source);
+	free(tex->pixels);
+	free(tex);
 }
