@@ -6,33 +6,40 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 14:01:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 13:51:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 14:23:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	update_height(t_xy *dir, float *z, t_point *to, int walls)
+static t_xy	cast_ray(t_xy *dir, t_point **head, int walls)
 {
 	t_intersection	sect;
 	t_ray			plr;
-	float			units_to_travel;
-	t_height		height;
 
 	plr.pos = vec2(0, 0);
 	plr.dir = *dir;
-	plr.cutpoint = vec2(-1, -1);
 	while (walls)
 	{
-		calc_intersection(to, &plr, &sect);
+		calc_intersection(*head, &plr, &sect);
 		plr.cutpoint = line_intersection(&sect);
 		if (plr.cutpoint.x != -1 && plr.cutpoint.y != -1)
 			break ;
-		to = to->next;
+		*head = (*head)->next;
 		walls--;
 	}
-	units_to_travel = vec2_mag(plr.cutpoint) / vec2_mag(*dir);
-	interpolate_y(&height, plr.cutpoint, to, to->next);
+	return (plr.cutpoint);
+}
+
+void	update_height(t_xy *dir, float *z, t_point *to, int walls)
+{
+	float			units_to_travel;
+	t_height		height;
+	t_xy			cutpoint;
+
+	cutpoint = cast_ray(dir, &to, walls);
+	units_to_travel = vec2_mag(cutpoint) / vec2_mag(*dir);
+	interpolate_y(&height, cutpoint, to, to->next);
 	*z = *z + ((height.ground - *z) / units_to_travel);
 }
 
