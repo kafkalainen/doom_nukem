@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:53:57 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/06 15:56:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 11:37:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 ** Player functions
 */
 
+int		check_height_diff(t_xy *dir, float *z, t_point *to, t_point *behind);
 void	init_player(t_player *plr);
-void	update_player(t_player *plr, t_home *home, SDL_Event *e);
-int		plr_inside(t_sector *sector, t_xy *pos);
 int		player_move(t_player *plr, t_home *home, t_xy *dir);
-int		check_height_diff(t_xy *dir, float *z, t_point *to);
-
+int		plr_inside(t_sector *sector, t_xy *pos);
+void	update_player(t_player *plr, t_home *home, SDL_Event *e);
+void	update_height(t_xy *dir, float *z, t_point *to, int walls);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/06 15:13:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 11:57:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ static void	calc_drawbox(t_plgn *box, int offset, t_height *x0, t_height *x1)
 	box->bottom_right = box->top_right;
 	box->top_left.y = offset - SCREEN_HEIGHT / box->top_left.z * x0->ceiling;
 	box->top_right.y = offset - SCREEN_HEIGHT / box->top_right.z * x1->ceiling;
-	box->bottom_left.y = offset + SCREEN_HEIGHT / box->top_left.z
-		* (x0->ceiling - x0->ground);
-	box->bottom_right.y = offset + SCREEN_HEIGHT / box->top_right.z
-		* (x1->ceiling - x1->ground);
+	box->bottom_left.y = offset + SCREEN_HEIGHT / box->top_left.z * (10 - x0->ground);
+	box->bottom_right.y = offset + SCREEN_HEIGHT / box->top_right.z * (10 - x1->ground);
 }
 
 static void	calc_z_x(t_plgn *box, t_xy *left_point, t_xy *right_point)
@@ -84,9 +82,9 @@ void	calc_dimensions(t_frame *frame, t_player *plr, t_home *home)
 	calc_z_x(&frame->outer_box, &frame->left.l_pt, &frame->left.r_pt);
 	calc_z_x(&frame->inner_box, &frame->left.l_pt, &frame->left.r_pt);
 	if (frame->draw_top || frame->draw_bottom)
-		calc_drawbox(&frame->inner_box, plr->pitch + plr->height,
+		calc_drawbox(&frame->inner_box, plr->pitch + plr->height + plr->z,
 			&temp->height, &temp->next->height);
-	calc_drawbox(&frame->outer_box, plr->pitch + plr->height,
+	calc_drawbox(&frame->outer_box, plr->pitch + plr->height + plr->z,
 		&frame->left.height_l, &frame->left.height_r);
 	interpolate_steps(frame);
 	frame->pitch = plr->pitch;
