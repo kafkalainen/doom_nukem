@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/07 12:37:12 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/07 14:06:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ t_texture	*create_texture(t_png *png, int idx)
 
 void	free_texture(t_texture *tex)
 {
-	free(tex->source);
-	free(tex->pixels);
-	free(tex);
+	if (tex->source)
+		free(tex->source);
+	if (tex->pixels)
+		free(tex->pixels);
+	if (tex)
+		free(tex);
 }

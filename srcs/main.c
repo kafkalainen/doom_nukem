@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/07 13:41:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/07 15:44:48 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,33 @@ void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio)
 
 void	launch(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
 {
-	while (!plr->input.quit)
+	while (home->game_state == GAME_LOOP)
 	{
 		fps_timer(&home->t);
 		update_player(plr, home, e);
 		update_screen(home, frame, plr);
 		render_buffer(frame->buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
+	}
+}
+
+void	process_inputs(int *game_state, SDL_Event *e, int *quit)
+{
+	while (SDL_PollEvent(e) != 0)
+	{
+		if (e->type = SDL_KEYDOWN)
+		{
+			if (*game_state == MAIN_MENU && (e->key.keysym.sym == K_ESC || e->type == SDL_QUIT))
+			{
+				printf("calling exit\n");
+				*quit = 1;
+			}
+			if (e->key.keysym.sym == SDLK_2)
+			{
+				printf("siirrytaaan game looppiin\n");
+				*game_state = GAME_LOOP;
+			}
+		}
 	}
 }
 
@@ -63,17 +83,17 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		setup(argv[1], &home, &plr, &frame);
-		setup_game_loop(argv[1], &home, &plr, &frame);
-		// while (!plr.input.quit)
-		// {
+		while (plr.input.quit != 1)
+		{
+			process_inputs(&home.game_state, &e, &plr.input.quit);
 			// setup main_menu graphics
-			// allow player to load editor
-			// allow player to load a map
-			// based on choice, setup either map or editor
-			// switch game state to 2 or 3 and launch
-			// appropriate loop
-		// }
-		launch(&home, &plr, &frame, &e);
+			if (home.game_state == GAME_LOOP)
+			{
+				printf("kutsu setup_game_looppia\n");
+				setup_game_loop(argv[1], &home, &plr, &frame);
+				launch(&home, &plr, &frame, &e);
+			}
+		}
 	}
 	else
 		error_output("fuck off\n"); // TODO: Launch main menu

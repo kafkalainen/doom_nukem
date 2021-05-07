@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 12:25:42 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/07 14:16:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	setup_game_loop(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	}
 	if (Mix_PlayingMusic() == 0)
 		Mix_PlayMusic(plr->audio.music, -1);
-	home->game_state = 2;
 }
 
 void	setup_editor(t_home *home, t_player *plr, t_frame *frame)
@@ -106,7 +105,7 @@ void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 		Mix_PlayMusic(plr->audio.music, -1);
 	init_player(plr);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	home->game_state = 1;
+	home->game_state = MAIN_MENU;
 }
 
 void	clean_up(t_home *home)

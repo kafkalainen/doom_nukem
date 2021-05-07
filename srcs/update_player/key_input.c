@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/21 12:23:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 15:35:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	action_keys(t_player *plr, SDL_KeyCode *sym)
 	}
 }
 
-void	keys_down(t_player *plr, SDL_KeyCode sym, SDL_Event *e)
+void	keys_down(t_player *plr, SDL_KeyCode sym, SDL_Event *e, int *game_state)
 {
 	if (sym == K_S)
 		plr->input.down = 1;
@@ -53,8 +53,6 @@ void	keys_down(t_player *plr, SDL_KeyCode sym, SDL_Event *e)
 	if (sym == K_E)
 		plr->input.rot_right = 1;
 	action_keys(plr, &sym);
-	if (sym == K_ESC || e->type == SDL_QUIT)
-		plr->input.quit = 1;
 }
 
 void	keys_up(t_player *plr, SDL_KeyCode sym)
@@ -73,10 +71,10 @@ void	keys_up(t_player *plr, SDL_KeyCode sym)
 		plr->input.rot_right = 0;
 }
 
-void	key_input(t_player *plr, SDL_Event *e)
+void	key_input(t_player *plr, SDL_Event *e, int *game_state)
 {
 	if (e->type == SDL_KEYDOWN)
-		keys_down(plr, e->key.keysym.sym, e);
+		keys_down(plr, e->key.keysym.sym, e, game_state);
 	else if (e->type == SDL_KEYUP)
 		keys_up(plr, e->key.keysym.sym);
 	else
