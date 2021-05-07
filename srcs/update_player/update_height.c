@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 14:01:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 11:50:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 13:51:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	update_height(t_xy *dir, float *z, t_point *to, int walls)
 		to = to->next;
 		walls--;
 	}
-	units_to_travel = vec2_mag(plr.cutpoint) / vec2_mag(plr.dir);
+	units_to_travel = vec2_mag(plr.cutpoint) / vec2_mag(*dir);
 	interpolate_y(&height, plr.cutpoint, to, to->next);
 	*z = *z + ((height.ground - *z) / units_to_travel);
 }
@@ -54,7 +54,7 @@ int	check_height_diff(t_xy *dir, float *z, t_point *to, t_point *behind)
 	height_to.ground = height_behind.ground - height_to.ground;
 	if (height_to.ground - *z < 6)
 	{
-		*z = height_to.ground - *z;
+		*z = height_behind.ground;
 		return (0);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/07 10:30:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 13:22:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,6 @@ static void	action_keys(t_player *plr, SDL_KeyCode *sym)
 	}
 }
 
-/*
-**
-**	Must change plr height standard to something to just assign default value,
-**	Going to put it now to 6 and 3.
-**	To create jump function, we need to make "gravity function", first.
-**	Jumping creates a froce that gradually falls until you are at max height,
-**	gravity pulling the player at all times
-**	at a constant rate, lets say 0,2z per 10 frames.
-**
-*/
-
 void	keys_down(t_player *plr, SDL_KeyCode sym, SDL_Event *e)
 {
 	if (sym == SDLK_s)
@@ -64,7 +53,7 @@ void	keys_down(t_player *plr, SDL_KeyCode sym, SDL_Event *e)
 	if (sym == SDLK_e)
 		plr->input.rot_right = 1;
 	if (sym == SDLK_LCTRL)
-		plr->height = -20;
+		plr->height = 0;
 	if (sym == SDLK_SPACE && plr->acceleration == 0)
 		plr->acceleration = 5;
 	action_keys(plr, &sym);

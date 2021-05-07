@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/06 16:14:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 12:59:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,12 @@ static void	draw_minimap(t_home *home, t_frame *frame)
 	}
 }
 
-static void	draw_player(t_frame *frame)
+static void	draw_player(t_frame *frame, t_player *plr)
 {
+	plr = plr;
+	// draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
+	// 	center_to_screen(vec2_mul(plr->dir, 400)), lightgreen,
+	// 	frame->buffer);
 	draw_rect(center_to_screen((t_xy){0.0f, 0.0f}),
 		(t_xy){3.0f, 3.0f}, frame, yellow);
 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
@@ -107,7 +111,7 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	if (plr->input.minimap)
 	{
 		draw_minimap(home, frame);
-		draw_player(frame);
+		draw_player(frame, plr);
 	}
 	if (plr->input.info)
 		draw_info(frame, plr, (int)home->t.fps);

@@ -6,24 +6,31 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 11:57:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 13:50:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	calc_drawbox(t_plgn *box, int offset, t_height *x0, t_height *x1)
+static void	calc_drawbox(t_plgn *box, int offset, t_height *x0, t_height *x1, t_player *plr)
 {
+	t_height	height_left;
+	t_height	height_right;
+
+	height_left.ceiling = (x0->ceiling - plr->z);
+	height_left.ground = (x0->ground - plr->z);
+	height_right.ceiling = (x1->ceiling - plr->z);
+	height_right.ground = (x1->ground - plr->z);
 	box->top_left.x = SCREEN_WIDTH - ((SCREEN_HEIGHT
 				/ box->top_left.z) * box->top_left.x) + 15;
 	box->top_right.x = SCREEN_WIDTH - ((SCREEN_HEIGHT
 				/ box->top_right.z) * box->top_right.x) + 15;
 	box->bottom_left = box->top_left;
 	box->bottom_right = box->top_right;
-	box->top_left.y = offset - SCREEN_HEIGHT / box->top_left.z * x0->ceiling;
-	box->top_right.y = offset - SCREEN_HEIGHT / box->top_right.z * x1->ceiling;
-	box->bottom_left.y = offset + SCREEN_HEIGHT / box->top_left.z * (10 - x0->ground);
-	box->bottom_right.y = offset + SCREEN_HEIGHT / box->top_right.z * (10 - x1->ground);
+	box->top_left.y = offset - SCREEN_HEIGHT / box->top_left.z * height_left.ceiling;
+	box->top_right.y = offset - SCREEN_HEIGHT / box->top_right.z * height_right.ceiling;
+	box->bottom_left.y = offset + SCREEN_HEIGHT / box->top_left.z * (10 - height_left.ground);
+	box->bottom_right.y = offset + SCREEN_HEIGHT / box->top_right.z * (10 - height_right.ground);
 }
 
 static void	calc_z_x(t_plgn *box, t_xy *left_point, t_xy *right_point)
@@ -82,10 +89,10 @@ void	calc_dimensions(t_frame *frame, t_player *plr, t_home *home)
 	calc_z_x(&frame->outer_box, &frame->left.l_pt, &frame->left.r_pt);
 	calc_z_x(&frame->inner_box, &frame->left.l_pt, &frame->left.r_pt);
 	if (frame->draw_top || frame->draw_bottom)
-		calc_drawbox(&frame->inner_box, plr->pitch + plr->height + plr->z,
-			&temp->height, &temp->next->height);
-	calc_drawbox(&frame->outer_box, plr->pitch + plr->height + plr->z,
-		&frame->left.height_l, &frame->left.height_r);
+		calc_drawbox(&frame->inner_box, plr->pitch + plr->height * 10,
+			&temp->height, &temp->next->height, plr);
+	calc_drawbox(&frame->outer_box, plr->pitch + plr->height * 10,
+		&frame->left.height_l, &frame->left.height_r, plr);
 	interpolate_steps(frame);
 	frame->pitch = plr->pitch;
 }
