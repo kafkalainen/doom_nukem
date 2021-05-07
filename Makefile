@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/07 11:15:59 by jnivala          ###   ########.fr        #
+#    Updated: 2021/05/07 14:53:41 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRCS = \
 	porting$(SLASH)validate_sectors_data_2.c \
 	raycaster$(SLASH)calc_dimensions.c \
 	raycaster$(SLASH)calc_ground_texels.c \
-	raycaster$(SLASH)calc_sector_texels.c \
+	raycaster$(SLASH)calc_sector_bounds.c \
 	raycaster$(SLASH)calc_wall_texels.c \
 	raycaster$(SLASH)colour_scale.c \
 	raycaster$(SLASH)get_floor.c \

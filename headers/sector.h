@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/06 12:20:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 14:57:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ typedef struct s_sector
 	int				tex_ceil;
 	int				ground;
 	int				ceiling;
-	t_xyz			floor_top_left;
-	t_xyz			floor_top_right;
-	t_xyz			floor_bottom_left;
-	t_xyz			floor_bottom_right;
+	t_xy			floor_top_left;
+	t_xy			floor_top_right;
+	t_xy			floor_bottom_left;
+	t_xy			floor_bottom_right;
 }					t_sector;
 
 enum e_sector_info

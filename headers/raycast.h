@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/06 12:43:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 14:58:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		calc_dimensions(t_frame *frame, t_player *plr, t_home *home);
 void		calc_ground_texels(t_sector *sector, t_frame *frame);
 void		calc_intersection(t_point *pgon, t_ray *ray,
 				t_intersection *sect);
-void		calc_sector_texels(t_sector *sector);
+void		calc_sector_bounds(t_sector *sector);
 void		calc_wall_texels(t_frame *frame, int tex_width);
 int			check_connection(t_point *point, t_frame *frame);
 int			check_if_portal(t_point *point);

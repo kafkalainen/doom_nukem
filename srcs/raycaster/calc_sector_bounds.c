@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_sector_texels.c                               :+:      :+:    :+:   */
+/*   calc_sector_bounds.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 15:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 20:44:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 14:56:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ static void	find_biggest_square(t_sector *sector)
 **	translation or transformation matrix is applied.
 */
 
-void	calc_sector_texels(t_sector *sector)
+void	calc_sector_bounds(t_sector *sector)
 {
-	sector->floor_top_left = vec3(sector->points->x0.x,
-			sector->points->x0.y, 0.0f);
-	sector->floor_top_right = vec3(sector->points->x0.x,
-			sector->points->x0.y, 0.0f);
-	sector->floor_bottom_left = vec3(sector->points->x0.x,
-			sector->points->x0.y, 0.0f);
-	sector->floor_bottom_right = vec3(sector->points->x0.x,
-			sector->points->x0.y, 0.0f);
+	sector->floor_top_left = vec2(sector->points->x0.x,
+			sector->points->x0.y);
+	sector->floor_top_right = vec2(sector->points->x0.x,
+			sector->points->x0.y);
+	sector->floor_bottom_left = vec2(sector->points->x0.x,
+			sector->points->x0.y);
+	sector->floor_bottom_right = vec2(sector->points->x0.x,
+			sector->points->x0.y);
 	find_biggest_square(sector);
 }

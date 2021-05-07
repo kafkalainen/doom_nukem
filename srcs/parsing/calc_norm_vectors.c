@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/23 12:50:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 14:52:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	calc_normal_vectors(t_home *home)
 	{
 		j = 0;
 		temp = home->sectors[i]->points;
+		calc_sector_bounds(home->sectors[i]);
 		while (j < home->sectors[i]->nb_of_walls)
 		{
 			temp->normal = vec2_normal(temp->x0, temp->next->x0);

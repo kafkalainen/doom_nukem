@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/07 12:59:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 15:14:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,22 @@ static void	draw_minimap(t_home *home, t_frame *frame)
 	{
 		j = 0;
 		temp = home->sectors[i]->points;
+		draw_line(
+			center_to_screen(home->sectors[i]->floor_bottom_left),
+			center_to_screen(home->sectors[i]->floor_bottom_right),
+			red, frame->buffer);
+		draw_line(
+			center_to_screen(home->sectors[i]->floor_top_left),
+			center_to_screen(home->sectors[i]->floor_top_right),
+			red, frame->buffer);
+		draw_line(
+			center_to_screen(home->sectors[i]->floor_top_left),
+			center_to_screen(home->sectors[i]->floor_bottom_left),
+			red, frame->buffer);
+		draw_line(
+			center_to_screen(home->sectors[i]->floor_top_right),
+			center_to_screen(home->sectors[i]->floor_bottom_right),
+			red, frame->buffer);
 		while (j < home->sectors[i]->nb_of_walls)
 		{
 			draw_line(center_to_screen(temp->x0),
