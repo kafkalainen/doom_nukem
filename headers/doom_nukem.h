@@ -28,6 +28,8 @@
 #  define TRUNCATE O_TRUNC
 #  include <string.h>
 #  include <unistd.h>
+#  include <sys/stat.h>
+#  include <sys/types.h>
 #  include "../SDL2/include/SDL2/SDL.h"
 #  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include "../headers/syscalls_windows.h"
@@ -96,14 +98,14 @@ int		load_game_audio(t_audio *audio);
 void	map_error_output(int i, t_home *home);
 void	play_footsteps(t_player *plr);
 void	read_error_output(char *msg, unsigned char **line);
-void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame);
-void	setup_game_loop(char *mapname, t_home *home, t_player *plr, t_frame *frame);
-void	setup_editor(t_home *home, t_player *plr, t_frame *frame);
+void	setup(t_home *home, t_player *plr, t_frame *frame);
+void	setup_game_loop(char *mapname, t_home *home, t_player *plr);
+void	setup_editor(t_home *home);
 void	translate_world_view(t_home *home, t_xy step);
 void	transform_world_view(t_home *home, float delta_dir);
 void	update_screen(t_home *home, t_frame *frame, t_player *plr);
 
-void	return_to_main_from_game(t_home *home, t_player *plr, t_frame *frame);
+void	return_to_main_from_game(t_home *home, t_player *plr);
 void	launch_game(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e);
 
 #endif

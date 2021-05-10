@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/10 12:32:37 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 12:41:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	write_audio_data(int *fd, char *path, char *asset_name)
 			(const char *)ft_itoa(asset.size));
 	tmp = (unsigned char *)ft_strjoin((const char *)tmp, "\n");
 	tmp = (unsigned char *)ft_strjoin((const char *)tmp, WRITE_BREAKER);
-	if (doom_write(fd, (const void **)&tmp, ft_strlen(tmp)) == -1)
+	if (doom_write(fd, (const void **)&tmp, ft_strlen((const char *)tmp)) == -1)
 		printf("Failed to write audio data point start\n");
 	if (doom_write(fd, (const void **)&asset.buf, asset.size) == -1)
 		printf("Failed to write audio data\n");
@@ -98,7 +98,6 @@ int	create_map_file(t_home *home)
 int		create_temp_audio_file(unsigned char *buf, ssize_t size, char *path)
 {
 	int		fd;
-	ssize_t	written_bytes;
 
 	doom_open(&fd, (const char **)&path,
 		WRITE_ONLY | CREATE_FILE | TRUNCATE, 0644);

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/10 12:34:11 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 12:57:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio)
 {
-	int i;
+	// int i;
 
 	// free_sectors(home);
 	free(buffer);
@@ -33,7 +33,7 @@ void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio)
 	SDL_Quit();
 }
 
-void	return_to_main_from_game(t_home *home, t_player *plr, t_frame *frame)
+void	return_to_main_from_game(t_home *home, t_player *plr)
 {
 	int i;
 
@@ -55,14 +55,14 @@ void	launch_game(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
 		render_buffer(frame->buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
-	return_to_main_from_game(home, plr, frame);
+	return_to_main_from_game(home, plr);
 }
 
 void	process_inputs(int *game_state, SDL_Event *e, int *quit)
 {
 	while (SDL_PollEvent(e) != 0)
 	{
-		if (e->type = SDL_KEYDOWN)
+		if (e->type == SDL_KEYDOWN)
 		{
 			if (*game_state == MAIN_MENU && (e->key.keysym.sym == K_ESC || e->type == SDL_QUIT))
 			{
@@ -95,7 +95,7 @@ int	main(int argc, char **argv)
 		error_output("usage: ./doom-nukem");
 	if (argc == 2)
 	{
-		setup(argv[1], &home, &plr, &frame);
+		setup(&home, &plr, &frame);
 		// setup_editor(&home, &plr, &frame);
 		// create_map_file(&home);
 		while (plr.input.quit != 1)
@@ -105,7 +105,7 @@ int	main(int argc, char **argv)
 			if (home.game_state == GAME_LOOP)
 			{
 				printf("kutsu setup_game_looppia\n");
-				setup_game_loop(argv[1], &home, &plr, &frame);
+				setup_game_loop(argv[1], &home, &plr);
 				launch_game(&home, &plr, &frame, &e);
 			}
 		}

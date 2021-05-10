@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 14:16:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 12:45:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	init_player(t_player *plr)
 	plr->current_sector = 0;
 }
 
-void	setup_game_loop(char *mapname, t_home *home, t_player *plr, t_frame *frame)
+void	setup_game_loop(char *mapname, t_home *home, t_player *plr)
 {
 	int ret;
 
@@ -74,12 +74,12 @@ void	setup_game_loop(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 		Mix_PlayMusic(plr->audio.music, -1);
 }
 
-void	setup_editor(t_home *home, t_player *plr, t_frame *frame)
+void	setup_editor(t_home *home)
 {
 	init_textures(home);
 }
 
-void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
+void	setup(t_home *home, t_player *plr, t_frame *frame)
 {
 	int		ret;
 

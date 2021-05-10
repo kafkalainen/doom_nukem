@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/10 10:12:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 12:42:21 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos, ssize_t size)
 	int			i;
 	int			idx;
 
+	idx = 0;
 	i = -1;
 	while (++i < 3)
 	{
