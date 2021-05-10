@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/10 12:57:12 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 13:04:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	process_inputs(int *game_state, SDL_Event *e, int *quit)
 	{
 		if (e->type == SDL_KEYDOWN)
 		{
-			if (*game_state == MAIN_MENU && (e->key.keysym.sym == K_ESC || e->type == SDL_QUIT))
+			if (*game_state == MAIN_MENU && (e->key.keysym.sym == SDLK_ESCAPE || e->type == SDL_QUIT))
 			{
 				printf("calling exit\n");
 				*quit = 1;
