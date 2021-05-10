@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/10 13:04:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 13:45:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ int	main(int argc, char **argv)
 		error_output("usage: ./doom-nukem");
 	if (argc == 2)
 	{
+		printf("%s\n", argv[1]);
 		setup(&home, &plr, &frame);
-		// setup_editor(&home, &plr, &frame);
+		// setup_editor(&home);
 		// create_map_file(&home);
 		while (plr.input.quit != 1)
 		{

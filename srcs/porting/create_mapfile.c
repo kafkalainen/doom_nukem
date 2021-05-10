@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/10 12:41:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 13:43:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	write_texture_data(int *fd, t_home *home)
 			printf("failed to write texture\n");
 		if (doom_write(fd, (const void **)&home->editor_tex[i]->source, home->editor_tex[i]->source_size) == -1)
 			printf("failed to write texture\n");
-		if (doom_write(fd, (const void **)&"\n", 1) == -1)
+		ft_strdel((char **)&buf);
+		buf = (unsigned char *)ft_strnew(sizeof(unsigned char) * 2);
+		buf = (unsigned char *)ft_strcpy((char *)buf, (const char *)"\n");
+		if (doom_write(fd, (const void **)&buf, 1) == -1)
 			printf("failed to write texture\n");
 		ft_strdel((char **)&buf);
 		i++;
@@ -68,8 +71,12 @@ void	write_audio_data(int *fd, char *path, char *asset_name)
 		printf("Failed to write audio data point start\n");
 	if (doom_write(fd, (const void **)&asset.buf, asset.size) == -1)
 		printf("Failed to write audio data\n");
-	if (doom_write(fd, (const void **)&"\n", 1) == -1)
-		printf("failed to audio data\n");
+	ft_strdel((char **)&tmp);
+	tmp = (unsigned char *)ft_strnew(sizeof(unsigned char) * 2);
+	tmp = (unsigned char *)ft_strcpy((char *)tmp, (const char *)"\n");
+	if (doom_write(fd, (const void **)&tmp, 1) == -1)
+		printf("failed to write texture\n");
+	ft_strdel((char **)&tmp);
 	free(tmp);
 	free(asset.buf);
 }
