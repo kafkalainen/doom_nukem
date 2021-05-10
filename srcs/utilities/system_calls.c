@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 11:53:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/10 10:13:20 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 12:31:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	doom_close(int *fd)
 	return (ret);
 }
 
-ssize_t	doom_write(int *fd, const void *buf, size_t count)
+ssize_t	doom_write(int *fd, const void **buf, size_t count)
 {
 	ssize_t	ret;
 
 	if (OS_WINDOWS)
-		ret = _write(*fd, buf, count);
+		ret = _write(*fd, *buf, count);
 	else
-		ret = write(*fd, buf, count);
+		ret = write(*fd, *buf, count);
 	return (ret);
 }
 

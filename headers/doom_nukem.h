@@ -49,6 +49,7 @@
 #  include <stdlib.h>
 #  include "../SDL2-2.0.14/i686-w64-mingw32/include/SDL2/SDL.h"
 #  include "../SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2/SDL_mixer.h"
+#  include "..headers/syscalls_linux.h"
 
 # endif
 
@@ -82,7 +83,7 @@
 void	clean_up(t_home *home);
 void	cleanup_audio(t_audio *audio);
 int		doom_close(int *fd);
-ssize_t	doom_write(int *fd, const void *buf, size_t count);
+ssize_t	doom_write(int *fd, const void **buf, size_t count);
 void	doom_open(int *fd, const char **path, int mode, mode_t rights);
 void	doom_read(ssize_t *read_bytes, int *fd, void **buf, size_t nb_of_bytes);
 int		doom_mkdir(const char *pathname, mode_t mode);

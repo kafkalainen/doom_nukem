@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/10 10:06:38 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 12:32:37 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	write_texture_data(int *fd, t_home *home)
 	buf = (unsigned char *)ft_strjoin("doom_textures #",
 		(const char *)ft_itoa(home->nbr_of_textures));
 	buf = (unsigned char *)ft_strjoin((const char *)buf, "\n");
-	if (doom_write(fd, buf, ft_strlen((const char *)buf)) == -1)
+	if (doom_write(fd, (const void **)&buf, ft_strlen((const char *)buf)) == -1)
 			printf("failed to add texture numbers\n");
 	ft_strdel((char **)&buf);
 	i = 1;
@@ -42,11 +42,11 @@ void	write_texture_data(int *fd, t_home *home)
 	{
 		if ((buf = create_write_buffer(home->editor_tex[i])) == NULL)
 			printf("failed to create write buffer\n");
-		if (doom_write(fd, buf, ft_strlen((const char *)buf)) == -1)
+		if (doom_write(fd, (const void **)&buf, ft_strlen((const char *)buf)) == -1)
 			printf("failed to write texture\n");
-		if (doom_write(fd, home->editor_tex[i]->source, home->editor_tex[i]->source_size) == -1)
+		if (doom_write(fd, (const void **)&home->editor_tex[i]->source, home->editor_tex[i]->source_size) == -1)
 			printf("failed to write texture\n");
-		if (doom_write(fd, "\n", 1) == -1)
+		if (doom_write(fd, (const void **)&"\n", 1) == -1)
 			printf("failed to write texture\n");
 		ft_strdel((char **)&buf);
 		i++;
@@ -64,11 +64,11 @@ void	write_audio_data(int *fd, char *path, char *asset_name)
 			(const char *)ft_itoa(asset.size));
 	tmp = (unsigned char *)ft_strjoin((const char *)tmp, "\n");
 	tmp = (unsigned char *)ft_strjoin((const char *)tmp, WRITE_BREAKER);
-	if (doom_write(fd, tmp, ft_strlen(tmp)) == -1)
+	if (doom_write(fd, (const void **)&tmp, ft_strlen(tmp)) == -1)
 		printf("Failed to write audio data point start\n");
-	if (doom_write(fd, asset.buf, asset.size) == -1)
+	if (doom_write(fd, (const void **)&asset.buf, asset.size) == -1)
 		printf("Failed to write audio data\n");
-	if (doom_write(fd, "\n", 1) == -1)
+	if (doom_write(fd, (const void **)&"\n", 1) == -1)
 		printf("failed to audio data\n");
 	free(tmp);
 	free(asset.buf);
@@ -104,7 +104,7 @@ int		create_temp_audio_file(unsigned char *buf, ssize_t size, char *path)
 		WRITE_ONLY | CREATE_FILE | TRUNCATE, 0644);
 	if (fd < 0)
 		return (-1);
-	if (doom_write(&fd, buf, size) == -1)
+	if (doom_write(&fd, (const void **)&buf, size) == -1)
 		return (-1);
 	if (doom_close(&fd) == -1)
 		return (-1);
