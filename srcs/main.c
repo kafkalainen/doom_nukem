@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/10 10:07:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 11:14:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,31 @@ void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio)
 {
 	int i;
 
-	free_sectors(home);
+	// free_sectors(home);
 	free(buffer);
 	cleanup_audio(audio);
-	i = -1;
-	while (++i <= home->nbr_of_textures)
-		free_texture(home->editor_tex[i]);
-	free(home->editor_tex);
+	// i = -1;
+	// while (++i <= home->nbr_of_textures)
+	// 	free_texture(home->editor_tex[i]);
+	// free(home->editor_tex);
 	free(home->t.frame_times);
 	ft_putendl("User closed the window");
 	SDL_Quit();
 }
 
-void	launch(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
+void	return_to_main_from_game(t_home *home, t_player *plr, t_frame *frame)
+{
+	int i;
+
+	free_sectors(home);
+	i = -1;
+	while (++i < (home->nbr_of_textures + 1))
+		free_texture(home->editor_tex[i]);
+	free(home->editor_tex);
+	init_player(plr);
+}
+
+void	launch_game(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
 {
 	while (home->game_state == GAME_LOOP)
 	{
@@ -43,6 +55,7 @@ void	launch(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
 		render_buffer(frame->buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
+	return_to_main_from_game(home, plr, frame);
 }
 
 void	process_inputs(int *game_state, SDL_Event *e, int *quit)
@@ -93,7 +106,7 @@ int	main(int argc, char **argv)
 			{
 				printf("kutsu setup_game_looppia\n");
 				setup_game_loop(argv[1], &home, &plr, &frame);
-				launch(&home, &plr, &frame, &e);
+				launch_game(&home, &plr, &frame, &e);
 			}
 		}
 	}
