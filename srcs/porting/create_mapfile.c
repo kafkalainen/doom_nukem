@@ -84,7 +84,7 @@ int	create_map_file(t_home *home)
 	char	*tmp = "./map_files/test.DATA";
 
 	doom_open(&fd, (const char**)&tmp,
-		WRITE_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST, 0644);
+		WRITE_ONLY | _O_BINARY | CREATE_FILE | TRUNCATE | CHECK_EXIST, 0644);
 	if (fd < 0)
 		return (-1);
 	write_texture_data(&fd, home);
@@ -100,7 +100,7 @@ int		create_temp_audio_file(unsigned char *buf, ssize_t size, char *path)
 	int		fd;
 
 	doom_open(&fd, (const char **)&path,
-		WRITE_ONLY | CREATE_FILE | TRUNCATE, 0644);
+		WRITE_ONLY | _O_BINARY | CREATE_FILE | TRUNCATE, 0644);
 	if (fd < 0)
 		return (-1);
 	if (doom_write(&fd, (const void **)&buf, size) == -1)
