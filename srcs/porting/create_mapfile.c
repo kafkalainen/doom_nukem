@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/04 16:42:42 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 10:06:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ unsigned char	*create_write_buffer(t_texture *tex)
 	return (buf);
 }
 
-void	write_texture_data(int fd, t_home *home)
+void	write_texture_data(int *fd, t_home *home)
 {
 	int				i;
 	unsigned char	*buf;
@@ -34,7 +34,7 @@ void	write_texture_data(int fd, t_home *home)
 	buf = (unsigned char *)ft_strjoin("doom_textures #",
 		(const char *)ft_itoa(home->nbr_of_textures));
 	buf = (unsigned char *)ft_strjoin((const char *)buf, "\n");
-	if (write(fd, buf, ft_strlen((const char *)buf)) == -1)
+	if (doom_write(fd, buf, ft_strlen((const char *)buf)) == -1)
 			printf("failed to add texture numbers\n");
 	ft_strdel((char **)&buf);
 	i = 1;
@@ -42,18 +42,18 @@ void	write_texture_data(int fd, t_home *home)
 	{
 		if ((buf = create_write_buffer(home->editor_tex[i])) == NULL)
 			printf("failed to create write buffer\n");
-		if (write(fd, buf, ft_strlen((const char *)buf)) == -1)
+		if (doom_write(fd, buf, ft_strlen((const char *)buf)) == -1)
 			printf("failed to write texture\n");
-		if (write(fd, home->editor_tex[i]->source, home->editor_tex[i]->source_size) == -1)
+		if (doom_write(fd, home->editor_tex[i]->source, home->editor_tex[i]->source_size) == -1)
 			printf("failed to write texture\n");
-		if (write(fd, "\n", 1) == -1)
+		if (doom_write(fd, "\n", 1) == -1)
 			printf("failed to write texture\n");
 		ft_strdel((char **)&buf);
 		i++;
 	}
 }
 
-void	write_audio_data(int fd, char *path, char *asset_name)
+void	write_audio_data(int *fd, char *path, char *asset_name)
 {
 	t_audio_asset	asset;
 	unsigned char	*tmp;
@@ -64,11 +64,11 @@ void	write_audio_data(int fd, char *path, char *asset_name)
 			(const char *)ft_itoa(asset.size));
 	tmp = (unsigned char *)ft_strjoin((const char *)tmp, "\n");
 	tmp = (unsigned char *)ft_strjoin((const char *)tmp, WRITE_BREAKER);
-	if (write(fd, tmp, ft_strlen(tmp)) == -1)
+	if (doom_write(fd, tmp, ft_strlen(tmp)) == -1)
 		printf("Failed to write audio data point start\n");
-	if (write(fd, asset.buf, asset.size) == -1)
+	if (doom_write(fd, asset.buf, asset.size) == -1)
 		printf("Failed to write audio data\n");
-	if (write(fd, "\n", 1) == -1)
+	if (doom_write(fd, "\n", 1) == -1)
 		printf("failed to audio data\n");
 	free(tmp);
 	free(asset.buf);
@@ -87,10 +87,10 @@ int	create_map_file(t_home *home)
 		WRITE_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST, 0644);
 	if (fd < 0)
 		return (-1);
-	write_texture_data(fd, home);
-	write_audio_data(fd, "./audio/eerie_by_eparviai.wav", "doom_music #");
-	write_audio_data(fd, "./audio/footstep1.wav", "doom_footstep1 #");
-	write_audio_data(fd, "./audio/footstep2.wav", "doom_footstep2 #");
+	write_texture_data(&fd, home);
+	write_audio_data(&fd, "./audio/eerie_by_eparviai.wav", "doom_music #");
+	write_audio_data(&fd, "./audio/footstep1.wav", "doom_footstep1 #");
+	write_audio_data(&fd, "./audio/footstep2.wav", "doom_footstep2 #");
 	doom_close(&fd);
 	return (1);
 }
@@ -98,12 +98,13 @@ int	create_map_file(t_home *home)
 int		create_temp_audio_file(unsigned char *buf, ssize_t size, char *path)
 {
 	int		fd;
+	ssize_t	written_bytes;
 
 	doom_open(&fd, (const char **)&path,
 		WRITE_ONLY | CREATE_FILE | TRUNCATE, 0644);
 	if (fd < 0)
 		return (-1);
-	if (write(fd, buf, size) == -1)
+	if (doom_write(&fd, buf, size) == -1)
 		return (-1);
 	if (doom_close(&fd) == -1)
 		return (-1);

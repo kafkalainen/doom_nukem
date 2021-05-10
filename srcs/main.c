@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/07 15:44:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 10:07:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		setup(argv[1], &home, &plr, &frame);
+		// setup_editor(&home, &plr, &frame);
+		// create_map_file(&home);
 		while (plr.input.quit != 1)
 		{
 			process_inputs(&home.game_state, &e, &plr.input.quit);

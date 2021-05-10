@@ -82,8 +82,10 @@
 void	clean_up(t_home *home);
 void	cleanup_audio(t_audio *audio);
 int		doom_close(int *fd);
+ssize_t	doom_write(int *fd, const void *buf, size_t count);
 void	doom_open(int *fd, const char **path, int mode, mode_t rights);
 void	doom_read(ssize_t *read_bytes, int *fd, void **buf, size_t nb_of_bytes);
+int		doom_mkdir(const char *pathname, mode_t mode);
 void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
 void	error_output_sdl(char *msg, t_home *home);
@@ -95,6 +97,7 @@ void	play_footsteps(t_player *plr);
 void	read_error_output(char *msg, unsigned char **line);
 void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame);
 void	setup_game_loop(char *mapname, t_home *home, t_player *plr, t_frame *frame);
+void	setup_editor(t_home *home, t_player *plr, t_frame *frame);
 void	translate_world_view(t_home *home, t_xy step);
 void	transform_world_view(t_home *home, float delta_dir);
 void	update_screen(t_home *home, t_frame *frame, t_player *plr);

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 11:53:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/04 15:54:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/10 10:13:20 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,28 @@ int	doom_close(int *fd)
 		ret = _close(*fd);
 	else
 		ret = close(*fd);
+	return (ret);
+}
+
+ssize_t	doom_write(int *fd, const void *buf, size_t count)
+{
+	ssize_t	ret;
+
+	if (OS_WINDOWS)
+		ret = _write(*fd, buf, count);
+	else
+		ret = write(*fd, buf, count);
+	return (ret);
+}
+
+int	doom_mkdir(const char *pathname, mode_t mode)
+{
+	int	ret;
+
+	if (OS_WINDOWS)
+		ret = _mkdir(pathname);
+	else
+		ret = mkdir(pathname, mode);
 	return (ret);
 }
 
