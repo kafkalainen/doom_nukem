@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/07 14:15:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 10:48:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,36 +38,11 @@
 # define FALSE 0
 # define AND &&
 # define OR ||
-# define EDITOR 3
-# define GAME_LOOP 2
+# define EDITOR 4
+# define GAME_LOOP 3
+# define MAP_MENU 2
 # define MAIN_MENU 1
-
-/*
-**
-*** Keyboard and Mouse macros
-**
-*/
-
-# define K_ESC SDLK_ESCAPE
-# define K_SPACE SDLK_SPACE
-# define K_CTRL SDLK_LCTRL
-# define K_SHIFT SDLK_LSHIFT
-
-# define K_UP SDLK_UP
-# define K_DOWN SDLK_DOWN
-# define K_LEFT SDLK_LEFT
-# define K_RIGHT SDLK_RIGHT
-
-# define K_W SDLK_w
-# define K_S SDLK_s
-# define K_A SDLK_a
-# define K_D SDLK_d
-# define K_Q SDLK_q
-# define K_E SDLK_e
-# define K_Z SDLK_z
-# define K_X SDLK_x
-# define K_C SDLK_c
-# define K_M SDLK_m
+# define QUIT -1
 
 /*
 ** Compass directions

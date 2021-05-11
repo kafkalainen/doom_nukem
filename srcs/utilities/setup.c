@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/10 12:45:12 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 10:37:45 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	init_player(t_player *plr)
 	plr->input.left = 0;
 	plr->input.rot_right = 0;
 	plr->input.rot_left = 0;
-	plr->input.quit = 0;
 	plr->input.wireframe = 1;
 	plr->input.minimap = 1;
 	plr->input.info = 1;
