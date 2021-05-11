@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/11 10:52:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 11:35:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,32 @@ void	process_inputs(int *game_state, SDL_Event *e)
 	{
 		if (e->type == SDL_KEYDOWN)
 		{
-			if (*game_state == MAIN_MENU && (e->key.keysym.sym == SDLK_ESCAPE || e->type == SDL_QUIT))
+			if (e->type == SDL_QUIT)
+				*game_state = QUIT;
+			if (*game_state == MAIN_MENU && e->key.keysym.sym == SDLK_ESCAPE)
 			{
 				printf("game state is main menu, calling exit\n");
 				*game_state = QUIT;
 			}
-			if (*game_state == MAP_MENU && e->key.keysym.sym == SDLK_ESCAPE)
+			if (*game_state != MAIN_MENU && *game_state != QUIT && e->key.keysym.sym == SDLK_ESCAPE)
 			{
-				printf("game state is map load menu, going back to main menu\n");
+				printf("going back to main menu\n");
 				*game_state = MAIN_MENU;
 			}
 			if (e->key.keysym.sym == SDLK_2 && *game_state == MAIN_MENU)
 			{
-				printf("game state is main menu, moving to load menu\n");
+				printf("moving to load menu\n");
 				*game_state = MAP_MENU;
 			}
 			if (e->key.keysym.sym == SDLK_3)
 			{
 				printf("Loading map\n");
 				*game_state = GAME_LOOP;
+			}
+			if (e->key.keysym.sym == SDLK_1 && *game_state == MAIN_MENU)
+			{
+				printf("Loading editor\n");
+				*game_state = EDITOR;
 			}
 		}
 	}
@@ -119,6 +126,8 @@ int	main(int argc, char **argv)
 				setup_game_loop(argv[1], &home, &plr);
 				launch_game(&home, &plr, &frame, &e);
 			}
+			render_buffer(frame.buffer, home.win.ScreenSurface);
+			SDL_UpdateWindowSurface(home.win.window);
 		}
 	}
 	else
