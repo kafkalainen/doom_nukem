@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:45:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/03 13:13:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/11 10:19:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	step_one(t_frame *frame)
 	frame->outer_box.bottom_left.y -= frame->step_outer_bot.y;
 	frame->middle_uv.top_left.x += frame->uv_step.x;
 	frame->middle_uv.top_left.z += frame->uv_step.z;
+	frame->ground_uv.top_left.x += frame->ground_uv_step.x;
+	frame->ground_uv.top_left.z += frame->ground_uv_step.z;
 	frame->outer_box.top_left.x += 1;
 	frame->outer_box.bottom_left.x += 1;
 	frame->inner_box.top_left.x += 1;

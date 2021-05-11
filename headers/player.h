@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 15:47:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 16:05:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_player
 	t_xy			dir;
 	t_xy			move_dir;
 	t_input			input;
-	clock_t			time;
+	Uint32			time;
 	t_audio			audio;
 }					t_player;
 

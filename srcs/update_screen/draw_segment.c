@@ -6,33 +6,50 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/05 15:31:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/11 10:31:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	draw_vertical_floor_strip(t_xyz offset, int height,
-							Uint32 colour, t_frame *frame)
+static void	fit_to_screen_space(t_xy *offset, t_xyz *texel,
+	int *height, float *uv_step_y)
+{
+	if (offset->y < 0)
+	{
+		texel->y += *uv_step_y * -offset->y;
+		*height += offset->y;
+		offset->y = 0;
+	}
+	if (*height > SCREEN_HEIGHT)
+		*height = SCREEN_HEIGHT;
+}
+
+static void	draw_vertical_floor_strip(t_xy offset, int height,
+							t_texture *tex, t_frame *frame)
 {
 	int		cur_y;
-	float	scale;
-	float	step_z;
+	t_xyz	corr_texel;
+	t_xyz	texel;
+	Uint32	colour;
 
+	texel = frame->ground_uv.top_left;
+	corr_texel = texel;
 	if (offset.x < 0 || offset.x > SCREEN_WIDTH)
 		return ;
 	cur_y = -1;
-	scale = (SCREEN_HEIGHT - offset.y) / (SCREEN_HEIGHT - frame->pitch);
-	step_z = (1 - scale) / offset.y;
-	scale = 0.3f;
 	while (cur_y < height)
 	{
+		if (cur_y % 16)
+			corr_texel = inv_z(texel);
 		if (cur_y + offset.y >= 0 && cur_y + offset.y < SCREEN_HEIGHT)
-			put_pixel(frame->buffer, offset.x,
-				cur_y + offset.y,
-				colour_scale(colour, scale));
+		{
+			colour = get_texel(corr_texel.x * (tex->w - 1),
+						corr_texel.y * (tex->h - 1), tex);
+			put_pixel(frame->buffer, offset.x, cur_y + offset.y, colour);
+		}
 		cur_y++;
-		scale += step_z;
+		texel.y += frame->uv_step.y;
 	}
 }
 
@@ -52,19 +69,6 @@ static void	draw_vertical_ceiling_strip(t_xyz offset, int height,
 				colour);
 		cur_y++;
 	}
-}
-
-static void	fit_to_screen_space(t_xy *offset, t_xyz *texel,
-	int *height, float *uv_step_y)
-{
-	if (offset->y < 0)
-	{
-		texel->y += *uv_step_y * -offset->y;
-		*height += offset->y;
-		offset->y = 0;
-	}
-	if (*height > SCREEN_HEIGHT)
-		*height = SCREEN_HEIGHT;
 }
 
 static void	draw_vertical_wall_strip(t_xy offset, int height,
@@ -97,12 +101,12 @@ static void	draw_vertical_wall_strip(t_xy offset, int height,
 
 void	draw_vertically(t_frame *frame, t_sector *sector, t_texture *wall_tex)
 {
-	Uint32		tex_floor;
+	// Uint32		tex_floor;
 
 	sector = sector;
 	while (frame->outer_box.top_left.x + 1 < 0)
 		step_one(frame);
-	tex_floor = get_floor(sector->tex_floor);
+	// tex_floor = get_floor(sector->tex_floor);
 	while (frame->outer_box.top_left.x < frame->outer_box.top_right.x)
 	{
 		draw_vertical_ceiling_strip(
@@ -125,8 +129,8 @@ void	draw_vertically(t_frame *frame, t_sector *sector, t_texture *wall_tex)
 				(frame->outer_box.bottom_left.y
 					- frame->inner_box.bottom_left.y), wall_tex, frame);
 		draw_vertical_floor_strip(
-			frame->outer_box.bottom_left,
-			SCREEN_HEIGHT - frame->outer_box.bottom_left.y, tex_floor, frame);
+			vec3_to_vec2(frame->outer_box.bottom_left),
+			SCREEN_HEIGHT - frame->outer_box.bottom_left.y, wall_tex, frame);
 		step_one(frame);
 	}
 }
@@ -135,6 +139,8 @@ void	draw_segment(t_frame *frame, t_home *home, t_player *plr)
 {
 	t_texture	*wall_tex;
 
+	// if (frame->left.wall->idx != -4)
+	// 	return ;
 	wall_tex = get_tex(-1, home->editor_tex);
 	if (frame->left.wall->idx < 0)
 		wall_tex = get_tex(frame->left.wall->idx, home->editor_tex);
@@ -143,6 +149,7 @@ void	draw_segment(t_frame *frame, t_home *home, t_player *plr)
 		home->sectors[frame->idx]->nb_of_walls), home->editor_tex);
 	calc_dimensions(frame, plr, home);
 	calc_wall_texels(frame, wall_tex->w);
+	calc_ground_texels(home->sectors[frame->idx], frame, plr);
 	if (plr->input.wireframe == 0)
 		draw_vertically(frame, home->sectors[frame->idx], wall_tex);
 	else

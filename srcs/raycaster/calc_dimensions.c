@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 13:50:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/11 09:32:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	calc_dimensions(t_frame *frame, t_player *plr, t_home *home)
 	}
 	calc_z_x(&frame->outer_box, &frame->left.l_pt, &frame->left.r_pt);
 	calc_z_x(&frame->inner_box, &frame->left.l_pt, &frame->left.r_pt);
+	frame->ground_uv.bottom_left.z = plr->height * 10 + plr->pitch;
 	if (frame->draw_top || frame->draw_bottom)
 		calc_drawbox(&frame->inner_box, plr->pitch + plr->height * 10,
 			&temp->height, &temp->next->height, plr);

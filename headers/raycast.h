@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 14:58:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/11 08:41:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ typedef struct s_frame
 	t_plgn			top_uv;
 	t_plgn			middle_uv;
 	t_plgn			bottom_uv;
-	t_xyz			ground_uv_t_l;
-	t_xyz			ground_uv_t_r;
-	t_xyz			ground_uv_b_l;
-	t_xyz			ground_uv_b_r;
+	t_plgn			ground_uv;
 	t_xyz			uv_step;
 	t_xyz			ground_uv_step;
 	t_xyz			step_inner_top;
@@ -67,6 +64,7 @@ typedef struct s_frame
 	float			tex_mult;
 	float			ratio;
 	int				pitch;
+	Uint32			last_frame;
 }					t_frame;
 
 enum e_lines
@@ -77,7 +75,7 @@ enum e_lines
 };
 
 void		calc_dimensions(t_frame *frame, t_player *plr, t_home *home);
-void		calc_ground_texels(t_sector *sector, t_frame *frame);
+void		calc_ground_texels(t_sector *sector, t_frame *frame, t_player *plr);
 void		calc_intersection(t_point *pgon, t_ray *ray,
 				t_intersection *sect);
 void		calc_sector_bounds(t_sector *sector);
