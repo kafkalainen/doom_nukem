@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/10 12:36:33 by rzukale          ###   ########.fr        #
+#    Updated: 2021/05/11 12:39:39 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,6 @@ HEADERS = \
 	headers$(SLASH)raycast.h \
 	headers$(SLASH)sector.h \
 	headers$(SLASH)syscalls_windows.h \
-	headers$(SLASH)syscalls_linux.h \
 	headers$(SLASH)vectors.h \
 
 WIN_INCLUDE_PATHS = \

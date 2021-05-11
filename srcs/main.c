@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/11 12:25:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 12:46:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,8 @@ void	load_map_menu(t_home *home)
 				error_output("Failed to allocate memory to map file name.\n");
 			home->map_names[i] = ft_strcpy(home->map_names[i], (const char *)buf);
 			ft_strdel(&buf);
+			i++;
 		}
-		i++;
 		dir_entry = readdir(dir);
 	}
 	closedir(dir);

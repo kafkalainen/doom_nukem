@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/10 13:43:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 12:37:01 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	create_map_file(t_home *home)
 	char	*tmp = "./map_files/test.DATA";
 
 	doom_open(&fd, (const char**)&tmp,
-		WRITE_ONLY | _O_BINARY | CREATE_FILE | TRUNCATE | CHECK_EXIST, 0644);
+		WRITE_ONLY | READ_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST, 0644);
 	if (fd < 0)
 		return (-1);
 	write_texture_data(&fd, home);
@@ -107,7 +107,7 @@ int		create_temp_audio_file(unsigned char *buf, ssize_t size, char *path)
 	int		fd;
 
 	doom_open(&fd, (const char **)&path,
-		WRITE_ONLY | _O_BINARY | CREATE_FILE | TRUNCATE, 0644);
+		WRITE_ONLY | READ_ONLY | CREATE_FILE | TRUNCATE, 0644);
 	if (fd < 0)
 		return (-1);
 	if (doom_write(&fd, (const void **)&buf, size) == -1)

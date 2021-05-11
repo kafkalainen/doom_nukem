@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 11:53:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/10 12:31:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 12:40:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ ssize_t	doom_write(int *fd, const void **buf, size_t count)
 	return (ret);
 }
 
-int	doom_mkdir(const char *pathname, mode_t mode)
+int	doom_mkdir(void)
 {
 	int	ret;
 
