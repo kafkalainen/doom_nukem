@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/11 10:37:45 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 12:24:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame)
 	init_player(plr);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	home->game_state = MAIN_MENU;
+	home->map_count = 0;
 }
 
 void	clean_up(t_home *home)

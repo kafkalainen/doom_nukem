@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/27 16:21:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 11:50:16 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	init_textures(t_home *home)
 			* (home->nbr_of_textures + 1));
 	if (!home->editor_tex)
 		error_output("Failed to allocate memory to editor textures.\n");
-	home->editor_tex[0] = NULL;
+	home->editor_tex[0] = assign_empty_texture();
 	i = 1;
 	dir_entry = readdir(dir);
 	while (dir_entry != NULL)

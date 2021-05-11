@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/11 11:35:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 12:25:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,21 @@
 
 void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio)
 {
-	// int i;
+	int i;
 
 	// free_sectors(home);
 	free(buffer);
 	cleanup_audio(audio);
-	// i = -1;
-	// while (++i <= home->nbr_of_textures)
-	// 	free_texture(home->editor_tex[i]);
-	// free(home->editor_tex);
+	i = 0;
+	if (home->map_count > 0)
+	{
+		while (i < home->map_count)
+		{
+			free(home->map_names[i]);
+			i++;
+		}
+		free(home->map_names);
+	}
 	free(home->t.frame_times);
 	ft_putendl("User closed the window");
 	SDL_Quit();
@@ -77,22 +83,68 @@ void	process_inputs(int *game_state, SDL_Event *e)
 				*game_state = MAIN_MENU;
 			}
 			if (e->key.keysym.sym == SDLK_2 && *game_state == MAIN_MENU)
-			{
-				printf("moving to load menu\n");
 				*game_state = MAP_MENU;
-			}
 			if (e->key.keysym.sym == SDLK_3)
-			{
-				printf("Loading map\n");
 				*game_state = GAME_LOOP;
-			}
 			if (e->key.keysym.sym == SDLK_1 && *game_state == MAIN_MENU)
-			{
-				printf("Loading editor\n");
 				*game_state = EDITOR;
-			}
 		}
 	}
+}
+
+static void	get_map_count(int *count, DIR **dir, struct dirent **dir_entry)
+{
+	char	*found;
+
+	*dir_entry = readdir(*dir);
+	while (*dir_entry != NULL)
+	{
+		found = ft_strstr((*dir_entry)->d_name, ".TEST");
+		if (found != NULL)
+			(*count)++;
+		*dir_entry = readdir(*dir);
+	}
+	rewinddir(*dir);
+}
+
+void	load_map_menu(t_home *home)
+{
+	DIR				*dir;
+	struct dirent	*dir_entry;
+	char			*buf;
+	char			*found;
+	int				i;
+
+	dir = opendir("map_files/");
+	if (dir == NULL)
+		error_output("Failed to open map_files directory.\n");
+	get_map_count(&home->map_count, &dir, &dir_entry);
+	if (home->map_count == 0)
+	{
+		printf("no maps to load\n");
+		return ;
+	}
+	home->map_names = (char **)malloc(sizeof(char *) * home->map_count);
+	if (!home->map_names)
+		error_output("Failed to allocate memory to map file names.\n");
+	dir_entry = readdir(dir);
+	i = 0;
+	while (dir_entry != NULL)
+	{
+		found = ft_strstr(dir_entry->d_name, ".TEST");
+		if (found != NULL)
+		{
+			buf = ft_strjoin("map_files/", dir_entry->d_name);
+			home->map_names[i] = (char *)malloc(sizeof(char) * ft_strlen((const char *)buf));
+			if (!home->map_names[i])
+				error_output("Failed to allocate memory to map file name.\n");
+			home->map_names[i] = ft_strcpy(home->map_names[i], (const char *)buf);
+			ft_strdel(&buf);
+		}
+		i++;
+		dir_entry = readdir(dir);
+	}
+	closedir(dir);
 }
 
 int	main(int argc, char **argv)
@@ -120,9 +172,21 @@ int	main(int argc, char **argv)
 		{
 			process_inputs(&home.game_state, &e);
 			// setup main_menu graphics
+			if (home.game_state == EDITOR)
+			{
+				printf("olen editorissa\n");
+				//load_editor();
+			}
+			if (home.game_state == MAP_MENU)
+			{
+				printf("olen map menussa\n");
+				if (home.map_count == 0)
+					load_map_menu(&home);
+				// launch_load_loop();
+			}
 			if (home.game_state == GAME_LOOP)
 			{
-				printf("kutsu setup_game_looppia\n");
+				printf("olen game loopissa\n");
 				setup_game_loop(argv[1], &home, &plr);
 				launch_game(&home, &plr, &frame, &e);
 			}
