@@ -46,10 +46,7 @@ int	doom_mkdir(const char *pathname, mode_t mode)
 {
 	int	ret;
 
-	if (OS_WINDOWS)
-		ret = _mkdir(pathname);
-	else
-		ret = mkdir(pathname, mode);
+	ret = system("mkdir temp");
 	return (ret);
 }
 

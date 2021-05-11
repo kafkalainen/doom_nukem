@@ -190,6 +190,12 @@ int	main(int argc, char **argv)
 				setup_game_loop(argv[1], &home, &plr);
 				launch_game(&home, &plr, &frame, &e);
 			}
+/* 			if (home.game_state == EDITOR_LOOP)
+			{
+				printf("kutsu setup_editor_looppia\n");
+				setup_game_loop(argv[1], &home, &plr);
+				launch_editor(&home, &plr, &frame, &e);
+			 }*/
 			render_buffer(frame.buffer, home.win.ScreenSurface);
 			SDL_UpdateWindowSurface(home.win.window);
 		}
