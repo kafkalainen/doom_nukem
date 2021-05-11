@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/11 15:29:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 15:33:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	process_inputs_load_menu(int *game_state, SDL_Event *e, int *option, int nb
 					*option = 0;
 				printf("nbr_of_maps %i : option %i\n", nbr_of_maps, *option);
 			}
-			if (e->key.keysym.sym == SDLK_RETURN || e->key.keysym.sym == SDLK_RETURN2)
+			if (e->key.keysym.sym == SDLK_RETURN || e->key.keysym.sym == SDLK_KP_ENTER)
 			{
 				*game_state = GAME_LOOP;
 				*selected = TRUE;
