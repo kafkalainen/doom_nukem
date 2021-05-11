@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 15:38:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 10:44:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,13 @@ void	update_player(t_player *plr, t_home *home, SDL_Event *e)
 {
 	while (SDL_PollEvent(e) != 0)
 	{
-		key_input(plr, e, &home->game_state);
-		mouse_handle(plr, home, e);
-		if (e->type == SDL_KEYDOWN && e->key.keysym.sym == SDLK_ESCAPE)
+		if (e->type == SDL_QUIT)
 		{
-			home->game_state = MAIN_MENU;
-			SDL_FlushEvents(SDL_KEYDOWN, SDL_KEYUP);
+			home->game_state = QUIT;
 			break ;
 		}
+		key_input(plr, e, &home->game_state);
+		mouse_handle(plr, home, e);
 	}
 	if (plr->input.rot_left == 1)
 		transform_world_view(home, DEG_TO_RAD * 0.5);

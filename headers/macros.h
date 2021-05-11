@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/10 13:03:12 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 10:48:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@
 # define FALSE 0
 # define AND &&
 # define OR ||
-# define EDITOR 3
-# define GAME_LOOP 2
+# define EDITOR 4
+# define GAME_LOOP 3
+# define MAP_MENU 2
 # define MAIN_MENU 1
+# define QUIT -1
 
 /*
 ** Compass directions

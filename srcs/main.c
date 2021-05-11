@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/10 13:45:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 10:52:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	return_to_main_from_game(t_home *home, t_player *plr)
 
 void	launch_game(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
 {
-	while (home->game_state == GAME_LOOP)
+	while (home->game_state == GAME_LOOP && home->game_state)
 	{
 		fps_timer(&home->t);
 		update_player(plr, home, e);
@@ -58,7 +58,7 @@ void	launch_game(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
 	return_to_main_from_game(home, plr);
 }
 
-void	process_inputs(int *game_state, SDL_Event *e, int *quit)
+void	process_inputs(int *game_state, SDL_Event *e)
 {
 	while (SDL_PollEvent(e) != 0)
 	{
@@ -66,12 +66,22 @@ void	process_inputs(int *game_state, SDL_Event *e, int *quit)
 		{
 			if (*game_state == MAIN_MENU && (e->key.keysym.sym == SDLK_ESCAPE || e->type == SDL_QUIT))
 			{
-				printf("calling exit\n");
-				*quit = 1;
+				printf("game state is main menu, calling exit\n");
+				*game_state = QUIT;
 			}
-			if (e->key.keysym.sym == SDLK_2)
+			if (*game_state == MAP_MENU && e->key.keysym.sym == SDLK_ESCAPE)
 			{
-				printf("siirrytaaan game looppiin\n");
+				printf("game state is map load menu, going back to main menu\n");
+				*game_state = MAIN_MENU;
+			}
+			if (e->key.keysym.sym == SDLK_2 && *game_state == MAIN_MENU)
+			{
+				printf("game state is main menu, moving to load menu\n");
+				*game_state = MAP_MENU;
+			}
+			if (e->key.keysym.sym == SDLK_3)
+			{
+				printf("Loading map\n");
 				*game_state = GAME_LOOP;
 			}
 		}
@@ -99,9 +109,9 @@ int	main(int argc, char **argv)
 		setup(&home, &plr, &frame);
 		// setup_editor(&home);
 		// create_map_file(&home);
-		while (plr.input.quit != 1)
+		while (home.game_state != QUIT)
 		{
-			process_inputs(&home.game_state, &e, &plr.input.quit);
+			process_inputs(&home.game_state, &e);
 			// setup main_menu graphics
 			if (home.game_state == GAME_LOOP)
 			{
