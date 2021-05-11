@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/11 13:13:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/11 14:15:13 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio)
 	free(buffer);
 	cleanup_audio(audio);
 	i = 0;
-	if (home->map_count > 0)
+	if (home->nbr_of_maps > 0)
 	{
-		while (i < home->map_count)
+		while (i < home->nbr_of_maps)
 		{
 			free(home->map_names[i]);
 			i++;
@@ -51,47 +51,6 @@ void	return_to_main_from_game(t_home *home, t_player *plr)
 	init_player(plr);
 }
 
-void	launch_game(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
-{
-	while (home->game_state == GAME_LOOP && home->game_state)
-	{
-		fps_timer(&home->t);
-		update_player(plr, home, e);
-		update_screen(home, frame, plr);
-		render_buffer(frame->buffer, home->win.ScreenSurface);
-		SDL_UpdateWindowSurface(home->win.window);
-	}
-	return_to_main_from_game(home, plr);
-}
-
-void	process_inputs(int *game_state, SDL_Event *e)
-{
-	while (SDL_PollEvent(e) != 0)
-	{
-		if (e->type == SDL_KEYDOWN)
-		{
-			if (e->type == SDL_QUIT)
-				*game_state = QUIT;
-			if (*game_state == MAIN_MENU && e->key.keysym.sym == SDLK_ESCAPE)
-			{
-				printf("game state is main menu, calling exit\n");
-				*game_state = QUIT;
-			}
-			if (*game_state != MAIN_MENU && *game_state != QUIT && e->key.keysym.sym == SDLK_ESCAPE)
-			{
-				printf("going back to main menu\n");
-				*game_state = MAIN_MENU;
-			}
-			if (e->key.keysym.sym == SDLK_2 && *game_state == MAIN_MENU)
-				*game_state = MAP_MENU;
-			if (e->key.keysym.sym == SDLK_3)
-				*game_state = GAME_LOOP;
-			if (e->key.keysym.sym == SDLK_1 && *game_state == MAIN_MENU)
-				*game_state = EDITOR;
-		}
-	}
-}
-
 static void	get_map_count(int *count, DIR **dir, struct dirent **dir_entry)
 {
 	char	*found;
@@ -107,7 +66,7 @@ static void	get_map_count(int *count, DIR **dir, struct dirent **dir_entry)
 	rewinddir(*dir);
 }
 
-void	load_map_menu(t_home *home)
+void	load_map_names(t_home *home)
 {
 	DIR				*dir;
 	struct dirent	*dir_entry;
@@ -118,13 +77,13 @@ void	load_map_menu(t_home *home)
 	dir = opendir("map_files/");
 	if (dir == NULL)
 		error_output("Failed to open map_files directory.\n");
-	get_map_count(&home->map_count, &dir, &dir_entry);
-	if (home->map_count == 0)
+	get_map_count(&home->nbr_of_maps, &dir, &dir_entry);
+	if (home->nbr_of_maps == 0)
 	{
 		printf("no maps to load\n");
 		return ;
 	}
-	home->map_names = (char **)malloc(sizeof(char *) * home->map_count);
+	home->map_names = (char **)malloc(sizeof(char *) * home->nbr_of_maps);
 	if (!home->map_names)
 		error_output("Failed to allocate memory to map file names.\n");
 	dir_entry = readdir(dir);
@@ -170,7 +129,7 @@ int	main(int argc, char **argv)
 		// create_map_file(&home);
 		while (home.game_state != QUIT)
 		{
-			process_inputs(&home.game_state, &e);
+			process_inputs_main_menu(&home.game_state, &e);
 			// setup main_menu graphics
 			if (home.game_state == EDITOR)
 			{
@@ -180,15 +139,16 @@ int	main(int argc, char **argv)
 			if (home.game_state == MAP_MENU)
 			{
 				printf("olen map menussa\n");
-				if (home.map_count == 0)
-					load_map_menu(&home);
-				// launch_load_loop();
+				if (home.nbr_of_maps == 0) // might need a better check for this
+					load_map_names(&home);
+				if (home.nbr_of_maps > 0)
+					launch_load_menu_loop(&home, &frame.buffer, &e);
 			}
 			if (home.game_state == GAME_LOOP)
 			{
 				printf("olen game loopissa\n");
 				setup_game_loop(argv[1], &home, &plr);
-				launch_game(&home, &plr, &frame, &e);
+				launch_game_loop(&home, &plr, &frame, &e);
 			}
 			render_buffer(frame.buffer, home.win.ScreenSurface);
 			SDL_UpdateWindowSurface(home.win.window);
