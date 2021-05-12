@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/07 14:53:41 by jnivala          ###   ########.fr        #
+#    Updated: 2021/05/12 16:39:32 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,10 @@ SRCS = \
 	vec_math$(SLASH)vec2_b.c \
 	vec_math$(SLASH)vec2_c.c \
 	vec_math$(SLASH)vec2_d.c \
-	vec_math$(SLASH)vec3.c
+	vec_math$(SLASH)vec3.c \
+	menu_systems$(SLASH)launch_modules.c \
+	menu_systems$(SLASH)menu_inputs.c \
+	menu_systems$(SLASH)menu_setups.c
 
 HEADERS = \
 	libft$(SLASH)libft.h \
@@ -105,8 +108,8 @@ HEADERS = \
 	headers$(SLASH)raycast.h \
 	headers$(SLASH)sector.h \
 	headers$(SLASH)syscalls_windows.h \
-	headers$(SLASH)syscalls_linux.h \
 	headers$(SLASH)vectors.h \
+	headers$(SLASH)menu_systems.h
 
 WIN_INCLUDE_PATHS = \
 	-ISDL2-2.0.14\i686-w64-mingw32\include\SDL2 \
@@ -156,7 +159,11 @@ else
 	ABS_DIR = $(shell pwd)
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
+<<<<<<< HEAD
 	CFLAGS = -Wall -Wextra -Werror -g $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
+=======
+	CFLAGS = -Wall -Wextra -ggdb3 -O3 -g $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
+>>>>>>> main
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
 	MKDIR := mkdir -p
@@ -246,6 +253,7 @@ $O:
 	$(MKDIR) $@$(SLASH)porting
 	$(MKDIR) $@$(SLASH)raycaster
 	$(MKDIR) $@$(SLASH)vec_math
+	$(MKDIR) $@$(SLASH)menu_systems
 
 $(OBJ): | $O
 

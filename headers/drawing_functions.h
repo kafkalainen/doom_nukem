@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/04 10:03:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:38:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 Uint32		colour_scale(Uint32 hex, float scale);
 int			draw_line(t_xy start, t_xy end, Uint32 color, Uint32 *buffer);
 void		draw_rect_center(t_xy xy, t_xy wh, t_frame *frame);
-void		draw_rect(t_xy xy, t_xy wh, t_frame *frame, Uint32 color);
+void		draw_rect(t_xy xy, t_xy wh, Uint32 *buffer, int color);
 void		draw_tex_pixel(t_texture *tex, t_xyz texel,
 				t_xy pixel, t_frame *frame);
 void		draw_wireframe(t_frame *frame, Uint32 colour);

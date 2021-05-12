@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/22 17:22:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 14:54:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,52 @@
 **	 	ft_putendl_fd("File creation failed\n", 2);
 */
 
-int	main(int argc, char **argv)
+void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio, Uint32 *menu_buffer)
+{
+	// free_sectors(home);
+	free(buffer);
+	free(menu_buffer);
+	cleanup_audio(audio);
+	free(home->t.frame_times);
+	ft_putendl("User closed the window");
+	SDL_Quit();
+}
+
+int	main(void)
 {
 	t_home		home;
 	t_player	plr;
 	t_frame		frame;
+	t_menu		menu;
 	SDL_Event	e;
 
-	if (argc != 2)
-		error_output("usage: ./doom-nukem [path to mapfile]");
-	setup(argv[1], &home, &plr, &frame);
-	if (open_file(&home, "map_files/test.DATA") < 0)
-		error_output("Could not successfully open map file.");
-	while (!plr.input.quit)
+	setup(&home, &plr, &frame, &menu);
+	while (home.game_state != QUIT)
 	{
-		fps_timer(&home.t);
-		update_player(&plr, &home, &e);
-		update_screen(&home, &frame, &plr);
-		render_buffer(frame.buffer, home.win.ScreenSurface);
+		process_inputs_main_menu(&home.game_state, &e, &menu.option);
+		update_main_menu(menu.menu_buffer, menu.option);
+		// if (home.game_state == EDITOR)
+		// {
+		// 	printf("olen editorissa\n");
+		// 	//load_editor();
+		// }
+		if (home.game_state == MAP_MENU)
+		{
+			load_map_names(&menu);
+			if (menu.nbr_of_maps > 0)
+				launch_load_menu_loop(&menu, &home.win, &e, &home.game_state);
+			else
+				home.game_state = MAIN_MENU;
+		}
+		if (home.game_state == GAME_LOOP)
+		{
+			setup_game_loop(&menu.chosen_map, &home, &plr);
+			launch_game_loop(&home, &plr, &frame, &e);
+			menu.option = 0;
+		}
+		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
-	free_sectors(&home);
-	free(frame.buffer);
-	cleanup_audio(&plr.audio);
-	ft_putendl("User closed the window");
-	SDL_Quit();
+	exit_game(&home, frame.buffer, &plr.audio, menu.menu_buffer);
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   porting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 15:42:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:17:44 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define BUF_SIZE 30000
 # define XPM_BUF_SIZE 200000
 
-int			create_map_file(t_home *home);
 int			get_next_breaker(unsigned char *buf);
 Uint32		get_floor(int floor_colour);
 int			load_map_file(t_home *home, char *path);
@@ -36,10 +35,15 @@ t_texture	*load_texture_from_map_data(char *line);
 Uint32		get_texel(int x, int y, t_texture *tex);
 void		put_texel(Uint32 *buffer, int x, int y, Uint32 color);
 void		free_array(unsigned char **array);
+void		parse_texture_data(unsigned char *buf, t_home *home, unsigned int *pos, ssize_t size);
 
 /*
 ** Audio Encode/Decode funtions
 */
+
+void		parse_audio_data(unsigned char *buf, unsigned int *pos, char *path, ssize_t size);
+void		get_audio_data(t_audio_asset *asset, char *path);
+int			create_temp_audio_file(unsigned char *buf, ssize_t size, char *path);
 
 /*
 ** File creation, writing and reading functions
@@ -49,6 +53,8 @@ void		free_array(unsigned char **array);
 # define READ_BREAKER '#'
 
 int			create_map_file(t_home *home);
+void		write_texture_data(int *fd, t_home *home);
+void		write_audio_data(int *fd, char *path, char *asset_name);
 int			open_file(t_home *home, char *path);
 int			open_map_file(t_home *home, char *path);
 

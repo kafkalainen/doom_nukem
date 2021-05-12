@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 14:52:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 11:01:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static void	get_tex_count(int *i, DIR **dir, struct dirent **dir_entry)
 		found = ft_strstr((*dir_entry)->d_name, ".png");
 		if (found != NULL)
 			(*i)++;
+		*dir_entry = readdir(*dir);
 	}
 	rewinddir(*dir);
 }
@@ -90,7 +91,7 @@ void	init_textures(t_home *home)
 			* (home->nbr_of_textures + 1));
 	if (!home->editor_tex)
 		error_output("Failed to allocate memory to editor textures.\n");
-	home->editor_tex[0] = NULL;
+	home->editor_tex[0] = assign_empty_texture();
 	i = 1;
 	dir_entry = readdir(dir);
 	while (dir_entry != NULL)
@@ -102,6 +103,7 @@ void	init_textures(t_home *home)
 			load_texture(buf, home, i++);
 			ft_strdel(&buf);
 		}
+		dir_entry = readdir(dir);
 	}
 	closedir(dir);
 }

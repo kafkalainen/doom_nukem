@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 13:01:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:40:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 	home->win.height = SCREEN_HEIGHT;
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) < 0)
 		error_output_sdl("Fatal: SDL Initalization failed.", home);
-	home->win.window = SDL_CreateWindow("Wolf3d", 100, 100,
-			home->win.width, home->win.height, 0);
+	home->win.window = SDL_CreateWindow("Doom-Nukem", 100, 100,
+		home->win.width, home->win.height, 0);
 	if (home->win.window == NULL)
 		error_output_sdl("Fatal: Failed to create a window.", home);
 	SDL_SetWindowPosition(home->win.window,
@@ -46,7 +46,6 @@ void	init_player(t_player *plr)
 	plr->input.left = 0;
 	plr->input.rot_right = 0;
 	plr->input.rot_left = 0;
-	plr->input.quit = 0;
 	plr->input.wireframe = 0;
 	plr->input.minimap = 1;
 	plr->input.info = 1;
@@ -55,32 +54,20 @@ void	init_player(t_player *plr)
 	plr->current_sector = 0;
 }
 
-static int	init_time(t_time *time)
-{
-	time->frame_times = (Uint32 *)malloc(sizeof(Uint32) * 11);
-	if (time->frame_times == NULL)
-		return (1);
-	time->frame_count = 0;
-	time->fps = 0;
-	time->frame_time_last = SDL_GetTicks();
-	return (0);
-}
-
-void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
+void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
 	int		ret;
 
-	ft_putstr("You chose: ");
-	ft_putendl_fd(mapname, 1);
-	if (load_map_file(home, mapname))
-		exit(EXIT_FAILURE);
-	transform_world_view(home, -PLR_DIR);
-	if (init_time(&home->t))
-		clean_up(home);
-	frame->buffer = (Uint32 *)malloc(sizeof(Uint32)
-			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);
-	if (!frame->buffer)
-		clean_up(home);
+	home->win.width = SCREEN_WIDTH;
+	home->win.height = SCREEN_HEIGHT;
+	home->t.frame_times = (Uint32*)malloc(sizeof(Uint32) * 11);
+	home->t.frame_count = 0;
+	home->t.fps = 0;
+	home->t.frame_time_last = SDL_GetTicks();
+	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
+	if (!(frame->buffer = (Uint32*)malloc(sizeof(Uint32) *
+		(Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT)))
+		error_output("Memory allocation failed!\n");
 	home = init_sdl(home, frame);
 	ret = load_audio(&plr->audio);
 	if (ret)
@@ -93,6 +80,7 @@ void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame)
 	// 	Mix_PlayMusic(plr->audio.music, -1);
 	init_player(plr);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
+	setup_menu(menu, &home->game_state);
 }
 
 void	clean_up(t_home *home)

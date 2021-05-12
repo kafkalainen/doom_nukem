@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/21 19:22:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/11 10:57:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,4 @@ void	mouse_handle(t_player *plr, t_home *home, SDL_Event *e)
 		transform_world_view(home, -e->motion.xrel * DEG_TO_RAD * 0.1);
 		plr->pitch = ft_fmin(ft_fmax((plr->pitch - e->motion.yrel), 0), 480);
 	}
-	else if (e->window.event == SDL_WINDOWEVENT_CLOSE)
-		plr->input.quit = 1;
 }

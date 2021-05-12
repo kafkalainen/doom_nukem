@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_shapes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 15:05:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:14:16 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	draw_line(t_xy p0, t_xy p1, Uint32 colour, Uint32 *buffer)
 	return (TRUE);
 }
 
-void	draw_rect(t_xy xy, t_xy wh, t_frame *frame, Uint32 color)
+void	draw_rect(t_xy xy, t_xy wh, Uint32 *buffer, int color)
 {
 	float	j;
 	float	i;
@@ -44,7 +44,7 @@ void	draw_rect(t_xy xy, t_xy wh, t_frame *frame, Uint32 color)
 	j = xy.y;
 	while (j < wh.y + xy.y)
 	{
-		draw_line(vec2(i, j), vec2(i + wh.x, j), color, frame->buffer);
+		draw_line(vec2(i, j), vec2(i + wh.x, j), color, buffer);
 		j++;
 	}
 }
