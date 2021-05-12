@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/28 11:24:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 14:57:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,20 @@ typedef struct s_point
 {
 	t_xy				x0;
 	int					idx;
-	char				c;
 	float				wall_facing;
 	t_xy				normal;
+	t_height			height;
 	struct s_point		*next;
 }						t_point;
+
+typedef struct s_point_data
+{
+	float		x;
+	float		y;
+	int			ground;
+	int			ceiling;
+	int			idx;
+}				t_point_data;
 
 typedef struct s_sector
 {
@@ -33,10 +42,10 @@ typedef struct s_sector
 	int				tex_ceil;
 	int				ground;
 	int				ceiling;
-	t_xyz			floor_top_left;
-	t_xyz			floor_top_right;
-	t_xyz			floor_bottom_left;
-	t_xyz			floor_bottom_right;
+	t_xy			floor_top_left;
+	t_xy			floor_top_right;
+	t_xy			floor_bottom_left;
+	t_xy			floor_bottom_right;
 }					t_sector;
 
 enum e_sector_info
@@ -44,8 +53,7 @@ enum e_sector_info
 	old_sector = -6666
 };
 
-t_point			*new_point(t_xy x0, int idx);
+t_point			*new_point(t_point_data *data);
 void			add_point(t_point **point, t_point *new);
-t_point			*loop_list(t_point *head, t_point *current);
 
 #endif

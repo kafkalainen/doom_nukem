@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 16:14:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:40:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_player(t_player *plr)
 {
 	plr->pos = vec2(0, 0);
 	plr->pitch = 240;
+	plr->height = 10;
 	plr->dir.x = 0.0f;
 	plr->dir.y = 1.0f;
 	plr->input.down = 0;
@@ -45,7 +46,7 @@ void	init_player(t_player *plr)
 	plr->input.left = 0;
 	plr->input.rot_right = 0;
 	plr->input.rot_left = 0;
-	plr->input.wireframe = 1;
+	plr->input.wireframe = 0;
 	plr->input.minimap = 1;
 	plr->input.info = 1;
 	plr->input.mouse = 1;
@@ -75,8 +76,8 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 		SDL_Quit();
 		clean_up(home);
 	}
-	if (Mix_PlayingMusic() == 0)
-		Mix_PlayMusic(plr->audio.music, -1);
+	// if (Mix_PlayingMusic() == 0)
+	// 	Mix_PlayMusic(plr->audio.music, -1);
 	init_player(plr);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	setup_menu(menu, &home->game_state);

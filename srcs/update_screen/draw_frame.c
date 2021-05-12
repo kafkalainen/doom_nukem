@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 16:14:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:38:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,22 @@ static void	draw_minimap(t_home *home, t_frame *frame)
 	{
 		j = 0;
 		temp = home->sectors[i]->points;
+		draw_line(
+			center_to_screen(home->sectors[i]->floor_bottom_left),
+			center_to_screen(home->sectors[i]->floor_bottom_right),
+			red, frame->buffer);
+		draw_line(
+			center_to_screen(home->sectors[i]->floor_top_left),
+			center_to_screen(home->sectors[i]->floor_top_right),
+			red, frame->buffer);
+		draw_line(
+			center_to_screen(home->sectors[i]->floor_top_left),
+			center_to_screen(home->sectors[i]->floor_bottom_left),
+			red, frame->buffer);
+		draw_line(
+			center_to_screen(home->sectors[i]->floor_top_right),
+			center_to_screen(home->sectors[i]->floor_bottom_right),
+			red, frame->buffer);
 		while (j < home->sectors[i]->nb_of_walls)
 		{
 			draw_line(center_to_screen(temp->x0),
@@ -51,8 +67,12 @@ static void	draw_minimap(t_home *home, t_frame *frame)
 	}
 }
 
-static void	draw_player(t_frame *frame)
+static void	draw_player(t_frame *frame, t_player *plr)
 {
+	plr = plr;
+	// draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
+	// 	center_to_screen(vec2_mul(plr->dir, 400)), lightgreen,
+	// 	frame->buffer);
 	draw_rect(center_to_screen((t_xy){0.0f, 0.0f}),
 		(t_xy){3.0f, 3.0f}, frame->buffer, yellow);
 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
@@ -70,6 +90,7 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	char	*sector;
 	char	*compass;
 	char	*fps;
+	char	*plr_z;
 
 	compass = compass_direction(&plr->dir);
 	sector = ft_itoa(plr->current_sector);
@@ -87,6 +108,7 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	free(fps);
 	free(sector);
 	free(compass);
+	free(plr_z);
 }
 
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
@@ -102,7 +124,7 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	if (plr->input.minimap)
 	{
 		draw_minimap(home, frame);
-		draw_player(frame);
+		draw_player(frame, plr);
 	}
 	if (plr->input.info)
 		draw_info(frame, plr, (int)home->t.fps);

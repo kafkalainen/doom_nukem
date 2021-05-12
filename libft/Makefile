@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 13:08:18 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/20 16:49:34 by jnivala          ###   ########.fr        #
+#    Updated: 2021/04/30 12:44:03 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,8 @@ SRC_LIST = \
 	$(SLASH)ft_ftoa.c\
 	$(SLASH)ft_roundf.c\
 	$(SLASH)ft_ineg.c\
+	$(SLASH)ft_imin.c\
+	$(SLASH)ft_imax.c\
 
 HEADERS = ./libft.h
 

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/28 14:25:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/03 12:42:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,40 @@
 
 static void	set_no_offset(t_frame *frame)
 {
-	frame->uv.top_left = inv_z((t_xyz){0.0f, 0.0f, frame->box.top_left.z});
-	frame->uv.bottom_left = inv_z((t_xyz){0.0f, 1.0f, frame->box.bottom_left.z});
-	frame->uv.top_right = inv_z((t_xyz){frame->ratio * frame->tex_mult,
-			0.0f, frame->box.top_right.z});
-	frame->uv.bottom_right = inv_z((t_xyz){frame->ratio * frame->tex_mult,
-			1.0f, frame->box.bottom_right.z});
+	frame->middle_uv.top_left = inv_z((t_xyz){0.0f, 0.0f,
+			frame->outer_box.top_left.z});
+	frame->middle_uv.bottom_left = inv_z((t_xyz){0.0f, 1.0f,
+			frame->outer_box.bottom_left.z});
+	frame->middle_uv.top_right = inv_z((t_xyz){frame->ratio * frame->tex_mult,
+			0.0f, frame->outer_box.top_right.z});
+	frame->middle_uv.bottom_right = inv_z((t_xyz){frame->ratio
+			* frame->tex_mult, 1.0f, frame->outer_box.bottom_right.z});
 }
 
 static void	set_offset_from_both_ends(t_frame *frame)
 {
-	frame->uv.top_left = inv_z((t_xyz){frame->unvisible_l_side
-			* frame->tex_mult, 0.0f, frame->box.top_left.z});
-	frame->uv.bottom_left = inv_z((t_xyz){frame->unvisible_l_side
-			* frame->tex_mult, 1.0f, frame->box.bottom_left.z});
-	frame->uv.top_right = inv_z((t_xyz){(frame->unvisible_l_side
+	frame->middle_uv.top_left = inv_z((t_xyz){frame->unvisible_l_side
+			* frame->tex_mult, 0.0f, frame->outer_box.top_left.z});
+	frame->middle_uv.bottom_left = inv_z((t_xyz){frame->unvisible_l_side
+			* frame->tex_mult, 1.0f, frame->outer_box.bottom_left.z});
+	frame->middle_uv.top_right = inv_z((t_xyz){(frame->unvisible_l_side
 				+ frame->ratio)
-			* frame->tex_mult, 0.0f, frame->box.top_right.z});
-	frame->uv.bottom_right = inv_z((t_xyz){(frame->unvisible_l_side
+			* frame->tex_mult, 0.0f, frame->outer_box.top_right.z});
+	frame->middle_uv.bottom_right = inv_z((t_xyz){(frame->unvisible_l_side
 				+ frame->ratio)
-			* frame->tex_mult, 1.0f, frame->box.bottom_right.z});
+			* frame->tex_mult, 1.0f, frame->outer_box.bottom_right.z});
 }
 
 static void	set_offset_from_left_side(t_frame *frame)
 {
-	frame->uv.top_left = inv_z((t_xyz){frame->unvisible_l_side
-			* frame->tex_mult, 0.0f, frame->box.top_left.z});
-	frame->uv.bottom_left = inv_z((t_xyz){frame->unvisible_l_side
-			* frame->tex_mult, 1.0f, frame->box.bottom_left.z});
-	frame->uv.top_right = inv_z((t_xyz){frame->tex_mult, 0.0f,
-			frame->box.top_right.z});
-	frame->uv.bottom_right = inv_z((t_xyz){frame->tex_mult, 1.0f,
-			frame->box.bottom_right.z});
+	frame->middle_uv.top_left = inv_z((t_xyz){frame->unvisible_l_side
+			* frame->tex_mult, 0.0f, frame->outer_box.top_left.z});
+	frame->middle_uv.bottom_left = inv_z((t_xyz){frame->unvisible_l_side
+			* frame->tex_mult, 1.0f, frame->outer_box.bottom_left.z});
+	frame->middle_uv.top_right = inv_z((t_xyz){frame->tex_mult, 0.0f,
+			frame->outer_box.top_right.z});
+	frame->middle_uv.bottom_right = inv_z((t_xyz){frame->tex_mult, 1.0f,
+			frame->outer_box.bottom_right.z});
 }
 
 static void	calc_offsets(t_frame *frame)
@@ -70,10 +72,13 @@ void	calc_wall_texels(t_frame *frame, int tex_width)
 	frame->unvisible_l_side = vec2_eucl_dist(frame->left.wall->x0,
 			frame->left.l_pt) / frame->full_wall_dist;
 	calc_offsets(frame);
-	frame->uv_step.x = interpolate_points(frame->uv.top_left.x,
-			frame->uv.top_right.x, frame->box.top_left.x, frame->box.top_right.x);
-	frame->uv_step.y = interpolate_points(frame->uv.top_left.y,
-			frame->uv.bottom_left.y, frame->box.top_left.y, frame->box.bottom_left.y);
-	frame->uv_step.z = interpolate_points(frame->uv.top_left.z,
-			frame->uv.top_right.z, frame->box.top_left.x, frame->box.top_right.x);
+	frame->uv_step.x = interpolate_points(frame->middle_uv.top_left.x,
+			frame->middle_uv.top_right.x, frame->outer_box.top_left.x,
+			frame->outer_box.top_right.x);
+	frame->uv_step.y = interpolate_points(frame->middle_uv.top_left.y,
+			frame->middle_uv.bottom_left.y, frame->outer_box.top_left.y,
+			frame->outer_box.bottom_left.y);
+	frame->uv_step.z = interpolate_points(frame->middle_uv.top_left.z,
+			frame->middle_uv.top_right.z, frame->outer_box.top_left.x,
+			frame->outer_box.top_right.x);
 }

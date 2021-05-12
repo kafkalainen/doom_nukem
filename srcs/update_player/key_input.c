@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 16:13:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:37:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 	if (sym == SDLK_e)
 		plr->input.rot_right = 1;
 	if (sym == SDLK_LCTRL)
-		plr->height = 3;
+		plr->height = 0;
 	if (sym == SDLK_SPACE && plr->acceleration == 0)
 		plr->acceleration = 5;
 	action_keys(plr, &sym);
@@ -76,7 +76,7 @@ void	keys_up(t_player *plr, SDL_KeyCode sym)
 	if (sym == SDLK_e)
 		plr->input.rot_right = 0;
 	if (sym == SDLK_LCTRL)
-		plr->height = 6;
+		plr->height = 10;
 }
 
 void	key_input(t_player *plr, SDL_Event *e, int *game_state)

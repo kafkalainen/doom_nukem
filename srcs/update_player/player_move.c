@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 20:22:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 12:53:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	plr_in_corner(t_sector *sector, t_xy *pos)
 	return (open_space);
 }
 
-static int	check_if_wall(t_sector *sector, t_xy *dir, t_xy *pos)
+static t_point	*check_if_wall(t_sector *sector, t_xy *dir, t_xy *pos)
 {
 	unsigned int	i;
 	t_point			*temp;
@@ -39,11 +39,11 @@ static int	check_if_wall(t_sector *sector, t_xy *dir, t_xy *pos)
 	while (i < sector->nb_of_walls)
 	{
 		if (check_if_lseg_intersects(temp, pos, dir))
-			return (temp->idx);
+			return (temp);
 		temp = temp->next;
 		i++;
 	}
-	return (open_space);
+	return (NULL);
 }
 
 int	plr_inside(t_sector *sector, t_xy *pos)
@@ -68,29 +68,35 @@ int	plr_inside(t_sector *sector, t_xy *pos)
 
 int	player_move(t_player *plr, t_home *home, t_xy *dir)
 {
-	int			crossing;
+	t_point		*crossing;
 	t_xy		pos;
 
 	pos = (t_xy){0.0f, 0.0f};
 	crossing = check_if_wall(home->sectors[plr->current_sector], dir, &pos);
-	if (crossing >= 0)
+	if (crossing != NULL && crossing->idx >= 0)
 	{
-		if (plr_in_corner(home->sectors[crossing], &pos) != open_space)
+		if (plr_in_corner(home->sectors[crossing->idx], &pos) !=  open_space)
+			return (0);
+		if (check_height_diff(dir, &plr->z, crossing,
+			get_portal_by_idx(plr->current_sector, home->sectors[crossing->idx])))
 			return (0);
 		translate_world_view(home, *dir);
-		plr->current_sector = crossing;
+		plr->current_sector = crossing->idx;
 	}
-	else if (crossing == open_space)
+	else if (crossing == NULL)
 	{
 		pos = vec2_mul(*dir, 8);
 		crossing = check_if_wall(home->sectors[plr->current_sector], dir, &pos);
-		if (crossing < 0 && crossing != open_space)
+		if (crossing != NULL && crossing->idx < 0)
 			return (0);
 		if (plr_in_corner(home->sectors[plr->current_sector], &pos)
 			!= open_space)
 			return (0);
 		if (plr_inside(home->sectors[plr->current_sector], &(t_xy){0.0f, 0.0f}))
+		{
+			update_height(dir, &plr->z, home->sectors[plr->current_sector]->points, home->sectors[plr->current_sector]->nb_of_walls);
 			translate_world_view(home, *dir);
+		}
 	}
 	return (TRUE);
 }

@@ -6,18 +6,26 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:45:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/28 14:43:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 14:45:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	step_one(t_xyz *start, t_xyz *bottom, size_t *obj_x, t_frame *frame)
+void	step_one(t_frame *frame)
 {
-	start->y -= frame->step_top.y;
-	bottom->y -= frame->step_bot.y;
-	start->z -= frame->step_top.z;
-	frame->uv.top_left.x += frame->uv_step.x;
-	frame->uv.top_left.z += frame->uv_step.z;
-	*obj_x = *obj_x + 1;
+	frame->inner_box.top_left.y -= frame->step_inner_top.y;
+	frame->inner_box.top_left.z -= frame->step_inner_top.z;
+	frame->inner_box.bottom_left.y -= frame->step_inner_bot.y;
+	frame->outer_box.top_left.y -= frame->step_outer_top.y;
+	frame->outer_box.top_left.z -= frame->step_outer_top.z;
+	frame->outer_box.bottom_left.y -= frame->step_outer_bot.y;
+	frame->middle_uv.top_left.x += frame->uv_step.x;
+	frame->middle_uv.top_left.z += frame->uv_step.z;
+	frame->ground_uv.top_left.x += frame->ground_uv_step.x;
+	frame->ground_uv.top_left.z += frame->uv_step.z;
+	frame->outer_box.top_left.x += 1;
+	frame->outer_box.bottom_left.x += 1;
+	frame->inner_box.top_left.x += 1;
+	frame->inner_box.bottom_left.x += 1;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 16:13:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:42:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 static void	get_nbr_of_sectors(unsigned int *pos, unsigned char *buf,
 	unsigned int *nbr_of_sectors)
 {
+	*pos += get_next_breaker(buf + *pos) + 1;
 	*nbr_of_sectors = ft_atoi((const char *)buf + *pos);
-	*pos += ft_nb_len(*nbr_of_sectors, 10);
+	*pos += get_next_breaker(buf + *pos);
 }
 
 int	free_sectors_and_exit(int error_code, t_home *home, size_t n)
@@ -44,7 +45,6 @@ int	parse_sector_data(unsigned char *buf, t_home *home)
 	buf = (unsigned char *)ft_strstr((const char *)buf, "doom_nukem_sectors");
 	if (!buf)
 		return (1);
-	pos += get_next_breaker(buf + pos) + 1;
 	get_nbr_of_sectors(&pos, buf, &home->nbr_of_sectors);
 	home->sectors = (t_sector **)malloc(sizeof(t_sector)
 			* (home->nbr_of_sectors + 1));
@@ -57,7 +57,8 @@ int	parse_sector_data(unsigned char *buf, t_home *home)
 			return (free_sectors_and_exit(1, home, i + 1));
 		i++;
 	}
-	if (*(buf + pos) != '\0')
+	pos += get_next_breaker(buf + pos) + 1;
+	if (*(buf + pos) != '\n')
 		return (free_sectors_and_exit(2, home, home->nbr_of_sectors));
 	home->sectors[i] = NULL;
 	return (0);

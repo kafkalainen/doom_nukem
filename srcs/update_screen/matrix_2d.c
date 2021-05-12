@@ -6,11 +6,31 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:10:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/26 14:57:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/07 15:12:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+static void transform_sector_bounding_box(t_sector *sector, float delta_dir)
+{
+	sector->floor_top_right = vec2_rot(sector->floor_top_right,
+		delta_dir);
+	sector->floor_bottom_right = vec2_rot(sector->floor_bottom_right,
+		delta_dir);
+	sector->floor_top_left = vec2_rot(sector->floor_top_left,
+		delta_dir);
+	sector->floor_bottom_left = vec2_rot(sector->floor_bottom_left,
+		delta_dir);
+}
+
+static void translate_sector_bounding_box(t_sector *sector, t_xy step)
+{
+	sector->floor_top_right = vec2_dec(sector->floor_top_right, step);
+	sector->floor_bottom_right = vec2_dec(sector->floor_bottom_right, step);
+	sector->floor_top_left = vec2_dec(sector->floor_top_left, step);
+	sector->floor_bottom_left = vec2_dec(sector->floor_bottom_left, step);
+}
 
 void	transform_world_view(t_home *home, float delta_dir)
 {
@@ -29,6 +49,7 @@ void	transform_world_view(t_home *home, float delta_dir)
 			current_point = current_point->next;
 			walls--;
 		}
+		transform_sector_bounding_box(home->sectors[i], delta_dir);
 		i++;
 	}
 }
@@ -50,6 +71,7 @@ void	translate_world_view(t_home *home, t_xy step)
 			current_point = current_point->next;
 			walls--;
 		}
+		translate_sector_bounding_box(home->sectors[i], step);
 		i++;
 	}
 }

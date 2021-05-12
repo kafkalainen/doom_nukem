@@ -6,21 +6,24 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/23 12:47:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/06 12:23:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_point	*new_point(t_xy x0, int idx)
+t_point	*new_point(t_point_data *data)
 {
 	t_point	*new;
 
 	new = (t_point *)malloc(sizeof(*new));
 	if (new != NULL)
 	{
-		new->x0 = x0;
-		new->idx = idx;
+		new->x0.x = data->x;
+		new->x0.y = data->y;
+		new->idx = data->idx;
+		new->height.ground = data->ground;
+		new->height.ceiling = data->ceiling;
 		new->next = NULL;
 	}
 	else
@@ -65,8 +68,7 @@ int	add_points(t_sector *sector,
 	unsigned char *buf, unsigned int **pos)
 {
 	unsigned int	i;
-	t_xy			coord;
-	int				tex_id;
+	t_point_data	data;
 	t_point			*point;
 
 	i = 0;
@@ -75,11 +77,10 @@ int	add_points(t_sector *sector,
 	sector->points = NULL;
 	while (i < sector->nb_of_walls)
 	{
-		parse_coordinates(&coord, &tex_id, &pos, &buf);
-		if (tex_id < -4)
+		parse_coordinates(&data, &pos, &buf);
+		if (data.idx < -4)
 			return (free_points(&sector->points, i));
-		**pos += ft_nb_len(tex_id, 10) + 1;
-		point = new_point(coord, tex_id);
+		point = new_point(&data);
 		if (point)
 			add_point(&sector->points, point);
 		else

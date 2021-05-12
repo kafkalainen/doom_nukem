@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/12 16:19:22 by rzukale          ###   ########.fr        #
+#    Updated: 2021/05/12 16:42:00 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,12 +38,14 @@ SRCS = \
 	porting$(SLASH)open_file2.c \
 	porting$(SLASH)validate_sectors_data.c \
 	porting$(SLASH)validate_sectors_data_2.c \
-	raycaster$(SLASH)calc_distances.c \
+	raycaster$(SLASH)calc_dimensions.c \
 	raycaster$(SLASH)calc_ground_texels.c \
-	raycaster$(SLASH)calc_sector_texels.c \
+	raycaster$(SLASH)calc_sector_bounds.c \
 	raycaster$(SLASH)calc_wall_texels.c \
 	raycaster$(SLASH)colour_scale.c \
 	raycaster$(SLASH)get_floor.c \
+	raycaster$(SLASH)get_next_wall_tex.c \
+	raycaster$(SLASH)get_portal_by_idx.c \
 	raycaster$(SLASH)get_wall_points.c \
 	raycaster$(SLASH)line_line_intersection.c \
 	raycaster$(SLASH)line_segment_check.c \
@@ -56,8 +58,10 @@ SRCS = \
 	update_screen$(SLASH)draw_segment.c \
 	update_screen$(SLASH)draw_shapes.c \
 	update_screen$(SLASH)draw_tex_pixel.c \
+	update_screen$(SLASH)draw_wireframe.c \
 	update_player$(SLASH)key_input.c \
 	update_player$(SLASH)mouse_handle.c \
+	update_player$(SLASH)update_height.c \
 	update_player$(SLASH)player_move.c \
 	update_screen$(SLASH)put_pixel.c \
 	update_screen$(SLASH)steplen.c \
@@ -76,10 +80,11 @@ SRCS = \
 	vec_math$(SLASH)vec2_a.c \
 	vec_math$(SLASH)vec2_b.c \
 	vec_math$(SLASH)vec2_c.c \
+	vec_math$(SLASH)vec2_d.c \
 	vec_math$(SLASH)vec3.c \
 	menu_systems$(SLASH)launch_modules.c \
 	menu_systems$(SLASH)menu_inputs.c \
-	menu_systems$(SLASH)menu_setups.c
+	menu_systems$(SLASH)menu_setups.c \
 
 HEADERS = \
 	libft$(SLASH)libft.h \
