@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 15:55:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:11:37 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@
 # define FALSE 0
 # define AND &&
 # define OR ||
+# define EDITOR 4
+# define GAME_LOOP 3
+# define MAP_MENU 2
+# define MAIN_MENU 1
+# define QUIT -1
 
 /*
 ** Compass directions

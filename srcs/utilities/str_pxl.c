@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   str_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/26 12:20:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:14:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_pxl_c	letter_logic(int c)
+static t_pxl_c	letter_logic(int c, int letter_colour)
 {
 	if (c >= 'A' && c <= 'Z')
-		return (pxl_alphabet(c, black, white));
+		return (pxl_alphabet(c, black, letter_colour));
 	if (c >= '0' && c <= '9')
-		return (pxl_numbers(c, black, white));
+		return (pxl_numbers(c, black, letter_colour));
 	if (c == ':' || c == '\'' || c == '!' || c == '?' || c == ' '
 		|| c == '.' || c == ',' || c == '(' || c == ')' || c == '%')
-		return (pxl_numbers(c, black, white));
-	return (pxl_numbers(' ', black, white));
+		return (pxl_numbers(c, black, letter_colour));
+	return (pxl_numbers(' ', black, letter_colour));
 }
 
-static void	handle_letter(t_frame *frame, t_xy coord, int c)
+static void		handle_letter(Uint32 *buffer, t_xy coord, int c, int letter_colour)
 {
 	t_xy	cur;
 	t_pxl_c	letter;
@@ -33,7 +33,7 @@ static void	handle_letter(t_frame *frame, t_xy coord, int c)
 
 	cur.y = 0;
 	m = TEXT_SIZE;
-	letter = letter_logic(c);
+	letter = letter_logic(c, letter_colour);
 	c = 0;
 	while (cur.y < 7)
 	{
@@ -43,21 +43,21 @@ static void	handle_letter(t_frame *frame, t_xy coord, int c)
 			c = letter.c[(int)(cur.x + cur.y * 5)];
 			mod.x = cur.x * m + coord.x;
 			mod.y = cur.y * m + coord.y;
-			draw_rect(mod, vec2(TEXT_SIZE, TEXT_SIZE), frame, c);
+			draw_rect(mod, vec2(TEXT_SIZE, TEXT_SIZE), buffer, c);
 			cur.x++;
 		}
 		cur.y++;
 	}
 }
 
-void	str_pxl(t_frame *frame, t_xy coord, char *str)
+void			str_pxl(Uint32 *buffer, t_xy coord, char *str, int letter_colour)
 {
 	int		c;
 
 	while (*str != '\0')
 	{
 		c = ft_toupper(*str);
-		handle_letter(frame, coord, c);
+		handle_letter(buffer, coord, c, letter_colour);
 		coord.x += 5 * TEXT_SIZE;
 		str++;
 	}

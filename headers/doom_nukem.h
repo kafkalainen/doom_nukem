@@ -28,8 +28,6 @@
 #  define TRUNCATE O_TRUNC
 #  include <string.h>
 #  include <unistd.h>
-#  include <sys/types.h>
-#  include <sys/stat.h>
 #  include "../SDL2/include/SDL2/SDL.h"
 #  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include "../headers/syscalls_windows.h"
@@ -72,10 +70,11 @@
 # include "drawing_functions.h"
 # include "caster.h"
 # include "events.h"
+# include "map.h"
 # include "porting.h"
 # include "parsing.h"
-# include "map.h"
 # include "typewriter.h"
+# include "menu_systems.h"
 
 /*
 ** Miscellanious
@@ -84,18 +83,22 @@
 void	clean_up(t_home *home);
 void	cleanup_audio(t_audio *audio);
 int		doom_close(int *fd);
+ssize_t	doom_write(int *fd, const void **buf, size_t count);
 void	doom_open(int *fd, const char **path, int mode, mode_t rights);
 void	doom_read(ssize_t *read_bytes, int *fd, void **buf, size_t nb_of_bytes);
+int		doom_mkdir(void);
 void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
 void	error_output_sdl(char *msg, t_home *home);
 void	fps_timer(t_time *t);
 int		load_audio(t_audio *audio);
+int		load_game_audio(t_audio *audio);
 void	map_error_output(int i, t_home *home);
 void	play_footsteps(t_player *plr);
 void	read_error_output(char *msg, unsigned char **line);
-void	setup(char *mapname, t_home *home, t_player *plr, t_frame *frame);
+void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu);
 void	translate_world_view(t_home *home, t_xy step);
 void	transform_world_view(t_home *home, float delta_dir);
 void	update_screen(t_home *home, t_frame *frame, t_player *plr);
+
 #endif

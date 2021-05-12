@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/28 16:02:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:14:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,12 @@ void	update_player(t_player *plr, t_home *home, SDL_Event *e)
 {
 	while (SDL_PollEvent(e) != 0)
 	{
-		key_input(plr, e);
+		if (e->type == SDL_QUIT)
+		{
+			home->game_state = QUIT;
+			break ;
+		}
+		key_input(plr, e, &home->game_state);
 		mouse_handle(plr, home, e);
 	}
 	if (plr->input.rot_left == 1)

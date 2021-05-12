@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   system_calls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 11:53:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/27 14:12:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:14:51 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,25 @@ int	doom_close(int *fd)
 		ret = _close(*fd);
 	else
 		ret = close(*fd);
+	return (ret);
+}
+
+ssize_t	doom_write(int *fd, const void **buf, size_t count)
+{
+	ssize_t	ret;
+
+	if (OS_WINDOWS)
+		ret = _write(*fd, *buf, count);
+	else
+		ret = write(*fd, *buf, count);
+	return (ret);
+}
+
+int	doom_mkdir(void)
+{
+	int	ret;
+
+	ret = system("mkdir temp");
 	return (ret);
 }
 
