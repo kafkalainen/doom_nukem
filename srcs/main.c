@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/11 14:15:13 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 11:08:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,9 @@
 
 void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio)
 {
-	int i;
-
 	// free_sectors(home);
 	free(buffer);
 	cleanup_audio(audio);
-	i = 0;
-	if (home->nbr_of_maps > 0)
-	{
-		while (i < home->nbr_of_maps)
-		{
-			free(home->map_names[i]);
-			i++;
-		}
-		free(home->map_names);
-	}
 	free(home->t.frame_times);
 	ft_putendl("User closed the window");
 	SDL_Quit();
@@ -51,66 +39,12 @@ void	return_to_main_from_game(t_home *home, t_player *plr)
 	init_player(plr);
 }
 
-static void	get_map_count(int *count, DIR **dir, struct dirent **dir_entry)
-{
-	char	*found;
-
-	*dir_entry = readdir(*dir);
-	while (*dir_entry != NULL)
-	{
-		found = ft_strstr((*dir_entry)->d_name, ".TEST");
-		if (found != NULL)
-			(*count)++;
-		*dir_entry = readdir(*dir);
-	}
-	rewinddir(*dir);
-}
-
-void	load_map_names(t_home *home)
-{
-	DIR				*dir;
-	struct dirent	*dir_entry;
-	char			*buf;
-	char			*found;
-	int				i;
-
-	dir = opendir("map_files/");
-	if (dir == NULL)
-		error_output("Failed to open map_files directory.\n");
-	get_map_count(&home->nbr_of_maps, &dir, &dir_entry);
-	if (home->nbr_of_maps == 0)
-	{
-		printf("no maps to load\n");
-		return ;
-	}
-	home->map_names = (char **)malloc(sizeof(char *) * home->nbr_of_maps);
-	if (!home->map_names)
-		error_output("Failed to allocate memory to map file names.\n");
-	dir_entry = readdir(dir);
-	i = 0;
-	while (dir_entry != NULL)
-	{
-		found = ft_strstr(dir_entry->d_name, ".TEST");
-		if (found != NULL)
-		{
-			buf = ft_strjoin("map_files/", dir_entry->d_name);
-			home->map_names[i] = (char *)malloc(sizeof(char) * ft_strlen((const char *)buf));
-			if (!home->map_names[i])
-				error_output("Failed to allocate memory to map file name.\n");
-			home->map_names[i] = ft_strcpy(home->map_names[i], (const char *)buf);
-			ft_strdel(&buf);
-			i++;
-		}
-		dir_entry = readdir(dir);
-	}
-	closedir(dir);
-}
-
 int	main(int argc, char **argv)
 {
 	t_home		home;
 	t_player	plr;
 	t_frame		frame;
+	t_menu		menu;
 	SDL_Event	e;
 
 	// TODO: master setup that initializes SDL functions and mallocs buffers etc.
@@ -127,6 +61,7 @@ int	main(int argc, char **argv)
 		setup(&home, &plr, &frame);
 		// setup_editor(&home);
 		// create_map_file(&home);
+		menu.nbr_of_maps = 0;
 		while (home.game_state != QUIT)
 		{
 			process_inputs_main_menu(&home.game_state, &e);
@@ -139,15 +74,14 @@ int	main(int argc, char **argv)
 			if (home.game_state == MAP_MENU)
 			{
 				printf("olen map menussa\n");
-				if (home.nbr_of_maps == 0) // might need a better check for this
-					load_map_names(&home);
-				if (home.nbr_of_maps > 0)
-					launch_load_menu_loop(&home, &frame.buffer, &e);
+				load_map_names(&menu);
+				if (menu.nbr_of_maps > 0)
+					launch_load_menu_loop(&menu, &frame.buffer, &e, &home.game_state);
 			}
 			if (home.game_state == GAME_LOOP)
 			{
 				printf("olen game loopissa\n");
-				setup_game_loop(argv[1], &home, &plr);
+				setup_game_loop(&menu.chosen_map, &home, &plr);
 				launch_game_loop(&home, &plr, &frame, &e);
 			}
 			render_buffer(frame.buffer, home.win.ScreenSurface);

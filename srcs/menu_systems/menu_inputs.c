@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/11 15:33:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 11:22:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	process_inputs_main_menu(int *game_state, SDL_Event *e)
 	}
 }
 
-void	process_inputs_load_menu(int *game_state, SDL_Event *e, int *option, int nbr_of_maps, int *selected)
+void	process_inputs_load_menu(int *game_state, SDL_Event *e, t_menu *menu)
 {
 	while (SDL_PollEvent(e) != 0)
 	{
@@ -55,24 +55,24 @@ void	process_inputs_load_menu(int *game_state, SDL_Event *e, int *option, int nb
 			}
 			if (e->key.keysym.sym == SDLK_UP)
 			{
-				if (*option > 0 && *option < nbr_of_maps)
-					*option = *option - 1;
-				else if (*option == 0)
-					*option = (nbr_of_maps - 1);
-				printf("nbr_of_maps %i : option %i\n", nbr_of_maps, *option);
+				if (menu->option > 0 && menu->option < menu->nbr_of_maps)
+					menu->option = menu->option - 1;
+				else if (menu->option == 0)
+					menu->option = (menu->nbr_of_maps - 1);
+				printf("option %i : map_name: %s\n", menu->option, menu->map_names[menu->option]);
 			}
 			if (e->key.keysym.sym == SDLK_DOWN)
 			{
-				if (*option >= 0 && *option < (nbr_of_maps - 1))
-					*option = *option + 1;
-				else if (*option == (nbr_of_maps - 1))
-					*option = 0;
-				printf("nbr_of_maps %i : option %i\n", nbr_of_maps, *option);
+				if (menu->option >= 0 && menu->option < (menu->nbr_of_maps - 1))
+					menu->option = menu->option + 1;
+				else if (menu->option == (menu->nbr_of_maps - 1))
+					menu->option = 0;
+				printf("option %i : map_name: %s\n", menu->option, menu->map_names[menu->option]);
 			}
 			if (e->key.keysym.sym == SDLK_RETURN || e->key.keysym.sym == SDLK_KP_ENTER)
 			{
 				*game_state = GAME_LOOP;
-				*selected = TRUE;
+				menu->selected = TRUE;
 			}
 			
 		}

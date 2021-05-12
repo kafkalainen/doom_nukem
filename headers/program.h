@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/11 14:13:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 09:50:58 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,10 @@ typedef struct		s_home
 	t_sector		**orig_sectors;
 	SDL_Surface		*text_surf;
 	t_texture		**editor_tex;
-	char			**map_names;
 	t_time			t;
 	t_xy			offset;
 	unsigned int	nbr_of_sectors;
 	int				nbr_of_textures;
-	int				nbr_of_maps;
 	int				game_state;
 }					t_home;
 

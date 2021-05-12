@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/11 14:14:55 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 10:18:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,6 @@ void	init_player(t_player *plr)
 	plr->current_sector = 0;
 }
 
-void	setup_game_loop(char *mapname, t_home *home, t_player *plr)
-{
-	int ret;
-
-	ft_putstr("You chose: ");
-	ft_putendl_fd(mapname, 1);
-	if (load_map_file(home, mapname))
-		exit(EXIT_FAILURE);
-	transform_world_view(home, -PLR_DIR);
-	if (open_file(home, "map_files/test.DATA") < 0)
-			error_output("Could not successfully open map file.");
-	ret = load_game_audio(&plr->audio);
-	if (ret)
-	{
-		cleanup_audio(&plr->audio);
-		SDL_Quit();
-		clean_up(home);
-	}
-	if (Mix_PlayingMusic() == 0)
-		Mix_PlayMusic(plr->audio.music, -1);
-}
-
-void	setup_editor(t_home *home)
-{
-	init_textures(home);
-}
-
 void	setup(t_home *home, t_player *plr, t_frame *frame)
 {
 	int		ret;
@@ -105,7 +78,6 @@ void	setup(t_home *home, t_player *plr, t_frame *frame)
 	init_player(plr);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	home->game_state = MAIN_MENU;
-	home->nbr_of_maps = 0;
 }
 
 void	clean_up(t_home *home)
