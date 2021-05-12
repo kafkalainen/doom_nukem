@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 13:59:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 14:14:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,27 @@ int		get_game_state(int *option)
 	if (*option == 3)
 		return (QUIT);
 	return (QUIT);
+}
+
+void	update_main_menu(Uint32 *menu_buffer, int option)
+{
+	int i;
+	int y;
+	int color;
+	const char* const arr[] = { "Editor", "Load Map", "Help", "Quit" };
+
+	i = 0;
+	y = 0;
+	while (i < 4)
+	{
+		if (i == option)
+			color = red;
+		else
+			color = white;
+		str_pxl(menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 50, (SCREEN_HEIGHT * 0.5) + y}, arr[i], color);
+		y += 15;
+		i++;
+	}
 }
 
 void	process_inputs_main_menu(int *game_state, SDL_Event *e, int *option)

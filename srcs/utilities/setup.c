@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 10:18:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 14:55:11 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	init_player(t_player *plr)
 	plr->current_sector = 0;
 }
 
-void	setup(t_home *home, t_player *plr, t_frame *frame)
+void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
 	int		ret;
 
@@ -77,7 +77,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame)
 		Mix_PlayMusic(plr->audio.music, -1);
 	init_player(plr);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	home->game_state = MAIN_MENU;
+	setup_menu(menu, &home->game_state);
 }
 
 void	clean_up(t_home *home)

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 14:00:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 14:54:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,47 +17,15 @@
 **	 	ft_putendl_fd("File creation failed\n", 2);
 */
 
-void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio)
+void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio, Uint32 *menu_buffer)
 {
 	// free_sectors(home);
 	free(buffer);
+	free(menu_buffer);
 	cleanup_audio(audio);
 	free(home->t.frame_times);
 	ft_putendl("User closed the window");
 	SDL_Quit();
-}
-
-void	return_to_main_from_game(t_home *home, t_player *plr)
-{
-	int i;
-
-	free_sectors(home);
-	i = -1;
-	while (++i < (home->nbr_of_textures + 1))
-		free_texture(home->editor_tex[i]);
-	free(home->editor_tex);
-	init_player(plr);
-}
-
-void	update_main_menu(Uint32 *menu_buffer, int option)
-{
-	int i;
-	int y;
-	int color;
-	const char* const arr[] = { "Editor", "Load Map", "Help", "Quit" };
-
-	i = 0;
-	y = 0;
-	while (i < 4)
-	{
-		if (i == option)
-			color = red;
-		else
-			color = white;
-		str_pxl(menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 50, (SCREEN_HEIGHT * 0.5) + y}, arr[i], color);
-		y += 15;
-		i++;
-	}
 }
 
 int	main(void)
@@ -68,25 +36,7 @@ int	main(void)
 	t_menu		menu;
 	SDL_Event	e;
 
-	// TODO: master setup that initializes SDL functions and mallocs buffers etc.
-	// launch main_menu loop
-	// boolean statement on which branch to launch, editor or game
-	// editor state: init all assets from sources, on exit free all assets and go back to main_menu loop
-	// game state: request map file, init assets from file and launch game loop. on exit free assets and return to main_menu loop
-	// on exit from main_menu loop: free assets initialized during master setup and call exit
-	// if (argc > 2)
-	// 	error_output("usage: ./doom-nukem");
-	// if (argc == 2)
-	// {
-	// 	printf("%s\n", argv[1]);
-	setup(&home, &plr, &frame);
-		// setup_editor(&home);
-		// create_map_file(&home);
-	menu.nbr_of_maps = 0;
-	menu.menu_buffer = (Uint32 *)malloc(sizeof(Uint32) * (SCREEN_WIDTH * SCREEN_HEIGHT));
-	if (!menu.menu_buffer)
-		error_output("Failed to allocate memory to menu_buffer\n");
-	menu.option = 0;
+	setup(&home, &plr, &frame, &menu);
 	while (home.game_state != QUIT)
 	{
 		process_inputs_main_menu(&home.game_state, &e, &menu.option);
@@ -113,10 +63,6 @@ int	main(void)
 		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
-	// }
-	// else
-	// 	error_output("fuck off\n"); // TODO: Launch main menu
-	free(menu.menu_buffer);
-	exit_game(&home, frame.buffer, &plr.audio);
+	exit_game(&home, frame.buffer, &plr.audio, menu.menu_buffer);
 	return (EXIT_SUCCESS);
 }

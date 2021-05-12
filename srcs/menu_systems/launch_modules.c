@@ -6,11 +6,23 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 13:22:16 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 14:12:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+void	return_to_main_from_game(t_home *home, t_player *plr)
+{
+	int i;
+
+	free_sectors(home);
+	i = -1;
+	while (++i < (home->nbr_of_textures + 1))
+		free_texture(home->editor_tex[i]);
+	free(home->editor_tex);
+	init_player(plr);
+}
 
 void	launch_game_loop(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
 {

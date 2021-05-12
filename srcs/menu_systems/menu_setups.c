@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 12:12:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 14:55:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,16 @@ void	load_map_names(t_menu *menu)
 		dir_entry = readdir(dir);
 	}
 	closedir(dir);
+}
+
+void	setup_menu(t_menu *menu, int *game_state)
+{
+	menu->nbr_of_maps = 0;
+	menu->menu_buffer = (Uint32 *)malloc(sizeof(Uint32) * (SCREEN_WIDTH * SCREEN_HEIGHT));
+	if (!menu->menu_buffer)
+		error_output("Failed to allocate memory to menu_buffer\n");
+	menu->option = 0;
+	*game_state = MAIN_MENU;
 }
 
 void	setup_game_loop(char **mapname, t_home *home, t_player *plr)
