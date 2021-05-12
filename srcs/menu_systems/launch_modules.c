@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 13:05:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 13:22:16 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,16 @@ void	update_load_menu(t_menu *menu)
 {
 	int i;
 	int y;
+	int color;
 
 	i = 0;
 	while (i < menu->nbr_of_maps)
 	{
-		str_pxl(menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y}, menu->map_names[i]);
+		if (i == menu->option)
+			color = red;
+		else
+			color = white;
+		str_pxl(menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y}, menu->map_names[i], color);
 		y += 15;
 		i++;
 	}
