@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 16:40:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 17:07:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_home	*init_sdl(t_home *home, t_frame *frame)
+static t_home	*init_sdl(t_home *home, float *min_step)
 {
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
@@ -27,7 +27,7 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 	if (home->win.ScreenSurface == NULL)
 		error_output_sdl("Fatal: Failed to get window surface", home);
-	frame->min_step = 0.002454369f;
+	*min_step = 0.002454369f;
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		error_output_sdl("Fatal: SDL_mixer could not initialize!", home);
 	return (home);
@@ -68,7 +68,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	if (!(frame->buffer = (Uint32*)malloc(sizeof(Uint32) *
 		(Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT)))
 		error_output("Memory allocation failed!\n");
-	home = init_sdl(home, frame);
+	home = init_sdl(home, &frame->min_step);
 	ret = load_audio(&plr->audio);
 	if (ret)
 	{
@@ -76,8 +76,8 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 		SDL_Quit();
 		clean_up(home);
 	}
-	// if (Mix_PlayingMusic() == 0)
-	// 	Mix_PlayMusic(plr->audio.music, -1);
+	if (Mix_PlayingMusic() == 0)
+		Mix_PlayMusic(plr->audio.music, -1);
 	init_player(plr);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	setup_menu(menu, &home->game_state);

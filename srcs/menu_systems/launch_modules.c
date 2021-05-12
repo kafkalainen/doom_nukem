@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 16:30:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 17:05:13 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,4 @@ void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e, int *game_
 		free(menu->map_names[i++]);
 	free(menu->map_names);
 	menu->nbr_of_maps = 0;
-	printf("%s\n", menu->chosen_map);
-
 }
