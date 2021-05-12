@@ -6,13 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/11 09:32:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/11 12:39:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	calc_drawbox(t_plgn *box, int offset, t_height *x0, t_height *x1, t_player *plr)
+static void	calc_drawbox(t_plgn *box, int offset, t_height *x0,
+	t_height *x1, t_player *plr)
 {
 	t_height	height_left;
 	t_height	height_right;
@@ -27,10 +28,14 @@ static void	calc_drawbox(t_plgn *box, int offset, t_height *x0, t_height *x1, t_
 				/ box->top_right.z) * box->top_right.x) + 15;
 	box->bottom_left = box->top_left;
 	box->bottom_right = box->top_right;
-	box->top_left.y = offset - SCREEN_HEIGHT / box->top_left.z * height_left.ceiling;
-	box->top_right.y = offset - SCREEN_HEIGHT / box->top_right.z * height_right.ceiling;
-	box->bottom_left.y = offset + SCREEN_HEIGHT / box->top_left.z * (10 - height_left.ground);
-	box->bottom_right.y = offset + SCREEN_HEIGHT / box->top_right.z * (10 - height_right.ground);
+	box->top_left.y = offset - SCREEN_HEIGHT / box->top_left.z
+		* height_left.ceiling;
+	box->top_right.y = offset - SCREEN_HEIGHT / box->top_right.z
+		* height_right.ceiling;
+	box->bottom_left.y = offset + SCREEN_HEIGHT / box->top_left.z
+		* (10 - height_left.ground);
+	box->bottom_right.y = offset + SCREEN_HEIGHT / box->top_right.z
+		* (10 - height_right.ground);
 }
 
 static void	calc_z_x(t_plgn *box, t_xy *left_point, t_xy *right_point)

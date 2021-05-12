@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/11 10:31:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 14:47:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ static void	draw_vertical_floor_strip(t_xy offset, int height,
 	cur_y = -1;
 	while (cur_y < height)
 	{
-		if (cur_y % 16)
-			corr_texel = inv_z(texel);
+		corr_texel = inv_z(texel);
 		if (cur_y + offset.y >= 0 && cur_y + offset.y < SCREEN_HEIGHT)
 		{
 			colour = get_texel(corr_texel.x * (tex->w - 1),
@@ -49,14 +48,15 @@ static void	draw_vertical_floor_strip(t_xy offset, int height,
 			put_pixel(frame->buffer, offset.x, cur_y + offset.y, colour);
 		}
 		cur_y++;
-		texel.y += frame->uv_step.y;
+		texel.y += frame->ground_uv_step.y;
+		texel.z += frame->ground_uv_step.z;
 	}
 }
 
 static void	draw_vertical_ceiling_strip(t_xyz offset, int height,
 							Uint32 colour, t_frame *frame)
 {
-	int		cur_y;
+	int	cur_y;
 
 	if (offset.x < 0 || offset.x > SCREEN_WIDTH)
 		return ;
@@ -85,8 +85,7 @@ static void	draw_vertical_wall_strip(t_xy offset, int height,
 	fit_to_screen_space(&offset, &texel, &height, &frame->uv_step.y);
 	while (cur_y < height)
 	{
-		if (cur_y % 16)
-			corr_texel = inv_z(texel);
+		corr_texel = inv_z(texel);
 		if (cur_y + offset.y >= 0 && cur_y + offset.y < SCREEN_HEIGHT)
 		{
 			colour = colour_scale(get_texel(corr_texel.x * (tex->w - 1),
