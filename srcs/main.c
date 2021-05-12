@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 13:06:21 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 14:00:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,27 @@ void	return_to_main_from_game(t_home *home, t_player *plr)
 	init_player(plr);
 }
 
+void	update_main_menu(Uint32 *menu_buffer, int option)
+{
+	int i;
+	int y;
+	int color;
+	const char* const arr[] = { "Editor", "Load Map", "Help", "Quit" };
+
+	i = 0;
+	y = 0;
+	while (i < 4)
+	{
+		if (i == option)
+			color = red;
+		else
+			color = white;
+		str_pxl(menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 50, (SCREEN_HEIGHT * 0.5) + y}, arr[i], color);
+		y += 15;
+		i++;
+	}
+}
+
 int	main(void)
 {
 	t_home		home;
@@ -65,18 +86,18 @@ int	main(void)
 	menu.menu_buffer = (Uint32 *)malloc(sizeof(Uint32) * (SCREEN_WIDTH * SCREEN_HEIGHT));
 	if (!menu.menu_buffer)
 		error_output("Failed to allocate memory to menu_buffer\n");
+	menu.option = 0;
 	while (home.game_state != QUIT)
 	{
-		process_inputs_main_menu(&home.game_state, &e);
-		// setup main_menu graphics
-		if (home.game_state == EDITOR)
-		{
-			printf("olen editorissa\n");
-			//load_editor();
-		}
+		process_inputs_main_menu(&home.game_state, &e, &menu.option);
+		update_main_menu(menu.menu_buffer, menu.option);
+		// if (home.game_state == EDITOR)
+		// {
+		// 	printf("olen editorissa\n");
+		// 	//load_editor();
+		// }
 		if (home.game_state == MAP_MENU)
 		{
-			printf("olen map menussa\n");
 			load_map_names(&menu);
 			if (menu.nbr_of_maps > 0)
 				launch_load_menu_loop(&menu, &home.win, &e, &home.game_state);
@@ -85,9 +106,9 @@ int	main(void)
 		}
 		if (home.game_state == GAME_LOOP)
 		{
-			printf("olen game loopissa\n");
 			setup_game_loop(&menu.chosen_map, &home, &plr);
 			launch_game_loop(&home, &plr, &frame, &e);
+			menu.option = 0;
 		}
 		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
