@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linkedlist.c                                       :+:      :+:    :+:   */
+/*   syscalls_linux.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/29 08:49:54 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 16:20:49 by jnivala          ###   ########.fr       */
+/*   Created: 2021/04/22 12:44:59 by jnivala           #+#    #+#             */
+/*   Updated: 2021/04/27 14:13:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/doom_nukem.h"
+#ifndef SYSCALLS_LINUX_H
+# define SYSCALLS_LINUX_H
+#  include <sys/types.h>
 
-t_point	*loop_list(t_point *head, t_point *current)
-{
-	return ((current == NULL) ? head : current);
-}
+int	close(int fd);
+int open(const char *pathname, int flags, mode_t mode);
+int	read(int const fd, void const *buffer, unsigned const int buffer_size);
+#endif

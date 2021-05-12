@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   entity.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/01/20 13:51:11 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/04/26 15:47:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENTITY_H
 # define ENTITY_H
 
-typedef struct		s_enemy
+typedef struct s_enemy
 {
-	int				hp;
-}					t_enemy;
+	int			hp;
+}				t_enemy;
 
 #endif

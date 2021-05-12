@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:50:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/23 14:50:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 12:20:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 
 void	free_array(unsigned char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i] != NULL)
 	{
-		ft_strdel((char**)&array[i]);
+		ft_strdel((char **)&array[i]);
 		i++;
 	}
 	free(array);

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 12:24:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:14:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@ int			load_audio(t_audio *audio)
 	return (0);
 }
 
-void		cleanup_audio(t_audio *audio)
+/*
+**	Should FreeWAV(t_chunk*) be used here?
+*/
+
+void	cleanup_audio(t_audio *audio)
 {
 	Mix_FreeChunk(audio->footstep1);
 	audio->footstep1 = NULL;
@@ -89,7 +93,7 @@ void		cleanup_audio(t_audio *audio)
 	Mix_CloseAudio();
 }
 
-void		play_footsteps(t_player *plr)
+void	play_footsteps(t_player *plr)
 {
 	Uint32			current_time;
 	static Uint32	last_time;

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 09:46:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 13:21:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:12:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define TYPEWRITER_H
 # define TEXT_SIZE 2
 
-typedef struct	s_pxl_c
+typedef struct s_pxl_c
 {
 	int			c[36];
 }				t_pxl_c;

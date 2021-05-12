@@ -6,34 +6,36 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 20:37:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:03:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	calc_distances(t_frame *frame, t_player *plr)
+void	calc_distances(t_frame *frame, t_player *plr, int *ground,
+	int *ceiling)
 {
-	float	left_z;
-	float	right_z;
-
-	left_z = vec2_perp_dist(frame->left.l_pt);
-	right_z = vec2_perp_dist(frame->left.r_pt);
-	frame->top_left.x = SCREEN_WIDTH - ((SCREEN_HEIGHT
-				/ left_z) * frame->left.l_pt.x) + 15;
-	frame->top_right.x = SCREEN_WIDTH - ((SCREEN_HEIGHT
-				/ right_z) * frame->left.r_pt.x) + 15;
-	frame->top_left.z = left_z;
-	frame->top_right.z = right_z;
-	frame->bottom_left = frame->top_left;
-	frame->bottom_right = frame->top_right;
-	frame->top_left.y = plr->pitch - SCREEN_HEIGHT / left_z * 20;
-	frame->top_right.y = plr->pitch - SCREEN_HEIGHT / right_z * 20;
-	frame->bottom_left.y = plr->pitch + SCREEN_HEIGHT / left_z * 20;
-	frame->bottom_right.y = plr->pitch + SCREEN_HEIGHT / right_z * 20;
-	frame->step.y = interpolate_points(frame->top_right.y, frame->top_left.y,
-			frame->top_left.x, frame->top_right.x);
-	frame->step.z = interpolate_points(frame->top_left.y, frame->top_right.y,
-			frame->top_left.x, frame->top_right.x);
+	frame->box.top_left.z  = vec2_perp_dist(frame->left.l_pt);
+	frame->box.top_right.z = vec2_perp_dist(frame->left.r_pt);
+	frame->box.top_left.x = SCREEN_WIDTH - ((SCREEN_HEIGHT
+				/ frame->box.top_left.z) * frame->left.l_pt.x) + 15;
+	frame->box.top_right.x = SCREEN_WIDTH - ((SCREEN_HEIGHT
+				/ frame->box.top_right.z) * frame->left.r_pt.x) + 15;
+	frame->box.bottom_left = frame->box.top_left;
+	frame->box.bottom_right = frame->box.top_right;
+	frame->box.top_left.y = (plr->pitch + plr->height) - SCREEN_HEIGHT /
+		frame->box.top_left.z * *ceiling;
+	frame->box.top_right.y = (plr->pitch + plr->height) - SCREEN_HEIGHT /
+		frame->box.top_right.z * *ceiling;
+	frame->box.bottom_left.y = (plr->pitch + plr->height) + SCREEN_HEIGHT /
+		frame->box.top_left.z * (*ceiling - *ground);
+	frame->box.bottom_right.y = (plr->pitch + plr->height) + SCREEN_HEIGHT /
+		frame->box.top_right.z * (*ceiling - *ground);
+	frame->step_top.y = interpolate_points(frame->box.top_right.y, frame->box.top_left.y,
+			frame->box.top_left.x, frame->box.top_right.x);
+	frame->step_top.z = interpolate_points(frame->box.top_left.y, frame->box.top_right.y,
+			frame->box.top_left.x, frame->box.top_right.x);
+	frame->step_bot.y = interpolate_points(frame->box.bottom_right.y, frame->box.bottom_left.y,
+			frame->box.top_left.x, frame->box.top_right.x);
 	frame->pitch = plr->pitch;
 }

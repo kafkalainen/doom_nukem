@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/10 09:58:30 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:17:44 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # define BUF_SIZE 30000
 # define XPM_BUF_SIZE 200000
 
-int	get_next_breaker(unsigned char *buf);
-int	get_floor(int floor_colour);
-int	load_map_file(t_home *home, char *path);
-int	validate_sectors_data(t_home *home);
+int			get_next_breaker(unsigned char *buf);
+Uint32		get_floor(int floor_colour);
+int			load_map_file(t_home *home, char *path);
+int			validate_sectors_data(t_home *home);
 
 /*
 ** PNG Encode/Decode functions
@@ -52,10 +52,10 @@ int			create_temp_audio_file(unsigned char *buf, ssize_t size, char *path);
 # define WRITE_BREAKER "#"
 # define READ_BREAKER '#'
 
-int		create_map_file(t_home *home);
-void	write_texture_data(int *fd, t_home *home);
-void	write_audio_data(int *fd, char *path, char *asset_name);
-int		open_file(t_home *home, char *path);
-int		open_map_file(t_home *home, char *path);
+int			create_map_file(t_home *home);
+void		write_texture_data(int *fd, t_home *home);
+void		write_audio_data(int *fd, char *path, char *asset_name);
+int			open_file(t_home *home, char *path);
+int			open_map_file(t_home *home, char *path);
 
 #endif

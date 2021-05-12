@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:09:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/23 14:39:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:11:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_if_lines_cut(t_sector *sector)
 	while (i < sector->nb_of_walls)
 	{
 		if (check_if_lseg_intersects(temp,
-			&temp->next->next->x0, &temp->next->next->next->x0))
+				&temp->next->next->x0, &temp->next->next->next->x0))
 			return (1);
 		temp = temp->next;
 		i++;

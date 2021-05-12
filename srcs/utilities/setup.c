@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 14:55:11 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:14:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static t_home	*init_sdl(t_home *home, t_frame *frame)
 {
+	home->win.width = SCREEN_WIDTH;
+	home->win.height = SCREEN_HEIGHT;
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) < 0)
 		error_output_sdl("Fatal: SDL Initalization failed.", home);
 	home->win.window = SDL_CreateWindow("Doom-Nukem", 100, 100,
@@ -83,8 +85,8 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 void	clean_up(t_home *home)
 {
 	free_sectors(home);
-	// if (home->t.frame_times)
-	// 	free(home->t.frame_times);
+	if (home->t.frame_times)
+		free(home->t.frame_times);
 	ft_putendl_fd("Shutting down.", 2);
 	exit(EXIT_FAILURE);
 }

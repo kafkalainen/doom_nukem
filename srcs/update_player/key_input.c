@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/11 10:33:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:13:58 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 		plr->input.rot_left = 1;
 	if (sym == SDLK_e)
 		plr->input.rot_right = 1;
+	if (sym == SDLK_LCTRL)
+		plr->height = 3;
+	if (sym == SDLK_SPACE && plr->acceleration == 0)
+		plr->acceleration = 5;
 	action_keys(plr, &sym);
 }
 
@@ -71,6 +75,8 @@ void	keys_up(t_player *plr, SDL_KeyCode sym)
 		plr->input.rot_left = 0;
 	if (sym == SDLK_e)
 		plr->input.rot_right = 0;
+	if (sym == SDLK_LCTRL)
+		plr->height = 6;
 }
 
 void	key_input(t_player *plr, SDL_Event *e, int *game_state)
