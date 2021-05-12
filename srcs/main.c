@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 12:24:43 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 13:06:21 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ int	main(void)
 		// setup_editor(&home);
 		// create_map_file(&home);
 	menu.nbr_of_maps = 0;
+	menu.menu_buffer = (Uint32 *)malloc(sizeof(Uint32) * (SCREEN_WIDTH * SCREEN_HEIGHT));
+	if (!menu.menu_buffer)
+		error_output("Failed to allocate memory to menu_buffer\n");
 	while (home.game_state != QUIT)
 	{
 		process_inputs_main_menu(&home.game_state, &e);
@@ -86,12 +89,13 @@ int	main(void)
 			setup_game_loop(&menu.chosen_map, &home, &plr);
 			launch_game_loop(&home, &plr, &frame, &e);
 		}
-		render_buffer(frame.buffer, home.win.ScreenSurface);
+		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
 	// }
 	// else
 	// 	error_output("fuck off\n"); // TODO: Launch main menu
+	free(menu.menu_buffer);
 	exit_game(&home, frame.buffer, &plr.audio);
 	return (EXIT_SUCCESS);
 }

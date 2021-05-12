@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 12:47:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 13:05:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@ void	launch_game_loop(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
 
 void	update_load_menu(t_menu *menu)
 {
+	int i;
+	int y;
+
+	i = 0;
+	while (i < menu->nbr_of_maps)
+	{
+		str_pxl(menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y}, menu->map_names[i]);
+		y += 15;
+		i++;
+	}
+	
 }
 
 void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e, int *game_state)
@@ -38,9 +49,9 @@ void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e, int *game_
 	while (*game_state == MAP_MENU && !menu->selected)
 	{
 		process_inputs_load_menu(game_state, e, menu);
-		// update_load_menu(menu);
-		// render_buffer(menu->menu_buffer, win->ScreenSurface);
-		// SDL_UpdateWindowSurface(win->window);
+		update_load_menu(menu);
+		render_buffer(menu->menu_buffer, win->ScreenSurface);
+		SDL_UpdateWindowSurface(win->window);
 	}
 	if (menu->selected)
 		menu->chosen_map = ft_strjoin("map_files/", menu->map_names[menu->option]);
