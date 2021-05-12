@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/12 16:39:32 by jnivala          ###   ########.fr        #
+#    Updated: 2021/05/12 16:42:00 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ SRCS = \
 	vec_math$(SLASH)vec3.c \
 	menu_systems$(SLASH)launch_modules.c \
 	menu_systems$(SLASH)menu_inputs.c \
-	menu_systems$(SLASH)menu_setups.c
+	menu_systems$(SLASH)menu_setups.c \
 
 HEADERS = \
 	libft$(SLASH)libft.h \
@@ -159,11 +159,7 @@ else
 	ABS_DIR = $(shell pwd)
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
-<<<<<<< HEAD
-	CFLAGS = -Wall -Wextra -Werror -g $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
-=======
 	CFLAGS = -Wall -Wextra -ggdb3 -O3 -g $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
->>>>>>> main
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
 	MKDIR := mkdir -p
