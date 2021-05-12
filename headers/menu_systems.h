@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:27:23 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 11:08:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 12:35:43 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 typedef	struct	s_menu
 {
+	Uint32		*menu_buffer;
 	char		**map_names;
 	char		*chosen_map;
 	int			nbr_of_maps;
@@ -28,7 +29,7 @@ void	setup_game_loop(char **mapname, t_home *home, t_player *plr);
 void	setup_editor(t_home *home);
 void	process_inputs_load_menu(int *game_state, SDL_Event *e, t_menu *menu);
 void	process_inputs_main_menu(int *game_state, SDL_Event *e);
-void	launch_load_menu_loop(t_menu *menu, Uint32 **buffer, SDL_Event *e, int *game_state);
+void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e, int *game_state);
 void	launch_game_loop(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e);
 
 #endif

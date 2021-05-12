@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 11:08:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 12:24:43 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	return_to_main_from_game(t_home *home, t_player *plr)
 	init_player(plr);
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	t_home		home;
 	t_player	plr;
@@ -53,43 +53,45 @@ int	main(int argc, char **argv)
 	// editor state: init all assets from sources, on exit free all assets and go back to main_menu loop
 	// game state: request map file, init assets from file and launch game loop. on exit free assets and return to main_menu loop
 	// on exit from main_menu loop: free assets initialized during master setup and call exit
-	if (argc > 2)
-		error_output("usage: ./doom-nukem");
-	if (argc == 2)
-	{
-		printf("%s\n", argv[1]);
-		setup(&home, &plr, &frame);
+	// if (argc > 2)
+	// 	error_output("usage: ./doom-nukem");
+	// if (argc == 2)
+	// {
+	// 	printf("%s\n", argv[1]);
+	setup(&home, &plr, &frame);
 		// setup_editor(&home);
 		// create_map_file(&home);
-		menu.nbr_of_maps = 0;
-		while (home.game_state != QUIT)
+	menu.nbr_of_maps = 0;
+	while (home.game_state != QUIT)
+	{
+		process_inputs_main_menu(&home.game_state, &e);
+		// setup main_menu graphics
+		if (home.game_state == EDITOR)
 		{
-			process_inputs_main_menu(&home.game_state, &e);
-			// setup main_menu graphics
-			if (home.game_state == EDITOR)
-			{
-				printf("olen editorissa\n");
-				//load_editor();
-			}
-			if (home.game_state == MAP_MENU)
-			{
-				printf("olen map menussa\n");
-				load_map_names(&menu);
-				if (menu.nbr_of_maps > 0)
-					launch_load_menu_loop(&menu, &frame.buffer, &e, &home.game_state);
-			}
-			if (home.game_state == GAME_LOOP)
-			{
-				printf("olen game loopissa\n");
-				setup_game_loop(&menu.chosen_map, &home, &plr);
-				launch_game_loop(&home, &plr, &frame, &e);
-			}
-			render_buffer(frame.buffer, home.win.ScreenSurface);
-			SDL_UpdateWindowSurface(home.win.window);
+			printf("olen editorissa\n");
+			//load_editor();
 		}
+		if (home.game_state == MAP_MENU)
+		{
+			printf("olen map menussa\n");
+			load_map_names(&menu);
+			if (menu.nbr_of_maps > 0)
+				launch_load_menu_loop(&menu, &home.win, &e, &home.game_state);
+			else
+				home.game_state = MAIN_MENU;
+		}
+		if (home.game_state == GAME_LOOP)
+		{
+			printf("olen game loopissa\n");
+			setup_game_loop(&menu.chosen_map, &home, &plr);
+			launch_game_loop(&home, &plr, &frame, &e);
+		}
+		render_buffer(frame.buffer, home.win.ScreenSurface);
+		SDL_UpdateWindowSurface(home.win.window);
 	}
-	else
-		error_output("fuck off\n"); // TODO: Launch main menu
+	// }
+	// else
+	// 	error_output("fuck off\n"); // TODO: Launch main menu
 	exit_game(&home, frame.buffer, &plr.audio);
 	return (EXIT_SUCCESS);
 }

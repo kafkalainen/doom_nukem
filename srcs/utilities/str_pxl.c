@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 19:15:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 12:45:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_pxl_c	letter_logic(int c)
 	return (pxl_numbers(' ', black, white));
 }
 
-static void		handle_letter(t_frame *frame, t_xy coord, int c)
+static void		handle_letter(Uint32 *buffer, t_xy coord, int c)
 {
 	t_xy	cur;
 	t_pxl_c	letter;
@@ -43,21 +43,21 @@ static void		handle_letter(t_frame *frame, t_xy coord, int c)
 			c = letter.c[(int)(cur.x + cur.y * 5)];
 			mod.x = cur.x * m + coord.x;
 			mod.y = cur.y * m + coord.y;
-			draw_rect(mod, vec2(TEXT_SIZE, TEXT_SIZE), frame, c);
+			draw_rect(mod, vec2(TEXT_SIZE, TEXT_SIZE), buffer, c);
 			cur.x++;
 		}
 		cur.y++;
 	}
 }
 
-void			str_pxl(t_frame *frame, t_xy coord, char *str)
+void			str_pxl(Uint32 *buffer, t_xy coord, char *str)
 {
 	int		c;
 
 	while (*str != '\0')
 	{
 		c = ft_toupper(*str);
-		handle_letter(frame, coord, c);
+		handle_letter(buffer, coord, c);
 		coord.x += 5 * TEXT_SIZE;
 		str++;
 	}

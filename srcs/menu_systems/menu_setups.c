@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 11:16:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 12:12:36 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	load_map_names(t_menu *menu)
 
 	dir = opendir("map_files/");
 	if (dir == NULL)
-		error_output("Failed to open map_files directory.\n");
+		error_output("Failed to open map_files directory.\n"); // redesign this to return to main menu instead of quitting?
 	get_map_count(&menu->nbr_of_maps, &dir, &dir_entry);
 	if (menu->nbr_of_maps == 0)
 	{
