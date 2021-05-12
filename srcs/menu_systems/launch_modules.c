@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 14:12:52 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/12 16:30:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	update_load_menu(t_menu *menu)
 	int color;
 
 	i = 0;
+	y = 0;
 	while (i < menu->nbr_of_maps)
 	{
 		if (i == menu->option)
@@ -54,7 +55,7 @@ void	update_load_menu(t_menu *menu)
 		y += 15;
 		i++;
 	}
-	
+
 }
 
 void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e, int *game_state)
