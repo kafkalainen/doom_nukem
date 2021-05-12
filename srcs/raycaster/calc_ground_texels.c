@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:54:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 15:12:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/12 15:24:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ static void	calc_offsets(t_sector *sector, t_frame *frame)
 	frame->ground_uv.bottom_left.y = vec2_dist_from_point(&sector->floor_bottom_left,
 		&sector->floor_bottom_right, &(t_xy){0.0f, 0.0f})
 		/ vec2_eucl_dist(sector->floor_bottom_left, sector->floor_top_left);
-	frame->ground_uv.bottom_left.z = 1.0f;
+	frame->ground_uv.bottom_left.z = 0.0f;
 	frame->ground_uv.bottom_right.x = frame->ground_uv.top_right.x;
 	frame->ground_uv.bottom_right.y = vec2_dist_from_point(&sector->floor_bottom_left,
 		&sector->floor_bottom_right, &(t_xy){0.0f, 0.0f})
 		/ vec2_eucl_dist(sector->floor_bottom_left, sector->floor_top_left);
-	frame->ground_uv.bottom_right.z = 1.0f;
+	frame->ground_uv.bottom_right.z = 0.0f;
 }
 
 static void	calc_inverse_of_z(t_xyz *top_left, t_xyz *top_right,
