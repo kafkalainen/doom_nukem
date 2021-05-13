@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 16:30:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/13 10:58:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,21 @@ void	launch_game_loop(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
 
 void	update_load_menu(t_menu *menu)
 {
-	int i;
-	int y;
-	int color;
+	int		i;
+	int		y;
+	t_args	args;
 
 	i = 0;
 	y = 0;
+	args.size = 4;
 	while (i < menu->nbr_of_maps)
 	{
 		if (i == menu->option)
-			color = red;
+			args.colour = red;
 		else
-			color = white;
-		str_pxl(menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y}, menu->map_names[i], color);
-		y += 15;
+			args.colour = white;
+		str_pxl(menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5), 25 + y}, menu->map_names[i], &args);
+		y += 30;
 		i++;
 	}
 
