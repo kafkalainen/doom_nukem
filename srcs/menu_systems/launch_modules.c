@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 17:05:13 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/13 11:17:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,19 @@ void	update_load_menu(t_menu *menu)
 {
 	int i;
 	int y;
-	int color;
+	t_plx_modifier	mod;
 
 	i = 0;
 	y = 0;
+	mod.colour = 0;
+	mod.size = TEXT_SIZE;
 	while (i < menu->nbr_of_maps)
 	{
 		if (i == menu->option)
-			color = red;
+			mod.colour = red;
 		else
-			color = white;
-		str_pxl(menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y}, menu->map_names[i], color);
+			mod.colour = white;
+		str_pxl(menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y}, menu->map_names[i], mod);
 		y += 15;
 		i++;
 	}
@@ -78,4 +80,5 @@ void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e, int *game_
 		free(menu->map_names[i++]);
 	free(menu->map_names);
 	menu->nbr_of_maps = 0;
+	menu->option = 0;
 }
