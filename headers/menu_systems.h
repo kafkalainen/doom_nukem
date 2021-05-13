@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:27:23 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 14:55:43 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/13 15:37:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef	struct	s_menu
 	int			nbr_of_maps;
 	int			selected;
 	int			option;
+	int			end;
+	int			start;
 }				t_menu;
 
 void	get_map_count(int *count, DIR **dir, struct dirent **dir_entry);
@@ -34,5 +36,6 @@ void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e, int *game_
 void	launch_game_loop(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e);
 void	return_to_main_from_game(t_home *home, t_player *plr);
 void	update_main_menu(Uint32 *menu_buffer, int option);
+void	update_load_menu(t_menu *menu, int sym);
 
 #endif
