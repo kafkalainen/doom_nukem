@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/13 11:04:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/14 22:51:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	setup_game_loop(char **mapname, t_home *home, t_player *plr)
 	ft_putendl_fd(*mapname, 1);
 	if (load_map_file(home, *mapname))
 		exit(EXIT_FAILURE);
-	transform_world_view(home, -PLR_DIR);
 	if (open_file(home, "map_files/test.DATA") < 0)
 			error_output("Could not successfully open map file.");
 	ret = load_game_audio(&plr->audio);

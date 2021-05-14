@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/14 15:50:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/14 22:46:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	calc_drawbox(t_plgn *box, int offset, t_height *x0,
 	height_left.ground = (x0->ground - plr->z);
 	height_right.ceiling = (x1->ceiling - plr->z);
 	height_right.ground = (x1->ground - plr->z);
-	box->top_left.x = SCREEN_WIDTH - ((SCREEN_HEIGHT
-				/ box->top_left.z) * box->top_left.x) + 15;
-	box->top_right.x = SCREEN_WIDTH - ((SCREEN_HEIGHT
-				/ box->top_right.z) * box->top_right.x) + 15;
+	box->top_left.x = SCREEN_WIDTH / 2 - ((SCREEN_HEIGHT
+				/ box->top_left.z) * box->top_left.x);
+	box->top_right.x = SCREEN_WIDTH / 2 - ((SCREEN_HEIGHT
+				/ box->top_right.z) * box->top_right.x);
 	box->bottom_left = box->top_left;
 	box->bottom_right = box->top_right;
 	box->top_left.y = offset - SCREEN_HEIGHT / box->top_left.z
@@ -40,9 +40,9 @@ static void	calc_drawbox(t_plgn *box, int offset, t_height *x0,
 
 static void	calc_z_x(t_plgn *box, t_xy *left_point, t_xy *right_point)
 {
-	box->top_left.z = vec2_perp_dist(*left_point);
+	box->top_left.z = left_point->y;
 	box->top_left.x = left_point->x;
-	box->top_right.z = vec2_perp_dist(*right_point);
+	box->top_right.z = right_point->y;
 	box->top_right.x = right_point->x;
 }
 
