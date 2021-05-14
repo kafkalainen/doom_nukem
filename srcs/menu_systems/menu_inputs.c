@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/13 10:59:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/14 11:40:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ int		get_game_state(int *option)
 
 void	update_main_menu(Uint32 *menu_buffer, int option)
 {
-	int i;
-	int y;
-	t_args args;
-	const char* const arr[] = { "Editor", "Load Map", "Help", "Quit" };
+	int					i;
+	int					y;
+	t_plx_modifier		mod;
+	const char* const	arr[] = { "Editor", "Load Map", "Help", "Quit" };
 
 	i = 0;
 	y = 0;
-	args.size = 4;
+	mod.size = MAIN_MENU_TEXT;
 	while (i < 4)
 	{
 		if (i == option)
-			args.colour = red;
+			mod.colour = red;
 		else
-			args.colour = white;
-		str_pxl(menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 70, (SCREEN_HEIGHT * 0.5) - 30 + y}, (char*)arr[i], &args);
+			mod.colour = white;
+		str_pxl(menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 75, ((SCREEN_HEIGHT * 0.5) - 45) + y}, (char *)arr[i], mod);
 		y += 30;
 		i++;
 	}

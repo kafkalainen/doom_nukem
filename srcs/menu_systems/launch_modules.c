@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/13 10:58:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/14 11:41:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,58 @@ void	launch_game_loop(t_home *home, t_player *plr, t_frame *frame, SDL_Event *e)
 	return_to_main_from_game(home, plr);
 }
 
-void	update_load_menu(t_menu *menu)
+void	update_load_menu(t_menu *menu, int sym)
 {
-	int		i;
-	int		y;
-	t_args	args;
+	int y;
+	int i;
+	t_plx_modifier	mod;
 
-	i = 0;
+	if (sym == SDLK_DOWN)
+	{
+		if (menu->option == 0)
+		{
+			menu->start = 0;
+			if ((menu->nbr_of_maps - 8) > 0)
+				menu->end = 7;
+			else
+				menu->end = menu->nbr_of_maps - 1;
+		}
+		if (menu->option > menu->end)
+			menu->end = menu->option;
+		if ((menu->end - 7) > 0)
+			menu->start = (menu->end - 7);
+		else
+			menu->start = 0;
+	}
+	else if (sym == SDLK_UP)
+	{
+		if (menu->option == menu->nbr_of_maps - 1)
+		{
+			menu->end = menu->option;
+			if ((menu->option - 7) > 0)
+				menu->start = (menu->option - 7);
+			else
+				menu->start = 0;
+		}
+		if (menu->option < menu->start)
+			menu->start = menu->option;
+		if ((menu->start + 7) > menu->nbr_of_maps - 1)
+			menu->end = menu->nbr_of_maps - 1;
+		else
+			menu->end = (menu->start + 7);
+	}
+	i = menu->start;
 	y = 0;
-	args.size = 4;
-	while (i < menu->nbr_of_maps)
+	mod.colour = 0;
+	mod.size = TEXT_SIZE;
+	while (i <= menu->end)
 	{
 		if (i == menu->option)
-			args.colour = red;
+			mod.colour = red;
 		else
-			args.colour = white;
-		str_pxl(menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5), 25 + y}, menu->map_names[i], &args);
-		y += 30;
+			mod.colour = white;
+		str_pxl(menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y}, menu->map_names[i], mod);
+		y += 15;
 		i++;
 	}
 
@@ -65,10 +100,15 @@ void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e, int *game_
 
 	menu->option = 0;
 	menu->selected = 0;
+	menu->start = 0;
+	if ((menu->nbr_of_maps - 8) > 0)
+		menu->end = 7;
+	else
+		menu->end = menu->nbr_of_maps - 1;
 	while (*game_state == MAP_MENU && !menu->selected)
 	{
 		process_inputs_load_menu(game_state, e, menu);
-		update_load_menu(menu);
+		update_load_menu(menu, e->key.keysym.sym);
 		render_buffer(menu->menu_buffer, win->ScreenSurface);
 		SDL_UpdateWindowSurface(win->window);
 	}
@@ -79,6 +119,5 @@ void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e, int *game_
 		free(menu->map_names[i++]);
 	free(menu->map_names);
 	menu->nbr_of_maps = 0;
-	printf("%s\n", menu->chosen_map);
-
+	menu->option = 0;
 }

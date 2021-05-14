@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/13 10:56:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/14 11:38:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_pxl_c	letter_logic(int c, int letter_colour)
 	return (pxl_numbers(' ', black, letter_colour));
 }
 
-static void		handle_letter(Uint32 *buffer, t_xy coord, int c, t_args *args)
+static void		handle_letter(Uint32 *buffer, t_xy coord, int c, t_plx_modifier mods)
 {
 	t_xy	cur;
 	t_pxl_c	letter;
@@ -32,8 +32,8 @@ static void		handle_letter(Uint32 *buffer, t_xy coord, int c, t_args *args)
 	int		m;
 
 	cur.y = 0;
-	m = args->size;
-	letter = letter_logic(c, args->colour);
+	m = mods.size;
+	letter = letter_logic(c, mods.colour);
 	c = 0;
 	while (cur.y < 7)
 	{
@@ -50,15 +50,15 @@ static void		handle_letter(Uint32 *buffer, t_xy coord, int c, t_args *args)
 	}
 }
 
-void			str_pxl(Uint32 *buffer, t_xy coord, char *str, t_args *args)
+void			str_pxl(Uint32 *buffer, t_xy coord, char *str, t_plx_modifier mod)
 {
 	int		c;
 
 	while (*str != '\0')
 	{
 		c = ft_toupper(*str);
-		handle_letter(buffer, coord, c, args);
-		coord.x += 5 * args->size;
+		handle_letter(buffer, coord, c, mod);
+		coord.x += 5 * mod.size;
 		str++;
 	}
 }

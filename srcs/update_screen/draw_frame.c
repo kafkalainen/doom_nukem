@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/13 11:04:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/14 11:44:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,30 +87,30 @@ static void	draw_player(t_frame *frame, t_player *plr)
 
 static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 {
-	char	*sector;
-	char	*compass;
-	char	*fps;
-	char	*plr_z;
-	t_args	args;
+	char			*sector;
+	char			*compass;
+	char			*fps;
+	char			*plr_z;
+	t_plx_modifier	mod;
 
-	args.colour = white;
-	args.size = TEXT_SIZE;
+	mod.colour = white;
+	mod.size = TEXT_SIZE;
 	compass = compass_direction(&plr->dir);
 	sector = ft_itoa(plr->current_sector);
 	fps = ft_itoa(nb_fps);
 	plr_z = ft_ftoa(plr->z, 6);
-	str_pxl(frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, &args);
-	str_pxl(frame->buffer, (t_xy){0, 50}, "dir: ", &args);
-	str_pxl(frame->buffer, (t_xy){50, 50}, compass, &args);
-	str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", &args);
-	str_pxl(frame->buffer, (t_xy){0, 90}, sector, &args);
-	str_pxl(frame->buffer, (t_xy){0, 110}, "current_z:", &args);
-	str_pxl(frame->buffer, (t_xy){0, 130}, plr_z, &args);
-	str_pxl(frame->buffer, (t_xy){0, 380}, "Press z to switch to wireframe", &args);
-	str_pxl(frame->buffer, (t_xy){0, 400}, "Press x to close minimap", &args);
-	str_pxl(frame->buffer, (t_xy){0, 420}, "Press c to close info", &args);
-	str_pxl(frame->buffer, (t_xy){0, 440}, "Move with wasd, rotate with q and e.", &args);
-	str_pxl(frame->buffer, (t_xy){0, 460}, "Capture and free mouse with m", &args);
+	str_pxl(frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, mod);
+	str_pxl(frame->buffer, (t_xy){0, 50}, "dir: ", mod);
+	str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
+	str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", mod);
+	str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
+	str_pxl(frame->buffer, (t_xy){0, 110}, "current_z:", mod);
+	str_pxl(frame->buffer, (t_xy){0, 130}, plr_z, mod);
+	str_pxl(frame->buffer, (t_xy){0, 380}, "Press z to switch to wireframe", mod);
+	str_pxl(frame->buffer, (t_xy){0, 400}, "Press x to close minimap", mod);
+	str_pxl(frame->buffer, (t_xy){0, 420}, "Press c to close info", mod);
+	str_pxl(frame->buffer, (t_xy){0, 440}, "Move with wasd, rotate with q and e.", mod);
+	str_pxl(frame->buffer, (t_xy){0, 460}, "Capture and free mouse with m", mod);
 	free(fps);
 	free(sector);
 	free(compass);
