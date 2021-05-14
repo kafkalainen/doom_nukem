@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/13 10:28:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/13 11:04:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	compass = compass_direction(&plr->dir);
 	sector = ft_itoa(plr->current_sector);
 	fps = ft_itoa(nb_fps);
-	plr_z = ft_itoa(plr->z);
+	plr_z = ft_ftoa(plr->z, 6);
 	str_pxl(frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, &args);
 	str_pxl(frame->buffer, (t_xy){0, 50}, "dir: ", &args);
 	str_pxl(frame->buffer, (t_xy){50, 50}, compass, &args);
