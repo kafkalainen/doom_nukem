@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/11 08:41:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/14 19:39:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_frame
 	float			visible_wall_dist;
 	float			unvisible_l_side;
 	float			screen_wall_len;
-	float			tex_mult;
+	t_xy			wall_tex_mult;
 	float			ratio;
 	int				pitch;
 	Uint32			last_frame;

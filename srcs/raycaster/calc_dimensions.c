@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/13 11:01:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/14 15:50:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,24 @@ static void	calc_z_x(t_plgn *box, t_xy *left_point, t_xy *right_point)
 
 static void	interpolate_steps(t_frame *frame)
 {
-	frame->step_outer_top.y = interpolate_points(frame->outer_box.top_right.y,
-			frame->outer_box.top_left.y, frame->outer_box.top_left.x,
-			frame->outer_box.top_right.x);
-	frame->step_outer_top.z = interpolate_points(frame->outer_box.top_left.y,
-			frame->outer_box.top_right.y, frame->outer_box.top_left.x,
-			frame->outer_box.top_right.x);
+	frame->step_outer_top.y = interpolate_points(
+			frame->outer_box.top_right.y, frame->outer_box.top_left.y,
+			frame->outer_box.top_left.x, frame->outer_box.top_right.x);
+	frame->step_outer_top.z = interpolate_points(
+			frame->outer_box.top_left.y, frame->outer_box.top_right.y,
+			frame->outer_box.top_left.x, frame->outer_box.top_right.x);
 	frame->step_outer_bot.y = interpolate_points(
-			frame->outer_box.bottom_right.y,
-			frame->outer_box.bottom_left.y, frame->outer_box.top_left.x,
-			frame->outer_box.top_right.x);
+			frame->outer_box.bottom_right.y, frame->outer_box.bottom_left.y,
+			frame->outer_box.top_left.x, frame->outer_box.top_right.x);
 	frame->step_inner_top.y = interpolate_points(
-			frame->inner_box.top_right.y,
-			frame->inner_box.top_left.y, frame->inner_box.top_left.x,
-			frame->inner_box.top_right.x);
+			frame->inner_box.top_right.y, frame->inner_box.top_left.y,
+			frame->inner_box.top_left.x, frame->inner_box.top_right.x);
 	frame->step_inner_top.z = interpolate_points(
-			frame->inner_box.top_left.y,
-			frame->inner_box.top_right.y, frame->inner_box.top_left.x,
-			frame->inner_box.top_right.x);
+			frame->inner_box.top_left.y, frame->inner_box.top_right.y,
+			frame->inner_box.top_left.x, frame->inner_box.top_right.x);
 	frame->step_inner_bot.y = interpolate_points(
-			frame->inner_box.bottom_right.y,
-			frame->inner_box.bottom_left.y, frame->inner_box.top_left.x,
-			frame->inner_box.top_right.x);
+			frame->inner_box.bottom_right.y, frame->inner_box.bottom_left.y,
+			frame->inner_box.top_left.x, frame->inner_box.top_right.x);
 }
 
 void	calc_dimensions(t_frame *frame, t_player *plr, t_home *home)

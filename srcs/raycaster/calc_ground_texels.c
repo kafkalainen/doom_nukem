@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:54:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/14 11:36:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/14 19:52:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,33 @@ static void	clip_offsets_to_range(t_plgn *ground_uv)
 	ground_uv->bottom_right.y = clip_to_0_1_range(ground_uv->bottom_right.y);
 }
 
-static void	calc_offsets(t_sector *sector, t_frame *frame)
+static void	calc_offsets(t_sector *sector, t_frame *frame, t_player *plr)
 {
+	plr = plr;
 	frame->ground_uv.top_left.x = vec2_dist_from_point(&sector->floor_top_right,
 		&sector->floor_bottom_right, &frame->left.l_pt)
 		/ vec2_eucl_dist(sector->floor_top_right, sector->floor_top_left);
 	frame->ground_uv.top_left.y = vec2_dist_from_point(&sector->floor_bottom_left,
 		&sector->floor_bottom_right, &frame->left.l_pt)
 		/ vec2_eucl_dist(sector->floor_bottom_left, sector->floor_top_left);
-	frame->ground_uv.top_left.z = frame->outer_box.top_left.z;
+	frame->ground_uv.top_left.z = frame->outer_box.bottom_left.z;
 	frame->ground_uv.top_right.x = vec2_dist_from_point(&sector->floor_top_right,
 		&sector->floor_bottom_right, &frame->left.r_pt)
 		/ vec2_eucl_dist(sector->floor_top_right, sector->floor_top_left);
 	frame->ground_uv.top_right.y = vec2_dist_from_point(&sector->floor_bottom_left,
 		&sector->floor_bottom_right, &frame->left.r_pt)
 		/ vec2_eucl_dist(sector->floor_bottom_left, sector->floor_top_left);
-	frame->ground_uv.top_right.z = frame->outer_box.top_right.z;
+	frame->ground_uv.top_right.z = frame->outer_box.bottom_left.z;
 	frame->ground_uv.bottom_left.x = frame->ground_uv.top_left.x;
 	frame->ground_uv.bottom_left.y = vec2_dist_from_point(&sector->floor_bottom_left,
 		&sector->floor_bottom_right, &(t_xy){0.0f, 0.0f})
 		/ vec2_eucl_dist(sector->floor_bottom_left, sector->floor_top_left);
-	frame->ground_uv.bottom_left.z = 1.0f;
+	frame->ground_uv.bottom_left.z = 10.0f;
 	frame->ground_uv.bottom_right.x = frame->ground_uv.top_right.x;
 	frame->ground_uv.bottom_right.y = vec2_dist_from_point(&sector->floor_bottom_left,
 		&sector->floor_bottom_right, &(t_xy){0.0f, 0.0f})
 		/ vec2_eucl_dist(sector->floor_bottom_left, sector->floor_top_left);
-	frame->ground_uv.bottom_right.z = 1.0f;
+	frame->ground_uv.bottom_right.z = 10.0f;
 }
 
 static void	calc_inverse_of_z(t_xyz *top_left, t_xyz *top_right,
@@ -84,12 +85,15 @@ static void	calc_inverse_of_z(t_xyz *top_left, t_xyz *top_right,
 **	texels "run towards player."
 **	2. When interpolated with 1 / Y', no effect. Makes Y so high, that only the first row is printed.
 **	3. If z is not incremented in the drawing loop, it causes texture to turn more in to wall like.
-**	4. What z should be, when close to the Camera??
+**	4. Not working with plr->z, nor adding static variable to the z at the bottom. Texels look somewhat correct,
+**	when z is around 10.0f for frame->ground_bottom_right and frame->ground_bottom_left.
+**	5. Testing with another idea: Player's gaze is shaped like a pie, instead of an square.
+**	Didn't work. No major improvement.
+**
 */
 void	calc_ground_texels(t_sector *sector, t_frame *frame, t_player *plr)
 {
-	plr = plr;
-	calc_offsets(sector, frame);
+	calc_offsets(sector, frame, plr);
 	clip_offsets_to_range(&frame->ground_uv);
 	calc_inverse_of_z(
 		&frame->ground_uv.top_left, &frame->ground_uv.top_right,
@@ -102,5 +106,5 @@ void	calc_ground_texels(t_sector *sector, t_frame *frame, t_player *plr)
 		frame->outer_box.bottom_left.y, SCREEN_HEIGHT);
 	frame->ground_uv_step.y = interpolate_points(
 		frame->ground_uv.top_left.y, frame->ground_uv.bottom_left.y,
-		frame->ground_uv.top_left.z, frame->ground_uv.bottom_left.z);
+		frame->outer_box.bottom_left.y, SCREEN_HEIGHT);
 }
