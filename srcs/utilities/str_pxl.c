@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/13 11:20:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/14 11:38:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		handle_letter(Uint32 *buffer, t_xy coord, int c, t_plx_modifier mod
 			c = letter.c[(int)(cur.x + cur.y * 5)];
 			mod.x = cur.x * m + coord.x;
 			mod.y = cur.y * m + coord.y;
-			draw_rect(mod, vec2(mods.size, mods.size), buffer, c);
+			draw_square(buffer, mod, c, m);
 			cur.x++;
 		}
 		cur.y++;

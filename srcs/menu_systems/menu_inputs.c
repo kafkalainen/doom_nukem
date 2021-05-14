@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_inputs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/13 11:49:52 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/14 11:40:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	process_inputs_main_menu(int *game_state, SDL_Event *e, int *option)
 			}
 			if (e->key.keysym.sym == SDLK_RETURN || e->key.keysym.sym == SDLK_KP_ENTER)
 				*game_state = get_game_state(option);
-			
+
 		}
 	}
 }
@@ -107,7 +107,7 @@ void	process_inputs_load_menu(int *game_state, SDL_Event *e, t_menu *menu)
 				*game_state = GAME_LOOP;
 				menu->selected = TRUE;
 			}
-			
+
 		}
 	}
 }

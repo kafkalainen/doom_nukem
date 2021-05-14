@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_shapes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 16:14:16 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/13 10:49:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,25 @@ int	draw_line(t_xy p0, t_xy p1, Uint32 colour, Uint32 *buffer)
 		--pixels;
 	}
 	return (TRUE);
+}
+
+void		draw_square(Uint32 *buffer, t_xy offset, int c, int s)
+{
+	int		x;
+	int		y;
+
+	x = 0;
+	y = 0;
+	while (y < s)
+	{
+		x = 0;
+		while (x < s)
+		{
+			put_pixel(buffer, (int)(x + offset.x), (int)(y + offset.y), c);
+			x++;
+		}
+		y++;
+	}
 }
 
 void	draw_rect(t_xy xy, t_xy wh, Uint32 *buffer, int color)
