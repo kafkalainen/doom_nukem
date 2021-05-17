@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/14 22:51:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/17 10:27:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,23 +76,24 @@ void	setup_menu(t_menu *menu, int *game_state)
 
 void	setup_game_loop(char **mapname, t_home *home, t_player *plr)
 {
-	int ret;
-
+	// int ret;
+	plr = plr;
 	ft_putstr("You chose: ");
 	ft_putendl_fd(*mapname, 1);
 	if (load_map_file(home, *mapname))
 		exit(EXIT_FAILURE);
-	if (open_file(home, "map_files/test.DATA") < 0)
-			error_output("Could not successfully open map file.");
-	ret = load_game_audio(&plr->audio);
-	if (ret)
-	{
-		cleanup_audio(&plr->audio);
-		SDL_Quit();
-		clean_up(home);
-	}
-	if (Mix_PlayingMusic() == 0)
-		Mix_PlayMusic(plr->audio.music, -1);
+	// if (open_file(home, "map_files/test.DATA") < 0)
+	// 		error_output("Could not successfully open map file.");
+	init_textures(home);
+	// ret = load_game_audio(&plr->audio);
+	// if (ret)
+	// {
+	// 	cleanup_audio(&plr->audio);
+	// 	SDL_Quit();
+	// 	clean_up(home);
+	// }
+	// if (Mix_PlayingMusic() == 0)
+	// 	Mix_PlayMusic(plr->audio.music, -1);
 	ft_strdel(mapname);
 	*mapname = NULL;
 }
