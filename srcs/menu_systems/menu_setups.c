@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 14:41:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/17 14:49:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	setup_menu(t_menu *menu, int *game_state)
 void	setup_game_loop(char **mapname, t_home *home,
 	t_player *plr, int *menu_option)
 {
+	(void)plr;
 	ft_putstr("You chose: ");
 	ft_putendl_fd(*mapname, 1);
 	if (load_map_file(home, *mapname))
