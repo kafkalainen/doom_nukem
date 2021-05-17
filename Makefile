@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/17 11:46:43 by rzukale          ###   ########.fr        #
+#    Updated: 2021/05/17 13:07:48 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS = \
 	porting$(SLASH)open_file2.c \
 	porting$(SLASH)validate_sectors_data.c \
 	porting$(SLASH)validate_sectors_data_2.c \
+	porting$(SLASH)porting_utils.c \
 	raycaster$(SLASH)calc_dimensions.c \
 	raycaster$(SLASH)calc_ground_texels.c \
 	raycaster$(SLASH)calc_sector_bounds.c \
