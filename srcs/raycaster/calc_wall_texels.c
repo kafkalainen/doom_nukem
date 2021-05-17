@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/14 10:56:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/14 19:50:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,35 @@ static void	set_no_offset(t_frame *frame)
 			frame->outer_box.top_left.z});
 	frame->middle_uv.bottom_left = inv_z((t_xyz){0.0f, 1.0f,
 			frame->outer_box.bottom_left.z});
-	frame->middle_uv.top_right = inv_z((t_xyz){frame->ratio * frame->tex_mult,
-			0.0f, frame->outer_box.top_right.z});
+	frame->middle_uv.top_right = inv_z((t_xyz){frame->ratio
+			* frame->wall_tex_mult.x, 0.0f, frame->outer_box.top_right.z});
 	frame->middle_uv.bottom_right = inv_z((t_xyz){frame->ratio
-			* frame->tex_mult, 1.0f, frame->outer_box.bottom_right.z});
+			* frame->wall_tex_mult.x, 1.0f, frame->outer_box.bottom_right.z});
 }
 
 static void	set_offset_from_both_ends(t_frame *frame)
 {
 	frame->middle_uv.top_left = inv_z((t_xyz){frame->unvisible_l_side
-			* frame->tex_mult, 0.0f, frame->outer_box.top_left.z});
+			* frame->wall_tex_mult.x, 0.0f, frame->outer_box.top_left.z});
 	frame->middle_uv.bottom_left = inv_z((t_xyz){frame->unvisible_l_side
-			* frame->tex_mult, 1.0f, frame->outer_box.bottom_left.z});
+			* frame->wall_tex_mult.x, 1.0f, frame->outer_box.bottom_left.z});
 	frame->middle_uv.top_right = inv_z((t_xyz){(frame->unvisible_l_side
 				+ frame->ratio)
-			* frame->tex_mult, 0.0f, frame->outer_box.top_right.z});
+			* frame->wall_tex_mult.x, 0.0f, frame->outer_box.top_right.z});
 	frame->middle_uv.bottom_right = inv_z((t_xyz){(frame->unvisible_l_side
 				+ frame->ratio)
-			* frame->tex_mult, 1.0f, frame->outer_box.bottom_right.z});
+			* frame->wall_tex_mult.x, 1.0f, frame->outer_box.bottom_right.z});
 }
 
 static void	set_offset_from_left_side(t_frame *frame)
 {
 	frame->middle_uv.top_left = inv_z((t_xyz){frame->unvisible_l_side
-			* frame->tex_mult, 0.0f, frame->outer_box.top_left.z});
+			* frame->wall_tex_mult.x, 0.0f, frame->outer_box.top_left.z});
 	frame->middle_uv.bottom_left = inv_z((t_xyz){frame->unvisible_l_side
-			* frame->tex_mult, 1.0f, frame->outer_box.bottom_left.z});
-	frame->middle_uv.top_right = inv_z((t_xyz){frame->tex_mult, 0.0f,
+			* frame->wall_tex_mult.x, 1.0f, frame->outer_box.bottom_left.z});
+	frame->middle_uv.top_right = inv_z((t_xyz){frame->wall_tex_mult.x, 0.0f,
 			frame->outer_box.top_right.z});
-	frame->middle_uv.bottom_right = inv_z((t_xyz){frame->tex_mult, 1.0f,
+	frame->middle_uv.bottom_right = inv_z((t_xyz){frame->wall_tex_mult.x, 1.0f,
 			frame->outer_box.bottom_right.z});
 }
 
@@ -68,7 +68,9 @@ void	calc_wall_texels(t_frame *frame, int tex_width)
 	frame->full_wall_dist = vec2_eucl_dist(frame->left.wall->x0,
 			frame->left.wall->next->x0);
 	frame->ratio = frame->visible_wall_dist / frame->full_wall_dist;
-	frame->tex_mult = frame->full_wall_dist / tex_width;
+	frame->wall_tex_mult.x = frame->full_wall_dist / tex_width;
+	frame->wall_tex_mult.y = (frame->outer_box.top_left.y - frame->outer_box.bottom_left.y)
+		/ tex_width;
 	frame->unvisible_l_side = vec2_eucl_dist(frame->left.wall->x0,
 			frame->left.l_pt) / frame->full_wall_dist;
 	calc_offsets(frame);

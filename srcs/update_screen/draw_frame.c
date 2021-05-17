@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/14 11:44:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/16 19:09:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,17 @@ static void	draw_minimap(t_home *home, t_frame *frame)
 	}
 }
 
-static void	draw_player(t_frame *frame, t_player *plr)
+static void	draw_player(t_frame *frame)
 {
-	plr = plr;
-	// draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
-	// 	center_to_screen(vec2_mul(plr->dir, 400)), lightgreen,
-	// 	frame->buffer);
-	draw_rect(center_to_screen((t_xy){0.0f, 0.0f}),
-		(t_xy){3.0f, 3.0f}, frame->buffer, yellow);
+	draw_square(frame->buffer, center_to_screen((t_xy){-2.0f, -2.0f}),
+		yellow, 4);
 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
 		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
-				vec2_mul((t_xy){1.0f, 0.0f}, 400))),
+				vec2_mul((t_xy){-PLR_DIR, PLR_DIR}, 400))),
 		lightgreen, frame->buffer);
 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
 		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
-				vec2_mul((t_xy){0.0f, 1.0f}, 400))),
+				vec2_mul((t_xy){PLR_DIR, PLR_DIR}, 400))),
 		lightgreen, frame->buffer);
 }
 
@@ -130,7 +126,7 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	if (plr->input.minimap)
 	{
 		draw_minimap(home, frame);
-		draw_player(frame, plr);
+		draw_player(frame);
 	}
 	if (plr->input.info)
 		draw_info(frame, plr, (int)home->t.fps);

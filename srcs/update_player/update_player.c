@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 16:37:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/14 22:48:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	movement(t_player *plr, t_home *home)
 	if (plr->input.up == 1 || plr->input.down == 1
 		|| plr->input.left == 1 || plr->input.right == 1)
 	{
-		plr_dir = (t_xy){PLR_DIR, PLR_DIR};
+		plr_dir = (t_xy){0, 1};
 		check_player_dir(plr, &plr_dir);
 		plr_dir = vec2_mul(plr_dir, delta_time * 0.05);
 		if (player_move(plr, home, &plr_dir))

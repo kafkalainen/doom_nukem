@@ -32,7 +32,7 @@ static void	get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	t_point			*p0;
 
 	ray.pos = vec2(0, 0);
-	ray.dir = vec2_rot(vec2(0, 1), -frame->max_fov * frame->min_step);
+	ray.dir = vec2_rot(vec2(-PLR_DIR, PLR_DIR), -frame->max_fov * frame->min_step);
 	p0 = start;
 	while (walls)
 	{
@@ -59,7 +59,7 @@ static void	get_l_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	t_point			*p0;
 
 	ray.pos = vec2(0, 0);
-	ray.dir = vec2_rot(vec2(0, 1), -frame->offset * frame->min_step);
+	ray.dir = vec2_rot(vec2(-PLR_DIR, PLR_DIR), -frame->offset * frame->min_step);
 	p0 = start;
 	while (walls)
 	{
