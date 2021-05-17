@@ -28,7 +28,7 @@ void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio, Uint32 *menu_buffer
 	SDL_Quit();
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_home		home;
 	t_player	plr;
@@ -36,6 +36,8 @@ int	main(void)
 	t_menu		menu;
 	SDL_Event	e;
 
+	argc = argc;
+	argv = argv;
 	setup(&home, &plr, &frame, &menu);
 	while (home.game_state != QUIT)
 	{

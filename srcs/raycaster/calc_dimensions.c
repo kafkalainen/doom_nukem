@@ -72,6 +72,7 @@ void	calc_dimensions(t_frame *frame, t_player *plr, t_home *home)
 {
 	t_point	*temp;
 
+	temp = frame->left.wall;
 	frame->draw_top = 0;
 	frame->draw_bottom = 0;
 	frame->draw_middle = 0;
