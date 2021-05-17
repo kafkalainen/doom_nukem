@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 17:07:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/17 14:07:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_home	*init_sdl(t_home *home, float *min_step)
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) < 0)
 		error_output_sdl("Fatal: SDL Initalization failed.", home);
 	home->win.window = SDL_CreateWindow("Doom-Nukem", 100, 100,
-		home->win.width, home->win.height, 0);
+			home->win.width, home->win.height, 0);
 	if (home->win.window == NULL)
 		error_output_sdl("Fatal: Failed to create a window.", home);
 	SDL_SetWindowPosition(home->win.window,
@@ -54,19 +54,27 @@ void	init_player(t_player *plr)
 	plr->current_sector = 0;
 }
 
+void	setup_fps(t_time *time)
+{
+	time->frame_times = (Uint32 *)malloc(sizeof(Uint32) * 11);
+	if (!time->frame_times)
+		error_output("Memory allocation failed!\n");
+	time->frame_count = 0;
+	time->fps = 0;
+	time->frame_time_last = SDL_GetTicks();
+}
+
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
 	int		ret;
 
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
-	home->t.frame_times = (Uint32*)malloc(sizeof(Uint32) * 11);
-	home->t.frame_count = 0;
-	home->t.fps = 0;
-	home->t.frame_time_last = SDL_GetTicks();
+	setup_fps(&home->t);
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
-	if (!(frame->buffer = (Uint32*)malloc(sizeof(Uint32) *
-		(Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT)))
+	frame->buffer = (Uint32 *)malloc(sizeof(Uint32)
+			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);
+	if (!frame->buffer)
 		error_output("Memory allocation failed!\n");
 	home = init_sdl(home, &frame->min_step);
 	ret = load_audio(&plr->audio);
