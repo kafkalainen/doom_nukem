@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:51:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 12:31:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:21:36 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,14 @@ void	get_header_elements(t_png *png)
 	png->compression_method = png->source.buf[26];
 	png->filter_method = png->source.buf[27];
 	png->interlace_method = png->source.buf[28];
-	if (png->color_type == 2 || png->color_type == 6)
-		png->channels = (png->color_type == 2) ? 3 : 4;
-	else if (!png->color_type || png->color_type == 4)
-		png->channels = (!png->color_type) ? 1 : 2;
+	if (png->color_type == 2)
+		png->channels = 3;
+	else if (png->color_type == 6)
+		png->channels = 4;
+	else if (!png->color_type)
+		png->channels = 1;
+	else if (png->color_type == 4)
+		png->channels = 2;
 	if (png->channels)
 	{
 		png->bpp = png->depth * png->channels;

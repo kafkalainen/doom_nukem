@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 16:13:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:33:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,7 @@ void	parse_data(t_png *png)
 			* png->compressed_size);
 	if (!png->compressed)
 		error_output("Memory allocation of compressed data pointer failed\n");
-	while (png->i < png->source.size)
-	{
-		get_current_chunk(&png->chunk, png->source.buf, png->i);
-		if (ft_strcmp(png->chunk.type, "IDAT") == 0)
-		{
-			ft_memcpy(png->compressed + png->compressed_index,
-				png->source.buf + png->i + 8, png->chunk.size);
-			png->compressed_index += png->chunk.size;
-		}
-		png->i += png->chunk.size + 12;
-	}
+	assemble_idat_chunks(png);
 }
 
 void	decode_png(t_png *png)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_structs.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:04:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/26 15:58:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:04:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define MAX_BIT_LENGTH 15
 # define NUM_CODE_LENGTH_CODES 19
 # define NUM_DEFLATE_CODE_SYMBOLS 288
+# define NUM_COMBINED_ARRAY_SIZE 576
 # define NUM_DISTANCE_SYMBOLS 32
 # define DEFLATE_CODE_BUFFER_SIZE 576
 # define DISTANCE_BUFFER_SIZE 64

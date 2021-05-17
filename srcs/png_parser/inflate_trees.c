@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 12:58:03 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/26 12:02:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:04:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_huffman_tree(t_huffman_tree *tree, unsigned int *buffer,
 
 unsigned int	*get_fixed_deflate_codetree(void)
 {
-	static unsigned int	combined_array[NUM_DEFLATE_CODE_SYMBOLS * 2];
+	static unsigned int	combined_array[NUM_COMBINED_ARRAY_SIZE];
 	int					i;
 
 	i = 0;

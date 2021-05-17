@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/07 14:06:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:26:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,7 @@ t_texture	*create_texture(t_png *png, int idx)
 	if (!tex->source)
 		error_output("Memory allocation of editor pixel pointer failed\n");
 	ft_memcpy(tex->source, png->source.buf, png->source.size);
-	tex->h = png->height;
-	tex->w = png->width;
-	tex->bpp = (png->depth / 8) * png->channels;
-	tex->size = png->final_size;
-	tex->color_depth = png->depth;
-	tex->color_type = png->color_type;
-	tex->format = png->format;
-	tex->source_size = png->source.size;
-	tex->pitch = (tex->w * tex->bpp);
-	tex->idx = idx;
+	add_texture_values(png, tex, idx);
 	tex->pixels = (unsigned int *)malloc(sizeof(unsigned int)
 			* (tex->h * tex->pitch));
 	if (!tex->pixels)

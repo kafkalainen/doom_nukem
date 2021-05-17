@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:23:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 12:21:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:16:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,14 @@ void	get_current_chunk(t_chunk *chunk, unsigned char *buf, int i)
 
 int	get_big_endian(unsigned char *buf)
 {
-	return ((buf[0] << 24)
-		| (buf[1] << 16)
-		| (buf[2] << 8)
-		| buf[3]);
+	return ((buf[0] << 24) | (buf[1] << 16) | (buf[2] << 8) | buf[3]);
 }
 
 int	check_depth(int depth)
 {
-	return ((depth == 1 || depth == 2 || depth == 4 ||
-		depth == 8 || depth == 16 ? 1 : 0));
+	if (depth == 1 || depth == 2 || depth == 4 || depth == 8 || depth == 16)
+		return (1);
+	return (0);
 }
 
 void	check_end(t_png *png)
