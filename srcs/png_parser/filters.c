@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:38:29 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/26 11:59:06 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:00:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,18 @@ int	predict(int a, int b, int c)
 	int	pc;
 
 	p = a + b - c;
-	pa = p > a ? p - a : a - p;
-	pb = p > b ? p - b : b - p;
-	pc = p > c ? p - c : c - p;
+	if (p > a)
+		pa = p - a;
+	else
+		pa = a - p;
+	if (p > b)
+		pb = p - b;
+	else
+		pb = b - p;
+	if (p > c)
+		pc = p - c;
+	else
+		pc = c - p;
 	if (pa <= pb && pa <= pc)
 		return (a);
 	else if (pb <= pc)

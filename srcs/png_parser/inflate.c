@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:40:20 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/26 12:07:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:13:01 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,14 @@ void	ft_inflate_uncompressed(t_png *png, const unsigned char *in,
 		error_output("size error\n");
 	if ((p + len) > png->compressed_size)
 		error_output("size error\n");
-	while (n < len)
-	{
+	while (n++ < len)
 		png->inflated[(*pos)++] = in[p++];
-		n++;
-	}
 	(*bp) = p * 8;
 }
 
 void	go_go_huffman(t_png *png, const unsigned char *in, t_huffman *h)
 {
-	static unsigned int	fixed_distance_tree[2 * NUM_DISTANCE_SYMBOLS] = {
+	static unsigned int	fixed_distance_tree[DISTANCE_BUFFER_SIZE] = {
 	33, 48, 34, 41, 35, 38, 36, 37, 0, 1, 2, 3, 39, 40, 4, 5, 6, 7, 42, 45, 43,
 	44, 8, 9, 10, 11, 46, 47, 12, 13, 14, 15, 49, 56, 50, 53, 51, 52, 16, 17,
 	18, 19, 54, 55, 20, 21, 22, 23, 57, 60, 58, 59, 24, 25, 26, 27, 61, 62, 28,

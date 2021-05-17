@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_functions.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/13 10:50:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/17 13:12:58 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		draw_tex_pixel(t_texture *tex, t_xyz texel,
 void		draw_wireframe(t_frame *frame, Uint32 colour);
 void		put_pixel(Uint32 *buffer, int x, int y, Uint32 color);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);
+Uint32		get_texel(int x, int y, t_texture *tex);
 t_xy		center_to_screen(t_xy loc);
 void		render_buffer(Uint32 *buffer, SDL_Surface *screen_surface);
 void		*optimized_memcpy(void *pixels, void *src, size_t size);

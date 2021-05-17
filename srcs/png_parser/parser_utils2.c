@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 15:19:58 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/20 17:16:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:33:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,33 @@ void	free_png(t_png png)
 	free(png.compressed);
 	free(png.inflated);
 	free(png.pixels);
+}
+
+void	add_texture_values(t_png *png, t_texture *tex, int idx)
+{
+	tex->h = png->height;
+	tex->w = png->width;
+	tex->bpp = (png->depth / 8) * png->channels;
+	tex->size = png->final_size;
+	tex->color_depth = png->depth;
+	tex->color_type = png->color_type;
+	tex->format = png->format;
+	tex->source_size = png->source.size;
+	tex->pitch = (tex->w * tex->bpp);
+	tex->idx = idx;
+}
+
+void	assemble_idat_chunks(t_png *png)
+{
+	while (png->i < png->source.size)
+	{
+		get_current_chunk(&png->chunk, png->source.buf, png->i);
+		if (ft_strcmp(png->chunk.type, "IDAT") == 0)
+		{
+			ft_memcpy(png->compressed + png->compressed_index,
+				png->source.buf + png->i + 8, png->chunk.size);
+			png->compressed_index += png->chunk.size;
+		}
+		png->i += png->chunk.size + 12;
+	}
 }

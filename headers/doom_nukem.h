@@ -93,6 +93,7 @@ void	map_error_output(int i, t_home *home);
 void	play_footsteps(t_player *plr);
 void	read_error_output(char *msg, unsigned char **line);
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu);
+void	setup_fps(t_time *time);
 void	translate_world_view(t_home *home, t_xy step);
 void	transform_world_view(t_home *home, float delta_dir);
 void	update_screen(t_home *home, t_frame *frame, t_player *plr);

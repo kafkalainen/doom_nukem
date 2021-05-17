@@ -17,16 +17,14 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 
 # TO-DO
 ## Riku & Elias
-- Scanfov-refactoring
-- optimization pass
-- pthread
+- Map Editor
+- norme main branch
 
 ## Joonas
-- Github best-practises
-- Merging filereading
+- Perspective fix
 
 ## Tomppa
-- Map editor
+- Sprites
 
 # Done
 - Tested to change int values in the tex_ft_draw_wall perspective_fix function, to no avail.
@@ -44,8 +42,8 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 # New features
 - [x] You can look up and down.
 - [x] The areas you go through don’t have a fixed shape, for exemple the rooms can have any number of walls in all possible directions.
-- [ ] The floor and ceiling have adjustable heights, which means different areas will not be at the same height - and you’ll have to manage that smoothly.
-- [ ] The floor and ceiling may not be horizontal but inclined planes.
+- [x] The floor and ceiling have adjustable heights, which means different areas will not be at the same height - and you’ll have to manage that smoothly.
+- [x] The floor and ceiling may not be horizontal but inclined planes.
 - [ ] The floors and ceilings have textures.
 - [ ] There can be a sky instead of a ceiling.
 - [ ] Walls can be partially transparent, unveiling the room behind.
@@ -54,7 +52,7 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - [ ] Objects or characters can be placed in the world as multiple sprites displayed according to the orientation between the object and the player (you’ll see the object or character from behind and from the side as you walk around it).
 - [ ] Each room or area has a light control tool, affecting both the walls and the objects
 within.
-- [ ] Text messages can be displayed during the game over the rest of the graphics.
+- [x] Text messages can be displayed during the game over the rest of the graphics.
 - [ ] There must be a HUD (life, currency, ammunition, carried artifacts...) By that we mean several elements arranged on the player’s view and not a simple one-block banner.
 
 # About the gameplay:
@@ -81,7 +79,7 @@ within.
 - [ ] Just like in the original games, you must pack in a single file all the elements you’re going to need for the game: the level’s design, textures and gameplay elements. One file per level is accepted, but it must be self-sufficient. The doom-nukem binary and the chosen level file must be self-sufficient.
 
 # Expected bonuses
-- [ ] A menu to choose the level or some difficulty options.
+- [x] A menu to choose the level or some difficulty options.
 - [ ] A genuine aesthetic research, an atmosphere, neat and detailed sceneries.
 - [ ] A complex and researched story and scenario.
 - [ ] Many useless interactions and animations that contribute to the immersion into the world (phone booth, vending machines, public toilets, projectile stains on the walls, etc).
@@ -89,6 +87,7 @@ within.
 the flag mode, etc.
 - [ ] Multithreaded rendering using pthread.
 - [ ] Plenty of other things we haven’t even imagined yet!
+- [x] User is able to add custom textures
 
 # Links
 - Fabien's Sanglard's tutorial for Building Duke Nukem Graphics Engine [Link](https://fabiensanglard.net/duke3d/build_engine_internals.php)

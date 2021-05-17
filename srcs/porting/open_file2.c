@@ -6,54 +6,14 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 16:13:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/17 12:56:53 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-/*
-** Open file, read everything to buffer, then go through it byte by byte
-** first look for keyword "doom_textures" = textures start here
-** next take nbr_of_textures
-** malloc necessary number of texture points
-** while loop until at nbr_of_textures
-** for every texture, create a t_png and allocate the data to each point
-** then inflate the compressed pixel info and convert it to pixels
-** just like png_parser does
-** finally transfer all data to t_texture structure
-*/
-
-int	get_next_breaker(unsigned char *buf)
-{
-	int	i;
-
-	i = 0;
-	while (buf[i])
-	{
-		if (buf[i] == READ_BREAKER)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-/*
-** Each map data element type is separated by a element tag
-** (eg. doom_textures for textures) element tag line for all elements will
-** include element tag, total number of element components
-** (eg. doom_textures #9) each element component line will include
-** everything that specific component will need to fully initialize,
-** they will be separated with a break character texture element
-** example: [idx] [width] [height] [size] [color_type] [color_depth]
-** [format] [bits_per_pixel] [pitch] [compressed_size] [unsigned char
-** *pixel data] tex idx is determined by the order by which elements
-** are saved into the map data file
-*/
-
 t_texture	*get_texture(unsigned char *buf, unsigned int *pos, ssize_t size)
 {
-	t_texture	*tex;
 	t_png		png;
 	int			i;
 	int			idx;
@@ -78,11 +38,7 @@ t_texture	*get_texture(unsigned char *buf, unsigned int *pos, ssize_t size)
 				error_output("Pointer points outside memory address\n");
 		}
 	}
-	parse_png(&png);
-	tex = create_texture(&png, idx);
-	free_png(png);
-	convert_to_uint32(tex->pixels, tex);
-	return (tex);
+	return (return_new_texture(&png, idx));
 }
 
 t_texture	*assign_empty_texture(void)
@@ -101,7 +57,8 @@ t_texture	*assign_empty_texture(void)
 	return (tex);
 }
 
-void	parse_texture_data(unsigned char *buf, t_home *home, unsigned int *pos, ssize_t size)
+void	parse_texture_data(unsigned char *buf, t_home *home,
+	unsigned int *pos, ssize_t size)
 {
 	int				i;
 
@@ -124,7 +81,8 @@ void	parse_texture_data(unsigned char *buf, t_home *home, unsigned int *pos, ssi
 	}
 }
 
-void	parse_audio_data(unsigned char *buf, unsigned int *pos, char *path, ssize_t size)
+void	parse_audio_data(unsigned char *buf, unsigned int *pos,
+	char *path, ssize_t size)
 {
 	t_audio_asset	asset;
 
@@ -146,11 +104,6 @@ void	parse_audio_data(unsigned char *buf, unsigned int *pos, char *path, ssize_t
 		error_output("Failed to create temp audio file\n");
 	free(asset.buf);
 }
-
-/*
-** // Buffer mallocing:
-** // tone down the MAX_SIZE for this once we know the avg range of file sizes
-*/
 
 int	open_file(t_home *home, char *path)
 {

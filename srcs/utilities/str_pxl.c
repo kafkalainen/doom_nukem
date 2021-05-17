@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/14 11:38:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/17 14:05:53 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static t_pxl_c	letter_logic(int c, int letter_colour)
 	return (pxl_numbers(' ', black, letter_colour));
 }
 
-static void		handle_letter(Uint32 *buffer, t_xy coord, int c, t_plx_modifier mods)
+static void	handle_letter(Uint32 *buffer, t_xy coord,
+	int c, t_plx_modifier mods)
 {
 	t_xy	cur;
 	t_pxl_c	letter;
@@ -50,7 +51,8 @@ static void		handle_letter(Uint32 *buffer, t_xy coord, int c, t_plx_modifier mod
 	}
 }
 
-void			str_pxl(Uint32 *buffer, t_xy coord, char *str, t_plx_modifier mod)
+void	str_pxl(Uint32 *buffer, t_xy coord,
+	char *str, t_plx_modifier mod)
 {
 	int		c;
 

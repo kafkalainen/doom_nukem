@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/12 11:01:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/17 13:10:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@ void	*convert_to_uint32(Uint32 *dest, t_texture *image)
 		}
 	}
 	return (dest);
-}
-
-Uint32	get_texel(int x, int y, t_texture *tex)
-{
-	int	offset_x;
-	int	offset_y;
-
-	offset_x = x % tex->w;
-	offset_y = y % tex->h;
-	return ((Uint32)tex->pixels[(offset_y * tex->w) + offset_x]);
 }
 
 void	load_texture(char *path, t_home *home, int i)
@@ -75,23 +65,12 @@ static void	get_tex_count(int *i, DIR **dir, struct dirent **dir_entry)
 ** Init textures for editor
 */
 
-void	init_textures(t_home *home)
+void	cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir)
 {
-	DIR				*dir;
-	struct dirent	*dir_entry;
-	int				i;
-	char			*found;
-	char			*buf;
+	int		i;
+	char	*found;
+	char	*buf;
 
-	dir = opendir("textures/");
-	if (dir == NULL)
-		error_output("Failed to open textures directory.\n");
-	get_tex_count(&home->nbr_of_textures, &dir, &dir_entry);
-	home->editor_tex = (t_texture **)malloc(sizeof(t_texture *)
-			* (home->nbr_of_textures + 1));
-	if (!home->editor_tex)
-		error_output("Failed to allocate memory to editor textures.\n");
-	home->editor_tex[0] = assign_empty_texture();
 	i = 1;
 	dir_entry = readdir(dir);
 	while (dir_entry != NULL)
@@ -105,5 +84,22 @@ void	init_textures(t_home *home)
 		}
 		dir_entry = readdir(dir);
 	}
+}
+
+void	init_textures(t_home *home)
+{
+	DIR				*dir;
+	struct dirent	*dir_entry;
+
+	dir = opendir("textures/");
+	if (dir == NULL)
+		error_output("Failed to open textures directory.\n");
+	get_tex_count(&home->nbr_of_textures, &dir, &dir_entry);
+	home->editor_tex = (t_texture **)malloc(sizeof(t_texture *)
+			* (home->nbr_of_textures + 1));
+	if (!home->editor_tex)
+		error_output("Failed to allocate memory to editor textures.\n");
+	home->editor_tex[0] = assign_empty_texture();
+	cycle_textures(home, dir_entry, dir);
 	closedir(dir);
 }

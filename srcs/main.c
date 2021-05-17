@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/13 11:04:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/17 11:16:08 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ int	main(void)
 		}
 		if (home.game_state == GAME_LOOP)
 		{
-			setup_game_loop(&menu.chosen_map, &home, &plr);
+			setup_game_loop(&menu.chosen_map, &home, &plr, &menu.option);
 			launch_game_loop(&home, &plr, &frame, &e);
-			menu.option = 0;
 		}
 		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
