@@ -14,6 +14,7 @@
 # define MACROS_H
 
 # define BUFF_SIZE 16
+# define NBR_BUTTONS 14
 # define SCREEN_WIDTH 640
 # define SCREEN_HEIGHT 480
 

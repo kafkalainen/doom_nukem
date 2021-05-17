@@ -71,6 +71,7 @@
 # include "parsing.h"
 # include "typewriter.h"
 # include "menu_systems.h"
+# include "editor.h"
 
 /*
 ** Miscellanious

@@ -61,6 +61,11 @@ int	main(int argc, char **argv)
 			setup_game_loop(&menu.chosen_map, &home, &plr, &menu.option);
 			launch_game_loop(&home, &plr, &frame, &e);
 		}
+		if (home.game_state == EDITOR)
+		{
+			printf("kutsu setup_editor_looppia\n");
+			launch_editor(&home, &e);
+		}
 		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}

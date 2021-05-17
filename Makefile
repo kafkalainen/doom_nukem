@@ -14,6 +14,8 @@ NAME = doom-nukem
 
 SRCS = \
 	main.c \
+	editor$(SLASH)setup_editor.c \
+	editor$(SLASH)allocate_buttons.c \
 	parsing$(SLASH)calc_norm_vectors.c \
 	parsing$(SLASH)free_sector.c \
 	parsing$(SLASH)parse_number_data.c \
@@ -99,6 +101,7 @@ HEADERS = \
 	headers$(SLASH)drawing_functions.h \
 	headers$(SLASH)entity.h \
 	headers$(SLASH)events.h \
+	headers$(SLASH)editor.h \
 	headers$(SLASH)macros.h \
 	headers$(SLASH)map.h \
 	headers$(SLASH)parser_structs.h \
@@ -244,6 +247,7 @@ endif
 
 $O:
 	$(MKDIR) $@
+	$(MKDIR) $@$(SLASH)editor
 	$(MKDIR) $@$(SLASH)utilities
 	$(MKDIR) $@$(SLASH)update_player
 	$(MKDIR) $@$(SLASH)update_screen
