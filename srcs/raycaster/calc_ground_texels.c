@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:54:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/17 09:34:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/17 10:54:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ static void	calc_inverse_of_z(t_xyz *top_left, t_xyz *top_right,
 **	Width of the x should be significantly smaller when closer to the player,
 **	so x can't be the same when closer to the viewer. It should drop proportion to the distance.
 **	The real problem is that how much smaller is it exactly.
-**	Screen still blinks.
 **	11. Testing with Lodev's tutorial just by mapping texels directly, and not inverting the texture coordinates.
 **	Calculating the weight at the draw function itself. Perpentual distance to zero at the end, and perpentual distance
 **	to frame->outer_box.bottom_left.z at top_left. Can't say it was a success, but noticed that we cannot add z
 **	to the texel, it needs to be subtracted at each y step.
+**	12. Start to do the calculations for the entire sector at once. Traverse the points between left and right,
+**	and continue.
 */
-
 
 void	calc_ground_texels(t_sector *sector, t_frame *frame, t_player *plr)
 {
