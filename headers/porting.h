@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/17 13:11:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/18 11:43:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int				get_next_breaker(unsigned char *buf);
 Uint32			get_floor(int floor_colour);
 int				load_map_file(t_home *home, char *path);
 int				validate_sectors_data(t_home *home);
+void			free_all_textures(t_texture **textures, int *nbr_of_textures);
 
 /*
 ** PNG Encode/Decode functions

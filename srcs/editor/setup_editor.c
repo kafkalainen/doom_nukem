@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setup_editor.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
+/*   Updated: 2021/05/18 11:48:57 by rzukale          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/doom_nukem.h"
 
 void			editor_put_pixel(Uint32 *buffer, int x, int y, int color)
@@ -100,7 +112,7 @@ void	editor_events(SDL_Event *e, t_home *home)
 	while (SDL_PollEvent(e) != 0)
 	{
 		if (e->type == SDL_QUIT)
-			home->game_state = MAIN_MENU;
+			home->game_state = QUIT;
 		if (e->type == SDL_KEYDOWN && e->key.keysym.sym == SDLK_ESCAPE)
 			home->game_state = MAIN_MENU;
 	}
@@ -110,6 +122,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 {
 	t_button	**blist;
 	t_editor	editor;
+	int			i;
 
 	SDL_SetWindowSize(home->win.window, 1920, 1080);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
@@ -129,7 +142,15 @@ void	launch_editor(t_home *home, SDL_Event *e)
 		render_buffer(editor.buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
-	free(&editor);
+	free(editor.buffer);
+	i = -1;
+	while (++i < NBR_BUTTONS)
+	{
+		free(blist[i]->text);
+		free(blist[i]);
+	}
+	free(blist);
+	free_all_textures(home->editor_tex, &home->nbr_of_textures);
 	SDL_SetWindowSize(home->win.window, SCREEN_WIDTH, SCREEN_HEIGHT);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 }

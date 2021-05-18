@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:55:06 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 13:08:19 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/18 13:04:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,16 @@ t_texture	*return_new_texture(t_png *png, int idx)
 	free_png(*png);
 	convert_to_uint32(tex->pixels, tex);
 	return (tex);
+}
+
+void	free_all_textures(t_texture **textures, int *nbr_of_textures)
+{
+	int	i;
+
+	i = 0;
+	while (i < ((*nbr_of_textures) + 1))
+		free_texture(textures[i++]);
+	free(textures);
+	textures = NULL;
+	*nbr_of_textures = 0;
 }

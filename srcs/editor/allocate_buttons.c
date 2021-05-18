@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   allocate_buttons.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/18 11:47:42 by rzukale           #+#    #+#             */
+/*   Updated: 2021/05/18 11:53:12 by rzukale          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../headers/doom_nukem.h"
 
@@ -5,8 +16,10 @@ void	create_button(t_button *list, t_xy ltop, t_xy wh, char *text)
 {
 	list->ltop = ltop;
 	list->wh = wh;
-	list->text = malloc(sizeof(char) * ft_strlen(text));
-	list->text = text;
+	list->text = malloc(sizeof(char) * (ft_strlen((const char *)text) + 1));
+	if (!list->text)
+		error_output("Memory allocation failed\n");
+	list->text = ft_strcpy(list->text, (const char *)text);
 }
 
 t_button	**create_button_list(t_button **blist)

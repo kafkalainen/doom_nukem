@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 11:28:08 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/18 12:58:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,8 @@
 
 void	return_to_main_from_game(t_home *home, t_player *plr)
 {
-	int	i;
-
 	free_sectors(home);
-	i = -1;
-	while (++i < (home->nbr_of_textures + 1))
-		free_texture(home->editor_tex[i]);
-	free(home->editor_tex);
+	free_all_textures(home->editor_tex, &home->nbr_of_textures);
 	init_player(plr);
 }
 

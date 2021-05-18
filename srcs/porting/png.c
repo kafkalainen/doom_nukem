@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 13:10:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/18 12:53:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	load_texture(char *path, t_home *home, int i)
 
 	png = png_parser(path);
 	home->editor_tex[i] = create_texture(&png, (i * (-1)));
-	if (home->editor_tex[i] == NULL)
+	if (!home->editor_tex[i])
 		error_output("PNG image file loading failed\n");
 	else
 		convert_to_uint32(home->editor_tex[i]->pixels, home->editor_tex[i]);
@@ -95,6 +95,8 @@ void	init_textures(t_home *home)
 	if (dir == NULL)
 		error_output("Failed to open textures directory.\n");
 	get_tex_count(&home->nbr_of_textures, &dir, &dir_entry);
+	if (home->nbr_of_textures == 0)
+		error_output("No textures found\n");
 	home->editor_tex = (t_texture **)malloc(sizeof(t_texture *)
 			* (home->nbr_of_textures + 1));
 	if (!home->editor_tex)
