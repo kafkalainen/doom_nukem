@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/18 12:53:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/18 16:51:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init_player(t_player *plr)
 	plr->input.mouse = 1;
 	plr->time = 0;
 	plr->current_sector = 0;
+	plr->z = 0;
 }
 
 void	setup_fps(t_time *time)
