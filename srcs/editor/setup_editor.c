@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/18 15:32:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/18 15:52:16 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,14 +123,18 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	t_button	**blist;
 	t_editor	editor;
 	int			i;
+	int			w;
+	int			h;
 
-	SDL_SetWindowSize(home->win.window, 1920, 1080);
+	w = 0;
+	h = 0;
+	SDL_SetWindowFullscreen(home->win.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	SDL_GetWindowSize(home->win.window, &w, &h);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
-	SDL_SetWindowPosition(home->win.window, 0, 0);
 	blist = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
 	init_textures(home);
 	if (!(editor.buffer = (Uint32*)malloc(sizeof(Uint32) *
-		(Uint32)1920 * (Uint32)1080)))
+		(Uint32)w * (Uint32)h)))
 		error_output("Memory allocation failed!\n");
 	editor.grid_size = 32;
 	editor.toggle_grid = 1;
@@ -152,6 +156,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	}
 	free(blist);
 	free_all_textures(home->editor_tex, &home->nbr_of_textures);
+	SDL_SetWindowFullscreen(home->win.window, 0);
 	SDL_SetWindowSize(home->win.window, SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_SetWindowPosition(home->win.window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
