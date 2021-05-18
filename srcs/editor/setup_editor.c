@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/18 11:48:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/18 15:32:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 
 	SDL_SetWindowSize(home->win.window, 1920, 1080);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
+	SDL_SetWindowPosition(home->win.window, 0, 0);
 	blist = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
 	init_textures(home);
 	if (!(editor.buffer = (Uint32*)malloc(sizeof(Uint32) *
@@ -152,5 +153,6 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	free(blist);
 	free_all_textures(home->editor_tex, &home->nbr_of_textures);
 	SDL_SetWindowSize(home->win.window, SCREEN_WIDTH, SCREEN_HEIGHT);
+	SDL_SetWindowPosition(home->win.window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 }
