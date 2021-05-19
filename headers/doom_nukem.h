@@ -28,7 +28,7 @@
 #  define TRUNCATE O_TRUNC
 #  include <string.h>
 #  include <unistd.h>
-#  define SDL_MAIN_HANDLED
+// #  define SDL_MAIN_HANDLED
 #  include "../SDL2/include/SDL2/SDL.h"
 #  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include "../headers/syscalls_windows.h"
@@ -44,7 +44,7 @@
 #  include <io.h>
 #  include <stdio.h>
 #  include <stdlib.h>
-#  define SDL_MAIN_HANDLED
+// #  define SDL_MAIN_HANDLED
 #  include "../SDL2-2.0.14/i686-w64-mingw32/include/SDL2/SDL.h"
 #  include "../SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2/SDL_mixer.h"
 
