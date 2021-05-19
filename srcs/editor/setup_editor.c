@@ -131,6 +131,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	h = 0;
 	SDL_SetWindowSize(home->win.window, 1920, 1080);
 	SDL_GetWindowSize(home->win.window, &w, &h);
+	SDL_SetWindowPosition(home->win.window, 5, 30);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 	blist = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
 	init_textures(home);
