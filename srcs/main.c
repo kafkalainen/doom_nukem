@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/18 16:11:43 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/19 14:36:53 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio, Uint32 *menu_buffer
 	SDL_Quit();
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	t_home		home;
 	t_player	plr;
@@ -36,8 +36,6 @@ int	main(int argc, char **argv)
 	t_menu		menu;
 	SDL_Event	e;
 
-	argc = argc;
-	argv = argv;
 	setup(&home, &plr, &frame, &menu);
 	while (home.game_state != QUIT)
 	{

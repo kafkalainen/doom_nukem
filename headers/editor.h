@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing_functions.h                                :+:      :+:    :+:   */
+/*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eparviai <eparvia@student.hive.fi>         +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/05/11 12:29:25 by eparviai         ###   ########.fr       */
+/*   Updated: 2021/05/19 15:53:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,15 @@ typedef struct		s_button
 
 typedef	struct		s_int_xy
 {
-	int				x;
-	int				y;
+	int				width;
+	int				height;
 }					t_int_xy;
+
+typedef	struct		s_box
+{
+	t_xy			start;
+	t_xy			end;
+}					t_box;
 
 
 typedef struct		s_editor

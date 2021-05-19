@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/18 16:51:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/19 15:57:26 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static t_home	*init_sdl(t_home *home, float *min_step)
 {
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
+	SDL_SetMainReady();
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) < 0)
 		error_output_sdl("Fatal: SDL Initalization failed.", home);
 	home->win.window = SDL_CreateWindow("Doom-Nukem", 100, 100,
@@ -67,7 +68,7 @@ void	setup_fps(t_time *time)
 
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
-	int		ret;
+	// int		ret;
 
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
@@ -78,15 +79,15 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	if (!frame->buffer)
 		error_output("Memory allocation failed!\n");
 	home = init_sdl(home, &frame->min_step);
-	ret = load_audio(&plr->audio);
-	if (ret)
-	{
-		cleanup_audio(&plr->audio);
-		SDL_Quit();
-		clean_up(home);
-	}
-	if (Mix_PlayingMusic() == 0)
-		Mix_PlayMusic(plr->audio.music, -1);
+	// ret = load_audio(&plr->audio);
+	// if (ret)
+	// {
+	// 	cleanup_audio(&plr->audio);
+	// 	SDL_Quit();
+	// 	clean_up(home);
+	// }
+	// if (Mix_PlayingMusic() == 0)
+	// 	Mix_PlayMusic(plr->audio.music, -1);
 	init_player(plr);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	setup_menu(menu, &home->game_state);
