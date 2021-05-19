@@ -8,3 +8,7 @@ SDL2_mixer-2.0.4.tar.gz
 doom-nukem
 SDL2_mixer-devel-2.0.4-mingw.tar.gz
 SDL2-devel-2.0.14-mingw.tar.gz
+libft/libft.a
+libft/obj
+objs/
+temp/
