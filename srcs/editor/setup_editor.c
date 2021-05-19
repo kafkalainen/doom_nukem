@@ -107,15 +107,15 @@ void	draw_ui(t_editor *editor)
 	//draw_sectors(home);
 }
 
-void	editor_events(SDL_Event *e, t_home *home)
+void	init_mouse_data(t_mouse_data *mouse_data)
 {
-	while (SDL_PollEvent(e) != 0)
-	{
-		if (e->type == SDL_QUIT)
-			home->game_state = QUIT;
-		if (e->type == SDL_KEYDOWN && e->key.keysym.sym == SDLK_ESCAPE)
-			home->game_state = MAIN_MENU;
-	}
+	mouse_data->i_mbleft = 0;
+	mouse_data->i_mbright = 0;
+	mouse_data->selected = -1;
+	mouse_data->x = 0;
+	mouse_data->y = 0;
+	mouse_data->x_rel = 0;
+	mouse_data->y_rel = 0;
 }
 
 void	launch_editor(t_home *home, SDL_Event *e)
@@ -129,6 +129,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	SDL_SetWindowPosition(home->win.window, 0, 0);
 	blist = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
 	init_textures(home);
+	init_mouse_data(editor.mouse_data);
 	if (!(editor.buffer = (Uint32*)malloc(sizeof(Uint32) *
 		(Uint32)1920 * (Uint32)1080)))
 		error_output("Memory allocation failed!\n");
@@ -137,7 +138,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	editor.button_list = create_button_list(blist);
 	while (home->game_state == EDITOR)
 	{
-		editor_events(e, home);
+		editor_events(e, home, &editor);
 		draw_ui(&editor);
 		draw_buttons(blist, editor.buffer);
 		render_buffer(editor.buffer, home->win.ScreenSurface);

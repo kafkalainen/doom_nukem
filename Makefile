@@ -16,6 +16,7 @@ SRCS = \
 	main.c \
 	editor$(SLASH)setup_editor.c \
 	editor$(SLASH)allocate_buttons.c \
+	editor$(SLASH)editor_events.c \
 	parsing$(SLASH)calc_norm_vectors.c \
 	parsing$(SLASH)free_sector.c \
 	parsing$(SLASH)parse_number_data.c \
