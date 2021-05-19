@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/17 11:16:08 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/18 16:11:43 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ int	main(int argc, char **argv)
 	{
 		process_inputs_main_menu(&home.game_state, &e, &menu.option);
 		update_main_menu(menu.menu_buffer, menu.option);
-		// if (home.game_state == EDITOR)
-		// {
-		// 	printf("olen editorissa\n");
-		// 	//load_editor();
-		// }
 		if (home.game_state == MAP_MENU)
 		{
 			load_map_names(&menu);
@@ -62,10 +57,7 @@ int	main(int argc, char **argv)
 			launch_game_loop(&home, &plr, &frame, &e);
 		}
 		if (home.game_state == EDITOR)
-		{
-			printf("kutsu setup_editor_looppia\n");
 			launch_editor(&home, &e);
-		}
 		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
