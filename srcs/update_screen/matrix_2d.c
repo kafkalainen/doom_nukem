@@ -6,25 +6,25 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:10:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 15:12:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/19 12:00:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void transform_sector_bounding_box(t_sector *sector, float delta_dir)
+static void	transform_sector_bounding_box(t_sector *sector, float delta_dir)
 {
 	sector->floor_top_right = vec2_rot(sector->floor_top_right,
-		delta_dir);
+			delta_dir);
 	sector->floor_bottom_right = vec2_rot(sector->floor_bottom_right,
-		delta_dir);
+			delta_dir);
 	sector->floor_top_left = vec2_rot(sector->floor_top_left,
-		delta_dir);
+			delta_dir);
 	sector->floor_bottom_left = vec2_rot(sector->floor_bottom_left,
-		delta_dir);
+			delta_dir);
 }
 
-static void translate_sector_bounding_box(t_sector *sector, t_xy step)
+static void	translate_sector_bounding_box(t_sector *sector, t_xy step)
 {
 	sector->floor_top_right = vec2_dec(sector->floor_top_right, step);
 	sector->floor_bottom_right = vec2_dec(sector->floor_bottom_right, step);

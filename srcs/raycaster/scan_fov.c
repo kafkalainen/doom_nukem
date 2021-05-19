@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/10 14:23:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/18 14:30:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr, int cur_pxl)
 	frame->left.wall = home->sectors[frame->idx]->points;
 	frame->right.wall = home->sectors[frame->idx]->points;
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
+	// calc_ground_dimensions(frame, plr, home);
 	while (frame->offset > frame->max_fov)
 	{
 		get_wall_pts(frame, home->sectors[frame->idx]->nb_of_walls, cur_pxl);
@@ -81,4 +82,5 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr, int cur_pxl)
 			frame->offset = frame->offset - ++cur_pxl;
 		}
 	}
+	// draw_sector(frame, home, plr, cur_pxl);
 }

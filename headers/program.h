@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 16:12:16 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/17 16:44:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,46 +20,6 @@ typedef struct s_window
 	int				width;
 	int				height;
 }					t_window;
-
-typedef struct s_raycast
-{
-	t_xy			sideDist;
-	t_xy			deltaDist;
-	t_xy			step;
-	int				side;
-	float			perpWallDist;
-}					t_raycast;
-
-typedef struct s_ray_floor
-{
-	t_xy			plane;
-	t_xy			left;
-	t_xy			right;
-}					t_ray_floor;
-
-typedef struct s_step
-{
-	t_xy			cur_step;
-	t_xy			step_len;
-}					t_step;
-
-typedef struct s_tex_col
-{
-	int				scr_col;
-	int				tex_col;
-	int				top;
-	int				bot;
-	int				line_height;
-	float			step;
-	SDL_Surface		*tex;
-}					t_tex_col;
-
-typedef struct s_wall
-{
-	t_xy			hit;
-	float			distance;
-	int				side;
-}					t_wall;
 
 typedef struct s_home
 {

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 15:24:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/18 14:15:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void	calc_normal_vectors(t_home *home)
 		}
 		i++;
 	}
+	calc_slanted_floors(home);
 }
