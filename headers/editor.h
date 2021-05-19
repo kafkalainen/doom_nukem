@@ -42,7 +42,7 @@ typedef struct		s_editor
 {
 	//t_sector_list	*sector_list;
 	t_button		**button_list;
-	t_mouse_data	*mouse_data;
+	t_mouse_data	mouse_data;
 	Uint32			*buffer;
 	t_window		win;
 	int				grid_size;

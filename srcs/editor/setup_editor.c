@@ -16,10 +16,10 @@ void			editor_put_pixel(Uint32 *buffer, int x, int y, int color)
 {
 	Uint32		*pixel;
 
-	if (x > 2560 - 1 || y > 1440 - 1 || x < 0 || y < 0)
+	if (x > 1920 - 1 || y > 1080 - 1 || x < 0 || y < 0)
 		return ;
 	// buffer[(SCREEN_WIDTH * y) + x] = color;
-	pixel = buffer + (2560 * y) + x;
+	pixel = buffer + (1920 * y) + x;
 	*pixel = color;
 }
 
@@ -101,9 +101,9 @@ void			draw_grid_editor(t_editor *editor, t_xy start, t_xy wh, int cell_size)
 
 void	draw_ui(t_editor *editor)
 {
-	draw_box(vec2(0, 0), vec2(200, 1440), editor->buffer, 0x282040);
+	draw_box(vec2(0, 0), vec2(200, 1080), editor->buffer, 0x282040);
 	if (editor->toggle_grid == 1)
-		draw_grid_editor(editor, vec2(200, 0), vec2(2359, 1239), editor->grid_size);
+		draw_grid_editor(editor, vec2(200, 0), vec2(1920, 1080), editor->grid_size);
 	//draw_sectors(home);
 }
 
@@ -129,12 +129,12 @@ void	launch_editor(t_home *home, SDL_Event *e)
 
 	w = 0;
 	h = 0;
-	SDL_SetWindowSize(home->win.window, 2560, 1440);
+	SDL_SetWindowSize(home->win.window, 1920, 1080);
 	SDL_GetWindowSize(home->win.window, &w, &h);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 	blist = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
 	init_textures(home);
-	init_mouse_data(editor.mouse_data);
+	init_mouse_data(&editor.mouse_data);
 	if (!(editor.buffer = (Uint32*)malloc(sizeof(Uint32) *
 		(Uint32)w * (Uint32)h)))
 		error_output("Memory allocation failed!\n");

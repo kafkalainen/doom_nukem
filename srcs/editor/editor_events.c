@@ -61,11 +61,11 @@ void	editor_events(SDL_Event *e, t_home *home, t_editor *editor)
 	{
 		if (e->type == SDL_MOUSEBUTTONDOWN)
 		{
-			editor_mouse(editor->mouse_data, e);
-			check_event(editor->mouse_data, editor->button_list);
+			editor_mouse(&editor->mouse_data, e);
+			check_event(&editor->mouse_data, editor->button_list);
 		}
 		if (e->type == SDL_MOUSEBUTTONUP)
-			check_event(editor->mouse_data, editor->button_list);
+			check_event(&editor->mouse_data, editor->button_list);
 		if (e->type == SDL_QUIT)
 			home->game_state = QUIT;
 		if (e->type == SDL_KEYDOWN && e->key.keysym.sym == SDLK_ESCAPE)
