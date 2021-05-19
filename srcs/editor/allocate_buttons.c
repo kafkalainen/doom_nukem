@@ -32,11 +32,11 @@ t_button	**create_button_list(t_button **blist)
 	i = 0;
 	create_button(blist[i++], vec2(32, 52), vec2(96, 76), "Print sector data");
 	create_button(blist[i++], vec2(32, 80), vec2(96, 104), "Toggle grid");
-	create_button(blist[i++], vec2(32, 134), vec2(24, 158), "++");
-	create_button(blist[i++], vec2(76, 134), vec2(24, 158), "--");
+	create_button(blist[i++], vec2(32, 134), vec2(56, 158), "++");
+	create_button(blist[i++], vec2(76, 134), vec2(100, 158), "--");
 	create_button(blist[i++], vec2(16, 180), vec2(96, 204), "New sector");
-	create_button(blist[i++], vec2(120, 180), vec2(24, 204), "-");
-	create_button(blist[i++], vec2(164, 180), vec2(24, 204), "+");
+	create_button(blist[i++], vec2(120, 180), vec2(144, 204), "-");
+	create_button(blist[i++], vec2(164, 180), vec2(188, 204), "+");
 	create_button(blist[i++], vec2(16, 240), vec2(168, 264), "Delete selected sector");
 	create_button(blist[i++], vec2(16, 280), vec2(168, 304), "Snap sector to grid");
 	create_button(blist[i++], vec2(16, 320), vec2(178, 344), "Show sectors' bboxes");

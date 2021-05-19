@@ -54,7 +54,7 @@ void	draw_box(t_xy start, t_xy end, Uint32 *buffer, int color)
 	y = start.y;
 	while (y < end.y)
 	{
-		editor_draw_line(vec2(x, y), vec2(x + end.x, y), color, buffer);
+		editor_draw_line(vec2(x, y), vec2(end.x, y), color, buffer);
 		y++;
 	}
 }
