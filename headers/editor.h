@@ -51,7 +51,9 @@ typedef struct		s_editor
 
 // SDL DRAWING STUFF
 
+void		editor_events(SDL_Event *e, t_home *home, t_editor *editor);
 void		draw_ui(t_editor *editor);
+void		check_event(t_mouse_data *mouse_data, t_button **list);
 void		launch_editor(t_home *home, SDL_Event *e);
 t_button	**create_button_list(t_button **blist);
 

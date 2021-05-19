@@ -10,6 +10,8 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e)
 			mouse_data->i_mbleft = 1;
 			mouse_data->x = e->motion.x;
 			mouse_data->y = e->motion.y;
+			printf("%s%f\n", "mouse.x =", mouse_data->x);
+			printf("%s%f\n", "mouse.y =", mouse_data->y);
 		}
 		if (e->button.button == SDL_BUTTON_RIGHT)
 		{
@@ -43,17 +45,14 @@ void	check_event(t_mouse_data *mouse_data, t_button **list)
 	i = 0;
 	while(i < NBR_BUTTONS)
 	{
-		if (check_bbox(list[i]->ltop, list[i]->wh, mouse_data->x, mouse_data->y))
+		if (check_bbox(list[i]->ltop, list[i]->wh, mouse_data->x, mouse_data->y) == 1)
+		{
 			mouse_data->selected = i;
+			printf("%s%d %s\n", "painoit nappula nro ", i, list[i]->text);
+
+		}
+		i++;
 	}
-	if (mouse_data->selected == 0)
-		printf("%s\n", "painoit nappula nro 0");
-	if (mouse_data->selected == 1)
-		printf("%s\n", "painoit nappula nro 1");
-	if (mouse_data->selected == 2)
-		printf("%s\n", "painoit nappula nro 2");
-	if (mouse_data->selected == 3)
-		printf("%s\n", "painoit nappula nro 3");
 }
 
 void	editor_events(SDL_Event *e, t_home *home, t_editor *editor)
