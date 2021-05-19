@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/18 15:52:16 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/19 12:22:45 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,11 @@ void	launch_editor(t_home *home, SDL_Event *e)
 
 	w = 0;
 	h = 0;
-	SDL_SetWindowSize(home->win.window, 1920, 1080);
+	SDL_SetWindowFullscreen(home->win.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	SDL_GetWindowSize(home->win.window, &w, &h);
-	SDL_SetWindowPosition(home->win.window, 5, 30);
+	SDL_SetWindowFullscreen(home->win.window, 0);
+	SDL_SetWindowSize(home->win.window, w, h);
+	SDL_SetWindowPosition(home->win.window, 0, 0);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 	blist = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
 	init_textures(home);
@@ -159,7 +161,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	}
 	free(blist);
 	free_all_textures(home->editor_tex, &home->nbr_of_textures);
-	SDL_SetWindowFullscreen(home->win.window, 0);
+	// SDL_SetWindowFullscreen(home->win.window, 0);
 	SDL_SetWindowSize(home->win.window, SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_SetWindowPosition(home->win.window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
