@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/16 19:09:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/19 11:57:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,24 @@ static char	*compass_direction(t_xy *dir)
 		return (ft_strdup("NO DIR"));
 }
 
+/*
+**		draw_line(
+**			center_to_screen(home->sectors[i]->floor_bottom_left),
+**			center_to_screen(home->sectors[i]->floor_bottom_right),
+**			red, frame->buffer);
+**		draw_line(
+**			center_to_screen(home->sectors[i]->floor_top_left),
+**			center_to_screen(home->sectors[i]->floor_top_right),
+**			red, frame->buffer);
+**		draw_line(
+**			center_to_screen(home->sectors[i]->floor_top_left),
+**			center_to_screen(home->sectors[i]->floor_bottom_left),
+**			red, frame->buffer);
+**		draw_line(
+**			center_to_screen(home->sectors[i]->floor_top_right),
+**			center_to_screen(home->sectors[i]->floor_bottom_right),
+**			red, frame->buffer);
+*/
 static void	draw_minimap(t_home *home, t_frame *frame)
 {
 	unsigned int	i;
@@ -39,22 +57,6 @@ static void	draw_minimap(t_home *home, t_frame *frame)
 	{
 		j = 0;
 		temp = home->sectors[i]->points;
-		draw_line(
-			center_to_screen(home->sectors[i]->floor_bottom_left),
-			center_to_screen(home->sectors[i]->floor_bottom_right),
-			red, frame->buffer);
-		draw_line(
-			center_to_screen(home->sectors[i]->floor_top_left),
-			center_to_screen(home->sectors[i]->floor_top_right),
-			red, frame->buffer);
-		draw_line(
-			center_to_screen(home->sectors[i]->floor_top_left),
-			center_to_screen(home->sectors[i]->floor_bottom_left),
-			red, frame->buffer);
-		draw_line(
-			center_to_screen(home->sectors[i]->floor_top_right),
-			center_to_screen(home->sectors[i]->floor_bottom_right),
-			red, frame->buffer);
 		while (j < home->sectors[i]->nb_of_walls)
 		{
 			draw_line(center_to_screen(temp->x0),
@@ -102,11 +104,11 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
 	str_pxl(frame->buffer, (t_xy){0, 110}, "current_z:", mod);
 	str_pxl(frame->buffer, (t_xy){0, 130}, plr_z, mod);
-	str_pxl(frame->buffer, (t_xy){0, 380}, "Press z to switch to wireframe", mod);
-	str_pxl(frame->buffer, (t_xy){0, 400}, "Press x to close minimap", mod);
-	str_pxl(frame->buffer, (t_xy){0, 420}, "Press c to close info", mod);
-	str_pxl(frame->buffer, (t_xy){0, 440}, "Move with wasd, rotate with q and e.", mod);
-	str_pxl(frame->buffer, (t_xy){0, 460}, "Capture and free mouse with m", mod);
+	str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
+	str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
+	str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
+	str_pxl(frame->buffer, (t_xy){0, 440}, "wasd, rotate with q and e.", mod);
+	str_pxl(frame->buffer, (t_xy){0, 460}, "free mouse with m", mod);
 	free(fps);
 	free(sector);
 	free(compass);

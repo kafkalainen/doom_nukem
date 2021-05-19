@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   caster.h                                           :+:      :+:    :+:   */
+/*   draw_shapes2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/22 13:51:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/17 16:44:42 by jnivala          ###   ########.fr       */
+/*   Created: 2021/05/19 11:46:02 by jnivala           #+#    #+#             */
+/*   Updated: 2021/05/19 11:46:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CASTER_H
-# define CASTER_H
+#include "../../headers/doom_nukem.h"
 
-/*
-** Raycaster
-*/
+void	draw_square(Uint32 *buffer, t_xy offset, int c, int s)
+{
+	int		x;
+	int		y;
 
-void			draw_fov_floor(t_home *home, t_player *plr);
-
-t_xy			init_ray(t_xy pos, t_xy plane, t_xy left, float angle);
-void			draw_fov(t_home *home, t_player *plr);
-void			draw_frame(t_home *home, t_frame *frame, t_player *plr);
-
-#endif
+	x = 0;
+	y = 0;
+	while (y < s)
+	{
+		x = 0;
+		while (x < s)
+		{
+			put_pixel(buffer, (int)(x + offset.x), (int)(y + offset.y), c);
+			x++;
+		}
+		y++;
+	}
+}

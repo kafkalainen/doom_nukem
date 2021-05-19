@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/14 15:59:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/18 16:13:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ t_xyz	vec3(float x, float y, float z);
 t_xyz	vec3_add(t_xyz a, t_xyz b);
 float	vec3_eucl_dist(t_xyz a);
 t_xy	vec3_to_vec2(t_xyz a);
+float	vec2_distance_from_point_to_line(t_xy *p0, t_xy *p1, t_xy *x0);
 
 #endif

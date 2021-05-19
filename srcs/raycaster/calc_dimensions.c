@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/14 22:46:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/19 11:41:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,19 @@ static void	interpolate_steps(t_frame *frame)
 			frame->inner_box.top_left.x, frame->inner_box.top_right.x);
 }
 
-void	calc_dimensions(t_frame *frame, t_player *plr, t_home *home)
+static void init_drawboxes(t_frame *frame)
+{
+	frame->draw_top = 0;
+	frame->draw_middle = 0;
+	frame->draw_bottom = 0;
+}
+
+void	calc_wall_dimensions(t_frame *frame, t_player *plr, t_home *home)
 {
 	t_point	*temp;
 
+	init_drawboxes(frame);
 	temp = frame->left.wall;
-	frame->draw_top = 0;
-	frame->draw_bottom = 0;
-	frame->draw_middle = 0;
-	frame->draw_incline = 0;
 	if (frame->left.wall->idx < 0)
 		frame->draw_middle = 1;
 	if (frame->left.wall->idx >= 0)

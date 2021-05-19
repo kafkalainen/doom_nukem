@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/14 19:39:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/19 11:50:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,38 +74,40 @@ enum e_lines
 	c_clockwise = 2,
 };
 
-void		calc_dimensions(t_frame *frame, t_player *plr, t_home *home);
-void		calc_ground_texels(t_sector *sector, t_frame *frame, t_player *plr);
-void		calc_intersection(t_point *pgon, t_ray *ray,
-				t_intersection *sect);
-void		calc_sector_bounds(t_sector *sector);
-void		calc_wall_texels(t_frame *frame, int tex_width);
-int			check_connection(t_point *point, t_frame *frame);
-int			check_if_portal(t_point *point);
-int			check_if_same_pt(int *current_pxl, t_ray_pt *fov);
-int			check_if_lseg_intersects(t_point *p0, t_xy *pos, t_xy *dir);
-void		continue_from_last_sector(t_point *start, t_ray_pt *fov,
-				t_frame *frame);
-void		draw_ground(t_player *plr, t_frame *frame, t_home *home);
-void		draw_segment(t_frame *frame, t_home *home, t_player *plr);
-int			draw_tex_line(t_xy start, t_xy end,
-				t_texture *tex, SDL_Surface *surf);
-void		draw_vertically(t_frame *frame, t_sector *sector,
-	t_texture *wall_tex);
-void		draw_wall(t_frame *frame, t_texture *tex, t_home *home,
-				t_player *plr);
-int			get_next_wall_tex(t_point **current_head, int nbr_of_walls);
-t_texture	*get_tex(int idx, t_texture	**textures);
-void		get_wall_pts(t_frame *frame, int walls, int current_pxl);
-t_point		*get_portal_by_idx(int idx, t_sector *sector);
-void		interpolate_y(t_height *height, t_xy cutpoint,
-			t_point *p0, t_point *p1);
-t_xy		line_intersection(t_intersection *sect);
-t_xy		line_intersection_raw(t_intersection *sect);
-void		scan_fov(t_home *home, t_frame *frame, t_player *plr,
-				int current_pxl);
-void		setup_frame(t_frame *frame, t_frame *new_frame,
-				int current_pxl, int idx);
-void		step_one(t_frame *frame);
+void			calc_ground_dimensions(t_frame *frame, t_player *plr, t_home *home);
+void			calc_ground_texels(t_sector *sector, t_frame *frame, t_player *plr);
+void			calc_intersection(t_point *pgon, t_ray *ray,
+					t_intersection *sect);
+void			calc_sector_bounds(t_sector *sector);
+void			calc_wall_dimensions(t_frame *frame, t_player *plr, t_home *home);
+void			calc_wall_texels(t_frame *frame, int tex_width);
+int				check_connection(t_point *point, t_frame *frame);
+int				check_if_portal(t_point *point);
+int				check_if_same_pt(int *current_pxl, t_ray_pt *fov);
+int				check_if_lseg_intersects(t_point *p0, t_xy *pos, t_xy *dir);
+void			continue_from_last_sector(t_point *start, t_ray_pt *fov,
+					t_frame *frame);
+void			draw_ground(t_player *plr, t_frame *frame, t_home *home);
+void			draw_segment(t_frame *frame, t_home *home, t_player *plr);
+int				draw_tex_line(t_xy start, t_xy end,
+					t_texture *tx, SDL_Surface *surf);
+void			draw_vertically(t_frame *frame, t_texture *wall_tex);
+void			draw_wall(t_frame *frame, t_texture *tex, t_home *home,
+					t_player *plr);
+int				get_next_wall_tex(t_point **current_head, int nbr_of_walls);
+t_texture		*get_tex(int idx, t_texture	**textures);
+void			get_wall_pts(t_frame *frame, int walls, int current_pxl);
+void			get_l_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls);
+void			get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls);
+t_point			*get_opposing_wall(t_point *current_wall, unsigned int walls);
+t_point			*get_portal_by_idx(int idx, t_sector *sector);
+void			interpolate_y(t_height *height, t_xy cutpoint,
+					t_point *p0, t_point *p1);
+t_xy			line_intersection(t_intersection *sect);
+void			scan_fov(t_home *home, t_frame *frame, t_player *plr,
+					int current_pxl);
+void			setup_frame(t_frame *frame, t_frame *new_frame,
+					int current_pxl, int idx);
+void			step_one(t_frame *frame);
 
 #endif

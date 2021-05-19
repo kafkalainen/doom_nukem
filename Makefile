@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/17 13:07:48 by rzukale          ###   ########.fr        #
+#    Updated: 2021/05/19 11:50:24 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = doom-nukem
 SRCS = \
 	main.c \
 	parsing$(SLASH)calc_norm_vectors.c \
+	parsing$(SLASH)calc_slanted_floors.c \
 	parsing$(SLASH)free_sector.c \
 	parsing$(SLASH)parse_number_data.c \
 	parsing$(SLASH)parse_sector.c \
@@ -42,10 +43,12 @@ SRCS = \
 	raycaster$(SLASH)calc_dimensions.c \
 	raycaster$(SLASH)calc_ground_texels.c \
 	raycaster$(SLASH)calc_sector_bounds.c \
+	raycaster$(SLASH)calc_ground_dimensions.c \
 	raycaster$(SLASH)calc_wall_texels.c \
 	raycaster$(SLASH)colour_scale.c \
 	raycaster$(SLASH)get_floor.c \
 	raycaster$(SLASH)get_next_wall_tex.c \
+	raycaster$(SLASH)get_opposing_wall.c \
 	raycaster$(SLASH)get_portal_by_idx.c \
 	raycaster$(SLASH)get_wall_points.c \
 	raycaster$(SLASH)line_line_intersection.c \
@@ -58,6 +61,7 @@ SRCS = \
 	update_screen$(SLASH)draw_frame.c \
 	update_screen$(SLASH)draw_segment.c \
 	update_screen$(SLASH)draw_shapes.c \
+	update_screen$(SLASH)draw_shapes2.c \
 	update_screen$(SLASH)draw_tex_pixel.c \
 	update_screen$(SLASH)draw_wireframe.c \
 	update_player$(SLASH)key_input.c \
@@ -65,7 +69,6 @@ SRCS = \
 	update_player$(SLASH)update_height.c \
 	update_player$(SLASH)player_move.c \
 	update_screen$(SLASH)put_pixel.c \
-	update_screen$(SLASH)steplen.c \
 	update_screen$(SLASH)matrix_2d.c \
 	update_player$(SLASH)update_player.c \
 	update_screen$(SLASH)update_screen.c \
