@@ -38,6 +38,13 @@ typedef struct		s_button
 	char		*text;
 }					t_button;
 
+typedef	struct		s_int_xy
+{
+	int				x;
+	int				y;
+}					t_int_xy;
+
+
 typedef struct		s_editor
 {
 	//t_sector_list	*sector_list;
@@ -45,6 +52,7 @@ typedef struct		s_editor
 	t_mouse_data	mouse_data;
 	Uint32			*buffer;
 	t_window		win;
+	t_int_xy		win_dim;
 	int				grid_size;
 	int				toggle_grid;
 }					t_editor;

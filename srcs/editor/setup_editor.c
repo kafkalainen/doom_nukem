@@ -12,33 +12,23 @@
 
 #include "../headers/doom_nukem.h"
 
-void			editor_put_pixel(Uint32 *buffer, int x, int y, int color)
-{
-	Uint32		*pixel;
-
-	if (x > 1920 - 1 || y > 1080 - 1 || x < 0 || y < 0)
-		return ;
-	// buffer[(SCREEN_WIDTH * y) + x] = color;
-	pixel = buffer + (1920 * y) + x;
-	*pixel = color;
-}
-
-void	editor_draw_line(t_xy p0, t_xy p1, int colour, Uint32 *buffer)
+void	editor_draw_line(t_xy start, t_xy end, int colour, Uint32 *buffer)
 {
 	t_xy		delta;
 	t_xy		pixel;
 	long int	pixels;
 
-	delta.x = p1.x - p0.x;
-	delta.y = p1.y - p0.y;
+	delta.x = end.x - start.x;
+	delta.y = end.y - start.y;
 	pixels = sqrt((delta.x * delta.x) + (delta.y * delta.y));
 	delta.x /= pixels;
 	delta.y /= pixels;
-	pixel.x = p0.x;
-	pixel.y = p0.y;
+	pixel.x = start.x;
+	pixel.y = start.y;
 	while (pixels)
 	{
-		editor_put_pixel(buffer, (int)pixel.x, (int)pixel.y, colour);
+		if (pixel.x >= 0 && pixel.x < end.x && pixel.y >= 0 && pixel.y < end.y)
+			buffer[((int)end.x * (int)pixel.y) + (int)pixel.x] = colour;
 		pixel.x += delta.x;
 		pixel.y += delta.y;
 		--pixels;
@@ -48,13 +38,11 @@ void	editor_draw_line(t_xy p0, t_xy p1, int colour, Uint32 *buffer)
 void	draw_box(t_xy start, t_xy end, Uint32 *buffer, int color)
 {
 	float y;
-	float x;
 
-	x = start.x;
 	y = start.y;
 	while (y < end.y)
 	{
-		editor_draw_line(vec2(x, y), vec2(end.x, y), color, buffer);
+		editor_draw_line(start, end, color, buffer);
 		y++;
 	}
 }
@@ -79,21 +67,21 @@ void		draw_buttons(t_button **blist, Uint32 *buffer)
 	//draw_text(home, ft_itoa(home->grid_size), vec2(60, 138), (t_color){0, 0, 0, 255});
 }
 
-void			draw_grid_editor(t_editor *editor, t_xy start, t_xy wh, int cell_size)
+void			draw_grid_editor(t_editor *editor, t_xy start, t_int_xy end, int cell_size)
 {
 	int		i;
 
 	i = 0;
-	while (i < wh.x)
+	while (i < end.x)
 	{
-		editor_draw_line(vec2(i + start.x, start.y), vec2(i + start.x, start.y + wh.y),
+		editor_draw_line(vec2(i + start.x, start.y), vec2(i + start.x, end.y),
 		0x606060, editor->buffer);
 		i += cell_size;
 	}
 	i = 0;
-	while (i < wh.y)
+	while (i < end.y)
 	{
-		editor_draw_line(vec2(start.x, start.y + i), vec2(start.x + wh.x, start.y + i),
+		editor_draw_line(vec2(start.x, start.y + i), vec2(end.x, start.y + i),
 		0x606060, editor->buffer);
 		i += cell_size;
 	}
@@ -101,9 +89,10 @@ void			draw_grid_editor(t_editor *editor, t_xy start, t_xy wh, int cell_size)
 
 void	draw_ui(t_editor *editor)
 {
-	draw_box(vec2(0, 0), vec2(200, 1080), editor->buffer, 0x282040);
+
+	draw_box(vec2(0, 0), vec2(200, editor->win_dim.y), editor->buffer, 0x282040);
 	if (editor->toggle_grid == 1)
-		draw_grid_editor(editor, vec2(200, 0), vec2(1920, 1080), editor->grid_size);
+		draw_grid_editor(editor, vec2(200, 0), editor->win_dim, editor->grid_size);
 	//draw_sectors(home);
 }
 
@@ -124,22 +113,20 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	t_button	**blist;
 	t_editor	editor;
 	int			i;
-	int			w;
-	int			h;
 
-	w = 0;
-	h = 0;
+	editor.win_dim.x = 0;
+	editor.win_dim.y = 0;
 	SDL_SetWindowFullscreen(home->win.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-	SDL_GetWindowSize(home->win.window, &w, &h);
+	SDL_GetWindowSize(home->win.window, &editor.win_dim.x, &editor.win_dim.y);
 	SDL_SetWindowFullscreen(home->win.window, 0);
-	SDL_SetWindowSize(home->win.window, w, h);
+	SDL_SetWindowSize(home->win.window, editor.win_dim.x, editor.win_dim.y);
 	SDL_SetWindowPosition(home->win.window, 0, 0);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 	blist = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
 	init_textures(home);
 	init_mouse_data(&editor.mouse_data);
 	if (!(editor.buffer = (Uint32*)malloc(sizeof(Uint32) *
-		(Uint32)w * (Uint32)h)))
+		(Uint32)editor.win_dim.x * (Uint32)editor.win_dim.y)))
 		error_output("Memory allocation failed!\n");
 	editor.grid_size = 32;
 	editor.toggle_grid = 1;
