@@ -6,22 +6,22 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/20 11:21:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 11:48:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/doom_nukem.h"
 
 
-void	put_editor_pixel(Uint32 *buffer, t_pxl_coords pxl_coords, t_screen_resolution dim, Uint32 color)
+void	put_editor_pixel(t_buffer *screen, t_pxl_coords pxl_coords, Uint32 color)
 {
-	if (pxl_coords.x > dim.width - 1 || pxl_coords.y > dim.height - 1 ||
+	if (pxl_coords.x > screen->width - 1 || pxl_coords.y > screen->height - 1 ||
 		pxl_coords.x < 0 || pxl_coords.y < 0)
 		return ;
-	buffer[(dim.width * pxl_coords.y) + pxl_coords.x] = color;
+	screen->buffer[(screen->width * pxl_coords.y) + pxl_coords.x] = color;
 }
 
-void	editor_draw_line(t_box box, t_screen_resolution dim, int colour, Uint32 *buffer)
+void	editor_draw_line(t_box box, int colour, t_buffer *buffer)
 {
 	t_xy			delta;
 	t_pxl_coords	pixel;
@@ -36,14 +36,14 @@ void	editor_draw_line(t_box box, t_screen_resolution dim, int colour, Uint32 *bu
 	pixel.y = (int)box.start.y;
 	while (pixels)
 	{
-		put_editor_pixel(buffer, pixel, dim, colour);
+		put_editor_pixel(buffer, pixel, colour);
 		pixel.x += (int)delta.x;
 		pixel.y += (int)delta.y;
 		--pixels;
 	}
 }
 
-void	draw_box(t_box box, t_screen_resolution dim, Uint32 *buffer, int color)
+void	draw_box(t_box box, t_buffer *buffer, int color)
 {
 	float end;
 	float start;
@@ -55,12 +55,12 @@ void	draw_box(t_box box, t_screen_resolution dim, Uint32 *buffer, int color)
 	{
 		box.start.y = start;
 		box.end.y = box.start.y;
-		editor_draw_line(box, dim, color, buffer);
+		editor_draw_line(box, color, buffer);
 		start++;
 	}
 }
 
-void		draw_buttons(t_button **blist, Uint32 *buffer, t_screen_resolution dim)
+void		draw_buttons(t_button **blist, t_buffer *buffer)
 {
 	int		i;
 	t_box	box;
@@ -71,7 +71,7 @@ void		draw_buttons(t_button **blist, Uint32 *buffer, t_screen_resolution dim)
 	{
 		box.start = blist[i]->ltop;
 		box.end = blist[i]->wh;
-		draw_box(box, dim, buffer, 0xAAAAAA);
+		draw_box(box, buffer, 0xAAAAAA);
 		i++;
 		//draw_text(home, blist->text, vec2(blist->ltop.x + 8,
 		//blist->ltop.y + 4), (t_color){0, 0, 0, 255});
@@ -98,7 +98,7 @@ void			draw_grid_editor(t_editor *editor, t_box box, int cell_size)
 	{
 		copy.start.x = x + i;
 		copy.end.x = copy.start.x;
-		editor_draw_line(copy, editor->dim, 0x606060, editor->buffer);
+		editor_draw_line(copy, 0x606060, &editor->screen);
 		i += cell_size;
 	}
 	i = 0;
@@ -109,7 +109,7 @@ void			draw_grid_editor(t_editor *editor, t_box box, int cell_size)
 	{
 		copy.start.y = x + i;
 		copy.end.y = copy.start.y;
-		editor_draw_line(copy, editor->dim, 0x606060, editor->buffer);
+		editor_draw_line(copy, 0x606060, &editor->screen);
 		i += cell_size;
 	}
 }
@@ -119,13 +119,13 @@ void	draw_ui(t_editor *editor)
 	t_box	box;
 
 	box.start = vec2(0, 0);
-	box.end = vec2(200, editor->dim.height);
-	draw_box(box, editor->dim, editor->buffer, 0x282040);
+	box.end = vec2(200, editor->screen.height);
+	draw_box(box, &editor->screen, 0x282040);
 	if (editor->toggle_grid == 1)
 	{
 		box.start = vec2(200, 0);
-		box.end.x = (float)editor->dim.width;
-		box.end.y = (float)editor->dim.height;
+		box.end.x = (float)editor->screen.width;
+		box.end.y = (float)editor->screen.height;
 		draw_grid_editor(editor, box, editor->grid_size);
 	}
 	// draw_sectors(home);
@@ -149,19 +149,19 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	t_editor	editor;
 	int			i;
 
-	editor.dim.width = 0;
-	editor.dim.height = 0;
+	editor.screen.width = 0;
+	editor.screen.height = 0;
 	SDL_SetWindowFullscreen(home->win.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-	SDL_GetWindowSize(home->win.window, &editor.dim.width, &editor.dim.height);
+	SDL_GetWindowSize(home->win.window, &editor.screen.width, &editor.screen.height);
 	SDL_SetWindowFullscreen(home->win.window, 0);
-	SDL_SetWindowSize(home->win.window, editor.dim.width, editor.dim.height);
+	SDL_SetWindowSize(home->win.window, editor.screen.width, editor.screen.height);
 	SDL_SetWindowPosition(home->win.window, 0, 0);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 	blist = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
 	init_textures(home);
 	init_mouse_data(&editor.mouse_data);
-	if (!(editor.buffer = (Uint32*)malloc(sizeof(Uint32) *
-		(Uint32)editor.dim.width * (Uint32)editor.dim.height)))
+	if (!(editor.screen.buffer = (Uint32*)malloc(sizeof(Uint32) *
+		(Uint32)editor.screen.width * (Uint32)editor.screen.height)))
 		error_output("Memory allocation failed!\n");
 	editor.grid_size = 32;
 	editor.toggle_grid = 1;
@@ -170,11 +170,11 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	{
 		editor_events(e, home, &editor);
 		draw_ui(&editor);
-		draw_buttons(blist, editor.buffer, editor.dim);
-		render_buffer(editor.buffer, home->win.ScreenSurface);
+		draw_buttons(blist, &editor.screen);
+		render_buffer(editor.screen.buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
-	free(editor.buffer);
+	free(editor.screen.buffer);
 	i = -1;
 	while (++i < NBR_BUTTONS)
 	{

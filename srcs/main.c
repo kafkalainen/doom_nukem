@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/19 16:55:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 11:50:01 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	while (home.game_state != QUIT)
 	{
 		process_inputs_main_menu(&home.game_state, &e, &menu.option);
-		update_main_menu(menu.menu_buffer, menu.option);
+		update_main_menu(menu.menu_screen.buffer, menu.option);
 		if (home.game_state == MAP_MENU)
 		{
 			load_map_names(&menu);
@@ -58,9 +58,9 @@ int	main(int argc, char **argv)
 		}
 		if (home.game_state == EDITOR)
 			launch_editor(&home, &e);
-		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
+		render_buffer(menu.menu_screen.buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
-	exit_game(&home, frame.buffer, &plr.audio, menu.menu_buffer);
+	exit_game(&home, frame.buffer, &plr.audio, menu.menu_screen.buffer);
 	return (EXIT_SUCCESS);
 }

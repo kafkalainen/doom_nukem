@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:27:23 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 11:46:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 11:46:13 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef	struct	s_menu
 {
-	Uint32		*menu_buffer;
+	t_buffer	menu_screen;
 	char		**map_names;
 	char		*chosen_map;
 	int			nbr_of_maps;

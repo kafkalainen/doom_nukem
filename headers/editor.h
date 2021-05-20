@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/05/20 11:20:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 11:47:30 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ typedef struct		s_button
 	char		*text;
 }					t_button;
 
-typedef	struct		s_screen_resolution
-{
-	int				width;
-	int				height;
-}					t_screen_resolution;
-
 typedef	struct		s_pxl_coords
 {
 	int				x;
@@ -56,15 +50,13 @@ typedef	struct		s_box
 	t_xy			end;
 }					t_box;
 
-
 typedef struct			s_editor
 {
 	//t_sector_list	*sector_list;
 	t_button			**button_list;
 	t_mouse_data		mouse_data;
-	Uint32				*buffer;
+	t_buffer			screen;
 	t_window			win;
-	t_screen_resolution	dim;
 	int					grid_size;
 	int					toggle_grid;
 }						t_editor;

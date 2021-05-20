@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 14:49:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/20 11:49:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	load_map_names(t_menu *menu)
 void	setup_menu(t_menu *menu, int *game_state)
 {
 	menu->nbr_of_maps = 0;
-	menu->menu_buffer = (Uint32 *)malloc(sizeof(Uint32)
+	menu->menu_screen.buffer = (Uint32 *)malloc(sizeof(Uint32)
 			* (SCREEN_WIDTH * SCREEN_HEIGHT));
-	if (!menu->menu_buffer)
+	if (!menu->menu_screen.buffer)
 		error_output("Failed to allocate memory to menu_buffer\n");
 	menu->option = 0;
 	*game_state = MAIN_MENU;

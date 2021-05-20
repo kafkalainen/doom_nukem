@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/17 16:44:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/20 11:47:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ typedef struct s_window
 	int				width;
 	int				height;
 }					t_window;
+
+typedef	struct		s_buffer
+{
+	int				width;
+	int				height;
+	Uint32			*buffer;
+}					t_buffer;
 
 typedef struct s_home
 {
