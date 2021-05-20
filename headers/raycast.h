@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/20 12:05:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 13:02:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void			calc_ground_texels(t_sector *sector, t_frame *frame, t_player *plr);
 void			calc_intersection(t_point *pgon, t_ray *ray,
 					t_intersection *sect);
 void			calc_sector_bounds(t_sector *sector);
-void			calc_wall_dimensions(t_frame *frame, t_player *plr, t_home *home);
+void			calc_wall_dimensions(t_frame *frame, t_player *plr, t_sector **sectors);
 void			calc_wall_texels(t_frame *frame, int tex_width);
 int				check_connection(t_point *point, t_frame *frame);
 int				check_if_portal(t_point *point);
@@ -88,7 +88,7 @@ int				check_if_lseg_intersects(t_point *p0, t_xy *pos, t_xy *dir);
 void			continue_from_last_sector(t_point *start, t_ray_pt *fov,
 					t_frame *frame);
 void			draw_ground(t_player *plr, t_frame *frame, t_home *home);
-void			draw_segment(t_frame *frame, t_home *home, t_player *plr);
+void			draw_segment(t_frame *frame, t_sector **sectors, t_texture **textures, t_player *plr);
 int				draw_tex_line(t_xy start, t_xy end,
 					t_texture *tx, SDL_Surface *surf);
 void			draw_vertically(t_frame *frame, t_texture *wall_tex);

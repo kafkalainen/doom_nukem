@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/20 12:19:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 13:01:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,20 @@ void	draw_vertically(t_frame *frame, t_texture *wall_tex)
 	}
 }
 
-void	draw_segment(t_frame *frame, t_home *home, t_player *plr)
+void	draw_segment(t_frame *frame, t_sector **sectors, t_texture **textures, t_player *plr)
 {
 	t_texture	*wall_tex;
 
-	wall_tex = get_tex(-1, home->editor_tex);
+	wall_tex = get_tex(-1, textures);
 	if (frame->left.wall->idx < 0)
-		wall_tex = get_tex(frame->left.wall->idx, home->editor_tex);
+		wall_tex = get_tex(frame->left.wall->idx, textures);
 	else
 		wall_tex = get_tex(get_next_wall_tex(&frame->left.wall->next,
-					home->sectors[frame->idx]->nb_of_walls), home->editor_tex);
-	calc_wall_dimensions(frame, plr, home);
+					sectors[frame->idx]->nb_of_walls), textures);
+	calc_wall_dimensions(frame, plr, sectors);
 	calc_wall_texels(frame, wall_tex->w);
 	if (plr->input.wireframe == 0)
 		draw_vertically(frame, wall_tex);
 	else
-		draw_wireframe(frame, get_floor(home->sectors[frame->idx]->tex_floor));
+		draw_wireframe(frame, get_floor(sectors[frame->idx]->tex_floor));
 }

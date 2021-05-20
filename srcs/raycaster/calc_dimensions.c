@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_dimensions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:27:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/19 11:41:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:58:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void init_drawboxes(t_frame *frame)
 	frame->draw_bottom = 0;
 }
 
-void	calc_wall_dimensions(t_frame *frame, t_player *plr, t_home *home)
+void	calc_wall_dimensions(t_frame *frame, t_player *plr, t_sector **sectors)
 {
 	t_point	*temp;
 
@@ -86,7 +86,7 @@ void	calc_wall_dimensions(t_frame *frame, t_player *plr, t_home *home)
 	if (frame->left.wall->idx >= 0)
 	{
 		temp = get_portal_by_idx(frame->idx,
-				home->sectors[frame->left.wall->idx]);
+				sectors[frame->left.wall->idx]);
 		frame->draw_top = frame->left.wall->height.ceiling
 			- temp->next->height.ceiling;
 		frame->draw_bottom = frame->left.wall->height.ground

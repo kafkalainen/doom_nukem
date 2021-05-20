@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/20 12:42:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 13:33:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,20 @@ void	draw_box(t_box box, t_buffer *buffer, int color)
 
 void		draw_buttons(t_button **blist, t_buffer *buffer)
 {
-	int		i;
-	t_box	box;
+	int				i;
+	t_box			box;
+	t_plx_modifier	mod;
 
 	i = 0;
+	mod.colour = white;
+	mod.size = TEXT_SIZE;
 	//check_button_clicked(home, blist);
 	while (i < NBR_BUTTONS)
 	{
 		box.start = blist[i]->ltop;
 		box.end = blist[i]->wh;
 		draw_box(box, buffer, 0xAAAAAA);
+		str_pxl(buffer, vec2(blist[i]->ltop.x + 8, blist[i]->ltop.y + 4), blist[i]->text, mod);
 		i++;
 		//draw_text(home, blist->text, vec2(blist->ltop.x + 8,
 		//blist->ltop.y + 4), (t_color){0, 0, 0, 255});
@@ -88,11 +92,11 @@ void	draw_ui(t_editor *editor)
 	t_box	box;
 
 	box.start = vec2(0, 0);
-	box.end = vec2(200, editor->buffer.height);
+	box.end = vec2(300, editor->buffer.height);
 	draw_box(box, &editor->buffer, 0x282040);
 	if (editor->toggle_grid == 1)
 	{
-		box.start = vec2(200, 0);
+		box.start = vec2(300, 0);
 		box.end.x = (float)editor->buffer.width;
 		box.end.y = (float)editor->buffer.height;
 		draw_grid_editor(editor, box, editor->grid_size);
