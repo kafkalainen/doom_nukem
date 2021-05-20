@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/20 11:49:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:27:06 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ void	load_map_names(t_menu *menu)
 void	setup_menu(t_menu *menu, int *game_state)
 {
 	menu->nbr_of_maps = 0;
-	menu->menu_screen.buffer = (Uint32 *)malloc(sizeof(Uint32)
+	menu->menu_buffer.pxl_buffer = (Uint32 *)malloc(sizeof(Uint32)
 			* (SCREEN_WIDTH * SCREEN_HEIGHT));
-	if (!menu->menu_screen.buffer)
+	if (!menu->menu_buffer.pxl_buffer)
 		error_output("Failed to allocate memory to menu_buffer\n");
 	menu->option = 0;
+	menu->menu_buffer.width = SCREEN_WIDTH;
+	menu->menu_buffer.height = SCREEN_HEIGHT;
 	*game_state = MAIN_MENU;
 }
 

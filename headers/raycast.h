@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/19 11:50:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:05:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_frame
 	int				draw_incline;
 	float			min_step;
 	int				old_idx;
-	Uint32			*buffer;
 	float			pxl_offset;
 	t_ray_pt		left;
 	t_ray_pt		right;
@@ -65,6 +64,7 @@ typedef struct s_frame
 	float			ratio;
 	int				pitch;
 	Uint32			last_frame;
+	t_buffer		buffer;
 }					t_frame;
 
 enum e_lines

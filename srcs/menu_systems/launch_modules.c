@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/20 11:50:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:10:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	launch_game_loop(t_home *home, t_player *plr,
 		fps_timer(&home->t);
 		update_player(plr, home, e);
 		update_screen(home, frame, plr);
-		render_buffer(frame->buffer, home->win.ScreenSurface);
+		render_buffer(frame->buffer.pxl_buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
 	return_to_main_from_game(home, plr);
@@ -42,7 +42,7 @@ void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e,
 	{
 		process_inputs_load_menu(game_state, e, menu);
 		update_load_menu(menu, e->key.keysym.sym);
-		render_buffer(menu->menu_screen.buffer, win->ScreenSurface);
+		render_buffer(menu->menu_buffer.pxl_buffer, win->ScreenSurface);
 		SDL_UpdateWindowSurface(win->window);
 	}
 	if (menu->selected)

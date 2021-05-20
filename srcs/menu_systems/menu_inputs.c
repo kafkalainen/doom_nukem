@@ -6,13 +6,13 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 11:45:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:23:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	update_main_menu(Uint32 *menu_buffer, int option)
+void	update_main_menu(t_buffer *menu_buffer, int option)
 {
 	int					i;
 	int					y;

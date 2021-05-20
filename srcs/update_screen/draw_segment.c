@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_segment.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/17 16:08:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:19:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ static void	fit_to_screen_space(t_xy *offset, t_xyz *texel,
 static void	draw_vertical_wall_strip(t_xy offset, int height,
 							t_texture *tex, t_frame *frame)
 {
-	int		cur_y;
-	t_xyz	corr_texel;
-	t_xyz	texel;
-	Uint32	colour;
+	int				cur_y;
+	t_xyz			corr_texel;
+	t_pxl_coords	c;
+	t_xyz			texel;
+	Uint32			colour;
 
 	cur_y = 0;
 	texel = frame->middle_uv.top_left;
@@ -42,10 +43,12 @@ static void	draw_vertical_wall_strip(t_xy offset, int height,
 		corr_texel = inv_z(texel);
 		if (cur_y + offset.y >= 0 && cur_y + offset.y < SCREEN_HEIGHT)
 		{
+			c.x = offset.x;
+			c.y = cur_y + offset.y;
 			colour = colour_scale(get_texel(corr_texel.x * (tex->w - 1),
 						corr_texel.y * (tex->h - 1), tex),
 					frame->left.wall->wall_facing);
-			put_pixel(frame->buffer, offset.x, cur_y + offset.y, colour);
+			put_pixel(&frame->buffer, c, colour);
 		}
 		cur_y++;
 		texel.y += frame->uv_step.y;

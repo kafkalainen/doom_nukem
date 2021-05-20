@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/20 11:47:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:14:36 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,14 @@ typedef	struct		s_buffer
 {
 	int				width;
 	int				height;
-	Uint32			*buffer;
+	Uint32			*pxl_buffer;
 }					t_buffer;
+
+typedef	struct		s_pxl_coords
+{
+	int				x;
+	int				y;
+}					t_pxl_coords;
 
 typedef struct s_home
 {

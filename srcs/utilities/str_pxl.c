@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/18 12:42:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:22:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_pxl_c	letter_logic(int c, int letter_colour)
 	return (pxl_numbers(' ', black, letter_colour));
 }
 
-static void	handle_letter(Uint32 *buffer, t_xy coord,
+static void	handle_letter(t_buffer *buffer, t_xy coord,
 	int c, t_plx_modifier mods)
 {
 	t_xy	cur;
@@ -51,7 +51,7 @@ static void	handle_letter(Uint32 *buffer, t_xy coord,
 	}
 }
 
-void	str_pxl(Uint32 *buffer, t_xy coord,
+void	str_pxl(t_buffer *buffer, t_xy coord,
 	char *str, t_plx_modifier mod)
 {
 	int		c;

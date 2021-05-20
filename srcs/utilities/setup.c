@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/19 16:56:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/20 12:15:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,12 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	home->win.height = SCREEN_HEIGHT;
 	setup_fps(&home->t);
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
-	frame->buffer = (Uint32 *)malloc(sizeof(Uint32)
+	frame->buffer.pxl_buffer = (Uint32 *)malloc(sizeof(Uint32)
 			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);
-	if (!frame->buffer)
+	if (!frame->buffer.pxl_buffer)
 		error_output("Memory allocation failed!\n");
+	frame->buffer.width = SCREEN_WIDTH;
+	frame->buffer.height = SCREEN_HEIGHT;
 	home = init_sdl(home, &frame->min_step);
 	// ret = load_audio(&plr->audio);
 	// if (ret)
