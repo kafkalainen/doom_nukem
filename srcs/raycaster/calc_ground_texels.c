@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:54:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/17 10:54:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/19 16:52:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,24 @@ static void	calc_offsets(t_sector *sector, t_frame *frame, t_player *plr)
 	frame->ground_uv.top_left.y = vec2_dist_from_point(&sector->floor_bottom_left,
 		&sector->floor_bottom_right, &frame->left.l_pt)
 		/ vec2_eucl_dist(sector->floor_bottom_left, sector->floor_top_left);
-	frame->ground_uv.top_left.z = vec3_eucl_dist(frame->outer_box.bottom_left);
+	frame->ground_uv.top_left.z = frame->inner_box.top_left.z;
 	frame->ground_uv.top_right.x = vec2_dist_from_point(&sector->floor_top_right,
 		&sector->floor_bottom_right, &frame->left.r_pt)
 		/ vec2_eucl_dist(sector->floor_top_right, sector->floor_top_left);
 	frame->ground_uv.top_right.y = vec2_dist_from_point(&sector->floor_bottom_left,
 		&sector->floor_bottom_right, &frame->left.r_pt)
 		/ vec2_eucl_dist(sector->floor_bottom_left, sector->floor_top_left);
-	frame->ground_uv.top_right.z = vec3_eucl_dist(frame->outer_box.bottom_right);
+	frame->ground_uv.top_right.z = frame->inner_box.top_right.z;
 	frame->ground_uv.bottom_left.x = frame->ground_uv.top_left.x;
 	frame->ground_uv.bottom_left.y = vec2_dist_from_point(&sector->floor_bottom_left,
 		&sector->floor_bottom_right, &(t_xy){0.0f, 0.0f})
 		/ vec2_eucl_dist(sector->floor_bottom_left, sector->floor_top_left);
-	frame->ground_uv.bottom_left.z = 10.0f;
+	frame->ground_uv.bottom_left.z = frame->inner_box.bottom_left.z;
 	frame->ground_uv.bottom_right.x = frame->ground_uv.top_right.x;
 	frame->ground_uv.bottom_right.y = vec2_dist_from_point(&sector->floor_bottom_left,
 		&sector->floor_bottom_right, &(t_xy){0.0f, 0.0f})
 		/ vec2_eucl_dist(sector->floor_bottom_left, sector->floor_top_left);
-	frame->ground_uv.bottom_right.z = 10.0f;
+	frame->ground_uv.bottom_right.z = frame->inner_box.bottom_right.z;
 }
 
 static void	calc_inverse_of_z(t_xyz *top_left, t_xyz *top_right,
@@ -120,11 +120,11 @@ void	calc_ground_texels(t_sector *sector, t_frame *frame, t_player *plr)
 		&frame->ground_uv.bottom_left, &frame->ground_uv.bottom_right);
 	frame->ground_uv_step.x = interpolate_points(
 		frame->ground_uv.top_left.x, frame->ground_uv.top_right.x,
-		frame->outer_box.bottom_left.x, frame->outer_box.bottom_right.x);
+		frame->inner_box.bottom_left.x, frame->inner_box.bottom_right.x);
 	frame->ground_uv_step.y = interpolate_points(
 		frame->ground_uv.top_left.y, frame->ground_uv.bottom_left.y,
-		frame->outer_box.bottom_left.y, SCREEN_HEIGHT);
+		frame->inner_box.bottom_left.y, SCREEN_HEIGHT);
 	frame->ground_uv_step.z = interpolate_points(
 		frame->ground_uv.top_left.z, frame->ground_uv.bottom_left.z,
-		frame->outer_box.bottom_left.y, SCREEN_HEIGHT);
+		frame->inner_box.bottom_left.y, SCREEN_HEIGHT);
 }

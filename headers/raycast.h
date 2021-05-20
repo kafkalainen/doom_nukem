@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/19 11:50:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/20 11:07:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ typedef struct s_frame
 	int				draw_top;
 	int				draw_middle;
 	int				draw_bottom;
-	int				draw_incline;
+	int				draw_ground;
 	float			min_step;
 	int				old_idx;
-	Uint32			*buffer;
 	float			pxl_offset;
+	Uint32			*buffer;
 	t_ray_pt		left;
 	t_ray_pt		right;
 	t_plgn			inner_box;
@@ -57,13 +57,14 @@ typedef struct s_frame
 	t_xyz			step_inner_bot;
 	t_xyz			step_outer_top;
 	t_xyz			step_outer_bot;
+	t_xyz			step_ground_left_top;
+	t_xyz			step_ground_right_top;
 	float			full_wall_dist;
 	float			visible_wall_dist;
 	float			unvisible_l_side;
 	float			screen_wall_len;
 	t_xy			wall_tex_mult;
 	float			ratio;
-	int				pitch;
 	Uint32			last_frame;
 }					t_frame;
 
@@ -81,13 +82,14 @@ void			calc_intersection(t_point *pgon, t_ray *ray,
 void			calc_sector_bounds(t_sector *sector);
 void			calc_wall_dimensions(t_frame *frame, t_player *plr, t_home *home);
 void			calc_wall_texels(t_frame *frame, int tex_width);
+t_xy			cast_ray(t_xy *dir, t_point **head, int walls);
 int				check_connection(t_point *point, t_frame *frame);
 int				check_if_portal(t_point *point);
 int				check_if_same_pt(int *current_pxl, t_ray_pt *fov);
 int				check_if_lseg_intersects(t_point *p0, t_xy *pos, t_xy *dir);
 void			continue_from_last_sector(t_point *start, t_ray_pt *fov,
 					t_frame *frame);
-void			draw_ground(t_player *plr, t_frame *frame, t_home *home);
+void			draw_sector(t_frame *frame, t_home *home, t_player *plr);
 void			draw_segment(t_frame *frame, t_home *home, t_player *plr);
 int				draw_tex_line(t_xy start, t_xy end,
 					t_texture *tx, SDL_Surface *surf);

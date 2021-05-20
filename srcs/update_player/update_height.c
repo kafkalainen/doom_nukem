@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 14:01:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 14:23:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/19 16:24:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_xy	cast_ray(t_xy *dir, t_point **head, int walls)
+t_xy	cast_ray(t_xy *dir, t_point **head, int walls)
 {
 	t_intersection	sect;
 	t_ray			plr;

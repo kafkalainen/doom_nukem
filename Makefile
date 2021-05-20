@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/19 11:50:24 by jnivala          ###   ########.fr        #
+#    Updated: 2021/05/19 15:50:14 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,10 @@ SRCS = \
 	porting$(SLASH)validate_sectors_data.c \
 	porting$(SLASH)validate_sectors_data_2.c \
 	porting$(SLASH)porting_utils.c \
-	raycaster$(SLASH)calc_dimensions.c \
 	raycaster$(SLASH)calc_ground_texels.c \
 	raycaster$(SLASH)calc_sector_bounds.c \
 	raycaster$(SLASH)calc_ground_dimensions.c \
+	raycaster$(SLASH)calc_wall_dimensions.c \
 	raycaster$(SLASH)calc_wall_texels.c \
 	raycaster$(SLASH)colour_scale.c \
 	raycaster$(SLASH)get_floor.c \
@@ -62,6 +62,7 @@ SRCS = \
 	raycaster$(SLASH)setup_frame.c \
 	raycaster$(SLASH)step_one.c \
 	update_screen$(SLASH)draw_frame.c \
+	update_screen$(SLASH)draw_sector.c \
 	update_screen$(SLASH)draw_segment.c \
 	update_screen$(SLASH)draw_shapes.c \
 	update_screen$(SLASH)draw_shapes2.c \
