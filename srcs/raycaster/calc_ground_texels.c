@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:54:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/21 14:11:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/21 15:10:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ void	calc_ground_texels(t_sector *sector, t_frame *frame)
 		&frame->ground_uv.bottom_left, &frame->ground_uv.bottom_right);
 	frame->ground_uv_step.x = interpolate_points(
 		frame->ground_uv.top_left.x, frame->ground_uv.top_right.x,
-		frame->outer_box.bottom_left.x, frame->outer_box.bottom_right.x);
-		// 0, 100);
+		240, SCREEN_HEIGHT);
 	frame->ground_uv_step.y = interpolate_points(
 		frame->ground_uv.top_left.y, frame->ground_uv.bottom_left.y,
 		240, SCREEN_HEIGHT);

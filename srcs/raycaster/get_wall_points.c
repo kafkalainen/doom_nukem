@@ -81,8 +81,8 @@ void	get_l_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	fov->r_pt = fov->wall->next->x0;
 	fov->height_r = fov->wall->next->height;
 	fov->ground_uv_r = fov->wall->next->ground_uv;
-	interpolate_y(&fov->height_l, fov->l_pt, p0, p0->next);
-	interpolate_uv(&fov->ground_uv_l, fov->l_pt, p0, p0->next);
+	interpolate_y(&fov->height_l, fov->l_pt, p0->next, p0);
+	interpolate_uv(&fov->ground_uv_l, fov->l_pt, p0->next, p0);
 }
 
 void	get_wall_pts(t_frame *frame, int walls, int current_pxl)
