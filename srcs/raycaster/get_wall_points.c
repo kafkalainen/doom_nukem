@@ -50,7 +50,9 @@ void	get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	fov->wall = p0;
 	fov->l_pt = fov->wall->x0;
 	fov->height_l = fov->wall->height;
+	fov->ground_uv_l = fov->wall->ground_uv;
 	interpolate_y(&fov->height_r, fov->r_pt, p0, p0->next);
+	interpolate_uv(&fov->ground_uv_r, fov->r_pt, p0, p0->next);
 }
 
 void	get_l_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
@@ -78,7 +80,9 @@ void	get_l_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
 	fov->wall = p0;
 	fov->r_pt = fov->wall->next->x0;
 	fov->height_r = fov->wall->next->height;
+	fov->ground_uv_r = fov->wall->next->ground_uv;
 	interpolate_y(&fov->height_l, fov->l_pt, p0, p0->next);
+	interpolate_uv(&fov->ground_uv_l, fov->l_pt, p0, p0->next);
 }
 
 void	get_wall_pts(t_frame *frame, int walls, int current_pxl)
@@ -95,11 +99,14 @@ void	get_wall_pts(t_frame *frame, int walls, int current_pxl)
 		frame->left.r_pt = frame->left.wall->next->x0;
 		frame->left.height_l = frame->left.wall->height;
 		frame->left.height_r = frame->left.wall->next->height;
+		frame->left.ground_uv_l = frame->left.wall->ground_uv;
+		frame->left.ground_uv_r = frame->left.wall->next->ground_uv;
 	}
 	if (check_if_same_wall(frame->left.wall->x0,
 			frame->right.wall->x0, frame->right.r_pt))
 	{
 		frame->left.r_pt = frame->right.r_pt;
 		frame->left.height_r = frame->right.height_r;
+		frame->left.ground_uv_r = frame->right.ground_uv_r;
 	}
 }

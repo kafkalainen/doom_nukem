@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 15:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/18 14:01:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/21 12:04:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ static void	find_biggest_square(t_sector *sector)
 	temp = sector->points;
 	while (walls)
 	{
-		if (temp->x0.x < sector->floor_top_left.x)
-			sector->floor_top_left.x = temp->x0.x;
-		if (temp->x0.x > sector->floor_top_right.x)
-			sector->floor_top_right.x = temp->x0.x;
-		if (temp->x0.y < sector->floor_top_left.y)
-			sector->floor_top_left.y = temp->x0.y;
-		if (temp->x0.y > sector->floor_bottom_left.y)
-			sector->floor_bottom_left.y = temp->x0.y;
+		if (temp->x0.x < sector->bounding_box.top_left.x)
+			sector->bounding_box.top_left.x = temp->x0.x;
+		if (temp->x0.x > sector->bounding_box.top_right.x)
+			sector->bounding_box.top_right.x = temp->x0.x;
+		if (temp->x0.y < sector->bounding_box.top_left.y)
+			sector->bounding_box.top_left.y = temp->x0.y;
+		if (temp->x0.y > sector->bounding_box.bottom_left.y)
+			sector->bounding_box.bottom_left.y = temp->x0.y;
 		temp = temp->next;
 		walls--;
 	}
-	sector->floor_top_right.y = sector->floor_top_left.y;
-	sector->floor_bottom_right.y = sector->floor_bottom_left.y;
-	sector->floor_bottom_right.x = sector->floor_top_right.x;
-	sector->floor_bottom_left.x = sector->floor_top_left.x;
+	sector->bounding_box.top_right.y = sector->bounding_box.top_left.y;
+	sector->bounding_box.bottom_right.y = sector->bounding_box.bottom_left.y;
+	sector->bounding_box.bottom_right.x = sector->bounding_box.top_right.x;
+	sector->bounding_box.bottom_left.x = sector->bounding_box.top_left.x;
 }
 
 /*
@@ -45,13 +45,13 @@ static void	find_biggest_square(t_sector *sector)
 
 void	calc_sector_bounds(t_sector *sector)
 {
-	sector->floor_top_left = vec2(sector->points->x0.x,
-			sector->points->x0.y);
-	sector->floor_top_right = vec2(sector->points->x0.x,
-			sector->points->x0.y);
-	sector->floor_bottom_left = vec2(sector->points->x0.x,
-			sector->points->x0.y);
-	sector->floor_bottom_right = vec2(sector->points->x0.x,
-			sector->points->x0.y);
+	sector->bounding_box.top_left = vec3(sector->points->x0.x,
+			sector->points->x0.y, 0.0f);
+	sector->bounding_box.top_right = vec3(sector->points->x0.x,
+			sector->points->x0.y, 0.0f);
+	sector->bounding_box.bottom_left = vec3(sector->points->x0.x,
+			sector->points->x0.y, 0.0f);
+	sector->bounding_box.bottom_right = vec3(sector->points->x0.x,
+			sector->points->x0.y, 0.0f);
 	find_biggest_square(sector);
 }

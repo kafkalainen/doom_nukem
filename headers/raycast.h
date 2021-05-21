@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/20 11:07:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/21 13:30:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,9 @@ typedef struct s_ray_pt
 	t_height		height_l;
 	t_height		height_r;
 	t_point			*wall;
+	t_xy			ground_uv_l;
+	t_xy			ground_uv_r;
 }					t_ray_pt;
-
-typedef struct s_plgn
-{
-	t_xyz			top_left;
-	t_xyz			top_right;
-	t_xyz			bottom_left;
-	t_xyz			bottom_right;
-}					t_plgn;
 
 typedef struct s_frame
 {
@@ -53,6 +47,7 @@ typedef struct s_frame
 	t_plgn			ground_uv;
 	t_xyz			uv_step;
 	t_xyz			ground_uv_step;
+	t_xyz			ground_fuck_step;
 	t_xyz			step_inner_top;
 	t_xyz			step_inner_bot;
 	t_xyz			step_outer_top;
@@ -76,7 +71,7 @@ enum e_lines
 };
 
 void			calc_ground_dimensions(t_frame *frame, t_player *plr, t_home *home);
-void			calc_ground_texels(t_sector *sector, t_frame *frame, t_player *plr);
+void			calc_ground_texels(t_sector *sector, t_frame *frame);
 void			calc_intersection(t_point *pgon, t_ray *ray,
 					t_intersection *sect);
 void			calc_sector_bounds(t_sector *sector);
@@ -89,6 +84,7 @@ int				check_if_same_pt(int *current_pxl, t_ray_pt *fov);
 int				check_if_lseg_intersects(t_point *p0, t_xy *pos, t_xy *dir);
 void			continue_from_last_sector(t_point *start, t_ray_pt *fov,
 					t_frame *frame);
+void			draw_linearly(t_frame *frame, t_texture *floor_tex, t_plgn *box);
 void			draw_sector(t_frame *frame, t_home *home, t_player *plr);
 void			draw_segment(t_frame *frame, t_home *home, t_player *plr);
 int				draw_tex_line(t_xy start, t_xy end,
@@ -105,7 +101,10 @@ t_point			*get_opposing_wall(t_point *current_wall, unsigned int walls);
 t_point			*get_portal_by_idx(int idx, t_sector *sector);
 void			interpolate_y(t_height *height, t_xy cutpoint,
 					t_point *p0, t_point *p1);
+void			interpolate_uv(t_xy *ground_uv, t_xy cutpoint,
+					t_point *p0, t_point *p1);
 t_xy			line_intersection(t_intersection *sect);
+void			precalc_ground_texels(t_home *home);
 void			scan_fov(t_home *home, t_frame *frame, t_player *plr,
 					int current_pxl);
 void			setup_frame(t_frame *frame, t_frame *new_frame,

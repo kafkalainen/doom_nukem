@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/18 14:15:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/21 11:59:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ typedef struct s_point
 	float				wall_facing;
 	t_xy				normal;
 	t_height			height;
+	t_xy				ground_uv;
 	struct s_point		*next;
-	struct s_point		*opposing;
 }						t_point;
 
 typedef struct s_point_data
@@ -41,10 +41,7 @@ typedef struct s_sector
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;
-	t_xy			floor_top_left;
-	t_xy			floor_top_right;
-	t_xy			floor_bottom_left;
-	t_xy			floor_bottom_right;
+	t_plgn			bounding_box;
 }					t_sector;
 
 enum e_sector_info

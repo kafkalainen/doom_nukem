@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/20 15:09:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/21 13:31:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,37 +23,6 @@ static void	fit_to_screen_space(t_xy *offset, t_xyz *texel,
 	}
 	if (*height > SCREEN_HEIGHT)
 		*height = SCREEN_HEIGHT;
-}
-
-void	draw_floor_strip(t_xy p0, t_xy p1, t_texture *tex, t_frame *frame)
-{
-	t_xy		delta;
-	t_xy		pixel;
-	long int	pixels;
-	t_xyz		corr_texel;
-	t_xyz		texel;
-	Uint32		colour;
-
-	delta.x = p1.x - p0.x;
-	delta.y = p1.y - p0.y;
-	pixels = sqrt((delta.x * delta.x) + (delta.y * delta.y));
-	delta.x /= pixels;
-	delta.y /= pixels;
-	pixel.x = p0.x;
-	pixel.y = p0.y;
-	texel = frame->ground_uv.top_left;
-	corr_texel = texel;
-	while (pixels)
-	{
-		corr_texel = inv_z(texel);
-		colour = get_texel(corr_texel.x * (tex->w - 1),
-						corr_texel.y * (tex->h - 1), tex);
-		put_pixel(frame->buffer, (int)pixel.x, (int)pixel.y, colour);
-		pixel.x += delta.x;
-		pixel.y += delta.y;
-		texel.x += frame->ground_uv_step.x;
-		--pixels;
-	}
 }
 
 static void	draw_vertical_wall_strip(t_xy offset, int height,
@@ -108,31 +77,6 @@ void	draw_vertically(t_frame *frame, t_texture *wall_tex)
 	}
 }
 
-static void	step_ground_one(t_frame *frame, t_plgn *box)
-{
-	// (void)frame;
-	frame->ground_uv.top_left.y += frame->ground_uv_step.y;
-	frame->ground_uv.top_left.z += frame->ground_uv_step.z;
-	box->bottom_left.y += 1;
-	box->bottom_right.y += 1;
-}
-
-void	draw_linearly(t_frame *frame, t_texture *floor_tex, t_plgn *box)
-{
-	while (box->bottom_right.y < 0)
-	{
-		box->bottom_left.y++;
-		box->bottom_right.y++;
-	}
-	while (box->bottom_right.y < SCREEN_HEIGHT
-		|| box->bottom_left.y < SCREEN_HEIGHT)
-	{
-		draw_floor_strip(vec3_to_vec2(box->bottom_left),
-			vec3_to_vec2(box->bottom_right), floor_tex, frame);
-		step_ground_one(frame, box);
-	}
-}
-
 void	draw_segment(t_frame *frame, t_home *home, t_player *plr)
 {
 	t_texture	*wall_tex;
@@ -148,7 +92,7 @@ void	draw_segment(t_frame *frame, t_home *home, t_player *plr)
 					home->sectors[frame->idx]->nb_of_walls), home->editor_tex);
 	calc_wall_dimensions(frame, plr, home);
 	calc_wall_texels(frame, wall_tex->w);
-	calc_ground_texels(home->sectors[frame->idx], frame, plr);
+	calc_ground_texels(home->sectors[frame->idx], frame);
 	box = frame->outer_box;
 	if (plr->input.wireframe == 0)
 	{

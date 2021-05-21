@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/18 16:13:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/21 13:19:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ typedef struct s_ray
 	t_xy			dir;
 	t_xy			cutpoint;
 }					t_ray;
+
+typedef struct s_plgn
+{
+	t_xyz			top_left;
+	t_xyz			top_right;
+	t_xyz			bottom_left;
+	t_xyz			bottom_right;
+}					t_plgn;
 
 /*
 ** Vector functions
