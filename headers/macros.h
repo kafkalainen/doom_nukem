@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 16:11:37 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/23 12:37:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define RAD_TO_DEG 57.29577951f
 # define DEG_TO_RAD 0.0174532925f
 # define SQR2 0.7071067812f
+# define Z_NEAR 0.1f
+# define Z_FAR 1000.0f
 # define TRUE 1
 # define FALSE 0
 # define AND &&

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:54:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/21 15:10:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/21 17:07:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ static void	calc_inverse_of_z(t_xyz *top_left, t_xyz *top_right,
 	*bottom_right = inv_z(*bottom_right);
 }
 
-void	calc_ground_texels(t_sector *sector, t_frame *frame)
+void	calc_ground_texels(t_frame *frame)
 {
-	(void)sector;
 	frame->ground_uv.top_left.x = frame->left.ground_uv_l.x;
 	frame->ground_uv.top_left.y = frame->left.ground_uv_l.y;
 	frame->ground_uv.top_left.z = frame->outer_box.bottom_left.z;
@@ -39,13 +38,10 @@ void	calc_ground_texels(t_sector *sector, t_frame *frame)
 	calc_inverse_of_z(
 		&frame->ground_uv.top_left, &frame->ground_uv.top_right,
 		&frame->ground_uv.bottom_left, &frame->ground_uv.bottom_right);
-	frame->ground_uv_step.x = interpolate_points(
-		frame->ground_uv.top_left.x, frame->ground_uv.top_right.x,
-		240, SCREEN_HEIGHT);
-	frame->ground_uv_step.y = interpolate_points(
-		frame->ground_uv.top_left.y, frame->ground_uv.bottom_left.y,
-		240, SCREEN_HEIGHT);
-	frame->ground_uv_step.z = interpolate_points(
-		frame->ground_uv.top_left.z, frame->ground_uv.bottom_left.z,
-		240, SCREEN_HEIGHT);
+	frame->ground_uv_step_delta_u.x = (frame->ground_uv.top_right.x - frame->ground_uv.top_left.x) / 320;
+	frame->ground_uv_step_delta_u.y = (frame->ground_uv.top_right.y - frame->ground_uv.top_left.y) / 320;
+	frame->ground_uv_step_delta_u.z = (frame->ground_uv.top_right.z - frame->ground_uv.top_left.z) / 320;
+	frame->ground_uv_step_delta_v.x = (frame->ground_uv.bottom_right.x - frame->ground_uv.top_left.x) / 240;
+	frame->ground_uv_step_delta_v.y = (frame->ground_uv.bottom_right.y - frame->ground_uv.top_left.y) / 240;
+	frame->ground_uv_step_delta_v.z = (frame->ground_uv.bottom_right.z - frame->ground_uv.top_left.z) / 240;
 }

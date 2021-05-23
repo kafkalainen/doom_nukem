@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/21 13:19:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/23 15:00:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ typedef struct s_xyz
 	float			z;
 }					t_xyz;
 
+typedef struct s_triangle
+{
+	t_xyz			p[3];
+}				t_triangle;
+
+
+typedef struct	s_m4x4 {
+	float	m[4][4];
+}				t_m4x4;
+
 typedef struct s_ray
 {
 	t_xy			pos;
@@ -62,6 +72,7 @@ typedef struct s_plgn
 
 float	interpolate_points(float x0, float x1, float y0, float y1);
 t_xyz	inv_z(t_xyz a);
+t_xyz	multi_vec_matrix(t_xyz *src, t_m4x4 *x);
 t_xy	vec2(float x, float y);
 t_xy	vec2_add(t_xy a, t_xy b);
 float	vec2_ang(t_xy a, t_xy b);
@@ -80,5 +91,11 @@ t_xyz	vec3_add(t_xyz a, t_xyz b);
 float	vec3_eucl_dist(t_xyz a);
 t_xy	vec3_to_vec2(t_xyz a);
 float	vec2_distance_from_point_to_line(t_xy *p0, t_xy *p1, t_xy *x0);
+t_m4x4	translate_matrix(t_xyz a);
+t_m4x4	scaling_matrix(t_xyz a);
+t_m4x4	projection_matrix(void);
+t_m4x4	rotation_matrix_x(float angle);
+t_m4x4	rotation_matrix_y(float angle);
+t_m4x4	rotation_matrix_z(float angle);
 
 #endif

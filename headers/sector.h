@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/21 11:59:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/23 11:46:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,27 @@ typedef struct s_point
 	t_xy				ground_uv;
 	struct s_point		*next;
 }						t_point;
+
+typedef struct s_wall
+{
+	t_triangle			top;
+	t_triangle			bottom;
+	int					idx;
+	float				wall_facing;
+	t_xy				normal;
+	struct s_wall		*next;
+}						t_wall;
+
+typedef struct s_ground
+{
+	t_triangle			top;
+	t_triangle			bottom;
+	int					idx;
+	float				wall_facing;
+	t_xy				normal;
+	struct s_wall		*next;
+}						t_ground;
+
 
 typedef struct s_point_data
 {

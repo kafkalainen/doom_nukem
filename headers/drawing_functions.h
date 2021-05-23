@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/20 14:27:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/23 14:56:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,23 @@
 
 t_xy		center_to_screen(t_xy loc);
 Uint32		colour_scale(Uint32 hex, float scale);
+t_triangle	create_projection(t_triangle *src);
 int			draw_line(t_xy start, t_xy end, Uint32 color, Uint32 *buffer);
 void		draw_rect_center(t_xy xy, t_xy wh, t_frame *frame);
 void		draw_rect(t_xy xy, t_xy wh, Uint32 *buffer, int color);
 void		draw_square(Uint32 *buffer, t_xy offset, int c, int s);
 void		draw_tex_pixel(t_texture *tex, t_xyz texel,
 				t_xy pixel, t_frame *frame);
+int			draw_polygon(t_frame *frame, t_triangle *tri);
+int			draw_cube(t_frame *frame);
 void		draw_wireframe(t_frame *frame, Uint32 colour);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);
 Uint32		get_texel(int x, int y, t_texture *tex);
 void		put_pixel(Uint32 *buffer, int x, int y, Uint32 color);
+t_triangle	scale_triangle(t_triangle *src, t_xyz scale);
 void		*optimized_memcpy(void *pixels, void *src, size_t size);
 void		render_buffer(Uint32 *buffer, SDL_Surface *screen_surface);
+t_triangle	translate_triangle(t_triangle *src, t_xyz translation);
+t_triangle	rotate_triangle(t_triangle *src, float angle, char dir);
 
 #endif
