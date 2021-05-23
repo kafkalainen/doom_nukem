@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/23 15:00:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/23 18:35:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ t_m4x4	projection_matrix(void);
 t_m4x4	rotation_matrix_x(float angle);
 t_m4x4	rotation_matrix_y(float angle);
 t_m4x4	rotation_matrix_z(float angle);
+t_xyz	triangle_normal(t_triangle *triangle);
 
 #endif

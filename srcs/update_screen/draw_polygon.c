@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/23 15:05:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/23 18:36:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		draw_cube(t_frame *frame)
 	t_triangle	project_cube[12];
 	t_triangle	translated_cube[12];
 	t_triangle	rot_cube[12];
+	t_xyz		normal;
 
 	//SOUTH
 	cube[0] = (t_triangle){(t_xyz){0,0,0}, (t_xyz){0,1,0}, (t_xyz){1,1,0}};
@@ -63,16 +64,20 @@ int		draw_cube(t_frame *frame)
 	i = 0;
 	while (i < 12)
 	{
-		project_cube[i] = create_projection(&translated_cube[i]);
-		project_cube[i].p[0].x = project_cube[i].p[0].x + 1.0f;
-		project_cube[i].p[0].y = project_cube[i].p[0].y + 1.0f;
-		project_cube[i].p[1].x = project_cube[i].p[1].x + 1.0f;
-		project_cube[i].p[1].y = project_cube[i].p[1].y + 1.0f;
-		project_cube[i].p[2].x = project_cube[i].p[2].x + 1.0f;
-		project_cube[i].p[2].y = project_cube[i].p[2].y + 1.0f;
-		project_cube[i] = scale_triangle(&project_cube[i],
-			(t_xyz){SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f});
-		draw_polygon(frame, &project_cube[i]);
+		normal = triangle_normal(&translated_cube[i]);
+		if (normal.z < 0)
+		{
+			project_cube[i] = create_projection(&translated_cube[i]);
+			project_cube[i].p[0].x = project_cube[i].p[0].x + 1.0f;
+			project_cube[i].p[0].y = project_cube[i].p[0].y + 1.0f;
+			project_cube[i].p[1].x = project_cube[i].p[1].x + 1.0f;
+			project_cube[i].p[1].y = project_cube[i].p[1].y + 1.0f;
+			project_cube[i].p[2].x = project_cube[i].p[2].x + 1.0f;
+			project_cube[i].p[2].y = project_cube[i].p[2].y + 1.0f;
+			project_cube[i] = scale_triangle(&project_cube[i],
+				(t_xyz){SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f});
+			draw_polygon(frame, &project_cube[i]);
+		}
 		i++;
 	}
 	return (TRUE);
