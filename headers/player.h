@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 16:38:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/24 08:20:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_input
 
 typedef struct s_player
 {
+	t_xyz			camera;
 	float			pitch;
 	float			z;
 	float			height;

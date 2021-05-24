@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:38:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/23 14:59:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/24 13:28:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_triangle	create_projection(t_triangle *src)
 		{0.0f, 0.0f, 1.00010001f, 1.0f},
 		{0.0f, 0.0f, -0.100010001f, 0.0f}
 	}};
+	dst = *src;
 	dst.p[0] = multi_vec_matrix(&src->p[0], &matrix);
 	dst.p[1] = multi_vec_matrix(&src->p[1], &matrix);
 	dst.p[2] = multi_vec_matrix(&src->p[2], &matrix);
@@ -36,6 +37,7 @@ t_triangle	scale_triangle(t_triangle *src, t_xyz scale)
 	t_triangle		dst;
 	t_m4x4			matrix;
 
+	dst = *src;
 	matrix = scaling_matrix(scale);
 	dst.p[0] = multi_vec_matrix(&src->p[0], &matrix);
 	dst.p[1] = multi_vec_matrix(&src->p[1], &matrix);
@@ -48,6 +50,7 @@ t_triangle	translate_triangle(t_triangle *src, t_xyz translation)
 	t_triangle		dst;
 	t_m4x4			matrix;
 
+	dst = *src;
 	matrix = translate_matrix(translation);
 	dst.p[0] = multi_vec_matrix(&src->p[0], &matrix);
 	dst.p[1] = multi_vec_matrix(&src->p[1], &matrix);
@@ -60,6 +63,7 @@ t_triangle	rotate_triangle(t_triangle *src, float angle, char dir)
 	t_triangle		dst;
 	t_m4x4			matrix;
 
+	dst = *src;
 	if (dir == 'x')
 		matrix = rotation_matrix_x(angle);
 	else if (dir == 'y')

@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_screen.c                                    :+:      :+:    :+:   */
+/*   vec3_c.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/05 13:36:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/24 12:04:03 by jnivala          ###   ########.fr       */
+/*   Created: 2021/05/24 15:04:51 by jnivala           #+#    #+#             */
+/*   Updated: 2021/05/24 15:18:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	render_buffer(Uint32 *buffer, SDL_Surface *screen_surface)
+t_uvz	uvz_calculate_value_with_delta(float delta_x, t_uvz delta_u, t_uvz delta_v)
 {
-	SDL_LockSurface(screen_surface);
-	optimized_memcpy(screen_surface->pixels,
-		buffer, screen_surface->pitch * screen_surface->h);
-	SDL_UnlockSurface(screen_surface);
-}
+	t_uvz	value;
 
-void	update_screen(t_home *home, t_frame *frame, t_player *plr)
-{
-	(void)home;
-	(void)plr;
-	frame->last_frame = SDL_GetTicks();
-	draw_cube(frame, home);
-	// draw_frame(home, frame, plr);
+	value.z = delta_x * delta_u.z + delta_v.z;
+	value.u = delta_x * delta_u.u + delta_v.u;
+	value.v = delta_x * delta_u.v + delta_v.v;
+	return (value);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/23 18:35:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/24 15:19:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,17 @@ typedef struct s_xyz
 	float			z;
 }					t_xyz;
 
+typedef struct s_uvz
+{
+	float			u;
+	float			v;
+	float			z;
+}					t_uvz;
+
 typedef struct s_triangle
 {
 	t_xyz			p[3];
+	t_uvz			uv[3];
 }				t_triangle;
 
 
@@ -98,5 +106,10 @@ t_m4x4	rotation_matrix_x(float angle);
 t_m4x4	rotation_matrix_y(float angle);
 t_m4x4	rotation_matrix_z(float angle);
 t_xyz	triangle_normal(t_triangle *triangle);
+float	vec3_dot_product(t_xyz a, t_xyz b);
+t_xyz	vec3_dec(t_xyz a, t_xyz b);
+t_xyz	vec3_unit_vector(t_xyz a);
+t_uvz	texel_inv_z(t_uvz a);
+t_uvz	uvz_calculate_value_with_delta(float delta_x, t_uvz delta_u, t_uvz delta_v);
 
 #endif

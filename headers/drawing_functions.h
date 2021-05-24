@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/23 14:56:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/24 15:21:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		draw_square(Uint32 *buffer, t_xy offset, int c, int s);
 void		draw_tex_pixel(t_texture *tex, t_xyz texel,
 				t_xy pixel, t_frame *frame);
 int			draw_polygon(t_frame *frame, t_triangle *tri);
-int			draw_cube(t_frame *frame);
+int			draw_cube(t_frame *frame, t_home *home);
 void		draw_wireframe(t_frame *frame, Uint32 colour);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);
 Uint32		get_texel(int x, int y, t_texture *tex);
@@ -37,5 +37,7 @@ void		*optimized_memcpy(void *pixels, void *src, size_t size);
 void		render_buffer(Uint32 *buffer, SDL_Surface *screen_surface);
 t_triangle	translate_triangle(t_triangle *src, t_xyz translation);
 t_triangle	rotate_triangle(t_triangle *src, float angle, char dir);
+void		calculate_triangle(t_frame *frame, t_triangle *tri, t_texture *tex);
+
 
 #endif

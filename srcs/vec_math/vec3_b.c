@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 15:06:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/23 18:33:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/24 10:41:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,21 @@ t_xyz	triangle_normal(t_triangle *triangle)
 	normal.z = normal.z / magnitude;
 	return (normal);
 }
+
+t_xyz	vec3_unit_vector(t_xyz a)
+{
+	float	magnitude;
+
+	magnitude = vec3_eucl_dist(a);
+	return ((t_xyz){a.x / magnitude, a.y / magnitude, a.z / magnitude});
+}
+
+float	vec3_dot_product(t_xyz a, t_xyz b)
+{
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
+}
+
+// float	calculate_delta_with_reciprocial(t_xyz	a, t_xyz b, t_uvz a, float reciprocial)
+// {
+// 	dvizdy = ((viz2 - viz1) * (x3 - x1) - (viz3 - viz1) * (x2 - x1)) * reciprocial;
+// }
