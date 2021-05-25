@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/24 15:19:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/25 11:13:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_xyz
 	float			x;
 	float			y;
 	float			z;
+	float			w;
 }					t_xyz;
 
 typedef struct s_uvz
@@ -78,38 +79,47 @@ typedef struct s_plgn
 ** Vector functions
 */
 
-float	interpolate_points(float x0, float x1, float y0, float y1);
-t_xyz	inv_z(t_xyz a);
-t_xyz	multi_vec_matrix(t_xyz *src, t_m4x4 *x);
-t_xy	vec2(float x, float y);
-t_xy	vec2_add(t_xy a, t_xy b);
-float	vec2_ang(t_xy a, t_xy b);
-float	vec2_cross(t_xy a, t_xy b);
-t_xy	vec2_dec(t_xy a, t_xy b);
-float	vec2_dot(t_xy a, t_xy b);
-float	vec2_eucl_dist(t_xy p1, t_xy p2);
-float	vec2_mag(t_xy a);
-t_xy	vec2_mul(t_xy v, float scalar);
-t_xy	vec2_norm(t_xy v);
-t_xy	vec2_normal(t_xy p0, t_xy p1);
-t_xy	vec2_rot(t_xy v, float angle);
-float	vec2_perp_dist(t_xy a);
-t_xyz	vec3(float x, float y, float z);
-t_xyz	vec3_add(t_xyz a, t_xyz b);
-float	vec3_eucl_dist(t_xyz a);
-t_xy	vec3_to_vec2(t_xyz a);
-float	vec2_distance_from_point_to_line(t_xy *p0, t_xy *p1, t_xy *x0);
-t_m4x4	translate_matrix(t_xyz a);
-t_m4x4	scaling_matrix(t_xyz a);
-t_m4x4	projection_matrix(void);
-t_m4x4	rotation_matrix_x(float angle);
-t_m4x4	rotation_matrix_y(float angle);
-t_m4x4	rotation_matrix_z(float angle);
-t_xyz	triangle_normal(t_triangle *triangle);
-float	vec3_dot_product(t_xyz a, t_xyz b);
-t_xyz	vec3_dec(t_xyz a, t_xyz b);
-t_xyz	vec3_unit_vector(t_xyz a);
-t_uvz	texel_inv_z(t_uvz a);
-t_uvz	uvz_calculate_value_with_delta(float delta_x, t_uvz delta_u, t_uvz delta_v);
-
+float		interpolate_points(float x0, float x1, float y0, float y1);
+t_xyz		inv_z(t_xyz a);
+t_xyz		multi_vec_matrix(t_xyz *src, t_m4x4 *x);
+t_xy		vec2(float x, float y);
+t_xy		vec2_add(t_xy a, t_xy b);
+float		vec2_ang(t_xy a, t_xy b);
+float		vec2_cross(t_xy a, t_xy b);
+t_xy		vec2_dec(t_xy a, t_xy b);
+float		vec2_dot(t_xy a, t_xy b);
+float		vec2_eucl_dist(t_xy p1, t_xy p2);
+float		vec2_mag(t_xy a);
+t_xy		vec2_mul(t_xy v, float scalar);
+t_xy		vec2_norm(t_xy v);
+t_xy		vec2_normal(t_xy p0, t_xy p1);
+t_xy		vec2_rot(t_xy v, float angle);
+float		vec2_perp_dist(t_xy a);
+t_xyz		vec3(float x, float y, float z);
+t_xyz		vec3_add(t_xyz a, t_xyz b);
+float		vec3_eucl_dist(t_xyz a);
+t_xy		vec3_to_vec2(t_xyz a);
+float		vec2_distance_from_point_to_line(t_xy *p0, t_xy *p1, t_xy *x0);
+t_m4x4		translate_matrix(t_xyz a);
+t_m4x4		scaling_matrix(t_xyz a);
+t_m4x4		rotation_matrix_x(float angle);
+t_m4x4		rotation_matrix_y(float angle);
+t_m4x4		rotation_matrix_z(float angle);
+t_m4x4		projection_matrix(void);
+t_xyz		triangle_normal(t_triangle *triangle);
+float		vec3_dot_product(t_xyz a, t_xyz b);
+t_xyz		vec3_dec(t_xyz a, t_xyz b);
+t_xyz		vec3_unit_vector(t_xyz a);
+t_uvz		texel_inv_z(t_uvz a);
+t_uvz		uvz_calculate_value_with_delta(float delta_x, t_uvz delta_u, t_uvz delta_v);
+float		triangle_calculate_average_z(t_triangle *triangle);
+t_xyz		vec3_mul(t_xyz a, float multiplier);
+t_xyz		vec3_cross_product(t_xyz a, t_xyz b);
+t_m4x4		point_to_matrix(t_xyz up, t_xyz forward, t_xyz right, t_xyz location);
+t_m4x4		inverse_matrix(t_m4x4 *rot_trans_matrix);
+t_triangle	apply_camera(t_xyz pos, t_xyz target, t_xyz up, t_triangle *src);
+t_m4x4		identity_matrix(void);
+t_m4x4		multiply_matrix(t_m4x4 *m1, t_m4x4 *m2);
+t_triangle	apply_world_matrix(float angle_x, float angle_z,
+	t_xyz translation, t_triangle *src);
 #endif

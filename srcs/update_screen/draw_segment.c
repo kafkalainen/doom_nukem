@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:50:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/21 15:24:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/25 08:55:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	draw_segment(t_frame *frame, t_home *home, t_player *plr)
 		wall_tex = get_tex(get_next_wall_tex(&frame->left.wall->next,
 					home->sectors[frame->idx]->nb_of_walls), home->editor_tex);
 	calc_wall_dimensions(frame, plr, home);
-	calc_wall_texels(frame, wall_tex->w);
+	// calc_wall_texels(frame, wall_tex->w);
 	calc_ground_texels(frame);
 	box = frame->outer_box;
 	if (plr->input.wireframe == 0)

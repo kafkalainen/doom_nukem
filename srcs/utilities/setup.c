@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/18 16:51:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/25 10:19:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void	init_player(t_player *plr)
 	plr->time = 0;
 	plr->current_sector = 0;
 	plr->z = 0;
+	plr->camera = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
+	plr->look_dir = (t_xyz){0.0f, 0.0f, 1.0f, 1.0f};
+	plr->up = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
+	plr->target = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
 }
 
 void	setup_fps(t_time *time)

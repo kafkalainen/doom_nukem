@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/24 17:21:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/25 13:27:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,106 +276,116 @@ void	calculate_triangle(t_frame *frame, t_triangle *tri, t_texture *tex)
 	}
 }
 
-int	draw_cube(t_frame *frame, t_home *home)
+int	painters_algorithm(const void *tri1, const void *tri2)
+{
+	if (triangle_calculate_average_z((t_triangle *)tri1)
+		> triangle_calculate_average_z((t_triangle *)tri2))
+		return (1);
+	else
+		return (0);
+}
+
+int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 {
 	int				i;
-	t_triangle		cube[12];
-	t_triangle		project_cube[12];
-	t_triangle		translated_cube[12];
-	t_triangle		rot_cube[12];
-	t_xyz			camera;
+	int				r;
 	t_xyz			normal;
 	// t_xyz			light_direction;
-	static Uint32	cur_time;
-	static float	degree = 0.0f;
-	t_texture		*tex;
+	// static Uint32	cur_time;
+	// t_texture		*tex;
 
 	// (void)home;
-	tex = get_tex(-1, home->editor_tex);
-	if (frame->last_frame - cur_time > 66)
-	{
-		cur_time = frame->last_frame;
-		degree += 0.1f;
-	}
-	if (degree > TWO_PI)
-		degree = 0.0f;
-	camera = (t_xyz){0,0,0};
+	// tex = get_tex(-1, home->editor_tex);
+	// if (frame->last_frame - cur_time > 66)
+	// {
+	// 	cur_time = frame->last_frame;
+	// 	degree += 0.1f;
+	// }
+	// if (degree > TWO_PI)
+	// 	degree = 0.0f;
 	// light_direction = (t_xyz){0,0,-1};
+	plr->target = vec3_add(plr->camera, plr->look_dir);
 	//SOUTH
-	cube[0] = (t_triangle){
-		{(t_xyz){0.0f,0.0f,0.0f}, (t_xyz){0.0f,1.0f,0.0f}, (t_xyz){1.0f,1.0f,0.0f}},
+	home->cube[0] = (t_triangle){
+		{(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){0.0f,0.0f,0.0f}, (t_uvz){1.0f,0.0f,0.0f}}};
-	cube[1] = (t_triangle){
-		(t_xyz){0.0f,0.0f,0.0f}, (t_xyz){1.0f,1.0f,0.0f}, (t_xyz){1.0f,0.0f,0.0f},
+	home->cube[1] = (t_triangle){
+		(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,0.0f,0.0f,1.0f},
 		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}};
 	//EAST
-	cube[2] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,0.0f}, (t_xyz){1.0f,1.0f,0.0f}, (t_xyz){1.0f,1.0f,1.0f}},
+	home->cube[2] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){0.0f,0.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}}};
-	cube[3] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,0.0f}, (t_xyz){1.0f,1.0f,1.0f}, (t_xyz){1.0f,0.0f,1.0f}},
+	home->cube[3] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,0.0f,1.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}};
 	//NORTH
-	cube[4] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f}},
+	home->cube[4] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}}};
-	cube[5] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,1.0f}},
+	home->cube[5] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,1.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}};
 	//WEST
-	cube[6] = (t_triangle){
-		{(t_xyz){0.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f}},
+	home->cube[6] = (t_triangle){
+		{(t_xyz){0.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}}};
-	cube[7] = (t_triangle){
-		{(t_xyz){0.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f}, (t_xyz){0.0f,0.0f,0.0f}},
+	home->cube[7] = (t_triangle){
+		{(t_xyz){0.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}};
 	//TOP
-	cube[8] = (t_triangle){
-		{(t_xyz){0.0f,1.0f,0.0f}, (t_xyz){0.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f}},
+	home->cube[8] = (t_triangle){
+		{(t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}}};
-	cube[9] = (t_triangle){
-		{(t_xyz){0.0f,1.0f,0.0f}, (t_xyz){1.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f}},
+	home->cube[9] = (t_triangle){
+		{(t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}};
 	//BOTTOM
-	cube[10] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,1.0f}, (t_xyz){0.0f,0.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f}},
+	home->cube[10] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}}};
-	cube[11] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f}, (t_xyz){1.0f,0.0f,0.0f}},
+	home->cube[11] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,0.0f,0.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}};
 	i = 0;
 	while (i < 12)
 	{
-		rot_cube[i] = rotate_triangle(&cube[i], degree, 'z');
-		rot_cube[i] = rotate_triangle(&rot_cube[i], degree, 'x');
-		translated_cube[i] = rot_cube[i];
-		translated_cube[i].p[0].z = rot_cube[i].p[0].z + 3.0f;
-		translated_cube[i].p[1].z = rot_cube[i].p[1].z + 3.0f;
-		translated_cube[i].p[2].z = rot_cube[i].p[2].z + 3.0f;
-		translated_cube[i].uv[0].z = translated_cube[i].p[0].z;
-		translated_cube[i].uv[1].z = translated_cube[i].p[1].z;
-		translated_cube[i].uv[2].z = translated_cube[i].p[2].z;
+		home->transformed_cube[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 3.0f, 1.0f}, &home->cube[i]);
 		i++;
 	}
 	i = 0;
 	while (i < 12)
 	{
-		normal = triangle_normal(&translated_cube[i]);
-		if (vec3_dot_product(normal, vec3_dec(translated_cube[i].p[0], camera)) < 0)
+		home->view_cube[i] = apply_camera(plr->camera, plr->target, plr->up, &home->transformed_cube[i]);
+		i++;
+	}
+	i = 0;
+	r = 0;
+	while (i < 12)
+	{
+		normal = triangle_normal(&home->view_cube[i]);
+		if (vec3_dot_product(normal, vec3_dec(home->view_cube[i].p[0], plr->camera)) > 0)
 		{
-			project_cube[i] = create_projection(&translated_cube[i]);
-			project_cube[i].p[0].x += 1.0f;
-			project_cube[i].p[0].y += 1.0f;
-			project_cube[i].p[1].x += 1.0f;
-			project_cube[i].p[1].y += 1.0f;
-			project_cube[i].p[2].x += 1.0f;
-			project_cube[i].p[2].y += 1.0f;
-			project_cube[i] = scale_triangle(&project_cube[i],
-				(t_xyz){SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f});
-			calculate_triangle(frame, &project_cube[i], tex);
-			draw_polygon(frame, &project_cube[i]);
+			home->project_cube[i] = create_projection(&home->view_cube[i]);
+			home->project_cube[i].p[0] = vec3_add(home->project_cube[i].p[0], ((t_xyz){1.0f, 1.0f, 0.0f, 0.0f}));
+			home->project_cube[i].p[1] = vec3_add(home->project_cube[i].p[1], ((t_xyz){1.0f, 1.0f, 0.0f, 0.0f}));
+			home->project_cube[i].p[2] = vec3_add(home->project_cube[i].p[2], ((t_xyz){1.0f, 1.0f, 0.0f, 0.0f}));
+			home->project_cube[i] = scale_triangle(&home->project_cube[i],
+				(t_xyz){SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 1.0f, 1.0f});
+			home->triangles_to_raster[r] = home->project_cube[i];
+			// draw_polygon(frame, &home->triangles_to_raster[r]);
+			r++;
 		}
 		i++;
+	}
+	i = r;
+	r = 0;
+	qsort((void *)home->triangles_to_raster, i, sizeof(home->triangles_to_raster[0]), painters_algorithm);
+	while (r < i)
+	{
+		// calculate_triangle(frame, &home->triangles_to_raster[r], tex);
+		draw_polygon(frame, &home->triangles_to_raster[r]);
+		r++;
 	}
 	return (TRUE);
 }

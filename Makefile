@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/24 15:11:54 by jnivala          ###   ########.fr        #
+#    Updated: 2021/05/25 11:19:10 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ SRCS = \
 	update_player$(SLASH)update_height.c \
 	update_player$(SLASH)player_move.c \
 	update_player$(SLASH)update_player.c \
-	update_screen$(SLASH)create_projection.c \
+	update_screen$(SLASH)apply_matrices_a.c \
+	update_screen$(SLASH)apply_matrices_b.c \
 	update_screen$(SLASH)draw_frame.c \
 	update_screen$(SLASH)draw_floor_segment.c \
 	update_screen$(SLASH)draw_polygon.c \
@@ -76,7 +77,8 @@ SRCS = \
 	update_screen$(SLASH)draw_shapes2.c \
 	update_screen$(SLASH)draw_tex_pixel.c \
 	update_screen$(SLASH)draw_wireframe.c \
-	update_screen$(SLASH)init_matrices.c \
+	update_screen$(SLASH)init_matrices_a.c \
+	update_screen$(SLASH)init_matrices_b.c \
 	update_screen$(SLASH)put_pixel.c \
 	update_screen$(SLASH)matrix_2d.c \
 	update_screen$(SLASH)matrix_3d.c \

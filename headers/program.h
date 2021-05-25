@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/17 16:44:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/25 11:16:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ typedef struct s_home
 	unsigned int	nbr_of_sectors;
 	int				nbr_of_textures;
 	int				game_state;
+	t_triangle		cube[12];
+	t_triangle		view_cube[12];
+	t_triangle		transformed_cube[12];
+	t_triangle		project_cube[12];
+	t_triangle		triangles_to_raster[12];
 }					t_home;
 
 #endif

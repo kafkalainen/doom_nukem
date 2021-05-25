@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_projection.c                                :+:      :+:    :+:   */
+/*   apply_matrices_a.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:38:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/24 13:28:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/25 11:37:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-/*
-**	Z_FAR / (Z_FAR - Z_NEAR) = 1.00010001f
-**	(-Z_FAR * Z_NEAR) / (Z_FAR - Z_NEAR) = -100 / 999.9 = -0.100010001f
-*/
 t_triangle	create_projection(t_triangle *src)
 {
-	t_triangle		dst;
-	static t_m4x4	matrix = (t_m4x4){{
-		{0.75f, 0.0f, 0.0f, 0.0f},
-		{0.0f, 1.0f, 0.0f, 0.0f},
-		{0.0f, 0.0f, 1.00010001f, 1.0f},
-		{0.0f, 0.0f, -0.100010001f, 0.0f}
-	}};
+	t_triangle			dst;
+	t_m4x4				matrix;
+
 	dst = *src;
+	matrix = projection_matrix();
 	dst.p[0] = multi_vec_matrix(&src->p[0], &matrix);
 	dst.p[1] = multi_vec_matrix(&src->p[1], &matrix);
 	dst.p[2] = multi_vec_matrix(&src->p[2], &matrix);
@@ -72,6 +65,28 @@ t_triangle	rotate_triangle(t_triangle *src, float angle, char dir)
 		matrix = rotation_matrix_z(angle);
 	else
 		return (*src);
+	dst.p[0] = multi_vec_matrix(&src->p[0], &matrix);
+	dst.p[1] = multi_vec_matrix(&src->p[1], &matrix);
+	dst.p[2] = multi_vec_matrix(&src->p[2], &matrix);
+	return (dst);
+}
+
+t_triangle	apply_camera(t_xyz pos, t_xyz target, t_xyz up, t_triangle *src)
+{
+	t_xyz	next_forward;
+	t_xyz	next_up;
+	t_xyz	next_right;
+	t_m4x4	matrix;
+	t_triangle	dst;
+
+	next_forward = vec3_dec(target, pos);
+	next_forward = vec3_unit_vector(next_forward);
+	next_up = vec3_mul(next_forward, vec3_dot_product(up, next_forward));
+	next_up = vec3_dec(up, next_up);
+	next_up = vec3_unit_vector(next_up);
+	next_right = vec3_cross_product(next_up, next_forward);
+	matrix = point_to_matrix(next_up, next_forward, next_right, pos);
+	matrix = inverse_matrix(&matrix);
 	dst.p[0] = multi_vec_matrix(&src->p[0], &matrix);
 	dst.p[1] = multi_vec_matrix(&src->p[1], &matrix);
 	dst.p[2] = multi_vec_matrix(&src->p[2], &matrix);

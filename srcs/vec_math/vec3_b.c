@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 15:06:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/24 10:41:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/25 13:35:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_xyz	vec3_dec(t_xyz a, t_xyz b)
 	dec.x = a.x - b.x;
 	dec.y = a.y - b.y;
 	dec.z = a.z - b.z;
+	dec.w = 1.0f;
 	return (dec);
 }
 
@@ -29,6 +30,7 @@ t_xyz	vec3_cross_product(t_xyz a, t_xyz b)
 	cross.x = a.y * b.z - a.z * b.y;
 	cross.y = a.z * b.x - a.x * b.z;
 	cross.z = a.x * b.y - a.y * b.x;
+	cross.w = 1.0f;
 	return (cross);
 }
 
@@ -46,6 +48,7 @@ t_xyz	triangle_normal(t_triangle *triangle)
 	normal.x = normal.x / magnitude;
 	normal.y = normal.y / magnitude;
 	normal.z = normal.z / magnitude;
+	normal.w = 1.0f;
 	return (normal);
 }
 
@@ -54,15 +57,10 @@ t_xyz	vec3_unit_vector(t_xyz a)
 	float	magnitude;
 
 	magnitude = vec3_eucl_dist(a);
-	return ((t_xyz){a.x / magnitude, a.y / magnitude, a.z / magnitude});
+	return ((t_xyz){a.x / magnitude, a.y / magnitude, a.z / magnitude, 1.0f});
 }
 
 float	vec3_dot_product(t_xyz a, t_xyz b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
-
-// float	calculate_delta_with_reciprocial(t_xyz	a, t_xyz b, t_uvz a, float reciprocial)
-// {
-// 	dvizdy = ((viz2 - viz1) * (x3 - x1) - (viz3 - viz1) * (x2 - x1)) * reciprocial;
-// }

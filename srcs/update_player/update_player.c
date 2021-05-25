@@ -6,38 +6,38 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/14 22:48:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/25 10:42:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	check_player_dir(t_player *plr, t_xy *dir)
-{
-	if (plr->input.up == 1)
-	{
-		if (plr->input.left == 1)
-			*dir = vec2_rot(*dir, -45 * DEG_TO_RAD);
-		else if (plr->input.right == 1)
-			*dir = vec2_rot(*dir, 45 * DEG_TO_RAD);
-	}
-	if (plr->input.down == 1)
-	{
-		if (plr->input.left == 1)
-			*dir = vec2_rot(*dir, -135 * DEG_TO_RAD);
-		else if (plr->input.right == 1)
-			*dir = vec2_rot(*dir, 135 * DEG_TO_RAD);
-		else
-			*dir = vec2_rot(*dir, 180 * DEG_TO_RAD);
-	}
-	else if (plr->input.up == 0)
-	{
-		if (plr->input.left == 1)
-			*dir = vec2_rot(*dir, -90 * DEG_TO_RAD);
-		if (plr->input.right == 1)
-			*dir = vec2_rot(*dir, 90 * DEG_TO_RAD);
-	}
-}
+// static void	check_player_dir(t_player *plr, t_xy *dir)
+// {
+// 	if (plr->input.up == 1)
+// 	{
+// 		if (plr->input.left == 1)
+// 			*dir = vec2_rot(*dir, -45 * DEG_TO_RAD);
+// 		else if (plr->input.right == 1)
+// 			*dir = vec2_rot(*dir, 45 * DEG_TO_RAD);
+// 	}
+// 	if (plr->input.down == 1)
+// 	{
+// 		if (plr->input.left == 1)
+// 			*dir = vec2_rot(*dir, -135 * DEG_TO_RAD);
+// 		else if (plr->input.right == 1)
+// 			*dir = vec2_rot(*dir, 135 * DEG_TO_RAD);
+// 		else
+// 			*dir = vec2_rot(*dir, 180 * DEG_TO_RAD);
+// 	}
+// 	else if (plr->input.up == 0)
+// 	{
+// 		if (plr->input.left == 1)
+// 			*dir = vec2_rot(*dir, -90 * DEG_TO_RAD);
+// 		if (plr->input.right == 1)
+// 			*dir = vec2_rot(*dir, 90 * DEG_TO_RAD);
+// 	}
+// }
 
 // void	gravity_func(t_player *plr, int floor_height, float gravity)
 // {
@@ -59,23 +59,28 @@ static void	movement(t_player *plr, t_home *home)
 {
 	Uint32	current_time;
 	Uint32	delta_time;
-	t_xy	plr_dir;
+	// t_xy	plr_dir;
 
+	(void)home;
 	current_time = SDL_GetTicks();
 	delta_time = current_time - plr->time;
 	if (delta_time < 1)
 		return ;
 	plr->time = current_time;
 	// gravity_func(plr, floor_height, (delta_time * 0.05));
-	if (plr->input.up == 1 || plr->input.down == 1
-		|| plr->input.left == 1 || plr->input.right == 1)
-	{
-		plr_dir = (t_xy){0, 1};
-		check_player_dir(plr, &plr_dir);
-		plr_dir = vec2_mul(plr_dir, delta_time * 0.05);
-		if (player_move(plr, home, &plr_dir))
-			play_footsteps(plr);
-	}
+	// if (plr->input.up == 1 || plr->input.down == 1
+	// 	|| plr->input.left == 1 || plr->input.right == 1)
+	// {
+	// 	plr_dir = (t_xy){0, 1};
+	// 	check_player_dir(plr, &plr_dir);
+	// 	plr_dir = vec2_mul(plr_dir, delta_time * 0.05);
+	// 	if (player_move(plr, home, &plr_dir))
+	// 		play_footsteps(plr);
+	// }
+	if (plr->input.up == 1)
+		plr->camera.y += 0.1;
+	if (plr->input.down == 1)
+		plr->camera.y -= 0.1;
 }
 
 void	update_player(t_player *plr, t_home *home, SDL_Event *e)
