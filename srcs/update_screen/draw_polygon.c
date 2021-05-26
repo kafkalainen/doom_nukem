@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/26 14:57:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 17:14:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,12 +288,14 @@ int	painters_algorithm(const void *tri1, const void *tri2)
 int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 {
 	int				i;
-	int				r;
+	int				j;
+	int				nb_of_triangles_to_raster;
 	t_xyz			scale;
 	t_xyz			normal;
 	t_xyz			view_offset;
 	t_m4x4			matrix;
 	t_triangle		clipped_triangle[2];
+	t_triangle		projected;
 	int				nb_of_clipped_triangles;
 	static float	degree = 0.0f;
 	// t_xyz			light_direction;
@@ -343,7 +345,7 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 		{(t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}}};
 	home->cube[9] = (t_triangle){
-		{(t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}},
+		{(t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}};
 	//BOTTOM
 	home->cube[10] = (t_triangle){
@@ -366,44 +368,50 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	plr->target = vec3_add(plr->camera, plr->look_dir);
 	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 0.0f};
 	i = 0;
-	r = 0;
+	j = 0;
+	nb_of_triangles_to_raster = 0;
 	while (i < 12)
 	{
 		normal = triangle_normal(&home->transformed_cube[i]);
 		if (vec3_dot_product(normal, vec3_dec(home->transformed_cube[i].p[0], plr->camera)) < 0)
 		{
-			home->view_cube[i] = apply_camera(plr->camera, plr->target, plr->up, &home->transformed_cube[i]);
-			nb_of_clipped_triangles = clip_against_plane((t_xyz){0.0f, 0.0f, 0.1f, 0.0f},
-				(t_xyz){0.0f, 0.0f, 1.0f, 0.0f}, &home->view_cube[i],
-				&clipped_triangle[0], &clipped_triangle[1]);
-			(void)nb_of_clipped_triangles;
-			home->project_cube[i] = create_projection(&home->view_cube[i]);
-			home->project_cube[i].p[0] = vec3_div(home->project_cube[i].p[0], home->project_cube[i].p[0].w);
-			home->project_cube[i].p[1] = vec3_div(home->project_cube[i].p[1], home->project_cube[i].p[1].w);
-			home->project_cube[i].p[2] = vec3_div(home->project_cube[i].p[2], home->project_cube[i].p[2].w);
-			home->project_cube[i].p[0].x *= -1.0f;
-			home->project_cube[i].p[0].y *= -1.0f;
-			home->project_cube[i].p[1].x *= -1.0f;
-			home->project_cube[i].p[1].y *= -1.0f;
-			home->project_cube[i].p[2].x *= -1.0f;
-			home->project_cube[i].p[2].y *= -1.0f;
-			home->project_cube[i].p[0] = vec3_add(home->project_cube[i].p[0], view_offset);
-			home->project_cube[i].p[1] = vec3_add(home->project_cube[i].p[1], view_offset);
-			home->project_cube[i].p[2] = vec3_add(home->project_cube[i].p[2], view_offset);
-			home->project_cube[i] = scale_triangle(&home->project_cube[i], scale);
-			home->triangles_to_raster[r] = home->project_cube[i];
-			r++;
+			home->view_cube = apply_camera(
+				plr->camera, plr->target, plr->up, &home->transformed_cube[i]);
+			nb_of_clipped_triangles = clip_against_plane(
+				(t_xyz){0.0f, 0.0f, 0.1f, 1.0f}, (t_xyz){0.0f, 0.0f, 1.0f, 0.0f},
+				&home->view_cube, &clipped_triangle[0], &clipped_triangle[1]);
+			j = 0;
+			while (j < nb_of_clipped_triangles)
+			{
+				projected = create_projection(&clipped_triangle[j]);
+				projected.p[0] = vec3_div(projected.p[0], projected.p[0].w);
+				projected.p[1] = vec3_div(projected.p[1], projected.p[1].w);
+				projected.p[2] = vec3_div(projected.p[2], projected.p[2].w);
+				projected.p[0].x *= -1.0f;
+				projected.p[0].y *= -1.0f;
+				projected.p[1].x *= -1.0f;
+				projected.p[1].y *= -1.0f;
+				projected.p[2].x *= -1.0f;
+				projected.p[2].y *= -1.0f;
+				projected.p[0] = vec3_add(projected.p[0], view_offset);
+				projected.p[1] = vec3_add(projected.p[1], view_offset);
+				projected.p[2] = vec3_add(projected.p[2], view_offset);
+				projected = scale_triangle(&projected, scale);
+				home->triangles_to_raster[nb_of_triangles_to_raster] = projected;
+				nb_of_triangles_to_raster++;
+				j++;
+			}
 		}
 		i++;
 	}
-	i = r;
-	r = 0;
-	qsort((void *)home->triangles_to_raster, i, sizeof(home->triangles_to_raster[0]), painters_algorithm);
-	while (r < i)
+	i = 0;
+	qsort((void *)home->triangles_to_raster, (size_t)nb_of_triangles_to_raster,
+		sizeof(t_triangle), painters_algorithm);
+	while (i < nb_of_triangles_to_raster)
 	{
 		// calculate_triangle(frame, &home->triangles_to_raster[r], tex);
-		draw_polygon(frame, &home->triangles_to_raster[r]);
-		r++;
+		draw_polygon(frame, &home->triangles_to_raster[i]);
+		i++;
 	}
 	str_pxl(frame->buffer, (t_xy){5.0f, 10.0f}, "player_xyz", (t_plx_modifier){green, 2});
 	str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});

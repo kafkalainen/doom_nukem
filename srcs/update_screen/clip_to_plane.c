@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/26 14:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 17:18:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static void	calculate_distance_to_plane(t_xyz point, t_xyz plane_normal,
 	t_xyz	tri_point;
 
 	tri_point = vec3_unit_vector(point);
-	*d = plane_normal.x * tri_point.x
-		+ plane_normal.y * tri_point.y
+	*d = plane_normal.x * tri_point.x + plane_normal.y * tri_point.y
 		+ plane_normal.z * tri_point.z
 		- vec3_dot_product(plane_normal, plane_point);
 }
@@ -98,13 +97,13 @@ int		clip_against_plane(t_xyz plane_point, t_xyz plane_normal,
 		triangle1->uv[2].w = loc.texel_offset * (loc.texels_outside[1].w - loc.texels_inside[0].w) + loc.texels_inside[0].w;
 		triangle2->p[0] = loc.points_inside[1];
 		triangle2->uv[0] = loc.texels_inside[1];
-		triangle2->p[0] = triangle1->p[1];
-		triangle2->uv[0] = triangle1->uv[1];
+		triangle2->p[1] = triangle1->p[2];
+		triangle2->uv[1] = triangle1->uv[2];
 		triangle2->p[2] = vec3_intersection_with_plane(plane_point, plane_normal, loc.points_inside[1], loc.points_outside[0], &loc.texel_offset);
 		triangle2->uv[2].u = loc.texel_offset * (loc.texels_outside[0].u - loc.texels_inside[1].u) + loc.texels_inside[1].u;
 		triangle2->uv[2].v = loc.texel_offset * (loc.texels_outside[0].v - loc.texels_inside[1].v) + loc.texels_inside[1].v;
 		triangle2->uv[2].w = loc.texel_offset * (loc.texels_outside[0].w - loc.texels_inside[1].w) + loc.texels_inside[1].w;
 		return (2);
 	}
-	return (-1);
+	return (0);
 }
