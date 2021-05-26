@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/26 11:33:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 14:36:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static void	swap_uvz(t_uvz *p0, t_uvz *p1)
 
 	swap.u = p0->u;
 	swap.v = p0->v;
-	swap.z = p0->z;
+	swap.w = p0->w;
 	p0->u = p1->u;
 	p0->v = p1->v;
-	p0->z = p1->z;
+	p0->w = p1->w;
 	p1->u = swap.u;
 	p1->v = swap.v;
-	p1->z = swap.z;
+	p1->w = swap.w;
 }
 
 static void	sort_vertices(t_triangle *tri)
@@ -76,10 +76,10 @@ static t_uvz	calculate_texel_delta_x(t_triangle *calculate, float denom)
 {
 	t_uvz texel_delta;
 
-	texel_delta.z = (
-		((calculate->uv[2].z - calculate->uv[0].z)
+	texel_delta.w = (
+		((calculate->uv[2].w - calculate->uv[0].w)
 		* (calculate->p[1].y - calculate->p[0].y))
-		- ((calculate->uv[1].z - calculate->uv[0].z)
+		- ((calculate->uv[1].w - calculate->uv[0].w)
 		* (calculate->p[2].y - calculate->p[0].y))) * denom;
 	texel_delta.u = (
 		((calculate->uv[2].u - calculate->uv[0].u)
@@ -98,10 +98,10 @@ static t_uvz	calculate_texel_delta_y(t_triangle *calculate, float denom)
 {
 	t_uvz texel_delta;
 
-	texel_delta.z = (
-		((calculate->uv[1].z - calculate->uv[0].z)
+	texel_delta.w = (
+		((calculate->uv[1].w - calculate->uv[0].w)
 		* (calculate->p[2].x - calculate->p[0].x))
-		- ((calculate->uv[2].z - calculate->uv[0].z)
+		- ((calculate->uv[2].w - calculate->uv[0].w)
 		* (calculate->p[1].x - calculate->p[0].x))) * denom;
 	texel_delta.u = (
 		((calculate->uv[1].u - calculate->uv[0].u)
@@ -134,7 +134,7 @@ static void fill_triangle(Uint32 *buffer, t_xy left, t_xy right,
 	{
 		x1 = left.x;
 		x2 = right.x;
-		texel.z = uv.z + (1 - (left.x - x1)) * texel_delta_x.z;
+		texel.w = uv.w + (1 - (left.x - x1)) * texel_delta_x.w;
 		texel.u = uv.u + (1 - (left.x - x1)) * texel_delta_x.u;
 		texel.v = uv.v + (1 - (left.x - x1)) * texel_delta_x.v;
 		while (x1++ < x2)
@@ -143,13 +143,13 @@ static void fill_triangle(Uint32 *buffer, t_xy left, t_xy right,
 			colour = get_texel(corr_texel.u * (tex->w - 1),
 						corr_texel.v * (tex->h - 1), tex);
 			put_pixel(buffer, x1, left_y, colour);
-			texel.z += texel_delta_x.z;
+			texel.w += texel_delta_x.w;
 			texel.u += texel_delta_x.u;
 			texel.v += texel_delta_x.v;
 		}
 		left.x += pixel_delta_left;
 		right.x += pixel_delta_right;
-		uv.z += texel_delta_left.z;
+		uv.w += texel_delta_left.w;
 		uv.u += texel_delta_left.u;
 		uv.v += texel_delta_left.v;
 		left_y++;
@@ -219,7 +219,7 @@ void	calculate_triangle(t_frame *frame, t_triangle *tri, t_texture *tex)
 		texel_delta_left = uvz_calculate_value_with_delta(pixel_delta_left, texel_delta_x, texel_delta_y);
 		dy = 1 - (calculate.p[0].y - y1i);
 		x_left = calculate.p[0].x + dy * pixel_delta_left;
-		texel_left.z = calculate.uv[0].z + dy * texel_delta_left.z;
+		texel_left.w = calculate.uv[0].w + dy * texel_delta_left.w;
 		texel_left.u = calculate.uv[0].u + dy * texel_delta_left.u;
 		texel_left.v = calculate.uv[0].v + dy * texel_delta_left.v;
 		if (y1i < y2i)
@@ -251,7 +251,7 @@ void	calculate_triangle(t_frame *frame, t_triangle *tri, t_texture *tex)
 			pixel_delta_left = dxdy1;
 			texel_delta_left = uvz_calculate_value_with_delta(pixel_delta_left, texel_delta_x, texel_delta_y);
 			x_left = calculate.p[0].x + dy * pixel_delta_left;
-			texel_left.z = calculate.uv[0].z + dy * texel_delta_left.z;
+			texel_left.w = calculate.uv[0].w + dy * texel_delta_left.w;
 			texel_left.u = calculate.uv[0].u + dy * texel_delta_left.u;
 			texel_left.v = calculate.uv[0].v + dy * texel_delta_left.v;
 			fill_triangle(frame->buffer,
@@ -265,7 +265,7 @@ void	calculate_triangle(t_frame *frame, t_triangle *tri, t_texture *tex)
 			texel_delta_left = uvz_calculate_value_with_delta(pixel_delta_left, texel_delta_x, texel_delta_y);
 			dy = 1 - (calculate.p[1].y - y2i);
 			x_left = calculate.p[1].x + dy * pixel_delta_left;
-			texel_left.z = calculate.uv[1].z + dy * texel_delta_left.z;
+			texel_left.w = calculate.uv[1].w + dy * texel_delta_left.w;
 			texel_left.u = calculate.uv[1].u + dy * texel_delta_left.u;
 			texel_left.v = calculate.uv[1].v + dy * texel_delta_left.v;
 			fill_triangle(frame->buffer,
@@ -293,20 +293,21 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	t_xyz			normal;
 	t_xyz			view_offset;
 	t_m4x4			matrix;
+	// t_triangle		clipped_triangle[2];
 	static float	degree = 0.0f;
 	// t_xyz			light_direction;
-	// static Uint32	cur_time;
+	static Uint32	cur_time;
 	// t_texture		*tex;
 
 	// (void)home;
 	// tex = get_tex(-1, home->editor_tex);
-	// if (frame->last_frame - cur_time > 66)
-	// {
-	// 	cur_time = frame->last_frame;
-	// 	degree += 0.1f;
-	// }
-	// if (degree > TWO_PI)
-	// 	degree = 0.0f;
+	if (frame->last_frame - cur_time > 66)
+	{
+		cur_time = frame->last_frame;
+		degree += 0.1f;
+	}
+	if (degree > TWO_PI)
+		degree = 0.0f;
 	// light_direction = (t_xyz){0,0,-1};
 	//SOUTH
 	home->cube[0] = (t_triangle){
@@ -357,24 +358,20 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 		home->transformed_cube[i] = apply_world_matrix(degree, degree, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &home->cube[i]);
 		i++;
 	}
-	i = 0;
 	plr->up = (t_xyz){0.0f,1.0f,0.0f,1.0f}; //Position player straight.
 	plr->target = (t_xyz){0.0f, 0.0f, 1.0f, 0.0f}; //Position player's gaze forwards.
+	matrix = rotation_matrix_y(plr->yaw);
 	plr->look_dir = multi_vec_matrix(&plr->target, &matrix);
 	plr->target = vec3_add(plr->camera, plr->look_dir);
-	while (i < 12)
-	{
-		home->view_cube[i] = apply_camera(plr->camera, plr->target, plr->up, &home->transformed_cube[i]);
-		i++;
-	}
+	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 0.0f};
 	i = 0;
 	r = 0;
-	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 0.0f};
 	while (i < 12)
 	{
-		normal = triangle_normal(&home->view_cube[i]);
-		if (vec3_dot_product(normal, vec3_dec(home->view_cube[i].p[0], plr->camera)) < 0)
+		normal = triangle_normal(&home->transformed_cube[i]);
+		if (vec3_dot_product(normal, vec3_dec(home->transformed_cube[i].p[0], plr->camera)) < 0)
 		{
+			home->view_cube[i] = apply_camera(plr->camera, plr->target, plr->up, &home->transformed_cube[i]);
 			home->project_cube[i] = create_projection(&home->view_cube[i]);
 			home->project_cube[i].p[0] = vec3_div(home->project_cube[i].p[0], home->project_cube[i].p[0].w);
 			home->project_cube[i].p[1] = vec3_div(home->project_cube[i].p[1], home->project_cube[i].p[1].w);
@@ -403,8 +400,9 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 		draw_polygon(frame, &home->triangles_to_raster[r]);
 		r++;
 	}
-	str_pxl(frame->buffer, (t_xy){5.0f, 10.0f}, "player_y", (t_plx_modifier){green, 2});
-	str_pxl(frame->buffer, (t_xy){5.0f, 24.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});
+	str_pxl(frame->buffer, (t_xy){5.0f, 10.0f}, "player_xyz", (t_plx_modifier){green, 2});
 	str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});
+	str_pxl(frame->buffer, (t_xy){5.0f, 24.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});
+	str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.z, 6), (t_plx_modifier){green, 2});
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 14:39:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/25 08:50:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 14:38:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ t_xyz	inv_z(t_xyz a)
 
 t_uvz	texel_inv_z(t_uvz a)
 {
-	a.z = 1.0f / a.z;
-	a.u = a.u * a.z;
-	a.v = a.v * a.z;
+	a.w = 1.0f / a.w;
+	a.u = a.u * a.w;
+	a.v = a.v * a.w;
 	return (a);
 }

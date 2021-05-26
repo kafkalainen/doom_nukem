@@ -6,13 +6,12 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/26 08:07:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 14:30:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTORS_H
 # define VECTORS_H
-
 
 typedef struct s_height
 {
@@ -46,8 +45,20 @@ typedef struct s_uvz
 {
 	float			u;
 	float			v;
-	float			z;
+	float			w;
 }					t_uvz;
+
+typedef struct s_point_location
+{
+	t_xyz		points_inside[3];
+	t_xyz		points_outside[3];
+	t_uvz		texels_inside[3];
+	t_uvz		texels_outside[3];
+	int			inside;
+	int			outside;
+	float		texel_offset;
+}					t_point_location;
+
 
 typedef struct s_triangle
 {
@@ -123,4 +134,6 @@ t_m4x4		multiply_matrix(t_m4x4 *m1, t_m4x4 *m2);
 t_triangle	apply_world_matrix(float angle_x, float angle_z,
 	t_xyz translation, t_triangle *src);
 t_xyz		vec3_div(t_xyz a, float scalar);
+t_xyz		vec3_intersection_with_plane(t_xyz plane_p, t_xyz plane_n,
+	t_xyz start, t_xyz end, float *texel_offset);
 #endif
