@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/25 10:19:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 11:35:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void	init_player(t_player *plr)
 	plr->input.minimap = 1;
 	plr->input.info = 1;
 	plr->input.mouse = 1;
+	plr->input.debug_up = 0;
+	plr->input.debug_down = 0;
+	plr->input.debug_right = 0;
+	plr->input.debug_left = 0;
 	plr->time = 0;
 	plr->current_sector = 0;
 	plr->z = 0;
@@ -57,6 +61,7 @@ void	init_player(t_player *plr)
 	plr->look_dir = (t_xyz){0.0f, 0.0f, 1.0f, 1.0f};
 	plr->up = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
 	plr->target = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
+	plr->yaw = 0.0f;
 }
 
 void	setup_fps(t_time *time)
@@ -92,7 +97,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	if (Mix_PlayingMusic() == 0)
 		Mix_PlayMusic(plr->audio.music, -1);
 	init_player(plr);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	setup_menu(menu, &home->game_state);
 }
 

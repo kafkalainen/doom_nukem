@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 09:07:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/25 10:57:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/25 13:49:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_m4x4	projection_matrix(void)
 /*
 **	Only works with translations and transformations!
 */
-t_m4x4	point_to_matrix(t_xyz up, t_xyz forward, t_xyz right, t_xyz location)
+t_m4x4	point_at_matrix(t_xyz up, t_xyz forward, t_xyz right, t_xyz location)
 {
 	return (t_m4x4){{
 		{right.x, right.y, right.z, 0.0f},
@@ -65,7 +65,6 @@ t_m4x4	inverse_matrix(t_m4x4 *rot_trans_matrix)
 		new_matrix.m[2][1] = rot_trans_matrix->m[1][2];
 		new_matrix.m[2][2] = rot_trans_matrix->m[2][2];
 		new_matrix.m[2][3] = 0.0f;
-		new_matrix.m[2][3] = rot_trans_matrix->m[3][2];
 		new_matrix.m[3][0] = -(rot_trans_matrix->m[3][0] * new_matrix.m[0][0]
 			+ rot_trans_matrix->m[3][1] * new_matrix.m[1][0]
 			+ rot_trans_matrix->m[3][2] * new_matrix.m[2][0]);

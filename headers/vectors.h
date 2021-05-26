@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/25 11:13:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 08:07:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,12 @@ t_uvz		uvz_calculate_value_with_delta(float delta_x, t_uvz delta_u, t_uvz delta_
 float		triangle_calculate_average_z(t_triangle *triangle);
 t_xyz		vec3_mul(t_xyz a, float multiplier);
 t_xyz		vec3_cross_product(t_xyz a, t_xyz b);
-t_m4x4		point_to_matrix(t_xyz up, t_xyz forward, t_xyz right, t_xyz location);
+t_m4x4		point_at_matrix(t_xyz up, t_xyz forward, t_xyz right, t_xyz location);
 t_m4x4		inverse_matrix(t_m4x4 *rot_trans_matrix);
 t_triangle	apply_camera(t_xyz pos, t_xyz target, t_xyz up, t_triangle *src);
 t_m4x4		identity_matrix(void);
 t_m4x4		multiply_matrix(t_m4x4 *m1, t_m4x4 *m2);
 t_triangle	apply_world_matrix(float angle_x, float angle_z,
 	t_xyz translation, t_triangle *src);
+t_xyz		vec3_div(t_xyz a, float scalar);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 15:06:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/25 13:35:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 09:04:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_xyz	triangle_normal(t_triangle *triangle)
 	normal.x = normal.x / magnitude;
 	normal.y = normal.y / magnitude;
 	normal.z = normal.z / magnitude;
-	normal.w = 1.0f;
+	normal.w = 0.0f; // This is set to zero, since normal is a vector.
 	return (normal);
 }
 

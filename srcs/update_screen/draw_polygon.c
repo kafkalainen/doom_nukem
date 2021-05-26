@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/25 13:27:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 11:33:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,11 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 {
 	int				i;
 	int				r;
+	t_xyz			scale;
 	t_xyz			normal;
+	t_xyz			view_offset;
+	t_m4x4			matrix;
+	static float	degree = 0.0f;
 	// t_xyz			light_direction;
 	// static Uint32	cur_time;
 	// t_texture		*tex;
@@ -304,7 +308,6 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	// if (degree > TWO_PI)
 	// 	degree = 0.0f;
 	// light_direction = (t_xyz){0,0,-1};
-	plr->target = vec3_add(plr->camera, plr->look_dir);
 	//SOUTH
 	home->cube[0] = (t_triangle){
 		{(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}},
@@ -347,13 +350,18 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	home->cube[11] = (t_triangle){
 		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,0.0f,0.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}};
+	view_offset = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
 	i = 0;
 	while (i < 12)
 	{
-		home->transformed_cube[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 3.0f, 1.0f}, &home->cube[i]);
+		home->transformed_cube[i] = apply_world_matrix(degree, degree, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &home->cube[i]);
 		i++;
 	}
 	i = 0;
+	plr->up = (t_xyz){0.0f,1.0f,0.0f,1.0f}; //Position player straight.
+	plr->target = (t_xyz){0.0f, 0.0f, 1.0f, 0.0f}; //Position player's gaze forwards.
+	plr->look_dir = multi_vec_matrix(&plr->target, &matrix);
+	plr->target = vec3_add(plr->camera, plr->look_dir);
 	while (i < 12)
 	{
 		home->view_cube[i] = apply_camera(plr->camera, plr->target, plr->up, &home->transformed_cube[i]);
@@ -361,19 +369,27 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	}
 	i = 0;
 	r = 0;
+	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 0.0f};
 	while (i < 12)
 	{
 		normal = triangle_normal(&home->view_cube[i]);
-		if (vec3_dot_product(normal, vec3_dec(home->view_cube[i].p[0], plr->camera)) > 0)
+		if (vec3_dot_product(normal, vec3_dec(home->view_cube[i].p[0], plr->camera)) < 0)
 		{
 			home->project_cube[i] = create_projection(&home->view_cube[i]);
-			home->project_cube[i].p[0] = vec3_add(home->project_cube[i].p[0], ((t_xyz){1.0f, 1.0f, 0.0f, 0.0f}));
-			home->project_cube[i].p[1] = vec3_add(home->project_cube[i].p[1], ((t_xyz){1.0f, 1.0f, 0.0f, 0.0f}));
-			home->project_cube[i].p[2] = vec3_add(home->project_cube[i].p[2], ((t_xyz){1.0f, 1.0f, 0.0f, 0.0f}));
-			home->project_cube[i] = scale_triangle(&home->project_cube[i],
-				(t_xyz){SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 1.0f, 1.0f});
+			home->project_cube[i].p[0] = vec3_div(home->project_cube[i].p[0], home->project_cube[i].p[0].w);
+			home->project_cube[i].p[1] = vec3_div(home->project_cube[i].p[1], home->project_cube[i].p[1].w);
+			home->project_cube[i].p[2] = vec3_div(home->project_cube[i].p[2], home->project_cube[i].p[2].w);
+			home->project_cube[i].p[0].x *= -1.0f;
+			home->project_cube[i].p[0].y *= -1.0f;
+			home->project_cube[i].p[1].x *= -1.0f;
+			home->project_cube[i].p[1].y *= -1.0f;
+			home->project_cube[i].p[2].x *= -1.0f;
+			home->project_cube[i].p[2].y *= -1.0f;
+			home->project_cube[i].p[0] = vec3_add(home->project_cube[i].p[0], view_offset);
+			home->project_cube[i].p[1] = vec3_add(home->project_cube[i].p[1], view_offset);
+			home->project_cube[i].p[2] = vec3_add(home->project_cube[i].p[2], view_offset);
+			home->project_cube[i] = scale_triangle(&home->project_cube[i], scale);
 			home->triangles_to_raster[r] = home->project_cube[i];
-			// draw_polygon(frame, &home->triangles_to_raster[r]);
 			r++;
 		}
 		i++;
@@ -387,5 +403,8 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 		draw_polygon(frame, &home->triangles_to_raster[r]);
 		r++;
 	}
+	str_pxl(frame->buffer, (t_xy){5.0f, 10.0f}, "player_y", (t_plx_modifier){green, 2});
+	str_pxl(frame->buffer, (t_xy){5.0f, 24.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});
+	str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});
 	return (TRUE);
 }

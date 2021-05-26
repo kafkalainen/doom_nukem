@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/25 09:41:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 11:16:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ typedef struct s_input
 	int				minimap;
 	int				info;
 	int				mouse;
+	int				debug_up;
+	int				debug_down;
+	int				debug_left;
+	int				debug_right;
 }					t_input;
 
 typedef struct s_player
@@ -34,6 +38,7 @@ typedef struct s_player
 	t_xyz			look_dir;
 	t_xyz			target;
 	t_xyz			up;
+	float			yaw;
 	float			pitch;
 	float			z;
 	float			height;

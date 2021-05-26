@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/12 16:37:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 11:22:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,23 @@ static void	action_keys(t_player *plr, SDL_KeyCode *sym)
 	}
 }
 
+static void	debug_keys(t_player *plr, SDL_KeyCode *sym, int nb)
+{
+	if (*sym == SDLK_UP)
+		plr->input.debug_up = nb;
+	if (*sym == SDLK_DOWN)
+		plr->input.debug_down = nb;
+	if (*sym == SDLK_LEFT)
+		plr->input.debug_left = nb;
+	if (*sym == SDLK_RIGHT)
+		plr->input.debug_right = nb;
+}
+
 void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 {
+	int	state;
+
+	state = 1;
 	if (sym == SDLK_ESCAPE)
 		*game_state = MAIN_MENU;
 	if (sym == SDLK_s)
@@ -58,11 +73,15 @@ void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 		plr->height = 0;
 	if (sym == SDLK_SPACE && plr->acceleration == 0)
 		plr->acceleration = 5;
+	debug_keys(plr, &sym, state);
 	action_keys(plr, &sym);
 }
 
 void	keys_up(t_player *plr, SDL_KeyCode sym)
 {
+	int	state;
+
+	state = 0;
 	if (sym == SDLK_s)
 		plr->input.down = 0;
 	if (sym == SDLK_w)
@@ -77,6 +96,7 @@ void	keys_up(t_player *plr, SDL_KeyCode sym)
 		plr->input.rot_right = 0;
 	if (sym == SDLK_LCTRL)
 		plr->height = 10;
+	debug_keys(plr, &sym, state);
 }
 
 void	key_input(t_player *plr, SDL_Event *e, int *game_state)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:04:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/25 09:29:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 08:06:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,9 @@ float	triangle_calculate_average_z(t_triangle *triangle)
 t_xyz	vec3_mul(t_xyz a, float scalar)
 {
 	return ((t_xyz){a.x * scalar, a.y * scalar, a.z * scalar, 1.0f});
+}
+
+t_xyz	vec3_div(t_xyz a, float scalar)
+{
+	return ((t_xyz){a.x / scalar, a.y / scalar, a.z / scalar, 1.0f});
 }

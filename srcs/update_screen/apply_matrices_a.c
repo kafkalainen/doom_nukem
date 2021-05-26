@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:38:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/25 11:37:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/25 13:53:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_triangle	apply_camera(t_xyz pos, t_xyz target, t_xyz up, t_triangle *src)
 	t_xyz	next_forward;
 	t_xyz	next_up;
 	t_xyz	next_right;
-	t_m4x4	matrix;
+	t_m4x4	view_matrix;
 	t_triangle	dst;
 
 	next_forward = vec3_dec(target, pos);
@@ -85,10 +85,10 @@ t_triangle	apply_camera(t_xyz pos, t_xyz target, t_xyz up, t_triangle *src)
 	next_up = vec3_dec(up, next_up);
 	next_up = vec3_unit_vector(next_up);
 	next_right = vec3_cross_product(next_up, next_forward);
-	matrix = point_to_matrix(next_up, next_forward, next_right, pos);
-	matrix = inverse_matrix(&matrix);
-	dst.p[0] = multi_vec_matrix(&src->p[0], &matrix);
-	dst.p[1] = multi_vec_matrix(&src->p[1], &matrix);
-	dst.p[2] = multi_vec_matrix(&src->p[2], &matrix);
+	view_matrix = point_at_matrix(next_up, next_forward, next_right, pos);
+	view_matrix = inverse_matrix(&view_matrix);
+	dst.p[0] = multi_vec_matrix(&src->p[0], &view_matrix);
+	dst.p[1] = multi_vec_matrix(&src->p[1], &view_matrix);
+	dst.p[2] = multi_vec_matrix(&src->p[2], &view_matrix);
 	return (dst);
 }
