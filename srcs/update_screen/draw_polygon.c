@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/26 14:36:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/26 14:57:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,8 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	t_xyz			normal;
 	t_xyz			view_offset;
 	t_m4x4			matrix;
-	// t_triangle		clipped_triangle[2];
+	t_triangle		clipped_triangle[2];
+	int				nb_of_clipped_triangles;
 	static float	degree = 0.0f;
 	// t_xyz			light_direction;
 	static Uint32	cur_time;
@@ -372,6 +373,10 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 		if (vec3_dot_product(normal, vec3_dec(home->transformed_cube[i].p[0], plr->camera)) < 0)
 		{
 			home->view_cube[i] = apply_camera(plr->camera, plr->target, plr->up, &home->transformed_cube[i]);
+			nb_of_clipped_triangles = clip_against_plane((t_xyz){0.0f, 0.0f, 0.1f, 0.0f},
+				(t_xyz){0.0f, 0.0f, 1.0f, 0.0f}, &home->view_cube[i],
+				&clipped_triangle[0], &clipped_triangle[1]);
+			(void)nb_of_clipped_triangles;
 			home->project_cube[i] = create_projection(&home->view_cube[i]);
 			home->project_cube[i].p[0] = vec3_div(home->project_cube[i].p[0], home->project_cube[i].p[0].w);
 			home->project_cube[i].p[1] = vec3_div(home->project_cube[i].p[1], home->project_cube[i].p[1].w);
