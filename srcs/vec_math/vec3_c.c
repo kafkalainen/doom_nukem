@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:04:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 08:31:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 14:50:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,30 @@ t_xyz	vec3_div(t_xyz a, float scalar)
 	return ((t_xyz){a.x / scalar, a.y / scalar, a.z / scalar, 1.0f});
 }
 
+
+/*
+**	vec3_unit_vector ok.
+**	vec3_dot_product ok.
+**	swapped end with start on line 65 vec3_dec call -> fixed error.
+*/
 t_xyz	vec3_intersection_with_plane(t_xyz point_on_plane, t_xyz plane_normal, t_xyz start,
 	t_xyz end, float *texel_offset)
 {
-		float	plane_distance;
-		float	start_distance;
-		float	end_distance;
+		float	plane_dot;
+		float	start_dot;
+		float	end_dot;
 		t_xyz	line_to_plane;
 		t_xyz	line;
 
 		plane_normal = vec3_unit_vector(plane_normal);
-		plane_distance = -vec3_dot_product(plane_normal, point_on_plane);
-		start_distance = vec3_dot_product(start, plane_normal);
-		end_distance = vec3_dot_product(end, plane_normal);
-		if (start_distance == end_distance)
-			return (start);
-		*texel_offset = interpolate_points(start_distance, -plane_distance,
-			start_distance, end_distance);
-		line = vec3_dec(start, end);
+		plane_dot = -vec3_dot_product(plane_normal, point_on_plane);
+		start_dot = vec3_dot_product(start, plane_normal);
+		end_dot = vec3_dot_product(end, plane_normal);
+		// if (start_dot == end_dot)
+		// 	return (start);
+		*texel_offset = interpolate_points(start_dot, -plane_dot,
+			start_dot, end_dot);
+		line = vec3_dec(end, start);
 		line_to_plane = vec3_mul(line, *texel_offset);
 		return (vec3_add(start, line_to_plane));
 }
