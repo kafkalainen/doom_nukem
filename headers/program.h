@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/26 17:01:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 12:31:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ typedef struct s_home
 	t_triangle		cube[12];
 	t_triangle		transformed_cube[12];
 	t_triangle		view_cube;
-	t_triangle		triangles_to_raster[100];
+	t_triangle		*triangles_in_view;
+	t_triangle		*triangles_to_raster;
+	t_sides			viewport;
 }					t_home;
 
 #endif

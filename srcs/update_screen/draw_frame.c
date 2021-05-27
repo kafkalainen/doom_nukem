@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/19 11:57:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 09:32:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,18 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	sector = ft_itoa(plr->current_sector);
 	fps = ft_itoa(nb_fps);
 	plr_z = ft_ftoa(plr->z, 6);
-	str_pxl(frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, mod);
-	str_pxl(frame->buffer, (t_xy){0, 50}, "dir: ", mod);
-	str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
-	str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", mod);
-	str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
-	str_pxl(frame->buffer, (t_xy){0, 110}, "current_z:", mod);
-	str_pxl(frame->buffer, (t_xy){0, 130}, plr_z, mod);
-	str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
-	str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
-	str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
-	str_pxl(frame->buffer, (t_xy){0, 440}, "wasd, rotate with q and e.", mod);
-	str_pxl(frame->buffer, (t_xy){0, 460}, "free mouse with m", mod);
+	ft_str_pxl(frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 50}, "dir: ", mod);
+	ft_str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 110}, "current_z:", mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 130}, plr_z, mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 440}, "wasd, rotate with q and e.", mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 460}, "free mouse with m", mod);
 	free(fps);
 	free(sector);
 	free(compass);

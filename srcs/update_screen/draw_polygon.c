@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/26 17:14:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 13:36:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	draw_polygon(t_frame *frame, t_triangle *tri)
 {
 	draw_line(vec2(tri->p[0].x, tri->p[0].y), vec2(tri->p[1].x, tri->p[1].y),
-		white, frame->buffer);
+		tri->colour, frame->buffer);
 	draw_line(vec2(tri->p[1].x, tri->p[1].y), vec2(tri->p[2].x, tri->p[2].y),
-		white, frame->buffer);
+		tri->colour, frame->buffer);
 	draw_line(vec2(tri->p[2].x, tri->p[2].y), vec2(tri->p[0].x, tri->p[0].y),
-		white, frame->buffer);
+		tri->colour, frame->buffer);
 	return (TRUE);
 }
 
@@ -285,11 +285,15 @@ int	painters_algorithm(const void *tri1, const void *tri2)
 		return (0);
 }
 
+/*
+**	1. Clipping doesn't work as it should, objects appear to be more perpendicular than they should.
+**	2. Problem when I scaled, not with the matrices, when objects appeared longer.
+*/
 int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 {
 	int				i;
 	int				j;
-	int				nb_of_triangles_to_raster;
+	int				nb_of_triangles_in_view;
 	t_xyz			scale;
 	t_xyz			normal;
 	t_xyz			view_offset;
@@ -297,68 +301,27 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	t_triangle		clipped_triangle[2];
 	t_triangle		projected;
 	int				nb_of_clipped_triangles;
+	int				raster_triangles_count;
 	static float	degree = 0.0f;
 	// t_xyz			light_direction;
-	static Uint32	cur_time;
+	// static Uint32	cur_time;
 	// t_texture		*tex;
 
 	// (void)home;
 	// tex = get_tex(-1, home->editor_tex);
-	if (frame->last_frame - cur_time > 66)
-	{
-		cur_time = frame->last_frame;
-		degree += 0.1f;
-	}
-	if (degree > TWO_PI)
-		degree = 0.0f;
+	// if (frame->last_frame - cur_time > 66)
+	// {
+	// 	cur_time = frame->last_frame;
+	// 	degree += 0.1f;
+	// }
+	// if (degree > TWO_PI)
+	// 	degree = 0.0f;
 	// light_direction = (t_xyz){0,0,-1};
-	//SOUTH
-	home->cube[0] = (t_triangle){
-		{(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){0.0f,0.0f,0.0f}, (t_uvz){1.0f,0.0f,0.0f}}};
-	home->cube[1] = (t_triangle){
-		(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,0.0f,0.0f,1.0f},
-		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}};
-	//EAST
-	home->cube[2] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){0.0f,0.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}}};
-	home->cube[3] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,0.0f,1.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}};
-	//NORTH
-	home->cube[4] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}}};
-	home->cube[5] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,1.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}};
-	//WEST
-	home->cube[6] = (t_triangle){
-		{(t_xyz){0.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}}};
-	home->cube[7] = (t_triangle){
-		{(t_xyz){0.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}};
-	//TOP
-	home->cube[8] = (t_triangle){
-		{(t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}}};
-	home->cube[9] = (t_triangle){
-		{(t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}};
-	//BOTTOM
-	home->cube[10] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}}};
-	home->cube[11] = (t_triangle){
-		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,0.0f,0.0f,1.0f}},
-		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}};
 	view_offset = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
 	i = 0;
 	while (i < 12)
 	{
-		home->transformed_cube[i] = apply_world_matrix(degree, degree, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &home->cube[i]);
+		home->transformed_cube[i] = apply_world_matrix(0.1f, degree, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &home->cube[i]);
 		i++;
 	}
 	plr->up = (t_xyz){0.0f,1.0f,0.0f,1.0f}; //Position player straight.
@@ -366,10 +329,10 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	matrix = rotation_matrix_y(plr->yaw);
 	plr->look_dir = multi_vec_matrix(&plr->target, &matrix);
 	plr->target = vec3_add(plr->camera, plr->look_dir);
-	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 0.0f};
+	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
 	i = 0;
 	j = 0;
-	nb_of_triangles_to_raster = 0;
+	nb_of_triangles_in_view = 0;
 	while (i < 12)
 	{
 		normal = triangle_normal(&home->transformed_cube[i]);
@@ -378,7 +341,7 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 			home->view_cube = apply_camera(
 				plr->camera, plr->target, plr->up, &home->transformed_cube[i]);
 			nb_of_clipped_triangles = clip_against_plane(
-				(t_xyz){0.0f, 0.0f, 0.1f, 1.0f}, (t_xyz){0.0f, 0.0f, 1.0f, 0.0f},
+				&home->viewport.near,
 				&home->view_cube, &clipped_triangle[0], &clipped_triangle[1]);
 			j = 0;
 			while (j < nb_of_clipped_triangles)
@@ -396,26 +359,36 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 				projected.p[0] = vec3_add(projected.p[0], view_offset);
 				projected.p[1] = vec3_add(projected.p[1], view_offset);
 				projected.p[2] = vec3_add(projected.p[2], view_offset);
+				// projected.p[0].x *= 0.5f * (float)SCREEN_WIDTH;
+				// projected.p[0].y *= 0.5f * (float)SCREEN_HEIGHT;
+				// projected.p[1].x *= 0.5f * (float)SCREEN_WIDTH;
+				// projected.p[1].y *= 0.5f * (float)SCREEN_HEIGHT;
+				// projected.p[2].x *= 0.5f * (float)SCREEN_WIDTH;
+				// projected.p[2].y *= 0.5f * (float)SCREEN_HEIGHT;
 				projected = scale_triangle(&projected, scale);
-				home->triangles_to_raster[nb_of_triangles_to_raster] = projected;
-				nb_of_triangles_to_raster++;
+				home->triangles_in_view[nb_of_triangles_in_view] = projected;
+				nb_of_triangles_in_view++;
 				j++;
 			}
 		}
 		i++;
 	}
-	i = 0;
-	qsort((void *)home->triangles_to_raster, (size_t)nb_of_triangles_to_raster,
+	//Check that algorithm works, z might be lost once we get here.
+	qsort((void *)home->triangles_in_view, (size_t)nb_of_triangles_in_view,
 		sizeof(t_triangle), painters_algorithm);
-	while (i < nb_of_triangles_to_raster)
+	j = 0;
+	raster_triangles_count = clip_to_viewport_edges(home->triangles_in_view, home->triangles_to_raster,
+	 	&home->viewport, nb_of_triangles_in_view);
+	while (j < raster_triangles_count)
 	{
-		// calculate_triangle(frame, &home->triangles_to_raster[r], tex);
-		draw_polygon(frame, &home->triangles_to_raster[i]);
-		i++;
+		// calculate_triangle(frame, &home->triangles_in_view[r], tex);
+		// draw_polygon(frame, &home->triangles_in_view[j]);
+		draw_polygon(frame, &home->triangles_to_raster[j]);
+		j++;
 	}
-	str_pxl(frame->buffer, (t_xy){5.0f, 10.0f}, "player_xyz", (t_plx_modifier){green, 2});
-	str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});
-	str_pxl(frame->buffer, (t_xy){5.0f, 24.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});
-	str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.z, 6), (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 10.0f}, "player_xyz", (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 24.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.z, 6), (t_plx_modifier){green, 2});
 	return (TRUE);
 }

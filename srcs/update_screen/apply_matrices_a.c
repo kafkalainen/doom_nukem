@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:38:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/25 13:53:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 07:07:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_triangle	apply_camera(t_xyz pos, t_xyz target, t_xyz up, t_triangle *src)
 	t_m4x4	view_matrix;
 	t_triangle	dst;
 
+	dst = *src;
 	next_forward = vec3_dec(target, pos);
 	next_forward = vec3_unit_vector(next_forward);
 	next_up = vec3_mul(next_forward, vec3_dot_product(up, next_forward));

@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/26 12:30:10 by jnivala          ###   ########.fr        #
+#    Updated: 2021/05/27 11:45:16 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRCS = \
 	update_screen$(SLASH)apply_matrices_a.c \
 	update_screen$(SLASH)apply_matrices_b.c \
 	update_screen$(SLASH)clip_to_plane.c \
+	update_screen$(SLASH)clip_to_viewport_edges.c \
 	update_screen$(SLASH)draw_frame.c \
 	update_screen$(SLASH)draw_floor_segment.c \
 	update_screen$(SLASH)draw_polygon.c \

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/21 16:27:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 12:31:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,7 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr,
 void			setup_frame(t_frame *frame, t_frame *new_frame,
 					int current_pxl, int idx);
 void			step_one(t_frame *frame);
+int				clip_to_viewport_edges(t_triangle *view_list, t_triangle *raster_list,
+				t_sides *viewport, int nb_of_triangles_in_view);
 
 #endif

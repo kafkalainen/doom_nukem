@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/26 11:35:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 12:32:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,66 @@ void	setup_fps(t_time *time)
 	time->frame_time_last = SDL_GetTicks();
 }
 
+void	init_viewport(t_sides *viewport)
+{
+	viewport->top = (t_plane){(t_xyz){ 0.0f, 0.0f, 0.0f, 1.0f }, (t_xyz){ 0.0f, 1.0f, 0.0f, 0.0f }};
+	viewport->bottom = (t_plane){(t_xyz){ 0.0f, SCREEN_HEIGHT - 1, 0.0f, 1.0f }, (t_xyz){ 0.0f, -1.0f, 0.0f, 0.0f }};
+	viewport->left = (t_plane){(t_xyz){ 0.0f, 0.0f, 0.0f, 0.0f }, (t_xyz){ 1.0f, 0.0f, 0.0f, 0.0f }};
+	viewport->right = (t_plane){(t_xyz){ SCREEN_WIDTH - 1, 0.0f, 0.0f, 0.0f }, (t_xyz){ -1.0f, 0.0f, 0.0f, 0.0f }};
+	viewport->near = (t_plane){(t_xyz){0.0f, 0.0f, 0.1f, 1.0f}, (t_xyz){0.0f, 0.0f, 1.0f, 0.0f}};
+}
+
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
 	int		ret;
 
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
+	//SOUTH
+	home->cube[0] = (t_triangle){
+		{(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){0.0f,0.0f,0.0f}, (t_uvz){1.0f,0.0f,0.0f}}, white};
+	home->cube[1] = (t_triangle){
+		(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,0.0f,0.0f,1.0f},
+		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}, white};
+	//EAST
+	home->cube[2] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){0.0f,0.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}}, white};
+	home->cube[3] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,0.0f,1.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}, white};
+	//NORTH
+	home->cube[4] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}}, white};
+	home->cube[5] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,1.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}, white};
+	//WEST
+	home->cube[6] = (t_triangle){
+		{(t_xyz){0.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}}, white};
+	home->cube[7] = (t_triangle){
+		{(t_xyz){0.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}, white};
+	//TOP
+	home->cube[8] = (t_triangle){
+		{(t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){0.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}}, white};
+	home->cube[9] = (t_triangle){
+		{(t_xyz){0.0f,1.0f,0.0f,1.0f}, (t_xyz){1.0f,1.0f,1.0f,1.0f}, (t_xyz){1.0f,1.0f,0.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}, white};
+	//BOTTOM
+	home->cube[10] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}}, white};
+	home->cube[11] = (t_triangle){
+		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,0.0f,0.0f,1.0f}},
+		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}, white};
+	home->triangles_in_view = (t_triangle*)malloc(sizeof(t_triangle) * 100);
+	home->triangles_to_raster = (t_triangle*)malloc(sizeof(t_triangle) * 200);
+	init_viewport(&home->viewport);
 	setup_fps(&home->t);
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	frame->buffer = (Uint32 *)malloc(sizeof(Uint32)

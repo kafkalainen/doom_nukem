@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/26 14:56:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 11:34:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_triangle
 {
 	t_xyz			p[3];
 	t_uvz			uv[3];
+	int				colour;
 }				t_triangle;
 
 
@@ -85,6 +86,21 @@ typedef struct s_plgn
 	t_xyz			bottom_left;
 	t_xyz			bottom_right;
 }					t_plgn;
+
+typedef struct s_plane
+{
+	t_xyz			point;
+	t_xyz			normal;
+}					t_plane;
+
+typedef struct s_sides
+{
+	t_plane			near;
+	t_plane			left;
+	t_plane			right;
+	t_plane			top;
+	t_plane			bottom;
+}					t_sides;
 
 /*
 ** Vector functions
@@ -136,6 +152,6 @@ t_triangle	apply_world_matrix(float angle_x, float angle_z,
 t_xyz		vec3_div(t_xyz a, float scalar);
 t_xyz		vec3_intersection_with_plane(t_xyz plane_p, t_xyz plane_n,
 	t_xyz start, t_xyz end, float *texel_offset);
-int			clip_against_plane(t_xyz plane_point, t_xyz plane_normal,
+int			clip_against_plane(t_plane *plane,
 			t_triangle *src, t_triangle *triangle1, t_triangle *triangle2);
 #endif

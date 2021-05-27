@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/18 12:42:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/27 09:30:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	handle_letter(Uint32 *buffer, t_xy coord,
 	}
 }
 
-void	str_pxl(Uint32 *buffer, t_xy coord,
+void	ft_str_pxl(Uint32 *buffer, t_xy coord,
 	char *str, t_plx_modifier mod)
 {
 	int		c;
