@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/27 12:31:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 20:00:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ typedef struct s_window
 	int				width;
 	int				height;
 }					t_window;
+
+typedef	struct s_raster_queue
+{
+	int			front;
+	int			rear;
+	size_t		size;
+	size_t		capacity;
+	t_triangle	*array;
+}				t_raster_queue;
 
 typedef struct s_home
 {
@@ -37,7 +46,7 @@ typedef struct s_home
 	t_triangle		transformed_cube[12];
 	t_triangle		view_cube;
 	t_triangle		*triangles_in_view;
-	t_triangle		*triangles_to_raster;
+	t_raster_queue	*raster_queue;
 	t_sides			viewport;
 }					t_home;
 

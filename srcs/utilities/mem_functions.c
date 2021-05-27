@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:50:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/04 10:12:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 19:45:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,17 @@ void	free_array(unsigned char **array)
 		i++;
 	}
 	free(array);
+}
+
+t_raster_queue	*create_raster_queue(size_t capacity)
+{
+	t_raster_queue	*queue;
+
+	queue = (t_raster_queue *)malloc(sizeof(t_raster_queue));
+	queue->capacity = capacity;
+	queue->front = 0;
+	queue->size = 0;
+	queue->rear = capacity - 1;
+	queue->array = (t_triangle *)malloc(queue->capacity * sizeof(t_triangle));
+	return (queue);
 }

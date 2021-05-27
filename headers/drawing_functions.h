@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/25 10:34:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 20:22:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void		draw_rect(t_xy xy, t_xy wh, Uint32 *buffer, int color);
 void		draw_square(Uint32 *buffer, t_xy offset, int c, int s);
 void		draw_tex_pixel(t_texture *tex, t_xyz texel,
 				t_xy pixel, t_frame *frame);
-int			draw_polygon(t_frame *frame, t_triangle *tri);
 int			draw_cube(t_frame *frame, t_home *home, t_player *plr);
 void		draw_wireframe(t_frame *frame, Uint32 colour);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);

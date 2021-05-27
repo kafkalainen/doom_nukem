@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:04:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 14:50:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 16:10:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ t_xyz	vec3_div(t_xyz a, float scalar)
 **	vec3_unit_vector ok.
 **	vec3_dot_product ok.
 **	swapped end with start on line 65 vec3_dec call -> fixed error.
+**	added pointer to plane.
+**	function should handle special cases as well, there is an error when clipping to near plane.
+**	testing to return plane->point when we are clipping to near plane, no more hanging.
 */
-t_xyz	vec3_intersection_with_plane(t_xyz point_on_plane, t_xyz plane_normal, t_xyz start,
-	t_xyz end, float *texel_offset)
+t_xyz	vec3_intersection_with_plane(t_plane *plane, t_xyz start, t_xyz end,
+	float *texel_offset)
 {
 		float	plane_dot;
 		float	start_dot;
@@ -53,12 +56,12 @@ t_xyz	vec3_intersection_with_plane(t_xyz point_on_plane, t_xyz plane_normal, t_x
 		t_xyz	line_to_plane;
 		t_xyz	line;
 
-		plane_normal = vec3_unit_vector(plane_normal);
-		plane_dot = -vec3_dot_product(plane_normal, point_on_plane);
-		start_dot = vec3_dot_product(start, plane_normal);
-		end_dot = vec3_dot_product(end, plane_normal);
-		// if (start_dot == end_dot)
-		// 	return (start);
+		plane->normal = vec3_unit_vector(plane->normal);
+		plane_dot = -vec3_dot_product(plane->normal, plane->point);
+		start_dot = vec3_dot_product(start, plane->normal);
+		end_dot = vec3_dot_product(end, plane->normal);
+		if (start_dot == end_dot)
+			return (plane->point);
 		*texel_offset = interpolate_points(start_dot, -plane_dot,
 			start_dot, end_dot);
 		line = vec3_dec(end, start);

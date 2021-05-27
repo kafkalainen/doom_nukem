@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/27 11:34:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 15:15:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,9 @@ t_m4x4		multiply_matrix(t_m4x4 *m1, t_m4x4 *m2);
 t_triangle	apply_world_matrix(float angle_x, float angle_z,
 	t_xyz translation, t_triangle *src);
 t_xyz		vec3_div(t_xyz a, float scalar);
-t_xyz		vec3_intersection_with_plane(t_xyz plane_p, t_xyz plane_n,
-	t_xyz start, t_xyz end, float *texel_offset);
+t_xyz		vec3_intersection_with_plane(t_plane *plane, t_xyz start, t_xyz end,
+			float *texel_offset);
 int			clip_against_plane(t_plane *plane,
 			t_triangle *src, t_triangle *triangle1, t_triangle *triangle2);
+void		initialize_locations(t_point_location *loc);
 #endif

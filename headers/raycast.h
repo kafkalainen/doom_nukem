@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 12:31:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 20:19:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,12 @@ void			scan_fov(t_home *home, t_frame *frame, t_player *plr,
 void			setup_frame(t_frame *frame, t_frame *new_frame,
 					int current_pxl, int idx);
 void			step_one(t_frame *frame);
-int				clip_to_viewport_edges(t_triangle *view_list, t_triangle *raster_list,
-				t_sides *viewport, int nb_of_triangles_in_view);
-
+int				clip_to_viewport_edges(t_triangle *view_list, t_raster_queue *raster_list,
+				t_sides *viewport, int nb_of_triangles_in_view, t_frame *frame);
+t_raster_queue	*create_raster_queue(size_t capacity);
+int				raster_queue_is_full(t_raster_queue *queue);
+int				raster_queue_is_empty(t_raster_queue *queue);
+int				enqueue_to_raster(t_raster_queue *queue, t_triangle item);
+int				dequeue(t_raster_queue *queue);
+int				front(t_raster_queue *queue, t_triangle *triangle);
 #endif

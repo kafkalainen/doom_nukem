@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 12:32:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 19:31:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,0.0f,0.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}, white};
 	home->triangles_in_view = (t_triangle*)malloc(sizeof(t_triangle) * 100);
-	home->triangles_to_raster = (t_triangle*)malloc(sizeof(t_triangle) * 200);
+	home->raster_queue = create_raster_queue(200);
 	init_viewport(&home->viewport);
 	setup_fps(&home->t);
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);

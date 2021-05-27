@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 09:07:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/26 12:10:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 15:14:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,16 @@ t_m4x4	inverse_matrix(t_m4x4 *rot_trans_matrix)
 			+ rot_trans_matrix->m[3][2] * new_matrix.m[2][2]);
 		new_matrix.m[3][3] = 1.0f;
 		return (new_matrix);
+}
+
+void	initialize_locations(t_point_location *loc)
+{
+	loc->points_inside[0] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	loc->points_inside[1] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	loc->points_inside[2] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	loc->points_outside[0] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	loc->points_outside[1] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	loc->points_outside[2] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	loc->inside = 0;
+	loc->outside = 0;
 }

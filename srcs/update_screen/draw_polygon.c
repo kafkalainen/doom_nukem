@@ -6,22 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 13:36:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 20:24:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-int	draw_polygon(t_frame *frame, t_triangle *tri)
-{
-	draw_line(vec2(tri->p[0].x, tri->p[0].y), vec2(tri->p[1].x, tri->p[1].y),
-		tri->colour, frame->buffer);
-	draw_line(vec2(tri->p[1].x, tri->p[1].y), vec2(tri->p[2].x, tri->p[2].y),
-		tri->colour, frame->buffer);
-	draw_line(vec2(tri->p[2].x, tri->p[2].y), vec2(tri->p[0].x, tri->p[0].y),
-		tri->colour, frame->buffer);
-	return (TRUE);
-}
 
 static void	swap_xyz(t_xyz *p0, t_xyz *p1)
 {
@@ -301,7 +290,6 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	t_triangle		clipped_triangle[2];
 	t_triangle		projected;
 	int				nb_of_clipped_triangles;
-	int				raster_triangles_count;
 	static float	degree = 0.0f;
 	// t_xyz			light_direction;
 	// static Uint32	cur_time;
@@ -377,15 +365,13 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	qsort((void *)home->triangles_in_view, (size_t)nb_of_triangles_in_view,
 		sizeof(t_triangle), painters_algorithm);
 	j = 0;
-	raster_triangles_count = clip_to_viewport_edges(home->triangles_in_view, home->triangles_to_raster,
-	 	&home->viewport, nb_of_triangles_in_view);
-	while (j < raster_triangles_count)
-	{
-		// calculate_triangle(frame, &home->triangles_in_view[r], tex);
-		// draw_polygon(frame, &home->triangles_in_view[j]);
-		draw_polygon(frame, &home->triangles_to_raster[j]);
-		j++;
-	}
+	clip_to_viewport_edges(home->triangles_in_view, home->raster_queue,
+	 	&home->viewport, nb_of_triangles_in_view, frame);
+	// while (j < raster_triangles_count)
+	// {
+	// 	// calculate_triangle(frame, &home->triangles_in_view[r], tex);
+	// 	// draw_polygon(frame, &home->triangles_in_view[j]);
+	// }
 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 10.0f}, "player_xyz", (t_plx_modifier){green, 2});
 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});
 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 24.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 11:08:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/27 16:57:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,74 @@ static void	check_if_inside_triangle(float *d, t_point_location *loc,
 	if (*d >= 0)
 	{
 		loc->texels_inside[loc->inside] = uv;
-		loc->points_inside[loc->inside++] = point;
+		loc->points_inside[loc->inside] = point;
+		loc->inside += 1;
 	}
 	else
 	{
 		loc->texels_outside[loc->outside] = uv;
-		loc->points_outside[loc->outside++] = point;
+		loc->points_outside[loc->outside] = point;
+		loc->outside += 1;
 	}
 }
 
-static void	initialize_locations(t_point_location *loc)
+
+
+static int	form_a_triangle(t_point_location *loc, t_plane *plane,
+	t_triangle *triangle1)
 {
-	loc->points_inside[0] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
-	loc->points_inside[1] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
-	loc->points_inside[2] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
-	loc->points_outside[0] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
-	loc->points_outside[1] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
-	loc->points_outside[2] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
-	loc->inside = 0;
-	loc->outside = 0;
+	triangle1->colour = red;
+	triangle1->p[0] = loc->points_inside[0];
+	triangle1->uv[0] = loc->texels_inside[0];
+	triangle1->p[1] = vec3_intersection_with_plane(plane, loc->points_inside[0],
+		loc->points_outside[0], &loc->texel_offset);
+	triangle1->uv[1].u = loc->texel_offset * (loc->texels_outside[0].u
+		- loc->texels_inside[0].u) + loc->texels_inside[0].u;
+	triangle1->uv[1].v = loc->texel_offset * (loc->texels_outside[0].v
+		- loc->texels_inside[0].v) + loc->texels_inside[0].v;
+	triangle1->uv[1].w = loc->texel_offset * (loc->texels_outside[0].w
+		- loc->texels_inside[0].w) + loc->texels_inside[0].w;
+	triangle1->p[2] = vec3_intersection_with_plane(plane, loc->points_inside[0],
+		loc->points_outside[1], &loc->texel_offset);
+	triangle1->uv[2].u = loc->texel_offset * (loc->texels_outside[1].u
+		- loc->texels_inside[0].u) + loc->texels_inside[0].u;
+	triangle1->uv[2].v = loc->texel_offset * (loc->texels_outside[1].v
+		- loc->texels_inside[0].v) + loc->texels_inside[0].v;
+	triangle1->uv[2].w = loc->texel_offset * (loc->texels_outside[1].w
+		- loc->texels_inside[0].w) + loc->texels_inside[0].w;
+	return (1);
+}
+
+static int	form_a_quadrant(t_point_location *loc, t_plane *plane,
+	t_triangle *triangle1, t_triangle *triangle2)
+{
+		triangle1->colour = blue;
+		triangle2->colour = green;
+		triangle1->p[0] = loc->points_inside[0];
+		triangle1->uv[0] = loc->texels_inside[0];
+		triangle1->p[1] = loc->points_inside[1];
+		triangle1->uv[1] = loc->texels_inside[1];
+		triangle1->p[2] = vec3_intersection_with_plane(plane, loc->points_inside[0],
+			loc->points_outside[0], &loc->texel_offset);
+		triangle1->uv[2].u = loc->texel_offset * (loc->texels_outside[1].u
+			- loc->texels_inside[0].u) + loc->texels_inside[0].u;
+		triangle1->uv[2].v = loc->texel_offset * (loc->texels_outside[1].v
+			- loc->texels_inside[0].v) + loc->texels_inside[0].v;
+		triangle1->uv[2].w = loc->texel_offset * (loc->texels_outside[1].w
+			- loc->texels_inside[0].w) + loc->texels_inside[0].w;
+		triangle2->p[0] = loc->points_inside[1];
+		triangle2->uv[0] = loc->texels_inside[1];
+		triangle2->p[1] = triangle1->p[2];
+		triangle2->uv[1] = triangle1->uv[2];
+		triangle2->p[2] = vec3_intersection_with_plane(plane, loc->points_inside[1],
+			loc->points_outside[0], &loc->texel_offset);
+		triangle2->uv[2].u = loc->texel_offset * (loc->texels_outside[0].u
+			- loc->texels_inside[1].u) + loc->texels_inside[1].u;
+		triangle2->uv[2].v = loc->texel_offset * (loc->texels_outside[0].v
+			- loc->texels_inside[1].v) + loc->texels_inside[1].v;
+		triangle2->uv[2].w = loc->texel_offset * (loc->texels_outside[0].w
+			- loc->texels_inside[1].w) + loc->texels_inside[1].w;
+		return (2);
 }
 
 int		clip_against_plane(t_plane *plane, t_triangle *src,
@@ -72,41 +121,8 @@ int		clip_against_plane(t_plane *plane, t_triangle *src,
 		return (1);
 	}
 	if (loc.inside == 1 && loc.outside == 2)
-	{
-		triangle1->colour = red;
-		triangle1->p[0] = loc.points_inside[0];
-		triangle1->uv[0] = loc.texels_inside[0];
-		triangle1->p[1] = vec3_intersection_with_plane(plane->point, plane->normal, loc.points_inside[0], loc.points_outside[0], &loc.texel_offset);
-		triangle1->uv[1].u = loc.texel_offset * (loc.texels_outside[0].u - loc.texels_inside[0].u) + loc.texels_inside[0].u;
-		triangle1->uv[1].v = loc.texel_offset * (loc.texels_outside[0].v - loc.texels_inside[0].v) + loc.texels_inside[0].v;
-		triangle1->uv[1].w = loc.texel_offset * (loc.texels_outside[0].w - loc.texels_inside[0].w) + loc.texels_inside[0].w;
-		triangle1->p[2] = vec3_intersection_with_plane(plane->point, plane->normal, loc.points_inside[0], loc.points_outside[1], &loc.texel_offset);
-		triangle1->uv[2].u = loc.texel_offset * (loc.texels_outside[1].u - loc.texels_inside[0].u) + loc.texels_inside[0].u;
-		triangle1->uv[2].v = loc.texel_offset * (loc.texels_outside[1].v - loc.texels_inside[0].v) + loc.texels_inside[0].v;
-		triangle1->uv[2].w = loc.texel_offset * (loc.texels_outside[1].w - loc.texels_inside[0].w) + loc.texels_inside[0].w;
-		return (1);
-	}
+		return (form_a_triangle(&loc, plane, triangle1));
 	if (loc.inside == 2 && loc.outside == 1)
-	{
-		triangle1->colour = blue;
-		triangle2->colour = green;
-		triangle1->p[0] = loc.points_inside[0];
-		triangle1->uv[0] = loc.texels_inside[0];
-		triangle1->p[1] = loc.points_inside[1];
-		triangle1->uv[1] = loc.texels_inside[1];
-		triangle1->p[2] = vec3_intersection_with_plane(plane->point, plane->normal, loc.points_inside[0], loc.points_outside[0], &loc.texel_offset);
-		triangle1->uv[2].u = loc.texel_offset * (loc.texels_outside[1].u - loc.texels_inside[0].u) + loc.texels_inside[0].u;
-		triangle1->uv[2].v = loc.texel_offset * (loc.texels_outside[1].v - loc.texels_inside[0].v) + loc.texels_inside[0].v;
-		triangle1->uv[2].w = loc.texel_offset * (loc.texels_outside[1].w - loc.texels_inside[0].w) + loc.texels_inside[0].w;
-		triangle2->p[0] = loc.points_inside[1];
-		triangle2->uv[0] = loc.texels_inside[1];
-		triangle2->p[1] = triangle1->p[2];
-		triangle2->uv[1] = triangle1->uv[2];
-		triangle2->p[2] = vec3_intersection_with_plane(plane->point, plane->normal, loc.points_inside[1], loc.points_outside[0], &loc.texel_offset);
-		triangle2->uv[2].u = loc.texel_offset * (loc.texels_outside[0].u - loc.texels_inside[1].u) + loc.texels_inside[1].u;
-		triangle2->uv[2].v = loc.texel_offset * (loc.texels_outside[0].v - loc.texels_inside[1].v) + loc.texels_inside[1].v;
-		triangle2->uv[2].w = loc.texel_offset * (loc.texels_outside[0].w - loc.texels_inside[1].w) + loc.texels_inside[1].w;
-		return (2);
-	}
+		return (form_a_quadrant(&loc, plane, triangle1, triangle2));
 	return (0);
 }
