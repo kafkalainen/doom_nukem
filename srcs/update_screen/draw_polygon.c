@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 20:24:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/28 11:19:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,6 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 {
 	int				i;
 	int				j;
-	int				nb_of_triangles_in_view;
 	t_xyz			scale;
 	t_xyz			normal;
 	t_xyz			view_offset;
@@ -320,7 +319,7 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
 	i = 0;
 	j = 0;
-	nb_of_triangles_in_view = 0;
+	home->triangles_in_view->size = 0;
 	while (i < 12)
 	{
 		normal = triangle_normal(&home->transformed_cube[i]);
@@ -354,24 +353,19 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 				// projected.p[2].x *= 0.5f * (float)SCREEN_WIDTH;
 				// projected.p[2].y *= 0.5f * (float)SCREEN_HEIGHT;
 				projected = scale_triangle(&projected, scale);
-				home->triangles_in_view[nb_of_triangles_in_view] = projected;
-				nb_of_triangles_in_view++;
+				home->triangles_in_view->array[home->triangles_in_view->size] = projected;
+				home->triangles_in_view->size++;
 				j++;
 			}
 		}
 		i++;
 	}
 	//Check that algorithm works, z might be lost once we get here.
-	qsort((void *)home->triangles_in_view, (size_t)nb_of_triangles_in_view,
+	qsort((void *)home->triangles_in_view->array, (size_t)home->triangles_in_view->size,
 		sizeof(t_triangle), painters_algorithm);
 	j = 0;
 	clip_to_viewport_edges(home->triangles_in_view, home->raster_queue,
-	 	&home->viewport, nb_of_triangles_in_view, frame);
-	// while (j < raster_triangles_count)
-	// {
-	// 	// calculate_triangle(frame, &home->triangles_in_view[r], tex);
-	// 	// draw_polygon(frame, &home->triangles_in_view[j]);
-	// }
+	 	&home->viewport, frame);
 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 10.0f}, "player_xyz", (t_plx_modifier){green, 2});
 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});
 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 24.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});

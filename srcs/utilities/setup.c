@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 19:31:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/28 11:03:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	home->cube[11] = (t_triangle){
 		{(t_xyz){1.0f,0.0f,1.0f,1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){1.0f,0.0f,0.0f,1.0f}},
 		{(t_uvz){0.0f,1.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}, white};
-	home->triangles_in_view = (t_triangle*)malloc(sizeof(t_triangle) * 100);
+	home->triangles_in_view = create_raster_queue(100);
 	home->raster_queue = create_raster_queue(200);
 	init_viewport(&home->viewport);
 	setup_fps(&home->t);
