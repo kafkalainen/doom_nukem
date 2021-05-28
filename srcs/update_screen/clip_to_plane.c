@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 16:57:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/28 12:37:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 static void	calculate_distance_to_plane(t_xyz point, t_xyz plane_normal,
 	 t_xyz plane_point, float *d)
 {
-	t_xyz	tri_point;
-
-	tri_point = vec3_unit_vector(point);
-	*d = plane_normal.x * tri_point.x + plane_normal.y * tri_point.y
-		+ plane_normal.z * tri_point.z
-		- vec3_dot_product(plane_normal, plane_point);
+	*d = vec3_dot_product(plane_normal, (vec3_dec(point, plane_point)));
 }
 
 static void	check_if_inside_triangle(float *d, t_point_location *loc,
@@ -39,8 +34,6 @@ static void	check_if_inside_triangle(float *d, t_point_location *loc,
 		loc->outside += 1;
 	}
 }
-
-
 
 static int	form_a_triangle(t_point_location *loc, t_plane *plane,
 	t_triangle *triangle1)
