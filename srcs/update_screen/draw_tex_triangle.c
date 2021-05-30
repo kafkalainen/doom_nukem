@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/30 17:44:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/30 17:51:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	draw_horizontal_line(t_frame *frame, t_texture *tex, t_steps *step)
 		texel.u = (1.0f - offset) * step->start_uv.u + offset * step->end_uv.u;
 		texel.v = (1.0f - offset) * step->start_uv.v + offset * step->end_uv.v;
 		texel.w = (1.0f - offset) * step->start_uv.w + offset * step->end_uv.w;
-		texel_inv_z(texel);
+		texel = texel_inv_z(texel);
 		put_pixel(frame->buffer, cur_x, step->cur_y,
 			get_texel(texel.u * tex->w, texel.v * tex->h, tex));
 		offset += offset_step;
