@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/28 12:37:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/30 18:48:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ static int	form_a_quadrant(t_point_location *loc, t_plane *plane,
 		triangle1->uv[1] = loc->texels_inside[1];
 		triangle1->p[2] = vec3_intersection_with_plane(plane, loc->points_inside[0],
 			loc->points_outside[0], &loc->texel_offset);
-		triangle1->uv[2].u = loc->texel_offset * (loc->texels_outside[1].u
+		triangle1->uv[2].u = loc->texel_offset * (loc->texels_outside[0].u
 			- loc->texels_inside[0].u) + loc->texels_inside[0].u;
-		triangle1->uv[2].v = loc->texel_offset * (loc->texels_outside[1].v
+		triangle1->uv[2].v = loc->texel_offset * (loc->texels_outside[0].v
 			- loc->texels_inside[0].v) + loc->texels_inside[0].v;
-		triangle1->uv[2].w = loc->texel_offset * (loc->texels_outside[1].w
+		triangle1->uv[2].w = loc->texel_offset * (loc->texels_outside[0].w
 			- loc->texels_inside[0].w) + loc->texels_inside[0].w;
 		triangle2->p[0] = loc->points_inside[1];
 		triangle2->uv[0] = loc->texels_inside[1];
