@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/27 19:56:13 by jnivala          ###   ########.fr        #
+#    Updated: 2021/05/30 17:42:14 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ SRCS = \
 	update_screen$(SLASH)draw_shapes.c \
 	update_screen$(SLASH)draw_shapes2.c \
 	update_screen$(SLASH)draw_tex_pixel.c \
+	update_screen$(SLASH)draw_tex_triangle.c \
 	update_screen$(SLASH)draw_wireframe.c \
 	update_screen$(SLASH)init_matrices_a.c \
 	update_screen$(SLASH)init_matrices_b.c \
@@ -95,6 +96,7 @@ SRCS = \
 	utilities$(SLASH)setup.c \
 	utilities$(SLASH)str_pxl.c \
 	utilities$(SLASH)system_calls.c \
+	utilities$(SLASH)swap_and_sort.c \
 	vec_math$(SLASH)vec2_a.c \
 	vec_math$(SLASH)vec2_b.c \
 	vec_math$(SLASH)vec2_c.c \

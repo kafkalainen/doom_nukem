@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/28 11:25:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/28 14:51:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ static void	viewport_logic(t_plane *plane, char choice, t_sides *viewport)
 	}
 }
 
-static int	draw_polygon(t_frame *frame, t_raster_queue *tri)
+static int	draw_polygon(t_frame *frame, t_raster_queue *tri, t_texture *tex)
 {
 	int	i;
 
 	i = tri->front;
 	while (i <= tri->rear)
 	{
+		draw_tex_triangle(frame, &tri->array[i], tex);
 		draw_line(vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
 			vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
 			tri->array[i].colour, frame->buffer);
@@ -83,7 +84,7 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 }
 
 int	clip_to_viewport_edges(t_raster_queue *view_list, t_raster_queue *raster_list,
-	t_sides *viewport, t_frame *frame)
+	t_sides *viewport, t_frame *frame, t_texture *tex)
 {
 	int			i;
 	int			current_plane;
@@ -105,7 +106,7 @@ int	clip_to_viewport_edges(t_raster_queue *view_list, t_raster_queue *raster_lis
 			new_triangles = clip_to_an_edge(raster_list, &plane, new_triangles);
 			current_plane++;
 		}
-		draw_polygon(frame, raster_list);
+		draw_polygon(frame, raster_list, tex);
 		i++;
 	}
 	return (raster_list->size);

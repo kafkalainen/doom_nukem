@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/27 15:15:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/30 17:43:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,16 @@ typedef struct s_plane
 	t_xyz			normal;
 }					t_plane;
 
+typedef struct s_deltas
+{
+	int			x;
+	int			y;
+	float		u;
+	float		v;
+	float		w;
+}				t_deltas;
+
+
 typedef struct s_sides
 {
 	t_plane			near;
@@ -101,6 +111,22 @@ typedef struct s_sides
 	t_plane			top;
 	t_plane			bottom;
 }					t_sides;
+
+typedef struct	s_steps
+{
+	float		denom_dy_a_side;
+	float		denom_dy_b_side;
+	t_uvz		tex_step_a_side;
+	t_uvz		tex_step_b_side;
+	t_xyz		screen_step_a_side;
+	t_xyz		screen_step_b_side;
+	t_uvz		start_uv;
+	t_uvz		end_uv;
+	int			start_x;
+	int			end_x;
+	t_uvz		cur_texel;
+	int			cur_y;
+}				t_steps;
 
 /*
 ** Vector functions
