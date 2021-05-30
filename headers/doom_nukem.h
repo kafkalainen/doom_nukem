@@ -99,8 +99,9 @@ void	translate_world_view(t_home *home, t_xy step);
 void	transform_world_view(t_home *home, float delta_dir);
 void	update_screen(t_home *home, t_frame *frame, t_player *plr);
 void	swap_int(int *i0, int *i1);
-void	swap_xyz(t_xyz *p0, t_xyz *p1);
+void	swap_sides(t_steps *steps);
 void	swap_uvz(t_uvz *p0, t_uvz *p1);
+void	swap_xyz(t_xyz *p0, t_xyz *p1);
 void	sort_vertices(t_triangle *tri);
 
 #endif

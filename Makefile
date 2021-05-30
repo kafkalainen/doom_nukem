@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/30 17:42:14 by jnivala          ###   ########.fr        #
+#    Updated: 2021/05/30 17:59:40 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRCS = \
 	update_screen$(SLASH)draw_floor_segment.c \
 	update_screen$(SLASH)draw_polygon.c \
 	update_screen$(SLASH)draw_segment.c \
+	update_screen$(SLASH)draw_horizontal_line.c \
 	update_screen$(SLASH)draw_shapes.c \
 	update_screen$(SLASH)draw_shapes2.c \
 	update_screen$(SLASH)draw_tex_pixel.c \

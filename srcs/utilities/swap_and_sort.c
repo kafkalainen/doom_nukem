@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:37:52 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/30 17:44:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/30 18:04:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,14 @@ void	sort_vertices(t_triangle *tri)
 	{
 		swap_xyz(&tri->p[1], &tri->p[2]);
 		swap_uvz(&tri->uv[1], &tri->uv[2]);
+	}
+}
+
+void	swap_sides(t_steps *steps)
+{
+	if (steps->start_x > steps->end_x)
+	{
+		swap_int(&steps->start_x, &steps->end_x);
+		swap_uvz(&steps->start_uv, &steps->end_uv);
 	}
 }
