@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 14:39:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/26 14:38:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/30 19:02:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,17 @@ t_uvz	texel_inv_z(t_uvz a)
 	a.u = a.u * a.w;
 	a.v = a.v * a.w;
 	return (a);
+}
+
+void	triangle_inv_z(t_triangle *tri)
+{
+	tri->uv[0].w = 1.0f / tri->p[0].w;
+	tri->uv[1].w = 1.0f / tri->p[1].w;
+	tri->uv[2].w = 1.0f / tri->p[2].w;
+	tri->uv[0].u = tri->uv[0].w * tri->uv[0].u;
+	tri->uv[1].u = tri->uv[1].w * tri->uv[1].u;
+	tri->uv[2].u = tri->uv[2].w * tri->uv[2].u;
+	tri->uv[0].v = tri->uv[0].w * tri->uv[0].v;
+	tri->uv[1].v = tri->uv[1].w * tri->uv[1].v;
+	tri->uv[2].v = tri->uv[2].w * tri->uv[2].v;
 }

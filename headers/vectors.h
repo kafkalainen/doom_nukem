@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/30 18:22:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/30 19:03:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ float		vec3_dot_product(t_xyz a, t_xyz b);
 t_xyz		vec3_dec(t_xyz a, t_xyz b);
 t_xyz		vec3_unit_vector(t_xyz a);
 t_uvz		texel_inv_z(t_uvz a);
+void		triangle_inv_z(t_triangle *tri);
 t_uvz		uvz_calculate_value_with_delta(float delta_x, t_uvz delta_u, t_uvz delta_v);
 float		triangle_calculate_average_z(t_triangle *triangle);
 t_xyz		vec3_mul(t_xyz a, float multiplier);

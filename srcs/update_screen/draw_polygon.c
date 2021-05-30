@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/28 16:00:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/30 19:03:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 	while (i < 12)
 	{
 		normal = triangle_normal(&home->transformed_cube[i]);
-		if (vec3_dot_product(normal, vec3_dec(home->transformed_cube[i].p[0], plr->camera)) < 0)
+		if (vec3_dot_product(normal, vec3_dec(home->transformed_cube[i].p[0], plr->camera)) > 0)
 		{
 			home->view_cube = apply_camera(
 				plr->camera, plr->target, plr->up, &home->transformed_cube[i]);
@@ -80,15 +80,7 @@ int	draw_cube(t_frame *frame, t_home *home, t_player *plr)
 			{
 				projected = create_projection(&clipped_triangle[j]);
 				//Perspective correction
-				projected.uv[0].u = projected.uv[0].u / projected.p[0].w;
-				projected.uv[1].u = projected.uv[1].u / projected.p[1].w;
-				projected.uv[2].u = projected.uv[2].u / projected.p[2].w;
-				projected.uv[0].v = projected.uv[0].v / projected.p[0].w;
-				projected.uv[1].v = projected.uv[1].v / projected.p[1].w;
-				projected.uv[2].v = projected.uv[2].v / projected.p[2].w;
-				projected.uv[0].w = 1.0f / projected.p[0].w;
-				projected.uv[1].w = 1.0f / projected.p[1].w;
-				projected.uv[2].w = 1.0f / projected.p[2].w;
+				triangle_inv_z(&projected);
 				projected.p[0] = vec3_div(projected.p[0], projected.p[0].w);
 				projected.p[1] = vec3_div(projected.p[1], projected.p[1].w);
 				projected.p[2] = vec3_div(projected.p[2], projected.p[2].w);
