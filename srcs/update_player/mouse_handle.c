@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/11 10:57:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/05/31 20:14:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 void	mouse_handle(t_player *plr, t_home *home, SDL_Event *e)
 {
+	(void)home;
 	if (e->type == SDL_MOUSEMOTION)
 	{
 		plr->dir.x += -e->motion.xrel * DEG_TO_RAD * 0.1;
 		plr->dir.y += -e->motion.xrel * DEG_TO_RAD * 0.1;
+		plr->yaw -= -e->motion.xrel * 0.01f;
 		if (plr->dir.x > TWO_PI)
 			plr->dir = (t_xy){0.0f, 0.0f};
 		if (plr->dir.x < 0)
 			plr->dir = (t_xy){TWO_PI, TWO_PI};
-		transform_world_view(home, -e->motion.xrel * DEG_TO_RAD * 0.1);
-		plr->pitch = ft_fmin(ft_fmax((plr->pitch - e->motion.yrel), 0), 480);
+		// transform_world_view(home, -e->motion.xrel * DEG_TO_RAD * 0.1);
+		plr->pitch = e->motion.yrel * 0.01f;
+		// plr->pitch = ft_fmin(ft_fmax((plr->pitch - e->motion.yrel), 0), 480);
 	}
 }

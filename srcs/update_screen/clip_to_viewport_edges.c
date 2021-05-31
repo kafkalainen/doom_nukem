@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/28 14:51:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 19:51:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	draw_polygon(t_frame *frame, t_raster_queue *tri, t_texture *tex)
 	int	i;
 
 	i = tri->front;
+	(void)tex;
 	while (i <= tri->rear)
 	{
 		draw_tex_triangle(frame, &tri->array[i], tex);

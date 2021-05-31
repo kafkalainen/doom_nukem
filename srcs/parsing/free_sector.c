@@ -6,15 +6,15 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 14:05:23 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/23 12:50:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 10:52:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	free_points(t_point **head, unsigned int nbr_of_walls)
+int	free_points(t_wall **head, unsigned int nbr_of_walls)
 {
-	t_point	*item;
+	t_wall	*item;
 
 	while (nbr_of_walls--)
 	{
@@ -35,7 +35,7 @@ void	free_sectors(t_home *home)
 		return ;
 	while (i < home->nbr_of_sectors)
 	{
-		free_points(&home->sectors[i]->points, home->sectors[i]->nb_of_walls);
+		free_points(&home->sectors[i]->walls, home->sectors[i]->nb_of_walls);
 		free(home->sectors[i]);
 		home->sectors[i] = NULL;
 		i++;
@@ -55,7 +55,7 @@ void	free_sectors_n(t_home *home, size_t n)
 	{
 		if (i + 1 < n)
 		{
-			free_points(&home->sectors[i]->points,
+			free_points(&home->sectors[i]->walls,
 				home->sectors[i]->nb_of_walls);
 		}
 		free(home->sectors[i]);

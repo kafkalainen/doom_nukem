@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/23 11:46:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 10:58:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_wall
 	t_triangle			bottom;
 	int					idx;
 	float				wall_facing;
-	t_xy				normal;
+	t_xyz				normal;
 	struct s_wall		*next;
 }						t_wall;
 
@@ -40,7 +40,7 @@ typedef struct s_ground
 	t_triangle			bottom;
 	int					idx;
 	float				wall_facing;
-	t_xy				normal;
+	t_xyz				normal;
 	struct s_wall		*next;
 }						t_ground;
 
@@ -57,6 +57,7 @@ typedef struct s_point_data
 typedef struct s_sector
 {
 	t_point			*points;
+	t_wall			*walls;
 	t_enemy			*enemies;
 	unsigned int	nb_of_walls;
 	int				idx_sector;
@@ -70,7 +71,7 @@ enum e_sector_info
 	old_sector = -6666
 };
 
-t_point			*new_point(t_point_data *data);
-void			add_point(t_point **point, t_point *new);
+t_wall			*new_point(t_point_data *left, t_point_data *right);
+void			add_point(t_wall **point, t_wall *new);
 
 #endif

@@ -6,21 +6,24 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:58:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/21 11:40:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 11:16:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_point	*get_opposing_wall(t_point *current_wall, unsigned int walls)
+/*
+**	ADJUZTED
+*/
+t_wall	*get_opposing_wall(t_wall *current_wall, unsigned int walls)
 {
-	t_point			*opposing_wall;
+	t_wall			*opposing_wall;
 	t_xy			pos;
 	t_xy			dir;
 
-	pos.x = (current_wall->next->x0.x + current_wall->x0.x) * 0.5;
-	pos.y = (current_wall->next->x0.y + current_wall->x0.y) * 0.5;
-	dir = vec2_mul(current_wall->normal, 20000.0f);
+	pos.x = (current_wall->top.p[2].x + current_wall->top.p[0].x) * 0.5;
+	pos.y = (current_wall->top.p[2].z + current_wall->top.p[0].z) * 0.5;
+	dir = vec2_mul(vec3_to_vec2(current_wall->normal), 20000.0f);
 	dir = vec2(-dir.x, -dir.y);
 	opposing_wall = current_wall->next;
 	while (walls - 1)

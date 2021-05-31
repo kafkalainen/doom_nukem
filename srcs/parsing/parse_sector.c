@@ -6,37 +6,47 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/06 12:23:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 11:45:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_point	*new_point(t_point_data *data)
+t_wall	*new_point(t_point_data *left, t_point_data *right)
 {
-	t_point	*new;
+	t_wall	*wall;
 
-	new = (t_point *)malloc(sizeof(*new));
-	if (new != NULL)
+	wall = (t_wall *)malloc(sizeof(*wall));
+	if (wall != NULL)
 	{
-		new->x0.x = data->x;
-		new->x0.y = data->y;
-		new->idx = data->idx;
-		new->height.ground = data->ground;
-		new->height.ceiling = data->ceiling;
-		new->next = NULL;
+		wall->top.p[0] = (t_xyz){left->x, left->ground, left->y, 1.0f};
+		wall->top.p[1] = (t_xyz){left->x, left->ceiling, left->y, 1.0f};
+		wall->top.p[2] = (t_xyz){right->x, right->ceiling, right->y, 1.0f};
+		wall->top.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
+		wall->top.uv[1] = (t_uvz){0.0f, 0.0f, 1.0f};
+		wall->top.uv[2] = (t_uvz){1.0f, 0.0f, 1.0f};
+		wall->bottom.p[0] = (t_xyz){left->x, left->ground, left->y, 1.0f};
+		wall->bottom.p[1] = (t_xyz){right->x, right->ceiling, right->y, 1.0f};
+		wall->bottom.p[2] = (t_xyz){right->x, right->ground, right->y, 1.0f};
+		wall->bottom.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
+		wall->bottom.uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
+		wall->bottom.uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
+		wall->top.colour = white;
+		wall->bottom.colour = white;
+		wall->idx = left->idx;
+		wall->next = NULL;
 	}
 	else
 	{
-		free(new);
-		new = NULL;
+		free(wall);
+		wall = NULL;
 	}
-	return (new);
+	return (wall);
 }
 
-void	add_point(t_point **point, t_point *new)
+void	add_point(t_wall **point, t_wall *new)
 {
-	t_point	*temp;
+	t_wall	*temp;
 
 	if (new == NULL)
 		return ;
@@ -54,9 +64,9 @@ void	add_point(t_point **point, t_point *new)
 	}
 }
 
-void	close_linkedlist(t_point **head)
+void	close_linkedlist(t_wall **head)
 {
-	t_point	*temp;
+	t_wall	*temp;
 
 	temp = *head;
 	while (temp->next)
@@ -68,26 +78,37 @@ int	add_points(t_sector *sector,
 	unsigned char *buf, unsigned int **pos)
 {
 	unsigned int	i;
-	t_point_data	data;
-	t_point			*point;
+	t_point_data	data_left;
+	t_point_data	data_right;
+	t_point_data	data_first;
+	t_wall			*wall;
 
 	i = 0;
 	if (sector == NULL)
 		return (1);
-	sector->points = NULL;
-	while (i < sector->nb_of_walls)
+	sector->walls = NULL;
+	parse_coordinates(&data_left, &pos, &buf);
+	data_first = data_left;
+	while (i < sector->nb_of_walls - 1)
 	{
-		parse_coordinates(&data, &pos, &buf);
-		if (data.idx < -4)
-			return (free_points(&sector->points, i));
-		point = new_point(&data);
-		if (point)
-			add_point(&sector->points, point);
+		parse_coordinates(&data_right, &pos, &buf);
+		if (data_left.idx < -4 || data_right.idx < -4)
+			return (free_points(&sector->walls, i));
+		wall = new_point(&data_left, &data_right);
+		if (wall)
+			add_point(&sector->walls, wall);
 		else
-			return (free_points(&sector->points, i));
+			return (free_points(&sector->walls, i));
+		data_left = data_right;
 		i++;
 	}
-	close_linkedlist(&sector->points);
+	data_right = data_first;
+	wall = new_point(&data_left, &data_right);
+	if (wall)
+			add_point(&sector->walls, wall);
+		else
+			return (free_points(&sector->walls, i));
+	close_linkedlist(&sector->walls);
 	return (0);
 }
 

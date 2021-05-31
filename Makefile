@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/30 17:59:40 by jnivala          ###   ########.fr        #
+#    Updated: 2021/05/31 09:33:41 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,6 +105,7 @@ SRCS = \
 	vec_math$(SLASH)vec3_a.c \
 	vec_math$(SLASH)vec3_b.c \
 	vec_math$(SLASH)vec3_c.c \
+	vec_math$(SLASH)vec3_d.c \
 	menu_systems$(SLASH)launch_modules.c \
 	menu_systems$(SLASH)menu_inputs.c \
 	menu_systems$(SLASH)menu_setups.c \

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/30 19:03:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 17:51:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_sides
 	t_plane			right;
 	t_plane			top;
 	t_plane			bottom;
+	t_xyz			view_offset;
 }					t_sides;
 
 typedef struct	s_steps
@@ -185,4 +186,6 @@ t_xyz		vec3_intersection_with_plane(t_plane *plane, t_xyz start, t_xyz end,
 int			clip_against_plane(t_plane *plane,
 			t_triangle *src, t_triangle *triangle1, t_triangle *triangle2);
 void		initialize_locations(t_point_location *loc);
+void		triangle_add(t_triangle *tri, t_xyz	add);
+void		invert_view(t_triangle *triangle);
 #endif

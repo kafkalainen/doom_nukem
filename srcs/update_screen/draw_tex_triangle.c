@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/30 18:28:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 09:35:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,22 +108,19 @@ int	draw_tex_triangle(t_frame *frame, t_triangle *triangle, t_texture *tex)
 		triangle->p[1], triangle->uv[0], triangle->uv[1]);
 	step.delta_p0p2 = calculate_vertex_delta(triangle->p[0],
 		triangle->p[2], triangle->uv[0], triangle->uv[2]);
+	step.denom_dy_a_side = 0;
+	step.denom_dy_b_side = 0;
 	if (step.delta_p0p1.y)
 		step.denom_dy_a_side = (float)fabsf(1.0f / step.delta_p0p1.y);
-	else
-		step.denom_dy_a_side = 0;
 	if (step.delta_p0p2.y)
 		step.denom_dy_b_side = (float)fabsf(1.0f / step.delta_p0p2.y);
-	else
-		step.denom_dy_b_side = 0;
 	step.current_triangle = 'a';
 	draw_triangle(frame, triangle, tex, &step);
 	step.delta_p0p1 = calculate_vertex_delta(triangle->p[1],
 		triangle->p[2], triangle->uv[1], triangle->uv[2]);
+	step.denom_dy_a_side = 0;
 	if (step.delta_p0p1.y)
 		step.denom_dy_a_side = (float)fabsf(1.0f / step.delta_p0p1.y);
-	else
-		step.denom_dy_a_side = 0;
 	step.current_triangle = 'b';
 	draw_triangle(frame, triangle, tex, &step);
 	return (TRUE);

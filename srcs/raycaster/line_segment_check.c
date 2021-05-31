@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:03:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 16:53:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 11:18:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,29 @@ int	orientation_of_three_points(t_xy a, t_xy b, t_xy c)
 		return (c_clockwise);
 }
 
-int	check_if_lseg_intersects(t_point *p0, t_xy *pos, t_xy *dir)
+int	check_if_lseg_intersects(t_wall *p0, t_xy *pos, t_xy *dir)
 {
 	int		pos_orientation;
 	int		dir_orientation;
 	int		p0_orientation;
 	int		p1_orientation;
 
-	pos_orientation = orientation_of_three_points(p0->x0, p0->next->x0, *pos);
-	dir_orientation = orientation_of_three_points(p0->x0, p0->next->x0, *dir);
-	p0_orientation = orientation_of_three_points(*pos, *dir, p0->x0);
-	p1_orientation = orientation_of_three_points(*pos, *dir, p0->next->x0);
+	pos_orientation = orientation_of_three_points(vec3_to_vec2(p0->top.p[0]),
+		vec3_to_vec2(p0->top.p[2]), *pos);
+	dir_orientation = orientation_of_three_points(vec3_to_vec2(p0->top.p[0]), vec3_to_vec2(p0->top.p[2]), *dir);
+	p0_orientation = orientation_of_three_points(*pos, *dir, vec3_to_vec2(p0->top.p[0]));
+	p1_orientation = orientation_of_three_points(*pos, *dir, vec3_to_vec2(p0->top.p[2]));
 	if (pos_orientation != dir_orientation && p0_orientation != p1_orientation)
 		return (1);
 	if (pos_orientation == 0
-		&& point_is_on_the_lseg(p0->x0, *pos, p0->next->x0))
+		&& point_is_on_the_lseg(vec3_to_vec2(p0->top.p[0]), *pos, vec3_to_vec2(p0->top.p[2])))
 		return (1);
 	if (dir_orientation == 0
-		&& point_is_on_the_lseg(p0->x0, *dir, p0->next->x0))
+		&& point_is_on_the_lseg(vec3_to_vec2(p0->top.p[0]), *dir, vec3_to_vec2(p0->top.p[2])))
 		return (1);
-	if (p0_orientation == 0 && point_is_on_the_lseg(*pos, p0->x0, *dir))
+	if (p0_orientation == 0 && point_is_on_the_lseg(*pos, vec3_to_vec2(p0->top.p[0]), *dir))
 		return (1);
-	if (p1_orientation == 0 && point_is_on_the_lseg(*pos, p0->next->x0, *dir))
+	if (p1_orientation == 0 && point_is_on_the_lseg(*pos, vec3_to_vec2(p0->top.p[2]), *dir))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/28 11:03:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 17:16:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_home
 {
 	t_window		win;
 	t_sector		**sectors;
-	t_sector		**orig_sectors;
 	SDL_Surface		*text_surf;
 	t_texture		**editor_tex;
 	t_time			t;
@@ -42,12 +41,6 @@ typedef struct s_home
 	unsigned int	nbr_of_sectors;
 	int				nbr_of_textures;
 	int				game_state;
-	t_triangle		cube[12];
-	t_triangle		transformed_cube[12];
-	t_triangle		view_cube;
-	t_raster_queue	*triangles_in_view;
-	t_raster_queue	*raster_queue;
-	t_sides			viewport;
 }					t_home;
 
 #endif

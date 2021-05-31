@@ -6,15 +6,15 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/21 20:39:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 11:20:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame)
+void	continue_from_last_sector(t_wall *start, t_ray_pt *fov, t_frame *frame)
 {
-	t_point	*p0;
+	t_wall	*p0;
 
 	p0 = start;
 	if (frame->old_idx != old_sector)
@@ -31,9 +31,9 @@ void	continue_from_last_sector(t_point *start, t_ray_pt *fov, t_frame *frame)
 	}
 }
 
-int	check_if_portal(t_point *p0)
+int	check_if_portal(t_wall *wall)
 {
-	if (p0->idx >= 0)
+	if (wall->idx >= 0)
 		return (TRUE);
 	else
 		return (FALSE);
@@ -53,7 +53,7 @@ int	check_if_same_pt(int *current_pxl, t_ray_pt *fov)
 	}
 }
 
-int	check_connection(t_point *point, t_frame *frame)
+int	check_connection(t_wall *point, t_frame *frame)
 {
 	if (point->idx == frame->old_idx)
 		return (TRUE);

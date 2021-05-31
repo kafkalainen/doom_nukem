@@ -6,15 +6,16 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:19:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/03 15:31:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/05/31 11:01:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	get_next_wall_tex(t_point **current_head, int nbr_of_walls)
+
+int	get_next_wall_tex(t_wall **current_head, int nbr_of_walls)
 {
-	t_point	*temp;
+	t_wall	*temp;
 
 	temp = *current_head;
 	while (nbr_of_walls)
