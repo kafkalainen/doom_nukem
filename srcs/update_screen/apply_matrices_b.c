@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 10:59:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/26 09:28:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/01 08:37:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,19 @@ t_triangle	apply_world_matrix(float angle_x, float angle_z,
 	dst.p[1] = multi_vec_matrix(&src->p[1], &world);
 	dst.p[2] = multi_vec_matrix(&src->p[2], &world);
 	return (dst);
+}
+
+void	create_target_vector(t_player *plr)
+{
+	t_m4x4	y_matrix;
+	t_m4x4	x_matrix;
+	t_m4x4	combined;
+
+	plr->up = (t_xyz){0.0f,1.0f,0.0f,1.0f};
+	plr->target = (t_xyz){0.0f, 0.0f, 1.0f, 0.0f};
+	y_matrix = rotation_matrix_y(plr->yaw);
+	x_matrix = rotation_matrix_x(plr->pitch);
+	combined = multiply_matrix(&y_matrix, &x_matrix);
+	plr->look_dir = multi_vec_matrix(&plr->target, &combined);
+	plr->target = vec3_add(plr->camera, plr->look_dir);
 }

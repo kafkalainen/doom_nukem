@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/01 08:16:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/01 08:37:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,10 @@ static Uint32	project_to_player_position(t_raster_queue *transformed,
 {
 	Uint32		i;
 	size_t		current_size;
-	t_m4x4		y_matrix;
-	t_m4x4		z_matrix;
 	t_xyz		normal;
 	t_triangle	current_viewed_triangle;
 
-	plr->up = (t_xyz){0.0f,1.0f,0.0f,1.0f};
-	plr->target = (t_xyz){0.0f, 0.0f, 1.0f, 0.0f};
-	y_matrix = rotation_matrix_y(plr->yaw);
-	z_matrix = rotation_matrix_x(plr->pitch);
-	y_matrix = multiply_matrix(&y_matrix, &z_matrix);
-	plr->look_dir = multi_vec_matrix(&plr->target, &y_matrix);
-	plr->target = vec3_add(plr->camera, plr->look_dir);
+	create_target_vector(plr);
 	current_size = transformed->size;
 	triangles_in_view->size = 0;
 	i = 0;

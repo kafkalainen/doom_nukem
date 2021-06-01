@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/31 17:51:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/01 08:36:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,4 +188,5 @@ int			clip_against_plane(t_plane *plane,
 void		initialize_locations(t_point_location *loc);
 void		triangle_add(t_triangle *tri, t_xyz	add);
 void		invert_view(t_triangle *triangle);
+
 #endif
