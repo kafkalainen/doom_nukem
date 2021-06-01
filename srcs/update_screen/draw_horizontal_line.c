@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/30 18:38:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/01 10:14:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static void	clip_to_range(t_uvz *texel)
 		texel->u = 0.0f;
 	if (texel->v < 0.0f)
 		texel->v = 0.0f;
+	// if (texel->u > 1.0f)
+	// 	texel->u = 1.0f;
+	// if (texel->v > 1.0f)
+	// 	texel->v = 1.0f;
 }
 
 int	draw_horizontal_line(t_frame *frame, t_texture *tex, t_steps *step)

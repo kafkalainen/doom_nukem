@@ -88,6 +88,7 @@ void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
 void	error_output_sdl(char *msg, t_home *home);
 void	fps_timer(t_time *t);
+int		is_negative(float z);
 int		load_audio(t_audio *audio);
 int		load_game_audio(t_audio *audio);
 void	map_error_output(int i, t_home *home);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 09:50:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/01 14:33:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int			add_points(t_sector *sector, unsigned char *buf,
 void		calc_normal_vectors(t_home *home);
 void		calc_slanted_floors(t_home *home);
 int			check_if_lines_cut(t_sector *sector);
+int			check_if_sector_has_same_points(t_sector *sector);
 void		close_linkedlist(t_wall **point);
 int			free_points(t_wall **head, unsigned int nbr_of_walls);
 void		free_sectors(t_home *home);

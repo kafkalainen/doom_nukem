@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 11:27:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/01 10:33:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ int	load_map_file(t_home *home, char *path)
 		free(buf);
 		if (ret)
 			error_output("ERROR: Failed to read map.");
-		// validate_sectors_data(home);
+		validate_sectors_data(home);
+		ft_putstr("OK\n");
+		exit(0);
 		// calc_normal_vectors(home);
 	}
 	return (0);
