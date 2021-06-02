@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/01 08:37:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/02 17:08:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ int	painters_algorithm(const void *tri1, const void *tri2)
 static Uint32	transform_walls(t_sector *sector, t_raster_queue *transformed)
 {
 	Uint32	i;
+	Uint32	j;
 	t_wall	*wall;
+	t_surface	*surface;
 
 	i = 0;
+	j = 0;
 	wall = sector->walls;
 	while (i < sector->nb_of_walls * 2)
 	{
@@ -35,6 +38,14 @@ static Uint32	transform_walls(t_sector *sector, t_raster_queue *transformed)
 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &wall->bottom);
 		i++;
 		wall = wall->next;
+	}
+	surface = sector->ground;
+	while (j < 2)
+	{
+		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &surface->tri);
+		i++;
+		j++;
+		surface = surface->next;
 	}
 	transformed->size = i;
 	return (TRUE);
@@ -99,7 +110,7 @@ int	draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr)
 	// static float	degree = 0.0f;
 	t_texture		*tex;
 
-	tex = get_tex(-1, home->editor_tex);
+	tex = get_tex(-2, home->editor_tex);
 	// if (frame->last_frame - cur_time > 66)
 	// {
 	// 	cur_time = frame->last_frame;

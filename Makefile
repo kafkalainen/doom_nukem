@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/01 13:11:44 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/02 16:29:05 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,13 @@ SRCS = \
 	editor$(SLASH)setup_editor.c \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)editor_events.c \
-	parsing$(SLASH)calc_norm_vectors.c \
+	parsing$(SLASH)calc_wall_and_floor_properties.c \
 	parsing$(SLASH)calc_slanted_floors.c \
 	parsing$(SLASH)free_sector.c \
 	parsing$(SLASH)parse_number_data.c \
 	parsing$(SLASH)parse_sector.c \
+	parsing$(SLASH)parse_surfaces.c \
+	parsing$(SLASH)triangulate_floor_and_ceiling.c \
 	png_parser$(SLASH)color_utils.c \
 	png_parser$(SLASH)crc.c \
 	png_parser$(SLASH)filters.c \

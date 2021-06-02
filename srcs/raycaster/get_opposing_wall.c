@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:58:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 11:16:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/01 14:58:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_wall	*get_opposing_wall(t_wall *current_wall, unsigned int walls)
 
 	pos.x = (current_wall->top.p[2].x + current_wall->top.p[0].x) * 0.5;
 	pos.y = (current_wall->top.p[2].z + current_wall->top.p[0].z) * 0.5;
-	dir = vec2_mul(vec3_to_vec2(current_wall->normal), 20000.0f);
+	dir = vec2_mul(current_wall->normal, 20000.0f);
 	dir = vec2(-dir.x, -dir.y);
 	opposing_wall = current_wall->next;
 	while (walls - 1)
