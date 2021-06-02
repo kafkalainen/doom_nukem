@@ -4,6 +4,7 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 # Design Reasonings
 - We decided to pursue a track of creating Duke Nukem engine.
 - Player field of vision is calculated as radians, and are then translated to pixels using how much they use screen space.
+- Switched from Build engine to complete 3D engine using matrices and meshes.
 
 # Biggest blocks
 - Linked list to Cycle list
@@ -14,6 +15,25 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Wall distorted because only angle is used. Solved using perpentual distance to the wall, and scaling it to the view.
 - Getting correct offset for wall textures.
 - Correcting walls by perspective-correct interpolation from affine texture coordinates.
+- Correcting floors by perspective-correct interpolation.
+
+# Learned through project
+- Makefile and Makefile rules
+- Batch scripting
+- How to deploy code to a seperate repository
+- Git Actions (Norminette and build script)
+- Platform specific design problems (__write vs. write)
+- Raycasting technique.
+- Level design.
+- Game design.
+- Build engine internals.
+- Convex space and polygons.
+- Vector mathematics.
+- Sector based map design.
+- Affine texture mapping.
+- Perspective correct texture mapping.
+- Matrix calculations.
+- Triangulation algorithms.
 
 # TO-DO
 ## Riku & Elias
