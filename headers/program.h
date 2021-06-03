@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/31 17:16:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/03 08:40:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef	struct s_raster_queue
 typedef struct s_home
 {
 	t_window		win;
+	t_skybox		skybox;
 	t_sector		**sectors;
 	SDL_Surface		*text_surf;
 	t_texture		**editor_tex;
@@ -42,5 +43,14 @@ typedef struct s_home
 	int				nbr_of_textures;
 	int				game_state;
 }					t_home;
+
+typedef struct	s_arg
+{
+	Uint32		*buffer;
+	t_texture	*tex;
+	t_steps		*step;
+	t_triangle	*triangle;
+	pthread_t	tid[MAX_THREADS];
+}				t_arg;
 
 #endif

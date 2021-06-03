@@ -6,11 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 09:35:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/03 08:41:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+#include <pthread.h>
+#include <stdlib.h>
 
 static t_deltas	calculate_vertex_delta(t_xyz p0, t_xyz p1,
 	t_uvz uv0, t_uvz uv1)
@@ -69,37 +71,73 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps)
 	swap_sides(steps);
 }
 
-static void	draw_triangle(t_frame *frame, t_triangle *triangle,
+static void *draw_area(void *args)
+{
+	int			start_y;
+	int			max_y;
+	int			index;
+	t_arg		*arg;
+	t_steps		thread_steps;
+	pthread_t	current;
+
+
+	arg = (t_arg*)args;
+	index = 0;
+	current = pthread_self;
+	thread_steps = *(arg->step);
+	while (current != arg->tid[index])
+		index++;
+	start_y = index * arg->step->thread_step
+		+ arg->step->cur_y;
+	start_y = (index + 1) * arg->step->thread_step
+		+ arg->step->max_y;
+	while (start_y <= max_y)
+	{
+		calc_current_step(arg->triangle, &thread_steps);
+		draw_horizontal_line(arg->buffer, arg->tex, &thread_steps);
+		start_y++;
+	}
+	return (NULL);
+}
+
+static void	draw_triangle(Uint32 *buffer, t_triangle *triangle,
 	t_texture *tex, t_steps *step)
 {
-	int	max_y;
+	int		i;
+	int		max_y;
+	t_arg	args;
 
+	args.tex = tex;
+	args.step = step;
+	args.triangle = triangle;
+	args.buffer = buffer;
 	initialize_steps(&step->screen_step_a_side, &step->tex_a_side,
 		&step->delta_p0p1, &step->denom_dy_a_side);
 	initialize_steps(&step->screen_step_b_side, &step->tex_b_side,
 		&step->delta_p0p2, &step->denom_dy_b_side);
-	if (step->denom_dy_a_side)
+	if (!step->denom_dy_a_side)
+		return ;
+	if (step->current_triangle == 'a')
 	{
-		if (step->current_triangle == 'a')
-		{
-			step->cur_y = (int)triangle->p[0].y;
-			max_y = (int)triangle->p[1].y;
-		}
-		else
-		{
-			step->cur_y = (int)triangle->p[1].y;
-			max_y = (int)triangle->p[2].y;
-		}
-		while (step->cur_y <= max_y)
-		{
-			calc_current_step(triangle, step);
-			draw_horizontal_line(frame, tex, step);
-			step->cur_y++;
-		}
+		step->cur_y = (int)triangle->p[0].y;
+		step->max_y = (int)triangle->p[1].y;
 	}
+	else
+	{
+		step->cur_y = (int)triangle->p[1].y;
+		step->max_y = (int)triangle->p[2].y;
+	}
+	step->thread_step = (step->max_y - step->cur_y) / MAX_THREADS;
+	while (i < MAX_THREADS)
+	{
+		pthread_create(&args.tid[i], NULL, &draw_area, (void*)&args);
+		i++;
+	}
+	while (i--)
+		pthread_join(args.tid[i], NULL);
 }
 
-int	draw_tex_triangle(t_frame *frame, t_triangle *triangle, t_texture *tex)
+int	draw_tex_triangle(Uint32 *buffer, t_triangle *triangle, t_texture *tex)
 {
 	t_steps		step;
 
@@ -115,13 +153,13 @@ int	draw_tex_triangle(t_frame *frame, t_triangle *triangle, t_texture *tex)
 	if (step.delta_p0p2.y)
 		step.denom_dy_b_side = (float)fabsf(1.0f / step.delta_p0p2.y);
 	step.current_triangle = 'a';
-	draw_triangle(frame, triangle, tex, &step);
+	draw_triangle(buffer, triangle, tex, &step);
 	step.delta_p0p1 = calculate_vertex_delta(triangle->p[1],
 		triangle->p[2], triangle->uv[1], triangle->uv[2]);
 	step.denom_dy_a_side = 0;
 	if (step.delta_p0p1.y)
 		step.denom_dy_a_side = (float)fabsf(1.0f / step.delta_p0p1.y);
 	step.current_triangle = 'b';
-	draw_triangle(frame, triangle, tex, &step);
+	draw_triangle(buffer, triangle, tex, &step);
 	return (TRUE);
 }

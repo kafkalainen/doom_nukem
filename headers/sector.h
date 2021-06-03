@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/02 16:19:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/02 17:29:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ typedef struct s_surface
 	t_xy				normal;
 	struct s_surface	*next;
 }						t_surface;
+
+typedef struct s_skybox
+{
+	int					idx;
+	t_triangle			*face;
+}						t_skybox;
 
 typedef struct s_point_data
 {

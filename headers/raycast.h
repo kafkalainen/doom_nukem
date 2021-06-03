@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 17:22:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/03 08:38:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void			draw_segment(t_frame *frame, t_home *home, t_player *plr);
 int				draw_tex_line(t_xy start, t_xy end,
 					t_texture *tx, SDL_Surface *surf);
 void			draw_vertically(t_frame *frame, t_texture *wall_tex);
-int				draw_horizontal_line(t_frame *frame, t_texture *tex, t_steps *step);
+int				draw_horizontal_line(Uint32 *buffer, t_texture *tex, t_steps *step);
 void			draw_wall(t_frame *frame, t_texture *tex, t_home *home,
 					t_player *plr);
 int				get_next_wall_tex(t_wall **current_head, int nbr_of_walls);

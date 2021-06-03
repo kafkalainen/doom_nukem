@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 11:27:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/02 18:50:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,12 @@ t_texture	*get_tex(int idx, t_texture	**textures)
 // 	frame->pxl_offset = new_frame.pxl_offset;
 // }
 
+/*
+** FAR TO NEAR
+*/
 // void	scan_fov(t_home *home, t_frame *frame, t_player *plr, int cur_pxl)
 // {
+//	frame->right.wall < frame->left.wall
 // 	frame->left.wall = home->sectors[frame->idx]->points;
 // 	frame->right.wall = home->sectors[frame->idx]->points;
 // 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
