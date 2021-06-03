@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/02 16:29:05 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/02 17:41:25 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ SRCS = \
 	porting$(SLASH)porting_utils.c \
 	raycaster$(SLASH)calc_ground_texels.c \
 	raycaster$(SLASH)calc_sector_bounds.c \
-	raycaster$(SLASH)calc_ground_dimensions.c \
 	raycaster$(SLASH)calc_wall_dimensions.c \
 	raycaster$(SLASH)calc_wall_texels.c \
 	raycaster$(SLASH)colour_scale.c \
@@ -101,6 +100,7 @@ SRCS = \
 	utilities$(SLASH)str_pxl.c \
 	utilities$(SLASH)system_calls.c \
 	utilities$(SLASH)swap_and_sort.c \
+	utilities$(SLASH)init_skybox.c \
 	vec_math$(SLASH)vec2_a.c \
 	vec_math$(SLASH)vec2_b.c \
 	vec_math$(SLASH)vec2_c.c \
