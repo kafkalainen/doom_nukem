@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/02 17:40:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 08:45:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static t_home	*init_sdl(t_home *home, float *min_step)
 void	init_player(t_player *plr)
 {
 	plr->pos = vec2(0, 0);
-	//plr->pitch = 240;
-	plr->pitch = 0.0f;
 	plr->height = 10;
 	plr->dir.x = 0.0f;
 	plr->dir.y = 1.0f;
@@ -62,6 +60,7 @@ void	init_player(t_player *plr)
 	plr->look_dir = (t_xyz){0.0f, 0.0f, 1.0f, 1.0f};
 	plr->up = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
 	plr->target = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
+	plr->pitch = 0.0f;
 	plr->yaw = 0.0f;
 }
 
@@ -91,9 +90,9 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
-	frame->transformed = create_raster_queue(100);
-	frame->triangles_in_view = create_raster_queue(100);
-	frame->raster_queue = create_raster_queue(200);
+	frame->transformed = create_raster_queue(100); //DEALLOCATE
+	frame->triangles_in_view = create_raster_queue(100); //DEALLOCATE
+	frame->raster_queue = create_raster_queue(200); //DEALLOCATE
 	init_viewport(&frame->viewport);
 	if (init_skybox(&home->skybox))
 		error_output("Memory allocation failed!\n");

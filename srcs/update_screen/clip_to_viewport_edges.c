@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/03 07:49:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/03 15:45:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,23 @@ static void	viewport_logic(t_plane *plane, char choice, t_sides *viewport)
 	}
 }
 
-static int	draw_polygon(t_frame *frame, t_raster_queue *tri, t_texture *tex)
+static int	draw_polygon(Uint32 *buffer, t_raster_queue *tri, t_texture *tex)
 {
 	int	i;
 
 	i = tri->front;
-	(void)tex;
 	while (i <= tri->rear)
 	{
-		draw_tex_triangle(frame, &tri->array[i], tex);
+		draw_tex_triangle(buffer, &tri->array[i], tex);
 		draw_line(vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
 			vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
-			tri->array[i].colour, frame->buffer);
+			tri->array[i].colour, buffer);
 		draw_line(vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
 			vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
-			tri->array[i].colour, frame->buffer);
+			tri->array[i].colour, buffer);
 		draw_line(vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
 			vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
-			tri->array[i].colour, frame->buffer);
+			tri->array[i].colour, buffer);
 		i++;
 	}
 	return (TRUE);
@@ -85,7 +84,7 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 }
 
 int	clip_to_viewport_edges(t_raster_queue *view_list, t_raster_queue *raster_list,
-	t_sides *viewport, t_frame *frame, t_texture *tex)
+	t_sides *viewport, Uint32 *buffer, t_texture *tex)
 {
 	int			i;
 	int			current_plane;
@@ -107,7 +106,7 @@ int	clip_to_viewport_edges(t_raster_queue *view_list, t_raster_queue *raster_lis
 			new_triangles = clip_to_an_edge(raster_list, &plane, new_triangles);
 			current_plane++;
 		}
-		draw_polygon(frame, raster_list, tex);
+		draw_polygon(buffer, raster_list, tex);
 		i++;
 	}
 	return (raster_list->size);

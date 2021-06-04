@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/03 08:20:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 08:44:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_sides
 	t_plane			right;
 	t_plane			top;
 	t_plane			bottom;
+	t_plane			*mid_planes;
 	t_xyz			view_offset;
 }					t_sides;
 
@@ -131,7 +132,7 @@ typedef struct	s_steps
 	char		current_triangle;
 	t_deltas	delta_p0p1;
 	t_deltas	delta_p0p2;
-	int			thread_step;
+	float		thread_step;
 }				t_steps;
 
 /*

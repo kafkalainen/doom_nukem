@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/03 08:41:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/03 16:34:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static void	initialize_steps(t_xyz *step_side, t_uvz *tex_step_side,
 	}
 }
 
-static void	calc_current_step(t_triangle *tri, t_steps *steps)
+static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 {
 	float		temp[2];
 
-	temp[0] = steps->cur_y - tri->p[0].y;
+	temp[0] = cur_y - tri->p[0].y;
 	steps->start_x = tri->p[0].x + (float)temp[0] * steps->screen_step_a_side.x;
 	steps->end_x = tri->p[0].x + (float)temp[0] * steps->screen_step_b_side.x;
 	steps->start_uv.u = tri->uv[0].u + (float)temp[0] * steps->tex_a_side.u;
@@ -58,7 +58,7 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps)
 	steps->end_uv.w = tri->uv[0].w + (float)temp[0] * steps->tex_b_side.w;
 	if (steps->current_triangle != 'a')
 	{
-		temp[1] = steps->cur_y - tri->p[1].y;
+		temp[1] = cur_y - tri->p[1].y;
 		steps->start_x = tri->p[1].x + (float)temp[1]
 			* steps->screen_step_a_side.x;
 		steps->start_uv.u = tri->uv[1].u + (float)temp[1]
@@ -71,71 +71,99 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps)
 	swap_sides(steps);
 }
 
-static void *draw_area(void *args)
-{
-	int			start_y;
-	int			max_y;
-	int			index;
-	t_arg		*arg;
-	t_steps		thread_steps;
-	pthread_t	current;
+// static void *draw_area(void *args)
+// {
+// 	int			start_y;
+// 	int			max_y;
+// 	int			index;
+// 	t_arg		*arg;
+// 	t_steps		thread_steps;
+// 	pthread_t	current;
 
 
-	arg = (t_arg*)args;
-	index = 0;
-	current = pthread_self;
-	thread_steps = *(arg->step);
-	while (current != arg->tid[index])
-		index++;
-	start_y = index * arg->step->thread_step
-		+ arg->step->cur_y;
-	start_y = (index + 1) * arg->step->thread_step
-		+ arg->step->max_y;
-	while (start_y <= max_y)
-	{
-		calc_current_step(arg->triangle, &thread_steps);
-		draw_horizontal_line(arg->buffer, arg->tex, &thread_steps);
-		start_y++;
-	}
-	return (NULL);
-}
+// 	index = 0;
+// 	arg = (t_arg*)args;
+// 	current = pthread_self();
+// 	thread_steps = *(arg->step);
+// 	while (current != arg->tid[index])
+// 		index++;
+// 	start_y = (int)((index) * ceil(arg->step->thread_step) + arg->step->cur_y);
+// 	max_y = (int)((index + 1) * ceil(arg->step->thread_step) + arg->step->cur_y);
+// 	while (start_y < max_y)
+// 	{
+// 		calc_current_step(arg->triangle, &thread_steps, start_y);
+// 		draw_horizontal_line(arg->buffer, arg->tex, &thread_steps, start_y);
+// 		arg->step->cur_y++;
+// 		start_y++;
+// 	}
+// 	return (NULL);
+// }
 
-static void	draw_triangle(Uint32 *buffer, t_triangle *triangle,
-	t_texture *tex, t_steps *step)
-{
-	int		i;
-	int		max_y;
-	t_arg	args;
+// static void	draw_triangle(Uint32 *buffer, t_triangle *triangle,
+// 	t_texture *tex, t_steps *step)
+// {
+// 	Uint32	i;
+// 	t_arg	args;
 
-	args.tex = tex;
-	args.step = step;
-	args.triangle = triangle;
-	args.buffer = buffer;
-	initialize_steps(&step->screen_step_a_side, &step->tex_a_side,
-		&step->delta_p0p1, &step->denom_dy_a_side);
-	initialize_steps(&step->screen_step_b_side, &step->tex_b_side,
-		&step->delta_p0p2, &step->denom_dy_b_side);
-	if (!step->denom_dy_a_side)
-		return ;
-	if (step->current_triangle == 'a')
-	{
-		step->cur_y = (int)triangle->p[0].y;
-		step->max_y = (int)triangle->p[1].y;
-	}
-	else
-	{
-		step->cur_y = (int)triangle->p[1].y;
-		step->max_y = (int)triangle->p[2].y;
-	}
-	step->thread_step = (step->max_y - step->cur_y) / MAX_THREADS;
-	while (i < MAX_THREADS)
-	{
-		pthread_create(&args.tid[i], NULL, &draw_area, (void*)&args);
-		i++;
-	}
-	while (i--)
-		pthread_join(args.tid[i], NULL);
-}
+// 	i = 0;
+// 	initialize_steps(&step->screen_step_a_side, &step->tex_a_side,
+// 		&step->delta_p0p1, &step->denom_dy_a_side);
+// 	initialize_steps(&step->screen_step_b_side, &step->tex_b_side,
+// 		&step->delta_p0p2, &step->denom_dy_b_side);
+// 	if (!step->denom_dy_a_side)
+// 		return ;
+// 	if (step->current_triangle == 'a')
+// 	{
+// 		step->cur_y = (int)triangle->p[0].y;
+// 		step->max_y = (int)triangle->p[1].y;
+// 	}
+// 	else
+// 	{
+// 		step->cur_y = (int)triangle->p[1].y;
+// 		step->max_y = (int)triangle->p[2].y;
+// 	}
+// 	step->thread_step = (step->max_y - step->cur_y) / MAX_THREADS;
+// 	args.tex = tex;
+// 	args.step = step;
+// 	args.triangle = triangle;
+// 	args.buffer = buffer;
+// 	while (i < MAX_THREADS)
+// 	{
+// 		pthread_create(&args.tid[i], NULL, &draw_area, (void*)&args);
+// 		i++;
+// 	}
+// 	while (i--)
+// 		pthread_join(args.tid[i], NULL);
+// }
+
+// static void	draw_triangle(Uint32 *buffer, t_triangle *triangle,
+// 	t_texture *tex, t_steps *step)
+// {
+// 	int	max_y;
+
+// 	initialize_steps(&step->screen_step_a_side, &step->tex_a_side,
+// 		&step->delta_p0p1, &step->denom_dy_a_side);
+// 	initialize_steps(&step->screen_step_b_side, &step->tex_b_side,
+// 		&step->delta_p0p2, &step->denom_dy_b_side);
+// 	if (!step->denom_dy_a_side)
+// 		return ;
+// 	if (step->current_triangle == 'a')
+// 	{
+// 		step->cur_y = (int)triangle->p[0].y;
+// 		max_y = (int)triangle->p[1].y;
+// 	}
+// 	else
+// 	{
+// 		step->cur_y = (int)triangle->p[1].y;
+// 		max_y = (int)triangle->p[2].y;
+// 	}
+// 	while (step->cur_y <= max_y)
+// 	{
+// 		calc_current_step(triangle, step, step->cur_y);
+// 		draw_horizontal_line(buffer, tex, step, step->cur_y);
+// 		step->cur_y++;
+// 	}
+// }
 
 int	draw_tex_triangle(Uint32 *buffer, t_triangle *triangle, t_texture *tex)
 {

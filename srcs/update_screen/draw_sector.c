@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_polygon.c                                     :+:      :+:    :+:   */
+/*   draw_sector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/02 18:53:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 08:49:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ static Uint32	transform_walls(t_home *home, t_sector *sector, t_raster_queue *tr
 	k = 0;
 	wall = sector->walls;
 	surface = sector->ground;
-	// (void)home;
 	while (i < 12)
 	{
 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[i]);
 		i++;
 	}
-	// while (i < sector->nb_of_walls * 2)
 	while (j < sector->nb_of_walls * 2)
 	{
 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &wall->top);
@@ -121,7 +119,7 @@ int	draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr)
 	// static float	degree = 0.0f;
 	t_texture		*tex;
 
-	tex = get_tex(-2, home->editor_tex);
+	tex = get_tex(-1, home->editor_tex);
 	// if (frame->last_frame - cur_time > 66)
 	// {
 	// 	cur_time = frame->last_frame;
@@ -134,7 +132,7 @@ int	draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr)
 	qsort((void *)frame->triangles_in_view->array,
 		(size_t)frame->triangles_in_view->size, sizeof(t_triangle), painters_algorithm);
 	clip_to_viewport_edges(frame->triangles_in_view, frame->raster_queue,
-	 	&frame->viewport, frame, tex);
+	 	&frame->viewport, frame->buffer, tex);
 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 10.0f}, "player_xyz", (t_plx_modifier){green, 2});
 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 24.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});
 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/03 08:38:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 08:47:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_frame
 	t_triangle		transformed_cube[12];
 	t_triangle		view_cube;
 	t_raster_queue	*triangles_in_view;
-	t_raster_queue	*raster_queue;
+	t_raster_queue	**raster_queue;
 	t_raster_queue	*transformed;
 	t_sides			viewport;
 }					t_frame;
@@ -96,7 +96,7 @@ void			draw_segment(t_frame *frame, t_home *home, t_player *plr);
 int				draw_tex_line(t_xy start, t_xy end,
 					t_texture *tx, SDL_Surface *surf);
 void			draw_vertically(t_frame *frame, t_texture *wall_tex);
-int				draw_horizontal_line(Uint32 *buffer, t_texture *tex, t_steps *step);
+int				draw_horizontal_line(Uint32 *buffer, t_texture *tex, t_steps *step, int cur_y);
 void			draw_wall(t_frame *frame, t_texture *tex, t_home *home,
 					t_player *plr);
 int				get_next_wall_tex(t_wall **current_head, int nbr_of_walls);
@@ -118,7 +118,7 @@ void			setup_frame(t_frame *frame, t_frame *new_frame,
 					int current_pxl, int idx);
 void			step_one(t_frame *frame);
 int				clip_to_viewport_edges(t_raster_queue *view_list, t_raster_queue *raster_list,
-				t_sides *viewport, t_frame *frame, t_texture *tex);
+				t_sides *viewport, Uint32 *buffer, t_texture *tex);
 t_raster_queue	*create_raster_queue(size_t capacity);
 int				raster_queue_is_full(t_raster_queue *queue);
 int				raster_queue_is_empty(t_raster_queue *queue);
