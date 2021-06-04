@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/03 08:48:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 16:33:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr)
 int			draw_cube(t_frame *frame, t_home *home, t_player *plr);
 void		draw_wireframe(t_frame *frame, Uint32 colour);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);
-Uint32		get_texel(int x, int y, t_texture *tex);
+Uint32		get_texel(t_uv *coord, t_uv *limits, Uint32 *pixels);
 void		put_pixel(Uint32 *buffer, int x, int y, Uint32 color);
 t_triangle	scale_triangle(t_triangle *src, t_xyz scale);
 void		*optimized_memcpy(void *pixels, void *src, size_t size);

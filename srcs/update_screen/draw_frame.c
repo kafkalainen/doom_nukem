@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/31 11:30:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 15:29:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,60 +28,42 @@ static char	*compass_direction(t_xy *dir)
 		return (ft_strdup("NO DIR"));
 }
 
-/*
-**		draw_line(
-**			center_to_screen(home->sectors[i]->floor_bottom_left),
-**			center_to_screen(home->sectors[i]->floor_bottom_right),
-**			red, frame->buffer);
-**		draw_line(
-**			center_to_screen(home->sectors[i]->floor_top_left),
-**			center_to_screen(home->sectors[i]->floor_top_right),
-**			red, frame->buffer);
-**		draw_line(
-**			center_to_screen(home->sectors[i]->floor_top_left),
-**			center_to_screen(home->sectors[i]->floor_bottom_left),
-**			red, frame->buffer);
-**		draw_line(
-**			center_to_screen(home->sectors[i]->floor_top_right),
-**			center_to_screen(home->sectors[i]->floor_bottom_right),
-**			red, frame->buffer);
-*/
-static void	draw_minimap(t_home *home, t_frame *frame)
-{
-	unsigned int	i;
-	unsigned int	j;
-	t_point			*temp;
+// static void	draw_minimap(t_home *home, t_frame *frame)
+// {
+// 	unsigned int	i;
+// 	unsigned int	j;
+// 	t_point			*temp;
 
-	i = 0;
-	while (i < home->nbr_of_sectors)
-	{
-		j = 0;
-		temp = home->sectors[i]->points;
-		while (j < home->sectors[i]->nb_of_walls)
-		{
-			draw_line(center_to_screen(temp->x0),
-				center_to_screen(temp->next->x0),
-				greenyellow, frame->buffer);
-			temp = temp->next;
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < home->nbr_of_sectors)
+// 	{
+// 		j = 0;
+// 		temp = home->sectors[i]->points;
+// 		while (j < home->sectors[i]->nb_of_walls)
+// 		{
+// 			draw_line(center_to_screen(temp->x0),
+// 				center_to_screen(temp->next->x0),
+// 				greenyellow, frame->buffer);
+// 			temp = temp->next;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
-static void	draw_player(t_frame *frame)
-{
-	draw_square(frame->buffer, center_to_screen((t_xy){-2.0f, -2.0f}),
-		yellow, 4);
-	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
-		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
-				vec2_mul((t_xy){-PLR_DIR, PLR_DIR}, 400))),
-		lightgreen, frame->buffer);
-	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
-		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
-				vec2_mul((t_xy){PLR_DIR, PLR_DIR}, 400))),
-		lightgreen, frame->buffer);
-}
+// static void	draw_player(t_frame *frame)
+// {
+// 	draw_square(frame->buffer, center_to_screen((t_xy){-2.0f, -2.0f}),
+// 		yellow, 4);
+// 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
+// 		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
+// 				vec2_mul((t_xy){-PLR_DIR, PLR_DIR}, 400))),
+// 		lightgreen, frame->buffer);
+// 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
+// 		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
+// 				vec2_mul((t_xy){PLR_DIR, PLR_DIR}, 400))),
+// 		lightgreen, frame->buffer);
+// }
 
 static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 {
@@ -104,6 +86,10 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	ft_str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 110}, "current_z:", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 130}, plr_z, mod);
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, ft_ftoa(plr->camera.z, 6), (t_plx_modifier){green, 2});
 	ft_str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
@@ -125,11 +111,11 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	frame->left.l_pt = (t_xy){-1.0f, -1.0f};
 	frame->right.r_pt = (t_xy){-1.0f, -1.0f};
 	// scan_fov(home, frame, plr, 0);
-	if (plr->input.minimap)
-	{
-		draw_minimap(home, frame);
-		draw_player(frame);
-	}
+	// if (plr->input.minimap)
+	// {
+	// 	draw_minimap(home, frame);
+	// 	draw_player(frame);
+	// }
 	if (plr->input.info)
 		draw_info(frame, plr, (int)home->t.fps);
 	return ;

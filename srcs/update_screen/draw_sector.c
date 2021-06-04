@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/04 08:49:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 16:00:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,26 +116,29 @@ static Uint32	project_to_player_position(t_raster_queue *transformed,
 
 int	draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr)
 {
-	// static float	degree = 0.0f;
+	t_arg			args;
 	t_texture		*tex;
+	Uint32			i;
 
+	i = 0;
 	tex = get_tex(-1, home->editor_tex);
-	// if (frame->last_frame - cur_time > 66)
-	// {
-	// 	cur_time = frame->last_frame;
-	// 	degree += 0.1f;
-	// }
-	// if (degree > TWO_PI)
-	// 	degree = 0.0f;
 	transform_walls(home, sector, frame->transformed);
 	project_to_player_position(frame->transformed, frame->triangles_in_view, plr, &frame->viewport);
 	qsort((void *)frame->triangles_in_view->array,
 		(size_t)frame->triangles_in_view->size, sizeof(t_triangle), painters_algorithm);
-	clip_to_viewport_edges(frame->triangles_in_view, frame->raster_queue,
-	 	&frame->viewport, frame->buffer, tex);
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 10.0f}, "player_xyz", (t_plx_modifier){green, 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 24.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 38.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 52.0f}, ft_ftoa(plr->camera.z, 6), (t_plx_modifier){green, 2});
+	args.tex = tex;
+	args.buffer = frame->buffer;
+	args.view_list = frame->triangles_in_view;
+	args.raster_queue = frame->raster_queue;
+	args.viewport = &frame->viewport;
+	args.last_frame = home->t.frame_time_last;
+	// clip_to_viewport_edges((void*)&args);
+	while (i < MAX_THREADS)
+	{
+		pthread_create(&args.tid[i], NULL, &clip_to_viewport_edges, (void*)&args);
+		i++;
+	}
+	while (i--)
+		pthread_join(args.tid[i], NULL);
 	return (TRUE);
 }

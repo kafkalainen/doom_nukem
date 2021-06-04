@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/02 17:41:25 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/04 16:38:54 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,10 +73,9 @@ SRCS = \
 	update_screen$(SLASH)clip_to_plane.c \
 	update_screen$(SLASH)clip_to_viewport_edges.c \
 	update_screen$(SLASH)draw_frame.c \
-	update_screen$(SLASH)draw_floor_segment.c \
-	update_screen$(SLASH)draw_polygon.c \
 	update_screen$(SLASH)draw_segment.c \
 	update_screen$(SLASH)draw_horizontal_line.c \
+	update_screen$(SLASH)draw_sector.c \
 	update_screen$(SLASH)draw_shapes.c \
 	update_screen$(SLASH)draw_shapes2.c \
 	update_screen$(SLASH)draw_tex_pixel.c \
@@ -151,11 +150,11 @@ WIN_LIBRARY_PATHS = \
 	-LSDL2-2.0.14\i686-w64-mingw32\lib \
 	-LSDL2_mixer-2.0.4\i686-w64-mingw32\lib \
 	-Llibft
-LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lm -g
+LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 CC = gcc
 WIN_CFLAGS = -Wall -Wextra -Werror -O3 -g
-WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lm
+WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer-lft -lpthread -lm
 
 ifeq ($(OS),Windows_NT)
 	TARGET_SYSTEM := Windows

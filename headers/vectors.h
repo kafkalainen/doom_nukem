@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/04 08:44:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 16:41:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ typedef struct s_uvz
 	float			v;
 	float			w;
 }					t_uvz;
+
+typedef struct s_uv
+{
+	int				u;
+	int				v;
+}					t_uv;
 
 typedef struct s_point_location
 {

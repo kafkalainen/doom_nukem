@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 19:44:34 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/28 11:43:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 14:27:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	raster_queue_is_empty(t_raster_queue *queue)
 /*
 **	Adds an element to the rear-end of the queue.
 */
-int	enqueue_to_raster(t_raster_queue *queue, t_triangle item)
+int	enqueue_to_raster(t_raster_queue *queue, t_triangle *item)
 {
 	if (queue->rear == queue->capacity - 1)
 		return (1);
@@ -34,7 +34,7 @@ int	enqueue_to_raster(t_raster_queue *queue, t_triangle item)
 		queue->front = 0;
 	queue->size = queue->size + 1;
 	queue->rear = queue->rear + 1;
-	queue->array[queue->rear] = item;
+	queue->array[queue->rear] = *item;
 	return (0);
 }
 

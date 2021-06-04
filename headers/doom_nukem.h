@@ -15,8 +15,8 @@
 
 # include <fcntl.h>
 # include <dirent.h>
-# include "time.h"
-# include "math.h"
+# include <time.h>
+# include <math.h>
 # ifdef __unix__
 #  define OS_WINDOWS 0
 #  define READ_ONLY O_RDONLY
@@ -28,6 +28,7 @@
 #  define TRUNCATE O_TRUNC
 #  include <string.h>
 #  include <unistd.h>
+#  include <pthread.h>
 #  include "../SDL2/include/SDL2/SDL.h"
 #  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include "../headers/syscalls_windows.h"

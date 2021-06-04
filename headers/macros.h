@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/03 07:52:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 15:12:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define MAP_MENU 2
 # define MAIN_MENU 1
 # define QUIT -1
-# define MAX_THREADS 25
+# define MAX_THREADS 42
 
 /*
 ** Compass directions

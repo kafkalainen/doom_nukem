@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/04 08:45:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 14:58:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,23 +76,43 @@ void	setup_fps(t_time *time)
 
 void	init_viewport(t_sides *viewport)
 {
+	Uint32	i;
+	Uint32	span;
+
+	i = 0;
+	span = (SCREEN_HEIGHT - 1) / (MAX_THREADS - 1);
+	viewport->mid_planes = (t_plane*)malloc(sizeof(t_plane) * MAX_THREADS);
 	viewport->top = (t_plane){(t_xyz){ 0.0f, 0.0f, 0.0f, 1.0f }, (t_xyz){ 0.0f, 1.0f, 0.0f, 0.0f }};
 	viewport->bottom = (t_plane){(t_xyz){ 0.0f, SCREEN_HEIGHT - 1, 0.0f, 1.0f }, (t_xyz){ 0.0f, -1.0f, 0.0f, 0.0f }};
-	viewport->left = (t_plane){(t_xyz){ 0.0f, 0.0f, 0.0f, 0.0f }, (t_xyz){ 1.0f, 0.0f, 0.0f, 0.0f }};
-	viewport->right = (t_plane){(t_xyz){ SCREEN_WIDTH - 1, 0.0f, 0.0f, 0.0f }, (t_xyz){ -1.0f, 0.0f, 0.0f, 0.0f }};
+	viewport->left = (t_plane){(t_xyz){ 0.0f, 0.0f, 0.0f, 1.0f }, (t_xyz){ 1.0f, 0.0f, 0.0f, 0.0f }};
+	viewport->right = (t_plane){(t_xyz){ SCREEN_WIDTH - 1, 0.0f, 0.0f, 1.0f }, (t_xyz){ -1.0f, 0.0f, 0.0f, 0.0f }};
 	viewport->near = (t_plane){(t_xyz){0.0f, 0.0f, 0.1f, 1.0f}, (t_xyz){0.0f, 0.0f, 1.0f, 0.0f}};
 	viewport->view_offset = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
+	while (i < MAX_THREADS - 1)
+	{
+		viewport->mid_planes[i] = (t_plane){(t_xyz){ 0.0f, span * i, 0.0f, 1.0f }, (t_xyz){ 0.0f, 1.0f, 0.0f, 0.0f }};
+		i++;
+	}
+	viewport->mid_planes[i] = (t_plane){(t_xyz){ 0.0f, SCREEN_HEIGHT, 0.0f, 1.0f }, (t_xyz){ 0.0f, 1.0f, 0.0f, 0.0f }};
+
 }
 
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
-	int		ret;
+	int				ret;
+	unsigned int	i;
 
+	i = 0;
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
 	frame->transformed = create_raster_queue(100); //DEALLOCATE
 	frame->triangles_in_view = create_raster_queue(100); //DEALLOCATE
-	frame->raster_queue = create_raster_queue(200); //DEALLOCATE
+	frame->raster_queue = (t_raster_queue**)malloc(sizeof(t_raster_queue*) * (MAX_THREADS + 1));
+	while (i < MAX_THREADS)
+	{
+		frame->raster_queue[i] = create_raster_queue(200); //DEALLOCATE
+		i++;
+	}
 	init_viewport(&frame->viewport);
 	if (init_skybox(&home->skybox))
 		error_output("Memory allocation failed!\n");

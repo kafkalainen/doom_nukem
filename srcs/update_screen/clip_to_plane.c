@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/30 18:48:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 12:05:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ static void	check_if_inside_triangle(float *d, t_point_location *loc,
 static int	form_a_triangle(t_point_location *loc, t_plane *plane,
 	t_triangle *triangle1)
 {
-	triangle1->colour = red;
+	triangle1->colour = white;
 	triangle1->p[0] = loc->points_inside[0];
+	if (loc->points_inside[0].x > 71 && plane->normal.x == -1.0f)
+		triangle1->colour = purple;
 	triangle1->uv[0] = loc->texels_inside[0];
 	triangle1->p[1] = vec3_intersection_with_plane(plane, loc->points_inside[0],
 		loc->points_outside[0], &loc->texel_offset);

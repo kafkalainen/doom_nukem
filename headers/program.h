@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/03 08:40:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 15:59:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ typedef struct s_home
 
 typedef struct	s_arg
 {
-	Uint32		*buffer;
-	t_texture	*tex;
-	t_steps		*step;
-	t_triangle	*triangle;
-	pthread_t	tid[MAX_THREADS];
+	Uint32			*buffer;
+	t_texture		*tex;
+	t_raster_queue	*view_list;
+	t_raster_queue	**raster_queue;
+	t_sides			*viewport;
+	Uint32			last_frame;
+	pthread_t		tid[MAX_THREADS];
 }				t_arg;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/03 15:45:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/04 16:17:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static int	draw_polygon(Uint32 *buffer, t_raster_queue *tri, t_texture *tex)
 	while (i <= tri->rear)
 	{
 		draw_tex_triangle(buffer, &tri->array[i], tex);
-		draw_line(vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
-			vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
-			tri->array[i].colour, buffer);
-		draw_line(vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
-			vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
-			tri->array[i].colour, buffer);
-		draw_line(vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
-			vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
-			tri->array[i].colour, buffer);
+		// draw_line(vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
+		// 	vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
+		// 	tri->array[i].colour, buffer);
+		// draw_line(vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
+		// 	vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
+		// 	tri->array[i].colour, buffer);
+		// draw_line(vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
+		// 	vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
+		// 	tri->array[i].colour, buffer);
 		i++;
 	}
 	return (TRUE);
@@ -76,38 +76,60 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 		i = 0;
 		while (i < triangles_to_add)
 		{
-			enqueue_to_raster(raster_list, clipped[i]);
+			enqueue_to_raster(raster_list, &clipped[i]);
 			i++;
 		}
 	}
 	return (triangles_to_add);
 }
 
-int	clip_to_viewport_edges(t_raster_queue *view_list, t_raster_queue *raster_list,
-	t_sides *viewport, Uint32 *buffer, t_texture *tex)
+static void	clipper_viewport_edges(t_sides *planes, t_raster_queue *raster_queue, t_arg *arg)
 {
 	int			i;
 	int			current_plane;
 	int			new_triangles;
 	t_plane		plane;
 
+
 	i = 0;
-	while (i < view_list->size)
+	while (i < arg->view_list->size)
 	{
-		raster_list->rear = -1;
-		raster_list->front = -1;
-		raster_list->size = 0;
-		enqueue_to_raster(raster_list, view_list->array[i]);
+		raster_queue->rear = -1;
+		raster_queue->front = -1;
+		raster_queue->size = 0;
+		enqueue_to_raster(raster_queue, &arg->view_list->array[i]);
 		new_triangles = 1;
 		current_plane = 0;
 		while (current_plane < 4)
 		{
-			viewport_logic(&plane, current_plane, viewport);
-			new_triangles = clip_to_an_edge(raster_list, &plane, new_triangles);
+			viewport_logic(&plane, current_plane, planes);
+			new_triangles = clip_to_an_edge(raster_queue, &plane, new_triangles);
 			current_plane++;
 		}
-		draw_polygon(buffer, raster_list, tex);
+		draw_polygon(arg->buffer, raster_queue, arg->tex);
 		i++;
 	}
-	return (raster_list->size);
+}
+
+void	*clip_to_viewport_edges(void *args)
+{
+	t_arg			*arg;
+	pthread_t		current;
+	unsigned int	index;
+	t_raster_queue	*current_queue;
+	t_sides			planes;
+
+	index = 0;
+	arg = (t_arg*)args;
+	current = pthread_self();
+	while (current != arg->tid[index] && index + 1 != MAX_THREADS)
+		index++;
+	planes = *(arg->viewport);
+	planes.top = arg->viewport->mid_planes[index];
+	planes.bottom = arg->viewport->mid_planes[index + 1];
+	planes.bottom.point.y -= 1;
+	planes.bottom.normal.y *= -1.0f;
+	current_queue = arg->raster_queue[index];
+	clipper_viewport_edges(&planes, current_queue, arg);
+	return (NULL);
 }
