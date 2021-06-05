@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_horizontal_line.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 10:24:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:39:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texture *tex, t_steps *step)
+int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex, t_steps *step)
 {
 	t_uvz	texel;
 	int		cur_x;
@@ -20,7 +20,7 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texture *tex, t_
 	float	offset_step;
 	int		size;
 
-	size = tex->w - 1;
+	size = tex->width - 1;
 	texel.u = step->start_uv.u + 0.4;
 	texel.v = step->start_uv.v + 0.2;
 	offset_step = 1.0f / ((float)(step->end_x - step->start_x));
@@ -39,7 +39,7 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texture *tex, t_
 			put_pixel(buffer, cur_x, step->cur_y,
 				get_texel(
 					&(t_uv){texel.u * size, texel.v * size},
-					&(t_uv){tex->w, tex->h}, tex->pixels));
+					&(t_uv){tex->width, tex->height}, tex->texels));
 		}
 		offset += offset_step;
 		cur_x++;

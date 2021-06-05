@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/05 09:54:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:46:06 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct	s_arg
 {
 	Uint32			*buffer;
 	float			*depth_buffer;
-	t_texture		*tex;
+	t_texel			*tex;
 	t_raster_queue	*view_list;
 	t_raster_queue	**raster_queue;
 	t_sides			*viewport;

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/18 12:06:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:37:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_texture	*assign_empty_texture(void)
 	if (!tex)
 		error_output("Memory allocation of t_texture struct failed\n");
 	tex->source = NULL;
-	tex->pixels = NULL;
+	tex->tex.texels = NULL;
 	return (tex);
 }
 

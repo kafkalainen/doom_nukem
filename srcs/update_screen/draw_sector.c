@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 10:01:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:45:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static Uint32	project_to_player_position(t_raster_queue *transformed,
 int	draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr)
 {
 	t_arg			args;
-	t_texture		*tex;
+	t_texel			*tex;
 	Uint32			i;
 
 	i = 0;

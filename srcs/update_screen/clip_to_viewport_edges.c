@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clip_to_viewport_edges.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 11:19:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:51:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	viewport_logic(t_plane *plane, char choice, t_sides *viewport)
 	}
 }
 
-static int	draw_polygon(Uint32 *buffer, float *depth_buffer, t_raster_queue *tri, t_texture *tex)
+static int	draw_polygon(Uint32 *buffer, float *depth_buffer, t_raster_queue *tri, t_texel *tex)
 {
 	int	i;
 

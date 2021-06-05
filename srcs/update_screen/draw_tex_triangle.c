@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_tex_triangle.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 10:26:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:41:44 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 }
 
 static void	draw_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *triangle,
-	t_texture *tex, t_steps *step)
+	t_texel *tex, t_steps *step)
 {
 	int	max_y;
 
@@ -98,7 +98,7 @@ static void	draw_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *trian
 	}
 }
 
-int	draw_tex_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *triangle, t_texture *tex)
+int	draw_tex_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *triangle, t_texel *tex)
 {
 	t_steps		step;
 

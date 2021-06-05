@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:04:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 12:04:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:31:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,19 @@ typedef struct s_crc
 	unsigned int	crc_table[256];
 }					t_crc;
 
+typedef	struct	s_texel
+{
+	unsigned int	*texels;
+	int				width;
+	int				height;
+}				t_texel;
+
 typedef struct s_texture
 {
-	unsigned int	*pixels;
 	unsigned char	*source;
 	unsigned int	source_size;
+	t_texel			tex;
 	int				idx;
-	int				w;
-	int				h;
 	int				size;
 	int				color_type;
 	int				color_depth;

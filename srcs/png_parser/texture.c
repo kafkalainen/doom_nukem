@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/18 12:56:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:34:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	convert_to_unsigned_int(t_texture *tex, t_png *png)
 		x = 0;
 		while (x < png->width)
 		{
-			tex->pixels[(y * tex->w) + x] = add_pixel(png->pixels, tex->bpp,
+			tex->tex.texels[(y * tex->tex.width) + x] = add_pixel(png->pixels, tex->bpp,
 					((y * tex->pitch) + x * tex->bpp));
 			x++;
 		}
@@ -75,9 +75,9 @@ t_texture	*create_texture(t_png *png, int idx)
 		error_output("Memory allocation of editor pixel pointer failed\n");
 	ft_memcpy(tex->source, png->source.buf, png->source.size);
 	add_texture_values(png, tex, idx);
-	tex->pixels = (unsigned int *)malloc(sizeof(unsigned int)
-			* (tex->h * tex->pitch));
-	if (!tex->pixels)
+	tex->tex.texels = (unsigned int *)malloc(sizeof(unsigned int)
+			* (tex->tex.height * tex->pitch));
+	if (!tex->tex.texels)
 		error_output("Memory allocation of pixel pointer failed\n");
 	convert_to_unsigned_int(tex, png);
 	return (tex);
@@ -90,10 +90,10 @@ void	free_texture(t_texture *tex)
 		free(tex->source);
 		tex->source = NULL;
 	}
-	if (tex->pixels != NULL)
+	if (tex->tex.texels != NULL)
 	{
-		free(tex->pixels);
-		tex->pixels = NULL;
+		free(tex->tex.texels);
+		tex->tex.texels = NULL;
 	}
 	if (tex != NULL)
 	{

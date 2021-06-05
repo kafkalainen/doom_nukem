@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 10:24:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:45:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ void			draw_segment(t_frame *frame, t_home *home, t_player *plr);
 int				draw_tex_line(t_xy start, t_xy end,
 					t_texture *tx, SDL_Surface *surf);
 void			draw_vertically(t_frame *frame, t_texture *wall_tex);
-int				draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texture *tex, t_steps *step);
+int				draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex, t_steps *step);
 void			draw_wall(t_frame *frame, t_texture *tex, t_home *home,
 					t_player *plr);
 int				get_next_wall_tex(t_wall **current_head, int nbr_of_walls);
-t_texture		*get_tex(int idx, t_texture	**textures);
+t_texel			*get_tex(int idx, t_texture	**textures);
 void			get_wall_pts(t_frame *frame, int walls, int current_pxl);
 void			get_l_pt(t_wall *start, t_ray_pt *fov, t_frame *frame, int walls);
 void			get_r_pt(t_wall *start, t_ray_pt *fov, t_frame *frame, int walls);

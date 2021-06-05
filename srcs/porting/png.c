@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/18 12:53:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:37:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	*convert_to_uint32(Uint32 *dest, t_texture *image)
 	int		y;
 	Uint32	*pixels;
 
-	pixels = (Uint32 *)image->pixels;
+	pixels = (Uint32 *)image->tex.texels;
 	y = -1;
-	while (++y < image->h)
+	while (++y < image->tex.height)
 	{
 		x = -1;
-		while (++x < image->w)
+		while (++x < image->tex.width)
 		{
-			dest[(y * image->w) + x] = swap_channels(pixels[(y
-						* image->w) + x]);
+			dest[(y * image->tex.width) + x] = swap_channels(pixels[(y
+						* image->tex.width) + x]);
 		}
 	}
 	return (dest);
@@ -41,7 +41,7 @@ void	load_texture(char *path, t_home *home, int i)
 	if (!home->editor_tex[i])
 		error_output("PNG image file loading failed\n");
 	else
-		convert_to_uint32(home->editor_tex[i]->pixels, home->editor_tex[i]);
+		convert_to_uint32(home->editor_tex[i]->tex.texels, home->editor_tex[i]);
 	free_png(png);
 }
 

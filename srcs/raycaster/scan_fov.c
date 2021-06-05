@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/02 18:50:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:45:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 // 		return ((int)trunc);
 // }
 
-t_texture	*get_tex(int idx, t_texture	**textures)
+t_texel	*get_tex(int idx, t_texture	**textures)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ t_texture	*get_tex(int idx, t_texture	**textures)
 	while (textures[i])
 	{
 		if (textures[i]->idx == idx)
-			return (textures[i]);
+			return (&textures[i]->tex);
 		i++;
 	}
 	return (NULL);
