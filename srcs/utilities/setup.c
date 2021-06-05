@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/04 14:58:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 09:57:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,14 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 		i++;
 	}
 	init_viewport(&frame->viewport);
-	if (init_skybox(&home->skybox))
+	if (init_skybox(&home->skybox)) // DEALLOCATE
 		error_output("Memory allocation failed!\n");
 	setup_fps(&home->t);
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	frame->buffer = (Uint32 *)malloc(sizeof(Uint32)
 			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);
+	frame->depth_buffer = (float *)malloc(sizeof(float)
+			* (float)SCREEN_WIDTH * (float)SCREEN_HEIGHT);
 	if (!frame->buffer)
 		error_output("Memory allocation failed!\n");
 	home = init_sdl(home, &frame->min_step);

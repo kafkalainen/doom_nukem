@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/04 16:00:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 10:01:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,15 +124,22 @@ int	draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr)
 	tex = get_tex(-1, home->editor_tex);
 	transform_walls(home, sector, frame->transformed);
 	project_to_player_position(frame->transformed, frame->triangles_in_view, plr, &frame->viewport);
-	qsort((void *)frame->triangles_in_view->array,
-		(size_t)frame->triangles_in_view->size, sizeof(t_triangle), painters_algorithm);
+	// qsort((void *)frame->triangles_in_view->array,
+	// 	(size_t)frame->triangles_in_view->size, sizeof(t_triangle), painters_algorithm);
+	while (i < SCREEN_HEIGHT * SCREEN_WIDTH)
+	{
+		frame->depth_buffer[i] = 0.0f;
+		i++;
+	}
 	args.tex = tex;
 	args.buffer = frame->buffer;
+	args.depth_buffer = frame->depth_buffer;
 	args.view_list = frame->triangles_in_view;
 	args.raster_queue = frame->raster_queue;
 	args.viewport = &frame->viewport;
 	args.last_frame = home->t.frame_time_last;
 	// clip_to_viewport_edges((void*)&args);
+	i = 0;
 	while (i < MAX_THREADS)
 	{
 		pthread_create(&args.tid[i], NULL, &clip_to_viewport_edges, (void*)&args);

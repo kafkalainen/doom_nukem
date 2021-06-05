@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/04 16:33:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 10:09:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ void		render_buffer(Uint32 *buffer, SDL_Surface *screen_surface);
 t_triangle	translate_triangle(t_triangle *src, t_xyz translation);
 t_triangle	rotate_triangle(t_triangle *src, float angle, char dir);
 void		calculate_triangle(t_frame *frame, t_triangle *tri, t_texture *tex);
-int			draw_tex_triangle(Uint32 *buffer, t_triangle *triangle, t_texture *tex);
+int			draw_tex_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *triangle, t_texture *tex);
 
 #endif

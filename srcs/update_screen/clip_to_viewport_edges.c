@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/04 16:17:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 10:11:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static void	viewport_logic(t_plane *plane, char choice, t_sides *viewport)
 	}
 }
 
-static int	draw_polygon(Uint32 *buffer, t_raster_queue *tri, t_texture *tex)
+static int	draw_polygon(Uint32 *buffer, float *depth_buffer, t_raster_queue *tri, t_texture *tex)
 {
 	int	i;
 
 	i = tri->front;
 	while (i <= tri->rear)
 	{
-		draw_tex_triangle(buffer, &tri->array[i], tex);
+		draw_tex_triangle(buffer, depth_buffer, &tri->array[i], tex);
 		// draw_line(vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
 		// 	vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
 		// 	tri->array[i].colour, buffer);
@@ -106,7 +106,7 @@ static void	clipper_viewport_edges(t_sides *planes, t_raster_queue *raster_queue
 			new_triangles = clip_to_an_edge(raster_queue, &plane, new_triangles);
 			current_plane++;
 		}
-		draw_polygon(arg->buffer, raster_queue, arg->tex);
+		draw_polygon(arg->buffer, arg->depth_buffer, raster_queue, arg->tex);
 		i++;
 	}
 }

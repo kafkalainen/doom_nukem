@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/04 09:42:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 10:20:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 	swap_sides(steps);
 }
 
-static void	draw_triangle(Uint32 *buffer, t_triangle *triangle,
+static void	draw_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *triangle,
 	t_texture *tex, t_steps *step)
 {
 	int	max_y;
@@ -93,12 +93,12 @@ static void	draw_triangle(Uint32 *buffer, t_triangle *triangle,
 	while (step->cur_y <= max_y)
 	{
 		calc_current_step(triangle, step, step->cur_y);
-		draw_horizontal_line(buffer, tex, step, step->cur_y);
+		draw_horizontal_line(buffer, depth_buffer, tex, step, step->cur_y);
 		step->cur_y++;
 	}
 }
 
-int	draw_tex_triangle(Uint32 *buffer, t_triangle *triangle, t_texture *tex)
+int	draw_tex_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *triangle, t_texture *tex)
 {
 	t_steps		step;
 
@@ -109,18 +109,21 @@ int	draw_tex_triangle(Uint32 *buffer, t_triangle *triangle, t_texture *tex)
 		triangle->p[2], triangle->uv[0], triangle->uv[2]);
 	step.denom_dy_a_side = 0;
 	step.denom_dy_b_side = 0;
+	if ((step.delta_p0p1.y == 0 && step.delta_p0p2.y == 0)
+		|| (step.delta_p0p1.x == 0 && step.delta_p0p2.x == 0))
+		return (FALSE);
 	if (step.delta_p0p1.y)
 		step.denom_dy_a_side = (float)fabsf(1.0f / step.delta_p0p1.y);
 	if (step.delta_p0p2.y)
 		step.denom_dy_b_side = (float)fabsf(1.0f / step.delta_p0p2.y);
 	step.current_triangle = 'a';
-	draw_triangle(buffer, triangle, tex, &step);
+	draw_triangle(buffer, depth_buffer, triangle, tex, &step);
 	step.delta_p0p1 = calculate_vertex_delta(triangle->p[1],
 		triangle->p[2], triangle->uv[1], triangle->uv[2]);
 	step.denom_dy_a_side = 0;
 	if (step.delta_p0p1.y)
 		step.denom_dy_a_side = (float)fabsf(1.0f / step.delta_p0p1.y);
 	step.current_triangle = 'b';
-	draw_triangle(buffer, triangle, tex, &step);
+	draw_triangle(buffer, depth_buffer, triangle, tex, &step);
 	return (TRUE);
 }
