@@ -6,16 +6,23 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/04 12:05:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 10:59:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
+/*
+**	Used if clause to no apparent effect.
+*/
 static void	calculate_distance_to_plane(t_xyz point, t_xyz plane_normal,
 	 t_xyz plane_point, float *d)
 {
-	*d = vec3_dot_product(plane_normal, (vec3_dec(point, plane_point)));
+	*d = plane_normal.x * point.x
+		+ plane_normal.y * point.y
+		+ plane_normal.z * point.z
+		- vec3_dot_product(plane_normal, plane_point);
+	// *d = vec3_dot_product(plane_normal, (vec3_dec(point, plane_point)));
 }
 
 static void	check_if_inside_triangle(float *d, t_point_location *loc,
@@ -40,8 +47,6 @@ static int	form_a_triangle(t_point_location *loc, t_plane *plane,
 {
 	triangle1->colour = white;
 	triangle1->p[0] = loc->points_inside[0];
-	if (loc->points_inside[0].x > 71 && plane->normal.x == -1.0f)
-		triangle1->colour = purple;
 	triangle1->uv[0] = loc->texels_inside[0];
 	triangle1->p[1] = vec3_intersection_with_plane(plane, loc->points_inside[0],
 		loc->points_outside[0], &loc->texel_offset);
@@ -65,11 +70,12 @@ static int	form_a_triangle(t_point_location *loc, t_plane *plane,
 static int	form_a_quadrant(t_point_location *loc, t_plane *plane,
 	t_triangle *triangle1, t_triangle *triangle2)
 {
-		triangle1->colour = blue;
-		triangle2->colour = green;
+		triangle1->colour = white;
 		triangle1->p[0] = loc->points_inside[0];
 		triangle1->uv[0] = loc->texels_inside[0];
 		triangle1->p[1] = loc->points_inside[1];
+		if (loc->points_inside[0].x < plane->point.x && plane->normal.x == 1.0f)
+			triangle1->colour = white;
 		triangle1->uv[1] = loc->texels_inside[1];
 		triangle1->p[2] = vec3_intersection_with_plane(plane, loc->points_inside[0],
 			loc->points_outside[0], &loc->texel_offset);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:04:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 09:32:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 11:14:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_xyz	vec3_intersection_with_plane(t_plane *plane, t_xyz start, t_xyz end,
 	t_xyz	line_to_plane;
 	t_xyz	line;
 
+	if (vec3_dot_product(vec3_dec(end, start), plane->normal) == 0)
+		return (end);
 	plane->normal = vec3_unit_vector(plane->normal);
 	plane_dot = -vec3_dot_product(plane->normal, plane->point);
 	start_dot = vec3_dot_product(start, plane->normal);

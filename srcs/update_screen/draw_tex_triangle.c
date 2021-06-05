@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 10:20:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/05 10:26:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	draw_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *trian
 	while (step->cur_y <= max_y)
 	{
 		calc_current_step(triangle, step, step->cur_y);
-		draw_horizontal_line(buffer, depth_buffer, tex, step, step->cur_y);
+		draw_horizontal_line(buffer, depth_buffer, tex, step);
 		step->cur_y++;
 	}
 }
