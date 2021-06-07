@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:04:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 11:14:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 10:16:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ t_xyz	vec3_intersection_with_plane(t_plane *plane, t_xyz start, t_xyz end,
 	end_dot = vec3_dot_product(end, plane->normal);
 	if (start_dot == end_dot)
 		return (plane->point);
-	*texel_offset = interpolate_points(start_dot, -plane_dot,
-			start_dot, end_dot);
+	*texel_offset = (-plane_dot - start_dot) / (end_dot - start_dot);
 	line = vec3_dec(end, start);
 	line_to_plane = vec3_mul(line, *texel_offset);
 	return (vec3_add(start, line_to_plane));

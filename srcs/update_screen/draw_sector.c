@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 15:45:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/07 11:19:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	painters_algorithm(const void *tri1, const void *tri2)
 
 static Uint32	transform_walls(t_home *home, t_sector *sector, t_raster_queue *transformed)
 {
-	Uint32	i;
-	Uint32	j;
-	Uint32	k;
-	t_wall	*wall;
+	Uint32		i;
+	Uint32		j;
+	Uint32		k;
+	t_wall		*wall;
 	t_surface	*surface;
 
 	i = 0;
