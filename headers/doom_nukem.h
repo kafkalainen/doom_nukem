@@ -90,8 +90,10 @@ int		doom_mkdir(void);
 void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
 void	error_output_sdl(char *msg, t_home *home, t_frame *frame);
+void	exit_game(t_home *home, t_frame *frame, t_audio *audio, Uint32 *menu_buffer);
 void	fps_timer(t_time *t);
 int		initialize_rasterization_queues(t_frame *frame);
+int		initialize_skybox(t_skybox *skybox);
 int		is_negative(float z);
 int		load_audio(t_audio *audio);
 int		load_game_audio(t_audio *audio);
@@ -99,7 +101,7 @@ void	map_error_output(int i, t_home *home);
 void	play_footsteps(t_player *plr);
 void	read_error_output(char *msg, unsigned char **line);
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu);
-void	setup_fps(t_time *time);
+int		setup_fps(t_time *time);
 void	translate_world_view(t_home *home, t_xy step);
 void	transform_world_view(t_home *home, float delta_dir);
 void	update_screen(t_home *home, t_frame *frame, t_player *plr);
@@ -108,6 +110,5 @@ void	swap_sides(t_steps *steps);
 void	swap_uvz(t_uvz *p0, t_uvz *p1);
 void	swap_xyz(t_xyz *p0, t_xyz *p1);
 void	sort_vertices(t_triangle *tri);
-int		init_skybox(t_skybox *skybox);
 
 #endif

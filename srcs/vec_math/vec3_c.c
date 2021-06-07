@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:04:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 10:16:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 15:02:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,6 @@ t_xyz	vec3_div(t_xyz a, float scalar)
 	return ((t_xyz){a.x / scalar, a.y / scalar, a.z / scalar, 1.0f});
 }
 
-/*
-**	vec3_unit_vector ok.
-**	vec3_dot_product ok.
-**	swapped end with start on line 65 vec3_dec call -> fixed error.
-**	added pointer to plane.
-**	function should handle special cases as well,
-**	there is an error when clipping to near plane.
-**	testing to return plane->point when we are clipping
-**	to near plane, no more hanging.
-*/
 t_xyz	vec3_intersection_with_plane(t_plane *plane, t_xyz start, t_xyz end,
 	float *texel_offset)
 {

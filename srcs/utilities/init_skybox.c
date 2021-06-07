@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:16:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 12:54:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 15:44:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void init_top_bottom(t_triangle *face)
 		(t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}, white, SKYBOX_TEX};
 }
 
-int		init_skybox(t_skybox *skybox)
+int		initialize_skybox(t_skybox *skybox)
 {
 	skybox->face = (t_triangle*)malloc(sizeof(t_triangle) * 12); //DEALLOCATE
 	if (skybox->face == NULL)

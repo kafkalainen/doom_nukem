@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 14:05:23 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 10:52:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 15:49:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	free_sectors(t_home *home)
 	i = 0;
 	if (home == NULL)
 		return ;
+	if (home->skybox.face)
+		free(home->skybox.face);
 	while (i < home->nbr_of_sectors)
 	{
 		free_points(&home->sectors[i]->walls, home->sectors[i]->nb_of_walls);
@@ -51,6 +53,8 @@ void	free_sectors_n(t_home *home, size_t n)
 	i = 0;
 	if (home == NULL)
 		return ;
+	if (home->skybox.face)
+		free(home->skybox.face);
 	while (i < n)
 	{
 		if (i + 1 < n)

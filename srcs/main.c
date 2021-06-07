@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/07 13:39:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/07 15:40:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 **	 	ft_putendl_fd("File creation failed\n", 2);
 */
 
-void	exit_game(t_home *home, Uint32 *buffer, t_audio *audio, Uint32 *menu_buffer)
+void	exit_game(t_home *home, t_frame *frame, t_audio *audio, Uint32 *menu_buffer)
 {
-	// free_sectors(home);
-	free(buffer);
+	free_queues(frame);
+	free(frame->buffer);
 	free(menu_buffer);
 	cleanup_audio(audio);
 	free(home->t.frame_times);
@@ -59,6 +59,6 @@ int	main(void)
 		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
-	exit_game(&home, frame.buffer, &plr.audio, menu.menu_buffer);
+	exit_game(&home, &frame, &plr.audio, menu.menu_buffer);
 	return (EXIT_SUCCESS);
 }

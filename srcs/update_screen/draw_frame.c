@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/04 15:29:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 15:32:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	char			*sector;
 	char			*compass;
 	char			*fps;
+	char			*plr_x;
+	char			*plr_y;
 	char			*plr_z;
 	t_plx_modifier	mod;
 
@@ -78,18 +80,18 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	compass = compass_direction(&plr->dir);
 	sector = ft_itoa(plr->current_sector);
 	fps = ft_itoa(nb_fps);
-	plr_z = ft_ftoa(plr->z, 6);
+	plr_x = ft_ftoa(plr->camera.x, 6);
+	plr_y = ft_ftoa(plr->camera.y, 6);
+	plr_z = ft_ftoa(plr->camera.z, 6);
 	ft_str_pxl(frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 50}, "dir: ", mod);
 	ft_str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 110}, "current_z:", mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 130}, plr_z, mod);
 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){green, 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, ft_ftoa(plr->camera.x, 6), (t_plx_modifier){green, 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, ft_ftoa(plr->camera.y, 6), (t_plx_modifier){green, 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, ft_ftoa(plr->camera.z, 6), (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_x, (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_y, (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_z, (t_plx_modifier){green, 2});
 	ft_str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
@@ -98,6 +100,8 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	free(fps);
 	free(sector);
 	free(compass);
+	free(plr_x);
+	free(plr_y);
 	free(plr_z);
 }
 

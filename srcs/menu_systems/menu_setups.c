@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/07 12:22:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/07 15:58:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	setup_menu(t_menu *menu, int *game_state)
 void	setup_game_loop(char **mapname, t_home *home,
 	t_player *plr, int *menu_option)
 {
-	(void)plr;
 	ft_putstr("You chose: ");
 	ft_putendl_fd(*mapname, 1);
+	init_player(plr);
 	if (load_map_file(home, *mapname))
 		exit(EXIT_FAILURE);
 	// if (open_file(home, "map_files/test.DATA") < 0)
@@ -83,6 +83,10 @@ void	setup_game_loop(char **mapname, t_home *home,
 	// }
 	// if (Mix_PlayingMusic() == 0)
 	// 	Mix_PlayMusic(plr->audio.music, -1);
+	if (initialize_skybox(&home->skybox))
+		error_output("Memory allocation failed!\n");
+	if (setup_fps(&home->t))
+		error_output("Memory allocation failed!\n");
 	ft_strdel(mapname);
 	*mapname = NULL;
 	*menu_option = 0;

@@ -6,16 +6,16 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 13:50:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 15:22:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	check_if_inside_triangle(float *d, t_point_location *loc,
+static void	check_if_inside_triangle(float d, t_point_location *loc,
 	t_xyz point, t_uvz uv)
 {
-	if (*d >= 0)
+	if (d >= 0)
 	{
 		loc->texels_inside[loc->inside] = uv;
 		loc->points_inside[loc->inside] = point;
@@ -94,9 +94,9 @@ int		clip_against_plane(t_plane *plane, t_triangle *src,
 	d[0] = vec3_dot_product(plane->normal, (vec3_dec(src->p[0], plane->point)));
 	d[1] = vec3_dot_product(plane->normal, (vec3_dec(src->p[1], plane->point)));
 	d[2] = vec3_dot_product(plane->normal, (vec3_dec(src->p[2], plane->point)));
-	check_if_inside_triangle(&d[0], &loc, src->p[0], src->uv[0]);
-	check_if_inside_triangle(&d[1], &loc, src->p[1], src->uv[1]);
-	check_if_inside_triangle(&d[2], &loc, src->p[2], src->uv[2]);
+	check_if_inside_triangle(d[0], &loc, src->p[0], src->uv[0]);
+	check_if_inside_triangle(d[1], &loc, src->p[1], src->uv[1]);
+	check_if_inside_triangle(d[2], &loc, src->p[2], src->uv[2]);
 	triangle1->idx = src->idx;
 	triangle2->idx = src->idx;
 	triangle1->colour = white;
