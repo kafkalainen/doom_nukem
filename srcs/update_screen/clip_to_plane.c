@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 12:59:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 13:50:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	check_if_inside_triangle(float *d, t_point_location *loc,
 static int	form_a_triangle(t_point_location *loc, t_plane *plane,
 	t_triangle *triangle1)
 {
-	triangle1->colour = white;
 	triangle1->p[0] = loc->points_inside[0];
 	triangle1->uv[0] = loc->texels_inside[0];
 	triangle1->p[1] = vec3_intersection_with_plane(plane, loc->points_inside[0],
@@ -98,8 +97,10 @@ int		clip_against_plane(t_plane *plane, t_triangle *src,
 	check_if_inside_triangle(&d[0], &loc, src->p[0], src->uv[0]);
 	check_if_inside_triangle(&d[1], &loc, src->p[1], src->uv[1]);
 	check_if_inside_triangle(&d[2], &loc, src->p[2], src->uv[2]);
-	triangle1->idx = loc.idx;
-	triangle2->idx = loc.idx;
+	triangle1->idx = src->idx;
+	triangle2->idx = src->idx;
+	triangle1->colour = white;
+	triangle2->colour = white;
 	if (loc.inside == 0)
 		return (0);
 	if (loc.inside == 3)
