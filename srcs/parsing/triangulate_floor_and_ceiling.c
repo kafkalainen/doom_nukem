@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 08:19:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/02 17:04:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 12:11:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_wall	*get_highest_ground(t_sector *sector)
 	return (highest_ground);
 }
 
-unsigned int	triangulate_floor_and_ceiling(t_sector *sector)
+unsigned int	triangulate_floor_and_ceiling(t_sector *sector, char choice)
 {
 	t_wall			*current_wall;
 	t_xyz			origin;
@@ -42,7 +42,8 @@ unsigned int	triangulate_floor_and_ceiling(t_sector *sector)
 	current_wall = get_highest_ground(sector);
 	origin = current_wall->bottom.p[0];
 	current_wall = current_wall->next;
-	new_surf = new_surface(current_wall, &origin, sector->tex_floor);
+	new_surf = new_surface(current_wall, &origin,
+		sector->tex_floor, choice);
 	if (new_surf)
 		add_surface(&sector->ground, new_surf);
 	else
@@ -52,7 +53,7 @@ unsigned int	triangulate_floor_and_ceiling(t_sector *sector)
 	current_wall = current_wall->next;
 	while (i < sector->nb_of_walls - 3)
 	{
-		new_surf = new_surface(current_wall, &origin, sector->tex_floor);
+		new_surf = new_surface(current_wall, &origin, sector->tex_floor, choice);
 		if (new_surf)
 			add_surface(&sector->ground, new_surf);
 		else

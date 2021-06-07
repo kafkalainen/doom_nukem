@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 11:20:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 12:03:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	continue_from_last_sector(t_wall *start, t_ray_pt *fov, t_frame *frame)
 
 int	check_if_portal(t_wall *wall)
 {
-	if (wall->idx >= 0)
+	if (wall->top.idx >= 0)
 		return (TRUE);
 	else
 		return (FALSE);
@@ -55,7 +55,7 @@ int	check_if_same_pt(int *current_pxl, t_ray_pt *fov)
 
 int	check_connection(t_wall *point, t_frame *frame)
 {
-	if (point->idx == frame->old_idx)
+	if (point->top.idx == frame->old_idx)
 		return (TRUE);
 	else
 		return (FALSE);

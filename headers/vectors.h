@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/04 16:41:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 12:58:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_point_location
 	int			inside;
 	int			outside;
 	float		texel_offset;
+	int			idx;
 }					t_point_location;
 
 
@@ -71,6 +72,7 @@ typedef struct s_triangle
 	t_xyz			p[3];
 	t_uvz			uv[3];
 	int				colour;
+	int				idx;
 }				t_triangle;
 
 
