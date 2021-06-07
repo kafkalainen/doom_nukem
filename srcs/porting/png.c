@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/05 15:37:35 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/07 14:43:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,14 @@ void	cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir)
 	char	*found;
 	char	*buf;
 
-	i = 1;
+	i = 2;
 	dir_entry = readdir(dir);
 	while (dir_entry != NULL)
 	{
 		found = ft_strstr(dir_entry->d_name, ".png");
-		if (found != NULL)
+		if (found != NULL && ft_strcmp(dir_entry->d_name, "dsky.png") != 0)
 		{
+			printf("%s index: %i\n", dir_entry->d_name, i);
 			buf = ft_strjoin("textures/", dir_entry->d_name);
 			load_texture(buf, home, i++);
 			ft_strdel(&buf);
@@ -102,6 +103,7 @@ void	init_textures(t_home *home)
 	if (!home->editor_tex)
 		error_output("Failed to allocate memory to editor textures.\n");
 	home->editor_tex[0] = assign_empty_texture();
+	load_texture("textures/dsky.png", home, 1);
 	cycle_textures(home, dir_entry, dir);
 	closedir(dir);
 }
