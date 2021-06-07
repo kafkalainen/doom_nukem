@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/05 10:33:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 12:49:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define MAIN_MENU 1
 # define QUIT -1
 # define MAX_THREADS 2
+# define SKYBOX_TEX -1
 
 /*
 ** Compass directions

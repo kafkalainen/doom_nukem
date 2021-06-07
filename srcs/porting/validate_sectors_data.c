@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:06:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/01 14:34:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 12:45:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	check_valid_connection(t_xyz *p0, t_xyz *p1, t_sector *sector, int i)
 	temp = sector->walls;
 	while (j < sector->nb_of_walls)
 	{
-		if (temp->idx == i)
+		if (temp->top.idx == i)
 		{
 			if (temp->top.p[0].x == p0->x
 				&& temp->top.p[0].z == p0->z
@@ -46,12 +46,12 @@ static int	check_if_portals_connected(int i, t_home *home)
 	temp = home->sectors[i]->walls;
 	while (j < home->sectors[i]->nb_of_walls)
 	{
-		if (temp->idx >= 0)
+		if (temp->top.idx >= 0)
 		{
 			if (home->nbr_of_sectors == 1)
 				return (1);
 			if (!(check_valid_connection(&temp->top.p[2], &temp->top.p[0],
-						home->sectors[temp->idx], i)))
+						home->sectors[temp->top.idx], i)))
 				return (1);
 		}
 		temp = temp->next;

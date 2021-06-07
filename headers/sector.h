@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/02 17:29:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 12:00:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_wall
 {
 	t_triangle			top;
 	t_triangle			bottom;
-	int					idx;
 	float				wall_facing;
 	t_xy				normal;
 	struct s_wall		*next;
@@ -37,7 +36,6 @@ typedef struct s_wall
 typedef struct s_surface
 {
 	t_triangle			tri;
-	int					idx;
 	float				wall_facing;
 	t_xy				normal;
 	struct s_surface	*next;

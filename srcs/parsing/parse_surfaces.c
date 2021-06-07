@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:56:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/02 16:44:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 12:09:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_surface	*new_surface(t_wall *data, t_xyz *start, int idx)
+t_surface	*new_surface(t_wall *data, t_xyz *start, int idx, char choice)
 {
 	t_surface	*surface;
 
@@ -20,13 +20,21 @@ t_surface	*new_surface(t_wall *data, t_xyz *start, int idx)
 	if (surface != NULL)
 	{
 		surface->tri.p[0] = *start;
-		surface->tri.p[1] = data->bottom.p[0];
-		surface->tri.p[2] = data->next->bottom.p[0];
+		if (choice == 'g')
+		{
+			surface->tri.p[1] = data->bottom.p[0];
+			surface->tri.p[2] = data->next->bottom.p[0];
+		}
+		else
+		{
+			surface->tri.p[1] = data->top.p[1];
+			surface->tri.p[2] = data->next->top.p[1];
+		}
 		surface->tri.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
 		surface->tri.uv[1] = (t_uvz){0.0f, 0.0f, 1.0f};
 		surface->tri.uv[2] = (t_uvz){1.0f, 0.0f, 1.0f};
 		surface->tri.colour = white;
-		surface->idx = idx;
+		surface->tri.idx = idx;
 		surface->next = NULL;
 	}
 	else

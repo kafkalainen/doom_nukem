@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 11:19:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 11:48:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,9 @@ static Uint32	project_to_player_position(t_raster_queue *transformed,
 int	draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr)
 {
 	t_arg			args;
-	t_texel			*tex;
 	Uint32			i;
 
 	i = 0;
-	tex = get_tex(-1, home->editor_tex);
 	transform_walls(home, sector, frame->transformed);
 	project_to_player_position(frame->transformed, frame->triangles_in_view, plr, &frame->viewport);
 	// qsort((void *)frame->triangles_in_view->array,
@@ -131,7 +129,7 @@ int	draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr)
 		frame->depth_buffer[i] = 0.0f;
 		i++;
 	}
-	args.tex = tex;
+	args.editor_tex = home->editor_tex;
 	args.buffer = frame->buffer;
 	args.depth_buffer = frame->depth_buffer;
 	args.view_list = frame->triangles_in_view;

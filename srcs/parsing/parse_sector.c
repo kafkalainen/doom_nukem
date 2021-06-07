@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/04 11:44:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 12:02:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_wall	*new_point(t_point_data *left, t_point_data *right)
 		wall->bottom.uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
 		wall->top.colour = white;
 		wall->bottom.colour = white;
-		wall->idx = left->idx;
+		wall->top.idx = left->idx;
+		wall->bottom.idx = left->idx;
 		wall->next = NULL;
 	}
 	else
