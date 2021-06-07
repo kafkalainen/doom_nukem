@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 15:22:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 20:05:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ int		clip_against_plane(t_plane *plane, t_triangle *src,
 
 	initialize_locations(&loc);
 	plane->normal = vec3_unit_vector(plane->normal);
-	d[0] = vec3_dot_product(plane->normal, (vec3_dec(src->p[0], plane->point)));
-	d[1] = vec3_dot_product(plane->normal, (vec3_dec(src->p[1], plane->point)));
-	d[2] = vec3_dot_product(plane->normal, (vec3_dec(src->p[2], plane->point)));
+	d[0] = vec3_dot_product(plane->normal, vec3_dec(src->p[0], plane->point));
+	d[1] = vec3_dot_product(plane->normal, vec3_dec(src->p[1], plane->point));
+	d[2] = vec3_dot_product(plane->normal, vec3_dec(src->p[2], plane->point));
 	check_if_inside_triangle(d[0], &loc, src->p[0], src->uv[0]);
 	check_if_inside_triangle(d[1], &loc, src->p[1], src->uv[1]);
 	check_if_inside_triangle(d[2], &loc, src->p[2], src->uv[2]);

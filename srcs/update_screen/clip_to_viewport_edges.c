@@ -6,33 +6,33 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 14:01:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 20:06:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../../headers/doom_nukem.h"
 
-static void	viewport_logic(t_plane *plane, char choice, t_sides *viewport)
+static void	viewport_logic(t_plane *plane, char choice, t_planes planes)
 {
 	if (choice == 0)
 	{
-		plane->point = viewport->top.point;
-		plane->normal = viewport->top.normal;
+		plane->point = planes.top.point;
+		plane->normal = planes.top.normal;
 	}
 	else if (choice == 1)
 	{
-		plane->point = viewport->bottom.point;
-		plane->normal = viewport->bottom.normal;
+		plane->point = planes.bottom.point;
+		plane->normal = planes.bottom.normal;
 	}
 	else if (choice == 2)
 	{
-		plane->point = viewport->left.point;
-		plane->normal = viewport->left.normal;
+		plane->point = planes.left.point;
+		plane->normal = planes.left.normal;
 	}
 	else
 	{
-		plane->point = viewport->right.point;
-		plane->normal = viewport->right.normal;
+		plane->point = planes.right.point;
+		plane->normal = planes.right.normal;
 	}
 }
 
@@ -45,28 +45,30 @@ static int	draw_polygon(Uint32 *buffer, float *depth_buffer,
 	// if (tri->array[i].idx >= 0)
 	// 	tex = NULL;
 	// tex = get_tex(tri->array[i].idx, editor_tex);
+	(void)tex;
+	(void)depth_buffer;
 	while (i <= tri->rear)
 	{
-		draw_tex_triangle(buffer, depth_buffer, &tri->array[i], tex);
-		// ft_str_pxl(buffer, vec2(tri->array[i].p[0].x, tri->array[i].p[0].y), "0", (t_plx_modifier){white, 2});
-		// ft_str_pxl(buffer, vec2(tri->array[i].p[1].x, tri->array[i].p[1].y), "1", (t_plx_modifier){white, 2});
-		// ft_str_pxl(buffer, vec2(tri->array[i].p[2].x, tri->array[i].p[2].y), "2", (t_plx_modifier){white, 2});
-		// draw_line(vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
-		// 	vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
-		// 	tri->array[i].colour, buffer);
-		// draw_line(vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
-		// 	vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
-		// 	tri->array[i].colour, buffer);
-		// draw_line(vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
-		// 	vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
-		// 	tri->array[i].colour, buffer);
+		// draw_tex_triangle(buffer, depth_buffer, &tri->array[i], tex);
+		ft_str_pxl(buffer, vec2(tri->array[i].p[0].x, tri->array[i].p[0].y), "0", (t_plx_modifier){white, 2});
+		ft_str_pxl(buffer, vec2(tri->array[i].p[1].x, tri->array[i].p[1].y), "1", (t_plx_modifier){white, 2});
+		ft_str_pxl(buffer, vec2(tri->array[i].p[2].x, tri->array[i].p[2].y), "2", (t_plx_modifier){white, 2});
+		draw_line(vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
+			vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
+			tri->array[i].colour, buffer);
+		draw_line(vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
+			vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
+			tri->array[i].colour, buffer);
+		draw_line(vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
+			vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
+			tri->array[i].colour, buffer);
 		i++;
 	}
 	return (TRUE);
 }
 
 static int	clip_to_an_edge(t_raster_queue *raster_list,
-	t_plane *plane, int current_triangles)
+	t_plane plane, int current_triangles)
 {
 	int			i;
 	int			triangles_to_add;
@@ -79,7 +81,7 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 		tested = raster_list->array[raster_list->front];
 		dequeue(raster_list);
 		current_triangles--;
-		triangles_to_add = clip_against_plane(plane, &tested, &clipped[0], &clipped[1]);
+		triangles_to_add = clip_against_plane(&plane, &tested, &clipped[0], &clipped[1]);
 		i = 0;
 		while (i < triangles_to_add)
 		{
@@ -90,7 +92,7 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 	return (triangles_to_add);
 }
 
-static void	clipper_viewport_edges(t_sides *planes, t_raster_queue *raster_queue, t_arg *arg)
+static void	clipper_viewport_edges(t_planes planes, t_raster_queue *raster_queue, t_arg *arg)
 {
 	int			i;
 	int			current_plane;
@@ -110,7 +112,7 @@ static void	clipper_viewport_edges(t_sides *planes, t_raster_queue *raster_queue
 		while (current_plane < 4)
 		{
 			viewport_logic(&plane, current_plane, planes);
-			new_triangles += clip_to_an_edge(raster_queue, &plane, new_triangles);
+			new_triangles += clip_to_an_edge(raster_queue, plane, new_triangles);
 			current_plane++;
 		}
 		tex = get_tex(arg->view_list->array[i].idx, arg->editor_tex);
@@ -125,19 +127,24 @@ void	*clip_to_viewport_edges(void *args)
 	pthread_t		current;
 	unsigned int	index;
 	t_raster_queue	*current_queue;
-	t_sides			planes;
+	t_planes		planes;
 
 	index = 0;
 	arg = (t_arg*)args;
 	current = pthread_self();
-	while (current != arg->tid[index] && index + 1 != MAX_THREADS)
+	while (current != arg->tid[index])
+	{
+		if (index + 1 > MAX_THREADS)
+			break ;
 		index++;
-	planes = *(arg->viewport);
+	}
 	planes.top = arg->viewport->mid_planes[index];
 	planes.bottom = arg->viewport->mid_planes[index + 1];
-	planes.bottom.point.y -= 1;
+	planes.bottom.point.y -= 1.0f;
 	planes.bottom.normal.y *= -1.0f;
+	planes.left = arg->viewport->left;
+	planes.right = arg->viewport->right;
 	current_queue = arg->raster_queue[index];
-	clipper_viewport_edges(&planes, current_queue, arg);
+	clipper_viewport_edges(planes, current_queue, arg);
 	return (NULL);
 }

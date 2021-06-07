@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:50:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 15:29:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 19:09:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,6 @@ void	free_queues(t_frame *frame)
 	if (frame->viewport.mid_planes)
 		free(frame->viewport.mid_planes);
 	frame->viewport.mid_planes = NULL;
+	// if (frame->viewport)
+	// 	free(frame->viewport);
 }

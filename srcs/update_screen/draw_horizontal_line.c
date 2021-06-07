@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_horizontal_line.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 15:39:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/07 18:14:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex, t_st
 	offset_step = 1.0f / ((float)(step->end_x - step->start_x));
 	offset = 0.0f;
 	cur_x = step->start_x;
-	if (cur_x < 0)
+	if (cur_x < 0 || step->cur_y > SCREEN_HEIGHT || step->cur_y < 0)
 		return (FALSE);
 	while (cur_x < step->end_x)
 	{

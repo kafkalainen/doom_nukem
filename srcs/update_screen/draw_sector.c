@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 16:18:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 20:06:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ int	draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr)
 	args.raster_queue = frame->raster_queue;
 	args.viewport = &frame->viewport;
 	args.last_frame = home->t.frame_time_last;
-	// clip_to_viewport_edges((void*)&args);
 	i = 0;
 	while (i < MAX_THREADS)
 	{

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/07 12:58:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 20:06:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,15 @@ typedef struct s_sides
 	t_xyz			view_offset;
 }					t_sides;
 
+
+typedef struct s_planes
+{
+	t_plane			left;
+	t_plane			right;
+	t_plane			top;
+	t_plane			bottom;
+}					t_planes;
+
 typedef struct	s_steps
 {
 	float		denom_dy_a_side;
@@ -194,8 +203,8 @@ t_triangle	apply_world_matrix(float angle_x, float angle_z,
 t_xyz		vec3_div(t_xyz a, float scalar);
 t_xyz		vec3_intersection_with_plane(t_plane *plane, t_xyz start, t_xyz end,
 			float *texel_offset);
-int			clip_against_plane(t_plane *plane,
-			t_triangle *src, t_triangle *triangle1, t_triangle *triangle2);
+int			clip_against_plane(t_plane *plane, t_triangle *src,
+			t_triangle *triangle1, t_triangle *triangle2);
 void		initialize_locations(t_point_location *loc);
 void		triangle_add(t_triangle *tri, t_xyz	add);
 void		invert_view(t_triangle *triangle);
