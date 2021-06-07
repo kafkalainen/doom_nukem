@@ -6,30 +6,30 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 11:25:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 14:50:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_home	*init_sdl(t_home *home, float *min_step)
+static t_home	*init_sdl(t_home *home, t_frame *frame, float *min_step)
 {
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) < 0)
-		error_output_sdl("Fatal: SDL Initalization failed.", home);
+		error_output_sdl("Fatal: SDL Initalization failed.", home, frame);
 	home->win.window = SDL_CreateWindow("Doom-Nukem", 100, 100,
 			home->win.width, home->win.height, 0);
 	if (home->win.window == NULL)
-		error_output_sdl("Fatal: Failed to create a window.", home);
+		error_output_sdl("Fatal: Failed to create a window.", home, frame);
 	SDL_SetWindowPosition(home->win.window,
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 	if (home->win.ScreenSurface == NULL)
-		error_output_sdl("Fatal: Failed to get window surface", home);
+		error_output_sdl("Fatal: Failed to get window surface", home, frame);
 	*min_step = 0.002454369f;
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
-		error_output_sdl("Fatal: SDL_mixer could not initialize!", home);
+		error_output_sdl("Fatal: SDL_mixer could not initialize!", home, frame);
 	return (home);
 }
 
@@ -100,19 +100,9 @@ void	init_viewport(t_sides *viewport)
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
 	int				ret;
-	unsigned int	i;
 
-	i = 0;
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
-	frame->transformed = create_raster_queue(100); //DEALLOCATE
-	frame->triangles_in_view = create_raster_queue(100); //DEALLOCATE
-	frame->raster_queue = (t_raster_queue**)malloc(sizeof(t_raster_queue*) * (MAX_THREADS + 1));
-	while (i < MAX_THREADS)
-	{
-		frame->raster_queue[i] = create_raster_queue(200); //DEALLOCATE
-		i++;
-	}
 	init_viewport(&frame->viewport);
 	if (init_skybox(&home->skybox)) // DEALLOCATE
 		error_output("Memory allocation failed!\n");
@@ -120,17 +110,18 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	frame->buffer = (Uint32 *)malloc(sizeof(Uint32)
 			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);
-	frame->depth_buffer = (float *)malloc(sizeof(float)
-			* (float)SCREEN_WIDTH * (float)SCREEN_HEIGHT);
 	if (!frame->buffer)
 		error_output("Memory allocation failed!\n");
-	home = init_sdl(home, &frame->min_step);
+	ret = initialize_rasterization_queues(frame);
+	if (ret)
+		clean_up(home, frame);
+	home = init_sdl(home, frame, &frame->min_step);
 	ret = load_audio(&plr->audio);
 	if (ret)
 	{
 		cleanup_audio(&plr->audio);
 		SDL_Quit();
-		clean_up(home);
+		clean_up(home, frame);
 	}
 	if (Mix_PlayingMusic() == 0)
 		Mix_PlayMusic(plr->audio.music, -1);
@@ -139,8 +130,9 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	setup_menu(menu, &home->game_state);
 }
 
-void	clean_up(t_home *home)
+void	clean_up(t_home *home, t_frame *frame)
 {
+	free_queues(frame);
 	free_sectors(home);
 	if (home->t.frame_times)
 		free(home->t.frame_times);

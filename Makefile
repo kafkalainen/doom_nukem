@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/04 16:38:54 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/07 14:35:54 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ SRCS = \
 	utilities$(SLASH)fps_timer.c \
 	utilities$(SLASH)is_negative.c \
 	utilities$(SLASH)mem_functions.c \
+	utilities$(SLASH)mem_functions_2.c \
 	utilities$(SLASH)pxl_alphabet.c \
 	utilities$(SLASH)pxl_numbers.c \
 	utilities$(SLASH)raster_queue.c \

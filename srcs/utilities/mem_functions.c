@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:50:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/28 09:17:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 14:29:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,25 @@ t_raster_queue	*create_raster_queue(size_t capacity)
 	queue->rear = -1;
 	queue->array = (t_triangle *)malloc(queue->capacity * sizeof(t_triangle));
 	return (queue);
+}
+
+t_raster_queue	*delete_raster_queue(t_raster_queue **queue)
+{
+	if (!(*queue))
+		return (NULL);
+	free((*queue)->array);
+	free(*queue);
+	return (NULL);
+}
+
+void	free_queues(t_frame *frame)
+{
+	unsigned int i;
+
+	i = 0;
+	free(frame->depth_buffer);
+	delete_raster_queue(&frame->transformed);
+	delete_raster_queue(&frame->triangles_in_view);
+	while (i < MAX_THREADS)
+		delete_raster_queue(&frame->raster_queue[i]);
 }

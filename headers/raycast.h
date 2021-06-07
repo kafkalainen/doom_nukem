@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 15:45:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/07 14:19:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ void			setup_frame(t_frame *frame, t_frame *new_frame,
 					int current_pxl, int idx);
 void			step_one(t_frame *frame);
 void			*clip_to_viewport_edges(void *args);
+void			free_queues(t_frame *frame);
+t_raster_queue	*delete_raster_queue(t_raster_queue **queue);
 t_raster_queue	*create_raster_queue(size_t capacity);
 int				raster_queue_is_full(t_raster_queue *queue);
 int				raster_queue_is_empty(t_raster_queue *queue);

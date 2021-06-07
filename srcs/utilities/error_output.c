@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:39:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/01 10:41:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 14:31:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	error_output_sdl(char *msg, t_home *home)
+void	error_output_sdl(char *msg, t_home *home, t_frame *frame)
 {
 	if (ft_strequ(msg, "Fatal: Failed to create a window."))
 	{
@@ -29,7 +29,7 @@ void	error_output_sdl(char *msg, t_home *home)
 		SDL_Quit();
 	}
 	ft_putendl_fd(msg, 2);
-	clean_up(home);
+	clean_up(home, frame);
 }
 
 void	error_output(char *msg)

@@ -80,7 +80,7 @@
 ** Miscellanious
 */
 
-void	clean_up(t_home *home);
+void	clean_up(t_home *home, t_frame *frame);
 void	cleanup_audio(t_audio *audio);
 int		doom_close(int *fd);
 ssize_t	doom_write(int *fd, const void **buf, size_t count);
@@ -89,8 +89,9 @@ void	doom_read(ssize_t *read_bytes, int *fd, void **buf, size_t nb_of_bytes);
 int		doom_mkdir(void);
 void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
-void	error_output_sdl(char *msg, t_home *home);
+void	error_output_sdl(char *msg, t_home *home, t_frame *frame);
 void	fps_timer(t_time *t);
+int		initialize_rasterization_queues(t_frame *frame);
 int		is_negative(float z);
 int		load_audio(t_audio *audio);
 int		load_game_audio(t_audio *audio);
