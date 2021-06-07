@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 12:11:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 16:07:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_surface		*new_surface(t_wall *data, t_xyz *start, int idx, char choice);
 void			add_surface(t_surface **point, t_surface *new);
 void			close_surface_list(t_surface **head);
 int				free_surfaces(t_surface **head, unsigned int nbr_of_surfaces);
-unsigned int	triangulate_floor_and_ceiling(t_sector *sector, char choice);
+unsigned int	triangulate_floor(t_sector *sector, char choice);
+unsigned int	triangulate_ceiling(t_sector *sector, char choice);
 
 #endif

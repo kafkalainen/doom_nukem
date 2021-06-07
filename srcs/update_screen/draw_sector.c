@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 13:40:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 16:18:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,18 @@ static Uint32	transform_walls(t_home *home, t_sector *sector, t_raster_queue *tr
 	Uint32		i;
 	Uint32		j;
 	Uint32		k;
+	// Uint32		l;
 	t_wall		*wall;
-	t_surface	*surface;
+	t_surface	*ground;
+	// t_surface	*ceiling;
 
 	i = 0;
 	j = 0;
 	k = 0;
+	// l = 0;
 	wall = sector->walls;
-	surface = sector->ground;
+	ground = sector->ground;
+	// ceiling = sector->ceiling;
 	while (i < 12)
 	{
 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[i]);
@@ -51,11 +55,18 @@ static Uint32	transform_walls(t_home *home, t_sector *sector, t_raster_queue *tr
 	}
 	while (k < 2)
 	{
-		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &surface->tri);
+		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &ground->tri);
 		i++;
 		k++;
-		surface = surface->next;
+		ground = ground->next;
 	}
+	// while (l < 2)
+	// {
+	// 	transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &ceiling->tri);
+	// 	i++;
+	// 	l++;
+	// 	ceiling = ceiling->next;
+	// }
 	transformed->size = i;
 	return (TRUE);
 }

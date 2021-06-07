@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/07 15:58:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 16:23:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	setup_game_loop(char **mapname, t_home *home,
 	ft_putstr("You chose: ");
 	ft_putendl_fd(*mapname, 1);
 	init_player(plr);
+	if (initialize_skybox(&home->skybox))
+		error_output("Memory allocation failed!\n");
 	if (load_map_file(home, *mapname))
 		exit(EXIT_FAILURE);
 	// if (open_file(home, "map_files/test.DATA") < 0)
@@ -83,8 +85,6 @@ void	setup_game_loop(char **mapname, t_home *home,
 	// }
 	// if (Mix_PlayingMusic() == 0)
 	// 	Mix_PlayMusic(plr->audio.music, -1);
-	if (initialize_skybox(&home->skybox))
-		error_output("Memory allocation failed!\n");
 	if (setup_fps(&home->t))
 		error_output("Memory allocation failed!\n");
 	ft_strdel(mapname);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 08:19:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 12:11:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 16:21:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,25 @@ static t_wall	*get_highest_ground(t_sector *sector)
 	return (highest_ground);
 }
 
-unsigned int	triangulate_floor_and_ceiling(t_sector *sector, char choice)
+static t_wall	*get_lowest_ceiling(t_sector *sector)
+{
+	unsigned int	i;
+	t_wall			*lowest_ceiling;
+	t_wall			*current_ceiling;
+
+	i = 0;
+	lowest_ceiling = sector->walls;
+	current_ceiling = sector->walls;
+	while (i < sector->nb_of_walls)
+	{
+		if (current_ceiling->top.p[1].y < lowest_ceiling->top.p[1].y)
+			lowest_ceiling = current_ceiling;
+		i++;
+	}
+	return (lowest_ceiling);
+}
+
+unsigned int	triangulate_floor(t_sector *sector, char choice)
 {
 	t_wall			*current_wall;
 	t_xyz			origin;
@@ -62,5 +80,40 @@ unsigned int	triangulate_floor_and_ceiling(t_sector *sector, char choice)
 		i++;
 	}
 	close_surface_list(&sector->ground);
+	return (i);
+}
+
+unsigned int	triangulate_ceiling(t_sector *sector, char choice)
+{
+	t_wall			*current_wall;
+	t_xyz			origin;
+	t_surface		*new_surf;
+	unsigned int	i;
+
+	i = 0;
+	sector->ceiling = NULL;
+	current_wall = get_lowest_ceiling(sector);
+	origin = current_wall->top.p[1];
+	current_wall = current_wall->next;
+	new_surf = new_surface(current_wall, &origin,
+		sector->tex_ceil, choice);
+	if (new_surf)
+		add_surface(&sector->ceiling, new_surf);
+	else
+		return (1);
+	if (sector->nb_of_walls == 3)
+		return (0);
+	current_wall = current_wall->next;
+	while (i < sector->nb_of_walls - 3)
+	{
+		new_surf = new_surface(current_wall, &origin, sector->tex_ceil, choice);
+		if (new_surf)
+			add_surface(&sector->ceiling, new_surf);
+		else
+			return (i + 2);
+		current_wall = current_wall->next;
+		i++;
+	}
+	close_surface_list(&sector->ceiling);
 	return (i);
 }
