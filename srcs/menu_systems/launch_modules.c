@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/04 15:49:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 13:02:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+void	process_inputs_game_loop(t_player *plr, int *game_state, SDL_Event *e)
+{
+	while (SDL_PollEvent(e) != 0)
+	{
+		if (e->type == SDL_QUIT)
+		{
+			*game_state = QUIT;
+			break ;
+		}
+		key_input(plr, e, game_state);
+		mouse_handle(plr, e);
+	}
+}
+
+void	update_world(t_player *plr, t_home *home)
+{
+	Uint32	current_time;
+	Uint32	delta_time;
+
+	current_time = SDL_GetTicks();
+	delta_time = current_time - plr->time;
+	if (delta_time < 1)
+		return ;
+	plr->time = current_time;
+
+	update_player(plr, home, delta_time);
+	// TODO: update objects
+}
 
 void	launch_game_loop(t_home *home, t_player *plr,
 	t_frame *frame, SDL_Event *e)
@@ -18,7 +47,8 @@ void	launch_game_loop(t_home *home, t_player *plr,
 	while (home->game_state == GAME_LOOP)
 	{
 		fps_timer(&home->t);
-		update_player(plr, home, e);
+		process_inputs_game_loop(plr, &home->game_state, e);
+		update_world(plr, home); // TODO: split into process_inputs_game_loop and update_world functions
 		update_screen(home, frame, plr);
 		render_buffer(frame->buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
