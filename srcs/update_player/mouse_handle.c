@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/01 10:15:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 12:50:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	mouse_handle(t_player *plr, t_home *home, SDL_Event *e)
+void	mouse_handle(t_player *plr, SDL_Event *e)
 {
-	(void)home;
 	if (e->type == SDL_MOUSEMOTION)
 	{
 		plr->dir.x += -e->motion.xrel * DEG_TO_RAD * 0.1;

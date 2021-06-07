@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 12:27:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 13:02:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,13 @@
 // // 	}
 // // }
 
-static void	movement(t_player *plr, t_home *home)
+static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 {
-	Uint32	current_time;
-	Uint32	delta_time;
+	
 	// t_xy	plr_dir;
 
 	(void)home;
-	current_time = SDL_GetTicks();
-	delta_time = current_time - plr->time;
-	if (delta_time < 1)
-		return ;
-	plr->time = current_time;
+	(void)delta_time;
 	// gravity_func(plr, floor_height, (delta_time * 0.05));
 	// if (plr->input.up == 1 || plr->input.down == 1
 	// 	|| plr->input.left == 1 || plr->input.right == 1)
@@ -98,21 +93,11 @@ static void	movement(t_player *plr, t_home *home)
 		plr->yaw += 0.02f;
 }
 
-void	update_player(t_player *plr, t_home *home, SDL_Event *e)
+void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 {
-	while (SDL_PollEvent(e) != 0)
-	{
-		if (e->type == SDL_QUIT)
-		{
-			home->game_state = QUIT;
-			break ;
-		}
-		key_input(plr, e, &home->game_state);
-		mouse_handle(plr, home, e);
-	}
 	// if (plr->input.rot_left == 1)
 	// 	transform_world_view(home, DEG_TO_RAD * 0.5);
 	// if (plr->input.rot_right == 1)
 	// 	transform_world_view(home, DEG_TO_RAD * -0.5);
-	movement(plr, home);
+	movement(plr, home, delta_time);
 }
