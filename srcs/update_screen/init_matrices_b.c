@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 09:07:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 15:14:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 20:25:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,15 @@ void	initialize_locations(t_point_location *loc)
 	loc->points_inside[0] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	loc->points_inside[1] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	loc->points_inside[2] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	loc->texels_inside[0] = (t_uvz){0.0f, 0.0f, 0.0f};
+	loc->texels_inside[1] = (t_uvz){0.0f, 0.0f, 0.0f};
+	loc->texels_inside[2] = (t_uvz){0.0f, 0.0f, 0.0f};
 	loc->points_outside[0] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	loc->points_outside[1] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	loc->points_outside[2] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	loc->texels_inside[0] = (t_uvz){0.0f, 0.0f, 0.0f};
+	loc->texels_inside[1] = (t_uvz){0.0f, 0.0f, 0.0f};
+	loc->texels_inside[2] = (t_uvz){0.0f, 0.0f, 0.0f};
 	loc->inside = 0;
 	loc->outside = 0;
 }

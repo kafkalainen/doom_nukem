@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 20:05:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 20:39:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	check_if_inside_triangle(float d, t_point_location *loc,
 	t_xyz point, t_uvz uv)
 {
-	if (d >= 0)
+	if (d >= 0.0f)
 	{
 		loc->texels_inside[loc->inside] = uv;
 		loc->points_inside[loc->inside] = point;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 20:06:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/07 21:02:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ static void	clipper_viewport_edges(t_planes planes, t_raster_queue *raster_queue
 		while (current_plane < 4)
 		{
 			viewport_logic(&plane, current_plane, planes);
-			new_triangles += clip_to_an_edge(raster_queue, plane, new_triangles);
+			clip_to_an_edge(raster_queue, plane, new_triangles);
+			new_triangles = raster_queue->size;
 			current_plane++;
 		}
 		tex = get_tex(arg->view_list->array[i].idx, arg->editor_tex);
