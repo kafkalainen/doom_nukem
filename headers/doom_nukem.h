@@ -90,7 +90,7 @@ int		doom_mkdir(void);
 void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
 void	error_output_sdl(char *msg, t_home *home, t_frame *frame);
-void	exit_game(t_home *home, t_frame *frame, t_audio *audio, Uint32 *menu_buffer);
+void	free_main_assets(t_home *home, t_frame *frame, t_audio *audio, Uint32 *menu_buffer);
 void	fps_timer(t_time *t);
 int		initialize_rasterization_queues(t_frame *frame);
 int		initialize_skybox(t_skybox *skybox);

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/07 13:02:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/07 16:07:28 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	launch_game_loop(t_home *home, t_player *plr,
 		render_buffer(frame->buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
-	return_to_main_from_game(home, plr);
+	free_game_assets(home, plr);
 }
 
 void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e,
