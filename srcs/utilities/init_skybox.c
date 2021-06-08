@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:16:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 15:44:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 09:04:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 static void	init_south_west(t_triangle *face)
 {
 	face[0] = (t_triangle){
-		{(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){0.0f,100.0f,0.0f,1.0f},
-		(t_xyz){100.0f, 100.0f, 0.0f,1.0f}}, {(t_uvz){0.0f,1.0f,0.0f},
+		{(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){100.0f, 100.0f, 0.0f,1.0f},
+		(t_xyz){0.0f,100.0f,0.0f,1.0f}}, {(t_uvz){0.0f,1.0f,0.0f},
 		(t_uvz){0.0f,0.0f,0.0f}, (t_uvz){1.0f,0.0f,0.0f}}, white, SKYBOX_TEX};
 	face[1] = (t_triangle){
-		(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){100.0f, 100.0f, 0.0f,1.0f},
-		(t_xyz){100.0f, 0.0f,0.0f,1.0f}, {(t_uvz){0.0f,1.0f,0.0f},
+		(t_xyz){0.0f,0.0f,0.0f,1.0f}, (t_xyz){100.0f, 0.0f,0.0f,1.0f},
+		(t_xyz){100.0f, 100.0f, 0.0f,1.0f}, {(t_uvz){0.0f,1.0f,0.0f},
 		(t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}, white, SKYBOX_TEX};
 	face[2] = (t_triangle){
-		{(t_xyz){100.0f, 0.0f,0.0f,1.0f}, (t_xyz){100.0f, 100.0f, 0.0f,1.0f},
-		(t_xyz){100.0f, 100.0f, 100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,0.0f},
+		{(t_xyz){100.0f, 0.0f,0.0f,1.0f}, (t_xyz){100.0f, 100.0f, 100.0f, 1.0f},
+		(t_xyz){100.0f, 100.0f, 0.0f,1.0f}}, {(t_uvz){0.0f,1.0f,0.0f},
 		(t_uvz){0.0f,0.0f,0.0f}, (t_uvz){1.0f,0.0f,1.0f}}, white, SKYBOX_TEX};
 	face[3] = (t_triangle){
-		{(t_xyz){100.0f, 0.0f,0.0f,1.0f}, (t_xyz){100.0f, 100.0f, 100.0f, 1.0f},
-		(t_xyz){100.0f, 0.0f,100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,0.0f},
+		{(t_xyz){100.0f, 0.0f,0.0f,1.0f}, (t_xyz){100.0f, 0.0f,100.0f, 1.0f},
+		(t_xyz){100.0f, 100.0f, 100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,0.0f},
 		(t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}, white, SKYBOX_TEX};
 }
 
@@ -36,42 +36,40 @@ static void init_north_east(t_triangle *face)
 {
 
 	face[4] = (t_triangle){
-		{(t_xyz){100.0f, 0.0f,100.0f, 1.0f},
-		(t_xyz){100.0f, 100.0f, 100.0f, 1.0f},
-		(t_xyz){0.0f,100.0f, 100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
+		{(t_xyz){100.0f, 0.0f,100.0f, 1.0f}, (t_xyz){0.0f,100.0f, 100.0f, 1.0f},
+		(t_xyz){100.0f, 100.0f, 100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
 		(t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}}, white, SKYBOX_TEX};
 	face[5] = (t_triangle){
-		{(t_xyz){100.0f, 0.0f,100.0f, 1.0f},
-		(t_xyz){0.0f,100.0f, 100.0f, 1.0f},
-		(t_xyz){0.0f,0.0f,100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
+		{(t_xyz){100.0f, 0.0f,100.0f, 1.0f}, (t_xyz){0.0f,0.0f,100.0f, 1.0f},
+		(t_xyz){0.0f,100.0f, 100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
 		(t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}, white, SKYBOX_TEX};
 	face[6] = (t_triangle){
-		{(t_xyz){0.0f,0.0f,100.0f, 1.0f}, (t_xyz){0.0f,100.0f, 100.0f, 1.0f},
-		(t_xyz){0.0f,100.0f, 0.0f,1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
+		{(t_xyz){0.0f,0.0f,100.0f, 1.0f}, (t_xyz){0.0f,100.0f, 0.0f,1.0f},
+		(t_xyz){0.0f,100.0f, 100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
 		(t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}}, white, SKYBOX_TEX};
 	face[7] = (t_triangle){
-		{(t_xyz){0.0f,0.0f,100.0f, 1.0f}, (t_xyz){0.0f,100.0f, 0.0f,1.0f},
-		(t_xyz){0.0f,0.0f,0.0f,1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
+		{(t_xyz){0.0f,0.0f,100.0f, 1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f},
+		(t_xyz){0.0f,100.0f, 0.0f,1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
 		(t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}, white, SKYBOX_TEX};
 }
 
 static void init_top_bottom(t_triangle *face)
 {
 	face[8] = (t_triangle){
-		{(t_xyz){0.0f,100.0f, 0.0f,1.0f}, (t_xyz){0.0f,100.0f, 100.0f, 1.0f},
-		(t_xyz){100.0f, 100.0f, 100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,0.0f},
+		{(t_xyz){0.0f,100.0f, 0.0f,1.0f}, (t_xyz){100.0f, 100.0f, 100.0f, 1.0f},
+		(t_xyz){0.0f,100.0f, 100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,0.0f},
 		(t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,1.0f}}, white, SKYBOX_TEX};
 	face[9] = (t_triangle){
-		{(t_xyz){0.0f,100.0f, 0.0f,1.0f}, (t_xyz){100.0f, 100.0f, 100.0f, 1.0f},
-		(t_xyz){100.0f, 100.0f, 0.0f,1.0f}}, {(t_uvz){0.0f,1.0f,0.0f},
+		{(t_xyz){0.0f,100.0f, 0.0f,1.0f}, (t_xyz){100.0f, 100.0f, 0.0f,1.0f},
+		(t_xyz){100.0f, 100.0f, 100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,0.0f},
 		(t_uvz){1.0f,0.0f,1.0f}, (t_uvz){1.0f,1.0f,1.0f}}, white, SKYBOX_TEX};
 	face[10] = (t_triangle){
-		{(t_xyz){100.0f, 0.0f,100.0f, 1.0f}, (t_xyz){0.0f,0.0f,100.0f, 1.0f},
-		(t_xyz){0.0f,0.0f,0.0f,1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
+		{(t_xyz){100.0f, 0.0f,100.0f, 1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f},
+		(t_xyz){0.0f,0.0f,100.0f, 1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
 		(t_uvz){0.0f,0.0f,1.0f}, (t_uvz){1.0f,0.0f,0.0f}}, white, SKYBOX_TEX};
 	face[11] = (t_triangle){
-		{(t_xyz){100.0f, 0.0f,100.0f, 1.0f}, (t_xyz){0.0f,0.0f,0.0f,1.0f},
-		(t_xyz){100.0f, 0.0f,0.0f,1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
+		{(t_xyz){100.0f, 0.0f,100.0f, 1.0f}, (t_xyz){100.0f, 0.0f,0.0f,1.0f},
+		(t_xyz){0.0f,0.0f,0.0f,1.0f}}, {(t_uvz){0.0f,1.0f,1.0f},
 		(t_uvz){1.0f,0.0f,0.0f}, (t_uvz){1.0f,1.0f,0.0f}}, white, SKYBOX_TEX};
 }
 

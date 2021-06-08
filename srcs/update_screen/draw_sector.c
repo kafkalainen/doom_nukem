@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 08:13:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 08:46:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static Uint32	project_to_player_position(t_raster_queue *transformed,
 	while (i < current_size)
 	{
 		normal = triangle_normal(&transformed->array[i]);
-		if (vec3_dot_product(normal, vec3_dec(transformed->array[i].p[0], plr->camera)) > 0)
+		if (vec3_dot_product(normal, vec3_dec(transformed->array[i].p[0], plr->camera)) < 0)
 		{
 			current_viewed_triangle = apply_camera(
 				plr->camera, plr->target, plr->up, &transformed->array[i]);

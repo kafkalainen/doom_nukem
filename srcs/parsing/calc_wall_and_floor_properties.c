@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 08:15:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 09:14:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	calc_wall_and_floor_properties(t_home *home)
 		j = 0;
 		temp = home->sectors[i]->walls;
 		// calc_sector_bounds(home->sectors[i]);
-		triangulate_floor(home->sectors[i], 'g');
-		triangulate_ceiling(home->sectors[i], 'c');
+		home->sectors[i]->nb_of_ground = triangulate_floor(home->sectors[i], 'g');
+		home->sectors[i]->nb_of_ceil = triangulate_ceiling(home->sectors[i], 'c');
 		while (j < home->sectors[i]->nb_of_walls)
 		{
 			temp->normal = vec2_normal(vec3_to_vec2(temp->top.p[0]), vec3_to_vec2(temp->top.p[2]));

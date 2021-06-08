@@ -6,23 +6,12 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 12:00:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 09:15:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SECTOR_H
 # define SECTOR_H
-
-typedef struct s_point
-{
-	t_xy				x0;
-	int					idx;
-	float				wall_facing;
-	t_xy				normal;
-	t_height			height;
-	t_xy				ground_uv;
-	struct s_point		*next;
-}						t_point;
 
 typedef struct s_wall
 {
@@ -58,10 +47,11 @@ typedef struct s_point_data
 
 typedef struct s_sector
 {
-	t_point			*points;
 	t_wall			*walls;
 	t_enemy			*enemies;
 	unsigned int	nb_of_walls;
+	unsigned int	nb_of_ceil;
+	unsigned int	nb_of_ground;
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;
