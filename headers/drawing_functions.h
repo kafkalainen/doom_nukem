@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_functions.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/05 15:41:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/08 11:56:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		draw_rect(t_xy xy, t_xy wh, Uint32 *buffer, int color);
 void		draw_square(Uint32 *buffer, t_xy offset, int c, int s);
 void		draw_tex_pixel(t_texture *tex, t_xyz texel,
 				t_xy pixel, t_frame *frame);
-int			draw_sector(t_frame *frame, t_home *home, t_sector *sector, t_player *plr);
+int			draw_sector(t_frame *frame, t_home *home, t_player *plr);
 int			draw_cube(t_frame *frame, t_home *home, t_player *plr);
 void		draw_wireframe(t_frame *frame, Uint32 colour);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);

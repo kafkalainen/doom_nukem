@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 08:19:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 09:31:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 13:46:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,9 @@ unsigned int	triangulate_floor(t_sector *sector, char choice)
 	while (i < sector->nb_of_walls - 2)
 	{
 		new_surf = new_surface(current_wall, &origin, sector->tex_floor, choice);
-		if (new_surf)
-			add_surface(&sector->ground, new_surf);
-		else
+		if (!new_surf)
 			return (i);
+		add_surface(&sector->ground, new_surf);
 		current_wall = current_wall->next;
 		i++;
 	}
@@ -89,10 +88,9 @@ unsigned int	triangulate_ceiling(t_sector *sector, char choice)
 	while (i < sector->nb_of_walls - 2)
 	{
 		new_surf = new_surface(current_wall, &origin, sector->tex_ceil, choice);
-		if (new_surf)
-			add_surface(&sector->ceiling, new_surf);
-		else
+		if (!new_surf)
 			return (i);
+		add_surface(&sector->ceiling, new_surf);
 		current_wall = current_wall->next;
 		i++;
 	}

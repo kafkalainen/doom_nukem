@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:50:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 19:09:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 10:11:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ t_raster_queue	*create_raster_queue(size_t capacity)
 
 t_raster_queue	*delete_raster_queue(t_raster_queue **queue)
 {
+	if (queue)
+		return (NULL);
 	if (!(*queue))
 		return (NULL);
 	free((*queue)->array);
@@ -78,21 +80,24 @@ void	free_queues(t_frame *frame)
 	unsigned int i;
 
 	i = 0;
+	if (!frame)
+		return ;
+	delete_raster_queue(&frame->transformed);
+	delete_raster_queue(&frame->triangles_in_view);
+	if (frame->raster_queue)
+	{
+		while (i < MAX_THREADS)
+		{
+			delete_raster_queue(&frame->raster_queue[i]);
+			i++;
+		}
+	}
 	if (frame->depth_buffer)
 		free(frame->depth_buffer);
 	frame->depth_buffer = NULL;
-	delete_raster_queue(&frame->transformed);
-	delete_raster_queue(&frame->triangles_in_view);
-	while (i < MAX_THREADS)
-	{
-		delete_raster_queue(&frame->raster_queue[i]);
-		i++;
-	}
 	if (frame->raster_queue)
 		free(frame->raster_queue);
 	if (frame->viewport.mid_planes)
 		free(frame->viewport.mid_planes);
 	frame->viewport.mid_planes = NULL;
-	// if (frame->viewport)
-	// 	free(frame->viewport);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/07 15:32:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 10:57:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	frame->pxl_offset = 0.0f;
 	frame->left.l_pt = (t_xy){-1.0f, -1.0f};
 	frame->right.r_pt = (t_xy){-1.0f, -1.0f};
-	// scan_fov(home, frame, plr, 0);
+	scan_fov(home, frame, plr);
 	// if (plr->input.minimap)
 	// {
 	// 	draw_minimap(home, frame);

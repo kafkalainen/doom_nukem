@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 15:58:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 11:33:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_player(t_player *plr)
 	plr->time = 0;
 	plr->current_sector = 0;
 	plr->z = 0;
-	plr->camera = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
+	plr->camera = (t_xyz){0.852332f, 4.87f, 6.68f, 1.0f};
 	plr->look_dir = (t_xyz){0.0f, 0.0f, 1.0f, 1.0f};
 	plr->up = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
 	plr->target = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
@@ -88,14 +88,14 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 		error_output("Memory allocation failed!\n");
 	ret = initialize_rasterization_queues(frame);
 	if (ret)
-		clean_up(home, frame);
+		clean_up(frame);
 	home = init_sdl(home, frame, &frame->min_step);
 	ret = load_audio(&plr->audio);
 	if (ret)
 	{
 		cleanup_audio(&plr->audio);
 		SDL_Quit();
-		clean_up(home, frame);
+		clean_up(frame);
 	}
 	if (Mix_PlayingMusic() == 0)
 		Mix_PlayMusic(plr->audio.music, -1);
@@ -103,12 +103,11 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	setup_menu(menu, &home->game_state);
 }
 
-void	clean_up(t_home *home, t_frame *frame)
+void	clean_up(t_frame *frame)
 {
+	if (frame->buffer)
+		free(frame->buffer);
 	free_queues(frame);
-	free_sectors(home);
-	if (home->t.frame_times)
-		free(home->t.frame_times);
 	ft_putendl_fd("Shutting down.", 2);
 	exit(EXIT_FAILURE);
 }

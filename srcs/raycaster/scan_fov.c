@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   scan_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/05 15:45:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/08 13:59:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-/*
-**	ERRORZ
-*/
-// static float	round_angle(float angle, float *pxl_offset)
-// {
-// 	float	angle_as_pixels;
-// 	int		trunc;
-
-// 	angle_as_pixels = angle / 0.002454369f;
-// 	trunc = (int)angle_as_pixels;
-// 	*pxl_offset = angle_as_pixels - trunc + *pxl_offset;
-// 	if (*pxl_offset >= 1.0f)
-// 	{
-// 		*pxl_offset = *pxl_offset - 1.0f;
-// 		return ((int)(trunc + 1));
-// 	}
-// 	else
-// 		return ((int)trunc);
-// }
 
 t_texel	*get_tex(int idx, t_texture	**textures)
 {
@@ -48,44 +28,100 @@ t_texel	*get_tex(int idx, t_texture	**textures)
 	return (NULL);
 }
 
-// static void	handle_portal(t_home *home, t_frame *frame, t_player *plr,
-// 	int cur_pxl)
+// static Uint32	transform_walls(t_home *home, t_sector *sector, t_raster_queue *transformed)
 // {
-// 	t_frame	new_frame;
+// 	Uint32		i;
+// 	Uint32		j;
+// 	Uint32		k;
+// 	Uint32		l;
+// 	t_wall		*wall;
+// 	t_surface	*ground;
+// 	t_surface	*ceiling;
 
-// 	setup_frame(frame, &new_frame, cur_pxl, frame->left.wall->idx);
-// 	scan_fov(home, &new_frame, plr, 0);
-// 	draw_segment(frame, home, plr);
-// 	frame->offset = new_frame.offset;
-// 	frame->pxl_offset = new_frame.pxl_offset;
-// }
-
-/*
-** FAR TO NEAR
-*/
-// void	scan_fov(t_home *home, t_frame *frame, t_player *plr, int cur_pxl)
-// {
-//	frame->right.wall < frame->left.wall
-// 	frame->left.wall = home->sectors[frame->idx]->points;
-// 	frame->right.wall = home->sectors[frame->idx]->points;
-// 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
-// 	while (frame->offset > frame->max_fov)
+// 	i = 0;
+// 	j = 0;
+// 	k = 0;
+// 	l = 0;
+// 	wall = sector->walls;
+// 	ground = sector->ground;
+// 	ceiling = sector->ceiling;
+// 	while (i < 12)
 // 	{
-// 		get_wall_pts(frame, home->sectors[frame->idx]->nb_of_walls, cur_pxl);
-// 		cur_pxl = round_angle(vec2_ang(frame->left.l_pt, frame->left.r_pt),
-// 				&frame->pxl_offset);
-// 		if (frame->left.wall->idx == frame->old_idx)
-// 		{
-// 			cur_pxl++;
-// 			break ;
-// 		}
-// 		if (check_if_portal(frame->left.wall)
-// 			&& !check_if_same_pt(&cur_pxl, &frame->left))
-// 			handle_portal(home, frame, plr, cur_pxl);
-// 		else
-// 		{
-// 			draw_segment(frame, home, plr);
-// 			frame->offset = frame->offset - ++cur_pxl;
-// 		}
+// 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[i]);
+// 		i++;
 // 	}
+// 	while (j < sector->nb_of_walls * 2)
+// 	{
+// 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &wall->top);
+// 		i++;
+// 		j++;
+// 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &wall->bottom);
+// 		i++;
+// 		j++;
+// 		wall = wall->next;
+// 	}
+// 	while (k < 4)
+// 	{
+// 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &ground->tri);
+// 		i++;
+// 		k++;
+// 		ground = ground->next;
+// 	}
+// 	while (l < 4)
+// 	{
+// 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &ceiling->tri);
+// 		i++;
+// 		l++;
+// 		ceiling = ceiling->next;
+// 	}
+// 	transformed->size = i;
+// 	return (TRUE);
 // }
+
+void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
+{
+	t_frame			new_frame;
+	t_triangle		temp_array[100];
+	t_surface		*ground;
+	t_surface		*ceiling;
+	unsigned int	j;
+
+	ground = home->sectors[frame->idx]->ground;
+	ceiling = home->sectors[frame->idx]->ceiling;
+	frame->left.wall = home->sectors[frame->idx]->walls;
+	frame->transformed->size = 0;
+	continue_from_last_sector(frame->left.wall, &frame->left, frame);
+	get_wall_pts(frame, home->sectors[frame->idx]->nb_of_walls, plr);
+	while (frame->transformed->size < (int)home->sectors[frame->idx]->nb_of_walls * 2)
+	{
+		if (frame->left.wall->top.idx >= 0)
+		{
+			setup_frame(frame, &new_frame, frame->left.wall->top.idx);
+			scan_fov(home, frame, plr);
+		}
+		temp_array[frame->transformed->size++] = frame->left.wall->top;
+		temp_array[frame->transformed->size++] = frame->left.wall->bottom;
+		frame->left.wall = frame->left.wall->next;
+	}
+	j = 0;
+	while (j < home->sectors[frame->idx]->nb_of_ceil)
+	{
+		temp_array[frame->transformed->size++] = ceiling->tri;
+		ceiling = ceiling->next;
+		j++;
+	}
+	j = 0;
+	while (j < home->sectors[frame->idx]->nb_of_ground)
+	{
+		temp_array[frame->transformed->size++] = ground->tri;
+		ground = ground->next;
+		j++;
+	}
+	j = 0;
+	while ((int)j < frame->transformed->size)
+	{
+		frame->transformed->array[j] = temp_array[j];
+		j++;
+	}
+	draw_sector(frame, home, plr);
+}

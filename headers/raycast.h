@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 19:07:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 11:19:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,37 +29,12 @@ typedef struct s_frame
 	int				idx;
 	int				max_fov;
 	int				offset;
-	int				draw_top;
-	int				draw_middle;
-	int				draw_bottom;
-	int				draw_ground;
 	float			min_step;
 	int				old_idx;
 	float			pxl_offset;
 	Uint32			*buffer;
 	t_ray_pt		left;
 	t_ray_pt		right;
-	t_plgn			inner_box;
-	t_plgn			outer_box;
-	t_plgn			top_uv;
-	t_plgn			middle_uv;
-	t_plgn			bottom_uv;
-	t_plgn			ground_uv;
-	t_xyz			uv_step;
-	t_xyz			ground_uv_step_delta_u;
-	t_xyz			ground_uv_step_delta_v;
-	t_xyz			step_inner_top;
-	t_xyz			step_inner_bot;
-	t_xyz			step_outer_top;
-	t_xyz			step_outer_bot;
-	t_xyz			step_ground_left_top;
-	t_xyz			step_ground_right_top;
-	float			full_wall_dist;
-	float			visible_wall_dist;
-	float			unvisible_l_side;
-	float			screen_wall_len;
-	t_xy			wall_tex_mult;
-	float			ratio;
 	Uint32			last_frame;
 	t_triangle		cube[12];
 	t_triangle		transformed_cube[12];
@@ -102,9 +77,9 @@ void			draw_wall(t_frame *frame, t_texture *tex, t_home *home,
 					t_player *plr);
 int				get_next_wall_tex(t_wall **current_head, int nbr_of_walls);
 t_texel			*get_tex(int idx, t_texture	**textures);
-void			get_wall_pts(t_frame *frame, int walls, int current_pxl);
-void			get_l_pt(t_wall *start, t_ray_pt *fov, t_frame *frame, int walls);
-void			get_r_pt(t_wall *start, t_ray_pt *fov, t_frame *frame, int walls);
+void			get_wall_pts(t_frame *frame, int walls, t_player *plr);
+void			get_l_pt(t_wall *start, t_ray ray, t_frame *frame, int walls);
+void			get_r_pt(t_wall *start, t_ray ray, t_frame *frame, int walls);
 t_wall			*get_opposing_wall(t_wall *current_wall, unsigned int walls);
 t_wall			*get_portal_by_idx(int idx, t_sector *sector);
 void			interpolate_y(t_height *height, t_xy cutpoint,
@@ -113,10 +88,8 @@ void			interpolate_uv(t_xy *ground_uv, t_xy cutpoint,
 					t_wall *p0, t_wall *p1);
 t_xy			line_intersection(t_intersection *sect);
 void			precalc_ground_texels(t_home *home);
-void			scan_fov(t_home *home, t_frame *frame, t_player *plr,
-					int current_pxl);
-void			setup_frame(t_frame *frame, t_frame *new_frame,
-					int current_pxl, int idx);
+void			scan_fov(t_home *home, t_frame *frame, t_player *plr);
+void			setup_frame(t_frame *frame, t_frame *new_frame, int idx);
 void			step_one(t_frame *frame);
 void			*clip_to_viewport_edges(void *args);
 void			free_queues(t_frame *frame);

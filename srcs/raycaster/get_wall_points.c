@@ -29,88 +29,57 @@
 // 		return (0);
 // }
 
-// void	get_r_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
-// {
-// 	t_ray			ray;
-// 	t_intersection	sect;
-// 	t_point			*p0;
+void	get_r_pt(t_wall *start, t_ray ray, t_frame *frame, int walls)
+{
+	t_intersection	sect;
+	t_wall			*wall;
 
-// 	ray.pos = vec2(0, 0);
-// 	ray.dir = vec2_rot(vec2(-PLR_DIR, PLR_DIR),
-// 		-frame->max_fov * frame->min_step);
-// 	p0 = start;
-// 	while (walls)
-// 	{
-// 		if (p0->x0.y >= 0 || p0->next->x0.y >= 0)
-// 		{
-// 			calc_intersection(p0, &ray, &sect);
-// 			fov->r_pt = line_intersection(&sect);
-// 			if (fov->r_pt.y != -1)
-// 				break ;
-// 		}
-// 		p0 = p0->next;
-// 		walls--;
-// 	}
-// 	fov->wall = p0;
-// 	fov->l_pt = fov->wall->x0;
-// 	fov->height_l = fov->wall->height;
-// 	fov->ground_uv_l = fov->wall->ground_uv;
-// 	interpolate_y(&fov->height_r, fov->r_pt, p0, p0->next);
-// 	interpolate_uv(&fov->ground_uv_r, fov->r_pt, p0, p0->next);
-// }
+	ray.dir = vec2_rot(ray.dir, -frame->max_fov * frame->min_step);
+	wall = start;
+	while (walls)
+	{
+		calc_intersection(wall, &ray, &sect);
+		frame->right.r_pt = line_intersection(&sect);
+		if (frame->right.r_pt.x != -1)
+			break ;
+		wall = wall->next;
+		walls--;
+	}
+	frame->right.wall = wall;
+}
 
-// void	get_l_pt(t_point *start, t_ray_pt *fov, t_frame *frame, int walls)
-// {
-// 	t_ray			ray;
-// 	t_intersection	sect;
-// 	t_point			*p0;
+void	get_l_pt(t_wall *start, t_ray ray, t_frame *frame, int walls)
+{
+	t_intersection	sect;
+	t_wall			*wall;
 
-// 	ray.pos = vec2(0, 0);
-// 	ray.dir = vec2_rot(vec2(-PLR_DIR, PLR_DIR),
-// 		-frame->offset * frame->min_step);
-// 	p0 = start;
-// 	while (walls)
-// 	{
-// 		if (p0->x0.y >= 0 || p0->next->x0.y >= 0)
-// 		{
-// 			calc_intersection(p0, &ray, &sect);
-// 			fov->l_pt = line_intersection(&sect);
-// 			if (fov->l_pt.y != -1)
-// 				break ;
-// 		}
-// 		p0 = p0->next;
-// 		walls--;
-// 	}
-// 	fov->wall = p0;
-// 	fov->r_pt = fov->wall->next->x0;
-// 	fov->height_r = fov->wall->next->height;
-// 	fov->ground_uv_r = fov->wall->next->ground_uv;
-// 	interpolate_y(&fov->height_l, fov->l_pt, p0->next, p0);
-// 	interpolate_uv(&fov->ground_uv_l, fov->l_pt, p0->next, p0);
-// }
+	ray.dir = vec2_rot(ray.dir, -frame->offset * frame->min_step);
+	wall = start;
+	while (walls)
+	{
+		calc_intersection(wall, &ray, &sect);
+		frame->left.l_pt = line_intersection(&sect);
+		if (frame->left.l_pt.x != -1)
+			break ;
+		wall = wall->next;
+		walls--;
+	}
+	frame->left.wall = wall;
+}
 
-// void	get_wall_pts(t_frame *frame, int walls, int current_pxl)
-// {
-// 	if (current_pxl == 0)
-// 	{
-// 		get_l_pt(frame->left.wall, &frame->left, frame, walls);
-// 		get_r_pt(frame->left.wall, &frame->right, frame, walls);
-// 	}
-// 	else
-// 	{
-// 		frame->left.wall = frame->left.wall->next;
-// 		frame->left.l_pt = frame->left.wall->x0;
-// 		frame->left.r_pt = frame->left.wall->next->x0;
-// 		frame->left.height_l = frame->left.wall->height;
-// 		frame->left.height_r = frame->left.wall->next->height;
-// 		frame->left.ground_uv_l = frame->left.wall->ground_uv;
-// 		frame->left.ground_uv_r = frame->left.wall->next->ground_uv;
-// 	}
-// 	if (check_if_same_wall(frame->left.wall->x0,
-// 			frame->right.wall->x0, frame->right.r_pt))
-// 	{
-// 		frame->left.r_pt = frame->right.r_pt;
-// 		frame->left.height_r = frame->right.height_r;
-// 		frame->left.ground_uv_r = frame->right.ground_uv_r;
-// 	}
-// }
+void	get_wall_pts(t_frame *frame, int walls, t_player *plr)
+{
+	t_ray	ray;
+
+	ray.pos = (t_xy){plr->camera.x, plr->camera.z};
+	ray.dir = (t_xy){plr->look_dir.x, plr->look_dir.z};
+	get_l_pt(frame->left.wall, ray, frame, walls);
+	get_r_pt(frame->left.wall, ray, frame, walls);
+	// if (check_if_same_wall(frame->left.wall->x0,
+	// 		frame->right.wall->x0, frame->right.r_pt))
+	// {
+	// 	frame->left.r_pt = frame->right.r_pt;
+	// 	frame->left.height_r = frame->right.height_r;
+	// 	frame->left.ground_uv_r = frame->right.ground_uv_r;
+	// }
+}

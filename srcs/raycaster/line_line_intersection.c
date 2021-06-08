@@ -15,9 +15,9 @@ t_xy	line_intersection(t_intersection *sect)
 
 void	calc_intersection(t_wall *wall, t_ray *ray, t_intersection *sect)
 {
-	sect->y1 = wall->top.p[0].y;
-	sect->x1 = wall->top.p[0].x;
-	sect->y2 = wall->top.p[2].y;
+	sect->y1 = wall->top.p[1].z;
+	sect->x1 = wall->top.p[1].x;
+	sect->y2 = wall->top.p[2].z;
 	sect->x2 = wall->top.p[2].x;
 	sect->neg = ((sect->x1 - ray->pos.x) * (-ray->dir.y)
 			- (sect->y1 - ray->pos.y) * (-ray->dir.x));

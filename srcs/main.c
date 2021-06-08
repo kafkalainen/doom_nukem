@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/07 16:07:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/08 09:54:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@
 **	 	ft_putendl_fd("File creation failed\n", 2);
 */
 
-void	free_main_assets(t_home *home, t_frame *frame, t_audio *audio, Uint32 *menu_buffer)
+void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *menu_buffer)
 {
 	free_queues(frame);
 	free(frame->buffer);
 	free(menu_buffer);
 	cleanup_audio(audio);
-	free(home->t.frame_times);
 	ft_putendl("User closed the window");
 	SDL_Quit();
 }
@@ -59,6 +58,6 @@ int	main(void)
 		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
-	free_main_assets(&home, &frame, &plr.audio, menu.menu_buffer);
+	free_main_assets(&frame, &plr.audio, menu.menu_buffer);
 	return (EXIT_SUCCESS);
 }

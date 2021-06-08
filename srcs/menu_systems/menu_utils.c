@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/07 16:08:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/08 09:53:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_game_assets(t_home *home, t_player *plr)
 {
+	if (home->t.frame_times)
+		free(home->t.frame_times);
 	free_sectors(home);
 	free_all_textures(home->editor_tex, &home->nbr_of_textures);
 	init_player(plr);
