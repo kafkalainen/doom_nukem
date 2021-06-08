@@ -6,19 +6,18 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/08 09:53:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 16:05:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	free_game_assets(t_home *home, t_player *plr)
+void	free_game_assets(t_home *home)
 {
 	if (home->t.frame_times)
 		free(home->t.frame_times);
 	free_sectors(home);
 	free_all_textures(home->editor_tex, &home->nbr_of_textures);
-	init_player(plr);
 }
 
 void	get_menu_range_key_down(t_menu *menu)
