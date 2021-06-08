@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 09:53:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 15:56:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	initialize_rasterization_queues(t_frame *frame)
 	while (i < MAX_THREADS)
 	{
 		frame->raster_queue[i] = create_raster_queue(200);
-		if (!frame->raster_queue)
+		if (!frame->raster_queue[i])
 			return (1);
 		i++;
 	}
