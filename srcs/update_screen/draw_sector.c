@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 13:52:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 14:30:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 	i = 0;
 	// transform_walls(home, sector, frame->transformed);
 	project_to_player_position(frame->transformed, frame->triangles_in_view, plr, &frame->viewport);
+	// qsort((void *)frame->triangles_in_view->array,
+	// 	(size_t)frame->triangles_in_view->size, sizeof(t_triangle), painters_algorithm);
 	while (i < SCREEN_HEIGHT * SCREEN_WIDTH)
 	{
 		frame->depth_buffer[i] = 0.0f;
