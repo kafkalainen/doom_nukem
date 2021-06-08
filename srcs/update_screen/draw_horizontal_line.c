@@ -6,13 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 14:32:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 14:38:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex, t_steps *step)
+int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer,
+	t_texel *tex, t_steps *step)
 {
 	t_uvz	texel;
 	int		cur_x;
@@ -20,12 +21,11 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex, t_st
 	float	offset_step;
 	int		size;
 
-	size = tex->width - 1;
-	texel.u = step->start_uv.u + 0.4;
-	texel.v = step->start_uv.v + 0.2;
-	offset_step = 1.0f / ((float)(step->end_x - step->start_x));
 	offset = 0.0f;
+	size = tex->width - 1;
 	cur_x = step->start_x;
+	texel = step->start_uv;
+	offset_step = 1.0f / ((float)(step->end_x - step->start_x));
 	if (cur_x < 0 || step->cur_y > SCREEN_HEIGHT || step->cur_y < 0)
 		return (FALSE);
 	while (cur_x < step->end_x)
