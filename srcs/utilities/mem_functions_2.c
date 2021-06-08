@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 20:57:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 08:15:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
 
-int	init_viewport(t_sides *viewport)
+static int	initialize_viewport(t_sides *viewport)
 {
 	Uint32	i;
 	Uint32	span;
@@ -25,8 +25,8 @@ int	init_viewport(t_sides *viewport)
 		return (1);
 	viewport->top = (t_plane){(t_xyz){ 0.0f, 0.0f, 0.0f, 1.0f }, (t_xyz){ 0.0f, 1.0f, 0.0f, 0.0f }};
 	viewport->bottom = (t_plane){(t_xyz){ 0.0f, SCREEN_HEIGHT - 1, 0.0f, 1.0f }, (t_xyz){ 0.0f, -1.0f, 0.0f, 0.0f }};
-	viewport->left = (t_plane){(t_xyz){ 100.0f, 0.0f, 0.0f, 1.0f }, (t_xyz){ 1.0f, 0.0f, 0.0f, 0.0f }};
-	viewport->right = (t_plane){(t_xyz){ SCREEN_WIDTH - 101.0f, 0.0f, 0.0f, 1.0f }, (t_xyz){ -1.0f, 0.0f, 0.0f, 0.0f }};
+	viewport->left = (t_plane){(t_xyz){ 0.0f, 0.0f, 0.0f, 1.0f }, (t_xyz){ 1.0f, 0.0f, 0.0f, 0.0f }};
+	viewport->right = (t_plane){(t_xyz){ SCREEN_WIDTH - 1.0f, 0.0f, 0.0f, 1.0f }, (t_xyz){ -1.0f, 0.0f, 0.0f, 0.0f }};
 	viewport->near = (t_plane){(t_xyz){0.0f, 0.0f, 0.1f, 1.0f}, (t_xyz){0.0f, 0.0f, 1.0f, 0.0f}};
 	viewport->view_offset = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
 	while (i < MAX_THREADS)
@@ -64,7 +64,7 @@ int	initialize_rasterization_queues(t_frame *frame)
 	if (!frame->depth_buffer)
 		return (1);
 	// frame->viewport = (t_sides*)malloc(sizeof(t_sides*));
-	if (init_viewport(&frame->viewport))
+	if (initialize_viewport(&frame->viewport))
 		return (1);
 	return (0);
 }

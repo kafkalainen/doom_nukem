@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 21:02:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 08:09:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ static int	draw_polygon(Uint32 *buffer, float *depth_buffer,
 	(void)depth_buffer;
 	while (i <= tri->rear)
 	{
-		// draw_tex_triangle(buffer, depth_buffer, &tri->array[i], tex);
-		ft_str_pxl(buffer, vec2(tri->array[i].p[0].x, tri->array[i].p[0].y), "0", (t_plx_modifier){white, 2});
-		ft_str_pxl(buffer, vec2(tri->array[i].p[1].x, tri->array[i].p[1].y), "1", (t_plx_modifier){white, 2});
-		ft_str_pxl(buffer, vec2(tri->array[i].p[2].x, tri->array[i].p[2].y), "2", (t_plx_modifier){white, 2});
-		draw_line(vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
-			vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
-			tri->array[i].colour, buffer);
-		draw_line(vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
-			vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
-			tri->array[i].colour, buffer);
-		draw_line(vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
-			vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
-			tri->array[i].colour, buffer);
+		draw_tex_triangle(buffer, depth_buffer, &tri->array[i], tex);
+		// ft_str_pxl(buffer, vec2(tri->array[i].p[0].x, tri->array[i].p[0].y), "0", (t_plx_modifier){white, 2});
+		// ft_str_pxl(buffer, vec2(tri->array[i].p[1].x, tri->array[i].p[1].y), "1", (t_plx_modifier){white, 2});
+		// ft_str_pxl(buffer, vec2(tri->array[i].p[2].x, tri->array[i].p[2].y), "2", (t_plx_modifier){white, 2});
+		// draw_line(vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
+		// 	vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
+		// 	tri->array[i].colour, buffer);
+		// draw_line(vec2(tri->array[i].p[1].x, tri->array[i].p[1].y),
+		// 	vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
+		// 	tri->array[i].colour, buffer);
+		// draw_line(vec2(tri->array[i].p[2].x, tri->array[i].p[2].y),
+		// 	vec2(tri->array[i].p[0].x, tri->array[i].p[0].y),
+		// 	tri->array[i].colour, buffer);
 		i++;
 	}
 	return (TRUE);
