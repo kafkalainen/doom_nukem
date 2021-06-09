@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/08 15:47:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 10:18:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *menu_buffer)
 	free_queues(frame);
 	free(frame->buffer);
 	free(menu_buffer);
-	cleanup_audio(audio);
+	clean_up_audio_source(audio);
 	ft_putendl("User closed the window");
 	SDL_Quit();
 }

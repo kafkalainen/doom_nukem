@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 11:33:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 10:17:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_player(t_player *plr)
 	plr->time = 0;
 	plr->current_sector = 0;
 	plr->z = 0;
-	plr->camera = (t_xyz){0.852332f, 4.87f, 6.68f, 1.0f};
+	plr->camera = (t_xyz){1.483f, 3.19f, 2.29f, 1.0f};
 	plr->look_dir = (t_xyz){0.0f, 0.0f, 1.0f, 1.0f};
 	plr->up = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
 	plr->target = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
@@ -93,7 +93,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	ret = load_audio(&plr->audio);
 	if (ret)
 	{
-		cleanup_audio(&plr->audio);
+		clean_up_audio_source(&plr->audio);
 		SDL_Quit();
 		clean_up(frame);
 	}

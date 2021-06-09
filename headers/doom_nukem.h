@@ -81,7 +81,7 @@
 */
 
 void	clean_up(t_frame *frame);
-void	cleanup_audio(t_audio *audio);
+void	clean_up_audio_source(t_audio *audio);
 int		doom_close(int *fd);
 ssize_t	doom_write(int *fd, const void **buf, size_t count);
 void	doom_open(int *fd, const char **path, int mode, mode_t rights);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/17 13:58:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/09 10:17:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	clean_up_audio_source(t_audio *audio)
 {
+	if (Mix_PlayingMusic())
+		Mix_PauseMusic();
 	if (audio->footstep1 != NULL)
 		Mix_FreeChunk(audio->footstep1);
 	audio->footstep1 = NULL;
@@ -76,21 +78,6 @@ int	load_audio(t_audio *audio)
 		return (773);
 	}
 	return (0);
-}
-
-/*
-**	Should FreeWAV(t_chunk*) be used here?
-*/
-
-void	cleanup_audio(t_audio *audio)
-{
-	Mix_FreeChunk(audio->footstep1);
-	audio->footstep1 = NULL;
-	Mix_FreeChunk(audio->footstep2);
-	audio->footstep2 = NULL;
-	Mix_FreeMusic(audio->music);
-	audio->music = NULL;
-	Mix_CloseAudio();
 }
 
 void	play_footsteps(t_player *plr)
