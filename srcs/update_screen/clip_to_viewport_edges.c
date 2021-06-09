@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 13:54:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 14:38:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,9 @@ void	*clip_to_viewport_edges(void *args)
 		index++;
 	}
 	planes.top = arg->viewport->mid_planes[index];
+	planes.top.point.y += 1.0f;
 	planes.bottom = arg->viewport->mid_planes[index + 1];
-	planes.bottom.point.y -= 1.0f;
+	// planes.bottom.point.y -= 1.0f;
 	planes.bottom.normal.y *= -1.0f;
 	planes.left = arg->viewport->left;
 	planes.right = arg->viewport->right;
