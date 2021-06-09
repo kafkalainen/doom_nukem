@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 10:06:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 10:57:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,11 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	{
 		if (frame->left.wall->top.idx >= 0)
 		{
-			setup_frame(frame, &new_frame, frame->left.wall->top.idx);
-			scan_fov(home, frame, plr);
+			if (!check_connection(frame->left.wall, frame))
+			{
+				setup_frame(frame, &new_frame, frame->left.wall->top.idx);
+				scan_fov(home, &new_frame, plr);
+			}
 		}
 		else
 		{
@@ -121,12 +124,12 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		ground = ground->next;
 		j++;
 	}
-	j = 0;
-	while (j < 12)
-	{
-		temp_array[frame->transformed->size++] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[j]);
-		j++;
-	}
+	// j = 0;
+	// while (j < 12)
+	// {
+	// 	temp_array[frame->transformed->size++] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[j]);
+	// 	j++;
+	// }
 	j = 0;
 	while ((int)j < frame->transformed->size)
 	{
