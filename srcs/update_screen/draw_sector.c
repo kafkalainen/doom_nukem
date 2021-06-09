@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 14:30:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 17:51:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,18 @@ static Uint32	project_to_player_position(t_raster_queue *transformed,
 	return (TRUE);
 }
 
+void	reset_depth_buffer(float *depth_buffer)
+{
+	int i;
+
+	i = 0;
+	while (i < (SCREEN_HEIGHT * SCREEN_WIDTH))
+	{
+		depth_buffer[i] = 0.0f;
+		i++;
+	}
+}
+
 int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 {
 	t_arg			args;
@@ -135,11 +147,12 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 	project_to_player_position(frame->transformed, frame->triangles_in_view, plr, &frame->viewport);
 	// qsort((void *)frame->triangles_in_view->array,
 	// 	(size_t)frame->triangles_in_view->size, sizeof(t_triangle), painters_algorithm);
-	while (i < SCREEN_HEIGHT * SCREEN_WIDTH)
-	{
-		frame->depth_buffer[i] = 0.0f;
-		i++;
-	}
+	// while (i < SCREEN_HEIGHT * SCREEN_WIDTH)
+	// {
+	// 	frame->depth_buffer[i] = 0.0f;
+	// 	i++;
+	// }
+	reset_depth_buffer(frame->depth_buffer);
 	args.editor_tex = home->editor_tex;
 	args.buffer = frame->buffer;
 	args.depth_buffer = frame->depth_buffer;

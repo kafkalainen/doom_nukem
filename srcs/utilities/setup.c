@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 11:33:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 12:26:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	ret = load_audio(&plr->audio);
 	if (ret)
 	{
-		cleanup_audio(&plr->audio);
-		SDL_Quit();
-		clean_up(frame);
+		cleanup_audio_source(&plr->audio);
+		ft_putendl_fd("Failed to load audio files from source, proceeding without menu music\n", 2);
 	}
-	if (Mix_PlayingMusic() == 0)
-		Mix_PlayMusic(plr->audio.music, -1);
+	else
+		if (Mix_PlayingMusic() == 0)
+			Mix_PlayMusic(plr->audio.music, -1);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	setup_menu(menu, &home->game_state);
 }

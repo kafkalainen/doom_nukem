@@ -6,13 +6,13 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/17 13:58:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/09 12:27:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	clean_up_audio_source(t_audio *audio)
+void	cleanup_audio_source(t_audio *audio)
 {
 	if (audio->footstep1 != NULL)
 		Mix_FreeChunk(audio->footstep1);
@@ -27,7 +27,7 @@ void	clean_up_audio_source(t_audio *audio)
 
 int	load_game_audio(t_audio *audio)
 {
-	clean_up_audio_source(audio);
+	cleanup_audio_source(audio);
 	audio->music = Mix_LoadMUS("temp/music.wav");
 	if (!audio->music)
 	{
@@ -84,12 +84,21 @@ int	load_audio(t_audio *audio)
 
 void	cleanup_audio(t_audio *audio)
 {
-	Mix_FreeChunk(audio->footstep1);
-	audio->footstep1 = NULL;
-	Mix_FreeChunk(audio->footstep2);
-	audio->footstep2 = NULL;
-	Mix_FreeMusic(audio->music);
-	audio->music = NULL;
+	if (audio->footstep1 != NULL)
+	{
+		Mix_FreeChunk(audio->footstep1);
+		audio->footstep1 = NULL;
+	}
+	if (audio->footstep2 != NULL)
+	{
+		Mix_FreeChunk(audio->footstep2);
+		audio->footstep2 = NULL;
+	}
+	if (audio->music != NULL)
+	{
+		Mix_FreeMusic(audio->music);
+		audio->music = NULL;
+	}
 	Mix_CloseAudio();
 }
 

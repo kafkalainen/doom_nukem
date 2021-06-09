@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_functions.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/08 11:56:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 17:18:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ t_triangle	translate_triangle(t_triangle *src, t_xyz translation);
 t_triangle	rotate_triangle(t_triangle *src, float angle, char dir);
 void		calculate_triangle(t_frame *frame, t_triangle *tri, t_texture *tex);
 int			draw_tex_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *triangle, t_texel *tex);
+
+void		reset_depth_buffer(float *depth_buffer);
 
 #endif
