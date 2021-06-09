@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/09 10:28:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 14:24:26 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	mouse_handle(t_player *plr, SDL_Event *e)
 			plr->pitch = -1.553343;
 		if (plr->pitch > 1.553343)
 			plr->pitch = 1.553343;
-		printf("%f\n", plr->yaw);
+		// printf("%f\n", plr->yaw);
 	}
 }

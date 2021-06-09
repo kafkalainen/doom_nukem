@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 14:13:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/09 16:57:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,11 @@ void	reset_depth_buffer(float *depth_buffer)
 int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 {
 	t_arg			args;
+	pthread_mutex_t	mutex;
 	Uint32			i;
 
 	i = 0;
+	mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	// transform_walls(home, sector, frame->transformed);
 	project_to_player_position(frame->transformed, frame->triangles_in_view, plr, &frame->viewport);
 	// qsort((void *)frame->triangles_in_view->array,
@@ -164,7 +166,9 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 	while (i < MAX_THREADS)
 	{
 		pthread_create(&args.tid[i], NULL, &clip_to_viewport_edges, (void*)&args);
+		pthread_mutex_lock(&mutex);
 		i++;
+		pthread_mutex_unlock(&mutex);
 	}
 	while (i--)
 		pthread_join(args.tid[i], NULL);
