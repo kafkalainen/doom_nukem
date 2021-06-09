@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 08:09:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 07:45:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static int	draw_polygon(Uint32 *buffer, float *depth_buffer,
 	// if (tri->array[i].idx >= 0)
 	// 	tex = NULL;
 	// tex = get_tex(tri->array[i].idx, editor_tex);
-	(void)tex;
-	(void)depth_buffer;
 	while (i <= tri->rear)
 	{
 		draw_tex_triangle(buffer, depth_buffer, &tri->array[i], tex);
