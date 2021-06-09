@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 11:19:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 09:22:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ typedef struct s_ray_pt
 {
 	t_xy			l_pt;
 	t_xy			r_pt;
-	t_height		height_l;
-	t_height		height_r;
+	t_xy			left_dir;
+	t_xy			right_dir;
 	t_wall			*wall;
-	t_xy			ground_uv_l;
-	t_xy			ground_uv_r;
 }					t_ray_pt;
 
 typedef struct s_frame

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/08 16:07:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 16:27:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	update_world(t_player *plr, t_home *home)
 	if (delta_time < 1)
 		return ;
 	plr->time = current_time;
-
 	update_player(plr, home, delta_time);
 	// TODO: update objects
 }

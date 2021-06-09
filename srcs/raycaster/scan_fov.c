@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 14:25:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 10:57:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,23 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	frame->left.wall = home->sectors[frame->idx]->walls;
 	frame->transformed->size = 0;
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
-	get_wall_pts(frame, home->sectors[frame->idx]->nb_of_walls, plr);
+	// get_wall_pts(frame, home->sectors[frame->idx]->nb_of_walls, plr);
 	j = 0;
 	while (frame->transformed->size < (int)home->sectors[frame->idx]->nb_of_walls * 2)
 	{
 		if (frame->left.wall->top.idx >= 0)
 		{
-			setup_frame(frame, &new_frame, frame->left.wall->top.idx);
-			scan_fov(home, frame, plr);
+			if (!check_connection(frame->left.wall, frame))
+			{
+				setup_frame(frame, &new_frame, frame->left.wall->top.idx);
+				scan_fov(home, &new_frame, plr);
+			}
 		}
-		temp_array[frame->transformed->size++] = frame->left.wall->top;
-		temp_array[frame->transformed->size++] = frame->left.wall->bottom;
+		else
+		{
+			temp_array[frame->transformed->size++] = frame->left.wall->top;
+			temp_array[frame->transformed->size++] = frame->left.wall->bottom;
+		}
 		frame->left.wall = frame->left.wall->next;
 	}
 	j = 0;
@@ -118,12 +124,12 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		ground = ground->next;
 		j++;
 	}
-	j = 0;
-	while (j < 12)
-	{
-		temp_array[frame->transformed->size++] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[j]);
-		j++;
-	}
+	// j = 0;
+	// while (j < 12)
+	// {
+	// 	temp_array[frame->transformed->size++] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[j]);
+	// 	j++;
+	// }
 	j = 0;
 	while ((int)j < frame->transformed->size)
 	{

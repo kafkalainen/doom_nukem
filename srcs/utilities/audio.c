@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 12:27:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/09 14:13:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	cleanup_audio_source(t_audio *audio)
 {
+	if (Mix_PlayingMusic())
+		Mix_PauseMusic();
 	if (audio->footstep1 != NULL)
 		Mix_FreeChunk(audio->footstep1);
 	audio->footstep1 = NULL;

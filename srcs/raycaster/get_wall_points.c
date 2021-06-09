@@ -34,7 +34,6 @@ void	get_r_pt(t_wall *start, t_ray ray, t_frame *frame, int walls)
 	t_intersection	sect;
 	t_wall			*wall;
 
-	ray.dir = vec2_rot(ray.dir, -frame->max_fov * frame->min_step);
 	wall = start;
 	while (walls)
 	{
@@ -53,7 +52,6 @@ void	get_l_pt(t_wall *start, t_ray ray, t_frame *frame, int walls)
 	t_intersection	sect;
 	t_wall			*wall;
 
-	ray.dir = vec2_rot(ray.dir, -frame->offset * frame->min_step);
 	wall = start;
 	while (walls)
 	{
@@ -72,8 +70,9 @@ void	get_wall_pts(t_frame *frame, int walls, t_player *plr)
 	t_ray	ray;
 
 	ray.pos = (t_xy){plr->camera.x, plr->camera.z};
-	ray.dir = (t_xy){plr->look_dir.x, plr->look_dir.z};
+	ray.dir = frame->left.left_dir;
 	get_l_pt(frame->left.wall, ray, frame, walls);
+	ray.dir = frame->right.right_dir;
 	get_r_pt(frame->left.wall, ray, frame, walls);
 	// if (check_if_same_wall(frame->left.wall->x0,
 	// 		frame->right.wall->x0, frame->right.r_pt))

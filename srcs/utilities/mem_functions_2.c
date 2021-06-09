@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 15:56:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 13:54:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	initialize_rasterization_queues(t_frame *frame)
 		i++;
 	}
 	frame->depth_buffer = (float *)malloc(sizeof(float)
-			* (float)SCREEN_WIDTH * (float)SCREEN_HEIGHT);
+			* ((SCREEN_WIDTH + 1) * SCREEN_HEIGHT) + 1);
 	if (!frame->depth_buffer)
 	{
 		frame->depth_buffer = NULL;

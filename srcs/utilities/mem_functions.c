@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:50:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 16:04:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 07:48:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	free_queues(t_frame *frame)
 	unsigned int i;
 
 	i = 0;
-	// if (!frame)
-	// 	return ;
+	if (!frame)
+		return ;
 	delete_raster_queue(&frame->transformed);
 	delete_raster_queue(&frame->triangles_in_view);
 	if (frame->raster_queue)
@@ -91,12 +91,11 @@ void	free_queues(t_frame *frame)
 			delete_raster_queue(&frame->raster_queue[i]);
 			i++;
 		}
+		free(frame->raster_queue);
 	}
 	if (frame->depth_buffer)
 		free(frame->depth_buffer);
 	frame->depth_buffer = NULL;
-	if (frame->raster_queue)
-		free(frame->raster_queue);
 	if (frame->viewport.mid_planes)
 		free(frame->viewport.mid_planes);
 	frame->viewport.mid_planes = NULL;
