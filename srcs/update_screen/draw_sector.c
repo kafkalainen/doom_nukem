@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 14:30:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 13:47:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 	}
 	args.editor_tex = home->editor_tex;
 	args.buffer = frame->buffer;
-	args.depth_buffer = frame->depth_buffer;
+	args.depth_buffer = &frame->depth_buffer;
 	args.view_list = frame->triangles_in_view;
 	args.raster_queue = frame->raster_queue;
 	args.viewport = &frame->viewport;
