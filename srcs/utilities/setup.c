@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 09:22:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 13:56:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
 	int				ret;
 
+	(void)plr;
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
@@ -91,15 +92,15 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	if (ret)
 		clean_up(frame);
 	home = init_sdl(home, frame, &frame->min_step);
-	ret = load_audio(&plr->audio);
-	if (ret)
-	{
-		cleanup_audio_source(&plr->audio);
-		ft_putendl_fd("Failed to load audio files from source, proceeding without menu music\n", 2);
-	}
-	else
-		if (Mix_PlayingMusic() == 0)
-			Mix_PlayMusic(plr->audio.music, -1);
+	// ret = load_audio(&plr->audio);
+	// if (ret)
+	// {
+	// 	cleanup_audio_source(&plr->audio);
+	// 	ft_putendl_fd("Failed to load audio files from source, proceeding without menu music\n", 2);
+	// }
+	// else
+	// 	if (Mix_PlayingMusic() == 0)
+	// 		Mix_PlayMusic(plr->audio.music, -1);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	setup_menu(menu, &home->game_state);
 }

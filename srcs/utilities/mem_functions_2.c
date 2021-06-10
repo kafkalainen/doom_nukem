@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_functions_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 15:05:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 14:13:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	initialize_viewport(t_sides *viewport)
 	Uint32	span;
 
 	i = 0;
-	span = (SCREEN_HEIGHT - 1) / MAX_THREADS;
+	span = (SCREEN_HEIGHT) / MAX_THREADS;
 	viewport->mid_planes = (t_plane*)malloc(sizeof(t_plane) * (MAX_THREADS + 1));
 	if (!(viewport->mid_planes))
 		return (1);

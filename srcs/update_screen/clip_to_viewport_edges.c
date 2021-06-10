@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 13:13:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/10 14:25:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ void	*clip_to_viewport_edges(void *args)
 	arg = (t_arg*)args;
 	index = arg->thread_index;
 	planes.top = arg->viewport->mid_planes[index];
-	planes.top.point.y += 1.0f;
 	planes.bottom = arg->viewport->mid_planes[index + 1];
 	// planes.bottom.point.y -= 1.0f;
 	planes.bottom.normal.y *= -1.0f;

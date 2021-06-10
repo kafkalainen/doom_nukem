@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/08 16:27:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 14:15:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	launch_game_loop(t_home *home, t_player *plr,
 		SDL_UpdateWindowSurface(home->win.window);
 	}
 	free_game_assets(home);
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 }
 
 void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e,

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 13:11:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/10 13:35:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 	pthread_mutex_t	mutex;
 	Uint32			i;
 
-	i = 0;
 	mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	// transform_walls(home, sector, frame->transformed);
 	project_to_player_position(frame->transformed, frame->triangles_in_view, plr, &frame->viewport);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/07 16:23:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 14:15:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	setup_game_loop(char **mapname, t_home *home,
 	ft_strdel(mapname);
 	*mapname = NULL;
 	*menu_option = 0;
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
 void	setup_editor(t_home *home)
