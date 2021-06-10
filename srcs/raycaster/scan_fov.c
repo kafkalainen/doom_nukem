@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 16:01:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 16:12:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	add_floor_and_ceiling(t_raster_queue *transformed, t_sector *sector)
 
 	while (j < sector->nb_of_ceil)
 	{
-		transformed->array[transformed->size - 1] = ceiling->tri;
+		transformed->array[transformed->size] = ceiling->tri;
 		transformed->size += 1;
 		ceiling = ceiling->next;
 		j++;
@@ -48,12 +48,20 @@ void	add_floor_and_ceiling(t_raster_queue *transformed, t_sector *sector)
 	j = 0;
 	while (j < sector->nb_of_ground)
 	{
-		transformed->array[transformed->size - 1] = ground->tri;
+		transformed->array[transformed->size] = ground->tri;
 		transformed->size += 1;
 		ground = ground->next;
 		j++;
 	}
 }
+
+// void	add_skybox_
+// 	j = 0;
+// 	while (j < 12)
+// 	{
+// 		temp_array[frame->transformed->size++] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[j]);
+// 		j++;
+// 	}
 
 void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {
@@ -83,13 +91,6 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		frame->left.wall = frame->left.wall->next;
 	}
 	frame->transformed->size = j;
-
-	// j = 0;
-	// while (j < 12)
-	// {
-	// 	temp_array[frame->transformed->size++] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[j]);
-	// 	j++;
-	// }
 	j = 0;
 	while ((int)j < frame->transformed->size)
 	{
