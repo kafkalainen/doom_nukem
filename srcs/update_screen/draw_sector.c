@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 13:35:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/10 16:03:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static Uint32	clip_to_near_plane(t_triangle *current_view,
 		triangle_add(&projected, viewport->view_offset);
 		projected = scale_triangle(&projected, scale);
 		triangles_in_view->array[triangles_in_view->size] = projected;
-		triangles_in_view->size++;
+		triangles_in_view->size += 1;
 		nb_of_clipped_triangles--;
 	}
 	return (TRUE);

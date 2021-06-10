@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 15:02:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 16:01:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,39 @@ t_texel	*get_tex(int idx, t_texture	**textures)
 	return (NULL);
 }
 
+void	add_floor_and_ceiling(t_raster_queue *transformed, t_sector *sector)
+{
+	Uint32			j;
+	t_surface		*ground;
+	t_surface		*ceiling;
+
+	ground = sector->ground;
+	ceiling = sector->ceiling;
+	j = 0;
+
+	while (j < sector->nb_of_ceil)
+	{
+		transformed->array[transformed->size - 1] = ceiling->tri;
+		transformed->size += 1;
+		ceiling = ceiling->next;
+		j++;
+	}
+	j = 0;
+	while (j < sector->nb_of_ground)
+	{
+		transformed->array[transformed->size - 1] = ground->tri;
+		transformed->size += 1;
+		ground = ground->next;
+		j++;
+	}
+}
+
 void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {
 	t_frame			new_frame;
 	t_triangle		temp_array[200];
-	t_surface		*ground;
-	t_surface		*ceiling;
 	unsigned int	j;
 
-	ground = home->sectors[frame->idx]->ground;
-	ceiling = home->sectors[frame->idx]->ceiling;
 	frame->left.wall = home->sectors[frame->idx]->walls;
 	frame->transformed->size = 0;
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
@@ -60,20 +83,7 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		frame->left.wall = frame->left.wall->next;
 	}
 	frame->transformed->size = j;
-	j = 0;
-	while (j < home->sectors[frame->idx]->nb_of_ceil)
-	{
-		temp_array[frame->transformed->size++] = ceiling->tri;
-		ceiling = ceiling->next;
-		j++;
-	}
-	j = 0;
-	while (j < home->sectors[frame->idx]->nb_of_ground)
-	{
-		temp_array[frame->transformed->size++] = ground->tri;
-		ground = ground->next;
-		j++;
-	}
+
 	// j = 0;
 	// while (j < 12)
 	// {
@@ -86,5 +96,6 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		frame->transformed->array[j] = temp_array[j];
 		j++;
 	}
+	add_floor_and_ceiling(frame->transformed, home->sectors[frame->idx]);
 	draw_sector(frame, home, plr);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 15:39:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 16:01:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ int	player_move(t_player *plr, t_home *home, Uint32 delta_time)
 		plr->camera = check_floor_height(home->sectors[plr->current_sector], plr->camera);
 		return (TRUE);
 	}
+	return (FALSE);
 }
