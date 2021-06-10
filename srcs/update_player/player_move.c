@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 14:21:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 15:39:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,25 @@ static t_xyz	check_floor_height(t_sector *sector, t_xyz pos)
 	return (pos);
 }
 
-int	player_move(t_player *plr, t_home *home)
+int	player_move(t_player *plr, t_home *home, Uint32 delta_time)
 {
-	t_wall *wall;
+	t_wall	*wall;
+	t_xyz	test_pos;
 
-	wall = check_if_crossing(home->sectors[plr->current_sector], plr->camera);
+	plr->move_dir = vec3_unit_vector(plr->move_dir);
+	test_pos = vec3_add(plr->camera, vec3_mul(plr->move_dir, delta_time * 0.05f));
+	wall = check_if_crossing(home->sectors[plr->current_sector], test_pos);
 	if (wall)
 	{
 		if (wall->top.idx >= 0)
 			plr->current_sector = wall->top.idx;
 		else
-			plr->camera = vec3_dec(plr->camera, vec3_mul(plr->look_dir, 0.05f));
+			return (FALSE);
 	}
 	else
 	{
+		plr->camera = vec3_add(plr->camera, vec3_mul(plr->move_dir, delta_time * 0.005f));
 		plr->camera = check_floor_height(home->sectors[plr->current_sector], plr->camera);
 		return (TRUE);
 	}
-	return (TRUE);
 }

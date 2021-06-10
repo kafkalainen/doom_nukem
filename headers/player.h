@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/26 11:16:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 14:46:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_player
 {
 	t_xyz			camera;
 	t_xyz			look_dir;
+	t_xyz			move_dir;
 	t_xyz			target;
 	t_xyz			up;
 	float			yaw;
@@ -48,7 +49,6 @@ typedef struct s_player
 	int				current_sector;
 	t_xy			pos;
 	t_xy			dir;
-	t_xy			move_dir;
 	t_input			input;
 	Uint32			time;
 	t_audio			audio;
