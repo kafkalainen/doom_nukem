@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 12:31:37 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/10 16:50:19 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void			free_texture(t_texture *tex);
 t_texture		*assign_empty_texture(void);
 void			convert_to_unsigned_int(t_texture *tex, t_png *png);
 unsigned int	add_pixel(unsigned char *data, int bpp, int pos);
-unsigned int	swap_channels(unsigned int pixel);
 void			add_texture_values(t_png *png, t_texture *tex, int idx);
 
 /*

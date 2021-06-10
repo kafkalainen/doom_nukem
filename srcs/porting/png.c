@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/07 14:43:40 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/10 16:43:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*convert_to_uint32(Uint32 *dest, t_texture *image)
 		while (++x < image->tex.width)
 		{
 			dest[(y * image->tex.width) + x] = swap_channels(pixels[(y
-						* image->tex.width) + x]);
+						* image->tex.width) + x], image->format);
 		}
 	}
 	return (dest);

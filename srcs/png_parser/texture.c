@@ -6,23 +6,33 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/05 15:34:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/10 17:02:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	swap_channels(unsigned int color)
+Uint32	swap_channels(unsigned int color, int format)
 {
 	unsigned int	red;
 	unsigned int	green;
 	unsigned int	blue;
 	unsigned int	alpha;
 
-	red = (color & 0xFF000000) >> 24;
-	green = (color & 0x00FF0000) >> 16;
-	blue = (color & 0x0000FF00) >> 8;
-	alpha = (color & 0x000000FF);
+	if (format == RGB_8 || format == RGB_16)
+	{
+		alpha = (color >> 24) & 0xFF;
+		red = (color & 0xFF0000) >> 16;
+		green = (color & 0x00FF00) >> 8;
+		blue = (color & 0x0000FF);
+	}
+	else
+	{
+		red = (color & 0xFF000000) >> 24;
+		green = (color & 0x00FF0000) >> 16;
+		blue = (color & 0x0000FF00) >> 8;
+		alpha = (color & 0x000000FF);
+	}
 	return ((alpha << 24) | (red << 16) | (green << 8) | (blue));
 }
 
