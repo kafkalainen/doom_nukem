@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 14:36:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 15:05:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	initialize_rasterization_queues(t_frame *frame)
 	unsigned int i;
 
 	i = 0;
-	frame->transformed = create_raster_queue(100);
+	frame->transformed = create_raster_queue(200);
 	if (!frame->transformed)
 		return (1);
-	frame->triangles_in_view = create_raster_queue(100);
+	frame->triangles_in_view = create_raster_queue(2000);
 	if (!frame->triangles_in_view)
 		return (1);
 	frame->raster_queue = (t_raster_queue**)malloc(sizeof(t_raster_queue*) * (MAX_THREADS + 1));
@@ -54,7 +54,7 @@ int	initialize_rasterization_queues(t_frame *frame)
 		return (1);
 	while (i < MAX_THREADS)
 	{
-		frame->raster_queue[i] = create_raster_queue(200);
+		frame->raster_queue[i] = create_raster_queue(2000);
 		if (!frame->raster_queue[i])
 			return (1);
 		i++;

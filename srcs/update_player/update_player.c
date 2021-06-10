@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 13:02:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/10 08:13:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,9 @@
 
 static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 {
-	
-	// t_xy	plr_dir;
-
 	(void)home;
 	(void)delta_time;
+	// t_xy	plr_dir;
 	// gravity_func(plr, floor_height, (delta_time * 0.05));
 	// if (plr->input.up == 1 || plr->input.down == 1
 	// 	|| plr->input.left == 1 || plr->input.right == 1)
@@ -72,9 +70,7 @@ static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 	// 	plr_dir = (t_xy){0, 1};
 	// 	check_player_dir(plr, &plr_dir);
 	// 	plr_dir = vec2_mul(plr_dir, delta_time * 0.05);
-	// 	if (player_move(plr, home, &plr_dir))
-	// 		play_footsteps(plr);
-	// }
+	//
 	if (plr->input.debug_up == 1)
 		plr->camera.y += 0.05f;
 	if (plr->input.debug_down == 1)
@@ -84,13 +80,21 @@ static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 	if (plr->input.debug_right == 1)
 		plr->camera.x += 0.05f;
 	if (plr->input.up == 1)
+	{
 		plr->camera = vec3_add(plr->camera, vec3_mul(plr->look_dir, 0.05f));
+		player_move(plr, home);
+	}
 	if (plr->input.down == 1)
+	{
 		plr->camera = vec3_dec(plr->camera, vec3_mul(plr->look_dir, 0.05f));
+		player_move(plr, home);
+	}
 	if (plr->input.left == 1)
 		plr->yaw -= 0.02f;
 	if (plr->input.right == 1)
 		plr->yaw += 0.02f;
+	// if (player_move(plr, home, &plr_dir))
+	//  	play_footsteps(plr);
 }
 
 void	update_player(t_player *plr, t_home *home, Uint32 delta_time)

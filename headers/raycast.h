@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 09:22:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/09 15:03:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ typedef struct s_frame
 	t_ray_pt		left;
 	t_ray_pt		right;
 	Uint32			last_frame;
-	t_triangle		cube[12];
-	t_triangle		transformed_cube[12];
 	t_triangle		view_cube;
 	t_raster_queue	*triangles_in_view;
 	t_raster_queue	**raster_queue;
