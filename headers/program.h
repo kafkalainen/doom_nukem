@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/09 13:50:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 13:09:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ typedef struct s_home
 typedef struct	s_arg
 {
 	Uint32			*buffer;
-	float			**depth_buffer;
+	float			*depth_buffer;
 	t_texture		**editor_tex;
 	t_raster_queue	*view_list;
 	t_raster_queue	**raster_queue;
 	t_sides			*viewport;
 	Uint32			last_frame;
-	pthread_t		tid[MAX_THREADS];
+	int				thread_index;
 }				t_arg;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clip_to_viewport_edges.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 14:38:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 13:13:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static void	clipper_viewport_edges(t_planes planes, t_raster_queue *raster_queue
 			current_plane++;
 		}
 		tex = get_tex(arg->view_list->array[i].idx, arg->editor_tex);
-		draw_polygon(arg->buffer, *(arg->depth_buffer), raster_queue, tex);
+		draw_polygon(arg->buffer, arg->depth_buffer, raster_queue, tex);
 		i++;
 	}
 }
@@ -123,20 +123,13 @@ static void	clipper_viewport_edges(t_planes planes, t_raster_queue *raster_queue
 void	*clip_to_viewport_edges(void *args)
 {
 	t_arg			*arg;
-	pthread_t		current;
 	unsigned int	index;
 	t_raster_queue	*current_queue;
 	t_planes		planes;
 
 	index = 0;
 	arg = (t_arg*)args;
-	current = pthread_self();
-	while (current != arg->tid[index])
-	{
-		if (index + 1 > MAX_THREADS)
-			break ;
-		index++;
-	}
+	index = arg->thread_index;
 	planes.top = arg->viewport->mid_planes[index];
 	planes.top.point.y += 1.0f;
 	planes.bottom = arg->viewport->mid_planes[index + 1];

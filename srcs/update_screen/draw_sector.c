@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 16:57:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/10 13:11:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,8 @@ void	reset_depth_buffer(float *depth_buffer)
 
 int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 {
-	t_arg			args;
+	t_arg			args[MAX_THREADS];
+	pthread_t		tid[MAX_THREADS];
 	pthread_mutex_t	mutex;
 	Uint32			i;
 
@@ -155,22 +156,23 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 	// 	i++;
 	// }
 	reset_depth_buffer(frame->depth_buffer);
-	args.editor_tex = home->editor_tex;
-	args.buffer = frame->buffer;
-	args.depth_buffer = &frame->depth_buffer;
-	args.view_list = frame->triangles_in_view;
-	args.raster_queue = frame->raster_queue;
-	args.viewport = &frame->viewport;
-	args.last_frame = home->t.frame_time_last;
 	i = 0;
 	while (i < MAX_THREADS)
 	{
-		pthread_create(&args.tid[i], NULL, &clip_to_viewport_edges, (void*)&args);
+		args[i].editor_tex = home->editor_tex;
+		args[i].buffer = frame->buffer;
+		args[i].depth_buffer = frame->depth_buffer;
+		args[i].view_list = frame->triangles_in_view;
+		args[i].raster_queue = frame->raster_queue;
+		args[i].viewport = &frame->viewport;
+		args[i].last_frame = home->t.frame_time_last;
+		args[i].thread_index = i;
+		pthread_create(&tid[i], NULL, &clip_to_viewport_edges, (void*)&args[i]);
 		pthread_mutex_lock(&mutex);
 		i++;
 		pthread_mutex_unlock(&mutex);
 	}
 	while (i--)
-		pthread_join(args.tid[i], NULL);
+		pthread_join(tid[i], NULL);
 	return (TRUE);
 }
