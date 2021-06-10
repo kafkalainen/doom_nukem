@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 16:12:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 16:24:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@ void	add_floor_and_ceiling(t_raster_queue *transformed, t_sector *sector)
 		j++;
 	}
 }
-
-// void	add_skybox_
-// 	j = 0;
-// 	while (j < 12)
-// 	{
-// 		temp_array[frame->transformed->size++] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[j]);
-// 		j++;
-// 	}
 
 void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {

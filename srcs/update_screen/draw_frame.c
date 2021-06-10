@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/09 09:56:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 16:25:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,21 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	free(plr_z);
 }
 
+void	add_skybox(t_raster_queue *transformed, t_skybox *skybox)
+{
+	Uint32 j;
+
+	j = 0;
+	transformed->size = 0;
+	while (j < 12)
+	{
+		transformed->array[transformed->size] = apply_world_matrix(0.0f, 0.0f,
+			(t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &skybox->face[j]);
+		transformed->size += 1;
+		j++;
+	}
+}
+
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
 	frame->idx = plr->current_sector;
@@ -116,6 +131,8 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	frame->right.r_pt = (t_xy){-1.0f, -1.0f};
 	frame->left.left_dir = vec2_add(vec3_to_vec2(plr->look_dir), vec2(-PLR_DIR, PLR_DIR));
 	frame->right.right_dir = vec2_add(vec3_to_vec2(plr->look_dir), vec2(PLR_DIR, PLR_DIR));
+	add_skybox(frame->transformed, &home->skybox);
+	draw_sector(frame, home, plr);
 	scan_fov(home, frame, plr);
 	// if (plr->input.minimap)
 	// {

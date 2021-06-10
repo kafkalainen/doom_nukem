@@ -6,70 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 16:03:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/10 16:21:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-int	painters_algorithm(const void *tri1, const void *tri2)
-{
-	if (triangle_calculate_average_z((t_triangle *)tri1)
-		< triangle_calculate_average_z((t_triangle *)tri2))
-		return (1);
-	else
-		return (0);
-}
-
-// static Uint32	transform_walls(t_home *home, t_sector *sector, t_raster_queue *transformed)
-// {
-// 	Uint32		i;
-// 	Uint32		j;
-// 	Uint32		k;
-// 	Uint32		l;
-// 	t_wall		*wall;
-// 	t_surface	*ground;
-// 	t_surface	*ceiling;
-
-// 	i = 0;
-// 	j = 0;
-// 	k = 0;
-// 	l = 0;
-// 	wall = sector->walls;
-// 	ground = sector->ground;
-// 	ceiling = sector->ceiling;
-// 	while (i < 12)
-// 	{
-// 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &home->skybox.face[i]);
-// 		i++;
-// 	}
-// 	while (j < sector->nb_of_walls * 2)
-// 	{
-// 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &wall->top);
-// 		i++;
-// 		j++;
-// 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &wall->bottom);
-// 		i++;
-// 		j++;
-// 		wall = wall->next;
-// 	}
-// 	while (k < 2)
-// 	{
-// 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &ground->tri);
-// 		i++;
-// 		k++;
-// 		ground = ground->next;
-// 	}
-// 	while (l < 2)
-// 	{
-// 		transformed->array[i] = apply_world_matrix(0.0f, 0.0f, (t_xyz){0.0f, 0.0f, 5.0f, 0.0f}, &ceiling->tri);
-// 		i++;
-// 		l++;
-// 		ceiling = ceiling->next;
-// 	}
-// 	transformed->size = i;
-// 	return (TRUE);
-// }
 
 static Uint32	clip_to_near_plane(t_triangle *current_view,
 	t_sides *viewport, t_raster_queue *triangles_in_view)
@@ -145,15 +86,7 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 	Uint32			i;
 
 	mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
-	// transform_walls(home, sector, frame->transformed);
 	project_to_player_position(frame->transformed, frame->triangles_in_view, plr, &frame->viewport);
-	// qsort((void *)frame->triangles_in_view->array,
-	// 	(size_t)frame->triangles_in_view->size, sizeof(t_triangle), painters_algorithm);
-	// while (i < SCREEN_HEIGHT * SCREEN_WIDTH)
-	// {
-	// 	frame->depth_buffer[i] = 0.0f;
-	// 	i++;
-	// }
 	reset_depth_buffer(frame->depth_buffer);
 	i = 0;
 	while (i < MAX_THREADS)
