@@ -6,11 +6,25 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:44:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 11:45:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/11 13:00:19 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+Uint32	get_color(enum e_colour color)
+{
+	Uint8 alpha;
+	Uint8 red;
+	Uint8 green;
+	Uint8 blue;
+
+	alpha = 0xFF;
+	red = (color & 0xFF0000) >> 16;
+	green = (color & 0x00FF00) >> 8;
+	blue = (color & 0x0000FF);
+	return (((alpha << 24)) | (red << 16) | (green << 8) | (blue));
+}
 
 int	get_game_state(int *option)
 {

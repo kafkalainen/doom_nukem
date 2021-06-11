@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/10 16:43:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/11 12:07:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	load_texture(char *path, t_home *home, int i)
 		error_output("PNG image file loading failed\n");
 	else
 		convert_to_uint32(home->editor_tex[i]->tex.texels, home->editor_tex[i]);
+	// printf("format: %i\n", png.format);
 	free_png(png);
 }
 

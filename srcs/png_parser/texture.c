@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/10 17:02:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/11 12:51:06 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Uint32	swap_channels(unsigned int color, int format)
 
 	if (format == RGB_8 || format == RGB_16)
 	{
-		alpha = (color >> 24) & 0xFF;
+		alpha = 0xFF;
 		red = (color & 0xFF0000) >> 16;
 		green = (color & 0x00FF00) >> 8;
 		blue = (color & 0x0000FF);

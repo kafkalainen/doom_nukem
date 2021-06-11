@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:34:26 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/04 16:22:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 12:50:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ Uint32	get_pixel(SDL_Surface *surface, int x, int y)
 
 void	put_pixel(Uint32 *buffer, int x, int y, Uint32 color)
 {
-	if (x > SCREEN_WIDTH - 1 || y > SCREEN_HEIGHT - 1 || x < 0 || y < 0)
+	Uint8 alpha;
+
+	alpha = (color & 0xFF000000) >> 24;
+
+	if (x > SCREEN_WIDTH - 1 || y > SCREEN_HEIGHT - 1 || x < 0 || y < 0 || alpha == 0.0f)
 		return ;
 	*(buffer + (SCREEN_WIDTH * y) + x) = color;
 }

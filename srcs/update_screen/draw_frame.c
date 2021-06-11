@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/10 16:25:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 13:09:26 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	char			*plr_z;
 	t_plx_modifier	mod;
 
-	mod.colour = white;
+	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
 	compass = compass_direction(&plr->dir);
 	sector = ft_itoa(plr->current_sector);
@@ -88,10 +88,10 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	ft_str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){green, 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_x, (t_plx_modifier){green, 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_y, (t_plx_modifier){green, 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_z, (t_plx_modifier){green, 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){get_color(green), 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_x, (t_plx_modifier){get_color(green), 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_y, (t_plx_modifier){get_color(green), 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_z, (t_plx_modifier){get_color(green), 2});
 	ft_str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);

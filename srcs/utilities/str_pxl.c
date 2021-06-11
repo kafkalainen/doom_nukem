@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/27 09:30:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 13:07:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static t_pxl_c	letter_logic(int c, int letter_colour)
 {
 	if (c >= 'A' && c <= 'Z')
-		return (pxl_alphabet(c, black, letter_colour));
+		return (pxl_alphabet(c, get_color(black), letter_colour));
 	if (c >= '0' && c <= '9')
-		return (pxl_numbers(c, black, letter_colour));
+		return (pxl_numbers(c, get_color(black), letter_colour));
 	if (c == ':' || c == '\'' || c == '!' || c == '?' || c == ' '
 		|| c == '.' || c == ',' || c == '(' || c == ')' || c == '%')
-		return (pxl_numbers(c, black, letter_colour));
-	return (pxl_numbers(' ', black, letter_colour));
+		return (pxl_numbers(c, get_color(black), letter_colour));
+	return (pxl_numbers(' ', get_color(black), letter_colour));
 }
 
 static void	handle_letter(Uint32 *buffer, t_xy coord,
