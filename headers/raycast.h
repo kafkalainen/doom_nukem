@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 15:03:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 12:06:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,10 @@ enum e_lines
 	c_clockwise = 2,
 };
 
-void			calc_ground_dimensions(t_frame *frame, t_player *plr, t_home *home);
-void			calc_ground_texels(t_frame *frame);
 void			calc_intersection(t_wall *pgon, t_ray *ray,
 					t_intersection *sect);
 void			calc_sector_bounds(t_sector *sector);
-void			calc_wall_dimensions(t_frame *frame, t_player *plr, t_home *home);
-void			calc_wall_texels(t_frame *frame, int tex_width);
+void			calc_extra_walls(t_home *home, unsigned int idx);
 t_xy			cast_ray(t_xy *dir, t_wall **head, int walls);
 int				check_connection(t_wall *point, t_frame *frame);
 int				check_if_portal(t_wall *point);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/07 12:49:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 11:32:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define BUFF_SIZE 16
 # define NBR_BUTTONS 14
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGHT 480
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 600
 
 # define WALL_HEIGHT 0.5f
 # define TEX_SIZE 128
@@ -46,7 +46,7 @@
 # define MAP_MENU 2
 # define MAIN_MENU 1
 # define QUIT -1
-# define MAX_THREADS 2
+# define MAX_THREADS 6
 # define SKYBOX_TEX -1
 
 /*

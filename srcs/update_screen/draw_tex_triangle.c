@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 11:02:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 13:03:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static t_deltas	calculate_vertex_delta(t_xyz p0, t_xyz p1,
 {
 	t_deltas	delta;
 
-	delta.y = p1.y - p0.y;
-	delta.x = p1.x - p0.x;
+	delta.y = (int)p1.y - (int)p0.y;
+	delta.x = (int)p1.x - (int)p0.x;
 	delta.v = uv1.v - uv0.v;
 	delta.u = uv1.u - uv0.u;
 	delta.w = uv1.w - uv0.w;

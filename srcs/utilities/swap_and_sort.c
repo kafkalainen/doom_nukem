@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:37:52 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 10:55:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 13:00:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ void	swap_uvz(t_uvz *p0, t_uvz *p1)
 
 void	sort_vertices(t_triangle *tri)
 {
-	if (tri->p[1].y < tri->p[0].y)
+	if ((int)tri->p[1].y < (int)tri->p[0].y)
 	{
 		swap_xyz(&tri->p[0], &tri->p[1]);
 		swap_uvz(&tri->uv[0], &tri->uv[1]);
 	}
-	if (tri->p[2].y < tri->p[0].y)
+	if ((int)tri->p[2].y < (int)tri->p[0].y)
 	{
 		swap_xyz(&tri->p[0], &tri->p[2]);
 		swap_uvz(&tri->uv[0], &tri->uv[2]);
 	}
-	if (tri->p[2].y < tri->p[1].y)
+	if ((int)tri->p[2].y < (int)tri->p[1].y)
 	{
 		swap_xyz(&tri->p[1], &tri->p[2]);
 		swap_uvz(&tri->uv[1], &tri->uv[2]);

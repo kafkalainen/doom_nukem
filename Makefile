@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/10 11:43:50 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/11 12:17:33 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS = \
 	editor$(SLASH)setup_editor.c \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)editor_events.c \
+	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_wall_and_floor_properties.c \
 	parsing$(SLASH)calc_slanted_floors.c \
 	parsing$(SLASH)free_sector.c \
