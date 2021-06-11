@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/11 12:17:33 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/11 16:25:36 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS = \
 	parsing$(SLASH)free_sector.c \
 	parsing$(SLASH)parse_number_data.c \
 	parsing$(SLASH)parse_sector.c \
+	parsing$(SLASH)parse_sector_2.c \
 	parsing$(SLASH)parse_surfaces.c \
 	parsing$(SLASH)triangulate_floor_and_ceiling.c \
 	png_parser$(SLASH)color_utils.c \
@@ -65,8 +66,9 @@ SRCS = \
 	raycaster$(SLASH)setup_frame.c \
 	update_player$(SLASH)key_input.c \
 	update_player$(SLASH)mouse_handle.c \
-	update_player$(SLASH)update_height.c \
+	update_player$(SLASH)check_y_diff.c \
 	update_player$(SLASH)player_move.c \
+	update_player$(SLASH)special_movement.c \
 	update_player$(SLASH)update_player.c \
 	update_screen$(SLASH)apply_matrices_a.c \
 	update_screen$(SLASH)apply_matrices_b.c \

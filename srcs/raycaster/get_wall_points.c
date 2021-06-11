@@ -69,7 +69,7 @@ void	get_wall_pts(t_frame *frame, int walls, t_player *plr)
 {
 	t_ray	ray;
 
-	ray.pos = (t_xy){plr->camera.x, plr->camera.z};
+	ray.pos = (t_xy){plr->pos.x, plr->pos.z};
 	ray.dir = frame->left.left_dir;
 	get_l_pt(frame->left.wall, ray, frame, walls);
 	ray.dir = frame->right.right_dir;

@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 16:01:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 16:22:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_wall	*check_if_crossing(t_sector *sector, t_xyz pos)
+static t_wall	*check_if_crossing(t_sector *sector, t_xyz pos, float cur_height)
 {
 	unsigned int	i;
 	t_wall			*temp;
@@ -25,14 +25,18 @@ static t_wall	*check_if_crossing(t_sector *sector, t_xyz pos)
 		plane.point = temp->top.p[0];
 		plane.normal = triangle_normal(&temp->top);
 		if (vec3_signed_distance_to_plane(pos, plane.normal, plane.point))
-			return (temp);
+		{
+			if (pos.y + cur_height < temp->top.p[0].y
+				|| pos.y + cur_height < temp->top.p[2].y)
+				return (temp);
+		}
 		temp = temp->next;
 		i++;
 	}
 	return (NULL);
 }
 
-static t_xyz	check_floor_height(t_sector *sector, t_xyz pos)
+t_xyz	check_y(t_sector *sector, t_xyz pos, float cur_height)
 {
 	unsigned int	i;
 	t_surface		*ground;
@@ -53,29 +57,33 @@ static t_xyz	check_floor_height(t_sector *sector, t_xyz pos)
 	plane.point = ground->tri.p[0];
 	plane.normal = triangle_normal(&ground->tri);
 	pos = vec3_intersection_with_ray_and_plane(&plane, pos, dir);
-	pos.y += 1.5f;
+	pos.y += cur_height;
 	return (pos);
 }
 
-int	player_move(t_player *plr, t_home *home, Uint32 delta_time)
+int	player_move(t_player *plr, t_home *home, Uint32 t)
 {
 	t_wall	*wall;
-	t_xyz	test_pos;
+	t_xyz	new_loc;
 
 	plr->move_dir = vec3_unit_vector(plr->move_dir);
-	test_pos = vec3_add(plr->camera, vec3_mul(plr->move_dir, delta_time * 0.05f));
-	wall = check_if_crossing(home->sectors[plr->current_sector], test_pos);
+	new_loc = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.05f));
+	wall = check_if_crossing(home->sectors[plr->cur_sector], new_loc, plr->height);
 	if (wall)
 	{
 		if (wall->top.idx >= 0)
-			plr->current_sector = wall->top.idx;
+		{
+			if (check_y_diff(&plr->pos, &new_loc, home->sectors[wall->top.idx], plr->height))
+				return (FALSE);
+			plr->cur_sector = wall->top.idx;
+		}
 		else
 			return (FALSE);
 	}
 	else
 	{
-		plr->camera = vec3_add(plr->camera, vec3_mul(plr->move_dir, delta_time * 0.005f));
-		plr->camera = check_floor_height(home->sectors[plr->current_sector], plr->camera);
+		plr->pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
+		plr->pos = check_y(home->sectors[plr->cur_sector], plr->pos, plr->height);
 		return (TRUE);
 	}
 	return (FALSE);

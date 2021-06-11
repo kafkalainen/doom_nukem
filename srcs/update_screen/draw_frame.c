@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/11 13:09:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/11 15:51:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
 	compass = compass_direction(&plr->dir);
-	sector = ft_itoa(plr->current_sector);
+	sector = ft_itoa(plr->cur_sector);
 	fps = ft_itoa(nb_fps);
-	plr_x = ft_ftoa(plr->camera.x, 6);
-	plr_y = ft_ftoa(plr->camera.y, 6);
-	plr_z = ft_ftoa(plr->camera.z, 6);
+	plr_x = ft_ftoa(plr->pos.x, 6);
+	plr_y = ft_ftoa(plr->pos.y, 6);
+	plr_z = ft_ftoa(plr->pos.z, 6);
 	ft_str_pxl(frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 50}, "dir: ", mod);
 	ft_str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
@@ -122,7 +122,7 @@ void	add_skybox(t_raster_queue *transformed, t_skybox *skybox)
 
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
-	frame->idx = plr->current_sector;
+	frame->idx = plr->cur_sector;
 	frame->old_idx = old_sector;
 	frame->max_fov = 0;
 	frame->offset = 640;

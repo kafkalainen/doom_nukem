@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/11 13:17:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 16:23:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 
-# define WALL_HEIGHT 0.5f
 # define TEX_SIZE 128
 # define FOV 1.57079616f
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
 
 # define NUM_TEX 8
-
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
 # define INV_PI_BY_TWO 0.1591549367f

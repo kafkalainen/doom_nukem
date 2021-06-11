@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 09:46:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 16:23:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ void	init_player(t_player *plr)
 	plr->input.debug_right = 0;
 	plr->input.debug_left = 0;
 	plr->time = 0;
-	plr->current_sector = 0;
-	plr->camera = (t_xyz){1.483f, 3.19f, 2.29f, 1.0f};
+	plr->cur_sector = 0;
+	plr->pos = (t_xyz){1.483f, 3.19f, 2.29f, 1.0f};
 	plr->look_dir = (t_xyz){0.0f, 0.0f, 1.0f, 1.0f};
 	plr->up = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
 	plr->target = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
 	plr->pitch = 0.0f;
 	plr->yaw = 0.0f;
+	plr->height = 1.5f;
 }
 
 int	setup_fps(t_time *time)
@@ -71,49 +72,6 @@ int	setup_fps(t_time *time)
 	time->frame_time_last = SDL_GetTicks();
 	return (0);
 }
-
-// void	create_depth_buffers(float ***depth_buffer)
-// {
-// 	Uint32	i;
-
-// 	i = 0;
-// 	if (!depth_buffer)
-// 		return ;
-// 	*depth_buffer = (float **)malloc(sizeof(float *) * (MAX_THREADS + 1));
-// 	if (!*depth_buffer)
-// 		error_output("Memory allocation failed!\n");
-// 	else
-// 		printf("Depth buffer allocation succeeded. Address is: %p\n", (void**)*depth_buffer);
-// 	while (i < MAX_THREADS)
-// 	{
-// 		*(*(depth_buffer) + i) = (float *)malloc(sizeof(float)
-// 			* (SCREEN_WIDTH * SCREEN_HEIGHT + 1));
-// 		if (*(*(depth_buffer) + i))
-// 			error_output("Memory allocation failed!\n");
-// 		else
-// 			printf("Depth buffer allocation succeeded. Address is: %p at %d\n", (void*)*(*(depth_buffer) + i), i);
-// 		i++;
-// 	}
-// }
-
-// void	free_depth_buffers(float ***depth_buffer)
-// {
-// 	Uint32	i;
-
-// 	i = 0;
-// 	if (!depth_buffer)
-// 		return ;
-// 	while (i < MAX_THREADS)
-// 	{
-// 		printf("Freeing depth buffer. Address is: %p at %d\n", (void*)*(*(depth_buffer) + i), i);
-// 		free(*(*(depth_buffer) + i));
-// 		ft_putendl_fd("Freed element depth buffer.\n", 1);
-// 		i++;
-// 	}
-// 	printf("Freeing array of the depth buffer. Address is: %p\n", (void**)*depth_buffer);
-// 	free(*depth_buffer);
-// 	printf("Freed depth buffer.\n");
-// }
 
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {

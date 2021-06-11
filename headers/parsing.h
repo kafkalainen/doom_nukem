@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 16:07:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 13:48:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void			add_point(t_wall **walls, t_wall *wall);
 int				add_points(t_sector *sector, unsigned char *buf,
 				unsigned int **pos);
+void			add_to_middle(t_wall **current_wall, t_wall *new_wall);
 void			calc_slanted_floors(t_home *home);
 void			calc_wall_and_floor_properties(t_home *home);
 int				check_if_lines_cut(t_sector *sector);

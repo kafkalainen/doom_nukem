@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 15:28:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 16:26:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ static void	check_player_dir(t_player *plr)
 static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 {
 	if (plr->input.debug_up == 1)
-		plr->camera.y += 0.05f;
+		plr->pos.y += 0.05f;
 	if (plr->input.debug_down == 1)
-		plr->camera.y -= 0.05f;
+		plr->pos.y -= 0.05f;
 	if (plr->input.debug_left == 1)
-		plr->camera.x -= 0.05f;
+		plr->pos.x -= 0.05f;
 	if (plr->input.debug_right == 1)
-		plr->camera.x += 0.05f;
+		plr->pos.x += 0.05f;
 	if (plr->input.up == 1 || plr->input.down == 1
 		|| plr->input.left == 1 || plr->input.right == 1)
 	{
@@ -82,5 +82,6 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 		plr->yaw -= 0.02f;
 	if (plr->input.rot_right == 1)
 		plr->yaw += 0.02f;
+	crouch(plr, delta_time);
 	movement(plr, home, delta_time);
 }
