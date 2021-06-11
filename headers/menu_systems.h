@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_systems.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:27:23 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/08 16:05:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 13:00:48 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	free_game_assets(t_home *home);
 void	update_option_load_menu(int *game_state, t_menu *menu, int sym);
 void	update_option_main_menu(int *game_state, int sym, int *option);
 int		get_game_state(int *option);
+Uint32	get_color(enum e_colour color);
 
 #endif
