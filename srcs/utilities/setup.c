@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 13:56:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/11 09:46:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,49 @@ int	setup_fps(t_time *time)
 	return (0);
 }
 
+// void	create_depth_buffers(float ***depth_buffer)
+// {
+// 	Uint32	i;
+
+// 	i = 0;
+// 	if (!depth_buffer)
+// 		return ;
+// 	*depth_buffer = (float **)malloc(sizeof(float *) * (MAX_THREADS + 1));
+// 	if (!*depth_buffer)
+// 		error_output("Memory allocation failed!\n");
+// 	else
+// 		printf("Depth buffer allocation succeeded. Address is: %p\n", (void**)*depth_buffer);
+// 	while (i < MAX_THREADS)
+// 	{
+// 		*(*(depth_buffer) + i) = (float *)malloc(sizeof(float)
+// 			* (SCREEN_WIDTH * SCREEN_HEIGHT + 1));
+// 		if (*(*(depth_buffer) + i))
+// 			error_output("Memory allocation failed!\n");
+// 		else
+// 			printf("Depth buffer allocation succeeded. Address is: %p at %d\n", (void*)*(*(depth_buffer) + i), i);
+// 		i++;
+// 	}
+// }
+
+// void	free_depth_buffers(float ***depth_buffer)
+// {
+// 	Uint32	i;
+
+// 	i = 0;
+// 	if (!depth_buffer)
+// 		return ;
+// 	while (i < MAX_THREADS)
+// 	{
+// 		printf("Freeing depth buffer. Address is: %p at %d\n", (void*)*(*(depth_buffer) + i), i);
+// 		free(*(*(depth_buffer) + i));
+// 		ft_putendl_fd("Freed element depth buffer.\n", 1);
+// 		i++;
+// 	}
+// 	printf("Freeing array of the depth buffer. Address is: %p\n", (void**)*depth_buffer);
+// 	free(*depth_buffer);
+// 	printf("Freed depth buffer.\n");
+// }
+
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
 	int				ret;
@@ -84,10 +127,13 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);
 	if (!frame->buffer)
 		error_output("Memory allocation failed!\n");
+	// create_depth_buffers(&frame->depth_buffer);
 	frame->depth_buffer = (float *)malloc(sizeof(float)
-			* ((SCREEN_WIDTH + 1) * SCREEN_HEIGHT) + 1);
+			* (SCREEN_WIDTH * SCREEN_HEIGHT + 1));
 	if (!frame->depth_buffer)
 		error_output("Memory allocation failed!\n");
+	else
+		printf("Depth buffer allocation succeeded. Address is: %p\n", frame->depth_buffer);
 	ret = initialize_rasterization_queues(frame);
 	if (ret)
 		clean_up(frame);

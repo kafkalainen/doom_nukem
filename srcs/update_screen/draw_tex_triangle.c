@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 14:06:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 11:02:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,61 +25,63 @@ static t_deltas	calculate_vertex_delta(t_xyz p0, t_xyz p1,
 	return (delta);
 }
 
+/*
+**	Since denominators are initialized to zero, we can safely multiply them.
+*/
 static void	initialize_steps(t_xyz *step_side, t_uvz *tex_step_side,
-	t_deltas *delta, float *denom)
+	t_deltas *delta, float denom)
 {
-	step_side->x = 0;
-	tex_step_side->u = 0.0f;
-	tex_step_side->v = 0.0f;
-	tex_step_side->w = 0.0f;
-	if (*denom)
-	{
-		step_side->x = delta->x * *denom;
-		tex_step_side->u = delta->u * *denom;
-		tex_step_side->v = delta->v * *denom;
-		tex_step_side->w = delta->w * *denom;
-	}
+	step_side->x = delta->x * denom;
+	tex_step_side->u = delta->u * denom;
+	tex_step_side->v = delta->v * denom;
+	tex_step_side->w = delta->w * denom;
 }
 
+/*
+**	Typecasted triangle to int, and then back to float.
+*/
 static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 {
 	float		temp[2];
 
-	temp[0] = cur_y - tri->p[0].y;
-	steps->start_x = tri->p[0].x + (float)temp[0] * steps->screen_step_a_side.x;
-	steps->end_x = tri->p[0].x + (float)temp[0] * steps->screen_step_b_side.x;
-	steps->start_uv.u = tri->uv[0].u + (float)temp[0] * steps->tex_a_side.u;
-	steps->start_uv.v = tri->uv[0].v + (float)temp[0] * steps->tex_a_side.v;
-	steps->start_uv.w = tri->uv[0].w + (float)temp[0] * steps->tex_a_side.w;
-	steps->end_uv.u = tri->uv[0].u + (float)temp[0] * steps->tex_b_side.u;
-	steps->end_uv.v = tri->uv[0].v + (float)temp[0] * steps->tex_b_side.v;
-	steps->end_uv.w = tri->uv[0].w + (float)temp[0] * steps->tex_b_side.w;
+	temp[0] = (float)(cur_y - (int)tri->p[0].y);
+	steps->start_x = tri->p[0].x + temp[0] * steps->screen_step_a_side.x;
+	steps->end_x = tri->p[0].x + temp[0] * steps->screen_step_b_side.x;
+	steps->start_uv.u = tri->uv[0].u + temp[0] * steps->tex_a_side.u;
+	steps->start_uv.v = tri->uv[0].v + temp[0] * steps->tex_a_side.v;
+	steps->start_uv.w = tri->uv[0].w + temp[0] * steps->tex_a_side.w;
+	steps->end_uv.u = tri->uv[0].u + temp[0] * steps->tex_b_side.u;
+	steps->end_uv.v = tri->uv[0].v + temp[0] * steps->tex_b_side.v;
+	steps->end_uv.w = tri->uv[0].w + temp[0] * steps->tex_b_side.w;
 	if (steps->current_triangle != 'a')
 	{
-		temp[1] = cur_y - tri->p[1].y;
-		steps->start_x = tri->p[1].x + (float)temp[1]
+		temp[1] = (float)(cur_y - (int)tri->p[1].y);
+		steps->start_x = tri->p[1].x + temp[1]
 			* steps->screen_step_a_side.x;
-		steps->start_uv.u = tri->uv[1].u + (float)temp[1]
+		steps->start_uv.u = tri->uv[1].u + temp[1]
 			* steps->tex_a_side.u;
-		steps->start_uv.v = tri->uv[1].v + (float)temp[1]
+		steps->start_uv.v = tri->uv[1].v + temp[1]
 			* steps->tex_a_side.v;
-		steps->start_uv.w = tri->uv[1].w + (float)temp[1]
+		steps->start_uv.w = tri->uv[1].w + temp[1]
 			* steps->tex_a_side.w;
 	}
 	swap_sides(steps);
 }
 
+/*
+**	Switched to delta instead of denominator.
+*/
 static void	draw_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *triangle,
 	t_texel *tex, t_steps *step)
 {
 	int	max_y;
 
-	initialize_steps(&step->screen_step_a_side, &step->tex_a_side,
-		&step->delta_p0p1, &step->denom_dy_a_side);
-	initialize_steps(&step->screen_step_b_side, &step->tex_b_side,
-		&step->delta_p0p2, &step->denom_dy_b_side);
-	if (!step->denom_dy_a_side)
+	if (!step->delta_p0p1.y)
 		return ;
+	initialize_steps(&step->screen_step_a_side, &step->tex_a_side,
+		&step->delta_p0p1, step->denom_dy_a_side);
+	initialize_steps(&step->screen_step_b_side, &step->tex_b_side,
+		&step->delta_p0p2, step->denom_dy_b_side);
 	if (step->current_triangle == 'a')
 	{
 		step->cur_y = (int)triangle->p[0].y;
@@ -94,7 +96,7 @@ static void	draw_triangle(Uint32 *buffer, float *depth_buffer, t_triangle *trian
 	{
 		calc_current_step(triangle, step, step->cur_y);
 		draw_horizontal_line(buffer, depth_buffer, tex, step);
-		step->cur_y++;
+		step->cur_y += 1;
 	}
 }
 

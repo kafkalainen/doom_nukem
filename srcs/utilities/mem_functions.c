@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:50:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 07:48:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/11 09:53:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,33 @@ void	free_queues(t_frame *frame)
 	i = 0;
 	if (!frame)
 		return ;
-	delete_raster_queue(&frame->transformed);
-	delete_raster_queue(&frame->triangles_in_view);
+	printf("Freeing transformed triangles: %p\n", (void*)frame->transformed);
+	frame->transformed = delete_raster_queue(&frame->transformed);
+	ft_putendl_fd("Freed transformed queue.", 1);
+	printf("Freeing triangles in view address: %p\n", (void*)frame->triangles_in_view);
+	frame->triangles_in_view = delete_raster_queue(&frame->triangles_in_view);
+	ft_putendl_fd("Freed viewed queue.", 1);
 	if (frame->raster_queue)
 	{
 		while (i < MAX_THREADS)
 		{
-			delete_raster_queue(&frame->raster_queue[i]);
+			printf("Freeing individual raster queue address: %p\n", (void*)frame->raster_queue[i]);
+			free(frame->raster_queue[i]->array);
+			free(frame->raster_queue[i]);
+			ft_putendl_fd("Freed individual raster queue.", 1);
 			i++;
 		}
+		printf("Freed raster queue address: %p\n", (void**)frame->raster_queue);
 		free(frame->raster_queue);
+		ft_putendl_fd("Freed raster queue.", 1);
 	}
 	if (frame->depth_buffer)
+	{
+		printf("Depth buffer address: %p\n", (void**)frame->depth_buffer);
 		free(frame->depth_buffer);
+	}
 	frame->depth_buffer = NULL;
+	ft_putendl_fd("Freed depth buffer.", 1);
 	if (frame->viewport.mid_planes)
 		free(frame->viewport.mid_planes);
 	frame->viewport.mid_planes = NULL;
