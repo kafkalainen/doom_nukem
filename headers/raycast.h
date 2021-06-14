@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 12:06:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/14 08:22:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ enum e_lines
 void			calc_intersection(t_wall *pgon, t_ray *ray,
 					t_intersection *sect);
 void			calc_sector_bounds(t_sector *sector);
-void			calc_extra_walls(t_home *home, unsigned int idx);
+void			calc_extra_walls(t_home *home);
 t_xy			cast_ray(t_xy *dir, t_wall **head, int walls);
 int				check_connection(t_wall *point, t_frame *frame);
 int				check_if_portal(t_wall *point);
