@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 12:05:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/14 08:39:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/14 09:57:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	generate_a_new_lower_wall(t_wall *portal, t_wall *portal_behind)
+static Uint32	generate_a_new_lower_wall(t_wall *portal, t_wall *portal_behind)
 {
 	t_point_data	left;
 	t_point_data	right;
@@ -32,11 +32,12 @@ static void	generate_a_new_lower_wall(t_wall *portal, t_wall *portal_behind)
 		left.idx = -2;
 	new_wall = new_point(&left, &right);
 	if (!new_wall)
-		return ;
+		return (0);
 	add_to_middle(&portal_behind, new_wall);
+	return (1);
 }
 
-static void	generate_a_new_top_wall(t_wall *portal, t_wall *portal_behind)
+static Uint32	generate_a_new_top_wall(t_wall *portal, t_wall *portal_behind)
 {
 	t_point_data	left;
 	t_point_data	right;
@@ -56,10 +57,10 @@ static void	generate_a_new_top_wall(t_wall *portal, t_wall *portal_behind)
 		left.idx = -2;
 	new_wall = new_point(&left, &right);
 	if (!new_wall)
-		return ;
+		return (0);
 	add_to_middle(&portal_behind, new_wall);
+	return (1);
 }
-
 
 Uint32	generate_wall_logic(t_wall *current_portal, t_wall *portal_behind)
 {
@@ -73,15 +74,9 @@ Uint32	generate_wall_logic(t_wall *current_portal, t_wall *portal_behind)
 	if (check_portal_ceiling_difference(current_portal, portal_behind))
 		ceil_diff = 1;
 	if (floor_diff && !ceil_diff)
-	{
-		generate_a_new_lower_wall(current_portal, portal_behind);
-		return (1);
-	}
+		return (generate_a_new_lower_wall(current_portal, portal_behind));
 	if (!floor_diff && ceil_diff)
-	{
-		generate_a_new_top_wall(current_portal, portal_behind);
-		return (1);
-	}
+		return (generate_a_new_top_wall(current_portal, portal_behind));
 	if (ceil_diff && floor_diff)
 	{
 		generate_a_new_top_wall(current_portal, portal_behind);
@@ -90,7 +85,6 @@ Uint32	generate_wall_logic(t_wall *current_portal, t_wall *portal_behind)
 	}
 	return (0);
 }
-
 
 void	calc_extra_walls(t_home *home)
 {
@@ -109,7 +103,7 @@ void	calc_extra_walls(t_home *home)
 			if (current_portal->top.idx >= 0)
 			{
 				portal_behind = get_portal_by_idx(i,
-					home->sectors[current_portal->top.idx]);
+						home->sectors[current_portal->top.idx]);
 				home->sectors[current_portal->top.idx]->nb_of_walls
 					+= generate_wall_logic(current_portal, portal_behind);
 			}
