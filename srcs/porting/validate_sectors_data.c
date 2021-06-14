@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_sectors_data.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:06:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 08:38:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/14 14:59:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	validate_sectors_data(t_home *home)
 	// 	map_error_output(6, home);
 	while (i < home->nbr_of_sectors)
 	{
+		home->sectors[i]->nb_of_ceil = 0;
+		home->sectors[i]->nb_of_ground = 0;
 		if (home->sectors[i]->nb_of_walls < 3)
 			map_error_output(7, home);
 		if (check_if_sector_has_same_points(home->sectors[i]))

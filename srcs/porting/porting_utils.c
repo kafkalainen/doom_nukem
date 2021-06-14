@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:55:06 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/05 15:38:08 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/14 15:33:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	get_next_breaker(unsigned char *buf)
 			return (i);
 		i++;
 	}
-	return (-1);
+	return (BUF_SIZE);
 }
 
 t_texture	*return_new_texture(t_png *png, int idx)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 12:02:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/14 14:14:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	close_linkedlist(t_wall **head)
 }
 
 int	add_points(t_sector *sector,
-	unsigned char *buf, unsigned int **pos)
+	unsigned char *buf, unsigned int **pos, ssize_t size)
 {
 	unsigned int	i;
 	t_point_data	data_left;
@@ -88,11 +88,13 @@ int	add_points(t_sector *sector,
 	if (sector == NULL)
 		return (1);
 	sector->walls = NULL;
-	parse_coordinates(&data_left, &pos, &buf);
+	if (parse_coordinates(&data_left, &pos, &buf, size))
+		return (1);
 	data_first = data_left;
 	while (i < sector->nb_of_walls - 1)
 	{
-		parse_coordinates(&data_right, &pos, &buf);
+		if (parse_coordinates(&data_right, &pos, &buf, size))
+			return (free_points(&sector->walls, i));
 		if (data_left.idx < -4 || data_right.idx < -4)
 			return (free_points(&sector->walls, i));
 		wall = new_point(&data_left, &data_right);
@@ -113,7 +115,7 @@ int	add_points(t_sector *sector,
 	return (0);
 }
 
-t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos)
+t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos, ssize_t size)
 {
 	t_sector		*new_sector;
 	int				ret;
@@ -121,14 +123,19 @@ t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos)
 	if (!buf)
 		return (NULL);
 	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > (unsigned int)size)
+		return (NULL);
 	if (!ft_strstr((const char *)(buf + *pos), "sector"))
 		return (NULL);
 	*pos += 6;
+	if (*pos > (unsigned int)size)
+		return (NULL);
 	new_sector = (t_sector *)malloc(sizeof(t_sector));
 	if (!new_sector)
 		return (NULL);
-	parse_number_data(new_sector, buf, pos);
-	ret = add_points(new_sector, buf, &pos);
+	if (parse_number_data(new_sector, buf, pos, size))
+		return (NULL);
+	ret = add_points(new_sector, buf, &pos, size);
 	if (ret)
 	{
 		free(new_sector);
