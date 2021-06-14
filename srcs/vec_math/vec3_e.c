@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 11:36:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 13:29:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/14 12:52:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,39 @@ float	area_of_triangle(t_xyz p0, t_xyz p1, t_xyz p2)
 				+ p2.x * (p0.z - p1.z)) / 2.0f));
 }
 
-Uint32	point_inside_a_triangle(t_xyz p1, t_xyz p2, t_xyz p3, t_xyz p)
+Uint32	point_inside_a_triangle(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p)
 {
-	float	area;
-	float	area1;
-	float	area2;
-	float	area3;
+	// float	area;
+	// float	area1;
+	// float	area2;
+	// float	area3;
 
-	area = area_of_triangle(p1, p2, p3);
-	area1 = area_of_triangle(p, p2, p3);
-	area2 = area_of_triangle(p1, p, p3);
-	area3 = area_of_triangle(p1, p2, p);
-	if (area == area1 + area2 + area3)
+	// area = area_of_triangle(p1, p2, p3);
+	// area1 = area_of_triangle(p, p2, p3);
+	// area2 = area_of_triangle(p1, p, p3);
+	// area3 = area_of_triangle(p1, p2, p);
+	// if (area == area1 + area2 + area3)
+	// 	return (TRUE);
+	// else
+	// 	return (FALSE);
+
+	// private function isInsideTriangle(A:Point,B:Point,C:Point,P:Point):Boolean {
+	// 		var planeAB:Number = (A.x-P.x)*(B.y-P.y)-(B.x-P.x)*(A.y-P.y);
+	// 		var planeBC:Number = (B.x-P.x)*(C.y-P.y)-(C.x - P.x)*(B.y-P.y);
+	// 		var planeCA:Number = (C.x-P.x)*(A.y-P.y)-(A.x - P.x)*(C.y-P.y);
+	// 		return sign(planeAB)==sign(planeBC) && sign(planeBC)==sign(planeCA);
+	// 	}
+	float plane_p0p1;
+	float plane_p1p2;
+	float plane_p2p0;
+
+	plane_p0p1 = (p0.x - p.x) * (p1.z - p.z) - (p1.x - p.x) * (p0.z - p.z);
+	plane_p1p2 = (p1.x - p.x) * (p2.z - p.z) - (p2.x - p.x) * (p1.z - p.z);
+	plane_p2p0 = (p2.x - p.x) * (p0.z - p.z) - (p0.x - p.x) * (p2.z - p.z);
+	plane_p0p1 = give_sign(plane_p0p1);
+	plane_p1p2 = give_sign(plane_p1p2);
+	plane_p2p0 = give_sign(plane_p2p0);
+	if (plane_p0p1 == plane_p1p2 && plane_p1p2 == plane_p2p0)
 		return (TRUE);
 	else
 		return (FALSE);

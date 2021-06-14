@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/14 08:28:08 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/14 15:34:04 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,8 @@ SRCS = \
 	raycaster$(SLASH)recursion_checks.c \
 	raycaster$(SLASH)scan_fov.c \
 	raycaster$(SLASH)setup_frame.c \
+	update_player$(SLASH)check_distances.c \
+	update_player$(SLASH)gravity.c \
 	update_player$(SLASH)key_input.c \
 	update_player$(SLASH)mouse_handle.c \
 	update_player$(SLASH)check_y_diff.c \

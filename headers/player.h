@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/11 15:52:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/14 13:56:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_input
 	int				rot_right;
 	int				rot_left;
 	int				crouch;
+	int				jump;
 	int				wireframe;
 	int				minimap;
 	int				info;
@@ -43,12 +44,10 @@ typedef struct s_player
 	t_xy			dir;
 	float			yaw;
 	float			pitch;
-	float			z;
 	float			height;
-	float			angle;
 	float			acceleration;
-	int				gravity;
 	int				cur_sector;
+	Uint32			gravity_pull;
 	Uint32			time;
 	t_audio			audio;
 }					t_player;

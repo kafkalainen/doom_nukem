@@ -6,27 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 16:26:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/14 17:06:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-// // void	gravity_func(t_player *plr, int floor_height, float gravity)
-// // {
-// // 	floor_height = floor_height;
-// // 	// plr->z = plr->z - gravity;
-// // 	if (plr->acceleration > 0)
-// // 	{
-// // 		plr->acceleration = plr->acceleration - gravity;
-// // 		plr->height += plr->acceleration;
-// // 	}
-// // 	if (plr->acceleration < 0)
-// // 	{
-// // 		plr->acceleration = 0;
-// // 		plr->height = 0;
-// // 	}
-// // }
 
 static void	check_player_dir(t_player *plr)
 {
@@ -82,6 +66,8 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 		plr->yaw -= 0.02f;
 	if (plr->input.rot_right == 1)
 		plr->yaw += 0.02f;
-	crouch(plr, delta_time);
+	crouch(plr);
+	jump(plr);
+	gravity(home->sectors[plr->cur_sector], plr, delta_time);
 	movement(plr, home, delta_time);
 }
