@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 12:06:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/14 08:22:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	calc_wall_and_floor_properties(t_home *home)
 			temp = temp->next;
 			j++;
 		}
-		calc_extra_walls(home, i);
 		i++;
 	}
+	calc_extra_walls(home);
 	// calc_slanted_floors(home);
 	// precalc_ground_texels(home);
 }

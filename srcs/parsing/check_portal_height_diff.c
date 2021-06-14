@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_sector_2.c                                   :+:      :+:    :+:   */
+/*   check_portal_height_diff.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 13:29:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 16:46:25 by jnivala          ###   ########.fr       */
+/*   Created: 2021/06/14 08:24:45 by jnivala           #+#    #+#             */
+/*   Updated: 2021/06/14 08:27:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	add_to_middle(t_wall **current_point, t_wall *new_wall)
+Uint32	check_portal_floor_difference(t_wall *portal,
+	t_wall *portal_behind)
 {
-	t_wall	*temp;
-
-	if (new_wall == NULL)
-		return ;
-	if (*current_point == NULL)
-	{
-		*current_point = new_wall;
-	}
+	if (portal->bottom.p[0].y > portal_behind->bottom.p[2].y
+		|| portal->bottom.p[2].y > portal_behind->bottom.p[0].y)
+		return (1);
 	else
-	{
-		temp = (*current_point)->next;
-		(*current_point)->next = new_wall;
-		new_wall->next = temp;
-	}
+		return (0);
+}
+
+Uint32	check_portal_ceiling_difference(t_wall *portal,
+	t_wall *portal_behind)
+{
+	if (portal->top.p[1].y < portal_behind->top.p[2].y
+		|| portal->top.p[2].y < portal_behind->top.p[1].y)
+		return (1);
+	else
+		return (0);
 }

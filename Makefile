@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/11 16:25:36 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/14 08:28:08 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_wall_and_floor_properties.c \
 	parsing$(SLASH)calc_slanted_floors.c \
+	parsing$(SLASH)check_portal_height_diff.c \
 	parsing$(SLASH)free_sector.c \
 	parsing$(SLASH)parse_number_data.c \
 	parsing$(SLASH)parse_sector.c \

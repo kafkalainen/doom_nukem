@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 16:22:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/14 07:39:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,14 @@ static t_wall	*check_if_crossing(t_sector *sector, t_xyz pos, float cur_height)
 	t_plane			plane;
 
 	i = 0;
+	(void)cur_height;
 	temp = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
 		plane.point = temp->top.p[0];
 		plane.normal = triangle_normal(&temp->top);
 		if (vec3_signed_distance_to_plane(pos, plane.normal, plane.point))
-		{
-			if (pos.y + cur_height < temp->top.p[0].y
-				|| pos.y + cur_height < temp->top.p[2].y)
-				return (temp);
-		}
+			return (temp);
 		temp = temp->next;
 		i++;
 	}
@@ -71,6 +68,7 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 	wall = check_if_crossing(home->sectors[plr->cur_sector], new_loc, plr->height);
 	if (wall)
 	{
+		ft_putendl_fd("ITS A WOLL", 1);
 		if (wall->top.idx >= 0)
 		{
 			if (check_y_diff(&plr->pos, &new_loc, home->sectors[wall->top.idx], plr->height))
