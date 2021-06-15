@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/14 13:56:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/15 10:36:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_player
 	float			height;
 	float			acceleration;
 	int				cur_sector;
-	Uint32			gravity_pull;
 	Uint32			time;
 	t_audio			audio;
 }					t_player;

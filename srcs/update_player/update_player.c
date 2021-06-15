@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/14 17:06:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/15 09:58:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 	if (plr->input.rot_right == 1)
 		plr->yaw += 0.02f;
 	crouch(plr);
-	jump(plr);
+	jump(plr, home->sectors[plr->cur_sector]);
 	gravity(home->sectors[plr->cur_sector], plr, delta_time);
 	movement(plr, home, delta_time);
 }
