@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/15 10:15:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/15 15:58:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_wall	*check_if_crossing(t_sector *sector, t_xyz pos)
+t_wall	*check_if_crossing(t_sector *sector, t_xyz pos)
 {
 	unsigned int	i;
 	t_wall			*temp;

@@ -94,6 +94,7 @@ void	error_output_sdl(char *msg, t_home *home, t_frame *frame);
 void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *menu_buffer);
 void	fps_timer(t_time *t);
 int		give_sign(float number);
+void	init_input_values(t_input *input);
 int		initialize_rasterization_queues(t_frame *frame);
 int		initialize_skybox(t_skybox *skybox);
 int		is_negative(float z);

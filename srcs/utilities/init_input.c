@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gravity.c                                          :+:      :+:    :+:   */
+/*   init_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/15 16:01:33 by jnivala          ###   ########.fr       */
+/*   Created: 2021/06/15 15:16:41 by jnivala           #+#    #+#             */
+/*   Updated: 2021/06/15 15:26:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	gravity(t_sector *sector, t_player *plr, Uint32 delta_time)
+void	init_input_values(t_input *input)
 {
-	float			g;
-	float			drop;
-	static Uint32	total_time;
-
-	g = 9.81f;
-	drop = check_distance_to_ground(sector, plr, plr->pos);
-	if (drop > 0.0f)
-	{
-		if (plr->input.jetpack)
-			total_time = delta_time;
-		else
-			total_time += delta_time;
-		drop = 0.5f * g * total_time * total_time * 0.000001f;
-		plr->pos.y -= drop;
-	}
-	else
-	{
-		total_time = 0;
-	}
-	return ;
+	input->down = 0;
+	input->up = 0;
+	input->right = 0;
+	input->left = 0;
+	input->rot_right = 0;
+	input->rot_left = 0;
+	input->wireframe = 0;
+	input->minimap = 1;
+	input->info = 1;
+	input->mouse = 1;
+	input->debug_up = 0;
+	input->debug_down = 0;
+	input->debug_right = 0;
+	input->debug_left = 0;
+	input->jetpack = 0;
+	input->jump = 0;
+	input->crouch = 0;
 }

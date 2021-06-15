@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 16:23:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/15 16:11:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,6 @@ void	init_player(t_player *plr)
 {
 	plr->dir.x = 0.0f;
 	plr->dir.y = 1.0f;
-	plr->input.down = 0;
-	plr->input.up = 0;
-	plr->input.right = 0;
-	plr->input.left = 0;
-	plr->input.rot_right = 0;
-	plr->input.rot_left = 0;
-	plr->input.wireframe = 0;
-	plr->input.minimap = 1;
-	plr->input.info = 1;
-	plr->input.mouse = 1;
-	plr->input.debug_up = 0;
-	plr->input.debug_down = 0;
-	plr->input.debug_right = 0;
-	plr->input.debug_left = 0;
 	plr->time = 0;
 	plr->cur_sector = 0;
 	plr->pos = (t_xyz){1.483f, 3.19f, 2.29f, 1.0f};
@@ -60,6 +46,7 @@ void	init_player(t_player *plr)
 	plr->pitch = 0.0f;
 	plr->yaw = 0.0f;
 	plr->height = 1.5f;
+	init_input_values(&plr->input);
 }
 
 int	setup_fps(t_time *time)
@@ -85,7 +72,6 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);
 	if (!frame->buffer)
 		error_output("Memory allocation failed!\n");
-	// create_depth_buffers(&frame->depth_buffer);
 	frame->depth_buffer = (float *)malloc(sizeof(float)
 			* (SCREEN_WIDTH * SCREEN_HEIGHT + 1));
 	if (!frame->depth_buffer)

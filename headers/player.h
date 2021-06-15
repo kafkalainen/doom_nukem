@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/15 10:36:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:44:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_input
 	int				minimap;
 	int				info;
 	int				mouse;
+	int				jetpack;
 	int				debug_up;
 	int				debug_down;
 	int				debug_left;
