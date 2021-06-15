@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/15 09:52:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/15 10:15:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 	{
 		plr->pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
 		dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr, plr->pos);
-		if (dist < 0)
+		if (dist < 0 && dist > -plr->height)
 			plr->pos.y -= dist;
 		return (TRUE);
 	}
