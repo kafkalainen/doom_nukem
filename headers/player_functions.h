@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:53:57 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/14 16:53:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/15 09:58:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ float	check_distance_to_ground(t_sector *sector, t_player *plr, t_xyz pos);
 void	crouch(t_player *plr);
 void	gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
 void	init_player(t_player *plr);
-void	jump(t_player *plr);
+void	jump(t_player *plr, t_sector *cur_sector);
 int		player_move(t_player *plr, t_home *home, Uint32 delta_time);
 int		plr_inside(t_sector *sector, t_xy *pos);
 void	update_player(t_player *plr, t_home *home, Uint32 delta_time);

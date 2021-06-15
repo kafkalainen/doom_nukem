@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 14:01:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/14 16:56:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/15 09:30:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		check_y_diff(t_player *plr, t_xyz *test_pos, t_sector *to)
 {
-	check_y(to, plr, *test_pos);
+	*test_pos = check_y(to, plr, *test_pos);
 	if (test_pos->y - plr->pos.y < plr->height)
 		return (0);
 	else
