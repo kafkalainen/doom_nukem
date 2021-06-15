@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/09 14:24:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/15 15:53:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void	mouse_handle(t_player *plr, SDL_Event *e)
 			plr->pitch = -1.553343;
 		if (plr->pitch > 1.553343)
 			plr->pitch = 1.553343;
-		// printf("%f\n", plr->yaw);
 	}
+	if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_RIGHT)
+		plr->input.jetpack = 1;
+	if (e->type == SDL_MOUSEBUTTONUP && e->button.button == SDL_BUTTON_RIGHT)
+		plr->input.jetpack = 0;
 }
