@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/15 14:34:16 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/15 16:22:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ typedef struct	s_entity
 	Uint32		is_revealed; // the twist; if true, set sprite_index to alt_sprite_index, default == false;
 	Uint32		entity_type; // 0 == health_station; 1 == enemy_1; 2 == enemy_2;
 	Uint32		state; // 0 == waiting; 1 == move; 2 == attack; 3 == dead
-	int			sprite_index; // 
-	int			alt_sprite_index;
+	Uint32		is_aggroed; // default false, based on distance between entity and player, if within distance parameters, cast ray to see if we can see enemy
+							// if true, aggro = true
+	int			sprite_index; //
+	int			alt_sprite_index; // default = 0
 	int			health; // 1 or 2
 	int			ammo; // defaults to 3
 	int			entity_index; // entity position in the entity_pool array, used to track ammo counts and replenishment
@@ -41,7 +43,6 @@ typedef	struct	s_projectile
 	Uint32		is_active;
 	Uint32		entity_type; // 0 or 1
 	int			sprite_index;
-	int			sprite_index_explosion; // on hit use this sprite map
 	int			entity_index; // links back to original entity
 }				t_projectile;
 
