@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/19 12:22:45 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:38:53 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 		free(blist[i]);
 	}
 	free(blist);
-	free_all_textures(home->editor_tex, &home->nbr_of_textures);
+	free_all_textures(home->textures, &home->nbr_of_textures);
 	// SDL_SetWindowFullscreen(home->win.window, 0);
 	SDL_SetWindowSize(home->win.window, SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_SetWindowPosition(home->win.window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);

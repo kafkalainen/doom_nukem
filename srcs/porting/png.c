@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/11 12:07:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:37:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	load_texture(char *path, t_home *home, int i)
 	t_png	png;
 
 	png = png_parser(path);
-	home->editor_tex[i] = create_texture(&png, (i * (-1)));
-	if (!home->editor_tex[i])
+	home->textures[i] = create_texture(&png, (i * (-1)));
+	if (!home->textures[i])
 		error_output("PNG image file loading failed\n");
 	else
-		convert_to_uint32(home->editor_tex[i]->tex.texels, home->editor_tex[i]);
+		convert_to_uint32(home->textures[i]->tex.texels, home->textures[i]);
 	// printf("format: %i\n", png.format);
 	free_png(png);
 }
@@ -99,11 +99,11 @@ void	init_textures(t_home *home)
 	get_tex_count(&home->nbr_of_textures, &dir, &dir_entry);
 	if (home->nbr_of_textures == 0)
 		error_output("No textures found\n");
-	home->editor_tex = (t_texture **)malloc(sizeof(t_texture *)
+	home->textures = (t_texture **)malloc(sizeof(t_texture *)
 			* (home->nbr_of_textures + 1));
-	if (!home->editor_tex)
+	if (!home->textures)
 		error_output("Failed to allocate memory to editor textures.\n");
-	home->editor_tex[0] = assign_empty_texture();
+	home->textures[0] = assign_empty_texture();
 	load_texture("textures/dsky.png", home, 1);
 	cycle_textures(home, dir_entry, dir);
 	closedir(dir);

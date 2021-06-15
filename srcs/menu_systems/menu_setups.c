@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/14 15:42:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:37:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,19 @@ void	setup_menu(t_menu *menu, int *game_state)
 	*game_state = MAIN_MENU;
 }
 
+void	print_walls(t_wall *walls)
+{
+	t_wall	*tmp;
+
+	tmp = walls;
+	while (tmp != NULL)
+	{
+		printf("wall facing: %f\n", tmp->wall_facing);
+		tmp = tmp->next;
+	}
+	printf("leaving print walls\n");
+}
+
 void	print_sectors(t_home *home)
 {
 	unsigned int i;
@@ -71,11 +84,14 @@ void	print_sectors(t_home *home)
 	while (i < home->nbr_of_sectors)
 	{
 		printf("Sector %i\n", i);
+		printf("sector index: %i\n", home->sectors[i]->idx_sector);
 		printf("tex_floor: %i\n", home->sectors[i]->tex_floor);
 		printf("tex_ceil: %i\n", home->sectors[i]->tex_ceil);
 		printf("nb_of_ceil: %i\n", home->sectors[i]->nb_of_ceil);
 		printf("nb_of_ground: %i\n", home->sectors[i]->nb_of_ground);
 		printf("nb_of_walls: %i\n", home->sectors[i]->nb_of_walls);
+		// loop linked list
+		// print_walls(home->sectors[i]->walls);
 		i++;
 	}
 }

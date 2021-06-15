@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/10 13:09:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:35:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ typedef struct s_home
 	t_skybox		skybox;
 	t_sector		**sectors;
 	SDL_Surface		*text_surf;
-	t_texture		**editor_tex;
+	t_texture		**textures;
+	t_entity		**entity_pool;
+	t_projectile	**projectile_pool;
 	t_time			t;
 	t_xy			offset;
 	unsigned int	nbr_of_sectors;
@@ -48,7 +50,7 @@ typedef struct	s_arg
 {
 	Uint32			*buffer;
 	float			*depth_buffer;
-	t_texture		**editor_tex;
+	t_texture		**textures;
 	t_raster_queue	*view_list;
 	t_raster_queue	**raster_queue;
 	t_sides			*viewport;

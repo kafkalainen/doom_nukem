@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/11 13:01:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:40:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_game_assets(t_home *home)
 	if (home->t.frame_times)
 		free(home->t.frame_times);
 	free_sectors(home);
-	free_all_textures(home->editor_tex, &home->nbr_of_textures);
+	free_all_textures(home->textures, &home->nbr_of_textures);
 }
 
 void	get_menu_range_key_down(t_menu *menu)

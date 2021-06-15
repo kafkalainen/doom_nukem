@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 12:55:52 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:39:21 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	write_texture_data(int *fd, t_home *home)
 	i = 1;
 	while (i <= home->nbr_of_textures)
 	{
-		write_single_texture(home->editor_tex[i], fd, buf);
+		write_single_texture(home->textures[i], fd, buf);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 15:48:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:40:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 	i = 0;
 	while (i < MAX_THREADS)
 	{
-		args[i].editor_tex = home->editor_tex;
+		args[i].textures = home->textures;
 		args[i].buffer = frame->buffer;
 		args[i].depth_buffer = frame->depth_buffer;
 		args[i].view_list = frame->triangles_in_view;

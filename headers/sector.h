@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 09:15:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/15 14:38:43 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_point_data
 typedef struct s_sector
 {
 	t_wall			*walls;
-	t_enemy			*enemies;
 	unsigned int	nb_of_walls;
 	unsigned int	nb_of_ceil;
 	unsigned int	nb_of_ground;
