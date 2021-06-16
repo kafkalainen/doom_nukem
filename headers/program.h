@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/15 14:35:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/16 15:29:19 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,15 @@ typedef struct s_home
 	t_sector		**sectors;
 	SDL_Surface		*text_surf;
 	t_texture		**textures;
+	t_texture		**sprites; // sprite maps for health station, enemy_1, enemy_2, dead_body, doors??? 
 	t_entity		**entity_pool;
 	t_projectile	**projectile_pool;
 	t_time			t;
 	t_xy			offset;
 	unsigned int	nbr_of_sectors;
 	int				nbr_of_textures;
+	int				nbr_of_entities;
+	int				nbr_of_projectiles;
 	int				game_state;
 }					t_home;
 

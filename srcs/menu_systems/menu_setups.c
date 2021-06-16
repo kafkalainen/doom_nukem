@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/15 14:37:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/16 15:34:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,25 +76,39 @@ void	print_walls(t_wall *walls)
 	printf("leaving print walls\n");
 }
 
-void	print_sectors(t_home *home)
-{
-	unsigned int i;
+/*
+** #entity_list #NBR_OF_ENTITITES
+** #ENTITY_TYPE#X-COORDINATE#Y-COORDINATE#Z-COORDINATE#X-NORMAL#Y-NORMAL#Z-NORMAL#IS_STATIC#ALWAYS_FACING_PLR
+*/
 
-	i = 0;
-	while (i < home->nbr_of_sectors)
-	{
-		printf("Sector %i\n", i);
-		printf("sector index: %i\n", home->sectors[i]->idx_sector);
-		printf("tex_floor: %i\n", home->sectors[i]->tex_floor);
-		printf("tex_ceil: %i\n", home->sectors[i]->tex_ceil);
-		printf("nb_of_ceil: %i\n", home->sectors[i]->nb_of_ceil);
-		printf("nb_of_ground: %i\n", home->sectors[i]->nb_of_ground);
-		printf("nb_of_walls: %i\n", home->sectors[i]->nb_of_walls);
-		// loop linked list
-		// print_walls(home->sectors[i]->walls);
-		i++;
-	}
+void	load_entities_from_map(t_home *home)
+{
+	home->sprites = (t_texture **)malloc(sizeof(t_texture *) * 2); // testing
+	if (!home->sprites)
+		error_output("Memory allocation failed\n");
+	home->entity_pool = (t_entity **)malloc(sizeof(t_entity *) * 2); // testing
+	if (!home->entity_pool)
+		error_output("Memory allocation failed\n");
+	// TODO: malloc sprite array from map data
+	// TODO: Determine size of entity pool
+	// TODO: malloc entity pool
+	// TODO: init each entity pool index with entity from map data
+	// TODO: 
 }
+
+// void	init_sprites_editor(t_home *home)
+// {
+// 	home->sprites = (t_texture **)malloc(sizeof(t_texture *) * SPRITE_COUNT);
+// 	if (!home->sprites)
+// 		error_output("Memory allocation failed\n");
+// 	body_sprite 0 // static && always_facing_plr
+// 	enemy 1
+// 	enemy 2
+// 	health station 3
+// 	projectile_sprite 4
+// 	wall_toggle 5
+// 	explosion_sprites 6
+// }
 
 void	setup_game_loop(char **mapname, t_home *home,
 	t_player *plr, int *menu_option)
@@ -109,7 +123,8 @@ void	setup_game_loop(char **mapname, t_home *home,
 	// if (open_file(home, "map_files/test.DATA") < 0)
 	// 		error_output("Could not successfully open map file.");
 	init_textures(home);
-	print_sectors(home);
+	// init_sprites_editor(home);
+	// load_entities_from_map(home);
 	// ret = load_game_audio(&plr->audio);
 	// if (ret)
 	// {

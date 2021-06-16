@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/15 14:37:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/16 15:33:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,16 @@ void	*convert_to_uint32(Uint32 *dest, t_texture *image)
 	return (dest);
 }
 
-void	load_texture(char *path, t_home *home, int i)
+void	load_texture(char *path, t_texture **tex_array, int i)
 {
 	t_png	png;
 
 	png = png_parser(path);
-	home->textures[i] = create_texture(&png, (i * (-1)));
-	if (!home->textures[i])
+	tex_array[i] = create_texture(&png, (i * (-1)));
+	if (!tex_array[i])
 		error_output("PNG image file loading failed\n");
 	else
-		convert_to_uint32(home->textures[i]->tex.texels, home->textures[i]);
-	// printf("format: %i\n", png.format);
+		convert_to_uint32(tex_array[i]->tex.texels, tex_array[i]);
 	free_png(png);
 }
 
@@ -81,7 +80,7 @@ void	cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir)
 		{
 			printf("%s index: %i\n", dir_entry->d_name, i);
 			buf = ft_strjoin("textures/", dir_entry->d_name);
-			load_texture(buf, home, i++);
+			load_texture(buf, home->textures, i++);
 			ft_strdel(&buf);
 		}
 		dir_entry = readdir(dir);
@@ -104,7 +103,7 @@ void	init_textures(t_home *home)
 	if (!home->textures)
 		error_output("Failed to allocate memory to editor textures.\n");
 	home->textures[0] = assign_empty_texture();
-	load_texture("textures/dsky.png", home, 1);
+	load_texture("textures/dsky.png", home->textures, 1);
 	cycle_textures(home, dir_entry, dir);
 	closedir(dir);
 }
