@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 15:06:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/31 09:30:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/16 17:24:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ t_xyz	triangle_normal(t_triangle *triangle)
 	p0p1 = vec3_dec(triangle->p[1], triangle->p[0]);
 	p0p2 = vec3_dec(triangle->p[2], triangle->p[0]);
 	normal = vec3_cross_product(p0p1, p0p2);
-	magnitude = vec3_eucl_dist(normal);
-	normal.x = normal.x / magnitude;
-	normal.y = normal.y / magnitude;
-	normal.z = normal.z / magnitude;
+	magnitude = 1 / vec3_eucl_dist(normal);
+	normal.x = normal.x * magnitude;
+	normal.y = normal.y * magnitude;
+	normal.z = normal.z * magnitude;
 	normal.w = 0.0f;
 	return (normal);
 }

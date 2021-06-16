@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/10 13:19:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/16 17:42:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,8 @@ void		invert_view(t_triangle *triangle);
 Uint32		vec3_signed_distance_to_plane(t_xyz point, t_xyz plane_normal,
 			t_xyz plane_point);
 float		area_of_triangle(t_xyz p0, t_xyz p1, t_xyz p2);
-Uint32		point_inside_a_triangle(t_xyz p1, t_xyz p2, t_xyz p3, t_xyz p);
+Uint32		point_inside_a_triangle_wall(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);
+Uint32		point_inside_a_triangle_surface(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);
 t_xyz		vec3_intersection_with_ray_and_plane(t_plane *plane, t_xyz origo, t_xyz dir);
 
 #endif

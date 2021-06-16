@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/15 15:58:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/16 17:43:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ t_xyz	check_y(t_sector *sector, t_player *plr, t_xyz pos)
 	ground = sector->ground;
 	while (i < sector->nb_of_ground)
 	{
-		if (point_inside_a_triangle(ground->tri.p[0], ground->tri.p[1],
-				ground->tri.p[2], pos))
+		if (point_inside_a_triangle_surface(ground->tri.p[0],
+				ground->tri.p[1], ground->tri.p[2], pos))
 			break ;
 		ground = ground->next;
 		i++;
@@ -57,11 +57,41 @@ t_xyz	check_y(t_sector *sector, t_player *plr, t_xyz pos)
 	return (pos);
 }
 
+// void	add_motion(t_xyz *pos, Uint32 delta_time)
+// {
+// 	static Uint32	time = 0;
+// 	static Uint32	move_left = 0;
+// 	static Uint32	move_right = 0;
+
+// 	if (time < 300 && move_left)
+// 	{
+// 		time += delta_time;
+// 		pos->x -= 1.0f;
+// 	}
+// 	else if (time >= 300 && move_left)
+// 	{
+// 		move_right = 1;
+// 		time = 0;
+// 	}
+// 	else if (time < 300 && move_right)
+// 	{
+// 		time += delta_time;
+// 		pos->x += 1.0f;
+// 	}
+// 	else if (time >= 300 && move_right)
+// 	{
+// 		move_right = 1;
+// 		time = 0;
+// 	}
+// 	else
+// 		*pos = *pos;
+// }
+
 int	player_move(t_player *plr, t_home *home, Uint32 t)
 {
-	t_wall	*wall;
-	t_xyz	new_loc;
-	float	dist;
+	t_wall			*wall;
+	t_xyz			new_loc;
+	float			dist;
 
 	plr->move_dir.y = 0.0f;
 	plr->move_dir = vec3_unit_vector(plr->move_dir);
@@ -71,7 +101,7 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 	wall = check_if_crossing(home->sectors[plr->cur_sector], new_loc);
 	if (wall)
 	{
-		if (wall->top.idx >= 0)
+		if (wall->top.idx >= 0 && wall->is_door && !wall->is_closed)
 		{
 			if (check_y_diff(plr, &new_loc, home->sectors[wall->top.idx]))
 				return (FALSE);
@@ -86,6 +116,7 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 		dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr, plr->pos);
 		if (dist < 0 && dist > -plr->height)
 			plr->pos.y -= dist;
+		// add_motion(&plr->pos, t);
 		return (TRUE);
 	}
 	return (FALSE);

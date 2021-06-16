@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 15:16:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/15 15:26:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/16 17:05:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	init_input_values(t_input *input)
 	input->jetpack = 0;
 	input->jump = 0;
 	input->crouch = 0;
+	input->use = 0;
 }

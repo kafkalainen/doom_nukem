@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/15 14:44:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/16 17:53:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_input
 	int				info;
 	int				mouse;
 	int				jetpack;
+	int				use;
 	int				debug_up;
 	int				debug_down;
 	int				debug_left;
@@ -57,4 +58,25 @@ enum e_movement
 	open_space = -9999
 };
 
+
+/*
+** Player functions
+*/
+
+t_wall	*check_if_crossing(t_sector *sector, t_xyz pos);
+t_xyz	check_y(t_sector *sector, t_player *plr, t_xyz pos);
+int		check_y_diff(t_player *plr, t_xyz *test_pos, t_sector *to);
+Uint32	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
+float	check_distance_to_ground(t_sector *sector, t_player *plr, t_xyz pos);
+int		check_index_of_a_wall(t_sector *sector, t_xyz pos, t_xyz dir);
+void	create_target_vector(t_player *plr);
+void	crouch(t_player *plr);
+void	gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
+void	init_player(t_player *plr);
+int		jetpack(t_player *plr, t_home *home, Uint32 t);
+void	jump(t_player *plr, t_sector *cur_sector);
+int		player_move(t_player *plr, t_home *home, Uint32 delta_time);
+int		plr_inside(t_sector *sector, t_xy *pos);
+int		player_use(t_player *plr, t_home *home, Uint32 delta_time);
+void	update_player(t_player *plr, t_home *home, Uint32 delta_time);
 #endif

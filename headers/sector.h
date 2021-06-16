@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/15 14:38:43 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/16 16:44:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ typedef struct s_wall
 	t_triangle			top;
 	t_triangle			bottom;
 	float				wall_facing;
+	Uint32				is_door;
+	Uint32				is_closed;
 	t_xy				normal;
 	struct s_wall		*next;
 }						t_wall;

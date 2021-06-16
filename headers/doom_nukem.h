@@ -64,7 +64,6 @@
 # include "player.h"
 
 # include "../libft/libft.h"
-# include "player_functions.h"
 # include "raycast.h"
 # include "drawing_functions.h"
 # include "caster.h"

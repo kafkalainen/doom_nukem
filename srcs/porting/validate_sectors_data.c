@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_sectors_data.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:06:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/14 14:59:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/16 15:30:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static int	check_valid_connection(t_xyz *p0, t_xyz *p1, t_sector *sector, int i)
 	temp = sector->walls;
 	while (j < sector->nb_of_walls)
 	{
-		if (temp->top.idx == i)
+		if (temp->top.idx == i || temp->top.idx - DOOR_INDEX == i)
 		{
-			if (temp->top.p[0].x == p0->x
-				&& temp->top.p[0].z == p0->z
+			if (temp->top.p[1].x == p0->x
+				&& temp->top.p[1].z == p0->z
 				&& temp->top.p[2].x == p1->x
 				&& temp->top.p[2].z == p1->z)
 				return (1);
@@ -50,9 +50,18 @@ static int	check_if_portals_connected(int i, t_home *home)
 		{
 			if (home->nbr_of_sectors == 1)
 				return (1);
-			if (!(check_valid_connection(&temp->top.p[2], &temp->top.p[0],
-						home->sectors[temp->top.idx], i)))
-				return (1);
+			if (temp->top.idx >= DOOR_INDEX)
+			{
+				if (!(check_valid_connection(&temp->top.p[2], &temp->top.p[1],
+					home->sectors[temp->top.idx - DOOR_INDEX], i)))
+					return (1);
+			}
+			else
+			{
+				if (!(check_valid_connection(&temp->top.p[2], &temp->top.p[1],
+					home->sectors[temp->top.idx], i)))
+					return (1);
+			}
 		}
 		temp = temp->next;
 		j++;

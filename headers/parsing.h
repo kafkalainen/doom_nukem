@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/14 14:12:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/16 15:41:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int				add_points(t_sector *sector, unsigned char *buf,
 void			add_to_middle(t_wall **current_wall, t_wall *new_wall);
 void			calc_slanted_floors(t_home *home);
 void			calc_wall_and_floor_properties(t_home *home);
+int				change_door_to_portal(int door);
 int				check_if_lines_cut(t_sector *sector);
 int				check_if_sector_has_same_points(t_sector *sector);
 Uint32			check_portal_floor_difference(t_wall *portal,

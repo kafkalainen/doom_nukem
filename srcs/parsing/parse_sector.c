@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/14 14:14:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/16 16:56:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ t_wall	*new_point(t_point_data *left, t_point_data *right)
 		wall->bottom.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
 		wall->bottom.uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
 		wall->bottom.uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
-		wall->top.colour = white;
-		wall->bottom.colour = white;
-		wall->top.idx = left->idx;
-		wall->bottom.idx = left->idx;
+		wall->top.idx = change_door_to_portal(left->idx);
+		wall->bottom.idx = change_door_to_portal(left->idx);
+		wall->is_closed = 0;
+		if (left->idx >= DOOR_INDEX)
+			wall->is_door = 1;
+		else
+			wall->is_door = 0;
 		wall->next = NULL;
 	}
 	else

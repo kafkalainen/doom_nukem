@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/15 15:24:40 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/16 17:10:54 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_wall_and_floor_properties.c \
 	parsing$(SLASH)calc_slanted_floors.c \
+	parsing$(SLASH)change_door_to_portal.c \
 	parsing$(SLASH)check_portal_height_diff.c \
 	parsing$(SLASH)free_sector.c \
 	parsing$(SLASH)parse_number_data.c \
@@ -71,6 +72,7 @@ SRCS = \
 	update_player$(SLASH)mouse_handle.c \
 	update_player$(SLASH)check_y_diff.c \
 	update_player$(SLASH)player_move.c \
+	update_player$(SLASH)player_use.c \
 	update_player$(SLASH)special_movement.c \
 	update_player$(SLASH)update_player.c \
 	update_screen$(SLASH)apply_matrices_a.c \
@@ -137,7 +139,6 @@ HEADERS = \
 	headers$(SLASH)map.h \
 	headers$(SLASH)parser_structs.h \
 	headers$(SLASH)parsing.h \
-	headers$(SLASH)player_functions.h \
 	headers$(SLASH)player.h \
 	headers$(SLASH)png_parser.h \
 	headers$(SLASH)porting.h \

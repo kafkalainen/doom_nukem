@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_portal_by_idx.c                                :+:      :+:    :+:   */
+/*   change_door_to_portal.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 13:28:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/16 15:48:33 by jnivala          ###   ########.fr       */
+/*   Created: 2021/06/16 15:35:38 by jnivala           #+#    #+#             */
+/*   Updated: 2021/06/16 15:41:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_wall	*get_portal_by_idx(int idx, t_sector *sector)
+int	change_door_to_portal(int door)
 {
-	t_wall			*temp;
-	unsigned int	i;
-
-	if (sector == NULL)
-		return (NULL);
-	i = 0;
-	temp = sector->walls;
-	while (i < sector->nb_of_walls)
-	{
-		if (temp->top.idx == idx || temp->top.idx == idx + DOOR_INDEX)
-			return (temp);
-		temp = temp->next;
-		i++;
-	}
-	return (NULL);
+	if (door >= DOOR_INDEX)
+		return (door - DOOR_INDEX);
+	else
+		return (door);
 }
