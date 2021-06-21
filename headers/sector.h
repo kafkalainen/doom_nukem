@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/16 16:44:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/21 11:32:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ typedef struct s_wall
 	float				wall_facing;
 	Uint32				is_door;
 	Uint32				is_closed;
+	Uint32				open_until;
+	float				height;
 	t_xy				normal;
 	struct s_wall		*next;
 }						t_wall;

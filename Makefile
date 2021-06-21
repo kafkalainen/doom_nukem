@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/16 17:10:54 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/21 12:24:57 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRCS = \
 	raycaster$(SLASH)get_next_wall_tex.c \
 	raycaster$(SLASH)get_opposing_wall.c \
 	raycaster$(SLASH)get_portal_by_idx.c \
+	raycaster$(SLASH)get_wall_height.c \
 	raycaster$(SLASH)get_wall_points.c \
 	raycaster$(SLASH)line_line_intersection.c \
 	raycaster$(SLASH)line_segment_check.c \
@@ -68,6 +69,7 @@ SRCS = \
 	raycaster$(SLASH)setup_frame.c \
 	update_player$(SLASH)check_distances.c \
 	update_player$(SLASH)gravity.c \
+	update_player$(SLASH)handle_doors.c \
 	update_player$(SLASH)key_input.c \
 	update_player$(SLASH)mouse_handle.c \
 	update_player$(SLASH)check_y_diff.c \

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/16 16:56:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/21 10:47:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ t_wall	*new_point(t_point_data *left, t_point_data *right)
 		wall->top.idx = change_door_to_portal(left->idx);
 		wall->bottom.idx = change_door_to_portal(left->idx);
 		wall->is_closed = 0;
+		wall->open_until = 0;
+		wall->height = get_wall_height(left->ground, right->ground,
+			left->ceiling, right->ceiling);
 		if (left->idx >= DOOR_INDEX)
 			wall->is_door = 1;
 		else
