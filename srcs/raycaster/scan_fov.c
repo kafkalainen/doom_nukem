@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 16:24:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 09:42:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	add_floor_and_ceiling(t_raster_queue *transformed, t_sector *sector)
 	ground = sector->ground;
 	ceiling = sector->ceiling;
 	j = 0;
-
 	while (j < sector->nb_of_ceil)
 	{
 		transformed->array[transformed->size] = ceiling->tri;
@@ -58,11 +57,11 @@ void	add_floor_and_ceiling(t_raster_queue *transformed, t_sector *sector)
 void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {
 	t_frame			new_frame;
-	t_triangle		temp_array[200];
+	t_triangle		temp_array[600];
 	unsigned int	j;
 
-	frame->left.wall = home->sectors[frame->idx]->walls;
 	frame->transformed->size = 0;
+	frame->left.wall = home->sectors[frame->idx]->walls;
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
 	j = 0;
 	while (j < home->sectors[frame->idx]->nb_of_walls * 2)
