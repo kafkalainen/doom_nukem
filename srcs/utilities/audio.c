@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/09 14:13:40 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/22 10:20:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	cleanup_audio(t_audio *audio)
 	Mix_CloseAudio();
 }
 
-void	play_footsteps(t_player *plr)
+void	play_footsteps(t_audio *audio)
 {
 	Uint32			current_time;
 	static Uint32	last_time;
@@ -115,14 +115,22 @@ void	play_footsteps(t_player *plr)
 	{
 		if (step)
 		{
-			Mix_PlayChannel(-1, plr->audio.footstep1, 0);
+			Mix_PlayChannel(-1, audio->footstep1, 0);
 			step = 0;
 		}
 		else
 		{
-			Mix_PlayChannel(-1, plr->audio.footstep2, 0);
+			Mix_PlayChannel(-1, audio->footstep2, 0);
 			step = 1;
 		}
 		last_time = current_time;
 	}
+}
+
+void	play_sound(Mix_Chunk *sound, int volume)
+{
+	if (!sound)
+		return ;
+	Mix_VolumeChunk(sound, volume);
+	Mix_PlayChannel(-1, sound, 0);
 }

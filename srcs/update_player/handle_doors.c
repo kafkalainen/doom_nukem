@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 09:31:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 10:02:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ static void	translate_door(t_wall *wall, char dir, float speed,
 	wall->bottom = translate_triangle(&wall->bottom, translation_bottom);
 }
 
-static void	handle_door_logic(t_wall *wall, Uint32 current_time,
+static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
 			Uint32 delta_time)
 {
 	if (wall->open_until < current_time)
 	{
 		lock_the_door(wall->next);
 		wall->is_closed = 1;
+		return (1);
 	}
 	else
 	{
@@ -69,16 +70,19 @@ static void	handle_door_logic(t_wall *wall, Uint32 current_time,
 			translate_door(wall->next, 'c', wall->height * 0.2f,
 				delta_time);
 	}
+	return (0);
 }
 
-void	close_doors(t_sector **sectors, Uint32 nb_of_sectors,
+Uint32	close_doors(t_sector **sectors, Uint32 nb_of_sectors,
 		Uint32 current_time, Uint32 delta_time)
 {
 	Uint32	i;
 	Uint32	walls;
 	t_wall	*wall;
+	Uint32	volume;
 
 	i = 0;
+	volume = 0;
 	while (i < nb_of_sectors)
 	{
 		walls = sectors[i]->nb_of_walls;
@@ -86,12 +90,13 @@ void	close_doors(t_sector **sectors, Uint32 nb_of_sectors,
 		while (walls)
 		{
 			if (wall->is_door && !wall->is_closed)
-				handle_door_logic(wall, current_time, delta_time);
+				volume += handle_door_logic(wall, current_time, delta_time);
 			wall = wall->next;
 			walls--;
 		}
 		i++;
 	}
+	return (volume);
 }
 
 int	open_door(t_sector **sectors, t_xyz look_loc,
@@ -109,6 +114,7 @@ int	open_door(t_sector **sectors, t_xyz look_loc,
 		wall->open_until = current_time + 5000;
 		portal_behind->is_closed = 0;
 		wall->is_closed = 0;
+		return (1);
 	}
-	return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/16 17:08:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 10:25:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 	{
 		check_player_dir(plr);
 		if (player_move(plr, home, delta_time))
-			play_footsteps(plr);
+			play_footsteps(&plr->audio);
 	}
 }
 

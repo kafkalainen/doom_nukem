@@ -80,8 +80,6 @@
 */
 
 void	clean_up(t_frame *frame);
-void	cleanup_audio(t_audio *audio);
-void	cleanup_audio_source(t_audio *audio);
 int		doom_close(int *fd);
 ssize_t	doom_write(int *fd, const void **buf, size_t count);
 void	doom_open(int *fd, const char **path, int mode, mode_t rights);
@@ -97,10 +95,7 @@ void	init_input_values(t_input *input);
 int		initialize_rasterization_queues(t_frame *frame);
 int		initialize_skybox(t_skybox *skybox);
 int		is_negative(float z);
-int		load_audio(t_audio *audio);
-int		load_game_audio(t_audio *audio);
 void	map_error_output(int i, t_home *home);
-void	play_footsteps(t_player *plr);
 void	read_error_output(char *msg, unsigned char **line);
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu);
 int		setup_fps(t_time *time);
