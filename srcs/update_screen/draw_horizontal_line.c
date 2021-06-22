@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 11:21:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 10:36:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer,
 	int		cur_x;
 	float	offset;
 	float	offset_step;
-	int		size;
 
 	offset = 0.0f;
-	size = tex->width - 1;
 	cur_x = step->start_x;
 	texel = step->start_uv;
 	offset_step = 1.0f / ((float)(step->end_x - step->start_x));
@@ -39,7 +37,7 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer,
 			texel = texel_inv_z(texel);
 			put_pixel(buffer, cur_x, step->cur_y,
 				get_texel(
-					&(t_uv){texel.u * size, texel.v * size},
+					&(t_uv){texel.u * tex->width - 1, texel.v * tex->height - 1},
 					&(t_uv){tex->width, tex->height}, tex->texels));
 			depth_buffer[cur_x + step->cur_y * SCREEN_WIDTH] = texel.w;
 		}

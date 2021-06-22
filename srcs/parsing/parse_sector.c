@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/21 10:47:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 10:49:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,18 @@ t_wall	*new_point(t_point_data *left, t_point_data *right)
 	wall = (t_wall *)malloc(sizeof(*wall));
 	if (wall != NULL)
 	{
-		wall->top.p[0] = (t_xyz){left->x, left->ground, left->y, 1.0f};
-		wall->top.p[1] = (t_xyz){left->x, left->ceiling, left->y, 1.0f};
-		wall->top.p[2] = (t_xyz){right->x, right->ceiling, right->y, 1.0f};
-		wall->top.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
-		wall->top.uv[1] = (t_uvz){0.0f, 0.0f, 1.0f};
-		wall->top.uv[2] = (t_uvz){1.0f, 0.0f, 1.0f};
-		wall->bottom.p[0] = (t_xyz){left->x, left->ground, left->y, 1.0f};
-		wall->bottom.p[1] = (t_xyz){right->x, right->ceiling, right->y, 1.0f};
-		wall->bottom.p[2] = (t_xyz){right->x, right->ground, right->y, 1.0f};
-		wall->bottom.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
-		wall->bottom.uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
-		wall->bottom.uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
+		initialize_triangles(wall, left, right);
+		initialize_top_texels(wall);
+		initialize_bottom_texels(wall);
 		wall->top.idx = change_door_to_portal(left->idx);
 		wall->bottom.idx = change_door_to_portal(left->idx);
+		wall->is_door = 0;
 		wall->is_closed = 0;
 		wall->open_until = 0;
 		wall->height = get_wall_height(left->ground, right->ground,
-			left->ceiling, right->ceiling);
+				left->ceiling, right->ceiling);
 		if (left->idx >= DOOR_INDEX)
 			wall->is_door = 1;
-		else
-			wall->is_door = 0;
 		wall->next = NULL;
 	}
 	else
@@ -114,14 +104,15 @@ int	add_points(t_sector *sector,
 	data_right = data_first;
 	wall = new_point(&data_left, &data_right);
 	if (wall)
-			add_point(&sector->walls, wall);
-		else
-			return (free_points(&sector->walls, i));
+		add_point(&sector->walls, wall);
+	else
+		return (free_points(&sector->walls, i));
 	close_linkedlist(&sector->walls);
 	return (0);
 }
 
-t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos, ssize_t size)
+t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos,
+	ssize_t size)
 {
 	t_sector		*new_sector;
 	int				ret;
