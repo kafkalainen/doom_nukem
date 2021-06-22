@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/16 15:33:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/22 16:12:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir)
 		}
 		dir_entry = readdir(dir);
 	}
+	load_texture("./sprites/skull_skulker_front.png", home->textures, i); // might need to do some magic with index nbr
+	printf("%i\n", i);
 }
 
 void	init_textures(t_home *home)
@@ -99,7 +101,7 @@ void	init_textures(t_home *home)
 	if (home->nbr_of_textures == 0)
 		error_output("No textures found\n");
 	home->textures = (t_texture **)malloc(sizeof(t_texture *)
-			* (home->nbr_of_textures + 1));
+			* (home->nbr_of_textures + 2));
 	if (!home->textures)
 		error_output("Failed to allocate memory to editor textures.\n");
 	home->textures[0] = assign_empty_texture();

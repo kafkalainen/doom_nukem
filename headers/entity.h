@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/16 15:29:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/22 15:15:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ typedef struct	s_entity
 	Uint32		state; // 0 == waiting; 1 == move; 2 == attack; 3 == dead // default = 0
 	Uint32		is_aggroed; // default false, based on distance between entity and player, if within distance parameters, cast ray to see if we can see enemy
 							// if true, aggro = true
-	int			sprite_index; // determined by entity_type // ALWAYS >= 0
+	int			sprite_index; // determined by entity_type // ALWAYS >= 0 // what sprite texture are we drawing from
 	int			alt_sprite_index; // default = 0
+	int			sprite_state; // look at state, then loop through sprite map indexes depeding on the state
 	int			health; // 1 or 2 // determined by entity_type
 	int			ammo; // defaults to 3
 	int			entity_index; // entity position in the entity_pool array, used to track ammo counts and replenishment
+	int			sector_idx;
 }				t_entity;
 
 typedef	struct	s_projectile
@@ -54,6 +56,8 @@ typedef	struct	s_projectile
 	Uint32		entity_type; // 0 or 1
 	int			sprite_index;
 	int			entity_index; // links back to original entity
+	int			sprite_state; // determines which sprite to draw from the sprite map
+	int			sector_idx;
 }				t_projectile;
 
 /*

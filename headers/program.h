@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/16 15:29:19 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/22 15:45:37 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef struct s_home
 	t_xy			offset;
 	unsigned int	nbr_of_sectors;
 	int				nbr_of_textures;
-	int				nbr_of_entities;
-	int				nbr_of_projectiles;
+	Uint32			nbr_of_entities;
+	Uint32			nbr_of_projectiles;
 	int				game_state;
 }					t_home;
 

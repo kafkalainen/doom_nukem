@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/16 15:34:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/22 17:20:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,53 @@ void	load_entities_from_map(t_home *home)
 	// TODO: 
 }
 
-// void	init_sprites_editor(t_home *home)
-// {
-// 	home->sprites = (t_texture **)malloc(sizeof(t_texture *) * SPRITE_COUNT);
-// 	if (!home->sprites)
-// 		error_output("Memory allocation failed\n");
-// 	body_sprite 0 // static && always_facing_plr
-// 	enemy 1
-// 	enemy 2
-// 	health station 3
-// 	projectile_sprite 4
-// 	wall_toggle 5
-// 	explosion_sprites 6
-// }
+void	init_sprites_editor(t_home *home)
+{
+	home->entity_pool = (t_entity **)malloc(sizeof(t_entity *) * 2);
+	if (!home->entity_pool)
+		error_output("Memory allocation failed\n");
+	home->entity_pool[0] = (t_entity *)malloc(sizeof(t_entity));
+		if (!home->entity_pool[0])
+			error_output("Memory allocation failed\n");
+	home->entity_pool[1] = NULL;
+	home->entity_pool[0]->entity_index = 0;
+	home->entity_pool[0]->entity_type = 1;
+	home->entity_pool[0]->health = 10;
+	home->entity_pool[0]->is_aggroed = 0;
+	home->entity_pool[0]->is_revealed = 0;
+	home->entity_pool[0]->is_static = 0;
+	home->entity_pool[0]->state = 0;
+	home->entity_pool[0]->velocity = 10;
+	home->entity_pool[0]->ammo = 0;
+	home->entity_pool[0]->always_facing_plr = 1;
+	home->entity_pool[0]->coordinates = (t_xyz){0.9, 1.1, 10, 1};
+	home->entity_pool[0]->top.p[0] = (t_xyz){0, 0, 0, 1};
+	home->entity_pool[0]->top.p[1] = (t_xyz){0, 1, 0, 1};
+	home->entity_pool[0]->top.p[2] = (t_xyz){1, 1, 0, 1};
+	home->entity_pool[0]->bot.p[0] = (t_xyz){0, 0, 0, 1};
+	home->entity_pool[0]->bot.p[1] = (t_xyz){1, 1, 0, 1};
+	home->entity_pool[0]->bot.p[2] = (t_xyz){1, 0, 0, 1};
+	home->entity_pool[0]->top.uv[0] = (t_uvz){1, 1, 1};
+	home->entity_pool[0]->top.uv[1] = (t_uvz){0, 0, 1};
+	home->entity_pool[0]->top.uv[2] = (t_uvz){1, 0, 1};
+	home->entity_pool[0]->bot.uv[0] = (t_uvz){0, 1, 1};
+	home->entity_pool[0]->bot.uv[1] = (t_uvz){0, 0, 1};
+	home->entity_pool[0]->bot.uv[2] = (t_uvz){1, 1, 1};
+	home->entity_pool[0]->top.idx = -10;
+	home->entity_pool[0]->bot.idx = -10;
+	home->entity_pool[0]->sprite_state = 0;
+	home->entity_pool[0]->sprite_index = -10;
+	home->nbr_of_entities = 1;
+	home->entity_pool[0]->sector_idx = 2;
+	home->nbr_of_projectiles = 0;
+	// body_sprite 0 // static && always_facing_plr
+	// enemy 1
+	// enemy 2
+	// health station 3
+	// projectile_sprite 4
+	// wall_toggle 5
+	// explosion_sprites 6
+}
 
 void	setup_game_loop(char **mapname, t_home *home,
 	t_player *plr, int *menu_option)
@@ -123,7 +157,7 @@ void	setup_game_loop(char **mapname, t_home *home,
 	// if (open_file(home, "map_files/test.DATA") < 0)
 	// 		error_output("Could not successfully open map file.");
 	init_textures(home);
-	// init_sprites_editor(home);
+	init_sprites_editor(home);
 	// load_entities_from_map(home);
 	// ret = load_game_audio(&plr->audio);
 	// if (ret)
