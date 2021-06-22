@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 12:40:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 13:00:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static void	lock_the_door(t_wall *wall)
 		wall->top.p[0].z, 1.0f};
 	wall->bottom.p[1] = (t_xyz){wall->bottom.p[1].x,
 		ceilf(wall->bottom.p[1].y), wall->bottom.p[1].z, 1.0f};
+	wall->top.uv[1].v = 0.0f;
+	wall->top.uv[2].v = 0.0f;
+	wall->bottom.uv[0].v = 1.0f;
+	wall->bottom.uv[2].v = 1.0f;
 }
 
 static void	translate_door(t_wall *wall, char dir, float speed, Uint32 t)

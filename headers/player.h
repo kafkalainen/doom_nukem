@@ -6,12 +6,22 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/22 10:02:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 13:34:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
+
+enum e_plot_states
+{
+	beginning,
+	enemy_sighted,
+	contemplation,
+	warning,
+	plot_twist,
+	ending,
+};
 
 typedef struct s_input
 {
@@ -49,6 +59,8 @@ typedef struct s_player
 	float			height;
 	float			acceleration;
 	int				cur_sector;
+	int				plot_state;
+	int				enemy_sighted;
 	Uint32			time;
 	t_audio			audio;
 }					t_player;
