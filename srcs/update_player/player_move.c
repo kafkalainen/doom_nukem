@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/16 17:43:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 09:13:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,12 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 	wall = check_if_crossing(home->sectors[plr->cur_sector], new_loc);
 	if (wall)
 	{
-		if (wall->top.idx >= 0 && wall->is_door && !wall->is_closed)
+		if (wall->top.idx >= 0)
 		{
 			if (check_y_diff(plr, &new_loc, home->sectors[wall->top.idx]))
 				return (FALSE);
-			plr->cur_sector = wall->top.idx;
+			if ((wall->is_door && !wall->is_closed) || !wall->is_door)
+				plr->cur_sector = wall->top.idx;
 		}
 		else
 			return (FALSE);

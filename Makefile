@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/21 12:24:57 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/22 08:32:00 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ SRCS = \
 	editor$(SLASH)editor_events.c \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_wall_and_floor_properties.c \
-	parsing$(SLASH)calc_slanted_floors.c \
 	parsing$(SLASH)change_door_to_portal.c \
 	parsing$(SLASH)check_portal_height_diff.c \
 	parsing$(SLASH)free_sector.c \
+	parsing$(SLASH)map_texel.c \
 	parsing$(SLASH)parse_number_data.c \
 	parsing$(SLASH)parse_sector.c \
 	parsing$(SLASH)parse_sector_2.c \
@@ -49,14 +49,12 @@ SRCS = \
 	porting$(SLASH)validate_sectors_data.c \
 	porting$(SLASH)validate_sectors_data_2.c \
 	porting$(SLASH)porting_utils.c \
-	raycaster$(SLASH)calc_ground_texels.c \
 	raycaster$(SLASH)calc_sector_bounds.c \
 	raycaster$(SLASH)calc_wall_dimensions.c \
 	raycaster$(SLASH)calc_wall_texels.c \
 	raycaster$(SLASH)colour_scale.c \
 	raycaster$(SLASH)get_floor.c \
 	raycaster$(SLASH)get_next_wall_tex.c \
-	raycaster$(SLASH)get_opposing_wall.c \
 	raycaster$(SLASH)get_portal_by_idx.c \
 	raycaster$(SLASH)get_wall_height.c \
 	raycaster$(SLASH)get_wall_points.c \

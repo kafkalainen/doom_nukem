@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:56:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 08:18:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 08:20:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ t_surface	*new_surface(t_wall *data, t_xyz *start, int idx, char choice)
 			surface->tri.p[2] = data->top.p[1];
 			surface->tri.p[1] = data->next->top.p[1];
 		}
-		surface->tri.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
-		surface->tri.uv[1] = (t_uvz){0.0f, 0.0f, 1.0f};
-		surface->tri.uv[2] = (t_uvz){1.0f, 0.0f, 1.0f};
-		surface->tri.colour = white;
 		surface->tri.idx = idx;
 		surface->next = NULL;
 	}

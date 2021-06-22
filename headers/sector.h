@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/21 11:32:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 07:58:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_sector
 	int				tex_ceil;
 	t_surface		*ground;
 	t_surface		*ceiling;
+	t_plgn			bounding_box;
 }					t_sector;
 
 enum e_sector_info

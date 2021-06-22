@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/16 17:42:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 08:01:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ typedef struct s_ray
 
 typedef struct s_plgn
 {
-	t_xyz			top_left;
-	t_xyz			top_right;
-	t_xyz			bottom_left;
-	t_xyz			bottom_right;
+	t_xy			top_left;
+	t_xy			top_right;
+	t_xy			bottom_left;
+	t_xy			bottom_right;
 }					t_plgn;
 
 typedef struct s_plane

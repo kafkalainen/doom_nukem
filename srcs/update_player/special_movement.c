@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/15 16:02:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/22 09:15:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,32 +116,32 @@ int	jetpack(t_player *plr, t_home *home, Uint32 t)
 	t_xyz	new_loc;
 	float	dist;
 
-	if (plr->input.jetpack == 1)
+	if (!plr->input.jetpack)
+		return (FALSE);
+	plr->move_dir = vec3_unit_vector(plr->look_dir);
+	new_loc = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.03f));
+	if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &new_loc))
+		return (FALSE);
+	wall = check_if_crossing(home->sectors[plr->cur_sector], new_loc);
+	if (wall)
 	{
-		plr->move_dir = vec3_unit_vector(plr->look_dir);
-		new_loc = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.03f));
-		if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &new_loc))
-			return (FALSE);
-		wall = check_if_crossing(home->sectors[plr->cur_sector], new_loc);
-		if (wall)
+		if (wall->top.idx >= 0)
 		{
-			if (wall->top.idx >= 0)
-			{
-				if (check_y_diff(plr, &new_loc, home->sectors[wall->top.idx]))
-					return (FALSE);
-				plr->cur_sector = wall->top.idx;
-			}
-			else
+			if (check_y_diff(plr, &new_loc, home->sectors[wall->top.idx]))
 				return (FALSE);
+			if ((wall->is_door && !wall->is_closed) || !wall->is_door)
+				plr->cur_sector = wall->top.idx;
 		}
 		else
-		{
-			plr->pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.005f));
-			dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr, plr->pos);
-			if (dist < 0 && dist > -plr->height)
-				plr->pos.y -= dist;
+			return (FALSE);
+	}
+	else
+	{
+		plr->pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.005f));
+		dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr, plr->pos);
+		if (dist < 0 && dist > -plr->height)
+			plr->pos.y -= dist;
 		return (TRUE);
-		}
 	}
 	return (FALSE);
 }
