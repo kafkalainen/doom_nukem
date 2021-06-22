@@ -12,23 +12,6 @@
 
 #include "../../headers/doom_nukem.h"
 
-
-/*
-**	ERRORZ
-*/
-// static int	check_if_same_wall(t_xy a, t_xy b, t_xy r_point)
-// {
-// 	if (a.x == b.x && a.y == b.y)
-// 	{
-// 		if (r_point.x != -1 && r_point.y != -1)
-// 			return (1);
-// 		else
-// 			return (0);
-// 	}
-// 	else
-// 		return (0);
-// }
-
 void	get_r_pt(t_wall *start, t_ray ray, t_frame *frame, int walls)
 {
 	t_intersection	sect;
