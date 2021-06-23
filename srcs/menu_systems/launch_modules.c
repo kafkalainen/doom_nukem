@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/23 15:19:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/23 16:41:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,25 @@ void	update_objects(t_home *home, t_xyz plr_pos, Uint32 delta_time)
 	i = 0;
 	while (i < home->nbr_of_entities)
 	{
-		if (home->entity_pool[i]->state != 3) // check to see if entity is dead or not
+		if (home->entity_pool[i]->state != ENTITY_DEAD) // check to see if entity is dead or not
 		{
 			if (home->entity_pool[i]->entity_type == 1 || home->entity_pool[i]->entity_type == 2) // entity is an enemy, move to state logics
 			{
-				if (!home->entity_pool[i]->is_aggroed)
-					check_aggro(plr_pos, home->entity_pool[i]);
 				// if (home->entity_pool[i]->take_damage) // determined by projectile while loop
 				// 	take_damage_logic(home->entity_pool[i], plr_pos, delta_time);
+				if (!home->entity_pool[i]->is_aggroed)
+				{
+					if (check_aggro(plr_pos, home->entity_pool[i]))
+						printf("we are aggroed\n");
+					//else
+						// move or idle
+				}
+				// if (home->entity_pool[i]->is_aggroed)
+				// {
+				// 	if (home->entity_pool[i]->state == ENTITY_MOVE && home->entity_pool[i]->sprite_state > ENTITY_SPRITE_MOVE_END) // we are done with moving
+				// 	// move or attack
+				// }
+			
 				// if (home->entity_pool[i]->is_aggroed)
 				// 	attack_logic(home->entity_pool[i], plr_pos, delta_time);
 				// else

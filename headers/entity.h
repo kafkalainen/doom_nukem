@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/23 15:19:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/23 16:00:19 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@
 # define ENTITY_MOVE 1
 # define ENTITY_IDLE 0
 # define ENTITY_ATTACK 2
-# define ENTITY_TAKE_DAMAGE 4
+# define ENTITY_TAKE_DAMAGE 3
+# define ENTITY_DEAD 4
+# define ENTITY_SPRITE_MOVE_START 0 // determine which sprite from sprite map to draw
+# define ENTITY_SPRITE_MOVE_END 5 // are we done drawing movement
+# define ENTITY_SPRITE_ATK_START 0
+# define ENTITY_SPRITE_ATK_END 5
+
 
 typedef struct	s_entity
 {
@@ -43,7 +49,7 @@ typedef struct	s_entity
 	Uint32		always_facing_plr; // if true, always draw entity_front.png OR entity_attack
 	Uint32		is_revealed; // the twist; if true, set sprite_index to alt_sprite_index, default == false;
 	Uint32		entity_type; // 0 == health_station; 1 == enemy_1; 2 == enemy_2;
-	Uint32		state; // 0 == waiting; 1 == move; 2 == attack; 3 == dead // default = 0
+	Uint32		state;
 	Uint32		is_aggroed; // default false, based on distance between entity and player, if within distance parameters, cast ray to see if we can see enemy
 							// if true, aggro = true
 	int			sprite_index; // determined by entity_type // ALWAYS >= 0 // what sprite texture are we drawing from
@@ -79,7 +85,7 @@ typedef	struct	s_projectile
 // attack()
 // take_damage()
 // die()
-void	check_aggro(t_xyz plr_pos, t_entity *entity);
+int		check_aggro(t_xyz plr_pos, t_entity *entity);
 
 
 #endif

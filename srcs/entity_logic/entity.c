@@ -6,13 +6,13 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:31:48 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/23 15:37:11 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/23 16:29:36 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	check_aggro(t_xyz plr_pos, t_entity *entity)
+int	check_aggro(t_xyz plr_pos, t_entity *entity)
 {
 	float	distance_squared;
 
@@ -26,6 +26,10 @@ void	check_aggro(t_xyz plr_pos, t_entity *entity)
 		(plr_pos.z - entity->pos.z) * (plr_pos.z - entity->pos.z));
 	printf("squared distance between entity and player is: %f\n", distance_squared);
 
-	if (distance_squared <= AGGRO_RANGE_1) // check to see if we can see the player
+	if (distance_squared <= AGGRO_RANGE_1)
+	{
 		entity->is_aggroed = 1;
+		return (1);
+	}
+	return (0);
 }
