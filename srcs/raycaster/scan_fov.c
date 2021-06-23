@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/23 14:56:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/23 16:33:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,10 @@ void	add_objects(t_raster_queue *transformed, t_home *home, int idx)
 
 void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {
+	unsigned int	j;
 	t_frame			new_frame;
 	t_triangle		temp_array[800];
-	unsigned int	j;
+	t_xyz			normal;
 
 	j = 0;
 	frame->transformed->size = 0;
@@ -101,8 +102,12 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	{
 		if (frame->left.wall->top.idx >= 0)
 		{
-			setup_frame(frame, &new_frame, frame->left.wall->top.idx);
-			scan_fov(home, &new_frame, plr);
+			normal = triangle_normal(&frame->left.wall->top);
+			if (vec3_dot_product(normal, plr->look_dir) < PLR_DIR)
+			{
+				setup_frame(frame, &new_frame, frame->left.wall->top.idx);
+				scan_fov(home, &new_frame, plr);
+			}
 		}
 		else
 		{
@@ -119,8 +124,8 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		j++;
 	}
 	add_floor_and_ceiling(frame->transformed, home->sectors[frame->idx]);
-	add_objects(frame->transformed, home, frame->idx);
 	draw_sector(frame, home, plr);
 	frame->transformed->size = 0;
-	// draw_sector(frame, home, plr);
+	add_objects(frame->transformed, home, frame->idx);
+	draw_sector(frame, home, plr);
 }

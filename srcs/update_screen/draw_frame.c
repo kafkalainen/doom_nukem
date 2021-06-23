@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/23 11:49:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/23 16:22:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,8 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	frame->max_fov = 0;
 	frame->offset = 640;
 	frame->pxl_offset = 0.0f;
-	frame->left.l_pt = (t_xy){-1.0f, -1.0f};
-	frame->right.r_pt = (t_xy){-1.0f, -1.0f};
-	frame->left.left_dir = vec2_add(vec3_to_vec2(plr->look_dir), vec2(-PLR_DIR, PLR_DIR));
-	frame->right.right_dir = vec2_add(vec3_to_vec2(plr->look_dir), vec2(PLR_DIR, PLR_DIR));
-	reset_depth_buffer(frame->depth_buffer);
+	frame->left.left_dir = vec3_add(plr->look_dir, vec3(-PLR_DIR, 0.0f, PLR_DIR));
+	frame->right.right_dir = vec3_add(plr->look_dir, vec3(PLR_DIR, 0.0f, PLR_DIR));
 	add_skybox(frame->transformed, &home->skybox);
 	draw_sector(frame, home, plr);
 	scan_fov(home, frame, plr);

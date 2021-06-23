@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/23 09:11:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 15:44:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ int	check_if_portal(t_wall *wall)
 		return (FALSE);
 }
 
-int	check_if_same_pt(int *current_pxl, t_ray_pt *fov)
-{
-	if (*current_pxl < 1 && vec2_eucl_dist(fov->l_pt, fov->r_pt) < 0.001)
-		return (TRUE);
-	else
-	{
-		if (*current_pxl == 0)
-		{
-			*current_pxl = 1;
-		}
-		return (FALSE);
-	}
-}
+// int	check_if_same_pt(int *current_pxl, t_ray_pt *fov)
+// {
+// 	if (*current_pxl < 1 && vec2_eucl_dist(fov->l_pt, fov->r_pt) < 0.001)
+// 		return (TRUE);
+// 	else
+// 	{
+// 		if (*current_pxl == 0)
+// 		{
+// 			*current_pxl = 1;
+// 		}
+// 		return (FALSE);
+// 	}
+// }
 
 int	check_connection(t_wall *point, t_frame *frame)
 {

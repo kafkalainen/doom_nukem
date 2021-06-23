@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 07:48:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 15:40:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 typedef struct s_ray_pt
 {
-	t_xy			l_pt;
-	t_xy			r_pt;
-	t_xy			left_dir;
-	t_xy			right_dir;
+	t_xyz			left_dir;
+	t_xyz			right_dir;
 	t_wall			*wall;
 }					t_ray_pt;
 
