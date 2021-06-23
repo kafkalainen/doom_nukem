@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/15 16:11:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 10:44:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	init_player(t_player *plr)
 	plr->dir.x = 0.0f;
 	plr->dir.y = 1.0f;
 	plr->time = 0;
-	plr->cur_sector = 0;
-	plr->pos = (t_xyz){1.483f, 3.19f, 2.29f, 1.0f};
+	plr->cur_sector = 1;
+	plr->pos = (t_xyz){0.5f, 1.5f, 5.23f, 1.0f};
 	plr->look_dir = (t_xyz){0.0f, 0.0f, 1.0f, 1.0f};
 	plr->up = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
 	plr->target = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};

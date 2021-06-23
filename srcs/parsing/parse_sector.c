@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 10:49:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 09:36:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	add_points(t_sector *sector,
 	{
 		if (parse_coordinates(&data_right, &pos, &buf, size))
 			return (free_points(&sector->walls, i));
-		if (data_left.idx < -4 || data_right.idx < -4)
+		if (data_left.idx < -7 || data_right.idx < -7)
 			return (free_points(&sector->walls, i));
 		wall = new_point(&data_left, &data_right);
 		if (wall)

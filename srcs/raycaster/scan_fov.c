@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 16:57:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/23 11:44:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,24 @@ void	add_floor_and_ceiling(t_raster_queue *transformed, t_sector *sector)
 }
 
 void	add_objects(t_raster_queue *transformed, t_home *home, int idx)
-{	
+{
 	Uint32			j;
-	
+
 	j = 0;
 	while (j < home->nbr_of_entities)
 	{
 		if (home->entity_pool[j]->sector_idx == idx)
 		{
-			transformed->array[transformed->size] = translate_triangle(&home->entity_pool[j]->top, home->entity_pool[j]->coordinates);
+			transformed->array[transformed->size] = translate_triangle(
+				&home->entity_pool[j]->top, home->entity_pool[j]->coordinates);
 			transformed->size += 1;
-			transformed->array[transformed->size] = translate_triangle(&home->entity_pool[j]->bot, home->entity_pool[j]->coordinates);
+			transformed->array[transformed->size] = translate_triangle(
+				&home->entity_pool[j]->bot, home->entity_pool[j]->coordinates);
 			transformed->size += 1;
 		}
 		j++;
 	}
-	j = 0;
+	// j = 0;
 	// while (j < home->nbr_of_projectiles)
 	// {
 	// 	if (home->projectile_pool[j]->sector_idx == idx)
@@ -90,19 +92,17 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	t_triangle		temp_array[800];
 	unsigned int	j;
 
+	j = 0;
 	frame->transformed->size = 0;
 	frame->left.wall = home->sectors[frame->idx]->walls;
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
-	j = 0;
-	while (j < home->sectors[frame->idx]->nb_of_walls * 2)
+	while (j < home->sectors[frame->idx]->nb_of_walls * 2
+		&& !check_connection(frame->left.wall, frame))
 	{
 		if (frame->left.wall->top.idx >= 0)
 		{
-			if (!check_connection(frame->left.wall, frame))
-			{
-				setup_frame(frame, &new_frame, frame->left.wall->top.idx);
-				scan_fov(home, &new_frame, plr);
-			}
+			setup_frame(frame, &new_frame, frame->left.wall->top.idx);
+			scan_fov(home, &new_frame, plr);
 		}
 		else
 		{
@@ -121,4 +121,6 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	add_floor_and_ceiling(frame->transformed, home->sectors[frame->idx]);
 	add_objects(frame->transformed, home, frame->idx);
 	draw_sector(frame, home, plr);
+	frame->transformed->size = 0;
+	// draw_sector(frame, home, plr);
 }

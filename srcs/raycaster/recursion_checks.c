@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 12:03:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 09:11:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	continue_from_last_sector(t_wall *start, t_ray_pt *fov, t_frame *frame)
 {
-	t_wall	*p0;
+	t_wall	*temp;
 
-	p0 = start;
+	temp = start;
 	if (frame->old_idx != old_sector)
 	{
-		while (p0)
+		while (temp)
 		{
-			if (check_connection(p0, frame))
+			if (check_connection(temp, frame))
 			{
-				fov->wall = p0->next;
+				fov->wall = temp->next;
 				return ;
 			}
-			p0 = p0->next;
+			temp = temp->next;
 		}
 	}
 }

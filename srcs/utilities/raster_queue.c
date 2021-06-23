@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 19:44:34 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/04 14:27:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 10:02:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int	dequeue(t_raster_queue *queue)
 	if (queue->front == -1 || queue->front > queue->rear)
 		return (1);
 	queue->array[queue->front].colour = white;
-	queue->array[queue->front].p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
-	queue->array[queue->front].p[1] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
-	queue->array[queue->front].p[2] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
-	queue->array[queue->front].uv[0] = (t_uvz){0.0f, 0.0f, 1.0f};
-	queue->array[queue->front].uv[1] = (t_uvz){0.0f, 0.0f, 1.0f};
-	queue->array[queue->front].uv[2] = (t_uvz){0.0f, 0.0f, 1.0f};
+	queue->array[queue->front].p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	queue->array[queue->front].p[1] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	queue->array[queue->front].p[2] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	queue->array[queue->front].uv[0] = (t_uvz){0.0f, 0.0f, 0.0f};
+	queue->array[queue->front].uv[1] = (t_uvz){0.0f, 0.0f, 0.0f};
+	queue->array[queue->front].uv[2] = (t_uvz){0.0f, 0.0f, 0.0f};
 	queue->front = queue->front + 1;
 	queue->size = queue->size - 1;
 	return (0);

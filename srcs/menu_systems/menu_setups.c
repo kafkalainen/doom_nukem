@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/22 17:20:38 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/23 11:16:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	load_entities_from_map(t_home *home)
 	// TODO: Determine size of entity pool
 	// TODO: malloc entity pool
 	// TODO: init each entity pool index with entity from map data
-	// TODO: 
+	// TODO:
 }
 
 void	init_sprites_editor(t_home *home)
@@ -116,18 +116,18 @@ void	init_sprites_editor(t_home *home)
 	home->entity_pool[0]->ammo = 0;
 	home->entity_pool[0]->always_facing_plr = 1;
 	home->entity_pool[0]->coordinates = (t_xyz){0.9, 1.1, 10, 1};
-	home->entity_pool[0]->top.p[0] = (t_xyz){0, 0, 0, 1};
-	home->entity_pool[0]->top.p[1] = (t_xyz){0, 1, 0, 1};
-	home->entity_pool[0]->top.p[2] = (t_xyz){1, 1, 0, 1};
-	home->entity_pool[0]->bot.p[0] = (t_xyz){0, 0, 0, 1};
-	home->entity_pool[0]->bot.p[1] = (t_xyz){1, 1, 0, 1};
-	home->entity_pool[0]->bot.p[2] = (t_xyz){1, 0, 0, 1};
-	home->entity_pool[0]->top.uv[0] = (t_uvz){1, 1, 1};
-	home->entity_pool[0]->top.uv[1] = (t_uvz){0, 0, 1};
-	home->entity_pool[0]->top.uv[2] = (t_uvz){1, 0, 1};
-	home->entity_pool[0]->bot.uv[0] = (t_uvz){0, 1, 1};
-	home->entity_pool[0]->bot.uv[1] = (t_uvz){0, 0, 1};
-	home->entity_pool[0]->bot.uv[2] = (t_uvz){1, 1, 1};
+	home->entity_pool[0]->top.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
+	home->entity_pool[0]->top.p[1] = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
+	home->entity_pool[0]->top.p[2] = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
+	home->entity_pool[0]->bot.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
+	home->entity_pool[0]->bot.p[1] = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
+	home->entity_pool[0]->bot.p[2] = (t_xyz){1.0f, 0.0f, 0.0f, 1.0f};
+	home->entity_pool[0]->top.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
+	home->entity_pool[0]->top.uv[1] = (t_uvz){0.0f, 0.0f, 1.0f};
+	home->entity_pool[0]->top.uv[2] = (t_uvz){1.0f, 0.0f, 1.0f};
+	home->entity_pool[0]->bot.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
+	home->entity_pool[0]->bot.uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
+	home->entity_pool[0]->bot.uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
 	home->entity_pool[0]->top.idx = -10;
 	home->entity_pool[0]->bot.idx = -10;
 	home->entity_pool[0]->sprite_state = 0;
