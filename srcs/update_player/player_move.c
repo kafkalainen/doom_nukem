@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/23 16:38:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 16:46:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 
 	plr->move_dir.y = 0.0f;
 	plr->move_dir = vec3_unit_vector(plr->move_dir);
-	new_loc = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.03f));
+	new_loc = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.01f));
 	if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &new_loc))
 		return (FALSE);
 	wall = check_if_crossing(home->sectors[plr->cur_sector], new_loc);
