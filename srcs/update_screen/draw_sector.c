@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/23 11:43:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 13:40:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr)
 
 	mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	project_to_player_position(frame->transformed, frame->triangles_in_view, plr, &frame->viewport);
+	reset_depth_buffer(frame->depth_buffer);
 	i = 0;
 	while (i < MAX_THREADS)
 	{
