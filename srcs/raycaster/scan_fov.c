@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/23 11:44:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 14:56:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	add_objects(t_raster_queue *transformed, t_home *home, int idx)
 		if (home->entity_pool[j]->sector_idx == idx)
 		{
 			transformed->array[transformed->size] = translate_triangle(
-				&home->entity_pool[j]->top, home->entity_pool[j]->coordinates);
+				&home->entity_pool[j]->top, home->entity_pool[j]->pos);
 			transformed->size += 1;
 			transformed->array[transformed->size] = translate_triangle(
-				&home->entity_pool[j]->bot, home->entity_pool[j]->coordinates);
+				&home->entity_pool[j]->bot, home->entity_pool[j]->pos);
 			transformed->size += 1;
 		}
 		j++;
