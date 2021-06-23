@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/23 16:16:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 16:33:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	add_objects(t_raster_queue *transformed, t_home *home, int idx)
 		if (home->entity_pool[j]->sector_idx == idx)
 		{
 			transformed->array[transformed->size] = translate_triangle(
-				&home->entity_pool[j]->top, home->entity_pool[j]->coordinates);
+				&home->entity_pool[j]->top, home->entity_pool[j]->pos);
 			transformed->size += 1;
 			transformed->array[transformed->size] = translate_triangle(
-				&home->entity_pool[j]->bot, home->entity_pool[j]->coordinates);
+				&home->entity_pool[j]->bot, home->entity_pool[j]->pos);
 			transformed->size += 1;
 		}
 		j++;
@@ -103,7 +103,7 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		if (frame->left.wall->top.idx >= 0)
 		{
 			normal = triangle_normal(&frame->left.wall->top);
-			if (vec3_dot_product(normal, plr->look_dir) < 0)
+			if (vec3_dot_product(normal, plr->look_dir) < PLR_DIR)
 			{
 				setup_frame(frame, &new_frame, frame->left.wall->top.idx);
 				scan_fov(home, &new_frame, plr);

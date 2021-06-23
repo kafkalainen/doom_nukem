@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/23 11:16:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 14:57:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	init_sprites_editor(t_home *home)
 	home->entity_pool[0]->velocity = 10;
 	home->entity_pool[0]->ammo = 0;
 	home->entity_pool[0]->always_facing_plr = 1;
-	home->entity_pool[0]->coordinates = (t_xyz){0.9, 1.1, 10, 1};
+	home->entity_pool[0]->pos = (t_xyz){0.9, 1.1, 10, 1};
 	home->entity_pool[0]->top.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
 	home->entity_pool[0]->top.p[1] = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
 	home->entity_pool[0]->top.p[2] = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};

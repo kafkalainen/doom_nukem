@@ -6,30 +6,40 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/22 15:15:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/23 15:19:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENTITY_H
 # define ENTITY_H
 
-# define AGGRO_RANGE_1 50
-# define AGGRO_RANGE_2 100
+# define AGGRO_RANGE_1 10
+# define AGGRO_RANGE_2 20
 # define ENTITY_VELOCITY_1 10
 # define ENTITY_VELOCITY_2 25
 # define PROJECTILE_VELOCITY 50
 # define ENTITY_WIDTH 128
 # define ENTITY_HEIGH 128
 # define SPRITE_COUNT 7
+# define ENTITY_COOLDOWN_1 6
+# define ENTITY_COOLDOWN_2 10
+# define ENTITY_MOVE 1
+# define ENTITY_IDLE 0
+# define ENTITY_ATTACK 2
+# define ENTITY_TAKE_DAMAGE 4
 
 typedef struct	s_entity
 {
-	t_xyz		coordinates;
+	t_xyz		pos;
 	t_xyz		normal;
+	t_xyz		move_dir;
 	float		velocity; // can be looked up via macros
 	t_triangle	top; // calculated per frame
 	t_triangle	bot; // calculated per frame
+	Uint32		take_damage; // boolean to see if we took damage this tick
+	Uint32		cooldown; // wait time between moving between idle and move states, or cooldown between attacks
 	Uint32		is_static; // 0 == can move, 1 == cannot move
+	Uint32		is_active;
 	Uint32		always_facing_plr; // if true, always draw entity_front.png OR entity_attack
 	Uint32		is_revealed; // the twist; if true, set sprite_index to alt_sprite_index, default == false;
 	Uint32		entity_type; // 0 == health_station; 1 == enemy_1; 2 == enemy_2;
@@ -49,6 +59,7 @@ typedef	struct	s_projectile
 {
 	t_xyz		coordinates;
 	t_xyz		normal;
+	t_xyz		move_dir;
 	float		velocity;
 	t_triangle	top;
 	t_triangle	bot;
@@ -66,7 +77,9 @@ typedef	struct	s_projectile
 
 // move() need pathfinding algorithm
 // attack()
+// take_damage()
 // die()
+void	check_aggro(t_xyz plr_pos, t_entity *entity);
 
 
 #endif

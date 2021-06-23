@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/11 09:25:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/23 15:19:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,48 @@ void	process_inputs_game_loop(t_player *plr, int *game_state, SDL_Event *e)
 	}
 }
 
+void	update_objects(t_home *home, t_xyz plr_pos, Uint32 delta_time)
+{
+	Uint32	i;
+
+	(void)delta_time;
+	// i = 0;
+	// while (i < home->nbr_of_projectiles)
+	// {
+	// 	if (home->projectile_pool[i]->is_active)
+	// 	{
+	// 		// move_projectile();
+	// 		// move each projectile
+	// 		// if we hit something, explode and set !is_active
+	// 		// apply damage to nearby entities
+	// 		// do wall damage sprite on affected wall coordinate
+	// 	}
+	// 	i++;
+	// }
+	i = 0;
+	while (i < home->nbr_of_entities)
+	{
+		if (home->entity_pool[i]->state != 3) // check to see if entity is dead or not
+		{
+			if (home->entity_pool[i]->entity_type == 1 || home->entity_pool[i]->entity_type == 2) // entity is an enemy, move to state logics
+			{
+				if (!home->entity_pool[i]->is_aggroed)
+					check_aggro(plr_pos, home->entity_pool[i]);
+				// if (home->entity_pool[i]->take_damage) // determined by projectile while loop
+				// 	take_damage_logic(home->entity_pool[i], plr_pos, delta_time);
+				// if (home->entity_pool[i]->is_aggroed)
+				// 	attack_logic(home->entity_pool[i], plr_pos, delta_time);
+				// else
+				// idle_logic(home->entity_pool[i], delta_time);
+				//if we see plr and !is_aggroed, set is_aggroed and move to attack state || move towards plr
+
+				// if we are not aggroed and we take damage, apply damage and aggro player
+			}
+		}
+		i++;
+	}
+}
+
 void	update_world(t_player *plr, t_home *home)
 {
 	Uint32	current_time;
@@ -37,7 +79,7 @@ void	update_world(t_player *plr, t_home *home)
 		return ;
 	plr->time = current_time;
 	update_player(plr, home, delta_time);
-	// TODO: update objects
+	update_objects(home, plr->pos, delta_time);
 }
 
 void	launch_game_loop(t_home *home, t_player *plr,
