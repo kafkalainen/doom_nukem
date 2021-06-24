@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/23 15:40:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 11:56:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_xy			cast_ray(t_xy *dir, t_wall **head, int walls);
 int				check_connection(t_wall *point, t_frame *frame);
 int				check_if_portal(t_wall *point);
 int				check_if_same_pt(int *current_pxl, t_ray_pt *fov);
-int				check_if_lseg_intersects(t_wall *p0, t_xy *pos, t_xy *dir);
+int				check_if_lseg_intersects(t_xy *p0, t_xy *p1, t_xy *pos, t_xy *dir);
 void			continue_from_last_sector(t_wall *start, t_ray_pt *fov,
 					t_frame *frame);
 void			draw_linearly(t_frame *frame, t_texture *floor_tex, t_plgn *box);

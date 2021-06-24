@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 10:50:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 11:47:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ static Uint32	project_to_player_position(t_raster_queue *transformed,
 	size_t		current_size;
 	t_xyz		normal;
 	t_triangle	current_viewed_triangle;
+	t_xyz		light_src;
 
+	light_src = (t_xyz){0.0f, 1.0f, 0.0f, 0.0f};
 	create_target_vector(plr);
 	current_size = transformed->size;
 	triangles_in_view->size = 0;
@@ -57,6 +59,7 @@ static Uint32	project_to_player_position(t_raster_queue *transformed,
 		normal = triangle_normal(&transformed->array[i]);
 		if (vec3_dot_product(normal, vec3_dec(transformed->array[i].p[0], plr->pos)) < 0)
 		{
+			transformed->array[i].illumination = vec3_dot_product(light_src, normal);
 			current_viewed_triangle = apply_camera(
 				plr->pos, plr->target, plr->up, &transformed->array[i]);
 			clip_to_near_plane(&current_viewed_triangle, view, triangles_in_view);

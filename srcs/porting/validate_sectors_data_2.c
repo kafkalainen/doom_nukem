@@ -6,47 +6,47 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:09:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/01 14:33:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 11:55:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	check_if_lines_cut(t_sector *sector)
-{
-	unsigned int	i;
-	unsigned int	j;
-	t_wall			*temp;
-	t_wall			*test;
-	t_xy			next;
-	t_xy			one_after;
+// int	check_if_lines_cut(t_sector *sector)
+// {
+// 	unsigned int	i;
+// 	unsigned int	j;
+// 	t_wall			*temp;
+// 	t_wall			*test;
+// 	t_xy			next;
+// 	t_xy			one_after;
 
-	if (sector->nb_of_walls < 4)
-		return (0);
-	j = 0;
-	temp = sector->walls;
-	while (j < sector->nb_of_walls)
-	{
-		i = 0;
-		test = temp->next;
-		while (i < sector->nb_of_walls - 2)
-		{
-			next = (t_xy){test->top.p[0].x, test->top.p[0].z};
-			one_after = (t_xy){test->top.p[2].x, test->top.p[2].z};
-			if (check_if_lseg_intersects(temp, &next, &one_after) && temp != test)
-			{
-				if (temp->top.p[2].x != test->top.p[2].x
-					&& temp->top.p[2].y != test->top.p[2].y)
-					return (1);
-			}
-			test = test->next;
-			i++;
-		}
-		temp = temp->next;
-		j++;
-	}
-	return (0);
-}
+// 	if (sector->nb_of_walls < 4)
+// 		return (0);
+// 	j = 0;
+// 	temp = sector->walls;
+// 	while (j < sector->nb_of_walls)
+// 	{
+// 		i = 0;
+// 		test = temp->next;
+// 		while (i < sector->nb_of_walls - 2)
+// 		{
+// 			next = (t_xy){test->top.p[0].x, test->top.p[0].z};
+// 			one_after = (t_xy){test->top.p[2].x, test->top.p[2].z};
+// 			if (check_if_lseg_intersects(temp, &next, &one_after) && temp != test)
+// 			{
+// 				if (temp->top.p[2].x != test->top.p[2].x
+// 					&& temp->top.p[2].y != test->top.p[2].y)
+// 					return (1);
+// 			}
+// 			test = test->next;
+// 			i++;
+// 		}
+// 		temp = temp->next;
+// 		j++;
+// 	}
+// 	return (0);
+// }
 
 static int	triangle_same_triangles(t_wall *test, t_wall *temp,
 	unsigned int i, unsigned int j)
