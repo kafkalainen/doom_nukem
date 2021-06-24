@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_segment_check.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:03:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 11:58:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:44:30 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,34 @@ int	orientation_of_three_points(t_xy a, t_xy b, t_xy c)
 		return (clockwise);
 	else
 		return (c_clockwise);
+}
+
+int	check_intersection(t_wall *p0, t_xy pos, t_xy dir)
+{
+	int		pos_orientation;
+	int		dir_orientation;
+	int		p0_orientation;
+	int		p1_orientation;
+
+	pos_orientation = orientation_of_three_points(vec3_to_vec2(p0->top.p[0]),
+		vec3_to_vec2(p0->top.p[2]), pos);
+	dir_orientation = orientation_of_three_points(vec3_to_vec2(p0->top.p[0]),
+		vec3_to_vec2(p0->top.p[2]), dir);
+	p0_orientation = orientation_of_three_points(pos, dir, vec3_to_vec2(p0->top.p[0]));
+	p1_orientation = orientation_of_three_points(pos, dir, vec3_to_vec2(p0->top.p[2]));
+	if (pos_orientation != dir_orientation && p0_orientation != p1_orientation)
+		return (1);
+	if (pos_orientation == 0
+		&& point_is_on_the_lseg(vec3_to_vec2(p0->top.p[0]), pos, vec3_to_vec2(p0->top.p[2])))
+		return (1);
+	if (dir_orientation == 0
+		&& point_is_on_the_lseg(vec3_to_vec2(p0->top.p[0]), dir, vec3_to_vec2(p0->top.p[2])))
+		return (1);
+	if (p0_orientation == 0 && point_is_on_the_lseg(pos, vec3_to_vec2(p0->top.p[0]), dir))
+		return (1);
+	if (p1_orientation == 0 && point_is_on_the_lseg(pos, vec3_to_vec2(p0->top.p[2]), dir))
+		return (1);
+	return (0);
 }
 
 int	check_if_lseg_intersects(t_xy *p0, t_xy *p1, t_xy *pos, t_xy *dir)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 11:56:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:45:01 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,7 @@ int				raster_queue_is_empty(t_raster_queue *queue);
 int				enqueue_to_raster(t_raster_queue *queue, t_triangle *item);
 int				dequeue(t_raster_queue *queue);
 int				front(t_raster_queue *queue, t_triangle *triangle);
+int				orientation_of_three_points(t_xy a, t_xy b, t_xy c);
+int				point_is_on_the_lseg(t_xy a, t_xy c, t_xy b);
+int				check_intersection(t_wall *p0, t_xy pos, t_xy dir);
 #endif

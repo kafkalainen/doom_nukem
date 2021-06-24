@@ -53,15 +53,16 @@
 
 # include "macros.h"
 # include "vectors.h"
-# include "entity.h"
 # include "sector.h"
 # include "calculations.h"
 # include "colours.h"
 # include "parser_structs.h"
 # include "png_parser.h"
-# include "program.h"
 # include "audio.h"
+# include "program.h"
 # include "player.h"
+# include "entity.h"
+
 
 # include "../libft/libft.h"
 # include "raycast.h"

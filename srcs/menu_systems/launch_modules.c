@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/23 16:41:38 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/24 13:38:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	process_inputs_game_loop(t_player *plr, int *game_state, SDL_Event *e)
 	}
 }
 
-void	update_objects(t_home *home, t_xyz plr_pos, Uint32 delta_time)
+void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 {
 	Uint32	i;
 
@@ -55,7 +55,7 @@ void	update_objects(t_home *home, t_xyz plr_pos, Uint32 delta_time)
 				// 	take_damage_logic(home->entity_pool[i], plr_pos, delta_time);
 				if (!home->entity_pool[i]->is_aggroed)
 				{
-					if (check_aggro(plr_pos, home->entity_pool[i]))
+					if (check_aggro(plr, home->entity_pool[i], home->sectors[home->entity_pool[i]->sector_idx]))
 						printf("we are aggroed\n");
 					//else
 						// move or idle
@@ -90,7 +90,7 @@ void	update_world(t_player *plr, t_home *home)
 		return ;
 	plr->time = current_time;
 	update_player(plr, home, delta_time);
-	update_objects(home, plr->pos, delta_time);
+	update_objects(home, plr, delta_time);
 }
 
 void	launch_game_loop(t_home *home, t_player *plr,

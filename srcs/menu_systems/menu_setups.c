@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/23 14:57:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/24 13:24:20 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	init_sprites_editor(t_home *home)
 	home->entity_pool[0]->state = 0;
 	home->entity_pool[0]->velocity = 10;
 	home->entity_pool[0]->ammo = 0;
-	home->entity_pool[0]->always_facing_plr = 1;
+	home->entity_pool[0]->always_facing_plr = 0;
 	home->entity_pool[0]->pos = (t_xyz){0.9, 1.1, 10, 1};
 	home->entity_pool[0]->top.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
 	home->entity_pool[0]->top.p[1] = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
@@ -128,6 +128,7 @@ void	init_sprites_editor(t_home *home)
 	home->entity_pool[0]->bot.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
 	home->entity_pool[0]->bot.uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
 	home->entity_pool[0]->bot.uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
+	home->entity_pool[0]->dir = triangle_normal(&home->entity_pool[0]->top);
 	home->entity_pool[0]->top.idx = -10;
 	home->entity_pool[0]->bot.idx = -10;
 	home->entity_pool[0]->sprite_state = 0;
