@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 15:08:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 15:46:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static Uint32	clip_to_near_plane(t_triangle *current_view,
+static void	clip_to_near_plane(t_triangle *current_view,
 	t_sides *viewport, t_raster_queue *triangles_in_view)
 {
 	Uint32		nb_of_clipped_triangles;
@@ -22,10 +22,11 @@ static Uint32	clip_to_near_plane(t_triangle *current_view,
 
 	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
 	nb_of_clipped_triangles = clip_against_plane(&viewport->near,
-		current_view, &clipped_triangle[0], &clipped_triangle[1]);
+			current_view, &clipped_triangle[0], &clipped_triangle[1]);
 	while (nb_of_clipped_triangles)
 	{
-		projected = create_projection(&clipped_triangle[nb_of_clipped_triangles - 1]);
+		projected = create_projection(&clipped_triangle[nb_of_clipped_triangles
+				 - 1]);
 		triangle_inv_z(&projected);
 		projected.p[0] = vec3_div(projected.p[0], projected.p[0].w);
 		projected.p[1] = vec3_div(projected.p[1], projected.p[1].w);
@@ -37,13 +38,10 @@ static Uint32	clip_to_near_plane(t_triangle *current_view,
 		triangles_in_view->size += 1;
 		nb_of_clipped_triangles--;
 	}
-	return (TRUE);
 }
 
-// static Uint32	project_to_player_position(t_raster_queue *transformed,
-// 	t_raster_queue *triangles_in_view, t_player *plr, t_sides *view)
-
-static Uint32	project_to_player_position(t_frame *frame, t_player *plr, t_xyz	light_src)
+static void	project_to_player_position(t_frame *frame, t_player *plr,
+	t_lighting *lights)
 {
 	Uint32		i;
 	size_t		current_size;
@@ -58,23 +56,26 @@ static Uint32	project_to_player_position(t_frame *frame, t_player *plr, t_xyz	li
 	{
 		normal = triangle_normal(&frame->transformed->array[i]);
 		if (vec3_dot_product(normal, vec3_dec(frame->transformed->array[i].p[0],
-			plr->pos)) < 0)
+					plr->pos)) < 0)
 		{
-			frame->transformed->array[i].illumination = ft_fmax(
-				vec3_dot_product(light_src, normal), 0.1f);
+			if (lights)
+				frame->transformed->array[i].illumination = ft_fmax(
+					vec3_dot_product(lights->light_dir, normal), 0.1f);
+			else
+				frame->transformed->array[i].illumination = 1.0f;
 			current_viewed_triangle = apply_camera(
-				plr->pos, plr->target, plr->up, &frame->transformed->array[i]);
+					plr->pos, plr->target, plr->up,
+					&frame->transformed->array[i]);
 			clip_to_near_plane(&current_viewed_triangle, &frame->viewport,
 				frame->triangles_in_view);
 		}
 		i++;
 	}
-	return (TRUE);
 }
 
 void	reset_depth_buffer(float *depth_buffer)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < (SCREEN_HEIGHT * SCREEN_WIDTH))
@@ -84,13 +85,8 @@ void	reset_depth_buffer(float *depth_buffer)
 	}
 }
 
-
-// if (sector_idx == -1)
-// 	project_to_player_position(frame, plr, (t_xyz){});
-// else
-// 	project_to_player_position(frame, plr, home->sectors[sector_idx]->)
-
-static void	initialize_thread(t_arg *arg, t_frame *frame, t_home *home, Uint32 idx)
+static void	initialize_thread(t_arg *arg, t_frame *frame, t_home *home,
+			Uint32 idx)
 {
 	arg->textures = home->textures;
 	arg->buffer = frame->buffer;
@@ -110,13 +106,16 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr, int sector_idx)
 	Uint32			i;
 
 	i = 0;
-	(void)sector_idx;
 	mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
-	project_to_player_position(frame, plr, (t_xyz){0.0f, 1.0f, 0.0f, 0.0f});
+	if (sector_idx == -1)
+		project_to_player_position(frame, plr, NULL);
+	else
+		project_to_player_position(frame, plr, &home->sectors[sector_idx]->lights);
 	while (i < MAX_THREADS)
 	{
 		initialize_thread(&args[i], frame, home, i);
-		pthread_create(&tid[i], NULL, &clip_to_viewport_edges, (void*)&args[i]);
+		pthread_create(&tid[i], NULL, &clip_to_viewport_edges,
+			(void*)&args[i]);
 		pthread_mutex_lock(&mutex);
 		i++;
 		pthread_mutex_unlock(&mutex);
