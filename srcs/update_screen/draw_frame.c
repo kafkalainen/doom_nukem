@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/24 11:21:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:52:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	frame->right.right_dir = vec3_add(plr->look_dir, vec3(PLR_DIR, 0.0f, PLR_DIR));
 	reset_depth_buffer(frame->depth_buffer);
 	add_skybox(frame->transformed, &home->skybox);
-	draw_sector(frame, home, plr);
+	draw_sector(frame, home, plr, -1);
 	scan_fov(home, frame, plr);
 	// if (plr->input.minimap)
 	// {

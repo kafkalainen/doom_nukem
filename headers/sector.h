@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 13:26:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 15:00:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ typedef struct s_wall
 	t_xy				normal;
 	struct s_wall		*next;
 }						t_wall;
+
+typedef	struct s_lighting
+{
+	t_xyz				light_src;
+	t_xyz				light_dir;
+	Uint32				state;
+}				t_lighting;
 
 typedef struct s_surface
 {
@@ -58,6 +65,7 @@ typedef struct s_sector
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;
+	t_lighting		lights;
 	t_surface		*ground;
 	t_surface		*ceiling;
 	t_plgn			bounding_box;

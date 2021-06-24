@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/24 11:34:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:20:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ typedef struct	s_steps
 	char		current_triangle;
 	t_deltas	delta_p0p1;
 	t_deltas	delta_p0p2;
-	float		thread_step;
+	float		illumination;
 }				t_steps;
 
 /*

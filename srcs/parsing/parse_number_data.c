@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_number_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/14 14:11:18 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/24 15:00:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	parse_number_data(t_sector *new_sector, unsigned char *buf,
 	*pos += get_next_breaker(buf + *pos);
 	if (*pos > (unsigned int)size)
 		return (1);
+	new_sector->lights.state = FALSE;
 	return (0);
 }
 

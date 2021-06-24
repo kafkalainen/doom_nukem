@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/23 09:58:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:18:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ int		clip_against_plane(t_plane *plane, t_triangle *src,
 	check_if_inside_triangle(d[2], &loc, src->p[2], src->uv[2]);
 	triangle1->idx = src->idx;
 	triangle2->idx = src->idx;
-	triangle1->colour = white;
-	triangle2->colour = white;
+	triangle1->illumination = src->illumination;
+	triangle2->illumination = src->illumination;
 	if (loc.inside == 0)
 		return (0);
 	if (loc.inside == 3)

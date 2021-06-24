@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 10:49:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:21:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex,
 			depth_buffer[cur_x + step->cur_y * SCREEN_WIDTH] = texel.w;
 			texel = texel_inv_z(texel);
 			put_pixel(buffer, cur_x, step->cur_y,
-				get_texel(
+				colour_scale(get_texel(
 					&(t_uv){texel.u * tex->width - 1, texel.v * tex->height - 1},
-					&(t_uv){tex->width, tex->height}, tex->texels));
+					&(t_uv){tex->width, tex->height}, tex->texels), step->illumination));
 		}
 		offset += offset_step;
 		cur_x++;

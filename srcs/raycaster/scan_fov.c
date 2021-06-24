@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 11:07:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:50:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,5 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	}
 	add_floor_and_ceiling(frame->transformed, home->sectors[frame->idx]);
 	add_objects(frame->transformed, home, frame->idx);
-	draw_sector(frame, home, plr);
+	draw_sector(frame, home, plr, frame->idx);
 }
