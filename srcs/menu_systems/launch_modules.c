@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/24 13:38:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/24 16:45:16 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 {
 	Uint32	i;
 
-	(void)delta_time;
 	// i = 0;
 	// while (i < home->nbr_of_projectiles)
 	// {
@@ -57,9 +56,8 @@ void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 				{
 					if (check_aggro(plr, home->entity_pool[i], home->sectors[home->entity_pool[i]->sector_idx]))
 						printf("we are aggroed\n");
-					//else
-						// move or idle
 				}
+				entity_move(home->entity_pool[i], home, delta_time);
 				// if (home->entity_pool[i]->is_aggroed)
 				// {
 				// 	if (home->entity_pool[i]->state == ENTITY_MOVE && home->entity_pool[i]->sprite_state > ENTITY_SPRITE_MOVE_END) // we are done with moving

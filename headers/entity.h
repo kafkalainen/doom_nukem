@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/24 14:06:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/24 16:35:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define AGGRO_RANGE_1 10
 # define AGGRO_RANGE_2 20
-# define ENTITY_VELOCITY_1 10
-# define ENTITY_VELOCITY_2 25
+# define ENTITY_VELOCITY_1 0.005f
+# define ENTITY_VELOCITY_2 0.0025f
 # define PROJECTILE_VELOCITY 50
 # define ENTITY_WIDTH 128
 # define ENTITY_HEIGH 128
@@ -42,6 +42,7 @@
 // take_damage()
 // die()
 int		check_aggro(t_player *plr, t_entity *entity, t_sector *sector);
-
+// void	move_entity(t_entity *entity, t_sector *sector, Uint32 delta_time);
+int		entity_move(t_entity *entity, t_home *home, Uint32 t);
 
 #endif
