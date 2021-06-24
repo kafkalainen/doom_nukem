@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/23 16:42:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 11:05:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,16 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	j = 0;
 	frame->transformed->size = 0;
 	frame->left.wall = home->sectors[frame->idx]->walls;
+	printf("I see sector %d\n", frame->idx);
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
 	while (j < home->sectors[frame->idx]->nb_of_walls * 2
 		&& !check_connection(frame->left.wall, frame))
 	{
 		if (frame->left.wall->top.idx >= 0)
 		{
+			plr->look_dir = vec3_unit_vector(plr->look_dir);
 			normal = triangle_normal(&frame->left.wall->top);
-			if (vec3_dot_product(normal, plr->look_dir) < PLR_DIR)
+			if (vec3_dot_product(normal, plr->look_dir) < SQR2)
 			{
 				setup_frame(frame, &new_frame, frame->left.wall->top.idx);
 				scan_fov(home, &new_frame, plr);
@@ -124,8 +126,6 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		j++;
 	}
 	add_floor_and_ceiling(frame->transformed, home->sectors[frame->idx]);
-	draw_sector(frame, home, plr);
-	frame->transformed->size = 0;
 	add_objects(frame->transformed, home, frame->idx);
 	draw_sector(frame, home, plr);
 }
