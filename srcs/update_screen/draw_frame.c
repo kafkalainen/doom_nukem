@@ -6,27 +6,27 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/24 14:52:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 16:43:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static char	*compass_direction(t_xy *dir)
-{
-	if (dir->x <= NW && dir->x > 0)
-		return (ft_strdup("North"));
-	else if (dir->x <= N && dir->x > NE)
-		return (ft_strdup("North"));
-	else if (dir->x <= SW && dir->x > NW)
-		return (ft_strdup("West"));
-	else if (dir->x <= SE && dir->x > SW)
-		return (ft_strdup("South"));
-	else if (dir->x <= NE && dir->x > SE)
-		return (ft_strdup("East"));
-	else
-		return (ft_strdup("NO DIR"));
-}
+// static char	*compass_direction(t_xy *dir)
+// {
+// 	if (dir->x <= NW && dir->x > 0)
+// 		return (ft_strdup("North"));
+// 	else if (dir->x <= N && dir->x > NE)
+// 		return (ft_strdup("North"));
+// 	else if (dir->x <= SW && dir->x > NW)
+// 		return (ft_strdup("West"));
+// 	else if (dir->x <= SE && dir->x > SW)
+// 		return (ft_strdup("South"));
+// 	else if (dir->x <= NE && dir->x > SE)
+// 		return (ft_strdup("East"));
+// 	else
+// 		return (ft_strdup("NO DIR"));
+// }
 
 // static void	draw_minimap(t_home *home, t_frame *frame)
 // {
@@ -65,45 +65,45 @@ static char	*compass_direction(t_xy *dir)
 // 		lightgreen, frame->buffer);
 // }
 
-static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
-{
-	char			*sector;
-	char			*compass;
-	char			*fps;
-	char			*plr_x;
-	char			*plr_y;
-	char			*plr_z;
-	t_plx_modifier	mod;
+// static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
+// {
+// 	char			*sector;
+// 	char			*compass;
+// 	char			*fps;
+// 	char			*plr_x;
+// 	char			*plr_y;
+// 	char			*plr_z;
+// 	t_plx_modifier	mod;
 
-	mod.colour = get_color(white);
-	mod.size = TEXT_SIZE;
-	compass = compass_direction(&plr->dir);
-	sector = ft_itoa(plr->cur_sector);
-	fps = ft_itoa(nb_fps);
-	plr_x = ft_ftoa(plr->pos.x, 6);
-	plr_y = ft_ftoa(plr->pos.y, 6);
-	plr_z = ft_ftoa(plr->pos.z, 6);
-	ft_str_pxl(frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 50}, "dir: ", mod);
-	ft_str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){get_color(green), 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_x, (t_plx_modifier){get_color(green), 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_y, (t_plx_modifier){get_color(green), 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_z, (t_plx_modifier){get_color(green), 2});
-	ft_str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 440}, "wasd, rotate with q and e.", mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 460}, "free mouse with m", mod);
-	free(fps);
-	free(sector);
-	free(compass);
-	free(plr_x);
-	free(plr_y);
-	free(plr_z);
-}
+// 	mod.colour = get_color(white);
+// 	mod.size = TEXT_SIZE;
+// 	compass = compass_direction(&plr->dir);
+// 	sector = ft_itoa(plr->cur_sector);
+// 	fps = ft_itoa(nb_fps);
+// 	plr_x = ft_ftoa(plr->pos.x, 6);
+// 	plr_y = ft_ftoa(plr->pos.y, 6);
+// 	plr_z = ft_ftoa(plr->pos.z, 6);
+// 	ft_str_pxl(frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, mod);
+// 	ft_str_pxl(frame->buffer, (t_xy){0, 50}, "dir: ", mod);
+// 	ft_str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
+// 	ft_str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", mod);
+// 	ft_str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
+// 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){get_color(green), 2});
+// 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_x, (t_plx_modifier){get_color(green), 2});
+// 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_y, (t_plx_modifier){get_color(green), 2});
+// 	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_z, (t_plx_modifier){get_color(green), 2});
+// 	ft_str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
+// 	ft_str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
+// 	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
+// 	ft_str_pxl(frame->buffer, (t_xy){0, 440}, "wasd, rotate with q and e.", mod);
+// 	ft_str_pxl(frame->buffer, (t_xy){0, 460}, "free mouse with m", mod);
+// 	free(fps);
+// 	free(sector);
+// 	free(compass);
+// 	free(plr_x);
+// 	free(plr_y);
+// 	free(plr_z);
+// }
 
 void	add_skybox(t_raster_queue *transformed, t_skybox *skybox)
 {
@@ -138,7 +138,7 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	// 	draw_minimap(home, frame);
 	// 	draw_player(frame);
 	// }
-	if (plr->input.info)
-		draw_info(frame, plr, (int)home->t.fps);
+	// if (plr->input.info)
+	// 	draw_info(frame, plr, (int)home->t.fps);
 	return ;
 }
