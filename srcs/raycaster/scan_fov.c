@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 14:50:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/25 12:43:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	unsigned int	j;
 	t_frame			new_frame;
 	t_triangle		temp_array[800];
-	t_xyz			normal;
 
 	j = 0;
 	frame->transformed->size = 0;
@@ -104,8 +103,8 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		if (frame->left.wall->top.idx >= 0)
 		{
 			plr->look_dir = vec3_unit_vector(plr->look_dir);
-			normal = triangle_normal(&frame->left.wall->top);
-			if (vec3_dot_product(normal, plr->look_dir) < SQR2)
+			// normal = triangle_normal(&frame->left.wall->top);
+			if (vec3_dot_product(frame->left.wall->top.normal, plr->look_dir) < SQR2)
 			{
 				setup_frame(frame, &new_frame, frame->left.wall->top.idx);
 				scan_fov(home, &new_frame, plr);

@@ -34,6 +34,8 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Perspective correct texture mapping.
 - Matrix calculations.
 - Triangulation algorithms.
+- Sutherland-Hodgeman Polygon Clipping.
+- From flat shading to Gouraud shading.
 
 # TO-DO
 ## Riku & Elias
@@ -114,3 +116,4 @@ the flag mode, etc.
 - Perspective Texture Mapping by Mikael Kalms [Link](https://www.lysator.liu.se/~mikaelk/doc/perspectivetexture/)
 - Perspective Texture Mapping article series by Chris Hecker [Link] http://www.chrishecker.com/Miscellaneous_Technical_Articles
 - Floor and Ceiling Drawing tutorial by Lodev. Idea of continuing drawing after the wall has been drawn stems from here! [Link](https://lodev.org/cgtutor/raycasting2.html)
+- CS184 Lecture 30 summary [Link](https://people.eecs.berkeley.edu/~jfc/cs184f98/lec30/lec30.html)

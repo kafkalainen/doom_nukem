@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/23 14:52:27 by rzukale          ###   ########.fr        #
+#    Updated: 2021/06/25 12:37:59 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS = \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)editor_events.c \
 	entity_logic$(SLASH)entity.c \
+	parsing$(SLASH)calc_average_unit_normals.c \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_wall_and_floor_properties.c \
 	parsing$(SLASH)change_door_to_portal.c \
@@ -91,6 +92,7 @@ SRCS = \
 	update_screen$(SLASH)matrix_2d.c \
 	update_screen$(SLASH)matrix_3d.c \
 	update_screen$(SLASH)update_screen.c \
+	update_screen$(SLASH)set_lighting.c \
 	utilities$(SLASH)audio.c \
 	utilities$(SLASH)error_output.c \
 	utilities$(SLASH)fps_timer.c \

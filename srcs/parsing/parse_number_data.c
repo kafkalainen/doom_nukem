@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 15:41:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 19:40:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	parse_number_data(t_sector *new_sector, unsigned char *buf,
 		return (1);
 	new_sector->lights.state = FALSE;
 	new_sector->lights.light_dir = vec3_unit_vector((t_xyz){rand() % 10,
-		rand() % 10, 0.0f, 0.0f});
+		rand() % 10, -1.0f, 0.0f});
 	return (0);
 }
 

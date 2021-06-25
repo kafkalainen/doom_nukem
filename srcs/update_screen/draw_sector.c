@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 15:46:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 20:15:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,7 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 		if (vec3_dot_product(normal, vec3_dec(frame->transformed->array[i].p[0],
 					plr->pos)) < 0)
 		{
-			if (lights)
-				frame->transformed->array[i].illumination = ft_fmax(
-					vec3_dot_product(lights->light_dir, normal), 0.1f);
-			else
-				frame->transformed->array[i].illumination = 1.0f;
+			set_lighting(lights, &frame->transformed->array[i], normal);
 			current_viewed_triangle = apply_camera(
 					plr->pos, plr->target, plr->up,
 					&frame->transformed->array[i]);

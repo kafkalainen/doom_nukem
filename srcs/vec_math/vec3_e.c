@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 11:36:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/16 17:41:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/24 19:18:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ float	area_of_triangle(t_xyz p0, t_xyz p1, t_xyz p2)
 
 Uint32	point_inside_a_triangle_surface(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p)
 {
-	float plane_p0p1;
-	float plane_p1p2;
-	float plane_p2p0;
+	float	plane_p0p1;
+	float	plane_p1p2;
+	float	plane_p2p0;
 
 	plane_p0p1 = (p0.x - p.x) * (p1.z - p.z) - (p1.x - p.x) * (p0.z - p.z);
 	plane_p1p2 = (p1.x - p.x) * (p2.z - p.z) - (p2.x - p.x) * (p1.z - p.z);
@@ -51,9 +51,9 @@ Uint32	point_inside_a_triangle_surface(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p)
 
 Uint32	point_inside_a_triangle_wall(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p)
 {
-	float plane_p0p1;
-	float plane_p1p2;
-	float plane_p2p0;
+	float	plane_p0p1;
+	float	plane_p1p2;
+	float	plane_p2p0;
 
 	plane_p0p1 = (p0.x - p.x) * (p1.y - p.y) - (p1.x - p.x) * (p0.y - p.y);
 	plane_p1p2 = (p1.x - p.x) * (p2.y - p.y) - (p2.x - p.x) * (p1.y - p.y);
@@ -67,7 +67,8 @@ Uint32	point_inside_a_triangle_wall(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p)
 		return (FALSE);
 }
 
-t_xyz	vec3_intersection_with_ray_and_plane(t_plane *plane, t_xyz origo, t_xyz dir)
+t_xyz	vec3_intersection_with_ray_and_plane(t_plane *plane, t_xyz origo,
+		t_xyz dir)
 {
 	float	t;
 	float	denom;
