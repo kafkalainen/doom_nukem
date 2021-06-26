@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/22 13:34:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/25 14:48:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ t_xyz	check_y(t_sector *sector, t_player *plr, t_xyz pos);
 int		check_y_diff(t_player *plr, t_xyz *test_pos, t_sector *to);
 Uint32	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
 float	check_distance_to_ground(t_sector *sector, t_player *plr, t_xyz pos);
-int		check_index_of_a_wall(t_sector *sector, t_xyz pos, t_xyz dir);
 Uint32	close_doors(t_sector **sectors, Uint32 nb_of_sectors,
 		Uint32 current_time, Uint32 delta_time);
 void	create_target_vector(t_player *plr);

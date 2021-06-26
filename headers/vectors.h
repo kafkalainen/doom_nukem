@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/25 12:27:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/26 20:18:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,21 @@ typedef struct s_triangle
 {
 	t_xyz			p[3];
 	t_uvz			uv[3];
+	t_xyz			vertex_normal[3];
 	int				colour;
 	int				idx;
 	float			illumination;
 	t_xyz			normal;
 }				t_triangle;
 
+typedef	struct s_raster_queue
+{
+	int			front;
+	int			rear;
+	int			size;
+	int			capacity;
+	t_triangle	*array;
+}				t_raster_queue;
 
 typedef struct	s_m4x4 {
 	float	m[4][4];
@@ -215,5 +224,6 @@ float		area_of_triangle(t_xyz p0, t_xyz p1, t_xyz p2);
 Uint32		point_inside_a_triangle_wall(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);
 Uint32		point_inside_a_triangle_surface(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);
 t_xyz		vec3_intersection_with_ray_and_plane(t_plane *plane, t_xyz origo, t_xyz dir);
+t_xyz		vec3_calc_vector_average(t_raster_queue	*queue);
 
 #endif

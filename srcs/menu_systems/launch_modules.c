@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/24 16:45:16 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/25 15:23:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 				// 	if (home->entity_pool[i]->state == ENTITY_MOVE && home->entity_pool[i]->sprite_state > ENTITY_SPRITE_MOVE_END) // we are done with moving
 				// 	// move or attack
 				// }
-			
+
 				// if (home->entity_pool[i]->is_aggroed)
 				// 	attack_logic(home->entity_pool[i], plr_pos, delta_time);
 				// else

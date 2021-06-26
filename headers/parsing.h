@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 10:49:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/26 20:16:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void			calc_wall_and_floor_properties(t_home *home);
 int				change_door_to_portal(int door);
 int				check_if_lines_cut(t_sector *sector);
 int				check_if_sector_has_same_points(t_sector *sector);
+Uint32			check_if_same_point(t_xyz a, t_xyz b);
 Uint32			check_portal_floor_difference(t_wall *portal,
 				t_wall *portal_behind);
 Uint32			check_portal_ceiling_difference(t_wall *portal,
@@ -48,7 +49,12 @@ int				parse_number_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_sector_data(unsigned char *buf, t_home *home, ssize_t size);
 int				parse_pixel_data(char *ptr, t_texture *tex);
-int				parse_xpm_data(unsigned char *buf, t_texture **tex);
+void			retrieve_adjacent_triangles_ceiling(t_wall *wall, t_sector *sector,
+				t_raster_queue *queue, Uint32 current_point);
+void			retrieve_adjacent_triangles_ground(t_wall *wall, t_sector *sector,
+				t_raster_queue *queue, Uint32 current_point);
+void			retrieve_adjacent_triangles_walls(t_wall *wall, t_sector *sector,
+				t_raster_queue *queue, Uint32 current_point);
 int				set_to_null(t_texture **tex, int error);
 unsigned int	triangulate_floor(t_sector *sector, char choice);
 unsigned int	triangulate_ceiling(t_sector *sector, char choice);

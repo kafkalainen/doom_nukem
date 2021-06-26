@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 20:06:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/25 12:18:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/25 12:55:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,23 @@
 **	neighboring normals.
 **	Apply Blinn-Phong's reflection model.
 */
+
 void	set_lighting(t_lighting *light, t_triangle *tri, t_xyz normal)
 {
-	if (light)
-	{
-		if (light->state)
-		{
-			tri->illumination = ft_fmax(
-				vec3_dot_product(light->light_dir, normal), 0.1f);
-			tri->illumination = ft_fmin(tri->illumination * 4, 1.0f);
-		}
-		else
-			tri->illumination = ft_fmax(
-				vec3_dot_product(light->light_dir, normal), 0.1f);
-	}
-	else
-		tri->illumination = 1.0f;
+	(void)light;
+	(void)normal;
+	// if (light)
+	// {
+	// 	if (light->state)
+	// 	{
+	// 		tri->illumination = ft_fmax(
+	// 			vec3_dot_product(light->light_dir, normal), 0.1f);
+	// 		tri->illumination = ft_fmin(tri->illumination * 4, 1.0f);
+	// 	}
+	// 	else
+	// 		tri->illumination = ft_fmax(
+	// 			vec3_dot_product(light->light_dir, normal), 0.1f);
+	// }
+	// else
+	tri->illumination = 1.0f;
 }

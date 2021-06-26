@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 20:15:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/25 14:49:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 {
 	Uint32		i;
 	size_t		current_size;
-	t_xyz		normal;
+	// t_xyz		normal;
 	t_triangle	current_viewed_triangle;
 
 	create_target_vector(plr);
@@ -54,11 +54,13 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 	i = 0;
 	while (i < current_size)
 	{
-		normal = triangle_normal(&frame->transformed->array[i]);
-		if (vec3_dot_product(normal, vec3_dec(frame->transformed->array[i].p[0],
+		// normal = triangle_normal(&frame->transformed->array[i]);
+		if (vec3_dot_product(frame->transformed->array[i].normal,
+					vec3_dec(frame->transformed->array[i].p[0],
 					plr->pos)) < 0)
 		{
-			set_lighting(lights, &frame->transformed->array[i], normal);
+			set_lighting(lights, &frame->transformed->array[i],
+					frame->transformed->array[i].normal);
 			current_viewed_triangle = apply_camera(
 					plr->pos, plr->target, plr->up,
 					&frame->transformed->array[i]);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:20:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/25 12:41:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/26 20:31:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@
 
 static void	calc_surface_normals(t_sector *sector)
 {
-	Uint32	i;
+	Uint32		i;
 	t_wall		*walls;
 	t_surface	*ceil_ground;
 
 	i = 0;
 	walls = sector->walls;
-	ceil_ground = sector->ceiling;
 	while (i < sector->nb_of_walls)
 	{
 		walls->top.normal = triangle_normal(&walls->top);
@@ -39,12 +38,15 @@ static void	calc_surface_normals(t_sector *sector)
 		walls = walls->next;
 		i++;
 	}
+	i = 0;
+	ceil_ground = sector->ceiling;
 	while (i < sector->nb_of_ceil)
 	{
 		ceil_ground->tri.normal = triangle_normal(&ceil_ground->tri);
 		ceil_ground = ceil_ground->next;
 		i++;
 	}
+	i = 0;
 	ceil_ground = sector->ground;
 	while (i < sector->nb_of_ground)
 	{
@@ -54,14 +56,44 @@ static void	calc_surface_normals(t_sector *sector)
 	}
 }
 
-void	calc_average_unit_normals(t_home *home)
+static void calc_top_normal_averages(t_sector *sector, t_raster_queue *queue)
 {
 	Uint32	i;
+	Uint32	j;
+	t_wall	*current;
 
 	i = 0;
+	j = 0;
+	current = sector->walls;
+	while (i < sector->nb_of_walls)
+	{
+		while (j < 3)
+		{
+			queue->front = -1;
+			queue->rear = -1;
+			queue->size = 0;
+			retrieve_adjacent_triangles_ceiling(current, sector, queue, j);
+			retrieve_adjacent_triangles_ground(current, sector, queue, j);
+			retrieve_adjacent_triangles_walls(current, sector, queue, j);
+			current->top.vertex_normal[j] = vec3_calc_vector_average(queue);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	calc_average_unit_normals(t_home *home)
+{
+	Uint32			i;
+	t_raster_queue	*queue;
+
+	i = 0;
+	queue = create_raster_queue(100);
 	while (i < home->nbr_of_sectors)
 	{
 		calc_surface_normals(home->sectors[i]);
+		calc_top_normal_averages(home->sectors[i], queue);
 		i++;
 	}
+	delete_raster_queue(&queue);
 }

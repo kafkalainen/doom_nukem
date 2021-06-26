@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 19:58:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/26 20:30:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,12 @@ t_wall	*check_if_crossing(t_sector *sector, t_xyz pos)
 {
 	unsigned int	i;
 	t_wall			*temp;
-	t_plane			plane;
 
 	i = 0;
 	temp = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
-		plane.point = temp->top.p[0];
-		plane.normal = triangle_normal(&temp->top);
-		if (vec3_signed_distance_to_plane(pos, plane.normal, plane.point))
+		if (vec3_signed_distance_to_plane(pos, temp->top.normal, temp->top.p[0]))
 			return (temp);
 		temp = temp->next;
 		i++;
@@ -51,7 +48,8 @@ t_xyz	check_y(t_sector *sector, t_player *plr, t_xyz pos)
 		i++;
 	}
 	plane.point = ground->tri.p[0];
-	plane.normal = triangle_normal(&ground->tri);
+	plane.normal = ground->tri.normal;
+	// plane.normal = triangle_normal(&ground->tri);
 	pos = vec3_intersection_with_ray_and_plane(&plane, pos, dir);
 	pos.y += plr->height;
 	return (pos);
