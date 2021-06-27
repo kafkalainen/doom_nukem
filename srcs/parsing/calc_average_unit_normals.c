@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:20:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/26 20:31:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/27 12:28:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ static void calc_top_normal_averages(t_sector *sector, t_raster_queue *queue)
 			queue->front = -1;
 			queue->rear = -1;
 			queue->size = 0;
-			retrieve_adjacent_triangles_ceiling(current, sector, queue, j);
-			retrieve_adjacent_triangles_ground(current, sector, queue, j);
-			retrieve_adjacent_triangles_walls(current, sector, queue, j);
+			retrieve_adjacent_triangles_ceiling(&current->top, sector, queue, j);
+			retrieve_adjacent_triangles_ground(&current->top, sector, queue, j);
+			retrieve_adjacent_top_triangles_walls(current, sector, queue, j);
+			retrieve_adjacent_bottom_triangles_walls(current, sector, queue, j);
 			current->top.vertex_normal[j] = vec3_calc_vector_average(queue);
 			j++;
 		}

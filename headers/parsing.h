@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/26 20:16:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/27 12:25:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,13 @@ int				parse_number_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_sector_data(unsigned char *buf, t_home *home, ssize_t size);
 int				parse_pixel_data(char *ptr, t_texture *tex);
-void			retrieve_adjacent_triangles_ceiling(t_wall *wall, t_sector *sector,
+void			retrieve_adjacent_triangles_ceiling(t_triangle *tri, t_sector *sector,
 				t_raster_queue *queue, Uint32 current_point);
-void			retrieve_adjacent_triangles_ground(t_wall *wall, t_sector *sector,
+void			retrieve_adjacent_triangles_ground(t_triangle *tri, t_sector *sector,
 				t_raster_queue *queue, Uint32 current_point);
-void			retrieve_adjacent_triangles_walls(t_wall *wall, t_sector *sector,
+void			retrieve_adjacent_top_triangles_walls(t_wall *wall, t_sector *sector,
+				t_raster_queue *queue, Uint32 current_point);
+void			retrieve_adjacent_bottom_triangles_walls(t_wall *wall, t_sector *sector,
 				t_raster_queue *queue, Uint32 current_point);
 int				set_to_null(t_texture **tex, int error);
 unsigned int	triangulate_floor(t_sector *sector, char choice);

@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/25 12:37:59 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/26 20:19:04 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,14 @@ SRCS = \
 	parsing$(SLASH)calc_wall_and_floor_properties.c \
 	parsing$(SLASH)change_door_to_portal.c \
 	parsing$(SLASH)check_portal_height_diff.c \
+	parsing$(SLASH)check_if_same_point.c \
 	parsing$(SLASH)free_sector.c \
 	parsing$(SLASH)map_texel.c \
 	parsing$(SLASH)parse_number_data.c \
 	parsing$(SLASH)parse_sector.c \
 	parsing$(SLASH)parse_sector_2.c \
 	parsing$(SLASH)parse_surfaces.c \
+	parsing$(SLASH)retrieve_adjacent_triangles.c \
 	parsing$(SLASH)triangulate_floor_and_ceiling.c \
 	png_parser$(SLASH)color_utils.c \
 	png_parser$(SLASH)crc.c \
@@ -117,6 +119,7 @@ SRCS = \
 	vec_math$(SLASH)vec3_c.c \
 	vec_math$(SLASH)vec3_d.c \
 	vec_math$(SLASH)vec3_e.c \
+	vec_math$(SLASH)vec3_f.c \
 	menu_systems$(SLASH)launch_modules.c \
 	menu_systems$(SLASH)menu_inputs.c \
 	menu_systems$(SLASH)menu_setups.c \
