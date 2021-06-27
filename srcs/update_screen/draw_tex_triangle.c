@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 14:20:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/27 13:57:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 			* steps->tex_a_side.w;
 	}
 	swap_sides(steps);
-	steps->illumination = tri->illumination;
 }
 
 /*

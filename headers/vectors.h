@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/26 20:18:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/27 13:44:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ typedef struct s_triangle
 	t_xyz			p[3];
 	t_uvz			uv[3];
 	t_xyz			vertex_normal[3];
+	float			i[3];
 	int				colour;
 	int				idx;
-	float			illumination;
 	t_xyz			normal;
 }				t_triangle;
 

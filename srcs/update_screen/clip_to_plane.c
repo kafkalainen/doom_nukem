@@ -6,25 +6,25 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 14:18:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/27 13:54:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
 static void	check_if_inside_triangle(float d, t_point_location *loc,
-	t_xyz point, t_uvz uv)
+	t_triangle *src, Uint32 i)
 {
 	if (d >= 0.0f)
 	{
-		loc->texels_inside[loc->inside] = uv;
-		loc->points_inside[loc->inside] = point;
+		loc->texels_inside[loc->inside] = src->uv[i];
+		loc->points_inside[loc->inside] = src->p[i];
 		loc->inside += 1;
 	}
 	else
 	{
-		loc->texels_outside[loc->outside] = uv;
-		loc->points_outside[loc->outside] = point;
+		loc->texels_outside[loc->outside] = src->uv[i];
+		loc->points_outside[loc->outside] = src->p[i];
 		loc->outside += 1;
 	}
 }
@@ -94,13 +94,11 @@ int		clip_against_plane(t_plane *plane, t_triangle *src,
 	d[0] = vec3_dot_product(plane->normal, vec3_dec(src->p[0], plane->point));
 	d[1] = vec3_dot_product(plane->normal, vec3_dec(src->p[1], plane->point));
 	d[2] = vec3_dot_product(plane->normal, vec3_dec(src->p[2], plane->point));
-	check_if_inside_triangle(d[0], &loc, src->p[0], src->uv[0]);
-	check_if_inside_triangle(d[1], &loc, src->p[1], src->uv[1]);
-	check_if_inside_triangle(d[2], &loc, src->p[2], src->uv[2]);
+	check_if_inside_triangle(d[0], &loc, src, 0);
+	check_if_inside_triangle(d[1], &loc, src, 1);
+	check_if_inside_triangle(d[2], &loc, src, 2);
 	triangle1->idx = src->idx;
 	triangle2->idx = src->idx;
-	triangle1->illumination = src->illumination;
-	triangle2->illumination = src->illumination;
 	if (loc.inside == 0)
 		return (0);
 	if (loc.inside == 3)

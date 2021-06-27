@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/06/26 20:19:04 by jnivala          ###   ########.fr        #
+#    Updated: 2021/06/27 13:33:56 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = \
 	editor$(SLASH)editor_events.c \
 	entity_logic$(SLASH)entity.c \
 	parsing$(SLASH)calc_average_unit_normals.c \
+	parsing$(SLASH)calc_normal_averages.c \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_wall_and_floor_properties.c \
 	parsing$(SLASH)change_door_to_portal.c \
@@ -31,6 +32,7 @@ SRCS = \
 	parsing$(SLASH)parse_sector_2.c \
 	parsing$(SLASH)parse_surfaces.c \
 	parsing$(SLASH)retrieve_adjacent_triangles.c \
+	parsing$(SLASH)retrieve_adjacent_triangles_2.c \
 	parsing$(SLASH)triangulate_floor_and_ceiling.c \
 	png_parser$(SLASH)color_utils.c \
 	png_parser$(SLASH)crc.c \

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:20:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/27 12:28:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/27 13:37:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,33 +56,6 @@ static void	calc_surface_normals(t_sector *sector)
 	}
 }
 
-static void calc_top_normal_averages(t_sector *sector, t_raster_queue *queue)
-{
-	Uint32	i;
-	Uint32	j;
-	t_wall	*current;
-
-	i = 0;
-	j = 0;
-	current = sector->walls;
-	while (i < sector->nb_of_walls)
-	{
-		while (j < 3)
-		{
-			queue->front = -1;
-			queue->rear = -1;
-			queue->size = 0;
-			retrieve_adjacent_triangles_ceiling(&current->top, sector, queue, j);
-			retrieve_adjacent_triangles_ground(&current->top, sector, queue, j);
-			retrieve_adjacent_top_triangles_walls(current, sector, queue, j);
-			retrieve_adjacent_bottom_triangles_walls(current, sector, queue, j);
-			current->top.vertex_normal[j] = vec3_calc_vector_average(queue);
-			j++;
-		}
-		i++;
-	}
-}
-
 void	calc_average_unit_normals(t_home *home)
 {
 	Uint32			i;
@@ -94,6 +67,9 @@ void	calc_average_unit_normals(t_home *home)
 	{
 		calc_surface_normals(home->sectors[i]);
 		calc_top_normal_averages(home->sectors[i], queue);
+		calc_bottom_normal_averages(home->sectors[i], queue);
+		calc_ceiling_normal_averages(home->sectors[i], queue);
+		calc_ground_normal_averages(home->sectors[i], queue);
 		i++;
 	}
 	delete_raster_queue(&queue);
