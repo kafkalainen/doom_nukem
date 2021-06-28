@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:31:48 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/24 17:27:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/28 15:00:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ int	entity_move(t_entity *entity, t_home *home, Uint32 t)
 			printf("hit a wall, need to rotate\n");
 			entity->top = rotate_triangle(&entity->top, 180, 'y');
 			entity->bot = rotate_triangle(&entity->bot, 180, 'y');
-			entity->dir = triangle_normal(&entity->top);
+			entity->top.normal = triangle_normal(&entity->top);
+			entity->bot.normal = entity->top.normal;
+			entity->dir = entity->top.normal;
 			printf("new direction: x: %f y: %f z: %f\n", entity->dir.x, entity->dir.y, entity->dir.z);
 		}
 			return (FALSE); // we hit a wall, turn 90 left or right, or do a 180

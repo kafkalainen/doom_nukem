@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 12:14:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/28 13:27:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ static int	form_a_quadrant(t_point_location *loc, t_plane *plane,
 		+ loc->illumination_inside[0];
 	triangle2->p[0] = loc->points_inside[1];
 	triangle2->uv[0] = loc->texels_inside[1];
+	triangle2->i[0] = loc->illumination_inside[1];
 	triangle2->p[1] = triangle1->p[2];
 	triangle2->uv[1] = triangle1->uv[2];
+	triangle2->i[1] = triangle1->i[2];
 	triangle2->p[2] = vec3_intersection_with_plane(plane, loc->points_inside[1],
 			loc->points_outside[0], &loc->texel_offset);
 	triangle2->uv[2] = calculate_texel_offset(loc->texels_inside[1],
