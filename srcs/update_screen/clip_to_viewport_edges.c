@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 14:24:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/28 12:23:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,12 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 		i = 0;
 		while (i < triangles_to_add)
 		{
+			if (triangles_to_add && clipped[0].i[2] < 1.0f)
+				printf("%f\n", clipped[0].i[2]);
+			if (triangles_to_add && clipped[0].i[1] < 1.0f)
+				printf("%f\n", clipped[0].i[2]);
+			if (triangles_to_add == 2 && clipped[1].i[2] < 1.0f)
+				printf("%f\n", clipped[1].i[2]);
 			enqueue_to_raster(raster_list, &clipped[i]);
 			i++;
 		}
@@ -132,7 +138,6 @@ void	*clip_to_viewport_edges(void *args)
 	index = arg->thread_index;
 	planes.top = arg->viewport->mid_planes[index];
 	planes.bottom = arg->viewport->mid_planes[index + 1];
-	// planes.bottom.point.y -= 1.0f;
 	planes.bottom.normal.y *= -1.0f;
 	planes.left = arg->viewport->left;
 	planes.right = arg->viewport->right;

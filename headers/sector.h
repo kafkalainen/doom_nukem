@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 15:00:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/28 09:45:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef	struct s_lighting
 {
 	t_xyz				light_src;
 	t_xyz				light_dir;
+	float				diffuse_power;
+	float				specular_power;
 	Uint32				state;
 }				t_lighting;
 

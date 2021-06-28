@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/27 13:44:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/27 16:53:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_point_location
 	t_xyz		points_outside[3];
 	t_uvz		texels_inside[3];
 	t_uvz		texels_outside[3];
+	float		illumination_outside[3];
+	float		illumination_inside[3];
 	int			inside;
 	int			outside;
 	float		texel_offset;
@@ -118,6 +120,7 @@ typedef struct s_deltas
 	float		u;
 	float		v;
 	float		w;
+	float		i;
 }				t_deltas;
 
 
@@ -149,6 +152,8 @@ typedef struct	s_steps
 	t_uvz		tex_b_side;
 	t_xyz		screen_step_a_side;
 	t_xyz		screen_step_b_side;
+	float		illumi_step_a_side;
+	float		illumi_step_b_side;
 	t_uvz		start_uv;
 	t_uvz		end_uv;
 	int			start_x;
@@ -159,7 +164,8 @@ typedef struct	s_steps
 	char		current_triangle;
 	t_deltas	delta_p0p1;
 	t_deltas	delta_p0p2;
-	float		illumination;
+	float		start_i;
+	float		end_i;
 }				t_steps;
 
 /*

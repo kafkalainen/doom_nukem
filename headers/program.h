@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/26 20:17:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/27 17:36:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,9 @@ typedef struct	s_arg
 	int				thread_index;
 }				t_arg;
 
+typedef struct s_draw_data
+{
+	Uint32		*buffer;
+	float		*depth_buffer;
+}				t_draw_data;
 #endif

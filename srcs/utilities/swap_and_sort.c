@@ -6,11 +6,20 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:37:52 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 13:00:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/27 16:32:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+void	swap_float(float *f0, float *f1)
+{
+	float swap;
+
+	swap = *f0;
+	*f0 = *f1;
+	*f1 = swap;
+}
 
 void	swap_int(int *i0, int *i1)
 {
@@ -57,16 +66,19 @@ void	sort_vertices(t_triangle *tri)
 	{
 		swap_xyz(&tri->p[0], &tri->p[1]);
 		swap_uvz(&tri->uv[0], &tri->uv[1]);
+		swap_float(&tri->i[0], &tri->i[1]);
 	}
 	if ((int)tri->p[2].y < (int)tri->p[0].y)
 	{
 		swap_xyz(&tri->p[0], &tri->p[2]);
 		swap_uvz(&tri->uv[0], &tri->uv[2]);
+		swap_float(&tri->i[0], &tri->i[2]);
 	}
 	if ((int)tri->p[2].y < (int)tri->p[1].y)
 	{
 		swap_xyz(&tri->p[1], &tri->p[2]);
 		swap_uvz(&tri->uv[1], &tri->uv[2]);
+		swap_float(&tri->i[1], &tri->i[2]);
 	}
 }
 
@@ -76,5 +88,6 @@ void	swap_sides(t_steps *steps)
 	{
 		swap_int(&steps->start_x, &steps->end_x);
 		swap_uvz(&steps->start_uv, &steps->end_uv);
+		swap_float(&steps->start_i, &steps->end_i);
 	}
 }

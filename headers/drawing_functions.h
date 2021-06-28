@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/25 12:40:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/28 09:51:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		put_pixel(Uint32 *buffer, int x, int y, Uint32 color);
 t_triangle	scale_triangle(t_triangle *src, t_xyz scale);
 void		*optimized_memcpy(void *pixels, void *src, size_t size);
 void		render_buffer(Uint32 *buffer, SDL_Surface *screen_surface);
-void		set_lighting(t_lighting *light, t_triangle *tri, t_xyz normal);
+void		set_lighting(t_lighting *light, t_triangle *tri, t_xyz plr_pos);
 t_xyz		translate_point(t_xyz *src, t_xyz translation);
 t_triangle	translate_triangle(t_triangle *src, t_xyz translation);
 t_triangle	rotate_triangle(t_triangle *src, float angle, char dir);
