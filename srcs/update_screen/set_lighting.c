@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 20:06:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 11:43:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 13:32:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,44 +37,35 @@ static float	saturate(float value)
 	return (value);
 }
 
-void	set_lighting(t_lighting *light, t_triangle *tri, t_xyz plr_pos)
+static float	calculate_light_intensity(t_lighting *light, t_triangle *tri,
+				Uint32 idx)
 {
-	Uint32	i;
 	t_xyz	light_dir;
 	float	magnitude;
 	float	dot_product;
 	float	intensity;
 
-	i = 0;
-	(void)plr_pos;
+	light_dir = vec3_dec(light->light_src, tri->p[idx]);
+	magnitude = vec3_eucl_dist(light_dir);
+	light_dir = vec3_unit_vector(light_dir);
+	magnitude = magnitude * magnitude;
+	dot_product = vec3_dot_product(tri->vertex_normal[idx], light_dir);
+	intensity = saturate(dot_product);
+	intensity = intensity * light->diffuse_power / magnitude;
+	if (intensity < 0.1f)
+		intensity = 0.1f;
+	return (intensity);
+}
+
+void	set_lighting(t_lighting *light, t_triangle *tri)
+{
 	if (light)
 	{
 		if (light->state == TRUE && light->diffuse_power > 0)
 		{
-			while (i < 3)
-			{
-				light_dir = vec3_dec(light->light_src, tri->p[i]);
-				magnitude = vec3_eucl_dist(light_dir);
-				light_dir = vec3_unit_vector(light_dir);
-				magnitude = magnitude * magnitude;
-				dot_product = vec3_dot_product(tri->vertex_normal[i], light_dir);
-				intensity = saturate(dot_product);
-				tri->lu[i] = intensity * light->diffuse_power / magnitude;
-				// //Calculate the half vector between the light vector and the view vector.
-				// //This is typically slower than calculating the actual reflection vector
-				// // due to the normalize function's reciprocal square root
-				// float3 H = normalize(lightDir + viewDir);
-
-				// //Intensity of the specular light
-				// float NdotH = dot(normal, H);
-				// intensity = pow(saturate(NdotH), specularHardness);
-
-				// //Sum up the specular light factoring
-				// OUT.Specular = intensity * light.specularColor * light.specularPower / distance;
-				if (tri->lu[i] < 0.1f)
-					tri->lu[i] = 0.1f;
-				i++;
-			}
+			tri->lu[0] = calculate_light_intensity(light, tri, 0);
+			tri->lu[1] = calculate_light_intensity(light, tri, 1);
+			tri->lu[2] = calculate_light_intensity(light, tri, 2);
 		}
 		else
 		{

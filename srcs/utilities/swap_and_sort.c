@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:37:52 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 11:44:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:27:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ void	swap_sides(t_steps *steps)
 	{
 		swap_int(&steps->start_x, &steps->end_x);
 		swap_uvz(&steps->start_uv, &steps->end_uv);
-		swap_float(&steps->start_i, &steps->end_i);
+		swap_float(&steps->start_lu, &steps->end_lu);
 	}
 }

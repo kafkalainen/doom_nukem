@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 11:42:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:20:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 					vec3_dec(frame->transformed->array[i].p[0],
 					plr->pos)) < 0)
 		{
-			set_lighting(lights, &frame->transformed->array[i], plr->pos);
+			set_lighting(lights, &frame->transformed->array[i]);
 			current_viewed_triangle = apply_camera(
 					plr->pos, plr->target, plr->up,
 					&frame->transformed->array[i]);

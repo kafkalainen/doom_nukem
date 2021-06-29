@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 11:53:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:27:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex,
 
 	offset = 0.0f;
 	texel = step->start_uv;
-	lumel = step->start_i;
+	lumel = step->start_lu;
 	offset_step = 1.0f / ((float)(step->end_x - step->start_x));
 	if (step->start_x < 0 || step->cur_y > SCREEN_HEIGHT - 1
 		|| step->cur_y < 0 || step->end_x > SCREEN_WIDTH - 1)
@@ -48,7 +48,7 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex,
 	while (step->start_x < step->end_x)
 	{
 		calc_texel(&texel, &step->start_uv, offset, &step->end_uv);
-		calc_lumel(&lumel, &step->start_i, offset, &step->end_i);
+		calc_lumel(&lumel, &step->start_lu, offset, &step->end_lu);
 		if (texel.w > depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH])
 		{
 			depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH] = texel.w;

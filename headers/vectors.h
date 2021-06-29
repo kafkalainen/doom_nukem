@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/29 12:00:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:26:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,8 @@ typedef struct	s_steps
 	t_uvz		tex_b_side;
 	t_xyz		screen_step_a_side;
 	t_xyz		screen_step_b_side;
-	float		illumi_step_a_side;
-	float		illumi_step_b_side;
+	float		lumel_step_a_side;
+	float		lumel_step_b_side;
 	t_uvz		start_uv;
 	t_uvz		end_uv;
 	int			start_x;
@@ -164,8 +164,8 @@ typedef struct	s_steps
 	char		current_triangle;
 	t_deltas	delta_p0p1;
 	t_deltas	delta_p0p2;
-	float		start_i;
-	float		end_i;
+	float		start_lu;
+	float		end_lu;
 }				t_steps;
 
 /*
