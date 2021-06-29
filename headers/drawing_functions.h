@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/28 09:51:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 14:46:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 */
 
 void		calc_average_unit_normals(t_home *home);
+float		calculate_lumel_offset(float from, float to, float t);
+t_uvz		calculate_texel_offset(t_uvz from, t_uvz to, float t);
 t_xy		center_to_screen(t_xy loc);
 Uint32		colour_scale(Uint32 hex, float scale);
 t_triangle	create_projection(t_triangle *src);
@@ -37,7 +39,7 @@ void		put_pixel(Uint32 *buffer, int x, int y, Uint32 color);
 t_triangle	scale_triangle(t_triangle *src, t_xyz scale);
 void		*optimized_memcpy(void *pixels, void *src, size_t size);
 void		render_buffer(Uint32 *buffer, SDL_Surface *screen_surface);
-void		set_lighting(t_lighting *light, t_triangle *tri, t_xyz plr_pos);
+void		set_lighting(t_lighting *light, t_triangle *tri);
 t_xyz		translate_point(t_xyz *src, t_xyz translation);
 t_triangle	translate_triangle(t_triangle *src, t_xyz translation);
 t_triangle	rotate_triangle(t_triangle *src, float angle, char dir);

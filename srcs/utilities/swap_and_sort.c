@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:37:52 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/27 16:32:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:27:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,19 @@ void	sort_vertices(t_triangle *tri)
 	{
 		swap_xyz(&tri->p[0], &tri->p[1]);
 		swap_uvz(&tri->uv[0], &tri->uv[1]);
-		swap_float(&tri->i[0], &tri->i[1]);
+		swap_float(&tri->lu[0], &tri->lu[1]);
 	}
 	if ((int)tri->p[2].y < (int)tri->p[0].y)
 	{
 		swap_xyz(&tri->p[0], &tri->p[2]);
 		swap_uvz(&tri->uv[0], &tri->uv[2]);
-		swap_float(&tri->i[0], &tri->i[2]);
+		swap_float(&tri->lu[0], &tri->lu[2]);
 	}
 	if ((int)tri->p[2].y < (int)tri->p[1].y)
 	{
 		swap_xyz(&tri->p[1], &tri->p[2]);
 		swap_uvz(&tri->uv[1], &tri->uv[2]);
-		swap_float(&tri->i[1], &tri->i[2]);
+		swap_float(&tri->lu[1], &tri->lu[2]);
 	}
 }
 
@@ -88,6 +88,6 @@ void	swap_sides(t_steps *steps)
 	{
 		swap_int(&steps->start_x, &steps->end_x);
 		swap_uvz(&steps->start_uv, &steps->end_uv);
-		swap_float(&steps->start_i, &steps->end_i);
+		swap_float(&steps->start_lu, &steps->end_lu);
 	}
 }

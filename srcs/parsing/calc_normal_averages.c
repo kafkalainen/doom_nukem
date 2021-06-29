@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 13:18:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 10:29:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:08:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	calc_top_normal_averages(t_sector *sector, t_raster_queue *queue)
 	t_wall	*current;
 
 	i = 0;
-	j = 0;
 	current = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
+		j = 0;
 		while (j < 3)
 		{
 			queue->front = -1;
@@ -34,6 +34,7 @@ void	calc_top_normal_averages(t_sector *sector, t_raster_queue *queue)
 			current->top.vertex_normal[j] = vec3_calc_vector_average(queue);
 			j++;
 		}
+		current = current->next;
 		i++;
 	}
 }
@@ -45,10 +46,10 @@ void	calc_bottom_normal_averages(t_sector *sector, t_raster_queue *queue)
 	t_wall	*current;
 
 	i = 0;
-	j = 0;
 	current = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
+		j = 0;
 		while (j < 3)
 		{
 			queue->front = -1;
@@ -60,6 +61,7 @@ void	calc_bottom_normal_averages(t_sector *sector, t_raster_queue *queue)
 			current->bottom.vertex_normal[j] = vec3_calc_vector_average(queue);
 			j++;
 		}
+		current = current->next;
 		i++;
 	}
 }
@@ -71,10 +73,10 @@ void	calc_ceiling_normal_averages(t_sector *sector, t_raster_queue *queue)
 	t_surface	*current;
 
 	i = 0;
-	j = 0;
 	current = sector->ceiling;
-	while (i < sector->nb_of_walls)
+	while (i < sector->nb_of_ceil)
 	{
+		j = 0;
 		while (j < 3)
 		{
 			queue->front = -1;
@@ -86,6 +88,7 @@ void	calc_ceiling_normal_averages(t_sector *sector, t_raster_queue *queue)
 			current->tri.vertex_normal[j] = vec3_calc_vector_average(queue);
 			j++;
 		}
+		current = current->next;
 		i++;
 	}
 }
@@ -97,10 +100,10 @@ void	calc_ground_normal_averages(t_sector *sector, t_raster_queue *queue)
 	t_surface	*current;
 
 	i = 0;
-	j = 0;
 	current = sector->ground;
-	while (i < sector->nb_of_walls)
+	while (i < sector->nb_of_ground)
 	{
+		j = 0;
 		while (j < 3)
 		{
 			queue->front = -1;
@@ -112,6 +115,7 @@ void	calc_ground_normal_averages(t_sector *sector, t_raster_queue *queue)
 			current->tri.vertex_normal[j] = vec3_calc_vector_average(queue);
 			j++;
 		}
+		current = current->next;
 		i++;
 	}
 }

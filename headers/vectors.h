@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/27 16:53:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:26:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct s_point_location
 	t_xyz		points_outside[3];
 	t_uvz		texels_inside[3];
 	t_uvz		texels_outside[3];
-	float		illumination_outside[3];
-	float		illumination_inside[3];
+	float		lumels_outside[3];
+	float		lumels_inside[3];
 	int			inside;
 	int			outside;
 	float		texel_offset;
@@ -73,7 +73,7 @@ typedef struct s_triangle
 	t_xyz			p[3];
 	t_uvz			uv[3];
 	t_xyz			vertex_normal[3];
-	float			i[3];
+	float			lu[3];
 	int				colour;
 	int				idx;
 	t_xyz			normal;
@@ -152,8 +152,8 @@ typedef struct	s_steps
 	t_uvz		tex_b_side;
 	t_xyz		screen_step_a_side;
 	t_xyz		screen_step_b_side;
-	float		illumi_step_a_side;
-	float		illumi_step_b_side;
+	float		lumel_step_a_side;
+	float		lumel_step_b_side;
 	t_uvz		start_uv;
 	t_uvz		end_uv;
 	int			start_x;
@@ -164,8 +164,8 @@ typedef struct	s_steps
 	char		current_triangle;
 	t_deltas	delta_p0p1;
 	t_deltas	delta_p0p2;
-	float		start_i;
-	float		end_i;
+	float		start_lu;
+	float		end_lu;
 }				t_steps;
 
 /*

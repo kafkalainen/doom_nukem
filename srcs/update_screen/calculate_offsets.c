@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_f.c                                           :+:      :+:    :+:   */
+/*   calculate_offsets.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 19:43:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 16:00:31 by jnivala          ###   ########.fr       */
+/*   Created: 2021/06/29 12:11:04 by jnivala           #+#    #+#             */
+/*   Updated: 2021/06/29 14:46:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_xyz	vec3_calc_vector_average(t_raster_queue	*queue)
+t_uvz	calculate_texel_offset(t_uvz from, t_uvz to, float t)
 {
-	int		i;
-	t_xyz	average;
-	float	denom;
+	t_uvz	sum;
 
-	i = queue->front;
-	average = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
-	if (queue->size == 0)
-		return ((t_xyz){0.0f, 0.0f, 0.0f, 0.0f});
-	while (i < queue->rear)
-	{
-		average = vec3_add(average, queue->array[i].normal);
-		i++;
-	}
-	denom = 1.0f / vec3_eucl_dist(average);
-	average = vec3_unit_vector(vec3_mul(average, denom));
-	return (average);
+	sum.u = t * (to.u - from.u) + from.u;
+	sum.v = t * (to.v - from.v) + from.v;
+	sum.w = t * (to.w - from.w) + from.w;
+	return (sum);
+}
+
+float	calculate_lumel_offset(float from, float to, float t)
+{
+	float	sum;
+
+	sum = t * (to - from) + from;
+	return (sum);
 }

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/29 14:41:13 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/29 14:56:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 					if (check_aggro(plr, home->entity_pool[i], home->sectors[home->entity_pool[i]->sector_idx]))
 						printf("we are aggroed\n");
 					else
-						entity_move(home->entity_pool[i], home, delta_time, plr->look_dir);
+						entity_move(home->entity_pool[i], home, delta_time);
 				}
 				else
 				{

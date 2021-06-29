@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 09:07:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 12:10:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:39:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,18 @@ void	initialize_locations(t_point_location *loc)
 	loc->texels_inside[0] = (t_uvz){0.0f, 0.0f, 0.0f};
 	loc->texels_inside[1] = (t_uvz){0.0f, 0.0f, 0.0f};
 	loc->texels_inside[2] = (t_uvz){0.0f, 0.0f, 0.0f};
-	loc->illumination_inside[0] = 0.0f;
-	loc->illumination_inside[1] = 0.0f;
-	loc->illumination_inside[2] = 0.0f;
+	loc->lumels_inside[0] = 0.0f;
+	loc->lumels_inside[1] = 0.0f;
+	loc->lumels_inside[2] = 0.0f;
 	loc->points_outside[0] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	loc->points_outside[1] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	loc->points_outside[2] = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	loc->texels_outside[0] = (t_uvz){0.0f, 0.0f, 0.0f};
 	loc->texels_outside[1] = (t_uvz){0.0f, 0.0f, 0.0f};
 	loc->texels_outside[2] = (t_uvz){0.0f, 0.0f, 0.0f};
-	loc->illumination_outside[0] = 0.0f;
-	loc->illumination_outside[1] = 0.0f;
-	loc->illumination_outside[2] = 0.0f;
+	loc->lumels_outside[0] = 0.0f;
+	loc->lumels_outside[1] = 0.0f;
+	loc->lumels_outside[2] = 0.0f;
 	loc->inside = 0;
 	loc->outside = 0;
 }

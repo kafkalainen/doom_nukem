@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:31:48 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/29 14:36:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/29 14:56:13 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void	entity_chase(t_entity *entity, t_home *home, Uint32 t, t_player *plr)
 	}
 }
 
-int	entity_move(t_entity *entity, t_home *home, Uint32 t, t_xyz plr_dir)
+int	entity_move(t_entity *entity, t_home *home, Uint32 t)
 {
 	t_wall			*wall;
 	t_xyz			new_loc;
@@ -197,8 +197,11 @@ int	entity_move(t_entity *entity, t_home *home, Uint32 t, t_xyz plr_dir)
 		else
 		{
 			printf("hit a wall, need to rotate\n");
-			choose_new_direction(entity, home, plr_dir);
-			// reset sprite status to 0
+			entity->top = rotate_triangle(&entity->top, 180, 'y');
+			entity->bot = rotate_triangle(&entity->bot, 180, 'y');
+			entity->top.normal = triangle_normal(&entity->top);
+			entity->bot.normal = entity->top.normal;
+			entity->dir = entity->top.normal;
 			printf("new direction: x: %f y: %f z: %f\n", entity->dir.x, entity->dir.y, entity->dir.z);
 		}
 			return (FALSE);
