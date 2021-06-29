@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/24 16:35:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/29 14:39:09 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 // die()
 int		check_aggro(t_player *plr, t_entity *entity, t_sector *sector);
 // void	move_entity(t_entity *entity, t_sector *sector, Uint32 delta_time);
-int		entity_move(t_entity *entity, t_home *home, Uint32 t);
+int		entity_move(t_entity *entity, t_home *home, Uint32 t, t_xyz plr_dir);
+void	entity_chase(t_entity *entity, t_home *home, Uint32 t, t_player *plr);
+float	get_distance_squared(t_xyz pt0, t_xyz pt1);
 
 #endif
