@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 13:29:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:42:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ static void	clip_to_near_plane(t_triangle *current_view,
 	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
 	nb_of_clipped_triangles = clip_against_plane(&viewport->near,
 			current_view, &clipped_triangle[0], &clipped_triangle[1]);
-	// if (nb_of_clipped_triangles && clipped_triangle[0].i[0] < 1.0f)
+	// if (nb_of_clipped_triangles && clipped_triangle[0].lu[0] < 1.0f)
 	// 	printf("first point first clipped under 1\n");
-	// if (nb_of_clipped_triangles == 2 && clipped_triangle[1].i[0] < 1.0f)
+	// if (nb_of_clipped_triangles == 2 && clipped_triangle[1].lu[0] < 1.0f)
 	// 	printf("first point second clipped under 1\n");
-	// if (nb_of_clipped_triangles && clipped_triangle[0].i[1] < 1.0f)
+	// if (nb_of_clipped_triangles && clipped_triangle[0].lu[1] < 1.0f)
 	// 	printf("second point first clipped under 1\n");
-	// if (nb_of_clipped_triangles == 2 && clipped_triangle[1].i[1] < 1.0f)
+	// if (nb_of_clipped_triangles == 2 && clipped_triangle[1].lu[1] < 1.0f)
 	// 	printf("second point second clipped under 1\n");
-	// if (nb_of_clipped_triangles && clipped_triangle[0].i[2] < 1.0f)
+	// if (nb_of_clipped_triangles && clipped_triangle[0].lu[2] < 1.0f)
 	// 	printf("third point first clipped under 1\n");
-	// if (nb_of_clipped_triangles == 2 && clipped_triangle[1].i[2] < 1.0f)
+	// if (nb_of_clipped_triangles == 2 && clipped_triangle[1].lu[2] < 1.0f)
 	// 	printf("third point second clipped under 1\n");
 	while (nb_of_clipped_triangles)
 	{
@@ -46,9 +46,6 @@ static void	clip_to_near_plane(t_triangle *current_view,
 		invert_view(&projected);
 		triangle_add(&projected, viewport->view_offset);
 		projected = scale_triangle(&projected, scale);
-		// projected.i[0] = 1.0f;
-		// projected.i[1] = 1.0f;
-		// projected.i[2] = 1.0f;
 		triangles_in_view->array[triangles_in_view->size] = projected;
 		triangles_in_view->size += 1;
 		nb_of_clipped_triangles--;

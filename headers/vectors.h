@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/27 16:53:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:39:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct s_point_location
 	t_xyz		points_outside[3];
 	t_uvz		texels_inside[3];
 	t_uvz		texels_outside[3];
-	float		illumination_outside[3];
-	float		illumination_inside[3];
+	float		lumels_outside[3];
+	float		lumels_inside[3];
 	int			inside;
 	int			outside;
 	float		texel_offset;
@@ -73,7 +73,7 @@ typedef struct s_triangle
 	t_xyz			p[3];
 	t_uvz			uv[3];
 	t_xyz			vertex_normal[3];
-	float			i[3];
+	float			lu[3];
 	int				colour;
 	int				idx;
 	t_xyz			normal;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 11:27:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:53:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ static void	calc_texel(t_uvz *texel, t_uvz *start, float offset,
 }
 
 
-static void	calc_illumination(float *illumination, float *start, float offset,
-					float *end)
+static void	calc_lumel(float *lumel, float *start, float offset, float *end)
 {
-	*illumination = (1.0f - offset) * *start + offset * *end;
+	*lumel = (1.0f - offset) * *start + offset * *end;
 }
 
 
@@ -35,13 +34,13 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex,
 	t_steps *step)
 {
 	t_uvz	texel;
-	float	illumination;
+	float	lumel;
 	float	offset;
 	float	offset_step;
 
 	offset = 0.0f;
 	texel = step->start_uv;
-	illumination = step->start_i;
+	lumel = step->start_i;
 	offset_step = 1.0f / ((float)(step->end_x - step->start_x));
 	if (step->start_x < 0 || step->cur_y > SCREEN_HEIGHT - 1
 		|| step->cur_y < 0 || step->end_x > SCREEN_WIDTH - 1)
@@ -49,7 +48,7 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex,
 	while (step->start_x < step->end_x)
 	{
 		calc_texel(&texel, &step->start_uv, offset, &step->end_uv);
-		calc_illumination(&illumination, &step->start_i, offset, &step->end_i);
+		calc_lumel(&lumel, &step->start_i, offset, &step->end_i);
 		if (texel.w > depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH])
 		{
 			depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH] = texel.w;
@@ -59,8 +58,7 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex,
 					get_texel(
 					&(t_uv){texel.u * tex->width - 1, texel.v * tex->height - 1},
 					&(t_uv){tex->width, tex->height}, tex->texels)
-					// );
-					, illumination));
+					, lumel));
 		}
 		offset += offset_step;
 		step->start_x++;

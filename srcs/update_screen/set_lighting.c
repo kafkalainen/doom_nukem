@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 20:06:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 16:03:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:43:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,44 +25,6 @@
 **	Y-axis needs to be interpolated properly at draw_tex_triangle.
 **	Triangle vertex normals are calculated incorrectly.
 */
-
-// void	set_lighting(t_lighting *light, t_triangle *tri, t_xyz plr_pos)
-// {
-// 	Uint32	i;
-
-// 	i = 0;
-// 	(void)plr_pos;
-// 	if (light)
-// 	{
-// 		if (light->state)
-// 		{
-// 			while (i < 3)
-// 			{
-// 				tri->i[i] = ft_fmax(
-// 					vec3_dot_product(light->light_dir, tri->vertex_normal[i]), 0.1f);
-// 				tri->i[i] = ft_fmin(tri->i[i] * 4, 1.0f);
-// 				i++;
-// 			}
-// 		}
-// 		else
-// 		{
-// 			while (i < 3)
-// 			{
-// 				tri->i[i] = ft_fmax(
-// 					vec3_dot_product(light->light_dir, tri->vertex_normal[i]), 0.1f);
-// 				i++;
-// 			}
-// 		}
-// 	}
-// 	else
-// 	{
-// 		while (i < 3)
-// 		{
-// 			tri->i[i] = 1.0f;
-// 			i++;
-// 		}
-// 	}
-// }
 
 static float	saturate(float value)
 {
@@ -91,14 +53,13 @@ void	set_lighting(t_lighting *light, t_triangle *tri, t_xyz plr_pos)
 		{
 			while (i < 3)
 			{
-				tri->vertex_normal[i] = vec3(0.0f, 1.0f, 0.0f);
 				light_dir = vec3_dec(light->light_src, tri->p[i]);
 				magnitude = vec3_eucl_dist(light_dir);
 				light_dir = vec3_unit_vector(light_dir);
 				magnitude = magnitude * magnitude;
 				dot_product = vec3_dot_product(tri->vertex_normal[i], light_dir);
 				intensity = saturate(dot_product);
-				tri->i[i] = intensity * light->diffuse_power / magnitude;
+				tri->lu[i] = intensity * light->diffuse_power / magnitude;
 				// //Calculate the half vector between the light vector and the view vector.
 				// //This is typically slower than calculating the actual reflection vector
 				// // due to the normalize function's reciprocal square root
@@ -110,22 +71,22 @@ void	set_lighting(t_lighting *light, t_triangle *tri, t_xyz plr_pos)
 
 				// //Sum up the specular light factoring
 				// OUT.Specular = intensity * light.specularColor * light.specularPower / distance;
-				if (tri->i[i] < 0.1f)
-					tri->i[i] = 0.1f;
+				if (tri->lu[i] < 0.1f)
+					tri->lu[i] = 0.1f;
 				i++;
 			}
 		}
 		else
 		{
-			tri->i[0] = 0.1f;
-			tri->i[1] = 0.1f;
-			tri->i[2] = 0.1f;
+			tri->lu[0] = 0.1f;
+			tri->lu[1] = 0.1f;
+			tri->lu[2] = 0.1f;
 		}
 	}
 	else
 	{
-		tri->i[0] = 1.0f;
-		tri->i[1] = 1.0f;
-		tri->i[2] = 1.0f;
+		tri->lu[0] = 1.0f;
+		tri->lu[1] = 1.0f;
+		tri->lu[2] = 1.0f;
 	}
 }

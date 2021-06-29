@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 13:06:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:44:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 		i = 0;
 		while (i < triangles_to_add)
 		{
-			// if (triangles_to_add && clipped[0].i[2] < 1.0f)
-			// 	printf("%f\n", clipped[0].i[2]);
-			// if (triangles_to_add && clipped[0].i[1] < 1.0f)
-			// 	printf("%f\n", clipped[0].i[2]);
-			// if (triangles_to_add == 2 && clipped[1].i[2] < 1.0f)
-			// 	printf("%f\n", clipped[1].i[2]);
+			// if (triangles_to_add && clipped[0].lu[2] < 1.0f)
+			// 	printf("%f\n", clipped[0].lu[2]);
+			// if (triangles_to_add && clipped[0].lu[1] < 1.0f)
+			// 	printf("%f\n", clipped[0].lu[2]);
+			// if (triangles_to_add == 2 && clipped[1].lu[2] < 1.0f)
+			// 	printf("%f\n", clipped[1].lu[2]);
 			enqueue_to_raster(raster_list, &clipped[i]);
 			i++;
 		}

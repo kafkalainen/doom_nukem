@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 15:45:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:06:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	parse_number_data(t_sector *new_sector, unsigned char *buf,
 	*pos += get_next_breaker(buf + *pos);
 	if (*pos > (unsigned int)size)
 		return (1);
-	new_sector->lights.state = FALSE;
-	new_sector->lights.light_src = (t_xyz){0.0f, 9.0f, 6.0f, 1.0f};
+	new_sector->lights.state = TRUE;
+	new_sector->lights.light_src = (t_xyz){0.8f, 9.0f, 6.0f, 1.0f};
 	new_sector->lights.diffuse_power = 40.0f;
 	return (0);
 }

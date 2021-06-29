@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/27 17:38:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:55:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	calculate_vertex_delta(t_triangle *triangle, t_deltas *delta_a,
 		delta_a->v = triangle->uv[1].v - triangle->uv[0].v;
 		delta_a->u = triangle->uv[1].u - triangle->uv[0].u;
 		delta_a->w = triangle->uv[1].w - triangle->uv[0].w;
-		delta_a->i = triangle->i[1] - triangle->i[0];
+		delta_a->i = triangle->lu[1] - triangle->lu[0];
 	}
 	else
 	{
@@ -31,14 +31,14 @@ static void	calculate_vertex_delta(t_triangle *triangle, t_deltas *delta_a,
 		delta_a->v = triangle->uv[2].v - triangle->uv[1].v;
 		delta_a->u = triangle->uv[2].u - triangle->uv[1].u;
 		delta_a->w = triangle->uv[2].w - triangle->uv[1].w;
-		delta_a->i = triangle->i[2] - triangle->i[1];
+		delta_a->i = triangle->lu[2] - triangle->lu[1];
 	}
 	delta_b->y = (int)triangle->p[2].y - (int)triangle->p[0].y;
 	delta_b->x = (int)triangle->p[2].x - (int)triangle->p[0].x;
 	delta_b->v = triangle->uv[2].v - triangle->uv[0].v;
 	delta_b->u = triangle->uv[2].u - triangle->uv[0].u;
 	delta_b->w = triangle->uv[2].w - triangle->uv[0].w;
-	delta_b->i = triangle->i[2] - triangle->i[0];
+	delta_b->i = triangle->lu[2] - triangle->lu[0];
 }
 
 /*
@@ -71,11 +71,11 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 	steps->start_uv.u = tri->uv[0].u + temp[0] * steps->tex_a_side.u;
 	steps->start_uv.v = tri->uv[0].v + temp[0] * steps->tex_a_side.v;
 	steps->start_uv.w = tri->uv[0].w + temp[0] * steps->tex_a_side.w;
-	steps->start_i = tri->i[0] + temp[0] * steps->illumi_step_a_side;
+	steps->start_i = tri->lu[0] + temp[0] * steps->illumi_step_a_side;
 	steps->end_uv.u = tri->uv[0].u + temp[0] * steps->tex_b_side.u;
 	steps->end_uv.v = tri->uv[0].v + temp[0] * steps->tex_b_side.v;
 	steps->end_uv.w = tri->uv[0].w + temp[0] * steps->tex_b_side.w;
-	steps->end_i = tri->i[0] + temp[0] * steps->illumi_step_b_side;
+	steps->end_i = tri->lu[0] + temp[0] * steps->illumi_step_b_side;
 	if (steps->current_triangle != 'a')
 	{
 		temp[1] = (float)(cur_y - (int)tri->p[1].y);
@@ -87,7 +87,7 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 			* steps->tex_a_side.v;
 		steps->start_uv.w = tri->uv[1].w + temp[1]
 			* steps->tex_a_side.w;
-		steps->start_i = tri->i[1] + temp[1]
+		steps->start_i = tri->lu[1] + temp[1]
 			* steps->illumi_step_a_side;
 	}
 	swap_sides(steps);
