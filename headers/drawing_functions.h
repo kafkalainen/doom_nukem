@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/28 09:51:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:12:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 */
 
 void		calc_average_unit_normals(t_home *home);
+float		calculate_lumel_offset(float from, float to, float t);
+t_uvz		calculate_texel_offset(t_uvz from, t_uvz to, float t);
 t_xy		center_to_screen(t_xy loc);
 Uint32		colour_scale(Uint32 hex, float scale);
 t_triangle	create_projection(t_triangle *src);
