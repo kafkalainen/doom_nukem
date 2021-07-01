@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 20:21:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 12:54:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,32 +81,25 @@ int	add_points(t_sector *sector,
 	t_wall			*wall;
 
 	i = 0;
-	if (sector == NULL)
+	if (sector == NULL || parse_coordinates(&data_left, &pos, &buf, size))
 		return (1);
 	sector->walls = NULL;
-	if (parse_coordinates(&data_left, &pos, &buf, size))
-		return (1);
 	data_first = data_left;
 	while (i < sector->nb_of_walls - 1)
 	{
 		if (parse_coordinates(&data_right, &pos, &buf, size))
 			return (free_points(&sector->walls, i));
-		if (data_left.idx < -10 || data_right.idx < -10)
-			return (free_points(&sector->walls, i));
 		wall = new_point(&data_left, &data_right);
-		if (wall)
-			add_point(&sector->walls, wall);
-		else
+		if (!wall)
 			return (free_points(&sector->walls, i));
+		add_point(&sector->walls, wall);
 		data_left = data_right;
 		i++;
 	}
-	data_right = data_first;
-	wall = new_point(&data_left, &data_right);
-	if (wall)
-		add_point(&sector->walls, wall);
-	else
+	wall = new_point(&data_left, &data_first);
+	if (!wall)
 		return (free_points(&sector->walls, i));
+	add_point(&sector->walls, wall);
 	close_linkedlist(&sector->walls);
 	return (0);
 }
@@ -120,9 +113,8 @@ t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos,
 	if (!buf)
 		return (NULL);
 	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
-		return (NULL);
-	if (!ft_strstr((const char *)(buf + *pos), "sector"))
+	if (*pos > (unsigned int)size
+		|| !ft_strstr((const char *)(buf + *pos), "sector"))
 		return (NULL);
 	*pos += 6;
 	if (*pos > (unsigned int)size)
@@ -130,9 +122,10 @@ t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos,
 	new_sector = (t_sector *)malloc(sizeof(t_sector));
 	if (!new_sector)
 		return (NULL);
-	if (parse_number_data(new_sector, buf, pos, size))
+	if (parse_vertex_data(new_sector, buf, pos, size))
 		return (NULL);
 	ret = add_points(new_sector, buf, &pos, size);
+	ret = parse_light_data(new_sector, buf, pos, size);
 	if (ret)
 	{
 		free(new_sector);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/27 13:33:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 13:43:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ void			calc_bottom_normal_averages(t_sector *sector,
 					t_raster_queue *queue);
 void			calc_ceiling_normal_averages(t_sector *sector,
 					t_raster_queue *queue);
+float			calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
 void			calc_ground_normal_averages(t_sector *sector,
 					t_raster_queue *queue);
+void			calc_light_sources(t_home *home);
 int				change_door_to_portal(int door);
 int				check_if_lines_cut(t_sector *sector);
 int				check_if_sector_has_same_points(t_sector *sector);
@@ -40,7 +42,7 @@ void			close_linkedlist(t_wall **point);
 void			close_surface_list(t_surface **head);
 int				free_points(t_wall **head, unsigned int nbr_of_walls);
 void			free_sectors(t_home *home);
-int				free_sectors_and_exit(int error_code, t_home *home, size_t n);
+int				free_sectors_and_exit(int error_code, t_home *home);
 void			free_sectors_n(t_home *home, size_t	n);
 int				free_surfaces(t_surface **head, unsigned int nbr_of_surfaces);
 void			initialize_triangles(t_wall *wall, t_point_data *left,
@@ -54,7 +56,9 @@ t_surface		*new_surface(t_wall *data, t_xyz *start, int idx, char choice);
 char			*parse_colour_data(char *ptr, t_texture *tex);
 int				parse_coordinates(t_point_data *data, unsigned int ***pos,
 					unsigned char **buf, ssize_t size);
-int				parse_number_data(t_sector *new_sector, unsigned char *buf,
+int				parse_vertex_data(t_sector *new_sector, unsigned char *buf,
+					unsigned int *pos, ssize_t size);
+int				parse_light_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_sector_data(unsigned char *buf, t_home *home,
 					ssize_t size);
