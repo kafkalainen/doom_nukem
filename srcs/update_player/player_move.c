@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 16:27:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 16:33:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,21 @@ int	plr_inside(t_sector *sector, t_player *plr)
 	Uint32		i;
 	t_xy	pos;
 	t_xy	dir;
+	Uint32	walls_crossed;
 
 	i = 0;
+	walls_crossed = 0;
 	wall = sector->walls;
 	pos = vec3_to_vec2(plr->pos);
 	dir = (t_xy){0.0f, -20000.0f};
 	dir = vec2_dec(dir, pos);
 	while (i < sector->nb_of_walls)
 	{
-		if (check_intersection(wall, pos, dir))
-			return (TRUE);
+		walls_crossed += check_intersection(wall, pos, dir);
 		wall = wall->next;
 		i++;
 	}
-	return (FALSE);
+	return (walls_crossed % 2);
 }
 
 int	player_move(t_player *plr, t_home *home, Uint32 t)
