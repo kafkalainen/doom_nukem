@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 12:50:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 14:57:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ typedef struct s_wall
 {
 	t_triangle			top;
 	t_triangle			bottom;
-	float				wall_facing;
 	Uint32				is_door;
 	Uint32				is_closed;
 	Uint32				open_until;
 	float				height;
-	t_xy				normal;
 	struct s_wall		*next;
 }						t_wall;
 
@@ -36,8 +34,6 @@ typedef	struct s_lighting
 typedef struct s_surface
 {
 	t_triangle			tri;
-	float				wall_facing;
-	t_xy				normal;
 	struct s_surface	*next;
 }						t_surface;
 

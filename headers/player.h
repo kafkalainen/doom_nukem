@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/25 14:48:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 16:23:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	jump(t_player *plr, t_sector *cur_sector);
 int		open_door(t_sector **sectors, t_xyz look_loc,
 		Uint32 current_time, Uint32 cur_sector);
 int		player_move(t_player *plr, t_home *home, Uint32 delta_time);
-int		plr_inside(t_sector *sector, t_xy *pos);
+int		plr_inside(t_sector *sector, t_player *plr);
 int		player_use(t_player *plr, t_home *home, Uint32 delta_time);
 void	update_player(t_player *plr, t_home *home, Uint32 delta_time);
 #endif

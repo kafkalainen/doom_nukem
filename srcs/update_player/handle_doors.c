@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 13:58:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 15:53:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ static void	translate_door(t_wall *wall, char dir, float speed, Uint32 t)
 	{
 		translation_top = (t_xyz){0.0f, speed * t * 0.001f, 0.0f, 1.0f};
 		translation_bottom = (t_xyz){0.0f, -speed * t * 0.001f, 0.0f, 1.0f};
-		wall->top.uv[1].v += t * 0.0002f;
-		wall->top.uv[2].v += t * 0.0002f;
-		wall->bottom.uv[0].v -= t * 0.0002f;
-		wall->bottom.uv[2].v -= t * 0.0002f;
+		wall->top.uv[1].v += 0.1f * t * 0.001f;
+		wall->top.uv[2].v += 0.1f * t * 0.001f;
+		wall->bottom.uv[0].v -= 0.1f * t * 0.001f;
+		wall->bottom.uv[2].v -= 0.1f * t * 0.001f;
 	}
 	else if (dir == 'c')
 	{
 		translation_top = (t_xyz){0.0f, -speed * t * 0.001f, 0.0f, 1.0f};
 		translation_bottom = (t_xyz){0.0f, speed * t * 0.001f, 0.0f, 1.0f};
-		wall->top.uv[1].v -= t * 0.0002f;
-		wall->top.uv[2].v -= t * 0.0002f;
-		wall->bottom.uv[0].v += t * 0.0002f;
-		wall->bottom.uv[2].v += t * 0.0002f;
+		wall->top.uv[1].v -= 0.1f * t * 0.001f;
+		wall->top.uv[2].v -= 0.1f * t * 0.001f;
+		wall->bottom.uv[0].v += 0.1f * t * 0.001f;
+		wall->bottom.uv[2].v += 0.1f * t * 0.001f;
 	}
 	wall->top.p[0] = translate_point(&wall->top.p[0], translation_top);
 	wall->bottom.p[1] = translate_point(&wall->bottom.p[1], translation_bottom);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 13:43:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 14:41:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int				add_points(t_sector *sector, unsigned char *buf,
 void			add_surface(t_surface **point, t_surface *new);
 void			add_to_middle(t_wall **current_wall, t_wall *new_wall);
 void			calc_slanted_floors(t_home *home);
-void			calc_wall_and_floor_properties(t_home *home);
+void			calc_map_properties(t_home *home, t_player *plr);
 void			calc_top_normal_averages(t_sector *sector,
 					t_raster_queue *queue);
 void			calc_bottom_normal_averages(t_sector *sector,
@@ -60,8 +60,8 @@ int				parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_light_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
-int				parse_sector_data(unsigned char *buf, t_home *home,
-					ssize_t size);
+int				parse_sector_data(unsigned char *buf, t_player *plr,
+				t_home *home, ssize_t size);
 int				parse_pixel_data(char *ptr, t_texture *tex);
 void			retrieve_adjacent_triangles_ceiling(t_triangle *tri,
 					t_sector *sector, t_raster_queue *queue,

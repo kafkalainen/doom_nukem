@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/24 15:26:55 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/01 14:59:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,6 @@ void	setup_menu(t_menu *menu, int *game_state)
 		error_output("Failed to allocate memory to menu_buffer\n");
 	menu->option = 0;
 	*game_state = MAIN_MENU;
-}
-
-void	print_walls(t_wall *walls)
-{
-	t_wall	*tmp;
-
-	tmp = walls;
-	while (tmp != NULL)
-	{
-		printf("wall facing: %f\n", tmp->wall_facing);
-		tmp = tmp->next;
-	}
-	printf("leaving print walls\n");
 }
 
 /*
@@ -153,7 +140,7 @@ void	setup_game_loop(char **mapname, t_home *home,
 	init_player(plr);
 	if (initialize_skybox(&home->skybox))
 		error_output("Memory allocation failed!\n");
-	if (load_map_file(home, *mapname))
+	if (load_map_file(plr, home, *mapname))
 		exit(EXIT_FAILURE);
 	// if (open_file(home, "map_files/test.DATA") < 0)
 	// 		error_output("Could not successfully open map file.");

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 12:54:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 14:31:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos,
 		return (NULL);
 	*pos += get_next_breaker(buf + *pos) + 1;
 	if (*pos > (unsigned int)size
-		|| !ft_strstr((const char *)(buf + *pos), "sector"))
+		|| !ft_strnequ((const char *)(buf + *pos), "sector", 6))
 		return (NULL);
 	*pos += 6;
 	if (*pos > (unsigned int)size)

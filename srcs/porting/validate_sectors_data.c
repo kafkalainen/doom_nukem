@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:06:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/16 15:30:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 16:25:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,15 @@ static int	check_if_convex(t_sector *sector)
 	return (0);
 }
 
-int	validate_sectors_data(t_home *home)
+int	validate_sectors_data(t_home *home, t_player *plr)
 {
 	unsigned int	i;
 
 	i = 0;
-	// if (!(plr_inside(home->sectors[i], &(t_xy){0.0f, 0.0f})))
-	// 	map_error_output(6, home);
+	home->sectors[i]->nb_of_ceil = 0;
+	home->sectors[i]->nb_of_ground = 0;
+	if (!(plr_inside(home->sectors[plr->cur_sector], plr)))
+		map_error_output(6, home);
 	while (i < home->nbr_of_sectors)
 	{
 		home->sectors[i]->nb_of_ceil = 0;

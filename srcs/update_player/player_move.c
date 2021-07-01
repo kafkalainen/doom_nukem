@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/26 20:30:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 16:27:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_xyz	check_y(t_sector *sector, t_player *plr, t_xyz pos)
 	}
 	plane.point = ground->tri.p[0];
 	plane.normal = ground->tri.normal;
-	// plane.normal = triangle_normal(&ground->tri);
 	pos = vec3_intersection_with_ray_and_plane(&plane, pos, dir);
 	pos.y += plr->height;
 	return (pos);
@@ -84,6 +83,28 @@ t_xyz	check_y(t_sector *sector, t_player *plr, t_xyz pos)
 // 	else
 // 		*pos = *pos;
 // }
+
+int	plr_inside(t_sector *sector, t_player *plr)
+{
+	t_wall	*wall;
+	Uint32		i;
+	t_xy	pos;
+	t_xy	dir;
+
+	i = 0;
+	wall = sector->walls;
+	pos = vec3_to_vec2(plr->pos);
+	dir = (t_xy){0.0f, -20000.0f};
+	dir = vec2_dec(dir, pos);
+	while (i < sector->nb_of_walls)
+	{
+		if (check_intersection(wall, pos, dir))
+			return (TRUE);
+		wall = wall->next;
+		i++;
+	}
+	return (FALSE);
+}
 
 int	player_move(t_player *plr, t_home *home, Uint32 t)
 {
