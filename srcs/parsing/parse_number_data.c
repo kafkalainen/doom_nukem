@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 11:06:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/01 13:30:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	parse_number_data(t_sector *new_sector, unsigned char *buf,
+int	parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 	unsigned int *pos, ssize_t size)
 {
 	new_sector->idx_sector = ft_atoi((const char *)buf + *pos);
@@ -31,9 +31,30 @@ int	parse_number_data(t_sector *new_sector, unsigned char *buf,
 	*pos += get_next_breaker(buf + *pos);
 	if (*pos > (unsigned int)size)
 		return (1);
-	new_sector->lights.state = TRUE;
-	new_sector->lights.light_src = (t_xyz){0.8f, 9.0f, 6.0f, 1.0f};
-	new_sector->lights.diffuse_power = 40.0f;
+	return (0);
+}
+
+int	parse_light_data(t_sector *new_sector, unsigned char *buf,
+	unsigned int *pos, ssize_t size)
+{
+	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > (unsigned int)size)
+		return (1);
+	new_sector->lights.light_src.x = ft_atoi((const char *)buf + *pos);
+	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > (unsigned int)size)
+		return (1);
+	new_sector->lights.light_src.z = ft_atoi((const char *)buf + *pos);
+	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > (unsigned int)size)
+		return (1);
+	new_sector->lights.diffuse_power = ft_atoi((const char *)buf + *pos);
+	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > (unsigned int)size)
+		return (1);
+	new_sector->lights.state = ft_atoi((const char *)buf + *pos);
+	new_sector->lights.light_src.y = 0.0f;
+	new_sector->lights.light_src.w = 1.0f;
 	return (0);
 }
 

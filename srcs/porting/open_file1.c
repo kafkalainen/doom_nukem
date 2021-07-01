@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/14 15:48:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/01 13:49:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,9 @@ static int	get_nbr_of_sectors(unsigned int *pos, unsigned char *buf,
 	return (0);
 }
 
-int	free_sectors_and_exit(int error_code, t_home *home, size_t n)
+int	free_sectors_and_exit(int error_code, t_home *home)
 {
-	if (error_code == 1)
-	{
-		free_sectors_n(home, n);
-		ft_putendl_fd("ERROR: Memory allocation for a sector failed.", 2);
-	}
-	else if (error_code == 2)
+	if (error_code == 2)
 	{
 		free_sectors(home);
 		ft_putendl_fd("ERROR: Still data in buffer after reading.", 2);
@@ -62,12 +57,12 @@ int	parse_sector_data(unsigned char *buf, t_home *home, ssize_t size)
 	{
 		home->sectors[i] = get_sector_data(buf, &pos, size);
 		if (home->sectors[i] == NULL)
-			return (free_sectors_and_exit(1, home, i + 1));
+			error_output("ERROR: Memory allocation for a sector failed.");
 		i++;
 	}
 	pos += get_next_breaker(buf + pos) + 1;
 	if (pos > (unsigned int)size || *(buf + pos) != '\n')
-		return (free_sectors_and_exit(2, home, home->nbr_of_sectors));
+		return (free_sectors_and_exit(2, home));
 	home->sectors[i] = NULL;
 	return (0);
 }
