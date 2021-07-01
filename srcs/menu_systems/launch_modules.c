@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/29 14:56:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/01 14:21:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 {
 	Uint32	i;
 	float	distance_squared;
+	(void)delta_time;
 	// i = 0;
 	// while (i < home->nbr_of_projectiles)
 	// {
@@ -50,22 +51,23 @@ void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 		{
 			if (home->entity_pool[i]->entity_type == 1 || home->entity_pool[i]->entity_type == 2) // entity is an enemy, move to state logics
 			{
+				determine_angle_between_entity_and_plr(home->entity_pool[i], plr);
 				// if (home->entity_pool[i]->take_damage) // determined by projectile while loop
 				// 	take_damage_logic(home->entity_pool[i], plr_pos, delta_time);
-				if (!home->entity_pool[i]->is_aggroed)
-				{
-					if (check_aggro(plr, home->entity_pool[i], home->sectors[home->entity_pool[i]->sector_idx]))
-						printf("we are aggroed\n");
-					else
-						entity_move(home->entity_pool[i], home, delta_time);
-				}
-				else
-				{
-					if (get_distance_squared(plr->pos, home->entity_pool[i]->pos) > 0.5f)
-						entity_chase(home->entity_pool[i], home, delta_time, plr);
-					else
-						printf("I hit you!\n");
-				}
+				// if (!home->entity_pool[i]->is_aggroed)
+				// {
+				// 	if (check_aggro(plr, home->entity_pool[i], home->sectors[home->entity_pool[i]->sector_idx]))
+				// 		printf("we are aggroed\n");
+				// 	else
+				// entity_move(home->entity_pool[i], home, delta_time);
+				// }
+				// else
+				// {
+				// 	if (get_distance_squared(plr->pos, home->entity_pool[i]->pos) > 0.5f)
+				// 		entity_chase(home->entity_pool[i], home, delta_time, plr);
+				// 	else
+				// 		printf("I hit you!\n");
+				// }
 				distance_squared = ((plr->pos.x - home->entity_pool[i]->pos.x) * (plr->pos.x - home->entity_pool[i]->pos.x) +
 					(plr->pos.y - home->entity_pool[i]->pos.y) * (plr->pos.y - home->entity_pool[i]->pos.y) +
 					(plr->pos.z - home->entity_pool[i]->pos.z) * (plr->pos.z - home->entity_pool[i]->pos.z));

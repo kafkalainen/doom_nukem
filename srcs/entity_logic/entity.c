@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:31:48 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/29 14:56:13 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/01 16:21:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,59 @@ int	check_aggro(t_player *plr, t_entity *entity, t_sector *sector)
 	return (0);
 }
 
-void	choose_new_direction(t_entity *entity, t_home *home, t_xyz plr_dir)
+void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
+{
+	float	dot_product;
+	t_xyz	a;
+	t_xyz	b;
+	t_xyz	z_normal;
+	t_xyz	cross;
+	float	cross_dot;
+	float	degrees;
+	float	radians;
+
+	a = vec3_unit_vector(vec3_dec(plr->pos, entity->pos));
+	b = entity->dir;
+	dot_product = vec3_dot_product(a, b);
+	z_normal = (t_xyz){0, 1, 0, 0};
+	cross = vec3_cross_product(z_normal, a);
+	cross_dot = vec3_dot_product(b, cross);
+	radians = acosf(cross_dot);
+	degrees = radians * (180.0 / M_PI); // using this for illustration purposes, can use radians in final commit
+	printf("degrees: %f\n", degrees);
+	if (degrees < 22.5 && degrees > 0) // right side
+		printf("right side\n");
+	else if (degrees > 22.5 && degrees < 67.5 && dot_product > 0) // front right
+		printf("front right\n");
+	else if (degrees > 22.5 && degrees < 67.5 && dot_product < 0)
+		printf("back right\n");
+	else if (degrees > 67.5 && degrees < 112.5 && dot_product > 0)
+		printf("directly in front\n");
+	else if (degrees > 67.5 && degrees < 112.5 && dot_product < 0)
+		printf("directly behind\n");
+	else if (degrees > 112.5 && degrees < 157.5 && dot_product > 0)
+		printf("front left\n");
+	else if (degrees > 112.5 && degrees < 157.5 && dot_product < 0)
+		printf("back left\n");
+	else if (degrees > 157.5 && degrees < 180)
+		printf("left side\n");
+}
+
+void	choose_new_direction(t_entity *entity, t_home *home)
 {
 	int		dir;
+	t_xyz	pos;
 
-	(void)plr_dir;
 	(void)home;
 	dir = rand() % 8;
+	dir = 0;
 	if (dir == 0) // move south
 	{
-		entity->dir.x = S;
+		pos.x = S;
+		pos.y = 0;
+		pos.z = 0;
+		pos.w = 1;
+		entity->dir = vec3_unit_vector(vec3_dec(entity->pos, pos));
 		// entity->top = rotate_triangle(&entity->top, 180, 'y');
 		// entity->bot = rotate_triangle(&entity->bot, 180, 'y');
 		// entity->dir = triangle_normal(&entity->top);
@@ -141,7 +184,7 @@ void	entity_chase(t_entity *entity, t_home *home, Uint32 t, t_player *plr)
 	testi = vec3_dec(plr->pos, entity->pos);
 	new_loc = vec3_unit_vector(testi);
 	new_loc.y = 0;
-	test = vec3_add(entity->pos, vec3_mul(new_loc, t * 0.0005f));
+	test = vec3_add(entity->pos, vec3_mul(new_loc, t * 0.005f));
 	wall = check_if_crossing(home->sectors[entity->sector_idx], test);
 	if (wall)
 	{
@@ -150,7 +193,7 @@ void	entity_chase(t_entity *entity, t_home *home, Uint32 t, t_player *plr)
 			if ((wall->is_door && !wall->is_closed) || !wall->is_door)
 			{
 				entity->sector_idx = wall->top.idx;
-			 	entity->pos = vec3_add(entity->pos, vec3_mul(new_loc, t * 0.0005f));
+			 	entity->pos = vec3_add(entity->pos, vec3_mul(new_loc, t * 0.005f));
 				// increment sprite status, if over the range, reset to 0
 			}
 		}
@@ -159,6 +202,9 @@ void	entity_chase(t_entity *entity, t_home *home, Uint32 t, t_player *plr)
 			printf("hit a wall, need to rotate\n");
 			// choose_new_direction(entity, home, plr_dir);
 			// reset sprite status to 0
+			entity->top = rotate_triangle(&entity->top, 180, 'y');
+			entity->bot = rotate_triangle(&entity->bot, 180, 'y');
+			entity->dir = triangle_normal(&entity->top);
 			printf("new direction: x: %f y: %f z: %f\n", entity->dir.x, entity->dir.y, entity->dir.z);
 		}
 	}
@@ -178,7 +224,7 @@ int	entity_move(t_entity *entity, t_home *home, Uint32 t)
 	t_wall			*wall;
 	t_xyz			new_loc;
 
-	new_loc = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.0005f));
+	new_loc = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.005f));
 	wall = check_if_crossing(home->sectors[entity->sector_idx], new_loc);
 	if (wall)
 	{
@@ -189,7 +235,7 @@ int	entity_move(t_entity *entity, t_home *home, Uint32 t)
 			if ((wall->is_door && !wall->is_closed) || !wall->is_door)
 			{
 				entity->sector_idx = wall->top.idx;
-			 	entity->pos = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.0005f));
+			 	entity->pos = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.005f));
 				// increment sprite status, if over the range, reset to 0
 				return (TRUE);
 			}
@@ -197,6 +243,7 @@ int	entity_move(t_entity *entity, t_home *home, Uint32 t)
 		else
 		{
 			printf("hit a wall, need to rotate\n");
+			// choose_new_direction(entity, home);
 			entity->top = rotate_triangle(&entity->top, 180, 'y');
 			entity->bot = rotate_triangle(&entity->bot, 180, 'y');
 			entity->top.normal = triangle_normal(&entity->top);
@@ -208,7 +255,7 @@ int	entity_move(t_entity *entity, t_home *home, Uint32 t)
 	}
 	else
 	{
-		entity->pos = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.0005f));
+		entity->pos = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.005f));
 		// increment sprite status, if over the range, reset to 0
 		// dist = check_distance_to_ground(home->sectors[entity->sector_idx], entity, entity->pos);
 		// if (dist < 0 && dist > -plr->height)
