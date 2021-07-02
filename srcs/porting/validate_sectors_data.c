@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:06:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/02 11:15:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/02 12:33:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ int	validate_sectors_data(t_home *home, t_player *plr)
 			map_error_output(3, home);
 		if (check_if_convex(home->sectors[i]))
 			map_error_output(4, home);
-		// if (check_if_lines_cut(home->sectors[i]))
-		// 	map_error_output(5, home);
 		i++;
 	}
 	return (0);

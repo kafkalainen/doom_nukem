@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 13:39:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 13:52:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/02 12:35:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	calc_light_sources(t_home *home)
 		home->sectors[i]->lights.light_src.y
 			= calc_distance_to_ceiling(home->sectors[i],
 				&home->sectors[i]->lights.light_src);
-		if (home->sectors[i]->lights.light_src.y > 0.5f)
-			home->sectors[i]->lights.light_src.y -= 0.5f;
+		if (home->sectors[i]->lights.light_src.y > 1.0f)
+			home->sectors[i]->lights.light_src.y -= 1.0f;
 		i++;
 	}
 }
