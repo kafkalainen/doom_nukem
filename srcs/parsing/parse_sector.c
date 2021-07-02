@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 14:31:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/02 11:46:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	add_points(t_sector *sector,
 	i = 0;
 	if (sector == NULL || parse_coordinates(&data_left, &pos, &buf, size))
 		return (1);
-	sector->walls = NULL;
 	data_first = data_left;
 	while (i < sector->nb_of_walls - 1)
 	{
@@ -108,7 +107,6 @@ t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos,
 	ssize_t size)
 {
 	t_sector		*new_sector;
-	int				ret;
 
 	if (!buf)
 		return (NULL);
@@ -122,14 +120,14 @@ t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos,
 	new_sector = (t_sector *)malloc(sizeof(t_sector));
 	if (!new_sector)
 		return (NULL);
+	new_sector->walls = NULL;
+	new_sector->ceiling = NULL;
+	new_sector->ground = NULL;
 	if (parse_vertex_data(new_sector, buf, pos, size))
-		return (NULL);
-	ret = add_points(new_sector, buf, &pos, size);
-	ret = parse_light_data(new_sector, buf, pos, size);
-	if (ret)
-	{
-		free(new_sector);
-		return (NULL);
-	}
+		return (free_sector(&new_sector));
+	if (add_points(new_sector, buf, &pos, size))
+		return (free_sector(&new_sector));
+	if (parse_light_data(new_sector, buf, pos, size))
+		return (free_sector(&new_sector));
 	return (new_sector);
 }

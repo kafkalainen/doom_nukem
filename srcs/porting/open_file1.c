@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 14:46:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/02 12:17:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 /*
 **	Add safeguards for mallocing.
 */
-
 int	load_map_file(t_player *plr, t_home *home, char *path)
 {
 	int				fd;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 14:50:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/02 11:26:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	calc_map_properties(t_home *home, t_player *plr)
 {
 	unsigned int	i;
-	// float			dist;
 
 	i = 0;
 	while (i < home->nbr_of_sectors)
@@ -31,6 +30,4 @@ void	calc_map_properties(t_home *home, t_player *plr)
 	calc_average_unit_normals(home);
 	calc_light_sources(home);
 	plr->pos = check_y(home->sectors[plr->cur_sector], plr, plr->pos);
-	// if (dist < 0 && dist > -plr->height)
-	// 	plr->pos.y -= dist;
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 14:05:23 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 09:10:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/02 11:35:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,13 @@ void	free_sectors_n(t_home *home, size_t n)
 	}
 	free(home->sectors);
 	home->sectors = NULL;
+}
+
+t_sector	*free_sector(t_sector **sector)
+{
+	if (*sector == NULL)
+		return (NULL);
+	free(*sector);
+	*sector = NULL;
+	return (*sector);
 }
