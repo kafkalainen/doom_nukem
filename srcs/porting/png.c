@@ -85,8 +85,11 @@ void	cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir)
 		}
 		dir_entry = readdir(dir);
 	}
-	load_texture("./sprites/skull_skulker_front.png", home->textures, i); // might need to do some magic with index nbr
-	printf("%i\n", i);
+	load_texture("textures/face.png", home->textures, i);
+	// load_texture("sprites/hud_doom.png", home->textures, i);
+	// load_texture("sprites/skull_skulker_front.png", home->textures, i); // might need to do some magic with index nbr
+	// load_texture("sprites/skull_skulker_attack_1.png", home->textures, i);
+	// printf("%i\n", i);
 }
 
 void	init_textures(t_home *home)
