@@ -71,7 +71,7 @@ void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 				distance_squared = ((plr->pos.x - home->entity_pool[i]->pos.x) * (plr->pos.x - home->entity_pool[i]->pos.x) +
 					(plr->pos.y - home->entity_pool[i]->pos.y) * (plr->pos.y - home->entity_pool[i]->pos.y) +
 					(plr->pos.z - home->entity_pool[i]->pos.z) * (plr->pos.z - home->entity_pool[i]->pos.z));
-				printf("distance to player: %f\n", distance_squared);
+				//printf("distance to player: %f\n", distance_squared);
 				// if (home->entity_pool[i]->is_aggroed)
 				// {
 				// 	if (home->entity_pool[i]->state == ENTITY_MOVE && home->entity_pool[i]->sprite_state > ENTITY_SPRITE_MOVE_END) // we are done with moving

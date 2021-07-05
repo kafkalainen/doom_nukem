@@ -81,7 +81,7 @@ void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 	cross_dot = vec3_dot_product(b, cross);
 	radians = acosf(cross_dot);
 	degrees = radians * (180.0 / M_PI); // using this for illustration purposes, can use radians in final commit
-	printf("degrees: %f\n", degrees);
+	/*printf("degrees: %f\n", degrees);
 	if (degrees < 22.5 && degrees > 0) // right side
 		printf("right side\n");
 	else if (degrees > 22.5 && degrees < 67.5 && dot_product > 0) // front right
@@ -97,7 +97,7 @@ void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 	else if (degrees > 112.5 && degrees < 157.5 && dot_product < 0)
 		printf("back left\n");
 	else if (degrees > 157.5 && degrees < 180)
-		printf("left side\n");
+		printf("left side\n");*/
 }
 
 void	choose_new_direction(t_entity *entity, t_home *home)
@@ -199,13 +199,13 @@ void	entity_chase(t_entity *entity, t_home *home, Uint32 t, t_player *plr)
 		}
 		else
 		{
-			printf("hit a wall, need to rotate\n");
+			//printf("hit a wall, need to rotate\n");
 			// choose_new_direction(entity, home, plr_dir);
 			// reset sprite status to 0
 			entity->top = rotate_triangle(&entity->top, 180, 'y');
 			entity->bot = rotate_triangle(&entity->bot, 180, 'y');
 			entity->dir = triangle_normal(&entity->top);
-			printf("new direction: x: %f y: %f z: %f\n", entity->dir.x, entity->dir.y, entity->dir.z);
+			//printf("new direction: x: %f y: %f z: %f\n", entity->dir.x, entity->dir.y, entity->dir.z);
 		}
 	}
 	else
@@ -242,14 +242,14 @@ int	entity_move(t_entity *entity, t_home *home, Uint32 t)
 		}
 		else
 		{
-			printf("hit a wall, need to rotate\n");
+			//printf("hit a wall, need to rotate\n");
 			// choose_new_direction(entity, home);
 			entity->top = rotate_triangle(&entity->top, 180, 'y');
 			entity->bot = rotate_triangle(&entity->bot, 180, 'y');
 			entity->top.normal = triangle_normal(&entity->top);
 			entity->bot.normal = entity->top.normal;
 			entity->dir = entity->top.normal;
-			printf("new direction: x: %f y: %f z: %f\n", entity->dir.x, entity->dir.y, entity->dir.z);
+			//printf("new direction: x: %f y: %f z: %f\n", entity->dir.x, entity->dir.y, entity->dir.z);
 		}
 			return (FALSE);
 	}
