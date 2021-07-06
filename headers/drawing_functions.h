@@ -48,5 +48,6 @@ void		calculate_triangle(t_frame *frame, t_triangle *tri,
 int			draw_tex_triangle(Uint32 *buffer, float *depth_buffer,
 			t_triangle *triangle, t_texel *tex);
 void		reset_depth_buffer(float *depth_buffer);
+void		draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr);
 
 #endif

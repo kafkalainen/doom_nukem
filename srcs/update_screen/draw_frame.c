@@ -140,5 +140,6 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	// }
 	if (plr->input.info)
 		draw_info(frame, plr, (int)home->t.fps);
+	draw_heads_up_display(home, frame, plr);
 	return ;
 }

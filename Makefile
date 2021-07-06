@@ -91,6 +91,7 @@ SRCS = \
 	update_screen$(SLASH)draw_tex_pixel.c \
 	update_screen$(SLASH)draw_tex_triangle.c \
 	update_screen$(SLASH)draw_wireframe.c \
+	update_screen$(SLASH)draw_hud.c \
 	update_screen$(SLASH)init_matrices_a.c \
 	update_screen$(SLASH)init_matrices_b.c \
 	update_screen$(SLASH)put_pixel.c \

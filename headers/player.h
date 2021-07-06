@@ -45,7 +45,36 @@ typedef struct s_input
 	int				debug_right;
 }					t_input;
 
-typedef struct s_player
+/*
+** HUD struct
+** Reasoning:
+** "viewmodel" triangles are for the player gun/hand etc. plane
+** made separate from the HUD layer in order to easily manipulate the layer
+** eg. gun walking "animation", png animation, lightning and such
+**
+** ammo stuff and especially power_points is there mostly as a reminder.
+** do we have them somewhere? Should they go to player struct?
+**
+** damage_effect_instensity will be a fade timer for a "hurt" effect.
+*/
+
+typedef struct		s_hud
+{
+	t_triangle		viewmodel_top;
+	t_triangle		viewmodel_bot;
+	t_triangle		hud_top;
+	t_triangle		hud_bot;
+
+	unsigned int	viewmodel_frame;
+	unsigned int	power_points;
+	unsigned int	live_ammo[2];
+	unsigned int	reserve_ammo[2];
+	float			damage_effect_intensity;
+
+}					t_hud;
+
+
+typedef struct		s_player
 {
 	t_input			input;
 	t_xyz			pos;
@@ -94,4 +123,5 @@ int		player_move(t_player *plr, t_home *home, Uint32 delta_time);
 int		plr_inside(t_sector *sector, t_player *plr);
 int		player_use(t_player *plr, t_home *home, Uint32 delta_time);
 void	update_player(t_player *plr, t_home *home, Uint32 delta_time);
+
 #endif
