@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/09 14:17:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/06 14:31:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *menu_buffer)
 	free_queues(frame);
 	free(frame->buffer);
 	free(menu_buffer);
-	cleanup_audio(audio);
+	cleanup_audio_source(audio);
 	ft_putendl("User closed the window");
 	SDL_Quit();
 }

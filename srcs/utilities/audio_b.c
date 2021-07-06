@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_light_sources.c                               :+:      :+:    :+:   */
+/*   audio_b.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 13:39:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/05 16:38:09 by jnivala          ###   ########.fr       */
+/*   Created: 2021/07/06 14:34:05 by jnivala           #+#    #+#             */
+/*   Updated: 2021/07/06 14:40:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	calc_light_sources(t_home *home)
+void	initialize_audio_to_null(t_audio *audio)
 {
-	Uint32	i;
-
-	i = 0;
-	while (i < home->nbr_of_sectors)
-	{
-		home->sectors[i]->lights.light_src.y
-			= calc_distance_to_ceiling(home->sectors[i],
-				&home->sectors[i]->lights.light_src);
-		if (home->sectors[i]->lights.light_src.y > 1.0f)
-			home->sectors[i]->lights.light_src.y -= 1.0f;
-		i++;
-	}
+	audio->footstep1 = NULL;
+	audio->footstep2 = NULL;
+	audio->music = NULL;
 }

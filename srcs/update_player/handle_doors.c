@@ -6,49 +6,62 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 15:53:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/06 15:47:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	lock_the_door(t_wall *wall)
+static void	lock_the_door(t_wall *dimensions, t_wall *door)
 {
-	wall->top.p[0] = (t_xyz){wall->top.p[0].x, (int)wall->top.p[0].y,
-		wall->top.p[0].z, 1.0f};
-	wall->bottom.p[1] = (t_xyz){wall->bottom.p[1].x,
-		ceilf(wall->bottom.p[1].y), wall->bottom.p[1].z, 1.0f};
-	wall->top.uv[1].v = 0.0f;
-	wall->top.uv[2].v = 0.0f;
-	wall->bottom.uv[0].v = 1.0f;
-	wall->bottom.uv[2].v = 1.0f;
+	door->top.p[0] = dimensions->top.p[0];
+	door->top.p[1] = dimensions->top.p[1];
+	door->top.p[2] = dimensions->top.p[2];
+	door->bottom.p[0] = dimensions->bottom.p[0];
+	door->bottom.p[1] = dimensions->bottom.p[1];
+	door->bottom.p[2] = dimensions->bottom.p[2];
+	door->top.uv[0] = dimensions->top.uv[0];
+	door->top.uv[1] = dimensions->top.uv[1];
+	door->top.uv[2] = dimensions->top.uv[2];
+	door->bottom.uv[0] = dimensions->bottom.uv[0];
+	door->bottom.uv[1] = dimensions->bottom.uv[1];
+	door->bottom.uv[2] = dimensions->bottom.uv[2];
 }
 
-static void	translate_door(t_wall *wall, char dir, float speed, Uint32 t)
+/*
+**	v = h / t
+**	h = vt
+*/
+static void	translate_door(t_wall *wall, char dir, float speed, float time)
 {
 	t_xyz	translation_top;
 	t_xyz	translation_bottom;
 
 	if (dir == 'o')
 	{
-		translation_top = (t_xyz){0.0f, speed * t * 0.001f, 0.0f, 1.0f};
-		translation_bottom = (t_xyz){0.0f, -speed * t * 0.001f, 0.0f, 1.0f};
-		wall->top.uv[1].v += 0.1f * t * 0.001f;
-		wall->top.uv[2].v += 0.1f * t * 0.001f;
-		wall->bottom.uv[0].v -= 0.1f * t * 0.001f;
-		wall->bottom.uv[2].v -= 0.1f * t * 0.001f;
+		translation_top = (t_xyz){0.0f, speed * time, 0.0f, 1.0f};
+		translation_bottom = (t_xyz){0.0f, speed * time, 0.0f, 1.0f};
+		wall->top.uv[0].v += 0.2f * time;
+		wall->top.uv[1].v += 0.2f * time;
+		wall->top.uv[2].v += 0.2f * time;
+		wall->bottom.uv[0].v += 0.2f * time;
+		wall->bottom.uv[1].v += 0.2f * time;
+		wall->bottom.uv[2].v += 0.2f * time;
 	}
 	else if (dir == 'c')
 	{
-		translation_top = (t_xyz){0.0f, -speed * t * 0.001f, 0.0f, 1.0f};
-		translation_bottom = (t_xyz){0.0f, speed * t * 0.001f, 0.0f, 1.0f};
-		wall->top.uv[1].v -= 0.1f * t * 0.001f;
-		wall->top.uv[2].v -= 0.1f * t * 0.001f;
-		wall->bottom.uv[0].v += 0.1f * t * 0.001f;
-		wall->bottom.uv[2].v += 0.1f * t * 0.001f;
+		translation_top = (t_xyz){0.0f, -speed * time, 0.0f, 1.0f};
+		translation_bottom = (t_xyz){0.0f, -speed * time, 0.0f, 1.0f};
+		wall->top.uv[0].v -= 0.2f * time;
+		wall->top.uv[1].v -= 0.2f * time;
+		wall->top.uv[2].v -= 0.2f * time;
+		wall->bottom.uv[0].v -= 0.2f * time;
+		wall->bottom.uv[1].v -= 0.2f * time;
+		wall->bottom.uv[2].v -= 0.2f * time;
 	}
 	wall->top.p[0] = translate_point(&wall->top.p[0], translation_top);
-	wall->bottom.p[1] = translate_point(&wall->bottom.p[1], translation_bottom);
+	wall->bottom.p[0] = translate_point(&wall->bottom.p[0], translation_bottom);
+	wall->bottom.p[2] = translate_point(&wall->bottom.p[2], translation_bottom);
 }
 
 static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
@@ -56,20 +69,20 @@ static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
 {
 	if (wall->open_until < current_time)
 	{
-		lock_the_door(wall->next);
+		lock_the_door(wall, wall->next);
 		wall->is_closed = 1;
 		return (1);
 	}
 	else
 	{
 		if (wall->open_until - 2500 > current_time)
-			translate_door(wall->next, 'o', wall->next->height * 0.2f,
-				delta_time);
+			translate_door(wall->next, 'o', wall->next->height * 0.4f,
+				delta_time * 0.001f);
 		else
 		{
 			wall->is_closed = 0;
-			translate_door(wall->next, 'c', wall->next->height * 0.2f,
-				delta_time);
+			translate_door(wall->next, 'c', wall->next->height * 0.4f,
+				delta_time * 0.001f);
 		}
 	}
 	return (0);

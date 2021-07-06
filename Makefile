@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/07/01 14:41:01 by jnivala          ###   ########.fr        #
+#    Updated: 2021/07/06 14:39:35 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,8 @@ SRCS = \
 	update_screen$(SLASH)matrix_3d.c \
 	update_screen$(SLASH)update_screen.c \
 	update_screen$(SLASH)set_lighting.c \
-	utilities$(SLASH)audio.c \
+	utilities$(SLASH)audio_a.c \
+	utilities$(SLASH)audio_b.c 	\
 	utilities$(SLASH)error_output.c \
 	utilities$(SLASH)fps_timer.c \
 	utilities$(SLASH)init_input.c \

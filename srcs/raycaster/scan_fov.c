@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/25 15:18:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/02 13:13:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,10 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	unsigned int	j;
 	t_frame			new_frame;
 	t_triangle		temp_array[800];
-	// t_xyz			normal;
 
 	j = 0;
 	frame->transformed->size = 0;
 	frame->left.wall = home->sectors[frame->idx]->walls;
-	// printf("I see sector %d\n", frame->idx);
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
 	while (j < home->sectors[frame->idx]->nb_of_walls * 2
 		&& !check_connection(frame->left.wall, frame))
@@ -104,8 +102,6 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 		if (frame->left.wall->top.idx >= 0)
 		{
 			plr->look_dir = vec3_unit_vector(plr->look_dir);
-			// normal = triangle_normal(&frame->left.wall->top);
-			// if (vec3_dot_product(normal, plr->look_dir) < SQR2)
 			if (vec3_dot_product(frame->left.wall->top.normal, plr->look_dir) < SQR2)
 			{
 				setup_frame(frame, &new_frame, frame->left.wall->top.idx);

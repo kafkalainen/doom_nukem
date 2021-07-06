@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/01 14:21:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/06 15:12:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,6 @@ void	update_world(t_player *plr, t_home *home)
 void	launch_game_loop(t_home *home, t_player *plr,
 	t_frame *frame, SDL_Event *e)
 {
-	// frame->depth_buffer = (float *)malloc(sizeof(float)
-	// 		* ((SCREEN_WIDTH + 1) * SCREEN_HEIGHT) + 1);
-	// if (!frame->depth_buffer)
-	// 	error_output("Memory allocation failed!\n");
-	// else
-	// 	printf("Depth buffer allocation succeeded. Address is: %p\n", frame->depth_buffer);
 	while (home->game_state == GAME_LOOP)
 	{
 		fps_timer(&home->t);
@@ -123,13 +117,6 @@ void	launch_game_loop(t_home *home, t_player *plr,
 		render_buffer(frame->buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
-	// if (frame->depth_buffer)
-	// {
-	// 	printf("Depth buffer address: %p\n", (void**)frame->depth_buffer);
-	// 	free(frame->depth_buffer);
-	// }
-	// frame->depth_buffer = NULL;
-	// ft_putendl_fd("Freed depth buffer.", 1);
 	free_game_assets(home);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 }

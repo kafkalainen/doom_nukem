@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 12:35:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/06 15:12:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	if (ret)
 		clean_up(frame);
 	home = init_sdl(home, frame, &frame->min_step);
+	initialize_audio_to_null(&plr->audio);
 	// ret = load_audio(&plr->audio);
 	// if (ret)
 	// {

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 10:19:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/06 14:40:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_audio
 
 void	cleanup_audio(t_audio *audio);
 void	cleanup_audio_source(t_audio *audio);
+void	initialize_audio_to_null(t_audio *audio);
 int		load_audio(t_audio *audio);
 int		load_game_audio(t_audio *audio);
 void	play_footsteps(t_audio *audio);

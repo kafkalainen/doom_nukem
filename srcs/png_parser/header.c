@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:51:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 12:21:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/06 15:59:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,20 @@ int	color_depth_restrictions(int color, int depth)
 	return (0);
 }
 
+static void	print_header_elements(t_png *png)
+{
+	printf("Width: %i\n", png->width);
+	printf("Height: %i\n", png->height);
+	printf("Compression method: %i\n", png->compression_method);
+	printf("Filter method: %i\n", png->filter_method);
+}
+
 void	check_header(t_png *png)
 {
 	if (png->chunk.size != 13 || png->state != 0 || png->source.size < 29)
 		error_output("Error reading file header\n");
 	get_header_elements(png);
+	print_header_elements(png);
 	if (png->width == 0 || png->height == 0 || !png->width || !png->height)
 		error_output("Image dimension error\n");
 	if (png->depth > 16 || !check_depth(png->depth))
