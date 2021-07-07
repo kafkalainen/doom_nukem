@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 14:45:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/07 13:48:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void			calc_sector_bounds(t_sector *sector);
 void			calc_extra_walls(t_home *home);
 t_xy			cast_ray(t_xy *dir, t_wall **head, int walls);
 int				check_connection(t_wall *point, t_frame *frame);
+Uint32			check_if_open_portal(t_wall *wall);
 int				check_if_portal(t_wall *point);
 int				check_if_same_pt(int *current_pxl, t_ray_pt *fov);
 int				check_if_lseg_intersects(t_xy *p0, t_xy *p1, t_xy *pos, t_xy *dir);
@@ -95,4 +96,11 @@ int				front(t_raster_queue *queue, t_triangle *triangle);
 int				orientation_of_three_points(t_xy a, t_xy b, t_xy c);
 int				point_is_on_the_lseg(t_xy a, t_xy c, t_xy b);
 int				check_intersection(t_wall *p0, t_xy pos, t_xy dir);
+void			quick_reset_queue(t_raster_queue *queue);
+void			draw_queue_empty(t_frame *frame, t_home *home,
+				t_player *plr, int *idx);
+void			add_ceiling(t_home *home, t_frame *frame, t_player *plr);
+void			add_ground(t_home *home, t_frame *frame, t_player *plr);
+void			add_walls(t_home *home, t_frame *frame, t_player *plr);
+void			add_objects(t_home *home, t_frame *frame, t_player *plr);
 #endif

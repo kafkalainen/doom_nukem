@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/02 13:13:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/07 13:52:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,101 +28,39 @@ t_texel	*get_tex(int idx, t_texture	**textures)
 	return (NULL);
 }
 
-void	add_floor_and_ceiling(t_raster_queue *transformed, t_sector *sector)
+void	fill_rasterqueue(t_home *home, t_frame *frame, t_player *plr)
 {
-	Uint32			j;
-	t_surface		*ground;
-	t_surface		*ceiling;
-
-	ground = sector->ground;
-	ceiling = sector->ceiling;
-	j = 0;
-	while (j < sector->nb_of_ceil)
-	{
-		transformed->array[transformed->size] = ceiling->tri;
-		transformed->size += 1;
-		ceiling = ceiling->next;
-		j++;
-	}
-	j = 0;
-	while (j < sector->nb_of_ground)
-	{
-		transformed->array[transformed->size] = ground->tri;
-		transformed->size += 1;
-		ground = ground->next;
-		j++;
-	}
-}
-
-void	add_objects(t_raster_queue *transformed, t_home *home, int idx)
-{
-	Uint32			j;
-
-	j = 0;
-	while (j < home->nbr_of_entities)
-	{
-		if (home->entity_pool[j]->sector_idx == idx)
-		{
-			transformed->array[transformed->size] = translate_triangle(
-				&home->entity_pool[j]->top, home->entity_pool[j]->pos);
-			transformed->size += 1;
-			transformed->array[transformed->size] = translate_triangle(
-				&home->entity_pool[j]->bot, home->entity_pool[j]->pos);
-			transformed->size += 1;
-		}
-		j++;
-	}
-	// j = 0;
-	// while (j < home->nbr_of_projectiles)
-	// {
-	// 	if (home->projectile_pool[j]->sector_idx == idx)
-	// 	{
-	// 		transformed->array[transformed->size] = translate_triangle(&home->projectile_pool[j]->top, home->entity_pool[j]->coordinates);
-	// 		transformed->size += 1;
-	// 		transformed->array[transformed->size] = translate_triangle(&home->projectile_pool[j]->bot, home->entity_pool[j]->coordinates);
-	// 		transformed->size += 1;
-	// 	}
-	// 	j++;
-	// }
+	add_walls(home, frame, plr);
+	add_ground(home, frame, plr);
+	add_ceiling(home, frame, plr);
+	add_objects(home, frame, plr);
 }
 
 void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {
 	unsigned int	j;
 	t_frame			new_frame;
-	t_triangle		temp_array[800];
 
 	j = 0;
-	frame->transformed->size = 0;
+	quick_reset_queue(frame->transformed);
 	frame->left.wall = home->sectors[frame->idx]->walls;
 	continue_from_last_sector(frame->left.wall, &frame->left, frame);
-	while (j < home->sectors[frame->idx]->nb_of_walls * 2
+	while (j < home->sectors[frame->idx]->nb_of_walls
 		&& !check_connection(frame->left.wall, frame))
 	{
-		if (frame->left.wall->top.idx >= 0)
+		if (check_if_open_portal(frame->left.wall))
 		{
-			plr->look_dir = vec3_unit_vector(plr->look_dir);
-			if (vec3_dot_product(frame->left.wall->top.normal, plr->look_dir) < SQR2)
+			if (vec3_dot_product(frame->left.wall->top.normal,
+					plr->look_dir) < SQR2)
 			{
 				setup_frame(frame, &new_frame, frame->left.wall->top.idx);
 				scan_fov(home, &new_frame, plr);
 			}
 		}
-		else
-		{
-			temp_array[j++] = frame->left.wall->top;
-			temp_array[j++] = frame->left.wall->bottom;
-		}
 		frame->left.wall = frame->left.wall->next;
-	}
-	frame->transformed->size = j;
-	j = 0;
-	while ((int)j < frame->transformed->size)
-	{
-		frame->transformed->array[j] = temp_array[j];
 		j++;
 	}
-	add_floor_and_ceiling(frame->transformed, home->sectors[frame->idx]);
-	add_objects(frame->transformed, home, frame->idx);
-	draw_sector(frame, home, plr, frame->idx);
+	fill_rasterqueue(home, frame, plr);
+	if (frame->transformed->size > 0)
+		draw_sector(frame, home, plr, frame->idx);
 }

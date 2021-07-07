@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/07/06 14:39:35 by jnivala          ###   ########.fr        #
+#    Updated: 2021/07/07 13:48:34 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,9 @@ SRCS = \
 	utilities$(SLASH)mem_functions_2.c \
 	utilities$(SLASH)pxl_alphabet.c \
 	utilities$(SLASH)pxl_numbers.c \
-	utilities$(SLASH)raster_queue.c \
+	utilities$(SLASH)raster_queue_a.c \
+	utilities$(SLASH)raster_queue_b.c \
+	utilities$(SLASH)raster_queue_c.c \
 	utilities$(SLASH)setup.c \
 	utilities$(SLASH)str_pxl.c \
 	utilities$(SLASH)system_calls.c \

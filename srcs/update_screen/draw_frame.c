@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/01 10:18:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/07 12:52:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,22 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	free(plr_z);
 }
 
-void	add_skybox(t_raster_queue *transformed, t_skybox *skybox)
+void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
+	 t_skybox *skybox)
 {
-	Uint32 j;
+	Uint32 i;
 
-	j = 0;
-	transformed->size = 0;
-	while (j < 12)
+	i = 0;
+	quick_reset_queue(frame->transformed);
+	while (i < 12)
 	{
-		transformed->array[transformed->size] = apply_world_matrix(0.0f, 0.0f,
-			(t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &skybox->face[j]);
-		transformed->size += 1;
-		j++;
+		if (enqueue_to_raster(frame->transformed, &skybox->face[i]))
+		{
+			draw_sector(frame, home, plr, frame->idx);
+			quick_reset_queue(frame->transformed);
+		}
+		else
+			i++;
 	}
 }
 
@@ -130,7 +134,7 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	frame->left.left_dir = vec3_add(plr->look_dir, vec3(-PLR_DIR, 0.0f, PLR_DIR));
 	frame->right.right_dir = vec3_add(plr->look_dir, vec3(PLR_DIR, 0.0f, PLR_DIR));
 	reset_depth_buffer(frame->depth_buffer);
-	add_skybox(frame->transformed, &home->skybox);
+	add_skybox(frame, home, plr, &home->skybox);
 	draw_sector(frame, home, plr, -1);
 	scan_fov(home, frame, plr);
 	// if (plr->input.minimap)
