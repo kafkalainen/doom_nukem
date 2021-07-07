@@ -37,7 +37,7 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Sutherland-Hodgeman Polygon Clipping.
 - From flat shading to Gouraud shading.
 - Averaging unit vectors and adjacent triangles.
-- Using lighting models.
+- Using lighting models Phong-Blinn vs. Lambertian reflectance.
 
 # TO-DO
 ## Riku & Elias

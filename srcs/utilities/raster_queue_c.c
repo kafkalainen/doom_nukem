@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 13:44:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/07 13:47:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/07 15:10:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	add_objects(t_home *home, t_frame *frame, t_player *plr)
 	t_triangle		top;
 
 	j = 0;
+	flag = 0;
 	while (j < home->nbr_of_entities)
 	{
 		if (home->entity_pool[j]->sector_idx == frame->idx)

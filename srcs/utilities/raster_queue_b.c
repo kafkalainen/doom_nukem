@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 12:13:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/07 13:48:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/07 15:09:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	add_ground(t_home *home, t_frame *frame, t_player *plr)
 	t_surface		*ground;
 
 	j = 0;
+	flag = 0;
 	ground = home->sectors[frame->idx]->ground;
 	while (j < home->sectors[frame->idx]->nb_of_ground)
 	{
@@ -56,6 +57,7 @@ void	add_ceiling(t_home *home, t_frame *frame, t_player *plr)
 	t_surface		*ceiling;
 
 	j = 0;
+	flag = 0;
 	ceiling = home->sectors[frame->idx]->ceiling;
 	while (j < home->sectors[frame->idx]->nb_of_ceil)
 	{
