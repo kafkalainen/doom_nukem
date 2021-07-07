@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:31:48 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/01 16:21:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/07 13:22:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,40 +64,29 @@ int	check_aggro(t_player *plr, t_entity *entity, t_sector *sector)
 
 void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 {
-	float	dot_product;
-	t_xyz	a;
-	t_xyz	b;
-	t_xyz	z_normal;
-	t_xyz	cross;
-	float	cross_dot;
-	float	degrees;
-	float	radians;
+	float	rad;
+	t_xy	a;
+	t_xy	b;
 
-	a = vec3_unit_vector(vec3_dec(plr->pos, entity->pos));
-	b = entity->dir;
-	dot_product = vec3_dot_product(a, b);
-	z_normal = (t_xyz){0, 1, 0, 0};
-	cross = vec3_cross_product(z_normal, a);
-	cross_dot = vec3_dot_product(b, cross);
-	radians = acosf(cross_dot);
-	degrees = radians * (180.0 / M_PI); // using this for illustration purposes, can use radians in final commit
-	printf("degrees: %f\n", degrees);
-	if (degrees < 22.5 && degrees > 0) // right side
-		printf("right side\n");
-	else if (degrees > 22.5 && degrees < 67.5 && dot_product > 0) // front right
-		printf("front right\n");
-	else if (degrees > 22.5 && degrees < 67.5 && dot_product < 0)
-		printf("back right\n");
-	else if (degrees > 67.5 && degrees < 112.5 && dot_product > 0)
-		printf("directly in front\n");
-	else if (degrees > 67.5 && degrees < 112.5 && dot_product < 0)
-		printf("directly behind\n");
-	else if (degrees > 112.5 && degrees < 157.5 && dot_product > 0)
+	a = vec3_to_vec2(vec3_dec(plr->pos, entity->pos));
+	b = vec3_to_vec2(vec3_dec(vec3_add(entity->pos, entity->dir), entity->pos));
+	rad = atan2f(b.y * a.x - b.x * a.y, b.x * a.x + b.y * a.y);
+	if (rad > -0.3926991 && rad < 0.3926991)
+		printf("infront\n");
+	if (rad < -0.3926991 && rad > -1.178097)
 		printf("front left\n");
-	else if (degrees > 112.5 && degrees < 157.5 && dot_product < 0)
-		printf("back left\n");
-	else if (degrees > 157.5 && degrees < 180)
+	if (rad < -1.178097 && rad > -1.9634954)
 		printf("left side\n");
+	if (rad < -1.9634954 && rad > -2.7488936)
+		printf("back left\n");
+	if (rad > 2.7488936 || rad < -2.7488936)
+		printf("behind\n"); 
+	if (rad < 2.7488936 && rad > 1.9634954)
+		printf("back right\n");
+	if (rad < 1.9634954 && rad > 1.178097)
+		printf("right side\n");
+	if (rad < 1.178097 && rad > 0.3926991)
+		printf("front right\n");
 }
 
 void	choose_new_direction(t_entity *entity, t_home *home)
