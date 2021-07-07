@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/07 13:53:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/07 13:56:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,24 @@ int	initialize_rasterization_queues(t_frame *frame)
 	frame->transformed = create_raster_queue(800);
 	if (!frame->transformed)
 		return (1);
-	else
-		printf("Allocation succeeded. Transformed address is: %p\n", frame->transformed);
+	// else
+	// 	printf("Allocation succeeded. Transformed address is: %p\n", frame->transformed);
 	frame->triangles_in_view = create_raster_queue(8000);
 	if (!frame->triangles_in_view)
 		return (1);
-	else
-		printf("Allocation succeeded. Triangles in view address is: %p\n", frame->triangles_in_view);
+	// else
+	// 	printf("Allocation succeeded. Triangles in view address is: %p\n", frame->triangles_in_view);
 	frame->raster_queue = (t_raster_queue**)malloc(sizeof(t_raster_queue*) * (MAX_THREADS + 1));
 	if (!frame->raster_queue)
 		return (1);
-	else
-		printf("Allocation succeeded. Raster queue address is: %p\n", frame->raster_queue);
+	// else
+	// 	printf("Allocation succeeded. Raster queue address is: %p\n", frame->raster_queue);
 	while (i < MAX_THREADS)
 	{
 		frame->raster_queue[i] = create_raster_queue(8000);
 		if (!frame->raster_queue[i])
 			return (1);
-		printf("Allocation succeeded. Individual queue address is: %p\n", frame->raster_queue[i]);
+		// printf("Allocation succeeded. Individual queue address is: %p\n", frame->raster_queue[i]);
 		i++;
 	}
 	if (initialize_viewport(&frame->viewport))
