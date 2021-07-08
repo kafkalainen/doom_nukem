@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/08 13:21:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/08 15:21:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,8 @@ typedef struct	s_steps
 	float		denom_dy_b_side;
 	t_uvz		tex_a_side;
 	t_uvz		tex_b_side;
+	t_uvz		subdiv_tex_a_side;
+	t_uvz		subdiv_tex_b_side;
 	t_xyz		screen_step_a_side;
 	t_xyz		screen_step_b_side;
 	float		lumel_step_a_side;
@@ -166,7 +168,10 @@ typedef struct	s_steps
 	t_deltas	delta_p0p2;
 	float		start_lu;
 	float		end_lu;
-	t_uvz		sub_div_cur_tex;
+	float		offset_step;
+	float		offset;
+	t_uvz		texel_start;
+	t_uvz		texel_inv;
 }				t_steps;
 
 /*
@@ -232,5 +237,6 @@ Uint32		point_inside_a_triangle_wall(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);
 Uint32		point_inside_a_triangle_surface(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);
 t_xyz		vec3_intersection_with_ray_and_plane(t_plane *plane, t_xyz origo, t_xyz dir);
 t_xyz		vec3_calc_vector_average(t_raster_queue	*queue);
-
+t_uvz		texel_mul(t_uvz *texel, float mul);
+t_uvz		texel_lerp(t_uvz *texel_start, float steps, t_uvz *delta);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 12:27:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/08 15:32:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,42 +26,52 @@ static void	calc_lumel(float *lumel, float *start, float offset, float *end)
 	*lumel = (1.0f - offset) * *start + offset * *end;
 }
 
+static Uint32	check_for_valid_range(t_steps *step)
+{
+	if (step->start_x < 0 || step->cur_y > SCREEN_HEIGHT - 1
+		|| step->cur_y < 0 || step->end_x > SCREEN_WIDTH - 1
+		|| step->start_x >= step->end_x)
+		return (FALSE);
+	else
+		return (TRUE);
+}
 
-/*
-**	variable cur_x to be removed
-*/
-int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex,
-	t_steps *step)
+
+void	draw_segment(Uint32 *buffer, float *depth_buffer, t_texel *tex, t_steps *step)
 {
 	t_uvz	texel;
 	float	lumel;
-	float	offset;
-	float	offset_step;
 
-	offset = 0.0f;
-	texel = step->start_uv;
-	lumel = step->start_lu;
-	offset_step = 1.0f / ((float)(step->end_x - step->start_x));
-	if (step->start_x < 0 || step->cur_y > SCREEN_HEIGHT - 1
-		|| step->cur_y < 0 || step->end_x > SCREEN_WIDTH - 1)
-		return (FALSE);
-	while (step->start_x < step->end_x)
+	calc_texel(&texel, &step->start_uv, step->offset, &step->end_uv);
+	calc_lumel(&lumel, &step->start_lu, step->offset, &step->end_lu);
+	if (texel.w > depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH])
 	{
-		calc_texel(&texel, &step->start_uv, offset, &step->end_uv);
-		calc_lumel(&lumel, &step->start_lu, offset, &step->end_lu);
-		if (texel.w > depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH])
-		{
-			depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH] = texel.w;
-			texel = texel_inv_z(texel);
-			put_pixel(buffer, step->start_x, step->cur_y,
-				colour_scale(
-					get_texel(
+		depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH] = texel.w;
+		texel = texel_inv_z(texel);
+		put_pixel(buffer, step->start_x, step->cur_y,
+			colour_scale(
+				get_texel(
 					&(t_uv){texel.u * tex->width - 1, texel.v * tex->height - 1},
 					&(t_uv){tex->width, tex->height}, tex->texels)
 					, lumel));
-		}
-		offset += offset_step;
-		step->start_x++;
+	}
+	step->offset += step->offset_step;
+	step->start_x++;
+}
+
+int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex,
+	t_steps *step)
+{
+	int		pixels;
+
+	step->offset = 0.0f;
+	step->offset_step = 1.0f / ((float)(step->end_x - step->start_x));
+	if (!check_for_valid_range(step))
+		return (FALSE);
+	pixels = step->end_x - step->start_x;
+	while (pixels--)
+	{
+		draw_segment(buffer, depth_buffer, tex, step);
 	}
 	return (TRUE);
 }

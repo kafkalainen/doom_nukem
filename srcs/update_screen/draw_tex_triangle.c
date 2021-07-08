@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 12:27:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/08 15:28:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static void	initialize_steps(t_steps *steps, float denom_a, float denom_b)
 	steps->tex_b_side.v = steps->delta_p0p2.v * denom_b;
 	steps->tex_b_side.w = steps->delta_p0p2.w * denom_b;
 	steps->lumel_step_b_side = steps->delta_p0p2.i * denom_b;
+	steps->subdiv_tex_a_side = texel_mul(&steps->tex_a_side, SUBDIVSIZE);
+	steps->subdiv_tex_b_side = texel_mul(&steps->tex_b_side, SUBDIVSIZE);
 }
 
 /*
@@ -68,25 +70,17 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 	temp[0] = (float)(cur_y - (int)tri->p[0].y);
 	steps->start_x = tri->p[0].x + temp[0] * steps->screen_step_a_side.x;
 	steps->end_x = tri->p[0].x + temp[0] * steps->screen_step_b_side.x;
-	steps->start_uv.u = tri->uv[0].u + temp[0] * steps->tex_a_side.u;
-	steps->start_uv.v = tri->uv[0].v + temp[0] * steps->tex_a_side.v;
-	steps->start_uv.w = tri->uv[0].w + temp[0] * steps->tex_a_side.w;
+	steps->start_uv = texel_lerp(&tri->uv[0], temp[0], &steps->tex_a_side);
 	steps->start_lu = tri->lu[0] + temp[0] * steps->lumel_step_a_side;
-	steps->end_uv.u = tri->uv[0].u + temp[0] * steps->tex_b_side.u;
-	steps->end_uv.v = tri->uv[0].v + temp[0] * steps->tex_b_side.v;
-	steps->end_uv.w = tri->uv[0].w + temp[0] * steps->tex_b_side.w;
+	steps->end_uv = texel_lerp(&tri->uv[0], temp[0], &steps->tex_b_side);
 	steps->end_lu = tri->lu[0] + temp[0] * steps->lumel_step_b_side;
 	if (steps->current_triangle != 'a')
 	{
 		temp[1] = (float)(cur_y - (int)tri->p[1].y);
 		steps->start_x = tri->p[1].x + temp[1]
 			* steps->screen_step_a_side.x;
-		steps->start_uv.u = tri->uv[1].u + temp[1]
-			* steps->tex_a_side.u;
-		steps->start_uv.v = tri->uv[1].v + temp[1]
-			* steps->tex_a_side.v;
-		steps->start_uv.w = tri->uv[1].w + temp[1]
-			* steps->tex_a_side.w;
+		steps->start_uv = texel_lerp(&tri->uv[1],
+			temp[1], &steps->tex_a_side);
 		steps->start_lu = tri->lu[1] + temp[1]
 			* steps->lumel_step_a_side;
 	}
