@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/06 15:47:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/08 12:55:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,41 +32,40 @@ static void	lock_the_door(t_wall *dimensions, t_wall *door)
 **	v = h / t
 **	h = vt
 */
-static void	translate_door(t_wall *wall, char dir, float speed, float time)
+static void	translate_door(t_wall *door, char dir, float speed, float time)
 {
 	t_xyz	translation_top;
 	t_xyz	translation_bottom;
+	float	denom;
 
+	denom = time * 0.4f;
 	if (dir == 'o')
 	{
 		translation_top = (t_xyz){0.0f, speed * time, 0.0f, 1.0f};
 		translation_bottom = (t_xyz){0.0f, speed * time, 0.0f, 1.0f};
-		wall->top.uv[0].v += 0.2f * time;
-		wall->top.uv[1].v += 0.2f * time;
-		wall->top.uv[2].v += 0.2f * time;
-		wall->bottom.uv[0].v += 0.2f * time;
-		wall->bottom.uv[1].v += 0.2f * time;
-		wall->bottom.uv[2].v += 0.2f * time;
+		door->top.uv[1].v += denom;
+		door->top.uv[2].v += denom;
+		door->bottom.uv[1].v += denom;
 	}
 	else if (dir == 'c')
 	{
 		translation_top = (t_xyz){0.0f, -speed * time, 0.0f, 1.0f};
 		translation_bottom = (t_xyz){0.0f, -speed * time, 0.0f, 1.0f};
-		wall->top.uv[0].v -= 0.2f * time;
-		wall->top.uv[1].v -= 0.2f * time;
-		wall->top.uv[2].v -= 0.2f * time;
-		wall->bottom.uv[0].v -= 0.2f * time;
-		wall->bottom.uv[1].v -= 0.2f * time;
-		wall->bottom.uv[2].v -= 0.2f * time;
+		door->top.uv[1].v -= denom;
+		door->top.uv[2].v -= denom;
+		door->bottom.uv[1].v -= denom;
 	}
-	wall->top.p[0] = translate_point(&wall->top.p[0], translation_top);
-	wall->bottom.p[0] = translate_point(&wall->bottom.p[0], translation_bottom);
-	wall->bottom.p[2] = translate_point(&wall->bottom.p[2], translation_bottom);
+	door->top.p[0] = translate_point(&door->top.p[0], translation_top);
+	door->bottom.p[0] = translate_point(&door->bottom.p[0], translation_bottom);
+	door->bottom.p[2] = translate_point(&door->bottom.p[2], translation_bottom);
 }
 
 static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
 			Uint32 delta_time)
 {
+	float	current_height;
+
+	current_height = wall->next->top.p[2].y - wall->next->top.p[0].y;
 	if (wall->open_until < current_time)
 	{
 		lock_the_door(wall, wall->next);
@@ -75,15 +74,14 @@ static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
 	}
 	else
 	{
+		if (wall->next->height - current_height > 1.5f)
+			wall->is_closed = 0;
 		if (wall->open_until - 2500 > current_time)
 			translate_door(wall->next, 'o', wall->next->height * 0.4f,
 				delta_time * 0.001f);
 		else
-		{
-			wall->is_closed = 0;
 			translate_door(wall->next, 'c', wall->next->height * 0.4f,
 				delta_time * 0.001f);
-		}
 	}
 	return (0);
 }

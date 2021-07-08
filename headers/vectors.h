@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/29 12:26:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/08 13:21:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ typedef struct	s_steps
 	t_deltas	delta_p0p2;
 	float		start_lu;
 	float		end_lu;
+	t_uvz		sub_div_cur_tex;
 }				t_steps;
 
 /*
