@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/08 15:21:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/09 11:41:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,6 @@ typedef struct	s_steps
 	float		denom_dy_b_side;
 	t_uvz		tex_a_side;
 	t_uvz		tex_b_side;
-	t_uvz		subdiv_tex_a_side;
-	t_uvz		subdiv_tex_b_side;
 	t_xyz		screen_step_a_side;
 	t_xyz		screen_step_b_side;
 	float		lumel_step_a_side;
@@ -170,8 +168,11 @@ typedef struct	s_steps
 	float		end_lu;
 	float		offset_step;
 	float		offset;
-	t_uvz		texel_start;
 	t_uvz		texel_inv;
+	t_uvz		texel_start;
+	t_uvz		texel_end;
+	t_uvz		delta;
+	int			sub_pixels;
 }				t_steps;
 
 /*
@@ -239,4 +240,10 @@ t_xyz		vec3_intersection_with_ray_and_plane(t_plane *plane, t_xyz origo, t_xyz d
 t_xyz		vec3_calc_vector_average(t_raster_queue	*queue);
 t_uvz		texel_mul(t_uvz *texel, float mul);
 t_uvz		texel_lerp(t_uvz *texel_start, float steps, t_uvz *delta);
+t_uvz		texel_add(t_uvz *a, t_uvz *b);
+void		calc_texel(t_uvz *texel, t_uvz *start, float offset,
+			t_uvz *end);
+void		calc_lumel(float *lumel, float *start, float offset,
+			float *end);
+
 #endif

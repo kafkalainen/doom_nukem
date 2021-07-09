@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 19:43:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/08 13:39:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/08 15:48:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ t_uvz	texel_mul(t_uvz *texel, float mul)
 	new_texel.u = texel->u * mul;
 	new_texel.v = texel->v * mul;
 	new_texel.w = texel->w * mul;
+	return (new_texel);
+}
+
+t_uvz	texel_add(t_uvz *a, t_uvz *b)
+{
+	t_uvz	new_texel;
+
+	new_texel.u = a->u + b->u;
+	new_texel.v = a->v + b->v;
+	new_texel.w = a->w + b->w;
 	return (new_texel);
 }
 

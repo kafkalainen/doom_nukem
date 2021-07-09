@@ -6,25 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/08 15:32:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/09 11:47:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-static void	calc_texel(t_uvz *texel, t_uvz *start, float offset,
-					t_uvz *end)
-{
-	texel->u = (1.0f - offset) * start->u + offset * end->u;
-	texel->v = (1.0f - offset) * start->v + offset * end->v;
-	texel->w = (1.0f - offset) * start->w + offset * end->w;
-}
-
-
-static void	calc_lumel(float *lumel, float *start, float offset, float *end)
-{
-	*lumel = (1.0f - offset) * *start + offset * *end;
-}
 
 static Uint32	check_for_valid_range(t_steps *step)
 {
@@ -36,27 +22,67 @@ static Uint32	check_for_valid_range(t_steps *step)
 		return (TRUE);
 }
 
-
-void	draw_segment(Uint32 *buffer, float *depth_buffer, t_texel *tex, t_steps *step)
+void	draw_segment(Uint32 *buffer, float *depth_buffer, t_texel *tex,
+	t_steps *step)
 {
-	t_uvz	texel;
 	float	lumel;
 
-	calc_texel(&texel, &step->start_uv, step->offset, &step->end_uv);
-	calc_lumel(&lumel, &step->start_lu, step->offset, &step->end_lu);
-	if (texel.w > depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH])
+	while (step->sub_pixels--)
 	{
-		depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH] = texel.w;
-		texel = texel_inv_z(texel);
-		put_pixel(buffer, step->start_x, step->cur_y,
-			colour_scale(
-				get_texel(
-					&(t_uv){texel.u * tex->width - 1, texel.v * tex->height - 1},
-					&(t_uv){tex->width, tex->height}, tex->texels)
-					, lumel));
+		if (step->texel_inv.w > depth_buffer[step->start_x + step->cur_y
+				 * SCREEN_WIDTH])
+		{
+			calc_lumel(&lumel, &step->start_lu, step->offset, &step->end_lu);
+			depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH]
+				= step->texel_inv.w;
+			put_pixel(buffer, step->start_x, step->cur_y,
+				colour_scale(
+					get_texel(
+						&(t_uv){step->texel_start.u * tex->width - 1,
+						step->texel_start.v * tex->height - 1},
+						&(t_uv){tex->width, tex->height}, tex->texels),
+					lumel));
+		}
+		step->texel_start = texel_add(&step->texel_start, &step->delta);
+		step->start_x++;
 	}
+}
+
+static void	draw_remainder(Uint32 *buffer, float *depth_buffer, t_texel *tex,
+	t_steps *step)
+{
+	float	denom_sub;
+	float	w;
+
+	denom_sub = 1.0f / step->sub_pixels;
+	w = step->texel_inv.w;
+	step->offset_step = step->offset_step * step->sub_pixels * DENOMSUBDIV;
 	step->offset += step->offset_step;
-	step->start_x++;
+	calc_texel(&step->texel_inv, &step->start_uv,
+		step->offset, &step->end_uv);
+	step->texel_end = texel_inv_z(step->texel_inv);
+	step->delta.u = (step->texel_end.u - step->texel_start.u) * denom_sub;
+	step->delta.v = (step->texel_end.v - step->texel_start.v) * denom_sub;
+	step->texel_inv.w = (w + step->texel_inv.w) * 0.5f;
+	draw_segment(buffer, depth_buffer, tex, step);
+}
+
+static void	draw_subdiv(Uint32 *buffer, float *depth_buffer, t_texel *tex,
+	t_steps *step)
+{
+	float	w;
+
+	step->offset += step->offset_step;
+	w = step->texel_inv.w;
+	calc_texel(&step->texel_inv, &step->start_uv,
+		step->offset, &step->end_uv);
+	step->texel_end = texel_inv_z(step->texel_inv);
+	step->delta.u = (step->texel_end.u - step->texel_start.u) * DENOMSUBDIV;
+	step->delta.v = (step->texel_end.v - step->texel_start.v) * DENOMSUBDIV;
+	step->texel_inv.w = (w + step->texel_inv.w) * 0.5f;
+	step->sub_pixels = SUBDIV;
+	draw_segment(buffer, depth_buffer, tex, step);
+	step->texel_start = step->texel_end;
 }
 
 int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex,
@@ -65,13 +91,19 @@ int	draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex,
 	int		pixels;
 
 	step->offset = 0.0f;
-	step->offset_step = 1.0f / ((float)(step->end_x - step->start_x));
+	step->offset_step = 1.0f / ((float)(step->end_x - step->start_x)) * SUBDIV;
 	if (!check_for_valid_range(step))
 		return (FALSE);
 	pixels = step->end_x - step->start_x;
-	while (pixels--)
+	calc_texel(&step->texel_inv, &step->start_uv, step->offset, &step->end_uv);
+	step->texel_start = texel_inv_z(step->texel_inv);
+	while (pixels >= SUBDIV)
 	{
-		draw_segment(buffer, depth_buffer, tex, step);
+		draw_subdiv(buffer, depth_buffer, tex, step);
+		pixels -= SUBDIV;
 	}
+	step->sub_pixels = pixels;
+	if (pixels > 0)
+		draw_remainder(buffer, depth_buffer, tex, step);
 	return (TRUE);
 }
