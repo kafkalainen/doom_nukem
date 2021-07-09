@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/06 15:12:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/09 11:44:58 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	process_inputs_game_loop(t_player *plr, int *game_state, SDL_Event *e)
 void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 {
 	Uint32	i;
-	float	distance_squared;
+	// float	distance_squared;
 	(void)delta_time;
 	// i = 0;
 	// while (i < home->nbr_of_projectiles)
@@ -68,10 +68,10 @@ void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 				// 	else
 				// 		printf("I hit you!\n");
 				// }
-				distance_squared = ((plr->pos.x - home->entity_pool[i]->pos.x) * (plr->pos.x - home->entity_pool[i]->pos.x) +
-					(plr->pos.y - home->entity_pool[i]->pos.y) * (plr->pos.y - home->entity_pool[i]->pos.y) +
-					(plr->pos.z - home->entity_pool[i]->pos.z) * (plr->pos.z - home->entity_pool[i]->pos.z));
-				printf("distance to player: %f\n", distance_squared);
+				// distance_squared = ((plr->pos.x - home->entity_pool[i]->pos.x) * (plr->pos.x - home->entity_pool[i]->pos.x) +
+				// 	(plr->pos.y - home->entity_pool[i]->pos.y) * (plr->pos.y - home->entity_pool[i]->pos.y) +
+				// 	(plr->pos.z - home->entity_pool[i]->pos.z) * (plr->pos.z - home->entity_pool[i]->pos.z));
+				// printf("distance to player: %f\n", distance_squared);
 				// if (home->entity_pool[i]->is_aggroed)
 				// {
 				// 	if (home->entity_pool[i]->state == ENTITY_MOVE && home->entity_pool[i]->sprite_state > ENTITY_SPRITE_MOVE_END) // we are done with moving
@@ -102,7 +102,7 @@ void	update_world(t_player *plr, t_home *home)
 		return ;
 	plr->time = current_time;
 	update_player(plr, home, delta_time);
-	update_objects(home, plr, delta_time);
+	// update_objects(home, plr, delta_time);
 }
 
 void	launch_game_loop(t_home *home, t_player *plr,

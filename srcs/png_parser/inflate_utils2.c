@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:13:42 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/26 12:06:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/09 13:52:44 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	fill_out(t_png *png, t_huffman_helper *s,
 	s->distance += ft_read_bits(&h->bit_p, in, s->num_extra_bits_dst);
 	s->start = h->pos;
 	s->backward = s->start - s->distance;
-	if (h->pos + s->length >= png->inflated_size)
+	if (h->pos + s->length > png->inflated_size)
 		error_output("bail\n");
 	s->forward = 0;
 	while (s->forward < s->length)

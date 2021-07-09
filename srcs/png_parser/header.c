@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:51:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/06 15:59:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/09 13:43:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	get_header_elements(t_png *png)
 	if (png->channels)
 	{
 		png->bpp = png->depth * png->channels;
-		png->scanline = png->bpp * png->width + 1;
+		png->scanline = png->channels * png->width + 1;
 	}
 }
 
