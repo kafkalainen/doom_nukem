@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/08 15:28:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/08 16:01:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static void	initialize_steps(t_steps *steps, float denom_a, float denom_b)
 	steps->tex_b_side.v = steps->delta_p0p2.v * denom_b;
 	steps->tex_b_side.w = steps->delta_p0p2.w * denom_b;
 	steps->lumel_step_b_side = steps->delta_p0p2.i * denom_b;
-	steps->subdiv_tex_a_side = texel_mul(&steps->tex_a_side, SUBDIVSIZE);
-	steps->subdiv_tex_b_side = texel_mul(&steps->tex_b_side, SUBDIVSIZE);
 }
 
 /*
