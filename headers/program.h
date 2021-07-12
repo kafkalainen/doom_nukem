@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/27 17:36:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/09 14:21:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_home
 	Uint32			nbr_of_entities;
 	Uint32			nbr_of_projectiles;
 	int				game_state;
+	char			**story;
 }					t_home;
 
 typedef struct	s_arg

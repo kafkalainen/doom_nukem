@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/06 15:12:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/12 11:09:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_player(t_player *plr)
 	plr->dir.x = 0.0f;
 	plr->dir.y = 1.0f;
 	plr->time = 0;
+	plr->message_time = 0;
 	plr->cur_sector = 0;
 	plr->pos = (t_xyz){0.8f, 3.5f, 2.87f, 1.0f};
 	plr->look_dir = (t_xyz){0.0f, 0.0f, 1.0f, 1.0f};

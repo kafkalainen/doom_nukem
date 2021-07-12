@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/09 11:08:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/12 11:07:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # define DOOR_INDEX 3000
 # define SUBDIV 16.0f
 # define DENOMSUBDIV 0.0625f
+# define STORY_STRINGS 30
 
 /*
 ** Compass directions

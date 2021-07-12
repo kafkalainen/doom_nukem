@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/09 11:37:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/12 11:46:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
+	mod.len = 100;
 	compass = compass_direction(&plr->dir);
 	sector = ft_itoa(plr->cur_sector);
 	fps = ft_itoa(nb_fps);
@@ -88,10 +89,10 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	ft_str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){get_color(green), 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_x, (t_plx_modifier){get_color(green), 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_y, (t_plx_modifier){get_color(green), 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_z, (t_plx_modifier){get_color(green), 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_x, (t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_y, (t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_z, (t_plx_modifier){get_color(green), 2, 12});
 	ft_str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
@@ -144,5 +145,6 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	// }
 	if (plr->input.info)
 		draw_info(frame, plr, (int)home->t.fps);
+	draw_plot_state(home->story, plr->plot_state, frame->buffer, plr);
 	return ;
 }
