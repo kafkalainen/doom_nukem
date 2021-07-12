@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/12 11:30:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/12 13:42:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,19 @@ Uint32	evolve_story(t_player *plr)
 void	draw_plot_state(char **array, Uint32 state, Uint32 *buffer, t_player *plr)
 {
 	t_plx_modifier	mod;
+	float			percentage;
 
-	if (plr->message_time > plr->time)
+	mod.colour = get_color(white);
+	mod.size = TEXT_SIZE;
+	if (plr->message_time > plr->time + 3000)
 	{
-		mod.colour = get_color(white);
-		mod.size = TEXT_SIZE;
-		mod.len = ft_strlen(array[state]);
+		percentage = 1.0f - ((plr->message_time - plr->time) * 0.00007f);
+		mod.len = (size_t)(ft_strlen(array[state]) * percentage);
+		ft_str_pxl(buffer, (t_xy){100, SCREEN_HEIGHT - 30}, array[state], mod);
+	}
+	else if (plr->message_time > plr->time)
+	{
+		mod.len = (size_t)(ft_strlen(array[state]));
 		ft_str_pxl(buffer, (t_xy){100, SCREEN_HEIGHT - 30}, array[state], mod);
 	}
 }
