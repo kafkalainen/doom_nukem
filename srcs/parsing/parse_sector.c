@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/02 11:46:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/13 10:14:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,21 @@ int	add_points(t_sector *sector,
 	if (sector == NULL || parse_coordinates(&data_left, &pos, &buf, size))
 		return (1);
 	data_first = data_left;
-	while (i < sector->nb_of_walls - 1)
+	while (i < sector->nb_of_walls)
 	{
-		if (parse_coordinates(&data_right, &pos, &buf, size))
+		if (i + 1 != sector->nb_of_walls
+			&& parse_coordinates(&data_right, &pos, &buf, size))
 			return (free_points(&sector->walls, i));
-		wall = new_point(&data_left, &data_right);
+		if (i + 1 != sector->nb_of_walls)
+			wall = new_point(&data_left, &data_right);
+		else
+			wall = new_point(&data_left, &data_first);
 		if (!wall)
 			return (free_points(&sector->walls, i));
 		add_point(&sector->walls, wall);
 		data_left = data_right;
 		i++;
 	}
-	wall = new_point(&data_left, &data_first);
-	if (!wall)
-		return (free_points(&sector->walls, i));
-	add_point(&sector->walls, wall);
 	close_linkedlist(&sector->walls);
 	return (0);
 }
@@ -120,14 +120,14 @@ t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos,
 	new_sector = (t_sector *)malloc(sizeof(t_sector));
 	if (!new_sector)
 		return (NULL);
-	new_sector->walls = NULL;
-	new_sector->ceiling = NULL;
-	new_sector->ground = NULL;
+	initialize_sector_pointers(new_sector);
 	if (parse_vertex_data(new_sector, buf, pos, size))
 		return (free_sector(&new_sector));
 	if (add_points(new_sector, buf, &pos, size))
 		return (free_sector(&new_sector));
 	if (parse_light_data(new_sector, buf, pos, size))
+		return (free_sector(&new_sector));
+	if (parse_story_data(new_sector, buf, pos, size))
 		return (free_sector(&new_sector));
 	return (new_sector);
 }

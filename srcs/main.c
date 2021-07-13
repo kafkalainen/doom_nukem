@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/06 14:31:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/13 12:37:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(void)
 			else
 				home.game_state = MAIN_MENU;
 		}
-		if (home.game_state == GAME_LOOP)
+		if (home.game_state == GAME_LOOP) // || home.game_state == GAME_CONTINUE)
 		{
 			setup_game_loop(&menu.chosen_map, &home, &plr, &menu.option);
 			launch_game_loop(&home, &plr, &frame, &e);

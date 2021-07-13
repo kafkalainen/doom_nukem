@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/12 11:44:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/13 12:52:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,6 @@ static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 
 void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 {
-	int	cur_sector;
-
-	cur_sector = plr->cur_sector;
 	if (plr->input.rot_left == 1)
 		plr->yaw -= 0.02f;
 	if (plr->input.rot_right == 1)
@@ -78,6 +75,5 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 	if (!plr->input.jetpack)
 		movement(plr, home, delta_time);
 	player_use(plr, home, delta_time);
-	if (cur_sector != plr->cur_sector)
-		evolve_story(plr);
+	evolve_story(plr, home->sectors[plr->cur_sector], home->sectors[plr->msg_sector]);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/12 12:42:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/13 12:48:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 enum e_plot_states
 {
+	no_plot,
+	sector_plot,
 	beginning1,
 	beginning2,
 	beginning3,
@@ -83,6 +85,7 @@ typedef struct s_player
 	float			height;
 	float			acceleration;
 	int				cur_sector;
+	int				msg_sector;
 	int				plot_state;
 	int				enemy_sighted;
 	Uint32			time;
@@ -121,8 +124,7 @@ int		player_use(t_player *plr, t_home *home, Uint32 delta_time);
 void	update_player(t_player *plr, t_home *home, Uint32 delta_time);
 char	**init_story(void);
 void	free_story(char ***array);
-Uint32	evolve_story(t_player *plr);
-void	draw_plot_state(char **array, Uint32 state, Uint32 *buffer,
-		t_player *plr);
+Uint32	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector);
+void	draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr);
 void	init_cutscene(char **array);
 #endif

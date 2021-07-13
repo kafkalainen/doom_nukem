@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/02 12:17:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/13 12:43:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	get_player_position(unsigned int *pos, unsigned char *buf,
 	if (*pos > (unsigned int)size)
 		return (1);
 	plr->cur_sector = ft_atoi((const char *)buf + *pos);
+	plr->msg_sector = plr->cur_sector;
 	return (0);
 }
 
@@ -86,6 +87,8 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 
 /*
 **	Add safeguards for mallocing.
+**	ft_strdel for *path, if new mapname is set in the mapfile,
+**	then ft_strdup the new name to *path.
 */
 int	load_map_file(t_player *plr, t_home *home, char *path)
 {

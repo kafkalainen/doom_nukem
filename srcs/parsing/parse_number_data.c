@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 13:30:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/13 10:35:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,34 @@ int	parse_coordinates(t_point_data *data,
 	***pos += get_next_breaker(*buf + ***pos);
 	if (***pos > (unsigned int)size)
 		return (1);
+	return (0);
+}
+
+int	parse_story_data(t_sector *new_sector, unsigned char *buf,
+	unsigned int *pos, ssize_t size)
+{
+	unsigned int	i;
+	size_t			len;
+
+	i = 0;
+	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > (unsigned int)size)
+		return (1);
+	new_sector->nb_of_msgs = ft_atoi((const char *)buf + *pos);
+	if (new_sector->nb_of_msgs)
+		new_sector->story = (char **)malloc(sizeof(char *)
+			* (new_sector->nb_of_msgs + 1));
+	else
+		new_sector->story = NULL;
+	if (new_sector->nb_of_msgs && !new_sector->story)
+		return (1);
+	while (i < new_sector->nb_of_msgs)
+	{
+		*pos += get_next_breaker(buf + *pos) + 1;
+		len = get_next_breaker(buf + *pos);
+		new_sector->story[i] = ft_strndup((const char *)buf + *pos, len);
+		i++;
+	}
+	new_sector->cur_msg = 0;
 	return (0);
 }

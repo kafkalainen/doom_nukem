@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/12 11:45:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/13 11:08:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_game_assets(t_home *home)
 		free(home->t.frame_times);
 	free_sectors(home);
 	free_all_textures(home->textures, &home->nbr_of_textures);
-	free_story(&home->story);
+	// free_story(&home->story);
 }
 
 void	get_menu_range_key_down(t_menu *menu)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/02 11:31:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/12 14:31:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void			initialize_triangles(t_wall *wall, t_point_data *left,
 					t_point_data *right);
 void			initialize_top_texels(t_wall *wall);
 void			initialize_bottom_texels(t_wall *wall);
+void			initialize_sector_pointers(t_sector *new_sector);
 t_sector		*get_sector_data(unsigned char *buf, unsigned int *pos,
 					ssize_t size);
 int				map_texel(t_surface *surface, t_sector *sector);
@@ -60,6 +61,8 @@ int				parse_coordinates(t_point_data *data, unsigned int ***pos,
 int				parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_light_data(t_sector *new_sector, unsigned char *buf,
+					unsigned int *pos, ssize_t size);
+int				parse_story_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_sector_data(unsigned char *buf, t_player *plr,
 				t_home *home, ssize_t size);
