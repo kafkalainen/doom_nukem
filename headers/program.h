@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/19 18:26:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:08:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,10 @@ typedef struct s_home
 	Uint32			linked_map;
 	Uint32			nbr_of_entities;
 	Uint32			nbr_of_projectiles;
-	Uint32			end_sector;
 	unsigned int	nbr_of_sectors;
 	int				nbr_of_textures;
+	int				end_sector;
 	int				game_state;
-
 }					t_home;
 
 typedef struct	s_arg

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/19 17:24:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:15:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ Uint32	close_doors(t_sector **sectors, Uint32 nb_of_sectors,
 		Uint32 current_time, Uint32 delta_time);
 void	create_target_vector(t_player *plr);
 void	crouch(t_player *plr);
+void	end_level(t_home *home, t_player *plr);
 void	gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
 void	init_player(t_player *plr);
 int		jetpack(t_player *plr, t_home *home, Uint32 t);

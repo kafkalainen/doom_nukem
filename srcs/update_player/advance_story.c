@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/19 17:24:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:20:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,16 @@ void	draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr)
 		mod.len = (size_t)(ft_strlen(home->story[plr->plot_state]));
 		ft_str_pxl(buffer, (t_xy){100, SCREEN_HEIGHT - 30},
 			home->story[plr->plot_state], mod);
+	}
+}
+
+void	end_level(t_home *home, t_player *plr)
+{
+	if (plr->cur_sector == home->end_sector)
+	{
+		if (home->linked_map)
+			home->game_state = GAME_CONTINUE;
+		else
+			home->game_state = MAIN_MENU;
 	}
 }

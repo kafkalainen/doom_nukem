@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/19 18:46:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:10:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 		error_output("Memory allocation failed!\n");
 	*menu_option = 0;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
+	home->game_state = GAME_LOOP;
 }
 
 void	setup_editor(t_home *home)

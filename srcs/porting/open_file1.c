@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/19 18:31:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:26:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 **	Add safeguards for mallocing.
 **	ft_strdel for *path, if new mapname is set in the mapfile,
 **	then ft_strdup the new name to *path.
+**	ft_putstr("OK\n");
+**	exit(0);
 */
 int	load_map_file(t_player *plr, t_home *home)
 {
@@ -138,8 +140,6 @@ int	load_map_file(t_player *plr, t_home *home)
 		validate_sectors_data(home, plr);
 		calc_map_properties(home, plr);
 		ft_putendl(home->chosen_map);
-		// ft_putstr("OK\n");
-		// exit(0);
 	}
 	return (0);
 }
