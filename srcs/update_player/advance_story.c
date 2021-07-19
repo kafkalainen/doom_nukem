@@ -6,17 +6,17 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/13 12:50:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 17:24:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	free_story(char ***array)
+void	free_story(char ***array, Uint32 nb_of_strings)
 {
 	Uint32 i;
 
-	i = STORY_STRINGS;
+	i = nb_of_strings;
 	while (i--)
 	{
 		free(*(*array + i));

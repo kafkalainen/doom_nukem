@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:29:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/12 14:05:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 17:19:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ void	initialize_sector_pointers(t_sector *new_sector)
 	new_sector->walls = NULL;
 	new_sector->ceiling = NULL;
 	new_sector->ground = NULL;
+	new_sector->story = NULL;
 }
