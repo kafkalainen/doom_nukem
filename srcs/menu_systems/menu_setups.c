@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/19 18:06:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 18:46:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,6 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 	// 	Mix_PlayMusic(plr->audio.music, -1);
 	if (setup_fps(&home->t))
 		error_output("Memory allocation failed!\n");
-	// ft_strdel(&home->chosen_map);
 	*menu_option = 0;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }

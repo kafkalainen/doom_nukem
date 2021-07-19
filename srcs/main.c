@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/19 17:55:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 18:49:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 **	 	ft_putendl_fd("File creation failed\n", 2);
 */
 
-void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *menu_buffer)
+void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *menu_buffer,
+		char **chosen_map)
 {
 	free_queues(frame);
 	free(frame->buffer);
 	free(menu_buffer);
+	ft_strdel(chosen_map);
 	cleanup_audio_source(audio);
 	ft_putendl("User closed the window");
 	SDL_Quit();
@@ -58,6 +60,6 @@ int	main(void)
 		render_buffer(menu.menu_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
-	free_main_assets(&frame, &plr.audio, menu.menu_buffer);
+	free_main_assets(&frame, &plr.audio, menu.menu_buffer, &home.chosen_map);
 	return (EXIT_SUCCESS);
 }
