@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/12 11:07:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 17:30:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define FALSE 0
 # define AND &&
 # define OR ||
+# define GAME_CONTINUE 5
 # define EDITOR 4
 # define GAME_LOOP 3
 # define MAP_MENU 2

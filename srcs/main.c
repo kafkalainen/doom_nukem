@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/13 12:37:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 17:55:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int	main(void)
 		{
 			load_map_names(&menu);
 			if (menu.nbr_of_maps > 0)
-				launch_load_menu_loop(&menu, &home.win, &e, &home.game_state);
+				launch_load_menu_loop(&menu, &home, &e);
 			else
 				home.game_state = MAIN_MENU;
 		}
-		if (home.game_state == GAME_LOOP) // || home.game_state == GAME_CONTINUE)
+		if (home.game_state == GAME_LOOP || home.game_state == GAME_CONTINUE)
 		{
-			setup_game_loop(&menu.chosen_map, &home, &plr, &menu.option);
+			setup_game_loop(&home, &plr, &menu.option);
 			launch_game_loop(&home, &plr, &frame, &e);
 		}
 		if (home.game_state == EDITOR)

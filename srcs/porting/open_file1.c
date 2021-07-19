@@ -6,21 +6,43 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/13 12:43:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 18:31:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
 static int	get_map_header_data(unsigned int *pos, unsigned char *buf,
-	unsigned int *nbr_of_sectors, ssize_t size)
+	t_home *home, ssize_t size)
 {
+	size_t	len;
+	char	*temp;
+
 	*pos += get_next_breaker(buf + *pos) + 1;
 	if (*pos > (unsigned int)size)
 		return (1);
-	*nbr_of_sectors = ft_atoi((const char *)buf + *pos);
-	if (*nbr_of_sectors <= 0)
+	home->nbr_of_sectors = ft_atoi((const char *)buf + *pos);
+	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > (unsigned int)size)
 		return (1);
+	home->end_sector = ft_atoi((const char *)buf + *pos);
+	if (home->nbr_of_sectors <= 0)
+		return (1);
+	*pos += get_next_breaker(buf + *pos) + 1;
+	if (*pos > (unsigned int)size)
+		return (1);
+	home->linked_map = ft_atoi((const char *)buf + *pos);
+	if (home->linked_map)
+	{
+		*pos += get_next_breaker(buf + *pos) + 1;
+		if (*pos > (unsigned int)size)
+			return (1);
+		len = get_next_breaker(buf + *pos);
+		ft_strdel(&home->chosen_map);
+		temp = ft_strndup((const char *)buf + *pos, len - 1);
+		home->chosen_map = ft_strjoin("map_files/", temp);
+		ft_strdel(&temp);
+	}
 	return (0);
 }
 
@@ -64,7 +86,7 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 	buf = (unsigned char *)ft_strstr((const char *)buf, "doom_nukem_sectors");
 	if (!buf)
 		return (1);
-	if (get_map_header_data(&pos, buf, &home->nbr_of_sectors, size)
+	if (get_map_header_data(&pos, buf, home, size)
 		|| get_player_position(&pos, buf, plr, size))
 		return (1);
 	home->sectors = (t_sector **)malloc(sizeof(t_sector)
@@ -90,7 +112,7 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 **	ft_strdel for *path, if new mapname is set in the mapfile,
 **	then ft_strdup the new name to *path.
 */
-int	load_map_file(t_player *plr, t_home *home, char *path)
+int	load_map_file(t_player *plr, t_home *home)
 {
 	int				fd;
 	unsigned char	*buf;
@@ -100,7 +122,7 @@ int	load_map_file(t_player *plr, t_home *home, char *path)
 	buf = (unsigned char *)malloc(sizeof(unsigned char) * (BUF_SIZE + 1));
 	if (!buf)
 		error_output("ERROR: Failed allocate memory for the map.");
-	doom_open(&fd, (const char **)&path, TEXT_ONLY, 0644);
+	doom_open(&fd, (const char **)&home->chosen_map, TEXT_ONLY, 0644);
 	if (fd < 0)
 		error_output("ERROR: Failed to open map");
 	else
@@ -115,6 +137,7 @@ int	load_map_file(t_player *plr, t_home *home, char *path)
 			error_output("ERROR: Failed to read map.");
 		validate_sectors_data(home, plr);
 		calc_map_properties(home, plr);
+		ft_putendl(home->chosen_map);
 		// ft_putstr("OK\n");
 		// exit(0);
 	}

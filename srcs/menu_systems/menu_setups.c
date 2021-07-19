@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/13 12:40:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 18:06:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,16 +132,15 @@ void	init_sprites_editor(t_home *home)
 	// explosion_sprites 6
 }
 
-void	setup_game_loop(char **mapname, t_home *home,
-	t_player *plr, int *menu_option)
+void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 {
 	ft_putstr("You chose: ");
-	ft_putendl_fd(*mapname, 1);
+	ft_putendl_fd(home->chosen_map, 1);
 	init_player(plr);
 	if (initialize_skybox(&home->skybox))
 		error_output("Memory allocation failed!\n");
-	if (load_map_file(plr, home, *mapname))
-		exit(EXIT_FAILURE);
+	if (load_map_file(plr, home))
+		error_output("Error while loading map!\n");
 	// if (open_file(home, "map_files/test.DATA") < 0)
 	// 		error_output("Could not successfully open map file.");
 	init_textures(home);
@@ -159,7 +158,7 @@ void	setup_game_loop(char **mapname, t_home *home,
 	// 	Mix_PlayMusic(plr->audio.music, -1);
 	if (setup_fps(&home->t))
 		error_output("Memory allocation failed!\n");
-	ft_strdel(mapname);
+	// ft_strdel(&home->chosen_map);
 	*menu_option = 0;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
