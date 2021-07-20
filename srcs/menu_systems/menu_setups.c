@@ -116,10 +116,10 @@ void	init_sprites_editor(t_home *home)
 	home->entity_pool[0]->bot.uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
 	home->entity_pool[0]->bot.uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
 	home->entity_pool[0]->dir = triangle_normal(&home->entity_pool[0]->top);
-	home->entity_pool[0]->top.idx = -10;
-	home->entity_pool[0]->bot.idx = -10;
+	home->entity_pool[0]->top.idx = -enemy0;
+	home->entity_pool[0]->bot.idx = -enemy0;
 	home->entity_pool[0]->sprite_state = 0;
-	home->entity_pool[0]->sprite_index = -10;
+	home->entity_pool[0]->sprite_index = -enemy0;
 	home->nbr_of_entities = 1;
 	home->entity_pool[0]->sector_idx = 2;
 	home->nbr_of_projectiles = 0;

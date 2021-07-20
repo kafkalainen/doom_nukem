@@ -23,7 +23,20 @@
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
 
-# define NUM_TEX 8
+/*
+**  Number of textures has been counted as follows:
+**  - Zero index
+**  - 20 available wall and floor textures.
+**  - HUD
+**  - 2 weapons
+**  - 4 enemies
+**  - Ammo projectile
+**  - Health station
+**  - Switch
+**  - Door
+**  - Lamp
+*/
+# define NUM_TEX 33
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
 # define INV_PI_BY_TWO 0.1591549367f

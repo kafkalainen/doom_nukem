@@ -84,7 +84,7 @@ Uint32	generate_doors(t_wall *current_portal)
 	right.ceiling = current_portal->top.p[2].y;
 	left.ground = current_portal->bottom.p[0].y;
 	right.ground = current_portal->bottom.p[2].y;
-	left.idx = -6;
+	left.idx = -door;
 	current_portal->is_closed = 1;
 	new_door = new_point(&left, &right);
 	if (!new_door)

@@ -14,18 +14,10 @@
 
 t_texel	*get_tex(int idx, t_texture	**textures)
 {
-	int	i;
-
 	if (idx >= 0)
 		error_output("idx larger or equal to zero\n");
-	i = 1;
-	while (textures[i])
-	{
-		if (textures[i]->idx == idx)
-			return (&textures[i]->tex);
-		i++;
-	}
-	return (NULL);
+	idx = -idx;
+	return (&textures[idx]->tex);
 }
 
 void	fill_rasterqueue(t_home *home, t_frame *frame, t_player *plr)
