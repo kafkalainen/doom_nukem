@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/06 16:59:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/21 16:40:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ void	init_textures(t_home *home)
 	load_texture("textures/hull2.png", home->textures, wall5);
 	load_texture("textures/loading_bay.png", home->textures, wall6);
 	load_texture("textures/door.png", home->textures, door);
-	load_texture("textures/enemy0.png", home->textures, enemy0);
+	load_texture("textures/skull_skulker.png", home->textures, enemy0);
+	load_texture("textures/hud_doom.png", home->textures, hud);
 }
