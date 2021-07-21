@@ -46,6 +46,17 @@ void	init_player(t_player *plr)
 	plr->pitch = 0.0f;
 	plr->yaw = 0.0f;
 	plr->height = 1.5f;
+	plr->power_points = 6;
+	plr->active_inv = -1;
+	plr->active_wep = 0;
+	plr->reserve_ammo[0] = 42;
+	plr->reserve_ammo[1] = 0;
+	plr->live_ammo[0] = 8;
+	plr->live_ammo[1] = 0;
+	plr->inventory[0] = 0;
+	plr->inventory[1] = 0;
+	plr->inventory[2] = 0;
+	plr->inventory[3] = 0;
 	init_input_values(&plr->input);
 }
 

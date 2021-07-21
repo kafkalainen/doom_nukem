@@ -50,6 +50,18 @@ static void	debug_keys(t_player *plr, SDL_KeyCode *sym, int nb)
 		plr->input.debug_right = nb;
 }
 
+static void	inventory_keys(t_player *plr, SDL_KeyCode *sym)
+{
+	if (*sym == SDLK_1)
+		plr->active_inv = 0;
+	if (*sym == SDLK_2)
+		plr->active_inv = 1;
+	if (*sym == SDLK_3)
+		plr->active_inv = 2;
+	if (*sym == SDLK_4)
+		plr->active_inv = 3;
+}
+
 void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 {
 	int	state;
@@ -77,6 +89,7 @@ void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 		plr->input.use = 1;
 	debug_keys(plr, &sym, state);
 	action_keys(plr, &sym);
+	inventory_keys(plr, &sym);
 }
 
 void	keys_up(t_player *plr, SDL_KeyCode sym)

@@ -140,6 +140,8 @@ void	setup_game_loop(char **mapname, t_home *home,
 	init_player(plr);
 	if (initialize_skybox(&home->skybox))
 		error_output("Memory allocation failed!\n");
+	if (initialize_hud(&plr->hud))
+		error_output("Memalloc failed for HUD\n");
 	if (load_map_file(plr, home, *mapname))
 		exit(EXIT_FAILURE);
 	// if (open_file(home, "map_files/test.DATA") < 0)

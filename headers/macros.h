@@ -23,6 +23,11 @@
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
 
+# define HUD_HP_X 100.0f
+# define HUD_HP_Y 540.0f
+# define HUD_AMMO_X 630.0f
+# define HUD_AMMO_Y 570.0f
+
 # define NUM_TEX 8
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f

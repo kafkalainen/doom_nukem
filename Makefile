@@ -114,6 +114,7 @@ SRCS = \
 	utilities$(SLASH)system_calls.c \
 	utilities$(SLASH)swap_and_sort.c \
 	utilities$(SLASH)init_skybox.c \
+	utilities$(SLASH)init_hud_elements.c \
 	vec_math$(SLASH)vec2_a.c \
 	vec_math$(SLASH)vec2_b.c \
 	vec_math$(SLASH)vec2_c.c \

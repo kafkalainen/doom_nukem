@@ -60,14 +60,12 @@ typedef struct s_input
 
 typedef struct		s_hud
 {
-	t_triangle		*viewmodel_top;
-	t_triangle		*viewmodel_bot;
-	t_triangle		*hud_top;
-	t_triangle		*hud_bot;
+	t_triangle		*viewmodel;
+	t_triangle		*hud;
 
+	int				idx[2];
 	unsigned int	viewmodel_frame;
 	float			damage_effect_intensity;
-
 }					t_hud;
 
 
@@ -87,7 +85,9 @@ typedef struct		s_player
 	int				cur_sector;
 	int				plot_state;
 	int				enemy_sighted;
-	unsigned int	power_points;
+	float			power_points;
+	unsigned int	active_wep;
+	unsigned int	active_inv;
 	unsigned int	live_ammo[2];
 	unsigned int	reserve_ammo[2];
 	unsigned int	inventory[4];

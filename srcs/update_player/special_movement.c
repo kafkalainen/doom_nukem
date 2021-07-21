@@ -118,30 +118,34 @@ int	jetpack(t_player *plr, t_home *home, Uint32 t)
 
 	if (!plr->input.jetpack)
 		return (FALSE);
-	plr->move_dir = vec3_unit_vector(plr->look_dir);
-	new_loc = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.03f));
-	if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &new_loc))
-		return (FALSE);
-	wall = check_if_crossing(home->sectors[plr->cur_sector], new_loc);
-	if (wall)
+	if (plr->power_points > 0)
 	{
-		if (wall->top.idx >= 0)
+		plr->power_points -= t * 0.005;
+		plr->move_dir = vec3_unit_vector(plr->look_dir);
+		new_loc = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.03f));
+		if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &new_loc))
+			return (FALSE);
+		wall = check_if_crossing(home->sectors[plr->cur_sector], new_loc);
+		if (wall)
 		{
-			if (check_y_diff(plr, &new_loc, home->sectors[wall->top.idx]))
+			if (wall->top.idx >= 0)
+			{
+				if (check_y_diff(plr, &new_loc, home->sectors[wall->top.idx]))
+					return (FALSE);
+				if ((wall->is_door && !wall->is_closed) || !wall->is_door)
+					plr->cur_sector = wall->top.idx;
+			}
+			else
 				return (FALSE);
-			if ((wall->is_door && !wall->is_closed) || !wall->is_door)
-				plr->cur_sector = wall->top.idx;
 		}
 		else
-			return (FALSE);
-	}
-	else
-	{
-		plr->pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.005f));
-		dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr, plr->pos);
-		if (dist < 0 && dist > -plr->height)
-			plr->pos.y -= dist;
-		return (TRUE);
+		{
+			plr->pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.005f));
+			dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr, plr->pos);
+			if (dist < 0 && dist > -plr->height)
+				plr->pos.y -= dist;
+			return (TRUE);
+		}
 	}
 	return (FALSE);
 }
