@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/19 19:26:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:50:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 static int	get_map_header_data(unsigned int *pos, unsigned char *buf,
 	t_home *home, ssize_t size)
 {
-	size_t	len;
-	char	*temp;
-
 	*pos += get_next_breaker(buf + *pos) + 1;
 	if (*pos > (unsigned int)size)
 		return (1);
@@ -26,7 +23,7 @@ static int	get_map_header_data(unsigned int *pos, unsigned char *buf,
 	if (*pos > (unsigned int)size)
 		return (1);
 	home->end_sector = ft_atoi((const char *)buf + *pos);
-	if (home->nbr_of_sectors <= 0)
+	if (home->nbr_of_sectors <= 0 || home->end_sector <= 0)
 		return (1);
 	*pos += get_next_breaker(buf + *pos) + 1;
 	if (*pos > (unsigned int)size)
@@ -34,14 +31,8 @@ static int	get_map_header_data(unsigned int *pos, unsigned char *buf,
 	home->linked_map = ft_atoi((const char *)buf + *pos);
 	if (home->linked_map)
 	{
-		*pos += get_next_breaker(buf + *pos) + 1;
-		if (*pos > (unsigned int)size)
+		if (parse_map_name(home, size, buf, &pos))
 			return (1);
-		len = get_next_breaker(buf + *pos);
-		ft_strdel(&home->chosen_map);
-		temp = ft_strndup((const char *)buf + *pos, len - 1);
-		home->chosen_map = ft_strjoin("map_files/", temp);
-		ft_strdel(&temp);
 	}
 	return (0);
 }
@@ -84,9 +75,7 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 	i = 0;
 	pos = 0;
 	buf = (unsigned char *)ft_strstr((const char *)buf, "doom_nukem_sectors");
-	if (!buf)
-		return (1);
-	if (get_map_header_data(&pos, buf, home, size)
+	if (!buf || get_map_header_data(&pos, buf, home, size)
 		|| get_player_position(&pos, buf, plr, size))
 		return (1);
 	home->sectors = (t_sector **)malloc(sizeof(t_sector)
@@ -139,7 +128,6 @@ int	load_map_file(t_player *plr, t_home *home)
 			error_output("ERROR: Failed to read map.");
 		validate_sectors_data(home, plr);
 		calc_map_properties(home, plr);
-		ft_putendl(home->chosen_map);
 	}
 	return (0);
 }
