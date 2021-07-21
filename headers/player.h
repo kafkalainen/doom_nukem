@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/01 16:23:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/21 14:02:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct		s_hud
 
 typedef struct		s_player
 {
+	t_hud			hud;
 	t_input			input;
 	t_xyz			pos;
 	t_xyz			look_dir;
@@ -85,13 +86,12 @@ typedef struct		s_player
 	int				cur_sector;
 	int				plot_state;
 	int				enemy_sighted;
+	int				active_inv;
 	float			power_points;
 	unsigned int	active_wep;
-	unsigned int	active_inv;
 	unsigned int	live_ammo[2];
 	unsigned int	reserve_ammo[2];
 	unsigned int	inventory[4];
-	t_hud			*hud;
 	Uint32			time;
 	t_audio			audio;
 }					t_player;

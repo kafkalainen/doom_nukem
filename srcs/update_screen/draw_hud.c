@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_hud.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/06 18:44:14 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/07/21 13:58:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,25 @@ static void		draw_inventory_slots(t_player *plr, Uint32 *buffer)
 	}
 }
 
-static void		draw_hud_image(t_home *home, t_frame *frame, t_player *plr)
-{
-	return ;
-}
+// static void		draw_hud_image(t_home *home, t_frame *frame, t_player *plr)
+// {
+// 	(void)home;
+// 	(void)frame;
+// 	(void)plr;
+// 	return ;
+// }
 
-static void		draw_inventory_images(t_home *home, t_frame *frame, t_player *plr)
-{
-	return ;
-}
+// static void		draw_inventory_images(t_home *home, t_frame *frame, t_player *plr)
+// {
+// 	(void)home;
+// 	(void)frame;
+// 	(void)plr;
+// 	return ;
+// }
 
 void			draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 {
+	(void)home;
 	//draw_hud_image(home, frame, plr);
 	draw_power_bar(plr, frame->buffer);
 	draw_inventory_slots(plr, frame->buffer);

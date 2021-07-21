@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:31:48 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/01 16:21:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/21 13:59:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,68 +19,70 @@ float	get_distance_squared(t_xyz pt0, t_xyz pt1)
 		(pt1.z - pt0.z) * (pt1.z - pt0.z)));
 }
 
-int	check_aggro(t_player *plr, t_entity *entity, t_sector *sector)
-{
-	float			distance_squared;
-	Uint32			signed_dst;
-	unsigned int	i;
-	t_wall			*wall;
+// int	check_aggro(t_player *plr, t_entity *entity, t_sector *sector)
+// {
+// 	float			distance_squared;
+// 	Uint32			signed_dst;
+// 	unsigned int	i;
+// 	t_wall			*wall;
 
-	distance_squared = get_distance_squared(entity->pos, plr->pos);
-	signed_dst = vec3_signed_distance_to_plane(plr->pos, entity->dir, entity->pos);
-	if (distance_squared <= AGGRO_RANGE_1 && signed_dst == 0 && plr->cur_sector == entity->sector_idx)
-	{
-		entity->is_aggroed = 1;
-		return (1);
-	}
-	if (distance_squared <= AGGRO_RANGE_1 && signed_dst == 0 && plr->cur_sector != entity->sector_idx)
-	{
-		wall = sector->walls;
-		i = 0;
-		while (i < sector->nb_of_walls)
-		{
-			if (check_if_portal(wall))
-			{
-				if ((wall->is_door && !wall->is_closed) || !wall->is_door)
-				{
-					if (check_intersection(wall, vec3_to_vec2(entity->pos), vec3_to_vec2(plr->pos)))
-					{
-						entity->is_aggroed = 1;
-						return (1);
-					}
-				}
-			}
-			i++;
-			wall = wall->next;
-		}
-	}
-	if (distance_squared <= 1)
-	{
-		entity->is_aggroed = 1;
-		return (1);
-	}
-	return (0);
-}
+// 	distance_squared = get_distance_squared(entity->pos, plr->pos);
+// 	signed_dst = vec3_signed_distance_to_plane(plr->pos, entity->dir, entity->pos);
+// 	if (distance_squared <= AGGRO_RANGE_1 && signed_dst == 0 && plr->cur_sector == entity->sector_idx)
+// 	{
+// 		entity->is_aggroed = 1;
+// 		return (1);
+// 	}
+// 	if (distance_squared <= AGGRO_RANGE_1 && signed_dst == 0 && plr->cur_sector != entity->sector_idx)
+// 	{
+// 		wall = sector->walls;
+// 		i = 0;
+// 		while (i < sector->nb_of_walls)
+// 		{
+// 			if (check_if_portal(wall))
+// 			{
+// 				if ((wall->is_door && !wall->is_closed) || !wall->is_door)
+// 				{
+// 					if (check_intersection(wall, vec3_to_vec2(entity->pos), vec3_to_vec2(plr->pos)))
+// 					{
+// 						entity->is_aggroed = 1;
+// 						return (1);
+// 					}
+// 				}
+// 			}
+// 			i++;
+// 			wall = wall->next;
+// 		}
+// 	}
+// 	if (distance_squared <= 1)
+// 	{
+// 		entity->is_aggroed = 1;
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 {
-	float	dot_product;
-	t_xyz	a;
-	t_xyz	b;
-	t_xyz	z_normal;
-	t_xyz	cross;
-	float	cross_dot;
-	float	degrees;
-	float	radians;
+	(void)entity;
+	(void)plr;
+	// float	dot_product;
+	// t_xyz	a;
+	// t_xyz	b;
+	// t_xyz	z_normal;
+	// t_xyz	cross;
+	// float	cross_dot;
+	// //float	degrees;
+	// //float	radians;
 
-	a = vec3_unit_vector(vec3_dec(plr->pos, entity->pos));
-	b = entity->dir;
-	dot_product = vec3_dot_product(a, b);
-	z_normal = (t_xyz){0, 1, 0, 0};
-	cross = vec3_cross_product(z_normal, a);
-	cross_dot = vec3_dot_product(b, cross);
-	radians = acosf(cross_dot);
-	degrees = radians * (180.0 / M_PI); // using this for illustration purposes, can use radians in final commit
+	// a = vec3_unit_vector(vec3_dec(plr->pos, entity->pos));
+	// b = entity->dir;
+	// // dot_product = vec3_dot_product(a, b);
+	// z_normal = (t_xyz){0, 1, 0, 0};
+	// // cross = vec3_cross_product(z_normal, a);
+	// cross_dot = vec3_dot_product(b, cross);
+	// radians = acosf(cross_dot);
+	// degrees = radians * (180.0 / M_PI); // using this for illustration purposes, can use radians in final commit
 	/*printf("degrees: %f\n", degrees);
 	if (degrees < 22.5 && degrees > 0) // right side
 		printf("right side\n");

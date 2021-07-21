@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_hud_elements.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:21:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/07 17:21:40 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/07/21 14:02:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

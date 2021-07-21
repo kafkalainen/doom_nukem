@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/01 14:21:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/21 13:59:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	process_inputs_game_loop(t_player *plr, int *game_state, SDL_Event *e)
 void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 {
 	Uint32	i;
-	float	distance_squared;
+	// float	distance_squared;
 	(void)delta_time;
 	// i = 0;
 	// while (i < home->nbr_of_projectiles)
@@ -68,9 +68,9 @@ void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
 				// 	else
 				// 		printf("I hit you!\n");
 				// }
-				distance_squared = ((plr->pos.x - home->entity_pool[i]->pos.x) * (plr->pos.x - home->entity_pool[i]->pos.x) +
-					(plr->pos.y - home->entity_pool[i]->pos.y) * (plr->pos.y - home->entity_pool[i]->pos.y) +
-					(plr->pos.z - home->entity_pool[i]->pos.z) * (plr->pos.z - home->entity_pool[i]->pos.z));
+				// distance_squared = ((plr->pos.x - home->entity_pool[i]->pos.x) * (plr->pos.x - home->entity_pool[i]->pos.x) +
+				// 	(plr->pos.y - home->entity_pool[i]->pos.y) * (plr->pos.y - home->entity_pool[i]->pos.y) +
+				// 	(plr->pos.z - home->entity_pool[i]->pos.z) * (plr->pos.z - home->entity_pool[i]->pos.z));
 				//printf("distance to player: %f\n", distance_squared);
 				// if (home->entity_pool[i]->is_aggroed)
 				// {
