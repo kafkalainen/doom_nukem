@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/29 14:46:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/21 21:23:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,12 @@ enum e_texture_idx
 	enemy2,
 	enemy3,
 	projectile,
-	health_station,
-	lever,
-	lamp
+	power_station_ready,
+	power_station_depleted,
+	button_on,
+	button_off,
+	lamp_on,
+	lamp_off,
 };
 
 /*

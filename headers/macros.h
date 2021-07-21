@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/19 17:30:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/21 21:20:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@
 **  - 2 weapons
 **  - 4 enemies
 **  - Ammo projectile
-**  - Health station
-**  - Switch
+**  - Health station full / depleted
+**  - Switch on / off
 **  - Door
-**  - Lamp
+**  - Lamp on / off
 */
-# define NUM_TEX 33
+# define NUM_TEX 36
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
 # define INV_PI_BY_TWO 0.1591549367f

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/21 16:40:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/21 21:18:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,18 @@ void	cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir)
 	// printf("%i\n", i);
 }
 
+static void	init_asset_textures(t_home *home)
+{
+	load_texture("textures/health_station_ready.png",
+		home->textures, health_station_ready);
+	load_texture("textures/health_station_depleted.png",
+		home->textures, health_station_depleted);
+	load_texture("textures/lamp_on.png", home->textures, lamp_on);
+	load_texture("textures/lamp_off.png", home->textures, lamp_off);
+	load_texture("textures/door.png", home->textures, door);
+	load_texture("textures/button_on.png", home->textures, button_off);
+	load_texture("textures/button_off.png", home->textures, button_on);
+}
 
 void	init_textures(t_home *home)
 {
@@ -92,7 +104,7 @@ void	init_textures(t_home *home)
 	load_texture("textures/hull.png", home->textures, wall4);
 	load_texture("textures/hull2.png", home->textures, wall5);
 	load_texture("textures/loading_bay.png", home->textures, wall6);
-	load_texture("textures/door.png", home->textures, door);
+	init_asset_textures(home);
 	load_texture("textures/skull_skulker.png", home->textures, enemy0);
 	load_texture("textures/hud_doom.png", home->textures, hud);
 }

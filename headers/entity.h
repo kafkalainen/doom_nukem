@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/30 12:19:51 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/21 17:58:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@
 # define ENTITY_SPRITE_MOVE_END 5 // are we done drawing movement
 # define ENTITY_SPRITE_ATK_START 0
 # define ENTITY_SPRITE_ATK_END 5
+
+// enum e_entity_tex
+// {
+// 	open_space = -9999
+// };
 
 /*
 ** Entity functions
