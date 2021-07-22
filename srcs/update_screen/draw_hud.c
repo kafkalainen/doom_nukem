@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/22 12:42:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 14:47:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static void		draw_inventory_slots(t_player *plr, Uint32 *buffer)
 
 static void		draw_hud_image(t_home *home, Uint32 *buffer)
 {
-	Uint32	x;
-	Uint32	y;
+	int		x;
+	int		y;
 	t_texel	tex;
 	tex = home->textures[hud]->tex;
 
