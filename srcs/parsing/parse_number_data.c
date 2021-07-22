@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/19 19:50:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 16:18:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,18 @@ int	parse_coordinates(t_point_data *data,
 	if (***pos > (unsigned int)size)
 		return (1);
 	data->ceiling = ft_atoi((const char *)*buf + ***pos);
+	***pos += get_next_breaker(*buf + ***pos) + 1;
+	if (***pos > (unsigned int)size)
+		return (1);
+	data->light_switch = ft_atoi((const char *)*buf + ***pos);
+	***pos += get_next_breaker(*buf + ***pos) + 1;
+	if (***pos > (unsigned int)size)
+		return (1);
+	data->on_off = ft_atoi((const char *)*buf + ***pos);
+	***pos += get_next_breaker(*buf + ***pos) + 1;
+	if (***pos > (unsigned int)size)
+		return (1);
+	data->health_station = ft_atoi((const char *)*buf + ***pos);
 	***pos += get_next_breaker(*buf + ***pos);
 	if (***pos > (unsigned int)size)
 		return (1);

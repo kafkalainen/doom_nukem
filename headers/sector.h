@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/22 15:43:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 16:08:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_point_data
 	int			ceiling;
 	int			idx;
 	int			light_switch;
+	int			on_off;
 	int			health_station;
 }				t_point_data;
 
