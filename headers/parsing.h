@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/19 19:49:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 15:47:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void			initialize_triangles(t_wall *wall, t_point_data *left,
 void			initialize_top_texels(t_wall *wall);
 void			initialize_bottom_texels(t_wall *wall);
 void			initialize_sector_pointers(t_sector *new_sector);
+void			initialize_door(t_wall *wall, t_point_data *left,
+					t_point_data *right);
+void			initialize_switches(t_wall *wall, t_point_data *left);
 t_sector		*get_sector_data(unsigned char *buf, unsigned int *pos,
 					ssize_t size);
 int				map_texel(t_surface *surface, t_sector *sector);

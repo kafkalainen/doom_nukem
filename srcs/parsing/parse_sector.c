@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/13 10:14:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 15:33:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,8 @@ t_wall	*new_point(t_point_data *left, t_point_data *right)
 		initialize_triangles(wall, left, right);
 		initialize_top_texels(wall);
 		initialize_bottom_texels(wall);
-		wall->top.idx = change_door_to_portal(left->idx);
-		wall->bottom.idx = change_door_to_portal(left->idx);
-		wall->is_door = 0;
-		wall->is_closed = 0;
-		wall->open_until = 0;
-		wall->height = get_wall_height(left->ground, right->ground,
-				left->ceiling, right->ceiling);
-		if (left->idx >= DOOR_INDEX)
-			wall->is_door = 1;
+		initialize_door(wall, left, right);
+		initialize_switches(wall, left);
 		wall->next = NULL;
 	}
 	else

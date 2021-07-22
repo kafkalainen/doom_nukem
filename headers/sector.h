@@ -6,17 +6,31 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/13 11:06:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 15:43:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SECTOR_H
 # define SECTOR_H
 
+typedef struct s_health_station
+{
+	Uint32	is_health_station;
+	Uint32	is_depleted;
+}				t_health_station;
+
+typedef struct s_light_switch
+{
+	Uint32	is_switch;
+	Uint32	on_off;
+}				t_light_switch;
+
 typedef struct s_wall
 {
 	t_triangle			top;
 	t_triangle			bottom;
+	t_health_station	station;
+	t_light_switch		light_switch;
 	Uint32				is_door;
 	Uint32				is_closed;
 	Uint32				open_until;
@@ -50,6 +64,8 @@ typedef struct s_point_data
 	int			ground;
 	int			ceiling;
 	int			idx;
+	int			light_switch;
+	int			health_station;
 }				t_point_data;
 
 typedef struct s_sector
