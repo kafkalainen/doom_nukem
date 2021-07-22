@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/22 12:28:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 13:15:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static void	init_asset_textures(t_home *home)
 	load_texture("textures/button_off.png", home->textures, button_off);
 	load_texture("textures/lamp_on.png", home->textures, lamp_on);
 	load_texture("textures/lamp_off.png", home->textures, lamp_off);
-	load_texture("textures/door.png", home->textures, door);
 }
 
 void	init_textures(t_home *home)
@@ -110,20 +109,22 @@ void	init_textures(t_home *home)
 	load_texture("textures/rusty_floor.png", home->textures, surf0);
 	load_texture("textures/floor_tile.png", home->textures, surf1);
 	load_texture("textures/grate.png", home->textures, surf2);
-	load_texture("textures/metal_sheet.png", home->textures, surf3);
-	load_texture("textures/plate.png", home->textures, surf4);
+	load_texture("textures/grate2.png", home->textures, surf3);
+	load_texture("textures/metal_sheet.png", home->textures, surf4);
 	load_texture("textures/plate.png", home->textures, surf5);
 	load_texture("textures/plate.png", home->textures, surf6);
 	load_texture("textures/plate.png", home->textures, surf7);
 	load_texture("textures/plate.png", home->textures, surf8);
 	load_texture("textures/plate.png", home->textures, surf9);
+	load_texture("textures/door.png", home->textures, door);
+	load_texture("textures/hud_doom.png", home->textures, hud);
 	load_texture("textures/plate.png", home->textures, weapon0);
 	load_texture("textures/plate.png", home->textures, weapon1);
-	init_asset_textures(home);
-	load_texture("textures/hud_doom.png", home->textures, hud);
 	load_texture("textures/skull_skulker.png", home->textures, enemy0);
 	load_texture("textures/skull_skulker.png", home->textures, enemy1);
 	load_texture("textures/skull_skulker.png", home->textures, enemy2);
 	load_texture("textures/skull_skulker.png", home->textures, enemy3);
 	load_texture("textures/skull_skulker.png", home->textures, projectile);
+	home->textures[NUM_TEX] = NULL;
+	init_asset_textures(home);
 }

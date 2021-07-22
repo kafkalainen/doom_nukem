@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/11 12:51:06 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/22 13:17:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ t_texture	*create_texture(t_png *png, int idx)
 
 void	free_texture(t_texture *tex)
 {
+	if (!tex)
+		return ;
 	if (tex->source != NULL)
 	{
 		free(tex->source);
