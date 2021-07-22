@@ -97,6 +97,7 @@ int		give_sign(float number);
 void	init_input_values(t_input *input);
 int		initialize_rasterization_queues(t_frame *frame);
 int		initialize_skybox(t_skybox *skybox);
+int		initialize_hud(t_hud *hud);
 int		is_negative(float z);
 void	map_error_output(int i, t_home *home);
 void	read_error_output(char *msg, unsigned char **line);

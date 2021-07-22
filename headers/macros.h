@@ -22,7 +22,10 @@
 # define FOV 1.57079616f
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
-
+# define HUD_HP_X 100.0f
+# define HUD_HP_Y 540.0f
+# define HUD_AMMO_X 630.0f
+# define HUD_AMMO_Y 570.0f
 /*
 **  Number of textures has been counted as follows:
 **  - Zero index
