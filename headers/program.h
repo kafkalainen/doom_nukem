@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/19 19:08:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 11:58:20 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef struct	s_entity
 							// if true, aggro = true
 	int			sprite_index; // determined by entity_type // ALWAYS >= 0 // what sprite texture are we drawing from
 	int			alt_sprite_index; // default = 0
-	int			sprite_state; // look at state, then loop through sprite map indexes depeding on the state
+	int			sprite_state; // angle between player and entity determines X axis of sprite map
+	int			anim_offset; // determines Y axis of sprite map
 	int			health; // 1 or 2 // determined by entity_type
 	int			ammo; // defaults to 3
 	int			entity_index; // entity position in the entity_pool array, used to track ammo counts and replenishment
