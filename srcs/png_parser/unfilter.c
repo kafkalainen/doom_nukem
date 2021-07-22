@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:12:55 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/21 16:01:13 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/22 14:09:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	convert_to_pixels(t_png *png)
 {
-	png->final_size = (png->width * png->channels) * png->height;
+	png->final_size = ((png->width * png->channels) * png->height) + 1;
 	png->pixels = (unsigned char *)ft_memalloc(sizeof(unsigned char)
 			* png->final_size);
 	if (!png->pixels)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/22 14:37:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 14:40:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	load_texture(char *path, t_texture **tex_array, int i)
 {
 	t_png	png;
 
+	printf("%s\n", path);
 	png = png_parser(path);
 	tex_array[i] = create_texture(&png, (i * (-1)));
 	if (!tex_array[i])

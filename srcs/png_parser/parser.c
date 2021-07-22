@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/21 16:05:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/22 13:58:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	parse_data(t_png *png)
 
 void	decode_png(t_png *png)
 {
-	png->inflated_size = png->scanline * png->height;
+	png->inflated_size = png->scanline * png->height + 1;
 	png->inflated = (unsigned char *)malloc(sizeof(unsigned char)
 			* png->inflated_size);
 	if (!png->inflated)
