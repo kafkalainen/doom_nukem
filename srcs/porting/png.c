@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/22 13:29:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 13:34:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,6 @@ void	init_textures(t_home *home)
 	load_texture("textures/skull_skulker.png", home->textures, enemy2);
 	load_texture("textures/skull_skulker.png", home->textures, enemy3);
 	load_texture("textures/skull_skulker.png", home->textures, projectile);
-	home->textures[NUM_TEX] = NULL;
+	home->textures[NUM_TEX] = assign_empty_texture();
 	init_asset_textures(home);
 }
