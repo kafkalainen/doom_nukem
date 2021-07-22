@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/22 13:34:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 14:37:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ void	init_textures(t_home *home)
 	load_texture("textures/grate.png", home->textures, surf2);
 	load_texture("textures/grate2.png", home->textures, surf3);
 	load_texture("textures/metal_sheet.png", home->textures, surf4);
-	load_texture("textures/plate.png", home->textures, surf5);
-	load_texture("textures/plate.png", home->textures, surf6);
-	load_texture("textures/plate.png", home->textures, surf7);
-	load_texture("textures/plate.png", home->textures, surf8);
+	load_texture("textures/steel_rust.png", home->textures, surf5);
+	load_texture("textures/clean_floor.png", home->textures, surf6);
+	load_texture("textures/scraps.png", home->textures, surf7);
+	load_texture("textures/gear.png", home->textures, surf8);
 	load_texture("textures/plate.png", home->textures, surf9);
 	load_texture("textures/door.png", home->textures, door);
 	load_texture("textures/hud_doom.png", home->textures, hud);
