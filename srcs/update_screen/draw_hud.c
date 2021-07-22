@@ -18,10 +18,10 @@ static void		draw_hud_texts(Uint32 *buffer, t_player *plr, int slot)
 
 	mod.colour = get_color(white);
 	mod.size = 3;
-	ft_str_pxl(buffer, vec2(HUD_AMMO_X, HUD_AMMO_Y - 12),
+	ft_str_pxl(buffer, vec2(plr->hud.hud_ammo_x, plr->hud.hud_ammo_y- 12),
 		ft_strjoin("Ammo: ", ft_itoa(plr->live_ammo[slot])), mod);
 	mod.size = 2;
-	ft_str_pxl(buffer, vec2(HUD_AMMO_X + 100, HUD_AMMO_Y + 12),
+	ft_str_pxl(buffer, vec2(plr->hud.hud_ammo_x + 100, plr->hud.hud_ammo_y+ 12),
 		ft_itoa(plr->reserve_ammo[slot]), mod);
 }
 
@@ -32,17 +32,28 @@ static void		draw_power_bar(t_player *plr, Uint32 *buffer)
 	int		gap;
 
 	i = 0;
-	gap = 8;
-	wh = vec2(14, 42);
+	gap = 4;
+	wh = vec2(12, 21);
 	while (i < (int)(plr->power_points + 0.99))
 	{
-		draw_rect(vec2(HUD_HP_X + i * (wh.x + gap) - gap * 0.25,
-			HUD_HP_Y - gap * 0.25), vec2(wh.x + gap * 0.5,
-			wh.y + gap * 0.5), buffer, 0xFF00AEFF);
-		draw_rect(vec2(HUD_HP_X + i * (wh.x + gap), HUD_HP_Y),
-			vec2(wh.x, wh.y), buffer, 0xFF0060D4);
+		draw_rect(vec2(plr->hud.hud_hp_x+ i * (wh.x + gap) - gap * 0.25,
+			plr->hud.hud_hp_y - gap * 0.25), vec2(wh.x + gap * 0.5,
+			wh.y + gap * 0.5), buffer, 0xFFFFFFFF);
+		draw_rect(vec2(plr->hud.hud_hp_x+ i * (wh.x + gap), plr->hud.hud_hp_y),
+			vec2(wh.x, wh.y), buffer, 0xFFD42E00);
 		i++;
 	}
+}
+
+static void		draw_fuel_bar(t_player *plr, Uint32 *buffer)
+{
+	t_xy	wh;
+
+	wh = vec2(plr->fuel_points * 0.9, 6);
+	draw_rect(vec2(plr->hud.hud_fuel_x - 2, plr->hud.hud_fuel_y - 2),
+		vec2(wh.x + 4, wh.y + 4), buffer, 0xFFFFFFFF);
+	draw_rect(vec2(plr->hud.hud_fuel_x, plr->hud.hud_fuel_y),
+		vec2(wh.x, wh.y), buffer, 0xFFD42E00);
 }
 
 static void		draw_inventory_slots(t_player *plr, Uint32 *buffer)
@@ -58,12 +69,12 @@ static void		draw_inventory_slots(t_player *plr, Uint32 *buffer)
 	{
 		if (plr->active_inv == i + 2)
 			draw_rect(vec2(SCREEN_WIDTH * 0.5 + i * (wh.x + gap) - gap * 0.25,
-				HUD_HP_Y + 8 - gap * 0.25), vec2(wh.x + gap * 0.5, wh.y + gap * 0.5), buffer, 0xFFDDDD00);
+				562 - gap * 0.25), vec2(wh.x + gap * 0.5, wh.y + gap * 0.5), buffer, 0xFFDDDD00);
 		else
 			draw_rect(vec2(SCREEN_WIDTH * 0.5 + i * (wh.x + gap) - gap * 0.25,
-				HUD_HP_Y + 8 - gap * 0.25), vec2(wh.x + gap * 0.5, wh.y + gap * 0.5), buffer, 0xFF202020);
+				562 - gap * 0.25), vec2(wh.x + gap * 0.5, wh.y + gap * 0.5), buffer, 0xFF202020);
 		draw_rect(vec2(SCREEN_WIDTH * 0.5 + i * (wh.x + gap),
-			HUD_HP_Y + 8), vec2(wh.x, wh.y), buffer, 0xFF606060);
+			562), vec2(wh.x, wh.y), buffer, 0xFF734D54);
 		i++;
 	}
 }
@@ -93,6 +104,7 @@ void			draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 	(void)home;
 	draw_hud_image(home, frame->buffer);
 	draw_power_bar(plr, frame->buffer);
+	draw_fuel_bar(plr, frame->buffer);
 	draw_inventory_slots(plr, frame->buffer);
 	//draw_inventory_images(home, frame, plr);
 	draw_hud_texts(frame->buffer, plr, 0);

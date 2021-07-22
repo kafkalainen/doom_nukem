@@ -92,6 +92,12 @@ typedef struct		s_hud
 	int				idx[2];
 	unsigned int	viewmodel_frame;
 	float			damage_effect_intensity;
+	float			hud_hp_x;
+	float			hud_hp_y;
+	float			hud_ammo_x;
+	float			hud_ammo_y;
+	float			hud_fuel_x;
+	float			hud_fuel_y;
 }					t_hud;
 
 
@@ -115,6 +121,7 @@ typedef struct		s_player
 	int				enemy_sighted;
 	int				active_inv;
 	float			power_points;
+	float			fuel_points;
 	unsigned int	active_wep;
 	unsigned int	live_ammo[2];
 	unsigned int	reserve_ammo[2];
