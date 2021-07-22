@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/22 13:15:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 13:29:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	init_asset_textures(t_home *home)
 void	init_textures(t_home *home)
 {
 	home->textures = (t_texture **)malloc(sizeof(t_texture *)
-			* NUM_TEX + 1);
+			* (NUM_TEX + 1));
 	if (!home->textures)
 		error_output("Failed to allocate memory to editor textures.\n");
 	home->textures[zero] = assign_empty_texture();
