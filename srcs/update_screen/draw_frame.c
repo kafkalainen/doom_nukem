@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/01 10:18:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/13 10:18:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
+	mod.len = 100;
 	compass = compass_direction(&plr->dir);
 	sector = ft_itoa(plr->cur_sector);
 	fps = ft_itoa(nb_fps);
@@ -88,10 +89,10 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	ft_str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){get_color(green), 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_x, (t_plx_modifier){get_color(green), 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_y, (t_plx_modifier){get_color(green), 2});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_z, (t_plx_modifier){get_color(green), 2});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_x, (t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_y, (t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_z, (t_plx_modifier){get_color(green), 2, 12});
 	ft_str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
@@ -105,18 +106,22 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	free(plr_z);
 }
 
-void	add_skybox(t_raster_queue *transformed, t_skybox *skybox)
+void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
+	 t_skybox *skybox)
 {
-	Uint32 j;
+	Uint32 i;
 
-	j = 0;
-	transformed->size = 0;
-	while (j < 12)
+	i = 0;
+	quick_reset_queue(frame->transformed);
+	while (i < 12)
 	{
-		transformed->array[transformed->size] = apply_world_matrix(0.0f, 0.0f,
-			(t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &skybox->face[j]);
-		transformed->size += 1;
-		j++;
+		if (enqueue_to_raster(frame->transformed, &skybox->face[i]))
+		{
+			draw_sector(frame, home, plr, frame->idx);
+			quick_reset_queue(frame->transformed);
+		}
+		else
+			i++;
 	}
 }
 
@@ -130,7 +135,7 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	frame->left.left_dir = vec3_add(plr->look_dir, vec3(-PLR_DIR, 0.0f, PLR_DIR));
 	frame->right.right_dir = vec3_add(plr->look_dir, vec3(PLR_DIR, 0.0f, PLR_DIR));
 	reset_depth_buffer(frame->depth_buffer);
-	add_skybox(frame->transformed, &home->skybox);
+	add_skybox(frame, home, plr, &home->skybox);
 	draw_sector(frame, home, plr, -1);
 	scan_fov(home, frame, plr);
 	// if (plr->input.minimap)
@@ -141,5 +146,6 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	if (plr->input.info)
 		draw_info(frame, plr, (int)home->t.fps);
 	draw_heads_up_display(home, frame, plr);
+	draw_plot_state(home, frame->buffer, plr);
 	return ;
 }

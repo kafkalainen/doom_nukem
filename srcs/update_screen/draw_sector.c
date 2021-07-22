@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 12:20:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/07 11:46:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,19 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 	i = 0;
 	while (i < current_size)
 	{
-		if (vec3_dot_product(frame->transformed->array[i].normal,
-					vec3_dec(frame->transformed->array[i].p[0],
+		front(frame->transformed, &current_viewed_triangle);
+		if (vec3_dot_product(current_viewed_triangle.normal,
+					vec3_dec(current_viewed_triangle.p[0],
 					plr->pos)) < 0)
 		{
-			set_lighting(lights, &frame->transformed->array[i]);
+			set_lighting(lights, &current_viewed_triangle);
 			current_viewed_triangle = apply_camera(
 					plr->pos, plr->target, plr->up,
-					&frame->transformed->array[i]);
+					&current_viewed_triangle);
 			clip_to_near_plane(&current_viewed_triangle, &frame->viewport,
 				frame->triangles_in_view);
 		}
+		dequeue(frame->transformed);
 		i++;
 	}
 }

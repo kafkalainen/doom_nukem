@@ -7,15 +7,18 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Switched from Build engine to complete 3D engine using matrices and meshes.
 
 # Biggest blocks
-- Linked list to Cycle list
-- Precision of a float
-- Pixel offset
+- Linked list to Cycle list.
+- Precision of a float.
+- Pixel offset.
 - Is right point needed to properly render the space?
 - Segfault in renderer when the function returns back to the same portal it came from.
 - Wall distorted because only angle is used. Solved using perpentual distance to the wall, and scaling it to the view.
 - Getting correct offset for wall textures.
 - Correcting walls by perspective-correct interpolation from affine texture coordinates.
 - Correcting floors by perspective-correct interpolation.
+- Moving away from Build Engine type of structure to full 3D engine.
+- Typecasting to from (float) to (int) when drawing scanlines.
+- Implementing polygon clipping.
 
 # Learned through project
 - Makefile and Makefile rules
@@ -37,7 +40,9 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Sutherland-Hodgeman Polygon Clipping.
 - From flat shading to Gouraud shading.
 - Averaging unit vectors and adjacent triangles.
-- Using lighting models.
+- Using lighting models Phong-Blinn vs. Lambertian reflectance.
+- Subdivision of scanlines to smaller batches to improve calculation speed ie. Quake and demos used these in end of 1990s
+- Manipulation of direction and velocity of entities based on time.
 
 # TO-DO
 ## Riku & Elias
@@ -115,7 +120,7 @@ the flag mode, etc.
 
 # Links
 - Fabien's Sanglard's tutorial for Building Duke Nukem Graphics Engine [Link](https://fabiensanglard.net/duke3d/build_engine_internals.php)
-- Perspective Texture Mapping by Mikael Kalms [Link](https://www.lysator.liu.se/~mikaelk/doc/perspectivetexture/)
+- Perspective Texture Mapping and scanline division by Mikael Kalms [Link](https://www.lysator.liu.se/~mikaelk/doc/perspectivetexture/)
 - Perspective Texture Mapping article series by Chris Hecker [Link] http://www.chrishecker.com/Miscellaneous_Technical_Articles
 - Floor and Ceiling Drawing tutorial by Lodev. Idea of continuing drawing after the wall has been drawn stems from here! [Link](https://lodev.org/cgtutor/raycasting2.html)
 - CS184 Lecture 30 summary [Link](https://people.eecs.berkeley.edu/~jfc/cs184f98/lec30/lec30.html)

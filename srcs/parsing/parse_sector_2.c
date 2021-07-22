@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:29:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 10:48:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 17:19:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,12 @@ void	add_to_middle(t_wall **current_point, t_wall *new_wall)
 		(*current_point)->next = new_wall;
 		new_wall->next = temp;
 	}
+}
+
+void	initialize_sector_pointers(t_sector *new_sector)
+{
+	new_sector->walls = NULL;
+	new_sector->ceiling = NULL;
+	new_sector->ground = NULL;
+	new_sector->story = NULL;
 }

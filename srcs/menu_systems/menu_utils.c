@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/15 14:40:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/13 11:08:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	free_game_assets(t_home *home)
 		free(home->t.frame_times);
 	free_sectors(home);
 	free_all_textures(home->textures, &home->nbr_of_textures);
+	// free_story(&home->story);
 }
 
 void	get_menu_range_key_down(t_menu *menu)
@@ -70,6 +71,7 @@ void	update_load_menu(t_menu *menu, int sym)
 	y = 0;
 	mod.colour = 0;
 	mod.size = TEXT_SIZE;
+	mod.len = 100;
 	while (i <= menu->end)
 	{
 		if (i == menu->option)

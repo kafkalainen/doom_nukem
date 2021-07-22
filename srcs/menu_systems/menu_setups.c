@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/21 14:02:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:10:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,10 @@ void	init_sprites_editor(t_home *home)
 	home->entity_pool[0]->bot.uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
 	home->entity_pool[0]->bot.uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
 	home->entity_pool[0]->dir = triangle_normal(&home->entity_pool[0]->top);
-	home->entity_pool[0]->top.idx = -10;
-	home->entity_pool[0]->bot.idx = -10;
+	home->entity_pool[0]->top.idx = -enemy0;
+	home->entity_pool[0]->bot.idx = -enemy0;
 	home->entity_pool[0]->sprite_state = 0;
-	home->entity_pool[0]->sprite_index = -10;
+	home->entity_pool[0]->sprite_index = -enemy0;
 	home->nbr_of_entities = 1;
 	home->entity_pool[0]->sector_idx = 2;
 	home->nbr_of_projectiles = 0;
@@ -132,22 +132,22 @@ void	init_sprites_editor(t_home *home)
 	// explosion_sprites 6
 }
 
-void	setup_game_loop(char **mapname, t_home *home,
-	t_player *plr, int *menu_option)
+void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 {
 	ft_putstr("You chose: ");
-	ft_putendl_fd(*mapname, 1);
+	ft_putendl_fd(home->chosen_map, 1);
 	init_player(plr);
 	if (initialize_skybox(&home->skybox))
 		error_output("Memory allocation failed!\n");
 	if (initialize_hud(&plr->hud))
 		error_output("Memalloc failed for HUD\n");
-	if (load_map_file(plr, home, *mapname))
-		exit(EXIT_FAILURE);
+	if (load_map_file(plr, home))
+		error_output("Error while loading map!\n");
 	// if (open_file(home, "map_files/test.DATA") < 0)
 	// 		error_output("Could not successfully open map file.");
 	init_textures(home);
 	init_sprites_editor(home);
+	// home->story = init_story();
 	// load_entities_from_map(home);
 	// ret = load_game_audio(&plr->audio);
 	// if (ret)
@@ -160,10 +160,9 @@ void	setup_game_loop(char **mapname, t_home *home,
 	// 	Mix_PlayMusic(plr->audio.music, -1);
 	if (setup_fps(&home->t))
 		error_output("Memory allocation failed!\n");
-	ft_strdel(mapname);
-	*mapname = NULL;
 	*menu_option = 0;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
+	home->game_state = GAME_LOOP;
 }
 
 void	setup_editor(t_home *home)

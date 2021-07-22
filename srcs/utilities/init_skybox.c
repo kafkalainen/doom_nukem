@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:16:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/27 14:08:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/07 11:51:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,19 @@ void	init_normals(t_triangle *face)
 	}
 }
 
+void	translate_skybox(t_triangle *face)
+{
+	Uint32	i;
+
+	i = 0;
+	while (i < 12)
+	{
+		face[i] = apply_world_matrix(0.0f, 0.0f,
+			(t_xyz){-50.0f, -50.0f, -50.0f, 0.0f}, &face[i]);
+		i++;
+	}
+}
+
 int		initialize_skybox(t_skybox *skybox)
 {
 	skybox->face = (t_triangle*)malloc(sizeof(t_triangle) * 12);
@@ -129,6 +142,7 @@ int		initialize_skybox(t_skybox *skybox)
 	init_north_east(skybox->face);
 	init_top_bottom(skybox->face);
 	init_normals(skybox->face);
+	translate_skybox(skybox->face);
 	skybox->idx = -1;
 	return (0);
 }

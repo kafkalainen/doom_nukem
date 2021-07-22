@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:12:55 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/26 12:00:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/09 13:46:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void	convert_to_pixels(t_png *png)
 {
-	png->final_size = (png->height * png->width * png->bpp + 7) / 8;
+	png->final_size = (png->width * png->channels) * png->height;
 	png->pixels = (unsigned char *)ft_memalloc(sizeof(unsigned char)
 			* png->final_size);
 	if (!png->pixels)
 		error_output("Memory allocation of filtered pixel pointer failed.");
-	if (png->bpp < 8 && png->bpp * png->width
-		!= ((png->width * png->bpp + 7) / 8) * 8)
-	{
-		unfilter_scanlines(png, png->inflated, png->inflated);
-		remove_padding(png, png->pixels, png->inflated);
-	}
-	else
-	{
-		unfilter_scanlines(png, png->pixels, png->inflated);
-	}
+	// if (png->bpp < 8 && png->bpp * png->width
+	// 	!= ((png->width * png->bpp + 7) / 8) * 8) // since we are calculating precise size, there cannot be any bit padding
+	// {
+	// 	unfilter_scanlines(png, png->inflated, png->inflated);
+	// 	remove_padding(png, png->pixels, png->inflated);
+	// }
+	// else
+	// {
+	unfilter_scanlines(png, png->pixels, png->inflated);
+	// }
 }
 
 void	unfilter_scanlines(t_png *png, unsigned char *out, unsigned char *in)
@@ -37,8 +37,8 @@ void	unfilter_scanlines(t_png *png, unsigned char *out, unsigned char *in)
 
 	s.line = 0;
 	s.prev = 0;
-	s.byte_width = (png->bpp + 7) / 8;
-	s.line_bytes = (png->width * png->bpp + 7) / 8;
+	s.byte_width = png->channels;
+	s.line_bytes = (png->width * png->channels);
 	while (s.line < png->height)
 	{
 		s.out_index = s.line_bytes * s.line;

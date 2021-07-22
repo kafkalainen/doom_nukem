@@ -100,6 +100,29 @@ void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 		printf("back left\n");
 	else if (degrees > 157.5 && degrees < 180)
 		printf("left side\n");*/
+	float	rad;
+	t_xy	a;
+	t_xy	b;
+
+	a = vec3_to_vec2(vec3_dec(plr->pos, entity->pos));
+	b = vec3_to_vec2(vec3_dec(vec3_add(entity->pos, entity->dir), entity->pos));
+	rad = atan2f(b.y * a.x - b.x * a.y, b.x * a.x + b.y * a.y);
+	if (rad > -0.3926991 && rad < 0.3926991)
+		printf("infront\n");
+	if (rad < -0.3926991 && rad > -1.178097)
+		printf("front left\n");
+	if (rad < -1.178097 && rad > -1.9634954)
+		printf("left side\n");
+	if (rad < -1.9634954 && rad > -2.7488936)
+		printf("back left\n");
+	if (rad > 2.7488936 || rad < -2.7488936)
+		printf("behind\n"); 
+	if (rad < 2.7488936 && rad > 1.9634954)
+		printf("back right\n");
+	if (rad < 1.9634954 && rad > 1.178097)
+		printf("right side\n");
+	if (rad < 1.178097 && rad > 0.3926991)
+		printf("front right\n");
 }
 
 void	choose_new_direction(t_entity *entity, t_home *home)

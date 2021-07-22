@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/27 17:36:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:08:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,14 @@ typedef struct s_home
 	t_projectile	**projectile_pool;
 	t_time			t;
 	t_xy			offset;
-	unsigned int	nbr_of_sectors;
-	int				nbr_of_textures;
+	char			**story;
+	char			*chosen_map;
+	Uint32			linked_map;
 	Uint32			nbr_of_entities;
 	Uint32			nbr_of_projectiles;
+	unsigned int	nbr_of_sectors;
+	int				nbr_of_textures;
+	int				end_sector;
 	int				game_state;
 }					t_home;
 

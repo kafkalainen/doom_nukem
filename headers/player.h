@@ -15,12 +15,38 @@
 
 enum e_plot_states
 {
-	beginning,
+	no_plot,
+	sector_plot,
+	beginning1,
+	beginning2,
+	beginning3,
+	beginning4,
+	beginning5,
+	talk1,
+	talk2,
+	talk3,
+	talk4,
+	talk5,
+	talk6,
+	talk7,
+	talk8,
+	ending1,
+	ending2,
+	ending3,
+	ending4,
+	ending5,
+	ending6,
+	ending7,
+	ending8,
+	ending9,
+	cutscene1,
+	cutscene2,
 	enemy_sighted,
-	contemplation,
-	warning,
-	plot_twist,
-	ending,
+	enemy_noise_before,
+	enemy_noise_after,
+	power_on,
+	first_blood,
+	health_low,
 };
 
 typedef struct s_input
@@ -84,6 +110,7 @@ typedef struct		s_player
 	float			height;
 	float			acceleration;
 	int				cur_sector;
+	int				msg_sector;
 	int				plot_state;
 	int				enemy_sighted;
 	int				active_inv;
@@ -93,6 +120,7 @@ typedef struct		s_player
 	unsigned int	reserve_ammo[2];
 	unsigned int	inventory[4];
 	Uint32			time;
+	Uint32			message_time;
 	t_audio			audio;
 }					t_player;
 
@@ -115,6 +143,7 @@ Uint32	close_doors(t_sector **sectors, Uint32 nb_of_sectors,
 		Uint32 current_time, Uint32 delta_time);
 void	create_target_vector(t_player *plr);
 void	crouch(t_player *plr);
+void	end_level(t_home *home, t_player *plr);
 void	gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
 void	init_player(t_player *plr);
 int		jetpack(t_player *plr, t_home *home, Uint32 t);
@@ -125,5 +154,9 @@ int		player_move(t_player *plr, t_home *home, Uint32 delta_time);
 int		plr_inside(t_sector *sector, t_player *plr);
 int		player_use(t_player *plr, t_home *home, Uint32 delta_time);
 void	update_player(t_player *plr, t_home *home, Uint32 delta_time);
-
+char	**init_story(void);
+void	free_story(char ***array, Uint32 nb_of_strings);
+Uint32	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector);
+void	draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr);
+void	init_cutscene(char **array);
 #endif

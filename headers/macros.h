@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/16 15:29:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/21 21:20:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,24 @@
 # define FOV 1.57079616f
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
-
 # define HUD_HP_X 100.0f
 # define HUD_HP_Y 540.0f
 # define HUD_AMMO_X 630.0f
 # define HUD_AMMO_Y 570.0f
-
-# define NUM_TEX 8
+/*
+**  Number of textures has been counted as follows:
+**  - Zero index
+**  - 20 available wall and floor textures.
+**  - HUD
+**  - 2 weapons
+**  - 4 enemies
+**  - Ammo projectile
+**  - Health station full / depleted
+**  - Switch on / off
+**  - Door
+**  - Lamp on / off
+*/
+# define NUM_TEX 36
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
 # define INV_PI_BY_TWO 0.1591549367f
@@ -44,6 +55,7 @@
 # define FALSE 0
 # define AND &&
 # define OR ||
+# define GAME_CONTINUE 5
 # define EDITOR 4
 # define GAME_LOOP 3
 # define MAP_MENU 2
@@ -52,6 +64,9 @@
 # define MAX_THREADS 6
 # define SKYBOX_TEX -1
 # define DOOR_INDEX 3000
+# define SUBDIV 16.0f
+# define DENOMSUBDIV 0.0625f
+# define STORY_STRINGS 30
 
 /*
 ** Compass directions

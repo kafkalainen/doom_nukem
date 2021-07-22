@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 12:35:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:57:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_player(t_player *plr)
 	plr->dir.x = 0.0f;
 	plr->dir.y = 1.0f;
 	plr->time = 0;
+	plr->message_time = 0;
 	plr->cur_sector = 0;
 	plr->pos = (t_xyz){0.8f, 3.5f, 2.87f, 1.0f};
 	plr->look_dir = (t_xyz){0.0f, 0.0f, 1.0f, 1.0f};
@@ -57,6 +58,7 @@ void	init_player(t_player *plr)
 	plr->inventory[1] = 0;
 	plr->inventory[2] = 0;
 	plr->inventory[3] = 0;
+	plr->plot_state = no_plot;
 	init_input_values(&plr->input);
 }
 
@@ -78,6 +80,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	(void)plr;
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
+	home->chosen_map = NULL;
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	frame->buffer = (Uint32 *)malloc(sizeof(Uint32)
 			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);
@@ -93,6 +96,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	if (ret)
 		clean_up(frame);
 	home = init_sdl(home, frame, &frame->min_step);
+	initialize_audio_to_null(&plr->audio);
 	// ret = load_audio(&plr->audio);
 	// if (ret)
 	// {

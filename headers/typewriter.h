@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typewriter.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 09:46:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 12:22:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/09 15:34:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef	struct s_plx_modifier
 {
 	int			colour;
 	int			size;
+	size_t		len;
 }				t_plx_modifier;
 
 

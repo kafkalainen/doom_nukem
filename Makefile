@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/07/01 14:41:01 by jnivala          ###   ########.fr        #
+#    Updated: 2021/07/12 12:42:55 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,12 +68,15 @@ SRCS = \
 	raycaster$(SLASH)recursion_checks.c \
 	raycaster$(SLASH)scan_fov.c \
 	raycaster$(SLASH)setup_frame.c \
+	update_player$(SLASH)advance_story.c \
 	update_player$(SLASH)check_distances.c \
+	update_player$(SLASH)check_y_diff.c \
 	update_player$(SLASH)gravity.c \
 	update_player$(SLASH)handle_doors.c \
+	update_player$(SLASH)init_story.c \
+	update_player$(SLASH)init_story_cutscene.c \
 	update_player$(SLASH)key_input.c \
 	update_player$(SLASH)mouse_handle.c \
-	update_player$(SLASH)check_y_diff.c \
 	update_player$(SLASH)player_move.c \
 	update_player$(SLASH)player_use.c \
 	update_player$(SLASH)special_movement.c \
@@ -99,7 +102,8 @@ SRCS = \
 	update_screen$(SLASH)matrix_3d.c \
 	update_screen$(SLASH)update_screen.c \
 	update_screen$(SLASH)set_lighting.c \
-	utilities$(SLASH)audio.c \
+	utilities$(SLASH)audio_a.c \
+	utilities$(SLASH)audio_b.c 	\
 	utilities$(SLASH)error_output.c \
 	utilities$(SLASH)fps_timer.c \
 	utilities$(SLASH)init_input.c \
@@ -108,7 +112,9 @@ SRCS = \
 	utilities$(SLASH)mem_functions_2.c \
 	utilities$(SLASH)pxl_alphabet.c \
 	utilities$(SLASH)pxl_numbers.c \
-	utilities$(SLASH)raster_queue.c \
+	utilities$(SLASH)raster_queue_a.c \
+	utilities$(SLASH)raster_queue_b.c \
+	utilities$(SLASH)raster_queue_c.c \
 	utilities$(SLASH)setup.c \
 	utilities$(SLASH)str_pxl.c \
 	utilities$(SLASH)system_calls.c \
@@ -125,6 +131,7 @@ SRCS = \
 	vec_math$(SLASH)vec3_d.c \
 	vec_math$(SLASH)vec3_e.c \
 	vec_math$(SLASH)vec3_f.c \
+	vec_math$(SLASH)vec3_g.c \
 	menu_systems$(SLASH)launch_modules.c \
 	menu_systems$(SLASH)menu_inputs.c \
 	menu_systems$(SLASH)menu_setups.c \

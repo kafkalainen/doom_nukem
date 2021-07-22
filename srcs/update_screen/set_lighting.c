@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 20:06:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 13:32:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/07 15:04:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ static float	saturate(float value)
 	return (value);
 }
 
+
+/*
+**	Decided to use lambertial lighting model
+**	opposed to Blinn-Phong lighting model.
+*/
 static float	calculate_light_intensity(t_lighting *light, t_triangle *tri,
 				Uint32 idx)
 {
@@ -45,13 +50,12 @@ static float	calculate_light_intensity(t_lighting *light, t_triangle *tri,
 	float	dot_product;
 	float	intensity;
 
-	light_dir = vec3_dec(light->light_src, tri->p[idx]);
+	light_dir = vec3_unit_vector(vec3_dec(light->light_src, tri->p[idx]));
 	magnitude = vec3_eucl_dist(light_dir);
-	light_dir = vec3_unit_vector(light_dir);
 	magnitude = magnitude * magnitude;
-	dot_product = vec3_dot_product(tri->vertex_normal[idx], light_dir);
+	dot_product = vec3_dot_product(light_dir, tri->normal);
 	intensity = saturate(dot_product);
-	intensity = intensity * light->diffuse_power / magnitude;
+	intensity = intensity * light->diffuse_power * 0.1f / magnitude;
 	if (intensity < 0.1f)
 		intensity = 0.1f;
 	return (intensity);

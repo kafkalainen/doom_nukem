@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/25 13:01:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:14:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 		check_player_dir(plr);
 		player_move(plr, home, delta_time);
 		// if (player_move(plr, home, delta_time))
-			// play_footsteps(&plr->audio);
+		// 	play_footsteps(&plr->audio);
 	}
 }
 
@@ -77,4 +77,7 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 	if (!plr->input.jetpack)
 		movement(plr, home, delta_time);
 	player_use(plr, home, delta_time);
+	evolve_story(plr, home->sectors[plr->cur_sector],
+		home->sectors[plr->msg_sector]);
+	end_level(home, plr);
 }

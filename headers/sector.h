@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 14:57:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/13 11:06:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ typedef struct s_sector
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;
+	char			**story;
+	unsigned int	nb_of_msgs;
+	unsigned int	cur_msg;
 	t_lighting		lights;
 	t_surface		*ground;
 	t_surface		*ceiling;

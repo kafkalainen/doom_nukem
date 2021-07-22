@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 13:07:38 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/12 12:14:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,22 @@ void	ft_str_pxl(Uint32 *buffer, t_xy coord,
 	char *str, t_plx_modifier mod)
 {
 	int		c;
+	t_xy	original;
 
-	while (*str != '\0')
+	original = coord;
+	while (*str != '\0' && mod.len--)
 	{
-		c = ft_toupper(*str);
-		handle_letter(buffer, coord, c, mod);
-		coord.x += 5 * mod.size;
+		if (*str == '\n')
+		{
+			coord.x = original.x;
+			coord.y += 7 * mod.size;
+		}
+		else
+		{
+			c = ft_toupper(*str);
+			handle_letter(buffer, coord, c, mod);
+			coord.x += 5 * mod.size;
+		}
 		str++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_inputs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/11 13:03:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/12 11:29:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	update_main_menu(Uint32 *menu_buffer, int option)
 	i = 0;
 	y = 0;
 	mod.size = MAIN_MENU_TEXT;
+	mod.len = 8;
 	while (i < 4)
 	{
 		if (i == option)
