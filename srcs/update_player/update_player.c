@@ -70,6 +70,8 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 	crouch(plr);
 	if (!plr->input.jetpack)
 		jump(plr, home->sectors[plr->cur_sector]);
+	if (plr->power_points < 6)
+		plr->power_points = fmin(plr->power_points + 0.002 * delta_time, 6.0f);
 	jetpack(plr, home, delta_time);
 	gravity(home->sectors[plr->cur_sector], plr, delta_time);
 	if (!plr->input.jetpack)

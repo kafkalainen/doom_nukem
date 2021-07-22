@@ -94,6 +94,7 @@ SRCS = \
 	update_screen$(SLASH)draw_tex_pixel.c \
 	update_screen$(SLASH)draw_tex_triangle.c \
 	update_screen$(SLASH)draw_wireframe.c \
+	update_screen$(SLASH)draw_hud.c \
 	update_screen$(SLASH)init_matrices_a.c \
 	update_screen$(SLASH)init_matrices_b.c \
 	update_screen$(SLASH)put_pixel.c \
@@ -119,6 +120,7 @@ SRCS = \
 	utilities$(SLASH)system_calls.c \
 	utilities$(SLASH)swap_and_sort.c \
 	utilities$(SLASH)init_skybox.c \
+	utilities$(SLASH)init_hud_elements.c \
 	vec_math$(SLASH)vec2_a.c \
 	vec_math$(SLASH)vec2_b.c \
 	vec_math$(SLASH)vec2_c.c \
@@ -174,7 +176,7 @@ WIN_LIBRARY_PATHS = \
 LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 CC = gcc
-WIN_CFLAGS = -Wall -Wextra -Werror -O3 -g
+WIN_CFLAGS = -Wall -Wextra -O3 -g
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 ifeq ($(OS),Windows_NT)
