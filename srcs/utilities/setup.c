@@ -47,7 +47,8 @@ void	init_player(t_player *plr)
 	plr->pitch = 0.0f;
 	plr->yaw = 0.0f;
 	plr->height = 1.5f;
-	plr->power_points = 6;
+	plr->power_points = 5.0f;
+	plr->fuel_points = 100.0f;
 	plr->active_inv = -1;
 	plr->active_wep = 0;
 	plr->reserve_ammo[0] = 42;

@@ -118,9 +118,9 @@ int	jetpack(t_player *plr, t_home *home, Uint32 t)
 
 	if (!plr->input.jetpack)
 		return (FALSE);
-	if (plr->power_points > 0)
+	if (plr->fuel_points > 1)
 	{
-		plr->power_points -= t * 0.005;
+		plr->fuel_points -= t * 0.05;
 		plr->move_dir = vec3_unit_vector(plr->look_dir);
 		new_loc = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.03f));
 		if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &new_loc))
@@ -146,6 +146,8 @@ int	jetpack(t_player *plr, t_home *home, Uint32 t)
 				plr->pos.y -= dist;
 			return (TRUE);
 		}
+	} else {
+		plr->input.jetpack = 0;
 	}
 	return (FALSE);
 }
