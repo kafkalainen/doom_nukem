@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/21 13:58:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 12:42:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,17 @@ static void		draw_inventory_slots(t_player *plr, Uint32 *buffer)
 	}
 }
 
-// static void		draw_hud_image(t_home *home, t_frame *frame, t_player *plr)
+// static void		draw_hud_image(t_home *home, t_frame *frame)
 // {
-// 	(void)home;
-// 	(void)frame;
-// 	(void)plr;
+// 	Uint32	x;
+// 	Uint32	y;
+// 	t_texel	tex;
+
+// 	tex = home->textures[hud]->tex;
+// 	while (tex.)
+// 	tex.texels
+
 // 	return ;
-// }
 
 // static void		draw_inventory_images(t_home *home, t_frame *frame, t_player *plr)
 // {

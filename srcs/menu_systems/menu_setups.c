@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/19 19:10:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 12:45:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 		error_output("Error while loading map!\n");
 	// if (open_file(home, "map_files/test.DATA") < 0)
 	// 		error_output("Could not successfully open map file.");
+	home->nbr_of_textures = NUM_TEX;
 	init_textures(home);
 	init_sprites_editor(home);
 	// home->story = init_story();
