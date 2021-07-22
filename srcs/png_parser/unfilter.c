@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:12:55 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/22 14:00:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/22 14:09:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ void	unfilter_scanlines(t_png *png, unsigned char *out, unsigned char *in)
 
 	s.line = 0;
 	s.prev = 0;
-	s.byte_width = (png->bpp + 7) / 8;
-	s.line_bytes = (png->width * png->bpp + 7) / 8;
-	// printf("line bytes: %i, scanline: %i, channels: %i, byte width: %i, line_bytes * height: %i\n", s.line_bytes, png->scanline, png->channels, s.byte_width, (s.line_bytes * png->height));
+	s.byte_width = png->channels;
+	s.line_bytes = (png->width * png->channels);
 	while (s.line < png->height)
 	{
 		s.out_index = s.line_bytes * s.line;
