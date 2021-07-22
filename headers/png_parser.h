@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/10 16:50:19 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/21 16:14:43 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,6 @@ void			add_texture_values(t_png *png, t_texture *tex, int idx);
 
 void			process_scanline(unsigned char *out,
 					unsigned char *sl, t_scan_helper s);
-void			remove_padding(t_png *png, unsigned char *out,
-					unsigned char *in);
-void			setup_padding_helper(t_padding_helper *h, t_png *png);
 void			unfilter_scanlines(t_png *png, unsigned char *out,
 					unsigned char *in);
 void			convert_to_pixels(t_png *png);

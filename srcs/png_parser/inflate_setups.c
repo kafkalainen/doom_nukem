@@ -6,22 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:04:19 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/26 11:53:51 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/21 16:03:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-/*
-** the order in which "code length alphabet code lengths" are stored,
-** out of this the huffman tree of the dynamic huffman tree lengths is generated
-** number of literal/length codes + 257. Unlike the spec, the value 257 is added
-** to it here already
-** number of distance codes. Unlike the spec, the value 1 is added to it
-** here already
-** number of code length codes. Unlike the spec, the value 4 is added to
-** it here already
-*/
 
 void	setup_dynamic_helper(t_dynamic_helper *d,
 	const unsigned char *in, unsigned int *bp)
@@ -44,14 +33,6 @@ void	setup_dynamic_helper(t_dynamic_helper *d,
 		d->i++;
 	}
 }
-
-/*
-** a value of 32767 means uninited,
-** a value >= numcodes is an address to another bit,
-** a value < numcodes is a code.
-** The 2 rows are the 2 possible bit values (0 or 1),
-** there are as many columns as codes
-*/
 
 void	setup_tree_helper(t_tree_helper *h, const unsigned int *bitlen,
 	t_huffman_tree *tree)
@@ -78,13 +59,6 @@ void	setup_tree_helper(t_tree_helper *h, const unsigned int *bitlen,
 		tree->tree2d[h->n++] = 32767;
 }
 
-/*
-** the base lengths represented by codes 257-285
-** the extra bits used by codes 257-285 (added to base length)
-** part 1: get length base
-** part 2: get extra bits and add the value of that to length
-*/
-
 void	get_length_base_extra(unsigned int *length,
 	unsigned int *num_extra_bits_dst, unsigned int code)
 {
@@ -97,13 +71,6 @@ void	get_length_base_extra(unsigned int *length,
 	*length = length_base[code - FIRST_LENGTH_CODE_INDEX];
 	*num_extra_bits_dst = length_extra[code - FIRST_LENGTH_CODE_INDEX];
 }
-
-/*
-** the base backwards distances (the bits of distance codes appear
-** after length codes and use their own huffman tree)
-** the extra bits of backwards distances (added to base)
-** part 4: get extra bits from distance
-*/
 
 void	get_dst_base_extra(unsigned int *distance,
 	unsigned int *num_extra_bits_dst, unsigned int code_dst)

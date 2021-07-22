@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:32:45 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/09 13:44:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/21 16:05:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,12 @@ void	parse_data(t_png *png)
 
 void	decode_png(t_png *png)
 {
-	png->inflated_size = png->scanline * png->height; // more precise size calculation for filtered-uncompressed pixel data
+	png->inflated_size = png->scanline * png->height;
 	png->inflated = (unsigned char *)malloc(sizeof(unsigned char)
 			* png->inflated_size);
 	if (!png->inflated)
 		error_output("Memory allocation of inflated data pointer failed\n");
-	ft_inflate(png); // complete overhaul
-	// ft_puff(png->inflated, png->inflated_size, png->compressed, png->compressed_size); // perhaps more variables needed
+	ft_inflate(png);
 	convert_to_pixels(png);
 }
 
