@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 14:05:23 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/02 11:35:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 17:24:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	free_sectors(t_home *home)
 		free_points(&home->sectors[i]->walls, home->sectors[i]->nb_of_walls);
 		free_surfaces(&home->sectors[i]->ground, home->sectors[i]->nb_of_ceil);
 		free_surfaces(&home->sectors[i]->ceiling, home->sectors[i]->nb_of_ground);
+		free_story(&home->sectors[i]->story, home->sectors[i]->nb_of_msgs);
 		free(home->sectors[i]);
 		home->sectors[i] = NULL;
 		i++;

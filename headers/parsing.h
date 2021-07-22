@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/12 14:31:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:49:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int				parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_light_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
+int				parse_map_name(t_home *home, ssize_t size,
+					unsigned char *buf, unsigned int **pos);
 int				parse_story_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_sector_data(unsigned char *buf, t_player *plr,

@@ -6,12 +6,53 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/06/29 14:46:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/21 21:23:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DRAWING_FUNCTIONS_H
 # define DRAWING_FUNCTIONS_H
+
+enum e_texture_idx
+{
+	zero,
+	space,
+	wall0,
+	wall1,
+	wall2,
+	wall3,
+	wall4,
+	wall5,
+	wall6,
+	wall7,
+	wall8,
+	wall9,
+	surf0,
+	surf1,
+	surf2,
+	surf3,
+	surf4,
+	surf5,
+	surf6,
+	surf7,
+	surf8,
+	surf9,
+	door,
+	hud,
+	weapon0,
+	weapon1,
+	enemy0,
+	enemy1,
+	enemy2,
+	enemy3,
+	projectile,
+	power_station_ready,
+	power_station_depleted,
+	button_on,
+	button_off,
+	lamp_on,
+	lamp_off,
+};
 
 /*
 ** Drawing functions

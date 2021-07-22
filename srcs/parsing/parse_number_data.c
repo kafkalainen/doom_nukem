@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/13 10:35:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:50:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,22 @@ int	parse_story_data(t_sector *new_sector, unsigned char *buf,
 		i++;
 	}
 	new_sector->cur_msg = 0;
+	return (0);
+}
+
+int	parse_map_name(t_home *home, ssize_t size, unsigned char *buf,
+	unsigned int **pos)
+{
+	char	*temp;
+	size_t	len;
+
+	**pos += get_next_breaker(buf + **pos) + 1;
+	if (**pos > (unsigned int)size)
+		return (1);
+	len = get_next_breaker(buf + **pos);
+	ft_strdel(&home->chosen_map);
+	temp = ft_strndup((const char *)buf + **pos, len - 1);
+	home->chosen_map = ft_strjoin("map_files/", temp);
+	ft_strdel(&temp);
 	return (0);
 }

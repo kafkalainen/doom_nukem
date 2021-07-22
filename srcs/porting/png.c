@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/06 16:59:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/22 10:08:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,6 @@ void	load_texture(char *path, t_texture **tex_array, int i)
 	free_png(png);
 }
 
-static void	get_tex_count(int *i, DIR **dir, struct dirent **dir_entry)
-{
-	char	*found;
-
-	(*i) = 0;
-	*dir_entry = readdir(*dir);
-	while (*dir_entry != NULL)
-	{
-		found = ft_strstr((*dir_entry)->d_name, ".png");
-		if (found != NULL)
-			(*i)++;
-		*dir_entry = readdir(*dir);
-	}
-	rewinddir(*dir);
-}
-
 /*
 ** Init textures for editor
 */
@@ -92,23 +76,35 @@ void	cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir)
 	// printf("%i\n", i);
 }
 
+static void	init_asset_textures(t_home *home)
+{
+	load_texture("textures/power_station_ready.png",
+		home->textures, power_station_ready);
+	load_texture("textures/power_station_depleted.png",
+		home->textures, power_station_depleted);
+	load_texture("textures/lamp_on.png", home->textures, lamp_on);
+	load_texture("textures/lamp_off.png", home->textures, lamp_off);
+	load_texture("textures/button_on.png", home->textures, button_on);
+	load_texture("textures/button_off.png", home->textures, button_off);
+	load_texture("textures/door.png", home->textures, door);
+}
+
 void	init_textures(t_home *home)
 {
-	DIR				*dir;
-	struct dirent	*dir_entry;
-
-	dir = opendir("textures/");
-	if (dir == NULL)
-		error_output("Failed to open textures directory.\n");
-	get_tex_count(&home->nbr_of_textures, &dir, &dir_entry);
-	if (home->nbr_of_textures == 0)
-		error_output("No textures found\n");
 	home->textures = (t_texture **)malloc(sizeof(t_texture *)
-			* (home->nbr_of_textures + 2));
+			* NUM_TEX + 1);
 	if (!home->textures)
 		error_output("Failed to allocate memory to editor textures.\n");
-	home->textures[0] = assign_empty_texture();
-	load_texture("textures/dsky.png", home->textures, 1);
-	cycle_textures(home, dir_entry, dir);
-	closedir(dir);
+	home->textures[zero] = assign_empty_texture();
+	load_texture("textures/dsky.png", home->textures, space);
+	load_texture("textures/armory.png", home->textures, wall0);
+	load_texture("textures/checkers.png", home->textures, wall1);
+	load_texture("textures/checkers2.png", home->textures, wall2);
+	load_texture("textures/face.png", home->textures, wall3);
+	load_texture("textures/hull.png", home->textures, wall4);
+	load_texture("textures/hull2.png", home->textures, wall5);
+	load_texture("textures/loading_bay.png", home->textures, wall6);
+	init_asset_textures(home);
+	load_texture("textures/skull_skulker.png", home->textures, enemy0);
+	load_texture("textures/hud_doom.png", home->textures, hud);
 }

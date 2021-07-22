@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/13 13:11:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:57:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	(void)plr;
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
+	home->chosen_map = NULL;
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	frame->buffer = (Uint32 *)malloc(sizeof(Uint32)
 			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);

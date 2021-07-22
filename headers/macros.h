@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/12 11:07:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/21 21:20:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,20 @@
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
 
-# define NUM_TEX 8
+/*
+**  Number of textures has been counted as follows:
+**  - Zero index
+**  - 20 available wall and floor textures.
+**  - HUD
+**  - 2 weapons
+**  - 4 enemies
+**  - Ammo projectile
+**  - Health station full / depleted
+**  - Switch on / off
+**  - Door
+**  - Lamp on / off
+*/
+# define NUM_TEX 36
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
 # define INV_PI_BY_TWO 0.1591549367f
@@ -39,6 +52,7 @@
 # define FALSE 0
 # define AND &&
 # define OR ||
+# define GAME_CONTINUE 5
 # define EDITOR 4
 # define GAME_LOOP 3
 # define MAP_MENU 2

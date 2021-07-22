@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/13 12:48:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 19:15:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ Uint32	close_doors(t_sector **sectors, Uint32 nb_of_sectors,
 		Uint32 current_time, Uint32 delta_time);
 void	create_target_vector(t_player *plr);
 void	crouch(t_player *plr);
+void	end_level(t_home *home, t_player *plr);
 void	gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
 void	init_player(t_player *plr);
 int		jetpack(t_player *plr, t_home *home, Uint32 t);
@@ -123,7 +124,7 @@ int		plr_inside(t_sector *sector, t_player *plr);
 int		player_use(t_player *plr, t_home *home, Uint32 delta_time);
 void	update_player(t_player *plr, t_home *home, Uint32 delta_time);
 char	**init_story(void);
-void	free_story(char ***array);
+void	free_story(char ***array, Uint32 nb_of_strings);
 Uint32	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector);
 void	draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr);
 void	init_cutscene(char **array);

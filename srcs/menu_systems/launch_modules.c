@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/12 11:42:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/19 18:05:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,7 @@ void	launch_game_loop(t_home *home, t_player *plr,
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 }
 
-void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e,
-	int *game_state)
+void	launch_load_menu_loop(t_menu *menu, t_home *home, SDL_Event *e)
 {
 	int	i;
 
@@ -133,15 +132,15 @@ void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e,
 		menu->end = 7;
 	else
 		menu->end = menu->nbr_of_maps - 1;
-	while (*game_state == MAP_MENU && !menu->selected)
+	while (home->game_state == MAP_MENU && !menu->selected)
 	{
-		process_inputs_load_menu(game_state, e, menu);
+		process_inputs_load_menu(&home->game_state, e, menu);
 		update_load_menu(menu, e->key.keysym.sym);
-		render_buffer(menu->menu_buffer, win->ScreenSurface);
-		SDL_UpdateWindowSurface(win->window);
+		render_buffer(menu->menu_buffer, home->win.ScreenSurface);
+		SDL_UpdateWindowSurface(home->win.window);
 	}
 	if (menu->selected)
-		menu->chosen_map = ft_strjoin("map_files/",
+		home->chosen_map = ft_strjoin("map_files/",
 				menu->map_names[menu->option]);
 	i = 0;
 	while (i < menu->nbr_of_maps)
