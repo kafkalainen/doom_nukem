@@ -68,30 +68,30 @@ static void		draw_inventory_slots(t_player *plr, Uint32 *buffer)
 	}
 }
 
-// static void		draw_hud_image(t_home *home, t_frame *frame)
-// {
-// 	Uint32	x;
-// 	Uint32	y;
-// 	t_texel	tex;
+static void		draw_hud_image(t_home *home, Uint32 *buffer)
+{
+	Uint32	x;
+	Uint32	y;
+	t_texel	tex;
+	tex = home->textures[hud]->tex;
 
-// 	tex = home->textures[hud]->tex;
-// 	while (tex.)
-// 	tex.texels
-
-// 	return ;
-
-// static void		draw_inventory_images(t_home *home, t_frame *frame, t_player *plr)
-// {
-// 	(void)home;
-// 	(void)frame;
-// 	(void)plr;
-// 	return ;
-// }
+	y = 0;
+	while (y < tex.height)
+	{
+		x = 0;
+		while (x < tex.width)
+		{
+			put_pixel(buffer, x, y, (Uint32)tex.texels[(tex.width * y) + x]);
+			x++;
+		}
+		y++;
+	}
+}
 
 void			draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 {
 	(void)home;
-	//draw_hud_image(home, frame, plr);
+	draw_hud_image(home, frame->buffer);
 	draw_power_bar(plr, frame->buffer);
 	draw_inventory_slots(plr, frame->buffer);
 	//draw_inventory_images(home, frame, plr);
