@@ -52,6 +52,7 @@ enum e_texture_idx
 	button_off,
 	lamp_on,
 	lamp_off,
+	pistol0,
 };
 
 /*

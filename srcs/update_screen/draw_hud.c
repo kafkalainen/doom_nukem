@@ -99,9 +99,34 @@ static void		draw_hud_image(t_home *home, Uint32 *buffer)
 	}
 }
 
+static void		draw_viewmodel_sprite(t_home *home, Uint32 *buffer,
+	t_player *plr, t_xy offset)
+{
+	int		x;
+	int		y;
+	t_texel	tex;
+	tex = home->textures[pistol0]->tex;
+
+	(void)plr;
+	y = 0;
+	while (y < tex.height)
+	{
+		x = 0;
+		while (x < tex.width)
+		{
+			put_pixel(buffer, x + (int)offset.x, y + (int)offset.y,
+				(Uint32)tex.texels[(tex.width * y) + x]);
+			x++;
+		}
+		y++;
+	}
+}
+
 void			draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 {
 	(void)home;
+	draw_viewmodel_sprite(home, frame->buffer, plr,
+		vec2(plr->hud.vm_x, plr->hud.vm_y));
 	draw_hud_image(home, frame->buffer);
 	draw_power_bar(plr, frame->buffer);
 	draw_fuel_bar(plr, frame->buffer);
