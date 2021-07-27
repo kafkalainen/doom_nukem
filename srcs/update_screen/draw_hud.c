@@ -107,8 +107,9 @@ static void		draw_viewmodel_sprite(t_home *home, Uint32 *buffer,
 	t_texel	tex;
 	tex = home->textures[pistol0]->tex;
 
-	(void)plr;
 	y = 0;
+	offset.x += plr->hud.vm_mx * 10;
+	offset.y += plr->hud.vm_my * 10;
 	while (y < tex.height)
 	{
 		x = 0;

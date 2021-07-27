@@ -100,6 +100,8 @@ typedef struct		s_hud
 	float			hud_fuel_y;
 	float			vm_x;
 	float			vm_y;
+	float			vm_mx;
+	float			vm_my;
 }					t_hud;
 
 
