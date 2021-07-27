@@ -36,7 +36,7 @@
 **  - Door
 **  - Lamp on / off
 */
-# define NUM_TEX 37
+# define NUM_TEX 38
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
 # define INV_PI_BY_TWO 0.1591549367f

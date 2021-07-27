@@ -22,5 +22,7 @@ int		initialize_hud(t_hud *hud)
 	hud->hud_ammo_y = 570.0f;
 	hud->hud_fuel_x = 58.0f;
 	hud->hud_fuel_y = 525.0f;
+	hud->vm_x = 530.0f;
+	hud->vm_y = 280.0f;
 	return (0);
 }
