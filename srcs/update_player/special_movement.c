@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 09:15:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/26 13:25:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	jump(t_player *plr, t_sector *sector)
 			return ;
 		if (check_distance_to_ground(sector, plr, plr->pos) <= 0)
 			set_animation_on(&animation_start, &animation_end, &plr->time, 500);
-		if (plr->time <= animation_end && jump_range <= 2.0f)
+		if (plr->time <= animation_end && jump_range <= 3.0f)
 			set_jump_sequence(plr, &animation_end, &jump_range);
 		else
 		{
