@@ -102,6 +102,8 @@ typedef struct		s_hud
 	float			vm_y;
 	float			vm_mx;
 	float			vm_my;
+	float			vm_rx;
+	float			vm_ry;
 }					t_hud;
 
 
@@ -130,6 +132,7 @@ typedef struct		s_player
 	unsigned int	live_ammo[2];
 	unsigned int	reserve_ammo[2];
 	unsigned int	inventory[4];
+	float			steps;
 	Uint32			time;
 	Uint32			message_time;
 	t_audio			audio;

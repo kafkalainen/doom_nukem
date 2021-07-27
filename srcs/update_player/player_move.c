@@ -107,16 +107,10 @@ int	plr_inside(t_sector *sector, t_player *plr)
 	return (walls_crossed % 2);
 }
 
-static void	viewmodel_motion(t_player *plr, Uint32 t)
+static void	viewmodel_motion(t_player *plr)
 {
-	float x;
-	float z;
-
-	(void)t;
-	x = plr->pos.x;
-	z = plr->pos.z;
-	plr->hud.vm_mx = sin((x * 2 + z * 2));
-	plr->hud.vm_my = sin((x * 2 + z * 2));
+	plr->hud.vm_mx = sin(plr->steps);
+	plr->hud.vm_my = sin(plr->steps);
 }
 
 int	player_move(t_player *plr, t_home *home, Uint32 t)
@@ -150,8 +144,9 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 	}
 	else
 	{
+		plr->steps += t * 0.005;
 		plr->pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
-		viewmodel_motion(plr, t);
+		viewmodel_motion(plr);
 		dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr, plr->pos);
 		if (dist < 0 && dist > -plr->height)
 			plr->pos.y -= dist;

@@ -59,6 +59,7 @@ void	init_player(t_player *plr)
 	plr->inventory[1] = 0;
 	plr->inventory[2] = 0;
 	plr->inventory[3] = 0;
+	plr->steps = 0;
 	plr->plot_state = no_plot;
 	init_input_values(&plr->input);
 }

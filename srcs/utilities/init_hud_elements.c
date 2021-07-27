@@ -26,5 +26,7 @@ int		initialize_hud(t_hud *hud)
 	hud->vm_y = 280.0f;
 	hud->vm_mx = 0.0f;
 	hud->vm_my = 0.0f;
+	hud->vm_rx = 0.0f;
+	hud->vm_ry = 0.0f;
 	return (0);
 }

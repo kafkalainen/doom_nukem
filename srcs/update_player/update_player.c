@@ -67,6 +67,10 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 		plr->yaw -= 0.02f;
 	if (plr->input.rot_right == 1)
 		plr->yaw += 0.02f;
+	if (plr->hud.vm_rx != 0)
+		plr->hud.vm_rx *= 0.908;
+	if (plr->hud.vm_ry != 0)
+		plr->hud.vm_ry *= 0.908;
 	crouch(plr);
 	if (!plr->input.jetpack)
 		jump(plr, home->sectors[plr->cur_sector]);
