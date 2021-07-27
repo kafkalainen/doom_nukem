@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/07/12 12:42:55 by jnivala          ###   ########.fr        #
+#    Updated: 2021/07/27 15:09:22 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS = \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_light_sources.c \
 	parsing$(SLASH)calc_map_properties.c \
+	parsing$(SLASH)calc_wall_objects.c \
 	parsing$(SLASH)change_door_to_portal.c \
 	parsing$(SLASH)check_portal_height_diff.c \
 	parsing$(SLASH)check_if_same_point.c \

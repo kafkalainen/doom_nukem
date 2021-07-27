@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 16:33:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/27 16:31:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ static void	viewmodel_motion(t_player *plr, Uint32 t)
 	float x;
 	float z;
 
+	(void)t;
 	x = plr->pos.x;
 	z = plr->pos.z;
 	plr->hud.vm_mx = sin((x * 2 + z * 2));

@@ -6,12 +6,15 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 13:18:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 11:08:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/27 15:39:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
+/*
+**	CONSIDERED TO BE COMPLETELY REMOVED SINCE THEY ARE NOT USED.
+*/
 void	calc_top_normal_averages(t_sector *sector, t_raster_queue *queue)
 {
 	Uint32	i;

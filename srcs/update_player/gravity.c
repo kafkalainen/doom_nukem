@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/27 14:41:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/27 15:03:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*
 **	We calculate the how much player will drop between frames.
-**	Gravity function is based on  space.
+**	Gravity function is based on space.
 **	s = 1 / 2 * g * t ** 2
 **
 */

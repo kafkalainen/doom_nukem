@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:29:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/22 15:47:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/27 16:11:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	initialize_door(t_wall *wall, t_point_data *left, t_point_data *right)
 void	initialize_switches(t_wall *wall, t_point_data *left)
 {
 	wall->light_switch.is_switch = left->light_switch;
-	wall->light_switch.on_off = 0;
-	wall->station.is_health_station = left->health_station;
+	wall->light_switch.on_off = left->on_off;
+	wall->station.is_power_station = left->power_station;
 	wall->station.is_depleted = 0;
 }
 

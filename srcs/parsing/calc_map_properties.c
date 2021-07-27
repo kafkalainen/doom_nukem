@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/02 11:26:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/27 17:15:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	calc_map_properties(t_home *home, t_player *plr)
 		i++;
 	}
 	calc_extra_walls(home);
+	// calc_wall_objects(home);
 	calc_average_unit_normals(home);
 	calc_light_sources(home);
 	plr->pos = check_y(home->sectors[plr->cur_sector], plr, plr->pos);
