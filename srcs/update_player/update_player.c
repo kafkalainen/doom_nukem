@@ -76,6 +76,8 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 		jump(plr, home->sectors[plr->cur_sector]);
 	if (plr->fuel_points < 100)
 		plr->fuel_points = fmin(plr->fuel_points + 0.004 * delta_time, 100.0f);
+	if (!plr->input.jetpack)
+		plr->pos.y += plr->speed.y * delta_time * 0.1;
 	jetpack(plr, home, delta_time);
 	gravity(home->sectors[plr->cur_sector], plr, delta_time);
 	if (!plr->input.jetpack)

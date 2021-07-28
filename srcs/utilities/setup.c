@@ -61,6 +61,7 @@ void	init_player(t_player *plr)
 	plr->inventory[3] = 0;
 	plr->steps = 0;
 	plr->plot_state = no_plot;
+	plr->speed = (t_xyz){0, 0, 0};
 	init_input_values(&plr->input);
 }
 

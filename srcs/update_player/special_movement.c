@@ -44,20 +44,20 @@ static void	set_height(t_player *plr, char direction)
 		return ;
 }
 
-static void	set_jump_sequence(t_player *plr, Uint32 *animation_end,
-	float *jump_range)
-{
-	if ((*animation_end - plr->time) > 450)
-	{
-		plr->pos.y -= 0.05f;
-		*jump_range -= 0.05f;
-	}
-	else
-	{
-		plr->pos.y += 0.2f;
-		*jump_range += 0.2f;
-	}
-}
+//static void	set_jump_sequence(t_player *plr, Uint32 *animation_end,
+//	float *jump_range)
+//{
+//	if ((*animation_end - plr->time) > 450)
+//	{
+//		plr->pos.y -= 0.05f;
+//		*jump_range -= 0.05f;
+//	}
+//	else
+//	{
+//		plr->pos.y += 0.2f;
+//		*jump_range += 0.2f;
+//	}
+//}
 
 void	crouch(t_player *plr)
 {
@@ -86,28 +86,38 @@ void	crouch(t_player *plr)
 
 void	jump(t_player *plr, t_sector *sector)
 {
-	static Uint32	animation_start = 0;
-	static Uint32	animation_end = 0;
-	static float	jump_range = 0.0f;
-	t_xyz			new_pos;
+	//static Uint32	animation_start = 0;
+	//static Uint32	animation_end = 0;
+	//static float	jump_range = 0.0f;
+	//t_xyz			new_pos;
 
-	if (plr->input.jump == 1)
+	if (plr->input.jump == 1 &&
+		!check_distance_to_ceiling(sector, &(t_xyz){plr->pos.x, plr->pos.y + 2.0f, plr->pos.z}) &&
+		check_distance_to_ground(sector, plr, plr->pos) <= 0)
 	{
-		new_pos = plr->pos;
-		new_pos.y += 2.0f;
-		if (check_distance_to_ceiling(sector, &new_pos))
-			return ;
-		if (check_distance_to_ground(sector, plr, plr->pos) <= 0)
-			set_animation_on(&animation_start, &animation_end, &plr->time, 500);
-		if (plr->time <= animation_end && jump_range <= 3.0f)
-			set_jump_sequence(plr, &animation_end, &jump_range);
-		else
-		{
-			animation_start = 0;
-			jump_range = 0.0f;
-			plr->input.jump = 0;
-		}
+		printf("JUMP\n");
+		plr->speed.y += 0.08;
 	}
+	else
+	{
+		plr->input.jump = 0;
+	}
+	//{
+	//	new_pos = plr->pos;
+	//	new_pos.y += 2.0f;
+	//	if (check_distance_to_ceiling(sector, &new_pos))
+	//		return ;
+	//	if (check_distance_to_ground(sector, plr, plr->pos) <= 0)
+	//		set_animation_on(&animation_start, &animation_end, &plr->time, 500);
+	//	if (plr->time <= animation_end && jump_range <= 3.0f)
+	//		set_jump_sequence(plr, &animation_end, &jump_range);
+	//	else
+	//	{
+	//		animation_start = 0;
+	//		jump_range = 0.0f;
+	//		plr->input.jump = 0;
+	//	}
+	//}
 }
 
 int	jetpack(t_player *plr, t_home *home, Uint32 t)
