@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/27 21:29:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/28 16:35:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 	if (plr->input.rot_right == 1)
 		plr->yaw += 0.02f;
 	if (plr->hud.vm_rx != 0)
-		plr->hud.vm_rx *= 0.908;
+		plr->hud.vm_rx *= 0.908f;
 	if (plr->hud.vm_ry != 0)
-		plr->hud.vm_ry *= 0.908;
+		plr->hud.vm_ry *= 0.908f;
 	crouch(plr);
 	if (!plr->input.jetpack)
 		jump(plr, home->sectors[plr->cur_sector]);
-	if (plr->fuel_points < 100)
-		plr->fuel_points = fmin(plr->fuel_points + 0.004 * delta_time, 100.0f);
+	if (plr->fuel_points < 100.0f)
+		plr->fuel_points = fmin(plr->fuel_points + 0.004f * delta_time, 100.0f);
 	jetpack(plr, home, delta_time);
 	gravity(home->sectors[plr->cur_sector], plr, delta_time);
 	if (!plr->input.jetpack)
