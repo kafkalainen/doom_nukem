@@ -117,6 +117,7 @@ typedef struct		s_player
 	t_xyz			target;
 	t_xyz			up;
 	t_xy			dir;
+	t_xyz			speed;
 	float			yaw;
 	float			pitch;
 	float			height;

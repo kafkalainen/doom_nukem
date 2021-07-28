@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/19 19:57:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/28 16:43:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	init_player(t_player *plr)
 	plr->inventory[3] = 0;
 	plr->steps = 0;
 	plr->plot_state = no_plot;
+	plr->speed = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	init_input_values(&plr->input);
 }
 

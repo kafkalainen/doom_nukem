@@ -27,18 +27,19 @@ void	gravity(t_sector *sector, t_player *plr, Uint32 delta_time)
 
 	g = 1.00f;
 	drop = check_distance_to_ground(sector, plr, plr->pos);
-	if (drop > 0.0f)
+	if (drop > 0.0f && !plr->input.jetpack)
 	{
 		if (plr->input.jetpack)
 			total_time = delta_time;
 		else
 			total_time += delta_time;
-		drop = 0.5f * g * total_time * total_time * 0.000001f;
-		plr->pos.y -= drop;
+		drop = g * delta_time * 0.0002f;
+		plr->speed.y -= drop;
 	}
 	else
 	{
 		total_time = 0;
+		plr->speed.y = 0.0f;
+		drop = fmax(drop, 0.0f);
 	}
-	return ;
 }

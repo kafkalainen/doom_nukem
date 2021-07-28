@@ -14,19 +14,19 @@
 
 int		initialize_hud(t_hud *hud)
 {
-	hud->idx[0] = -1;
-	hud->idx[1] = -1;
-	hud->hud_hp_x = 58.0f;
-	hud->hud_hp_y = 562.0f;
-	hud->hud_ammo_x = 630.0f;
-	hud->hud_ammo_y = 570.0f;
-	hud->hud_fuel_x = 58.0f;
-	hud->hud_fuel_y = 525.0f;
-	hud->vm_x = 530.0f;
-	hud->vm_y = 280.0f;
-	hud->vm_mx = 0.0f;
-	hud->vm_my = 0.0f;
-	hud->vm_rx = 0.0f;
-	hud->vm_ry = 0.0f;
+	hud->idx[0]		= -1;
+	hud->idx[1]		= -1;
+	hud->hud_hp_x	= 58.0f;
+	hud->hud_hp_y	= 562.0f;
+	hud->hud_ammo_x	= 630.0f;
+	hud->hud_ammo_y	= 570.0f;
+	hud->hud_fuel_x	= 58.0f;
+	hud->hud_fuel_y	= 525.0f;
+	hud->vm_x		= 530.0f;
+	hud->vm_y		= 280.0f;
+	hud->vm_mx		= 0.0f;
+	hud->vm_my		= 0.0f;
+	hud->vm_rx		= 0.0f;
+	hud->vm_ry		= 0.0f;
 	return (0);
 }
