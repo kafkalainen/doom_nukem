@@ -83,6 +83,7 @@ SRCS = \
 	update_player$(SLASH)player_use.c \
 	update_player$(SLASH)special_movement.c \
 	update_player$(SLASH)update_player.c \
+	update_player$(SLASH)shooting.c \
 	update_screen$(SLASH)apply_matrices_a.c \
 	update_screen$(SLASH)apply_matrices_b.c \
 	update_screen$(SLASH)calculate_offsets.c \

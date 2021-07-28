@@ -12,7 +12,19 @@
 
 #include "../../headers/doom_nukem.h"
 
-void	mouse_handle(t_player *plr, SDL_Event *e)
+static void		mouse_button_handle(t_player *plr, SDL_Event *e)
+{
+	if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_LEFT)
+		plr->input.shoot = 1;
+	if (e->type == SDL_MOUSEBUTTONUP && e->button.button == SDL_BUTTON_LEFT)
+		plr->input.shoot = 0;
+	if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_RIGHT)
+		plr->input.jetpack = 1;
+	if (e->type == SDL_MOUSEBUTTONUP && e->button.button == SDL_BUTTON_RIGHT)
+		plr->input.jetpack = 0;
+}
+
+void			mouse_handle(t_player *plr, SDL_Event *e)
 {
 	if (e->type == SDL_MOUSEMOTION)
 	{
@@ -35,8 +47,5 @@ void	mouse_handle(t_player *plr, SDL_Event *e)
 		if (plr->pitch > 1.553343)
 			plr->pitch = 1.553343;
 	}
-	if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_RIGHT)
-		plr->input.jetpack = 1;
-	if (e->type == SDL_MOUSEBUTTONUP && e->button.button == SDL_BUTTON_RIGHT)
-		plr->input.jetpack = 0;
+	mouse_button_handle(plr, e);
 }

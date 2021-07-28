@@ -53,6 +53,7 @@ enum e_texture_idx
 	lamp_on,
 	lamp_off,
 	pistol0,
+	bullet_decal,
 };
 
 /*

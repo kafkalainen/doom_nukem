@@ -65,6 +65,7 @@ typedef struct s_input
 	int				mouse;
 	int				jetpack;
 	int				use;
+	int				shoot;
 	int				debug_up;
 	int				debug_down;
 	int				debug_left;
@@ -106,6 +107,12 @@ typedef struct		s_hud
 	float			vm_ry;
 }					t_hud;
 
+typedef struct		s_weapon
+{
+	unsigned int	ammo;
+	unsigned int	type; //projectile or shitscan
+	float			fire_rate;
+}					t_weapon;
 
 typedef struct		s_player
 {
@@ -129,9 +136,8 @@ typedef struct		s_player
 	int				active_inv;
 	float			power_points;
 	float			fuel_points;
+	t_weapon		wep[2];
 	unsigned int	active_wep;
-	unsigned int	live_ammo[2];
-	unsigned int	reserve_ammo[2];
 	unsigned int	inventory[4];
 	float			steps;
 	Uint32			time;
@@ -174,4 +180,6 @@ void	free_story(char ***array, Uint32 nb_of_strings);
 Uint32	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector);
 void	draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr);
 void	init_cutscene(char **array);
+void	shooting_handle(t_home *home, t_player *plr);
+
 #endif

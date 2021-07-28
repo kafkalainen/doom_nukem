@@ -127,6 +127,7 @@ void	init_textures(t_home *home)
 	load_texture("textures/skull_skulker.png", home->textures, enemy3);
 	load_texture("textures/skull_skulker.png", home->textures, projectile);
 	load_texture("textures/pistol.png", home->textures, pistol0);
+	load_texture("textures/bullet_decal.png", home->textures, bullet_decal);
 	home->textures[NUM_TEX] = assign_empty_texture();
 	init_asset_textures(home);
 }
