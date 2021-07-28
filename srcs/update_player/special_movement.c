@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/26 13:25:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/28 16:51:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,38 +86,19 @@ void	crouch(t_player *plr)
 
 void	jump(t_player *plr, t_sector *sector)
 {
-	//static Uint32	animation_start = 0;
-	//static Uint32	animation_end = 0;
-	//static float	jump_range = 0.0f;
-	//t_xyz			new_pos;
+	t_xyz	new_pos;
 
-	if (plr->input.jump == 1 &&
-		!check_distance_to_ceiling(sector, &(t_xyz){plr->pos.x, plr->pos.y + 2.0f, plr->pos.z}) &&
-		check_distance_to_ground(sector, plr, plr->pos) <= 0)
+	new_pos = (t_xyz){plr->pos.x, plr->pos.y + 2.0f, plr->pos.z, plr->pos.w};
+	if (plr->input.jump == 1
+		&& !check_distance_to_ceiling(sector, &new_pos)
+		&& check_distance_to_ground(sector, plr, plr->pos) <= 0)
 	{
-		printf("JUMP\n");
-		plr->speed.y += 0.08;
+		plr->speed.y += 0.08f;
 	}
 	else
 	{
 		plr->input.jump = 0;
 	}
-	//{
-	//	new_pos = plr->pos;
-	//	new_pos.y += 2.0f;
-	//	if (check_distance_to_ceiling(sector, &new_pos))
-	//		return ;
-	//	if (check_distance_to_ground(sector, plr, plr->pos) <= 0)
-	//		set_animation_on(&animation_start, &animation_end, &plr->time, 500);
-	//	if (plr->time <= animation_end && jump_range <= 3.0f)
-	//		set_jump_sequence(plr, &animation_end, &jump_range);
-	//	else
-	//	{
-	//		animation_start = 0;
-	//		jump_range = 0.0f;
-	//		plr->input.jump = 0;
-	//	}
-	//}
 }
 
 int	jetpack(t_player *plr, t_home *home, Uint32 t)
@@ -130,7 +111,7 @@ int	jetpack(t_player *plr, t_home *home, Uint32 t)
 		return (FALSE);
 	if (plr->fuel_points > 1)
 	{
-		plr->fuel_points -= t * 0.05;
+		plr->fuel_points -= t * 0.05f;
 		plr->move_dir = vec3_unit_vector(plr->look_dir);
 		new_loc = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.03f));
 		if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &new_loc))

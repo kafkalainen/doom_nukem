@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/19 19:14:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/28 16:42:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 	if (!plr->input.jetpack)
 		jump(plr, home->sectors[plr->cur_sector]);
 	if (plr->fuel_points < 100)
-		plr->fuel_points = fmin(plr->fuel_points + 0.004 * delta_time, 100.0f);
+		plr->fuel_points = fmin(plr->fuel_points + 0.004f * delta_time, 100.0f);
 	if (!plr->input.jetpack)
-		plr->pos.y += plr->speed.y * delta_time * 0.1;
+		plr->pos.y += plr->speed.y * delta_time * 0.1f;
 	jetpack(plr, home, delta_time);
 	gravity(home->sectors[plr->cur_sector], plr, delta_time);
 	if (!plr->input.jetpack)
