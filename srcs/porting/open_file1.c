@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/19 19:50:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/28 11:58:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,14 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 			error_output("ERROR: Memory allocation for a sector failed.");
 		i++;
 	}
-	pos += get_next_breaker(buf + pos) + 1;
-	if (pos > (unsigned int)size || *(buf + pos) != '\n')
+	pos += get_next_breaker(buf + pos);
+	if (pos > (unsigned int)size
+		|| !ft_strnequ((const char *)buf + pos, "#doom_nukem_entities", 20))
 		return (free_sectors_and_exit(2, home));
 	home->sectors[i] = NULL;
 	return (0);
 }
 
-/*
-**	Add safeguards for mallocing.
-**	ft_strdel for *path, if new mapname is set in the mapfile,
-**	then ft_strdup the new name to *path.
-**	ft_putstr("OK\n");
-**	exit(0);
-*/
 int	load_map_file(t_player *plr, t_home *home)
 {
 	int				fd;
@@ -123,6 +117,7 @@ int	load_map_file(t_player *plr, t_home *home)
 			read_error_output("ERROR: Failed to read map.", &buf);
 		buf[size] = '\0';
 		ret = parse_sector_data(buf, plr, home, size);
+		ret = parse_entity_data(buf, plr, home, size);
 		free(buf);
 		if (ret)
 			error_output("ERROR: Failed to read map.");

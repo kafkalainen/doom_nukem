@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/27 16:44:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/28 10:58:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,15 @@ typedef struct s_point_data
 	int			on_off;
 	int			power_station;
 }				t_point_data;
+
+typedef struct s_entity_data
+{
+	float		x;
+	float		y;
+	float		ground;
+	int			entity_type;
+	int			is_static;
+}				t_entity_data;
 
 typedef struct s_sector
 {

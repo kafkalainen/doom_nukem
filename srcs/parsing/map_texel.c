@@ -6,25 +6,25 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 07:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 10:41:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/28 09:56:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
 
-void	initialize_top_texels(t_wall *wall)
+void	initialize_top_texels(t_triangle *top)
 {
-	wall->top.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
-	wall->top.uv[1] = (t_uvz){0.0f, 0.0f, 1.0f};
-	wall->top.uv[2] = (t_uvz){1.0f, 0.0f, 1.0f};
+	top->uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
+	top->uv[1] = (t_uvz){0.0f, 0.0f, 1.0f};
+	top->uv[2] = (t_uvz){1.0f, 0.0f, 1.0f};
 }
 
-void	initialize_bottom_texels(t_wall *wall)
+void	initialize_bottom_texels(t_triangle *bottom)
 {
-	wall->bottom.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
-	wall->bottom.uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
-	wall->bottom.uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
+	bottom->uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
+	bottom->uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
+	bottom->uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
 }
 
 static t_uvz	interpolate_coordinate(t_xyz coordinate, t_plgn *bounding_box)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/22 15:47:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/28 11:59:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void			free_sectors(t_home *home);
 int				free_sectors_and_exit(int error_code, t_home *home);
 void			free_sectors_n(t_home *home, size_t	n);
 int				free_surfaces(t_surface **head, unsigned int nbr_of_surfaces);
-void			initialize_triangles(t_wall *wall, t_point_data *left,
-					t_point_data *right);
-void			initialize_top_texels(t_wall *wall);
-void			initialize_bottom_texels(t_wall *wall);
+void			initialize_top_texels(t_triangle *top);
+void			initialize_bottom_texels(t_triangle *bottom);
 void			initialize_sector_pointers(t_sector *new_sector);
 void			initialize_door(t_wall *wall, t_point_data *left,
 					t_point_data *right);
 void			initialize_switches(t_wall *wall, t_point_data *left);
+void			initialize_wall_triangles(t_wall *wall, t_point_data *left,
+					t_point_data *right);
 t_sector		*get_sector_data(unsigned char *buf, unsigned int *pos,
 					ssize_t size);
 int				map_texel(t_surface *surface, t_sector *sector);
@@ -61,6 +61,8 @@ t_surface		*new_surface(t_wall *data, t_xyz *start, int idx, char choice);
 char			*parse_colour_data(char *ptr, t_texture *tex);
 int				parse_coordinates(t_point_data *data, unsigned int ***pos,
 					unsigned char **buf, ssize_t size);
+int				parse_entity_data(unsigned char *buf, t_player *plr,
+					t_home *home, ssize_t size);
 int				parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_light_data(t_sector *new_sector, unsigned char *buf,
