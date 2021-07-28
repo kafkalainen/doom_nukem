@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/27 16:31:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/27 21:13:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,36 +53,6 @@ t_xyz	check_y(t_sector *sector, t_player *plr, t_xyz pos)
 	pos.y += plr->height;
 	return (pos);
 }
-
-// void	add_motion(t_xyz *pos, Uint32 delta_time)
-// {
-// 	static Uint32	time = 0;
-// 	static Uint32	move_left = 0;
-// 	static Uint32	move_right = 0;
-
-// 	if (time < 300 && move_left)
-// 	{
-// 		time += delta_time;
-// 		pos->x -= 1.0f;
-// 	}
-// 	else if (time >= 300 && move_left)
-// 	{
-// 		move_right = 1;
-// 		time = 0;
-// 	}
-// 	else if (time < 300 && move_right)
-// 	{
-// 		time += delta_time;
-// 		pos->x += 1.0f;
-// 	}
-// 	else if (time >= 300 && move_right)
-// 	{
-// 		move_right = 1;
-// 		time = 0;
-// 	}
-// 	else
-// 		*pos = *pos;
-// }
 
 int	plr_inside(t_sector *sector, t_player *plr)
 {
@@ -144,13 +114,12 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 	}
 	else
 	{
-		plr->steps += t * 0.005;
+		plr->steps += t * 0.005f;
 		plr->pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
 		viewmodel_motion(plr);
 		dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr, plr->pos);
 		if (dist < 0 && dist > -plr->height)
 			plr->pos.y -= dist;
-		// add_motion(&plr->pos, t);
 		return (TRUE);
 	}
 	return (FALSE);

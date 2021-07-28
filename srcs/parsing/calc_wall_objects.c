@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 15:07:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/27 17:15:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/28 12:28:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,34 +65,6 @@ static Uint32	generate_a_button(t_wall *wall)
 	add_to_middle(&wall, new_wall);
 	return (1);
 }
-
-// static Uint32	generate_a_power_station(t_wall *wall)
-// {
-// 	t_point_data	left;
-// 	t_point_data	right;
-// 	t_wall			*new_wall;
-
-// 	left.x = portal->top.p[1].x;
-// 	right.x = portal->top.p[2].x;
-// 	left.y = portal->top.p[1].z;
-// 	right.y = portal->top.p[2].z;
-// 	left.ceiling = portal->top.p[1].y;
-// 	right.ceiling = portal->top.p[2].y;
-// 	left.ground = portal_behind->top.p[2].y;
-// 	right.ground = portal_behind->top.p[1].y;
-// 	portal_behind->top.p[2].y = portal->top.p[1].y;
-// 	portal_behind->top.p[1].y = portal->top.p[2].y;
-// 	portal_behind->bottom.p[1].y = portal->top.p[1].y;
-// 	if (portal->next->top.idx < 0)
-// 		left.idx = portal->next->top.idx;
-// 	else
-// 		left.idx = -2;
-// 	new_wall = new_point(&left, &right);
-// 	if (!new_wall)
-// 		return (0);
-// 	add_to_middle(&portal_behind, new_wall);
-// 	return (1);
-// }
 
 void	calc_wall_objects(t_home *home)
 {

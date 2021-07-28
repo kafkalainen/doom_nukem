@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:29:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/27 16:11:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/07/28 10:51:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	initialize_sector_pointers(t_sector *new_sector)
 	new_sector->story = NULL;
 }
 
-void	initialize_triangles(t_wall *wall, t_point_data *left,
+void	initialize_wall_triangles(t_wall *wall, t_point_data *left,
 	t_point_data *right)
 {
 	wall->top.p[0] = (t_xyz){left->x, left->ground, left->y, 1.0f};
