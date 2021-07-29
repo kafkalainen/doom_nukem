@@ -56,6 +56,25 @@ static void		draw_fuel_bar(t_player *plr, Uint32 *buffer)
 		vec2(wh.x, wh.y), buffer, 0xFFD42E00);
 }
 
+static void		draw_crosshair(Uint32 *buffer)
+{
+	t_xy	wh;
+
+	wh = vec2(12, 12);
+	draw_line(vec2(SCREEN_WIDTH * 0.5 - wh.x * 0.5, SCREEN_HEIGHT * 0.5),
+		vec2(SCREEN_WIDTH * 0.5 + wh.x * 0.5, SCREEN_HEIGHT * 0.5),
+		0xFF00F180, buffer);
+	draw_line(vec2(SCREEN_WIDTH * 0.499, SCREEN_HEIGHT * 0.5 - wh.y * 0.5),
+		vec2(SCREEN_WIDTH * 0.499, SCREEN_HEIGHT * 0.5 + wh.y * 0.5),
+		0xFF00F180, buffer);
+	draw_line(vec2(SCREEN_WIDTH * 0.5 - wh.x * 0.5, SCREEN_HEIGHT * 0.499),
+		vec2(SCREEN_WIDTH * 0.5 + wh.x * 0.5, SCREEN_HEIGHT * 0.499),
+		0xFF00F180, buffer);
+	draw_line(vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5 - wh.y * 0.5),
+		vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5 + wh.y * 0.5),
+		0xFF00F180, buffer);
+}
+
 static void		draw_inventory_slots(t_player *plr, Uint32 *buffer)
 {
 	int		i;
@@ -132,6 +151,7 @@ void			draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 	draw_power_bar(plr, frame->buffer);
 	draw_fuel_bar(plr, frame->buffer);
 	draw_inventory_slots(plr, frame->buffer);
+	draw_crosshair(frame->buffer);
 	//draw_inventory_images(home, frame, plr);
 	//draw_hud_texts(frame->buffer, plr, 0);
 }
