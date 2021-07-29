@@ -12,37 +12,43 @@
 
 #include "../../headers/doom_nukem.h"
 
+static int evaluate_ret(t_xyz a, t_xyz b)
+{
+	if (a.x == b.x && a.y == b.y && a.z == b.z)
+		return (TRUE);
+	return (FALSE);
+}
+
 static t_xyz		get_bullet_hit_point(t_home *home, t_player *plr)
 {
 	t_xyz			pos;
 	t_xyz			dir;
 	t_xyz			ret;
 	t_plane			plane;
-	t_wall			wall;
+	t_wall			*wall;
 	unsigned int	i;
 
 	pos = plr->pos;
-	dir = vec3_dec(vec3_add(plr->pos, plr->look_dir), plr->pos);
+	dir = plr->look_dir;
+	wall = home->sectors[plr->cur_sector]->walls;
 	i = 0;
 	ret = (t_xyz){0,0,0};
 	while (i < home->sectors[plr->cur_sector]->nb_of_walls)
 	{
-		if (point_inside_a_triangle_wall(home->sectors[plr->cur_sector]->walls->top.p[0],
-			home->sectors[plr->cur_sector]->walls->top.p[1],
-			home->sectors[plr->cur_sector]->walls->top.p[2],
-			pos))
+		plane.point = wall->top.p[0];
+		plane.normal = wall->top.normal;
+		ret = vec3_intersection_with_ray_and_plane(&plane, pos, dir);
+		if (evaluate_ret(ret, pos) == FALSE)
 		{
-			printf("START\n%f\n%f\n%f\n%p--\n", ret.x, ret.y, ret.z, home->sectors[plr->cur_sector]->walls);
+			printf("START\n%f\n%f\n%f\n%d--\n", ret.x, ret.y, ret.z, wall->top.idx);
 			return (ret);
 		}
 		else
 			printf("miss\n");
-		plane = (t_plane){home->sectors[plr->cur_sector]->walls->top.p[0],
-			home->sectors[plr->cur_sector]->walls->top.normal};
-		ret = vec3_intersection_with_ray_and_plane(&plane, pos, dir);
 		i++;
-		home->sectors[plr->cur_sector]->walls = home->sectors[plr->cur_sector]->walls->next;
+		wall = wall->next;
 	}
+	free(wall);
 	return ret;
 }
 

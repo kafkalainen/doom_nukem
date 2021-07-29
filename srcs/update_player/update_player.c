@@ -72,7 +72,9 @@ static void		plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
 	if (plr->wep[plr->active_wep].ammo > 0 &&
 		plr->wep[plr->active_wep].fire_rate <= 0)
 	{
-		//shooting_handle(home, plr);
+		plr->wep[plr->active_wep].fire_rate = 0.5;
+		plr->hud.vm_ry = -20;
+		shooting_handle(home, plr);
 	}
 }
 

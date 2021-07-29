@@ -32,4 +32,5 @@ void	init_input_values(t_input *input)
 	input->jump = 0;
 	input->crouch = 0;
 	input->use = 0;
+	input->shoot = 0;
 }
