@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   porting_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:55:06 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/14 15:33:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/08/02 18:36:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	free_all_textures(t_texture **textures, int *nbr_of_textures)
 	int	i;
 
 	i = 0;
-	while (i < ((*nbr_of_textures) + 1))
+	while (i < ((*nbr_of_textures)))
 		free_texture(textures[i++]);
 	free(textures);
 	textures = NULL;

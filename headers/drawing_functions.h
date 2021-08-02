@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/21 21:23:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 18:33:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ enum e_texture_idx
 	button_off,
 	lamp_on,
 	lamp_off,
-	pistol0,
 	bullet_decal,
 };
 

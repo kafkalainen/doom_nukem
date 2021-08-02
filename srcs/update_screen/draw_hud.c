@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/02 16:27:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 18:33:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ static void		draw_viewmodel_sprite(t_home *home, Uint32 *buffer,
 	int		x;
 	int		y;
 	t_texel	tex;
-	tex = home->textures[pistol0]->tex;
+	tex = home->textures[weapon0]->tex;
 
 	y = 0;
 	offset.x += plr->hud.vm_mx * 10 + plr->hud.vm_rx;
