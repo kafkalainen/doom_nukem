@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/28 12:29:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 12:31:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void		determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr);
 int			entity_move(t_entity *entity, t_home *home, Uint32 t);
 void		entity_chase(t_entity *entity, t_home *home, Uint32 t, t_player *plr);
 float		get_distance_squared(t_xyz pt0, t_xyz pt1);
-void		initialize_entity_triangles(t_entity *entity);
-t_entity	*new_entity(t_entity_data *data);
+Uint32		initialize_entity_textures(t_entity *entity);
 
 #endif

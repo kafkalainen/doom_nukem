@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/28 11:59:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 12:12:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int				add_points(t_sector *sector, unsigned char *buf,
 					unsigned int **pos, ssize_t size);
 void			add_surface(t_surface **point, t_surface *new);
 void			add_to_middle(t_wall **current_wall, t_wall *new_wall);
+Uint32			assign_entity_properties(t_home *home);
 void			calc_slanted_floors(t_home *home);
 void			calc_map_properties(t_home *home, t_player *plr);
 void			calc_top_normal_averages(t_sector *sector,
@@ -61,8 +62,7 @@ t_surface		*new_surface(t_wall *data, t_xyz *start, int idx, char choice);
 char			*parse_colour_data(char *ptr, t_texture *tex);
 int				parse_coordinates(t_point_data *data, unsigned int ***pos,
 					unsigned char **buf, ssize_t size);
-int				parse_entity_data(unsigned char *buf, t_player *plr,
-					t_home *home, ssize_t size);
+int				parse_entity_data(unsigned char *buf, t_home *home, ssize_t size);
 int				parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_light_data(t_sector *new_sector, unsigned char *buf,

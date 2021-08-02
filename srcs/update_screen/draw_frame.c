@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/13 10:18:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 16:27:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,16 +125,27 @@ void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
 	}
 }
 
+// void	draw_white(t_frame *frame)
+// {
+// 	unsigned int	i;
+
+// 	i = 0;
+// 	while (i < SCREEN_HEIGHT * SCREEN_WIDTH)
+// 	{
+// 		*(frame->buffer + i) = white;
+// 		i++;
+// 	}
+// }
+
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
 	frame->idx = plr->cur_sector;
 	frame->old_idx = old_sector;
 	frame->max_fov = 0;
-	frame->offset = 640;
-	frame->pxl_offset = 0.0f;
 	frame->left.left_dir = vec3_add(plr->look_dir, vec3(-PLR_DIR, 0.0f, PLR_DIR));
 	frame->right.right_dir = vec3_add(plr->look_dir, vec3(PLR_DIR, 0.0f, PLR_DIR));
 	reset_depth_buffer(frame->depth_buffer);
+	// draw_white(frame);
 	add_skybox(frame, home, plr, &home->skybox);
 	draw_sector(frame, home, plr, -1);
 	scan_fov(home, frame, plr);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/28 11:58:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 16:24:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	load_map_file(t_player *plr, t_home *home)
 			read_error_output("ERROR: Failed to read map.", &buf);
 		buf[size] = '\0';
 		ret = parse_sector_data(buf, plr, home, size);
-		ret = parse_entity_data(buf, plr, home, size);
+		ret = parse_entity_data(buf, home, size);
 		free(buf);
 		if (ret)
 			error_output("ERROR: Failed to read map.");

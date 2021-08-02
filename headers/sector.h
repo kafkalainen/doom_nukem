@@ -6,31 +6,17 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/28 10:58:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 12:19:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SECTOR_H
 # define SECTOR_H
 
-typedef struct s_power_station
-{
-	Uint32	is_power_station;
-	Uint32	is_depleted;
-}				t_power_station;
-
-typedef struct s_light_switch
-{
-	Uint32	is_switch;
-	Uint32	on_off;
-}				t_light_switch;
-
 typedef struct s_wall
 {
 	t_triangle			top;
 	t_triangle			bottom;
-	t_power_station		station;
-	t_light_switch		light_switch;
 	Uint32				is_door;
 	Uint32				is_closed;
 	Uint32				open_until;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:29:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/28 10:51:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 12:19:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,6 @@ void	initialize_door(t_wall *wall, t_point_data *left, t_point_data *right)
 			left->ceiling, right->ceiling);
 	if (left->idx >= DOOR_INDEX)
 		wall->is_door = 1;
-}
-
-void	initialize_switches(t_wall *wall, t_point_data *left)
-{
-	wall->light_switch.is_switch = left->light_switch;
-	wall->light_switch.on_off = left->on_off;
-	wall->station.is_power_station = left->power_station;
-	wall->station.is_depleted = 0;
 }
 
 void	add_to_middle(t_wall **current_point, t_wall *new_wall)

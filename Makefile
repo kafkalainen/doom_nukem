@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/07/28 11:59:36 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/02 12:32:25 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,16 +18,17 @@ SRCS = \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)editor_events.c \
 	entity_logic$(SLASH)entity.c \
+	parsing$(SLASH)assign_entity_properties.c \
 	parsing$(SLASH)calc_average_unit_normals.c \
 	parsing$(SLASH)calc_normal_averages.c \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_light_sources.c \
 	parsing$(SLASH)calc_map_properties.c \
-	parsing$(SLASH)calc_wall_objects.c \
 	parsing$(SLASH)change_door_to_portal.c \
 	parsing$(SLASH)check_portal_height_diff.c \
 	parsing$(SLASH)check_if_same_point.c \
 	parsing$(SLASH)free_sector.c \
+	parsing$(SLASH)initialize_entity_textures.c \
 	parsing$(SLASH)map_texel.c \
 	parsing$(SLASH)parse_entity_data.c \
 	parsing$(SLASH)parse_number_data.c \

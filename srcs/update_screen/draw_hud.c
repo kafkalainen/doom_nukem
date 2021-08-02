@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/22 14:47:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 16:27:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ static void		draw_viewmodel_sprite(t_home *home, Uint32 *buffer,
 
 void			draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 {
-	(void)home;
 	draw_viewmodel_sprite(home, frame->buffer, plr,
 		vec2(plr->hud.vm_x, plr->hud.vm_y));
 	draw_hud_image(home, frame->buffer);
