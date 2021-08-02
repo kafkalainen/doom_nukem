@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/02 17:18:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 18:40:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,22 @@ static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 	}
 }
 
-// static void		plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
-// {
-// 	if (plr->wep[plr->active_wep].fire_rate > 0)
-// 		plr->wep[plr->active_wep].fire_rate -= t * 0.001;
-// 	else
-// 		plr->wep[plr->active_wep].fire_rate = 0;
-// 	if (!plr->input.shoot)
-// 		return ;
-// 	if (plr->wep[plr->active_wep].ammo > 0 &&
-// 		plr->wep[plr->active_wep].fire_rate <= 0)
-// 	{
-// 		plr->wep[plr->active_wep].fire_rate = 0.5;
-// 		plr->hud.vm_ry = -20;
-// 		shooting_handle(home, plr);
-// 	}
-// }
+static void		plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
+{
+	if (plr->wep[plr->active_wep].fire_rate > 0)
+		plr->wep[plr->active_wep].fire_rate -= t * 0.001;
+	else
+		plr->wep[plr->active_wep].fire_rate = 0;
+	if (!plr->input.shoot)
+		return ;
+	if (plr->wep[plr->active_wep].ammo > 0 &&
+		plr->wep[plr->active_wep].fire_rate <= 0)
+	{
+		plr->wep[plr->active_wep].fire_rate = 0.5;
+		plr->hud.vm_ry = -20;
+		shooting_handle(home, plr);
+	}
+}
 
 void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 {
@@ -89,7 +89,7 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 	if (plr->hud.vm_ry != 0)
 		plr->hud.vm_ry *= 0.908f;
 	crouch(plr);
-	// plr_shoot_handle(home, plr, delta_time);
+	plr_shoot_handle(home, plr, delta_time);
 	if (!plr->input.jetpack)
 		jump(plr, home->sectors[plr->cur_sector]);
 	if (plr->fuel_points < 100)
