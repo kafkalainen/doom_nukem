@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/22 14:40:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 17:26:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir)
 		dir_entry = readdir(dir);
 	}
 	// load_texture("textures/face.png", home->textures, i);
-	load_texture("sprites/hud_doom.png", home->textures, i);
+	// load_texture("sprites/hud_doom.png", home->textures, i);
 	// load_texture("sprites/skull_skulker_front.png", home->textures, i); // might need to do some magic with index nbr
 	// load_texture("sprites/skull_skulker_attack_1.png", home->textures, i);
 	// printf("%i\n", i);
@@ -87,6 +87,8 @@ static void	init_asset_textures(t_home *home)
 	load_texture("textures/button_off.png", home->textures, button_off);
 	load_texture("textures/lamp_on.png", home->textures, lamp_on);
 	load_texture("textures/lamp_off.png", home->textures, lamp_off);
+	load_texture("textures/pistol.png", home->textures, pistol0);
+	load_texture("textures/pistol.png", home->textures, bullet_decal);
 }
 
 void	init_textures(t_home *home)
@@ -126,8 +128,6 @@ void	init_textures(t_home *home)
 	load_texture("textures/skull_skulker.png", home->textures, enemy2);
 	load_texture("textures/skull_skulker.png", home->textures, enemy3);
 	load_texture("textures/skull_skulker.png", home->textures, projectile);
-	load_texture("textures/pistol.png", home->textures, pistol0);
-	load_texture("textures/bullet_decal.png", home->textures, bullet_decal);
-	home->textures[NUM_TEX] = assign_empty_texture();
 	init_asset_textures(home);
+	home->textures[NUM_TEX] = assign_empty_texture();
 }
