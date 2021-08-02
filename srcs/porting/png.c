@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/08/02 17:26:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/02 18:07:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,12 @@ static void	init_asset_textures(t_home *home)
 	load_texture("textures/button_off.png", home->textures, button_off);
 	load_texture("textures/lamp_on.png", home->textures, lamp_on);
 	load_texture("textures/lamp_off.png", home->textures, lamp_off);
-	load_texture("textures/pistol.png", home->textures, pistol0);
-	load_texture("textures/pistol.png", home->textures, bullet_decal);
+	load_texture("textures/bullet_decal.png", home->textures, bullet_decal);
 }
 
 void	init_textures(t_home *home)
 {
-	home->textures = (t_texture **)malloc(sizeof(t_texture *)
-			* (NUM_TEX + 1));
+	home->textures = (t_texture **)malloc(sizeof(t_texture *) * NUM_TEX);
 	if (!home->textures)
 		error_output("Failed to allocate memory to editor textures.\n");
 	home->textures[zero] = assign_empty_texture();
@@ -121,7 +119,7 @@ void	init_textures(t_home *home)
 	load_texture("textures/plate.png", home->textures, surf9);
 	load_texture("textures/door.png", home->textures, door);
 	load_texture("textures/hud_doom.png", home->textures, hud);
-	load_texture("textures/plate.png", home->textures, weapon0);
+	load_texture("textures/pistol.png", home->textures, weapon0);
 	load_texture("textures/plate.png", home->textures, weapon1);
 	load_texture("textures/skull_skulker.png", home->textures, enemy0);
 	load_texture("textures/skull_skulker.png", home->textures, enemy1);
@@ -129,5 +127,5 @@ void	init_textures(t_home *home)
 	load_texture("textures/skull_skulker.png", home->textures, enemy3);
 	load_texture("textures/skull_skulker.png", home->textures, projectile);
 	init_asset_textures(home);
-	home->textures[NUM_TEX] = assign_empty_texture();
+	home->textures[NUM_TEX - 1] = assign_empty_texture(); //39
 }
