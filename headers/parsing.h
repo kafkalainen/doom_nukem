@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/03 11:58:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/03 12:16:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ Uint32			check_portal_ceiling_difference(t_wall *portal,
 					t_wall *portal_behind);
 void			close_linkedlist(t_wall **point);
 void			close_surface_list(t_surface **head);
+void			free_entities(t_home *home);
 int				free_points(t_wall **head, unsigned int nbr_of_walls);
 t_sector		*free_sector(t_sector **sector);
 void			free_sectors(t_home *home);

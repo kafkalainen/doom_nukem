@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/07 13:56:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/03 12:13:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,24 @@ int	initialize_rasterization_queues(t_frame *frame)
 	if (initialize_viewport(&frame->viewport))
 		return (1);
 	return (0);
+}
+
+void	free_entities(t_home *home)
+{
+	Uint32	i;
+
+	i = 0;
+	if (!home->entity_pool)
+		return ;
+	while (i < home->nbr_of_entities)
+	{
+		if (home->entity_pool[i])
+		{
+			free(home->entity_pool[i]);
+			home->entity_pool[i] = NULL;
+		}
+		i++;
+	}
+	free(home->entity_pool);
+	home->entity_pool = NULL;
 }
