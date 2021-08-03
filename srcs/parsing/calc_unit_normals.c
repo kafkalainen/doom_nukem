@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_average_unit_normals.c                        :+:      :+:    :+:   */
+/*   calc_unit_normals.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:20:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/28 10:23:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/03 12:01:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-/*
-**	To get the average unit normal vector at a vertex,
-**	we take the average of the normals of the neighboring faces.
-**	Since the resulting normal should be a unit normal,
-**	we can do the averaging by summing all the neighboring normals,
-**	and then dividing by the magnitude of this sum.
-**	Create a normal[3] set to triangle to store average of
-**	neighboring normals.
-**	Apply Blinn-Phong's reflection model.
-*/
-
-static void	calc_surface_normals(t_sector *sector)
+static void	calc_wall_normals(t_sector *sector)
 {
 	Uint32		i;
 	t_wall		*walls;
-	t_surface	*ceil_ground;
 
 	i = 0;
 	walls = sector->walls;
@@ -38,6 +26,13 @@ static void	calc_surface_normals(t_sector *sector)
 		walls = walls->next;
 		i++;
 	}
+}
+
+static void calc_ceil_ground_normals(t_sector *sector)
+{
+	Uint32		i;
+	t_surface	*ceil_ground;
+
 	i = 0;
 	ceil_ground = sector->ceiling;
 	while (i < sector->nb_of_ceil)
@@ -56,21 +51,15 @@ static void	calc_surface_normals(t_sector *sector)
 	}
 }
 
-void	calc_average_unit_normals(t_home *home)
+void	calc_unit_normals(t_home *home)
 {
 	Uint32			i;
-	t_raster_queue	*queue;
 
 	i = 0;
-	queue = create_raster_queue(100);
 	while (i < home->nbr_of_sectors)
 	{
-		calc_surface_normals(home->sectors[i]);
-		calc_top_normal_averages(home->sectors[i], queue);
-		calc_bottom_normal_averages(home->sectors[i], queue);
-		calc_ceiling_normal_averages(home->sectors[i], queue);
-		calc_ground_normal_averages(home->sectors[i], queue);
+		calc_wall_normals(home->sectors[i]);
+		calc_ceil_ground_normals(home->sectors[i]);
 		i++;
 	}
-	delete_raster_queue(&queue);
 }

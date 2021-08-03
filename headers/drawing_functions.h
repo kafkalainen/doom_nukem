@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/02 18:33:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/03 11:54:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ enum e_texture_idx
 ** Drawing functions
 */
 
-void		calc_average_unit_normals(t_home *home);
 float		calculate_lumel_offset(float from, float to, float t);
 t_uvz		calculate_texel_offset(t_uvz from, t_uvz to, float t);
 t_xy		center_to_screen(t_xy loc);

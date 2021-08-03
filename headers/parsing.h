@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/02 12:12:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/03 11:58:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,10 @@ int				add_points(t_sector *sector, unsigned char *buf,
 void			add_surface(t_surface **point, t_surface *new);
 void			add_to_middle(t_wall **current_wall, t_wall *new_wall);
 Uint32			assign_entity_properties(t_home *home);
-void			calc_slanted_floors(t_home *home);
 void			calc_map_properties(t_home *home, t_player *plr);
-void			calc_top_normal_averages(t_sector *sector,
-					t_raster_queue *queue);
-void			calc_bottom_normal_averages(t_sector *sector,
-					t_raster_queue *queue);
-void			calc_ceiling_normal_averages(t_sector *sector,
-					t_raster_queue *queue);
 float			calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
-void			calc_ground_normal_averages(t_sector *sector,
-					t_raster_queue *queue);
 void			calc_light_sources(t_home *home);
+void			calc_unit_normals(t_home *home);
 int				change_door_to_portal(int door);
 int				check_if_lines_cut(t_sector *sector);
 int				check_if_sector_has_same_points(t_sector *sector);
