@@ -6,13 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/03 16:55:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/03 17:01:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	test_triangle(t_triangle *tri, t_xyz *isection_2, float *d, t_player *plr)
+Uint32	test_triangle(t_triangle *tri, t_xyz *isection_2, float *d,
+		t_player *plr)
 {
 	t_plane	plane;
 	t_xyz	isection;
@@ -38,7 +39,8 @@ Uint32	test_triangle(t_triangle *tri, t_xyz *isection_2, float *d, t_player *plr
 	return (0);
 }
 
-float	get_ceiling_hit_point(t_sector *sector, t_player *plr, t_xyz *isection)
+float	get_ceiling_hit_point(t_sector *sector, t_player *plr,
+		t_xyz *isection)
 {
 	Uint32		i;
 	t_surface	*surf;
@@ -59,7 +61,8 @@ float	get_ceiling_hit_point(t_sector *sector, t_player *plr, t_xyz *isection)
 		return (999.0f);
 }
 
-float	get_ground_hit_point(t_sector *sector, t_player *plr, t_xyz *isection)
+float	get_ground_hit_point(t_sector *sector, t_player *plr,
+		t_xyz *isection)
 {
 	Uint32		i;
 	t_surface	*surf;
@@ -93,9 +96,9 @@ float	get_wall_hit_point(t_home *home, t_player *plr, t_xyz *isection,
 	while (i < home->sectors[bullet_sector]->nb_of_walls)
 	{
 		if (test_triangle(&wall->top, isection, &d, plr) && wall->top.idx >= 0)
-			get_bullet_ricochet_hit_point(home, plr, wall->top.idx);
+			get_bullet_ricochet_hit_point(home, plr, bullet_sector);
 		if (test_triangle(&wall->bottom, isection, &d, plr) && wall->bottom.idx >= 0)
-			get_bullet_ricochet_hit_point(home, plr, wall->bottom.idx);
+			get_bullet_ricochet_hit_point(home, plr, bullet_sector);
 		wall = wall->next;
 		i++;
 	}
@@ -106,7 +109,7 @@ float	get_wall_hit_point(t_home *home, t_player *plr, t_xyz *isection,
 }
 
 t_xyz	get_bullet_ricochet_hit_point(t_home *home, t_player *plr,
-				unsigned int bullet_sector)
+		unsigned int bullet_sector)
 {
 	float	d[3];
 	t_xyz	hitpoints[3];
