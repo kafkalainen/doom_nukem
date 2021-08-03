@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:31:48 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/21 13:59:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/03 15:05:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 	if (rad < -1.9634954 && rad > -2.7488936)
 		printf("back left\n");
 	if (rad > 2.7488936 || rad < -2.7488936)
-		printf("behind\n"); 
+		printf("behind\n");
 	if (rad < 2.7488936 && rad > 1.9634954)
 		printf("back right\n");
 	if (rad < 1.9634954 && rad > 1.178097)
@@ -180,7 +180,6 @@ t_xyz	entity_check_y(t_sector *sector, int one, t_xyz pos)
 	}
 	plane.point = ground->tri.p[0];
 	plane.normal = ground->tri.normal;
-	// plane.normal = triangle_normal(&ground->tri);
 	pos = vec3_intersection_with_ray_and_plane(&plane, pos, dir);
 	pos.y += one;
 	return (pos);

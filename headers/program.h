@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/22 11:58:20 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/08/03 12:23:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ typedef struct s_window
 
 typedef struct	s_entity
 {
+	t_triangle	top; // calculated per frame
+	t_triangle	bot; // calculated per frame
 	t_xyz		pos;
 	t_xyz		dir;
 	float		velocity; // can be looked up via macros
-	t_triangle	top; // calculated per frame
-	t_triangle	bot; // calculated per frame
 	Uint32		take_damage; // boolean to see if we took damage this tick
 	Uint32		cooldown; // wait time between moving between idle and move states, or cooldown between attacks
 	Uint32		is_static; // 0 == can move, 1 == cannot move

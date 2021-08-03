@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 11:36:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/26 19:44:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/03 15:25:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,14 @@ t_xyz	vec3_intersection_with_ray_and_plane(t_plane *plane, t_xyz origo,
 	float	denom;
 
 	t = vec3_dot_product(vec3_dec(plane->point, origo), plane->normal);
+	// if (t >= 0.0f)
+	// 	return (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	// else
+	// {
 	denom = vec3_dot_product(dir, plane->normal);
 	if (denom == 0)
 		return (origo);
 	t = t / denom;
 	return (vec3_add(origo, vec3_mul(dir, t)));
+	// }
 }

@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 13:08:18 by jnivala           #+#    #+#              #
-#    Updated: 2021/04/30 12:44:03 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/03 12:52:29 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,6 +123,7 @@ SRC_LIST = \
 	$(SLASH)ft_ineg.c\
 	$(SLASH)ft_imin.c\
 	$(SLASH)ft_imax.c\
+	$(SLASH)ft_fabsf.c\
 
 HEADERS = ./libft.h
 

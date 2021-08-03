@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/30 12:43:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/03 12:52:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_complex			ft_cpow3(t_complex z);
 t_complex			ft_csub(t_complex x, t_complex y);
 size_t				ft_count_wrds(const char *s, int d);
 double				ft_dabs(double i);
+float				ft_fabsf(float i);
 float				ft_fmax(float a, float b);
 float				ft_fmin(float a, float b);
 char				*ft_ftoa(float nb, int precision);
