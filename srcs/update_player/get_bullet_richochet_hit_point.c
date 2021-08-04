@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/03 17:01:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/04 11:00:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,11 @@ float	get_wall_hit_point(t_home *home, t_player *plr, t_xyz *isection,
 	wall = home->sectors[bullet_sector]->walls;
 	while (i < home->sectors[bullet_sector]->nb_of_walls)
 	{
-		if (test_triangle(&wall->top, isection, &d, plr) && wall->top.idx >= 0)
+		if (test_triangle(&wall->top, isection, &d, plr)
+			&& wall->top.idx >= 0)
 			get_bullet_ricochet_hit_point(home, plr, bullet_sector);
-		if (test_triangle(&wall->bottom, isection, &d, plr) && wall->bottom.idx >= 0)
+		if (test_triangle(&wall->bottom, isection, &d, plr)
+			&& wall->bottom.idx >= 0)
 			get_bullet_ricochet_hit_point(home, plr, bullet_sector);
 		wall = wall->next;
 		i++;
@@ -120,10 +122,10 @@ t_xyz	get_bullet_ricochet_hit_point(t_home *home, t_player *plr,
 	ft_putstr("BULLET SECTOR ");
 	ft_putendl(ft_itoa(bullet_sector));
 	if (d[0] != 999.0f && d[0] <= d[1] && d[0] <= d[2])
-		ft_putendl("HIT A GROUND.");
+		home->entity_pool[1]->pos = hitpoints[0];
 	if (d[1] != 999.0f && d[1] <= d[0] && d[1] <= d[2])
-		ft_putendl("HIT A CEILING.");
+		home->entity_pool[1]->pos = hitpoints[1];
 	if (d[2] != 999.0f && d[2] <= d[1] && d[2] <= d[0])
-		ft_putendl("HIT A WALL.");
+		home->entity_pool[1]->pos = hitpoints[2];
 	return (hitpoints[2]);
 }

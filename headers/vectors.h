@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/03 13:22:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/04 15:53:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,8 @@ void		calc_texel(t_uvz *texel, t_uvz *start, float offset,
 			t_uvz *end);
 void		calc_lumel(float *lumel, float *start, float offset,
 			float *end);
-Uint32		vec3_check_same_sidedness(t_xyz p1, t_xyz p2, t_xyz a, t_xyz b);
+Uint32		vec3_check_sidedness(t_xyz p1, t_xyz p2, t_xyz a, t_xyz b);
 Uint32		vec3_is_inside_triangle(t_triangle *tri, t_xyz point);
-
+Uint32		vec3_ray_triangle_intersect(t_triangle *tri,
+			t_xyz pos, t_xyz dir, t_xyz *isection);
 #endif

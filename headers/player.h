@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/03 16:32:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/04 11:23:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,5 +188,6 @@ t_xyz	get_bullet_ricochet_hit_point(t_home *home, t_player *plr,
 float	get_ceiling_hit_point(t_sector *sector, t_player *plr, t_xyz *isection);
 float	get_ground_hit_point(t_sector *sector, t_player *plr, t_xyz *isection);
 Uint32	test_triangle(t_triangle *tri, t_xyz *isection_2, float *d, t_player *plr);
+Uint32	player_look(t_home *home, t_player *plr);
 
 #endif
