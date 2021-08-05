@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/04 11:24:11 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/05 15:43:38 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS = \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)editor_events.c \
 	entity_logic$(SLASH)entity.c \
+	entity_logic$(SLASH)handle_activation.c \
 	parsing$(SLASH)assign_entity_properties.c \
 	parsing$(SLASH)calc_unit_normals.c \
 	parsing$(SLASH)calc_extra_walls.c \
@@ -70,6 +71,7 @@ SRCS = \
 	raycaster$(SLASH)recursion_checks.c \
 	raycaster$(SLASH)scan_fov.c \
 	raycaster$(SLASH)setup_frame.c \
+	update_player$(SLASH)activate_object.c \
 	update_player$(SLASH)advance_story.c \
 	update_player$(SLASH)check_distances.c \
 	update_player$(SLASH)check_y_diff.c \
@@ -100,6 +102,7 @@ SRCS = \
 	update_screen$(SLASH)draw_tex_triangle.c \
 	update_screen$(SLASH)draw_wireframe.c \
 	update_screen$(SLASH)draw_hud.c \
+	update_screen$(SLASH)draw_object_data.c \
 	update_screen$(SLASH)init_matrices_a.c \
 	update_screen$(SLASH)init_matrices_b.c \
 	update_screen$(SLASH)put_pixel.c \
@@ -137,6 +140,7 @@ SRCS = \
 	vec_math$(SLASH)vec3_e.c \
 	vec_math$(SLASH)vec3_f.c \
 	vec_math$(SLASH)vec3_g.c \
+	vec_math$(SLASH)vec3_h.c \
 	menu_systems$(SLASH)launch_modules.c \
 	menu_systems$(SLASH)menu_inputs.c \
 	menu_systems$(SLASH)menu_setups.c \

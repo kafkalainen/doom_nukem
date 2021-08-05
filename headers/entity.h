@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/02 12:31:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/05 15:42:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ int			entity_move(t_entity *entity, t_home *home, Uint32 t);
 void		entity_chase(t_entity *entity, t_home *home, Uint32 t, t_player *plr);
 float		get_distance_squared(t_xyz pt0, t_xyz pt1);
 Uint32		initialize_entity_textures(t_entity *entity);
-
+void		translate_entity(t_triangle *tri1, t_triangle *tri2,
+				t_entity *entity);
+Uint32		handle_activation(t_entity *entity);
 #endif

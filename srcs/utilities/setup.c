@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/02 18:31:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/05 11:55:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	init_player(t_player *plr)
 	plr->wep[0].fire_rate = 1.0f;
 	plr->wep[0].type = 0;
 	plr->speed = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	plr->display_object = 0;
 	init_input_values(&plr->input);
 }
 

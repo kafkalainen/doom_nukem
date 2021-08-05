@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_look.c                                      :+:      :+:    :+:   */
+/*   activate_object.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/04 11:17:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/05 15:33:40 by jnivala          ###   ########.fr       */
+/*   Created: 2021/08/05 15:18:48 by jnivala           #+#    #+#             */
+/*   Updated: 2021/08/05 15:26:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	player_look(t_home *home, t_player *plr)
+t_entity	*activate_object(t_home *home, t_player *plr)
 {
 	Uint32		i;
 	t_xyz		isection;
@@ -33,14 +33,9 @@ Uint32	player_look(t_home *home, t_player *plr)
 				entity_hit = 1;
 			if (entity_hit && vec3_eucl_dist(vec3_dec(isection, plr->pos))
 				< 2.5f)
-			{
-				plr->display_object = home->entity_pool[i]->entity_type;
-				break ;
-			}
+				return (home->entity_pool[i]);
 		}
 		i++;
 	}
-	if (!entity_hit)
-		plr->display_object = 0;
-	return (0);
+	return (NULL);
 }

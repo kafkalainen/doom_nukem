@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/03 11:54:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/05 14:38:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ int			draw_tex_triangle(Uint32 *buffer, float *depth_buffer,
 			t_triangle *triangle, t_texel *tex);
 void		reset_depth_buffer(float *depth_buffer);
 void		draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr);
+void		draw_object_data(Uint32 *buffer, t_player *plr);
 
 #endif

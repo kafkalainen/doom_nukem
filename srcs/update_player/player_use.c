@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 17:07:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/04 11:23:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/05 15:37:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int		player_use(t_player *plr, t_home *home, Uint32 delta_time)
 {
 	t_xyz			look_dir;
 	t_xyz			look_loc;
+	t_entity		*entity;
 	// Uint32			doors_closing;
 
+	entity = NULL;
 	close_doors(home->sectors, home->nbr_of_sectors, plr->time, delta_time);
 	// doors_closing = close_doors(home->sectors, home->nbr_of_sectors, plr->time, delta_time);
 	// if (doors_closing)
@@ -29,5 +31,13 @@ int		player_use(t_player *plr, t_home *home, Uint32 delta_time)
 	if (open_door(home->sectors, look_loc, plr->time, plr->cur_sector))
 		return (TRUE);
 	// 	play_sound(plr->audio.door_opening);
-	return (TRUE);
+	entity = activate_object(home, plr);
+	if (entity)
+	{
+		handle_activation(entity);
+		plr->input.use = 0;
+		// play_sound(plr->audio.button_pressed);
+		return (TRUE);
+	}
+	return (FALSE);
 }

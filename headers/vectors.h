@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/04 15:53:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/05 15:35:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,4 +248,6 @@ Uint32		vec3_check_sidedness(t_xyz p1, t_xyz p2, t_xyz a, t_xyz b);
 Uint32		vec3_is_inside_triangle(t_triangle *tri, t_xyz point);
 Uint32		vec3_ray_triangle_intersect(t_triangle *tri,
 			t_xyz pos, t_xyz dir, t_xyz *isection);
+float		vec3_angle(t_xyz a, t_xyz b);
+
 #endif

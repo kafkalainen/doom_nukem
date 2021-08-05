@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 15:06:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/27 12:46:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/05 09:06:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ t_xyz	vec3_unit_vector(t_xyz a)
 	float	magnitude;
 
 	magnitude = vec3_eucl_dist(a);
-	return ((t_xyz){a.x / magnitude, a.y / magnitude, a.z / magnitude, 1.0f});
+	magnitude = 1 / magnitude;
+	return ((t_xyz){a.x * magnitude, a.y * magnitude, a.z * magnitude, 1.0f});
 }
 
 float	vec3_dot_product(t_xyz a, t_xyz b)

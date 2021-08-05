@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/02 16:27:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/05 14:34:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,6 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 		draw_info(frame, plr, (int)home->t.fps);
 	draw_heads_up_display(home, frame, plr);
 	draw_plot_state(home, frame->buffer, plr);
+	draw_object_data(frame->buffer, plr);
 	return ;
 }
