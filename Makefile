@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/05 15:43:38 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/06 09:39:23 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = \
 	parsing$(SLASH)check_portal_height_diff.c \
 	parsing$(SLASH)check_if_same_point.c \
 	parsing$(SLASH)free_sector.c \
+	parsing$(SLASH)get_next_value.c \
 	parsing$(SLASH)initialize_entity_textures.c \
 	parsing$(SLASH)map_texel.c \
 	parsing$(SLASH)parse_entity_data.c \

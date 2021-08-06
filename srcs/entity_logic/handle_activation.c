@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/05 16:05:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/05 16:13:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ static void	change_texture(t_entity *entity)
 	}
 }
 
+/*
+**	Add button type to map data to handle elevators and lights.
+**	Lights could have one integer value, and it is affected by the button,
+**	or it is not affected by the button, or it is automatically turned on,
+**	when player moves to the sector.
+**	Lights have idx value matching the entity link index value.
+*/
 Uint32	handle_activation(t_entity *entity, t_sector *sector, t_player *plr)
 {
 	if (entity->entity_type == button)

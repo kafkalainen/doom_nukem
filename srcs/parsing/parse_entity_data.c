@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:46:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/02 12:35:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 09:47:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 **	#4				2		#0#10#2		#1#0#2		#1			#1
 **	#0				0		#-1#1#2		#1#0#2		#0			#1
 **
-**	always_facing_plr	is_revealed			state
-**	boolean				boolean				boolean
-**	#0					#0					#0
-**	#0					#0					#1
+**	always_facing_plr	is_revealed			state		is_linked
+**	boolean				boolean				boolean		Uint32
+**	#0					#0					#0			#2
+**	#0					#0					#1			#0
 */
 static int	get_entity_header_data(unsigned int *pos, unsigned char *buf,
 	t_home *home, ssize_t size)
@@ -32,16 +32,6 @@ static int	get_entity_header_data(unsigned int *pos, unsigned char *buf,
 	if (*pos > (unsigned int)size)
 		return (1);
 	home->nbr_of_entities = ft_atoi((const char *)buf + *pos);
-	return (0);
-}
-
-static Uint32	get_next_value(Uint32 *nb, unsigned char *buf,
-				unsigned int **pos, ssize_t size)
-{
-	**pos += get_next_breaker(buf + **pos) + 1;
-	if (**pos > (unsigned int)size)
-		return (1);
-	*nb = ft_atoi((const char *)buf + **pos);
 	return (0);
 }
 
@@ -73,23 +63,25 @@ static t_entity	*get_entity_data(unsigned char *buf, unsigned int idx,
 	if (!entity)
 		return (NULL);
 	entity->entity_index = idx;
-	if (get_next_value(&entity->entity_type, buf, &pos, size))
+	if (get_next_uint_value(&entity->entity_type, buf, &pos, size))
 		return (NULL);
-	if (get_next_value((Uint32 *)&entity->sector_idx, buf, &pos, size))
+	if (get_next_int_value(&entity->sector_idx, buf, &pos, size))
 		return (NULL);
 	if (parse_coordinate(&entity->pos, buf, &pos, size))
 		return (NULL);
 	if (parse_coordinate(&entity->dir, buf, &pos, size))
 		return (NULL);
-	if (get_next_value((Uint32 *)&entity->is_static, buf, &pos, size))
+	if (get_next_uint_value((Uint32 *)&entity->is_static, buf, &pos, size))
 		return (NULL);
-	if (get_next_value((Uint32 *)&entity->is_active, buf, &pos, size))
+	if (get_next_uint_value((Uint32 *)&entity->is_active, buf, &pos, size))
 		return (NULL);
-	if (get_next_value((Uint32 *)&entity->always_facing_plr, buf, &pos, size))
+	if (get_next_uint_value((Uint32 *)&entity->always_facing_plr, buf, &pos, size))
 		return (NULL);
-	if (get_next_value((Uint32 *)&entity->is_revealed, buf, &pos, size))
+	if (get_next_uint_value((Uint32 *)&entity->is_revealed, buf, &pos, size))
 		return (NULL);
-	if (get_next_value((Uint32 *)&entity->state, buf, &pos, size))
+	if (get_next_uint_value((Uint32 *)&entity->state, buf, &pos, size))
+		return (NULL);
+	if (get_next_uint_value((Uint32 *)&entity->is_linked, buf, &pos, size))
 		return (NULL);
 	return (entity);
 }

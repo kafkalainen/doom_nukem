@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/02 12:19:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 10:01:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,19 @@ typedef struct s_wall
 	struct s_wall		*next;
 }						t_wall;
 
+/*
+**	light_src tells the position of the light source.
+**	diffuse_power is the power of the light
+**	linked can have following values.
+**	0	not linked
+**	1	automatic
+**	2->	linked button entity
+*/
 typedef	struct s_lighting
 {
 	t_xyz				light_src;
 	float				diffuse_power;
+	Uint32				is_linked;
 	Uint32				state;
 }				t_lighting;
 
@@ -74,7 +83,7 @@ typedef struct s_sector
 	int				tex_floor;
 	int				tex_ceil;
 	char			**story;
-	unsigned int	nb_of_msgs;
+	Uint32			nb_of_msgs;
 	unsigned int	cur_msg;
 	t_lighting		lights;
 	t_surface		*ground;

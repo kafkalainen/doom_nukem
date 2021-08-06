@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/03 12:23:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 09:30:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ typedef struct s_window
 	int				height;
 }					t_window;
 
+/*
+**	is_linked can have following values.
+**	0	not linked
+**	1	automatic
+**	2->	linked button entity
+*/
 typedef struct	s_entity
 {
 	t_triangle	top; // calculated per frame
@@ -32,6 +38,7 @@ typedef struct	s_entity
 	Uint32		cooldown; // wait time between moving between idle and move states, or cooldown between attacks
 	Uint32		is_static; // 0 == can move, 1 == cannot move
 	Uint32		is_active;
+	Uint32		is_linked;
 	Uint32		always_facing_plr; // if true, always draw entity_front.png OR entity_attack
 	Uint32		is_revealed; // the twist; if true, set sprite_index to alt_sprite_index, default == false;
 	Uint32		entity_type; // 0 == health_station; 1 == enemy_1; 2 == enemy_2;

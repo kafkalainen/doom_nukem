@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/03 12:16:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 10:09:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,13 @@ void			ground_retrieve_adjacent_triangles_ground(t_surface *surf,
 int				set_to_null(t_texture **tex, int error);
 unsigned int	triangulate_floor(t_sector *sector, char choice);
 unsigned int	triangulate_ceiling(t_sector *sector, char choice);
+Uint32			get_next_int_value(int *nb, unsigned char *buf,
+					unsigned int **pos, ssize_t size);
+Uint32			get_next_uint_value(Uint32 *nb, unsigned char *buf,
+					unsigned int **pos, ssize_t size);
+Uint32			get_next_float_value(float *nb, unsigned char *buf,
+					unsigned int **pos, ssize_t size);
+Uint32			get_next_string(char **str, unsigned char *buf,
+					unsigned int **pos, ssize_t size);
 
 #endif

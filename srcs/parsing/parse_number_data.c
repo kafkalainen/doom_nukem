@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/28 11:27:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 10:10:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,16 @@ int	parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 int	parse_light_data(t_sector *new_sector, unsigned char *buf,
 	unsigned int *pos, ssize_t size)
 {
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_float_value(&new_sector->lights.light_src.x, buf, &pos, size))
 		return (1);
-	new_sector->lights.light_src.x = ft_atoi((const char *)buf + *pos);
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_float_value(&new_sector->lights.light_src.z, buf, &pos, size))
 		return (1);
-	new_sector->lights.light_src.z = ft_atoi((const char *)buf + *pos);
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_float_value(&new_sector->lights.diffuse_power, buf, &pos, size))
 		return (1);
-	new_sector->lights.diffuse_power = ft_atoi((const char *)buf + *pos);
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_uint_value(&new_sector->lights.state, buf, &pos, size))
 		return (1);
-	new_sector->lights.state = ft_atoi((const char *)buf + *pos);
+	if (get_next_uint_value(&new_sector->lights.is_linked, buf, &pos, size))
+		return (1);
 	new_sector->lights.light_src.y = 0.0f;
 	new_sector->lights.light_src.w = 1.0f;
 	return (0);
@@ -91,13 +85,10 @@ int	parse_story_data(t_sector *new_sector, unsigned char *buf,
 	unsigned int *pos, ssize_t size)
 {
 	unsigned int	i;
-	size_t			len;
 
 	i = 0;
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_uint_value(&new_sector->nb_of_msgs, buf, &pos, size))
 		return (1);
-	new_sector->nb_of_msgs = ft_atoi((const char *)buf + *pos);
 	if (new_sector->nb_of_msgs)
 		new_sector->story = (char **)malloc(sizeof(char *)
 			* (new_sector->nb_of_msgs + 1));
@@ -107,9 +98,8 @@ int	parse_story_data(t_sector *new_sector, unsigned char *buf,
 		return (1);
 	while (i < new_sector->nb_of_msgs)
 	{
-		*pos += get_next_breaker(buf + *pos) + 1;
-		len = get_next_breaker(buf + *pos);
-		new_sector->story[i] = ft_strndup((const char *)buf + *pos, len);
+		if (get_next_string(&new_sector->story[i], buf, &pos, size))
+			return (1);
 		i++;
 	}
 	new_sector->cur_msg = 0;
