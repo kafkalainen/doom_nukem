@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/05 11:51:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 14:29:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,23 @@ static void	initialize_entity_triangles(t_entity *entity)
 	else
 		size = (t_xy){1.0f, 1.0f};
 	entity->top.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
-	entity->top.p[1] = (t_xyz){size.x, size.y, 0.0f, 1.0f};
-	entity->top.p[2] = (t_xyz){0.0f, size.y, 0.0f, 1.0f};
+	entity->top.p[1] = (t_xyz){0.0f, size.y, 0.0f, 1.0f};
+	entity->top.p[2] = (t_xyz){size.x, size.y, 0.0f, 1.0f};
 	entity->bot.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
-	entity->bot.p[1] = (t_xyz){size.x, 0.0f, 0.0f, 1.0f};
-	entity->bot.p[2] = (t_xyz){size.x, size.y, 0.0f, 1.0f};
+	entity->bot.p[1] = (t_xyz){size.x, size.y, 0.0f, 1.0f};
+	entity->bot.p[2] = (t_xyz){size.x, 0.0f, 0.0f, 1.0f};
 }
 
 static void	initialize_static_entity(t_entity *entity)
 {
 	entity->top = rotate_triangle(&entity->top,
-		-vec3_angle(entity->dir, entity->top.normal), 'y');
+		vec3_angle(entity->top.normal, entity->dir), 'y');
 	entity->bot = rotate_triangle(&entity->bot,
-		-vec3_angle(entity->dir, entity->top.normal), 'y');
+		vec3_angle(entity->bot.normal, entity->dir), 'y');
 	entity->top.normal = entity->dir;
 	entity->bot.normal = entity->dir;
 	entity->pos = translate_point(&entity->pos,
-		vec3_mul(entity->dir, 0.15f));
+		vec3_mul(entity->top.normal, 0.15f));
 }
 
 static void	initialize_entity_movement(t_entity *entity)
@@ -89,8 +89,8 @@ static void	initialize_entity_movement(t_entity *entity)
 static void	initialize_entity_values(t_entity *entity)
 {
 	entity->dir = vec3_unit_vector(entity->dir);
-	entity->top.normal = (t_xyz){0.0f, 0.0f, 1.0f, 0.0f};
-	entity->bot.normal = (t_xyz){0.0f, 0.0f, 1.0f, 0.0f};
+	entity->top.normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
+	entity->bot.normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
 	entity->take_damage = 0;
 	entity->cooldown = 0;
 	entity->is_aggroed = 0;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/04 13:15:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 13:46:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,7 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 			if (check_y_diff(plr, &new_loc, home->sectors[wall->top.idx]))
 				return (FALSE);
 			if ((wall->is_door && !wall->is_closed) || !wall->is_door)
-			{
-				plr->cur_sector = wall->top.idx;
-				home->sectors[plr->cur_sector]->lights.state = TRUE;
-			 	plr->pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
-				return (TRUE);
-			}
+				return (update_player_to_new_location(plr, wall, home->sectors, t));
 		}
 		else
 			return (FALSE);
