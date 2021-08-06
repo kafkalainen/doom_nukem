@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 09:33:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/10 11:45:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 11:33:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	triangle_add(t_triangle *triangle, t_xyz add)
 
 void	invert_view(t_triangle *triangle)
 {
-	triangle->p[0].x *= -1.0f;
+	triangle->p[0].x *= 1.0f;
 	triangle->p[0].y *= -1.0f;
-	triangle->p[1].x *= -1.0f;
+	triangle->p[1].x *= 1.0f;
 	triangle->p[1].y *= -1.0f;
-	triangle->p[2].x *= -1.0f;
+	triangle->p[2].x *= 1.0f;
 	triangle->p[2].y *= -1.0f;
 }

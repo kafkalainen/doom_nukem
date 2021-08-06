@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/07 11:46:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 11:32:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,6 @@ static void	clip_to_near_plane(t_triangle *current_view,
 	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
 	nb_of_clipped_triangles = clip_against_plane(&viewport->near,
 			current_view, &clipped_triangle[0], &clipped_triangle[1]);
-	// if (nb_of_clipped_triangles && clipped_triangle[0].lu[0] < 1.0f)
-	// 	printf("first point first clipped under 1\n");
-	// if (nb_of_clipped_triangles == 2 && clipped_triangle[1].lu[0] < 1.0f)
-	// 	printf("first point second clipped under 1\n");
-	// if (nb_of_clipped_triangles && clipped_triangle[0].lu[1] < 1.0f)
-	// 	printf("second point first clipped under 1\n");
-	// if (nb_of_clipped_triangles == 2 && clipped_triangle[1].lu[1] < 1.0f)
-	// 	printf("second point second clipped under 1\n");
-	// if (nb_of_clipped_triangles && clipped_triangle[0].lu[2] < 1.0f)
-	// 	printf("third point first clipped under 1\n");
-	// if (nb_of_clipped_triangles == 2 && clipped_triangle[1].lu[2] < 1.0f)
-	// 	printf("third point second clipped under 1\n");
 	while (nb_of_clipped_triangles)
 	{
 		projected = create_projection(&clipped_triangle[nb_of_clipped_triangles
@@ -67,7 +55,7 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 	{
 		front(frame->transformed, &current_viewed_triangle);
 		if (vec3_dot_product(current_viewed_triangle.normal,
-					vec3_dec(current_viewed_triangle.p[0],
+				vec3_dec(current_viewed_triangle.p[0],
 					plr->pos)) < 0)
 		{
 			set_lighting(lights, &current_viewed_triangle);
@@ -119,7 +107,8 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr, int sector_idx)
 	if (sector_idx == -1)
 		project_to_player_position(frame, plr, NULL);
 	else
-		project_to_player_position(frame, plr, &home->sectors[sector_idx]->lights);
+		project_to_player_position(frame, plr,
+			&home->sectors[sector_idx]->lights);
 	while (i < MAX_THREADS)
 	{
 		initialize_thread(&args[i], frame, home, i);

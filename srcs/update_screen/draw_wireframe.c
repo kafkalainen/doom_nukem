@@ -6,54 +6,40 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 09:53:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 11:21:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 11:24:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-// static void	draw_top(t_frame *frame, Uint32 colour)
-// {
-// 	draw_line(vec3_to_vec2(frame->inner_box.top_left),
-// 		vec3_to_vec2(frame->inner_box.top_right),
-// 		colour, frame->buffer);
-// 	draw_line(vec3_to_vec2(frame->outer_box.top_left),
-// 		vec3_to_vec2(frame->outer_box.top_right),
-// 		colour, frame->buffer);
-// }
+static void	draw_wire_tri(Uint32 *buffer, t_triangle *tri, Uint32 colour)
+{
+	ft_str_pxl(buffer, vec2(tri->p[0].x, tri->p[0].y), "0", (t_plx_modifier){white, 2, 2});
+	ft_str_pxl(buffer, vec2(tri->p[1].x, tri->p[1].y), "1", (t_plx_modifier){white, 2, 2});
+	ft_str_pxl(buffer, vec2(tri->p[2].x, tri->p[2].y), "2", (t_plx_modifier){white, 2, 2});
+	draw_line(vec2(tri->p[0].x, tri->p[0].y),
+		vec2(tri->p[1].x, tri->p[1].y),
+		colour, buffer);
+	draw_line(vec2(tri->p[1].x, tri->p[1].y),
+		vec2(tri->p[2].x, tri->p[2].y),
+		colour, buffer);
+	draw_line(vec2(tri->p[2].x, tri->p[2].y),
+		vec2(tri->p[0].x, tri->p[0].y),
+		colour, buffer);
+}
 
-// static void	draw_middle(t_frame *frame, Uint32 colour)
-// {
-// 	draw_line(vec3_to_vec2(frame->outer_box.top_left),
-// 		vec3_to_vec2(frame->outer_box.top_right), colour,
-// 		frame->buffer);
-// 	draw_line(vec3_to_vec2(frame->outer_box.bottom_left),
-// 		vec3_to_vec2(frame->outer_box.bottom_right),
-// 		colour, frame->buffer);
-// 	draw_line(vec3_to_vec2(frame->outer_box.top_left),
-// 		vec3_to_vec2(frame->outer_box.bottom_left),
-// 		colour, frame->buffer);
-// 	draw_line(vec3_to_vec2(frame->outer_box.top_right),
-// 		vec3_to_vec2(frame->outer_box.bottom_right),
-// 		colour, frame->buffer);
-// }
+void	draw_wireframe(t_frame *frame, Uint32 colour)
+{
+	int		i;
 
-// static void	draw_bottom(t_frame *frame, Uint32 colour)
-// {
-// 	draw_line(vec3_to_vec2(frame->inner_box.bottom_left),
-// 		vec3_to_vec2(frame->inner_box.bottom_right),
-// 		colour, frame->buffer);
-// 	draw_line(vec3_to_vec2(frame->outer_box.bottom_left),
-// 		vec3_to_vec2(frame->outer_box.bottom_right),
-// 		colour, frame->buffer);
-// }
-
-// void	draw_wireframe(t_frame *frame, Uint32 colour)
-// {
-// 	if (frame->draw_top)
-// 		draw_top(frame, colour);
-// 	if (frame->draw_middle)
-// 		draw_middle(frame, colour);
-// 	if (frame->draw_bottom)
-// 		draw_bottom(frame, colour);
-// }
+	i = frame->triangles_in_view->front;
+	if (frame->triangles_in_view->size > 0)
+	{
+		while (i <= frame->triangles_in_view->rear)
+		{
+			draw_wire_tri(frame->buffer, &frame->triangles_in_view->array[i],
+				colour);
+			i++;
+		}
+	}
+}

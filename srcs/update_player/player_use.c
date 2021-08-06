@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 17:07:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/05 16:02:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 10:24:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		player_use(t_player *plr, t_home *home, Uint32 delta_time)
 	entity = activate_object(home, plr);
 	if (entity)
 	{
-		handle_activation(entity, home->sectors[entity->sector_idx], plr);
+		handle_activation(entity, home, plr);
 		plr->input.use = 0;
 		// play_sound(plr->audio.button_pressed);
 		return (TRUE);

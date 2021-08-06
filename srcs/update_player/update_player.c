@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/04 11:26:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 11:40:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,25 @@ static void	check_player_dir(t_player *plr)
 	if (plr->input.up == 1)
 	{
 		if (plr->input.left == 1)
-			matrix = rotation_matrix_y(-0.7853982);
-		else if (plr->input.right == 1)
 			matrix = rotation_matrix_y(0.7853982);
+		else if (plr->input.right == 1)
+			matrix = rotation_matrix_y(-0.7853982);
 		else
 			matrix = rotation_matrix_y(0);
 	}
 	if (plr->input.down == 1)
 	{
 		if (plr->input.left == 1)
-			matrix = rotation_matrix_y(-2.356194);
-		else if (plr->input.right == 1)
 			matrix = rotation_matrix_y(2.356194);
+		else if (plr->input.right == 1)
+			matrix = rotation_matrix_y(-2.356194);
 		else
 			matrix = rotation_matrix_y(PI);
 	}
 	if (plr->input.left == 1 && plr->input.up == 0)
-		matrix = rotation_matrix_y(-PI_BY_TWO);
-	if (plr->input.right == 1 && plr->input.up == 0)
 		matrix = rotation_matrix_y(PI_BY_TWO);
+	if (plr->input.right == 1 && plr->input.up == 0)
+		matrix = rotation_matrix_y(-PI_BY_TWO);
 	plr->move_dir = multi_vec_matrix(&plr->look_dir, &matrix);
 }
 

@@ -6,18 +6,31 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/05 16:13:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 11:41:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	handle_button(t_entity *entity, t_sector *sector)
+static void	handle_button(t_entity *entity, t_home *home)
 {
+	Uint32	i;
+
+	i = 0;
+	if (entity->is_linked)
+	{
+		while (i < home->nbr_of_sectors)
+		{
+			if (home->sectors[i]->lights.is_linked == entity->is_linked
+				&& entity->is_linked > 1)
+				break ;
+			i++;
+		}
+	}
 	if (entity->state)
-		sector->lights.state = 1;
+		home->sectors[i]->lights.state = 1;
 	else
-		sector->lights.state = 0;
+		home->sectors[i]->lights.state = 0;
 }
 
 static void	change_texture(t_entity *entity)
@@ -41,7 +54,7 @@ static void	change_texture(t_entity *entity)
 **	when player moves to the sector.
 **	Lights have idx value matching the entity link index value.
 */
-Uint32	handle_activation(t_entity *entity, t_sector *sector, t_player *plr)
+Uint32	handle_activation(t_entity *entity, t_home *home, t_player *plr)
 {
 	if (entity->entity_type == button)
 	{
@@ -49,7 +62,7 @@ Uint32	handle_activation(t_entity *entity, t_sector *sector, t_player *plr)
 			entity->state = 0;
 		else
 			entity->state = 1;
-		handle_button(entity, sector);
+		handle_button(entity, home);
 	}
 	if (entity->entity_type == powerstation)
 	{
