@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/06 09:30:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/09 13:43:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ typedef struct s_window
 }					t_window;
 
 /*
+**	light_button:
 **	is_linked can have following values.
 **	0	not linked
 **	1	automatic
-**	2->	linked button entity
+**	2->	linked sector entity
+**	elevator_button:
+**	is_linked can have following values.
+**	0	not linked
+**	2->	linked sector entity
 */
 typedef struct	s_entity
 {

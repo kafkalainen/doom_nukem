@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 14:29:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 14:44:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static void	initialize_entity_triangles(t_entity *entity)
 		|| entity->entity_type == thing)
 		size = (t_xy){1.0f, 2.5f};
 	else if (entity->entity_type == lamp
-		|| entity->entity_type == button)
+		|| entity->entity_type == light_button
+		|| entity->entity_type == elevator_button)
 		size = (t_xy){0.5f, 0.5f};
 	else
 		size = (t_xy){1.0f, 1.0f};
@@ -64,8 +65,8 @@ static void	initialize_entity_movement(t_entity *entity)
 {
 	if (entity->is_static == 1)
 	{
-		if (entity->entity_type == button ||entity->entity_type == powerstation
-			|| entity->entity_type == lamp)
+		if (entity->entity_type == light_button || entity->entity_type == powerstation
+			|| entity->entity_type == lamp || entity->entity_type == elevator_button)
 		{
 			initialize_static_entity(entity);
 			entity->velocity = 0;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:21:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 13:56:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/09 11:51:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	initialize_static_entity(t_entity *entity)
 {
-	if (entity->entity_type == button)
+	if (entity->entity_type == elevator_button
+		|| entity->entity_type == light_button)
 	{
 		entity->sprite_index = -button_on;
 		entity->alt_sprite_index = -button_off;
@@ -82,12 +83,6 @@ Uint32	initialize_entity_textures(t_entity *entity)
 		initialize_moving_entity_textures(entity);
 	initialize_triangle_index(&entity->top, entity);
 	initialize_triangle_index(&entity->bot, entity);
-	// entity->top.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
-	// entity->top.uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
-	// entity->top.uv[2] = (t_uvz){0.0f, 0.0f, 1.0f};
-	// entity->bot.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
-	// entity->bot.uv[1] = (t_uvz){1.0f, 1.0f, 1.0f};
-	// entity->bot.uv[2] = (t_uvz){1.0f, 0.0f, 1.0f};
 	initialize_top_texels(&entity->top);
 	initialize_bottom_texels(&entity->bot);
 	return (0);

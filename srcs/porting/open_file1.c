@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/02 16:24:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/09 11:36:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,14 @@
 static int	get_map_header_data(unsigned int *pos, unsigned char *buf,
 	t_home *home, ssize_t size)
 {
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_uint_value(&home->nbr_of_sectors, buf, &pos, size))
 		return (1);
-	home->nbr_of_sectors = ft_atoi((const char *)buf + *pos);
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_int_value(&home->end_sector, buf, &pos, size))
 		return (1);
-	home->end_sector = ft_atoi((const char *)buf + *pos);
 	if (home->nbr_of_sectors <= 0 || home->end_sector <= 0)
 		return (1);
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_uint_value(&home->linked_map, buf, &pos, size))
 		return (1);
-	home->linked_map = ft_atoi((const char *)buf + *pos);
 	if (home->linked_map)
 	{
 		if (parse_map_name(home, size, buf, &pos))

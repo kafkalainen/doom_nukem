@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/06 13:37:39 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/09 13:58:06 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,11 @@ SRCS = \
 	editor$(SLASH)setup_editor.c \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)editor_events.c \
+	entity_logic$(SLASH)activate_elevator.c \
 	entity_logic$(SLASH)entity.c \
 	entity_logic$(SLASH)handle_activation.c \
+	entity_logic$(SLASH)turn_on_lights.c \
+	entity_logic$(SLASH)update_elevators.c \
 	parsing$(SLASH)assign_entity_properties.c \
 	parsing$(SLASH)calc_unit_normals.c \
 	parsing$(SLASH)calc_extra_walls.c \

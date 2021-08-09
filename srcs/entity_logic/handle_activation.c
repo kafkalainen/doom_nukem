@@ -6,31 +6,18 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 11:41:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/09 11:41:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	handle_button(t_entity *entity, t_home *home)
+static void	handle_button(t_entity *entity, t_home *home, t_player *plr)
 {
-	Uint32	i;
-
-	i = 0;
-	if (entity->is_linked)
-	{
-		while (i < home->nbr_of_sectors)
-		{
-			if (home->sectors[i]->lights.is_linked == entity->is_linked
-				&& entity->is_linked > 1)
-				break ;
-			i++;
-		}
-	}
-	if (entity->state)
-		home->sectors[i]->lights.state = 1;
-	else
-		home->sectors[i]->lights.state = 0;
+	if (entity->entity_type == light_button)
+		turn_on_lights(entity, home);
+	if (entity->entity_type == elevator_button)
+		activate_elevator(home, entity, plr);
 }
 
 static void	change_texture(t_entity *entity)
@@ -56,13 +43,14 @@ static void	change_texture(t_entity *entity)
 */
 Uint32	handle_activation(t_entity *entity, t_home *home, t_player *plr)
 {
-	if (entity->entity_type == button)
+	if (entity->entity_type == light_button
+		|| entity->entity_type == elevator_button)
 	{
 		if (entity->state)
 			entity->state = 0;
 		else
 			entity->state = 1;
-		handle_button(entity, home);
+		handle_button(entity, home, plr);
 	}
 	if (entity->entity_type == powerstation)
 	{

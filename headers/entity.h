@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/06 10:17:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/09 13:59:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ enum e_entities
 	thing,
 	drone,
 	crewmember,
-	button,
+	light_button,
+	elevator_button,
 	powerstation,
 	lamp,
 };
@@ -62,4 +63,9 @@ Uint32		initialize_entity_textures(t_entity *entity);
 void		translate_entity(t_triangle *tri1, t_triangle *tri2,
 				t_entity *entity);
 Uint32		handle_activation(t_entity *entity, t_home *home, t_player *plr);
+void		turn_on_lights(t_entity *entity, t_home *home);
+void		activate_elevator(t_home *home, t_entity *entity, t_player *plr);
+Uint32		update_elevators(t_home *home, t_player *plr,
+			Uint32 current_time, Uint32 delta_time);
+
 #endif

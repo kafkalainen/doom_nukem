@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 12:00:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/05 15:11:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/06 14:47:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ void	draw_object_data(Uint32 *buffer, t_player *plr)
 	if (plr->display_object == powerstation)
 		ft_str_pxl(buffer, (t_xy){SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f},
 			"Power station: Press F to charge.", mod);
-	else if (plr->display_object == button)
+	else if (plr->display_object == light_button)
 		ft_str_pxl(buffer, (t_xy){SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f},
-			"Button: Press F to activate.", mod);
+			"Button: Press F to turn on lights.", mod);
+	else if (plr->display_object == elevator_button)
+		ft_str_pxl(buffer, (t_xy){SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f},
+			"Button: Press F to activate the elevator.", mod);
 	else
 		return ;
 }

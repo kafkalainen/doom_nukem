@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 10:01:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/09 12:09:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,22 @@ typedef struct s_entity_data
 typedef struct s_sector
 {
 	t_wall			*walls;
+	t_surface		*ground;
+	t_surface		*ceiling;
+	t_lighting		lights;
+	t_plgn			bounding_box;
+	Uint32			is_elevator;
+	Uint32			moving_until;
+	Uint32			nb_of_msgs;
 	unsigned int	nb_of_walls;
 	unsigned int	nb_of_ceil;
 	unsigned int	nb_of_ground;
+	unsigned int	cur_msg;
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;
 	char			**story;
-	Uint32			nb_of_msgs;
-	unsigned int	cur_msg;
-	t_lighting		lights;
-	t_surface		*ground;
-	t_surface		*ceiling;
-	t_plgn			bounding_box;
+	char			elevator_dir;
 }					t_sector;
 
 enum e_sector_info

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 10:10:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/09 12:27:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,18 @@ int	parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 	unsigned int *pos, ssize_t size)
 {
 	new_sector->idx_sector = ft_atoi((const char *)buf + *pos);
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_uint_value(&new_sector->nb_of_walls, buf, &pos, size))
 		return (1);
-	new_sector->nb_of_walls = ft_atoi((const char *)buf + *pos);
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_int_value(&new_sector->tex_floor, buf, &pos, size))
 		return (1);
-	new_sector->tex_floor = ft_atoi((const char *)buf + *pos);
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	if (get_next_int_value(&new_sector->tex_ceil, buf, &pos, size))
 		return (1);
-	new_sector->tex_ceil = ft_atoi((const char *)buf + *pos);
+	if (get_next_uint_value(&new_sector->is_elevator, buf, &pos, size))
+		return (1);
 	*pos += get_next_breaker(buf + *pos);
 	if (*pos > (unsigned int)size)
 		return (1);
+	new_sector->moving_until = 0;
 	return (0);
 }
 
