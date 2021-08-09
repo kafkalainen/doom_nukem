@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 14:44:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/09 14:51:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,20 @@ static void	initialize_entity_triangles(t_entity *entity)
 
 static void	initialize_static_entity(t_entity *entity)
 {
-	entity->top = rotate_triangle(&entity->top,
-		vec3_angle(entity->top.normal, entity->dir), 'y');
-	entity->bot = rotate_triangle(&entity->bot,
-		vec3_angle(entity->bot.normal, entity->dir), 'y');
+	if (entity->entity_type == lamp)
+	{
+		entity->top = rotate_triangle(&entity->top,
+			PI_BY_TWO, 'x');
+		entity->bot = rotate_triangle(&entity->bot,
+			PI_BY_TWO, 'x');
+	}
+	else
+	{
+		entity->top = rotate_triangle(&entity->top,
+			vec3_angle(entity->top.normal, entity->dir), 'y');
+		entity->bot = rotate_triangle(&entity->bot,
+			vec3_angle(entity->bot.normal, entity->dir), 'y');
+	}
 	entity->top.normal = entity->dir;
 	entity->bot.normal = entity->dir;
 	entity->pos = translate_point(&entity->pos,
