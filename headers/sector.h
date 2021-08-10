@@ -6,19 +6,36 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 09:43:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 16:23:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SECTOR_H
 # define SECTOR_H
 
+
+/*
+**	top and bottom triangle have all texture and positional data for the
+**	wall.
+**	is_door = is portal a door.
+**	is_closed = is portal currently closed.
+**	is_locked = is portal currently locked.
+**	0 = unlocked
+**	1 = temporarily locked
+**	2 = cleaning keycard
+**	3 = engineering keycard
+**	4 = military keycard
+**	open_until tells how long the door is open.
+**	height tells the height of the wall for locking.
+**	next gives the next memory address for a wall.
+*/
 typedef struct s_wall
 {
 	t_triangle			top;
 	t_triangle			bottom;
 	Uint32				is_door;
 	Uint32				is_closed;
+	Uint32				is_locked;
 	Uint32				open_until;
 	float				height;
 	struct s_wall		*next;
@@ -27,10 +44,11 @@ typedef struct s_wall
 /*
 **	light_src tells the position of the light source.
 **	diffuse_power is the power of the light
-**	linked can have following values.
+**	is_linked can have following values.
 **	0	not linked
 **	1	automatic
-**	2->	linked button entity
+**	2+	linked button entity
+**	light state is boolean that if it is on or off
 */
 typedef	struct s_lighting
 {

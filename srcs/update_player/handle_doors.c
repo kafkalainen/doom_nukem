@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/08 15:34:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 16:27:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	open_door(t_sector **sectors, t_xyz look_loc,
 	t_wall			*portal_behind;
 
 	wall = check_if_crossing(sectors[cur_sector], look_loc);
-	if (wall && wall->is_door)
+	if (wall && wall->is_door && wall->is_locked == unlocked)
 	{
 		portal_behind = get_portal_by_idx(cur_sector,
 				sectors[wall->top.idx]);

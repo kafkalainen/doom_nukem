@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/09 15:46:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 14:07:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	calc_map_properties(t_home *home, t_player *plr)
 		i++;
 	}
 	calc_extra_walls(home);
+	calc_elevator_walls(home);
 	calc_unit_normals(home);
 	calc_light_sources(home);
 	assign_entity_properties(home);

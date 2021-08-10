@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:50:13 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 11:34:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 16:49:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,22 @@ static float	get_floor_height_diff(t_home *home, int sector_idx,
 	return (0.0f);
 }
 
+void	bolt_elevator_doors(t_sector *sector, Uint32 state)
+{
+	Uint32	j;
+	t_wall	*portal;
+
+	j = 0;
+	portal = sector->walls;
+	while (j < sector->nb_of_walls)
+	{
+		if (portal->top.idx >= 0 && portal->is_door)
+			portal->is_locked = state;
+		portal = portal->next;
+		j++;
+	}
+}
+
 /*
 **	Activate elevator gets the height difference between the two
 **	floors, and calculates how fast elevator must travel to reach
@@ -80,6 +96,7 @@ void	activate_elevator(t_home *home, t_entity *entity, t_player *plr)
 				= plr->time + 10000;
 			home->sectors[entity->is_linked - 2]->velocity
 				= height * 0.1f;
+			bolt_elevator_doors(home->sectors[entity->is_linked - 2], locked);
 		}
 	}
 }

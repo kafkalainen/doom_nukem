@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/10 11:19:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 16:42:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,16 @@ enum e_floors
 	normal_room,
 	elevator,
 	lower,
-	upper,
+	upper
+};
+
+enum e_door_states
+{
+	unlocked,
+	locked,
+	cleaning_keycard,
+	engineering_keycard,
+	military_keycard
 };
 
 /*
@@ -78,5 +87,6 @@ Uint32		update_elevators(t_home *home, t_player *plr,
 Uint32		translate_sector(t_sector *sector, float distance);
 void		translate_entities(t_home *home, float distance, int sector_idx);
 Uint32		lock_elevator(t_home *home, t_sector *elevator);
+void		bolt_elevator_doors(t_sector *sector, Uint32 state);
 
 #endif

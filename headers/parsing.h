@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 10:09:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 14:07:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int				add_points(t_sector *sector, unsigned char *buf,
 void			add_surface(t_surface **point, t_surface *new);
 void			add_to_middle(t_wall **current_wall, t_wall *new_wall);
 Uint32			assign_entity_properties(t_home *home);
+void			calc_elevator_walls(t_home *home);
 void			calc_map_properties(t_home *home, t_player *plr);
 float			calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
 void			calc_light_sources(t_home *home);
@@ -48,6 +49,7 @@ void			initialize_door(t_wall *wall, t_point_data *left,
 void			initialize_switches(t_wall *wall, t_point_data *left);
 void			initialize_wall_triangles(t_wall *wall, t_point_data *left,
 					t_point_data *right);
+Uint32			generate_doors(t_wall *current_portal);
 t_sector		*get_sector_data(unsigned char *buf, unsigned int *pos,
 					ssize_t size);
 int				map_texel(t_surface *surface, t_sector *sector);

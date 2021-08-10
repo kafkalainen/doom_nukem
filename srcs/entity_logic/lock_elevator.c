@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:23:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 11:23:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 16:45:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ Uint32	lock_elevator(t_home *home, t_sector *elevator)
 		cur_wall = cur_wall->next;
 		i++;
 	}
+	bolt_elevator_doors(elevator, unlocked);
 	return (1);
 }
