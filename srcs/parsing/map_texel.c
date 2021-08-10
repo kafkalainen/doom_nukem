@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 07:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 14:01:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 11:37:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
 
 void	initialize_top_texels(t_triangle *top)
 {
@@ -45,13 +44,12 @@ static t_uvz	interpolate_coordinate(t_xyz coordinate, t_plgn *bounding_box)
 
 int	map_texel(t_surface *surface, t_sector *sector)
 {
-
 	surface->tri.uv[0] = interpolate_coordinate(surface->tri.p[0],
-		&sector->bounding_box);
+			&sector->bounding_box);
 	surface->tri.uv[1] = interpolate_coordinate(surface->tri.p[1],
-		&sector->bounding_box);
+			&sector->bounding_box);
 	surface->tri.uv[2] = interpolate_coordinate(surface->tri.p[2],
-		&sector->bounding_box);
+			&sector->bounding_box);
 	surface->tri.colour = white;
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/09 13:58:06 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/10 11:51:48 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = \
 	entity_logic$(SLASH)activate_elevator.c \
 	entity_logic$(SLASH)entity.c \
 	entity_logic$(SLASH)handle_activation.c \
+	entity_logic$(SLASH)lock_elevator.c \
 	entity_logic$(SLASH)turn_on_lights.c \
 	entity_logic$(SLASH)update_elevators.c \
 	parsing$(SLASH)assign_entity_properties.c \
@@ -39,8 +40,6 @@ SRCS = \
 	parsing$(SLASH)parse_sector.c \
 	parsing$(SLASH)parse_sector_2.c \
 	parsing$(SLASH)parse_surfaces.c \
-	parsing$(SLASH)retrieve_adjacent_triangles.c \
-	parsing$(SLASH)retrieve_adjacent_triangles_2.c \
 	parsing$(SLASH)triangulate_floor_and_ceiling.c \
 	png_parser$(SLASH)color_utils.c \
 	png_parser$(SLASH)crc.c \

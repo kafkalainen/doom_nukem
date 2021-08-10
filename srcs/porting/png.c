@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/08/02 18:07:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 11:43:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,6 @@ void	cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir)
 		}
 		dir_entry = readdir(dir);
 	}
-	// load_texture("textures/face.png", home->textures, i);
-	// load_texture("sprites/hud_doom.png", home->textures, i);
-	// load_texture("sprites/skull_skulker_front.png", home->textures, i); // might need to do some magic with index nbr
-	// load_texture("sprites/skull_skulker_attack_1.png", home->textures, i);
-	// printf("%i\n", i);
 }
 
 static void	init_asset_textures(t_home *home)

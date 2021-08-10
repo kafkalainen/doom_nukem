@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/09 11:41:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 09:29:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ static void	handle_button(t_entity *entity, t_home *home, t_player *plr)
 {
 	if (entity->entity_type == light_button)
 		turn_on_lights(entity, home);
-	if (entity->entity_type == elevator_button)
+	else if (entity->entity_type == elevator_button)
 		activate_elevator(home, entity, plr);
+	else
+		return ;
 }
 
 static void	change_texture(t_entity *entity)

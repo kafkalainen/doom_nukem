@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 14:52:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/09 13:51:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 11:36:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,40 +52,32 @@ static void	translate_ceiling_and_ground(t_sector *sector,
 	}
 }
 
-static Uint32	translate_sector(t_sector *sector, char dir, float distance)
+Uint32	translate_sector(t_sector *sector, float distance)
 {
-	t_xyz	direction;
+	t_xyz	translation;
 
-	if (dir == '+')
-		direction = (t_xyz){0.0f, distance, 0.0f, 0.0f};
-	else
-		direction = (t_xyz){0.0f, -distance, 0.0f, 0.0f};
-	translate_walls(sector, direction);
-	translate_ceiling_and_ground(sector, direction);
+	translation = (t_xyz){0.0f, distance, 0.0f, 0.0f};
+	translate_walls(sector, translation);
+	translate_ceiling_and_ground(sector, translation);
 	return (0);
 }
 
-static void	translate_entities(t_home *home, char dir,
-				float distance, int sector_idx)
+void	translate_entities(t_home *home, float distance, int sector_idx)
 {
 	Uint32	i;
-	t_xyz	direction;
+	t_xyz	translation;
 
 	i = 0;
-	if (dir == '+')
-		direction = (t_xyz){0.0f, distance, 0.0f, 0.0f};
-	else
-		direction = (t_xyz){0.0f, -distance, 0.0f, 0.0f};
+	translation = (t_xyz){0.0f, distance, 0.0f, 0.0f};
 	while (i < home->nbr_of_entities)
 	{
 		if (home->entity_pool[i]->sector_idx == sector_idx)
 		{
-			home->entity_pool[i]->pos =
-				vec3_add(home->entity_pool[i]->pos, direction);
+			home->entity_pool[i]->pos
+				= vec3_add(home->entity_pool[i]->pos, translation);
 		}
 		i++;
 	}
-
 }
 
 Uint32	update_elevators(t_home *home, t_player *plr,
@@ -96,20 +88,18 @@ Uint32	update_elevators(t_home *home, t_player *plr,
 	i = 0;
 	while (i < home->nbr_of_sectors)
 	{
-		if (home->sectors[i]->is_elevator &&
-			home->sectors[i]->moving_until > current_time)
+		if (home->sectors[i]->is_elevator == elevator)
 		{
-			if (home->sectors[i]->elevator_dir == '+')
+			if (home->sectors[i]->moving_until > current_time)
 			{
-				translate_sector(home->sectors[i], '+', 5.0f * delta_time * 0.001f);
-				translate_entities(home, '+', 5.0f * delta_time * 0.001f, i);
+				translate_sector(home->sectors[i],
+					home->sectors[i]->velocity * delta_time * 0.001f);
+				translate_entities(home,
+					home->sectors[i]->velocity * delta_time * 0.001f, i);
+				plr->pos = check_y(home->sectors[i], plr, plr->pos);
 			}
 			else
-			{
-				translate_sector(home->sectors[i], '-', 5.0f * delta_time * 0.001f);
-				translate_entities(home, '-', 5.0f * delta_time * 0.001f, i);
-			}
-			plr->pos = check_y(home->sectors[i], plr, plr->pos);
+				lock_elevator(home, home->sectors[i]);
 		}
 		i++;
 	}

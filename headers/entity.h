@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/09 13:59:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 11:19:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ enum e_entities
 	lamp,
 };
 
+enum e_floors
+{
+	normal_room,
+	elevator,
+	lower,
+	upper,
+};
+
 /*
 ** Entity functions
 */
@@ -67,5 +75,8 @@ void		turn_on_lights(t_entity *entity, t_home *home);
 void		activate_elevator(t_home *home, t_entity *entity, t_player *plr);
 Uint32		update_elevators(t_home *home, t_player *plr,
 			Uint32 current_time, Uint32 delta_time);
+Uint32		translate_sector(t_sector *sector, float distance);
+void		translate_entities(t_home *home, float distance, int sector_idx);
+Uint32		lock_elevator(t_home *home, t_sector *elevator);
 
 #endif

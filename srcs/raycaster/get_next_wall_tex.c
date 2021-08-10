@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:19:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/07 12:46:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 11:38:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
 
 int	get_next_wall_tex(t_wall **current_head, int nbr_of_walls)
 {

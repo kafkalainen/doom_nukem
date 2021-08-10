@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:20:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/03 12:01:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 11:52:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	calc_wall_normals(t_sector *sector)
 	}
 }
 
-static void calc_ceil_ground_normals(t_sector *sector)
+static void	calc_ceil_ground_normals(t_sector *sector)
 {
 	Uint32		i;
 	t_surface	*ceil_ground;

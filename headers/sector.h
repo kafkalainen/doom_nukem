@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/09 12:09:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 09:43:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ typedef struct s_sector
 	t_surface		*ceiling;
 	t_lighting		lights;
 	t_plgn			bounding_box;
+	float			velocity;
 	Uint32			is_elevator;
+	Uint32			elevator_dir;
 	Uint32			moving_until;
 	Uint32			nb_of_msgs;
 	unsigned int	nb_of_walls;
@@ -91,7 +93,6 @@ typedef struct s_sector
 	int				tex_floor;
 	int				tex_ceil;
 	char			**story;
-	char			elevator_dir;
 }					t_sector;
 
 enum e_sector_info

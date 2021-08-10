@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 12:05:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/06 17:23:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 11:57:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,13 @@ void	calc_extra_walls(t_home *home)
 			{
 				portal_behind = get_portal_by_idx(i,
 						home->sectors[current_portal->top.idx]);
-				home->sectors[current_portal->top.idx]->nb_of_walls
-					+= generate_wall_logic(current_portal, portal_behind);
-				home->sectors[i]->nb_of_walls += generate_doors(current_portal);
+				if (home->sectors[current_portal->top.idx]->is_elevator
+					== normal_room)
+				{
+					home->sectors[current_portal->top.idx]->nb_of_walls
+						+= generate_wall_logic(current_portal, portal_behind);
+					home->sectors[i]->nb_of_walls += generate_doors(current_portal);
+				}
 			}
 			current_portal = current_portal->next;
 			j++;

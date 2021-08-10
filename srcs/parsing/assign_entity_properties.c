@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/09 14:51:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 12:40:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,17 @@
 // t_triangle	top; // calculated per frame
 // t_triangle	bot; // calculated per frame
 // Uint32		take_damage; // boolean to see if we took damage this tick
-// Uint32		cooldown; // wait time between moving between idle and move states, or cooldown between attacks
-// Uint32		is_aggroed; // default false, based on distance between entity and player, if within distance parameters, cast ray to see if we can see enemy
+// Uint32		cooldown; // wait time between moving between
+// 				idle and move states, or cooldown between attacks
+// Uint32		is_aggroed; // default false, based on distance between
+//				entity and player, if within distance parameters,
+//				 cast ray to see if we can see enemy
 // 						// if true, aggro = true
-// int			sprite_index; // determined by entity_type // ALWAYS >= 0 // what sprite texture are we drawing from
+// int			sprite_index; // determined by entity_type // ALWAYS >= 0
+// 				what sprite texture are we drawing from
 // int			alt_sprite_index; // default = 0
-// int			sprite_state; // angle between player and entity determines X axis of sprite map
+// int			sprite_state; // angle between player and entity
+//				determines X axis of sprite map
 // int			anim_offset; // determines Y axis of sprite map
 // int			health; // 1 or 2 // determined by entity_type
 // int			ammo; // defaults to 3
@@ -54,29 +59,31 @@ static void	initialize_static_entity(t_entity *entity)
 	if (entity->entity_type == lamp)
 	{
 		entity->top = rotate_triangle(&entity->top,
-			PI_BY_TWO, 'x');
+				PI_BY_TWO, 'x');
 		entity->bot = rotate_triangle(&entity->bot,
-			PI_BY_TWO, 'x');
+				PI_BY_TWO, 'x');
 	}
 	else
 	{
 		entity->top = rotate_triangle(&entity->top,
-			vec3_angle(entity->top.normal, entity->dir), 'y');
+				vec3_angle(entity->top.normal, entity->dir), 'y');
 		entity->bot = rotate_triangle(&entity->bot,
-			vec3_angle(entity->bot.normal, entity->dir), 'y');
+				vec3_angle(entity->bot.normal, entity->dir), 'y');
 	}
 	entity->top.normal = entity->dir;
 	entity->bot.normal = entity->dir;
 	entity->pos = translate_point(&entity->pos,
-		vec3_mul(entity->top.normal, 0.15f));
+			vec3_mul(entity->top.normal, 0.15f));
 }
 
 static void	initialize_entity_movement(t_entity *entity)
 {
 	if (entity->is_static == 1)
 	{
-		if (entity->entity_type == light_button || entity->entity_type == powerstation
-			|| entity->entity_type == lamp || entity->entity_type == elevator_button)
+		if (entity->entity_type == light_button
+			|| entity->entity_type == powerstation
+			|| entity->entity_type == lamp
+			|| entity->entity_type == elevator_button)
 		{
 			initialize_static_entity(entity);
 			entity->velocity = 0;
@@ -86,7 +93,8 @@ static void	initialize_entity_movement(t_entity *entity)
 	{
 		if (entity->entity_type == crewmember || entity->entity_type == thing)
 			entity->velocity = ENTITY_VELOCITY_1;
-		else if (entity->entity_type == skull_skulker || entity->entity_type == drone)
+		else if (entity->entity_type == skull_skulker
+			|| entity->entity_type == drone)
 			entity->velocity = ENTITY_VELOCITY_2;
 		else
 			entity->velocity = 0;
@@ -116,7 +124,7 @@ static void	initialize_entity_values(t_entity *entity)
 	entity->ammo = 3;
 }
 
-Uint32		assign_entity_properties(t_home *home)
+Uint32	assign_entity_properties(t_home *home)
 {
 	Uint32	i;
 

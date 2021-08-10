@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/09 12:27:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 12:09:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 	if (*pos > (unsigned int)size)
 		return (1);
 	new_sector->moving_until = 0;
+	new_sector->elevator_dir = 0;
 	return (0);
 }
 
@@ -38,7 +39,8 @@ int	parse_light_data(t_sector *new_sector, unsigned char *buf,
 		return (1);
 	if (get_next_float_value(&new_sector->lights.light_src.z, buf, &pos, size))
 		return (1);
-	if (get_next_float_value(&new_sector->lights.diffuse_power, buf, &pos, size))
+	if (get_next_float_value(&new_sector->lights.diffuse_power,
+			buf, &pos, size))
 		return (1);
 	if (get_next_uint_value(&new_sector->lights.state, buf, &pos, size))
 		return (1);
@@ -88,7 +90,7 @@ int	parse_story_data(t_sector *new_sector, unsigned char *buf,
 		return (1);
 	if (new_sector->nb_of_msgs)
 		new_sector->story = (char **)malloc(sizeof(char *)
-			* (new_sector->nb_of_msgs + 1));
+				* (new_sector->nb_of_msgs + 1));
 	else
 		new_sector->story = NULL;
 	if (new_sector->nb_of_msgs && !new_sector->story)
