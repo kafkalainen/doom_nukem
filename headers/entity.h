@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/10 16:42:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/11 09:39:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ Uint32		translate_sector(t_sector *sector, float distance);
 void		translate_entities(t_home *home, float distance, int sector_idx);
 Uint32		lock_elevator(t_home *home, t_sector *elevator);
 void		bolt_elevator_doors(t_sector *sector, Uint32 state);
+void		bolt_elevator_door(t_sector *elevator, t_sector **sectors,
+			Uint32 previous_floor, Uint32 state);
+void		lock_the_door(t_wall *dimensions, t_wall *door);
 
 #endif

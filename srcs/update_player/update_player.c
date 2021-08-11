@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 11:40:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/11 09:27:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 	gravity(home->sectors[plr->cur_sector], plr, delta_time);
 	if (!plr->input.jetpack)
 		movement(plr, home, delta_time);
-	player_use(plr, home, delta_time);
+	player_use(plr, home);
 	player_look(home, plr);
 	evolve_story(plr, home->sectors[plr->cur_sector],
 		home->sectors[plr->msg_sector]);

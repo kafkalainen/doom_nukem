@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:50:13 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 16:49:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/11 09:42:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,40 @@ static float	get_floor_height_diff(t_home *home, int sector_idx,
 	return (0.0f);
 }
 
-void	bolt_elevator_doors(t_sector *sector, Uint32 state)
+void	bolt_elevator_doors(t_sector *elevator, Uint32 state)
 {
 	Uint32	j;
 	t_wall	*portal;
 
 	j = 0;
-	portal = sector->walls;
-	while (j < sector->nb_of_walls)
+	portal = elevator->walls;
+	while (j < elevator->nb_of_walls)
 	{
 		if (portal->top.idx >= 0 && portal->is_door)
+		{
+			lock_the_door(portal, portal->next);
+			portal->open_until = 0;
+			portal->is_closed = 1;
+			portal->is_locked = state;
+		}
+		portal = portal->next;
+		j++;
+	}
+}
+
+void	bolt_elevator_door(t_sector *elevator, t_sector **sectors,
+		Uint32 next_floor, Uint32 state)
+{
+	Uint32	j;
+	t_wall	*portal;
+
+	j = 0;
+	portal = elevator->walls;
+
+	while (j < elevator->nb_of_walls)
+	{
+		if (portal->top.idx >= 0 && portal->is_door
+			&& sectors[portal->top.idx]->is_elevator == next_floor)
 			portal->is_locked = state;
 		portal = portal->next;
 		j++;
