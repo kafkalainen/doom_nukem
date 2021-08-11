@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/02 12:37:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/11 10:41:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ t_texel			*get_tex(int idx, t_texture	**textures);
 void			get_wall_pts(t_frame *frame, int walls, t_player *plr);
 void			get_l_pt(t_wall *start, t_ray ray, t_frame *frame, int walls);
 void			get_r_pt(t_wall *start, t_ray ray, t_frame *frame, int walls);
-float			get_wall_height(Uint32 left_ground, Uint32 right_ground,
-				Uint32 left_ceiling, Uint32 right_ceiling);
+float			get_wall_height(float left_ground, float right_ground,
+				float left_ceiling, float right_ceiling);
 t_wall			*get_portal_by_idx(int idx, t_sector *sector);
 void			interpolate_y(t_height *height, t_xy cutpoint,
 					t_wall *p0, t_wall *p1);

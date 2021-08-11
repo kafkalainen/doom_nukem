@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 10:41:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/11 09:13:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/11 10:43:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-float	get_wall_height(Uint32 left_ground, Uint32 right_ground,
-	Uint32 left_ceiling, Uint32 right_ceiling)
+float	get_wall_height(float left_ground, float right_ground,
+	float left_ceiling, float right_ceiling)
 {
 	float	max_ceiling;
 	float	max_ground;
@@ -26,5 +26,5 @@ float	get_wall_height(Uint32 left_ground, Uint32 right_ground,
 		max_ground = left_ground;
 	else
 		max_ground = right_ground;
-	return (ft_fabsf(max_ceiling) - ft_fabsf(max_ground));
+	return (max_ceiling - max_ground);
 }
