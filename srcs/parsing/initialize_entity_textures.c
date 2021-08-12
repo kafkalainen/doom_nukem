@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:21:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/09 11:51:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 14:03:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,17 @@ static void	initialize_triangle_index(t_triangle *tri, t_entity *entity)
 Uint32	initialize_entity_textures(t_entity *entity)
 {
 	if (entity->is_static)
+	{
 		initialize_static_entity(entity);
+		initialize_top_texels(&entity->top);
+		initialize_bottom_texels(&entity->bot);
+	}
 	else
+	{
 		initialize_moving_entity_textures(entity);
+		set_entity_texels_for_frame(entity);
+	}
 	initialize_triangle_index(&entity->top, entity);
 	initialize_triangle_index(&entity->bot, entity);
-	initialize_top_texels(&entity->top);
-	initialize_bottom_texels(&entity->bot);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/11 09:39:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 14:03:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,20 @@ enum e_door_states
 	military_keycard
 };
 
+enum e_entity_states
+{
+	in_front,
+	front_left,
+	left,
+	back_left,
+	back,
+	back_right,
+	right,
+	front_right,
+	attack,
+	die
+};
+
 /*
 ** Entity functions
 */
@@ -91,5 +105,6 @@ void		bolt_elevator_doors(t_sector *sector, Uint32 state);
 void		bolt_elevator_door(t_sector *elevator, t_sector **sectors,
 			Uint32 previous_floor, Uint32 state);
 void		lock_the_door(t_wall *dimensions, t_wall *door);
-
+void		set_entity_texels_for_frame(t_entity *entity);
+void		update_enemies(t_home *home, t_player *plr, Uint32 delta_time);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:40:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 14:35:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 15:10:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,28 @@ void	translate_entity(t_triangle *tri1, t_triangle *tri2,
 {
 	*tri1 = translate_triangle(&entity->top, entity->pos);
 	*tri2 = translate_triangle(&entity->bot, entity->pos);
+}
+
+void	set_entity_texels_for_frame(t_entity *entity)
+{
+	Uint32	x;
+	Uint32	y;
+
+	x = entity->sprite_state;
+	y = entity->anim_offset;
+	if (x > 9 || y > 5)
+		return ;
+	entity->top.uv[0] = (t_uvz){x * 0.1f, (y + 1) * 0.166666667f, 1.0f};
+	entity->top.uv[1] = (t_uvz){x * 0.1f, y * 0.166666667f, 1.0f};
+	entity->top.uv[2] = (t_uvz){(x + 1) * 0.1f, y * 0.166666667f, 1.0f};
+	entity->bot.uv[0] = (t_uvz){x * 0.1f, (y + 1) * 0.166666667f, 1.0f};
+	entity->bot.uv[1] = (t_uvz){(x + 1) * 0.1f, y * 0.166666667f, 1.0f};
+	entity->bot.uv[2] = (t_uvz){(x + 1) * 0.1f, (y + 1) * 0.166666667f, 1.0f};
+}
+
+void	initialize_lumels(float *p0, float *p1, float *p2, float init)
+{
+	*p0 = init;
+	*p1 = init;
+	*p2 = init;
 }

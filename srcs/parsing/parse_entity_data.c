@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:46:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 12:39:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 14:37:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 **	entity_index
 **	entity_type	sector_idx	pos			dir			is_static	is_active
 **	#enum entity	int		#x#z#y		#x#z#y		boolean		boolean
-**	#4				2		#0#10#2		#1#0#2		#1			#1
-**	#0				0		#-1#1#2		#1#0#2		#0			#1
+**	#4				#2		#0#10#2		#1#0#2		#1			#1
+**	#0				#0		#-1#1#2		#1#0#2		#0			#1
 **
 **	always_facing_plr	is_revealed			state		is_linked
 **	boolean				boolean				boolean		Uint32

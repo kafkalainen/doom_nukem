@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 20:06:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/07 15:04:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 15:13:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 static float	saturate(float value)
 {
 	if (value < 0.0f)
-		value = 0.0f;
+		value = ft_fabsf(value);
 	else if (value > 1.0f)
 		value = 1.0f;
 	else
@@ -39,7 +39,7 @@ static float	saturate(float value)
 
 
 /*
-**	Decided to use lambertial lighting model
+**	Decided to use Lambertial lighting model
 **	opposed to Blinn-Phong lighting model.
 */
 static float	calculate_light_intensity(t_lighting *light, t_triangle *tri,
@@ -61,27 +61,47 @@ static float	calculate_light_intensity(t_lighting *light, t_triangle *tri,
 	return (intensity);
 }
 
+static float	calculate_enemy_light_intensity(t_lighting *light, t_triangle *tri,
+				Uint32 idx)
+{
+	t_xyz	light_dir;
+	float	magnitude;
+	float	dot_product;
+	float	intensity;
+
+	light_dir = vec3_unit_vector(vec3_dec(light->light_src, tri->p[idx]));
+	magnitude = vec3_eucl_dist(light_dir);
+	magnitude = magnitude * magnitude;
+	dot_product = vec3_dot_product(light_dir, (t_xyz){0.0f, 1.0f, 0.0f, 1.0f});
+	intensity = saturate(dot_product);
+	intensity = intensity * light->diffuse_power * 0.1f / magnitude;
+	if (intensity < 0.1f)
+		intensity = 0.1f;
+	return (intensity);
+}
+
 void	set_lighting(t_lighting *light, t_triangle *tri)
 {
 	if (light)
 	{
-		if (light->state == TRUE && light->diffuse_power > 0)
+		if (light->state == TRUE && light->diffuse_power > 0.0f)
 		{
-			tri->lu[0] = calculate_light_intensity(light, tri, 0);
-			tri->lu[1] = calculate_light_intensity(light, tri, 1);
-			tri->lu[2] = calculate_light_intensity(light, tri, 2);
+			if (tri->idx == -enemy0 || tri->idx == -enemy1)
+			{
+				tri->lu[0] = calculate_enemy_light_intensity(light, tri, 0);
+				tri->lu[1] = calculate_enemy_light_intensity(light, tri, 1);
+				tri->lu[2] = calculate_enemy_light_intensity(light, tri, 2);
+			}
+			else
+			{
+				tri->lu[0] = calculate_light_intensity(light, tri, 0);
+				tri->lu[1] = calculate_light_intensity(light, tri, 1);
+				tri->lu[2] = calculate_light_intensity(light, tri, 2);
+			}
 		}
 		else
-		{
-			tri->lu[0] = 0.1f;
-			tri->lu[1] = 0.1f;
-			tri->lu[2] = 0.1f;
-		}
+			initialize_lumels(&tri->lu[0], &tri->lu[1], &tri->lu[2], 0.1f);
 	}
 	else
-	{
-		tri->lu[0] = 1.0f;
-		tri->lu[1] = 1.0f;
-		tri->lu[2] = 1.0f;
-	}
+		initialize_lumels(&tri->lu[0], &tri->lu[1], &tri->lu[2], 1.0f);
 }

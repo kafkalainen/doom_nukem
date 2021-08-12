@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/05 15:35:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 15:11:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,5 +249,6 @@ Uint32		vec3_is_inside_triangle(t_triangle *tri, t_xyz point);
 Uint32		vec3_ray_triangle_intersect(t_triangle *tri,
 			t_xyz pos, t_xyz dir, t_xyz *isection);
 float		vec3_angle(t_xyz a, t_xyz b);
+void		initialize_lumels(float *p0, float *p1, float *p2, float init);
 
 #endif

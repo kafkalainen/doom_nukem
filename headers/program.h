@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/09 13:43:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 13:22:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,75 @@ typedef struct s_window
 }					t_window;
 
 /*
-**	light_button:
-**	is_linked can have following values.
-**	0	not linked
-**	1	automatic
-**	2->	linked sector entity
-**	elevator_button:
-**	is_linked can have following values.
-**	0	not linked
-**	2->	linked sector entity
+**	Entities are structures, that have necessary data to create
+**	enemy and objects to the level.
+**	top	bot: 			triangles that are calculated per frame based
+**						on their direction and position.
+**	velocity:			their current velocity.
+**	take_damage:		ticks out when enemies take damage.
+**	cooldown:			the wait time between idle and move states, when
+**						enemy is moving.
+**	is_static:			Boolean to for if object is moving or static.
+**	always_facing:		If true, always draw entity_front.png
+**						OR entity_attack
+**	is_revealed:		Enemies have alternate texture pack, then sprite_index
+**						is set to alt_sprite_index, default == false;
+**	entity_type:		Entity_type is used based on values listed in enum
+**						e_entity.
+**	state:				State tells if a light switch is on or not, is button
+**						activated or not.
+**	is_aggroed:			Default false, based on distance between entity and
+**						player, if within distance parameters, cast ray
+**						to see if we can see enemy. If enemy has a line
+**						of sight, set aggro = true
+**	entity_index:		Default texture_index. Always >= 0
+**	alt_sprite_index:	Storage for alternate texture index. Always >= 0
+**	sprite_state:		Angle between player and entity determines X axis
+**						of the sprite map.
+**	anim_offset:		Tells which frame we are drawing from Y axis of
+**						the sprite map.
+**	health:				Tells how much health entity has. All entities
+**						default to 999, except for enemies that have
+**						either 1 or 2 health.
+**	ammo:				Ammo defaults to 3 with enemies.
+**	entity_pool:		Entity position in the entity_pool array,
+**						used to track ammo counts and replenishment.
+**	sector_idx:			Tells in which sector entity currently is.
 */
+
 typedef struct	s_entity
 {
-	t_triangle	top; // calculated per frame
-	t_triangle	bot; // calculated per frame
+	t_triangle	top;
+	t_triangle	bot;
 	t_xyz		pos;
 	t_xyz		dir;
-	float		velocity; // can be looked up via macros
-	Uint32		take_damage; // boolean to see if we took damage this tick
-	Uint32		cooldown; // wait time between moving between idle and move states, or cooldown between attacks
-	Uint32		is_static; // 0 == can move, 1 == cannot move
+	t_xyz		vec_to_plr;
+	float		velocity;
+	Uint32		take_damage;
+	Uint32		cooldown;
+	Uint32		is_static;
 	Uint32		is_active;
 	Uint32		is_linked;
-	Uint32		always_facing_plr; // if true, always draw entity_front.png OR entity_attack
-	Uint32		is_revealed; // the twist; if true, set sprite_index to alt_sprite_index, default == false;
-	Uint32		entity_type; // 0 == health_station; 1 == enemy_1; 2 == enemy_2;
+	Uint32		always_facing_plr;
+	Uint32		is_revealed;
+	Uint32		entity_type;
 	Uint32		state;
-	Uint32		is_aggroed; // default false, based on distance between entity and player, if within distance parameters, cast ray to see if we can see enemy
-							// if true, aggro = true
-	int			sprite_index; // determined by entity_type // ALWAYS >= 0 // what sprite texture are we drawing from
-	int			alt_sprite_index; // default = 0
-	int			sprite_state; // angle between player and entity determines X axis of sprite map
-	int			anim_offset; // determines Y axis of sprite map
-	int			health; // 1 or 2 // determined by entity_type
-	int			ammo; // defaults to 3
-	int			entity_index; // entity position in the entity_pool array, used to track ammo counts and replenishment
+	Uint32		is_aggroed;
+	int			sprite_index;
+	int			alt_sprite_index;
+	int			sprite_state;
+	int			anim_offset;
+	int			health;
+	int			ammo;
+	int			entity_index;
 	int			sector_idx;
 }				t_entity;
 
+/*
+**	entity_type:	0 or 1
+**	entity_index	links back to original entity
+**	sprite_state:	determines which sprite to draw from the sprite map.
+*/
 typedef	struct	s_projectile
 {
 	t_xyz		coordinates;
@@ -69,10 +100,10 @@ typedef	struct	s_projectile
 	t_triangle	top;
 	t_triangle	bot;
 	Uint32		is_active;
-	Uint32		entity_type; // 0 or 1
+	Uint32		entity_type;
 	int			sprite_index;
-	int			entity_index; // links back to original entity
-	int			sprite_state; // determines which sprite to draw from the sprite map
+	int			entity_index;
+	int			sprite_state;
 	int			sector_idx;
 }				t_projectile;
 
@@ -83,7 +114,7 @@ typedef struct s_home
 	t_sector		**sectors;
 	SDL_Surface		*text_surf;
 	t_texture		**textures;
-	t_texture		**sprites; // sprite maps for health station, enemy_1, enemy_2, dead_body, doors???
+	t_texture		**sprites;
 	t_entity		**entity_pool;
 	t_projectile	**projectile_pool;
 	t_time			t;

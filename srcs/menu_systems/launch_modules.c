@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/08/11 09:28:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 10:48:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,9 @@ void	update_world(t_player *plr, t_home *home)
 		return ;
 	plr->time = current_time;
 	update_player(plr, home, delta_time);
-	// update_world()
+	update_enemies(home, plr, delta_time);
 	update_elevators(home, plr, current_time, delta_time);
 	update_doors(home->sectors, home->nbr_of_sectors, plr->time, delta_time);
-	// update_objects(home, plr, delta_time);
 	// doors_closing = close_doors(home->sectors, home->nbr_of_sectors, plr->time, delta_time);
 	// if (doors_closing)
 	// 	play_sound(plr->audio.door_closing);
