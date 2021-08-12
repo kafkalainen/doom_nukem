@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 13:08:18 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/10 15:07:26 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/11 13:21:04 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,6 +125,7 @@ SRC_LIST = \
 	$(SLASH)ft_imax.c\
 	$(SLASH)ft_fabsf.c\
 	$(SLASH)ft_skipc.c\
+	$(SLASH)ft_fabsf.c\
 
 HEADERS = ./libft.h
 
