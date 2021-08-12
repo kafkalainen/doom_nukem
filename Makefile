@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/12 14:23:37 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/12 15:19:33 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = \
 	entity_logic$(SLASH)activate_elevator.c \
 	entity_logic$(SLASH)determine_entity_angle.c \
 	entity_logic$(SLASH)entity.c \
+	entity_logic$(SLASH)entity_move.c \
 	entity_logic$(SLASH)handle_activation.c \
 	entity_logic$(SLASH)lock_elevator.c \
 	entity_logic$(SLASH)turn_on_lights.c \

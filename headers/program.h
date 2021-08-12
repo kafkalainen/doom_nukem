@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/12 13:22:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 15:27:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct	s_entity
 	t_xyz		vec_to_plr;
 	float		velocity;
 	Uint32		take_damage;
-	Uint32		cooldown;
 	Uint32		is_static;
 	Uint32		is_active;
 	Uint32		is_linked;
@@ -76,6 +75,7 @@ typedef struct	s_entity
 	Uint32		entity_type;
 	Uint32		state;
 	Uint32		is_aggroed;
+	int			cooldown;
 	int			sprite_index;
 	int			alt_sprite_index;
 	int			sprite_state;

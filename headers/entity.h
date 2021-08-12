@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/12 14:03:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 15:36:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define SPRITE_COUNT 7
 # define ENTITY_COOLDOWN_1 6
 # define ENTITY_COOLDOWN_2 10
+# define ENTITY_COOLDOWN_3 20
 # define ENTITY_MOVE 1
 # define ENTITY_IDLE 0
 # define ENTITY_ATTACK 2
