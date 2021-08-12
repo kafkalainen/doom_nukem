@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/08/10 11:43:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/12 09:28:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ void	init_textures(t_home *home)
 	load_texture("textures/loading_bay.png", home->textures, wall2);
 	load_texture("textures/rusty_wall.png", home->textures, wall3);
 	load_texture("textures/white.png", home->textures, wall4);
-	load_texture("textures/hull2.png", home->textures, wall5);
-	load_texture("textures/hull.png", home->textures, wall6);
-	load_texture("textures/riveted.png", home->textures, wall7);
+	load_texture("textures/rusty_window.png", home->textures, wall5);
+	load_texture("textures/bridge_window.png", home->textures, wall6);
+	load_texture("textures/hull2.png", home->textures, wall7);
 	load_texture("textures/yellow.png", home->textures, wall8);
 	load_texture("textures/white.png", home->textures, wall9);
 	load_texture("textures/rusty_floor.png", home->textures, surf0);
@@ -110,7 +110,7 @@ void	init_textures(t_home *home)
 	load_texture("textures/steel_rust.png", home->textures, surf5);
 	load_texture("textures/clean_floor.png", home->textures, surf6);
 	load_texture("textures/scraps.png", home->textures, surf7);
-	load_texture("textures/gear.png", home->textures, surf8);
+	load_texture("textures/hull.png", home->textures, surf8);
 	load_texture("textures/plate.png", home->textures, surf9);
 	load_texture("textures/door.png", home->textures, door);
 	load_texture("textures/hud_doom.png", home->textures, hud);
