@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/12 14:40:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 10:06:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 ** float		velocity;
 ** t_triangle	top;
 ** t_triangle	bot;
+** float		height;
+** float		width;
 ** Uint32		take_damage;
 ** Uint32		cooldown;
 ** Uint32		is_aggroed;
@@ -47,6 +49,9 @@ static void	initialize_entity_triangles(t_entity *entity)
 	entity->bot.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
 	entity->bot.p[1] = (t_xyz){size.x, size.y, 0.0f, 1.0f};
 	entity->bot.p[2] = (t_xyz){size.x, 0.0f, 0.0f, 1.0f};
+	entity->height = size.y;
+	entity->legs = size.y * 0.001f;
+	entity->width = size.x;
 }
 
 static void	initialize_static_entity(t_entity *entity)

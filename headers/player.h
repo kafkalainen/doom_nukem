@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/11 09:27:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 09:33:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,12 @@ typedef struct s_weapon
 
 typedef struct s_player
 {
+	t_audio			audio;
 	t_hud			hud;
 	t_input			input;
+	t_weapon		wep[2];
 	t_xyz			pos;
+	t_xyz			test_pos;
 	t_xyz			look_dir;
 	t_xyz			move_dir;
 	t_xyz			target;
@@ -129,24 +132,23 @@ typedef struct s_player
 	t_xy			dir;
 	t_xyz			speed;
 	float			yaw;
+	float			steps;
 	float			pitch;
 	float			height;
+	float			width;
 	float			acceleration;
+	float			power_points;
+	float			fuel_points;
 	int				cur_sector;
 	int				msg_sector;
 	int				plot_state;
-	int				enemy_sighted;
 	int				active_inv;
-	float			power_points;
-	float			fuel_points;
-	t_weapon		wep[2];
-	unsigned int	active_wep;
-	unsigned int	inventory[4];
-	float			steps;
+	int				enemy_sighted;
 	Uint32			time;
 	Uint32			message_time;
 	Uint32			display_object;
-	t_audio			audio;
+	unsigned int	active_wep;
+	unsigned int	inventory[4];
 }					t_player;
 
 enum e_movement
@@ -162,7 +164,7 @@ t_wall		*check_if_crossing(t_sector *sector, t_xyz pos);
 t_xyz		check_y(t_sector *sector, t_player *plr, t_xyz pos);
 int			check_y_diff(t_player *plr, t_xyz *test_pos, t_sector *to);
 Uint32		check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
-float		check_distance_to_ground(t_sector *sector, t_player *plr,
+float		check_distance_to_ground(t_sector *sector, float height,
 				t_xyz pos);
 Uint32		update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 				Uint32 current_time, Uint32 delta_time);
@@ -197,6 +199,6 @@ Uint32		test_triangle(t_triangle *tri, t_xyz *isection_2, float *d,
 				t_player *plr);
 Uint32		player_look(t_home *home, t_player *plr);
 t_entity	*activate_object(t_home *home, t_player *plr);
-Uint32		update_player_to_new_location(t_player *plr, t_wall *wall,
-				t_sector **sector, Uint32 time);
+Uint32		check_if_allowed_move_through_portal(t_wall *wall, t_player *plr,
+				t_home *home, Uint32 t);
 #endif

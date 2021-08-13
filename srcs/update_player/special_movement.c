@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/28 16:51:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 09:24:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	jump(t_player *plr, t_sector *sector)
 	new_pos = (t_xyz){plr->pos.x, plr->pos.y + 2.0f, plr->pos.z, plr->pos.w};
 	if (plr->input.jump == 1
 		&& !check_distance_to_ceiling(sector, &new_pos)
-		&& check_distance_to_ground(sector, plr, plr->pos) <= 0)
+		&& check_distance_to_ground(sector, plr->height, plr->pos) <= 0)
 	{
 		plr->speed.y += 0.08f;
 	}
@@ -104,7 +104,6 @@ void	jump(t_player *plr, t_sector *sector)
 int	jetpack(t_player *plr, t_home *home, Uint32 t)
 {
 	t_wall	*wall;
-	t_xyz	new_loc;
 	float	dist;
 
 	if (!plr->input.jetpack)
@@ -113,26 +112,21 @@ int	jetpack(t_player *plr, t_home *home, Uint32 t)
 	{
 		plr->fuel_points -= t * 0.05f;
 		plr->move_dir = vec3_unit_vector(plr->look_dir);
-		new_loc = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.03f));
-		if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &new_loc))
+		plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.03f));
+		if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &plr->test_pos))
 			return (FALSE);
-		wall = check_if_crossing(home->sectors[plr->cur_sector], new_loc);
+		wall = check_if_crossing(home->sectors[plr->cur_sector], plr->test_pos);
 		if (wall)
 		{
-			if (wall->top.idx >= 0)
-			{
-				if (check_y_diff(plr, &new_loc, home->sectors[wall->top.idx]))
-					return (FALSE);
-				if ((wall->is_door && !wall->is_closed) || !wall->is_door)
-					plr->cur_sector = wall->top.idx;
-			}
+			if (check_if_allowed_move_through_portal(wall, plr, home, t))
+				return (TRUE);
 			else
 				return (FALSE);
 		}
 		else
 		{
 			plr->pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.005f));
-			dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr, plr->pos);
+			dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr->height, plr->pos);
 			if (dist < 0 && dist > -plr->height)
 				plr->pos.y -= dist;
 			return (TRUE);

@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/12 15:19:33 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/13 09:19:40 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,10 +90,10 @@ SRCS = \
 	update_player$(SLASH)init_story_cutscene.c \
 	update_player$(SLASH)key_input.c \
 	update_player$(SLASH)mouse_handle.c \
+	update_player$(SLASH)plr_inside.c \
 	update_player$(SLASH)player_look.c \
 	update_player$(SLASH)player_move.c \
 	update_player$(SLASH)player_use.c \
-	update_player$(SLASH)player_update_movement.c \
 	update_player$(SLASH)special_movement.c \
 	update_player$(SLASH)update_player.c \
 	update_player$(SLASH)shooting.c \

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/05 11:55:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 09:19:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	init_player(t_player *plr)
 	plr->pitch = 0.0f;
 	plr->yaw = 0.0f;
 	plr->height = 1.5f;
+	plr->width = 0.5f;
 	plr->power_points = 5.0f;
 	plr->fuel_points = 100.0f;
 	plr->active_inv = -1;
@@ -55,7 +56,7 @@ void	init_player(t_player *plr)
 	plr->inventory[1] = 0;
 	plr->inventory[2] = 0;
 	plr->inventory[3] = 0;
-	plr->steps = 0;
+	plr->steps = 0.0f;
 	plr->plot_state = no_plot;
 	plr->wep[0].ammo = 42;
 	plr->wep[0].fire_rate = 1.0f;

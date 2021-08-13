@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_update_movement.c                           :+:      :+:    :+:   */
+/*   plr_inside.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/06 13:29:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 13:37:13 by jnivala          ###   ########.fr       */
+/*   Created: 2021/08/13 08:57:50 by jnivala           #+#    #+#             */
+/*   Updated: 2021/08/13 08:58:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-
-Uint32	update_player_to_new_location(t_player *plr, t_wall *wall,
-	t_sector **sector, Uint32 time)
+int	plr_inside(t_sector *sector, t_player *plr)
 {
-	plr->cur_sector = wall->top.idx;
-	if (sector[plr->cur_sector]->lights.is_linked == 1)
-		sector[plr->cur_sector]->lights.state = TRUE;
-	plr->pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, time * 0.005f));
-	return (TRUE);
+	t_wall	*wall;
+	Uint32		i;
+	t_xy	pos;
+	t_xy	dir;
+	Uint32	walls_crossed;
+
+	i = 0;
+	walls_crossed = 0;
+	wall = sector->walls;
+	pos = vec3_to_vec2(plr->pos);
+	dir = (t_xy){0.0f, -20000.0f};
+	dir = vec2_dec(dir, pos);
+	while (i < sector->nb_of_walls)
+	{
+		walls_crossed += check_intersection(wall, pos, dir);
+		wall = wall->next;
+		i++;
+	}
+	return (walls_crossed % 2);
 }

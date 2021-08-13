@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 13:35:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 10:15:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ float	calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 	return (surf_dist);
 }
 
-float	check_distance_to_ground(t_sector *sector, t_player *plr, t_xyz pos)
+float	check_distance_to_ground(t_sector *sector, float height, t_xyz pos)
 {
 	unsigned int	i;
 	t_surface		*ground;
@@ -75,5 +75,5 @@ float	check_distance_to_ground(t_sector *sector, t_player *plr, t_xyz pos)
 	}
 	surf_dist = vec3_dot_product(vec3_dec(pos, ground->tri.p[0]),
 		ground->tri.normal);
-	return (surf_dist - plr->height);
+	return (surf_dist - height);
 }

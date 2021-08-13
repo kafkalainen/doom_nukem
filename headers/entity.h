@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/12 15:36:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 09:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,5 @@ void		bolt_elevator_door(t_sector *elevator, t_sector **sectors,
 void		lock_the_door(t_wall *dimensions, t_wall *door);
 void		set_entity_texels_for_frame(t_entity *entity);
 void		update_enemies(t_home *home, t_player *plr, Uint32 delta_time);
+void		entity_gravity(t_sector *sector, t_entity *entity, Uint32 delta_time);
 #endif

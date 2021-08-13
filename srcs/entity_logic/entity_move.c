@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/12 16:03:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 10:27:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,13 @@ static Uint32	check_if_moving_through_portal(t_wall *wall, t_entity *entity, t_h
 {
 	t_xyz	new_loc;
 
-	new_loc = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.0005f));
+	new_loc = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.01f));
 	if (wall->top.idx >= 0)
 	{
 		if (entity_check_y_diff(entity, &new_loc, home->sectors[wall->top.idx]))
 			return (FALSE);
-		if ((wall->is_door && !wall->is_closed) || !wall->is_door)
+		if ((wall->is_door && !wall->is_closed && wall->is_locked == unlocked)
+			|| !wall->is_door)
 		{
 			entity->sector_idx = wall->top.idx;
 			entity->pos = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.0005f));
@@ -83,35 +84,34 @@ static Uint32	check_if_moving_through_portal(t_wall *wall, t_entity *entity, t_h
 	return (FALSE);
 }
 
+
 int		entity_move(t_entity *entity, t_home *home, Uint32 t)
 {
 	t_wall			*wall;
-	Uint32			moving;
 	t_xyz			new_loc;
+	float			dist;
 
-	new_loc = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.0005f));
+	entity->dir.y = 0.0f;
+	entity->dir = vec3_unit_vector(entity->dir);
+	new_loc = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.01f));
 	wall = check_if_crossing(home->sectors[entity->sector_idx], new_loc);
 	if (wall)
 	{
-		moving = check_if_moving_through_portal(wall, entity, home, t);
-		if (!moving)
+		if (check_if_moving_through_portal(wall, entity, home, t))
+			return (TRUE);
+		else
 		{
-			//printf("hit a wall, need to rotate\n");
-			// choose_new_direction(entity, home);
-			entity->dir = (t_xyz){entity->dir.x, 0.0f, -entity->dir.z, 0.0f};
-			//printf("new direction: x: %f y: %f z: %f\n", entity->dir.x, entity->dir.y, entity->dir.z);
+			entity->dir = wall->top.normal;
+			return (FALSE);
 		}
-		return (FALSE);
 	}
 	else
 	{
 		entity->pos = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.0005f));
 		pick_next_frame(entity, t);
-		// increment sprite status, if over the range, reset to 0
-		// dist = check_distance_to_ground(home->sectors[entity->sector_idx], entity, entity->pos);
-		// if (dist < 0 && dist > -plr->height)
-		// 	plr->pos.y -= dist;
-		// add_motion(&plr->pos, t);
+		dist = check_distance_to_ground(home->sectors[entity->sector_idx], entity->legs, entity->pos);
+		if (dist < 0)
+			entity->pos.y = dist + entity->legs;
 		return (TRUE);
 	}
 	return (FALSE);

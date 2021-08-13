@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/12 15:27:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 09:50:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ typedef struct	s_entity
 	t_xyz		dir;
 	t_xyz		vec_to_plr;
 	float		velocity;
+	float		height;
+	float		width;
+	float		legs;
 	Uint32		take_damage;
 	Uint32		is_static;
 	Uint32		is_active;

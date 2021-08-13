@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 14:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/12 15:04:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 10:18:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	angle_state_logic(float rad, t_entity *entity)
 	else if (rad < -0.3926991 && rad > -1.178097)
 		entity->sprite_state = front_right;
 	else if (rad < -1.178097 && rad > -1.9634954)
-		entity->sprite_state = right;
+		entity->sprite_state = left;
 	else if (rad < -1.9634954 && rad > -2.7488936)
 		entity->sprite_state = back_left;
 	else if (rad > 2.7488936 || rad < -2.7488936)
@@ -27,7 +27,7 @@ static void	angle_state_logic(float rad, t_entity *entity)
 	else if (rad < 2.7488936 && rad > 1.9634954)
 		entity->sprite_state = back_right;
 	else if (rad < 1.9634954 && rad > 1.178097)
-		entity->sprite_state = left;
+		entity->sprite_state = right;
 	else if (rad < 1.178097 && rad > 0.3926991)
 		entity->sprite_state = front_left;
 	else
