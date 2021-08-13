@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/11 10:33:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 11:25:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	lock_the_door(t_wall *dimensions, t_wall *door)
 {
+
 	door->top.p[0] = dimensions->top.p[0];
 	door->top.p[1] = dimensions->top.p[1];
 	door->top.p[2] = dimensions->top.p[2];
@@ -26,6 +27,10 @@ void	lock_the_door(t_wall *dimensions, t_wall *door)
 	door->bottom.uv[0] = dimensions->bottom.uv[0];
 	door->bottom.uv[1] = dimensions->bottom.uv[1];
 	door->bottom.uv[2] = dimensions->bottom.uv[2];
+	door->top = translate_triangle(&door->top,
+		vec3_mul(door->top.normal, -0.05f));
+	door->bottom = translate_triangle(&door->bottom,
+		vec3_mul(door->bottom.normal, -0.05f));
 }
 
 /*
@@ -60,8 +65,11 @@ static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
 	current_height = wall->next->top.p[2].y - wall->next->top.p[0].y;
 	if (wall->open_until < current_time)
 	{
-		lock_the_door(wall, wall->next);
-		wall->is_closed = 1;
+		if (!wall->is_closed)
+		{
+			lock_the_door(wall, wall->next);
+			wall->is_closed = 1;
+		}
 		return (1);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 10:27:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 10:53:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,9 @@ int		entity_move(t_entity *entity, t_home *home, Uint32 t)
 	{
 		entity->pos = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.0005f));
 		pick_next_frame(entity, t);
-		dist = check_distance_to_ground(home->sectors[entity->sector_idx], entity->legs, entity->pos);
-		if (dist < 0)
+		dist = check_distance_to_ground(home->sectors[entity->sector_idx],
+			entity->legs, entity->pos);
+		if (dist != entity->legs)
 			entity->pos.y = dist + entity->legs;
 		return (TRUE);
 	}
