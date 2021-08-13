@@ -6,22 +6,19 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 11:36:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/04 10:06:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 14:21:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	vec3_signed_distance_to_plane(t_xyz point, t_xyz plane_normal,
+float	vec3_signed_distance_to_plane(t_xyz point, t_xyz plane_normal,
 	t_xyz plane_point)
 {
 	float	d;
 
 	d = vec3_dot_product(vec3_dec(point, plane_point), plane_normal);
-	if (d <= 0)
-		return (1);
-	else
-		return (0);
+	return (d);
 }
 
 float	area_of_triangle(t_xyz p0, t_xyz p1, t_xyz p2)

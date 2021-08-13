@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 09:24:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 15:29:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,26 +112,27 @@ int	jetpack(t_player *plr, t_home *home, Uint32 t)
 	{
 		plr->fuel_points -= t * 0.05f;
 		plr->move_dir = vec3_unit_vector(plr->look_dir);
-		plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.03f));
-		if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &plr->test_pos))
+		plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.003f));
+		if (check_distance_to_ceiling(home->sectors[plr->cur_sector],
+				&plr->test_pos))
 			return (FALSE);
-		wall = check_if_crossing(home->sectors[plr->cur_sector], plr->test_pos);
-		if (wall)
+		wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
+				plr->width, plr->test_pos, plr->move_dir);
+		if (!wall)
 		{
-			if (check_if_allowed_move_through_portal(wall, plr, home, t))
-				return (TRUE);
-			else
-				return (FALSE);
-		}
-		else
-		{
-			plr->pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.005f));
-			dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr->height, plr->pos);
+			plr->pos = plr->test_pos;
+			plr->steps += t * 0.005f;
+			check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
+			dist = check_distance_to_ground(home->sectors[plr->cur_sector],
+					plr->height, plr->pos);
 			if (dist < 0 && dist > -plr->height)
 				plr->pos.y -= dist;
 			return (TRUE);
 		}
-	} else {
+		return (FALSE);
+	}
+	else
+	{
 		plr->input.jetpack = 0;
 	}
 	return (FALSE);

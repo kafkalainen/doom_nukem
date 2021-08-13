@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 09:43:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 15:56:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 void	update_enemies(t_home *home, t_player *plr, Uint32 delta_time)
 {
-	Uint32	i;
+	Uint32		i;
+	t_entity	*cur_enemy;
 
 	i = 0;
+	(void)plr;
 	while (i < home->nbr_of_entities)
 	{
-		if (home->entity_pool[i]->entity_type != ENTITY_DEAD)
+		cur_enemy = home->entity_pool[i];
+		if (cur_enemy->entity_type != ENTITY_DEAD)
 		{
-			if (home->entity_pool[i]->entity_type == skull_skulker
-				|| home->entity_pool[i]->entity_type == thing)
+			if (cur_enemy->entity_type == skull_skulker
+				|| cur_enemy->entity_type == thing)
 			{
-				entity_gravity(home->sectors[home->entity_pool[i]->sector_idx],
-					home->entity_pool[i], delta_time);
-				entity_move(home->entity_pool[i], home, delta_time);
-				determine_angle_between_entity_and_plr(home->entity_pool[i],
-					plr);
-				set_entity_texels_for_frame(home->entity_pool[i]);
-				printf("%f\n", vec3_eucl_dist(vec3_dec(plr->pos, home->entity_pool[i]->pos)));
-				printf("x: %f y: %f z: %f\n", home->entity_pool[i]->pos.x,
-					home->entity_pool[i]->pos.y, home->entity_pool[i]->pos.z);
+				entity_gravity(home->sectors[cur_enemy->sector_idx],
+					cur_enemy, delta_time);
+				// entity_move(cur_enemy, home, delta_time);
+				// determine_angle_between_entity_and_plr(cur_enemy,
+				// 	plr);
+				set_entity_texels_for_frame(cur_enemy);
+				// printf("%f\n", vec3_eucl_dist(vec3_dec(plr->pos, cur_enemy->pos)));
+				// printf("x: %f y: %f z: %f\n", cur_enemy->pos.x,
+				// 	cur_enemy->pos.y, cur_enemy->pos.z);
 			}
 		}
 		i++;

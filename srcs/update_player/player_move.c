@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 09:23:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 15:21:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_wall	*check_if_crossing(t_sector *sector, t_xyz pos)
 	temp = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
-		if (vec3_signed_distance_to_plane(pos, temp->top.normal, temp->top.p[0]))
+		if (vec3_signed_distance_to_plane(pos, temp->top.normal,
+			temp->top.p[0]) < 0.0f)
 			return (temp);
 		temp = temp->next;
 		i++;
@@ -60,24 +61,29 @@ static void	viewmodel_motion(t_player *plr)
 	plr->hud.vm_my = sin(plr->steps);
 }
 
-Uint32	check_if_allowed_move_through_portal(t_wall *wall, t_player *plr,
-				t_home *home, Uint32 t)
+void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
 {
-	if (wall->top.idx >= 0)
+	Uint32	i;
+	t_wall	*portal;
+
+	i = 0;
+	portal = home->sectors[*cur_sector]->walls;
+	while (i < home->sectors[*cur_sector]->nb_of_walls)
 	{
-		if (check_y_diff(plr, &plr->test_pos, home->sectors[wall->top.idx]))
-			return (FALSE);
-		if ((wall->is_door && !wall->is_closed && wall->is_locked == unlocked)
-			|| !wall->is_door)
+		if ((portal->top.idx >= 0 && !portal->is_door) || (portal->is_door
+			&& !portal->is_closed && portal->is_locked == unlocked))
 		{
-			plr->cur_sector = wall->top.idx;
-			if (home->sectors[plr->cur_sector]->lights.is_linked == 1)
-				home->sectors[plr->cur_sector]->lights.state = TRUE;
-			plr->pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
-			return (TRUE);
+			if (vec3_signed_distance_to_plane(pos,
+				portal->top.normal, portal->top.p[0]) < 0)
+			{
+				*cur_sector = portal->top.idx;
+				if (home->sectors[*cur_sector]->lights.is_linked == 1)
+					home->sectors[*cur_sector]->lights.state = TRUE;
+			}
 		}
+		portal = portal->next;
+		i++;
 	}
-	return (FALSE);
 }
 
 int	player_move(t_player *plr, t_home *home, Uint32 t)
@@ -87,21 +93,16 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 
 	plr->move_dir.y = 0.0f;
 	plr->move_dir = vec3_unit_vector(plr->move_dir);
-	plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.01f));
+	plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
 	if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &plr->test_pos))
 		return (FALSE);
-	wall = check_if_crossing(home->sectors[plr->cur_sector], plr->test_pos);
-	if (wall)
+	wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
+		plr->width, plr->test_pos, plr->move_dir);
+	if (!wall)
 	{
-		if (check_if_allowed_move_through_portal(wall, plr, home, t))
-			return (TRUE);
-		else
-			return (FALSE);
-	}
-	else
-	{
+		plr->pos = plr->test_pos;
+		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 		plr->steps += t * 0.005f;
-		plr->pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
 		viewmodel_motion(plr);
 		dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr->height, plr->pos);
 		if (dist < 0 && dist > -plr->height)

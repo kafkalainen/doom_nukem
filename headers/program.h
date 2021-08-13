@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/13 09:50:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 15:34:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct	s_entity
 	t_triangle	top;
 	t_triangle	bot;
 	t_xyz		pos;
+	t_xyz		test_pos;
 	t_xyz		dir;
 	t_xyz		vec_to_plr;
 	float		velocity;

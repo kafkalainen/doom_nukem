@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/12 15:11:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 14:21:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ int			clip_against_plane(t_plane *plane, t_triangle *src,
 void		initialize_locations(t_point_location *loc);
 void		triangle_add(t_triangle *tri, t_xyz	add);
 void		invert_view(t_triangle *triangle);
-Uint32		vec3_signed_distance_to_plane(t_xyz point, t_xyz plane_normal,
+float		vec3_signed_distance_to_plane(t_xyz point, t_xyz plane_normal,
 			t_xyz plane_point);
 float		area_of_triangle(t_xyz p0, t_xyz p1, t_xyz p2);
 Uint32		point_inside_a_triangle_wall(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/13 09:33:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 15:32:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,5 @@ Uint32		test_triangle(t_triangle *tri, t_xyz *isection_2, float *d,
 				t_player *plr);
 Uint32		player_look(t_home *home, t_player *plr);
 t_entity	*activate_object(t_home *home, t_player *plr);
-Uint32		check_if_allowed_move_through_portal(t_wall *wall, t_player *plr,
-				t_home *home, Uint32 t);
+
 #endif

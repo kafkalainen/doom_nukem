@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 14:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 10:18:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/13 15:54:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 	t_xy	b;
 	t_xyz	new_vector;
 
+	new_vector.y = 0.0f;
 	new_vector = vec3_unit_vector(vec3_dec(plr->pos, entity->pos));
 	if (check_if_same_point(new_vector, entity->vec_to_plr))
 		return ;
@@ -51,9 +52,13 @@ void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 	rad = vec3_angle(
 		(t_xyz){entity->vec_to_plr.x, 0.0f, entity->vec_to_plr.z, 0.0f},
 		(t_xyz){new_vector.x, 0.0f, new_vector.z, 0.0f});
-	entity->top = rotate_triangle(&entity->top, rad, 'y');
-	entity->bot = rotate_triangle(&entity->bot, rad, 'y');
-	entity->top.normal = triangle_normal(&entity->top);
-	entity->bot.normal = triangle_normal(&entity->bot);
-	entity->vec_to_plr = new_vector;
+	// printf("%f\n", rad);
+	// if (rad)
+	// {
+		entity->top = rotate_triangle(&entity->top, rad, 'y');
+		entity->bot = rotate_triangle(&entity->bot, rad, 'y');
+		entity->top.normal = triangle_normal(&entity->top);
+		entity->bot.normal = triangle_normal(&entity->bot);
+		entity->vec_to_plr = new_vector;
+	// }
 }
