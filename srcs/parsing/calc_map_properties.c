@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/12 13:49:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/18 11:47:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	calc_map_properties(t_home *home, t_player *plr)
 	calc_elevator_doors(home);
 	calc_unit_normals(home);
 	calc_light_sources(home);
-	assign_entity_properties(home, plr->pos);
 	plr->pos = check_y(home->sectors[plr->cur_sector], plr, plr->pos);
+	assign_entity_properties(home, plr->pos);
 }

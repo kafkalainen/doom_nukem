@@ -6,29 +6,31 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:40:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/12 15:10:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/18 12:24:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-float	vec3_angle(t_xyz a, t_xyz b)
+float	vec3_angle(t_xyz to_be_turned, t_xyz compared)
 {
 	float	dot;
-	float	dot_ccw;
 	float	mag_a;
 	float	mag_b;
+    float   sign;
 
-	mag_a = vec3_eucl_dist(a);
-	mag_b = vec3_eucl_dist(b);
-	dot = vec3_dot_product(a, b);
-	dot_ccw = a.x * -b.z + a.z * b.x;
-	if (dot_ccw > 0)
-		return (-acosf(dot / (mag_a * mag_b)));
-	else if (dot_ccw < 0)
-		return (acosf(dot / (mag_a * mag_b)));
+	mag_a = vec3_eucl_dist(to_be_turned);
+	mag_b = vec3_eucl_dist(to_be_turned);
+	dot = vec3_dot_product(to_be_turned, compared);
+	dot /= mag_a * mag_b;
+	sign = -to_be_turned.z * compared.x + to_be_turned.x * compared.z;
+	if (sign < 0)
+		sign = -1.0f;
+	else if (sign > 0)
+		sign = 1.0f;
 	else
 		return (0.0f);
+	return (sign * acos(dot));
 }
 
 void	translate_entity(t_triangle *tri1, t_triangle *tri2,

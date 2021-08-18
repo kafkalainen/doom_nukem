@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:44:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/13 14:21:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/18 10:32:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,7 @@ Uint32		vec3_check_sidedness(t_xyz p1, t_xyz p2, t_xyz a, t_xyz b);
 Uint32		vec3_is_inside_triangle(t_triangle *tri, t_xyz point);
 Uint32		vec3_ray_triangle_intersect(t_triangle *tri,
 			t_xyz pos, t_xyz dir, t_xyz *isection);
-float		vec3_angle(t_xyz a, t_xyz b);
+float		vec3_angle(t_xyz to_be_turned, t_xyz compared);
 void		initialize_lumels(float *p0, float *p1, float *p2, float init);
 
 #endif

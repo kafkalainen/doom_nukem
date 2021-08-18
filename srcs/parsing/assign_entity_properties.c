@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 10:06:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/18 12:30:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static void	initialize_entity_values(t_entity *entity, t_xyz plr_pos)
 	entity->is_aggroed = 0;
 	entity->sprite_state = 0;
 	entity->anim_offset = 0;
-	entity->vec_to_plr = vec3_unit_vector(vec3_dec(entity->pos, plr_pos));
+	entity->vec_to_plr = vec3_unit_vector(vec3_dec(plr_pos, entity->pos));
 	if (entity->entity_type == skull_skulker || entity->entity_type == drone)
 		entity->health = 1;
 	else if (entity->entity_type == crewmember || entity->entity_type == thing)
