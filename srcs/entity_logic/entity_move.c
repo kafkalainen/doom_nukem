@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 15:46:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/18 16:51:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ int	entity_move(t_entity *entity, t_home *home, Uint32 t)
 		if (dist != entity->legs)
 			entity->pos.y = entity->legs;
 		return (TRUE);
+	}
+	else
+	{
+		entity->dir = wall->top.normal;
 	}
 	return (FALSE);
 }

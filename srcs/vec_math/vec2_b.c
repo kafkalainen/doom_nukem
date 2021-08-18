@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:16:10 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/18 11:55:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/18 16:11:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ float	vec2_ang(t_xy a, t_xy b)
 	else if (sign > 0)
 		sign = 1.0f;
 	else
-		sign = 0.0f;
+		return (0.0f);
 	return (sign * acosf(vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b))));
 }
 

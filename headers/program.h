@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/13 15:34:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/18 15:43:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct	s_entity
 	t_xyz		pos;
 	t_xyz		test_pos;
 	t_xyz		dir;
-	t_xyz		vec_to_plr;
+	t_xy		vec_to_plr;
 	float		velocity;
 	float		height;
 	float		width;

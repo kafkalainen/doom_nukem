@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/18 12:30:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/18 15:43:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ static void	initialize_entity_triangles(t_entity *entity)
 		size = (t_xy){0.5f, 0.5f};
 	else
 		size = (t_xy){1.0f, 1.0f};
-	entity->top.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
-	entity->top.p[1] = (t_xyz){0.0f, size.y, 0.0f, 1.0f};
-	entity->top.p[2] = (t_xyz){size.x, size.y, 0.0f, 1.0f};
-	entity->bot.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
-	entity->bot.p[1] = (t_xyz){size.x, size.y, 0.0f, 1.0f};
-	entity->bot.p[2] = (t_xyz){size.x, 0.0f, 0.0f, 1.0f};
+	entity->top.p[0] = (t_xyz){-0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
+	entity->top.p[1] = (t_xyz){-0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
+	entity->top.p[2] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
+	entity->bot.p[0] = (t_xyz){-0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
+	entity->bot.p[1] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
+	entity->bot.p[2] = (t_xyz){0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
 	entity->height = size.y;
-	entity->legs = size.y * 0.001f;
+	entity->legs = size.y * 0.5f;
 	entity->width = size.x;
 }
 
@@ -115,7 +115,7 @@ static void	initialize_entity_values(t_entity *entity, t_xyz plr_pos)
 	entity->is_aggroed = 0;
 	entity->sprite_state = 0;
 	entity->anim_offset = 0;
-	entity->vec_to_plr = vec3_unit_vector(vec3_dec(plr_pos, entity->pos));
+	entity->vec_to_plr = vec2_norm(vec2_dec(vec3_to_vec2(plr_pos), vec3_to_vec2(entity->pos)));
 	if (entity->entity_type == skull_skulker || entity->entity_type == drone)
 		entity->health = 1;
 	else if (entity->entity_type == crewmember || entity->entity_type == thing)
