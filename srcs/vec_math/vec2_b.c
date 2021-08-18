@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec2_b.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:16:10 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/18 16:11:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/18 17:35:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ float	vec2_mag(t_xy a)
 
 float	vec2_ang(t_xy a, t_xy b)
 {
-	float sign;
+	float	sign;
+	float	angle;
 
 	sign = -a.y * b.x + a.x * b.y;
 	if (sign < 0)
@@ -41,7 +42,12 @@ float	vec2_ang(t_xy a, t_xy b)
 		sign = 1.0f;
 	else
 		return (0.0f);
-	return (sign * acosf(vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b))));
+	angle = vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b));
+	if (angle < -1.0)
+		angle = -1.0f;
+	else if (angle > 1.0)
+		angle = 1.0f;
+	return (sign * acosf(angle));
 }
 
 t_xy	vec2_normal(t_xy p0, t_xy p1)

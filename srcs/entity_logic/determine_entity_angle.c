@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   determine_entity_angle.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 14:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/18 16:33:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/18 17:30:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,9 @@ void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 	rad = atan2f(b.y * a.x - b.x * a.y, b.x * a.x + b.y * a.y);
 	angle_state_logic(rad, entity);
 	rad = vec2_ang(entity->vec_to_plr, a);
-	if (rad != 0)
-	{
-		entity->top = rotate_triangle(&entity->top, rad, 'y');
-		entity->bot = rotate_triangle(&entity->bot, rad, 'y');
-		entity->top.normal = triangle_normal(&entity->top);
-		entity->bot.normal = triangle_normal(&entity->bot);
-	}
+	entity->top = rotate_triangle(&entity->top, rad, 'y');
+	entity->bot = rotate_triangle(&entity->bot, rad, 'y');
+	entity->top.normal = triangle_normal(&entity->top);
+	entity->bot.normal = triangle_normal(&entity->bot);
 	entity->vec_to_plr = a;
 }
