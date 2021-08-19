@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/19 11:07:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/19 14:48:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	free_projectiles(t_home *home)
 {
 	Uint32	i;
 
-	i = 100;
+	i = MAX_PROJECTILES;
 	if (!home->projectile_pool)
 		return ;
 	while (i--)

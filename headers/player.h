@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/19 10:03:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/19 15:08:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,15 +187,15 @@ Uint32		evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector);
 void		draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr);
 void		init_cutscene(char **array);
 void		shooting_handle(t_home *home, t_player *plr);
-float		get_wall_hit_point(t_home *home, t_player *plr, t_xyz *isection,
+float		get_wall_hit_point(t_home *home, t_player *plr, t_bullet_hole *hole,
 				unsigned int bullet_sector);
-t_xyz		get_bullet_ricochet_hit_point(t_home *home, t_player *plr,
+void		get_bullet_ricochet_hit_point(t_home *home, t_player *plr,
 				unsigned int bullet_sector);
 float		get_ceiling_hit_point(t_sector *sector, t_player *plr,
-				t_xyz *isection);
+				t_bullet_hole *hole);
 float		get_ground_hit_point(t_sector *sector, t_player *plr,
-				t_xyz *isection);
-Uint32		test_triangle(t_triangle *tri, t_xyz *isection_2, float *d,
+				t_bullet_hole *hole);
+Uint32		test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 				t_player *plr);
 Uint32		player_look(t_home *home, t_player *plr);
 t_entity	*activate_object(t_home *home, t_player *plr);

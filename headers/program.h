@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/19 10:52:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/19 15:02:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,13 @@ typedef	struct	s_projectile
 	int			sector_idx;
 }				t_projectile;
 
+typedef struct s_bullet_hole
+{
+	t_xyz			point;
+	t_xyz			normal;
+	int				sector_idx;
+}					t_bullet_hole;
+
 typedef struct s_home
 {
 	t_window		win;
@@ -128,6 +135,7 @@ typedef struct s_home
 	Uint32			linked_map;
 	Uint32			nbr_of_entities;
 	Uint32			nbr_of_projectiles;
+	int				projectile_idx;
 	unsigned int	nbr_of_sectors;
 	int				nbr_of_textures;
 	int				end_sector;
