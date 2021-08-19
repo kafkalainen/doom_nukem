@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/13 11:45:18 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/19 10:02:21 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ SRCS = \
 	update_player$(SLASH)special_movement.c \
 	update_player$(SLASH)update_player.c \
 	update_player$(SLASH)shooting.c \
+	update_player$(SLASH)strafe_vector_along_the_wall.c \
 	update_screen$(SLASH)apply_matrices_a.c \
 	update_screen$(SLASH)apply_matrices_b.c \
 	update_screen$(SLASH)calculate_offsets.c \
