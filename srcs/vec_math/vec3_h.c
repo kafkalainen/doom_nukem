@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:40:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/18 16:10:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/19 10:00:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ float	vec3_angle(t_xyz to_be_turned, t_xyz compared)
 	mag_b = vec3_eucl_dist(compared);
 	dot = vec3_dot_product(to_be_turned, compared);
 	dot /= mag_a * mag_b;
+	if (dot < -1.0)
+		dot = -1.0f;
+	else if (dot > 1.0)
+		dot = 1.0f;
 	sign = -to_be_turned.z * compared.x + to_be_turned.x * compared.z;
 	if (sign < 0)
 		sign = -1.0f;

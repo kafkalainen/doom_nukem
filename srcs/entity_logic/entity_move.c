@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/18 16:51:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/19 09:44:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,39 @@ static void	pick_next_frame(t_entity *entity, Uint32 t)
 		entity->anim_offset = 0;
 }
 
+static void	place_entity_to_ground(t_entity *entity, t_home *home)
+{
+	float	distance;
+
+	distance = check_distance_to_ground(home->sectors[entity->sector_idx],
+			entity->legs, entity->pos);
+	if (distance > entity->legs)
+		entity->pos.y -= entity->legs;
+}
+
 int	entity_move(t_entity *entity, t_home *home, Uint32 t)
 {
 	t_wall			*wall;
-	float			dist;
 
 	entity->dir.y = 0.0f;
 	entity->dir = vec3_unit_vector(entity->dir);
-	entity->test_pos = vec3_add(entity->pos, vec3_mul(entity->dir, t * 0.0005f));
-	if (check_distance_to_ceiling(home->sectors[entity->sector_idx], &entity->test_pos))
+	entity->test_pos = vec3_add(entity->pos,
+			vec3_mul(entity->dir, t * entity->velocity));
+	if (check_distance_to_ceiling(home->sectors[entity->sector_idx],
+			&entity->test_pos))
 		return (FALSE);
 	wall = check_if_too_close_to_walls(home->sectors[entity->sector_idx],
-		entity->width, entity->test_pos, entity->dir);
+			entity->width, entity->test_pos, entity->dir);
 	if (!wall)
 	{
 		entity->pos = entity->test_pos;
 		pick_next_frame(entity, t);
 		check_if_moved_through_portal(&entity->sector_idx, entity->pos, home);
-		dist = check_distance_to_ground(home->sectors[entity->sector_idx],
-			entity->legs, entity->pos);
-		if (dist != entity->legs)
-			entity->pos.y = entity->legs;
+		place_entity_to_ground(entity, home);
 		return (TRUE);
 	}
-	else
-	{
-		entity->dir = wall->top.normal;
-	}
+	entity->dir = wall->top.normal;
+	entity->pos = vec3_add(entity->pos, vec3_mul(entity->dir,
+		t * entity->velocity));
 	return (FALSE);
 }
