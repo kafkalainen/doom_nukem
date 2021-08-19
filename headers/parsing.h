@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/16 09:28:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/19 11:08:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int				add_points(t_sector *sector, unsigned char *buf,
 void			add_surface(t_surface **point, t_surface *new);
 void			add_to_middle(t_wall **current_wall, t_wall *new_wall);
 Uint32			assign_entity_properties(t_home *home, t_xyz plr_pos);
+void			assign_projectiles(t_home *home);
 void			calc_elevator_doors(t_home *home);
 void			calc_map_properties(t_home *home, t_player *plr);
 float			calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
@@ -35,6 +36,7 @@ Uint32			check_portal_ceiling_difference(t_wall *portal,
 void			close_linkedlist(t_wall **point);
 void			close_surface_list(t_surface **head);
 void			free_entities(t_home *home);
+void			free_projectiles(t_home *home);
 int				free_points(t_wall **head, unsigned int nbr_of_walls);
 t_sector		*free_sector(t_sector **sector);
 void			free_sectors(t_home *home);

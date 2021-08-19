@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/18 15:43:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/19 10:52:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct	s_entity
 */
 typedef	struct	s_projectile
 {
-	t_xyz		coordinates;
+	t_xyz		pos;
 	t_xyz		normal;
 	t_xyz		move_dir;
 	float		velocity;

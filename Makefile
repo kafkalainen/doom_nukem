@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/19 10:02:21 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/19 10:47:35 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS = \
 	entity_logic$(SLASH)update_elevators.c \
 	entity_logic$(SLASH)update_enemies.c \
 	parsing$(SLASH)assign_entity_properties.c \
+	parsing$(SLASH)assign_projectiles.c \
 	parsing$(SLASH)calc_elevator_doors.c \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_light_sources.c \

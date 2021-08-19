@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/03 12:13:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/19 11:07:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,23 @@ void	free_entities(t_home *home)
 	}
 	free(home->entity_pool);
 	home->entity_pool = NULL;
+}
+
+void	free_projectiles(t_home *home)
+{
+	Uint32	i;
+
+	i = 100;
+	if (!home->projectile_pool)
+		return ;
+	while (i--)
+	{
+		if (home->projectile_pool[i])
+		{
+			free(home->projectile_pool[i]);
+			home->projectile_pool[i] = NULL;
+		}
+	}
+	free(home->projectile_pool);
+	home->projectile_pool = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/04 11:00:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/19 11:00:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ t_xyz	get_bullet_ricochet_hit_point(t_home *home, t_player *plr,
 {
 	float	d[3];
 	t_xyz	hitpoints[3];
+	// t_xyz	normals[3];
 
 	d[2] = get_wall_hit_point(home, plr, &hitpoints[2], bullet_sector);
 	d[1] = get_ceiling_hit_point(home->sectors[bullet_sector], plr, &hitpoints[1]);
@@ -122,10 +123,15 @@ t_xyz	get_bullet_ricochet_hit_point(t_home *home, t_player *plr,
 	ft_putstr("BULLET SECTOR ");
 	ft_putendl(ft_itoa(bullet_sector));
 	if (d[0] != 999.0f && d[0] <= d[1] && d[0] <= d[2])
-		home->entity_pool[1]->pos = hitpoints[0];
+		home->projectile_pool[home->nbr_of_projectiles - 1]->pos = hitpoints[0];
 	if (d[1] != 999.0f && d[1] <= d[0] && d[1] <= d[2])
-		home->entity_pool[1]->pos = hitpoints[1];
+		home->projectile_pool[home->nbr_of_projectiles - 1]->pos = hitpoints[1];
 	if (d[2] != 999.0f && d[2] <= d[1] && d[2] <= d[0])
-		home->entity_pool[1]->pos = hitpoints[2];
+		home->projectile_pool[home->nbr_of_projectiles - 1]->pos = hitpoints[2];
+	printf("BULLET HOLE\n %f\n %f\n %f\n",
+		home->projectile_pool[home->nbr_of_projectiles - 1]->pos.x,
+		home->projectile_pool[home->nbr_of_projectiles - 1]->pos.y,
+		home->projectile_pool[home->nbr_of_projectiles - 1]->pos.z
+	);
 	return (hitpoints[2]);
 }
