@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_bullet_richochet_hit_point.c                   :+:      :+:    :+:   */
+/*   get_bullet_hit_point.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/19 16:01:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/20 10:52:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Uint32	test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 	{
 		if (vec3_dot_product(plane.normal, vec3_dec(plane.point, plr->pos)) < 0)
 		{
-			distance = ft_fabsf(vec3_eucl_dist(vec3_dec(hole, plr->pos)));
+			distance = vec3_eucl_dist(vec3_dec(hole, plr->pos));
 			if (distance < *d)
 			{
 				*d = distance;
@@ -57,12 +57,10 @@ float	get_ceiling_hit_point(t_sector *sector, t_player *plr,
 	{
 		if (test_triangle(&surf->tri, hole, &d, plr))
 			hole->sector_idx = sector->idx_sector;
+		surf = surf->next;
 		i++;
 	}
-	if (d != 999.0f)
-		return (d);
-	else
-		return (999.0f);
+	return (d);
 }
 
 float	get_ground_hit_point(t_sector *sector, t_player *plr,
@@ -82,39 +80,58 @@ float	get_ground_hit_point(t_sector *sector, t_player *plr,
 		surf = surf->next;
 		i++;
 	}
-	if (d != 999.0f)
-		return (d);
-	else
-		return (999.0f);
+	return (d);
 }
 
+float	get_entity_hit_point(t_home *home, t_player *plr, t_bullet_hole *hole,
+		int bullet_sector)
+{
+	Uint32		i;
+	t_triangle	tested[2];
+	float		distance;
 
-static t_bullet_hole	loop_through_sector(t_home *home, t_player *plr, unsigned int bullet_sector)
+	i = 0;
+	distance = 999.0f;
+	while (i < home->nbr_of_entities)
+	{
+		if (home->entity_pool[i]->is_active
+			&& home->entity_pool[i]->sector_idx == bullet_sector)
+		{
+			translate_entity(&tested[0], &tested[1], home->entity_pool[i]);
+			if (test_triangle(&tested[0], hole, &distance, plr)
+				|| test_triangle(&tested[1], hole, &distance, plr))
+			{
+				hole->sector_idx = bullet_sector;
+				home->entity_pool[i]->take_damage = TRUE;
+			}
+		}
+		i++;
+	}
+	return (distance);
+}
+
+static t_bullet_hole	loop_through_sector(t_home *home, t_player *plr, int bullet_sector)
 {
 	float			d[4];
 	t_bullet_hole	hitpoints[4];
 
-	// d[3] = get_entity_hit_point(home, plr, &hitpoints[3], bullet_sector);
-	d[2] = get_wall_hit_point(home, plr, &hitpoints[2], bullet_sector);
-	d[1] = get_ceiling_hit_point(home->sectors[bullet_sector], plr, &hitpoints[1]);
 	d[0] = get_ground_hit_point(home->sectors[bullet_sector], plr, &hitpoints[0]);
-	if (d[0] != 999.0f && d[0] <= d[1] && d[0] <= d[2])
-	{
+	d[1] = get_ceiling_hit_point(home->sectors[bullet_sector], plr, &hitpoints[1]);
+	d[3] = get_entity_hit_point(home, plr, &hitpoints[3], bullet_sector);
+	d[2] = get_wall_hit_point(home, plr, &hitpoints[2], bullet_sector);
+	if (d[0] != 999.0f && d[0] <= d[1] && d[0] <= d[2] && d[0] <= d[3])
 		return (hitpoints[0]);
-	}
-	if (d[1] != 999.0f && d[1] <= d[0] && d[1] <= d[2])
-	{
+	if (d[1] != 999.0f && d[1] <= d[0] && d[1] <= d[2] && d[1] <= d[3])
 		return (hitpoints[1]);
-	}
-	if (d[2] != 999.0f && d[2] <= d[1] && d[2] <= d[0])
-	{
+	if (d[2] != 999.0f && d[2] <= d[1] && d[2] <= d[0] && d[2] <= d[3])
 		return (hitpoints[2]);
-	}
+	if (d[3] != 999.0f && d[3] <= d[1] && d[3] <= d[0]  && d[3] <= d[2])
+		return (hitpoints[3]);
 	return (hitpoints[0]);
 }
 
 float	get_wall_hit_point(t_home *home, t_player *plr, t_bullet_hole *hole,
-		unsigned int bullet_sector)
+		int bullet_sector)
 {
 	Uint32		i;
 	t_wall		*wall;
@@ -151,8 +168,8 @@ float	get_wall_hit_point(t_home *home, t_player *plr, t_bullet_hole *hole,
 	return (d);
 }
 
-void	get_bullet_ricochet_hit_point(t_home *home, t_player *plr,
-		unsigned int bullet_sector)
+void	get_bullet_hit_point(t_home *home, t_player *plr,
+		int bullet_sector)
 {
 	t_bullet_hole	hole;
 	t_projectile	*current;

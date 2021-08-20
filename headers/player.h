@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/19 15:08:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/20 09:32:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,11 +188,13 @@ void		draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr);
 void		init_cutscene(char **array);
 void		shooting_handle(t_home *home, t_player *plr);
 float		get_wall_hit_point(t_home *home, t_player *plr, t_bullet_hole *hole,
-				unsigned int bullet_sector);
-void		get_bullet_ricochet_hit_point(t_home *home, t_player *plr,
-				unsigned int bullet_sector);
+				int bullet_sector);
+void		get_bullet_hit_point(t_home *home, t_player *plr,
+				int bullet_sector);
 float		get_ceiling_hit_point(t_sector *sector, t_player *plr,
 				t_bullet_hole *hole);
+float		get_entity_hit_point(t_home *home, t_player *plr, t_bullet_hole *hole,
+				int bullet_sector);
 float		get_ground_hit_point(t_sector *sector, t_player *plr,
 				t_bullet_hole *hole);
 Uint32		test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,

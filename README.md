@@ -19,6 +19,7 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Moving away from Build Engine type of structure to full 3D engine.
 - Typecasting to from (float) to (int) when drawing scanlines.
 - Implementing polygon clipping.
+- Floating point issues with arccos functions.
 
 # Learned through project
 - Makefile and Makefile rules

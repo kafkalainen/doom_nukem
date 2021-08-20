@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shooting.c                                         :+:      :+:    :+:   */
+/*   die.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/28 19:12:34 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/20 09:12:26 by jnivala          ###   ########.fr       */
+/*   Created: 2021/08/20 10:29:00 by jnivala           #+#    #+#             */
+/*   Updated: 2021/08/20 10:50:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	shooting_handle(t_home *home, t_player *plr)
+Uint32	die(t_entity *entity, Uint32 t)
 {
-	if (home->projectile_idx >= MAX_PROJECTILES - 1)
-		home->projectile_idx = -1;
-	if (home->nbr_of_projectiles < MAX_PROJECTILES)
-		home->nbr_of_projectiles++;
-	home->projectile_idx++;
-	get_bullet_hit_point(home, plr, plr->cur_sector);
+	if (entity->health <= 0)
+	{
+		printf("I DIE!\n");
+		entity->sprite_state = die_now;
+		pick_next_frame(entity, t);
+		if (entity->anim_offset == 4)
+			entity->is_active = FALSE;
+		return (TRUE);
+	}
+	return (FALSE);
 }

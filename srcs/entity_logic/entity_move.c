@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/19 09:44:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/20 10:37:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	pick_next_frame(t_entity *entity, Uint32 t)
+void	pick_next_frame(t_entity *entity, Uint32 t)
 {
 	entity->cooldown = entity->cooldown - t;
 	if (entity->cooldown < 0)

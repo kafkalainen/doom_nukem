@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/19 10:47:35 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/20 10:31:04 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = \
 	editor$(SLASH)editor_events.c \
 	entity_logic$(SLASH)activate_elevator.c \
 	entity_logic$(SLASH)determine_entity_angle.c \
+	entity_logic$(SLASH)die.c \
 	entity_logic$(SLASH)entity.c \
 	entity_logic$(SLASH)entity_move.c \
 	entity_logic$(SLASH)handle_activation.c \
@@ -26,6 +27,7 @@ SRCS = \
 	entity_logic$(SLASH)turn_on_lights.c \
 	entity_logic$(SLASH)update_elevators.c \
 	entity_logic$(SLASH)update_enemies.c \
+	entity_logic$(SLASH)take_damage.c \
 	parsing$(SLASH)assign_entity_properties.c \
 	parsing$(SLASH)assign_projectiles.c \
 	parsing$(SLASH)calc_elevator_doors.c \
@@ -85,7 +87,7 @@ SRCS = \
 	update_player$(SLASH)advance_story.c \
 	update_player$(SLASH)check_distances.c \
 	update_player$(SLASH)check_y_diff.c \
-	update_player$(SLASH)get_bullet_richochet_hit_point.c \
+	update_player$(SLASH)get_bullet_hit_point.c \
 	update_player$(SLASH)gravity.c \
 	update_player$(SLASH)handle_doors.c \
 	update_player$(SLASH)init_story.c \

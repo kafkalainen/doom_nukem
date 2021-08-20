@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/19 15:02:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/20 10:33:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct	s_entity
 	float		height;
 	float		width;
 	float		legs;
+	Uint32		time;
 	Uint32		take_damage;
 	Uint32		is_static;
 	Uint32		is_active;
