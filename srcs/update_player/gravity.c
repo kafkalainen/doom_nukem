@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 10:04:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/23 14:02:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,26 @@ void	gravity(t_sector *sector, t_player *plr, Uint32 delta_time)
 	}
 }
 
+/*
+**	t = sqrt(2s / g)
+*/
 void	entity_gravity(t_sector *sector, t_entity *entity, Uint32 delta_time)
 {
 	float			g;
 	float			drop;
-	static Uint32	total_time;
 
 	g = 3.0f;
 	drop = check_distance_to_ground(sector, entity->legs, entity->pos);
-	if (drop > 0.0f)
+	if (entity->time <= 0 && drop > 0.0f)
 	{
-
-		total_time += delta_time;
+		entity->time = sqrtf(2 * drop * 0.5f);
+	}
+	else if (entity->time > 0 && drop > 0.0f)
+	{
+		entity->time -= delta_time;
 		drop = g * delta_time * 0.0002f;
 		entity->pos.y -= drop;
 	}
 	else
-	{
-		total_time = 0;
-		drop = ft_fmax(drop, 0.0f);
-	}
+		return ;
 }
