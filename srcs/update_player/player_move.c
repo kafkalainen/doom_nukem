@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/19 10:10:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/23 15:06:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,5 @@ int	player_move(t_player *plr, t_home *home, Uint32 t)
 			plr->pos.y -= dist;
 		return (TRUE);
 	}
-	plr->move_dir = strafe_vector_along_the_wall(plr->move_dir, wall);
-	plr->pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.0005f));
-	return (FALSE);
+	return (strafe_along_the_wall(wall, plr, home, t));
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/20 09:32:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/23 15:03:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ Uint32		test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 				t_player *plr);
 Uint32		player_look(t_home *home, t_player *plr);
 t_entity	*activate_object(t_home *home, t_player *plr);
-t_xyz		strafe_vector_along_the_wall(t_xyz dir, t_wall *wall);
+Uint32		strafe_along_the_wall(t_wall *wall, t_player *plr,
+			t_home *home, Uint32 t);
 
 #endif
