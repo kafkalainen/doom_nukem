@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/24 14:34:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 15:27:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void				translate_entity(t_triangle *tri1, t_triangle *tri2,
 Uint32				handle_activation(t_entity *entity, t_home *home, t_player *plr);
 void				turn_on_lights(t_entity *entity, t_home *home);
 void				activate_elevator(t_home *home, t_entity *entity, t_player *plr);
-Uint32				take_damage(t_entity *entity);
+Uint32				take_damage(t_entity *entity, Uint32 delta_time);
 Uint32				translate_sector(t_sector *sector, float distance);
 void				translate_entities(t_home *home, float distance, int sector_idx);
 Uint32				lock_elevator(t_home *home, t_sector *elevator);

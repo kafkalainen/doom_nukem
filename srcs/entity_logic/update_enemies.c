@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/24 14:36:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 15:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	update_enemies(t_home *home, t_player *plr, Uint32 delta_time)
 							cur_enemy->pos));
 				if (!attack_player(cur_enemy, plr, delta_time))
 					entity_move(cur_enemy, home, delta_time);
+				take_damage(cur_enemy, delta_time);
 				determine_angle_between_entity_and_plr(cur_enemy,
 					plr);
-				take_damage(cur_enemy);
 				die(cur_enemy, delta_time);
 				set_entity_texels_for_frame(cur_enemy);
 				// printf("%f\n", vec3_eucl_dist(vec3_dec(plr->pos, cur_enemy->pos)));
