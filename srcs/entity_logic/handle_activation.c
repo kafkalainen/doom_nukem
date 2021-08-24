@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 09:29:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 09:06:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ static void	change_texture(t_entity *entity)
 	}
 }
 
-/*
-**	Add button type to map data to handle elevators and lights.
-**	Lights could have one integer value, and it is affected by the button,
-**	or it is not affected by the button, or it is automatically turned on,
-**	when player moves to the sector.
-**	Lights have idx value matching the entity link index value.
-*/
 Uint32	handle_activation(t_entity *entity, t_home *home, t_player *plr)
 {
 	if (entity->entity_type == light_button
@@ -54,7 +47,7 @@ Uint32	handle_activation(t_entity *entity, t_home *home, t_player *plr)
 			entity->state = 1;
 		handle_button(entity, home, plr);
 	}
-	if (entity->entity_type == powerstation)
+	else if (entity->entity_type == powerstation)
 	{
 		if (entity->state)
 		{
@@ -63,6 +56,8 @@ Uint32	handle_activation(t_entity *entity, t_home *home, t_player *plr)
 				plr->power_points += 3;
 		}
 	}
+	else
+		return (0);
 	change_texture(entity);
 	return (1);
 }
