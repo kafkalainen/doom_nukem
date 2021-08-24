@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:12:34 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/24 11:45:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 13:06:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	rotate_based_on_axes(t_bullet_hole *hole, t_projectile *current)
+static void	rotate_hole_based_on_axes(t_bullet_hole *hole, t_projectile *current)
 {
 	float	angle[3];
 	t_m4x4	x;
@@ -41,7 +41,7 @@ static void	set_bullet_hole(t_bullet_hole *hole, t_projectile *current)
 	if (hole->hole_type != nothing)
 	{
 		current->pos = hole->point;
-		rotate_based_on_axes(hole, current);
+		rotate_hole_based_on_axes(hole, current);
 		current->top.normal = hole->normal;
 		current->bot.normal = hole->normal;
 		current->sector_idx = hole->sector_idx;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/23 10:30:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 13:11:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,32 @@ static void	initialize_entity_triangles(t_entity *entity)
 	entity->width = size.x;
 }
 
-static void	initialize_static_entity(t_entity *entity)
+static void	initialize_static_entity(t_entity *current)
 {
-	if (entity->entity_type == lamp)
-	{
-		entity->top = rotate_triangle(&entity->top,
-				PI_BY_TWO, 'x');
-		entity->bot = rotate_triangle(&entity->bot,
-				PI_BY_TWO, 'x');
-	}
-	else
-	{
-		entity->top = rotate_triangle(&entity->top,
-				vec3_angle(entity->top.normal, entity->dir), 'y');
-		entity->bot = rotate_triangle(&entity->bot,
-				vec3_angle(entity->bot.normal, entity->dir), 'y');
-	}
-	entity->top.normal = entity->dir;
-	entity->bot.normal = entity->dir;
-	entity->pos = translate_point(&entity->pos,
-			vec3_mul(entity->top.normal, 0.15f));
+	float	angle[3];
+	t_m4x4	x;
+	t_m4x4	y;
+	t_m4x4	z;
+	t_m4x4	combined;
+
+	angle[0] = vec3_ang_axis(current->top.normal, current->dir, 'x');
+	angle[1] = vec3_ang_axis(current->top.normal, current->dir, 'y');
+	angle[2] = vec3_ang_axis(current->top.normal, current->dir, 'z');
+	x = rotation_matrix_x(angle[0]);
+	y = rotation_matrix_y(angle[1]);
+	z = rotation_matrix_z(angle[2]);
+	combined = multiply_matrix(&z, &y);
+	combined = multiply_matrix(&combined, &x);
+	current->top.p[0] = multi_vec_matrix(&current->top.p[0], &combined);
+	current->top.p[1] = multi_vec_matrix(&current->top.p[1], &combined);
+	current->top.p[2] = multi_vec_matrix(&current->top.p[2], &combined);
+	current->bot.p[0] = multi_vec_matrix(&current->bot.p[0], &combined);
+	current->bot.p[1] = multi_vec_matrix(&current->bot.p[1], &combined);
+	current->bot.p[2] = multi_vec_matrix(&current->bot.p[2], &combined);
+	current->top.normal = current->dir;
+	current->bot.normal = current->dir;
+	current->pos = translate_point(&current->pos,
+			vec3_mul(current->top.normal, 0.15f));
 }
 
 static void	initialize_entity_movement(t_entity *entity)
@@ -116,7 +122,8 @@ static void	initialize_entity_values(t_entity *entity, t_xyz plr_pos)
 	entity->sprite_state = 0;
 	entity->anim_offset = 0;
 	entity->time = 0;
-	entity->vec_to_plr = vec2_norm(vec2_dec(vec3_to_vec2(plr_pos), vec3_to_vec2(entity->pos)));
+	entity->vec_to_plr = vec2_norm(vec2_dec(vec3_to_vec2(plr_pos),
+				vec3_to_vec2(entity->pos)));
 	if (entity->entity_type == skull_skulker || entity->entity_type == drone)
 		entity->health = 2;
 	else if (entity->entity_type == crewmember || entity->entity_type == thing)
