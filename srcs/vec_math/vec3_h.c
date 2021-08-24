@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:40:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/19 10:00:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 10:44:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,41 @@ void	initialize_lumels(float *p0, float *p1, float *p2, float init)
 	*p0 = init;
 	*p1 = init;
 	*p2 = init;
+}
+
+float	vec3_ang_axis(t_xyz to_be_turned, t_xyz compared, char axis)
+{
+	float	sign;
+	float	angle;
+	t_xy	a;
+	t_xy	b;
+
+	if (axis == 'x')
+	{
+		a = (t_xy){to_be_turned.z, to_be_turned.y};
+		b = (t_xy){compared.z, compared.y};
+	}
+	else if (axis == 'y')
+	{
+		a = (t_xy){to_be_turned.x, to_be_turned.z};
+		b = (t_xy){compared.x, compared.z};
+	}
+	else if (axis == 'z')
+	{
+		a = (t_xy){to_be_turned.x, to_be_turned.y};
+		b = (t_xy){compared.x, compared.y};
+	}
+	sign = -a.y * b.x + a.x * b.y;
+	if (sign < 0)
+		sign = -1.0f;
+	else if (sign > 0)
+		sign = 1.0f;
+	else
+		return (0.0f);
+	angle = vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b));
+	if (angle < -1.0)
+		angle = -1.0f;
+	else if (angle > 1.0)
+		angle = 1.0f;
+	return (sign * acosf(angle));
 }

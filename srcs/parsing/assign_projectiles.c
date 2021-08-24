@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 10:31:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/19 14:50:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 11:44:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 ** }				t_projectile;
 */
 
-static void	initialize_projectile_triangles(t_projectile *projectile)
+void	initialize_projectile_triangles(t_projectile *projectile)
 {
 	t_xy	size;
 

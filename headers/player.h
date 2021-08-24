@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/23 15:03:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 10:10:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ void		init_cutscene(char **array);
 void		shooting_handle(t_home *home, t_player *plr);
 float		get_wall_hit_point(t_home *home, t_player *plr, t_bullet_hole *hole,
 				int bullet_sector);
-void		get_bullet_hit_point(t_home *home, t_player *plr,
+t_bullet_hole	get_bullet_hit_point(t_home *home, t_player *plr,
 				int bullet_sector);
 float		get_ceiling_hit_point(t_sector *sector, t_player *plr,
 				t_bullet_hole *hole);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.h                                          :+:      :+:    :+:   */
+/*   h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -250,5 +250,6 @@ Uint32		vec3_ray_triangle_intersect(t_triangle *tri,
 			t_xyz pos, t_xyz dir, t_xyz *isection);
 float		vec3_angle(t_xyz to_be_turned, t_xyz compared);
 void		initialize_lumels(float *p0, float *p1, float *p2, float init);
+float		vec3_ang_axis(t_xyz to_be_turned, t_xyz compared, char axis);
 
 #endif

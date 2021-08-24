@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/20 10:51:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 11:45:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,14 @@ enum e_door_states
 	military_keycard
 };
 
+enum e_hole_states
+{
+	nothing,
+	ceiling_hole,
+	ground_hole,
+	wall_hole
+};
+
 enum e_entity_states
 {
 	in_front,
@@ -110,4 +118,5 @@ void				update_enemies(t_home *home, t_player *plr, Uint32 delta_time);
 void				pick_next_frame(t_entity *entity, Uint32 t);
 Uint32				update_elevators(t_home *home, t_player *plr,
 					Uint32 current_time, Uint32 delta_time);
+void				initialize_projectile_triangles(t_projectile *projectile);
 #endif
