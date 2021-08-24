@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/20 10:33:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/23 15:19:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ typedef struct s_window
 **						player, if within distance parameters, cast ray
 **						to see if we can see enemy. If enemy has a line
 **						of sight, set aggro = true
+**	is_linked:			0	not linked
+**						1	automatic
+**						2+	linked button entity
 **	entity_index:		Default texture_index. Always >= 0
 **	alt_sprite_index:	Storage for alternate texture index. Always >= 0
 **	sprite_state:		Angle between player and entity determines X axis

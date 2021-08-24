@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 09:19:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 08:56:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_player(t_player *plr)
 	plr->pitch = 0.0f;
 	plr->yaw = 0.0f;
 	plr->height = 1.5f;
-	plr->width = 0.5f;
+	plr->width = 0.3f;
 	plr->power_points = 5.0f;
 	plr->fuel_points = 100.0f;
 	plr->active_inv = -1;
