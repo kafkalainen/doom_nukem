@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/24 10:10:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 14:08:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_player
 	t_hud			hud;
 	t_input			input;
 	t_weapon		wep[2];
+	t_triangle		tri[4];
 	t_xyz			pos;
 	t_xyz			test_pos;
 	t_xyz			look_dir;
@@ -203,5 +204,6 @@ Uint32		player_look(t_home *home, t_player *plr);
 t_entity	*activate_object(t_home *home, t_player *plr);
 Uint32		strafe_along_the_wall(t_wall *wall, t_player *plr,
 			t_home *home, Uint32 t);
+void		initialize_player_target_triangles(t_player *plr);
 
 #endif

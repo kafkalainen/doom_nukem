@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/24 08:56:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 14:29:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,24 @@ static t_home	*init_sdl(t_home *home, t_frame *frame, float *min_step)
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		error_output_sdl("Fatal: SDL_mixer could not initialize!", home, frame);
 	return (home);
+}
+
+void	initialize_player_target_triangles(t_player *plr)
+{
+	plr->tri[0].p[0] = (t_xyz){-0.5f * plr->width,
+		-0.5f * plr->height, 0.0f, 1.0f};
+	plr->tri[0].p[1] = (t_xyz){-0.5f * plr->width,
+		0.5f * plr->height, 0.0f, 1.0f};
+	plr->tri[0].p[2] = (t_xyz){0.5f * plr->width,
+		0.5f * plr->height, 0.0f, 1.0f};
+	plr->tri[1].p[0] = (t_xyz){-0.5f * plr->width,
+		-0.5f * plr->height, 0.0f, 1.0f};
+	plr->tri[1].p[1] = (t_xyz){0.5f * plr->width,
+		0.5f * plr->height, 0.0f, 1.0f};
+	plr->tri[1].p[2] = (t_xyz){0.5f * plr->width,
+		-0.5f * plr->height, 0.0f, 1.0f};
+	plr->tri[0].normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
+	plr->tri[1].normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
 }
 
 void	init_player(t_player *plr)
@@ -63,6 +81,7 @@ void	init_player(t_player *plr)
 	plr->wep[0].type = 0;
 	plr->speed = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	plr->display_object = 0;
+	initialize_player_target_triangles(plr);
 	init_input_values(&plr->input);
 }
 

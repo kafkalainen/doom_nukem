@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/24 11:45:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 14:34:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ enum e_entity_states
 */
 
 // move() need pathfinding algorithm
-// attack()
-int					check_aggro(t_player *plr, t_entity *entity, t_sector *sector);
+Uint32				check_aggro(t_player *plr, t_entity *entity, t_sector *sector);
+Uint32				attack_player(t_entity *entity, t_player *plr, Uint32 t);
 void				determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr);
 Uint32				die(t_entity *entity, Uint32 t);
 int					entity_move(t_entity *entity, t_home *home, Uint32 t);

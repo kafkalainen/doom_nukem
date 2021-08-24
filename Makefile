@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/24 09:28:32 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/24 14:27:18 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRCS = \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)editor_events.c \
 	entity_logic$(SLASH)activate_elevator.c \
+	entity_logic$(SLASH)attack_player.c \
+	entity_logic$(SLASH)check_aggro.c \
 	entity_logic$(SLASH)determine_entity_angle.c \
 	entity_logic$(SLASH)die.c \
 	entity_logic$(SLASH)entity.c \

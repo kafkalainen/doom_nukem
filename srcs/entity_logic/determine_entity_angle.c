@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   determine_entity_angle.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 14:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/18 17:30:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/08/24 14:12:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
