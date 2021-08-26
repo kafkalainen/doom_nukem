@@ -93,9 +93,14 @@ typedef struct	s_m4x4 {
 
 typedef struct s_ray
 {
-	t_xy			pos;
-	t_xy			dir;
-	t_xy			cutpoint;
+	t_xyz			pos;
+	t_xyz			dir;
+	t_xyz			cutpoint;
+	t_xyz			plr_pos;
+	t_xyz			plr_dir;
+	int				side;
+	int				start_sector;
+	int				end_sector;
 }					t_ray;
 
 typedef struct s_plgn

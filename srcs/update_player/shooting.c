@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:12:34 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/24 13:06:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 08:47:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ static void	set_bullet_hole(t_bullet_hole *hole, t_projectile *current)
 		current->top.normal = hole->normal;
 		current->bot.normal = hole->normal;
 		current->sector_idx = hole->sector_idx;
-		printf("%d\n", current->sector_idx);
 	}
 }
 
-void	shooting_handle(t_home *home, t_player *plr)
+void	shooting_handle(t_home *home, t_player *plr, t_ray *ray)
 {
 	t_bullet_hole	hole;
 	t_projectile	*current;
@@ -59,8 +58,10 @@ void	shooting_handle(t_home *home, t_player *plr)
 	if (home->nbr_of_projectiles < MAX_PROJECTILES)
 		home->nbr_of_projectiles++;
 	home->projectile_idx++;
-	hole = get_bullet_hit_point(home, plr, plr->cur_sector);
+	hole = get_bullet_hit_point(home, ray, ray->start_sector);
 	current = home->projectile_pool[home->projectile_idx];
+	if (hole.hole_type == player)
+		plr->power_points--;
 	initialize_projectile_triangles(current);
 	set_bullet_hole(&hole, current);
 }

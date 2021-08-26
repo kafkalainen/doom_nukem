@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:03:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 11:39:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 16:20:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 ** greater than zero and dot product of ac is less than ab, then the point
 ** is on the wall.
 */
-
 int	point_is_on_the_lseg(t_xy a, t_xy c, t_xy b)
 {
 	t_xy	vec_ab;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/24 15:27:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 08:16:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define ENTITY_VELOCITY_1 0.0005f
 # define ENTITY_VELOCITY_2 0.00025f
 # define PROJECTILE_VELOCITY 50
+# define ENEMY 99
+# define PLAYER 33
 # define ENTITY_WIDTH 128
 # define ENTITY_HEIGH 128
 # define SPRITE_COUNT 7
@@ -67,6 +69,7 @@ enum e_door_states
 enum e_hole_states
 {
 	nothing,
+	player,
 	ceiling_hole,
 	ground_hole,
 	wall_hole
@@ -92,7 +95,7 @@ enum e_entity_states
 
 // move() need pathfinding algorithm
 Uint32				check_aggro(t_player *plr, t_entity *entity, t_sector *sector);
-Uint32				attack_player(t_entity *entity, t_player *plr, Uint32 t);
+Uint32				attack_player(t_home *home, t_entity *entity, t_player *plr, Uint32 t);
 void				determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr);
 Uint32				die(t_entity *entity, Uint32 t);
 int					entity_move(t_entity *entity, t_home *home, Uint32 t);

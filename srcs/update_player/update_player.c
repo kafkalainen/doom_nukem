@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 09:33:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 08:42:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 
 static void		plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
 {
+	t_ray	ray;
+
 	if (plr->wep[plr->active_wep].fire_rate > 0)
 		plr->wep[plr->active_wep].fire_rate -= t * 0.001;
 	else
@@ -74,7 +76,11 @@ static void		plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
 	{
 		plr->wep[plr->active_wep].fire_rate = 0.5;
 		plr->hud.vm_ry = -20;
-		shooting_handle(home, plr);
+		ray.pos = plr->pos;
+		ray.dir = plr->look_dir;
+		ray.side = PLAYER;
+		ray.start_sector = plr->cur_sector;
+		shooting_handle(home, plr, &ray);
 	}
 }
 

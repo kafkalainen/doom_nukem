@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 11:17:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/05 15:33:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/24 15:48:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ Uint32	player_look(t_home *home, t_player *plr)
 				|| vec3_ray_triangle_intersect(&tested[1],
 					plr->pos, plr->look_dir, &isection))
 				entity_hit = 1;
-			if (entity_hit && vec3_eucl_dist(vec3_dec(isection, plr->pos))
-				< 2.5f)
+			if (entity_hit && get_distance_squared(isection, plr->pos)
+				< 6.25f)
 			{
 				plr->display_object = home->entity_pool[i]->entity_type;
 				break ;

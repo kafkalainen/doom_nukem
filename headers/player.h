@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/24 14:08:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 08:43:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,19 +187,21 @@ void		free_story(char ***array, Uint32 nb_of_strings);
 Uint32		evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector);
 void		draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr);
 void		init_cutscene(char **array);
-void		shooting_handle(t_home *home, t_player *plr);
-float		get_wall_hit_point(t_home *home, t_player *plr, t_bullet_hole *hole,
+void		shooting_handle(t_home *home, t_player *plr, t_ray *ray);
+float		get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 				int bullet_sector);
-t_bullet_hole	get_bullet_hit_point(t_home *home, t_player *plr,
+t_bullet_hole	get_bullet_hit_point(t_home *home, t_ray *ray,
 				int bullet_sector);
-float		get_ceiling_hit_point(t_sector *sector, t_player *plr,
+float		get_ceiling_hit_point(t_sector *sector, t_ray *ray,
 				t_bullet_hole *hole);
-float		get_entity_hit_point(t_home *home, t_player *plr, t_bullet_hole *hole,
+float		get_entity_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 				int bullet_sector);
-float		get_ground_hit_point(t_sector *sector, t_player *plr,
+float		get_ground_hit_point(t_sector *sector, t_ray *ray,
 				t_bullet_hole *hole);
+float		get_player_hit_point(t_ray *ray, t_bullet_hole *hole,
+				int bullet_sector);
 Uint32		test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
-				t_player *plr);
+				t_ray *ray);
 Uint32		player_look(t_home *home, t_player *plr);
 t_entity	*activate_object(t_home *home, t_player *plr);
 Uint32		strafe_along_the_wall(t_wall *wall, t_player *plr,

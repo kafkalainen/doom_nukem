@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/24 13:11:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/25 11:30:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	initialize_entity_triangles(t_entity *entity)
 	if (entity->entity_type == powerstation
 		|| entity->entity_type == crewmember
 		|| entity->entity_type == thing)
-		size = (t_xy){1.0f, 2.5f};
+		size = (t_xy){2.0f, 2.0f};
 	else if (entity->entity_type == lamp
 		|| entity->entity_type == light_button
 		|| entity->entity_type == elevator_button)
@@ -50,7 +50,7 @@ static void	initialize_entity_triangles(t_entity *entity)
 	entity->bot.p[1] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
 	entity->bot.p[2] = (t_xyz){0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
 	entity->height = size.y;
-	entity->legs = size.y * 0.5f;
+	entity->legs = size.y * 0.3f;
 	entity->width = size.x;
 }
 
