@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/26 08:43:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 10:54:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ enum e_movement
 ** Player functions
 */
 
+t_entity	*activate_object(t_home *home, t_player *plr);
 t_wall		*check_if_crossing(t_sector *sector, t_xyz pos);
 t_xyz		check_y(t_sector *sector, t_player *plr, t_xyz pos);
 int			check_y_diff(t_player *plr, t_xyz *test_pos, t_sector *to);
@@ -171,23 +172,10 @@ Uint32		update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 				Uint32 current_time, Uint32 delta_time);
 void		create_target_vector(t_player *plr);
 void		crouch(t_player *plr);
-void		end_level(t_home *home, t_player *plr);
-void		gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
-void		init_player(t_player *plr);
-int			jetpack(t_player *plr, t_home *home, Uint32 t);
-void		jump(t_player *plr, t_sector *cur_sector);
-int			open_door(t_sector **sectors, t_xyz look_loc,
-				Uint32 current_time, Uint32 cur_sector);
-int			player_move(t_player *plr, t_home *home, Uint32 delta_time);
-int			plr_inside(t_sector *sector, t_player *plr);
-int			player_use(t_player *plr, t_home *home);
-void		update_player(t_player *plr, t_home *home, Uint32 delta_time);
-char		**init_story(void);
-void		free_story(char ***array, Uint32 nb_of_strings);
-Uint32		evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector);
 void		draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr);
-void		init_cutscene(char **array);
-void		shooting_handle(t_home *home, t_player *plr, t_ray *ray);
+void		end_level(t_home *home, t_player *plr);
+Uint32		evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector);
+void		free_story(char ***array, Uint32 nb_of_strings);
 float		get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 				int bullet_sector);
 t_bullet_hole	get_bullet_hit_point(t_home *home, t_ray *ray,
@@ -200,12 +188,24 @@ float		get_ground_hit_point(t_sector *sector, t_ray *ray,
 				t_bullet_hole *hole);
 float		get_player_hit_point(t_ray *ray, t_bullet_hole *hole,
 				int bullet_sector);
-Uint32		test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
-				t_ray *ray);
-Uint32		player_look(t_home *home, t_player *plr);
-t_entity	*activate_object(t_home *home, t_player *plr);
-Uint32		strafe_along_the_wall(t_wall *wall, t_player *plr,
-			t_home *home, Uint32 t);
+void		gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
 void		initialize_player_target_triangles(t_player *plr);
+void		init_cutscene(char **array);
+void		init_player(t_player *plr);
+char		**init_story(void);
+int			jetpack(t_player *plr, t_home *home, Uint32 t);
+void		jump(t_player *plr, t_sector *cur_sector);
+int			player_move(t_player *plr, t_home *home, Uint32 delta_time);
+int			plr_inside(t_sector *sector, t_player *plr);
+int			player_use(t_player *plr, t_home *home);
+int			open_door(t_sector **sectors, t_xyz look_loc,
+				Uint32 current_time, Uint32 cur_sector);
+Uint32		player_look(t_home *home, t_player *plr);
+void		update_player(t_player *plr, t_home *home, Uint32 delta_time);
+void		shooting_handle(t_home *home, t_ray *ray);
+Uint32		strafe_along_the_wall(t_wall *wall, t_player *plr,
+				t_ray *ray);
+Uint32		test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
+			t_home *home, Uint32 t);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/08/12 10:48:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 10:17:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,70 +26,70 @@ void	process_inputs_game_loop(t_player *plr, int *game_state, SDL_Event *e)
 	}
 }
 
-void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
-{
-	Uint32	i;
-	// float	distance_squared;
-	(void)delta_time;
-	// i = 0;
-	// while (i < home->nbr_of_projectiles)
-	// {
-	// 	if (home->projectile_pool[i]->is_active)
-	// 	{
-	// 		// move_projectile();
-	// 		// move each projectile
-	// 		// if we hit something, explode and set !is_active
-	// 		// apply damage to nearby entities
-	// 		// do wall damage sprite on affected wall coordinate
-	// 	}
-	// 	i++;
-	// }
-	i = 0;
-	while (i < home->nbr_of_entities)
-	{
-		if (home->entity_pool[i]->state != ENTITY_DEAD) // check to see if entity is dead or not
-		{
-			if (home->entity_pool[i]->entity_type == 1 || home->entity_pool[i]->entity_type == 2) // entity is an enemy, move to state logics
-			{
-				determine_angle_between_entity_and_plr(home->entity_pool[i], plr);
-				// if (home->entity_pool[i]->take_damage) // determined by projectile while loop
-				// 	take_damage_logic(home->entity_pool[i], plr_pos, delta_time);
-				// if (!home->entity_pool[i]->is_aggroed)
-				// {
-				// 	if (check_aggro(plr, home->entity_pool[i], home->sectors[home->entity_pool[i]->sector_idx]))
-				// 		printf("we are aggroed\n");
-				// 	else
-				// entity_move(home->entity_pool[i], home, delta_time);
-				// }
-				// else
-				// {
-				// 	if (get_distance_squared(plr->pos, home->entity_pool[i]->pos) > 0.5f)
-				// 		entity_chase(home->entity_pool[i], home, delta_time, plr);
-				// 	else
-				// 		printf("I hit you!\n");
-				// }
-				// distance_squared = ((plr->pos.x - home->entity_pool[i]->pos.x) * (plr->pos.x - home->entity_pool[i]->pos.x) +
-				// 	(plr->pos.y - home->entity_pool[i]->pos.y) * (plr->pos.y - home->entity_pool[i]->pos.y) +
-				// 	(plr->pos.z - home->entity_pool[i]->pos.z) * (plr->pos.z - home->entity_pool[i]->pos.z));
-				//printf("distance to player: %f\n", distance_squared);
-				// if (home->entity_pool[i]->is_aggroed)
-				// {
-				// 	if (home->entity_pool[i]->state == ENTITY_MOVE && home->entity_pool[i]->sprite_state > ENTITY_SPRITE_MOVE_END) // we are done with moving
-				// 	// move or attack
-				// }
+// void	update_objects(t_home *home, t_player *plr, Uint32 delta_time)
+// {
+// 	Uint32	i;
+// 	// float	distance_squared;
+// 	(void)delta_time;
+// 	// i = 0;
+// 	// while (i < home->nbr_of_projectiles)
+// 	// {
+// 	// 	if (home->projectile_pool[i]->is_active)
+// 	// 	{
+// 	// 		// move_projectile();
+// 	// 		// move each projectile
+// 	// 		// if we hit something, explode and set !is_active
+// 	// 		// apply damage to nearby entities
+// 	// 		// do wall damage sprite on affected wall coordinate
+// 	// 	}
+// 	// 	i++;
+// 	// }
+// 	i = 0;
+// 	while (i < home->nbr_of_entities)
+// 	{
+// 		if (home->entity_pool[i]->state != ENTITY_DEAD) // check to see if entity is dead or not
+// 		{
+// 			if (home->entity_pool[i]->entity_type == 1 || home->entity_pool[i]->entity_type == 2) // entity is an enemy, move to state logics
+// 			{
+// 				determine_angle_between_entity_and_plr(home->entity_pool[i], plr);
+// 				// if (home->entity_pool[i]->take_damage) // determined by projectile while loop
+// 				// 	take_damage_logic(home->entity_pool[i], plr_pos, delta_time);
+// 				// if (!home->entity_pool[i]->is_aggroed)
+// 				// {
+// 				// 	if (check_aggro(plr, home->entity_pool[i], home->sectors[home->entity_pool[i]->sector_idx]))
+// 				// 		printf("we are aggroed\n");
+// 				// 	else
+// 				// entity_move(home->entity_pool[i], home, delta_time);
+// 				// }
+// 				// else
+// 				// {
+// 				// 	if (get_distance_squared(plr->pos, home->entity_pool[i]->pos) > 0.5f)
+// 				// 		entity_chase(home->entity_pool[i], home, delta_time, plr);
+// 				// 	else
+// 				// 		printf("I hit you!\n");
+// 				// }
+// 				// distance_squared = ((plr->pos.x - home->entity_pool[i]->pos.x) * (plr->pos.x - home->entity_pool[i]->pos.x) +
+// 				// 	(plr->pos.y - home->entity_pool[i]->pos.y) * (plr->pos.y - home->entity_pool[i]->pos.y) +
+// 				// 	(plr->pos.z - home->entity_pool[i]->pos.z) * (plr->pos.z - home->entity_pool[i]->pos.z));
+// 				//printf("distance to player: %f\n", distance_squared);
+// 				// if (home->entity_pool[i]->is_aggroed)
+// 				// {
+// 				// 	if (home->entity_pool[i]->state == ENTITY_MOVE && home->entity_pool[i]->sprite_state > ENTITY_SPRITE_MOVE_END) // we are done with moving
+// 				// 	// move or attack
+// 				// }
 
-				// if (home->entity_pool[i]->is_aggroed)
-				// 	attack_logic(home->entity_pool[i], plr_pos, delta_time);
-				// else
-				// idle_logic(home->entity_pool[i], delta_time);
-				//if we see plr and !is_aggroed, set is_aggroed and move to attack state || move towards plr
+// 				// if (home->entity_pool[i]->is_aggroed)
+// 				// 	attack_logic(home->entity_pool[i], plr_pos, delta_time);
+// 				// else
+// 				// idle_logic(home->entity_pool[i], delta_time);
+// 				//if we see plr and !is_aggroed, set is_aggroed and move to attack state || move towards plr
 
-				// if we are not aggroed and we take damage, apply damage and aggro player
-			}
-		}
-		i++;
-	}
-}
+// 				// if we are not aggroed and we take damage, apply damage and aggro player
+// 			}
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	update_world(t_player *plr, t_home *home)
 {
@@ -103,6 +103,7 @@ void	update_world(t_player *plr, t_home *home)
 	plr->time = current_time;
 	update_player(plr, home, delta_time);
 	update_enemies(home, plr, delta_time);
+	update_projectiles(home, plr, delta_time);
 	update_elevators(home, plr, current_time, delta_time);
 	update_doors(home->sectors, home->nbr_of_sectors, plr->time, delta_time);
 	// doors_closing = close_doors(home->sectors, home->nbr_of_sectors, plr->time, delta_time);

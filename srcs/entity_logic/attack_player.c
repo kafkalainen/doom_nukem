@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 08:42:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 10:38:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,32 +39,19 @@ static void	initialize_player_triangles(t_player *plr, t_xyz enemy_dir)
 }
 
 
-static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr,
-		Uint32 t)
+static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr)
 {
 	t_ray	ray;
 
-	(void)t;
 	initialize_player_triangles(plr,
 		vec3_unit_vector(vec3_dec(entity->pos, plr->pos)));
 	ray.side = ENEMY;
-	ray.plr_pos = plr->pos;
-	ray.plr_dir = plr->move_dir;
 	ray.pos = entity->pos;
 	ray.dir = entity->dir;
 	ray.start_sector = entity->sector_idx;
-	ray.end_sector = plr->cur_sector;
-	shooting_handle(home, plr, &ray);
+	shooting_handle(home, &ray);
 	return (true);
 }
-		// vec3_ray_triangle_intersect(&tri[0], entity->pos,
-		// 	vec3_unit_vector(vec3_dec(plr->pos, entity->pos)))
-		// || vec3_ray_triangle_intersect(&tri[1], entity->pos,
-		// 	vec3_unit_vector(vec3_dec(plr->pos, entity->pos)))
-
-		// ray.pos = entity->pos;
-		// ray.dir = entity->dir;
-		// shooting_handle(home, &ray);
 
 /*
 **	If attack intersects with a wall.
@@ -92,7 +79,7 @@ t_bool	attack_player(t_home *home, t_entity *entity, t_player *plr,
 		entity->sprite_state = attack;
 		if (entity->anim_offset >= 4
 				&& (int)(entity->cooldown - t) < 0)
-			shoot_player(home, entity, plr, t);
+			shoot_player(home, entity, plr);
 		pick_next_frame(entity, t);
 		return (true);
 	}

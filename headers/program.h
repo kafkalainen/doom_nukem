@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/26 08:38:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 08:57:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef	struct	s_projectile
 	Uint32		is_active;
 	Uint32		entity_type;
 	int			sprite_index;
+	int			alt_sprite_index;
 	int			entity_index;
 	int			sprite_state;
 	int			sector_idx;

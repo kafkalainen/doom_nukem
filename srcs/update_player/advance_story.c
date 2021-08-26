@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/19 19:20:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 10:50:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,6 @@ void	end_level(t_home *home, t_player *plr)
 		else
 			home->game_state = MAIN_MENU;
 	}
+	if  (plr->power_points <= 0)
+		home->game_state = MAIN_MENU;
 }

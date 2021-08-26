@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:12:34 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/26 08:47:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 10:29:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	rotate_hole_based_on_axes(t_bullet_hole *hole, t_projectile *current)
+void	rotate_projectile_based_on_axes(t_xyz normal, t_projectile *current)
 {
 	float	angle[3];
 	t_m4x4	x;
@@ -20,9 +20,9 @@ static void	rotate_hole_based_on_axes(t_bullet_hole *hole, t_projectile *current
 	t_m4x4	z;
 	t_m4x4	combined;
 
-	angle[0] = vec3_ang_axis(current->normal, hole->normal, 'x');
-	angle[1] = vec3_ang_axis(current->normal, hole->normal, 'y');
-	angle[2] = vec3_ang_axis(current->normal, hole->normal, 'z');
+	angle[0] = vec3_ang_axis(current->normal, normal, 'x');
+	angle[1] = vec3_ang_axis(current->normal, normal, 'y');
+	angle[2] = vec3_ang_axis(current->normal, normal, 'z');
 	x = rotation_matrix_x(angle[0]);
 	y = rotation_matrix_y(angle[1]);
 	z = rotation_matrix_z(angle[2]);
@@ -36,19 +36,19 @@ static void	rotate_hole_based_on_axes(t_bullet_hole *hole, t_projectile *current
 	current->bot.p[2] = multi_vec_matrix(&current->bot.p[2], &combined);
 }
 
-static void	set_bullet_hole(t_bullet_hole *hole, t_projectile *current)
+void	set_bullet_hole(t_bullet_hole *hole, t_projectile *current)
 {
 	if (hole->hole_type != nothing)
 	{
 		current->pos = hole->point;
-		rotate_hole_based_on_axes(hole, current);
+		rotate_projectile_based_on_axes(hole->normal, current);
 		current->top.normal = hole->normal;
 		current->bot.normal = hole->normal;
 		current->sector_idx = hole->sector_idx;
 	}
 }
 
-void	shooting_handle(t_home *home, t_player *plr, t_ray *ray)
+void	shooting_handle(t_home *home, t_ray *ray)
 {
 	t_bullet_hole	hole;
 	t_projectile	*current;
@@ -58,10 +58,19 @@ void	shooting_handle(t_home *home, t_player *plr, t_ray *ray)
 	if (home->nbr_of_projectiles < MAX_PROJECTILES)
 		home->nbr_of_projectiles++;
 	home->projectile_idx++;
-	hole = get_bullet_hit_point(home, ray, ray->start_sector);
 	current = home->projectile_pool[home->projectile_idx];
-	if (hole.hole_type == player)
-		plr->power_points--;
-	initialize_projectile_triangles(current);
-	set_bullet_hole(&hole, current);
+	if (ray->side == ENEMY)
+	{
+		current->is_active = true;
+		current->move_dir = ray->dir;
+		current->pos = ray->pos;
+		current->sector_idx = ray->start_sector;
+		initialize_projectile_triangles(current);
+	}
+	else
+	{
+		hole = get_bullet_hit_point(home, ray, ray->start_sector);
+		initialize_projectile_triangles(current);
+		set_bullet_hole(&hole, current);
+	}
 }

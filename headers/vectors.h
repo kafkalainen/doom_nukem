@@ -97,7 +97,6 @@ typedef struct s_ray
 	t_xyz			dir;
 	t_xyz			cutpoint;
 	t_xyz			plr_pos;
-	t_xyz			plr_dir;
 	int				side;
 	int				start_sector;
 	int				end_sector;

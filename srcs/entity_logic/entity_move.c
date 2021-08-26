@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/24 15:08:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 09:07:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	pick_next_frame(t_entity *entity, Uint32 t)
 	if (entity->cooldown < 0)
 	{
 		entity->anim_offset++;
-		entity->cooldown = 200;
+		entity->cooldown = ENTITY_COOLDOWN_3;
 	}
-	if (entity->anim_offset > 4)
-		entity->anim_offset = 0;
+	if (entity->anim_offset > ENTITY_SPRITE_MOVE_END)
+		entity->anim_offset = ENTITY_SPRITE_MOVE_START;
 }
 
 static void	place_entity_to_ground(t_entity *entity, t_home *home)
