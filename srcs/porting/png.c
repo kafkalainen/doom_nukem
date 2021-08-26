@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/08/26 08:59:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 12:58:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ void	init_textures(t_home *home)
 	load_texture("textures/plate.png", home->textures, weapon1);
 	load_texture("textures/skull_skulker.png", home->textures, enemy0);
 	load_texture("textures/thing.png", home->textures, enemy1);
-	load_texture("textures/skull_skulker.png", home->textures, enemy2);
-	load_texture("textures/thing.png", home->textures, enemy3);
+	load_texture("textures/skull_skulker_3.png", home->textures, enemy2);
+	load_texture("textures/thing_2.png", home->textures, enemy3);
 	load_texture("textures/plasma_ball.png", home->textures, bullet);
 	init_asset_textures(home);
 	home->textures[NUM_TEX - 1] = assign_empty_texture(); //39

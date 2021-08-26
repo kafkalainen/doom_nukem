@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/21 16:14:43 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/08/26 11:18:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ int				get_color_rgba(int depth);
 int				get_color_rgb(int depth);
 int				get_color_lum(int depth);
 int				get_color_luma(int color_depth);
+Uint32			get_transparency(Uint32 rgba);
 void			error_output(char *msg);
 void			free_png(t_png png);
 void			assemble_idat_chunks(t_png *png);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:03:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/24 16:20:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 13:17:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ int	check_intersection(t_wall *p0, t_xy pos, t_xy dir)
 			vec3_to_vec2(p0->top.p[2]), pos);
 	dir_orientation = orientation_of_three_points(vec3_to_vec2(p0->top.p[0]),
 			vec3_to_vec2(p0->top.p[2]), dir);
-	p0_orientation = orientation_of_three_points(pos, dir, vec3_to_vec2(p0->top.p[0]));
-	p1_orientation = orientation_of_three_points(pos, dir, vec3_to_vec2(p0->top.p[2]));
+	p0_orientation = orientation_of_three_points(pos, dir,
+			vec3_to_vec2(p0->top.p[0]));
+	p1_orientation = orientation_of_three_points(pos, dir,
+			vec3_to_vec2(p0->top.p[2]));
 	if (pos_orientation != dir_orientation && p0_orientation != p1_orientation)
 		return (1);
 	if (pos_orientation == 0

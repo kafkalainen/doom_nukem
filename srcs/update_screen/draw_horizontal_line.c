@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/09 11:47:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 13:13:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,26 @@ void	draw_segment(Uint32 *buffer, float *depth_buffer, t_texel *tex,
 	t_steps *step)
 {
 	float	lumel;
+	Uint32	colour;
 
 	while (step->sub_pixels--)
 	{
 		if (step->texel_inv.w > depth_buffer[step->start_x + step->cur_y
 				 * SCREEN_WIDTH])
 		{
-			calc_lumel(&lumel, &step->start_lu, step->offset, &step->end_lu);
-			depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH]
-				= step->texel_inv.w;
-			put_pixel(buffer, step->start_x, step->cur_y,
-				colour_scale(
-					get_texel(
-						&(t_uv){step->texel_start.u * tex->width - 1,
-						step->texel_start.v * tex->height - 1},
-						&(t_uv){tex->width, tex->height}, tex->texels),
-					lumel));
+			colour = get_texel(
+					&(t_uv){step->texel_start.u * tex->width - 1,
+					step->texel_start.v * tex->height - 1},
+					&(t_uv){tex->width, tex->height}, tex->texels);
+			if (colour >> 24 > 0)
+			{
+				calc_lumel(&lumel, &step->start_lu, step->offset,
+					&step->end_lu);
+				depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH]
+					= step->texel_inv.w;
+				put_pixel(buffer, step->start_x, step->cur_y,
+					colour_scale(colour, lumel));
+			}
 		}
 		step->texel_start = texel_add(&step->texel_start, &step->delta);
 		step->start_x++;
