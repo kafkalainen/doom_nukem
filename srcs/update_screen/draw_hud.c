@@ -142,8 +142,46 @@ static void		draw_viewmodel_sprite(t_home *home, Uint32 *buffer,
 	}
 }
 
+static void		draw_muzzleflash(t_home *home, Uint32 *buffer,
+	t_player *plr, t_xy offset)
+{
+	int		x;
+	int		y;
+	t_texel	tex;
+	tex = home->textures[muzzleflash]->tex;
+
+	y = 0;
+	offset.x += plr->hud.vm_mx * 10 + plr->hud.vm_rx;
+	offset.y += plr->hud.vm_my * 10 + plr->hud.vm_ry;
+	while (y < tex.height)
+	{
+		x = 0;
+		while (x < tex.width)
+		{
+			put_pixel(buffer, x + (int)offset.x, y + (int)offset.y,
+				(Uint32)tex.texels[(tex.width * y) + x]);
+			x++;
+		}
+		y++;
+	}
+}
+
+static void		draw_uded(Uint32 *buffer)
+{
+	t_plx_modifier	mod;
+
+	mod.colour = white;
+	mod.len = 100;
+	mod.size = 4;
+	ft_str_pxl(buffer, (t_xy){SCREEN_WIDTH * 0.3f, SCREEN_HEIGHT * 0.4f},
+			"MISSION::FAILED", mod);
+}
+
 void			draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 {
+	if (plr->wep[plr->active_wep].fire_rate > 0.45)
+		draw_muzzleflash(home, frame->buffer, plr,
+			vec2(plr->hud.vm_x, plr->hud.vm_y + 32));
 	draw_viewmodel_sprite(home, frame->buffer, plr,
 		vec2(plr->hud.vm_x, plr->hud.vm_y));
 	draw_hud_image(home, frame->buffer);
@@ -151,6 +189,8 @@ void			draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 	draw_fuel_bar(plr, frame->buffer);
 	draw_inventory_slots(plr, frame->buffer);
 	draw_crosshair(frame->buffer);
+	if (plr->dead > 0)
+		draw_uded(frame->buffer);
 	//draw_inventory_images(home, frame, plr);
 	//draw_hud_texts(frame->buffer, plr, 0);
 }

@@ -81,6 +81,7 @@ void	init_player(t_player *plr)
 	plr->wep[0].type = 0;
 	plr->speed = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	plr->display_object = 0;
+	plr->dead = 0;
 	initialize_player_target_triangles(plr);
 	init_input_values(&plr->input);
 }

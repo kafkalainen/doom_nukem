@@ -139,6 +139,7 @@ typedef struct s_player
 	float			acceleration;
 	float			power_points;
 	float			fuel_points;
+	float			dead;
 	int				cur_sector;
 	int				msg_sector;
 	int				plot_state;

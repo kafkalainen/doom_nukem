@@ -26,7 +26,7 @@ static void		mouse_button_handle(t_player *plr, SDL_Event *e)
 
 void			mouse_handle(t_player *plr, SDL_Event *e)
 {
-	if (e->type == SDL_MOUSEMOTION)
+	if (e->type == SDL_MOUSEMOTION && plr->dead == 0)
 	{
 		plr->dir.x += -e->motion.xrel * DEG_TO_RAD * 0.1;
 		plr->dir.y += -e->motion.xrel * DEG_TO_RAD * 0.1;

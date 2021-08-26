@@ -53,6 +53,7 @@ enum e_texture_idx
 	lamp_on,
 	lamp_off,
 	bullet_decal,
+	muzzleflash
 };
 
 /*
@@ -91,5 +92,6 @@ int			draw_tex_triangle(Uint32 *buffer, float *depth_buffer,
 void		reset_depth_buffer(float *depth_buffer);
 void		draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr);
 void		draw_object_data(Uint32 *buffer, t_player *plr);
+void		death_animation(t_home *home, t_player *plr, Uint32 t);
 
 #endif

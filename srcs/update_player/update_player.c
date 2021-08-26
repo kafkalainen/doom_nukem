@@ -110,5 +110,7 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 	player_look(home, plr);
 	evolve_story(plr, home->sectors[plr->cur_sector],
 		home->sectors[plr->msg_sector]);
+	if (plr->dead > 0)
+		death_animation(home, plr, delta_time);
 	end_level(home, plr);
 }

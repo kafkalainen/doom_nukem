@@ -94,6 +94,6 @@ void	end_level(t_home *home, t_player *plr)
 		else
 			home->game_state = MAIN_MENU;
 	}
-	if  (plr->power_points <= 0)
-		home->game_state = MAIN_MENU;
+	if  (plr->power_points <= 0 && plr->dead == 0)
+		plr->dead = 1;
 }

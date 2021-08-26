@@ -131,6 +131,7 @@ SRCS = \
 	update_screen$(SLASH)matrix_3d.c \
 	update_screen$(SLASH)update_screen.c \
 	update_screen$(SLASH)set_lighting.c \
+	update_screen$(SLASH)death_animation_handle.c \
 	utilities$(SLASH)audio_a.c \
 	utilities$(SLASH)audio_b.c 	\
 	utilities$(SLASH)error_output.c \
