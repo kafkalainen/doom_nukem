@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/25 11:30:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 13:24:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ static void	initialize_entity_values(t_entity *entity, t_xyz plr_pos)
 	entity->bot.normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
 	entity->take_damage = 0;
 	entity->cooldown = 0;
+	entity->die_animation = 0;
 	entity->is_aggroed = 0;
 	entity->sprite_state = 0;
 	entity->anim_offset = 0;

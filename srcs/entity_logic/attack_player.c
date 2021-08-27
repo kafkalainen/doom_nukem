@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 10:38:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 13:34:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,9 @@ static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr)
 	return (true);
 }
 
-/*
-**	If attack intersects with a wall.
-*/
 t_bool	attack_player(t_home *home, t_entity *entity, t_player *plr,
 		Uint32 t)
 {
-	(void)home;
 	if (!entity->is_aggroed)
 		return (false);
 	if (entity->entity_type == skull_skulker)
@@ -77,10 +73,10 @@ t_bool	attack_player(t_home *home, t_entity *entity, t_player *plr,
 	if (entity->entity_type == thing)
 	{
 		entity->sprite_state = attack;
+		pick_next_frame(entity, t);
 		if (entity->anim_offset >= 4
 				&& (int)(entity->cooldown - t) < 0)
 			shoot_player(home, entity, plr);
-		pick_next_frame(entity, t);
 		return (true);
 	}
 	return (false);

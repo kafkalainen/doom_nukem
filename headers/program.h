@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/26 08:57:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 13:22:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct	s_entity
 	Uint32		state;
 	Uint32		is_aggroed;
 	int			cooldown;
+	int			die_animation;
 	int			sprite_index;
 	int			alt_sprite_index;
 	int			sprite_state;

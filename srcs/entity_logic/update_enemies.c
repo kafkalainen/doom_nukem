@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 13:22:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 13:16:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@ static void	show_dead_entity(t_entity *cur_enemy, t_player *plr)
 	rotate_entity_towards_player(cur_enemy, plr);
 	set_entity_texels_for_frame(cur_enemy);
 }
-
-//static t_xyz	pos;
-// if (!check_if_same_point(pos, cur_enemy->pos))
-	// {
-	// 	printf("x: %f y: %f z: %f\n", cur_enemy->pos.x,
-	// 		cur_enemy->pos.y, cur_enemy->pos.z);
-	// 	pos = cur_enemy->pos;
-// }
 
 static void	update_entity(t_home *home, t_entity *cur_enemy,
 			t_player *plr, Uint32 t)
@@ -41,7 +33,8 @@ static void	update_entity(t_home *home, t_entity *cur_enemy,
 		entity_move(cur_enemy, home, t);
 	take_damage(cur_enemy, t);
 	determine_angle_between_entity_and_plr(cur_enemy, plr);
-	die(cur_enemy, t);
+	if (cur_enemy->health <= 0)
+		die(cur_enemy, t);
 	set_entity_texels_for_frame(cur_enemy);
 }
 

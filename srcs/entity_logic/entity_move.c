@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 09:07:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 13:07:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pick_next_frame(t_entity *entity, Uint32 t)
 {
-	entity->cooldown = entity->cooldown - t;
+	entity->cooldown = (int)(entity->cooldown - (int)t);
 	if (entity->cooldown < 0)
 	{
 		entity->anim_offset++;

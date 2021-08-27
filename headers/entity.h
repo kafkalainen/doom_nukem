@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/26 13:27:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 13:24:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ Uint32				check_aggro(t_player *plr, t_entity *entity,
 						t_sector *sector);
 void				determine_angle_between_entity_and_plr(t_entity *entity,
 						t_player *plr);
-Uint32				die(t_entity *entity, Uint32 t);
+t_bool				die(t_entity *entity, Uint32 t);
 int					entity_move(t_entity *entity, t_home *home, Uint32 t);
 void				entity_chase(t_entity *entity, t_home *home, Uint32 t,
 						t_player *plr);
