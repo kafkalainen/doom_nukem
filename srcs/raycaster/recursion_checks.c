@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/07 11:18:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 11:56:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,6 @@ int	check_if_portal(t_wall *wall)
 int	check_connection(t_wall *point, t_frame *frame)
 {
 	if (point->top.idx == frame->old_idx)
-		return (TRUE);
-	else
-		return (FALSE);
-}
-
-Uint32	check_if_open_portal(t_wall *wall)
-{
-	if (wall->top.idx >= 0)
 		return (TRUE);
 	else
 		return (FALSE);

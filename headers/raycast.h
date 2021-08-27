@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/19 14:05:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 11:55:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void			calc_sector_bounds(t_sector *sector);
 void			calc_extra_walls(t_home *home);
 t_xy			cast_ray(t_xy *dir, t_wall **head, int walls);
 int				check_connection(t_wall *point, t_frame *frame);
-Uint32			check_if_open_portal(t_wall *wall);
 int				check_if_portal(t_wall *point);
 int				check_if_same_pt(int *current_pxl, t_ray_pt *fov);
 int				check_if_lseg_intersects(t_xy *p0, t_xy *p1, t_xy *pos, t_xy *dir);

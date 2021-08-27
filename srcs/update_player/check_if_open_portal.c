@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   death_animation_handle.c                           :+:      :+:    :+:   */
+/*   check_if_open_portal.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/27 12:13:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/27 12:43:06 by jnivala          ###   ########.fr       */
+/*   Created: 2021/08/27 11:50:14 by jnivala           #+#    #+#             */
+/*   Updated: 2021/08/27 11:52:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void		death_animation(t_home *home, t_player *plr, Uint32 t)
+t_bool	check_if_open_portal(t_wall *wall)
 {
-	plr->roll = plr->roll - 0.002f * t;
-	plr->yaw = plr->yaw + 0.001f * t;
-	plr->pitch = plr->pitch + 0.001f * t;
-	plr->pos.y -= 0.0015f * t;
-	plr->dead += 0.001f * t;
-	if (plr->dead > 2)
-		home->game_state = MAIN_MENU;
+	if ((wall->top.idx >= 0 && !wall->is_door) || (wall->is_door
+			&& !wall->is_closed && wall->is_locked == unlocked))
+		return (true);
+	else
+		return (false);
 }

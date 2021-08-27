@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/26 10:17:36 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/27 11:53:02 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SRCS = \
 	update_player$(SLASH)advance_story.c \
 	update_player$(SLASH)check_distances.c \
 	update_player$(SLASH)check_y_diff.c \
+	update_player$(SLASH)check_if_open_portal.c \
 	update_player$(SLASH)get_bullet_hit_point.c \
 	update_player$(SLASH)get_ceiling_hit_point.c \
 	update_player$(SLASH)get_entity_hit_point.c \
