@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/27 12:11:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 12:45:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ t_wall			*check_if_crossing(t_sector *sector, t_xyz pos);
 t_bool			check_if_open_portal(t_wall *wall);
 t_xyz			check_y(t_sector *sector, t_player *plr, t_xyz pos);
 int				check_y_diff(t_player *plr, t_xyz *test_pos, t_sector *to);
-Uint32			check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
+t_bool			check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
 float			check_distance_to_ground(t_sector *sector, float height,
 					t_xyz pos);
 Uint32			update_doors(t_sector **sectors, Uint32 nb_of_sectors,

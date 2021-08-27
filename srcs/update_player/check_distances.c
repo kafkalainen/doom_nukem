@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 10:15:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 12:46:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
+t_bool	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 {
 	unsigned int	i;
 	t_surface		*ceiling;
@@ -30,10 +30,10 @@ Uint32	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 	}
 	surf_dist = vec3_dot_product(vec3_dec(*new_loc, ceiling->tri.p[0]),
 		ceiling->tri.normal);
-	if (surf_dist <= 0)
-		return (TRUE);
+	if (surf_dist <= 0.3f)
+		return (true);
 	else
-		return (FALSE);
+		return (false);
 }
 
 float	calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 10:59:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/27 12:40:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/27 12:49:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	create_target_vector(t_player *plr)
 	z_matrix = rotation_matrix_z(plr->roll);
 	y_matrix = rotation_matrix_y(plr->yaw);
 	x_matrix = rotation_matrix_x(plr->pitch);
-	combined = multiply_matrix(&y_matrix, &x_matrix);
+	combined = multiply_matrix(&x_matrix, &y_matrix);
 	combined = multiply_matrix(&combined, &z_matrix);
 	plr->look_dir = multi_vec_matrix(&plr->target, &combined);
 	plr->target = vec3_add(plr->pos, plr->look_dir);
