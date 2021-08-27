@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 10:31:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 09:15:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 21:15:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ static void	initialize_projectile(t_projectile *projectile)
 	projectile->velocity = 0.005f;
 	projectile->sprite_index = -bullet;
 	projectile->alt_sprite_index = -bullet_decal;
+	projectile->is_active = 0;
 	initialize_projectile_triangles(projectile);
 	initialize_top_texels(&projectile->top);
 	initialize_bottom_texels(&projectile->bot);
-	projectile->is_active = 0;
 	projectile->sector_idx = 0;
 }
 
