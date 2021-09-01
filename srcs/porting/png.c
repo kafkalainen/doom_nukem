@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/08/26 13:29:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 18:24:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,10 @@ void	init_textures(t_home *home)
 	load_texture("textures/thing.png", home->textures, enemy3);
 	load_texture("textures/plasma_ball.png", home->textures, bullet);
 	load_texture("textures/muzzle.png", home->textures, muzzleflash);
+	load_texture("textures/ammo_pack.png", home->textures, ammo_pack_sprite);
+	load_texture("textures/cleaning_key.png", home->textures, cleaning_keycard_sprite);
+	load_texture("textures/engineering_key.png", home->textures, engineering_keycard_sprite);
+	load_texture("textures/military_key.png", home->textures, military_keycard_sprite);
 	init_asset_textures(home);
-	home->textures[NUM_TEX - 1] = assign_empty_texture(); //39
+	home->textures[NUM_TEX - 1] = assign_empty_texture(); //43
 }

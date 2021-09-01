@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/01 09:00:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 18:19:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ static void	initialize_entity_triangles(t_entity *entity)
 		|| entity->entity_type == crewmember
 		|| entity->entity_type == thing)
 		size = (t_xy){2.0f, 2.0f};
-	else if (entity->entity_type == lamp
-		|| entity->entity_type == light_button
-		|| entity->entity_type == elevator_button)
+	else if (entity->entity_type == lamp || entity->entity_type == light_button
+		|| entity->entity_type == elevator_button
+		|| entity->entity_type == keycard_military
+		|| entity->entity_type == keycard_engineering
+		|| entity->entity_type == keycard_cleaning
+		|| entity->entity_type == ammo_pack)
 		size = (t_xy){0.5f, 0.5f};
 	else
 		size = (t_xy){1.0f, 1.0f};

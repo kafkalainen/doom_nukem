@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/26 08:59:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 18:17:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ enum e_texture_idx
 	lamp_on,
 	lamp_off,
 	bullet_decal,
-	muzzleflash
+	muzzleflash,
+	ammo_pack_sprite,
+	cleaning_keycard_sprite,
+	engineering_keycard_sprite,
+	military_keycard_sprite
 };
 
 /*

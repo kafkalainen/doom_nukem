@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/01 10:33:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 18:12:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ enum e_entities
 	elevator_button,
 	powerstation,
 	lamp,
+	ammo_pack,
+	keycard_cleaning,
+	keycard_engineering,
+	keycard_military,
 };
 
 enum e_floors
@@ -54,9 +58,9 @@ enum e_door_states
 {
 	unlocked,
 	locked,
-	cleaning_keycard,
-	engineering_keycard,
-	military_keycard
+	cleaning_lock,
+	engineering_lock,
+	military_lock
 };
 
 enum e_hole_states
