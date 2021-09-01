@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/01 11:14:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 12:29:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	fill_rasterqueue(t_home *home, t_frame *frame, t_player *plr)
 }
 
 static t_wall	*cast_ray(t_wall *wall, unsigned int nb_of_walls,
-				t_xy pos, t_ray_pt *ray)
+				t_xy pos, t_ray_pt *ray, int old_idx)
 {
 	float	t;
 	t_wall	*temp;
@@ -38,7 +38,8 @@ static t_wall	*cast_ray(t_wall *wall, unsigned int nb_of_walls,
 	temp = wall;
 	while (nb_of_walls--)
 	{
-		if (vec2_get_scalar_to_intersection(pos, ray->dir, temp, &t))
+		if (temp->top.idx != old_idx
+			&& vec2_get_scalar_to_intersection(pos, ray->dir, temp, &t))
 		{
 			ray->isection = vec2_add(pos, vec2_mul(ray->dir, t));
 			return (temp);
@@ -63,29 +64,27 @@ static void	cast_rays_player_view(t_home *home, t_frame *frame, t_player *plr)
 
 	plr_2d_pos = vec3_to_vec2(plr->pos);
 	frame->left.wall = cast_ray(home->sectors[frame->idx]->walls,
-		home->sectors[frame->idx]->nb_of_walls, plr_2d_pos, &frame->left);
+		home->sectors[frame->idx]->nb_of_walls, plr_2d_pos, &frame->left, frame->old_idx);
 	frame->right.wall = cast_ray(home->sectors[frame->idx]->walls,
-		home->sectors[frame->idx]->nb_of_walls, plr_2d_pos, &frame->right);
+		home->sectors[frame->idx]->nb_of_walls, plr_2d_pos, &frame->right, frame->old_idx);
 	if (!frame->right.wall || !frame->left.wall)
 		return ;
-	while (frame->left.wall != frame->right.wall
-		&& !check_connection(frame->left.wall, frame))
+	while (frame->left.wall != frame->right.wall)
 	{
-		if (check_if_portal(frame->left.wall))
+		if (check_if_portal(frame->left.wall)
+			&& !check_connection(frame->left.wall, frame))
 		{
-			frame->left.isection = vec2(frame->left.wall->top.p[1].x,
-				frame->left.wall->top.p[1].z);
 			setup_frame(frame, &new_frame, plr_2d_pos, frame->left.wall->top.idx);
 			scan_fov(home, &new_frame, plr);
 		}
 		frame->left.wall = frame->left.wall->next;
+		frame->left.isection = vec2(frame->left.wall->top.p[1].x,
+				frame->left.wall->top.p[1].z);
 	}
 	if (check_if_portal(frame->right.wall)
 		&& !check_connection(frame->right.wall, frame))
 	{
-		frame->left.isection = vec2(frame->left.wall->top.p[1].x,
-				frame->left.wall->top.p[1].z);
-		setup_frame(frame, &new_frame, plr_2d_pos, frame->left.wall->top.idx);
+		setup_frame(frame, &new_frame, plr_2d_pos, frame->right.wall->top.idx);
 		scan_fov(home, &new_frame, plr);
 	}
 }
