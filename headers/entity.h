@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/27 13:24:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 10:33:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ enum e_entity_states
 {
 	in_front,
 	front_left,
-	left,
+	on_left,
 	back_left,
 	back,
 	back_right,
-	right,
+	on_right,
 	front_right,
 	attack,
 	die_now

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/07/19 18:07:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/31 16:12:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # define XPM_BUF_SIZE 200000
 
 int				get_next_breaker(unsigned char *buf);
-Uint32			get_floor(int floor_colour);
 int				load_map_file(t_player *plr, t_home *home);
 int				validate_sectors_data(t_home *home, t_player *plr);
 void			free_all_textures(t_texture **textures, int *nbr_of_textures);

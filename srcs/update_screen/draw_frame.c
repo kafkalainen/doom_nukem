@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/05 14:34:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 11:10:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,13 +139,18 @@ void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
 
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
+	t_m4x4	m;
+	// t_xyz	look_dir_2d;
+
 	frame->idx = plr->cur_sector;
 	frame->old_idx = old_sector;
-	frame->max_fov = 0;
-	frame->left.left_dir = vec3_add(plr->look_dir, vec3(-PLR_DIR, 0.0f, PLR_DIR));
-	frame->right.right_dir = vec3_add(plr->look_dir, vec3(PLR_DIR, 0.0f, PLR_DIR));
+	m = rotation_matrix_y(1.0f);
+	frame->left.dir = vec2_unit_vector(vec3_to_vec2(multi_vec_matrix(&plr->look_dir, &m)));
+	// frame->left.dir = vec3_add(plr->look_dir, vec3(PLR_DIR, 0.0f, PLR_DIR));
+	m = rotation_matrix_y(-1.0f);
+	frame->right.dir = vec2_unit_vector(vec3_to_vec2(multi_vec_matrix(&plr->look_dir, &m)));
+	// frame->right.dir = vec3_add(plr->look_dir, vec3(-PLR_DIR, 0.0f, PLR_DIR));
 	reset_depth_buffer(frame->depth_buffer);
-	// draw_white(frame);
 	add_skybox(frame, home, plr, &home->skybox);
 	draw_sector(frame, home, plr, -1);
 	scan_fov(home, frame, plr);

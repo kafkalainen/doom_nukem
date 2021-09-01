@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/27 11:56:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/31 19:57:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,18 @@ void	continue_from_last_sector(t_wall *start, t_ray_pt *fov, t_frame *frame)
 	}
 }
 
-int	check_if_portal(t_wall *wall)
+t_bool	check_if_portal(t_wall *wall)
 {
-	if (wall->top.idx >= 0)
-		return (TRUE);
+	if (wall->top.idx >= 0 && wall->bottom.idx >= 0)
+		return (true);
 	else
-		return (FALSE);
+		return (false);
 }
 
-// int	check_if_same_pt(int *current_pxl, t_ray_pt *fov)
-// {
-// 	if (*current_pxl < 1 && vec2_eucl_dist(fov->l_pt, fov->r_pt) < 0.001)
-// 		return (TRUE);
-// 	else
-// 	{
-// 		if (*current_pxl == 0)
-// 		{
-// 			*current_pxl = 1;
-// 		}
-// 		return (FALSE);
-// 	}
-// }
-
-int	check_connection(t_wall *point, t_frame *frame)
+t_bool	check_connection(t_wall *point, t_frame *frame)
 {
 	if (point->top.idx == frame->old_idx)
-		return (TRUE);
+		return (true);
 	else
-		return (FALSE);
+		return (false);
 }

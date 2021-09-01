@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 14:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 13:25:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 10:33:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	angle_state_logic(float rad, t_entity *entity)
 	else if (rad < -0.3926991 && rad > -1.178097)
 		entity->sprite_state = front_left;
 	else if (rad < -1.178097 && rad > -1.9634954)
-		entity->sprite_state = left;
+		entity->sprite_state = on_left;
 	else if (rad < -1.9634954 && rad > -2.7488936)
 		entity->sprite_state = back_left;
 	else if (rad > 2.7488936 || rad < -2.7488936)
@@ -27,7 +27,7 @@ static void	angle_state_logic(float rad, t_entity *entity)
 	else if (rad < 2.7488936 && rad > 1.9634954)
 		entity->sprite_state = back_right;
 	else if (rad < 1.9634954 && rad > 1.178097)
-		entity->sprite_state = right;
+		entity->sprite_state = on_right;
 	else if (rad < 1.178097 && rad > 0.3926991)
 		entity->sprite_state = front_right;
 	else
@@ -39,7 +39,7 @@ void	rotate_entity_towards_player(t_entity *entity, t_player *plr)
 	float	rad;
 	t_xy	vec_to_plr;
 
-	vec_to_plr = vec2_norm(vec2_dec(vec3_to_vec2(plr->pos),
+	vec_to_plr = vec2_unit_vector(vec2_dec(vec3_to_vec2(plr->pos),
 				vec3_to_vec2(entity->pos)));
 	if (vec_to_plr.x == entity->vec_to_plr.x
 		&& vec_to_plr.y == entity->vec_to_plr.y)
@@ -58,7 +58,7 @@ void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 	t_xy	a;
 	t_xy	b;
 
-	a = vec2_norm(vec2_dec(vec3_to_vec2(plr->pos), vec3_to_vec2(entity->pos)));
+	a = vec2_unit_vector(vec2_dec(vec3_to_vec2(plr->pos), vec3_to_vec2(entity->pos)));
 	if (a.x == entity->vec_to_plr.x && a.y == entity->vec_to_plr.y)
 		return ;
 	b = vec3_to_vec2(vec3_dec(vec3_add(entity->pos, entity->dir), entity->pos));

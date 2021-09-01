@@ -1,17 +1,17 @@
 #doom_nukem_sectors#6#5#1#pentagonal3.TEST
 #1#3#0
-#sector0#6#-8#-5#0
-#0#0#-4#2#6
-#-2#2#-3#2#6
+#sector0#6#-5#-3#0
+#0#0#-3#2#6
+#-2#2#-2#2#6
 #0#4#3001#2#6
-#2#4#-3#2#6
-#4#2#-3#2#6
-#2#0#-3#2#6
+#2#4#-4#2#6
+#4#2#-5#2#6
+#2#0#-6#2#6
 #1#3#40#1#1
 #2#Rahikainen: Ugh, my head feels worse than
 that night with paint thinner.
 #Rahikainen: What is going on in here? Where is everybody?
-#sector1#6#-8#-5#0
+#sector1#6#-5#-3#0
 #0#4#-3#0#10
 #-2#6#-3#0#10
 #0#8#2#0#10
@@ -21,7 +21,7 @@ that night with paint thinner.
 #2#6#10#1#2
 #2#Rahikainen: What..? Aliens? In our station?
 #Rahikainen: Gotta get rid of them.
-#sector2#6#-8#-5#0
+#sector2#6#-5#-3#0
 #0#8#-7#0#10
 #-2#10#-7#0#10
 #0#12#-7#0#10
@@ -31,7 +31,7 @@ that night with paint thinner.
 #1#10#40#1#1
 #1#Rahikainen: You scumbags! I'm gonna vent you
 out of this station.
-#sector3#6#-8#-5#0
+#sector3#6#-5#-3#0
 #4#10#2#0#10
 #2#12#-3#0#10
 #4#14#-3#0#10
@@ -41,7 +41,7 @@ out of this station.
 #7#12#5#1#1
 #1#Rahikainen: Still no one. Could they have been
 taken away by those beings?
-#sector4#6#-8#-5#0
+#sector4#6#-5#-3#0
 #8#8#-4#2#6
 #6#10#3#2#6
 #8#12#-3#2#6
@@ -50,7 +50,7 @@ taken away by those beings?
 #10#8#5#2#6
 #9#10#8#1#1
 #1#Rahikainen: Now to next floor. I'll get bottom of this..
-#sector5#6#-8#-5#0
+#sector5#6#-5#-3#0
 #8#4#-3#0#10
 #6#6#-3#0#10
 #8#8#4#0#10

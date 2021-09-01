@@ -13,6 +13,12 @@
 #ifndef VECTORS_H
 # define VECTORS_H
 
+typedef enum
+{
+	false,
+	true
+}			t_bool;
+
 typedef struct s_height
 {
 	float			ground;
@@ -194,7 +200,7 @@ float		vec2_dot(t_xy a, t_xy b);
 float		vec2_eucl_dist(t_xy p1, t_xy p2);
 float		vec2_mag(t_xy a);
 t_xy		vec2_mul(t_xy v, float scalar);
-t_xy		vec2_norm(t_xy v);
+t_xy		vec2_unit_vector(t_xy v);
 t_xy		vec2_normal(t_xy p0, t_xy p1);
 t_xy		vec2_rot(t_xy v, float angle);
 float		vec2_perp_dist(t_xy a);

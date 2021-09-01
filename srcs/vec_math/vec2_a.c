@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:15:12 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 14:46:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 08:59:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ t_xy	vec2_rot(t_xy v, float angle)
 		});
 }
 
-t_xy	vec2_norm(t_xy v)
+t_xy	vec2_unit_vector(t_xy v)
 {
 	float	mag;
 
 	mag = sqrtf((v.x * v.x) + (v.y * v.y));
+	mag = 1 / mag;
 	return ((t_xy)
 		{
-			v.x / mag,
-			v.y / mag
+			v.x * mag,
+			v.y * mag
 		});
 }

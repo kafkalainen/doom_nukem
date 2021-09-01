@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/27 13:24:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 09:00:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static void	initialize_entity_values(t_entity *entity, t_xyz plr_pos)
 	entity->sprite_state = 0;
 	entity->anim_offset = 0;
 	entity->time = 0;
-	entity->vec_to_plr = vec2_norm(vec2_dec(vec3_to_vec2(plr_pos),
+	entity->vec_to_plr = vec2_unit_vector(vec2_dec(vec3_to_vec2(plr_pos),
 				vec3_to_vec2(entity->pos)));
 	if (entity->entity_type == skull_skulker || entity->entity_type == drone)
 		entity->health = 2;

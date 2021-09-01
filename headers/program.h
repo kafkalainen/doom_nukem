@@ -6,18 +6,12 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/27 13:22:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 08:53:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROGRAM_H
 # define PROGRAM_H
-
-typedef enum
-{
-	false,
-	true
-}			t_bool;
 
 typedef struct s_window
 {

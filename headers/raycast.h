@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/27 11:55:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 10:31:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,24 @@
 
 typedef struct s_ray_pt
 {
-	t_xyz			left_dir;
-	t_xyz			right_dir;
+	t_xy			dir;
+	t_xy			isection;
 	t_wall			*wall;
 }					t_ray_pt;
 
 typedef struct s_frame
 {
-	int				idx;
-	int				max_fov;
-	int				offset;
-	float			min_step;
-	int				old_idx;
-	float			pxl_offset;
+	t_raster_queue	**raster_queue;
+	t_raster_queue	*triangles_in_view;
+	t_raster_queue	*transformed;
 	Uint32			*buffer;
+	float			*depth_buffer;
+	Uint32			last_frame;
 	t_ray_pt		left;
 	t_ray_pt		right;
-	Uint32			last_frame;
-	t_triangle		view_cube;
-	t_raster_queue	*triangles_in_view;
-	t_raster_queue	**raster_queue;
-	t_raster_queue	*transformed;
 	t_sides			viewport;
-	float			*depth_buffer;
+	int				idx;
+	int				old_idx;
 }					t_frame;
 
 enum e_lines
@@ -51,9 +46,8 @@ void			calc_intersection(t_wall *pgon, t_ray *ray,
 					t_intersection *sect);
 void			calc_sector_bounds(t_sector *sector);
 void			calc_extra_walls(t_home *home);
-t_xy			cast_ray(t_xy *dir, t_wall **head, int walls);
-int				check_connection(t_wall *point, t_frame *frame);
-int				check_if_portal(t_wall *point);
+t_bool			check_connection(t_wall *point, t_frame *frame);
+t_bool			check_if_portal(t_wall *point);
 int				check_if_same_pt(int *current_pxl, t_ray_pt *fov);
 int				check_if_lseg_intersects(t_xy *p0, t_xy *p1, t_xy *pos, t_xy *dir);
 void			continue_from_last_sector(t_wall *start, t_ray_pt *fov,
@@ -72,6 +66,8 @@ void			get_r_pt(t_wall *start, t_ray ray, t_frame *frame, int walls);
 float			get_wall_height(float left_ground, float right_ground,
 				float left_ceiling, float right_ceiling);
 t_wall			*get_portal_by_idx(int idx, t_sector *sector);
+t_bool			vec2_get_scalar_to_intersection(t_xy pos, t_xy dir, t_wall *wall,
+				float *t);
 void			interpolate_y(t_height *height, t_xy cutpoint,
 					t_wall *p0, t_wall *p1);
 void			interpolate_uv(t_xy *ground_uv, t_xy cutpoint,
@@ -79,7 +75,7 @@ void			interpolate_uv(t_xy *ground_uv, t_xy cutpoint,
 t_xy			line_intersection(t_intersection *sect);
 void			precalc_ground_texels(t_home *home);
 void			scan_fov(t_home *home, t_frame *frame, t_player *plr);
-void			setup_frame(t_frame *frame, t_frame *new_frame, int idx);
+void			setup_frame(t_frame *frame, t_frame *new_frame, t_xy pos, int idx);
 void			step_one(t_frame *frame);
 void			*clip_to_viewport_edges(void *args);
 void			free_queues(t_frame *frame);

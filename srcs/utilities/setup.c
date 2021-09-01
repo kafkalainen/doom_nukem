@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/27 12:16:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/31 20:06:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_home	*init_sdl(t_home *home, t_frame *frame, float *min_step)
+static t_home	*init_sdl(t_home *home, t_frame *frame)
 {
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
@@ -27,7 +27,6 @@ static t_home	*init_sdl(t_home *home, t_frame *frame, float *min_step)
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 	if (home->win.ScreenSurface == NULL)
 		error_output_sdl("Fatal: Failed to get window surface", home, frame);
-	*min_step = 0.002454369f;
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		error_output_sdl("Fatal: SDL_mixer could not initialize!", home, frame);
 	return (home);
@@ -120,7 +119,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	ret = initialize_rasterization_queues(frame);
 	if (ret)
 		clean_up(frame);
-	home = init_sdl(home, frame, &frame->min_step);
+	home = init_sdl(home, frame);
 	initialize_audio_to_null(&plr->audio);
 	// ret = load_audio(&plr->audio);
 	// if (ret)

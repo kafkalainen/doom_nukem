@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/27 11:53:02 by jnivala          ###   ########.fr        #
+#    Updated: 2021/08/31 16:14:46 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,19 +73,18 @@ SRCS = \
 	porting$(SLASH)validate_sectors_data.c \
 	porting$(SLASH)validate_sectors_data_2.c \
 	porting$(SLASH)porting_utils.c \
-	raycaster$(SLASH)calc_sector_bounds.c \
-	raycaster$(SLASH)colour_scale.c \
-	raycaster$(SLASH)get_floor.c \
-	raycaster$(SLASH)get_next_wall_tex.c \
-	raycaster$(SLASH)get_portal_by_idx.c \
-	raycaster$(SLASH)get_wall_height.c \
-	raycaster$(SLASH)get_wall_points.c \
-	raycaster$(SLASH)line_line_intersection.c \
-	raycaster$(SLASH)line_segment_check.c \
-	raycaster$(SLASH)recursion_checks.c \
-	raycaster$(SLASH)scan_fov.c \
-	raycaster$(SLASH)setup_frame.c \
-	raycaster$(SLASH)check_distances_to_walls.c \
+	engine$(SLASH)calc_sector_bounds.c \
+	engine$(SLASH)colour_scale.c \
+	engine$(SLASH)get_next_wall_tex.c \
+	engine$(SLASH)get_portal_by_idx.c \
+	engine$(SLASH)get_wall_height.c \
+	engine$(SLASH)get_wall_points.c \
+	engine$(SLASH)line_line_intersection.c \
+	engine$(SLASH)line_segment_check.c \
+	engine$(SLASH)recursion_checks.c \
+	engine$(SLASH)scan_fov.c \
+	engine$(SLASH)setup_frame.c \
+	engine$(SLASH)check_distances_to_walls.c \
 	update_player$(SLASH)activate_object.c \
 	update_player$(SLASH)advance_story.c \
 	update_player$(SLASH)check_distances.c \
@@ -326,6 +325,7 @@ endif
 $O:
 	$(MKDIR) $@
 	$(MKDIR) $@$(SLASH)editor
+	$(MKDIR) $@$(SLASH)engine
 	$(MKDIR) $@$(SLASH)entity_logic
 	$(MKDIR) $@$(SLASH)utilities
 	$(MKDIR) $@$(SLASH)update_player
@@ -333,7 +333,6 @@ $O:
 	$(MKDIR) $@$(SLASH)parsing
 	$(MKDIR) $@$(SLASH)png_parser
 	$(MKDIR) $@$(SLASH)porting
-	$(MKDIR) $@$(SLASH)raycaster
 	$(MKDIR) $@$(SLASH)vec_math
 	$(MKDIR) $@$(SLASH)menu_systems
 
