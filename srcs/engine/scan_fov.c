@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/01 12:29:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 13:06:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,70 +29,30 @@ void	fill_rasterqueue(t_home *home, t_frame *frame, t_player *plr)
 	add_projectiles(home, frame, plr);
 }
 
-static t_wall	*cast_ray(t_wall *wall, unsigned int nb_of_walls,
-				t_xy pos, t_ray_pt *ray, int old_idx)
-{
-	float	t;
-	t_wall	*temp;
-
-	temp = wall;
-	while (nb_of_walls--)
-	{
-		if (temp->top.idx != old_idx
-			&& vec2_get_scalar_to_intersection(pos, ray->dir, temp, &t))
-		{
-			ray->isection = vec2_add(pos, vec2_mul(ray->dir, t));
-			return (temp);
-		}
-		temp = temp->next;
-	}
-	return (NULL);
-}
-
-/*
-**	In setup_frame define leftmost and rightmost vector
-**	using plr_pos and wallpoints. In first loop, you
-**	will need to use 1.0f and -1.0f rad at rotation matrix.
-**	and afterwards vec2_unit_vector(plr_pos, triangle->p[0], and triangle->p[2]);
-**	Create boolean function, which will seek intersection between 2d wall and player
-**	direction.
-*/
-static void	cast_rays_player_view(t_home *home, t_frame *frame, t_player *plr)
-{
-	t_frame	new_frame;
-	t_xy 	plr_2d_pos;
-
-	plr_2d_pos = vec3_to_vec2(plr->pos);
-	frame->left.wall = cast_ray(home->sectors[frame->idx]->walls,
-		home->sectors[frame->idx]->nb_of_walls, plr_2d_pos, &frame->left, frame->old_idx);
-	frame->right.wall = cast_ray(home->sectors[frame->idx]->walls,
-		home->sectors[frame->idx]->nb_of_walls, plr_2d_pos, &frame->right, frame->old_idx);
-	if (!frame->right.wall || !frame->left.wall)
-		return ;
-	while (frame->left.wall != frame->right.wall)
-	{
-		if (check_if_portal(frame->left.wall)
-			&& !check_connection(frame->left.wall, frame))
-		{
-			setup_frame(frame, &new_frame, plr_2d_pos, frame->left.wall->top.idx);
-			scan_fov(home, &new_frame, plr);
-		}
-		frame->left.wall = frame->left.wall->next;
-		frame->left.isection = vec2(frame->left.wall->top.p[1].x,
-				frame->left.wall->top.p[1].z);
-	}
-	if (check_if_portal(frame->right.wall)
-		&& !check_connection(frame->right.wall, frame))
-	{
-		setup_frame(frame, &new_frame, plr_2d_pos, frame->right.wall->top.idx);
-		scan_fov(home, &new_frame, plr);
-	}
-}
-
 void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 {
+	unsigned int	i;
+	t_frame			new_frame;
+
+	i = 0;
 	quick_reset_queue(frame->transformed);
-	cast_rays_player_view(home, frame, plr);
+	frame->left.wall = home->sectors[frame->idx]->walls;
+	continue_from_last_sector(frame->left.wall, &frame->left, frame);
+	while (i < home->sectors[frame->idx]->nb_of_walls
+		&& !check_connection(frame->left.wall, frame))
+	{
+		if (frame->left.wall->top.idx >= 0)
+		{
+			if (vec3_dot_product(frame->left.wall->top.normal,
+					plr->look_dir) < SQR2)
+			{
+				setup_frame(frame, &new_frame, frame->left.wall->top.idx);
+				scan_fov(home, &new_frame, plr);
+			}
+		}
+		frame->left.wall = frame->left.wall->next;
+		i++;
+	}
 	fill_rasterqueue(home, frame, plr);
 	if (frame->transformed->size > 0)
 		draw_sector(frame, home, plr, frame->idx);

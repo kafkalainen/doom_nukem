@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/01 10:31:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 12:53:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void			interpolate_uv(t_xy *ground_uv, t_xy cutpoint,
 t_xy			line_intersection(t_intersection *sect);
 void			precalc_ground_texels(t_home *home);
 void			scan_fov(t_home *home, t_frame *frame, t_player *plr);
-void			setup_frame(t_frame *frame, t_frame *new_frame, t_xy pos, int idx);
+void			setup_frame(t_frame *frame, t_frame *new_frame, int idx);
 void			step_one(t_frame *frame);
 void			*clip_to_viewport_edges(void *args);
 void			free_queues(t_frame *frame);
