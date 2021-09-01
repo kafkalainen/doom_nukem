@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/27 13:16:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 18:49:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	update_enemies(t_home *home, t_player *plr, Uint32 delta_time)
 	while (i < home->nbr_of_entities)
 	{
 		cur_enemy = home->entity_pool[i];
+		if (cur_enemy->entity_type == ammo_pack)
+			rotate_entity_towards_player(cur_enemy, plr);
 		if (cur_enemy->is_active != false)
 		{
 			if (cur_enemy->entity_type == skull_skulker

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:21:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/12 14:03:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 18:37:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,16 @@ static void	initialize_static_entity(t_entity *entity)
 		entity->sprite_index = -lamp_on;
 		entity->alt_sprite_index = -lamp_off;
 	}
+	else if (entity->entity_type == ammo_pack)
+		entity->sprite_index = -ammo_pack_sprite;
+	else if (entity->entity_type == keycard_engineering)
+		entity->sprite_index = -engineering_keycard_sprite;
+	else if (entity->entity_type == keycard_cleaning)
+		entity->sprite_index = -cleaning_keycard_sprite;
+	else if (entity->entity_type == keycard_military)
+		entity->sprite_index = -military_keycard_sprite;
 	else
-	{
 		error_output("ERROR: Static entity texture not found.");
-	}
 }
 
 static void	initialize_moving_entity_textures(t_entity *entity)

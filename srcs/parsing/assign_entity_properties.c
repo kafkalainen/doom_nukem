@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/01 18:19:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/01 18:32:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,8 @@ static void	initialize_entity_movement(t_entity *entity)
 {
 	if (entity->is_static == 1)
 	{
-		if (entity->entity_type == light_button
-			|| entity->entity_type == powerstation
-			|| entity->entity_type == lamp
-			|| entity->entity_type == elevator_button)
+		if (entity->entity_type >= light_button
+			&& entity->entity_type <= keycard_military)
 		{
 			initialize_static_entity(entity);
 			entity->velocity = 0;
