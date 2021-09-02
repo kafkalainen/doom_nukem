@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 12:31:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:24:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_player(t_player *plr)
 	plr->inventory[3].in_use = 0;
 	plr->steps = 0.0f;
 	plr->plot_state = no_plot;
-	plr->wep[0].ammo = 42;
+	plr->wep[0].ammo = 10;
 	plr->wep[0].fire_rate = 1.0f;
 	plr->wep[0].type = 0;
 	plr->speed = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};

@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/02 14:06:15 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/02 15:10:26 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,7 @@ SRCS = \
 	update_player$(SLASH)activate_object.c \
 	update_player$(SLASH)advance_story.c \
 	update_player$(SLASH)check_distances.c \
+	update_player$(SLASH)check_for_matching_key.c \
 	update_player$(SLASH)check_y_diff.c \
 	update_player$(SLASH)check_if_open_portal.c \
 	update_player$(SLASH)get_bullet_hit_point.c \

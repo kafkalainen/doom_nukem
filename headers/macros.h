@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/01 18:03:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 14:26:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@
 # define MAX_THREADS 6
 # define SKYBOX_TEX -1
 # define DOOR_INDEX 3000
+# define CLEANING_INDEX 4000
+# define ENGINEERING_INDEX 5000
+# define MILITARY_INDEX 6000
 # define SUBDIV 16.0f
 # define DENOMSUBDIV 0.0625f
 # define STORY_STRINGS 30

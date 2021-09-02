@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:55:55 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 11:32:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 14:55:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Uint32	generate_doors(t_wall *current_portal)
 	right.ground = current_portal->bottom.p[2].y;
 	left.idx = -door;
 	current_portal->is_closed = 1;
-	current_portal->is_locked = unlocked;
+	// current_portal->is_locked = unlocked;
 	new_door = new_point(&left, &right);
 	if (!new_door)
 		return (0);

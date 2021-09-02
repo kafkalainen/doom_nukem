@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 13:38:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:11:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,7 @@ t_bool	activate_power_station(t_entity *power_station, t_player *plr)
 	return (false);
 }
 
-/*
-**	We need to render ammo packs that haven't been picked up.
-**	Basically we can use entity->state. If true, ammopack is in the world,
-**	if false, ammo pack has been picked up.
-*/
-t_bool	pick_up_ammo_pack(t_entity *ammo_pack, t_player *plr)
+t_bool	pick_up_item(t_entity *item, t_player *plr)
 {
 	int	i;
 
@@ -63,8 +58,8 @@ t_bool	pick_up_ammo_pack(t_entity *ammo_pack, t_player *plr)
 	if (i >= 4)
 		return (false);
 	plr->inventory[i].in_use = true;
-	plr->inventory[i].sprite_idx = ammo_pack_sprite;
-	ammo_pack->is_active = false;
+	plr->inventory[i].sprite_idx = -item->sprite_index;
+	item->is_active = false;
 	return (true);
 }
 
@@ -84,8 +79,9 @@ t_bool	handle_activation(t_entity *entity, t_home *home, t_player *plr)
 	}
 	else if (entity->entity_type == powerstation)
 		activate_power_station(entity, plr);
-	else if (entity->entity_type == ammo_pack)
-		pick_up_ammo_pack(entity, plr);
+	else if (entity->entity_type >= ammo_pack
+			&& entity->entity_type <= keycard_military)
+		pick_up_item(entity, plr);
 	else
 		return (0);
 	change_texture(entity);

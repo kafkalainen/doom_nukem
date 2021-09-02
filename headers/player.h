@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 14:09:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 14:56:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct s_weapon
 	float			fire_rate;
 }					t_weapon;
 
-typedef	struct s_inventory
+typedef struct s_inventory
 {
 	t_bool			in_use;
 	int				sprite_idx;
@@ -176,6 +176,8 @@ int				check_y_diff(t_player *plr, t_xyz *test_pos, t_sector *to);
 t_bool			check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
 float			check_distance_to_ground(t_sector *sector, float height,
 					t_xyz pos);
+t_bool			check_for_matching_key(t_wall *wall, t_player *plr,
+					int keycard);
 Uint32			update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 					Uint32 current_time, Uint32 delta_time);
 void			create_target_vector(t_player *plr);
@@ -207,7 +209,7 @@ void			jump(t_player *plr, t_sector *cur_sector);
 int				player_move(t_player *plr, t_home *home, Uint32 delta_time);
 int				plr_inside(t_sector *sector, t_player *plr);
 int				player_use(t_player *plr, t_home *home);
-int				open_door(t_sector **sectors, t_xyz look_loc, t_player *plr,
+t_bool			open_door(t_sector **sectors, t_xyz look_loc, t_player *plr,
 					int active_item);
 t_bool			player_look(t_home *home, t_player *plr);
 int				player_use_inventory_item(t_player *plr);

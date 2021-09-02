@@ -6,24 +6,25 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 11:14:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:22:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-//static void		draw_hud_texts(Uint32 *buffer, t_player *plr, int slot)
-//{
-//	t_plx_modifier	mod;
-//
-//	mod.colour = get_color(white);
-//	mod.size = 3;
-//	ft_str_pxl(buffer, vec2(plr->hud.hud_ammo_x, plr->hud.hud_ammo_y- 12),
-//		ft_strjoin("Ammo: ", ft_itoa(plr->live_ammo[slot])), mod);
-//	mod.size = 2;
-//	ft_str_pxl(buffer, vec2(plr->hud.hud_ammo_x + 100, plr->hud.hud_ammo_y+ 12),
-//		ft_itoa(plr->reserve_ammo[slot]), mod);
-//}
+static void		draw_hud_texts(Uint32 *buffer, t_player *plr)
+{
+	char			*str;
+	t_plx_modifier	mod;
+
+	mod.colour = get_color(white);
+	mod.size = 3;
+	str = ft_strjoin("Ammo: ", ft_itoa(plr->wep[plr->active_wep].ammo));
+	mod.len = ft_strlen(str);
+	ft_str_pxl(buffer, vec2(plr->hud.hud_ammo_x, plr->hud.hud_ammo_y),
+		str, mod);
+	free(str);
+}
 
 static void		draw_power_bar(t_player *plr, Uint32 *buffer)
 {
@@ -166,8 +167,8 @@ void			draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 	draw_fuel_bar(plr, frame->buffer);
 	draw_inventory_slots(plr, frame->buffer);
 	draw_inventory_images(home, plr, frame->buffer);
+	draw_hud_texts(frame->buffer, plr);
 	draw_crosshair(frame->buffer);
 	if (plr->dead > 0)
 		draw_uded(frame->buffer);
-	//draw_hud_texts(frame->buffer, plr, 0);
 }

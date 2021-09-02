@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 14:13:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 14:56:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,21 +112,23 @@ Uint32	update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 	return (volume);
 }
 
-int	open_door(t_sector **sectors, t_xyz look_loc, t_player *plr,
+t_bool	open_door(t_sector **sectors, t_xyz look_loc, t_player *plr,
 	int active_item)
 {
 	t_wall			*wall;
 	t_wall			*portal_behind;
 
-	(void)active_item;
 	wall = check_if_crossing(sectors[plr->cur_sector], look_loc);
-	if (wall && wall->is_door && wall->is_locked == unlocked)
+	if (wall && wall->is_door)
 	{
-		portal_behind = get_portal_by_idx(plr->cur_sector,
+		if (check_for_matching_key(wall, plr, active_item))
+		{
+			portal_behind = get_portal_by_idx(plr->cur_sector,
 				sectors[wall->top.idx]);
-		portal_behind->open_until = plr->time + 5000;
-		wall->open_until = plr->time + 5000;
-		return (1);
+			portal_behind->open_until = plr->time + 5000;
+			wall->open_until = plr->time + 5000;
+		}
+		return (true);
 	}
-	return (0);
+	return (false);
 }
