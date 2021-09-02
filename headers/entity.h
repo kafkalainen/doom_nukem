@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 15:10:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 16:42:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ enum e_floors
 
 enum e_door_states
 {
-	unlocked,
-	locked,
-	cleaning_lock,
-	engineering_lock,
-	military_lock
+	unlocked = 300,
+	locked = 301,
+	cleaning_lock = 302,
+	engineering_lock = 303,
+	military_lock = 304
 };
 
 enum e_hole_states

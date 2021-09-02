@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 15:22:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 15:32:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 static void		draw_hud_texts(Uint32 *buffer, t_player *plr)
 {
 	char			*str;
+	char			*concatstr;
 	t_plx_modifier	mod;
 
 	mod.colour = get_color(white);
 	mod.size = 3;
-	str = ft_strjoin("Ammo: ", ft_itoa(plr->wep[plr->active_wep].ammo));
-	mod.len = ft_strlen(str);
-	ft_str_pxl(buffer, vec2(plr->hud.hud_ammo_x, plr->hud.hud_ammo_y),
-		str, mod);
+	str = ft_itoa(plr->wep[plr->active_wep].ammo);
+	concatstr = ft_strjoin("Ammo: ", str);
 	free(str);
+	mod.len = ft_strlen(concatstr);
+	ft_str_pxl(buffer, vec2(plr->hud.hud_ammo_x, plr->hud.hud_ammo_y),
+		concatstr, mod);
+	free(concatstr);
 }
 
 static void		draw_power_bar(t_player *plr, Uint32 *buffer)
