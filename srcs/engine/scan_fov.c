@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/01 13:06:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 13:41:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	fill_rasterqueue(t_home *home, t_frame *frame, t_player *plr)
 	add_walls(home, frame, plr);
 	add_ground(home, frame, plr);
 	add_ceiling(home, frame, plr);
-	add_objects(home, frame, plr);
+	add_entities(home, frame, plr);
 	add_projectiles(home, frame, plr);
 }
 

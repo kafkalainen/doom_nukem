@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 11:25:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 14:13:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,19 +112,20 @@ Uint32	update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 	return (volume);
 }
 
-int	open_door(t_sector **sectors, t_xyz look_loc,
-	Uint32 current_time, Uint32 cur_sector)
+int	open_door(t_sector **sectors, t_xyz look_loc, t_player *plr,
+	int active_item)
 {
 	t_wall			*wall;
 	t_wall			*portal_behind;
 
-	wall = check_if_crossing(sectors[cur_sector], look_loc);
+	(void)active_item;
+	wall = check_if_crossing(sectors[plr->cur_sector], look_loc);
 	if (wall && wall->is_door && wall->is_locked == unlocked)
 	{
-		portal_behind = get_portal_by_idx(cur_sector,
+		portal_behind = get_portal_by_idx(plr->cur_sector,
 				sectors[wall->top.idx]);
-		portal_behind->open_until = current_time + 5000;
-		wall->open_until = current_time + 5000;
+		portal_behind->open_until = plr->time + 5000;
+		wall->open_until = plr->time + 5000;
 		return (1);
 	}
 	return (0);

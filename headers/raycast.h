@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/01 12:53:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 13:23:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void			draw_queue_empty(t_frame *frame, t_home *home,
 void			add_ceiling(t_home *home, t_frame *frame, t_player *plr);
 void			add_ground(t_home *home, t_frame *frame, t_player *plr);
 void			add_walls(t_home *home, t_frame *frame, t_player *plr);
-void			add_objects(t_home *home, t_frame *frame, t_player *plr);
+void			add_entities(t_home *home, t_frame *frame, t_player *plr);
 void			add_projectiles(t_home *home, t_frame *frame, t_player *plr);
 t_wall			*check_if_too_close_to_walls(t_sector *sector, float width,
 				t_xyz pos, t_xyz dir);

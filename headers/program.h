@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 10:17:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 13:38:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,22 @@ typedef struct s_window
 **	cooldown:			the wait time between idle and move states, when
 **						enemy is moving.
 **	is_static:			Boolean to for if object is moving or static.
-**	always_facing:		If true, always draw entity_front.png
-**						OR entity_attack
+**	is_active:			Is enemy dead or not.
+**						In items, it tells us whether to render pickupable
+**						item or not.
 **	is_revealed:		Enemies have alternate texture pack, then sprite_index
 **						is set to alt_sprite_index, default == false;
 **	entity_type:		Entity_type is used based on values listed in enum
 **						e_entity.
 **	state:				State tells if a light switch is on or not, is button
-**						activated or not.
+**						activated or not, is it upper or lower floor.
 **	is_aggroed:			Default false, based on distance between entity and
 **						player, if within distance parameters, cast ray
 **						to see if we can see enemy. If enemy has a line
 **						of sight, set aggro = true
+**	is_pickupable:		Default false, based on entity type. If entity_type
+**						is pickable by player, we set is_pickupable to true.
+**						all pickupables are facing towards player.
 **	is_linked:			0	not linked
 **						1	automatic
 **						2+	linked button entity

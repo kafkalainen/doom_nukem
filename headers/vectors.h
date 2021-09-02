@@ -254,9 +254,9 @@ void		calc_texel(t_uvz *texel, t_uvz *start, float offset,
 			t_uvz *end);
 void		calc_lumel(float *lumel, float *start, float offset,
 			float *end);
-Uint32		vec3_check_sidedness(t_xyz p1, t_xyz p2, t_xyz a, t_xyz b);
-Uint32		vec3_is_inside_triangle(t_triangle *tri, t_xyz point);
-Uint32		vec3_ray_triangle_intersect(t_triangle *tri,
+t_bool		vec3_check_sidedness(t_xyz p1, t_xyz p2, t_xyz a, t_xyz b);
+t_bool		vec3_is_inside_triangle(t_triangle *tri, t_xyz point);
+t_bool		vec3_ray_triangle_intersect(t_triangle *tri,
 			t_xyz pos, t_xyz dir, t_xyz *isection);
 float		vec3_angle(t_xyz to_be_turned, t_xyz compared);
 void		initialize_lumels(float *p0, float *p1, float *p2, float init);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 11:17:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 10:11:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 13:45:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_bool	player_look(t_home *home, t_player *plr)
 	entity_hit = 0;
 	while (i < home->nbr_of_entities)
 	{
-		if (home->entity_pool[i]->sector_idx == plr->cur_sector)
+		if (home->entity_pool[i]->sector_idx == plr->cur_sector
+			&& check_if_entity_is_active(home->entity_pool[i]))
 		{
 			translate_entity(&tested[0], &tested[1], home->entity_pool[i]);
 			if (vec3_ray_triangle_intersect(&tested[0],

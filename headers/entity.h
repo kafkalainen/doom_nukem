@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 10:08:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 13:44:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void				bolt_elevator_door(t_sector *elevator, t_sector **sectors,
 						Uint32 previous_floor, Uint32 state);
 Uint32				check_aggro(t_player *plr, t_entity *entity,
 						t_sector *sector);
+t_bool				check_if_entity_is_active(t_entity *entity);
 void				determine_angle_between_entity_and_plr(t_entity *entity,
 						t_player *plr);
 t_bool				die(t_entity *entity, Uint32 t);

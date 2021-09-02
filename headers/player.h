@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 10:11:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 14:09:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,9 +207,10 @@ void			jump(t_player *plr, t_sector *cur_sector);
 int				player_move(t_player *plr, t_home *home, Uint32 delta_time);
 int				plr_inside(t_sector *sector, t_player *plr);
 int				player_use(t_player *plr, t_home *home);
-int				open_door(t_sector **sectors, t_xyz look_loc,
-					Uint32 current_time, Uint32 cur_sector);
+int				open_door(t_sector **sectors, t_xyz look_loc, t_player *plr,
+					int active_item);
 t_bool			player_look(t_home *home, t_player *plr);
+int				player_use_inventory_item(t_player *plr);
 void			update_player(t_player *plr, t_home *home, Uint32 delta_time);
 void			shooting_handle(t_home *home, t_ray *ray);
 Uint32			strafe_along_the_wall(t_wall *wall, t_player *plr,

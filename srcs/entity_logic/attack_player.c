@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 08:41:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 12:31:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static t_bool	shoot_player(t_home *home, t_entity *entity)
 {
 	t_ray	ray;
 
-	// initialize_player_triangles(plr,
-	// 	vec3_unit_vector(vec3_dec(entity->pos, plr->pos)));
 	ray.side = ENEMY;
 	ray.pos = entity->pos;
 	ray.dir = entity->dir;

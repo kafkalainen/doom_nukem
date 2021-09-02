@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 10:26:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 13:38:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,13 @@ t_bool	pick_up_ammo_pack(t_entity *ammo_pack, t_player *plr)
 	int	i;
 
 	i = 0;
-	(void)ammo_pack;
 	while (plr->inventory[i].in_use)
 		i++;
 	if (i >= 4)
 		return (false);
 	plr->inventory[i].in_use = true;
 	plr->inventory[i].sprite_idx = ammo_pack_sprite;
-	printf("PICKED UP, TO SLOT %d\n", i);
+	ammo_pack->is_active = false;
 	return (true);
 }
 

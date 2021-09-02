@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/02 10:44:51 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/02 14:06:15 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ SRCS = \
 	update_player$(SLASH)player_look.c \
 	update_player$(SLASH)player_move.c \
 	update_player$(SLASH)player_use.c \
+	update_player$(SLASH)player_use_inventory_item.c \
 	update_player$(SLASH)special_movement.c \
 	update_player$(SLASH)update_player.c \
 	update_player$(SLASH)shooting.c \
