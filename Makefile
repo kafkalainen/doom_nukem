@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/08/31 16:14:46 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/02 10:44:51 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS = \
 	entity_logic$(SLASH)die.c \
 	entity_logic$(SLASH)entity.c \
 	entity_logic$(SLASH)entity_move.c \
+	entity_logic$(SLASH)face_entity_towards_player.c \
 	entity_logic$(SLASH)handle_activation.c \
 	entity_logic$(SLASH)lock_elevator.c \
 	entity_logic$(SLASH)turn_on_lights.c \
@@ -123,6 +124,7 @@ SRCS = \
 	update_screen$(SLASH)draw_tex_triangle.c \
 	update_screen$(SLASH)draw_wireframe.c \
 	update_screen$(SLASH)draw_hud.c \
+	update_screen$(SLASH)draw_inventory.c \
 	update_screen$(SLASH)draw_object_data.c \
 	update_screen$(SLASH)init_matrices_a.c \
 	update_screen$(SLASH)init_matrices_b.c \

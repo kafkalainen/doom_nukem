@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/02 18:33:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 11:14:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,29 +73,6 @@ static void		draw_crosshair(Uint32 *buffer)
 	draw_line(vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5 - wh.y * 0.5),
 		vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5 + wh.y * 0.5),
 		0xFF00F180, buffer);
-}
-
-static void		draw_inventory_slots(t_player *plr, Uint32 *buffer)
-{
-	int		i;
-	t_xy	wh;
-	int		gap;
-
-	i = -2;
-	gap = 12;
-	wh = vec2(32, 32);
-	while (i < 2)
-	{
-		if (plr->active_inv == i + 2)
-			draw_rect(vec2(SCREEN_WIDTH * 0.5 + i * (wh.x + gap) - gap * 0.25,
-				562 - gap * 0.25), vec2(wh.x + gap * 0.5, wh.y + gap * 0.5), buffer, 0xFFDDDD00);
-		else
-			draw_rect(vec2(SCREEN_WIDTH * 0.5 + i * (wh.x + gap) - gap * 0.25,
-				562 - gap * 0.25), vec2(wh.x + gap * 0.5, wh.y + gap * 0.5), buffer, 0xFF202020);
-		draw_rect(vec2(SCREEN_WIDTH * 0.5 + i * (wh.x + gap),
-			562), vec2(wh.x, wh.y), buffer, 0xFF734D54);
-		i++;
-	}
 }
 
 static void		draw_hud_image(t_home *home, Uint32 *buffer)
@@ -188,9 +165,9 @@ void			draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 	draw_power_bar(plr, frame->buffer);
 	draw_fuel_bar(plr, frame->buffer);
 	draw_inventory_slots(plr, frame->buffer);
+	draw_inventory_images(home, plr, frame->buffer);
 	draw_crosshair(frame->buffer);
 	if (plr->dead > 0)
 		draw_uded(frame->buffer);
-	//draw_inventory_images(home, frame, plr);
 	//draw_hud_texts(frame->buffer, plr, 0);
 }

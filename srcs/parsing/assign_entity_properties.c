@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/01 18:32:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:31:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 ** int			health;
 ** int			ammo;
 */
-static void	initialize_entity_triangles(t_entity *entity)
+void	initialize_entity_triangles(t_entity *entity)
 {
 	t_xy	size;
 
@@ -37,12 +37,8 @@ static void	initialize_entity_triangles(t_entity *entity)
 		|| entity->entity_type == crewmember
 		|| entity->entity_type == thing)
 		size = (t_xy){2.0f, 2.0f};
-	else if (entity->entity_type == lamp || entity->entity_type == light_button
-		|| entity->entity_type == elevator_button
-		|| entity->entity_type == keycard_military
-		|| entity->entity_type == keycard_engineering
-		|| entity->entity_type == keycard_cleaning
-		|| entity->entity_type == ammo_pack)
+	else if (entity->entity_type == elevator_button || entity->entity_type == light_button
+		|| (entity->entity_type <= lamp && entity->entity_type >= keycard_military))
 		size = (t_xy){0.5f, 0.5f};
 	else
 		size = (t_xy){1.0f, 1.0f};
@@ -132,6 +128,11 @@ static void	initialize_entity_values(t_entity *entity, t_xyz plr_pos)
 		entity->health = 3;
 	else
 		entity->health = 999;
+	if (entity->entity_type >= ammo_pack &&
+		entity->entity_type <= keycard_military)
+		entity->is_pickupable = true;
+	else
+		entity->is_pickupable = false;
 	entity->ammo = 3;
 }
 

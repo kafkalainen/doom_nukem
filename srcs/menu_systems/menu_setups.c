@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/08/02 13:12:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:23:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,55 +81,6 @@ void	load_entities_from_map(t_home *home)
 	// TODO: malloc entity pool
 	// TODO: init each entity pool index with entity from map data
 	// TODO:
-}
-
-void	init_sprites_editor(t_home *home)
-{
-	home->entity_pool = (t_entity **)malloc(sizeof(t_entity *) * 2);
-	if (!home->entity_pool)
-		error_output("Memory allocation failed\n");
-	home->entity_pool[0] = (t_entity *)malloc(sizeof(t_entity));
-		if (!home->entity_pool[0])
-			error_output("Memory allocation failed\n");
-	home->entity_pool[1] = NULL;
-	home->entity_pool[0]->entity_index = 0;
-	home->entity_pool[0]->entity_type = 1;
-	home->entity_pool[0]->health = 10;
-	home->entity_pool[0]->is_aggroed = 0;
-	home->entity_pool[0]->is_revealed = 0;
-	home->entity_pool[0]->is_static = 0;
-	home->entity_pool[0]->state = 0;
-	home->entity_pool[0]->velocity = ENTITY_VELOCITY_1;
-	home->entity_pool[0]->ammo = 0;
-	home->entity_pool[0]->always_facing_plr = 0;
-	home->entity_pool[0]->pos = (t_xyz){0.9, 1.1, 10, 1};
-	home->entity_pool[0]->top.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
-	home->entity_pool[0]->top.p[1] = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
-	home->entity_pool[0]->top.p[2] = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
-	home->entity_pool[0]->bot.p[0] = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
-	home->entity_pool[0]->bot.p[1] = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
-	home->entity_pool[0]->bot.p[2] = (t_xyz){1.0f, 0.0f, 0.0f, 1.0f};
-	home->entity_pool[0]->top.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
-	home->entity_pool[0]->top.uv[1] = (t_uvz){0.0f, 0.0f, 1.0f};
-	home->entity_pool[0]->top.uv[2] = (t_uvz){1.0f, 0.0f, 1.0f};
-	home->entity_pool[0]->bot.uv[0] = (t_uvz){0.0f, 1.0f, 1.0f};
-	home->entity_pool[0]->bot.uv[1] = (t_uvz){1.0f, 0.0f, 1.0f};
-	home->entity_pool[0]->bot.uv[2] = (t_uvz){1.0f, 1.0f, 1.0f};
-	home->entity_pool[0]->dir = triangle_normal(&home->entity_pool[0]->top);
-	home->entity_pool[0]->top.idx = -enemy0;
-	home->entity_pool[0]->bot.idx = -enemy0;
-	home->entity_pool[0]->sprite_state = 0;
-	home->entity_pool[0]->sprite_index = -enemy0;
-	home->nbr_of_entities = 1;
-	home->entity_pool[0]->sector_idx = 2;
-	home->nbr_of_projectiles = 0;
-	// body_sprite 0 // static && always_facing_plr
-	// enemy 1
-	// enemy 2
-	// health station 3
-	// projectile_sprite 4
-	// wall_toggle 5
-	// explosion_sprites 6
 }
 
 void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)

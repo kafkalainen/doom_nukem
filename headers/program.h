@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/01 08:53:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:17:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ typedef struct	s_entity
 	Uint32		is_static;
 	Uint32		is_active;
 	Uint32		is_linked;
-	Uint32		always_facing_plr;
 	Uint32		is_revealed;
 	Uint32		entity_type;
 	Uint32		state;
 	Uint32		is_aggroed;
+	t_bool		is_pickupable;
 	int			cooldown;
 	int			die_animation;
 	int			sprite_index;

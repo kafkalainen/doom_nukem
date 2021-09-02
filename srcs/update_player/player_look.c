@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 11:17:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/24 15:48:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:11:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	player_look(t_home *home, t_player *plr)
+t_bool	player_look(t_home *home, t_player *plr)
 {
 	Uint32		i;
 	t_xyz		isection;
@@ -42,5 +42,5 @@ Uint32	player_look(t_home *home, t_player *plr)
 	}
 	if (!entity_hit)
 		plr->display_object = 0;
-	return (0);
+	return (true);
 }

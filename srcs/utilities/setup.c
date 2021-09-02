@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/31 20:06:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:02:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 	return (home);
 }
 
-void	initialize_player_target_triangles(t_player *plr)
-{
-	plr->tri[0].p[0] = (t_xyz){-0.5f * plr->width,
-		-0.5f * plr->height, 0.0f, 1.0f};
-	plr->tri[0].p[1] = (t_xyz){-0.5f * plr->width,
-		0.5f * plr->height, 0.0f, 1.0f};
-	plr->tri[0].p[2] = (t_xyz){0.5f * plr->width,
-		0.5f * plr->height, 0.0f, 1.0f};
-	plr->tri[1].p[0] = (t_xyz){-0.5f * plr->width,
-		-0.5f * plr->height, 0.0f, 1.0f};
-	plr->tri[1].p[1] = (t_xyz){0.5f * plr->width,
-		0.5f * plr->height, 0.0f, 1.0f};
-	plr->tri[1].p[2] = (t_xyz){0.5f * plr->width,
-		-0.5f * plr->height, 0.0f, 1.0f};
-	plr->tri[0].normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
-	plr->tri[1].normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
-}
+// void	initialize_player_target_triangles(t_player *plr)
+// {
+// 	plr->tri[0].p[0] = (t_xyz){-0.5f * plr->width,
+// 		-0.5f * plr->height, 0.0f, 1.0f};
+// 	plr->tri[0].p[1] = (t_xyz){-0.5f * plr->width,
+// 		0.5f * plr->height, 0.0f, 1.0f};
+// 	plr->tri[0].p[2] = (t_xyz){0.5f * plr->width,
+// 		0.5f * plr->height, 0.0f, 1.0f};
+// 	plr->tri[1].p[0] = (t_xyz){-0.5f * plr->width,
+// 		-0.5f * plr->height, 0.0f, 1.0f};
+// 	plr->tri[1].p[1] = (t_xyz){0.5f * plr->width,
+// 		0.5f * plr->height, 0.0f, 1.0f};
+// 	plr->tri[1].p[2] = (t_xyz){0.5f * plr->width,
+// 		-0.5f * plr->height, 0.0f, 1.0f};
+// 	plr->tri[0].normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
+// 	plr->tri[1].normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
+// }
 
 void	init_player(t_player *plr)
 {
@@ -70,10 +70,10 @@ void	init_player(t_player *plr)
 	plr->fuel_points = 100.0f;
 	plr->active_inv = -1;
 	plr->active_wep = 0;
-	plr->inventory[0] = 0;
-	plr->inventory[1] = 0;
-	plr->inventory[2] = 0;
-	plr->inventory[3] = 0;
+	plr->inventory[0].in_use = 0;
+	plr->inventory[1].in_use = 0;
+	plr->inventory[2].in_use = 0;
+	plr->inventory[3].in_use = 0;
 	plr->steps = 0.0f;
 	plr->plot_state = no_plot;
 	plr->wep[0].ammo = 42;
@@ -82,7 +82,7 @@ void	init_player(t_player *plr)
 	plr->speed = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	plr->display_object = 0;
 	plr->dead = 0;
-	initialize_player_target_triangles(plr);
+	// initialize_player_target_triangles(plr);
 	init_input_values(&plr->input);
 }
 

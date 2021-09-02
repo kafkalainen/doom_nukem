@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/01 18:12:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:08:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,18 @@ void				entity_chase(t_entity *entity, t_home *home, Uint32 t,
 						t_player *plr);
 void				entity_gravity(t_sector *sector, t_entity *entity,
 						Uint32 delta_time);
-float				get_distance_squared(t_xyz pt0, t_xyz pt1);
-Uint32				handle_activation(t_entity *entity, t_home *home,
+void				face_entity_towards_player(t_entity *entity,
 						t_player *plr);
+float				get_distance_squared(t_xyz pt0, t_xyz pt1);
+t_bool				handle_activation(t_entity *entity, t_home *home,
+						t_player *plr);
+void				initialize_entity_triangles(t_entity *entity);
 void				initialize_projectile_triangles(t_projectile *projectile);
 Uint32				initialize_entity_textures(t_entity *entity);
 Uint32				lock_elevator(t_home *home, t_sector *elevator);
 void				lock_the_door(t_wall *dimensions, t_wall *door);
 void				pick_next_frame(t_entity *entity, Uint32 t);
+t_bool				pick_up_ammo_pack(t_entity *ammo_pack, t_player *plr);
 void				rotate_entity_towards_player(t_entity *entity,
 						t_player *plr);
 void				rotate_projectile_based_on_axes(t_xyz normal,

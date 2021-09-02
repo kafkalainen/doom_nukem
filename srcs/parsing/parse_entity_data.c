@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:46:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/12 14:37:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:17:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ static t_entity	*get_entity_data(unsigned char *buf, t_entity *entity,
 	if (get_next_uint_value(&entity->is_static, buf, &pos, size))
 		return (NULL);
 	if (get_next_uint_value(&entity->is_active, buf, &pos, size))
-		return (NULL);
-	if (get_next_uint_value(&entity->always_facing_plr, buf, &pos, size))
 		return (NULL);
 	if (get_next_uint_value(&entity->is_revealed, buf, &pos, size))
 		return (NULL);

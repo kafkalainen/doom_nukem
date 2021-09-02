@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/27 12:45:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/02 10:11:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,12 @@ typedef struct s_weapon
 	float			fire_rate;
 }					t_weapon;
 
+typedef	struct s_inventory
+{
+	t_bool			in_use;
+	int				sprite_idx;
+}				t_inventory;
+
 typedef struct s_player
 {
 	t_audio			audio;
@@ -123,14 +129,15 @@ typedef struct s_player
 	t_input			input;
 	t_weapon		wep[2];
 	t_triangle		tri[4];
+	t_inventory		inventory[4];
 	t_xyz			pos;
 	t_xyz			test_pos;
 	t_xyz			look_dir;
 	t_xyz			move_dir;
 	t_xyz			target;
 	t_xyz			up;
-	t_xy			dir;
 	t_xyz			speed;
+	t_xy			dir;
 	float			yaw;
 	float			steps;
 	float			pitch;
@@ -150,7 +157,6 @@ typedef struct s_player
 	Uint32			message_time;
 	Uint32			display_object;
 	unsigned int	active_wep;
-	unsigned int	inventory[4];
 }					t_player;
 
 enum e_movement
@@ -203,7 +209,7 @@ int				plr_inside(t_sector *sector, t_player *plr);
 int				player_use(t_player *plr, t_home *home);
 int				open_door(t_sector **sectors, t_xyz look_loc,
 					Uint32 current_time, Uint32 cur_sector);
-Uint32			player_look(t_home *home, t_player *plr);
+t_bool			player_look(t_home *home, t_player *plr);
 void			update_player(t_player *plr, t_home *home, Uint32 delta_time);
 void			shooting_handle(t_home *home, t_ray *ray);
 Uint32			strafe_along_the_wall(t_wall *wall, t_player *plr,
