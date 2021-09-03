@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/03 11:17:20 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/03 13:34:16 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,13 @@ SRCS = \
 	entity_logic$(SLASH)check_aggro.c \
 	entity_logic$(SLASH)determine_entity_angle.c \
 	entity_logic$(SLASH)die.c \
-	entity_logic$(SLASH)entity.c \
 	entity_logic$(SLASH)entity_move.c \
 	entity_logic$(SLASH)face_entity_towards_player.c \
 	entity_logic$(SLASH)handle_activation.c \
 	entity_logic$(SLASH)lock_elevator.c \
 	entity_logic$(SLASH)turn_on_lights.c \
 	entity_logic$(SLASH)update_elevators.c \
-	entity_logic$(SLASH)update_enemies.c \
+	entity_logic$(SLASH)update_entities.c \
 	entity_logic$(SLASH)update_projectiles.c \
 	entity_logic$(SLASH)take_damage.c \
 	parsing$(SLASH)assign_entity_properties.c \
@@ -112,6 +111,7 @@ SRCS = \
 	update_player$(SLASH)update_player.c \
 	update_player$(SLASH)shooting.c \
 	update_player$(SLASH)strafe_vector_along_the_wall.c \
+	update_player$(SLASH)player_take_damage.c \
 	update_screen$(SLASH)apply_matrices_a.c \
 	update_screen$(SLASH)apply_matrices_b.c \
 	update_screen$(SLASH)calculate_offsets.c \
@@ -142,8 +142,8 @@ SRCS = \
 	utilities$(SLASH)fps_timer.c \
 	utilities$(SLASH)initialize_player.c \
 	utilities$(SLASH)is_negative.c \
-	utilities$(SLASH)mem_functions.c \
-	utilities$(SLASH)mem_functions_2.c \
+	utilities$(SLASH)mem_functions_a.c \
+	utilities$(SLASH)mem_functions_b.c \
 	utilities$(SLASH)pxl_alphabet.c \
 	utilities$(SLASH)pxl_numbers.c \
 	utilities$(SLASH)raster_queue_a.c \
