@@ -1,55 +1,74 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   audio.c                                            :+:      :+:    :+:   */
+/*   audio_a.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 10:20:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 10:03:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
+static void free_sound(Mix_Chunk **chunk)
+{
+	if (*chunk != NULL)
+		Mix_FreeChunk(*chunk);
+	*chunk = NULL;
+}
+
+
 void	cleanup_audio_source(t_audio *audio)
 {
 	if (Mix_PlayingMusic())
 		Mix_PauseMusic();
-	if (audio->footstep1 != NULL)
-		Mix_FreeChunk(audio->footstep1);
-	audio->footstep1 = NULL;
-	if (audio->footstep2 != NULL)
-		Mix_FreeChunk(audio->footstep2);
-	audio->footstep2 = NULL;
 	if (audio->music != NULL)
 		Mix_FreeMusic(audio->music);
 	audio->music = NULL;
+	free_sound(&audio->footstep1);
+	free_sound(&audio->footstep2);
+	free_sound(&audio->door);
+	free_sound(&audio->button);
+	free_sound(&audio->plasma_gun);
+	free_sound(&audio->error);
+	free_sound(&audio->rahikainen_ramble[0]);
+	free_sound(&audio->rahikainen_ramble[1]);
+	free_sound(&audio->rahikainen_ramble[2]);
+	free_sound(&audio->rahikainen_damage[0]);
+	free_sound(&audio->rahikainen_damage[1]);
+	free_sound(&audio->rahikainen_damage[2]);
+	free_sound(&audio->rahikainen_damage[3]);
+	free_sound(&audio->rahikainen_damage[4]);
 }
 
 int	load_game_audio(t_audio *audio)
 {
 	cleanup_audio_source(audio);
-	audio->music = Mix_LoadMUS("temp/music.wav");
-	if (!audio->music)
+	audio->music = Mix_LoadMUS("audio/eerie_by_eparviai.wav");
+	audio->footstep1 = Mix_LoadWAV("audio/footstep1.wav");
+	audio->footstep2 = Mix_LoadWAV("audio/footstep2.wav");
+	audio->door = Mix_LoadWAV("audio/door_opens_and_closes.wav");
+	audio->button = Mix_LoadWAV("audio/button.wav");
+	audio->plasma_gun = Mix_LoadWAV("audio/plasma_gun.wav");
+	audio->error = Mix_LoadWAV("audio/error.wav");
+	audio->rahikainen_ramble[0] = Mix_LoadWAV("audio/rahikainen_1.wav");
+	audio->rahikainen_ramble[1] = Mix_LoadWAV("audio/rahikainen_2.wav");
+	audio->rahikainen_ramble[2] = Mix_LoadWAV("audio/rahikainen_3.wav");
+	audio->rahikainen_damage[0] = Mix_LoadWAV("audio/rahikainen_aah_1.wav");
+	audio->rahikainen_damage[1] = Mix_LoadWAV("audio/rahikainen_damage.wav");
+	audio->rahikainen_damage[2] = Mix_LoadWAV("audio/rahikainen_ugh.wav");
+	audio->rahikainen_damage[3] = Mix_LoadWAV("audio/rahikainen_ugh_2.wav");
+	audio->rahikainen_damage[4] = Mix_LoadWAV("audio/rahikainen_ugh_3.wav");
+	audio->error = Mix_LoadWAV("audio/error.wav");
+
+	if (!audio->music || !audio->footstep1 || !audio->footstep2
+		|| !audio->door || !audio->button || !audio->plasma_gun
+		|| !audio->error)
 	{
-		ft_putendl_fd("Failed to load beat music! SDL_mixer Error", 2);
-		audio->footstep1 = NULL;
-		audio->footstep2 = NULL;
-		return (771);
-	}
-	audio->footstep1 = Mix_LoadWAV("temp/footstep1.wav");
-	if (!audio->footstep1)
-	{
-		ft_putendl_fd("Failed to load scratch sound effect!", 2);
-		audio->footstep2 = NULL;
-		return (772);
-	}
-	audio->footstep2 = Mix_LoadWAV("temp/footstep2.wav");
-	if (!audio->footstep2)
-	{
-		ft_putendl_fd("Failed to load scratch sound effect!", 2);
-		return (773);
+		ft_putendl("ERROR: Couldn't load audio.");
+		return (1);
 	}
 	return (0);
 }
@@ -102,35 +121,4 @@ void	cleanup_audio(t_audio *audio)
 		audio->music = NULL;
 	}
 	Mix_CloseAudio();
-}
-
-void	play_footsteps(t_audio *audio)
-{
-	Uint32			current_time;
-	static Uint32	last_time;
-	static int		step;
-
-	current_time = SDL_GetTicks();
-	if (current_time > last_time + 600)
-	{
-		if (step)
-		{
-			Mix_PlayChannel(-1, audio->footstep1, 0);
-			step = 0;
-		}
-		else
-		{
-			Mix_PlayChannel(-1, audio->footstep2, 0);
-			step = 1;
-		}
-		last_time = current_time;
-	}
-}
-
-void	play_sound(Mix_Chunk *sound, int volume)
-{
-	if (!sound)
-		return ;
-	Mix_VolumeChunk(sound, volume);
-	Mix_PlayChannel(-1, sound, 0);
 }

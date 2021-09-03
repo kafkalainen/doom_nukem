@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 15:23:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 09:41:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,8 @@ static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 		|| plr->input.left == 1 || plr->input.right == 1)
 	{
 		check_player_dir(plr);
-		player_move(plr, home, delta_time);
-		// if (player_move(plr, home, delta_time))
-		// 	play_footsteps(&plr->audio);
+		if (player_move(plr, home, delta_time))
+			play_footsteps(&plr->audio);
 	}
 }
 
@@ -74,7 +73,7 @@ static void		plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
 	if (plr->wep[plr->active_wep].ammo > 0 &&
 		plr->wep[plr->active_wep].fire_rate <= 0)
 	{
-		plr->wep[plr->active_wep].fire_rate = 0.5;
+		plr->wep[plr->active_wep].fire_rate = 1.0f;
 		plr->hud.vm_ry = -20;
 		ray.pos = plr->pos;
 		ray.dir = plr->look_dir;
@@ -82,6 +81,7 @@ static void		plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
 		ray.start_sector = plr->cur_sector;
 		shooting_handle(home, &ray);
 		plr->wep[plr->active_wep].ammo--;
+		play_sound(plr->audio.plasma_gun, 30);
 	}
 }
 

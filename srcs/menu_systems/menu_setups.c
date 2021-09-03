@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/02 10:23:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 10:14:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,6 @@ void	setup_menu(t_menu *menu, int *game_state)
 	*game_state = MAIN_MENU;
 }
 
-/*
-** #entity_list #NBR_OF_ENTITITES
-** #ENTITY_TYPE#X-COORDINATE#Y-COORDINATE#Z-COORDINATE#X-NORMAL#Y-NORMAL#Z-NORMAL#IS_STATIC#ALWAYS_FACING_PLR
-*/
-
-void	load_entities_from_map(t_home *home)
-{
-	home->sprites = (t_texture **)malloc(sizeof(t_texture *) * 2); // testing
-	if (!home->sprites)
-		error_output("Memory allocation failed\n");
-	home->entity_pool = (t_entity **)malloc(sizeof(t_entity *) * 2); // testing
-	if (!home->entity_pool)
-		error_output("Memory allocation failed\n");
-	// TODO: malloc sprite array from map data
-	// TODO: Determine size of entity pool
-	// TODO: malloc entity pool
-	// TODO: init each entity pool index with entity from map data
-	// TODO:
-}
-
 void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 {
 	ft_putstr("You chose: ");
@@ -98,16 +78,13 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 	// 		error_output("Could not successfully open map file.");
 	home->nbr_of_textures = NUM_TEX;
 	init_textures(home);
-	// init_sprites_editor(home);
 	// home->story = init_story();
-	// load_entities_from_map(home);
-	// ret = load_game_audio(&plr->audio);
-	// if (ret)
-	// {
-	// 	cleanup_audio(&plr->audio);
-	// 	SDL_Quit();
-	// 	clean_up(home);
-	// }
+	if (load_game_audio(&plr->audio))
+	{
+		free_game_assets(home);
+		home->game_state = MAIN_MENU;
+		return ;
+	}
 	// if (Mix_PlayingMusic() == 0)
 	// 	Mix_PlayMusic(plr->audio.music, -1);
 	if (setup_fps(&home->t))

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 10:50:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 10:11:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ Uint32	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector)
 		{
 			plr->plot_state = sector_plot;
 			plr->msg_sector = plr->cur_sector;
-			plr->message_time = plr->time + 10000;
+			plr->message_time = plr->time + 13000;
+			play_sound(plr->audio.rahikainen_ramble[(int)plr->time % 2], 30);
 		}
 		return (TRUE);
 		/*
@@ -59,7 +60,7 @@ void	write_message(Uint32 *buffer, t_player *plr, char *msg, t_plx_modifier *mod
 {
 	float			percentage;
 
-	percentage = 1.0f - ((plr->message_time - plr->time - 5000) * 0.0002f);
+	percentage = 1.0f - ((plr->message_time - plr->time - 8000) * 0.0002f);
 	mod->len = (size_t)(ft_strlen(msg) * percentage);
 	ft_str_pxl(buffer, (t_xy){100, SCREEN_HEIGHT - 30},
 		msg, *mod);
