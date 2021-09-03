@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 12:00:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:49:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 20:37:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	draw_object_data(Uint32 *buffer, t_player *plr)
 			"Button: Press F to turn on lights.", mod);
 	else if (plr->display_object == lift_button)
 		ft_str_pxl(buffer, (t_xy){SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f},
-			"Button: Press F to activate the elevator.", mod);
+			"Button: Press F to activate the lift.", mod);
 	else if (plr->display_object >= ammo_pack
 		&& plr->display_object <= keycard_military)
 		draw_object_data_pickable(buffer, plr, mod);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:41:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 20:46:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 **	is_door = is portal a door.
 **	is_closed = is portal currently closed.
 **	is_locked = is portal currently locked.
-**	0 = unlocked
-**	1 = temporarily locked
-**	2 = cleaning keycard
-**	3 = engineering keycard
-**	4 = military keycard
+**	300 = unlocked
+**	301 = temporarily locked
+**	302 = cleaning keycard
+**	303 = engineering keycard
+**	304 = military keycard
 **	open_until tells how long the door is open.
 **	height tells the height of the wall for locking.
 **	next gives the next memory address for a wall.
@@ -99,7 +99,7 @@ typedef struct s_sector
 	t_plgn			bounding_box;
 	float			velocity;
 	Uint32			is_lift;
-	Uint32			elevator_dir;
+	Uint32			lift_dir;
 	Uint32			moving_until;
 	Uint32			nb_of_msgs;
 	unsigned int	nb_of_walls;

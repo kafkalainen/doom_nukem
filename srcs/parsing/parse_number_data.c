@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:40:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 21:10:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 	if (*pos > (unsigned int)size)
 		return (1);
 	new_sector->moving_until = 0;
-	new_sector->elevator_dir = lower;
+	new_sector->lift_dir = lower;
 	return (0);
 }
 

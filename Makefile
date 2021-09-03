@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/03 16:42:22 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/03 20:33:11 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,15 +25,15 @@ SRCS = \
 	entity_logic$(SLASH)entity_move.c \
 	entity_logic$(SLASH)face_entity_towards_player.c \
 	entity_logic$(SLASH)handle_activation.c \
-	entity_logic$(SLASH)lock_elevator.c \
+	entity_logic$(SLASH)lock_lift.c \
 	entity_logic$(SLASH)turn_on_lights.c \
-	entity_logic$(SLASH)update_elevators.c \
+	entity_logic$(SLASH)update_lifts.c \
 	entity_logic$(SLASH)update_entities.c \
 	entity_logic$(SLASH)update_projectiles.c \
 	entity_logic$(SLASH)take_damage.c \
 	parsing$(SLASH)assign_entity_properties.c \
 	parsing$(SLASH)assign_projectiles.c \
-	parsing$(SLASH)calc_elevator_doors.c \
+	parsing$(SLASH)calc_lift_doors.c \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_light_sources.c \
 	parsing$(SLASH)calc_map_properties.c \

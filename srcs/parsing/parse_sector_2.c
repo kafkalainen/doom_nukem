@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:29:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 14:39:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 21:13:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ void	initialize_wall_triangles(t_wall *wall, t_point_data *left,
 	wall->bottom.p[2] = (t_xyz){right->x, right->ground, right->y, 1.0f};
 }
 
-static int	get_door_lock(int door_idx)
-{
-	if (door_idx >= DOOR_INDEX && door_idx < CLEANING_INDEX)
-		return (unlocked);
-	else if (door_idx >= CLEANING_INDEX && door_idx < ENGINEERING_INDEX)
-		return (cleaning_lock);
-	else if (door_idx >= ENGINEERING_INDEX && door_idx < MILITARY_INDEX)
-		return (engineering_lock);
-	else if (door_idx >= MILITARY_INDEX)
-		return (military_lock);
-	else
-		return (locked);
-}
+// static int	get_door_lock(int door_idx)
+// {
+// 	if (door_idx == -door || (door_idx >= DOOR_INDEX && door_idx < CLEANING_INDEX))
+// 		return (unlocked);
+// 	else if (door_idx >= CLEANING_INDEX && door_idx < ENGINEERING_INDEX)
+// 		return (cleaning_lock);
+// 	else if (door_idx >= ENGINEERING_INDEX && door_idx < MILITARY_INDEX)
+// 		return (engineering_lock);
+// 	else if (door_idx >= MILITARY_INDEX)
+// 		return (military_lock);
+// 	else
+// 		return (locked);
+// }
 
 void	initialize_door(t_wall *wall, t_point_data *left, t_point_data *right)
 {
@@ -51,7 +51,8 @@ void	initialize_door(t_wall *wall, t_point_data *left, t_point_data *right)
 	wall->bottom.idx = change_door_to_portal(left->idx);
 	wall->is_door = 0;
 	wall->is_closed = 0;
-	wall->is_locked = get_door_lock(left->idx);
+	// wall->is_locked = get_door_lock(left->idx);
+	wall->is_locked = unlocked;
 	wall->open_until = 0;
 	wall->height = get_wall_height(left->ground, right->ground,
 			left->ceiling, right->ceiling);

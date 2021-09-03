@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 16:50:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 20:27:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ enum e_entities
 enum e_floors
 {
 	normal,
-	elevator,
+	lift,
 	lower,
 	upper
 };
@@ -89,12 +89,12 @@ enum e_entity_states
 /*
 ** Entity functions
 */
-void				activate_elevator(t_home *home, t_entity *entity,
+void				activate_lift(t_home *home, t_entity *entity,
 						t_player *plr);
 Uint32				attack_player(t_home *home, t_entity *entity, t_player *plr,
 						Uint32 t);
-void				bolt_elevator_doors(t_sector *sector, Uint32 state);
-void				bolt_elevator_door(t_sector *elevator, t_sector **sectors,
+void				bolt_lift_doors(t_sector *sector, Uint32 state);
+void				bolt_lift_door(t_sector *lift, t_sector **sectors,
 						Uint32 previous_floor, Uint32 state);
 Uint32				check_aggro(t_player *plr, t_entity *entity,
 						t_sector *sector);
@@ -116,7 +116,7 @@ t_bool				handle_keycards(t_entity *keycard);
 void				initialize_entity_triangles(t_entity *entity);
 void				initialize_projectile_triangles(t_projectile *projectile);
 Uint32				initialize_entity_textures(t_entity *entity);
-Uint32				lock_elevator(t_home *home, t_sector *elevator);
+Uint32				lock_lift(t_home *home, t_sector *lift);
 void				lock_the_door(t_wall *dimensions, t_wall *door);
 void				pick_next_frame(t_entity *entity, Uint32 t);
 t_bool				pick_up_item(t_entity *item, t_player *plr);
@@ -126,7 +126,7 @@ void				rotate_projectile_based_on_axes(t_xyz normal,
 						t_projectile *current);
 void				set_bullet_hole(t_bullet_hole *hole, t_projectile *current);
 void				set_entity_texels_for_frame(t_entity *entity);
-Uint32				update_elevators(t_home *home, t_player *plr,
+Uint32				update_lifts(t_home *home, t_player *plr,
 						Uint32 current_time, Uint32 delta_time);
 void				update_entities(t_home *home, t_player *plr,
 						Uint32 delta_time);

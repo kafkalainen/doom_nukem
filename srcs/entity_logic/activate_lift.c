@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:50:13 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:42:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 20:56:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static float	get_floor_height_diff(t_home *home, int sector_idx,
 	return (0.0f);
 }
 
-void	bolt_elevator_doors(t_sector *elevator, Uint32 state)
+void	bolt_lift_doors(t_sector *lift, Uint32 state)
 {
 	Uint32	j;
 	t_wall	*portal;
 
 	j = 0;
-	portal = elevator->walls;
-	while (j < elevator->nb_of_walls)
+	portal = lift->walls;
+	while (j < lift->nb_of_walls)
 	{
 		if (portal->top.idx >= 0 && portal->is_door)
 		{
@@ -71,15 +71,15 @@ void	bolt_elevator_doors(t_sector *elevator, Uint32 state)
 	}
 }
 
-void	bolt_elevator_door(t_sector *elevator, t_sector **sectors,
+void	bolt_lift_door(t_sector *lift, t_sector **sectors,
 		Uint32 next_floor, Uint32 state)
 {
 	Uint32	j;
 	t_wall	*portal;
 
 	j = 0;
-	portal = elevator->walls;
-	while (j < elevator->nb_of_walls)
+	portal = lift->walls;
+	while (j < lift->nb_of_walls)
 	{
 		if (portal->top.idx >= 0 && portal->is_door
 			&& sectors[portal->top.idx]->is_lift == next_floor)
@@ -90,12 +90,12 @@ void	bolt_elevator_door(t_sector *elevator, t_sector **sectors,
 }
 
 /*
-**	Activate elevator gets the height difference between the two
-**	floors, and calculates how fast elevator must travel to reach
+**	Activate lift gets the height difference between the two
+**	floors, and calculates how fast lift must travel to reach
 **	that floor in ten seconds. It stores also the information about
 **	whether we are going upwards or downwards.
 */
-void	activate_elevator(t_home *home, t_entity *entity, t_player *plr)
+void	activate_lift(t_home *home, t_entity *entity, t_player *plr)
 {
 	float	height;
 
@@ -105,21 +105,21 @@ void	activate_elevator(t_home *home, t_entity *entity, t_player *plr)
 		{
 			if (entity->state)
 			{
-				home->sectors[entity->is_linked - 2]->elevator_dir = upper;
-				height
-					= get_floor_height_diff(home, entity->is_linked - 2, upper);
+				home->sectors[entity->is_linked - 2]->lift_dir = upper;
+				height = get_floor_height_diff(home, entity->is_linked - 2, upper);
 			}
 			else
 			{
-				home->sectors[entity->is_linked - 2]->elevator_dir = lower;
-				height
-					= get_floor_height_diff(home, entity->is_linked - 2, lower);
+				home->sectors[entity->is_linked - 2]->lift_dir = lower;
+				height = get_floor_height_diff(home, entity->is_linked - 2, lower);
 			}
 			home->sectors[entity->is_linked - 2]->moving_until
 				= plr->time + 10000;
 			home->sectors[entity->is_linked - 2]->velocity
 				= height * 0.1f;
-			bolt_elevator_doors(home->sectors[entity->is_linked - 2], locked);
+			bolt_lift_doors(home->sectors[entity->is_linked - 2], locked);
+			play_sound(plr->audio.bolt_locked, 20);
+			play_sound(plr->audio.lift, 20);
 		}
 	}
 }

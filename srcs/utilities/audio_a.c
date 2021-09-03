@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 11:25:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 20:23:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	cleanup_audio_source(t_audio *audio)
 	free_sound(&audio->rahikainen_damage[2]);
 	free_sound(&audio->rahikainen_damage[3]);
 	free_sound(&audio->rahikainen_damage[4]);
+	free_sound(&audio->bolt_locked);
+	free_sound(&audio->bolt_unlocked);
+	free_sound(&audio->lift);
 }
 
 int	load_game_audio(t_audio *audio)
@@ -61,9 +64,13 @@ int	load_game_audio(t_audio *audio)
 	audio->rahikainen_damage[3] = Mix_LoadWAV("audio/rahikainen_ugh_2.wav");
 	audio->rahikainen_damage[4] = Mix_LoadWAV("audio/rahikainen_ugh_3.wav");
 	audio->error = Mix_LoadWAV("audio/error.wav");
+	audio->bolt_locked = Mix_LoadWAV("audio/bolt_locked.wav");
+	audio->bolt_unlocked = Mix_LoadWAV("audio/bolt_unlocked.wav");
+	audio->lift = Mix_LoadWAV("audio/lift.wav");
 	if (!audio->music || !audio->footstep1 || !audio->footstep2
 		|| !audio->door || !audio->button || !audio->plasma_gun
-		|| !audio->error)
+		|| !audio->error || !audio->lift || !audio->bolt_locked
+		|| !audio->bolt_unlocked)
 	{
 		ft_putendl("ERROR: Couldn't load audio.");
 		return (1);

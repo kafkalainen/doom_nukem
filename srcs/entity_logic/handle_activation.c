@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:52:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 20:25:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	handle_button(t_entity *entity, t_home *home, t_player *plr)
 	if (entity->type == light_button)
 		turn_on_lights(entity, home);
 	else if (entity->type == lift_button)
-		activate_elevator(home, entity, plr);
+		activate_lift(home, entity, plr);
 	else
 		return ;
 	play_sound(plr->audio.button, 20);

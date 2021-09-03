@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:34:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 10:03:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 20:24:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	initialize_audio_to_null(t_audio *audio)
 	audio->rahikainen_damage[2] = NULL;
 	audio->rahikainen_damage[3] = NULL;
 	audio->rahikainen_damage[4] = NULL;
+	audio->bolt_unlocked = NULL;
+	audio->bolt_locked = NULL;
+	audio->lift = NULL;
 }
 
 void	play_footsteps(t_audio *audio)

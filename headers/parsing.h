@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 15:51:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 20:27:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			add_surface(t_surface **point, t_surface *new);
 void			add_to_middle(t_wall **current_wall, t_wall *new_wall);
 Uint32			assign_entity_properties(t_home *home, t_xyz plr_pos);
 void			assign_projectiles(t_home *home);
-void			calc_elevator_doors(t_home *home);
+void			calc_lift_doors(t_home *home);
 void			calc_map_properties(t_home *home, t_player *plr);
 float			calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
 void			calc_light_sources(t_home *home);
