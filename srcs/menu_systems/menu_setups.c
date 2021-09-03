@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 10:14:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:18:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 {
 	ft_putstr("You chose: ");
 	ft_putendl_fd(home->chosen_map, 1);
-	init_player(plr);
+	initialize_player(plr);
 	if (initialize_skybox(&home->skybox))
 		error_output("Memory allocation failed!\n");
 	if (initialize_hud(&plr->hud))

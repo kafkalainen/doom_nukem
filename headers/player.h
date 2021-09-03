@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 14:56:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:11:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ float			get_player_hit_point(t_ray *ray, t_bullet_hole *hole,
 void			gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
 void			initialize_player_target_triangles(t_player *plr);
 void			init_cutscene(char **array);
-void			init_player(t_player *plr);
+void			initialize_player(t_player *plr);
 char			**init_story(void);
 int				jetpack(t_player *plr, t_home *home, Uint32 t);
 void			jump(t_player *plr, t_sector *cur_sector);
