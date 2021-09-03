@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:14:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 13:46:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:47:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ static t_bool	check_for_close_range(Uint32 signed_dst, float distance_squared,
 	return (false);
 }
 
-static t_bool	check_if_in_next_sector(t_sector *sector, float distance_squared,
-	t_player *plr, t_entity *entity)
+/*
+**	REVISIT
+*/
+static t_bool	check_if_in_next_sector(t_sector *sector,
+	float distance_squared, t_player *plr, t_entity *entity)
 {
 	unsigned int	i;
 	t_wall			*wall;

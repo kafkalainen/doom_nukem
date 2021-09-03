@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 12:00:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 16:59:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:49:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_object_data(Uint32 *buffer, t_player *plr)
 	else if (plr->display_object == light_button)
 		ft_str_pxl(buffer, (t_xy){SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f},
 			"Button: Press F to turn on lights.", mod);
-	else if (plr->display_object == elevator_button)
+	else if (plr->display_object == lift_button)
 		ft_str_pxl(buffer, (t_xy){SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f},
 			"Button: Press F to activate the elevator.", mod);
 	else if (plr->display_object >= ammo_pack

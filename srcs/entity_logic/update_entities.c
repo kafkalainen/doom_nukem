@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 13:32:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:52:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ void	update_entities(t_home *home, t_player *plr, Uint32 delta_time)
 			show_pickupables(cur_entity, plr, home, delta_time);
 		if (cur_entity->is_active != false)
 		{
-			if (cur_entity->entity_type == skull_skulker
-				|| cur_entity->entity_type == thing)
+			if (cur_entity->type == skull_skulker
+				|| cur_entity->type == thing)
 				update_entity(home, cur_entity, plr, delta_time);
 		}
 		else
 		{
-			if (cur_entity->entity_type == skull_skulker
-				|| cur_entity->entity_type == thing)
+			if (cur_entity->type == skull_skulker
+				|| cur_entity->type == thing)
 				show_dead_entity(cur_entity, plr);
 		}
 		i++;

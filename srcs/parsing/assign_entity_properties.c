@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 16:57:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:52:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	initialize_entity_triangles(t_entity *entity)
 {
 	t_xy	size;
 
-	if (entity->entity_type == powerstation
-		|| entity->entity_type == crewmember
-		|| entity->entity_type == thing)
+	if (entity->type == powerstation
+		|| entity->type == crewmember
+		|| entity->type == thing)
 		size = (t_xy){2.0f, 2.0f};
-	else if (entity->entity_type == elevator_button
-		|| entity->entity_type == light_button
-		|| (entity->entity_type >= lamp
-			&& entity->entity_type <= keycard_military))
+	else if (entity->type == lift_button
+		|| entity->type == light_button
+		|| (entity->type >= lamp
+			&& entity->type <= keycard_military))
 		size = (t_xy){0.5f, 0.5f};
 	else
 		size = (t_xy){1.0f, 1.0f};
@@ -87,8 +87,8 @@ static void	initialize_entity_movement(t_entity *entity)
 {
 	if (entity->is_static == 1)
 	{
-		if (entity->entity_type >= light_button
-			&& entity->entity_type <= keycard_military)
+		if (entity->type >= light_button
+			&& entity->type <= keycard_military)
 		{
 			initialize_static_entity(entity);
 			entity->velocity = 0;
@@ -96,10 +96,10 @@ static void	initialize_entity_movement(t_entity *entity)
 	}
 	else if (entity->is_static == 0)
 	{
-		if (entity->entity_type == crewmember || entity->entity_type == thing)
+		if (entity->type == crewmember || entity->type == thing)
 			entity->velocity = ENTITY_VELOCITY_1;
-		else if (entity->entity_type == skull_skulker
-			|| entity->entity_type == drone)
+		else if (entity->type == skull_skulker
+			|| entity->type == drone)
 			entity->velocity = ENTITY_VELOCITY_2;
 		else
 			entity->velocity = 0;
@@ -124,14 +124,14 @@ static void	initialize_entity_values(t_entity *entity, t_xyz plr_pos)
 	entity->time = 0;
 	entity->vec_to_plr = vec2_unit_vector(vec2_dec(vec3_to_vec2(plr_pos),
 				vec3_to_vec2(entity->pos)));
-	if (entity->entity_type == skull_skulker || entity->entity_type == drone)
+	if (entity->type == skull_skulker || entity->type == drone)
 		entity->health = 2;
-	else if (entity->entity_type == crewmember || entity->entity_type == thing)
+	else if (entity->type == crewmember || entity->type == thing)
 		entity->health = 3;
 	else
 		entity->health = 999;
-	if (entity->entity_type >= ammo_pack
-		&& entity->entity_type <= keycard_military)
+	if (entity->type >= ammo_pack
+		&& entity->type <= keycard_military)
 		entity->is_pickupable = true;
 	else
 		entity->is_pickupable = false;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 11:17:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 16:55:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:52:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	check_if_entities(t_home *home, t_player *plr,
 			if (*visible_object && get_distance_squared(isection, plr->pos)
 				< 6.25f)
 			{
-				plr->display_object = home->entity_pool[i]->entity_type;
+				plr->display_object = home->entity_pool[i]->type;
 				break ;
 			}
 		}

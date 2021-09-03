@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 16:03:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:53:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_window
 **						item or not.
 **	is_revealed:		Enemies have alternate texture pack, then sprite_index
 **						is set to alt_sprite_index, default == false;
-**	entity_type:		Entity_type is used based on values listed in enum
+**	type:				Type is used based on values listed in enum
 **						e_entity.
 **	state:				State tells if a light switch is on or not, is button
 **						activated or not, is it upper or lower floor.
@@ -83,7 +83,7 @@ typedef struct s_entity
 	Uint32		is_active;
 	Uint32		is_linked;
 	Uint32		is_revealed;
-	Uint32		entity_type;
+	Uint32		type;
 	Uint32		state;
 	Uint32		is_aggroed;
 	t_bool		is_pickupable;
@@ -108,7 +108,7 @@ typedef struct s_time
 }				t_time;
 
 /*
-**	entity_type:	0 or 1
+**	type:	0 or 1
 **	entity_index	links back to original entity
 **	sprite_state:	determines which sprite to draw from the sprite map.
 */
@@ -121,7 +121,7 @@ typedef struct s_projectile
 	t_triangle	top;
 	t_triangle	bot;
 	Uint32		is_active;
-	Uint32		entity_type;
+	Uint32		type;
 	int			sprite_index;
 	int			alt_sprite_index;
 	int			entity_index;

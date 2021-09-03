@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:46:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 10:17:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:52:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static Uint32	parse_coordinate(t_xyz *coord, unsigned char *buf,
 static t_entity	*get_entity_data(unsigned char *buf, t_entity *entity,
 		unsigned int *pos, ssize_t size)
 {
-	if (get_next_uint_value(&entity->entity_type, buf, &pos, size))
+	if (get_next_uint_value(&entity->type, buf, &pos, size))
 		return (NULL);
 	if (get_next_int_value(&entity->sector_idx, buf, &pos, size))
 		return (NULL);

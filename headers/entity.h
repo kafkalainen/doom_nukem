@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 16:37:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:50:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ enum e_entities
 	drone,
 	crewmember,
 	light_button,
-	elevator_button,
+	lift_button,
 	powerstation,
 	lamp,
 	ammo_pack,
