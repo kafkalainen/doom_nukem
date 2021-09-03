@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 19:43:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 13:49:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 13:58:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 float	get_distance_squared(t_xyz pt0, t_xyz pt1)
 {
-	return (((pt1.x - pt0.x) * (pt1.x - pt0.x) +
-		(pt1.y - pt0.y) * (pt1.y - pt0.y) +
-		(pt1.z - pt0.z) * (pt1.z - pt0.z)));
+	return (((pt1.x - pt0.x) * (pt1.x - pt0.x)
+			+ (pt1.y - pt0.y) * (pt1.y - pt0.y)
+			+ (pt1.z - pt0.z) * (pt1.z - pt0.z)));
 }
 
 t_xyz	vec3_calc_vector_average(t_raster_queue	*queue)

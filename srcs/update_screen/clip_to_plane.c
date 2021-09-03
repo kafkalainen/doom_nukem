@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/01 10:05:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:41:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	form_a_triangle(t_point_location *loc, t_plane *plane,
 			loc->points_outside[0], &loc->texel_offset);
 	triangle1->uv[1] = calculate_texel_offset(loc->texels_inside[0],
 			loc->texels_outside[0], loc->texel_offset);
-	// triangle1->lu[1] = loc->lumels_outside[0];
 	triangle1->lu[1] = calculate_lumel_offset(loc->lumels_inside[0],
 			loc->lumels_outside[0], loc->texel_offset);
 	triangle1->p[2] = vec3_intersection_with_plane(plane, loc->points_inside[0],
@@ -50,7 +49,6 @@ static int	form_a_triangle(t_point_location *loc, t_plane *plane,
 			loc->texels_outside[1], loc->texel_offset);
 	triangle1->lu[2] = calculate_lumel_offset(loc->lumels_inside[0],
 			loc->lumels_outside[1], loc->texel_offset);
-	// triangle1->lu[2] = loc->lumels_outside[1];
 	return (1);
 }
 

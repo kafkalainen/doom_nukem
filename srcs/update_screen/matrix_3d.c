@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:09:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/25 16:42:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:36:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_xyz	multi_vec_matrix(t_xyz *src, t_m4x4 *x)
 {
-	t_xyz dst;
+	t_xyz			dst;
 
 	dst.x = src->x * x->m[0][0]
 		+ src->y * x->m[1][0]

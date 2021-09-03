@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 09:07:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 11:39:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:38:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_m4x4	identity_matrix(void)
 {
-	return (t_m4x4){{
-		{1.0f, 0.0f, 0.0f, 0.0f},
-		{0.0f, 1.0f, 0.0f, 0.0f},
-		{0.0f, 0.0f, 1.0f, 0.0f},
-		{0.0f, 0.0f, 0.0f, 1.0f}
-	}};
+	return ((t_m4x4){{
+			{1.0f, 0.0f, 0.0f, 0.0f},
+			{0.0f, 1.0f, 0.0f, 0.0f},
+			{0.0f, 0.0f, 1.0f, 0.0f},
+			{0.0f, 0.0f, 0.0f, 1.0f}
+		}});
 }
 
 /*
@@ -29,12 +29,12 @@ t_m4x4	identity_matrix(void)
 */
 t_m4x4	projection_matrix(void)
 {
-	return (t_m4x4){{
-		{0.75f, 0.0f, 0.0f, 0.0f},
-		{0.0f, 1.0f, 0.0f, 0.0f},
-		{0.0f, 0.0f, 1.00010001f, 1.0f},
-		{0.0f, 0.0f, -0.0100010001f, 0.0f}
-	}};
+	return ((t_m4x4){{
+			{0.75f, 0.0f, 0.0f, 0.0f},
+			{0.0f, 1.0f, 0.0f, 0.0f},
+			{0.0f, 0.0f, 1.00010001f, 1.0f},
+			{0.0f, 0.0f, -0.0100010001f, 0.0f}
+		}});
 }
 
 /*
@@ -42,41 +42,41 @@ t_m4x4	projection_matrix(void)
 */
 t_m4x4	point_at_matrix(t_xyz up, t_xyz forward, t_xyz right, t_xyz location)
 {
-	return (t_m4x4){{
-		{right.x, right.y, right.z, 0.0f},
-		{up.x, up.y, up.z, 0.0f},
-		{forward.x, forward.y, forward.z, 0.0f},
-		{location.x, location.y, location.z, 1.0f}
-	}};
+	return ((t_m4x4){{
+			{right.x, right.y, right.z, 0.0f},
+			{up.x, up.y, up.z, 0.0f},
+			{forward.x, forward.y, forward.z, 0.0f},
+			{location.x, location.y, location.z, 1.0f}
+		}});
 }
 
 t_m4x4	inverse_matrix(t_m4x4 *rot_trans_matrix)
 {
-		t_m4x4	new_matrix;
+	t_m4x4	new_matrix;
 
-		new_matrix.m[0][0] = rot_trans_matrix->m[0][0];
-		new_matrix.m[0][1] = rot_trans_matrix->m[1][0];
-		new_matrix.m[0][2] = rot_trans_matrix->m[2][0];
-		new_matrix.m[0][3] = 0.0f;
-		new_matrix.m[1][0] = rot_trans_matrix->m[0][1];
-		new_matrix.m[1][1] = rot_trans_matrix->m[1][1];
-		new_matrix.m[1][2] = rot_trans_matrix->m[2][1];
-		new_matrix.m[1][3] = 0.0f;
-		new_matrix.m[2][0] = rot_trans_matrix->m[0][2];
-		new_matrix.m[2][1] = rot_trans_matrix->m[1][2];
-		new_matrix.m[2][2] = rot_trans_matrix->m[2][2];
-		new_matrix.m[2][3] = 0.0f;
-		new_matrix.m[3][0] = -(rot_trans_matrix->m[3][0] * new_matrix.m[0][0]
+	new_matrix.m[0][0] = rot_trans_matrix->m[0][0];
+	new_matrix.m[0][1] = rot_trans_matrix->m[1][0];
+	new_matrix.m[0][2] = rot_trans_matrix->m[2][0];
+	new_matrix.m[0][3] = 0.0f;
+	new_matrix.m[1][0] = rot_trans_matrix->m[0][1];
+	new_matrix.m[1][1] = rot_trans_matrix->m[1][1];
+	new_matrix.m[1][2] = rot_trans_matrix->m[2][1];
+	new_matrix.m[1][3] = 0.0f;
+	new_matrix.m[2][0] = rot_trans_matrix->m[0][2];
+	new_matrix.m[2][1] = rot_trans_matrix->m[1][2];
+	new_matrix.m[2][2] = rot_trans_matrix->m[2][2];
+	new_matrix.m[2][3] = 0.0f;
+	new_matrix.m[3][0] = -(rot_trans_matrix->m[3][0] * new_matrix.m[0][0]
 			+ rot_trans_matrix->m[3][1] * new_matrix.m[1][0]
 			+ rot_trans_matrix->m[3][2] * new_matrix.m[2][0]);
-		new_matrix.m[3][1] = -(rot_trans_matrix->m[3][0] * new_matrix.m[0][1]
+	new_matrix.m[3][1] = -(rot_trans_matrix->m[3][0] * new_matrix.m[0][1]
 			+ rot_trans_matrix->m[3][1] * new_matrix.m[1][1]
 			+ rot_trans_matrix->m[3][2] * new_matrix.m[2][1]);
-		new_matrix.m[3][2] = -(rot_trans_matrix->m[3][0] * new_matrix.m[0][2]
+	new_matrix.m[3][2] = -(rot_trans_matrix->m[3][0] * new_matrix.m[0][2]
 			+ rot_trans_matrix->m[3][1] * new_matrix.m[1][2]
 			+ rot_trans_matrix->m[3][2] * new_matrix.m[2][2]);
-		new_matrix.m[3][3] = 1.0f;
-		return (new_matrix);
+	new_matrix.m[3][3] = 1.0f;
+	return (new_matrix);
 }
 
 void	initialize_locations(t_point_location *loc)

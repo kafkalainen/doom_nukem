@@ -100,6 +100,7 @@ int		initialize_hud(t_hud *hud);
 int		is_negative(float z);
 void	map_error_output(int i, t_home *home);
 void	read_error_output(char *msg, unsigned char **line);
+float	set_valid(float angle);
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu);
 int		setup_fps(t_time *time);
 void	translate_world_view(t_home *home, t_xy step);

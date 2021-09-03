@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 09:53:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 11:24:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:24:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 static void	draw_wire_tri(Uint32 *buffer, t_triangle *tri, Uint32 colour)
 {
-	ft_str_pxl(buffer, vec2(tri->p[0].x, tri->p[0].y), "0", (t_plx_modifier){white, 2, 2});
-	ft_str_pxl(buffer, vec2(tri->p[1].x, tri->p[1].y), "1", (t_plx_modifier){white, 2, 2});
-	ft_str_pxl(buffer, vec2(tri->p[2].x, tri->p[2].y), "2", (t_plx_modifier){white, 2, 2});
+	ft_str_pxl(buffer, vec2(tri->p[0].x, tri->p[0].y), "0",
+		(t_plx_modifier){white, 2, 2});
+	ft_str_pxl(buffer, vec2(tri->p[1].x, tri->p[1].y), "1",
+		(t_plx_modifier){white, 2, 2});
+	ft_str_pxl(buffer, vec2(tri->p[2].x, tri->p[2].y), "2",
+		(t_plx_modifier){white, 2, 2});
 	draw_line(vec2(tri->p[0].x, tri->p[0].y),
 		vec2(tri->p[1].x, tri->p[1].y),
 		colour, buffer);

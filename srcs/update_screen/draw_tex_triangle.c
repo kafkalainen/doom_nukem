@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/08 16:01:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:16:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 		steps->start_x = tri->p[1].x + temp[1]
 			* steps->screen_step_a_side.x;
 		steps->start_uv = texel_lerp(&tri->uv[1],
-			temp[1], &steps->tex_a_side);
+				temp[1], &steps->tex_a_side);
 		steps->start_lu = tri->lu[1] + temp[1]
 			* steps->lumel_step_a_side;
 	}

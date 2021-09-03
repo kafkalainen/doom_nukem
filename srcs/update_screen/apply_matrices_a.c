@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:38:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/01 08:34:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:37:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_triangle	create_projection(t_triangle *src)
 {
-	t_triangle			dst;
-	t_m4x4				matrix;
+	t_triangle		dst;
+	t_m4x4			matrix;
 
 	dst = *src;
 	matrix = projection_matrix();
@@ -73,11 +73,11 @@ t_triangle	rotate_triangle(t_triangle *src, float angle, char dir)
 
 t_triangle	apply_camera(t_xyz pos, t_xyz target, t_xyz up, t_triangle *src)
 {
-	t_xyz	next_forward;
-	t_xyz	next_up;
-	t_xyz	next_right;
-	t_m4x4	view_matrix;
-	t_triangle	dst;
+	t_xyz			next_forward;
+	t_xyz			next_up;
+	t_xyz			next_right;
+	t_m4x4			view_matrix;
+	t_triangle		dst;
 
 	dst = *src;
 	next_forward = vec3_dec(target, pos);

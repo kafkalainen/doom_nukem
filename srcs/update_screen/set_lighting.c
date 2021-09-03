@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 20:06:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 10:46:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:16:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static float	saturate(float value)
 	return (value);
 }
 
-
 /*
 **	Decided to use Lambertial lighting model
 **	opposed to Blinn-Phong lighting model.
@@ -61,8 +60,8 @@ static float	calculate_light_intensity(t_lighting *light, t_triangle *tri,
 	return (intensity);
 }
 
-static float	calculate_enemy_light_intensity(t_lighting *light, t_triangle *tri,
-				Uint32 idx)
+static float	calculate_enemy_light_intensity(t_lighting *light,
+				t_triangle *tri, Uint32 idx)
 {
 	t_xyz	light_dir;
 	float	magnitude;

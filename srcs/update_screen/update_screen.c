@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 13:36:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 17:19:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:23:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ void	render_buffer(Uint32 *buffer, SDL_Surface *screen_surface)
 void	update_screen(t_home *home, t_frame *frame, t_player *plr)
 {
 	frame->last_frame = SDL_GetTicks();
-	// draw_minimapper(frame->buffer);
 	draw_frame(home, frame, plr);
 }

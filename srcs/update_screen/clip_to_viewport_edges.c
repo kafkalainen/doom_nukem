@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/06 11:19:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:40:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ static int	draw_polygon(Uint32 *buffer, float *depth_buffer,
 	int		i;
 
 	i = tri->front;
-	// if (tri->array[i].idx >= 0)
-	// 	tex = NULL;
-	// tex = get_tex(tri->array[i].idx, editor_tex);
 	while (i <= tri->rear)
 	{
 		draw_tex_triangle(buffer, depth_buffer, &tri->array[i], tex);
@@ -67,16 +64,11 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 		tested = raster_list->array[raster_list->front];
 		dequeue(raster_list);
 		current_triangles--;
-		triangles_to_add = clip_against_plane(&plane, &tested, &clipped[0], &clipped[1]);
+		triangles_to_add = clip_against_plane(&plane, &tested,
+				&clipped[0], &clipped[1]);
 		i = 0;
 		while (i < triangles_to_add)
 		{
-			// if (triangles_to_add && clipped[0].lu[2] < 1.0f)
-			// 	printf("%f\n", clipped[0].lu[2]);
-			// if (triangles_to_add && clipped[0].lu[1] < 1.0f)
-			// 	printf("%f\n", clipped[0].lu[2]);
-			// if (triangles_to_add == 2 && clipped[1].lu[2] < 1.0f)
-			// 	printf("%f\n", clipped[1].lu[2]);
 			enqueue_to_raster(raster_list, &clipped[i]);
 			i++;
 		}
@@ -84,7 +76,8 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 	return (triangles_to_add);
 }
 
-static void	clipper_viewport_edges(t_planes planes, t_raster_queue *raster_queue, t_arg *arg)
+static void	clipper_viewport_edges(t_planes planes,
+			t_raster_queue *raster_queue, t_arg *arg)
 {
 	int			i;
 	int			current_plane;
@@ -122,7 +115,7 @@ void	*clip_to_viewport_edges(void *args)
 	t_planes		planes;
 
 	index = 0;
-	arg = (t_arg*)args;
+	arg = (t_arg *)args;
 	index = arg->thread_index;
 	planes.top = arg->viewport->mid_planes[index];
 	planes.bottom = arg->viewport->mid_planes[index + 1];

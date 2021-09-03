@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:37:52 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 11:35:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:13:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,13 @@ void	swap_sides(t_steps *steps)
 		swap_uvz(&steps->start_uv, &steps->end_uv);
 		ft_swapf(&steps->start_lu, &steps->end_lu);
 	}
+}
+
+float	set_valid(float angle)
+{
+	if (angle < -1.0)
+		angle = -1.0f;
+	else if (angle > 1.0)
+		angle = 1.0f;
+	return (angle);
 }

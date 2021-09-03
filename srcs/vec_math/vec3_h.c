@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:40:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 10:52:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:13:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,32 +72,27 @@ float	vec3_ang_axis(t_xyz to_be_turned, t_xyz compared, char axis)
 {
 	float	sign;
 	float	angle;
-	t_xy	a;
-	t_xy	b;
+	t_xy	v[2];
 
 	if (axis == 'x')
 	{
-		a = (t_xy){to_be_turned.z, to_be_turned.y};
-		b = (t_xy){compared.z, compared.y};
+		v[0] = (t_xy){to_be_turned.z, to_be_turned.y};
+		v[1] = (t_xy){compared.z, compared.y};
 	}
 	else if (axis == 'y')
 	{
-		a = (t_xy){to_be_turned.x, to_be_turned.z};
-		b = (t_xy){compared.x, compared.z};
+		v[0] = (t_xy){to_be_turned.x, to_be_turned.z};
+		v[1] = (t_xy){compared.x, compared.z};
 	}
 	else if (axis == 'z')
 	{
-		a = (t_xy){to_be_turned.x, to_be_turned.y};
-		b = (t_xy){compared.x, compared.y};
+		v[0] = (t_xy){to_be_turned.x, to_be_turned.y};
+		v[1] = (t_xy){compared.x, compared.y};
 	}
-	sign = -a.y * b.x + a.x * b.y;
+	sign = -v[0].y * v[1].x + v[0].x * v[1].y;
 	if (sign == 0.0f)
 		return (0.0f);
 	sign = ft_signf(sign);
-	angle = vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b));
-	if (angle < -1.0)
-		angle = -1.0f;
-	else if (angle > 1.0)
-		angle = 1.0f;
+	angle = set_valid(vec2_dot(v[0], v[1]) / (vec2_mag(v[0]) * vec2_mag(v[1])));
 	return (sign * acosf(angle));
 }

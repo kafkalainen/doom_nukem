@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 10:59:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/27 12:49:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:15:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	create_target_vector(t_player *plr)
 	t_m4x4	x_matrix;
 	t_m4x4	combined;
 
-	plr->up = (t_xyz){0.0f,1.0f,0.0f,1.0f};
+	plr->up = (t_xyz){0.0f, 1.0f, 0.0f, 1.0f};
 	plr->target = (t_xyz){0.0f, 0.0f, 1.0f, 0.0f};
 	z_matrix = rotation_matrix_z(plr->roll);
 	y_matrix = rotation_matrix_y(plr->yaw);

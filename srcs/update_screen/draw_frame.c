@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/01 12:57:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:35:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,49 +67,46 @@ static char	*compass_direction(t_xy *dir)
 
 static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 {
-	char			*sector;
 	char			*compass;
 	char			*fps;
-	char			*plr_x;
-	char			*plr_y;
-	char			*plr_z;
+	char			*plr_pos[3];
 	t_plx_modifier	mod;
 
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
 	mod.len = 100;
 	compass = compass_direction(&plr->dir);
-	sector = ft_itoa(plr->cur_sector);
 	fps = ft_itoa(nb_fps);
-	plr_x = ft_ftoa(plr->pos.x, 6);
-	plr_y = ft_ftoa(plr->pos.y, 6);
-	plr_z = ft_ftoa(plr->pos.z, 6);
+	plr_pos[0] = ft_ftoa(plr->pos.x, 6);
+	plr_pos[1] = ft_ftoa(plr->pos.y, 6);
+	plr_pos[2] = ft_ftoa(plr->pos.z, 6);
 	ft_str_pxl(frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 50}, "dir: ", mod);
 	ft_str_pxl(frame->buffer, (t_xy){50, 50}, compass, mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 70}, "sector:", mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 90}, sector, mod);
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f}, "player_xyz", (t_plx_modifier){get_color(green), 2, 12});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_x, (t_plx_modifier){get_color(green), 2, 12});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_y, (t_plx_modifier){get_color(green), 2, 12});
-	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_z, (t_plx_modifier){get_color(green), 2, 12});
-	ft_str_pxl(frame->buffer, (t_xy){0, 380}, "z to switch to wireframe", mod);
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 150.0f},
+		"player_xyz", (t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 170.0f}, plr_pos[0],
+		(t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 190.0f}, plr_pos[1],
+		(t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(frame->buffer, (t_xy){5.0f, 210.0f}, plr_pos[2],
+		(t_plx_modifier){get_color(green), 2, 12});
 	ft_str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
-	ft_str_pxl(frame->buffer, (t_xy){0, 440}, "wasd, rotate with q and e.", mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 440}, "wasd, rotate with q and e.",
+		mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 460}, "free mouse with m", mod);
 	free(fps);
-	free(sector);
 	free(compass);
-	free(plr_x);
-	free(plr_y);
-	free(plr_z);
+	free(plr_pos[0]);
+	free(plr_pos[1]);
+	free(plr_pos[2]);
 }
 
 void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
 	 t_skybox *skybox)
 {
-	Uint32 i;
+	Uint32	i;
 
 	i = 0;
 	quick_reset_queue(frame->transformed);
@@ -125,18 +122,6 @@ void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
 	}
 }
 
-// void	draw_white(t_frame *frame)
-// {
-// 	unsigned int	i;
-
-// 	i = 0;
-// 	while (i < SCREEN_HEIGHT * SCREEN_WIDTH)
-// 	{
-// 		*(frame->buffer + i) = white;
-// 		i++;
-// 	}
-// }
-
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
 	frame->idx = plr->cur_sector;
@@ -145,11 +130,6 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	add_skybox(frame, home, plr, &home->skybox);
 	draw_sector(frame, home, plr, -1);
 	scan_fov(home, frame, plr);
-	// if (plr->input.minimap)
-	// {
-	// 	draw_minimap(home, frame);
-	// 	draw_player(frame);
-	// }
 	if (plr->input.info)
 		draw_info(frame, plr, (int)home->t.fps);
 	draw_heads_up_display(home, frame, plr);
