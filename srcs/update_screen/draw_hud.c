@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 14:35:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:45:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 	draw_fuel_bar(plr, frame->buffer);
 	draw_inventory_slots(plr, frame->buffer);
 	draw_inventory_images(home, plr, frame->buffer);
-	draw_hud_texts(frame->buffer, plr);
+	draw_hud_ammo_left(frame->buffer, plr);
 	draw_crosshair(frame->buffer);
 	if (plr->dead > 0)
 		draw_mission_failed(frame->buffer);

@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/03 13:34:16 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/03 14:47:12 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,15 +119,16 @@ SRCS = \
 	update_screen$(SLASH)clip_to_viewport_edges.c \
 	update_screen$(SLASH)draw_frame.c \
 	update_screen$(SLASH)draw_horizontal_line.c \
+	update_screen$(SLASH)draw_hud.c \
+	update_screen$(SLASH)draw_inventory.c \
+	update_screen$(SLASH)draw_object_data.c \
 	update_screen$(SLASH)draw_sector.c \
 	update_screen$(SLASH)draw_shapes.c \
 	update_screen$(SLASH)draw_shapes2.c \
 	update_screen$(SLASH)draw_tex_pixel.c \
 	update_screen$(SLASH)draw_tex_triangle.c \
+	update_screen$(SLASH)draw_weapon.c \
 	update_screen$(SLASH)draw_wireframe.c \
-	update_screen$(SLASH)draw_hud.c \
-	update_screen$(SLASH)draw_inventory.c \
-	update_screen$(SLASH)draw_object_data.c \
 	update_screen$(SLASH)init_matrices_a.c \
 	update_screen$(SLASH)init_matrices_b.c \
 	update_screen$(SLASH)put_pixel.c \

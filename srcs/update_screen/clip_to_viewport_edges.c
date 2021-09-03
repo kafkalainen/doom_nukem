@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 14:40:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:44:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,13 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 }
 
 static void	clipper_viewport_edges(t_planes planes,
-			t_raster_queue *raster_queue, t_arg *arg)
+			t_raster_queue *raster_queue, t_arg *arg, int i)
 {
-	int			i;
 	int			current_plane;
 	int			new_triangles;
 	t_plane		plane;
 	t_texel		*tex;
 
-	i = 0;
 	while (i < arg->view_list->size)
 	{
 		raster_queue->rear = -1;
@@ -113,8 +111,10 @@ void	*clip_to_viewport_edges(void *args)
 	unsigned int	index;
 	t_raster_queue	*current_queue;
 	t_planes		planes;
+	int				i;
 
 	index = 0;
+	i = 0;
 	arg = (t_arg *)args;
 	index = arg->thread_index;
 	planes.top = arg->viewport->mid_planes[index];
@@ -123,6 +123,6 @@ void	*clip_to_viewport_edges(void *args)
 	planes.left = arg->viewport->left;
 	planes.right = arg->viewport->right;
 	current_queue = arg->raster_queue[index];
-	clipper_viewport_edges(planes, current_queue, arg);
+	clipper_viewport_edges(planes, current_queue, arg, i);
 	return (NULL);
 }
