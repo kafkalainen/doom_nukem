@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 12:20:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:31:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ t_entity		*activate_object(t_home *home, t_player *plr);
 t_wall			*check_if_crossing(t_sector *sector, t_xyz pos);
 t_bool			check_if_open_portal(t_wall *wall);
 t_xyz			check_y(t_sector *sector, t_player *plr, t_xyz pos);
-int				check_y_diff(t_player *plr, t_xyz *test_pos, t_sector *to);
 t_bool			check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
 float			check_distance_to_ground(t_sector *sector, float height,
 					t_xyz pos);
@@ -184,7 +183,7 @@ void			create_target_vector(t_player *plr);
 void			crouch(t_player *plr);
 void			draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr);
 void			end_level(t_home *home, t_player *plr);
-Uint32			evolve_story(t_player *plr, t_sector *sector,
+t_bool			evolve_story(t_player *plr, t_sector *sector,
 					t_sector *msg_sector);
 void			free_story(char ***array, Uint32 nb_of_strings);
 float			get_wall_hit_point(t_home *home, t_ray *ray,
@@ -204,14 +203,15 @@ void			initialize_player_target_triangles(t_player *plr);
 void			init_cutscene(char **array);
 void			initialize_player(t_player *plr);
 char			**init_story(void);
-int				jetpack(t_player *plr, t_home *home, Uint32 t);
+t_bool			jetpack(t_player *plr, t_home *home, Uint32 t);
 void			jump(t_player *plr, t_sector *cur_sector);
-int				player_move(t_player *plr, t_home *home, Uint32 delta_time);
+t_bool			player_move(t_player *plr, t_home *home, Uint32 t);
 int				plr_inside(t_sector *sector, t_player *plr);
 int				player_use(t_player *plr, t_home *home);
 t_bool			open_door(t_sector **sectors, t_xyz look_loc, t_player *plr,
 					int active_item);
 t_bool			player_look(t_home *home, t_player *plr);
+void			player_place_feet_to_ground(t_home *home, t_player *plr);
 int				player_use_inventory_item(t_player *plr);
 void			update_player(t_player *plr, t_home *home, Uint32 delta_time);
 void			shooting_handle(t_home *home, t_ray *ray);

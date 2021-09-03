@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/27 11:54:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:50:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Uint32	test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 	plane = (t_plane){tri->p[0], tri->normal};
 	hole = vec3_intersection_with_ray_and_plane(&plane, ray->pos, ray->dir);
 	dot = vec3_dot_product(vec3_unit_vector(vec3_dec(hole, ray->pos)),
-		ray->dir);
+			ray->dir);
 	if (dot > 0.0f && vec3_is_inside_triangle(tri, hole))
 	{
 		if (vec3_dot_product(plane.normal, vec3_dec(plane.point, ray->pos)) < 0)

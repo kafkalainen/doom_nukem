@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 11:55:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:30:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_wall	*check_if_crossing(t_sector *sector, t_xyz pos)
 	while (i < sector->nb_of_walls)
 	{
 		if (vec3_signed_distance_to_plane(pos, temp->top.normal,
-			temp->top.p[0]) < 0.0f)
+				temp->top.p[0]) < 0.0f)
 			return (temp);
 		temp = temp->next;
 		i++;
@@ -66,11 +66,10 @@ void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
 	portal = home->sectors[*cur_sector]->walls;
 	while (i < home->sectors[*cur_sector]->nb_of_walls)
 	{
-		if ((portal->top.idx >= 0 && !portal->is_door) || (portal->is_door
-			&& !portal->is_closed && portal->is_locked == unlocked))
+		if (check_if_open_portal(portal))
 		{
 			if (vec3_signed_distance_to_plane(pos,
-				portal->top.normal, portal->top.p[0]) < 0)
+					portal->top.normal, portal->top.p[0]) < 0)
 			{
 				*cur_sector = portal->top.idx;
 				if (home->sectors[*cur_sector]->lights.is_linked == 1)
@@ -82,28 +81,26 @@ void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
 	}
 }
 
-int	player_move(t_player *plr, t_home *home, Uint32 t)
+t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 {
 	t_wall			*wall;
-	float			dist;
 
 	plr->move_dir.y = 0.0f;
 	plr->move_dir = vec3_unit_vector(plr->move_dir);
 	plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
-	if (check_distance_to_ceiling(home->sectors[plr->cur_sector], &plr->test_pos))
-		return (FALSE);
+	if (check_distance_to_ceiling(home->sectors[plr->cur_sector],
+			&plr->test_pos))
+		return (false);
 	wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
-		plr->width, plr->test_pos, plr->move_dir);
+			plr->width, plr->test_pos, plr->move_dir);
 	if (!wall)
 	{
 		plr->pos = plr->test_pos;
 		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 		plr->steps += t * 0.005f;
 		viewmodel_motion(plr);
-		dist = check_distance_to_ground(home->sectors[plr->cur_sector], plr->height, plr->pos);
-		if (dist < 0 && dist > -plr->height)
-			plr->pos.y -= dist;
-		return (TRUE);
+		player_place_feet_to_ground(home, plr);
+		return (true);
 	}
 	return (strafe_along_the_wall(wall, plr, home, t));
 }

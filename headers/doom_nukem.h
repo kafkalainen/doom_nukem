@@ -55,7 +55,6 @@
 # include "macros.h"
 # include "vectors.h"
 # include "sector.h"
-# include "calculations.h"
 # include "colours.h"
 # include "parser_structs.h"
 # include "png_parser.h"
@@ -66,11 +65,9 @@
 
 
 # include "../libft/libft.h"
-# include "raycast.h"
+# include "engine.h"
 # include "drawing_functions.h"
-# include "caster.h"
 # include "events.h"
-# include "map.h"
 # include "porting.h"
 # include "parsing.h"
 # include "typewriter.h"

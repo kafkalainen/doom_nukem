@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.h                                          :+:      :+:    :+:   */
+/*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 13:23:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:41:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAYCAST_H
-# define RAYCAST_H
+#ifndef ENGINE_H
+# define ENGINE_H
 
 typedef struct s_ray_pt
 {
@@ -52,12 +52,6 @@ int				check_if_same_pt(int *current_pxl, t_ray_pt *fov);
 int				check_if_lseg_intersects(t_xy *p0, t_xy *p1, t_xy *pos, t_xy *dir);
 void			continue_from_last_sector(t_wall *start, t_ray_pt *fov,
 					t_frame *frame);
-void			draw_linearly(t_frame *frame, t_texture *floor_tex, t_plgn *box);
-void			draw_segment(Uint32 *buffer, float *depth_buffer, t_texel *tex, t_steps *step);
-void			draw_vertically(t_frame *frame, t_texture *wall_tex);
-int				draw_horizontal_line(Uint32 *buffer, float *depth_buffer, t_texel *tex, t_steps *step);
-void			draw_wall(t_frame *frame, t_texture *tex, t_home *home,
-					t_player *plr);
 int				get_next_wall_tex(t_wall **current_head, int nbr_of_walls);
 t_texel			*get_tex(int idx, t_texture	**textures);
 void			get_wall_pts(t_frame *frame, int walls, t_player *plr);

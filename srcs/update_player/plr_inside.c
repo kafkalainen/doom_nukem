@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 08:57:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 08:58:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:20:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	plr_inside(t_sector *sector, t_player *plr)
 {
-	t_wall	*wall;
+	t_wall		*wall;
 	Uint32		i;
-	t_xy	pos;
-	t_xy	dir;
-	Uint32	walls_crossed;
+	t_xy		pos;
+	t_xy		dir;
+	Uint32		walls_crossed;
 
 	i = 0;
 	walls_crossed = 0;

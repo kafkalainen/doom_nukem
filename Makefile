@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/03 14:47:12 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/03 15:40:49 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,6 @@ SRCS = \
 	update_player$(SLASH)advance_story.c \
 	update_player$(SLASH)check_distances.c \
 	update_player$(SLASH)check_for_matching_key.c \
-	update_player$(SLASH)check_y_diff.c \
 	update_player$(SLASH)check_if_open_portal.c \
 	update_player$(SLASH)get_bullet_hit_point.c \
 	update_player$(SLASH)get_ceiling_hit_point.c \
@@ -101,6 +100,7 @@ SRCS = \
 	update_player$(SLASH)init_story.c \
 	update_player$(SLASH)init_story_cutscene.c \
 	update_player$(SLASH)key_input.c \
+	update_player$(SLASH)key_input_toggle.c \
 	update_player$(SLASH)mouse_handle.c \
 	update_player$(SLASH)plr_inside.c \
 	update_player$(SLASH)player_look.c \
@@ -112,6 +112,7 @@ SRCS = \
 	update_player$(SLASH)shooting.c \
 	update_player$(SLASH)strafe_vector_along_the_wall.c \
 	update_player$(SLASH)player_take_damage.c \
+	update_player$(SLASH)player_place_feet_to_ground.c \
 	update_screen$(SLASH)apply_matrices_a.c \
 	update_screen$(SLASH)apply_matrices_b.c \
 	update_screen$(SLASH)calculate_offsets.c \
@@ -178,22 +179,19 @@ HEADERS = \
 	libft$(SLASH)libft.h \
 	headers$(SLASH)doom_nukem.h \
 	headers$(SLASH)audio.h \
-	headers$(SLASH)calculations.h \
-	headers$(SLASH)caster.h \
 	headers$(SLASH)colours.h \
 	headers$(SLASH)drawing_functions.h \
+	headers$(SLASH)engine.h \
 	headers$(SLASH)entity.h \
 	headers$(SLASH)events.h \
 	headers$(SLASH)editor.h \
 	headers$(SLASH)macros.h \
-	headers$(SLASH)map.h \
 	headers$(SLASH)parser_structs.h \
 	headers$(SLASH)parsing.h \
 	headers$(SLASH)player.h \
 	headers$(SLASH)png_parser.h \
 	headers$(SLASH)porting.h \
 	headers$(SLASH)program.h \
-	headers$(SLASH)raycast.h \
 	headers$(SLASH)sector.h \
 	headers$(SLASH)syscalls_windows.h \
 	headers$(SLASH)vectors.h \

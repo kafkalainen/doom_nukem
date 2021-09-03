@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 09:48:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:22:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	lock_the_door(t_wall *dimensions, t_wall *door)
 {
-
 	door->top.p[0] = dimensions->top.p[0];
 	door->top.p[1] = dimensions->top.p[1];
 	door->top.p[2] = dimensions->top.p[2];
@@ -28,9 +27,9 @@ void	lock_the_door(t_wall *dimensions, t_wall *door)
 	door->bottom.uv[1] = dimensions->bottom.uv[1];
 	door->bottom.uv[2] = dimensions->bottom.uv[2];
 	door->top = translate_triangle(&door->top,
-		vec3_mul(door->top.normal, -0.05f));
+			vec3_mul(door->top.normal, -0.05f));
 	door->bottom = translate_triangle(&door->bottom,
-		vec3_mul(door->bottom.normal, -0.05f));
+			vec3_mul(door->bottom.normal, -0.05f));
 }
 
 /*
@@ -124,7 +123,7 @@ t_bool	open_door(t_sector **sectors, t_xyz look_loc, t_player *plr,
 		if (check_for_matching_key(wall, plr, active_item))
 		{
 			portal_behind = get_portal_by_idx(plr->cur_sector,
-				sectors[wall->top.idx]);
+					sectors[wall->top.idx]);
 			portal_behind->open_until = plr->time + 5000;
 			wall->open_until = plr->time + 5000;
 			play_sound(plr->audio.door, 20);

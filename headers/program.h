@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 13:38:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:34:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,14 @@ typedef struct	s_entity
 	int			entity_index;
 	int			sector_idx;
 }				t_entity;
+
+typedef struct s_time
+{
+	Uint32	*frame_times;
+	Uint32	frame_time_last;
+	Uint32	frame_count;
+	float	fps;
+}				t_time;
 
 /*
 **	entity_type:	0 or 1

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/27 12:46:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:11:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ t_bool	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 	ceiling = sector->ceiling;
 	while (i < sector->nb_of_ceil)
 	{
-		if (point_inside_a_triangle_surface(ceiling->tri.p[0], ceiling->tri.p[1],
-				ceiling->tri.p[2], *new_loc))
+		if (point_inside_a_triangle_surface(ceiling->tri.p[0],
+				ceiling->tri.p[1], ceiling->tri.p[2], *new_loc))
 			break ;
 		ceiling = ceiling->next;
 		i++;
 	}
 	surf_dist = vec3_dot_product(vec3_dec(*new_loc, ceiling->tri.p[0]),
-		ceiling->tri.normal);
+			ceiling->tri.normal);
 	if (surf_dist <= 0.3f)
 		return (true);
 	else
@@ -46,14 +46,14 @@ float	calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 	ceiling = sector->ceiling;
 	while (i < sector->nb_of_ceil)
 	{
-		if (point_inside_a_triangle_surface(ceiling->tri.p[0], ceiling->tri.p[1],
-				ceiling->tri.p[2], *new_loc))
+		if (point_inside_a_triangle_surface(ceiling->tri.p[0],
+				ceiling->tri.p[1], ceiling->tri.p[2], *new_loc))
 			break ;
 		ceiling = ceiling->next;
 		i++;
 	}
 	surf_dist = vec3_dot_product(vec3_dec(*new_loc, ceiling->tri.p[0]),
-		ceiling->tri.normal);
+			ceiling->tri.normal);
 	return (surf_dist);
 }
 
@@ -74,6 +74,6 @@ float	check_distance_to_ground(t_sector *sector, float height, t_xyz pos)
 		i++;
 	}
 	surf_dist = vec3_dot_product(vec3_dec(pos, ground->tri.p[0]),
-		ground->tri.normal);
+			ground->tri.normal);
 	return (surf_dist - height);
 }

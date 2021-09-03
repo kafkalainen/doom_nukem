@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 10:11:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:14:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_story(char ***array, Uint32 nb_of_strings)
 {
-	Uint32 i;
+	Uint32	i;
 
 	i = nb_of_strings;
 	while (i--)
@@ -26,10 +26,15 @@ void	free_story(char ***array, Uint32 nb_of_strings)
 	*array = NULL;
 }
 
-Uint32	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector)
+/*
+**	Here we can also implement player action that
+**	affects story items that are played
+**	based on world interaction.
+*/
+t_bool	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector)
 {
 	if (plr->message_time > plr->time)
-		return (FALSE);
+		return (false);
 	else
 	{
 		if (plr->plot_state == sector_plot)
@@ -48,15 +53,12 @@ Uint32	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector)
 			plr->message_time = plr->time + 13000;
 			play_sound(plr->audio.rahikainen_ramble[(int)plr->time % 2], 30);
 		}
-		return (TRUE);
-		/*
-		**	Here we can also implement player action that affects story items that are played
-		**	based on world interaction.
-		*/
+		return (true);
 	}
 }
 
-void	write_message(Uint32 *buffer, t_player *plr, char *msg, t_plx_modifier *mod)
+void	write_message(Uint32 *buffer, t_player *plr, char *msg,
+		t_plx_modifier *mod)
 {
 	float			percentage;
 
@@ -75,8 +77,10 @@ void	draw_plot_state(t_home *home, Uint32 *buffer, t_player *plr)
 	mod.size = TEXT_SIZE;
 	cur_story = home->sectors[plr->msg_sector]->cur_msg;
 	if (plr->plot_state == sector_plot && plr->message_time > plr->time)
-		write_message(buffer, plr, home->sectors[plr->msg_sector]->story[cur_story], &mod);
-	if (plr->plot_state != sector_plot && plr->message_time > (plr->time + 3000))
+		write_message(buffer, plr,
+			home->sectors[plr->msg_sector]->story[cur_story], &mod);
+	if (plr->plot_state != sector_plot
+		&& plr->message_time > (plr->time + 3000))
 		write_message(buffer, plr, home->story[plr->plot_state], &mod);
 	else if (plr->plot_state != sector_plot && plr->message_time > plr->time)
 	{
@@ -95,6 +99,6 @@ void	end_level(t_home *home, t_player *plr)
 		else
 			home->game_state = MAIN_MENU;
 	}
-	if  (plr->power_points <= 0 && plr->dead == 0)
+	if (plr->power_points <= 0 && plr->dead == 0)
 		plr->dead = 1;
 }

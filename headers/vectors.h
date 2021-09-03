@@ -73,6 +73,16 @@ typedef struct s_point_location
 	float		texel_offset;
 }					t_point_location;
 
+typedef struct s_intersection
+{
+	float	x1;
+	float	x2;
+	float	y1;
+	float	y2;
+	float	den;
+	float	neg;
+	float	pos;
+}			t_intersection;
 
 typedef struct s_triangle
 {

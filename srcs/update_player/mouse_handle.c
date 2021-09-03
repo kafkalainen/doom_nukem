@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/20 10:05:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:20:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void		mouse_button_handle(t_player *plr, SDL_Event *e)
+static void	mouse_button_handle(t_player *plr, SDL_Event *e)
 {
 	if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_LEFT)
 		plr->input.shoot = 1;
@@ -24,7 +24,7 @@ static void		mouse_button_handle(t_player *plr, SDL_Event *e)
 		plr->input.jetpack = 0;
 }
 
-void			mouse_handle(t_player *plr, SDL_Event *e)
+void	mouse_handle(t_player *plr, SDL_Event *e)
 {
 	if (e->type == SDL_MOUSEMOTION && plr->dead == 0)
 	{

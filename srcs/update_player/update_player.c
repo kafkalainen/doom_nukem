@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 09:41:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:27:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	movement(t_player *plr, t_home *home, Uint32 delta_time)
 	}
 }
 
-static void		plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
+static void	plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
 {
 	t_ray	ray;
 
@@ -70,8 +70,8 @@ static void		plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
 		plr->wep[plr->active_wep].fire_rate = 0;
 	if (!plr->input.shoot)
 		return ;
-	if (plr->wep[plr->active_wep].ammo > 0 &&
-		plr->wep[plr->active_wep].fire_rate <= 0)
+	if (plr->wep[plr->active_wep].ammo > 0
+		&& plr->wep[plr->active_wep].fire_rate <= 0)
 	{
 		plr->wep[plr->active_wep].fire_rate = 1.0f;
 		plr->hud.vm_ry = -20;
@@ -85,7 +85,7 @@ static void		plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
 	}
 }
 
-void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
+static void	update_player_values(t_player *plr, Uint32 delta_time)
 {
 	if (plr->input.rot_left == 1)
 		plr->yaw -= 0.02f;
@@ -95,15 +95,21 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 		plr->hud.vm_rx *= 0.908f;
 	if (plr->hud.vm_ry != 0)
 		plr->hud.vm_ry *= 0.908f;
+	if (plr->fuel_points < 100)
+		plr->fuel_points = fmin(plr->fuel_points + 0.004f * delta_time, 100.0f);
+}
+
+void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
+{
+	update_player_values(plr, delta_time);
 	crouch(plr);
 	plr_shoot_handle(home, plr, delta_time);
 	if (!plr->input.jetpack)
 		jump(plr, home->sectors[plr->cur_sector]);
-	if (plr->fuel_points < 100)
-		plr->fuel_points = fmin(plr->fuel_points + 0.004f * delta_time, 100.0f);
 	if (!plr->input.jetpack)
 		plr->pos.y += plr->speed.y * delta_time * 0.1f;
-	jetpack(plr, home, delta_time);
+	if (plr->input.jetpack)
+		jetpack(plr, home, delta_time);
 	gravity(home->sectors[plr->cur_sector], plr, delta_time);
 	if (!plr->input.jetpack)
 		movement(plr, home, delta_time);

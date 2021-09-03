@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 13:27:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/13 11:11:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:50:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,6 @@ char	**init_story(void)
 	char	**array;
 
 	array = (char **)malloc(sizeof(char *) * (STORY_STRINGS + 1));
-	// init_beginning(array);
-	// init_talks(array);
-	// init_ending(array);
-	// init_cutscene(array);
 	array[enemy_sighted] = ft_strdup(
 			"What is that freakish thing? Are we under attack?");
 	array[enemy_noise_before] = ft_strdup(

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 12:40:34 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/13 11:34:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:20:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@
 // 	add_third_cutscene_part(array);
 // 	add_fourth_cutscene_part(array);
 // 	array[cutscene2] = ft_strdup(
-// 			"[LOG 2213-02-22]: SHIP IN RANGE.\nTRANSFER DATA.\nTRANSFER COMPLETE.");
+// 			"[LOG 2213-02-22]: SHIP IN RANGE.
+//	\nTRANSFER DATA.\nTRANSFER COMPLETE.");
 // }

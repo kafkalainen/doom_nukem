@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 17:07:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 09:39:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 14:49:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int		player_use(t_player *plr, t_home *home)
+int	player_use(t_player *plr, t_home *home)
 {
 	t_xyz			look_dir;
 	t_xyz			look_loc;

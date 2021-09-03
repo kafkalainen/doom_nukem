@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calculations.h                                     :+:      :+:    :+:   */
+/*   player_place_feet_to_ground.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 18:48:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/04/26 15:46:41 by jnivala          ###   ########.fr       */
+/*   Created: 2021/09/03 15:04:54 by jnivala           #+#    #+#             */
+/*   Updated: 2021/09/03 15:15:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CALCULATIONS_H
-# define CALCULATIONS_H
+#include "../../headers/doom_nukem.h"
 
-typedef struct s_time
+void	player_place_feet_to_ground(t_home *home, t_player *plr)
 {
-	Uint32	*frame_times;
-	Uint32	frame_time_last;
-	Uint32	frame_count;
-	float	fps;
-}				t_time;
+	float	dist;
 
-typedef struct s_intersection
-{
-	float	x1;
-	float	x2;
-	float	y1;
-	float	y2;
-	float	den;
-	float	neg;
-	float	pos;
-}			t_intersection;
-
-#endif
+	dist = check_distance_to_ground(home->sectors[plr->cur_sector],
+			plr->height, plr->pos);
+	if (dist < 0 && dist > -plr->height)
+		plr->pos.y -= dist;
+}

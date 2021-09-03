@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 15:29:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:08:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,6 @@ static void	set_height(t_player *plr, char direction)
 	else
 		return ;
 }
-
-//static void	set_jump_sequence(t_player *plr, Uint32 *animation_end,
-//	float *jump_range)
-//{
-//	if ((*animation_end - plr->time) > 450)
-//	{
-//		plr->pos.y -= 0.05f;
-//		*jump_range -= 0.05f;
-//	}
-//	else
-//	{
-//		plr->pos.y += 0.2f;
-//		*jump_range += 0.2f;
-//	}
-//}
 
 void	crouch(t_player *plr)
 {
@@ -101,13 +86,10 @@ void	jump(t_player *plr, t_sector *sector)
 	}
 }
 
-int	jetpack(t_player *plr, t_home *home, Uint32 t)
+t_bool	jetpack(t_player *plr, t_home *home, Uint32 t)
 {
 	t_wall	*wall;
-	float	dist;
 
-	if (!plr->input.jetpack)
-		return (FALSE);
 	if (plr->fuel_points > 1)
 	{
 		plr->fuel_points -= t * 0.05f;
@@ -115,25 +97,17 @@ int	jetpack(t_player *plr, t_home *home, Uint32 t)
 		plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.003f));
 		if (check_distance_to_ceiling(home->sectors[plr->cur_sector],
 				&plr->test_pos))
-			return (FALSE);
+			return (false);
 		wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
 				plr->width, plr->test_pos, plr->move_dir);
 		if (!wall)
 		{
 			plr->pos = plr->test_pos;
-			plr->steps += t * 0.005f;
 			check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
-			dist = check_distance_to_ground(home->sectors[plr->cur_sector],
-					plr->height, plr->pos);
-			if (dist < 0 && dist > -plr->height)
-				plr->pos.y -= dist;
-			return (TRUE);
+			player_place_feet_to_ground(home, plr);
+			return (true);
 		}
-		return (FALSE);
 	}
-	else
-	{
-		plr->input.jetpack = 0;
-	}
-	return (FALSE);
+	plr->input.jetpack = 0;
+	return (false);
 }

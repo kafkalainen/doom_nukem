@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 14:34:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:42:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		draw_inventory_images(t_home *home, t_player *plr, Uint32 *buffer);
 void		draw_inventory_slots(t_player *plr, Uint32 *buffer);
 int			draw_line(t_xy start, t_xy end, Uint32 color, Uint32 *buffer);
 void		draw_muzzleflash(t_home *home, Uint32 *buffer,
-			t_player *plr, t_xy offset);
+				t_player *plr, t_xy offset);
 void		draw_object_data(Uint32 *buffer, t_player *plr);
 void		draw_rect_center(t_xy xy, t_xy wh, t_frame *frame);
 void		draw_rect(t_xy xy, t_xy wh, Uint32 *buffer, int color);
@@ -92,7 +92,16 @@ int			draw_tex_triangle(Uint32 *buffer, float *depth_buffer,
 int			draw_sector(t_frame *frame, t_home *home, t_player *plr,
 				int sector_idx);
 void		draw_weapon(t_home *home, Uint32 *buffer,
-			t_player *plr, t_xy offset);
+				t_player *plr, t_xy offset);
+void		draw_frame(t_home *home, t_frame *frame, t_player *plr);
+void		draw_linearly(t_frame *frame, t_texture *floor_tex, t_plgn *box);
+void		draw_segment(Uint32 *buffer, float *depth_buffer, t_texel *tex,
+				t_steps *step);
+void		draw_vertically(t_frame *frame, t_texture *wall_tex);
+int			draw_horizontal_line(Uint32 *buffer, float *depth_buffer,
+			t_texel *tex, t_steps *step);
+void		draw_wall(t_frame *frame, t_texture *tex, t_home *home,
+				t_player *plr);
 void		draw_wireframe(t_frame *frame, Uint32 colour);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);
 Uint32		get_texel(t_uv *coord, t_uv *limits, Uint32 *pixels);
