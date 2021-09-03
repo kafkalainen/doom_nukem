@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 14:52:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 11:36:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:40:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ Uint32	update_elevators(t_home *home, t_player *plr,
 	i = 0;
 	while (i < home->nbr_of_sectors)
 	{
-		if (home->sectors[i]->is_elevator == elevator)
+		if (home->sectors[i]->is_lift == elevator)
 		{
 			if (home->sectors[i]->moving_until > current_time)
 			{

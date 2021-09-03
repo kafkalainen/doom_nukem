@@ -13,11 +13,11 @@
 #ifndef VECTORS_H
 # define VECTORS_H
 
-typedef enum
+typedef enum e_bool
 {
 	false,
 	true
-}			t_bool;
+}	t_bool;
 
 typedef struct s_height
 {
@@ -94,7 +94,7 @@ typedef struct s_triangle
 	t_xyz			normal;
 }				t_triangle;
 
-typedef	struct s_raster_queue
+typedef struct s_raster_queue
 {
 	int			front;
 	int			rear;
@@ -103,7 +103,7 @@ typedef	struct s_raster_queue
 	t_triangle	*array;
 }				t_raster_queue;
 
-typedef struct	s_m4x4 {
+typedef struct s_m4x4 {
 	float	m[4][4];
 }				t_m4x4;
 
@@ -142,7 +142,6 @@ typedef struct s_deltas
 	float		i;
 }				t_deltas;
 
-
 typedef struct s_sides
 {
 	t_plane			near;
@@ -154,7 +153,6 @@ typedef struct s_sides
 	t_xyz			view_offset;
 }					t_sides;
 
-
 typedef struct s_planes
 {
 	t_plane			left;
@@ -163,7 +161,7 @@ typedef struct s_planes
 	t_plane			bottom;
 }					t_planes;
 
-typedef struct	s_steps
+typedef struct s_steps
 {
 	float		denom_dy_a_side;
 	float		denom_dy_b_side;
@@ -231,42 +229,46 @@ t_xyz		vec3_dec(t_xyz a, t_xyz b);
 t_xyz		vec3_unit_vector(t_xyz a);
 t_uvz		texel_inv_z(t_uvz a);
 void		triangle_inv_z(t_triangle *tri);
-t_uvz		uvz_calculate_value_with_delta(float delta_x, t_uvz delta_u, t_uvz delta_v);
+t_uvz		uvz_calculate_value_with_delta(float delta_x, t_uvz delta_u,
+				t_uvz delta_v);
 float		triangle_calculate_average_z(t_triangle *triangle);
 t_xyz		vec3_mul(t_xyz a, float multiplier);
 t_xyz		vec3_cross_product(t_xyz a, t_xyz b);
-t_m4x4		point_at_matrix(t_xyz up, t_xyz forward, t_xyz right, t_xyz location);
+t_m4x4		point_at_matrix(t_xyz up, t_xyz forward, t_xyz right,
+				t_xyz location);
 t_m4x4		inverse_matrix(t_m4x4 *rot_trans_matrix);
 t_triangle	apply_camera(t_xyz pos, t_xyz target, t_xyz up, t_triangle *src);
 t_m4x4		identity_matrix(void);
 t_m4x4		multiply_matrix(t_m4x4 *m1, t_m4x4 *m2);
 t_triangle	apply_world_matrix(float angle_x, float angle_z,
-	t_xyz translation, t_triangle *src);
+				t_xyz translation, t_triangle *src);
 t_xyz		vec3_div(t_xyz a, float scalar);
 t_xyz		vec3_intersection_with_plane(t_plane *plane, t_xyz start, t_xyz end,
-			float *texel_offset);
+				float *texel_offset);
 int			clip_against_plane(t_plane *plane, t_triangle *src,
-			t_triangle *triangle1, t_triangle *triangle2);
+				t_triangle *triangle1, t_triangle *triangle2);
 void		initialize_locations(t_point_location *loc);
 void		triangle_add(t_triangle *tri, t_xyz	add);
 void		invert_view(t_triangle *triangle);
 float		vec3_signed_distance_to_plane(t_xyz point, t_xyz plane_normal,
-			t_xyz plane_point);
+				t_xyz plane_point);
 float		area_of_triangle(t_xyz p0, t_xyz p1, t_xyz p2);
-t_bool		point_inside_a_triangle_surface(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);
-t_xyz		vec3_intersection_with_ray_and_plane(t_plane *plane, t_xyz origo, t_xyz dir);
+t_bool		point_inside_a_triangle_surface(t_xyz p0, t_xyz p1,
+				t_xyz p2, t_xyz p);
+t_xyz		vec3_intersection_with_ray_and_plane(t_plane *plane,
+				t_xyz origo, t_xyz dir);
 t_xyz		vec3_calc_vector_average(t_raster_queue	*queue);
 t_uvz		texel_mul(t_uvz *texel, float mul);
 t_uvz		texel_lerp(t_uvz *texel_start, float steps, t_uvz *delta);
 t_uvz		texel_add(t_uvz *a, t_uvz *b);
 void		calc_texel(t_uvz *texel, t_uvz *start, float offset,
-			t_uvz *end);
+				t_uvz *end);
 void		calc_lumel(float *lumel, float *start, float offset,
-			float *end);
+				float *end);
 t_bool		vec3_check_sidedness(t_xyz p1, t_xyz p2, t_xyz a, t_xyz b);
 t_bool		vec3_is_inside_triangle(t_triangle *tri, t_xyz point);
 t_bool		vec3_ray_triangle_intersect(t_triangle *tri,
-			t_xyz pos, t_xyz dir, t_xyz *isection);
+				t_xyz pos, t_xyz dir, t_xyz *isection);
 float		vec3_angle(t_xyz to_be_turned, t_xyz compared);
 void		initialize_lumels(float *p0, float *p1, float *p2, float init);
 float		vec3_ang_axis(t_xyz to_be_turned, t_xyz compared, char axis);

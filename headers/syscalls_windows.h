@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syscalls_windows.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 12:45:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/12 16:15:35 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:08:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define SYSCALLS_WINDOWS_H
 
 int	_close(int fd);
-int _open(const char *pathname, int flags, int pmode);
-int	_read(int const fd, void const *buffer, unsigned const buffer_size);
+int	_open(const char *pathname, int flags, int pmode);
+int	_read(const int fd, const void *buffer, const unsigned int buffer_size);
 int	_mkdir(const char *dirname);
-int _write(int fd, const void *buffer, unsigned int count);
+int	_write(int fd, const void *buffer, unsigned int count);
 
 #endif

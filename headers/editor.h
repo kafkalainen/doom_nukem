@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing_functions.h                                :+:      :+:    :+:   */
+/*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eparviai <eparvia@student.hive.fi>         +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/05/11 12:29:25 by eparviai         ###   ########.fr       */
+/*   Updated: 2021/09/03 15:51:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
 
-typedef struct		s_mouse_data
+typedef struct s_mouse_data
 {
 	float			x;
 	float			y;
@@ -24,23 +24,23 @@ typedef struct		s_mouse_data
 	float			y_rel;
 }					t_mouse_data;
 
-/* typedef struct		s_sector_list 
-{ 
+/* typedef struct		s_sector_list
+{
 	t_sector 		*sector;
 	t_bbox			bbox;
 	t_sector_list	*next;
 }					t_sector_list ; */
 
-typedef struct		s_button
+typedef struct s_button
 {
 	t_xy		ltop;
 	t_xy		wh;
 	char		*text;
 }					t_button;
 
-typedef struct		s_editor
+//t_sector_list	*sector_list;
+typedef struct s_editor
 {
-	//t_sector_list	*sector_list;
 	t_button		**button_list;
 	t_mouse_data	mouse_data;
 	Uint32			*buffer;

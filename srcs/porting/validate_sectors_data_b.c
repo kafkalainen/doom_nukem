@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_sectors_data_2.c                          :+:      :+:    :+:   */
+/*   validate_sectors_data_b.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:09:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/24 11:55:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:20:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 // 		{
 // 			next = (t_xy){test->top.p[0].x, test->top.p[0].z};
 // 			one_after = (t_xy){test->top.p[2].x, test->top.p[2].z};
-// 			if (check_if_lseg_intersects(temp, &next, &one_after) && temp != test)
+// 			if (check_if_lseg_intersects(temp, &next,
+//					&one_after) && temp != test)
 // 			{
 // 				if (temp->top.p[2].x != test->top.p[2].x
 // 					&& temp->top.p[2].y != test->top.p[2].y)

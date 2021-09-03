@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_structs.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:04:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/21 16:13:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:04:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_crc
 	int				flag;
 }					t_crc;
 
-typedef	struct	s_texel
+typedef struct s_texel
 {
 	unsigned int	*texels;
 	int				width;

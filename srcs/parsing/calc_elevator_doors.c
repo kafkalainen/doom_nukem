@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:02:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/11 10:13:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:40:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void	generate_doors_to_portals(t_sector *original, t_sector **next,
 			t_wall *portal)
 {
-	t_wall *portal_behind;
+	t_wall	*portal_behind;
 
 	portal_behind = get_portal_by_idx(original->idx_sector,
-						next[portal->top.idx]);
+			next[portal->top.idx]);
 	portal->is_door = 1;
 	portal_behind->is_door = 1;
 	original->nb_of_walls += generate_doors(portal);
@@ -36,14 +36,14 @@ void	calc_elevator_doors(t_home *home)
 	{
 		j = 0;
 		current_portal = home->sectors[i]->walls;
-		while (home->sectors[i]->is_elevator
+		while (home->sectors[i]->is_lift
 			&& j < home->sectors[i]->nb_of_walls)
 		{
 			if (current_portal->top.idx >= 0 && !current_portal->is_door
-				&& home->sectors[current_portal->top.idx]->is_elevator)
+				&& home->sectors[current_portal->top.idx]->is_lift)
 				generate_doors_to_portals(home->sectors[i], home->sectors,
-							current_portal);
-			if (home->sectors[i]->is_elevator == elevator)
+					current_portal);
+			if (home->sectors[i]->is_lift == elevator)
 				current_portal->is_locked = locked;
 			current_portal = current_portal->next;
 			j++;

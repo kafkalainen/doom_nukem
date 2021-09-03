@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/22 13:17:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:33:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	convert_to_unsigned_int(t_texture *tex, t_png *png)
 		x = 0;
 		while (x < png->width)
 		{
-			tex->tex.texels[(y * tex->tex.width) + x] = add_pixel(png->pixels, tex->bpp,
+			tex->tex.texels[(y * tex->tex.width) + x]
+				= add_pixel(png->pixels, tex->bpp,
 					((y * tex->pitch) + x * tex->bpp));
 			x++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:44:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/11 13:00:19 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:26:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 Uint32	get_color(enum e_colour color)
 {
-	Uint8 alpha;
-	Uint8 red;
-	Uint8 green;
-	Uint8 blue;
+	Uint8	alpha;
+	Uint8	red;
+	Uint8	green;
+	Uint8	blue;
 
 	alpha = 0xFF;
 	red = (color & 0xFF0000) >> 16;
@@ -75,7 +75,7 @@ void	update_option_load_menu(int *game_state, t_menu *menu, int sym)
 		else if (menu->option == (menu->nbr_of_maps - 1))
 			menu->option = 0;
 	}
-	if (sym == SDLK_RETURN ||sym == SDLK_KP_ENTER)
+	if (sym == SDLK_RETURN || sym == SDLK_KP_ENTER)
 	{
 		*game_state = GAME_LOOP;
 		menu->selected = TRUE;

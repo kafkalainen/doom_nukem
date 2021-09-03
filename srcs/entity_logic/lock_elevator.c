@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:23:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/11 08:25:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:42:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Uint32	lock_elevator(t_home *home, t_sector *elevator)
 	while (i < elevator->nb_of_walls)
 	{
 		if (cur_wall->top.idx >= 0
-			&& home->sectors[cur_wall->top.idx]->is_elevator
+			&& home->sectors[cur_wall->top.idx]->is_lift
 			== elevator->elevator_dir)
 		{
 			portal = get_portal_by_idx(elevator->idx_sector,

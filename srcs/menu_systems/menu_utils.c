@@ -6,12 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/08/19 11:06:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:32:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
+// REVISIT ADD STORY STRING MANAGEMENT
+// free_story(&home->story);
 void	free_game_assets(t_home *home)
 {
 	if (home->t.frame_times)
@@ -20,7 +22,6 @@ void	free_game_assets(t_home *home)
 	free_all_textures(home->textures, &home->nbr_of_textures);
 	free_entities(home);
 	free_projectiles(home);
-	// free_story(&home->story);
 }
 
 void	get_menu_range_key_down(t_menu *menu)
@@ -80,7 +81,8 @@ void	update_load_menu(t_menu *menu, int sym)
 			mod.colour = get_color(red);
 		else
 			mod.colour = get_color(white);
-		ft_str_pxl(menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y},
+		ft_str_pxl(menu->menu_buffer,
+			(t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y},
 			menu->map_names[i], mod);
 		y += 15;
 		i++;

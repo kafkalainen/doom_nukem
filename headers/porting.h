@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/31 16:12:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:59:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,24 @@ void			clear_buffer(Uint32 *buffer);
 Uint32			swap_channels(Uint32 color, int format);
 t_texture		*load_texture_from_map_data(char *line);
 void			free_array(unsigned char **array);
-void			parse_texture_data(unsigned char *buf, t_home *home, unsigned int *pos, ssize_t size);
-void			write_single_texture(t_texture *tex, int *fd, unsigned char *buf);
+void			parse_texture_data(unsigned char *buf, t_home *home,
+					unsigned int *pos, ssize_t size);
+void			write_single_texture(t_texture *tex, int *fd,
+					unsigned char *buf);
 t_texture		*return_new_texture(t_png *png, int idx);
 unsigned char	*create_write_buffer(t_texture *tex);
-void			cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir);
+void			cycle_textures(t_home *home,
+					struct dirent *dir_entry, DIR *dir);
 
 /*
 ** Audio Encode/Decode funtions
 */
 
-void			parse_audio_data(unsigned char *buf, unsigned int *pos, char *path, ssize_t size);
+void			parse_audio_data(unsigned char *buf,
+					unsigned int *pos, char *path, ssize_t size);
 void			get_audio_data(t_audio_asset *asset, char *path);
-int				create_temp_audio_file(unsigned char *buf, ssize_t size, char *path);
+int				create_temp_audio_file(unsigned char *buf,
+					ssize_t size, char *path);
 
 /*
 ** File creation, writing and reading functions

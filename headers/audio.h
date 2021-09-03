@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 15:46:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:02:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_audio
 	Mix_Chunk	*rahikainen_damage[5];
 }				t_audio;
 
-typedef	struct	s_audio_asset
+typedef struct s_audio_asset
 {
 	unsigned int	size;
 	unsigned char	*buf;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 12:30:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:37:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ enum e_entities
 
 enum e_floors
 {
-	normal_room,
+	normal,
 	elevator,
 	lower,
 	upper

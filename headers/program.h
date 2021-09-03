@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 15:34:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:03:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_window
 **	sector_idx:			Tells in which sector entity currently is.
 */
 
-typedef struct	s_entity
+typedef struct s_entity
 {
 	t_triangle	top;
 	t_triangle	bot;
@@ -112,7 +112,7 @@ typedef struct s_time
 **	entity_index	links back to original entity
 **	sprite_state:	determines which sprite to draw from the sprite map.
 */
-typedef	struct	s_projectile
+typedef struct s_projectile
 {
 	t_xyz		pos;
 	t_xyz		normal;
@@ -161,7 +161,7 @@ typedef struct s_home
 	int				game_state;
 }					t_home;
 
-typedef struct	s_arg
+typedef struct s_arg
 {
 	Uint32			*buffer;
 	float			*depth_buffer;

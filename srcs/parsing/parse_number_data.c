@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/11 08:52:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:40:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 		return (1);
 	if (get_next_int_value(&new_sector->tex_ceil, buf, &pos, size))
 		return (1);
-	if (get_next_uint_value(&new_sector->is_elevator, buf, &pos, size))
+	if (get_next_uint_value(&new_sector->is_lift, buf, &pos, size))
 		return (1);
 	*pos += get_next_breaker(buf + *pos);
 	if (*pos > (unsigned int)size)

@@ -6,13 +6,12 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 16:23:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:41:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SECTOR_H
 # define SECTOR_H
-
 
 /*
 **	top and bottom triangle have all texture and positional data for the
@@ -50,7 +49,7 @@ typedef struct s_wall
 **	2+	linked button entity
 **	light state is boolean that if it is on or off
 */
-typedef	struct s_lighting
+typedef struct s_lighting
 {
 	t_xyz				light_src;
 	float				diffuse_power;
@@ -99,7 +98,7 @@ typedef struct s_sector
 	t_lighting		lights;
 	t_plgn			bounding_box;
 	float			velocity;
-	Uint32			is_elevator;
+	Uint32			is_lift;
 	Uint32			elevator_dir;
 	Uint32			moving_until;
 	Uint32			nb_of_msgs;

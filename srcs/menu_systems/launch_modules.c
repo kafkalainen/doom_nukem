@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 12:30:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:32:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	launch_game_loop(t_home *home, t_player *plr,
 	{
 		fps_timer(&home->t);
 		process_inputs_game_loop(plr, &home->game_state, e);
-		update_world(plr, home); // TODO: split into process_inputs_game_loop and update_world functions
+		update_world(plr, home);
 		update_screen(home, frame, plr);
 		render_buffer(frame->buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 11:21:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:27:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void	setup_menu(t_menu *menu, int *game_state)
 	*game_state = MAIN_MENU;
 }
 
+// REVISIT PUT MUSIC TOGGLE
+// if (Mix_PlayingMusic() == 0)
+// 	Mix_PlayMusic(plr->audio.music, -1);
 void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 {
 	ft_putstr("You chose: ");
@@ -82,8 +85,6 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 		home->game_state = MAIN_MENU;
 		return ;
 	}
-	// if (Mix_PlayingMusic() == 0)
-	// 	Mix_PlayMusic(plr->audio.music, -1);
 	if (setup_fps(&home->t))
 		error_output("Memory allocation failed!\n");
 	*menu_option = 0;

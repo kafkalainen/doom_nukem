@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/19 11:08:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:51:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ t_surface		*new_surface(t_wall *data, t_xyz *start, int idx, char choice);
 char			*parse_colour_data(char *ptr, t_texture *tex);
 int				parse_coordinates(t_point_data *data, unsigned int ***pos,
 					unsigned char **buf, ssize_t size);
-int				parse_entity_data(unsigned char *buf, t_home *home, ssize_t size);
+int				parse_entity_data(unsigned char *buf, t_home *home,
+					ssize_t size);
 int				parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_light_data(t_sector *new_sector, unsigned char *buf,
@@ -69,7 +70,7 @@ int				parse_map_name(t_home *home, ssize_t size,
 int				parse_story_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_sector_data(unsigned char *buf, t_player *plr,
-				t_home *home, ssize_t size);
+					t_home *home, ssize_t size);
 int				parse_pixel_data(char *ptr, t_texture *tex);
 int				set_to_null(t_texture **tex, int error);
 unsigned int	triangulate_floor(t_sector *sector, char choice);

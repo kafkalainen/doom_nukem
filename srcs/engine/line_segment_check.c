@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:03:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 13:17:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:30:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,11 @@ int	check_intersection(t_wall *p0, t_xy pos, t_xy dir)
 		&& point_is_on_the_lseg(vec3_to_vec2(p0->top.p[0]), dir,
 			vec3_to_vec2(p0->top.p[2])))
 		return (1);
-	if (p0_orientation == 0 && point_is_on_the_lseg(pos, vec3_to_vec2(p0->top.p[0]), dir))
+	if (p0_orientation == 0
+		&& point_is_on_the_lseg(pos, vec3_to_vec2(p0->top.p[0]), dir))
 		return (1);
-	if (p1_orientation == 0 && point_is_on_the_lseg(pos, vec3_to_vec2(p0->top.p[2]), dir))
+	if (p1_orientation == 0
+		&& point_is_on_the_lseg(pos, vec3_to_vec2(p0->top.p[2]), dir))
 		return (1);
 	return (0);
 }

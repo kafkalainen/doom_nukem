@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 12:05:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 11:06:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:40:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static Uint32	generate_a_new_top_wall(t_wall *portal, t_wall *portal_behind)
 	return (1);
 }
 
-static Uint32	generate_wall_logic(t_wall *current_portal, t_wall *portal_behind)
+static Uint32	generate_wall_logic(t_wall *current_portal,
+				t_wall *portal_behind)
 {
 	Uint32	ceil_diff;
 	Uint32	floor_diff;
@@ -105,7 +106,7 @@ void	calc_extra_walls(t_home *home)
 	{
 		j = 0;
 		current_portal = home->sectors[i]->walls;
-		while (home->sectors[i]->is_elevator == normal_room && j < home->sectors[i]->nb_of_walls)
+		while (!home->sectors[i]->is_lift && j < home->sectors[i]->nb_of_walls)
 		{
 			if (current_portal->top.idx >= 0)
 			{

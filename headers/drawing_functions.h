@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 15:42:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:03:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void		draw_segment(Uint32 *buffer, float *depth_buffer, t_texel *tex,
 				t_steps *step);
 void		draw_vertically(t_frame *frame, t_texture *wall_tex);
 int			draw_horizontal_line(Uint32 *buffer, float *depth_buffer,
-			t_texel *tex, t_steps *step);
+				t_texel *tex, t_steps *step);
 void		draw_wall(t_frame *frame, t_texture *tex, t_home *home,
 				t_player *plr);
 void		draw_wireframe(t_frame *frame, Uint32 colour);
