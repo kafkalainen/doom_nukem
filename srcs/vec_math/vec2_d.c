@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 11:36:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/01 08:47:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 10:34:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	vec2_get_scalar_to_intersection(t_xy pos, t_xy dir, t_wall *wall,
 
 	vectors[0] = vec2_dec(pos, vec2(wall->top.p[1].x, wall->top.p[1].z));
 	vectors[1] = vec2_dec(vec2(wall->top.p[2].x, wall->top.p[2].z),
-		vec2(wall->top.p[1].x, wall->top.p[1].z));
+			vec2(wall->top.p[1].x, wall->top.p[1].z));
 	vectors[2] = vec2(-dir.y, dir.x);
 	dot = vec2_dot(vectors[1], vectors[2]);
 	if (fabsf(dot) < 0.000001)

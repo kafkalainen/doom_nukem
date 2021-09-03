@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 11:39:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 13:13:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 10:35:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,11 @@ void	calc_lumel(float *lumel, float *start, float offset, float *end)
 
 t_bool	vec3_is_inside_triangle(t_triangle *tri, t_xyz point)
 {
-	// t_xyz	test_vector;
-
 	if (vec3_check_sidedness(point, tri->p[0], tri->p[1], tri->p[2])
 		&& vec3_check_sidedness(point, tri->p[1], tri->p[0], tri->p[2])
 		&& vec3_check_sidedness(point, tri->p[2], tri->p[0], tri->p[1]))
 	{
-		// test_vector = vec3_unit_vector(vec3_cross_product(
-		// 			vec3_dec(tri->p[0], tri->p[1]),
-		// 			vec3_dec(tri->p[0], tri->p[2])));
-		// if (ft_fabsf(vec3_dot_product(vec3_dec(tri->p[0], point),
-		// 			test_vector)) <= 0.01f)
-		// {
-			return (true);
-		// }
+		return (true);
 	}
 	return (false);
 }

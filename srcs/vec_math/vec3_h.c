@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:40:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/24 10:44:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 10:40:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,7 @@ float	vec3_ang_axis(t_xyz to_be_turned, t_xyz compared, char axis)
 		b = (t_xy){compared.x, compared.y};
 	}
 	sign = -a.y * b.x + a.x * b.y;
-	if (sign < 0)
-		sign = -1.0f;
-	else if (sign > 0)
-		sign = 1.0f;
-	else
-		return (0.0f);
+	ft_signf(sign);
 	angle = vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b));
 	if (angle < -1.0)
 		angle = -1.0f;
