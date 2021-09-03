@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 11:17:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:24:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,22 @@ int	setup_fps(t_time *time)
 	return (0);
 }
 
+/* ADD MENU AUDIO!!
+** ret = load_audio(&plr->audio);
+** if (ret)
+** {
+** 	cleanup_audio_source(&plr->audio);
+** 	ft_putendl_fd("Failed to load audio files from source,
+	proceeding without menu music\n", 2);
+** }
+** else
+** 	if (Mix_PlayingMusic() == 0)
+** 		Mix_PlayMusic(plr->audio.music, -1);
+*/
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
 	int				ret;
 
-	(void)plr;
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
 	home->chosen_map = NULL;
@@ -55,27 +66,16 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	frame->buffer = (Uint32 *)malloc(sizeof(Uint32)
 			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);
 	if (!frame->buffer)
-		error_output("Memory allocation failed!\n");
+		error_output("Memory allocation failed for draw buffer!");
 	frame->depth_buffer = (float *)malloc(sizeof(float)
 			* (SCREEN_WIDTH * SCREEN_HEIGHT + 1));
 	if (!frame->depth_buffer)
-		error_output("Memory allocation failed!\n");
-	else
-		printf("Depth buffer allocation succeeded. Address is: %p\n", frame->depth_buffer);
+		error_output("Memory allocation failed for depth buffer!");
 	ret = initialize_rasterization_queues(frame);
 	if (ret)
 		clean_up(frame);
 	home = init_sdl(home, frame);
 	initialize_audio_to_null(&plr->audio);
-	// ret = load_audio(&plr->audio);
-	// if (ret)
-	// {
-	// 	cleanup_audio_source(&plr->audio);
-	// 	ft_putendl_fd("Failed to load audio files from source, proceeding without menu music\n", 2);
-	// }
-	// else
-	// 	if (Mix_PlayingMusic() == 0)
-	// 		Mix_PlayMusic(plr->audio.music, -1);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	setup_menu(menu, &home->game_state);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raster_queue.c                                     :+:      :+:    :+:   */
+/*   raster_queue_a.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 19:44:34 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/23 10:02:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:38:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int raster_queue_is_full(t_raster_queue *queue)
+int	raster_queue_is_full(t_raster_queue *queue)
 {
 	return (queue->size == queue->capacity);
 }
@@ -21,7 +21,6 @@ int	raster_queue_is_empty(t_raster_queue *queue)
 {
 	return (queue->size == 0);
 }
-
 
 /*
 **	Adds an element to the rear-end of the queue.
@@ -60,7 +59,7 @@ int	dequeue(t_raster_queue *queue)
 /*
 **	Retrieve first item
 */
-int front(t_raster_queue *queue, t_triangle *triangle)
+int	front(t_raster_queue *queue, t_triangle *triangle)
 {
 	if (raster_queue_is_empty(queue))
 		return (1);

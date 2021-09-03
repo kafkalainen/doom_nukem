@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 11:18:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:21:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,8 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 		error_output("Memalloc failed for HUD\n");
 	if (load_map_file(plr, home))
 		error_output("Error while loading map!\n");
-	// if (open_file(home, "map_files/test.DATA") < 0)
-	// 		error_output("Could not successfully open map file.");
 	home->nbr_of_textures = NUM_TEX;
 	init_textures(home);
-	// home->story = init_story();
 	if (load_game_audio(&plr->audio))
 	{
 		free_game_assets(home);

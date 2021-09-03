@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 13:44:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 13:45:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:29:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,19 @@ void	add_entities(t_home *home, t_frame *frame, t_player *plr)
 {
 	int				flag;
 	Uint32			j;
-	t_triangle		bot;
-	t_triangle		top;
+	t_triangle		tri[2];
 
 	j = 0;
 	flag = 0;
 	while (j < home->nbr_of_entities)
 	{
 		if (home->entity_pool[j]->sector_idx == frame->idx
-		&& check_if_entity_is_active(home->entity_pool[j]))
+			&& check_if_entity_is_active(home->entity_pool[j]))
 		{
-			top = translate_triangle(&home->entity_pool[j]->top,
-					home->entity_pool[j]->pos);
-			bot = translate_triangle(&home->entity_pool[j]->bot,
-					home->entity_pool[j]->pos);
-			if (enqueue_to_raster(frame->transformed, &top))
+			translate_entity(&tri[0], &tri[1], home->entity_pool[j]);
+			if (enqueue_to_raster(frame->transformed, &tri[0]))
 				draw_queue_empty(frame, home, plr, &flag);
-			if (enqueue_to_raster(frame->transformed, &bot))
+			if (enqueue_to_raster(frame->transformed, &tri[1]))
 				draw_queue_empty(frame, home, plr, &flag);
 		}
 		if (flag)

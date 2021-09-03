@@ -6,29 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:37:52 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/29 12:27:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:35:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-void	swap_float(float *f0, float *f1)
-{
-	float swap;
-
-	swap = *f0;
-	*f0 = *f1;
-	*f1 = swap;
-}
-
-void	swap_int(int *i0, int *i1)
-{
-	int swap;
-
-	swap = *i0;
-	*i0 = *i1;
-	*i1 = swap;
-}
 
 void	swap_xyz(t_xyz *p0, t_xyz *p1)
 {
@@ -66,19 +48,19 @@ void	sort_vertices(t_triangle *tri)
 	{
 		swap_xyz(&tri->p[0], &tri->p[1]);
 		swap_uvz(&tri->uv[0], &tri->uv[1]);
-		swap_float(&tri->lu[0], &tri->lu[1]);
+		ft_swapf(&tri->lu[0], &tri->lu[1]);
 	}
 	if ((int)tri->p[2].y < (int)tri->p[0].y)
 	{
 		swap_xyz(&tri->p[0], &tri->p[2]);
 		swap_uvz(&tri->uv[0], &tri->uv[2]);
-		swap_float(&tri->lu[0], &tri->lu[2]);
+		ft_swapf(&tri->lu[0], &tri->lu[2]);
 	}
 	if ((int)tri->p[2].y < (int)tri->p[1].y)
 	{
 		swap_xyz(&tri->p[1], &tri->p[2]);
 		swap_uvz(&tri->uv[1], &tri->uv[2]);
-		swap_float(&tri->lu[1], &tri->lu[2]);
+		ft_swapf(&tri->lu[1], &tri->lu[2]);
 	}
 }
 
@@ -86,8 +68,8 @@ void	swap_sides(t_steps *steps)
 {
 	if (steps->start_x > steps->end_x)
 	{
-		swap_int(&steps->start_x, &steps->end_x);
+		ft_swapi(&steps->start_x, &steps->end_x);
 		swap_uvz(&steps->start_uv, &steps->end_uv);
-		swap_float(&steps->start_lu, &steps->end_lu);
+		ft_swapf(&steps->start_lu, &steps->end_lu);
 	}
 }

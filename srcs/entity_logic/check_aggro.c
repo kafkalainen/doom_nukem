@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:14:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/24 14:08:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 13:46:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	check_for_close_range(Uint32 signed_dst, float distance_squared,
+static t_bool	check_for_close_range(Uint32 signed_dst, float distance_squared,
 	t_player *plr, t_entity *entity)
 {
 	if (distance_squared <= AGGRO_RANGE_1
@@ -20,12 +20,12 @@ Uint32	check_for_close_range(Uint32 signed_dst, float distance_squared,
 		&& plr->cur_sector == entity->sector_idx)
 	{
 		entity->is_aggroed = 1;
-		return (1);
+		return (true);
 	}
-	return (0);
+	return (false);
 }
 
-Uint32	check_if_in_next_sector(t_sector *sector, float distance_squared,
+static t_bool	check_if_in_next_sector(t_sector *sector, float distance_squared,
 	t_player *plr, t_entity *entity)
 {
 	unsigned int	i;
@@ -39,7 +39,7 @@ Uint32	check_if_in_next_sector(t_sector *sector, float distance_squared,
 	signed_dst = vec3_signed_distance_to_plane(plr->pos, entity->dir,
 			entity->pos);
 	vec_to_plr = vec3_unit_vector(vec3_dec(plr->pos, entity->pos));
-	if (distance_squared <= AGGRO_RANGE_1
+	if (distance_squared <= AGGRO_RANGE_2
 		&& signed_dst == 0 && plr->cur_sector != entity->sector_idx)
 	{
 		while (i < sector->nb_of_walls)
@@ -47,21 +47,26 @@ Uint32	check_if_in_next_sector(t_sector *sector, float distance_squared,
 			if (check_if_portal(wall)
 				&& ((wall->is_door && !wall->is_closed) || !wall->is_door))
 			{
-				if (vec3_ray_triangle_intersect(&wall->top, entity->pos, vec_to_plr, &isection)
-					|| vec3_ray_triangle_intersect(&wall->bottom, entity->pos, vec_to_plr, &isection))
+				if (vec3_ray_triangle_intersect(&wall->top,
+						entity->pos, vec_to_plr, &isection)
+					|| vec3_ray_triangle_intersect(&wall->bottom, entity->pos,
+						vec_to_plr, &isection))
 				{
-					entity->is_aggroed = 1;
-					return (1);
+					if (vec3_dot_product(vec_to_plr, entity->dir) > 0.0f)
+					{
+						entity->is_aggroed = 1;
+						return (true);
+					}
 				}
 			}
 			i++;
 			wall = wall->next;
 		}
 	}
-	return (0);
+	return (false);
 }
 
-Uint32	check_aggro(t_player *plr, t_entity *entity, t_sector *sector)
+t_bool	check_aggro(t_player *plr, t_entity *entity, t_sector *sector)
 {
 	float			distance_squared;
 	Uint32			signed_dst;
@@ -70,14 +75,9 @@ Uint32	check_aggro(t_player *plr, t_entity *entity, t_sector *sector)
 	signed_dst = vec3_signed_distance_to_plane(plr->pos, entity->dir,
 			entity->pos);
 	if (check_for_close_range(signed_dst, distance_squared, plr, entity))
-		return (TRUE);
+		return (true);
 	if (check_if_in_next_sector(sector, distance_squared, plr,
 			entity))
-		return (TRUE);
-	if (distance_squared <= 1)
-	{
-		entity->is_aggroed = 1;
-		return (TRUE);
-	}
-	return (FALSE);
+		return (true);
+	return (false);
 }

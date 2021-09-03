@@ -6,19 +6,18 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 10:03:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:25:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void free_sound(Mix_Chunk **chunk)
+static void	free_sound(Mix_Chunk **chunk)
 {
 	if (*chunk != NULL)
 		Mix_FreeChunk(*chunk);
 	*chunk = NULL;
 }
-
 
 void	cleanup_audio_source(t_audio *audio)
 {
@@ -62,7 +61,6 @@ int	load_game_audio(t_audio *audio)
 	audio->rahikainen_damage[3] = Mix_LoadWAV("audio/rahikainen_ugh_2.wav");
 	audio->rahikainen_damage[4] = Mix_LoadWAV("audio/rahikainen_ugh_3.wav");
 	audio->error = Mix_LoadWAV("audio/error.wav");
-
 	if (!audio->music || !audio->footstep1 || !audio->footstep2
 		|| !audio->door || !audio->button || !audio->plasma_gun
 		|| !audio->error)

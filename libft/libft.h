@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 10:39:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:33:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ char				*ft_strnstr(t_c_char *big, t_c_char *little, size_t len);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);
+void				ft_swapi(int *i0, int *i1);
+void				ft_swapf(float *f0, float *f1);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 #endif

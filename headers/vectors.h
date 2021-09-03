@@ -243,8 +243,7 @@ void		invert_view(t_triangle *triangle);
 float		vec3_signed_distance_to_plane(t_xyz point, t_xyz plane_normal,
 			t_xyz plane_point);
 float		area_of_triangle(t_xyz p0, t_xyz p1, t_xyz p2);
-Uint32		point_inside_a_triangle_wall(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);
-Uint32		point_inside_a_triangle_surface(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);
+t_bool		point_inside_a_triangle_surface(t_xyz p0, t_xyz p1, t_xyz p2, t_xyz p);
 t_xyz		vec3_intersection_with_ray_and_plane(t_plane *plane, t_xyz origo, t_xyz dir);
 t_xyz		vec3_calc_vector_average(t_raster_queue	*queue);
 t_uvz		texel_mul(t_uvz *texel, float mul);

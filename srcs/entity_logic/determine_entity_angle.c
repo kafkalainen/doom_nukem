@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 14:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 12:46:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 12:29:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 	t_xy	a;
 	t_xy	b;
 
-	a = vec2_unit_vector(vec2_dec(vec3_to_vec2(plr->pos), vec3_to_vec2(entity->pos)));
+	a = vec2_unit_vector(vec2_dec(vec3_to_vec2(plr->pos),
+				vec3_to_vec2(entity->pos)));
 	if (a.x == entity->vec_to_plr.x && a.y == entity->vec_to_plr.y)
 		return ;
 	b = vec3_to_vec2(vec3_dec(vec3_add(entity->pos, entity->dir), entity->pos));

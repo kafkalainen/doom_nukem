@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/23 15:06:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:55:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,20 @@ t_xyz	check_y(t_sector *sector, t_player *plr, t_xyz pos)
 	unsigned int	i;
 	t_surface		*ground;
 	t_xyz			dir;
-	t_plane			plane;
+	t_xyz			isection;
 
 	i = 0;
 	dir = (t_xyz){0.0f, -1.0f, 0.0f, 0.0f};
 	ground = sector->ground;
 	while (i < sector->nb_of_ground)
 	{
-		if (point_inside_a_triangle_surface(ground->tri.p[0],
-				ground->tri.p[1], ground->tri.p[2], pos))
+		if (vec3_ray_triangle_intersect(&ground->tri, pos, dir, &isection))
 			break ;
 		ground = ground->next;
 		i++;
 	}
-	plane.point = ground->tri.p[0];
-	plane.normal = ground->tri.normal;
-	pos = vec3_intersection_with_ray_and_plane(&plane, pos, dir);
-	pos.y += plr->height;
-	return (pos);
+	isection.y += plr->height;
+	return (isection);
 }
 
 static void	viewmodel_motion(t_player *plr)

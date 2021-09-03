@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 12:31:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 12:28:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_bool	attack_player(t_home *home, t_entity *entity, t_player *plr,
 		entity->sprite_state = attack;
 		pick_next_frame(entity, t);
 		if (entity->anim_offset >= 4
-				&& (int)(entity->cooldown - t) < 0)
+			&& (int)(entity->cooldown - t) < 0)
 			shoot_player(home, entity);
 		return (true);
 	}

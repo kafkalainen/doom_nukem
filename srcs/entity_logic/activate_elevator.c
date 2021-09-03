@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:50:13 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/11 09:42:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 12:28:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	bolt_elevator_door(t_sector *elevator, t_sector **sectors,
 
 	j = 0;
 	portal = elevator->walls;
-
 	while (j < elevator->nb_of_walls)
 	{
 		if (portal->top.idx >= 0 && portal->is_door

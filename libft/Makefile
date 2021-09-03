@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 13:08:18 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/03 10:39:21 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/03 11:32:16 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -127,6 +127,8 @@ SRC_LIST = \
 	$(SLASH)ft_skipc.c\
 	$(SLASH)ft_fabsf.c\
 	$(SLASH)ft_signf.c\
+	$(SLASH)ft_swapf.c\
+	$(SLASH)ft_swapi.c\
 
 HEADERS = ./libft.h
 

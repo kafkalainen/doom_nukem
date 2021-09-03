@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:50:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/19 14:55:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:37:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_raster_queue	*delete_raster_queue(t_raster_queue **queue)
 
 void	free_queues(t_frame *frame)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	if (!frame)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 16:42:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 12:30:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void				set_bullet_hole(t_bullet_hole *hole, t_projectile *current);
 void				set_entity_texels_for_frame(t_entity *entity);
 Uint32				update_elevators(t_home *home, t_player *plr,
 						Uint32 current_time, Uint32 delta_time);
-void				update_enemies(t_home *home, t_player *plr,
+void				update_entities(t_home *home, t_player *plr,
 						Uint32 delta_time);
 void				update_projectiles(t_home *home, t_player *plr, Uint32 t);
 Uint32				take_damage(t_entity *entity, Uint32 delta_time);
