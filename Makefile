@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/03 15:40:49 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/03 16:42:22 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS = \
 	editor$(SLASH)setup_editor.c \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)editor_events.c \
-	entity_logic$(SLASH)activate_elevator.c \
+	entity_logic$(SLASH)activate_lift.c \
 	entity_logic$(SLASH)attack_player.c \
 	entity_logic$(SLASH)check_aggro.c \
 	entity_logic$(SLASH)determine_entity_angle.c \
@@ -68,10 +68,11 @@ SRCS = \
 	png_parser$(SLASH)parser_utils2.c \
 	porting$(SLASH)png.c \
 	porting$(SLASH)create_mapfile.c \
+	porting$(SLASH)init_textures.c \
 	porting$(SLASH)open_file1.c \
 	porting$(SLASH)open_file2.c \
-	porting$(SLASH)validate_sectors_data.c \
-	porting$(SLASH)validate_sectors_data_2.c \
+	porting$(SLASH)validate_sectors_data_a.c \
+	porting$(SLASH)validate_sectors_data_b.c \
 	porting$(SLASH)porting_utils.c \
 	engine$(SLASH)calc_sector_bounds.c \
 	engine$(SLASH)colour_scale.c \
