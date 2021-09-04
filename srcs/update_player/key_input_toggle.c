@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 15:19:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:53:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 static void	action_keys(t_player *plr, SDL_KeyCode *sym)
 {
-	if (*sym == SDLK_z && plr->input.wireframe == 1)
-		plr->input.wireframe = 0;
-	else if (*sym == SDLK_z && plr->input.wireframe == 0)
-		plr->input.wireframe = 1;
+	if (*sym == SDLK_z)
+		toggle_music(plr->audio.music);
 	if (*sym == SDLK_x && plr->input.minimap == 1)
 		plr->input.minimap = 0;
 	else if (*sym == SDLK_x && plr->input.minimap == 0)

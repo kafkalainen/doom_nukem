@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:55:55 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 09:26:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 09:56:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ Uint32	generate_doors(t_wall *current_portal)
 	right.ceiling = current_portal->top.p[2].y;
 	left.ground = current_portal->bottom.p[0].y;
 	right.ground = current_portal->bottom.p[2].y;
-	if (current_portal->top.idx == 0)
-	{
-		printf("left x %f, y %f, right x %f right y %f\n", left.x, left.y, right.x, right.y);
-		printf("left c %f, g %f, right c %f right g %f\n", left.ceiling, left.ground, right.ceiling, right.ground);
-	}
 	left.idx = -door;
 	current_portal->is_closed = 1;
 	new_door = new_point(&left, &right);

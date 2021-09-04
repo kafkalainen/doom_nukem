@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 11:16:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:39:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void	initialize_input_values(t_input *input)
 	input->crouch = 0;
 	input->use = 0;
 	input->shoot = 0;
+	input->music = false;
 }
 
 void	initialize_player(t_player *plr)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:29:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 07:59:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:58:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	initialize_wall_triangles(t_wall *wall, t_point_data *left,
 
 int	get_door_lock(int door_idx)
 {
-	if (door_idx == -door || (door_idx >= DOOR_INDEX && door_idx < CLEANING_INDEX))
+	if (door_idx == -door
+		|| (door_idx >= DOOR_INDEX && door_idx < CLEANING_INDEX))
 		return (unlocked);
 	else if (door_idx >= CLEANING_INDEX && door_idx < ENGINEERING_INDEX)
 		return (cleaning_lock);

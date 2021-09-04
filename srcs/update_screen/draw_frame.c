@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 14:35:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:46:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 		(t_plx_modifier){get_color(green), 2, 12});
 	ft_str_pxl(frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "c to close info", mod);
+	ft_str_pxl(frame->buffer, (t_xy){0, 420}, "z to pause music", mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 440}, "wasd, rotate with q and e.",
 		mod);
 	ft_str_pxl(frame->buffer, (t_xy){0, 460}, "free mouse with m", mod);

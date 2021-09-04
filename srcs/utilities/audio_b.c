@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:34:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 20:24:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:52:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	initialize_audio_to_null(t_audio *audio)
 	audio->rahikainen_ramble[0] = NULL;
 	audio->rahikainen_ramble[1] = NULL;
 	audio->rahikainen_ramble[2] = NULL;
+	audio->rahikainen_ramble[3] = NULL;
 	audio->rahikainen_damage[0] = NULL;
 	audio->rahikainen_damage[1] = NULL;
 	audio->rahikainen_damage[2] = NULL;
@@ -32,6 +33,7 @@ void	initialize_audio_to_null(t_audio *audio)
 	audio->bolt_unlocked = NULL;
 	audio->bolt_locked = NULL;
 	audio->lift = NULL;
+	audio->plasma_gun_no_ammo = NULL;
 }
 
 void	play_footsteps(t_audio *audio)
@@ -63,4 +65,14 @@ void	play_sound(Mix_Chunk *sound, int volume)
 		return ;
 	Mix_VolumeChunk(sound, volume);
 	Mix_PlayChannel(-1, sound, 0);
+}
+
+void	toggle_music(Mix_Music *music)
+{
+	if (!Mix_PlayingMusic())
+		Mix_PlayMusic(music, -1);
+	else if (Mix_PausedMusic())
+		Mix_ResumeMusic();
+	else
+		Mix_PauseMusic();
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 15:20:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:55:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	mouse_button_handle(t_player *plr, SDL_Event *e)
 
 void	mouse_handle(t_player *plr, SDL_Event *e)
 {
-	if (e->type == SDL_MOUSEMOTION && plr->dead == 0)
+	if (plr->input.mouse && e->type == SDL_MOUSEMOTION && plr->dead == 0)
 	{
 		plr->dir.x += -e->motion.xrel * DEG_TO_RAD * 0.1;
 		plr->dir.y += -e->motion.xrel * DEG_TO_RAD * 0.1;
@@ -47,5 +47,6 @@ void	mouse_handle(t_player *plr, SDL_Event *e)
 		if (plr->pitch > 1.553343)
 			plr->pitch = 1.553343;
 	}
-	mouse_button_handle(plr, e);
+	if (plr->input.mouse)
+		mouse_button_handle(plr, e);
 }

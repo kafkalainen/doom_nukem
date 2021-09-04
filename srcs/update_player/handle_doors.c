@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 09:51:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:59:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,8 @@ static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
 		if (wall->next->height - current_height > 1.5f)
 			wall->is_closed = 0;
 		if (wall->open_until - 2500 > current_time)
-		{
-			if (wall->top.idx == 2)
-				printf("OPEN %f\n", wall->height);
 			translate_door(wall->next, wall->height * 0.4f,
 				delta_time * 0.001f);
-		}
 		else
 			translate_door(wall->next, -wall->height * 0.4f,
 				delta_time * 0.001f);
@@ -121,7 +117,7 @@ t_bool	open_door(t_sector **sectors, t_player *plr, int active_item)
 	t_wall			*portal_behind;
 
 	wall = check_if_crossing(sectors[plr->cur_sector],
-		plr->pos, plr->look_dir);
+			plr->pos, plr->look_dir);
 	if (wall && wall->is_door)
 	{
 		if (check_for_matching_key(wall, plr, active_item))

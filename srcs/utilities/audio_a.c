@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 20:23:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:32:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	cleanup_audio_source(t_audio *audio)
 	free_sound(&audio->rahikainen_ramble[0]);
 	free_sound(&audio->rahikainen_ramble[1]);
 	free_sound(&audio->rahikainen_ramble[2]);
+	free_sound(&audio->rahikainen_ramble[3]);
 	free_sound(&audio->rahikainen_damage[0]);
 	free_sound(&audio->rahikainen_damage[1]);
 	free_sound(&audio->rahikainen_damage[2]);
@@ -43,6 +44,7 @@ void	cleanup_audio_source(t_audio *audio)
 	free_sound(&audio->bolt_locked);
 	free_sound(&audio->bolt_unlocked);
 	free_sound(&audio->lift);
+	free_sound(&audio->plasma_gun_no_ammo);
 }
 
 int	load_game_audio(t_audio *audio)
@@ -58,6 +60,7 @@ int	load_game_audio(t_audio *audio)
 	audio->rahikainen_ramble[0] = Mix_LoadWAV("audio/rahikainen_1.wav");
 	audio->rahikainen_ramble[1] = Mix_LoadWAV("audio/rahikainen_2.wav");
 	audio->rahikainen_ramble[2] = Mix_LoadWAV("audio/rahikainen_3.wav");
+	audio->rahikainen_ramble[3] = Mix_LoadWAV("audio/rahikainen_4.wav");
 	audio->rahikainen_damage[0] = Mix_LoadWAV("audio/rahikainen_aah_1.wav");
 	audio->rahikainen_damage[1] = Mix_LoadWAV("audio/rahikainen_damage.wav");
 	audio->rahikainen_damage[2] = Mix_LoadWAV("audio/rahikainen_ugh.wav");
@@ -67,6 +70,7 @@ int	load_game_audio(t_audio *audio)
 	audio->bolt_locked = Mix_LoadWAV("audio/bolt_locked.wav");
 	audio->bolt_unlocked = Mix_LoadWAV("audio/bolt_unlocked.wav");
 	audio->lift = Mix_LoadWAV("audio/lift.wav");
+	audio->plasma_gun_no_ammo = Mix_LoadWAV("audio/out_of_ammo.wav");
 	if (!audio->music || !audio->footstep1 || !audio->footstep2
 		|| !audio->door || !audio->button || !audio->plasma_gun
 		|| !audio->error || !audio->lift || !audio->bolt_locked

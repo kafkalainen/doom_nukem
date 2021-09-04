@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:23:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 20:36:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:03:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ Uint32	lock_lift(t_home *home, t_sector *lift)
 		i++;
 	}
 	bolt_lift_door(lift, home->sectors, lift->lift_dir, unlocked);
+	bolt_lift_door(lift, home->sectors, other_dir(lift->lift_dir), locked);
 	return (1);
 }

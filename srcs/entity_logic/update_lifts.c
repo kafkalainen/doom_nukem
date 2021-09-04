@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 14:52:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 20:41:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 09:58:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,7 @@ Uint32	update_lifts(t_home *home, t_player *plr,
 				plr->pos = check_y(home->sectors[i], plr, plr->pos);
 			}
 			else
-			{
 				lock_lift(home, home->sectors[i]);
-					// play_sound(plr->audio.bolt_unlocked, 20);
-			}
 		}
 		i++;
 	}
