@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/04 11:54:55 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/04 13:25:33 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,6 +143,7 @@ SRCS = \
 	update_screen$(SLASH)death_animation_handle.c \
 	utilities$(SLASH)audio_a.c \
 	utilities$(SLASH)audio_b.c 	\
+	utilities$(SLASH)audio_c.c 	\
 	utilities$(SLASH)error_output.c \
 	utilities$(SLASH)fps_timer.c \
 	utilities$(SLASH)initialize_player.c \
