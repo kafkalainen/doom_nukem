@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 20:27:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 07:51:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void			initialize_wall_triangles(t_wall *wall, t_point_data *left,
 Uint32			generate_doors(t_wall *current_portal);
 t_sector		*get_sector_data(unsigned char *buf, unsigned int *pos,
 					ssize_t size);
+int				get_door_lock(int door_idx);
 int				map_texel(t_surface *surface, t_sector *sector);
 t_surface		*new_surface(t_wall *data, t_xyz *start, int idx, char choice);
 char			*parse_colour_data(char *ptr, t_texture *tex);

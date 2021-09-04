@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:50:13 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 20:56:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 08:32:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ void	activate_lift(t_home *home, t_entity *entity, t_player *plr)
 			home->sectors[entity->is_linked - 2]->velocity
 				= height * 0.1f;
 			bolt_lift_doors(home->sectors[entity->is_linked - 2], locked);
-			play_sound(plr->audio.bolt_locked, 20);
 			play_sound(plr->audio.lift, 20);
 		}
 	}
