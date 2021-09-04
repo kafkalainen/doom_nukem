@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/04 10:44:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 13:04:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,11 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 		error_output("Error while loading map!\n");
 	home->nbr_of_textures = NUM_TEX;
 	init_textures(home);
-	if (load_game_audio(&plr->audio))
-	{
-		free_game_assets(home);
-		home->game_state = MAIN_MENU;
-		return ;
-	}
-	toggle_music(plr->audio.music);
 	if (setup_fps(&home->t))
 		error_output("Memory allocation failed!\n");
+	if (load_game_audio(&plr->audio))
+		error_output("Loading game audio failed!\n");
+	toggle_music(plr->audio.music);
 	*menu_option = 0;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	plr->input.mouse = 1;

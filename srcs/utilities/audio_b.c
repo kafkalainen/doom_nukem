@@ -6,35 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:34:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 10:52:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 12:48:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-void	initialize_audio_to_null(t_audio *audio)
-{
-	audio->footstep1 = NULL;
-	audio->footstep2 = NULL;
-	audio->music = NULL;
-	audio->door = NULL;
-	audio->button = NULL;
-	audio->plasma_gun = NULL;
-	audio->error = NULL;
-	audio->rahikainen_ramble[0] = NULL;
-	audio->rahikainen_ramble[1] = NULL;
-	audio->rahikainen_ramble[2] = NULL;
-	audio->rahikainen_ramble[3] = NULL;
-	audio->rahikainen_damage[0] = NULL;
-	audio->rahikainen_damage[1] = NULL;
-	audio->rahikainen_damage[2] = NULL;
-	audio->rahikainen_damage[3] = NULL;
-	audio->rahikainen_damage[4] = NULL;
-	audio->bolt_unlocked = NULL;
-	audio->bolt_locked = NULL;
-	audio->lift = NULL;
-	audio->plasma_gun_no_ammo = NULL;
-}
 
 void	play_footsteps(t_audio *audio)
 {
@@ -75,4 +51,54 @@ void	toggle_music(Mix_Music *music)
 		Mix_ResumeMusic();
 	else
 		Mix_PauseMusic();
+}
+
+int	load_audio(t_audio *audio)
+{
+	audio->music = Mix_LoadMUS("audio/eerie_by_eparviai.wav");
+	if (!audio->music)
+	{
+		ft_putendl_fd("Failed to load beat music! SDL_mixer Error", 2);
+		audio->footstep1 = NULL;
+		audio->footstep2 = NULL;
+		return (771);
+	}
+	audio->footstep1 = Mix_LoadWAV("audio/footstep1.wav");
+	if (!audio->footstep1)
+	{
+		ft_putendl_fd("Failed to load scratch sound effect!", 2);
+		audio->footstep2 = NULL;
+		return (772);
+	}
+	audio->footstep2 = Mix_LoadWAV("audio/footstep2.wav");
+	if (!audio->footstep2)
+	{
+		ft_putendl_fd("Failed to load scratch sound effect!", 2);
+		return (773);
+	}
+	return (0);
+}
+
+/*
+**	Should FreeWAV(t_chunk*) be used here?
+*/
+
+void	cleanup_audio(t_audio *audio)
+{
+	if (audio->footstep1 != NULL)
+	{
+		Mix_FreeChunk(audio->footstep1);
+		audio->footstep1 = NULL;
+	}
+	if (audio->footstep2 != NULL)
+	{
+		Mix_FreeChunk(audio->footstep2);
+		audio->footstep2 = NULL;
+	}
+	if (audio->music != NULL)
+	{
+		Mix_FreeMusic(audio->music);
+		audio->music = NULL;
+	}
+	Mix_CloseAudio();
 }

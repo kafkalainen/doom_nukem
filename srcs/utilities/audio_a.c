@@ -6,11 +6,46 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 12:04:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 13:05:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+void	initialize_audio_to_null(t_audio *audio)
+{
+	audio->footstep1 = NULL;
+	audio->footstep2 = NULL;
+	audio->music = NULL;
+	audio->door = NULL;
+	audio->button = NULL;
+	audio->plasma_gun = NULL;
+	audio->error = NULL;
+	audio->rahikainen_ramble[0] = NULL;
+	audio->rahikainen_ramble[1] = NULL;
+	audio->rahikainen_ramble[2] = NULL;
+	audio->rahikainen_ramble[3] = NULL;
+	audio->rahikainen_damage[0] = NULL;
+	audio->rahikainen_damage[1] = NULL;
+	audio->rahikainen_damage[2] = NULL;
+	audio->rahikainen_damage[3] = NULL;
+	audio->rahikainen_damage[4] = NULL;
+	audio->bolt_unlocked = NULL;
+	audio->bolt_locked = NULL;
+	audio->lift = NULL;
+	audio->plasma_gun_no_ammo = NULL;
+}
+
+static t_bool	check_invalid_pointers(t_audio *audio)
+{
+	if (!audio->music || !audio->footstep1 || !audio->footstep2
+		|| !audio->door || !audio->button || !audio->plasma_gun
+		|| !audio->error || !audio->lift || !audio->bolt_locked
+		|| !audio->bolt_unlocked || !audio->plasma_gun_no_ammo)
+		return (true);
+	else
+		return (false);
+}
 
 static void	free_sound(Mix_Chunk **chunk)
 {
@@ -70,63 +105,10 @@ int	load_game_audio(t_audio *audio)
 	audio->bolt_unlocked = Mix_LoadWAV("audio/bolt_unlocked.wav");
 	audio->lift = Mix_LoadWAV("audio/lift.wav");
 	audio->plasma_gun_no_ammo = Mix_LoadWAV("audio/out_of_ammo.wav");
-	if (!audio->music || !audio->footstep1 || !audio->footstep2
-		|| !audio->door || !audio->button || !audio->plasma_gun
-		|| !audio->error || !audio->lift || !audio->bolt_locked
-		|| !audio->bolt_unlocked || !audio->plasma_gun_no_ammo)
+	if (check_invalid_pointers(audio))
 	{
 		ft_putendl("ERROR: Couldn't load audio.");
 		return (1);
 	}
 	return (0);
-}
-
-int	load_audio(t_audio *audio)
-{
-	audio->music = Mix_LoadMUS("audio/eerie_by_eparviai.wav");
-	if (!audio->music)
-	{
-		ft_putendl_fd("Failed to load beat music! SDL_mixer Error", 2);
-		audio->footstep1 = NULL;
-		audio->footstep2 = NULL;
-		return (771);
-	}
-	audio->footstep1 = Mix_LoadWAV("audio/footstep1.wav");
-	if (!audio->footstep1)
-	{
-		ft_putendl_fd("Failed to load scratch sound effect!", 2);
-		audio->footstep2 = NULL;
-		return (772);
-	}
-	audio->footstep2 = Mix_LoadWAV("audio/footstep2.wav");
-	if (!audio->footstep2)
-	{
-		ft_putendl_fd("Failed to load scratch sound effect!", 2);
-		return (773);
-	}
-	return (0);
-}
-
-/*
-**	Should FreeWAV(t_chunk*) be used here?
-*/
-
-void	cleanup_audio(t_audio *audio)
-{
-	if (audio->footstep1 != NULL)
-	{
-		Mix_FreeChunk(audio->footstep1);
-		audio->footstep1 = NULL;
-	}
-	if (audio->footstep2 != NULL)
-	{
-		Mix_FreeChunk(audio->footstep2);
-		audio->footstep2 = NULL;
-	}
-	if (audio->music != NULL)
-	{
-		Mix_FreeMusic(audio->music);
-		audio->music = NULL;
-	}
-	Mix_CloseAudio();
 }

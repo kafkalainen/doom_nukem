@@ -6,32 +6,35 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/09 11:36:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 12:56:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static int	get_map_header_data(unsigned int *pos, unsigned char *buf,
+static int	get_map_header(unsigned int *pos, unsigned char **buf,
 	t_home *home, ssize_t size)
 {
-	if (get_next_uint_value(&home->nbr_of_sectors, buf, &pos, size))
+	*buf = (unsigned char *)ft_strstr((const char *)*buf, "doom_nukem_sectors");
+	if (!*buf)
 		return (1);
-	if (get_next_int_value(&home->end_sector, buf, &pos, size))
+	if (get_next_uint_value(&home->nbr_of_sectors, *buf, &pos, size))
+		return (1);
+	if (get_next_int_value(&home->end_sector, *buf, &pos, size))
 		return (1);
 	if (home->nbr_of_sectors <= 0 || home->end_sector <= 0)
 		return (1);
-	if (get_next_uint_value(&home->linked_map, buf, &pos, size))
+	if (get_next_uint_value(&home->linked_map, *buf, &pos, size))
 		return (1);
 	if (home->linked_map)
 	{
-		if (parse_map_name(home, size, buf, &pos))
+		if (parse_map_name(home, size, *buf, &pos))
 			return (1);
 	}
 	return (0);
 }
 
-static int	get_player_position(unsigned int *pos, unsigned char *buf,
+static int	get_plr(unsigned int *pos, unsigned char *buf,
 			t_player *plr, ssize_t size)
 {
 	*pos += get_next_breaker(buf + *pos) + 1;
@@ -68,9 +71,7 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 
 	i = 0;
 	pos = 0;
-	buf = (unsigned char *)ft_strstr((const char *)buf, "doom_nukem_sectors");
-	if (!buf || get_map_header_data(&pos, buf, home, size)
-		|| get_player_position(&pos, buf, plr, size))
+	if (get_map_header(&pos, &buf, home, size) || get_plr(&pos, buf, plr, size))
 		return (1);
 	home->sectors = (t_sector **)malloc(sizeof(t_sector)
 			* (home->nbr_of_sectors + 1));
