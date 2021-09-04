@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 12:56:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 13:10:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 	return (0);
 }
 
+//validate_sectors_data(home, plr);
 int	load_map_file(t_player *plr, t_home *home)
 {
 	int				fd;
@@ -116,7 +117,6 @@ int	load_map_file(t_player *plr, t_home *home)
 		free(buf);
 		if (ret)
 			error_output("ERROR: Failed to read map.");
-		validate_sectors_data(home, plr);
 		calc_map_properties(home, plr);
 	}
 	return (0);
