@@ -12,3 +12,6 @@ libft/libft.a
 libft/obj
 objs/
 temp/
+libft/test*
+test*
+*_test
