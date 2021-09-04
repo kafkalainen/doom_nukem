@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/04 08:58:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:38:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_input
 	int				jump;
 	int				wireframe;
 	int				minimap;
+	t_bool			music;
 	int				info;
 	int				mouse;
 	int				jetpack;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 20:27:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:02:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void				initialize_projectile_triangles(t_projectile *projectile);
 Uint32				initialize_entity_textures(t_entity *entity);
 Uint32				lock_lift(t_home *home, t_sector *lift);
 void				lock_the_door(t_wall *dimensions, t_wall *door);
+Uint32				other_dir(Uint32 dir);
 void				pick_next_frame(t_entity *entity, Uint32 t);
 t_bool				pick_up_item(t_entity *item, t_player *plr);
 void				rotate_entity_towards_player(t_entity *entity,

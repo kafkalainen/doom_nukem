@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 10:24:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 11:11:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ t_bool	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector)
 				msg_sector->cur_msg = msg_sector->nb_of_msgs;
 			plr->plot_state = no_plot;
 		}
-		if (plr->plot_state == no_plot
+		if (plr->plot_state == no_plot && sector->nb_of_msgs
 			&& sector->cur_msg < sector->nb_of_msgs)
 		{
 			plr->plot_state = sector_plot;
 			plr->msg_sector = plr->cur_sector;
 			plr->message_time = plr->time
-				+ ft_strlen(msg_sector->story[msg_sector->cur_msg])
+				+ ft_strlen(sector->story[sector->cur_msg])
 				* 50 + 5000;
-			play_sound(plr->audio.rahikainen_ramble[rand() % 3], 30);
+			play_sound(plr->audio.rahikainen_ramble[(int)plr->time % 3], 30);
 		}
 		return (true);
 	}

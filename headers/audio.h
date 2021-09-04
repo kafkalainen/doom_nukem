@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 20:21:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:42:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_audio
 	Mix_Chunk	*bolt_unlocked;
 	Mix_Chunk	*bolt_locked;
 	Mix_Chunk	*lift;
+	Mix_Chunk	*plasma_gun_no_ammo;
 }				t_audio;
 
 typedef struct s_audio_asset
@@ -42,5 +43,6 @@ int		load_audio(t_audio *audio);
 int		load_game_audio(t_audio *audio);
 void	play_footsteps(t_audio *audio);
 void	play_sound(Mix_Chunk *sound, int volume);
+void	toggle_music(Mix_Music *music);
 
 #endif
