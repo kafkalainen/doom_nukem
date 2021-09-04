@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_sector.c                                     :+:      :+:    :+:   */
+/*   parse_sector_a.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 11:47:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 11:44:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	add_point(t_wall **point, t_wall *new)
 	}
 }
 
-void	close_linkedlist(t_wall **head)
+int	close_linkedlist(t_wall **head)
 {
 	t_wall	*temp;
 
@@ -61,10 +61,11 @@ void	close_linkedlist(t_wall **head)
 	while (temp->next)
 		temp = temp->next;
 	temp->next = *head;
+	return (0);
 }
 
-int	add_points(t_sector *sector,
-	unsigned char *buf, unsigned int **pos, ssize_t size)
+int	add_points(t_sector *sector, unsigned char *buf,
+	unsigned int **pos, ssize_t size)
 {
 	unsigned int	i;
 	t_point_data	data_left;
@@ -76,23 +77,21 @@ int	add_points(t_sector *sector,
 	if (sector == NULL || parse_coordinates(&data_left, &pos, &buf, size))
 		return (1);
 	data_first = data_left;
-	while (i < sector->nb_of_walls)
+	while (i++ < sector->nb_of_walls)
 	{
-		if (i + 1 != sector->nb_of_walls
+		if (i != sector->nb_of_walls
 			&& parse_coordinates(&data_right, &pos, &buf, size))
-			return (free_points(&sector->walls, i));
-		if (i + 1 != sector->nb_of_walls)
+			return (free_points(&sector->walls, i - 1));
+		if (i != sector->nb_of_walls)
 			wall = new_point(&data_left, &data_right);
 		else
 			wall = new_point(&data_left, &data_first);
 		if (!wall)
-			return (free_points(&sector->walls, i));
+			return (free_points(&sector->walls, i - 1));
 		add_point(&sector->walls, wall);
 		data_left = data_right;
-		i++;
 	}
-	close_linkedlist(&sector->walls);
-	return (0);
+	return (close_linkedlist(&sector->walls));
 }
 
 t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos,

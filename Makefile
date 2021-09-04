@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/04 10:04:12 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/04 11:54:55 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,8 @@ SRCS = \
 	parsing$(SLASH)map_texel.c \
 	parsing$(SLASH)parse_entity_data.c \
 	parsing$(SLASH)parse_number_data.c \
-	parsing$(SLASH)parse_sector.c \
-	parsing$(SLASH)parse_sector_2.c \
+	parsing$(SLASH)parse_sector_a.c \
+	parsing$(SLASH)parse_sector_b.c \
 	parsing$(SLASH)parse_surfaces.c \
 	parsing$(SLASH)triangulate_floor_and_ceiling.c \
 	png_parser$(SLASH)color_utils.c \
@@ -123,6 +123,7 @@ SRCS = \
 	update_screen$(SLASH)draw_frame.c \
 	update_screen$(SLASH)draw_horizontal_line.c \
 	update_screen$(SLASH)draw_hud.c \
+	update_screen$(SLASH)draw_info.c \
 	update_screen$(SLASH)draw_inventory.c \
 	update_screen$(SLASH)draw_object_data.c \
 	update_screen$(SLASH)draw_sector.c \

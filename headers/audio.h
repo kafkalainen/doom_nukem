@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 10:42:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 12:06:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_audio
 	Mix_Chunk	*button;
 	Mix_Chunk	*plasma_gun;
 	Mix_Chunk	*error;
-	Mix_Chunk	*rahikainen_ramble[3];
+	Mix_Chunk	*rahikainen_ramble[4];
 	Mix_Chunk	*rahikainen_damage[5];
 	Mix_Chunk	*bolt_unlocked;
 	Mix_Chunk	*bolt_locked;

@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 14:05:23 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/10 11:47:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 11:40:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	free_points(t_wall **head, unsigned int nbr_of_walls)
+t_bool	free_points(t_wall **head, unsigned int nbr_of_walls)
 {
 	t_wall	*item;
 
@@ -23,7 +23,7 @@ int	free_points(t_wall **head, unsigned int nbr_of_walls)
 		free(item);
 		item = NULL;
 	}
-	return (1);
+	return (true);
 }
 
 void	free_sectors(t_home *home)

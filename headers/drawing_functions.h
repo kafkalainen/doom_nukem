@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 16:03:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 11:54:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_xy		center_to_screen(t_xy loc);
 Uint32		colour_scale(Uint32 hex, float scale);
 t_triangle	create_projection(t_triangle *src);
 void		death_animation(t_home *home, t_player *plr, Uint32 t);
-int			draw_cube(t_frame *frame, t_home *home, t_player *plr);
 void		draw_crosshair(Uint32 *buffer);
 void		draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr);
 void		draw_hud_ammo_left(Uint32 *buffer, t_player *plr);
@@ -94,14 +93,11 @@ int			draw_sector(t_frame *frame, t_home *home, t_player *plr,
 void		draw_weapon(t_home *home, Uint32 *buffer,
 				t_player *plr, t_xy offset);
 void		draw_frame(t_home *home, t_frame *frame, t_player *plr);
-void		draw_linearly(t_frame *frame, t_texture *floor_tex, t_plgn *box);
+void		draw_info(t_frame *frame, t_player *plr, int nb_fps);
 void		draw_segment(Uint32 *buffer, float *depth_buffer, t_texel *tex,
 				t_steps *step);
-void		draw_vertically(t_frame *frame, t_texture *wall_tex);
 int			draw_horizontal_line(Uint32 *buffer, float *depth_buffer,
 				t_texel *tex, t_steps *step);
-void		draw_wall(t_frame *frame, t_texture *tex, t_home *home,
-				t_player *plr);
 void		draw_wireframe(t_frame *frame, Uint32 colour);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);
 Uint32		get_texel(t_uv *coord, t_uv *limits, Uint32 *pixels);
