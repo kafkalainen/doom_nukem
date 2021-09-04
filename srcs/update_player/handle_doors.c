@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 08:05:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 09:01:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ Uint32	update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 	return (volume);
 }
 
-t_bool	open_door(t_sector **sectors, t_xyz look_loc, t_player *plr,
-	int active_item)
+t_bool	open_door(t_sector **sectors, t_player *plr, int active_item)
 {
 	t_wall			*wall;
 	t_wall			*portal_behind;
 
-	wall = check_if_crossing(sectors[plr->cur_sector], look_loc);
+	wall = check_if_crossing(sectors[plr->cur_sector],
+		plr->pos, plr->look_dir);
 	if (wall && wall->is_door)
 	{
 		if (check_for_matching_key(wall, plr, active_item))

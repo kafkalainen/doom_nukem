@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/02 14:26:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 09:03:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define SQR2 0.7071067812f
 # define Z_NEAR 0.1f
 # define Z_FAR 1000.0f
+# define OPEN_DOOR_DISTANCE 3.25f
 # define TRUE 1
 # define FALSE 0
 # define AND &&
