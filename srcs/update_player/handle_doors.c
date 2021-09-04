@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 09:01:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 09:51:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,12 @@ static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
 		if (wall->next->height - current_height > 1.5f)
 			wall->is_closed = 0;
 		if (wall->open_until - 2500 > current_time)
+		{
+			if (wall->top.idx == 2)
+				printf("OPEN %f\n", wall->height);
 			translate_door(wall->next, wall->height * 0.4f,
 				delta_time * 0.001f);
+		}
 		else
 			translate_door(wall->next, -wall->height * 0.4f,
 				delta_time * 0.001f);

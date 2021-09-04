@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 12:05:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:40:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 09:49:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,18 @@ static Uint32	generate_wall_logic(t_wall *current_portal,
 		walls += generate_a_new_top_wall(current_portal, portal_behind);
 		walls += generate_a_new_lower_wall(current_portal, portal_behind);
 	}
+	if (ceil_diff || floor_diff)
+		portal_behind->height = current_portal->height;
 	return (walls);
 }
 
+/*
+**	Calculation of extra walls is necessary to handle height differences.
+**	2D map is converted to 3D coordinates. When we encounter a portal
+**	in map data, that is higher or lower than the next sector, we generate
+**	A wall behind that portal.
+**	If a door is found, we generate doors to the current sector.
+*/
 void	calc_extra_walls(t_home *home)
 {
 	Uint32	i;
