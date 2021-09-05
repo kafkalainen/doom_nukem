@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:23:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 13:26:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 21:42:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static t_bool	check_invalid_pointers(t_audio *audio)
 	if (!audio->music || !audio->footstep1 || !audio->footstep2
 		|| !audio->door || !audio->button || !audio->plasma_gun
 		|| !audio->error || !audio->lift || !audio->bolt_locked
-		|| !audio->bolt_unlocked || !audio->plasma_gun_no_ammo)
+		|| !audio->bolt_unlocked || !audio->plasma_gun_no_ammo
+		|| !audio->reload)
 		return (true);
 	else
 		return (false);
@@ -51,6 +52,7 @@ int	load_game_audio(t_audio *audio)
 	audio->bolt_unlocked = Mix_LoadWAV("audio/bolt_unlocked.wav");
 	audio->lift = Mix_LoadWAV("audio/lift.wav");
 	audio->plasma_gun_no_ammo = Mix_LoadWAV("audio/out_of_ammo.wav");
+	audio->reload = Mix_LoadWAV("audio/reload.wav");
 	if (check_invalid_pointers(audio))
 	{
 		ft_putendl("ERROR: Couldn't load audio.");

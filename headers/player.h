@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/04 10:38:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 21:55:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ typedef struct s_player
 	Uint32			time;
 	Uint32			message_time;
 	Uint32			display_object;
+	Uint32			reload;
 	unsigned int	active_wep;
 }					t_player;
 
@@ -220,5 +221,6 @@ Uint32			strafe_along_the_wall(t_wall *wall, t_player *plr,
 Uint32			test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 					t_ray *ray);
 void			player_take_damage(t_player *plr, Uint32 damage, Uint32 time);
+void			reload_weapon(t_player *plr, Uint32 t);
 
 #endif

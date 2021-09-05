@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 12:06:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 21:41:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_audio
 	Mix_Chunk	*bolt_locked;
 	Mix_Chunk	*lift;
 	Mix_Chunk	*plasma_gun_no_ammo;
+	Mix_Chunk	*reload;
 }				t_audio;
 
 typedef struct s_audio_asset

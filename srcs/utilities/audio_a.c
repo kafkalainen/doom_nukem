@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 13:25:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 21:42:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	initialize_audio_to_null(t_audio *audio)
 	audio->bolt_locked = NULL;
 	audio->lift = NULL;
 	audio->plasma_gun_no_ammo = NULL;
+	audio->reload = NULL;
 }
 
 static void	free_sound(Mix_Chunk **chunk)
