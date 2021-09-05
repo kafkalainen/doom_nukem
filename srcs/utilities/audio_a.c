@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/05 21:42:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 22:37:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ void	initialize_audio_to_null(t_audio *audio)
 	audio->lift = NULL;
 	audio->plasma_gun_no_ammo = NULL;
 	audio->reload = NULL;
+	audio->unlock_door = NULL;
+	audio->skull_skulker_aggro = NULL;
+	audio->skull_skulker_attack = NULL;
+	audio->skull_skulker_damage = NULL;
+	audio->skull_skulker_death = NULL;
+	audio->thing_aggro = NULL;
+	audio->thing_attack = NULL;
+	audio->thing_damage = NULL;
+	audio->thing_death = NULL;
 }
 
 static void	free_sound(Mix_Chunk **chunk)

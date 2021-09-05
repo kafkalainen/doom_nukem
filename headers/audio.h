@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/05 21:41:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 22:38:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ typedef struct s_audio
 	Mix_Chunk	*lift;
 	Mix_Chunk	*plasma_gun_no_ammo;
 	Mix_Chunk	*reload;
+	Mix_Chunk	*unlock_door;
+	Mix_Chunk	*skull_skulker_aggro;
+	Mix_Chunk	*skull_skulker_attack;
+	Mix_Chunk	*skull_skulker_damage;
+	Mix_Chunk	*skull_skulker_death;
+	Mix_Chunk	*thing_aggro;
+	Mix_Chunk	*thing_attack;
+	Mix_Chunk	*thing_damage;
+	Mix_Chunk	*thing_death;
 }				t_audio;
 
 typedef struct s_audio_asset
