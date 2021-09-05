@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:52:21 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/05 22:53:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 23:27:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	player_use_inventory_item(t_player *plr)
 		if (plr->inventory[plr->active_inv].sprite_idx == ammo_pack_sprite)
 		{
 			plr->reload = 3000;
+			plr->inventory[plr->active_inv].in_use = false;
+			plr->active_inv = -1;
 			play_sound(plr->audio.reload, 30);
 		}
 		else if (plr->inventory[plr->active_inv].sprite_idx
@@ -30,8 +32,6 @@ int	player_use_inventory_item(t_player *plr)
 		else if (plr->inventory[plr->active_inv].sprite_idx
 			== engineering_keycard_sprite)
 			return (keycard_engineering);
-		plr->inventory[plr->active_inv].in_use = false;
-		plr->active_inv = -1;
 	}
 	return (0);
 }
