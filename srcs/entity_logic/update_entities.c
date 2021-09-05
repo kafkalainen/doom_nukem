@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:52:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 23:17:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,44 @@ static void	show_dead_entity(t_entity *cur_enemy, t_player *plr)
 	set_entity_texels_for_frame(cur_enemy);
 }
 
+static void	sound_logic(t_entity *enemy, t_player *plr, char sound)
+{
+	if (sound == 'd')
+	{
+		if (enemy->type == skull_skulker)
+			play_sound(plr->audio.skull_skulker_damage, 40);
+		else if (enemy->type == thing)
+			play_sound(plr->audio.thing_damage, 30);
+	}
+	else if (sound == 'x')
+	{
+		if (enemy->type == skull_skulker)
+			play_sound(plr->audio.skull_skulker_death, 40);
+		else if (enemy->type == thing)
+			play_sound(plr->audio.thing_death, 30);
+	}
+}
+
 static void	update_entity(t_home *home, t_entity *cur_enemy,
 			t_player *plr, Uint32 t)
 {
 	entity_gravity(home->sectors[cur_enemy->sector_idx], cur_enemy, t);
-	check_aggro(plr, cur_enemy,
-		home->sectors[cur_enemy->sector_idx]);
+	if (!cur_enemy->is_aggroed)
+		check_aggro(plr, cur_enemy,
+			home->sectors[cur_enemy->sector_idx]);
 	if (cur_enemy->is_aggroed)
 		cur_enemy->dir = vec3_unit_vector(vec3_dec(plr->pos,
 					cur_enemy->pos));
 	if (!attack_player(home, cur_enemy, plr, t))
 		entity_move(cur_enemy, home, t);
-	take_damage(cur_enemy, t);
+	if (take_damage(cur_enemy, t))
+		sound_logic(cur_enemy, plr, 'd');
 	determine_angle_between_entity_and_plr(cur_enemy, plr);
 	if (cur_enemy->health <= 0)
-		die(cur_enemy, t);
+	{
+		if (die(cur_enemy, t))
+			sound_logic(cur_enemy, plr, 'x');
+	}
 	set_entity_texels_for_frame(cur_enemy);
 }
 

@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/24 15:37:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 23:07:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	take_damage(t_entity *entity, Uint32 t)
+t_bool	take_damage(t_entity *entity, Uint32 t)
 {
 	if (entity->take_damage == TRUE && entity->cooldown > 0)
 	{
@@ -26,9 +26,9 @@ Uint32	take_damage(t_entity *entity, Uint32 t)
 			{
 				entity->take_damage = FALSE;
 				entity->health--;
+				return (true);
 			}
 		}
-		return (TRUE);
 	}
-	return (FALSE);
+	return (false);
 }

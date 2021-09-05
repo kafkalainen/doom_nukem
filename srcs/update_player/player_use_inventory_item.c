@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:52:21 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/05 21:57:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 22:53:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	player_use_inventory_item(t_player *plr)
 		if (plr->inventory[plr->active_inv].sprite_idx == ammo_pack_sprite)
 		{
 			plr->reload = 3000;
-			play_sound(plr->audio.reload, 20);
+			play_sound(plr->audio.reload, 30);
 		}
 		else if (plr->inventory[plr->active_inv].sprite_idx
 			== military_keycard_sprite)

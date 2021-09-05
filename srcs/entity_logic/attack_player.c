@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:52:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 22:59:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_bool	shoot_player(t_home *home, t_entity *entity)
+static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr)
 {
 	t_ray	ray;
 
@@ -21,6 +21,7 @@ static t_bool	shoot_player(t_home *home, t_entity *entity)
 	ray.dir = entity->dir;
 	ray.start_sector = entity->sector_idx;
 	shooting_handle(home, &ray);
+	play_sound(plr->audio.thing_attack, 30);
 	return (true);
 }
 
@@ -36,7 +37,10 @@ t_bool	attack_player(t_home *home, t_entity *entity, t_player *plr,
 			entity->sprite_state = attack;
 			if (entity->anim_offset >= 4
 				&& (int)(entity->cooldown - t) < 0)
-				plr->power_points--;
+			{
+				player_take_damage(plr, 1, t);
+				play_sound(plr->audio.skull_skulker_attack, 30);
+			}
 			pick_next_frame(entity, t);
 			return (false);
 		}
@@ -47,7 +51,7 @@ t_bool	attack_player(t_home *home, t_entity *entity, t_player *plr,
 		pick_next_frame(entity, t);
 		if (entity->anim_offset >= 4
 			&& (int)(entity->cooldown - t) < 0)
-			shoot_player(home, entity);
+			shoot_player(home, entity, plr);
 		return (true);
 	}
 	return (false);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:14:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:47:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/05 22:53:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,21 @@ t_bool	check_aggro(t_player *plr, t_entity *entity, t_sector *sector)
 	signed_dst = vec3_signed_distance_to_plane(plr->pos, entity->dir,
 			entity->pos);
 	if (check_for_close_range(signed_dst, distance_squared, plr, entity))
+	{
+		if (entity->type == skull_skulker)
+			play_sound(plr->audio.skull_skulker_aggro, 20);
+		else if (entity->type == thing)
+			play_sound(plr->audio.thing_aggro, 20);
 		return (true);
+	}
 	if (check_if_in_next_sector(sector, distance_squared, plr,
 			entity))
+	{
+		if (entity->type == skull_skulker)
+			play_sound(plr->audio.skull_skulker_aggro, 20);
+		else if (entity->type == thing)
+			play_sound(plr->audio.thing_aggro, 20);
 		return (true);
+	}
 	return (false);
 }
