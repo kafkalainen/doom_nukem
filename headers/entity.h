@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 14:15:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 14:38:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ENTITY_H
 # define BACKGROUND 0xFFEE82EE
 # define AGGRO_RANGE_1 10
-# define AGGRO_RANGE_2 20
+# define AGGRO_RANGE_2 40
 # define ENTITY_VELOCITY_1 0.0005f
 # define ENTITY_VELOCITY_2 0.00025f
 # define PROJECTILE_VELOCITY 50
