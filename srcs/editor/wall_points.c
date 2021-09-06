@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_points.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 15:09:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:34:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void		assign_sector_bbox(t_sector_list *sector)
 	sector->bbox.start.y = min.y;
 	sector->bbox.end.x = max.x;
 	sector->bbox.end.y = max.y;
-	sector->bbox.start.w = 1.0f;
-	sector->bbox.end.w = 1.0f;
 }
 
 t_editor_walls	*new_wall_point(t_mouse_data *data, t_action *action)

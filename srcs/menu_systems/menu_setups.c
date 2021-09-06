@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 16:40:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:33:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,4 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	plr->input.mouse = 1;
 	home->game_state = GAME_LOOP;
-}
-
-void	setup_editor(t_home *home)
-{
-	init_textures(home);
 }

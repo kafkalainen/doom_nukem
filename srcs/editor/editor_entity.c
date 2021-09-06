@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 12:39:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:35:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	link_entities(t_entity_list **list, t_mouse_data mdata, int current_entity)
 	// 	return (FALSE);
 	// if (link_allowed(curr, temp))
 	// {
-		
+
 	// }
 	if (curr && curr->is_linked > 1)
 		link_nbr = curr->is_linked;
@@ -254,7 +254,7 @@ int		get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls)
 // 	{
 // 		if (temp->idx == selected_wall)
 // 		{
-			
+
 // 		}
 // 		i++;
 // 		temp = temp->next;
@@ -273,7 +273,7 @@ void	create_new_entity(t_entity_list **head, t_mouse_data *mdata, t_action *acti
 	if (!new)
 		error_output("Memory allocation of new entity failed\n");
 	if (action->create_elev_button)
-		new->entity_type = elevator_button;
+		new->entity_type = lift_button;
 	else if (action->create_light_button)
 		new->entity_type = light_button;
 	else if (action->create_powerstation)

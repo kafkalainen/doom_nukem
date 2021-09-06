@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:58:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:29:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,14 @@ void	ft_str_pxl(t_buffer *buffer, t_xy coord,
 		}
 		str++;
 	}
+}
+
+void	ft_c_pxl(t_buffer *buffer, t_xy coord,
+	char c, t_plx_modifier mod)
+{
+	char c2;
+
+	c2 = ft_toupper(c);
+	handle_letter(buffer, coord, c2, mod);
+	coord.x += 5 * mod.size;
 }

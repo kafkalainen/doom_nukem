@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/06 14:16:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:34:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void		draw_sector_textfields(t_sector_list *sector, t_buffer *buffer)
 		return ;
 	mod.colour = white;
 	mod.size = TEXT_SIZE;
-	c_pxl(buffer, vec2(165, 56), '0' + sector->idx_sector, mod);
+	ft_c_pxl(buffer, vec2(165, 56), '0' + sector->idx_sector, mod);
 	if (sector->sector_plot)
-		str_pxl(buffer, vec2(32, 580), (char *)sector->sector_plot, mod);
+		ft_str_pxl(buffer, vec2(32, 580), (char *)sector->sector_plot, mod);
 }
 
 int			get_color_from_action_data(int i, t_action *action, int end_sector)
@@ -90,7 +90,7 @@ void		draw_buttons(t_button **blist, t_buffer *buffer, int draw_depth, t_action 
 			box.start = blist[i]->ltop;
 			box.end = blist[i]->wh;
 			draw_box(box, buffer, 0xAAAAAA);
-			str_pxl(buffer,
+			ft_str_pxl(buffer,
 				vec2(blist[i]->ltop.x + 8, blist[i]->ltop.y + 4),
 				blist[i]->info.text, mod);
 		}
@@ -129,7 +129,7 @@ void			draw_grid_editor(t_buffer *buffer, t_action *action)
 
 t_xy		scale_xy(t_screen_xy x0, int scalar, t_screen_xy offset)
 {
-	return ((t_xy){x0.x * scalar + offset.x, x0.y * scalar + offset.y, 1.0f});
+	return ((t_xy){x0.x * scalar + offset.x, x0.y * scalar + offset.y});
 }
 
 void	draw_editor_sectors(t_editor *editor)
@@ -235,12 +235,12 @@ void	draw_entity_textfields(t_entity_list **list, int selected_entity, t_buffer 
 		return ;
 	mod.colour = white;
 	mod.size = TEXT_SIZE;
-	c_pxl(buffer, vec2(100, 56), '0' + temp->entity_idx, mod);
-	c_pxl(buffer, vec2(100, 84), '0' + temp->entity_type, mod);
-	c_pxl(buffer, vec2(150, 114), '0' + temp->is_linked, mod);
-	c_pxl(buffer, vec2(165, 144), '0' + temp->is_revealed, mod);
-	c_pxl(buffer, vec2(165, 174), '0' + temp->is_static, mod);
-	c_pxl(buffer, vec2(100, 204), '0' + temp->state, mod);
+	ft_c_pxl(buffer, vec2(100, 56), '0' + temp->entity_idx, mod);
+	ft_c_pxl(buffer, vec2(100, 84), '0' + temp->entity_type, mod);
+	ft_c_pxl(buffer, vec2(150, 114), '0' + temp->is_linked, mod);
+	ft_c_pxl(buffer, vec2(165, 144), '0' + temp->is_revealed, mod);
+	ft_c_pxl(buffer, vec2(165, 174), '0' + temp->is_static, mod);
+	ft_c_pxl(buffer, vec2(100, 204), '0' + temp->state, mod);
 }
 
 void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text)
@@ -250,9 +250,9 @@ void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, in
 	mod.colour = white;
 	mod.size = TEXT_SIZE;
 	if (help_text == map_saving)
-		str_pxl(buffer, vec2(midpoint - 100, 50), "Please input text string", mod);
+		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Please input text string", mod);
 	if (string != NULL)
-		str_pxl(buffer, vec2(midpoint - 100, 70), (char *)string, mod);
+		ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)string, mod);
 }
 
 void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_names)
@@ -271,9 +271,9 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 	mod.colour = orange;
 	mod.size = TEXT_SIZE;
 	if (action->link_maps)
-		str_pxl(buffer, vec2(310, 70), "Select which map to link to", mod);
+		ft_str_pxl(buffer, vec2(310, 70), "Select which map to link to", mod);
 	else
-		str_pxl(buffer, vec2(310, 70), "Select which map to load into editor", mod);
+		ft_str_pxl(buffer, vec2(310, 70), "Select which map to load into editor", mod);
 	box.start.x = 310;
 	box.start.y = 100;
 	box.end.x = 700;
@@ -285,7 +285,7 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 			mod.colour = red;
 		else
 			mod.colour = white;
-		str_pxl(buffer, vec2(310, 100 + y),
+		ft_str_pxl(buffer, vec2(310, 100 + y),
 			map_names[i], mod);
 		y += 15;
 		i++;
