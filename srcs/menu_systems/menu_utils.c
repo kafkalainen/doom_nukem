@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 16:26:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:01:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,40 @@ void	free_game_assets(t_home *home)
 	free_projectiles(home);
 }
 
-void	get_menu_range_key_down(t_menu *menu)
+void	get_menu_range_key_down(int *option, int *start, int *end, int nbr_of_maps)
 {
-	if (menu->option == 0)
+	if (*option == 0)
 	{
-		menu->start = 0;
-		if ((menu->nbr_of_maps - 8) > 0)
-			menu->end = 7;
+		*start = 0;
+		if ((nbr_of_maps - 8) > 0)
+			*end = 7;
 		else
-			menu->end = menu->nbr_of_maps - 1;
+			*end = nbr_of_maps - 1;
 	}
-	if (menu->option > menu->end)
-		menu->end = menu->option;
-	if ((menu->end - 7) > 0)
-		menu->start = (menu->end - 7);
+	if (*option > *end)
+		*end = *option;
+	if ((*end - 7) > 0)
+		*start = (*end - 7);
 	else
-		menu->start = 0;
+		*start = 0;
 }
 
-void	get_menu_range_key_up(t_menu *menu)
+void	get_menu_range_key_up(int *option, int *start, int *end, int nbr_of_maps)
 {
-	if (menu->option == menu->nbr_of_maps - 1)
+	if (*option == nbr_of_maps - 1)
 	{
-		menu->end = menu->option;
-		if ((menu->option - 7) > 0)
-			menu->start = (menu->option - 7);
+		*end = *option;
+		if ((*option - 7) > 0)
+			*start = (*option - 7);
 		else
-			menu->start = 0;
+			*start = 0;
 	}
-	if (menu->option < menu->start)
-		menu->start = menu->option;
-	if ((menu->start + 7) > menu->nbr_of_maps - 1)
-		menu->end = menu->nbr_of_maps - 1;
+	if (*option < *start)
+		*start = *option;
+	if ((*start + 7) > nbr_of_maps - 1)
+		*end = nbr_of_maps - 1;
 	else
-		menu->end = (menu->start + 7);
+		*end = (*start + 7);
 }
 
 void	update_load_menu(t_menu *menu, int sym)
@@ -67,9 +67,9 @@ void	update_load_menu(t_menu *menu, int sym)
 	t_plx_modifier	mod;
 
 	if (sym == SDLK_DOWN)
-		get_menu_range_key_down(menu);
+		get_menu_range_key_down(&menu->option, &menu->start, &menu->end, menu->nbr_of_maps);
 	else if (sym == SDLK_UP)
-		get_menu_range_key_up(menu);
+		get_menu_range_key_up(&menu->option, &menu->start, &menu->end, menu->nbr_of_maps);
 	i = menu->start;
 	y = 0;
 	mod.colour = 0;
@@ -97,7 +97,7 @@ void	loop_map_names(char **map_names, struct dirent *dir_entry, DIR *dir)
 	i = 0;
 	while (dir_entry != NULL)
 	{
-		found = ft_strstr(dir_entry->d_name, ".TEST");
+		found = ft_strstr(dir_entry->d_name, ".DN");
 		if (found != NULL)
 		{
 			map_names[i] = (char *)malloc(sizeof(char)

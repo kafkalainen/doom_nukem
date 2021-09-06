@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:23:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:10:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef struct s_xy
 	float			x;
 	float			y;
 }					t_xy;
+
+typedef	struct		s_box
+{
+	t_xy			start;
+	t_xy			end;
+}					t_box;
 
 typedef t_xy	t_range;
 

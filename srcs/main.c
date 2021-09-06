@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 17:45:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:04:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	main(void)
 			setup_game_loop(&home, &plr, &menu.option);
 			launch_game_loop(&home, &plr, &frame, &e);
 		}
-		// if (home.game_state == EDITOR)
-		// 	launch_editor(&home, &e);
+		if (home.game_state == EDITOR)
+			launch_editor(&home, &e);
 		render_buffer(menu.menu_buffer.pxl_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/06 17:08:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:26:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ typedef struct		s_mouse_data
 	int				i_mbright;
 }					t_mouse_data;
 
-typedef	struct		s_box
-{
-	t_xy			start;
-	t_xy			end;
-}					t_box;
-
 typedef struct s_editor_walls
 {
 	t_screen_xy				x0;
@@ -45,7 +39,7 @@ typedef struct s_editor_walls
 **	intensity between 0-100, can be rescaled on gamesetup between 0-1
 */
 
-typedef	struct	s_editor_light
+typedef	struct s_editor_light
 {
 	t_screen_xy	pos;
 	int			intensity;
@@ -53,42 +47,14 @@ typedef	struct	s_editor_light
 	int			state;
 }				t_editor_light;
 
-/* typedef struct s_editor_sector
-{
-	t_editor_walls	*walls;
-	t_editor_light	light;
-	unsigned char	*sector_plot;
-	unsigned int	nb_of_walls;
-	int				idx_sector;
-	int				tex_floor;
-	int				tex_ceil;
-}				t_editor_sector;
- */
-typedef struct		s_sector_list
-{
-	t_editor_walls	*walls;
-	t_editor_light	light;
-	unsigned char	*sector_plot;
-	int				nb_of_walls;
-	int				idx_sector;
-	int				tex_floor;
-	int				tex_ceil;
-	int				is_elevator;
-	int				has_light_button;
-	int				has_light_source;
-	t_box					bbox;
-	struct s_sector_list	*next;
-}					t_sector_list;
-
-typedef	struct		s_button_info
+typedef	struct s_button_info
 {
 	char		*text;
 	int			inputfield;
 	int			draw_depth;
 }					t_button_info;
 
-
-typedef struct		s_button
+typedef struct s_button
 {
 	t_button_info	info;
 	t_xy			ltop;
@@ -96,7 +62,7 @@ typedef struct		s_button
 
 }					t_button;
 
-typedef	struct		s_plr_pos
+typedef	struct s_plr_pos
 {
 	int				x;
 	int				z;
@@ -104,7 +70,7 @@ typedef	struct		s_plr_pos
 }					t_plr_pos;
 
 
-typedef struct		s_action
+typedef struct s_action
 {
 	t_screen_xy		offset;
 	t_xy			mouse_pos;
@@ -151,14 +117,14 @@ typedef struct		s_action
 	int				end;
 }					t_action;
 
-typedef	struct		s_editor_xyz
+typedef	struct s_editor_xyz
 {
 	int				x;
 	int				y;
 	int				z;
 }					t_editor_xyz;
 
-typedef	struct		s_entity_list
+typedef	struct s_entity_list
 {
 	t_box					bbox;
 	t_editor_xyz			pos;
@@ -174,8 +140,23 @@ typedef	struct		s_entity_list
 	struct s_entity_list	*next;
 }					t_entity_list;
 
+typedef struct s_sector_list
+{
+	t_editor_walls	*walls;
+	t_editor_light	light;
+	unsigned char	*sector_plot;
+	int				nb_of_walls;
+	int				idx_sector;
+	int				tex_floor;
+	int				tex_ceil;
+	int				is_elevator;
+	int				has_light_button;
+	int				has_light_source;
+	t_box					bbox;
+	struct s_sector_list	*next;
+}					t_sector_list;
 
-typedef struct		s_editor
+typedef struct s_editor
 {
 	t_sector_list		*sector_list;
 	t_entity_list		*entity_list;

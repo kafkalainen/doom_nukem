@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 17:48:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:51:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	write_texture_data(int *fd, t_home *home)
 	unsigned char	*buf;
 
 	buf = NULL;
-	buf = (unsigned char *)ft_strjoin("doom_textures #",
-			(const char *)ft_itoa(home->nbr_of_textures));
-	buf = (unsigned char *)ft_strjoin((const char *)buf, "\n");
+	buf = (unsigned char *)ft_strjoin_freeable("#doom_nukem_textures#",
+			ft_itoa(home->nbr_of_textures), 0, 1);
+	buf = (unsigned char *)ft_strjoin_freeable((char *)buf, "\n", 1, 0);
 	if (doom_write(fd, (const void **)&buf, ft_strlen((const char *)buf)) == -1)
 		printf("failed to add texture numbers\n");
 	ft_strdel((char **)&buf);
@@ -39,11 +39,14 @@ void	write_audio_data(int *fd, char *path, char *asset_name)
 
 	get_audio_data(&asset, path);
 	tmp = NULL;
-	tmp = (unsigned char *)ft_strjoin((const char *)asset_name,
-			(const char *)ft_itoa(asset.size));
-	tmp = (unsigned char *)ft_strjoin((const char *)tmp, "\n");
-	tmp = (unsigned char *)ft_strjoin((const char *)tmp, WRITE_BREAKER);
-	if (doom_write(fd, (const void **)&tmp, ft_strlen((const char *)tmp)) == -1)
+	tmp = (unsigned char *)ft_strjoin_freeable((char *)asset_name,
+			ft_itoa(asset.size), 0, 1);
+	tmp = (unsigned char *)ft_strjoin_freeable((char *)tmp,
+			"\n", 1, 0);
+	tmp = (unsigned char *)ft_strjoin_freeable((char *)tmp,
+			WRITE_BREAKER, 1, 0);
+	if (doom_write(fd, (const void **)&tmp,
+			ft_strlen((const char *)tmp)) == -1)
 		printf("Failed to write audio data point start\n");
 	if (doom_write(fd, (const void **)&asset.buf, asset.size) == -1)
 		printf("Failed to write audio data\n");

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:55:06 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 15:35:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:58:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ unsigned char	*create_write_buffer(t_texture *tex)
 	unsigned char	*buf;
 
 	buf = NULL;
-	buf = (unsigned char *)ft_strjoin(WRITE_BREAKER, ft_itoa(tex->idx));
-	buf = (unsigned char *)ft_strjoin((const char *)buf, WRITE_BREAKER);
-	buf = (unsigned char *)ft_strjoin((const char *)buf,
-			ft_itoa(tex->source_size));
-	buf = (unsigned char *)ft_strjoin((const char *)buf, WRITE_BREAKER);
+	buf = (unsigned char *)ft_strjoin_freeable(WRITE_BREAKER,
+			ft_itoa(tex->idx), 0, 1);
+	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
+			WRITE_BREAKER, 1, 0);
+	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
+			ft_itoa(tex->source_size), 1, 1);
+	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
+			WRITE_BREAKER, 1, 0);
 	return (buf);
 }
 
@@ -55,7 +58,7 @@ int	get_next_breaker(unsigned char *buf)
 			return (i);
 		i++;
 	}
-	return (BUF_SIZE);
+	return (-1);
 }
 
 t_texture	*return_new_texture(t_png *png, int idx)

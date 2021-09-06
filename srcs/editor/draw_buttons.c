@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/06 17:34:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:32:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ void	draw_bbox_sector(t_sector_list *sector, t_buffer *buffer, t_action *action)
 	float	point2;
 	float	point3;
 	float	point4;
-	int		color;
+	Uint32	color;
 
 	point1 = sector->bbox.start.x * action->scalar + action->offset.x;
 	point2 = sector->bbox.start.y * action->scalar + action->offset.y;
 	point3 = sector->bbox.end.x * action->scalar + action->offset.x;
 	point4 = sector->bbox.end.y * action->scalar + action->offset.y;
 	if (action->selected_sector == sector->idx_sector)
-		color = lightgreen;
+		color = get_color(lightgreen);
 	else
-		color = blue;
+		color = get_color(blue);
 	draw_rect(vec2(point1, point2), vec2(fabs(point1 - point3), fabs(point2 - point4)), buffer, color);
 }
 
-void	draw_box(t_box box, t_buffer *buffer, int color)
+void	draw_box(t_box box, t_buffer *buffer, Uint32 color)
 {
 	float end;
 	float start;
@@ -54,7 +54,7 @@ void		draw_sector_textfields(t_sector_list *sector, t_buffer *buffer)
 
 	if (!sector)
 		return ;
-	mod.colour = white;
+	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
 	ft_c_pxl(buffer, vec2(165, 56), '0' + sector->idx_sector, mod);
 	if (sector->sector_plot)
@@ -64,10 +64,10 @@ void		draw_sector_textfields(t_sector_list *sector, t_buffer *buffer)
 int			get_color_from_action_data(int i, t_action *action, int end_sector)
 {
 	if ((i == 7 && action->player_start_assigned) || (i == 4 && end_sector >= 0))
-		return (green);
+		return (get_color(green));
 	else if (i == 7 || i == 4)
-		return (red);
-	return (white);
+		return (get_color(red));
+	return (get_color(white));
 }
 
 void		draw_buttons(t_button **blist, t_buffer *buffer, int draw_depth, t_action *action, int end_sector)
@@ -78,9 +78,9 @@ void		draw_buttons(t_button **blist, t_buffer *buffer, int draw_depth, t_action 
 
 	box.start = vec2(0, 0);
 	box.end = vec2(300, buffer->height);
-	draw_box(box, buffer, 0x282040);
+	draw_box(box, buffer, get_color(0x282040));
 	i = 0;
-	mod.colour = white;
+	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
 	while (i < NBR_BUTTONS)
 	{
@@ -89,7 +89,7 @@ void		draw_buttons(t_button **blist, t_buffer *buffer, int draw_depth, t_action 
 			mod.colour = get_color_from_action_data(i, action, end_sector);
 			box.start = blist[i]->ltop;
 			box.end = blist[i]->wh;
-			draw_box(box, buffer, 0xAAAAAA);
+			draw_box(box, buffer, get_color(0xAAAAAA));
 			ft_str_pxl(buffer,
 				vec2(blist[i]->ltop.x + 8, blist[i]->ltop.y + 4),
 				blist[i]->info.text, mod);
@@ -113,7 +113,7 @@ void			draw_grid_editor(t_buffer *buffer, t_action *action)
 		val = i * action->scalar + (action->offset.y % action->scalar);
 		if (val < buffer->height)
 			draw_line(vec2(300, val),
-				vec2(buffer->width, val), 0x808080, buffer);
+				vec2(buffer->width, val), get_color(0x808080), buffer);
 		i++;
 	}
 	i = 0;
@@ -122,7 +122,7 @@ void			draw_grid_editor(t_buffer *buffer, t_action *action)
 		val = (i * action->scalar + (action->offset.y % action->scalar)) + 300;
 		if (val < buffer->width && val >= 300)
 			draw_line(vec2(val, 0),
-				vec2(val, buffer->height), 0x808080, buffer);
+				vec2(val, buffer->height), get_color(0x808080), buffer);
 		i++;
 	}
 }
@@ -157,16 +157,16 @@ void	draw_editor_sectors(t_editor *editor)
 			temp_box.start = test1;
 			temp_box.end = test2;
 			if (wall_1->idx == editor->action.selected_wall && sector_list->idx_sector == editor->action.selected_sector)
-				color = white;
+				color = get_color(white);
 			else
-				color = yellow;
+				color = get_color(yellow);
 			if (sector_list->idx_sector == editor->action.selected_sector)
 				draw_box(temp_box, &editor->buffer, color);
 			wall_2 = wall_1->next;
 			draw_line(
 				scale_xy(wall_1->x0, editor->action.scalar, editor->action.offset),
 				scale_xy(wall_2->x0, editor->action.scalar, editor->action.offset),
-				white, &editor->buffer);
+				get_color(white), &editor->buffer);
 			active++;
 			wall_1 = wall_1->next;
 		}
@@ -278,13 +278,13 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 	box.start.y = 100;
 	box.end.x = 700;
 	box.end.y = (100 + (15 * (action->end - action->start + 1)));
-	draw_box(box, buffer, black);
+	draw_box(box, buffer, get_color(black));
 	while (i <= action->end)
 	{
 		if (i == action->option)
-			mod.colour = red;
+			mod.colour = get_color(red);
 		else
-			mod.colour = white;
+			mod.colour = get_color(white);
 		ft_str_pxl(buffer, vec2(310, 100 + y),
 			map_names[i], mod);
 		y += 15;
@@ -317,7 +317,7 @@ void	draw_ui(t_editor *editor)
 			tempo = tempo->next;
 		draw_line(
 			scale_xy((t_screen_xy){tempo->pos.x, tempo->pos.z}, editor->action.scalar, editor->action.offset),
-			vec2(editor->mouse_data.x, editor->mouse_data.y), blue, &editor->buffer);
+			vec2(editor->mouse_data.x, editor->mouse_data.y), get_color(blue), &editor->buffer);
 		editor->entity_list = ent;
 	}
 	if (editor->action.save_file)

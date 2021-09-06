@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 17:47:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:04:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,6 @@ void	reload_editor_with_defaults(t_editor *editor, char *path)
 	editor->mapname = (unsigned char *)ft_strnew(sizeof(unsigned char) * (ft_strlen((const char *)path) + 1));
 	editor->mapname = (unsigned char *)ft_strcpy((char *)editor->mapname, (const char *)path);
 	editor->action.map_name_set = 1;
-}
-
-Uint32	get_next_int_value(int *nb, unsigned char *buf,
-				unsigned int **pos, ssize_t size)
-{
-	**pos += get_next_breaker(buf + **pos) + 1;
-	if (**pos > (unsigned int)size)
-		return (1);
-	*nb = ft_atoi((const char *)buf + **pos);
-	return (0);
 }
 
 int		editor_parse_map_name(t_editor *editor, ssize_t size, unsigned char *buf, unsigned int **pos)

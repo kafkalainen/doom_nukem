@@ -65,9 +65,9 @@
 
 # include "../libft/libft.h"
 # include "engine.h"
+# include "editor.h"
 # include "drawing_functions.h"
 # include "events.h"
-# include "editor.h"
 # include "porting.h"
 # include "parsing.h"
 # include "typewriter.h"

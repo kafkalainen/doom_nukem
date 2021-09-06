@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 16:46:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:52:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,24 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 	return (0);
 }
 
+void	verify_hash(unsigned char *buf, ssize_t size)
+{
+	Uint32			orig_hash;
+	Uint32			new_hash;
+	unsigned int	pos;
+
+	pos = 0;
+	new_hash = 0;
+	orig_hash = ft_atoi((const char *)buf);
+	pos += get_next_breaker(buf + pos);
+	if (pos > size)
+		error_output("Reading past memory pointer\n");
+	new_hash = ft_adler32(buf + pos, size);
+	printf("Original hash: %i, new hash: %i\n", orig_hash, new_hash);
+	if (orig_hash != new_hash)
+		error_output("Hash verification failed\n");
+}
+
 //validate_sectors_data(home, plr);
 int	load_map_file(t_player *plr, t_home *home)
 {
@@ -112,6 +130,7 @@ int	load_map_file(t_player *plr, t_home *home)
 		if (size <= 0 || size == BUF_SIZE || doom_close(&fd) == -1)
 			read_error_output("ERROR: Failed to read map.", &buf);
 		buf[size] = '\0';
+		verify_hash(buf, size);
 		ret = parse_sector_data(buf, plr, home, size);
 		ret = parse_entity_data(buf, home, size);
 		free(buf);

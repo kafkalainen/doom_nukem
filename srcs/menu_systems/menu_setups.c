@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 17:42:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:02:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	get_map_count(int *count, DIR **dir, struct dirent **dir_entry)
 	*dir_entry = readdir(*dir);
 	while (*dir_entry != NULL)
 	{
-		found = ft_strstr((*dir_entry)->d_name, ".TEST");
+		found = ft_strstr((*dir_entry)->d_name, ".DN");
 		if (found != NULL)
 			(*count)++;
 		*dir_entry = readdir(*dir);
