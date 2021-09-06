@@ -67,11 +67,11 @@
 # include "engine.h"
 # include "drawing_functions.h"
 # include "events.h"
+# include "editor.h"
 # include "porting.h"
 # include "parsing.h"
 # include "typewriter.h"
 # include "menu_systems.h"
-# include "editor.h"
 
 /*
 ** Miscellaneous

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:27:23 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 16:41:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:10:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	update_main_menu(t_buffer *menu_buffer, int option);
 int		get_map_count(int *count, DIR **dir, struct dirent **dir_entry);
 void	loop_map_names(char **map_names, struct dirent *dir_entry, DIR *dir);
 void	update_load_menu(t_menu *menu, int sym);
-void	get_menu_range_key_up(t_menu *menu);
-void	get_menu_range_key_down(t_menu *menu);
+void	get_menu_range_key_up(int *option, int *start, int *end, int nbr_of_maps);
+void	get_menu_range_key_down(int *option, int *start, int *end, int nbr_of_maps);
 void	free_game_assets(t_home *home);
 void	update_option_load_menu(int *game_state, t_menu *menu, int sym);
 void	update_option_main_menu(int *game_state, int sym, int *option);

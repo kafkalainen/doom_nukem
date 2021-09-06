@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/04 09:03:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:09:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MACROS_H
 
 # define BUFF_SIZE 16
-# define NBR_BUTTONS 14
+# define NBR_BUTTONS 28
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 
@@ -37,6 +37,7 @@
 **  - Lamp on / off
 */
 # define NUM_TEX 44
+# define MAX_FILE_NAME_LENGHT 50
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
 # define INV_PI_BY_TWO 0.1591549367f

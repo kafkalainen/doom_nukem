@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 09:46:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:59:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:12:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ t_pxl_c			pxl_alphabet(int l, int b, int c);
 t_pxl_c			pxl_numbers(int l, int b, int c);
 void			ft_str_pxl(t_buffer *buffer, t_xy coord, char *str,
 					t_plx_modifier mod);
+void			c_pxl(t_buffer *buffer, t_xy coord, char c, t_plx_modifier mod);
 #endif

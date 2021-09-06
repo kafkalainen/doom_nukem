@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 14:38:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:09:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@
 # define ENTITY_SPRITE_MOVE_START 0
 # define ENTITY_SPRITE_MOVE_END 4
 # define MAX_PROJECTILES 15
+
+enum e_help_text
+{
+	map_saving,
+	story_string,
+};
+
+enum e_draw_depth
+{
+	depth_zero,
+	sector,
+	entity,
+	wall,
+};
 
 enum e_entities
 {

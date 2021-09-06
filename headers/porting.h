@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 15:51:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:12:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define READ_BREAKER '#'
 # define BUF_SIZE 30000
 # define XPM_BUF_SIZE 200000
+# define MOD_ADLER 65521
 
 int				get_next_breaker(unsigned char *buf);
 int				load_map_file(t_player *plr, t_home *home);
@@ -59,10 +60,27 @@ int				create_temp_audio_file(unsigned char *buf,
 # define WRITE_BREAKER "#"
 # define READ_BREAKER '#'
 
-int				create_map_file(t_home *home);
+int				create_map_file(t_home *home, t_editor *editor);
 void			write_texture_data(int *fd, t_home *home);
 void			write_audio_data(int *fd, char *path, char *asset_name);
 int				open_file(t_home *home, char *path);
 int				open_map_file(t_home *home, char *path);
+void			write_sector_data(int *fd, t_editor *editor);
+void			write_entity_data(int *fd, t_editor *editor);
+char			*ft_strjoin_freeable(char *s1, char *s2, int free_one, int free_two);
+Uint32			ft_adler32(unsigned char *data, ssize_t size);
+void			create_hash(unsigned char *tmp);
+void			verify_hash(unsigned char *buf, ssize_t size);
+
+int				get_nbr_of_lines(unsigned char *plot);
+int				check_if_linked(unsigned char *linked_map);
+int				get_nbr_of_sectors(t_sector_list **sectors);
+unsigned char	*get_writable_sector_data3(t_sector_list *sector,
+					unsigned char *buf);
+unsigned char	*get_writable_sector_data2(t_sector_list *sector,
+					unsigned char *buf);
+unsigned char	*get_sector_plot(unsigned char *plot);
+unsigned char	*write_plot_lines(unsigned char *plot);
+unsigned char	*get_writable_wall_data(t_editor_walls *wall);
 
 #endif

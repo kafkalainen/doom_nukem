@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/06 15:09:59 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/06 17:05:39 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,20 @@ NAME = doom-nukem
 
 SRCS = \
 	main.c \
-	editor$(SLASH)setup_editor.c \
+	editor$(SLASH)check_if_non_convex.c \
+	editor$(SLASH)check_for_intersecting_lines.c \
+	editor$(SLASH)draw_buttons.c \
+	editor$(SLASH)launch_editor.c \
 	editor$(SLASH)allocate_buttons.c \
+	editor$(SLASH)wall_points.c \
 	editor$(SLASH)editor_events.c \
+	editor$(SLASH)button_actions.c \
+	editor$(SLASH)editor_entity.c \
+	editor$(SLASH)event_actions.c \
+	editor$(SLASH)handle_events.c \
+	editor$(SLASH)sector_actions.c \
+	editor$(SLASH)sector_properties.c \
+	editor$(SLASH)editor_load_map.c \
 	entity_logic$(SLASH)activate_lift.c \
 	entity_logic$(SLASH)attack_player.c \
 	entity_logic$(SLASH)check_aggro.c \
@@ -69,12 +80,17 @@ SRCS = \
 	png_parser$(SLASH)parser_utils2.c \
 	porting$(SLASH)png.c \
 	porting$(SLASH)create_mapfile.c \
+	porting$(SLASH)hashing.c \
 	porting$(SLASH)init_textures.c \
 	porting$(SLASH)open_file1.c \
 	porting$(SLASH)open_file2.c \
+	porting$(SLASH)porting_utils.c \
+	porting$(SLASH)porting_utils2.c \
 	porting$(SLASH)validate_sectors_data_a.c \
 	porting$(SLASH)validate_sectors_data_b.c \
-	porting$(SLASH)porting_utils.c \
+	porting$(SLASH)write_sector_data.c \
+	porting$(SLASH)write_sector_data2.c \
+	porting$(SLASH)write_entity_data.c \
 	engine$(SLASH)calc_sector_bounds.c \
 	engine$(SLASH)colour_scale.c \
 	engine$(SLASH)get_next_wall_tex.c \
