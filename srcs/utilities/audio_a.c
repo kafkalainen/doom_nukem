@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/05 23:04:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 14:54:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,18 @@ static void	free_sound(Mix_Chunk **chunk)
 	*chunk = NULL;
 }
 
+static void	cleanup_enemy_audio_sources(t_audio *audio)
+{
+	free_sound(&audio->skull_skulker_aggro);
+	free_sound(&audio->skull_skulker_attack);
+	free_sound(&audio->skull_skulker_damage);
+	free_sound(&audio->skull_skulker_death);
+	free_sound(&audio->thing_aggro);
+	free_sound(&audio->thing_attack);
+	free_sound(&audio->thing_damage);
+	free_sound(&audio->thing_death);
+}
+
 void	cleanup_audio_source(t_audio *audio)
 {
 	if (Mix_PlayingMusic())
@@ -84,4 +96,7 @@ void	cleanup_audio_source(t_audio *audio)
 	free_sound(&audio->bolt_unlocked);
 	free_sound(&audio->lift);
 	free_sound(&audio->plasma_gun_no_ammo);
+	free_sound(&audio->reload);
+	free_sound(&audio->unlock_door);
+	cleanup_enemy_audio_sources(audio);
 }
