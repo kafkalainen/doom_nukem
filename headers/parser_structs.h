@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_structs.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:04:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 12:04:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:04:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 
 typedef struct s_chunk
 {
-	int				size;
 	unsigned char	length[4];
 	char			type[5];
+	int				size;
 }					t_chunk;
 
 typedef struct s_source
@@ -36,22 +36,10 @@ typedef struct s_source
 	unsigned int	size;
 }					t_source;
 
-typedef struct s_padding_helper
-{
-	unsigned int	out_linebits;
-	unsigned int	in_linebits;
-	unsigned int	difference;
-	unsigned int	out_bit_p;
-	unsigned int	in_bit_p;
-	unsigned int	line;
-	unsigned int	x;
-	unsigned char	bit;
-}					t_padding_helper;
-
 typedef struct s_scan_helper
 {
-	unsigned int	line;
 	unsigned char	*prev;
+	unsigned int	line;
 	int				byte_width;
 	int				line_bytes;
 	unsigned int	out_index;
@@ -61,6 +49,11 @@ typedef struct s_scan_helper
 
 typedef struct s_png
 {
+	t_chunk			chunk;
+	t_source		source;
+	unsigned char	*compressed;
+	unsigned char	*pixels;
+	unsigned char	*inflated;
 	unsigned int	i;
 	unsigned int	width;
 	unsigned int	height;
@@ -71,8 +64,6 @@ typedef struct s_png
 	unsigned int	compressed_index;
 	unsigned int	inflated_size;
 	unsigned int	final_size;
-	t_chunk			chunk;
-	t_source		source;
 	unsigned int	depth;
 	unsigned int	color_type;
 	unsigned int	compression_method;
@@ -80,25 +71,27 @@ typedef struct s_png
 	unsigned int	interlace_method;
 	unsigned int	channels;
 	unsigned int	bpp;
-	unsigned char	*compressed;
-	unsigned char	*pixels;
-	unsigned char	*inflated;
 }					t_png;
 
 typedef struct s_crc
 {
-	int				flag;
 	unsigned int	crc_table[256];
+	int				flag;
 }					t_crc;
+
+typedef struct s_texel
+{
+	unsigned int	*texels;
+	int				width;
+	int				height;
+}				t_texel;
 
 typedef struct s_texture
 {
-	unsigned int	*pixels;
 	unsigned char	*source;
 	unsigned int	source_size;
+	t_texel			tex;
 	int				idx;
-	int				w;
-	int				h;
 	int				size;
 	int				color_type;
 	int				color_depth;
@@ -157,12 +150,12 @@ typedef struct s_huffman_helper
 
 typedef struct s_huffman
 {
-	unsigned int	codetree_buffer[DEFLATE_CODE_BUFFER_SIZE];
-	unsigned int	codetree_dst_buffer[DISTANCE_BUFFER_SIZE];
-	unsigned int	code_length_tree_buffer[CODE_LENGTH_BUFFER_SIZE];
 	t_huffman_tree	codetree;
 	t_huffman_tree	codetree_dst;
 	t_huffman_tree	code_length_tree;
+	unsigned int	codetree_buffer[DEFLATE_CODE_BUFFER_SIZE];
+	unsigned int	codetree_dst_buffer[DISTANCE_BUFFER_SIZE];
+	unsigned int	code_length_tree_buffer[CODE_LENGTH_BUFFER_SIZE];
 	unsigned int	bit_p;
 	unsigned int	pos;
 	unsigned int	type;

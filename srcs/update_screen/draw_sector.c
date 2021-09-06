@@ -5,11 +5,120 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/17 15:43:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/19 11:54:31 by jnivala          ###   ########.fr       */
+/*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
+/*   Updated: 2021/09/06 16:21:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	draw_sector(t_frame *frame, t_home *home, t_player *plr);
+static void	clip_to_near_plane(t_triangle *current_view,
+	t_sides *viewport, t_raster_queue *triangles_in_view)
+{
+	Uint32		nb_of_clipped_triangles;
+	t_triangle	projected;
+	t_xyz		scale;
+	t_triangle	clipped_triangle[2];
+
+	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
+	nb_of_clipped_triangles = clip_against_plane(&viewport->near,
+			current_view, &clipped_triangle[0], &clipped_triangle[1]);
+	while (nb_of_clipped_triangles)
+	{
+		projected = create_projection(&clipped_triangle[nb_of_clipped_triangles
+				 - 1]);
+		triangle_inv_z(&projected);
+		projected.p[0] = vec3_div(projected.p[0], projected.p[0].w);
+		projected.p[1] = vec3_div(projected.p[1], projected.p[1].w);
+		projected.p[2] = vec3_div(projected.p[2], projected.p[2].w);
+		invert_view(&projected);
+		triangle_add(&projected, viewport->view_offset);
+		projected = scale_triangle(&projected, scale);
+		triangles_in_view->array[triangles_in_view->size] = projected;
+		triangles_in_view->size += 1;
+		nb_of_clipped_triangles--;
+	}
+}
+
+static void	project_to_player_position(t_frame *frame, t_player *plr,
+	t_lighting *lights)
+{
+	Uint32		i;
+	size_t		current_size;
+	t_triangle	current_viewed_triangle;
+
+	create_target_vector(plr);
+	current_size = frame->transformed->size;
+	frame->triangles_in_view->size = 0;
+	i = 0;
+	while (i < current_size)
+	{
+		front(frame->transformed, &current_viewed_triangle);
+		if (vec3_dot_product(current_viewed_triangle.normal,
+				vec3_dec(current_viewed_triangle.p[0],
+					plr->pos)) < 0)
+		{
+			set_lighting(lights, &current_viewed_triangle);
+			current_viewed_triangle = apply_camera(
+					plr->pos, plr->target, plr->up,
+					&current_viewed_triangle);
+			clip_to_near_plane(&current_viewed_triangle, &frame->viewport,
+				frame->triangles_in_view);
+		}
+		dequeue(frame->transformed);
+		i++;
+	}
+}
+
+void	reset_depth_buffer(float *depth_buffer)
+{
+	int	i;
+
+	i = 0;
+	while (i < (SCREEN_HEIGHT * SCREEN_WIDTH))
+	{
+		depth_buffer[i] = 0.0f;
+		i++;
+	}
+}
+
+static void	initialize_thread(t_arg *arg, t_frame *frame, t_home *home,
+			Uint32 idx)
+{
+	arg->textures = home->textures;
+	arg->buffer = &frame->buffer;
+	arg->depth_buffer = frame->depth_buffer;
+	arg->view_list = frame->triangles_in_view;
+	arg->raster_queue = frame->raster_queue;
+	arg->viewport = &frame->viewport;
+	arg->last_frame = home->t.frame_time_last;
+	arg->thread_index = idx;
+}
+
+int	draw_sector(t_frame *frame, t_home *home, t_player *plr, int sector_idx)
+{
+	t_arg			args[MAX_THREADS];
+	pthread_t		tid[MAX_THREADS];
+	pthread_mutex_t	mutex;
+	Uint32			i;
+
+	i = 0;
+	mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+	if (sector_idx == -1)
+		project_to_player_position(frame, plr, NULL);
+	else
+		project_to_player_position(frame, plr,
+			&home->sectors[sector_idx]->lights);
+	while (i < MAX_THREADS)
+	{
+		initialize_thread(&args[i], frame, home, i);
+		pthread_create(&tid[i], NULL, &clip_to_viewport_edges,
+			(void*)&args[i]);
+		pthread_mutex_lock(&mutex);
+		i++;
+		pthread_mutex_unlock(&mutex);
+	}
+	while (i--)
+		pthread_join(tid[i], NULL);
+	return (TRUE);
+}

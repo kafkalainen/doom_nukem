@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/20 12:22:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 15:58:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static t_pxl_c	letter_logic(int c, int letter_colour)
 {
 	if (c >= 'A' && c <= 'Z')
-		return (pxl_alphabet(c, black, letter_colour));
+		return (pxl_alphabet(c, get_color(black), letter_colour));
 	if (c >= '0' && c <= '9')
-		return (pxl_numbers(c, black, letter_colour));
+		return (pxl_numbers(c, get_color(black), letter_colour));
 	if (c == ':' || c == '\'' || c == '!' || c == '?' || c == ' '
 		|| c == '.' || c == ',' || c == '(' || c == ')' || c == '%')
-		return (pxl_numbers(c, black, letter_colour));
-	return (pxl_numbers(' ', black, letter_colour));
+		return (pxl_numbers(c, get_color(black), letter_colour));
+	return (pxl_numbers(' ', get_color(black), letter_colour));
 }
 
 static void	handle_letter(t_buffer *buffer, t_xy coord,
@@ -51,16 +51,26 @@ static void	handle_letter(t_buffer *buffer, t_xy coord,
 	}
 }
 
-void	str_pxl(t_buffer *buffer, t_xy coord,
+void	ft_str_pxl(t_buffer *buffer, t_xy coord,
 	char *str, t_plx_modifier mod)
 {
 	int		c;
+	t_xy	original;
 
-	while (*str != '\0')
+	original = coord;
+	while (*str != '\0' && mod.len--)
 	{
-		c = ft_toupper(*str);
-		handle_letter(buffer, coord, c, mod);
-		coord.x += 5 * mod.size;
+		if (*str == '\n')
+		{
+			coord.x = original.x;
+			coord.y += 7 * mod.size;
+		}
+		else
+		{
+			c = ft_toupper(*str);
+			handle_letter(buffer, coord, c, mod);
+			coord.x += 5 * mod.size;
+		}
 		str++;
 	}
 }

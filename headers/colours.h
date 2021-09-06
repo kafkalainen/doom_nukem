@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:37:29 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/26 10:45:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/11 12:55:37 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ enum e_colour
 	firebrick = 0xb22222,
 	darkred = 0x8b0000,
 	maroon = 0x800000,
-	white = 0xffffff,
+	white = 0xffffffff,
 	whitesmoke = 0xf5f5f5,
 	gainsboro = 0xdcdcdc,
 	lightgrey = 0xd3d3d3,

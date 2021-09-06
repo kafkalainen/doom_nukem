@@ -3,26 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:16:50 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/18 12:56:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:33:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	swap_channels(unsigned int color)
+Uint32	swap_channels(unsigned int color, int format)
 {
 	unsigned int	red;
 	unsigned int	green;
 	unsigned int	blue;
 	unsigned int	alpha;
 
-	red = (color & 0xFF000000) >> 24;
-	green = (color & 0x00FF0000) >> 16;
-	blue = (color & 0x0000FF00) >> 8;
-	alpha = (color & 0x000000FF);
+	if (format == RGB_8 || format == RGB_16)
+	{
+		alpha = 0xFF;
+		red = (color & 0xFF0000) >> 16;
+		green = (color & 0x00FF00) >> 8;
+		blue = (color & 0x0000FF);
+	}
+	else
+	{
+		red = (color & 0xFF000000) >> 24;
+		green = (color & 0x00FF0000) >> 16;
+		blue = (color & 0x0000FF00) >> 8;
+		alpha = (color & 0x000000FF);
+	}
 	return ((alpha << 24) | (red << 16) | (green << 8) | (blue));
 }
 
@@ -54,7 +64,8 @@ void	convert_to_unsigned_int(t_texture *tex, t_png *png)
 		x = 0;
 		while (x < png->width)
 		{
-			tex->pixels[(y * tex->w) + x] = add_pixel(png->pixels, tex->bpp,
+			tex->tex.texels[(y * tex->tex.width) + x]
+				= add_pixel(png->pixels, tex->bpp,
 					((y * tex->pitch) + x * tex->bpp));
 			x++;
 		}
@@ -75,9 +86,9 @@ t_texture	*create_texture(t_png *png, int idx)
 		error_output("Memory allocation of editor pixel pointer failed\n");
 	ft_memcpy(tex->source, png->source.buf, png->source.size);
 	add_texture_values(png, tex, idx);
-	tex->pixels = (unsigned int *)malloc(sizeof(unsigned int)
-			* (tex->h * tex->pitch));
-	if (!tex->pixels)
+	tex->tex.texels = (unsigned int *)malloc(sizeof(unsigned int)
+			* (tex->tex.height * tex->pitch));
+	if (!tex->tex.texels)
 		error_output("Memory allocation of pixel pointer failed\n");
 	convert_to_unsigned_int(tex, png);
 	return (tex);
@@ -85,15 +96,17 @@ t_texture	*create_texture(t_png *png, int idx)
 
 void	free_texture(t_texture *tex)
 {
+	if (!tex)
+		return ;
 	if (tex->source != NULL)
 	{
 		free(tex->source);
 		tex->source = NULL;
 	}
-	if (tex->pixels != NULL)
+	if (tex->tex.texels != NULL)
 	{
-		free(tex->pixels);
-		tex->pixels = NULL;
+		free(tex->tex.texels);
+		tex->tex.texels = NULL;
 	}
 	if (tex != NULL)
 	{

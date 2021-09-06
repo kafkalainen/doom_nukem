@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typewriter.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 09:46:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/20 12:23:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 15:59:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ typedef struct s_pxl_c
 	int			c[36];
 }				t_pxl_c;
 
-typedef	struct s_plx_modifier
+typedef struct s_plx_modifier
 {
-	int		colour;
-	int		size;
+	int			colour;
+	int			size;
+	size_t		len;
 }				t_plx_modifier;
-
 
 t_pxl_c			pxl_alphabet(int l, int b, int c);
 t_pxl_c			pxl_numbers(int l, int b, int c);
-void			str_pxl(t_buffer *buffer, t_xy coord, char *str, t_plx_modifier mod);
+void			ft_str_pxl(t_buffer *buffer, t_xy coord, char *str,
+					t_plx_modifier mod);
 #endif

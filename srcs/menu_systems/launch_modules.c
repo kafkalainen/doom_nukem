@@ -3,14 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/20 12:10:38 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 16:48:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+void	process_inputs_game_loop(t_player *plr, int *game_state, SDL_Event *e)
+{
+	while (SDL_PollEvent(e) != 0)
+	{
+		if (e->type == SDL_QUIT)
+		{
+			*game_state = QUIT;
+			break ;
+		}
+		key_input(plr, e, game_state);
+		mouse_handle(plr, e);
+	}
+}
+
+void	update_world(t_player *plr, t_home *home)
+{
+	Uint32	current_time;
+	Uint32	delta_time;
+
+	current_time = SDL_GetTicks();
+	delta_time = current_time - plr->time;
+	if (delta_time < 1)
+		return ;
+	plr->time = current_time;
+	update_player(plr, home, delta_time);
+	update_entities(home, plr, delta_time);
+	update_projectiles(home, plr, delta_time);
+	update_lifts(home, plr, current_time, delta_time);
+	update_doors(home->sectors, home->nbr_of_sectors, plr->time, delta_time);
+}
 
 void	launch_game_loop(t_home *home, t_player *plr,
 	t_frame *frame, SDL_Event *e)
@@ -18,16 +49,17 @@ void	launch_game_loop(t_home *home, t_player *plr,
 	while (home->game_state == GAME_LOOP)
 	{
 		fps_timer(&home->t);
-		update_player(plr, home, e);
+		process_inputs_game_loop(plr, &home->game_state, e);
+		update_world(plr, home);
 		update_screen(home, frame, plr);
 		render_buffer(frame->buffer.pxl_buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
-	return_to_main_from_game(home, plr);
+	free_game_assets(home);
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 }
 
-void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e,
-	int *game_state)
+void	launch_load_menu_loop(t_menu *menu, t_home *home, SDL_Event *e)
 {
 	int	i;
 
@@ -38,15 +70,15 @@ void	launch_load_menu_loop(t_menu *menu, t_window *win, SDL_Event *e,
 		menu->end = 7;
 	else
 		menu->end = menu->nbr_of_maps - 1;
-	while (*game_state == MAP_MENU && !menu->selected)
+	while (home->game_state == MAP_MENU && !menu->selected)
 	{
-		process_inputs_load_menu(game_state, e, menu);
+		process_inputs_load_menu(&home->game_state, e, menu);
 		update_load_menu(menu, e->key.keysym.sym);
-		render_buffer(menu->menu_buffer.pxl_buffer, win->ScreenSurface);
-		SDL_UpdateWindowSurface(win->window);
+		render_buffer(menu->menu_buffer.pxl_buffer, home->win.ScreenSurface);
+		SDL_UpdateWindowSurface(home->win.window);
 	}
 	if (menu->selected)
-		menu->chosen_map = ft_strjoin("map_files/",
+		home->chosen_map = ft_strjoin("map_files/",
 				menu->map_names[menu->option]);
 	i = 0;
 	while (i < menu->nbr_of_maps)

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 12:58:03 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 12:04:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/21 16:03:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,6 @@ unsigned int	*get_fixed_deflate_codetree(void)
 	}
 	return ((unsigned int *)combined_array);
 }
-
-/*
-** i is the current symbol we're reading in the part that contains
-** the code lengths of lit/len codes and dist codes
-** now we've finally got hlit and hdist, so generate the code trees,
-** and the function is done
-*/
 
 void	ft_get_tree_inflate_dynamic(t_huffman *h,
 	const unsigned char *in, unsigned int inlength)

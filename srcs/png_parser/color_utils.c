@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:35:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/04/23 12:35:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/26 11:28:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,9 @@ int	get_color_rgba(int depth)
 		return (RGBA_16);
 	else
 		return (-1);
+}
+
+Uint32	get_transparency(Uint32 argb)
+{
+	return (argb & (0xFF << 24));
 }

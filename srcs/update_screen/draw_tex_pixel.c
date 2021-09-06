@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   draw_tex_pixel.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 17:22:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/20 12:21:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 16:07:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	get_texel(int x, int y, t_texture *tex)
+Uint32	get_texel(t_uv *coord, t_uv *limits, Uint32 *pixels)
 {
-	int	offset_x;
-	int	offset_y;
-
-	offset_x = x % tex->w;
-	offset_y = y % tex->h;
-	return ((Uint32)tex->pixels[(offset_y * tex->w) + offset_x]);
+	if (coord->u < 0)
+		coord->u = 0;
+	if (coord->v < 0)
+		coord->v = 0;
+	if (coord->u > limits->u - 1)
+		coord->u = limits->u - 1;
+	if (coord->v > limits->v - 1)
+		coord->v = limits->v - 1;
+	return ((Uint32)pixels[(coord->v * limits->u) + coord->u]);
 }

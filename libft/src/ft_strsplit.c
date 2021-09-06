@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 08:09:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/20 16:48:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/08/10 15:34:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ char	**ft_strsplit(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	word_count = ft_word_counter(s, c);
-	arr = (char **)malloc(sizeof(*arr) * (word_count + 1));
-	if (!arr)
+	arr = (char **)malloc(sizeof(char *) * (word_count + 1));
+	if (arr)
 	{
 		while (i < word_count)
 		{

@@ -15,8 +15,8 @@
 
 # include <fcntl.h>
 # include <dirent.h>
-# include "time.h"
-# include "math.h"
+# include <time.h>
+# include <math.h>
 # ifdef __unix__
 #  define OS_WINDOWS 0
 #  define READ_ONLY O_RDONLY
@@ -28,7 +28,8 @@
 #  define TRUNCATE O_TRUNC
 #  include <string.h>
 #  include <unistd.h>
-// #  define SDL_MAIN_HANDLED
+#  include <pthread.h>
+#  define SDL_MAIN_HANDLED
 #  include "../SDL2/include/SDL2/SDL.h"
 #  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include "../headers/syscalls_windows.h"
@@ -44,7 +45,8 @@
 #  include <io.h>
 #  include <stdio.h>
 #  include <stdlib.h>
-// #  define SDL_MAIN_HANDLED
+#  include <pthread.h>
+#  define SDL_MAIN_HANDLED
 #  include "../SDL2-2.0.14/i686-w64-mingw32/include/SDL2/SDL.h"
 #  include "../SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2/SDL_mixer.h"
 
@@ -52,23 +54,19 @@
 
 # include "macros.h"
 # include "vectors.h"
-# include "entity.h"
 # include "sector.h"
-# include "calculations.h"
 # include "colours.h"
 # include "parser_structs.h"
 # include "png_parser.h"
-# include "program.h"
 # include "audio.h"
+# include "program.h"
 # include "player.h"
+# include "entity.h"
 
 # include "../libft/libft.h"
-# include "player_functions.h"
-# include "raycast.h"
+# include "engine.h"
 # include "drawing_functions.h"
-# include "caster.h"
 # include "events.h"
-# include "map.h"
 # include "porting.h"
 # include "parsing.h"
 # include "typewriter.h"
@@ -79,8 +77,7 @@
 ** Miscellaneous
 */
 
-void	clean_up(t_home *home);
-void	cleanup_audio(t_audio *audio);
+void	clean_up(t_frame *frame);
 int		doom_close(int *fd);
 ssize_t	doom_write(int *fd, const void **buf, size_t count);
 void	doom_open(int *fd, const char **path, int mode, mode_t rights);
@@ -88,17 +85,26 @@ void	doom_read(ssize_t *read_bytes, int *fd, void **buf, size_t nb_of_bytes);
 int		doom_mkdir(void);
 void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
-void	error_output_sdl(char *msg, t_home *home);
+void	error_output_sdl(char *msg, t_home *home, t_frame *frame);
+void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *menu_buffer,
+			char **chosen_map);
 void	fps_timer(t_time *t);
-int		load_audio(t_audio *audio);
-int		load_game_audio(t_audio *audio);
+int		give_sign(float number);
+int		initialize_rasterization_queues(t_frame *frame);
+int		initialize_skybox(t_skybox *skybox);
+int		initialize_hud(t_hud *hud);
+int		is_negative(float z);
 void	map_error_output(int i, t_home *home);
-void	play_footsteps(t_player *plr);
 void	read_error_output(char *msg, unsigned char **line);
+float	set_valid(float angle);
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu);
-void	setup_fps(t_time *time);
+int		setup_fps(t_time *time);
 void	translate_world_view(t_home *home, t_xy step);
 void	transform_world_view(t_home *home, float delta_dir);
 void	update_screen(t_home *home, t_frame *frame, t_player *plr);
+void	swap_sides(t_steps *steps);
+void	swap_uvz(t_uvz *p0, t_uvz *p1);
+void	swap_xyz(t_xyz *p0, t_xyz *p1);
+void	sort_vertices(t_triangle *tri);
 
 #endif

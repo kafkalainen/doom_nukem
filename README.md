@@ -4,35 +4,49 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 # Design Reasonings
 - We decided to pursue a track of creating Duke Nukem engine.
 - Player field of vision is calculated as radians, and are then translated to pixels using how much they use screen space.
+- Switched from Build engine to complete 3D engine using matrices and meshes.
 
 # Biggest blocks
-- Linked list to Cycle list
-- Precision of a float
-- Pixel offset
+- Linked list to Cycle list.
+- Precision of a float.
+- Pixel offset.
 - Is right point needed to properly render the space?
 - Segfault in renderer when the function returns back to the same portal it came from.
 - Wall distorted because only angle is used. Solved using perpentual distance to the wall, and scaling it to the view.
 - Getting correct offset for wall textures.
 - Correcting walls by perspective-correct interpolation from affine texture coordinates.
+- Correcting floors by perspective-correct interpolation.
+- Moving away from Build Engine type of structure to full 3D engine.
+- Typecasting to from (float) to (int) when drawing scanlines.
+- Implementing polygon clipping.
+- Floating point issues with arccos functions.
+
+# Learned through project
+- Makefile and Makefile rules
+- Batch scripting
+- How to deploy code to a seperate repository
+- Git Actions (Norminette and build script)
+- Platform specific design problems (__write vs. write)
+- Raycasting technique.
+- Level design.
+- Game design.
+- Build engine internals.
+- Convex space and polygons.
+- Vector mathematics.
+- Sector based map design.
+- Affine texture mapping.
+- Perspective correct texture mapping.
+- Matrix calculations.
+- Triangulation algorithms.
+- Sutherland-Hodgeman Polygon Clipping.
+- From flat shading to Gouraud shading.
+- Averaging unit vectors and adjacent triangles.
+- Using lighting models Phong-Blinn vs. Lambertian reflectance.
+- Subdivision of scanlines to smaller batches to improve calculation speed ie. Quake and demos used these in end of 1990s
+- Manipulation of direction and velocity of entities based on time.
+- Manipulation of direction of the sprites to create animations and perspective to an object.
 
 # TO-DO
-## Riku & Elias
-- Map Editor
-- norme main branch
-
-## Joonas
-- Perspective fix
-
-## Tomppa
-- Sprites
-
-# Done
-- Tested to change int values in the tex_ft_draw_wall perspective_fix function, to no avail.
-- We need to change angle, before it is normalized.
-
-# Thoughts
-- Half of the wall length needs to be added to the calculation in perspective fix.
-
 # Wolf3d features that you must include:
 - [x] You can move through the universe in real time via the keyboard arrows, just like in the two original games. 360-degree rotation, forward and back move.
 - [x] Pressing the ESC key must close the window and exit the program properly.
@@ -44,13 +58,13 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - [x] The areas you go through don’t have a fixed shape, for exemple the rooms can have any number of walls in all possible directions.
 - [x] The floor and ceiling have adjustable heights, which means different areas will not be at the same height - and you’ll have to manage that smoothly.
 - [x] The floor and ceiling may not be horizontal but inclined planes.
-- [ ] The floors and ceilings have textures.
-- [ ] There can be a sky instead of a ceiling.
-- [ ] Walls can be partially transparent, unveiling the room behind.
-- [ ] Decorative elements can be placed on the walls over the main texture (paintings, posters... ).
+- [x] The floors and ceilings have textures.
+- [x] There can be a sky instead of a ceiling.
+- [x] Walls can be partially transparent, unveiling the room behind.
+- [x] Decorative elements can be placed on the walls over the main texture (paintings, posters... ).
 - [ ] Objects or characters can be placed in the world as sprites that always face the player.
-- [ ] Objects or characters can be placed in the world as multiple sprites displayed according to the orientation between the object and the player (you’ll see the object or character from behind and from the side as you walk around it).
-- [ ] Each room or area has a light control tool, affecting both the walls and the objects
+- [x] Objects or characters can be placed in the world as multiple sprites displayed according to the orientation between the object and the player (you’ll see the object or character from behind and from the side as you walk around it).
+- [x] Each room or area has a light control tool, affecting both the walls and the objects
 within.
 - [x] Text messages can be displayed during the game over the rest of the graphics.
 - [ ] There must be a HUD (life, currency, ammunition, carried artifacts...) By that we mean several elements arranged on the player’s view and not a simple one-block banner.
@@ -91,6 +105,7 @@ the flag mode, etc.
 
 # Links
 - Fabien's Sanglard's tutorial for Building Duke Nukem Graphics Engine [Link](https://fabiensanglard.net/duke3d/build_engine_internals.php)
-- Perspective Texture Mapping by Mikael Kalms [Link](https://www.lysator.liu.se/~mikaelk/doc/perspectivetexture/)
+- Perspective Texture Mapping and scanline division by Mikael Kalms [Link](https://www.lysator.liu.se/~mikaelk/doc/perspectivetexture/)
 - Perspective Texture Mapping article series by Chris Hecker [Link] http://www.chrishecker.com/Miscellaneous_Technical_Articles
 - Floor and Ceiling Drawing tutorial by Lodev. Idea of continuing drawing after the wall has been drawn stems from here! [Link](https://lodev.org/cgtutor/raycasting2.html)
+- CS184 Lecture 30 summary [Link](https://people.eecs.berkeley.edu/~jfc/cs184f98/lec30/lec30.html)

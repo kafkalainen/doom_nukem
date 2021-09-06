@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/18 12:06:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/03 16:24:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_texture	*assign_empty_texture(void)
 	if (!tex)
 		error_output("Memory allocation of t_texture struct failed\n");
 	tex->source = NULL;
-	tex->pixels = NULL;
+	tex->tex.texels = NULL;
 	return (tex);
 }
 
@@ -64,15 +64,15 @@ void	parse_texture_data(unsigned char *buf, t_home *home,
 	if (*pos > (unsigned int)size)
 		error_output("Pointer points outside memory address\n");
 	home->nbr_of_textures = ft_atoi((char *)buf + *pos);
-	home->editor_tex = (t_texture **)malloc(sizeof(t_texture *)
+	home->textures = (t_texture **)malloc(sizeof(t_texture *)
 			* (home->nbr_of_textures + 1));
-	if (!home->editor_tex)
+	if (!home->textures)
 		error_output("failed to allocate memory to editor textures\n");
-	home->editor_tex[0] = assign_empty_texture();
+	home->textures[0] = assign_empty_texture();
 	i = 1;
 	while (i <= home->nbr_of_textures)
 	{
-		home->editor_tex[i] = get_texture(buf, pos, size);
+		home->textures[i] = get_texture(buf, pos, size);
 		i++;
 	}
 }

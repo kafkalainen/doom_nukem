@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   porting_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:55:06 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/19 13:50:21 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 15:35:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	get_next_breaker(unsigned char *buf)
 			return (i);
 		i++;
 	}
-	return (-1);
+	return (BUF_SIZE);
 }
 
 t_texture	*return_new_texture(t_png *png, int idx)
@@ -65,7 +65,7 @@ t_texture	*return_new_texture(t_png *png, int idx)
 	parse_png(png);
 	tex = create_texture(png, idx);
 	free_png(*png);
-	convert_to_uint32(tex->pixels, tex);
+	convert_to_uint32(tex->tex.texels, tex);
 	return (tex);
 }
 
@@ -74,7 +74,7 @@ void	free_all_textures(t_texture **textures, int *nbr_of_textures)
 	int	i;
 
 	i = 0;
-	while (i < ((*nbr_of_textures) + 1))
+	while (i < ((*nbr_of_textures)))
 		free_texture(textures[i++]);
 	free(textures);
 	textures = NULL;

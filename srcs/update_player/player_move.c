@@ -6,97 +6,105 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/07 12:53:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/04 09:03:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static int	plr_in_corner(t_sector *sector, t_xy *pos)
+t_wall	*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir)
 {
 	unsigned int	i;
-	t_point			*temp;
+	t_wall			*temp;
+	t_xyz			isection;
 
 	i = 0;
-	temp = sector->points;
+	temp = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
-		if (vec2_eucl_dist(temp->x0, *pos) < 8)
-			return (temp->idx);
-		temp = temp->next;
-		i++;
-	}
-	return (open_space);
-}
-
-static t_point	*check_if_wall(t_sector *sector, t_xy *dir, t_xy *pos)
-{
-	unsigned int	i;
-	t_point			*temp;
-
-	i = 0;
-	temp = sector->points;
-	while (i < sector->nb_of_walls)
-	{
-		if (check_if_lseg_intersects(temp, pos, dir))
-			return (temp);
+		if (vec3_ray_triangle_intersect(&temp->top, pos, dir, &isection)
+			|| vec3_ray_triangle_intersect(&temp->bottom, pos, dir, &isection))
+		{
+			if (get_distance_squared(pos, isection) <= OPEN_DOOR_DISTANCE)
+				return (temp);
+		}
 		temp = temp->next;
 		i++;
 	}
 	return (NULL);
 }
 
-int	plr_inside(t_sector *sector, t_xy *pos)
+t_xyz	check_y(t_sector *sector, t_player *plr, t_xyz pos)
 {
 	unsigned int	i;
-	t_xy			dir;
-	t_point			*temp;
-	int				walls_crossed;
+	t_surface		*ground;
+	t_xyz			dir;
+	t_xyz			isection;
 
 	i = 0;
-	walls_crossed = 0;
-	temp = sector->points;
-	dir = (t_xy){-200000.0f, 0.0f};
-	while (i < sector->nb_of_walls)
+	dir = (t_xyz){0.0f, -1.0f, 0.0f, 0.0f};
+	ground = sector->ground;
+	while (i < sector->nb_of_ground)
 	{
-		walls_crossed += check_if_lseg_intersects(temp, pos, &dir);
-		temp = temp->next;
+		if (vec3_ray_triangle_intersect(&ground->tri, pos, dir, &isection))
+			break ;
+		ground = ground->next;
 		i++;
 	}
-	return (walls_crossed % 2);
+	isection.y += plr->height;
+	return (isection);
 }
 
-int	player_move(t_player *plr, t_home *home, t_xy *dir)
+static void	viewmodel_motion(t_player *plr)
 {
-	t_point		*crossing;
-	t_xy		pos;
+	plr->hud.vm_mx = sin(plr->steps);
+	plr->hud.vm_my = sin(plr->steps);
+}
 
-	pos = (t_xy){0.0f, 0.0f};
-	crossing = check_if_wall(home->sectors[plr->current_sector], dir, &pos);
-	if (crossing != NULL && crossing->idx >= 0)
+void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
+{
+	Uint32	i;
+	t_wall	*portal;
+
+	i = 0;
+	portal = home->sectors[*cur_sector]->walls;
+	while (i < home->sectors[*cur_sector]->nb_of_walls)
 	{
-		if (plr_in_corner(home->sectors[crossing->idx], &pos) !=  open_space)
-			return (0);
-		if (check_height_diff(dir, &plr->z, crossing,
-			get_portal_by_idx(plr->current_sector, home->sectors[crossing->idx])))
-			return (0);
-		translate_world_view(home, *dir);
-		plr->current_sector = crossing->idx;
-	}
-	else if (crossing == NULL)
-	{
-		pos = vec2_mul(*dir, 8);
-		crossing = check_if_wall(home->sectors[plr->current_sector], dir, &pos);
-		if (crossing != NULL && crossing->idx < 0)
-			return (0);
-		if (plr_in_corner(home->sectors[plr->current_sector], &pos)
-			!= open_space)
-			return (0);
-		if (plr_inside(home->sectors[plr->current_sector], &(t_xy){0.0f, 0.0f}))
+		if (check_if_open_portal(portal))
 		{
-			update_height(dir, &plr->z, home->sectors[plr->current_sector]->points, home->sectors[plr->current_sector]->nb_of_walls);
-			translate_world_view(home, *dir);
+			if (vec3_signed_distance_to_plane(pos,
+					portal->top.normal, portal->top.p[0]) < 0)
+			{
+				*cur_sector = portal->top.idx;
+				if (home->sectors[*cur_sector]->lights.is_linked == 1)
+					home->sectors[*cur_sector]->lights.state = TRUE;
+			}
 		}
+		portal = portal->next;
+		i++;
 	}
-	return (TRUE);
+}
+
+t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
+{
+	t_wall			*wall;
+
+	plr->move_dir.y = 0.0f;
+	plr->move_dir = vec3_unit_vector(plr->move_dir);
+	plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
+	if (check_distance_to_ceiling(home->sectors[plr->cur_sector],
+			&plr->test_pos))
+		return (false);
+	wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
+			plr->width, plr->test_pos, plr->move_dir);
+	if (!wall)
+	{
+		plr->pos = plr->test_pos;
+		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
+		plr->steps += t * 0.005f;
+		viewmodel_motion(plr);
+		player_place_feet_to_ground(home, plr);
+		return (true);
+	}
+	return (strafe_along_the_wall(wall, plr, home, t));
 }

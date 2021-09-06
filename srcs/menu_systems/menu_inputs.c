@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_inputs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/20 12:23:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 15:17:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ void	update_main_menu(t_buffer *menu_buffer, int option)
 	i = 0;
 	y = 0;
 	mod.size = MAIN_MENU_TEXT;
+	mod.len = 8;
 	while (i < 4)
 	{
 		if (i == option)
-			mod.colour = red;
+			mod.colour = get_color(red);
 		else
-			mod.colour = white;
-		str_pxl(menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 75,
+			mod.colour = get_color(white);
+		ft_str_pxl(menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 75,
 			((SCREEN_HEIGHT * 0.5) - 45) + y}, (char *)arr[i], mod);
 		y += 30;
 		i++;

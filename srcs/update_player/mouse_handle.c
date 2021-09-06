@@ -3,26 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/05/11 10:57:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/04 10:55:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	mouse_handle(t_player *plr, t_home *home, SDL_Event *e)
+static void	mouse_button_handle(t_player *plr, SDL_Event *e)
 {
-	if (e->type == SDL_MOUSEMOTION)
+	if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_LEFT)
+		plr->input.shoot = 1;
+	if (e->type == SDL_MOUSEBUTTONUP && e->button.button == SDL_BUTTON_LEFT)
+		plr->input.shoot = 0;
+	if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_RIGHT)
+		plr->input.jetpack = 1;
+	if (e->type == SDL_MOUSEBUTTONUP && e->button.button == SDL_BUTTON_RIGHT)
+		plr->input.jetpack = 0;
+}
+
+void	mouse_handle(t_player *plr, SDL_Event *e)
+{
+	if (plr->input.mouse && e->type == SDL_MOUSEMOTION && plr->dead == 0)
 	{
 		plr->dir.x += -e->motion.xrel * DEG_TO_RAD * 0.1;
 		plr->dir.y += -e->motion.xrel * DEG_TO_RAD * 0.1;
-		if (plr->dir.x > TWO_PI)
-			plr->dir = (t_xy){0.0f, 0.0f};
+		plr->hud.vm_rx += -e->motion.xrel * DEG_TO_RAD * 3;
+		plr->yaw += -e->motion.xrel * 0.01f;
+		if (plr->yaw > TWO_PI)
+			plr->yaw = 0.0f;
+		if (plr->yaw < 0.0f)
+			plr->yaw = TWO_PI;
 		if (plr->dir.x < 0)
+			plr->dir = (t_xy){0.0f, 0.0f};
+		if (plr->dir.x > TWO_PI)
 			plr->dir = (t_xy){TWO_PI, TWO_PI};
-		transform_world_view(home, -e->motion.xrel * DEG_TO_RAD * 0.1);
-		plr->pitch = ft_fmin(ft_fmax((plr->pitch - e->motion.yrel), 0), 480);
+		plr->pitch += e->motion.yrel * 0.01f;
+		plr->hud.vm_ry += -e->motion.yrel * DEG_TO_RAD * 3;
+		if (plr->pitch < -1.4)
+			plr->pitch = -1.4;
+		if (plr->pitch > 1.553343)
+			plr->pitch = 1.553343;
 	}
+	if (plr->input.mouse)
+		mouse_button_handle(plr, e);
 }

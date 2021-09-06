@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/05/19 11:50:24 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/06 15:09:59 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,42 @@ SRCS = \
 	editor$(SLASH)setup_editor.c \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)editor_events.c \
-	parsing$(SLASH)calc_norm_vectors.c \
-	parsing$(SLASH)calc_slanted_floors.c \
+	entity_logic$(SLASH)activate_lift.c \
+	entity_logic$(SLASH)attack_player.c \
+	entity_logic$(SLASH)check_aggro.c \
+	entity_logic$(SLASH)determine_entity_angle.c \
+	entity_logic$(SLASH)die.c \
+	entity_logic$(SLASH)entity_move.c \
+	entity_logic$(SLASH)face_entity_towards_player.c \
+	entity_logic$(SLASH)handle_activation.c \
+	entity_logic$(SLASH)lock_lift.c \
+	entity_logic$(SLASH)other_dir.c \
+	entity_logic$(SLASH)turn_on_lights.c \
+	entity_logic$(SLASH)update_lifts.c \
+	entity_logic$(SLASH)update_entities.c \
+	entity_logic$(SLASH)update_projectiles.c \
+	entity_logic$(SLASH)take_damage.c \
+	parsing$(SLASH)assign_entity_properties.c \
+	parsing$(SLASH)assign_projectiles.c \
+	parsing$(SLASH)calc_lift_doors.c \
+	parsing$(SLASH)calc_extra_walls.c \
+	parsing$(SLASH)calc_light_sources.c \
+	parsing$(SLASH)calc_map_properties.c \
+	parsing$(SLASH)calc_unit_normals.c \
+	parsing$(SLASH)change_door_to_portal.c \
+	parsing$(SLASH)check_portal_height_diff.c \
+	parsing$(SLASH)check_if_same_point.c \
 	parsing$(SLASH)free_sector.c \
+	parsing$(SLASH)generate_doors.c \
+	parsing$(SLASH)get_next_value.c \
+	parsing$(SLASH)initialize_entity_textures.c \
+	parsing$(SLASH)map_texel.c \
+	parsing$(SLASH)parse_entity_data.c \
 	parsing$(SLASH)parse_number_data.c \
-	parsing$(SLASH)parse_sector.c \
+	parsing$(SLASH)parse_sector_a.c \
+	parsing$(SLASH)parse_sector_b.c \
+	parsing$(SLASH)parse_surfaces.c \
+	parsing$(SLASH)triangulate_floor_and_ceiling.c \
 	png_parser$(SLASH)color_utils.c \
 	png_parser$(SLASH)crc.c \
 	png_parser$(SLASH)filters.c \
@@ -38,57 +69,112 @@ SRCS = \
 	png_parser$(SLASH)parser_utils2.c \
 	porting$(SLASH)png.c \
 	porting$(SLASH)create_mapfile.c \
+	porting$(SLASH)init_textures.c \
 	porting$(SLASH)open_file1.c \
 	porting$(SLASH)open_file2.c \
-	porting$(SLASH)validate_sectors_data.c \
-	porting$(SLASH)validate_sectors_data_2.c \
+	porting$(SLASH)validate_sectors_data_a.c \
+	porting$(SLASH)validate_sectors_data_b.c \
 	porting$(SLASH)porting_utils.c \
-	raycaster$(SLASH)calc_dimensions.c \
-	raycaster$(SLASH)calc_ground_texels.c \
-	raycaster$(SLASH)calc_sector_bounds.c \
-	raycaster$(SLASH)calc_ground_dimensions.c \
-	raycaster$(SLASH)calc_wall_texels.c \
-	raycaster$(SLASH)colour_scale.c \
-	raycaster$(SLASH)get_floor.c \
-	raycaster$(SLASH)get_next_wall_tex.c \
-	raycaster$(SLASH)get_opposing_wall.c \
-	raycaster$(SLASH)get_portal_by_idx.c \
-	raycaster$(SLASH)get_wall_points.c \
-	raycaster$(SLASH)line_line_intersection.c \
-	raycaster$(SLASH)line_segment_check.c \
-	raycaster$(SLASH)perspective_offset.c \
-	raycaster$(SLASH)recursion_checks.c \
-	raycaster$(SLASH)scan_fov.c \
-	raycaster$(SLASH)setup_frame.c \
-	raycaster$(SLASH)step_one.c \
+	engine$(SLASH)calc_sector_bounds.c \
+	engine$(SLASH)colour_scale.c \
+	engine$(SLASH)get_next_wall_tex.c \
+	engine$(SLASH)get_portal_by_idx.c \
+	engine$(SLASH)get_wall_height.c \
+	engine$(SLASH)get_wall_points.c \
+	engine$(SLASH)line_line_intersection.c \
+	engine$(SLASH)line_segment_check.c \
+	engine$(SLASH)recursion_checks.c \
+	engine$(SLASH)scan_fov.c \
+	engine$(SLASH)setup_frame.c \
+	engine$(SLASH)check_distances_to_walls.c \
+	update_player$(SLASH)activate_object.c \
+	update_player$(SLASH)advance_story.c \
+	update_player$(SLASH)check_distances.c \
+	update_player$(SLASH)check_for_matching_key.c \
+	update_player$(SLASH)check_if_open_portal.c \
+	update_player$(SLASH)get_bullet_hit_point.c \
+	update_player$(SLASH)get_ceiling_hit_point.c \
+	update_player$(SLASH)get_entity_hit_point.c \
+	update_player$(SLASH)get_ground_hit_point.c \
+	update_player$(SLASH)get_player_hit_point.c \
+	update_player$(SLASH)gravity.c \
+	update_player$(SLASH)handle_doors.c \
+	update_player$(SLASH)init_story.c \
+	update_player$(SLASH)init_story_cutscene.c \
+	update_player$(SLASH)key_input.c \
+	update_player$(SLASH)key_input_toggle.c \
+	update_player$(SLASH)mouse_handle.c \
+	update_player$(SLASH)plr_inside.c \
+	update_player$(SLASH)player_look.c \
+	update_player$(SLASH)player_move.c \
+	update_player$(SLASH)player_use.c \
+	update_player$(SLASH)player_use_inventory_item.c \
+	update_player$(SLASH)special_movement.c \
+	update_player$(SLASH)update_player.c \
+	update_player$(SLASH)shooting.c \
+	update_player$(SLASH)strafe_vector_along_the_wall.c \
+	update_player$(SLASH)player_take_damage.c \
+	update_player$(SLASH)player_place_feet_to_ground.c \
+	update_player$(SLASH)reload_weapon.c \
+	update_screen$(SLASH)apply_matrices_a.c \
+	update_screen$(SLASH)apply_matrices_b.c \
+	update_screen$(SLASH)calculate_offsets.c \
+	update_screen$(SLASH)clip_to_plane.c \
+	update_screen$(SLASH)clip_to_viewport_edges.c \
 	update_screen$(SLASH)draw_frame.c \
-	update_screen$(SLASH)draw_segment.c \
+	update_screen$(SLASH)draw_horizontal_line.c \
+	update_screen$(SLASH)draw_hud.c \
+	update_screen$(SLASH)draw_info.c \
+	update_screen$(SLASH)draw_inventory.c \
+	update_screen$(SLASH)draw_object_data.c \
+	update_screen$(SLASH)draw_sector.c \
 	update_screen$(SLASH)draw_shapes.c \
 	update_screen$(SLASH)draw_shapes2.c \
 	update_screen$(SLASH)draw_tex_pixel.c \
+	update_screen$(SLASH)draw_tex_triangle.c \
+	update_screen$(SLASH)draw_weapon.c \
 	update_screen$(SLASH)draw_wireframe.c \
-	update_player$(SLASH)key_input.c \
-	update_player$(SLASH)mouse_handle.c \
-	update_player$(SLASH)update_height.c \
-	update_player$(SLASH)player_move.c \
+	update_screen$(SLASH)init_matrices_a.c \
+	update_screen$(SLASH)init_matrices_b.c \
 	update_screen$(SLASH)put_pixel.c \
 	update_screen$(SLASH)matrix_2d.c \
-	update_player$(SLASH)update_player.c \
+	update_screen$(SLASH)matrix_3d.c \
 	update_screen$(SLASH)update_screen.c \
-	utilities$(SLASH)audio.c \
+	update_screen$(SLASH)set_lighting.c \
+	update_screen$(SLASH)death_animation_handle.c \
+	utilities$(SLASH)audio_a.c \
+	utilities$(SLASH)audio_b.c 	\
+	utilities$(SLASH)audio_c.c 	\
+	utilities$(SLASH)audio_cleanup.c \
 	utilities$(SLASH)error_output.c \
 	utilities$(SLASH)fps_timer.c \
-	utilities$(SLASH)mem_functions.c \
+	utilities$(SLASH)initialize_player.c \
+	utilities$(SLASH)is_negative.c \
+	utilities$(SLASH)mem_functions_a.c \
+	utilities$(SLASH)mem_functions_b.c \
 	utilities$(SLASH)pxl_alphabet.c \
 	utilities$(SLASH)pxl_numbers.c \
+	utilities$(SLASH)raster_queue_a.c \
+	utilities$(SLASH)raster_queue_b.c \
+	utilities$(SLASH)raster_queue_c.c \
 	utilities$(SLASH)setup.c \
 	utilities$(SLASH)str_pxl.c \
 	utilities$(SLASH)system_calls.c \
+	utilities$(SLASH)swap_and_sort.c \
+	utilities$(SLASH)init_skybox.c \
+	utilities$(SLASH)init_hud_elements.c \
 	vec_math$(SLASH)vec2_a.c \
 	vec_math$(SLASH)vec2_b.c \
 	vec_math$(SLASH)vec2_c.c \
 	vec_math$(SLASH)vec2_d.c \
-	vec_math$(SLASH)vec3.c \
+	vec_math$(SLASH)vec3_a.c \
+	vec_math$(SLASH)vec3_b.c \
+	vec_math$(SLASH)vec3_c.c \
+	vec_math$(SLASH)vec3_d.c \
+	vec_math$(SLASH)vec3_e.c \
+	vec_math$(SLASH)vec3_f.c \
+	vec_math$(SLASH)vec3_g.c \
+	vec_math$(SLASH)vec3_h.c \
 	menu_systems$(SLASH)launch_modules.c \
 	menu_systems$(SLASH)menu_inputs.c \
 	menu_systems$(SLASH)menu_setups.c \
@@ -99,23 +185,19 @@ HEADERS = \
 	libft$(SLASH)libft.h \
 	headers$(SLASH)doom_nukem.h \
 	headers$(SLASH)audio.h \
-	headers$(SLASH)calculations.h \
-	headers$(SLASH)caster.h \
 	headers$(SLASH)colours.h \
 	headers$(SLASH)drawing_functions.h \
+	headers$(SLASH)engine.h \
 	headers$(SLASH)entity.h \
 	headers$(SLASH)events.h \
 	headers$(SLASH)editor.h \
 	headers$(SLASH)macros.h \
-	headers$(SLASH)map.h \
 	headers$(SLASH)parser_structs.h \
 	headers$(SLASH)parsing.h \
-	headers$(SLASH)player_functions.h \
 	headers$(SLASH)player.h \
 	headers$(SLASH)png_parser.h \
 	headers$(SLASH)porting.h \
 	headers$(SLASH)program.h \
-	headers$(SLASH)raycast.h \
 	headers$(SLASH)sector.h \
 	headers$(SLASH)syscalls_windows.h \
 	headers$(SLASH)vectors.h \
@@ -131,11 +213,11 @@ WIN_LIBRARY_PATHS = \
 	-LSDL2-2.0.14\i686-w64-mingw32\lib \
 	-LSDL2_mixer-2.0.4\i686-w64-mingw32\lib \
 	-Llibft
-LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lm -g
+LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 CC = gcc
-WIN_CFLAGS = -Wall -Wextra -Werror -O3 -g
-WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lm
+WIN_CFLAGS = -Wall -Wextra -O3 -g
+WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 ifeq ($(OS),Windows_NT)
 	TARGET_SYSTEM := Windows
@@ -252,13 +334,14 @@ endif
 $O:
 	$(MKDIR) $@
 	$(MKDIR) $@$(SLASH)editor
+	$(MKDIR) $@$(SLASH)engine
+	$(MKDIR) $@$(SLASH)entity_logic
 	$(MKDIR) $@$(SLASH)utilities
 	$(MKDIR) $@$(SLASH)update_player
 	$(MKDIR) $@$(SLASH)update_screen
 	$(MKDIR) $@$(SLASH)parsing
 	$(MKDIR) $@$(SLASH)png_parser
 	$(MKDIR) $@$(SLASH)porting
-	$(MKDIR) $@$(SLASH)raycaster
 	$(MKDIR) $@$(SLASH)vec_math
 	$(MKDIR) $@$(SLASH)menu_systems
 

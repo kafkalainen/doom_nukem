@@ -6,31 +6,38 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 11:36:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/05/19 11:44:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 10:34:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	interpolate_y(t_height *height, t_xy cutpoint, t_point *p0, t_point *p1)
+/*
+**	Get distance to intersection gets the scalar of the vector dir. If there
+**	is no scalar, function will return false.
+*/
+t_bool	vec2_get_scalar_to_intersection(t_xy pos, t_xy dir, t_wall *wall,
+		float *t)
 {
-	float	full_mag;
-	float	cut_mag;
+	t_xy	vectors[3];
+	float	dot;
+	float	t1;
+	float	t2;
 
-	full_mag = vec2_mag(vec2_dec(p1->x0, p0->x0));
-	cut_mag = vec2_mag(vec2_dec(p1->x0, cutpoint));
-	height->ground = p1->height.ground - (p1->height.ground - p0->height.ground)
-		* (cut_mag / full_mag);
-	height->ceiling = p1->height.ceiling - (p1->height.ceiling
-			- p0->height.ceiling) * (cut_mag / full_mag);
-}
-
-float	vec2_distance_from_point_to_line(t_xy *p0, t_xy *p1, t_xy *x0)
-{
-	float	dist;
-
-	dist = fabsf((p1->x - p0->x) * (p0->y - x0->y)
-			- (p0->x - x0->x) * (p1->y - p0->y))
-		/ vec2_eucl_dist(*p0, *p1);
-	return (dist);
+	vectors[0] = vec2_dec(pos, vec2(wall->top.p[1].x, wall->top.p[1].z));
+	vectors[1] = vec2_dec(vec2(wall->top.p[2].x, wall->top.p[2].z),
+			vec2(wall->top.p[1].x, wall->top.p[1].z));
+	vectors[2] = vec2(-dir.y, dir.x);
+	dot = vec2_dot(vectors[1], vectors[2]);
+	if (fabsf(dot) < 0.000001)
+		return (false);
+	dot = 1 / dot;
+	t1 = vec2_cross(vectors[1], vectors[0]) * dot;
+	t2 = vec2_dot(vectors[0], vectors[2]) * dot;
+	if (t1 >= 0.0f && (t2 >= 0.0f && t2 <= 1.0f))
+	{
+		*t = t1;
+		return (true);
+	}
+	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:40:20 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 12:13:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/20 12:55:48 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_inflate_uncompressed(t_png *png, const unsigned char *in,
 	p += 2;
 	if ((len + nlen) != 65535)
 		error_output("16-bit nlen should complement len\n");
-	if ((*pos) + len <= png->inflated_size)
+	if ((*pos) + len > png->inflated_size)
 		error_output("size error\n");
 	if ((p + len) > png->compressed_size)
 		error_output("size error\n");
@@ -113,13 +113,13 @@ void	ft_inflate_data(t_png *png)
 		done = ft_read_bit(&h.bit_p, &png->compressed[2]);
 		h.type = ft_read_bit(&h.bit_p, &png->compressed[2])
 			| (ft_read_bit(&h.bit_p, &png->compressed[2]) << 1);
-		if (h.type == 3)
-			error_output("zlib type error\n");
-		else if (h.type == 0)
+		if (h.type == 0)
 			ft_inflate_uncompressed(png, &png->compressed[2],
 				&h.bit_p, &h.pos);
-		else
+		else if (h.type == 1 || h.type == 2)
 			go_go_huffman(png, &png->compressed[2], &h);
+		else
+			error_output("zlib type error\n");
 	}
 }
 

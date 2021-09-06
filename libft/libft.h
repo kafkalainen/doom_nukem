@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/30 12:43:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:33:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_complex			ft_cpow3(t_complex z);
 t_complex			ft_csub(t_complex x, t_complex y);
 size_t				ft_count_wrds(const char *s, int d);
 double				ft_dabs(double i);
+float				ft_fabsf(float i);
 float				ft_fmax(float a, float b);
 float				ft_fmin(float a, float b);
 char				*ft_ftoa(float nb, int precision);
@@ -84,6 +85,7 @@ void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 size_t				ft_replace_char(char *s, int c, int rep);
 float				ft_roundf(float nb, int prec);
+int					ft_signf(float nb);
 char				*ft_skipc(char *str, char c);
 double				ft_sqrt(double base);
 char				**ft_strarrnew(size_t arr_len, char const *str);
@@ -116,6 +118,8 @@ char				*ft_strnstr(t_c_char *big, t_c_char *little, size_t len);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);
+void				ft_swapi(int *i0, int *i1);
+void				ft_swapf(float *f0, float *f1);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 #endif

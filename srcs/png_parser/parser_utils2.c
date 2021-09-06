@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 15:19:58 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 12:33:40 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/06/05 15:32:43 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ void	free_png(t_png png)
 
 void	add_texture_values(t_png *png, t_texture *tex, int idx)
 {
-	tex->h = png->height;
-	tex->w = png->width;
+	tex->tex.width = png->width;
+	tex->tex.height = png->height;
 	tex->bpp = (png->depth / 8) * png->channels;
 	tex->size = png->final_size;
 	tex->color_depth = png->depth;
 	tex->color_type = png->color_type;
 	tex->format = png->format;
 	tex->source_size = png->source.size;
-	tex->pitch = (tex->w * tex->bpp);
+	tex->pitch = (tex->tex.width * tex->bpp);
 	tex->idx = idx;
 }
 

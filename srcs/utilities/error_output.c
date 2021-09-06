@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:39:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/23 14:24:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/06/08 10:12:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	error_output_sdl(char *msg, t_home *home)
+void	error_output_sdl(char *msg, t_home *home, t_frame *frame)
 {
 	if (ft_strequ(msg, "Fatal: Failed to create a window."))
 	{
@@ -29,7 +29,7 @@ void	error_output_sdl(char *msg, t_home *home)
 		SDL_Quit();
 	}
 	ft_putendl_fd(msg, 2);
-	clean_up(home);
+	clean_up(frame);
 }
 
 void	error_output(char *msg)
@@ -59,6 +59,8 @@ void	map_error_output(int i, t_home *home)
 		ft_putendl_fd("ERROR: Sectors line segments are cutting.", 2);
 	else if (i == 6)
 		ft_putendl_fd("ERROR: Player out of bounds.", 2);
+	else if (i == 7)
+		ft_putendl_fd("ERROR: Sector has less than three walls.", 2);
 	free_sectors(home);
 	exit(EXIT_FAILURE);
 }

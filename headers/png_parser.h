@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 12:31:37 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/08/26 11:18:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void			free_texture(t_texture *tex);
 t_texture		*assign_empty_texture(void);
 void			convert_to_unsigned_int(t_texture *tex, t_png *png);
 unsigned int	add_pixel(unsigned char *data, int bpp, int pos);
-unsigned int	swap_channels(unsigned int pixel);
 void			add_texture_values(t_png *png, t_texture *tex, int idx);
 
 /*
@@ -100,9 +99,6 @@ void			add_texture_values(t_png *png, t_texture *tex, int idx);
 
 void			process_scanline(unsigned char *out,
 					unsigned char *sl, t_scan_helper s);
-void			remove_padding(t_png *png, unsigned char *out,
-					unsigned char *in);
-void			setup_padding_helper(t_padding_helper *h, t_png *png);
 void			unfilter_scanlines(t_png *png, unsigned char *out,
 					unsigned char *in);
 void			convert_to_pixels(t_png *png);
@@ -171,6 +167,7 @@ int				get_color_rgba(int depth);
 int				get_color_rgb(int depth);
 int				get_color_lum(int depth);
 int				get_color_luma(int color_depth);
+Uint32			get_transparency(Uint32 rgba);
 void			error_output(char *msg);
 void			free_png(t_png png);
 void			assemble_idat_chunks(t_png *png);

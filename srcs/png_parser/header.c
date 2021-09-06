@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:51:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/17 12:21:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/07/21 16:02:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	get_header_elements(t_png *png)
 	if (png->channels)
 	{
 		png->bpp = png->depth * png->channels;
-		png->scanline = png->bpp * png->width + 1;
+		png->scanline = png->channels * png->width + 1;
 	}
 }
 

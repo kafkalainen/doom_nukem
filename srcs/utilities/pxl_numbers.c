@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 09:42:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/26 12:09:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/03 11:25:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ static t_pxl_c	letter_special_2(int l, int b, int c)
 	else if (l == ')')
 		return ((t_pxl_c){{b, b, b, b, b, b, c, b, b, b, b, b, c, b, b, b, b, c,
 				b, b, b, b, c, b, b, b, c, b, b, b, b, b, b, b, b}});
+	else if (l == '/')
+		return ((t_pxl_c){{b, b, b, b, b, b, b, b, c, b, b, b, c, c, b, b, b, c,
+				b, b, b, c, b, b, b, b, c, b, b, b, b, b, b, b, b}});
 	else
 		return ((t_pxl_c){{b, b, b, b, b, b, c, b, c, b, b, b, b, c, b, b, b, c,
 				b, b, b, c, b, b, b, b, c, b, c, b, b, b, b, b, b}});
@@ -102,7 +105,8 @@ t_pxl_c	pxl_numbers(int l, int b, int c)
 		return (letter_6789(l, b, c));
 	else if (l == ':' || l == '\'' || l == '!' || l == '?' || l == ' ')
 		return (letter_special_1(l, b, c));
-	else if (l == '.' || l == ',' || l == '(' || l == ')' || l == '%')
+	else if (l == '.' || l == ',' || l == '(' || l == ')' || l == '%'
+		|| l == '/')
 		return (letter_special_2(l, b, c));
 	else
 		return ((t_pxl_c){{b, b, b, b, b, b, b, c, b, b, b, b, c, b, b, b, c, c,

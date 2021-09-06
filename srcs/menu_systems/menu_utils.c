@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/05/20 12:27:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 16:26:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	return_to_main_from_game(t_home *home, t_player *plr)
+// REVISIT ADD STORY STRING MANAGEMENT
+// free_story(&home->story);
+void	free_game_assets(t_home *home)
 {
+	if (home->t.frame_times)
+		free(home->t.frame_times);
 	free_sectors(home);
-	free_all_textures(home->editor_tex, &home->nbr_of_textures);
-	init_player(plr);
+	free_all_textures(home->textures, &home->nbr_of_textures);
+	free_entities(home);
+	free_projectiles(home);
 }
 
 void	get_menu_range_key_down(t_menu *menu)
@@ -69,13 +74,15 @@ void	update_load_menu(t_menu *menu, int sym)
 	y = 0;
 	mod.colour = 0;
 	mod.size = TEXT_SIZE;
+	mod.len = 100;
 	while (i <= menu->end)
 	{
 		if (i == menu->option)
-			mod.colour = red;
+			mod.colour = get_color(red);
 		else
-			mod.colour = white;
-		str_pxl(&menu->menu_buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y},
+			mod.colour = get_color(white);
+		ft_str_pxl(&menu->menu_buffer,
+			(t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y},
 			menu->map_names[i], mod);
 		y += 15;
 		i++;

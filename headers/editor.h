@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/05/20 12:14:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 15:20:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
 
-typedef struct		s_mouse_data
+typedef struct s_mouse_data
 {
 	float			x;
 	float			y;
@@ -24,14 +24,14 @@ typedef struct		s_mouse_data
 	float			y_rel;
 }					t_mouse_data;
 
-/* typedef struct		s_sector_list 
-{ 
+/* typedef struct		s_sector_list
+{
 	t_sector 		*sector;
 	t_bbox			bbox;
 	t_sector_list	*next;
 }					t_sector_list ; */
 
-typedef struct		s_button
+typedef struct s_button
 {
 	t_xy		ltop;
 	t_xy		wh;
@@ -44,16 +44,16 @@ typedef	struct		s_box
 	t_xy			end;
 }					t_box;
 
-typedef struct			s_editor
+//t_sector_list	*sector_list;
+typedef struct s_editor
 {
-	//t_sector_list	*sector_list;
-	t_button			**button_list;
-	t_mouse_data		mouse_data;
-	t_buffer			buffer;
-	t_window			win;
-	int					grid_size;
-	int					toggle_grid;
-}						t_editor;
+	t_button		**button_list;
+	t_mouse_data	mouse_data;
+	Uint32			*buffer;
+	t_window		win;
+	int				grid_size;
+	int				toggle_grid;
+}					t_editor;
 
 // SDL DRAWING STUFF
 
