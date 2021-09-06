@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_mapfile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/15 14:39:21 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:48:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,23 @@ void	write_audio_data(int *fd, char *path, char *asset_name)
 **	Add writing map and audio data for the mapfile.
 */
 
-int	create_map_file(t_home *home)
+int	create_map_file(t_home *home, t_editor *editor)
 {
 	int			fd;
-	const char	*tmp = "./map_files/test.DATA";
 
-	doom_open(&fd, (const char **)&tmp,
-		WRITE_ONLY | READ_ONLY | CREATE_FILE | TRUNCATE | CHECK_EXIST, 0644);
+	(void)home;
+	doom_open(&fd, (const char **)&editor->mapname,
+		WRITE_ONLY | READ_ONLY | CREATE_FILE | TRUNCATE, 0644);
 	if (fd < 0)
 		return (-1);
+	write_sector_data(&fd, editor);
+	write_entity_data(&fd, editor);
 	write_texture_data(&fd, home);
 	write_audio_data(&fd, "./audio/eerie_by_eparviai.wav", "doom_music #");
 	write_audio_data(&fd, "./audio/footstep1.wav", "doom_footstep1 #");
 	write_audio_data(&fd, "./audio/footstep2.wav", "doom_footstep2 #");
 	doom_close(&fd);
+	create_hash(editor->mapname);
 	return (1);
 }
 

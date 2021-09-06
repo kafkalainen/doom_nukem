@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 17:33:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:42:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	get_map_count(int *count, DIR **dir, struct dirent **dir_entry)
 	return (1);
 }
 
-void	load_map_names(t_menu *menu)
+void	load_map_names(char ***map_names, int *nbr_of_maps)
 {
 	DIR				*dir;
 	struct dirent	*dir_entry;
@@ -42,13 +42,13 @@ void	load_map_names(t_menu *menu)
 	dir = opendir("map_files/");
 	if (dir == NULL)
 		error_output("Failed to open map_files directory.\n");
-	if (get_map_count(&menu->nbr_of_maps, &dir, &dir_entry) == -1)
+	if (get_map_count(nbr_of_maps, &dir, &dir_entry) == -1)
 		return ;
-	menu->map_names = (char **)malloc(sizeof(char *) * (menu->nbr_of_maps));
-	if (!menu->map_names)
+	*map_names = (char **)malloc(sizeof(char *) * (*nbr_of_maps));
+	if (!map_names)
 		error_output("Failed to allocate memory to map file names.\n");
 	dir_entry = readdir(dir);
-	loop_map_names(menu->map_names, dir_entry, dir);
+	loop_map_names(*map_names, dir_entry, dir);
 	closedir(dir);
 }
 

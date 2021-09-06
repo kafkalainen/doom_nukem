@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_load_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 16:24:38 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:47:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ int	editor_parse_light_data(t_sector_list *new, unsigned char *buf,
 	return (0);
 }
 
-char	*get_next_string(unsigned char *buf,
+char	*editor_get_next_string(unsigned char *buf,
 			unsigned int **pos, ssize_t size)
 {
 	ssize_t	len;
@@ -285,9 +285,9 @@ int	editor_parse_story_data(t_sector_list *new, unsigned char *buf,
 	while (i < lines)
 	{
 		if (new->sector_plot == NULL)
-			new->sector_plot = (unsigned char *)get_next_string(buf, &pos, size);
+			new->sector_plot = (unsigned char *)editor_get_next_string(buf, &pos, size);
 		else
-			new->sector_plot = (unsigned char *)ft_strjoin_freeable((char *)new->sector_plot, get_next_string(buf, &pos, size), 1, 1);
+			new->sector_plot = (unsigned char *)ft_strjoin_freeable((char *)new->sector_plot, editor_get_next_string(buf, &pos, size), 1, 1);
 		if (new->sector_plot == NULL)
 			return (1);
 		i++;

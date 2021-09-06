@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 16:44:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 17:45:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *menu_buffer,
 
 void	handle_map_menu(t_menu *menu, t_home *home, SDL_Event *e)
 {
-	load_map_names(menu);
+	load_map_names(&menu->map_names, &menu->nbr_of_maps);
 	if (menu->nbr_of_maps > 0)
 		launch_load_menu_loop(menu, home, e);
 	else
