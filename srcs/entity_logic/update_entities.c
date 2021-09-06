@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 14:16:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 15:01:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	update_entities(t_home *home, t_player *plr, Uint32 delta_time)
 	while (i < home->nbr_of_entities)
 	{
 		cur_entity = home->entity_pool[i];
-		cur_entity->vec_to_plr = vec3_unit_vector(vec3_dec(plr->pos, cur_entity->pos));
+		cur_entity->vec_to_plr
+			= vec3_unit_vector(vec3_dec(plr->pos, cur_entity->pos));
 		if (cur_entity->is_pickupable)
 			show_pickupables(cur_entity, home, delta_time);
 		if (cur_entity->is_active != false)
