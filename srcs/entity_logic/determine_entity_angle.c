@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 14:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 12:29:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 13:30:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ void	rotate_entity_towards_player(t_entity *entity, t_player *plr)
 
 	vec_to_plr = vec2_unit_vector(vec2_dec(vec3_to_vec2(plr->pos),
 				vec3_to_vec2(entity->pos)));
-	if (vec_to_plr.x == entity->vec_to_plr.x
-		&& vec_to_plr.y == entity->vec_to_plr.y)
+	if (vec_to_plr.x == entity->vec_to_plr_2d.x
+		&& vec_to_plr.y == entity->vec_to_plr_2d.y)
 		return ;
-	rad = vec2_ang(entity->vec_to_plr, vec_to_plr);
+	rad = vec2_ang(entity->vec_to_plr_2d, vec_to_plr);
 	entity->top = rotate_triangle(&entity->top, rad, 'y');
 	entity->bot = rotate_triangle(&entity->bot, rad, 'y');
 	entity->top.normal = triangle_normal(&entity->top);
 	entity->bot.normal = triangle_normal(&entity->bot);
-	entity->vec_to_plr = vec_to_plr;
+	entity->vec_to_plr_2d = vec_to_plr;
 }
 
 void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
@@ -60,7 +60,7 @@ void	determine_angle_between_entity_and_plr(t_entity *entity, t_player *plr)
 
 	a = vec2_unit_vector(vec2_dec(vec3_to_vec2(plr->pos),
 				vec3_to_vec2(entity->pos)));
-	if (a.x == entity->vec_to_plr.x && a.y == entity->vec_to_plr.y)
+	if (a.x == entity->vec_to_plr_2d.x && a.y == entity->vec_to_plr_2d.y)
 		return ;
 	b = vec3_to_vec2(vec3_dec(vec3_add(entity->pos, entity->dir), entity->pos));
 	rad = atan2f(b.y * a.x - b.x * a.y, b.x * a.x + b.y * a.y);

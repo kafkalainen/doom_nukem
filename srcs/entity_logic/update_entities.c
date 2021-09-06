@@ -6,16 +6,15 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/05 23:17:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 14:16:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	show_pickupables(t_entity *pickupable, t_player *plr,
-			t_home *home, Uint32 t)
+static void	show_pickupables(t_entity *pickupable, t_home *home, Uint32 t)
 {
-	face_entity_towards_player(pickupable, plr);
+	face_entity_towards_player(pickupable);
 	entity_gravity(home->sectors[pickupable->sector_idx],
 		pickupable, t);
 }
@@ -51,11 +50,9 @@ static void	update_entity(t_home *home, t_entity *cur_enemy,
 {
 	entity_gravity(home->sectors[cur_enemy->sector_idx], cur_enemy, t);
 	if (!cur_enemy->is_aggroed)
-		check_aggro(plr, cur_enemy,
-			home->sectors[cur_enemy->sector_idx]);
+		check_aggro(plr, cur_enemy, home);
 	if (cur_enemy->is_aggroed)
-		cur_enemy->dir = vec3_unit_vector(vec3_dec(plr->pos,
-					cur_enemy->pos));
+		cur_enemy->dir = cur_enemy->vec_to_plr;
 	if (!attack_player(home, cur_enemy, plr, t))
 		entity_move(cur_enemy, home, t);
 	if (take_damage(cur_enemy, t))
@@ -78,8 +75,9 @@ void	update_entities(t_home *home, t_player *plr, Uint32 delta_time)
 	while (i < home->nbr_of_entities)
 	{
 		cur_entity = home->entity_pool[i];
+		cur_entity->vec_to_plr = vec3_unit_vector(vec3_dec(plr->pos, cur_entity->pos));
 		if (cur_entity->is_pickupable)
-			show_pickupables(cur_entity, plr, home, delta_time);
+			show_pickupables(cur_entity, home, delta_time);
 		if (cur_entity->is_active != false)
 		{
 			if (cur_entity->type == skull_skulker

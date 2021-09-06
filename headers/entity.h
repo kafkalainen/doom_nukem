@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/04 10:02:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/06 14:15:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ Uint32				attack_player(t_home *home, t_entity *entity, t_player *plr,
 void				bolt_lift_doors(t_sector *sector, Uint32 state);
 void				bolt_lift_door(t_sector *lift, t_sector **sectors,
 						Uint32 previous_floor, Uint32 state);
-Uint32				check_aggro(t_player *plr, t_entity *entity,
-						t_sector *sector);
+t_bool				check_aggro(t_player *plr, t_entity *entity, t_home *home);
 t_bool				check_if_entity_is_active(t_entity *entity);
 void				determine_angle_between_entity_and_plr(t_entity *entity,
 						t_player *plr);
@@ -107,8 +106,7 @@ void				entity_chase(t_entity *entity, t_home *home, Uint32 t,
 						t_player *plr);
 void				entity_gravity(t_sector *sector, t_entity *entity,
 						Uint32 delta_time);
-void				face_entity_towards_player(t_entity *entity,
-						t_player *plr);
+void				face_entity_towards_player(t_entity *entity);
 float				get_distance_squared(t_xyz pt0, t_xyz pt1);
 t_bool				handle_activation(t_entity *entity, t_home *home,
 						t_player *plr);
