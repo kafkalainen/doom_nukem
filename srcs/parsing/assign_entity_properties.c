@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 11:29:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:33:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	initialize_entity_triangles(t_entity *entity)
 	entity->bot.p[0] = (t_xyz){-0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
 	entity->bot.p[1] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
 	entity->bot.p[2] = (t_xyz){0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
-	entity->height = size.y;
+	if (entity->type == thing)
+		entity->height = 1.5f;
+	else
+		entity->height = size.y;
 	entity->legs = size.y * 0.3f;
 	entity->width = 1.0f;
 }
