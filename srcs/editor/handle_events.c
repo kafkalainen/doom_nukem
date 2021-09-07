@@ -90,10 +90,6 @@ void	read_input_string(unsigned char **string, t_action *action)
 	}
 	else if (action->input_active && ft_isprint(action->keysym))
 	{
-		if (action->keysym == SDLK_RETURN)
-			c = '\n';
-		else
-			c = action->keysym;
 		if (*string == NULL)
 		{
 			*string = (unsigned char *)ft_strnew(sizeof(char) * 1);
@@ -182,8 +178,8 @@ int		check_saving_prerequisites(t_editor *editor)
 {
 	if (editor->mapname == NULL || !editor->action.player_start_assigned || !editor->end_sector)
 		return (FALSE);
-	// if (!check_plr_start_and_end_sector_exists(&editor->sector_list, editor->plr, editor->end_sector))
-	// 	return (FALSE);
+	if (!check_plr_start_and_end_sector_exists(&editor->sector_list, editor->plr, editor->end_sector))
+		return (FALSE);
 	printf("Saving map into file\n");
 	return (TRUE);
 }

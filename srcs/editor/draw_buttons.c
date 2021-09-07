@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/07 11:40:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 15:51:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	draw_editor_sectors(t_editor *editor)
 	t_xy			test2;
 	t_box			temp_box;
 	int				active;
-	int				color;
+	Uint32			color;
 
 	active = 0;
 	sector_list = editor->sector_list;
@@ -205,9 +205,9 @@ void	draw_entities(t_editor *editor)
 		temp_box.start = test1;
 		temp_box.end = test2;
 		if (temp->entity_idx == editor->action.selected_entity)
-			color = white;
+			color = get_color(white);
 		else
-			color = red;
+			color = get_color(red);
 		draw_box(temp_box, &editor->buffer, color);
 		if (temp->is_linked)
 		{
@@ -217,7 +217,7 @@ void	draw_entities(t_editor *editor)
 					draw_line(
 						scale_xy((t_screen_xy){temp->pos.x, temp->pos.z}, editor->action.scalar, editor->action.offset),
 						scale_xy((t_screen_xy){link->pos.x, link->pos.z}, editor->action.scalar, editor->action.offset),
-						blue, &editor->buffer);
+						get_color(blue), &editor->buffer);
 				link = link->next;
 			}
 			link = head;
@@ -250,7 +250,7 @@ void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, in
 {
 	t_plx_modifier	mod;
 
-	mod.colour = white;
+	mod.colour = get_color(orange);
 	mod.size = TEXT_SIZE;
 	if (help_text == map_saving)
 		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Please input text string", mod);
