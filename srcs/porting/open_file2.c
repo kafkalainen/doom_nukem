@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/07 14:15:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 16:22:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,22 @@ void	parse_texture_data(unsigned char *buf, t_home *home, ssize_t size)
 	int				i;
 	unsigned int	pos;
 
-	buf = (unsigned char *)ft_strstr((char *)buf, "#doom_nukem_textures#");
+	pos = 0;
+	buf = (unsigned char *)ft_memstr((char *)buf, "#doom_nukem_textures", size);
 	pos += get_next_breaker(buf + pos) + 1;
 	if (pos > (unsigned int)size)
 		error_output("Pointer points outside memory address\n");
-	home->nbr_of_textures = ft_atoi((char *)buf + pos);
-	home->textures = (t_texture **)malloc(sizeof(t_texture *)
-			* (home->nbr_of_textures + 1));
+	home->textures = (t_texture **)malloc(sizeof(t_texture *) * (NUM_TEX));
 	if (!home->textures)
 		error_output("failed to allocate memory to editor textures\n");
 	home->textures[0] = assign_empty_texture();
 	i = 1;
-	while (i <= home->nbr_of_textures)
+	while (i < (NUM_TEX - 1))
 	{
 		home->textures[i] = get_texture(buf, &pos, size);
 		i++;
 	}
+	home->textures[i] = assign_empty_texture();
 }
 
 void	parse_audio_data(unsigned char *buf, unsigned int *pos,

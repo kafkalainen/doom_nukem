@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/07 14:45:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 16:30:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,12 @@
 void	write_texture_data(int *fd, t_home *home)
 {
 	int				i;
+	const char		*header = "#doom_nukem_textures\n";
 	unsigned char	*buf;
 
 	buf = NULL;
-	buf = (unsigned char *)ft_strjoin_freeable("#doom_nukem_textures#",
-			ft_itoa(NUM_TEX), 0, 1);
-	buf = (unsigned char *)ft_strjoin_freeable((char *)buf, "\n", 1, 0);
-	if (doom_write(fd, (const void **)&buf, ft_strlen((const char *)buf)) == -1)
-		printf("failed to add texture numbers\n");
-	ft_strdel((char **)&buf);
+	if (doom_write(fd, (const void **)&header, 21) == -1)
+		error_output("ERROR: Failed to add texture identifier.");
 	i = 1;
 	while (i < (NUM_TEX - 1))
 	{

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 17:32:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 16:16:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	free(editor.button_list);
 	free_all_entities(&editor.entity_list);
 	editor_free_all_sectors(&editor.sector_list);
-	free_all_textures(home->textures, &home->nbr_of_textures);
+	free_all_textures(home->textures, NUM_TEX);
 	SDL_SetWindowSize(home->win.window, SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_SetWindowPosition(home->win.window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);

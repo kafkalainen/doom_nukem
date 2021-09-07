@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 11:33:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 16:03:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				ft_memdel(void **ap);
 void				*ft_memmove(void *dest, const void *src, size_t n);
+char				*ft_memstr(const char *haystack, const char *needle,
+						size_t size);
 int					ft_nb_len(int value, int base);
 double				ft_pow_of_2(double base, double exponent);
 void				ft_putchar(char c);

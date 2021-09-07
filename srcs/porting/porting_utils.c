@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:55:06 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/07 14:35:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 16:17:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,13 @@ t_texture	*return_new_texture(t_png *png, int idx)
 	return (tex);
 }
 
-void	free_all_textures(t_texture **textures, int *nbr_of_textures)
+void	free_all_textures(t_texture **textures, int nbr_of_textures)
 {
 	int	i;
 
 	i = 0;
-	while (i < ((*nbr_of_textures)))
+	while (i < nbr_of_textures)
 		free_texture(textures[i++]);
 	free(textures);
 	textures = NULL;
-	*nbr_of_textures = 0;
 }

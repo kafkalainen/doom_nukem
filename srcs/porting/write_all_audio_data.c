@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:15:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 15:35:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 15:54:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	write_all_audio_data(int *fd)
 {
 	const char	*line = "#doom_nukem_audio#";
 
-	if (doom_write(fd, (const void **)&line, 19) == -1)
+	if (doom_write(fd, (const void **)&line, 18) == -1)
 		error_output("Error: Audio couldn't be written");
 	write_audio_data(fd, "./audio/eerie_by_eparviai.wav",
 		"doom_music #");
