@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_all_audio_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:15:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 15:54:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 18:52:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ static void	write_enemy(int *fd)
 
 int	write_all_audio_data(int *fd)
 {
-	const char	*line = "#doom_nukem_audio#";
-
-	if (doom_write(fd, (const void **)&line, 18) == -1)
-		error_output("Error: Audio couldn't be written");
 	write_audio_data(fd, "./audio/eerie_by_eparviai.wav",
 		"doom_music #");
 	write_audio_data(fd, "./audio/footstep1.wav", "doom_footstep1 #");

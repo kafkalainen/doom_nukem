@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_all_audio_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:40:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 16:06:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 18:48:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	parse_all_audio_data(unsigned char *buf, ssize_t size)
 	unsigned int	pos;
 
 	pos = 0;
-	buf = (unsigned char *)ft_memstr((char *)buf, "#doom_nukem_audio", size);
+	buf = (unsigned char *)ft_memstr((char *)buf, "doom_music #", size);
 	pos += get_next_breaker(buf + pos);
 	if (pos > (unsigned int)size)
 		error_output("Pointer points outside memory address\n");
