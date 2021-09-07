@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:01:38 by rzukale           #+#    #+#             */
-/*   Updated: 2021/08/26 11:18:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 14:28:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PNG_PARSER_H
 # define PNG_PARSER_H
 
-# define MAX_SIZE 16777216
+# define MAX_SIZE 33554432
 # define COLOR_LUM 0
 # define COLOR_RGB 2
 # define COLOR_LUMA 4

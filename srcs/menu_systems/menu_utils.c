@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 18:01:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:38:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	update_load_menu(t_menu *menu, int sym)
 			mod.colour = get_color(red);
 		else
 			mod.colour = get_color(white);
-		ft_str_pxl(&menu->menu_buffer,
+		ft_str_pxl(&menu->buffer,
 			(t_xy){(SCREEN_WIDTH * 0.5) - 200, 25 + y},
 			menu->map_names[i], mod);
 		y += 15;

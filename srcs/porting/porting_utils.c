@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:55:06 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 17:58:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 14:35:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ void	write_single_texture(t_texture *tex, int *fd, unsigned char *buf)
 {
 	buf = create_write_buffer(tex);
 	if (buf == NULL)
-		printf("failed to create write buffer\n");
+		error_output("ERROR: Failed to create write buffer.");
 	if (doom_write(fd, (const void **)&buf,
 			ft_strlen((const char *)buf)) == -1)
-		printf("failed to write texture\n");
+		error_output("ERROR: Failed to write texture header.");
 	if (doom_write(fd, (const void **)&tex->source,
 			tex->source_size) == -1)
-		printf("failed to write texture\n");
+		error_output("ERROR: Failed to write texture data.");
 	ft_strdel((char **)&buf);
 	buf = (unsigned char *)ft_strnew(sizeof(unsigned char) * 2);
 	buf = (unsigned char *)ft_strcpy((char *)buf, (const char *)"\n");
 	if (doom_write(fd, (const void **)&buf, 1) == -1)
-		printf("failed to write texture\n");
+		error_output("ERROR: Failed to write texture end.");
 	ft_strdel((char **)&buf);
 }
 

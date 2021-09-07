@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/05 23:25:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:05:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	initialize_player_game_states(t_player *plr)
 	plr->display_object = 0;
 	plr->dead = 0;
 	plr->reload = 0;
+	plr->recharge = 0;
 }
 
 static void	initialize_input_values(t_input *input)

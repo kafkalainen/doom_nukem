@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:00:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 13:07:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr)
 
 static t_bool	skull_skulker_attack(t_entity *entity, t_player *plr, Uint32 t)
 {
-	if (get_distance_squared(plr->pos, entity->pos) < 2.25f)
+	if (get_distance_squared(plr->pos, entity->pos) < 4.00f)
 	{
 		entity->sprite_state = attack;
 		if (entity->anim_offset >= 4

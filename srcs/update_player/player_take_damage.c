@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 12:15:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 12:19:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:59:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void	player_take_damage(t_player *plr, Uint32 damage, Uint32 time)
 		return ;
 	if (plr->power_points)
 		plr->power_points -= damage;
-	play_sound(plr->audio.rahikainen_damage[time % 4], 20);
+	play_sound(plr->audio.rahikainen_damage[time % 2], 20);
 }

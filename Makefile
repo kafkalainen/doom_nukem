@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/06 17:05:39 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/07 14:17:28 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS = \
 	parsing$(SLASH)generate_doors.c \
 	parsing$(SLASH)get_next_value.c \
 	parsing$(SLASH)initialize_entity_textures.c \
+	parsing$(SLASH)initialize_entity_triangles.c \
 	parsing$(SLASH)map_texel.c \
 	parsing$(SLASH)parse_entity_data.c \
 	parsing$(SLASH)parse_number_data.c \
@@ -84,13 +85,16 @@ SRCS = \
 	porting$(SLASH)init_textures.c \
 	porting$(SLASH)open_file1.c \
 	porting$(SLASH)open_file2.c \
+	porting$(SLASH)parse_all_audio_data.c \
 	porting$(SLASH)porting_utils.c \
 	porting$(SLASH)porting_utils2.c \
 	porting$(SLASH)validate_sectors_data_a.c \
 	porting$(SLASH)validate_sectors_data_b.c \
+	porting$(SLASH)verify_hash.c \
 	porting$(SLASH)write_sector_data.c \
 	porting$(SLASH)write_sector_data2.c \
 	porting$(SLASH)write_entity_data.c \
+	porting$(SLASH)write_all_audio_data.c \
 	engine$(SLASH)calc_sector_bounds.c \
 	engine$(SLASH)colour_scale.c \
 	engine$(SLASH)get_next_wall_tex.c \
@@ -132,6 +136,7 @@ SRCS = \
 	update_player$(SLASH)player_take_damage.c \
 	update_player$(SLASH)player_place_feet_to_ground.c \
 	update_player$(SLASH)reload_weapon.c \
+	update_player$(SLASH)recharge_suit.c \
 	update_screen$(SLASH)apply_matrices_a.c \
 	update_screen$(SLASH)apply_matrices_b.c \
 	update_screen$(SLASH)calculate_offsets.c \

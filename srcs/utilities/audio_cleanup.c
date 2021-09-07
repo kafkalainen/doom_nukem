@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:07:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:09:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:30:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	cleanup_audio_source(t_audio *audio)
 	free_sound(&audio->plasma_gun_no_ammo);
 	free_sound(&audio->reload);
 	free_sound(&audio->unlock_door);
+	free_sound(&audio->power_station_depleted);
+	free_sound(&audio->recharge);
 	cleanup_rahikainen_audio_sources(audio);
 	cleanup_enemy_audio_sources(audio);
 }

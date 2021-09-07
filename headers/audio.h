@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/05 22:38:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:18:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,21 @@
 typedef struct s_audio
 {
 	Mix_Music	*music;
-	Mix_Chunk	*footstep1;
-	Mix_Chunk	*footstep2;
-	Mix_Chunk	*door;
-	Mix_Chunk	*button;
-	Mix_Chunk	*plasma_gun;
-	Mix_Chunk	*error;
-	Mix_Chunk	*rahikainen_ramble[4];
-	Mix_Chunk	*rahikainen_damage[5];
 	Mix_Chunk	*bolt_unlocked;
 	Mix_Chunk	*bolt_locked;
+	Mix_Chunk	*button;
+	Mix_Chunk	*door;
+	Mix_Chunk	*error;
+	Mix_Chunk	*footstep1;
+	Mix_Chunk	*footstep2;
 	Mix_Chunk	*lift;
+	Mix_Chunk	*plasma_gun;
 	Mix_Chunk	*plasma_gun_no_ammo;
+	Mix_Chunk	*power_station_depleted;
+	Mix_Chunk	*rahikainen_ramble[4];
+	Mix_Chunk	*rahikainen_damage[5];
 	Mix_Chunk	*reload;
-	Mix_Chunk	*unlock_door;
+	Mix_Chunk	*recharge;
 	Mix_Chunk	*skull_skulker_aggro;
 	Mix_Chunk	*skull_skulker_attack;
 	Mix_Chunk	*skull_skulker_damage;
@@ -38,6 +39,7 @@ typedef struct s_audio
 	Mix_Chunk	*thing_attack;
 	Mix_Chunk	*thing_damage;
 	Mix_Chunk	*thing_death;
+	Mix_Chunk	*unlock_door;
 }				t_audio;
 
 typedef struct s_audio_asset

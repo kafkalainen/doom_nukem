@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:09:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:25:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,6 @@ void	initialize_audio_to_null(t_audio *audio)
 	audio->thing_attack = NULL;
 	audio->thing_damage = NULL;
 	audio->thing_death = NULL;
+	audio->recharge = NULL;
+	audio->power_station_depleted = NULL;
 }
