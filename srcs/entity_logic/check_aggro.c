@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:14:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:06:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 13:05:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_bool	check_aggro(t_player *plr, t_entity *entity, t_home *home)
 			play_sound(plr->audio.skull_skulker_aggro, 20);
 		else if (entity->type == thing)
 			play_sound(plr->audio.thing_aggro, 20);
+		entity->velocity = 0.0025f;
 		return (true);
 	}
 	if (distance_squared <= AGGRO_RANGE_2
@@ -79,6 +80,7 @@ t_bool	check_aggro(t_player *plr, t_entity *entity, t_home *home)
 			play_sound(plr->audio.skull_skulker_aggro, 20);
 		else if (entity->type == thing)
 			play_sound(plr->audio.thing_aggro, 20);
+		entity->velocity = 0.0025f;
 		return (true);
 	}
 	return (false);

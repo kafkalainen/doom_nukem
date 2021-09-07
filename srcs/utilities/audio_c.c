@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:23:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 12:28:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:59:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	load_rahikainen(t_audio *audio)
 	audio->rahikainen_ramble[2] = Mix_LoadWAV("audio/rahikainen_3.wav");
 	audio->rahikainen_ramble[3] = Mix_LoadWAV("audio/rahikainen_4.wav");
 	audio->rahikainen_damage[0] = Mix_LoadWAV("audio/rahikainen_aah_1.wav");
-	audio->rahikainen_damage[1] = Mix_LoadWAV("audio/rahikainen_damage.wav");
-	audio->rahikainen_damage[2] = Mix_LoadWAV("audio/rahikainen_ugh.wav");
-	audio->rahikainen_damage[3] = Mix_LoadWAV("audio/rahikainen_ugh_2.wav");
-	audio->rahikainen_damage[4] = Mix_LoadWAV("audio/rahikainen_ugh_3.wav");
+	audio->rahikainen_damage[1] = Mix_LoadWAV("audio/rahikainen_ugh.wav");
+	audio->rahikainen_damage[2] = Mix_LoadWAV("audio/rahikainen_ugh_2.wav");
+	audio->rahikainen_damage[3] = Mix_LoadWAV("audio/rahikainen_ugh_3.wav");
+	audio->rahikainen_damage[4] = Mix_LoadWAV("audio/rahikainen_damage.wav");
 }
 
 static void	load_enemy(t_audio *audio)
