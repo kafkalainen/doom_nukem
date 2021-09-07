@@ -3,14 +3,14 @@
 void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 {
 /* 	action->move = 0; */
-	if (action->input_active >= 0)
+	if (action->input_active != -1)
 	{
 		if (keysym == SDLK_RETURN)
 		{
 			printf("we ended input\n");
 			action->input_active = -1;
+			action->keysym = -1;
 		}
-			
 		action->keysym = keysym;
 		return ;
 	}

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 17:56:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 18:11:11 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/07 16:42:08 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ unsigned char	*get_writable_wall_data(t_editor_walls *wall)
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
 			WRITE_BREAKER, 1, 0);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
-			ft_itoa(wall->idx), 1, 1);
+			ft_itoa(wall->type), 1, 1);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
 			WRITE_BREAKER, 1, 0);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,

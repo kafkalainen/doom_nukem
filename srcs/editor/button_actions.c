@@ -5,8 +5,12 @@ void		main_button_actions(t_action *action, int i)
 	if (i == 0)
 	{
 		action->save_file = 1;
+		printf("save file\n");
 		if (!action->map_name_set)
+		{
+			printf("input active\n");
 			action->input_active = 1;
+		}
 	}
 	else if (i == 1 && action->nbr_of_maps > 0)
 		action->open_file = 1;

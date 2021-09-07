@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/07 15:51:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/07 18:34:01 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,12 @@ void	draw_buttons(t_button **blist, t_buffer *buffer,
 	i = 0;
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
+	mod.len = 0;
 	while (i < NBR_BUTTONS)
 	{
 		if (blist[i]->info.draw_depth == draw_depth)
 		{
+			mod.len = ft_strlen((const char *)blist[i]->info.text);
 			mod.colour = get_color_from_action_data(i, action, end_sector);
 			box.start = blist[i]->ltop;
 			box.end = blist[i]->wh;
@@ -231,6 +233,8 @@ void	draw_entity_textfields(t_entity_list **list, int selected_entity, t_buffer 
 {
 	t_entity_list	*temp;
 	t_plx_modifier	mod;
+	char			*str;
+
 	temp = *list;
 	while (temp != NULL && temp->entity_idx != selected_entity)
 		temp = temp->next;
@@ -238,7 +242,11 @@ void	draw_entity_textfields(t_entity_list **list, int selected_entity, t_buffer 
 		return ;
 	mod.colour = white;
 	mod.size = TEXT_SIZE;
+	str = ft_itoa(temp->entity_idx);
+	mod.len = ft_strlen(str);
+	ft_strdel(&str);
 	ft_c_pxl(buffer, vec2(100, 56), '0' + temp->entity_idx, mod);
+	mod.len = 1;
 	ft_c_pxl(buffer, vec2(100, 84), '0' + temp->entity_type, mod);
 	ft_c_pxl(buffer, vec2(150, 114), '0' + temp->is_linked, mod);
 	ft_c_pxl(buffer, vec2(165, 144), '0' + temp->is_revealed, mod);
@@ -246,16 +254,35 @@ void	draw_entity_textfields(t_entity_list **list, int selected_entity, t_buffer 
 	ft_c_pxl(buffer, vec2(100, 204), '0' + temp->state, mod);
 }
 
+// void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text)
+// {
+// 	t_plx_modifier	mod;
+
+// 	mod.colour = white;
+// 	mod.size = TEXT_SIZE;
+// 	if (help_text == map_saving)
+// 		str_pxl(buffer, vec2(midpoint - 100, 50), "Please input text string", mod);
+// 	if (string != NULL)
+// 		str_pxl(buffer, vec2(midpoint - 100, 70), (char *)string, mod);
+// }
+
 void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text)
 {
 	t_plx_modifier	mod;
 
 	mod.colour = get_color(orange);
 	mod.size = TEXT_SIZE;
+	(void)help_text;
 	if (help_text == map_saving)
+	{
+		mod.len = 25;
 		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Please input text string", mod);
+	}
 	if (string != NULL)
+	{
+		mod.len = ft_strlen((const char *)string);
 		ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)string, mod);
+	}
 }
 
 void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_names)
@@ -271,7 +298,7 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 		get_menu_range_key_up(&action->option, &action->start, &action->end, action->nbr_of_maps);
 	i = action->start;
 	y = 0;
-	mod.colour = orange;
+	mod.colour = get_color(orange);
 	mod.size = TEXT_SIZE;
 	if (action->link_maps)
 		ft_str_pxl(buffer, vec2(310, 70), "Select which map to link to", mod);

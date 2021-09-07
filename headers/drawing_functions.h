@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/07 15:51:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/07 18:05:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ t_xyz		translate_point(t_xyz *src, t_xyz translation);
 t_triangle	translate_triangle(t_triangle *src, t_xyz translation);
 void		update_editor_load_menu(t_buffer *buffer, t_action *action,
 				char **map_names);
+void		draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text);
 
 #endif

@@ -88,8 +88,9 @@ void	read_input_string(unsigned char **string, t_action *action)
 		action->keysym = -1;
 		return ;
 	}
-	else if (action->input_active && ft_isprint(action->keysym))
+	if (action->input_active && ft_isprint(action->keysym))
 	{
+		c = action->keysym;
 		if (*string == NULL)
 		{
 			*string = (unsigned char *)ft_strnew(sizeof(char) * 1);
@@ -199,7 +200,6 @@ void	save_editor_map(t_editor *editor, t_home *home)
 		if (check_saving_prerequisites(editor))
 			create_map_file(home, editor);
 		editor->action.save_file = 0;
-		editor->action.input_active = -1;
 	}
 }
 
@@ -338,6 +338,8 @@ int		handle_events(t_editor *editor, t_home *home)
 		editor->action.create_sector = 0;
 		editor->action.edit_sector = 1;
 	}
+	if (editor->action.save_file)
+		save_editor_map(editor, home);
 	if (editor->action.input_active && editor->action.edit_sector)
 	{
 		//handle_sector(&editor->sector_list, &editor->mouse_data, &editor->action);
@@ -364,8 +366,6 @@ int		handle_events(t_editor *editor, t_home *home)
 	}
 	// if (editor->mouse_data.i_mbleft)
 	// 	new_check_event(editor);
-	if (editor->action.save_file)
-		save_editor_map(editor, home);
 	if (editor->action.link_maps == 2)
 		link_maps(&editor->action, &editor->linked_mapname, editor->map_names);
 	if (editor->action.unlink_maps)

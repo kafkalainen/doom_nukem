@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/06 18:26:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 17:50:55 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,5 +266,11 @@ void			editor_load_map(t_editor *editor);
 void			load_map_names_to_memory(t_editor *editor);
 void			editor_free_all_sectors(t_sector_list **head);
 void			assign_sector_bbox(t_sector_list *sector);
+
+int				check_saving_prerequisites(t_editor *editor);
+int				check_plr_start_and_end_sector_exists(t_sector_list **list, t_plr_pos plr, int end_sector);
+void			save_editor_map(t_editor *editor, t_home *home);
+void			read_input_string(unsigned char **string, t_action *action);
+unsigned char	*delete_char_from_string(unsigned char **string);
 
 #endif
