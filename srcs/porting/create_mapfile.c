@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 17:51:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 14:45:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	write_texture_data(int *fd, t_home *home)
 
 	buf = NULL;
 	buf = (unsigned char *)ft_strjoin_freeable("#doom_nukem_textures#",
-			ft_itoa(home->nbr_of_textures), 0, 1);
+			ft_itoa(NUM_TEX), 0, 1);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf, "\n", 1, 0);
 	if (doom_write(fd, (const void **)&buf, ft_strlen((const char *)buf)) == -1)
 		printf("failed to add texture numbers\n");
 	ft_strdel((char **)&buf);
 	i = 1;
-	while (i <= home->nbr_of_textures)
+	while (i < (NUM_TEX - 1))
 	{
 		write_single_texture(home->textures[i], fd, buf);
 		i++;
@@ -68,7 +68,6 @@ int	create_map_file(t_home *home, t_editor *editor)
 {
 	int			fd;
 
-	(void)home;
 	doom_open(&fd, (const char **)&editor->mapname,
 		WRITE_ONLY | READ_ONLY | CREATE_FILE | TRUNCATE, 0644);
 	if (fd < 0)
@@ -76,9 +75,7 @@ int	create_map_file(t_home *home, t_editor *editor)
 	write_sector_data(&fd, editor);
 	write_entity_data(&fd, editor);
 	write_texture_data(&fd, home);
-	write_audio_data(&fd, "./audio/eerie_by_eparviai.wav", "doom_music #");
-	write_audio_data(&fd, "./audio/footstep1.wav", "doom_footstep1 #");
-	write_audio_data(&fd, "./audio/footstep2.wav", "doom_footstep2 #");
+	write_all_audio_data(&fd);
 	doom_close(&fd);
 	create_hash(editor->mapname);
 	return (1);

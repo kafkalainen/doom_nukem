@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 16:24:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 14:15:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,16 @@ t_texture	*assign_empty_texture(void)
 	return (tex);
 }
 
-void	parse_texture_data(unsigned char *buf, t_home *home,
-	unsigned int *pos, ssize_t size)
+void	parse_texture_data(unsigned char *buf, t_home *home, ssize_t size)
 {
 	int				i;
+	unsigned int	pos;
 
-	*pos = 0;
-	buf = (unsigned char *)ft_strstr((char *)buf, "doom_textures");
-	*pos += get_next_breaker(buf + *pos) + 1;
-	if (*pos > (unsigned int)size)
+	buf = (unsigned char *)ft_strstr((char *)buf, "#doom_nukem_textures#");
+	pos += get_next_breaker(buf + pos) + 1;
+	if (pos > (unsigned int)size)
 		error_output("Pointer points outside memory address\n");
-	home->nbr_of_textures = ft_atoi((char *)buf + *pos);
+	home->nbr_of_textures = ft_atoi((char *)buf + pos);
 	home->textures = (t_texture **)malloc(sizeof(t_texture *)
 			* (home->nbr_of_textures + 1));
 	if (!home->textures)
@@ -72,7 +71,7 @@ void	parse_texture_data(unsigned char *buf, t_home *home,
 	i = 1;
 	while (i <= home->nbr_of_textures)
 	{
-		home->textures[i] = get_texture(buf, pos, size);
+		home->textures[i] = get_texture(buf, &pos, size);
 		i++;
 	}
 }
@@ -99,37 +98,4 @@ void	parse_audio_data(unsigned char *buf, unsigned int *pos,
 	if (create_temp_audio_file(asset.buf, asset.size, path) == -1)
 		error_output("Failed to create temp audio file\n");
 	free(asset.buf);
-}
-
-int	open_file(t_home *home, char *path)
-{
-	int				fd;
-	unsigned char	*buf;
-	ssize_t			size;
-	unsigned int	pos;
-
-	doom_open(&fd, (const char **)&path, READ_ONLY, 0644);
-	if (fd < 0)
-		error_output("Failed to open file\n");
-	else
-	{
-		buf = (unsigned char *)malloc(sizeof(unsigned char) * MAX_SIZE);
-		if (!buf)
-			error_output("Memory allocation of source buffer failed\n");
-		doom_read(&size, &fd, (void **)&buf, MAX_SIZE);
-		if (size <= 0)
-			error_output("Failed to read file\n");
-		else if (size >= MAX_SIZE)
-			error_output("File is too large\n");
-		if (doom_close(&fd) == -1)
-			error_output("Could not close file\n");
-		parse_texture_data(buf, home, &pos, size);
-		if (doom_mkdir() == -1)
-			printf("Failed to create temporary directory\n");
-		parse_audio_data(buf, &pos, "./temp/music.wav", size);
-		parse_audio_data(buf, &pos, "./temp/footstep1.wav", size);
-		parse_audio_data(buf, &pos, "./temp/footstep2.wav", size);
-		free(buf);
-	}
-	return (1);
 }

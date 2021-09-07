@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 11:48:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 15:43:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	load_map_file(t_player *plr, t_home *home)
 	ssize_t			size;
 	int				ret;
 
-	buf = (unsigned char *)malloc(sizeof(unsigned char) * (BUF_SIZE + 1));
+	buf = (unsigned char *)malloc(sizeof(unsigned char) * (MAX_SIZE + 1));
 	if (!buf)
 		error_output("ERROR: Failed allocate memory for the map.");
 	doom_open(&fd, (const char **)&home->map, TEXT_ONLY, 0644);
@@ -108,13 +108,17 @@ int	load_map_file(t_player *plr, t_home *home)
 		error_output("ERROR: Failed to open map");
 	else
 	{
-		doom_read(&size, &fd, (void **)&buf, BUF_SIZE);
-		if (size <= 0 || size == BUF_SIZE || doom_close(&fd) == -1)
+		doom_read(&size, &fd, (void **)&buf, MAX_SIZE);
+		if (size <= 0 || size == MAX_SIZE || doom_close(&fd) == -1)
 			read_error_output("ERROR: Failed to read map.", &buf);
 		buf[size] = '\0';
-		// verify_hash(buf, size);
+		verify_hash(buf, size);
 		ret = parse_sector_data(buf, plr, home, size);
 		ret = parse_entity_data(buf, home, size);
+		parse_texture_data(buf, home, size);
+		if (doom_mkdir() == -1)
+			error_output("ERROR: Failed to create temporary directory.");
+		parse_all_audio_data(buf, size);
 		free(buf);
 		if (ret)
 			error_output("ERROR: Failed to read map.");

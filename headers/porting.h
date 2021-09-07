@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 17:12:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 14:15:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ Uint32			swap_channels(Uint32 color, int format);
 t_texture		*load_texture_from_map_data(char *line);
 void			free_array(unsigned char **array);
 void			parse_texture_data(unsigned char *buf, t_home *home,
-					unsigned int *pos, ssize_t size);
+					ssize_t size);
 void			write_single_texture(t_texture *tex, int *fd,
 					unsigned char *buf);
 t_texture		*return_new_texture(t_png *png, int idx);
@@ -49,6 +49,7 @@ void			cycle_textures(t_home *home,
 
 void			parse_audio_data(unsigned char *buf,
 					unsigned int *pos, char *path, ssize_t size);
+int				parse_all_audio_data(unsigned char *buf, ssize_t size);
 void			get_audio_data(t_audio_asset *asset, char *path);
 int				create_temp_audio_file(unsigned char *buf,
 					ssize_t size, char *path);
@@ -63,7 +64,7 @@ int				create_temp_audio_file(unsigned char *buf,
 int				create_map_file(t_home *home, t_editor *editor);
 void			write_texture_data(int *fd, t_home *home);
 void			write_audio_data(int *fd, char *path, char *asset_name);
-int				open_file(t_home *home, char *path);
+int				write_all_audio_data(int *fd);
 int				open_map_file(t_home *home, char *path);
 void			write_sector_data(int *fd, t_editor *editor);
 void			write_entity_data(int *fd, t_editor *editor);
@@ -71,7 +72,6 @@ char			*ft_strjoin_freeable(char *s1, char *s2, int free_one, int free_two);
 Uint32			ft_adler32(unsigned char *data, ssize_t size);
 void			create_hash(unsigned char *tmp);
 void			verify_hash(unsigned char *buf, ssize_t size);
-
 int				get_nbr_of_lines(unsigned char *plot);
 int				check_if_linked(unsigned char *linked_map);
 int				get_nbr_of_sectors(t_sector_list **sectors);
