@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 16:48:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:48:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ void	launch_load_menu_loop(t_menu *menu, t_home *home, SDL_Event *e)
 	{
 		process_inputs_load_menu(&home->game_state, e, menu);
 		update_load_menu(menu, e->key.keysym.sym);
-		render_buffer(menu->menu_buffer.pxl_buffer, home->win.ScreenSurface);
+		render_buffer(menu->buffer.pxl_buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
 	if (menu->selected)
-		home->chosen_map = ft_strjoin("map_files/",
-				menu->map_names[menu->option]);
+		home->map = ft_strjoin("map_files/", menu->map_names[menu->option]);
 	i = 0;
 	while (i < menu->nbr_of_maps)
 		free(menu->map_names[i++]);

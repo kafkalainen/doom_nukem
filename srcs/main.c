@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 18:04:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:48:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 **	 	ft_putendl_fd("File creation failed\n", 2);
 */
 
-void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *menu_buffer,
+void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *buffer,
 		char **chosen_map)
 {
 	free_queues(frame);
 	free(frame->buffer.pxl_buffer);
-	free(menu_buffer);
+	free(buffer);
 	ft_strdel(chosen_map);
 	cleanup_audio_source(audio);
 	ft_putendl("User closed the window");
@@ -50,7 +50,7 @@ int	main(void)
 	while (home.game_state != QUIT)
 	{
 		process_inputs_main_menu(&home.game_state, &e, &menu.option);
-		update_main_menu(&menu.menu_buffer, menu.option);
+		update_main_menu(&menu.buffer, menu.option);
 		if (home.game_state == MAP_MENU)
 			handle_map_menu(&menu, &home, &e);
 		if (home.game_state == GAME_LOOP || home.game_state == GAME_CONTINUE)
@@ -60,9 +60,9 @@ int	main(void)
 		}
 		if (home.game_state == EDITOR)
 			launch_editor(&home, &e);
-		render_buffer(menu.menu_buffer.pxl_buffer, home.win.ScreenSurface);
+		render_buffer(menu.buffer.pxl_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
-	free_main_assets(&frame, &plr.audio, menu.menu_buffer.pxl_buffer, &home.chosen_map);
+	free_main_assets(&frame, &plr.audio, menu.buffer.pxl_buffer, &home.map);
 	return (EXIT_SUCCESS);
 }

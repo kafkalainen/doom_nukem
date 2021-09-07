@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 16:17:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:47:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ typedef struct s_home
 	t_time			t;
 	t_xy			offset;
 	char			**story;
-	char			*chosen_map;
+	char			*map;
 	Uint32			linked_map;
 	Uint32			nbr_of_entities;
 	Uint32			nbr_of_projectiles;

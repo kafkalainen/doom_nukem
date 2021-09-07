@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 16:22:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:39:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,6 @@ void	draw_rect_center(t_xy xy, t_xy wh, t_frame *frame)
 		draw_line(vec2(xy.x + i, xy.y + j),
 			vec2(xy.x + fabs(i), xy.y + j), 0x00A000, &frame->buffer);
 		j++;
-	}
-}
-
-void	draw_grid(t_frame *frame)
-{
-	int		i;
-	t_xy	dim;
-
-	dim = vec2(1, 1);
-	i = 0;
-	while (i < dim.y)
-	{
-		draw_line(
-			vec2(0, i * MINIMAP_SIZE),
-			vec2(dim.x * MINIMAP_SIZE, i * MINIMAP_SIZE), white, &frame->buffer);
-		++i;
-	}
-	i = 0;
-	while (i < dim.x)
-	{
-		draw_line(
-			vec2(i * MINIMAP_SIZE, 0),
-			vec2(i * MINIMAP_SIZE, dim.y * MINIMAP_SIZE), white, &frame->buffer);
-		++i;
 	}
 }
 

@@ -86,7 +86,7 @@ int		doom_mkdir(void);
 void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
 void	error_output_sdl(char *msg, t_home *home, t_frame *frame);
-void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *menu_buffer,
+void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *buffer,
 			char **chosen_map);
 void	fps_timer(t_time *t);
 int		give_sign(float number);

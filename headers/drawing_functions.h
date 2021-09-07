@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 18:20:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:39:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		draw_entity_textfields(t_entity_list **list, int selected_entity,
 void		draw_frame(t_home *home, t_frame *frame, t_player *plr);
 void		draw_input_string(unsigned char *string, t_buffer *buffer,
 				int midpoint, int help_text);
-void		draw_grid_editor(t_buffer *buffer, t_action *action);
+void		draw_grid(t_buffer *buffer, t_action *action);
 void		draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr);
 int			draw_horizontal_line(t_buffer *buffer, float *depth_buffer,
 				t_texel *tex, t_steps *step);

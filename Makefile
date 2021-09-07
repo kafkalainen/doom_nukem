@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/06 17:05:39 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/07 11:45:34 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS = \
 	parsing$(SLASH)generate_doors.c \
 	parsing$(SLASH)get_next_value.c \
 	parsing$(SLASH)initialize_entity_textures.c \
+	parsing$(SLASH)initialize_entity_triangles.c \
 	parsing$(SLASH)map_texel.c \
 	parsing$(SLASH)parse_entity_data.c \
 	parsing$(SLASH)parse_number_data.c \
@@ -88,6 +89,7 @@ SRCS = \
 	porting$(SLASH)porting_utils2.c \
 	porting$(SLASH)validate_sectors_data_a.c \
 	porting$(SLASH)validate_sectors_data_b.c \
+	porting$(SLASH)verify_hash.c \
 	porting$(SLASH)write_sector_data.c \
 	porting$(SLASH)write_sector_data2.c \
 	porting$(SLASH)write_entity_data.c \

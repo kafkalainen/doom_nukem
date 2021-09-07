@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 11:27:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:48:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	get_map_header(unsigned int *pos, unsigned char **buf,
 		return (1);
 	if (home->linked_map)
 	{
-		if (parse_map_name(&home->chosen_map, size, *buf, &pos))
+		if (parse_map_name(&home->map, size, *buf, &pos))
 			return (1);
 	}
 	return (0);
@@ -92,24 +92,6 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 	return (0);
 }
 
-void	verify_hash(unsigned char *buf, ssize_t size)
-{
-	Uint32			orig_hash;
-	Uint32			new_hash;
-	unsigned int	pos;
-
-	pos = 0;
-	new_hash = 0;
-	orig_hash = ft_atoi((const char *)buf);
-	pos += get_next_breaker(buf + pos);
-	if (pos > size)
-		error_output("Reading past memory pointer\n");
-	new_hash = ft_adler32(buf + pos, size);
-	printf("Original hash: %i, new hash: %i\n", orig_hash, new_hash);
-	if (orig_hash != new_hash)
-		error_output("Hash verification failed\n");
-}
-
 //validate_sectors_data(home, plr);
 int	load_map_file(t_player *plr, t_home *home)
 {
@@ -121,7 +103,7 @@ int	load_map_file(t_player *plr, t_home *home)
 	buf = (unsigned char *)malloc(sizeof(unsigned char) * (BUF_SIZE + 1));
 	if (!buf)
 		error_output("ERROR: Failed allocate memory for the map.");
-	doom_open(&fd, (const char **)&home->chosen_map, TEXT_ONLY, 0644);
+	doom_open(&fd, (const char **)&home->map, TEXT_ONLY, 0644);
 	if (fd < 0)
 		error_output("ERROR: Failed to open map");
 	else

@@ -6,13 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/06 18:32:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:40:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/doom_nukem.h"
 
-void	draw_bbox_sector(t_sector_list *sector, t_buffer *buffer, t_action *action)
+void	draw_bbox_sector(t_sector_list *sector, t_buffer *buffer,
+		t_action *action)
 {
 	float	point1;
 	float	point2;
@@ -28,7 +29,8 @@ void	draw_bbox_sector(t_sector_list *sector, t_buffer *buffer, t_action *action)
 		color = get_color(lightgreen);
 	else
 		color = get_color(blue);
-	draw_rect(vec2(point1, point2), vec2(fabs(point1 - point3), fabs(point2 - point4)), buffer, color);
+	draw_rect(vec2(point1, point2), vec2(ft_fabsf(point1 - point3),
+		ft_fabsf(point2 - point4)), buffer, color);
 }
 
 void	draw_box(t_box box, t_buffer *buffer, Uint32 color)
@@ -48,7 +50,7 @@ void	draw_box(t_box box, t_buffer *buffer, Uint32 color)
 	}
 }
 
-void		draw_sector_textfields(t_sector_list *sector, t_buffer *buffer)
+void	draw_sector_textfields(t_sector_list *sector, t_buffer *buffer)
 {
 	t_plx_modifier	mod;
 
@@ -61,7 +63,7 @@ void		draw_sector_textfields(t_sector_list *sector, t_buffer *buffer)
 		ft_str_pxl(buffer, vec2(32, 580), (char *)sector->sector_plot, mod);
 }
 
-int			get_color_from_action_data(int i, t_action *action, int end_sector)
+int	get_color_from_action_data(int i, t_action *action, int end_sector)
 {
 	if ((i == 7 && action->player_start_assigned) || (i == 4 && end_sector >= 0))
 		return (get_color(green));
@@ -70,7 +72,8 @@ int			get_color_from_action_data(int i, t_action *action, int end_sector)
 	return (get_color(white));
 }
 
-void		draw_buttons(t_button **blist, t_buffer *buffer, int draw_depth, t_action *action, int end_sector)
+void	draw_buttons(t_button **blist, t_buffer *buffer,
+		int draw_depth, t_action *action, int end_sector)
 {
 	int				i;
 	t_box			box;
@@ -98,7 +101,7 @@ void		draw_buttons(t_button **blist, t_buffer *buffer, int draw_depth, t_action 
 	}
 }
 
-void			draw_grid_editor(t_buffer *buffer, t_action *action)
+void	draw_grid(t_buffer *buffer, t_action *action)
 {
 	int		cells_on_sx;
 	int		cells_on_sy;
@@ -300,7 +303,7 @@ void	draw_ui(t_editor *editor)
 
 	temp = editor->sector_list;
 	if (editor->action.grid == 1)
-		draw_grid_editor(&editor->buffer, &editor->action);
+		draw_grid(&editor->buffer, &editor->action);
 	while (temp && temp->idx_sector != editor->action.selected_sector)
 		temp = temp->next;
 	if (editor->action.draw_depth == entity)

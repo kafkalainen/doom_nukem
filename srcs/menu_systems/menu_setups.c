@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/06 18:02:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:48:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,20 @@ void	load_map_names(char ***map_names, int *nbr_of_maps)
 void	setup_menu(t_menu *menu, int *game_state)
 {
 	menu->nbr_of_maps = 0;
-	menu->menu_buffer.pxl_buffer = (Uint32 *)malloc(sizeof(Uint32)
+	menu->buffer.pxl_buffer = (Uint32 *)malloc(sizeof(Uint32)
 			* (SCREEN_WIDTH * SCREEN_HEIGHT));
-	if (!menu->menu_buffer.pxl_buffer)
-		error_output("Failed to allocate memory to menu_buffer\n");
+	if (!menu->buffer.pxl_buffer)
+		error_output("Failed to allocate memory to menu buffer\n");
 	menu->option = 0;
-	menu->menu_buffer.width = SCREEN_WIDTH;
-	menu->menu_buffer.height = SCREEN_HEIGHT;
+	menu->buffer.width = SCREEN_WIDTH;
+	menu->buffer.height = SCREEN_HEIGHT;
 	*game_state = MAIN_MENU;
 }
 
 void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 {
 	ft_putstr("You chose: ");
-	ft_putendl_fd(home->chosen_map, 1);
+	ft_putendl_fd(home->map, 1);
 	initialize_player(plr);
 	if (initialize_skybox(&home->skybox))
 		error_output("Memory allocation failed!\n");
