@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 17:52:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 11:27:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	load_map_file(t_player *plr, t_home *home)
 		if (size <= 0 || size == BUF_SIZE || doom_close(&fd) == -1)
 			read_error_output("ERROR: Failed to read map.", &buf);
 		buf[size] = '\0';
-		verify_hash(buf, size);
+		// verify_hash(buf, size);
 		ret = parse_sector_data(buf, plr, home, size);
 		ret = parse_entity_data(buf, home, size);
 		free(buf);
