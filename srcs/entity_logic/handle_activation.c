@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 20:25:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:32:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ t_bool	activate_power_station(t_entity *power_station, t_player *plr)
 	if (power_station->state)
 	{
 		power_station->state = 0;
-		if (plr->power_points < 5)
-			plr->power_points += 3;
+		plr->recharge = 1000;
+		play_sound(plr->audio.recharge, 30);
 		return (true);
 	}
+	play_sound(plr->audio.power_station_depleted, 30);
 	return (false);
 }
 

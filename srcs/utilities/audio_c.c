@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:23:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/05 22:40:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:28:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static t_bool	check_invalid_pointers(t_audio *audio)
 		|| !audio->skull_skulker_aggro || !audio->skull_skulker_attack
 		|| !audio->skull_skulker_damage || !audio->skull_skulker_death
 		|| !audio->thing_aggro || !audio->thing_attack
-		|| !audio->thing_damage || !audio->thing_death)
+		|| !audio->thing_damage || !audio->thing_death
+		|| !audio->recharge || !audio->power_station_depleted)
 		return (true);
 	else
 		return (false);
@@ -71,6 +72,9 @@ int	load_game_audio(t_audio *audio)
 	audio->plasma_gun_no_ammo = Mix_LoadWAV("audio/out_of_ammo.wav");
 	audio->reload = Mix_LoadWAV("audio/reload.wav");
 	audio->unlock_door = Mix_LoadWAV("audio/door_unlocked.wav");
+	audio->recharge = Mix_LoadWAV("audio/error.wav");
+	audio->power_station_depleted
+		= Mix_LoadWAV("audio/power_station_depleted.wav");
 	if (check_invalid_pointers(audio))
 	{
 		ft_putendl("ERROR: Couldn't load audio.");

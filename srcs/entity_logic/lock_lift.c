@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:23:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 10:03:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:18:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	update_heights(t_home *home, t_sector *lift,
 {
 	float	height_diff;
 
+	height_diff = 0.0f;
 	if (portal->bottom.p[0].y != portal_behind->bottom.p[0].y)
 		height_diff = portal_behind->bottom.p[0].y - portal->bottom.p[0].y;
 	translate_entities(home, height_diff, lift->idx_sector);

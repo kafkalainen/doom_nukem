@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_use.c                                       :+:      :+:    :+:   */
+/*   recharge_suit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/16 17:07:53 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 12:23:56 by jnivala          ###   ########.fr       */
+/*   Created: 2021/09/07 11:58:57 by jnivala           #+#    #+#             */
+/*   Updated: 2021/09/07 12:02:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	player_use(t_player *plr, t_home *home)
+void	recharge_suit(t_player *plr, Uint32 t)
 {
-	t_entity		*entity;
-	int				item;
-
-	entity = NULL;
-	if (!plr->input.use)
-		return (FALSE);
-	if (plr->active_inv != -1)
-		item = player_use_inventory_item(plr);
-	else
-		item = 0;
-	open_door(home->sectors, plr, item);
-	entity = activate_object(home, plr);
-	if (entity)
+	if (plr->recharge)
 	{
-		handle_activation(entity, home, plr);
-		plr->input.use = 0;
-		return (TRUE);
+		plr->recharge -= t;
+		if (plr->recharge <= t)
+		{
+			if (plr->power_points < 5)
+				plr->power_points += 3;
+		}
 	}
-	return (FALSE);
 }

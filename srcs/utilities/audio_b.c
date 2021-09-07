@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:34:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 12:48:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:35:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	play_sound(Mix_Chunk *sound, int volume)
 void	toggle_music(Mix_Music *music)
 {
 	if (!Mix_PlayingMusic())
+	{
 		Mix_PlayMusic(music, -1);
+		Mix_VolumeMusic(30);
+	}
 	else if (Mix_PausedMusic())
 		Mix_ResumeMusic();
 	else

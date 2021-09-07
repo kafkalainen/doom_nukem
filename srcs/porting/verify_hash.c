@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:45:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 11:45:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/07 12:20:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	verify_hash(unsigned char *buf, ssize_t size)
 {
 	Uint32			orig_hash;
 	Uint32			new_hash;
-	unsigned int	pos;
+	ssize_t			pos;
 
 	pos = 0;
 	new_hash = 0;
