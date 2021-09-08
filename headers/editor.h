@@ -201,11 +201,33 @@ int				check_bbox(t_xy start, t_xy end, int mouse_x, int mouse_y);
 ** Event handler and event related
 */
 
-void			check_event(t_mouse_data *mouse_data, t_button **list, t_action *action);
+void			check_event(t_mouse_data *mouse_data, t_button **list,
+				t_action *action);
 void			editor_events(SDL_Event *e, t_home *home, t_editor *editor);
-void			mouse_zoom(t_action *action, int mouse_x, int mouse_y, int zoom);
+void			mouse_zoom(t_action *action, int mouse_x, int mouse_y,
+				int zoom);
 int				handle_events(t_editor *editor, t_home *home);
 void			reset_actions(t_action *action);
+void			new_check_event(t_editor *editor);
+void			unlink_selected_entity(t_entity_list **list, int entity_idx,
+				int *unlink_state);
+void			check_ui_events(int x, int y, t_button ***blist,
+				t_action *action);
+int				clicked_inside_grid(int x, int y, int height, int width);
+int				check_plr_start_and_end_sector_exists(
+				t_sector_list **list, t_plr_pos plr, int end_sector);
+void			assign_end_sector(t_sector_list **list, t_screen_xy *mdata,
+				int *end_sector, int *sector_assigned);
+int				assign_player_start(t_sector_list **list,
+				t_screen_xy *mdata, t_plr_pos *plr, int *assign_player_start);
+t_sector_list	*get_clicked_sector(t_sector_list **list,
+				t_screen_xy mdata, int *selected_sector);
+t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_screen_xy mdata,
+				int *selected_wall, int nbr_of_walls);
+void			check_grid_events(t_editor *editor);
+void			link_maps(t_action *action, unsigned char **linked_mapname,
+				char **map_names);
+int				clicked_inside_ui(int x, int y, int height, int width);
 
 /*
 **				Wall creation.
@@ -268,7 +290,6 @@ void			editor_free_all_sectors(t_sector_list **head);
 void			assign_sector_bbox(t_sector_list *sector);
 
 int				check_saving_prerequisites(t_editor *editor);
-int				check_plr_start_and_end_sector_exists(t_sector_list **list, t_plr_pos plr, int end_sector);
 void			save_editor_map(t_editor *editor, t_home *home);
 void			read_input_string(unsigned char **string, t_action *action);
 unsigned char	*delete_char_from_string(unsigned char **string);
