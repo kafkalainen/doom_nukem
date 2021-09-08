@@ -25,6 +25,9 @@ SRCS = \
 	editor$(SLASH)editor_entity.c \
 	editor$(SLASH)event_actions.c \
 	editor$(SLASH)handle_events.c \
+	editor$(SLASH)handle_events2.c \
+	editor$(SLASH)handle_events3.c \
+	editor$(SLASH)handle_events4.c \
 	editor$(SLASH)sector_actions.c \
 	editor$(SLASH)sector_properties.c \
 	editor$(SLASH)editor_load_map.c \
