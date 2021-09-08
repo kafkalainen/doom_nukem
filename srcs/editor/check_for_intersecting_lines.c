@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 08:58:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 17:24:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:27:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static int	editor_point_is_on_the_lseg(t_screen_xy a,
 	float	dot_ab_ab;
 	float	dot_ab_ac;
 
-	vec_ab = vec2_dec((t_xy){b.x, b.y}, (t_xy){a.x, a.y});
-	vec_ac = vec2_dec((t_xy){c.x, c.y}, (t_xy){a.x, a.y});
+	vec_ab = vec2_dec(vec2(b.x, b.y), vec2(a.x, a.y));
+	vec_ac = vec2_dec(vec2(c.x, c.y), vec2(a.x, a.y));
 	if (vec2_cross(vec_ab, vec_ac) != 0)
 		return (0);
 	dot_ab_ab = vec2_dot(vec_ab, vec_ab);

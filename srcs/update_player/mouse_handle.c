@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/04 10:55:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:36:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	mouse_handle(t_player *plr, SDL_Event *e)
 		if (plr->yaw < 0.0f)
 			plr->yaw = TWO_PI;
 		if (plr->dir.x < 0)
-			plr->dir = (t_xy){0.0f, 0.0f};
+			plr->dir = vec2(0.0f, 0.0f);
 		if (plr->dir.x > TWO_PI)
-			plr->dir = (t_xy){TWO_PI, TWO_PI};
+			plr->dir = vec2(TWO_PI, TWO_PI);
 		plr->pitch += e->motion.yrel * 0.01f;
 		plr->hud.vm_ry += -e->motion.yrel * DEG_TO_RAD * 3;
 		if (plr->pitch < -1.4)

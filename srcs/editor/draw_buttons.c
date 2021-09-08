@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/07 18:34:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:30:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	draw_grid(t_buffer *buffer, t_action *action)
 
 t_xy		scale_xy(t_screen_xy x0, int scalar, t_screen_xy offset)
 {
-	return ((t_xy){x0.x * scalar + offset.x, x0.y * scalar + offset.y});
+	return (vec2(x0.x * scalar + offset.x, x0.y * scalar + offset.y));
 }
 
 void	draw_editor_sectors(t_editor *editor)

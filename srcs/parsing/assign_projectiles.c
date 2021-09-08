@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 10:31:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:57:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:32:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	initialize_projectile_triangles(t_projectile *projectile)
 {
 	t_xy	size;
 
-	size = (t_xy){0.25f, 0.25f};
+	size = vec2(0.25f, 0.25f);
 	projectile->top.p[0] = (t_xyz){-0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
 	projectile->top.p[1] = (t_xyz){-0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
 	projectile->top.p[2] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};

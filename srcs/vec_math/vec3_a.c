@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 14:39:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/01 13:58:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:43:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_xyz	vec3_add(t_xyz a, t_xyz b)
 
 t_xy	vec3_to_vec2(t_xyz a)
 {
-	return ((t_xy){a.x, a.z});
+	return ((t_xy){a.x, a.z, 1.0f});
 }
 
 float	vec3_eucl_dist(t_xyz a)

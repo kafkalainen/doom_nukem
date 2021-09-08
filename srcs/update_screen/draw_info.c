@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 11:52:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 16:21:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:39:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ static void	compass_direction(t_buffer *buffer, t_xy *dir, t_plx_modifier mod)
 // {
 // 	char	*pstr[3];
 
-// 	ft_str_pxl(buffer, (t_xy){5.0f, 150.0f},
+// 	ft_str_pxl(buffer, vec2(5.0f, 150.0f),
 // 	"xyz", (t_plx_modifier){get_color(green), 2, 12});
 // 	pstr[0] = ft_ftoa(pos.x, 6);
 // 	pstr[1] = ft_ftoa(pos.y, 6);
 // 	pstr[2] = ft_ftoa(pos.z, 6);
-// 	ft_str_pxl(buffer, (t_xy){5.0f, 170.0f}, pstr[0],
+// 	ft_str_pxl(buffer, vec2(5.0f, 170.0f), pstr[0],
 // 		(t_plx_modifier){get_color(green), 2, 12});
-// 	ft_str_pxl(buffer, (t_xy){5.0f, 190.0f}, pstr[1],
+// 	ft_str_pxl(buffer, vec2(5.0f, 190.0f), pstr[1],
 // 		(t_plx_modifier){get_color(green), 2, 12});
-// 	ft_str_pxl(buffer, (t_xy){5.0f, 210.0f}, pstr[2],
+// 	ft_str_pxl(buffer, vec2(5.0f, 210.0f), pstr[2],
 // 		(t_plx_modifier){get_color(green), 2, 12});
 // 	free(pstr[0]);
 // 	free(pstr[1]);
@@ -67,13 +67,13 @@ void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	mod.size = TEXT_SIZE;
 	mod.len = 100;
 	fps = ft_itoa(nb_fps);
-	ft_str_pxl(&frame->buffer, (t_xy){SCREEN_WIDTH * 0.5 - 15, 0}, fps, mod);
+	ft_str_pxl(&frame->buffer, vec2(SCREEN_WIDTH * 0.5 - 15, 0), fps, mod);
 	compass_direction(&frame->buffer, &plr->dir, mod);
-	ft_str_pxl(&frame->buffer, (t_xy){0, 400}, "x to close minimap", mod);
-	ft_str_pxl(&frame->buffer, (t_xy){0, 420}, "c to close info", mod);
-	ft_str_pxl(&frame->buffer, (t_xy){0, 420}, "z to pause music", mod);
-	ft_str_pxl(&frame->buffer, (t_xy){0, 440}, "wasd, rotate with q and e.",
+	ft_str_pxl(&frame->buffer, vec2(10, 400), "x to close minimap", mod);
+	ft_str_pxl(&frame->buffer, vec2(10, 420), "c to close info", mod);
+	ft_str_pxl(&frame->buffer, vec2(10, 420), "z to pause music", mod);
+	ft_str_pxl(&frame->buffer, vec2(10, 440), "wasd, rotate with q and e.",
 		mod);
-	ft_str_pxl(&frame->buffer, (t_xy){0, 460}, "free mouse with m", mod);
+	ft_str_pxl(&frame->buffer, vec2(10, 460), "free mouse with m", mod);
 	free(fps);
 }

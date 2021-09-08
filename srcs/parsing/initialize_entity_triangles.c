@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:41:54 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 13:08:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:33:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ static t_xy	size_logic(t_entity *entity)
 	t_xy	size;
 
 	if (entity->type == powerstation)
-		size = (t_xy){1.0f, 2.0f};
+		size = vec2(1.0f, 2.0f);
 	else if (entity->type == crewmember
 		|| entity->type == thing)
-		size = (t_xy){4.0f, 4.0f};
+		size = vec2(4.0f, 4.0f);
 	else if (entity->type == lift_button
 		|| entity->type == light_button
 		|| (entity->type >= lamp
 			&& entity->type <= keycard_military))
-		size = (t_xy){0.5f, 0.5f};
+		size = vec2(0.5f, 0.5f);
 	else
-		size = (t_xy){2.0f, 2.0f};
+		size = vec2(2.0f, 2.0f);
 	return (size);
 }
 

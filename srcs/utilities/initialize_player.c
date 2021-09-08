@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 12:05:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:42:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	initialize_player_movement_vectors(t_player *plr)
 {
-	plr->dir = (t_xy){0.0f, 1.0f};
+	plr->dir = vec2(0.0f, 1.0f);
 	plr->cur_sector = 0;
 	plr->pos = (t_xyz){0.8f, 3.5f, 2.87f, 1.0f};
 	plr->look_dir = (t_xyz){0.0f, 0.0f, 1.0f, 1.0f};

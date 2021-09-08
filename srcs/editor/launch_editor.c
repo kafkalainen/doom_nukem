@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/07 17:46:20 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:06:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ static t_editor	setup_editor(t_editor *editor, t_home *home)
 	editor->grid_size = 32;
 	editor->button_list = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
 	editor->button_list = create_button_list(editor->button_list);
-	SDL_SetWindowFullscreen(home->win.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-	SDL_GetWindowSize(home->win.window, &editor->buffer.width, &editor->buffer.height);
-	SDL_SetWindowFullscreen(home->win.window, 0);
+	editor->buffer.width = 800;
+	editor->buffer.height = 600;
+	// SDL_SetWindowFullscreen(home->win.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	// SDL_GetWindowSize(home->win.window, &editor->buffer.width, &editor->buffer.height);
+	// SDL_SetWindowFullscreen(home->win.window, 0);
 	SDL_SetWindowSize(home->win.window, editor->buffer.width, editor->buffer.height);
 	SDL_SetWindowPosition(home->win.window, 0, 0);
 	if (!(editor->buffer.pxl_buffer = (Uint32*)malloc(sizeof(Uint32) *

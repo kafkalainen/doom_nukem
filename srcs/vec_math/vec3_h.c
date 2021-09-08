@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:40:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 14:13:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:45:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,18 @@ float	vec3_ang_axis(t_xyz to_be_turned, t_xyz compared, char axis)
 
 	if (axis == 'x')
 	{
-		v[0] = (t_xy){to_be_turned.z, to_be_turned.y};
-		v[1] = (t_xy){compared.z, compared.y};
+		v[0] = vec2(to_be_turned.z, to_be_turned.y);
+		v[1] = vec2(compared.z, compared.y);
 	}
 	else if (axis == 'y')
 	{
-		v[0] = (t_xy){to_be_turned.x, to_be_turned.z};
-		v[1] = (t_xy){compared.x, compared.z};
+		v[0] = vec2(to_be_turned.x, to_be_turned.z);
+		v[1] = vec2(compared.x, compared.z);
 	}
 	else if (axis == 'z')
 	{
-		v[0] = (t_xy){to_be_turned.x, to_be_turned.y};
-		v[1] = (t_xy){compared.x, compared.y};
+		v[0] = vec2(to_be_turned.x, to_be_turned.y);
+		v[1] = vec2(compared.x, compared.y);
 	}
 	sign = -v[0].y * v[1].x + v[0].x * v[1].y;
 	if (sign == 0.0f)

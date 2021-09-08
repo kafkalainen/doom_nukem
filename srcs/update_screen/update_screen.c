@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 13:36:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 16:01:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:42:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	render_buffer(Uint32 *buffer, SDL_Surface *screen_surface)
 // 	float	mult;
 
 // 	mult = 0.7f;
-// 	offset = (t_xy){1.0f, 1.0f};
-// 	p0 = (t_xy){0.0f, 0.0f};
-// 	p1 = (t_xy){0.0f, 1.0f};
-// 	p2 = (t_xy){1.0f, 1.0f};
-// 	p3 = (t_xy){1.0f, 0.0f};
+// 	offset = vec2(1.0f, 1.0f);
+// 	p0 = vec2(0.0f, 0.0f);
+// 	p1 = vec2(0.0f, 1.0f);
+// 	p2 = vec2(1.0f, 1.0f);
+// 	p3 = vec2(1.0f, 0.0f);
 // 	p0 = vec2_add(p0, offset);
 // 	p1 = vec2_add(p1, offset);
 // 	p2 = vec2_add(p2, offset);

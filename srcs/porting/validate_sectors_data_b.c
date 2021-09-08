@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:09:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:20:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:35:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 // 		test = temp->next;
 // 		while (i < sector->nb_of_walls - 2)
 // 		{
-// 			next = (t_xy){test->top.p[0].x, test->top.p[0].z};
-// 			one_after = (t_xy){test->top.p[2].x, test->top.p[2].z};
+// 			next = vec2(test->top.p[0].x, test->top.p[0].z);
+// 			one_after = vec2(test->top.p[2].x, test->top.p[2].z);
 // 			if (check_if_lseg_intersects(temp, &next,
 //					&one_after) && temp != test)
 // 			{

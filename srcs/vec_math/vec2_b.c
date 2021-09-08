@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec2_b.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:16:10 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/08/18 17:35:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:44:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_xy	vec2_mul(t_xy v, float scalar)
 {
 	return ((t_xy){
 		v.x * scalar,
-		v.y * scalar
+		v.y * scalar,
+		1.0f
 	});
 }
 
@@ -52,5 +53,5 @@ float	vec2_ang(t_xy a, t_xy b)
 
 t_xy	vec2_normal(t_xy p0, t_xy p1)
 {
-	return ((t_xy){(p1.y - p0.y), -(p1.x - p0.x)});
+	return ((t_xy){(p1.y - p0.y), -(p1.x - p0.x), 1.0f});
 }

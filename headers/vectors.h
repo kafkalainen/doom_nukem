@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 18:10:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:26:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_xy
 {
 	float			x;
 	float			y;
+	float			w;
 }					t_xy;
 
 typedef	struct		s_box
@@ -112,6 +113,11 @@ typedef struct s_raster_queue
 typedef struct s_m4x4 {
 	float	m[4][4];
 }				t_m4x4;
+
+typedef struct s_m3x3
+{
+	float		m[3][3];
+}				t_m3x3;
 
 typedef struct s_ray
 {
@@ -278,5 +284,10 @@ t_bool		vec3_ray_triangle_intersect(t_triangle *tri,
 float		vec3_angle(t_xyz to_be_turned, t_xyz compared);
 void		initialize_lumels(float *p0, float *p1, float *p2, float init);
 float		vec3_ang_axis(t_xyz to_be_turned, t_xyz compared, char axis);
+t_m3x3		scaling_matrix_2d(t_xy scale);
+t_m3x3		translation_matrix_2d(t_xy translation);
+t_m3x3		rotation_matrix_2d(float angle);
+t_m3x3		multiply_2d_matrix_with_2d_matrix(t_m3x3 *m1, t_m3x3 *m2);
+t_xy		multiply_vec2_with_2d_matrix(t_xy *src, t_m3x3 *x);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 16:20:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:38:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	draw_mission_failed(t_buffer *buffer)
 	mod.colour = white;
 	mod.len = 100;
 	mod.size = 4;
-	ft_str_pxl(buffer, (t_xy){SCREEN_WIDTH * 0.3f, SCREEN_HEIGHT * 0.4f},
+	ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.3f, SCREEN_HEIGHT * 0.4f),
 		"MISSION::FAILED", mod);
 }
 

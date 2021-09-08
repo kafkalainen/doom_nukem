@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 16:18:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:36:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@
 
 // static void	draw_player(t_frame *frame)
 // {
-// 	draw_square(frame->buffer, center_to_screen((t_xy){-2.0f, -2.0f}),
+// 	draw_square(frame->buffer, center_to_screen(vec2(-2.0f, -2.0f)),
 // 		yellow, 4);
-// 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
-// 		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
-// 				vec2_mul((t_xy){-PLR_DIR, PLR_DIR}, 400))),
+// 	draw_line(center_to_screen(vec2(0.0f, 0.0f)),
+// 		center_to_screen(vec2_add(vec2(0.0f, 0.0f),
+// 				vec2_mul(vec2(-PLR_DIR, PLR_DIR), 400))),
 // 		lightgreen, frame->buffer);
-// 	draw_line(center_to_screen((t_xy){0.0f, 0.0f}),
-// 		center_to_screen(vec2_add((t_xy){0.0f, 0.0f},
-// 				vec2_mul((t_xy){PLR_DIR, PLR_DIR}, 400))),
+// 	draw_line(center_to_screen((vec2(0.0f, 0.0f)),
+// 		center_to_screen(vec2_add(vec2(0.0f, 0.0f),
+// 				vec2_mul(vec2(PLR_DIR, PLR_DIR), 400))),
 // 		lightgreen, frame->buffer);
 // }
 

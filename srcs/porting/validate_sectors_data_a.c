@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:06:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:43:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:34:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,17 @@
 // 	temp = sector->walls;
 // 	if (sector->nb_of_walls == 3)
 // 		return (1);
-// 	dxy_1 = vec2_dec((t_xy){temp->top.p[2].x, temp->top.p[2].z},
-// 			(t_xy){temp->top.p[0].x, temp->top.p[0].z});
-// 	dxy_2 = vec2_dec((t_xy){temp->next->top.p[2].x, temp->next->top.p[2].z},
-// 			(t_xy){temp->top.p[2].x, temp->top.p[2].z});
+// 	dxy_1 = vec2_dec(vec2(temp->top.p[2].x, temp->top.p[2].z),
+// 			vec2(temp->top.p[0].x, temp->top.p[0].z));
+// 	dxy_2 = vec2_dec(vec2(temp->next->top.p[2].x, temp->next->top.p[2].z),
+// 			vec2(temp->top.p[2].x, temp->top.p[2].z));
 // 	sign = is_negative(vec2_cross(dxy_1, dxy_2));
 // 	while (i < sector->nb_of_walls)
 // 	{
 // 		temp = temp->next;
 // 		dxy_1 = dxy_2;
-// 		dxy_2 = vec2_dec((t_xy){temp->next->top.p[2].x, temp->next->top.p[2].z},
-// 				(t_xy){temp->next->top.p[0].x, temp->next->top.p[0].z});
+// 		dxy_2 = vec2_dec(vec2(temp->next->top.p[2].x, temp->next->top.p[2].z),
+// 				vec2(temp->next->top.p[0].x, temp->next->top.p[0].z));
 // 		if (is_negative(vec2_cross(dxy_1, dxy_2)) != sign)
 // 			return (true);
 // 		i++;

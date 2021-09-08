@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 12:59:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:37:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	write_message(t_buffer *buffer, t_player *plr, char *msg,
 
 	percentage = 1.0f - ((plr->message_time - plr->time - 5000) * 0.0002f);
 	mod->len = (size_t)(ft_strlen(msg) * percentage);
-	ft_str_pxl(buffer, (t_xy){100, SCREEN_HEIGHT - 30},
+	ft_str_pxl(buffer,vec2(100, SCREEN_HEIGHT - 30),
 		msg, *mod);
 }
 
@@ -87,7 +87,7 @@ void	draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr)
 	else if (plr->plot_state != sector_plot && plr->message_time > plr->time)
 	{
 		mod.len = (size_t)(ft_strlen(home->story[plr->plot_state]));
-		ft_str_pxl(buffer, (t_xy){100, SCREEN_HEIGHT - 30},
+		ft_str_pxl(buffer, vec2(100, SCREEN_HEIGHT - 30),
 			home->story[plr->plot_state], mod);
 	}
 }

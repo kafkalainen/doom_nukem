@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 09:05:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 17:17:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:28:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_xy	vec2_screen_dec(t_screen_xy a, t_screen_xy b)
 {
-	return (vec2_dec((t_xy){a.x, a.y}, (t_xy){b.x, b.y}));
+	return (vec2_dec(vec2(a.x, a.y), vec2(b.x, b.y)));
 }
 
 int	check_if_non_convex(t_sector_list *sector)

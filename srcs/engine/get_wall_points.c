@@ -52,7 +52,7 @@
 // {
 // 	t_ray	ray;
 
-// 	ray.pos = (t_xy){plr->pos.x, plr->pos.z};
+// 	ray.pos = vec2(plr->pos.x, plr->pos.z);
 // 	ray.dir = frame->left.left_dir;
 // 	get_l_pt(frame->left.wall, ray, frame, walls);
 // 	ray.dir = frame->right.right_dir;

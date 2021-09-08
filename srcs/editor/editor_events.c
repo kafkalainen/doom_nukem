@@ -75,7 +75,7 @@ void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 		if (keysym == SDLK_DELETE)
 			action->delete = 1;
 	}
-	
+
 /* 	if (keysym == SDLK_KP_PLUS)
 		action->move = 1;
 	if (keysym == SDLK_KP_MINUS)
@@ -89,20 +89,21 @@ void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_buffer *buffer)
 {
 	(void)buffer;
-	// t_screen_xy	pos;
+	t_screen_xy	pos;
 	if (e->type == SDL_MOUSEMOTION)
 	{
 		mouse_data->x = e->motion.x;
 		mouse_data->y = e->motion.y;
-		// SDL_GetMouseState(&pos.x, &pos.y);
-		// action->mouse_pos = (t_xy){(pos.x / (float)buffer->width) + 0.5f,
-		// 	(pos.y / (float)buffer->height) + 0.5f, 1.0f};
+		SDL_GetMouseState(&pos.x, &pos.y);
+		action->mouse_pos = vec2((pos.x / (float)buffer->width),
+			((buffer->height - pos.y) / (float)buffer->height));
+		printf("Mouse coordinate is x %f, y %f\n", action->mouse_pos.x, action->mouse_pos.y);
 	}
 	if (e->type == SDL_MOUSEWHEEL)
 	{
 		// SDL_GetMouseState(&pos.x, &pos.y);
-		// action->mouse_pos = (t_xy){(pos.x / (float)buffer->width) + 0.5f,
-		// 	(pos.y / (float)buffer->height) + 0.5f, 1.0f};
+		// action->mouse_pos = vec2((pos.x / (float)buffer->width) + 0.5f,
+		// 	(pos.y / (float)buffer->height) + 0.5f, 1.0f);
 		if (e->wheel.y > 0 && action->scalar < 640) /* scroll up == Zoom in*/
 			mouse_zoom(action, mouse_data->x, mouse_data->y, 1);
         else if(e->wheel.y < 0 && action->scalar > 10) /* scroll down == Zoom Out*/
@@ -111,7 +112,9 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_bu
 	if (e->type == SDL_MOUSEBUTTONDOWN)
 	{
 		if (e->button.button == SDL_BUTTON_LEFT || mouse_data->i_mbleft == 1)
+		{
 			mouse_data->i_mbleft = 1;
+		}
 		if (e->button.button == SDL_BUTTON_RIGHT)
 			mouse_data->i_mbright = 1;
 		if ((e->button.button == SDL_BUTTON_LEFT && action->create_entity == 1))
@@ -136,7 +139,6 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_bu
 			action->assign_end_sector = 2;
 		if (e->button.button == SDL_BUTTON_RIGHT && action->assign_end_sector == 1)
 			action->assign_end_sector = 0;
-
 	}
 	if (e->type == SDL_MOUSEBUTTONUP)
 	{

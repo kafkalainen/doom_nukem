@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/07 11:37:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 08:32:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	update_main_menu(t_buffer *buffer, int option)
 			mod.colour = get_color(red);
 		else
 			mod.colour = get_color(white);
-		ft_str_pxl(buffer, (t_xy){(SCREEN_WIDTH * 0.5) - 75,
-			((SCREEN_HEIGHT * 0.5) - 45) + y}, (char *)arr[i], mod);
+		ft_str_pxl(buffer, vec2((SCREEN_WIDTH * 0.5) - 75,
+			((SCREEN_HEIGHT * 0.5) - 45) + y), (char *)arr[i], mod);
 		y += 30;
 		i++;
 	}
