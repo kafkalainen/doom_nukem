@@ -6,11 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 16:53:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:08:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	create_button(t_button *list, t_box box, t_button_info info)
 {
