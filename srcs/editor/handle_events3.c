@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 17:31:28 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:48:00 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,6 @@
 // 		editor->action.link_entity = 0;
 // 	}
 // }
-
-void	reset_actions(t_action *action)
-{
-	action->selected_sector = -1;
-	action->selected_point = -1;
-	action->create_sector = 0;
-	action->edit_sector = 0;
-	action->input_active = -1;
-	action->keysym = -1;
-	action->move = 0;
-}
 
 unsigned char	*delete_char_from_string(unsigned char **string)
 {

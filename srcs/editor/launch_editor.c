@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 17:28:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:46:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,23 @@ void	init_mouse_data(t_mouse_data *mouse_data)
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 }
 
+void	reset_actions(t_action *action)
+{
+	action->selected_sector = -1;
+	action->selected_point = -1;
+	action->selected_entity = -1;
+	action->selected_wall = -1;
+	action->prev_entity = -1;
+	action->draw_depth = 0;
+	action->delete = 0;
+}
+
 void	init_actions(t_action *action)
 {
 	action->offset.x = 0;
 	action->offset.y = 0;
 	action->offsetf = vec2(0.0f, 0.0f);
 	action->grid = 1;
-	action->new_sector = 0;
 	action->selected_sector = -1;
 	action->selected_point = -1;
 	action->selected_entity = -1;

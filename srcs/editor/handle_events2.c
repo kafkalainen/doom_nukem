@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 17:16:55 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:47:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	check_grid_events(t_editor *editor)
 			editor->action.draw_depth = wall;
 	}
 	else
-		init_actions(&editor->action);
+		reset_actions(&editor->action);
 	if (editor->action.delete && (editor->action.selected_entity >= 0 || editor->action.selected_sector >= 0))
 	{
 		if (editor->action.selected_entity >= 0)

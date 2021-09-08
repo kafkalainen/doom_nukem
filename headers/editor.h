@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/08 17:32:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:42:54 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct s_action
 	t_xy			mouse_pos;
 	t_xy			world_pos;
 	int				grid;
-	int				new_sector;
 	int				selected_sector;
 	int				selected_point;
 	int				selected_entity;
