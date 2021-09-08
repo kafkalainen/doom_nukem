@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 17:46:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 18:02:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_actions(t_action *action)
 	action->selected_entity = -1;
 	action->selected_wall = -1;
 	action->scalar = 10;
-	action->scalarf = 1.0f;
+	action->scalarf = 0.125f;
 	action->create_sector = 0;
 	action->create_entity = 0;
 	action->link_entity = 0;

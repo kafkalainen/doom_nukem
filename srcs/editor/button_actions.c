@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 17:11:18 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 18:01:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,19 +98,19 @@ void	wall_button_actions(t_action *action, int i)
 		action->edit_floor_height = 1;
 		action->input_active = 1;
 	}
-		
+
 	else if (i == 22) // light button
 	{
 		action->create_light_button = 1;
 		printf("add a light button\n");
 	}
-		
+
 	else if (i == 23) // powerstation
 	{
 		action->create_powerstation = 1;
 		printf("add a powerstation\n");
 	}
-		
+
 }
 
 int		check_bbox(t_xy start, t_xy end, int mouse_x, int mouse_y)
