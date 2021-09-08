@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_points.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 16:43:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 15:45:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	check_for_last_point(t_sector_list *sector, t_mouse_data *data,
 	t_action *action)
 {
 	t_xy		mouse;
-	double 		dist;
+	double		dist;
 
-	mouse.x = (data->x - action->offset.x) / action->scalar;
-	mouse.y = (data->y - action->offset.y) / action->scalar;
-
+	(void)data;
+	mouse = vec2(action->world_pos.x, action->world_pos.y);
+	// mouse.x = (data->x - action->offset.x) / action->scalar;
+	// mouse.y = (data->y - action->offset.y) / action->scalar;
 	dist = sqrt(pow(fabs(sector->walls->x0.x - mouse.x), 2.0f) +
 		pow(fabs(sector->walls->x0.y - mouse.y), 2.0f));
-
 	if (!sector->walls)
 		return (0);
 	if (dist <= 1)
@@ -89,22 +89,22 @@ int	add_point_to_list(t_sector_list *sector, t_mouse_data *data,
 	t_action *action)
 {
 	t_editor_walls	*point;
-	t_screen_xy		coord;
+	t_screen_xy		new_coord;
 
-	coord.x = (data->x - action->offset.x) / action->scalar;
-	coord.y = (data->y - action->offset.y) / action->scalar;
+	point = NULL;
+	new_coord = (t_screen_xy){ft_roundf(action->world_pos.x, 0), ft_roundf(action->world_pos.y, 0)};
 	if (sector == NULL)
 		return (1);
 	if (sector->nb_of_walls > 1 && check_for_last_point(sector, data, action))
-		return(bake_last_point(sector, action, point));
+		return (bake_last_point(sector, action, point));
 	point = sector->walls;
 	while (point && point->next)
 		point = point->next;
-	if (point && check_for_intersecting_lines(sector, point->x0, coord))
+	if (point && check_for_intersecting_lines(sector, point->x0, new_coord))
 		ft_putendl("ERROR: Cannot put down the point, intersecting with other lines.");
 	else
 	{
-		point = new_wall_point(data, action);
+		point = new_wall_point(new_coord);
 		if (point)
 			add_point_end(&sector->walls, point);
 		else

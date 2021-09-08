@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_points2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:05:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 13:05:47 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/09/08 14:39:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,19 @@ void		assign_sector_bbox(t_sector_list *sector)
 	sector->bbox.end.y = max.y;
 }
 
-t_editor_walls	*new_wall_point(t_mouse_data *data, t_action *action)
+t_editor_walls	*new_wall_point(t_screen_xy world_coord)
 {
 	t_editor_walls	*new;
 
 	new = (t_editor_walls *)malloc(sizeof(*new));
 	if (new != NULL)
 	{
-		new->x0.x = (data->x - action->offset.x) / action->scalar; // casting mouse data to int makes the grid be offset by 3-4 units
-		new->x0.y = (data->y - action->offset.y) / action->scalar; // without it there is no snapping on walls on windows
+		new->x0.x = world_coord.x;
+		new->x0.y = world_coord.y;
 		new->idx = -1;
 		new->type = 0;
-		new->bbox.start = vec2(new->x0.x - 1, new->x0.y - 1);
-		new->bbox.end = vec2((new->x0.x + 1), (new->x0.y + 1));
+		new->bbox.start = vec2(new->x0.x - 0.5f, new->x0.y - 0.5f);
+		new->bbox.end = vec2((new->x0.x + 0.5f), (new->x0.y + 0.5f));
 		new->height.ground = 0;
 		new->height.ceiling = 3;
 		new->next = NULL;

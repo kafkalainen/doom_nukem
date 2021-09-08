@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/08 10:40:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 15:54:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,7 @@ int				clicked_inside_ui(int x, int y, int height, int width);
 /*
 **				Wall creation.
 */
-t_editor_walls	*new_wall_point(t_mouse_data *data, t_action *action);
+t_editor_walls	*new_wall_point(t_screen_xy world_coord);
 void			add_point_end(t_editor_walls **point, t_editor_walls *new);
 int				add_point_to_list(t_sector_list *sector, t_mouse_data *data,
 					t_action *action);
@@ -297,5 +297,7 @@ int				check_saving_prerequisites(t_editor *editor);
 void			save_editor_map(t_editor *editor, t_home *home);
 void			read_input_string(unsigned char **string, t_action *action);
 unsigned char	*delete_char_from_string(unsigned char **string);
-
+t_xy			world_to_screen(t_screen_xy x0, float scalarf, t_xy offsetf,
+					t_buffer *buffer);
+t_xy			ndc_to_world(t_xy ndc, t_xy offset, float scalar);
 #endif

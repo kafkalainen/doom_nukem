@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/08 11:09:53 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/08 15:53:29 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,9 @@ SRCS = \
 	editor$(SLASH)editor_load_map.c \
 	editor$(SLASH)get_ndc.c \
 	editor$(SLASH)draw_grid.c \
+	editor$(SLASH)draw_editor_sectors.c \
+	editor$(SLASH)world_to_screen.c \
+	editor$(SLASH)ndc_to_world.c \
 	entity_logic$(SLASH)activate_lift.c \
 	entity_logic$(SLASH)attack_player.c \
 	entity_logic$(SLASH)check_aggro.c \
