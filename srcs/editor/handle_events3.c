@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 11:24:38 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/09/08 17:31:28 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	new_check_event(t_editor *editor)
-{
-	t_mouse_data	mdata;
+// void	new_check_event(t_editor *editor)
+// {
+// 	t_mouse_data	mdata;
 
-	mdata = editor->mouse_data;
-	if (mdata.x > 300 && mdata.x < editor->buffer.width && mdata.y > 0 && mdata.y < editor->buffer.height)
-	{
+// 	mdata = editor->mouse_data;
+// 	if (mdata.x > 300 && mdata.x < editor->buffer.width && mdata.y > 0 && mdata.y < editor->buffer.height)
+// 	{
 		
-	}
-	if (editor->action.link_entity == 2 && editor->action.prev_entity != -1 && editor->temp_entity != NULL)
-	{
-		link_entities(&editor->entity_list, mdata, editor->action.prev_entity);
-		editor->action.link_entity = 0;
-	}
-}
+// 	}
+// 	if (editor->action.link_entity == 2 && editor->action.prev_entity != -1 && editor->temp_entity != NULL)
+// 	{
+// 		link_entities(&editor->entity_list, mdata, editor->action.prev_entity);
+// 		editor->action.link_entity = 0;
+// 	}
+// }
 
 void	reset_actions(t_action *action)
 {

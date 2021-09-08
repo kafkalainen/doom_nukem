@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:25:29 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 11:25:29 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/09/08 17:14:19 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
 
 void	check_ui_events(int x, int y, t_button ***blist, t_action *action)
 {
@@ -27,13 +28,19 @@ void	check_ui_events(int x, int y, t_button ***blist, t_action *action)
 			{
 				if (list[i]->info.draw_depth == depth_zero)
 					main_button_actions(action, i);
+				else if (list[i]->info.draw_depth == sector)
+					sector_button_actions(action, i);
 				else if (list[i]->info.draw_depth == entity)
 					entity_button_actions(action, i);
+				else if (list[i]->info.draw_depth == wall)
+					wall_button_actions(action, i);
 				break ;
 			}
 		}
 		i++;
 	}
+	if (i == NBR_BUTTONS)
+		init_actions(action);
 }
 
 int		clicked_inside_grid(int x, int y, int height, int width)

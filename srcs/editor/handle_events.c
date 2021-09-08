@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 11:23:11 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/09/08 17:29:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ int		handle_events(t_editor *editor, t_home *home)
 		save_editor_map(editor, home);
 	if (editor->action.input_active && editor->action.edit_sector)
 	{
-		if (handle_sector(&editor->sector_list, &editor->mouse_data, &editor->action))
-			editor_free_selected_sector(editor, editor->action.selected_sector);
+		handle_sector(&editor->sector_list, &editor->mouse_data, &editor->action);
 	}
 	if (editor->action.create_entity == 2)
 	{
@@ -76,10 +75,7 @@ int		handle_events(t_editor *editor, t_home *home)
 	if (editor->mouse_data.i_mbleft)
 	{
 		if (clicked_inside_ui(editor->mouse_data.x, editor->mouse_data.y, editor->buffer.height, editor->buffer.width))
-		{
 			check_ui_events(editor->mouse_data.x, editor->mouse_data.y, &editor->button_list, &editor->action);
-			editor->mouse_data.i_mbleft = 0;
-		}
 		else if (clicked_inside_grid(editor->mouse_data.x, editor->mouse_data.y, editor->buffer.height, editor->buffer.width))
 			check_grid_events(editor);
 	}

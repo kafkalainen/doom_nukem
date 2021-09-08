@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 11:09:30 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/09/08 17:16:55 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_grid_events(t_editor *editor)
 	mdata.x = (editor->mouse_data.x - editor->action.offset.x) / editor->action.scalar;
 	mdata.y = (editor->mouse_data.y - editor->action.offset.y) / editor->action.scalar;
 	editor->temp_sector = get_clicked_sector(&editor->sector_list, mdata, &editor->action.selected_sector);
-	if (editor->temp_sector) // we know we hit a sector
+	if (editor->temp_sector)
 	{
 		editor->action.draw_depth = sector;
 		editor->action.prev_entity = editor->action.selected_entity;
@@ -39,11 +39,13 @@ void	check_grid_events(t_editor *editor)
 			editor->action.draw_depth = wall;
 	}
 	else
-		editor->action.draw_depth = depth_zero;
+		init_actions(&editor->action);
 	if (editor->action.delete && (editor->action.selected_entity >= 0 || editor->action.selected_sector >= 0))
 	{
 		if (editor->action.selected_entity >= 0)
-			delete_entity(&editor->entity_list, &editor->action);
+			delete_selected_entity(&editor->entity_list, &editor->action);
+		else if (editor->action.selected_sector >= 0)
+			editor_free_selected_sector(&editor->sector_list, &editor->entity_list, &editor->action);
 	}
 	if (editor->action.edit_entity)
 		edit_entity(editor->temp_entity, &editor->action);
@@ -51,6 +53,11 @@ void	check_grid_events(t_editor *editor)
 		editor->action.player_start_assigned = assign_player_start(&editor->sector_list, &mdata, &editor->plr, &editor->action.assign_player_start);
 	if (editor->action.assign_end_sector == 2)
 		assign_end_sector(&editor->sector_list, &mdata, &editor->end_sector, &editor->action.assign_end_sector);
+	if (editor->action.link_entity == 2 && editor->action.prev_entity != -1 && editor->temp_entity != NULL)
+	{
+		link_entities(&editor->entity_list, mdata, editor->action.prev_entity);
+		editor->action.link_entity = 0;
+	}
 }
 
 int		check_plr_start_and_end_sector_exists(t_sector_list **list, t_plr_pos plr, int end_sector)

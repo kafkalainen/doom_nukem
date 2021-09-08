@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 17:09:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:28:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ void	init_actions(t_action *action)
 	action->assign_end_sector = 0;
 	action->assign_player_start = 0;
 	action->unlink_entity = 0;
+	action->edit_wall = 0;
+	action->edit_floor_height = 0;
+	action->edit_ceiling_height = 0;
+	action->convert_to_portal = 0;
+	action->change_wall_texture = 0;
+	action->change_floor_texture = 0;
+	action->change_ceiling_texture = 0;
+	action->set_light_intensity = 0;
+	action->create_light_source = 0;
+	action->add_wall_point = 0;
 }
 
 static t_editor	setup_editor(t_editor *editor, t_home *home)
