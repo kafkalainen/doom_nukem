@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 08:06:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 10:30:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_actions(t_action *action)
 {
 	action->offset.x = 0;
 	action->offset.y = 0;
+	action->offsetf = vec2(0.0f, 0.0f);
 	action->grid = 1;
 	action->new_sector = 0;
 	action->selected_sector = -1;
@@ -35,6 +36,7 @@ void	init_actions(t_action *action)
 	action->selected_entity = -1;
 	action->selected_wall = -1;
 	action->scalar = 10;
+	action->scalarf = 1.0f;
 	action->create_sector = 0;
 	action->create_entity = 0;
 	action->link_entity = 0;
@@ -72,8 +74,8 @@ static t_editor	setup_editor(t_editor *editor, t_home *home)
 	editor->grid_size = 32;
 	editor->button_list = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
 	editor->button_list = create_button_list(editor->button_list);
-	editor->buffer.width = 800;
-	editor->buffer.height = 600;
+	editor->buffer.width = 1200;
+	editor->buffer.height = 900;
 	// SDL_SetWindowFullscreen(home->win.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	// SDL_GetWindowSize(home->win.window, &editor->buffer.width, &editor->buffer.height);
 	// SDL_SetWindowFullscreen(home->win.window, 0);

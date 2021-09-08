@@ -53,13 +53,29 @@ void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 	else
 	{
 		if (keysym == SDLK_w)
+		{
 			action->offset.y += action->scalar * 2;
+			action->offsetf.y -= action->scalarf * 0.1f;
+		}
 		if (keysym == SDLK_s)
+		{
 			action->offset.y -= action->scalar * 2;
+			action->offsetf.y += action->scalarf * 0.1f;
+		}
 		if (keysym == SDLK_d)
+		{
 			action->offset.x -= action->scalar * 2;
+			action->offsetf.x += action->scalarf * 0.1f;
+		}
 		if (keysym == SDLK_a)
+		{
 			action->offset.x += action->scalar * 2;
+			action->offsetf.x -= action->scalarf * 0.1f;
+		}
+		if (keysym == SDLK_w || keysym == SDLK_s || keysym == SDLK_d || keysym == SDLK_a)
+		{
+			printf("Current offset x %f and y %f\n", action->offsetf.x, action->offsetf.y);
+		}
 		if (keysym == SDLK_f)
 			action->create_sector = 1;
 		if (keysym == SDLK_g && action->grid == 0)
@@ -88,25 +104,27 @@ void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 
 void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_buffer *buffer)
 {
-	(void)buffer;
 	t_screen_xy	pos;
+	t_xy		offset;
 	if (e->type == SDL_MOUSEMOTION)
 	{
 		mouse_data->x = e->motion.x;
 		mouse_data->y = e->motion.y;
 		SDL_GetMouseState(&pos.x, &pos.y);
-		action->mouse_pos = vec2((pos.x / (float)buffer->width),
-			((buffer->height - pos.y) / (float)buffer->height));
-		printf("Mouse coordinate is x %f, y %f\n", action->mouse_pos.x, action->mouse_pos.y);
+		action->mouse_pos = get_ndc(buffer, pos);
+		action->world_pos = vec2_mul(action->mouse_pos, 1 / action->scalarf);
+		offset = vec2_mul(action->offsetf, -1 / action->scalarf);
+		action->world_pos = vec2_add(offset, action->world_pos);
+		printf("World coordinate is x %f, y %f\n", action->world_pos.x, action->world_pos.y);
 	}
 	if (e->type == SDL_MOUSEWHEEL)
 	{
 		// SDL_GetMouseState(&pos.x, &pos.y);
 		// action->mouse_pos = vec2((pos.x / (float)buffer->width) + 0.5f,
 		// 	(pos.y / (float)buffer->height) + 0.5f, 1.0f);
-		if (e->wheel.y > 0 && action->scalar < 640) /* scroll up == Zoom in*/
+		if (e->wheel.y > 0)// && action->scalar < 640) /* scroll up == Zoom in*/
 			mouse_zoom(action, mouse_data->x, mouse_data->y, 1);
-        else if(e->wheel.y < 0 && action->scalar > 10) /* scroll down == Zoom Out*/
+        else if(e->wheel.y < 0)// && action->scalar > 10) /* scroll down == Zoom Out*/
 			mouse_zoom(action, mouse_data->x, mouse_data->y, 0);
 	}
 	if (e->type == SDL_MOUSEBUTTONDOWN)
@@ -114,6 +132,12 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_bu
 		if (e->button.button == SDL_BUTTON_LEFT || mouse_data->i_mbleft == 1)
 		{
 			mouse_data->i_mbleft = 1;
+			SDL_GetMouseState(&pos.x, &pos.y);
+			action->mouse_pos = get_ndc(buffer, pos);
+			action->world_pos = vec2_mul(action->mouse_pos, 1 / action->scalarf);
+			offset = vec2_mul(action->offsetf, -1 / action->scalarf);
+			action->world_pos = vec2_add(offset, action->world_pos);
+			printf("World coordinate is x %f, y %f\n", action->world_pos.x, action->world_pos.y);
 		}
 		if (e->button.button == SDL_BUTTON_RIGHT)
 			mouse_data->i_mbright = 1;

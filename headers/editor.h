@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/07 17:50:55 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/08 10:40:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
+# define TOOLBAR_WIDTH 300
 
 typedef struct		s_mouse_data
 {
@@ -73,7 +74,9 @@ typedef	struct s_plr_pos
 typedef struct s_action
 {
 	t_screen_xy		offset;
+	t_xy			offsetf;
 	t_xy			mouse_pos;
+	t_xy			world_pos;
 	int				grid;
 	int				new_sector;
 	int				selected_sector;
@@ -81,6 +84,7 @@ typedef struct s_action
 	int				selected_entity;
 	int				selected_wall;
 	int				scalar;
+	float			scalarf;
 	int				create_sector;
 	int				create_entity;
 	int				link_entity;
@@ -258,7 +262,7 @@ void			editor_free_selected_sector(t_editor *editor, int selected);
 /*
 ** Editor map loading stuff
 */
-
+t_xy			get_ndc(t_buffer *buffer, t_screen_xy coord);
 void			init_actions(t_action *action);
 void			init_mouse_data(t_mouse_data *mouse_data);
 

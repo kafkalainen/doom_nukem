@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/08 08:30:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 11:09:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,34 +103,34 @@ void	draw_buttons(t_button **blist, t_buffer *buffer,
 	}
 }
 
-void	draw_grid(t_buffer *buffer, t_action *action)
-{
-	int		cells_on_sx;
-	int		cells_on_sy;
-	int		i;
-	int		val;
+// void	draw_grid(t_buffer *buffer, t_action *action)
+// {
+// 	int		cells_on_sx;
+// 	int		cells_on_sy;
+// 	int		i;
+// 	int		val;
 
-	cells_on_sx = (buffer->width - 300) / action->scalar;
-	cells_on_sy = (buffer->height) / action->scalar;
-	i = 0;
-	while (i <= cells_on_sy)
-	{
-		val = i * action->scalar + (action->offset.y % action->scalar);
-		if (val < buffer->height)
-			draw_line(vec2(300, val),
-				vec2(buffer->width, val), get_color(0x808080), buffer);
-		i++;
-	}
-	i = 0;
-	while (i <= cells_on_sx)
-	{
-		val = (i * action->scalar + (action->offset.y % action->scalar)) + 300;
-		if (val < buffer->width && val >= 300)
-			draw_line(vec2(val, 0),
-				vec2(val, buffer->height), get_color(0x808080), buffer);
-		i++;
-	}
-}
+// 	cells_on_sx = (buffer->width - 300) / action->scalar;
+// 	cells_on_sy = (buffer->height) / action->scalar;
+// 	i = 0;
+// 	while (i <= cells_on_sy)
+// 	{
+// 		val = i * action->scalar + (action->offset.y % action->scalar);
+// 		if (val < buffer->height)
+// 			draw_line(vec2(300, val),
+// 				vec2(buffer->width, val), get_color(0x808080), buffer);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i <= cells_on_sx)
+// 	{
+// 		val = (i * action->scalar + (action->offset.y % action->scalar)) + 300;
+// 		if (val < buffer->width && val >= 300)
+// 			draw_line(vec2(val, 0),
+// 				vec2(val, buffer->height), get_color(0x808080), buffer);
+// 		i++;
+// 	}
+// }
 
 t_xy		scale_xy(t_screen_xy x0, int scalar, t_screen_xy offset)
 {
