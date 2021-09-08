@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   menu_inputs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 08:32:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 18:19:44 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	update_main_menu(t_buffer *buffer, int option)
+void	update_main_menu(t_buffer *buffer, int *option)
 {
 	int					i;
 	int					y;
@@ -25,7 +25,7 @@ void	update_main_menu(t_buffer *buffer, int option)
 	mod.len = 8;
 	while (i < 4)
 	{
-		if (i == option)
+		if (i == *option)
 			mod.colour = get_color(red);
 		else
 			mod.colour = get_color(white);

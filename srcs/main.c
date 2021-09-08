@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/07 11:48:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 18:26:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/doom_nukem.h"
 
-/*
-** if (create_map_file(&home) < 0)
-**	 	ft_putendl_fd("File creation failed\n", 2);
-*/
-
-void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *buffer,
+int	free_all(t_frame *frame, t_audio *audio, Uint32 *buffer,
 		char **chosen_map)
 {
 	free_queues(frame);
@@ -27,6 +22,7 @@ void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *buffer,
 	cleanup_audio_source(audio);
 	ft_putendl("User closed the window");
 	SDL_Quit();
+	return (EXIT_SUCCESS);
 }
 
 void	handle_map_menu(t_menu *menu, t_home *home, SDL_Event *e)
@@ -38,7 +34,22 @@ void	handle_map_menu(t_menu *menu, t_home *home, SDL_Event *e)
 		home->game_state = MAIN_MENU;
 }
 
-int	main(void)
+void	update_main_loop(t_buffer *buffer,
+	int *game_state, SDL_Event *e, int *option)
+{
+	process_inputs_main_menu(game_state, e, option);
+	update_main_menu(buffer, option);
+}
+
+void	set_solo_mode(char *path, char **mapname, int *game_state)
+{
+	if (!path)
+		error_output("path is null\n");
+	*mapname = ft_strdup(path);
+	*game_state = GAME_LOOP;
+}
+
+int	main(int argc, char **argv)
 {
 	t_home		home;
 	t_player	plr;
@@ -47,10 +58,11 @@ int	main(void)
 	SDL_Event	e;
 
 	setup(&home, &plr, &frame, &menu);
+	if (argc == 2)
+		set_solo_mode(argv[1], &home.map, &home.game_state);
 	while (home.game_state != QUIT)
 	{
-		process_inputs_main_menu(&home.game_state, &e, &menu.option);
-		update_main_menu(&menu.buffer, menu.option);
+		update_main_loop(&menu.buffer, &home.game_state, &e, &menu.option);
 		if (home.game_state == MAP_MENU)
 			handle_map_menu(&menu, &home, &e);
 		if (home.game_state == GAME_LOOP || home.game_state == GAME_CONTINUE)
@@ -63,6 +75,5 @@ int	main(void)
 		render_buffer(menu.buffer.pxl_buffer, home.win.ScreenSurface);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
-	free_main_assets(&frame, &plr.audio, menu.buffer.pxl_buffer, &home.map);
-	return (EXIT_SUCCESS);
+	return (free_all(&frame, &plr.audio, menu.buffer.pxl_buffer, &home.map));
 }
