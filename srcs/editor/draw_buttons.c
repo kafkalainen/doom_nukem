@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/08 14:57:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:20:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	draw_bbox_sector(t_sector_list *sector, t_buffer *buffer,
 		t_action *action)
@@ -81,7 +81,7 @@ void	draw_buttons(t_button **blist, t_buffer *buffer,
 
 	box.start = vec2(0, 0);
 	box.end = vec2(300, buffer->height);
-	draw_box(box, buffer, get_color(0x282040));
+	draw_box(box, buffer, get_color(0x1f1f1f));
 	i = 0;
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
@@ -103,35 +103,6 @@ void	draw_buttons(t_button **blist, t_buffer *buffer,
 	}
 }
 
-// void	draw_grid(t_buffer *buffer, t_action *action)
-// {
-// 	int		cells_on_sx;
-// 	int		cells_on_sy;
-// 	int		i;
-// 	int		val;
-
-// 	cells_on_sx = (buffer->width - 300) / action->scalar;
-// 	cells_on_sy = (buffer->height) / action->scalar;
-// 	i = 0;
-// 	while (i <= cells_on_sy)
-// 	{
-// 		val = i * action->scalar + (action->offset.y % action->scalar);
-// 		if (val < buffer->height)
-// 			draw_line(vec2(300, val),
-// 				vec2(buffer->width, val), get_color(0x808080), buffer);
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (i <= cells_on_sx)
-// 	{
-// 		val = (i * action->scalar + (action->offset.y % action->scalar)) + 300;
-// 		if (val < buffer->width && val >= 300)
-// 			draw_line(vec2(val, 0),
-// 				vec2(val, buffer->height), get_color(0x808080), buffer);
-// 		i++;
-// 	}
-// }
-
 void	draw_entities(t_editor *editor)
 {
 	t_entity_list	*temp;
@@ -147,9 +118,9 @@ void	draw_entities(t_editor *editor)
 	temp = editor->entity_list;
 	while (temp != NULL)
 	{
-		test1 = world_to_screen((t_screen_xy){temp->pos.x, temp->pos.z}, editor->action.scalarf, editor->action.offsetf,
+		test1 = world_to_screen(vec2(temp->pos.x, temp->pos.z), editor->action.scalarf, editor->action.offsetf,
 					&editor->buffer);
-		test2 = world_to_screen((t_screen_xy){temp->pos.x + 1, temp->pos.z + 1}, editor->action.scalarf, editor->action.offsetf,
+		test2 = world_to_screen(vec2(temp->pos.x + 1, temp->pos.z + 1), editor->action.scalarf, editor->action.offsetf,
 					&editor->buffer);
 		temp_box.start = test1;
 		temp_box.end = test2;
@@ -164,9 +135,9 @@ void	draw_entities(t_editor *editor)
 			{
 				if (link->is_linked == temp->is_linked && link->is_linked > 1)
 					draw_line(
-						world_to_screen((t_screen_xy){temp->pos.x, temp->pos.z}, editor->action.scalarf, editor->action.offsetf,
+						world_to_screen(vec2(temp->pos.x, temp->pos.z), editor->action.scalarf, editor->action.offsetf,
 							&editor->buffer),
-						world_to_screen((t_screen_xy){link->pos.x, link->pos.z}, editor->action.scalarf, editor->action.offsetf,
+						world_to_screen(vec2(link->pos.x, link->pos.z), editor->action.scalarf, editor->action.offsetf,
 							&editor->buffer),
 						get_color(blue), &editor->buffer);
 				link = link->next;
@@ -295,7 +266,7 @@ void	draw_ui(t_editor *editor)
 		while (tempo->entity_idx != editor->action.selected_entity)
 			tempo = tempo->next;
 		draw_line(
-			world_to_screen((t_screen_xy){tempo->pos.x, tempo->pos.z}, editor->action.scalarf, editor->action.offsetf,
+			world_to_screen(vec2(tempo->pos.x, tempo->pos.z), editor->action.scalarf, editor->action.offsetf,
 				&editor->buffer),
 			vec2(editor->mouse_data.x, editor->mouse_data.y), get_color(blue), &editor->buffer);
 		editor->entity_list = ent;

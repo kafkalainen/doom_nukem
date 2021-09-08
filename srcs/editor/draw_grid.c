@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 11:36:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:58:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ static void	draw_grid_horizontal(t_buffer *buffer, t_action *action)
 	int				val;
 
 	i = 0;
-	cells_on_y_axis = 2.0f / action->scalarf;
+	if (action->scalarf != 0.0f)
+		cells_on_y_axis = 2.0f / action->scalarf;
+	else
+		cells_on_y_axis = 2.0f;
 	while (i <= cells_on_y_axis)
 	{
-		val = buffer->height * 0.5f * (i * action->scalarf
-				+ (action->offsetf.y));
+		val = 0.5f * buffer->height * (i * action->scalarf + action->offsetf.y);
 		if (val < buffer->height)
 			draw_line(
 				vec2(TOOLBAR_WIDTH, val),
@@ -40,11 +42,14 @@ static void	draw_grid_vertical(t_buffer *buffer, t_action *action)
 	int				val;
 
 	i = 0;
-	cells_on_x_axis = 2.0f / action->scalarf;
+	if (action->scalarf != 0.0f)
+		cells_on_x_axis = 2.0f / action->scalarf;
+	else
+		cells_on_x_axis = 2.0f;
 	while (i <= cells_on_x_axis)
 	{
 		val = TOOLBAR_WIDTH + (0.5f * (buffer->width - TOOLBAR_WIDTH)
-				* (i * action->scalarf + (action->offsetf.x)));
+				* (i * action->scalarf + action->offsetf.x));
 		if (val < buffer->width && val >= TOOLBAR_WIDTH)
 			draw_line(
 				vec2(val, 0),

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   allocate_buttons.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 15:54:30 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/09/08 17:08:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	create_button(t_button *list, t_box box, t_button_info info)
 {

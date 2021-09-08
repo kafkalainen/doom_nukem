@@ -1,4 +1,4 @@
-#include "../headers/doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void		main_button_actions(t_action *action, int i)
 {

@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:06:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 15:41:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 16:30:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_xy	world_to_screen(t_screen_xy world_coord, float scalarf, t_xy offsetf,
+t_xy	world_to_screen(t_xy world_coord, float scalarf, t_xy offsetf,
 		t_buffer *buffer)
 {
 	t_xy		offset;

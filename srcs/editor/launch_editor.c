@@ -6,11 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 10:30:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 17:09:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	init_mouse_data(t_mouse_data *mouse_data)
 {
@@ -36,7 +36,7 @@ void	init_actions(t_action *action)
 	action->selected_entity = -1;
 	action->selected_wall = -1;
 	action->scalar = 10;
-	action->scalarf = 1.0f;
+	action->scalarf = 0.125f;
 	action->create_sector = 0;
 	action->create_entity = 0;
 	action->link_entity = 0;

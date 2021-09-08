@@ -1,4 +1,4 @@
-#include "../headers/doom_nukem.h"
+#include "../../headers/doom_nukem.h"
 
 void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 {
