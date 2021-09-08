@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 17:09:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 18:02:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,23 @@ void	init_mouse_data(t_mouse_data *mouse_data)
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 }
 
+void	reset_actions(t_action *action)
+{
+	action->selected_sector = -1;
+	action->selected_point = -1;
+	action->selected_entity = -1;
+	action->selected_wall = -1;
+	action->prev_entity = -1;
+	action->draw_depth = 0;
+	action->delete = 0;
+}
+
 void	init_actions(t_action *action)
 {
 	action->offset.x = 0;
 	action->offset.y = 0;
 	action->offsetf = vec2(0.0f, 0.0f);
 	action->grid = 1;
-	action->new_sector = 0;
 	action->selected_sector = -1;
 	action->selected_point = -1;
 	action->selected_entity = -1;
@@ -65,6 +75,16 @@ void	init_actions(t_action *action)
 	action->assign_end_sector = 0;
 	action->assign_player_start = 0;
 	action->unlink_entity = 0;
+	action->edit_wall = 0;
+	action->edit_floor_height = 0;
+	action->edit_ceiling_height = 0;
+	action->convert_to_portal = 0;
+	action->change_wall_texture = 0;
+	action->change_floor_texture = 0;
+	action->change_ceiling_texture = 0;
+	action->set_light_intensity = 0;
+	action->create_light_source = 0;
+	action->add_wall_point = 0;
 }
 
 static t_editor	setup_editor(t_editor *editor, t_home *home)

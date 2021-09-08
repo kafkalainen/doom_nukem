@@ -74,58 +74,6 @@ void	editor_free_walls(t_editor_walls **head, int nbr_of_walls)
 	}
 }
 
-void	editor_free_sector(t_sector_list **head)
-{
-	if (!*head)
-		return ;
-	editor_free_walls(&(*head)->walls, (*head)->nb_of_walls);
-	free(*head);
-	*head = NULL;
-}
-
-void	editor_free_selected_sector(t_editor *editor, int idx)
-{
-	t_sector_list	*selected;
-	t_sector_list	*temp;
-
-	printf("idx: %d\n", idx);
-	if (!editor || !editor->sector_list)
-		return ;
-	temp = editor->sector_list;
-	while (temp->idx_sector < idx)
-		temp = temp->next;
-	if (idx == 0) {
-		selected = temp;
-		selected->next = NULL;
-		free(selected);
-		selected = NULL;
-	}
-	else
-		selected = temp->next;
-	editor_free_walls(&selected->walls, selected->nb_of_walls);
-	editor->action.selected_sector = -1;
-
-	//t_sector_list	*previous;
-	//t_sector_list	*deleted;
-	//t_sector_list	*next;
-//
-	//if (!editor && !editor->sector_list)
-	//	return ;
-	//previous = editor->sector_list;
-	//while (previous != NULL && previous->next != NULL
-	//	&& previous->next->idx_sector != selected)
-	//	previous = previous->next;
-	//deleted = previous->next;
-	//if (deleted)
-	//{
-	//	next = deleted->next;
-	//	editor_free_walls(&deleted->walls, deleted->nb_of_walls);
-	//	free(deleted);
-	//	deleted = NULL;
-	//	previous->next = next;
-	//}
-}
-
 int		handle_sector(t_sector_list **head, t_mouse_data *mouse_data, t_action *action)
 {
 	t_sector_list	*temp;
@@ -150,4 +98,93 @@ int		handle_sector(t_sector_list **head, t_mouse_data *mouse_data, t_action *act
 		edit_story(temp, action);
 	mouse_data->i_mbleft = 0;
 	return (0);
+}
+
+int		get_sector_count(t_sector_list **list)
+{
+	t_sector_list	*temp;
+	unsigned int	i;
+
+	temp = *list;
+	i = 0;
+	while (temp != NULL)
+	{
+		i++;
+		temp = temp->next;
+	}
+	return (i);
+}
+
+void	reset_sector_indexes(t_sector_list **head)
+{
+	t_sector_list	*temp;
+	int				idx;
+	int				nbr_of_sectors;
+
+	nbr_of_sectors = get_sector_count(head);
+	temp = *head;
+	idx = 0;
+	while (idx < nbr_of_sectors)
+	{
+		temp->idx_sector = idx;
+		temp = temp->next;
+		idx++;
+	}
+}
+
+// void	delete_entities_from_sector(t_entity_list **entity_head, int sector_idx, t_action *action)
+// {
+// 	t_entity_list	*temp;
+// 	t_entity_list	*prev;
+// 	int				nbr_of_entities;
+// 	int				i;
+// 	int				nbr_to_delete;
+
+// 	i = 0;
+// 	nbr_to_delete = 0;
+// 	nbr_of_entities = get_entity_count(entity_head);
+// 	temp = *entity_head;
+// 	while (i < nbr_of_entities && temp != NULL)
+// 	{
+// 		if (temp->sector_idx == sector_idx)
+// 			nbr_to_delete++;
+// 		i++;
+// 		temp = temp->next;
+// 	}
+// }
+
+void	editor_free_selected_sector(t_sector_list **head, t_entity_list **entity_head, t_action *action)
+{
+	t_sector_list	*temp;
+	t_sector_list	*prev;
+
+	temp = *head;
+	(void)entity_head;
+	if (temp == NULL)
+		return ;
+	if (temp != NULL && temp->idx_sector == action->selected_sector)
+	{
+		*head = temp->next;
+		// delete_entities_from_sector(entity_head, temp->idx_sector, action);
+		editor_free_walls(&temp->walls, temp->nb_of_walls);
+		free(temp);
+		reset_sector_indexes(head);
+		action->delete = 0;
+		action->selected_sector = -1;
+		return ;
+	}
+	while (temp != NULL && temp->idx_sector != action->selected_sector)
+	{
+		prev = temp;
+		temp = temp->next;
+	}
+	if (temp == NULL)
+		return ;
+	prev->next = temp->next;
+	// delete_entities_from_sector(entity_head, temp->idx_sector, action);
+	editor_free_walls(&temp->walls, temp->nb_of_walls);
+	free(temp);
+	reset_sector_indexes(head);
+	action->delete = 0;
+	action->selected_sector = -1;
 }

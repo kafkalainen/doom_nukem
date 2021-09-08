@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/08 16:18:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 18:02:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct s_action
 	t_xy			mouse_pos;
 	t_xy			world_pos;
 	int				grid;
-	int				new_sector;
 	int				selected_sector;
 	int				selected_point;
 	int				selected_entity;
@@ -119,6 +118,16 @@ typedef struct s_action
 	int				nbr_of_maps;
 	int				start;
 	int				end;
+	int				edit_wall;
+	int				change_wall_texture;
+	int				change_floor_texture;
+	int				change_ceiling_texture;
+	int				convert_to_portal;
+	int				edit_ceiling_height;
+	int				edit_floor_height;
+	int				set_light_intensity;
+	int				create_light_source;
+	int				add_wall_point;
 }					t_action;
 
 typedef	struct s_editor_xyz
@@ -199,6 +208,7 @@ t_button		**create_button_list(t_button **blist);
 void			main_button_actions(t_action *action, int i);
 void			entity_button_actions(t_action *action, int i);
 void			wall_button_actions(t_action *action, int i);
+void			sector_button_actions(t_action *action, int i);
 int				check_bbox(t_xy start, t_xy end, int mouse_x, int mouse_y);
 
 /*
@@ -259,11 +269,11 @@ int				check_if_non_convex(t_sector_list *sector);
 */
 
 void			create_new_entity(t_entity_list **head, t_mouse_data *mdata, t_action *action, t_sector_list *sector);
-void			delete_entity(t_entity_list **head, t_action *action);
+void			delete_selected_entity(t_entity_list **head, t_action *action);
 unsigned int	get_entity_count(t_entity_list **list);
 t_entity_list	*get_selected_entity(t_entity_list **head, t_mouse_data	mdata);
 t_entity_list	*get_clicked_entity(t_entity_list **list, t_screen_xy mdata, int *selected_entity);
-int				link_entities(t_entity_list **list, t_mouse_data mdata, int current_entity);
+int				link_entities(t_entity_list **list, t_screen_xy mdata, int current_entity);
 void			edit_entity(t_entity_list *entity, t_action *action);
 void			free_all_entities(t_entity_list **head);
 
@@ -278,7 +288,7 @@ void			edit_story(t_sector_list *sector, t_action *action);
 
 void			editor_free_walls(t_editor_walls **head, int nbr_of_walls);
 void			editor_free_sector(t_sector_list **head);
-void			editor_free_selected_sector(t_editor *editor, int selected);
+void			editor_free_selected_sector(t_sector_list **head, t_entity_list **entity_head, t_action *action);
 
 
 /*

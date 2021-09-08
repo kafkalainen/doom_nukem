@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 17:07:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/08 18:01:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	link_allowed(t_entity_list *entity1, t_entity_list *entity2)
 	return (FALSE);
 }
 
-int	link_entities(t_entity_list **list, t_mouse_data mdata, int current_entity)
+int	link_entities(t_entity_list **list, t_screen_xy mdata, int current_entity)
 {
 	t_entity_list	*temp;
 	t_entity_list	*curr;
@@ -136,7 +136,7 @@ void	reset_list_indexes(t_entity_list **head)
 	}
 }
 
-void	delete_entity(t_entity_list **head, t_action *action)
+void	delete_selected_entity(t_entity_list **head, t_action *action)
 {
 	t_entity_list	*temp;
 	t_entity_list	*prev;
