@@ -20,6 +20,7 @@ SRCS = \
 	editor$(SLASH)launch_editor.c \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)wall_points.c \
+	editor$(SLASH)wall_points2.c \
 	editor$(SLASH)editor_events.c \
 	editor$(SLASH)button_actions.c \
 	editor$(SLASH)editor_entity.c \
