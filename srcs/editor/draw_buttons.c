@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 21:50:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 23:17:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,9 +216,16 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 	mod.colour = get_color(orange);
 	mod.size = TEXT_SIZE;
 	if (action->link_maps)
+	{
+		mod.len = 28;
 		ft_str_pxl(buffer, vec2(310, 70), "Select which map to link to", mod);
+	}
 	else
+	{
+		mod.len = 37;
 		ft_str_pxl(buffer, vec2(310, 70), "Select which map to load into editor", mod);
+	}
+		
 	box.start.x = 310;
 	box.start.y = 100;
 	box.end.x = 700;
@@ -230,6 +237,7 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 			mod.colour = get_color(red);
 		else
 			mod.colour = get_color(white);
+		mod.len = ft_strlen(map_names[i]);
 		ft_str_pxl(buffer, vec2(310, 100 + y),
 			map_names[i], mod);
 		y += 15;

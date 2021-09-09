@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/07 16:16:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 23:33:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 		error_output("Memalloc failed for HUD\n");
 	if (load_map_file(plr, home))
 		error_output("Error while loading map!\n");
-	init_textures(home);
 	if (setup_fps(&home->t))
 		error_output("Memory allocation failed!\n");
 	if (load_game_audio(&plr->audio))

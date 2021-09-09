@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:54:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 23:30:51 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int	load_map_file(t_player *plr, t_home *home)
 			error_output("ERROR: Failed to create temporary directory.");
 		parse_all_audio_data(buf, size);
 		free(buf);
+		buf = NULL;
 		if (ret)
 			error_output("ERROR: Failed to read map.");
 		calc_map_properties(home, plr);

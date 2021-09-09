@@ -3,28 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 08:35:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 23:39:16 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-// REVISIT ADD STORY STRING MANAGEMENT
-// free_story(&home->story);
-void	free_game_assets(t_home *home)
-{
-	if (home->t.frame_times)
-		free(home->t.frame_times);
-	free_sectors(home);
-	free_all_textures(home->textures, NUM_TEX);
-	free_entities(home);
-	free_projectiles(home);
-}
-
-void	get_menu_range_key_down(int *option, int *start, int *end, int nbr_of_maps)
+void	get_menu_range_key_down(int *option, int *start,
+	int *end, int nbr_of_maps)
 {
 	if (*option == 0)
 	{
@@ -42,7 +31,8 @@ void	get_menu_range_key_down(int *option, int *start, int *end, int nbr_of_maps)
 		*start = 0;
 }
 
-void	get_menu_range_key_up(int *option, int *start, int *end, int nbr_of_maps)
+void	get_menu_range_key_up(int *option, int *start,
+	int *end, int nbr_of_maps)
 {
 	if (*option == nbr_of_maps - 1)
 	{
@@ -60,6 +50,13 @@ void	get_menu_range_key_up(int *option, int *start, int *end, int nbr_of_maps)
 		*end = (*start + 7);
 }
 
+static Uint32	get_menu_color(int i, int option)
+{
+	if (i == option)
+		return (get_color(red));
+	return (get_color(white));
+}
+
 void	update_load_menu(t_menu *menu, int sym)
 {
 	int				y;
@@ -67,20 +64,19 @@ void	update_load_menu(t_menu *menu, int sym)
 	t_plx_modifier	mod;
 
 	if (sym == SDLK_DOWN)
-		get_menu_range_key_down(&menu->option, &menu->start, &menu->end, menu->nbr_of_maps);
+		get_menu_range_key_down(&menu->option, &menu->start,
+			&menu->end, menu->nbr_of_maps);
 	else if (sym == SDLK_UP)
-		get_menu_range_key_up(&menu->option, &menu->start, &menu->end, menu->nbr_of_maps);
+		get_menu_range_key_up(&menu->option, &menu->start,
+			&menu->end, menu->nbr_of_maps);
 	i = menu->start;
 	y = 0;
 	mod.colour = 0;
 	mod.size = TEXT_SIZE;
-	mod.len = 100;
 	while (i <= menu->end)
 	{
-		if (i == menu->option)
-			mod.colour = get_color(red);
-		else
-			mod.colour = get_color(white);
+		mod.colour = get_menu_color(i, menu->option);
+		mod.len = ft_strlen(menu->map_names[i]);
 		ft_str_pxl(&menu->buffer,
 			vec2((SCREEN_WIDTH * 0.5) - 200, 25 + y),
 			menu->map_names[i], mod);

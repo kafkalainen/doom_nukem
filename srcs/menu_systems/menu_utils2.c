@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:44:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 16:26:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 23:38:53 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,16 @@ void	update_option_load_menu(int *game_state, t_menu *menu, int sym)
 		*game_state = GAME_LOOP;
 		menu->selected = TRUE;
 	}
+}
+
+// REVISIT ADD STORY STRING MANAGEMENT
+// free_story(&home->story);
+void	free_game_assets(t_home *home)
+{
+	if (home->t.frame_times)
+		free(home->t.frame_times);
+	free_sectors(home);
+	free_all_textures(home->textures, NUM_TEX);
+	free_entities(home);
+	free_projectiles(home);
 }
