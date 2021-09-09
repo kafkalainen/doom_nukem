@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 14:14:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:47:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,7 @@ void			launch_editor(t_home *home, SDL_Event *e);
 ** Rendering/drawing
 */
 
-void			draw_ui(t_editor *editor);
+void			draw_ui(t_editor *editor, t_texture **textures);
 void			draw_buttons(t_button **blist, t_buffer *buffer, int draw_depth,
 					t_action *action, int end_sector);
 void			draw_sector_textfields(t_editor_sector *sector,
@@ -311,7 +311,7 @@ int				check_if_non_convex(t_editor_sector *sector);
 ** Entities
 */
 
-void			create_new_entity(t_entity_list **head, t_mouse_data *mdata,
+void			create_new_entity(t_entity_list **head,
 					t_action *action, t_editor_sector *sector);
 void			delete_selected_entity(t_entity_list **head, t_action *action);
 unsigned int	get_entity_count(t_entity_list **list);

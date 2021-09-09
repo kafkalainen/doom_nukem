@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:47:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,52 +63,6 @@ void	draw_buttons(t_button **blist, t_buffer *buffer,
 		}
 		i++;
 	}
-}
-
-void	draw_entities(t_editor *editor)
-{
-	t_entity_list	*temp;
-	t_entity_list	*head;
-	t_entity_list	*link;
-	t_xy			test1;
-	t_xy			test2;
-	t_box			temp_box;
-	int				color;
-
-	link = editor->entity_list;
-	head = editor->entity_list;
-	temp = editor->entity_list;
-	while (temp != NULL)
-	{
-		test1 = world_to_screen(vec2(temp->pos.x, temp->pos.z), editor->action.scalarf, editor->action.offsetf,
-					&editor->buffer);
-		test2 = world_to_screen(vec2(temp->pos.x + 1, temp->pos.z + 1), editor->action.scalarf, editor->action.offsetf,
-					&editor->buffer);
-		temp_box.start = test1;
-		temp_box.end = test2;
-		if (temp->entity_idx == editor->action.selected_entity)
-			color = get_color(white);
-		else
-			color = get_color(red);
-		draw_box(temp_box, &editor->buffer, color);
-		if (temp->is_linked)
-		{
-			while (link != NULL)
-			{
-				if (link->is_linked == temp->is_linked && link->is_linked > 1)
-					draw_line(
-						world_to_screen(vec2(temp->pos.x, temp->pos.z), editor->action.scalarf, editor->action.offsetf,
-							&editor->buffer),
-						world_to_screen(vec2(link->pos.x, link->pos.z), editor->action.scalarf, editor->action.offsetf,
-							&editor->buffer),
-						get_color(blue), &editor->buffer);
-				link = link->next;
-			}
-			link = head;
-		}
-		temp = temp->next;
-	}
-	editor->entity_list = head;
 }
 
 void	draw_entity_textfields(t_entity_list **list, int selected_entity, t_buffer *buffer)
@@ -204,7 +158,7 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 	}
 }
 
-void	draw_ui(t_editor *editor)
+void	draw_ui(t_editor *editor, t_texture **textures)
 {
 	t_editor_sector	*temp;
 	t_entity_list	*ent;
@@ -220,7 +174,7 @@ void	draw_ui(t_editor *editor)
 	if (editor->action.draw_depth == sector)
 		draw_sector_textfields(temp, &editor->buffer);
 	draw_editor_sectors(editor);
-	draw_entities(editor);
+	draw_editor_entities(editor, textures);
 	ent = editor->entity_list;
 	tempo = editor->entity_list;
 	if (editor->action.link_entity == 1)

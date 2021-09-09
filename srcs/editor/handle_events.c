@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 13:54:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:25:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int		handle_events(t_editor *editor, t_home *home)
 		save_editor_map(editor, home);
 	if (editor->action.create_entity == user_input)
 	{
-		create_new_entity(&editor->entity_list, &editor->mouse_data,
-			&editor->action, editor->temp_sector);
+		create_new_entity(&editor->entity_list, &editor->action,
+			editor->temp_sector);
 		editor->action.create_entity = idle;
 	}
 	if (editor->mouse_data.i_mbleft)

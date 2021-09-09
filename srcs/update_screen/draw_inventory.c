@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:38:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:55:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:50:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ void	draw_inventory_slots(t_player *plr, t_buffer *buffer)
 	}
 }
 
-static void	draw_image(t_xy offset, t_texel *tex, t_buffer *buffer,
-				float scale)
+void	draw_image(t_xy offset, t_texel *tex, t_buffer *buffer, float scale)
 {
 	t_screen_xy	current;
 	t_screen_xy	image;

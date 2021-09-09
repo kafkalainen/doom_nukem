@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/09 14:13:26 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/09 14:29:17 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = \
 	editor$(SLASH)check_for_intersecting_lines.c \
 	editor$(SLASH)draw_buttons.c \
 	editor$(SLASH)draw_editor_sector_bbox.c \
+	editor$(SLASH)draw_editor_entities.c \
 	editor$(SLASH)launch_editor.c \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)wall_points.c \

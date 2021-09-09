@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:24:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,7 @@ int		get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls)
 // 	}
 // }
 
-void	create_new_entity(t_entity_list **head, t_mouse_data *mdata, t_action *action, t_editor_sector *sector)
+void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *sector)
 {
 	t_entity_list	*temp;
 	t_entity_list	*new;
@@ -285,10 +285,10 @@ void	create_new_entity(t_entity_list **head, t_mouse_data *mdata, t_action *acti
 	new->is_revealed = 0;
 	new->is_static = 0;
 	new->sector_idx = 0; //sector->idx_sector;
-	new->pos.x = (mdata->x - action->offset.x) / action->scalar;
-	new->pos.z = (mdata->y - action->offset.y) / action->scalar;
-	new->bbox.start = vec2(new->pos.x - 1, new->pos.z - 1);
-	new->bbox.end = vec2((new->pos.x + 1), (new->pos.z + 1));
+	new->pos.x = action->world_pos.x;
+	new->pos.z = action->world_pos.y;
+	new->bbox.start = vec2(new->pos.x - 0.2f, new->pos.z + 0.2f);
+	new->bbox.end = vec2(new->pos.x + 0.2f, new->pos.z - 0.2f);
 	new->pos.y = 0; //get_highest_floor_height(&sector->walls, sector->nb_of_walls); // need to calculate height difference between sector floor and entity height
 	// if (new->entity_type == elevator_button || new->entity_type == light_button || new->entity_type == powerstation)
 	// 	get_direction_from_wall_point(&new->dir, &sector->walls, sector->nb_of_walls, action->selected_wall);
