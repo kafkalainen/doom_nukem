@@ -6,32 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/08 18:00:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 09:32:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-void	draw_bbox_sector(t_sector_list *sector, t_buffer *buffer,
-		t_action *action)
-{
-	float	point1;
-	float	point2;
-	float	point3;
-	float	point4;
-	Uint32	color;
-
-	point1 = sector->bbox.start.x * action->scalar + action->offset.x;
-	point2 = sector->bbox.start.y * action->scalar + action->offset.y;
-	point3 = sector->bbox.end.x * action->scalar + action->offset.x;
-	point4 = sector->bbox.end.y * action->scalar + action->offset.y;
-	if (action->selected_sector == sector->idx_sector)
-		color = get_color(lightgreen);
-	else
-		color = get_color(blue);
-	draw_rect(vec2(point1, point2), vec2(ft_fabsf(point1 - point3),
-		ft_fabsf(point2 - point4)), buffer, color);
-}
 
 void	draw_box(t_box box, t_buffer *buffer, Uint32 color)
 {

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 17:16:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 09:25:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	draw_editor_sectors(t_editor *editor)
 		i = 0;
 		left_point = sector_list->walls;
 		right_point = left_point;
-		// draw_bbox_sector(sector_list, &editor->buffer, &editor->action);
+		draw_bbox_sector(sector_list, &editor->buffer, &editor->action);
 		while (left_point && left_point->next && i < sector_list->nb_of_walls)
 		{
 			draw_wall_bbox(left_point, sector_list, editor);

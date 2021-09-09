@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 09:11:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 09:16:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,40 +44,41 @@ static void	calc_cells_on_axis(t_action *action, int *start, int *cells_on_axis,
 static void	draw_grid_horizontal(t_buffer *buffer, t_action *action)
 {
 	int					cells_on_y_axis;
-	int					i;
+	int					current_cell;
 	int					val;
 
-	i = 0;
-	calc_cells_on_axis(action, &i, &cells_on_y_axis, 'y');
-	while (i <= cells_on_y_axis)
+	current_cell = 0;
+	calc_cells_on_axis(action, &current_cell, &cells_on_y_axis, 'y');
+	while (current_cell <= cells_on_y_axis)
 	{
-		val = 0.5f * buffer->height * (i * action->scalarf + action->offsetf.y);
+		val = 0.5f * buffer->height * (current_cell
+				* action->scalarf + action->offsetf.y);
 		if (val < buffer->height)
 			draw_line(
 				vec2(TOOLBAR_WIDTH, val),
 				vec2(buffer->width, val),
 				get_color(0x808080), buffer);
-		i++;
+		current_cell++;
 	}
 }
 
 static void	draw_grid_vertical(t_buffer *buffer, t_action *action)
 {
 	int					cells_on_x_axis;
-	int					i;
+	int					current_cell;
 	int					val;
 
-	i = 0;
-	calc_cells_on_axis(action, &i, &cells_on_x_axis, 'x');
-	while (i <= cells_on_x_axis)
+	current_cell = 0;
+	calc_cells_on_axis(action, &current_cell, &cells_on_x_axis, 'x');
+	while (current_cell <= cells_on_x_axis)
 	{
 		val = TOOLBAR_WIDTH + (0.5f * (buffer->width - TOOLBAR_WIDTH)
-				* (i * action->scalarf + action->offsetf.x));
+				* (current_cell * action->scalarf + action->offsetf.x));
 		if (val < buffer->width && val >= TOOLBAR_WIDTH)
 			draw_line(
 				vec2(val, 0),
 				vec2(val, buffer->height), get_color(0x808080), buffer);
-		i++;
+		current_cell++;
 	}
 }
 

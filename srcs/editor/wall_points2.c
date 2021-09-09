@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:05:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 17:16:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 09:31:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void		assign_sector_bbox(t_sector_list *sector)
 		i++;
 	}
 	sector->bbox.start.x = min.x;
-	sector->bbox.start.y = min.y;
+	sector->bbox.start.y = max.y;
 	sector->bbox.end.x = max.x;
-	sector->bbox.end.y = max.y;
+	sector->bbox.end.y = min.y;
 }
 
 t_editor_walls	*new_wall_point(t_screen_xy world_coord)
