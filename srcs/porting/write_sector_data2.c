@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 17:56:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 11:32:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ unsigned char	*get_sector_plot(unsigned char *plot)
 	return (buf);
 }
 
-unsigned char	*get_writable_sector_data2(t_sector_list *sector,
+unsigned char	*get_writable_sector_data2(t_editor_sector *sector,
 	unsigned char *buf)
 {
 	buf = (unsigned char *)ft_strjoin_freeable(WRITE_BREAKER,
@@ -106,7 +106,7 @@ unsigned char	*get_writable_sector_data2(t_sector_list *sector,
 	return (buf);
 }
 
-unsigned char	*get_writable_sector_data3(t_sector_list *sector,
+unsigned char	*get_writable_sector_data3(t_editor_sector *sector,
 	unsigned char *buf)
 {
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,

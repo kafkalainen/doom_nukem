@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_points.c                                      :+:      :+:    :+:   */
+/*   list_utilities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/13 14:21:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_sector_list *find_sector(t_sector_list **sector, int s_idx, int w_idx)
-{	
-	t_sector_list *temp;
+t_editor_sector *find_sector(t_editor_sector **sector, int s_idx, int w_idx)
+{
+	t_editor_sector *temp;
 
 	temp = *sector;
 	while (temp && temp->idx_sector != s_idx)

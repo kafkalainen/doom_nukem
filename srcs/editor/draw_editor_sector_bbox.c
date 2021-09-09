@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 09:31:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 09:35:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	draw_bbox_sector(t_sector_list *sector, t_buffer *buffer,
+void	draw_bbox_sector(t_editor_sector *sector, t_buffer *buffer,
 		t_action *action)
 {
 	Uint32	color;

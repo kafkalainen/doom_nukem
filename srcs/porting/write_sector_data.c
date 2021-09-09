@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   write_sector_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 16:47:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 18:10:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-unsigned char	*get_writable_sector_data(t_sector_list *sector)
+unsigned char	*get_writable_sector_data(t_editor_sector *sector)
 {
 	unsigned char	*buf;
 	int				i;
@@ -80,7 +80,7 @@ void	write_sector_data(int *fd,
 	t_editor *editor)
 {
 	int				nbr_of_sectors;
-	t_sector_list	*temp;
+	t_editor_sector	*temp;
 	unsigned char	*buf;
 	int				i;
 

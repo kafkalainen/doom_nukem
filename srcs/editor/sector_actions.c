@@ -1,11 +1,11 @@
 #include "../../headers/doom_nukem.h"
 
-void	create_new_sector(t_sector_list **head, t_action *action)
+void	create_new_sector(t_editor_sector **head, t_action *action)
 {
-	t_sector_list	*temp;
-	t_sector_list	*new;
+	t_editor_sector	*temp;
+	t_editor_sector	*new;
 
-	new = (t_sector_list*)malloc(sizeof(t_sector_list));
+	new = (t_editor_sector*)malloc(sizeof(t_editor_sector));
 	if (!new)
 		error_output("Memory allocation of sector failed\n");
 	new->bbox.start = vec2(0, 0);
@@ -21,6 +21,7 @@ void	create_new_sector(t_sector_list **head, t_action *action)
 	new->light.is_linked = 0;
 	new->light.state = 0;
 	new->idx_sector = 0;
+	new->centroid = vec2(0.0f, 0.0f);
 	if (action->create_elev_button)
 		new->is_elevator = 1;
 	else
@@ -45,7 +46,7 @@ void	create_new_sector(t_sector_list **head, t_action *action)
 	action->selected_sector = new->idx_sector;
 }
 
-void	handle_removal(t_sector_list *sector_list, t_action *action)
+void	handle_removal(t_editor_sector *sector_list, t_action *action)
 {
 	t_editor_walls *temp;
 
@@ -74,9 +75,9 @@ void	editor_free_walls(t_editor_walls **head, int nbr_of_walls)
 	}
 }
 
-int		handle_sector(t_sector_list **head, t_mouse_data *mouse_data, t_action *action)
+int		handle_sector(t_editor_sector **head, t_mouse_data *mouse_data, t_action *action)
 {
-	t_sector_list	*temp;
+	t_editor_sector	*temp;
 
 	temp = *head;
 	while (temp != NULL && temp->idx_sector != action->selected_sector)
@@ -100,9 +101,9 @@ int		handle_sector(t_sector_list **head, t_mouse_data *mouse_data, t_action *act
 	return (0);
 }
 
-int		get_sector_count(t_sector_list **list)
+int		get_sector_count(t_editor_sector **list)
 {
-	t_sector_list	*temp;
+	t_editor_sector	*temp;
 	unsigned int	i;
 
 	temp = *list;
@@ -115,9 +116,9 @@ int		get_sector_count(t_sector_list **list)
 	return (i);
 }
 
-void	reset_sector_indexes(t_sector_list **head)
+void	reset_sector_indexes(t_editor_sector **head)
 {
-	t_sector_list	*temp;
+	t_editor_sector	*temp;
 	int				idx;
 	int				nbr_of_sectors;
 
@@ -153,10 +154,10 @@ void	reset_sector_indexes(t_sector_list **head)
 // 	}
 // }
 
-void	editor_free_selected_sector(t_sector_list **head, t_entity_list **entity_head, t_action *action)
+void	editor_free_selected_sector(t_editor_sector **head, t_entity_list **entity_head, t_action *action)
 {
-	t_sector_list	*temp;
-	t_sector_list	*prev;
+	t_editor_sector	*temp;
+	t_editor_sector	*prev;
 
 	temp = *head;
 	(void)entity_head;

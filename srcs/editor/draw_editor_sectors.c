@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 09:25:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	draw_wall_bbox(t_editor_walls *wall, t_sector_list *cur_sector,
+static void	draw_wall_bbox(t_editor_walls *wall, t_editor_sector *cur_sector,
 		t_editor *editor)
 {
 	t_box	box;
@@ -60,7 +60,7 @@ static void	draw_wall_line(t_editor_walls *left_point, t_editor_walls *right_poi
 void	draw_editor_sectors(t_editor *editor)
 {
 	int				i;
-	t_sector_list	*sector_list;
+	t_editor_sector	*sector_list;
 	t_editor_walls	*left_point;
 	t_editor_walls	*right_point;
 

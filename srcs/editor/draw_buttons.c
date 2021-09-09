@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 09:37:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	draw_sector_textfields(t_sector_list *sector, t_buffer *buffer)
+void	draw_sector_textfields(t_editor_sector *sector, t_buffer *buffer)
 {
 	t_plx_modifier	mod;
 
@@ -206,7 +206,7 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 
 void	draw_ui(t_editor *editor)
 {
-	t_sector_list	*temp;
+	t_editor_sector	*temp;
 	t_entity_list	*ent;
 	t_entity_list	*tempo;
 

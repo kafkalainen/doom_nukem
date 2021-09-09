@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 08:58:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 08:27:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	editor_check_if_same_point(t_screen_xy p0, t_screen_xy p1)
 		return (0);
 }
 
-int	check_for_intersecting_lines(t_sector_list *sector,
+int	check_for_intersecting_lines(t_editor_sector *sector,
 	t_screen_xy p0, t_screen_xy p1)
 {
 	int				i;

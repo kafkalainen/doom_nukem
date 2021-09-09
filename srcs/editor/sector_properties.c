@@ -1,6 +1,6 @@
 #include "../../headers/doom_nukem.h"
 
-void	edit_story(t_sector_list *sector, t_action *action)
+void	edit_story(t_editor_sector *sector, t_action *action)
 {
 	// char	temp;
 	char 	c[2];

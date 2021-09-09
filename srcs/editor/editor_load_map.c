@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 18:02:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	free_walls(t_editor_walls **head, int nbr_of_walls)
 	}
 }
 
-void	editor_free_all_sectors(t_sector_list **head)
+void	editor_free_all_sectors(t_editor_sector **head)
 {
-	t_sector_list	*temp;
+	t_editor_sector	*temp;
 
 	while (*head != NULL)
 	{
@@ -133,7 +133,7 @@ static int	editor_get_player_position(unsigned int *pos, unsigned char *buf,
 	return (0);
 }
 
-int	editor_parse_vertex_data(t_sector_list *new, unsigned char *buf,
+int	editor_parse_vertex_data(t_editor_sector *new, unsigned char *buf,
 	unsigned int *pos, ssize_t size)
 {
 	new->idx_sector = ft_atoi((const char *)buf + *pos);
@@ -204,7 +204,7 @@ int	editor_parse_coordinates(t_point_data *data,
 	return (0);
 }
 
-int	editor_add_points(t_sector_list *sector,
+int	editor_add_points(t_editor_sector *sector,
 	unsigned char *buf, unsigned int **pos, ssize_t size)
 {
 	int				i;
@@ -229,7 +229,7 @@ int	editor_add_points(t_sector_list *sector,
 	return (0);
 }
 
-int	editor_parse_light_data(t_sector_list *new, unsigned char *buf,
+int	editor_parse_light_data(t_editor_sector *new, unsigned char *buf,
 	unsigned int *pos, ssize_t size)
 {
 	if (get_next_int_value(&new->light.pos.x, buf, &pos, size))
@@ -261,7 +261,7 @@ char	*editor_get_next_string(unsigned char *buf,
 	return (str);
 }
 
-int	editor_parse_story_data(t_sector_list *new, unsigned char *buf,
+int	editor_parse_story_data(t_editor_sector *new, unsigned char *buf,
 	unsigned int *pos, ssize_t size)
 {
 	int	i;
@@ -286,12 +286,12 @@ int	editor_parse_story_data(t_sector_list *new, unsigned char *buf,
 }
 
 int	editor_get_sector_data(unsigned char *buf, unsigned int *pos,
-	ssize_t size, t_sector_list **head)
+	ssize_t size, t_editor_sector **head)
 {
-	t_sector_list	*temp;
-	t_sector_list	*new;
+	t_editor_sector	*temp;
+	t_editor_sector	*new;
 
-	new = (t_sector_list *)malloc(sizeof(t_sector_list));
+	new = (t_editor_sector *)malloc(sizeof(t_editor_sector));
 	if (!new)
 		return (1);
 	new->next = NULL;

@@ -6,16 +6,16 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 10:54:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_sector_list	*get_clicked_sector(t_sector_list **list, t_xy click,
+t_editor_sector	*get_clicked_sector(t_editor_sector **list, t_xy click,
 				int *selected_sector)
 {
-	t_sector_list	*temp;
+	t_editor_sector	*temp;
 
 	temp = *list;
 	while (temp != NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_functions.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/07 18:05:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ Uint32		colour_scale(Uint32 hex, float scale);
 t_triangle	create_projection(t_triangle *src);
 void		death_animation(t_home *home, t_player *plr, Uint32 t);
 void		draw_box(t_box box, t_buffer *buffer, Uint32 color);
-void		draw_bbox_sector(t_sector_list *sector, t_buffer *buffer,
+void		draw_bbox_sector(t_editor_sector *sector, t_buffer *buffer,
 				t_action *action);
 void		draw_buttons(t_button **blist, t_buffer *buffer, int draw_depth, t_action *action, int end_sector);
 void		draw_crosshair(t_buffer *buffer);
@@ -100,7 +100,7 @@ void		draw_rect_center(t_xy xy, t_xy wh, t_frame *frame);
 void		draw_rect(t_xy xy, t_xy wh, t_buffer *buffer, int color);
 int			draw_sector(t_frame *frame, t_home *home, t_player *plr,
 				int sector_idx);
-void		draw_sector_textfields(t_sector_list *sector, t_buffer *buffer);
+void		draw_sector_textfields(t_editor_sector *sector, t_buffer *buffer);
 void		draw_segment(t_buffer *buffer, float *depth_buffer, t_texel *tex,
 				t_steps *step);
 void		draw_square(t_buffer *buffer, t_xy offset, int c, int s);

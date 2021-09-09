@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 10:40:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,7 @@ int		get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls)
 // 	}
 // }
 
-void	create_new_entity(t_entity_list **head, t_mouse_data *mdata, t_action *action, t_sector_list *sector)
+void	create_new_entity(t_entity_list **head, t_mouse_data *mdata, t_action *action, t_editor_sector *sector)
 {
 	t_entity_list	*temp;
 	t_entity_list	*new;

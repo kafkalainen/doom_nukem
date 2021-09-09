@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/07 16:17:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void			create_hash(unsigned char *tmp);
 void			verify_hash(unsigned char *buf, ssize_t size);
 int				get_nbr_of_lines(unsigned char *plot);
 int				check_if_linked(unsigned char *linked_map);
-int				get_nbr_of_sectors(t_sector_list **sectors);
-unsigned char	*get_writable_sector_data3(t_sector_list *sector,
+int				get_nbr_of_sectors(t_editor_sector **sectors);
+unsigned char	*get_writable_sector_data3(t_editor_sector *sector,
 					unsigned char *buf);
-unsigned char	*get_writable_sector_data2(t_sector_list *sector,
+unsigned char	*get_writable_sector_data2(t_editor_sector *sector,
 					unsigned char *buf);
 unsigned char	*get_sector_plot(unsigned char *plot);
 unsigned char	*write_plot_lines(unsigned char *plot);

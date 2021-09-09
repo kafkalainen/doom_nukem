@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 10:42:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ void	check_grid_events(t_editor *editor)
 	}
 }
 
-int	check_plr_start_and_end_sector_exists(t_sector_list **list,
+int	check_plr_start_and_end_sector_exists(t_editor_sector **list,
 	t_plr_pos plr, int end_sector)
 {
-	t_sector_list	*temp;
-	t_sector_list	*temp_two;
+	t_editor_sector	*temp;
+	t_editor_sector	*temp_two;
 
 	temp = *list;
 	temp_two = *list;
@@ -92,10 +92,10 @@ int	check_plr_start_and_end_sector_exists(t_sector_list **list,
 	return (TRUE);
 }
 
-void	assign_end_sector(t_sector_list **list, t_xy *click, int *end_sector,
+void	assign_end_sector(t_editor_sector **list, t_xy *click, int *end_sector,
 		int *sector_assigned)
 {
-	t_sector_list	*temp;
+	t_editor_sector	*temp;
 
 	temp = *list;
 	while (temp != NULL && !check_bbox(temp->bbox.start, temp->bbox.end,
@@ -107,10 +107,10 @@ void	assign_end_sector(t_sector_list **list, t_xy *click, int *end_sector,
 	*sector_assigned = 0;
 }
 
-int	assign_player_start(t_sector_list **list, t_xy *click, t_plr_pos *plr,
+int	assign_player_start(t_editor_sector **list, t_xy *click, t_plr_pos *plr,
 	int *assign_player_start)
 {
-	t_sector_list	*temp;
+	t_editor_sector	*temp;
 
 	temp = *list;
 	while (temp != NULL && !check_bbox(temp->bbox.start, temp->bbox.end,

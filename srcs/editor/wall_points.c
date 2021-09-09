@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 15:45:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	close_editor_wall_list(t_editor_walls **head)
 	temp->next = *head;
 }
 
-int	check_for_last_point(t_sector_list *sector, t_mouse_data *data,
+int	check_for_last_point(t_editor_sector *sector, t_mouse_data *data,
 	t_action *action)
 {
 	t_xy		mouse;
@@ -62,7 +62,7 @@ void	remove_last_point(t_editor_walls **walls, int *nb_of_walls,
 	return ;
 }
 
-static int	bake_last_point(t_sector_list *sector, t_action *action,
+static int	bake_last_point(t_editor_sector *sector, t_action *action,
 			t_editor_walls *point)
 {
 	point = sector->walls;
@@ -85,7 +85,7 @@ static int	bake_last_point(t_sector_list *sector, t_action *action,
 	return (0);
 }
 
-int	add_point_to_list(t_sector_list *sector, t_mouse_data *data,
+int	add_point_to_list(t_editor_sector *sector, t_mouse_data *data,
 	t_action *action)
 {
 	t_editor_walls	*point;

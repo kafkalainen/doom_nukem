@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   porting_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 16:44:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 17:58:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char	*ft_strjoin_freeable(char *s1, char *s2, int free_one, int free_two)
 	return (concat_str);
 }
 
-int	get_nbr_of_sectors(t_sector_list **sectors)
+int	get_nbr_of_sectors(t_editor_sector **sectors)
 {
 	int				len;
-	t_sector_list	*temp;
+	t_editor_sector	*temp;
 
 	len = 0;
 	temp = *sectors;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:05:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 11:44:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	add_point_end(t_editor_walls **point, t_editor_walls *new)
 	}
 }
 
-void		assign_sector_bbox(t_sector_list *sector)
+void		assign_sector_bbox(t_editor_sector *sector)
 {
 	t_screen_xy		min;
 	t_screen_xy		max;
