@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 14:03:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 15:29:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	check_for_last_point(t_editor_sector *sector, t_mouse_data *data,
 
 	(void)data;
 	mouse = vec2(action->world_pos.x, action->world_pos.y);
-	// mouse.x = (data->x - action->offset.x) / action->scalar;
-	// mouse.y = (data->y - action->offset.y) / action->scalar;
 	dist = sqrt(pow(fabs(sector->walls->x0.x - mouse.x), 2.0f) +
 		pow(fabs(sector->walls->x0.y - mouse.y), 2.0f));
 	if (!sector->walls)
@@ -81,6 +79,7 @@ static int	bake_last_point(t_editor_sector *sector, t_action *action,
 		action->selected_sector = sector->idx_sector;
 		assign_sector_bbox(sector);
 		calculate_centroid(sector);
+		// editor_sort_sector_vertices(sector);
 		action->create_sector = idle;
 	}
 	return (0);

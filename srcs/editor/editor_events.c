@@ -53,29 +53,13 @@ void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 	else
 	{
 		if (keysym == SDLK_w)
-		{
-			action->offset.y += action->scalar * 2;
 			action->offsetf.y -= action->scalarf * 0.1f;
-		}
 		if (keysym == SDLK_s)
-		{
-			action->offset.y -= action->scalar * 2;
 			action->offsetf.y += action->scalarf * 0.1f;
-		}
 		if (keysym == SDLK_d)
-		{
-			action->offset.x -= action->scalar * 2;
 			action->offsetf.x += action->scalarf * 0.1f;
-		}
 		if (keysym == SDLK_a)
-		{
-			action->offset.x += action->scalar * 2;
 			action->offsetf.x -= action->scalarf * 0.1f;
-		}
-		// if (keysym == SDLK_w || keysym == SDLK_s || keysym == SDLK_d || keysym == SDLK_a)
-		// {
-		// 	printf("Current offset x %f and y %f\n", action->offsetf.x, action->offsetf.y);
-		// }
 		if (keysym == SDLK_f)
 		{
 			if (action->create_sector == idle)
@@ -94,15 +78,6 @@ void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 		if (keysym == SDLK_DELETE)
 			action->delete = 1;
 	}
-
-/* 	if (keysym == SDLK_KP_PLUS)
-		action->move = 1;
-	if (keysym == SDLK_KP_MINUS)
-		action->move = -1;
-	action->selected_point += action->move; */
-	// printf("%d\n", action->offset.y);
-	// printf("%d\n", action->offset.x);
-	// printf("%d\n", action->scalar);
 }
 
 void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_buffer *buffer)
@@ -118,26 +93,14 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_bu
 		action->world_pos = ndc_to_world(action->mouse_pos, action->offsetf,
 			action->scalarf);
 	}
-	if (e->type == SDL_MOUSEWHEEL)
-	{
-		// SDL_GetMouseState(&pos.x, &pos.y);
-		// action->mouse_pos = vec2((pos.x / (float)buffer->width) + 0.5f,
-		// 	(pos.y / (float)buffer->height) + 0.5f, 1.0f);
-		if (e->wheel.y > 0)// && action->scalar < 640) /* scroll up == Zoom in*/
-			mouse_zoom(action, mouse_data->x, mouse_data->y, 1);
-        else if(e->wheel.y < 0)// && action->scalar > 10) /* scroll down == Zoom Out*/
-			mouse_zoom(action, mouse_data->x, mouse_data->y, 0);
-	}
+	if (e->type == SDL_MOUSEWHEEL && e->wheel.y > 0 && action->scalarf < ZOOM_IN_MAX)
+		mouse_zoom(action, 1);
+	if(e->type == SDL_MOUSEWHEEL && e->wheel.y < 0 && action->scalarf > ZOOM_OUT_MAX)
+		mouse_zoom(action, 0);
 	if (e->type == SDL_MOUSEBUTTONDOWN)
 	{
-		if (e->button.button == SDL_BUTTON_LEFT || mouse_data->i_mbleft == 1)
-		{
+		if (e->button.button == SDL_BUTTON_LEFT)
 			mouse_data->i_mbleft = 1;
-			// SDL_GetMouseState(&pos.x, &pos.y);
-			// action->mouse_pos = get_ndc(buffer, pos);
-			// action->world_pos = ndc_to_world(action->mouse_pos, action->offsetf,
-			// 	action->scalarf);
-		}
 		if (e->button.button == SDL_BUTTON_RIGHT)
 			mouse_data->i_mbright = 1;
 		if ((e->button.button == SDL_BUTTON_LEFT && action->create_entity == allocate))

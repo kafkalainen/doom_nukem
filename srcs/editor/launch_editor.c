@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 14:53:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 15:31:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,12 @@ void	reset_actions(t_action *action)
 
 void	init_actions(t_action *action)
 {
-	action->offset.x = 0;
-	action->offset.y = 0;
 	action->offsetf = vec2(0.0f, 0.0f);
 	action->grid = 1;
 	action->selected_sector = -1;
 	action->selected_point = -1;
 	action->selected_entity = -1;
 	action->selected_wall = -1;
-	action->scalar = 10;
 	action->scalarf = 0.125f;
 	action->create_sector = idle;
 	action->create_entity = idle;

@@ -1,22 +1,18 @@
 #include "../../headers/doom_nukem.h"
 
-void	mouse_zoom(t_action *action, int mouse_x, int mouse_y, int zoom)
+void	mouse_zoom(t_action *action, int zoom)
 {
 	if (zoom)
 	{
-		action->offset.x *= 2;
-		action->offset.y *= 2;
-		action->offset.x -= mouse_x;
-		action->offset.y -= mouse_y;
-		action->scalar *= 2;
 		action->scalarf *= 2.0f;
+		action->offsetf.x -= action->mouse_pos.x;
+		action->offsetf.y += action->mouse_pos.y;
 	}
 	else
 	{
-		action->offset.x += mouse_x;
-		action->offset.y += mouse_y;
-		action->offset.x /= 2;
-		action->offset.y /= 2;
 		action->scalarf *= 0.5f;
+		action->offsetf.x += action->mouse_pos.x;
+		action->offsetf.y -= action->mouse_pos.y;
 	}
+	printf("%f\n", action->scalarf);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 14:47:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 15:31:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_editor_walls
 	t_screen_xy				norm;
 	t_height				height;
 	t_box					bbox;
+	float					center_angle;
 	int						idx;
 	int						type;
 	struct s_editor_walls	*next;
@@ -112,7 +113,6 @@ typedef struct s_plr_pos
 
 typedef struct s_action
 {
-	t_screen_xy		offset;
 	t_xy			offsetf;
 	t_xy			mouse_pos;
 	t_xy			world_pos;
@@ -261,8 +261,7 @@ t_bool			check_bbox_ui(t_xy start, t_xy end, t_xy click);
 void			check_event(t_mouse_data *mouse_data, t_button **list,
 					t_action *action);
 void			editor_events(SDL_Event *e, t_home *home, t_editor *editor);
-void			mouse_zoom(t_action *action, int mouse_x, int mouse_y,
-					int zoom);
+void			mouse_zoom(t_action *action, int zoom);
 int				handle_events(t_editor *editor, t_home *home);
 void			reset_actions(t_action *action);
 void			new_check_event(t_editor *editor);

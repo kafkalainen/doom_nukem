@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 11:00:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 15:27:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define FOV 1.57079616f
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
+# define ZOOM_OUT_MAX 0.031250f
+# define ZOOM_IN_MAX 2.0f
 
 /*
 **  Number of textures has been counted as follows:
