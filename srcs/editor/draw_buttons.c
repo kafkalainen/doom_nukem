@@ -6,28 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 09:32:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 09:37:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-void	draw_box(t_box box, t_buffer *buffer, Uint32 color)
-{
-	float end;
-	float start;
-
-	end = box.end.y;
-	start = box.start.y;
-	box.end.y = box.start.y;
-	while (start < end)
-	{
-		box.start.y = start;
-		box.end.y = box.start.y;
-		draw_line(box.start, box.end, color, buffer);
-		start++;
-	}
-}
 
 void	draw_sector_textfields(t_sector_list *sector, t_buffer *buffer)
 {

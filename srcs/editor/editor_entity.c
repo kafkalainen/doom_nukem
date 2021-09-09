@@ -6,20 +6,20 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 18:01:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 10:40:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_entity_list	*get_clicked_entity(t_entity_list **list, t_screen_xy mdata, int *selected_entity)
+t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click, int *selected_entity)
 {
 	t_entity_list	*temp;
 
 	temp = *list;
 	while (temp != NULL)
 	{
-		if (check_bbox(temp->bbox.start, temp->bbox.end, mdata.x, mdata.y))
+		if (check_bbox(temp->bbox.start, temp->bbox.end, click))
 		{
 			*selected_entity = temp->entity_idx;
 			return (temp);
@@ -80,7 +80,7 @@ int	link_allowed(t_entity_list *entity1, t_entity_list *entity2)
 	return (FALSE);
 }
 
-int	link_entities(t_entity_list **list, t_screen_xy mdata, int current_entity)
+int	link_entities(t_entity_list **list, t_xy click, int current_entity)
 {
 	t_entity_list	*temp;
 	t_entity_list	*curr;
@@ -106,7 +106,7 @@ int	link_entities(t_entity_list **list, t_screen_xy mdata, int current_entity)
 		link_nbr = get_new_link_index(list, current_entity);
 	while (temp != NULL)
 	{
-		if (check_bbox(temp->bbox.start, temp->bbox.end, mdata.x, mdata.y))
+		if (check_bbox(temp->bbox.start, temp->bbox.end, click))
 		{
 			if (temp->is_linked < 2)
 				temp->is_linked = link_nbr;

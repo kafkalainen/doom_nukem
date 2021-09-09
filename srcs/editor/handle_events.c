@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 17:29:12 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 10:40:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_sector_list	*get_clicked_sector(t_sector_list **list, t_screen_xy mdata, int *selected_sector)
+t_sector_list	*get_clicked_sector(t_sector_list **list, t_xy click,
+				int *selected_sector)
 {
 	t_sector_list	*temp;
 
 	temp = *list;
 	while (temp != NULL)
 	{
-		if (check_bbox(temp->bbox.start, temp->bbox.end, mdata.x, mdata.y))
+		if (check_bbox(temp->bbox.start, temp->bbox.end, click))
 		{
 			*selected_sector = temp->idx_sector;
 			return (temp);
@@ -30,7 +31,8 @@ t_sector_list	*get_clicked_sector(t_sector_list **list, t_screen_xy mdata, int *
 	return (NULL);
 }
 
-t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_screen_xy mdata, int *selected_wall, int nbr_of_walls)
+t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
+				int *selected_wall, int nbr_of_walls)
 {
 	t_editor_walls	*temp;
 	int				i;
@@ -39,7 +41,7 @@ t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_screen_xy mdata, int 
 	temp = *walls;
 	while (temp != NULL && i < nbr_of_walls)
 	{
-		if (check_bbox(temp->bbox.start, temp->bbox.end, mdata.x, mdata.y))
+		if (check_bbox(temp->bbox.start, temp->bbox.end, click))
 		{
 			*selected_wall = temp->idx;
 			return (temp);

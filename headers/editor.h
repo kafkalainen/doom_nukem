@@ -6,13 +6,47 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/08 18:02:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 10:41:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
 # define TOOLBAR_WIDTH 300
+
+enum e_buttons
+{
+	button_save,
+	button_open,
+	button_activate_grid,
+	button_create_sector,
+	button_assign_end_sector,
+	button_link_map,
+	button_unlink_map,
+	button_plr_start,
+	button_create_elevator,
+	button_edit_sector,
+	button_change_floor_tex,
+	button_change_ceil_tex,
+	button_set_light_intensity,
+	button_is_elevator,
+	button_create_light_src,
+	button_input_active,
+	button_add_wall_point,
+	button_wall_index,
+	button_change_wall_tex,
+	button_convert_to_portal,
+	button_set_ceiling_height,
+	button_set_floor_height,
+	button_create_light_button,
+	button_create_powerstation,
+	button_entity_index,
+	button_change_entity_type,
+	button_toggle_entity_is_linked,
+	button_toggle_is_revealed,
+	button_toggle_is_static,
+	button_toggle_state,
+};
 
 typedef struct		s_mouse_data
 {
@@ -209,7 +243,7 @@ void			main_button_actions(t_action *action, int i);
 void			entity_button_actions(t_action *action, int i);
 void			wall_button_actions(t_action *action, int i);
 void			sector_button_actions(t_action *action, int i);
-int				check_bbox(t_xy start, t_xy end, int mouse_x, int mouse_y);
+int				check_bbox(t_xy start, t_xy end, t_xy click);
 
 /*
 ** Event handler and event related
@@ -229,15 +263,15 @@ void			check_ui_events(int x, int y, t_button ***blist,
 				t_action *action);
 int				clicked_inside_grid(int x, int y, int height, int width);
 int				check_plr_start_and_end_sector_exists(
-				t_sector_list **list, t_plr_pos plr, int end_sector);
-void			assign_end_sector(t_sector_list **list, t_screen_xy *mdata,
-				int *end_sector, int *sector_assigned);
-int				assign_player_start(t_sector_list **list,
-				t_screen_xy *mdata, t_plr_pos *plr, int *assign_player_start);
+					t_sector_list **list, t_plr_pos plr, int end_sector);
+void			assign_end_sector(t_sector_list **list, t_xy *click,
+					int *end_sector, int *sector_assigned);
+int				assign_player_start(t_sector_list **list, t_xy *click,
+					t_plr_pos *plr, int *assign_player_start);
 t_sector_list	*get_clicked_sector(t_sector_list **list,
-				t_screen_xy mdata, int *selected_sector);
-t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_screen_xy mdata,
-				int *selected_wall, int nbr_of_walls);
+					t_xy click, int *selected_sector);
+t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
+					int *selected_wall, int nbr_of_walls);
 void			check_grid_events(t_editor *editor);
 void			link_maps(t_action *action, unsigned char **linked_mapname,
 				char **map_names);
@@ -272,8 +306,9 @@ void			create_new_entity(t_entity_list **head, t_mouse_data *mdata, t_action *ac
 void			delete_selected_entity(t_entity_list **head, t_action *action);
 unsigned int	get_entity_count(t_entity_list **list);
 t_entity_list	*get_selected_entity(t_entity_list **head, t_mouse_data	mdata);
-t_entity_list	*get_clicked_entity(t_entity_list **list, t_screen_xy mdata, int *selected_entity);
-int				link_entities(t_entity_list **list, t_screen_xy mdata, int current_entity);
+t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click,
+					int *selected_entity);
+int				link_entities(t_entity_list **list, t_xy click, int current_entity);
 void			edit_entity(t_entity_list *entity, t_action *action);
 void			free_all_entities(t_entity_list **head);
 
@@ -310,4 +345,5 @@ unsigned char	*delete_char_from_string(unsigned char **string);
 t_xy			world_to_screen(t_xy x0, float scalarf, t_xy offsetf,
 					t_buffer *buffer);
 t_xy			ndc_to_world(t_xy ndc, t_xy offset, float scalar);
+
 #endif

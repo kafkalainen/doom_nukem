@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/07 11:39:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 09:38:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,23 @@ void	draw_rect_center(t_xy xy, t_xy wh, t_frame *frame)
 		draw_line(vec2(xy.x + i, xy.y + j),
 			vec2(xy.x + fabs(i), xy.y + j), 0x00A000, &frame->buffer);
 		j++;
+	}
+}
+
+void	draw_box(t_box box, t_buffer *buffer, Uint32 color)
+{
+	float end;
+	float start;
+
+	end = box.end.y;
+	start = box.start.y;
+	box.end.y = box.start.y;
+	while (start < end)
+	{
+		box.start.y = start;
+		box.end.y = box.start.y;
+		draw_line(box.start, box.end, color, buffer);
+		start++;
 	}
 }
 

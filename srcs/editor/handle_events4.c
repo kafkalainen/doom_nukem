@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:25:29 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 17:46:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 10:41:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@ void	check_ui_events(int x, int y, t_button ***blist, t_action *action)
 {
 	t_button	**list;
 	int			i;
+	t_xy		click_ui;
 
 	i = 0;
 	list = *blist;
+	click_ui = vec2(x, y);
 	while (i < NBR_BUTTONS)
 	{
 		if (list[i]->info.draw_depth == action->draw_depth)
 		{
-			if (check_bbox(list[i]->ltop, list[i]->wh, x, y))
+			if (check_bbox(list[i]->ltop, list[i]->wh, click_ui))
 			{
 				if (list[i]->info.draw_depth == depth_zero)
 					main_button_actions(action, i);
@@ -78,7 +80,7 @@ void	save_editor_map(t_editor *editor, t_home *home)
 			editor->mapname = (unsigned char *)ft_strjoin_freeable((char *)editor->mapname, ".DN", 1, 0);
 			editor->mapname = (unsigned char *)ft_strjoin_freeable("./map_files/", (char *)editor->mapname, 0, 1);
 			editor->action.map_name_set = 1;
-		}		
+		}
 		if (check_saving_prerequisites(editor))
 			create_map_file(home, editor);
 		editor->action.save_file = 0;
