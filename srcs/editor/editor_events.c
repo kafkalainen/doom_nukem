@@ -117,7 +117,6 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_bu
 		action->mouse_pos = get_ndc(buffer, pos);
 		action->world_pos = ndc_to_world(action->mouse_pos, action->offsetf,
 			action->scalarf);
-		printf("World coordinate is x %f, y %f\n", action->world_pos.x, action->world_pos.y);
 	}
 	if (e->type == SDL_MOUSEWHEEL)
 	{
@@ -138,14 +137,13 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_bu
 			// action->mouse_pos = get_ndc(buffer, pos);
 			// action->world_pos = ndc_to_world(action->mouse_pos, action->offsetf,
 			// 	action->scalarf);
-			// printf("World coordinate is x %f, y %f\n", action->world_pos.x, action->world_pos.y);
 		}
 		if (e->button.button == SDL_BUTTON_RIGHT)
 			mouse_data->i_mbright = 1;
 		if ((e->button.button == SDL_BUTTON_LEFT && action->create_entity == allocate))
 			action->create_entity = user_input;
-		if (e->button.button == SDL_BUTTON_RIGHT && action->create_entity == 1)
-			action->create_entity = 0;
+		if (e->button.button == SDL_BUTTON_RIGHT && action->create_entity == allocate)
+			action->create_entity = idle;
 		if ((e->button.button == SDL_BUTTON_LEFT && action->selected_entity >= 0 && action->link_entity == 1))
 		{
 			action->prev_entity = action->selected_entity;

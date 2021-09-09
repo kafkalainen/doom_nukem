@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 11:36:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 10:34:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:12:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,14 @@ t_bool	vec2_get_scalar_to_intersection(t_xy pos, t_xy dir, t_wall *wall,
 		return (true);
 	}
 	return (false);
+}
+
+t_xy	vec2_div(t_xy a, float scalar)
+{
+	scalar = 1 / scalar;
+	return ((t_xy){
+		a.x * scalar,
+		a.y * scalar,
+		1.0f
+	});
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 13:53:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 14:14:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,7 +326,7 @@ void			free_all_entities(t_entity_list **head);
 /*
 ** Sector creation and manipulation
 */
-
+t_xy			calculate_centroid(t_editor_sector *sector);
 void			editor_create_new_sector(t_editor_sector **head, t_action *action);
 int				editor_new_sector_wallpoints(t_editor_sector **head,
 					t_mouse_data *mouse_data, t_action *action);

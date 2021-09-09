@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/09 13:25:05 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/09 14:13:26 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = doom-nukem
 
 SRCS = \
 	main.c \
+	editor$(SLASH)calculate_centroid.c \
 	editor$(SLASH)check_if_non_convex.c \
 	editor$(SLASH)check_for_intersecting_lines.c \
 	editor$(SLASH)draw_buttons.c \
