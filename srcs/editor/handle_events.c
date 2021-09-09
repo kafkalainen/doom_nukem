@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 10:40:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 10:54:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
 int		handle_events(t_editor *editor, t_home *home)
 {
 	if (editor->action.unlink_entity)
-		unlink_selected_entity(&editor->entity_list, editor->action.selected_entity, &editor->action.unlink_entity);
+	{
+		unlink_selected_entity(&editor->entity_list,
+			editor->action.selected_entity, &editor->action.unlink_entity);
+	}
 	if (editor->action.create_sector)
 	{
 		create_new_sector(&editor->sector_list, &editor->action);
@@ -71,14 +74,18 @@ int		handle_events(t_editor *editor, t_home *home)
 	}
 	if (editor->action.create_entity == 2)
 	{
-		create_new_entity(&editor->entity_list, &editor->mouse_data, &editor->action, editor->temp_sector);
+		create_new_entity(&editor->entity_list, &editor->mouse_data,
+			&editor->action, editor->temp_sector);
 		editor->action.create_entity = 0;
 	}
 	if (editor->mouse_data.i_mbleft)
 	{
-		if (clicked_inside_ui(editor->mouse_data.x, editor->mouse_data.y, editor->buffer.height, editor->buffer.width))
-			check_ui_events(editor->mouse_data.x, editor->mouse_data.y, &editor->button_list, &editor->action);
-		else if (clicked_inside_grid(editor->mouse_data.x, editor->mouse_data.y, editor->buffer.height, editor->buffer.width))
+		if (clicked_inside_ui(editor->mouse_data.x, editor->mouse_data.y,
+				editor->buffer.height, editor->buffer.width))
+			check_ui_events(editor->mouse_data.x, editor->mouse_data.y,
+				&editor->button_list, &editor->action);
+		else if (clicked_inside_grid(editor->mouse_data.x, editor->mouse_data.y,
+				editor->buffer.height, editor->buffer.width))
 			check_grid_events(editor);
 	}
 	if (editor->action.link_maps == 2)

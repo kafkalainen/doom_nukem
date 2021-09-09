@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:05:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 09:31:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:32:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_editor_walls	*new_wall_point(t_screen_xy world_coord)
 		new->x0.x = world_coord.x;
 		new->x0.y = world_coord.y;
 		new->idx = -1;
-		new->type = 0;
+		new->type = -1;
 		new->bbox.start = vec2(new->x0.x - 0.2f, new->x0.y + 0.2f);
 		new->bbox.end = vec2((new->x0.x + 0.2f), (new->x0.y - 0.2f));
 		new->height.ground = 0;

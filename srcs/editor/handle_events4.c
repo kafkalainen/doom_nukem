@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:25:29 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 10:51:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:19:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ void	check_ui_events(int x, int y, t_button ***blist, t_action *action)
 		reset_actions(action);
 }
 
-int		clicked_inside_grid(int x, int y, int height, int width)
+int	clicked_inside_grid(int x, int y, int height, int width)
 {
 	if (x > 300 && x < width && y > 0 && y < height)
 		return (TRUE);
 	return (FALSE);
 }
 
-int		clicked_inside_ui(int x, int y, int height, int width)
+int	clicked_inside_ui(int x, int y, int height, int width)
 {
 	if (x > 0 && x < 300 && x < width && y > 0 && y < height)
 		return (TRUE);
 	return (FALSE);
 }
 
-int		check_saving_prerequisites(t_editor *editor)
+int	check_saving_prerequisites(t_editor *editor)
 {
 	if (editor->mapname == NULL || !editor->action.player_start_assigned || !editor->end_sector)
 		return (FALSE);

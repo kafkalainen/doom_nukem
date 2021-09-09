@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 16:42:19 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:00:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 **  - Lamp on / off
 */
 # define NUM_TEX 44
-# define MAX_FILE_NAME_LENGHT 50
+# define MAX_FILE_NAME_LENGTH 50
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
 # define INV_PI_BY_TWO 0.1591549367f
