@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 15:36:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 18:48:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 		editor_events(e, home, &editor);
 		handle_events(&editor, home);
 		draw_ui(&editor, home->textures);
-		draw_buttons(editor.button_list, &editor.buffer, editor.action.draw_depth, &editor.action, editor.end_sector);
+		draw_buttons(&editor, editor.end_sector, home->textures);
 		render_buffer(editor.buffer.pxl_buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 17:55:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 18:30:09 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,7 @@ int		get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls)
 		temp = temp->next;
 		i++;
 	}
-	return (highest);
+	return (highest + 1);
 }
 
 // void	get_direction_from_wall_points(t_editor_xyz *dir, t_editor_walls **walls, int nbr_of_walls, int selected_wall)
@@ -266,8 +266,8 @@ void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *
 	t_entity_list	*temp;
 	t_entity_list	*new;
 
-	// if (sector == NULL)
-	// 	return ;
+	if (sector == NULL)
+		return ;
 	(void)sector;
 	new = (t_entity_list *)malloc(sizeof(t_entity_list));
 	if (!new)
@@ -284,18 +284,18 @@ void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *
 	new->is_linked = 0;
 	new->is_revealed = 0;
 	new->is_static = 0;
-	new->sector_idx = 0; //sector->idx_sector;
+	new->sector_idx = sector->idx_sector;
 	new->pos.x = ft_roundf_to_grid(action->world_pos.x, 0);
 	new->pos.z =ft_roundf_to_grid(action->world_pos.y, 0);
 	new->bbox.start = vec2(new->pos.x - 0.2f, new->pos.z + 0.2f);
 	new->bbox.end = vec2(new->pos.x + 0.2f, new->pos.z - 0.2f);
-	new->pos.y = 0; //get_highest_floor_height(&sector->walls, sector->nb_of_walls); // need to calculate height difference between sector floor and entity height
+	new->pos.y = get_highest_floor_height(&sector->walls, sector->nb_of_walls); // need to calculate height difference between sector floor and entity height
 	// if (new->entity_type == elevator_button || new->entity_type == light_button || new->entity_type == powerstation)
 	// 	get_direction_from_wall_point(&new->dir, &sector->walls, sector->nb_of_walls, action->selected_wall);
 	// else
 	// {
 		new->dir.x = 0;
-		new->dir.y = 1;
+		new->dir.y = -1;
 		new->dir.z = 0;
 	// }
 	new->state = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 14:25:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 18:39:19 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
 
 int		handle_events(t_editor *editor, t_home *home)
 {
+	if (editor->action.edit_entity)
+		edit_entity(editor->temp_entity, &editor->action);
 	if (editor->action.unlink_entity)
 	{
 		unlink_selected_entity(&editor->entity_list,
@@ -80,11 +82,18 @@ int		handle_events(t_editor *editor, t_home *home)
 	{
 		if (clicked_inside_ui(editor->mouse_data.x, editor->mouse_data.y,
 				editor->buffer.height, editor->buffer.width))
+		{
 			check_ui_events(editor->mouse_data.x, editor->mouse_data.y,
 				&editor->button_list, &editor->action);
+			editor->mouse_data.i_mbleft = 0;
+		}		
 		else if (clicked_inside_grid(editor->mouse_data.x, editor->mouse_data.y,
 				editor->buffer.height, editor->buffer.width))
+		{
 			check_grid_events(editor);
+			editor->mouse_data.i_mbleft = 0;
+		}
+			
 	}
 	if (editor->action.link_maps == 2)
 		link_maps(&editor->action, &editor->linked_mapname, editor->map_names);

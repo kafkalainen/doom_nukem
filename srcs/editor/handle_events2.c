@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 18:32:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	check_grid_events(t_editor *editor)
 			editor_free_selected_sector(&editor->sector_list,
 				&editor->entity_list, &editor->action);
 	}
-	if (editor->action.edit_entity)
-		edit_entity(editor->temp_entity, &editor->action);
 	if (editor->action.assign_player_start == 2)
 		editor->action.player_start_assigned
 			= assign_player_start(&editor->sector_list, &editor->action.world_pos,

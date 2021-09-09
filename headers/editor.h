@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 17:38:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 18:57:58 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,8 +239,6 @@ void			launch_editor(t_home *home, SDL_Event *e);
 */
 
 void			draw_ui(t_editor *editor, t_texture **textures);
-void			draw_buttons(t_button **blist, t_buffer *buffer, int draw_depth,
-					t_action *action, int end_sector);
 void			draw_sector_textfields(t_editor_sector *sector,
 					t_buffer *buffer);
 
@@ -358,5 +356,6 @@ t_xy			world_to_screen(t_xy x0, float scalarf, t_xy offsetf,
 					t_buffer *buffer);
 t_xy			ndc_to_world(t_xy ndc, t_xy offset, float scalar);
 float			ft_roundf_to_grid(float nb, int prec);
+int				editor_select_entity_tex(Uint32 type);
 
 #endif
