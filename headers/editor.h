@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 15:31:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 16:29:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ typedef struct s_editor_walls
 {
 	t_screen_xy				x0;
 	t_screen_xy				norm;
+	t_xy					centroid_vec;
 	t_height				height;
 	t_box					bbox;
 	float					center_angle;
+	float					dist_from_center;
 	int						idx;
 	int						type;
 	struct s_editor_walls	*next;
@@ -329,8 +331,8 @@ t_xy			calculate_centroid(t_editor_sector *sector);
 void			editor_create_new_sector(t_editor_sector **head, t_action *action);
 int				editor_new_sector_wallpoints(t_editor_sector **head,
 					t_mouse_data *mouse_data, t_action *action);
+void			editor_sort_wall_vertices(t_editor_sector *sector);
 void			edit_story(t_editor_sector *sector, t_action *action);
-
 void			editor_free_walls(t_editor_walls **head, int nbr_of_walls);
 void			editor_free_sector(t_editor_sector **head);
 void			editor_free_selected_sector(t_editor_sector **head,
