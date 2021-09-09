@@ -29,7 +29,6 @@
 #  include <string.h>
 #  include <unistd.h>
 #  include <pthread.h>
-#  define SDL_MAIN_HANDLED
 #  include "../SDL2/include/SDL2/SDL.h"
 #  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include "../headers/syscalls_windows.h"
@@ -46,7 +45,6 @@
 #  include <stdio.h>
 #  include <stdlib.h>
 #  include <pthread.h>
-#  define SDL_MAIN_HANDLED
 #  include "../SDL2-2.0.14/i686-w64-mingw32/include/SDL2/SDL.h"
 #  include "../SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2/SDL_mixer.h"
 
@@ -86,7 +84,7 @@ int		doom_mkdir(void);
 void	draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void	error_output(char *msg);
 void	error_output_sdl(char *msg, t_home *home, t_frame *frame);
-void	free_main_assets(t_frame *frame, t_audio *audio, Uint32 *buffer,
+int		free_all(t_frame *frame, t_audio *audio, Uint32 *buffer,
 			char **chosen_map);
 void	fps_timer(t_time *t);
 int		give_sign(float number);
