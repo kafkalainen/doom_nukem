@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:47:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 15:54:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 17:16:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_xy	ndc_to_world(t_xy ndc, t_xy offset, float scalar)
 	denom = 1 / scalar;
 	world_coord = vec2_mul(ndc, denom);
 	offset = vec2_mul(offset, -denom);
+	offset.y = -offset.y;
 	world_coord = vec2_add(offset, world_coord);
 	return (world_coord);
 }
