@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 19:38:21 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 20:50:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,14 @@ void	draw_entity_textfields(t_entity_list **list, int selected_entity, t_buffer 
 	mod.size = TEXT_SIZE;
 	str = ft_itoa(temp->entity_idx);
 	mod.len = ft_strlen(str);
-	ft_str_pxl(buffer, vec2(100, 56), str, mod);
+	ft_str_pxl(buffer, vec2(165, 56), str, mod);
 	ft_strdel(&str);
-	box.start = vec2(32, 230);
-	box.end = vec2(132, 330);
+	str = ft_itoa(temp->entity_type);
+	mod.len = ft_strlen(str);
+	ft_str_pxl(buffer, vec2(165, 84), str, mod);
+	ft_strdel(&str);
+	box.start = vec2(32, 110);
+	box.end = vec2(132, 220);
 	draw_box(box, buffer, get_color(black));
 	tex = get_tex(editor_select_entity_tex(temp->entity_type), textures);
 	if (temp->entity_type == skull_skulker || temp->entity_type == thing ||
@@ -140,15 +144,11 @@ void	draw_entity_textfields(t_entity_list **list, int selected_entity, t_buffer 
 		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 		draw_image(box.start, tex, buffer, scale.w);
 	}
-	str = ft_itoa(temp->entity_type);
-	mod.len = ft_strlen(str);
-	ft_str_pxl(buffer, vec2(100, 84), str, mod);
-	ft_strdel(&str);
 	mod.len = 1;
-	ft_c_pxl(buffer, vec2(150, 114), '0' + temp->is_linked, mod);
-	ft_c_pxl(buffer, vec2(165, 144), '0' + temp->is_revealed, mod);
-	ft_c_pxl(buffer, vec2(165, 174), '0' + temp->is_static, mod);
-	ft_c_pxl(buffer, vec2(100, 204), '0' + temp->state, mod);
+	ft_c_pxl(buffer, vec2(165, 229), '0' + temp->is_linked, mod);
+	ft_c_pxl(buffer, vec2(165, 259), '0' + temp->is_revealed, mod);
+	ft_c_pxl(buffer, vec2(165, 289), '0' + temp->is_static, mod);
+	ft_c_pxl(buffer, vec2(165, 325), '0' + temp->state, mod);
 }
 
 // void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text)

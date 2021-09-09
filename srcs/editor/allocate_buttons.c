@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocate_buttons.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 18:01:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 20:43:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ t_button	**create_button_list(t_button **blist)
 		(t_button_info){"Index", 0, entity});
 	create_button(blist[i++], (t_box){vec2(32, 80), vec2(90, 105)},
 		(t_button_info){"Type", 0, entity});
-	create_button(blist[i++], (t_box){vec2(32, 110), vec2(140, 135)},
+	create_button(blist[i++], (t_box){vec2(32, 225), vec2(140, 250)},
 		(t_button_info){"Is linked", 0, entity});
-	create_button(blist[i++], (t_box){vec2(32, 140), vec2(160, 165)},
+	create_button(blist[i++], (t_box){vec2(32, 255), vec2(160, 280)},
 		(t_button_info){"Is revealed", 0, entity});
-	create_button(blist[i++], (t_box){vec2(32, 170), vec2(140, 195)},
+	create_button(blist[i++], (t_box){vec2(32, 285), vec2(140, 315)},
 		(t_button_info){"Is static", 0, entity});
-	create_button(blist[i], (t_box){vec2(32, 200), vec2(95, 225)},
+	create_button(blist[i], (t_box){vec2(32, 320), vec2(95, 345)},
 		(t_button_info){"State", 0, entity});
 	return (blist);
 }
