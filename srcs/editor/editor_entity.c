@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 14:24:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 15:10:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,22 +171,22 @@ void	edit_entity(t_entity_list *entity, t_action *action)
 {
 	if (action->change_entity_type)
 	{
-		if ((entity->entity_type >= 0 && entity->entity_type < 4) || entity->entity_type == lamp)
-		{
-			if (entity->entity_type < 3)
-				entity->entity_type += 1;
-			else if (entity->entity_type == 3)
-				entity->entity_type = lamp;
-			else if (entity->entity_type == lamp)
-				entity->entity_type = skull_skulker;
-			else if (entity->entity_type == light_button || entity->entity_type == powerstation)
-			{
-				if (entity->entity_type == light_button)
-					entity->entity_type = powerstation;
-				else
-					entity->entity_type = light_button;
-			}
-		}
+		if (entity->entity_type == skull_skulker)
+			entity->entity_type = thing;
+		else if (entity->entity_type == thing)
+			entity->entity_type = drone;
+		else if (entity->entity_type == drone)
+			entity->entity_type = crewmember;
+		else if (entity->entity_type == crewmember)
+			entity->entity_type = ammo_pack;
+		else if (entity->entity_type == ammo_pack)
+			entity->entity_type = keycard_cleaning;
+		else if (entity->entity_type == keycard_cleaning)
+			entity->entity_type = keycard_engineering;
+		else if (entity->entity_type == keycard_engineering)
+			entity->entity_type = keycard_military;
+		else if (entity->entity_type == keycard_military)
+			entity->entity_type = skull_skulker;
 		action->change_entity_type = 0;
 	}
 	else if (action->toggle_entity_is_linked)
