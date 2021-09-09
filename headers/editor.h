@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 10:41:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 10:50:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,8 @@ void			main_button_actions(t_action *action, int i);
 void			entity_button_actions(t_action *action, int i);
 void			wall_button_actions(t_action *action, int i);
 void			sector_button_actions(t_action *action, int i);
-int				check_bbox(t_xy start, t_xy end, t_xy click);
+t_bool			check_bbox(t_xy start, t_xy end, t_xy click);
+t_bool			check_bbox_ui(t_xy start, t_xy end, t_xy click);
 
 /*
 ** Event handler and event related
