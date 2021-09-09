@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 18:57:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 21:18:43 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,8 +239,6 @@ void			launch_editor(t_home *home, SDL_Event *e);
 */
 
 void			draw_ui(t_editor *editor, t_texture **textures);
-void			draw_sector_textfields(t_editor_sector *sector,
-					t_buffer *buffer);
 
 /*
 ** Buttons

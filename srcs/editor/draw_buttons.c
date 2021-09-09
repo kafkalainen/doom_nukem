@@ -6,33 +6,43 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 20:50:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 21:22:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	draw_sector_textfields(t_editor_sector *sector, t_buffer *buffer)
+void	draw_sector_textfields(t_editor_sector *sector, t_buffer *buffer, t_texture **textures)
 {
 	t_plx_modifier	mod;
 	char			*temp;
+	t_box			box;
+	float			scale;
+	t_texel			*tex;
 
 	if (!sector)
 		return ;
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
 	temp = ft_itoa(sector->idx_sector);
-	mod.len = ft_strlen(temp) + 1;
-	printf("idx len: %i\n", (int)mod.len);
+	mod.len = ft_strlen(temp);
 	ft_str_pxl(buffer, vec2(165, 56), temp, mod);
-	printf("%s\n", temp);
 	ft_strdel(&temp);
+	box.start = vec2(32, 110);
+	box.end = vec2(132, 210);
+	tex = get_tex(sector->tex_floor, textures);
+	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
+	draw_image(box.start, tex, buffer, scale);
+	box.start = vec2(32, 240);
+	box.end = vec2(132, 340);
+	tex = get_tex(sector->tex_ceil, textures);
+	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
+	draw_image(box.start, tex, buffer, scale);
 	if (sector->sector_plot)
 	{
 		mod.len = ft_strlen((const char *)sector->sector_plot);
 		ft_str_pxl(buffer, vec2(32, 580), (char *)sector->sector_plot, mod);
 	}
-		
 }
 
 int	get_color_from_action_data(int i, t_action *action, int end_sector)
@@ -75,7 +85,7 @@ void	draw_buttons(t_editor *editor, int end_sector, t_texture **textures)
 	if (editor->action.draw_depth == entity)
 		draw_entity_textfields(&editor->entity_list, editor->action.selected_entity, &editor->buffer, textures);
 	if (editor->action.draw_depth == sector)
-		draw_sector_textfields(editor->temp_sector, &editor->buffer);
+		draw_sector_textfields(editor->temp_sector, &editor->buffer, textures);
 }
 
 void	draw_test_image(t_xy offset, t_texel *tex, t_buffer *buffer, t_xy scale) // bad name, possible duplicate, if the original can be modified for sprite maps
@@ -150,18 +160,6 @@ void	draw_entity_textfields(t_entity_list **list, int selected_entity, t_buffer 
 	ft_c_pxl(buffer, vec2(165, 289), '0' + temp->is_static, mod);
 	ft_c_pxl(buffer, vec2(165, 325), '0' + temp->state, mod);
 }
-
-// void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text)
-// {
-// 	t_plx_modifier	mod;
-
-// 	mod.colour = white;
-// 	mod.size = TEXT_SIZE;
-// 	if (help_text == map_saving)
-// 		str_pxl(buffer, vec2(midpoint - 100, 50), "Please input text string", mod);
-// 	if (string != NULL)
-// 		str_pxl(buffer, vec2(midpoint - 100, 70), (char *)string, mod);
-// }
 
 void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text)
 {

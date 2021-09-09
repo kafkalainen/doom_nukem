@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 20:43:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 21:06:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ static int	buttons_create_sector_layer(t_button **blist, int i)
 		(t_button_info){"Sector idx:", 0, sector});
 	create_button(blist[i++], (t_box){vec2(32, 80), vec2(220, 105)},
 		(t_button_info){"Sector floor tex:", 0, sector});
-	create_button(blist[i++], (t_box){vec2(32, 110), vec2(240, 135)},
+	create_button(blist[i++], (t_box){vec2(32, 215), vec2(240, 235)},
 		(t_button_info){"Sector ceiling tex:", 0, sector});
-	create_button(blist[i++], (t_box){vec2(32, 140), vec2(235, 165)},
+	create_button(blist[i++], (t_box){vec2(32, 345), vec2(235, 370)},
 		(t_button_info){"Set Light intensity", 1, sector});
-	create_button(blist[i++], (t_box){vec2(32, 170), vec2(195, 195)},
+	create_button(blist[i++], (t_box){vec2(32, 375), vec2(195, 400)},
 		(t_button_info){"Is elevator", 1, sector});
-	create_button(blist[i++], (t_box){vec2(32, 200), vec2(195, 225)},
+	create_button(blist[i++], (t_box){vec2(32, 405), vec2(210, 430)},
 		(t_button_info){"Add light source", 1, sector});
-	create_button(blist[i++], (t_box){vec2(32, 230), vec2(195, 255)},
+	create_button(blist[i++], (t_box){vec2(32, 435), vec2(205, 460)},
 		(t_button_info){"Write plot", 1, sector});
-	create_button(blist[i++], (t_box){vec2(32, 260), vec2(195, 285)},
+	create_button(blist[i++], (t_box){vec2(32, 465), vec2(240, 490)},
 		(t_button_info){"Add new wall point", 1, sector});
 	return (i);
 }
