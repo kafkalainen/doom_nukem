@@ -6,13 +6,20 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 13:39:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 13:53:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
 # define TOOLBAR_WIDTH 300
+
+enum e_menu_state
+{
+	idle,
+	allocate,
+	user_input
+};
 
 enum e_buttons
 {

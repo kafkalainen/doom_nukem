@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 13:46:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 13:56:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void		main_button_actions(t_action *action, int i)
 	}
 	else if (i == button_create_sector)
 	{
-		if (action->create_sector == 0)
-			action->create_sector = 1;
+		if (action->create_sector == idle)
+			action->create_sector = allocate;
 	}
 	else if (i == button_assign_end_sector)
 		action->assign_end_sector = 1;

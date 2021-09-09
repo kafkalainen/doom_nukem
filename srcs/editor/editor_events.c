@@ -78,15 +78,15 @@ void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 		// }
 		if (keysym == SDLK_f)
 		{
-			if (action->create_sector == 0)
-				action->create_sector = 1;
+			if (action->create_sector == idle)
+				action->create_sector = allocate;
 		}
 		if (keysym == SDLK_g && action->grid == 0)
 			action->grid = 1;
 		else if (keysym == SDLK_g && action->grid == 1)
 			action->grid = 0;
-		if (keysym == SDLK_e && action->create_entity == 0)
-			action->create_entity = 1;
+		if (keysym == SDLK_e && action->create_entity == idle)
+			action->create_entity = allocate;
 		if (keysym == SDLK_l && action->selected_entity >= 0)
 			action->link_entity = 1;
 		if (keysym == SDLK_u && action->selected_entity >= 0)
@@ -142,8 +142,8 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_bu
 		}
 		if (e->button.button == SDL_BUTTON_RIGHT)
 			mouse_data->i_mbright = 1;
-		if ((e->button.button == SDL_BUTTON_LEFT && action->create_entity == 1))
-			action->create_entity = 2;
+		if ((e->button.button == SDL_BUTTON_LEFT && action->create_entity == allocate))
+			action->create_entity = user_input;
 		if (e->button.button == SDL_BUTTON_RIGHT && action->create_entity == 1)
 			action->create_entity = 0;
 		if ((e->button.button == SDL_BUTTON_LEFT && action->selected_entity >= 0 && action->link_entity == 1))

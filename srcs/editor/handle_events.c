@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 13:35:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 13:54:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,21 @@ int		handle_events(t_editor *editor, t_home *home)
 		unlink_selected_entity(&editor->entity_list,
 			editor->action.selected_entity, &editor->action.unlink_entity);
 	}
-	if (editor->action.create_sector == 1)
+	if (editor->action.create_sector == allocate)
 	{
 		editor_create_new_sector(&editor->sector_list, &editor->action);
 		editor->action.create_sector++;
 	}
-	if (editor->action.create_sector == 2)
+	if (editor->action.create_sector == user_input)
 		editor_new_sector_wallpoints(&editor->sector_list,
 			&editor->mouse_data, &editor->action);
 	if (editor->action.save_file)
 		save_editor_map(editor, home);
-	if (editor->action.create_entity == 2)
+	if (editor->action.create_entity == user_input)
 	{
 		create_new_entity(&editor->entity_list, &editor->mouse_data,
 			&editor->action, editor->temp_sector);
-		editor->action.create_entity = 0;
+		editor->action.create_entity = idle;
 	}
 	if (editor->mouse_data.i_mbleft)
 	{

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 18:02:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 13:55:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	init_actions(t_action *action)
 	action->selected_wall = -1;
 	action->scalar = 10;
 	action->scalarf = 0.125f;
-	action->create_sector = 0;
-	action->create_entity = 0;
+	action->create_sector = idle;
+	action->create_entity = idle;
 	action->link_entity = 0;
 	action->prev_entity = -1;
-	action->edit_sector = 0;
+	action->edit_sector = idle;
 	action->input_active = -1;
 	action->keysym = -1;
 	action-> move = 0;
