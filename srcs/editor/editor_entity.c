@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 15:10:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 17:55:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,8 +285,8 @@ void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *
 	new->is_revealed = 0;
 	new->is_static = 0;
 	new->sector_idx = 0; //sector->idx_sector;
-	new->pos.x = action->world_pos.x;
-	new->pos.z = action->world_pos.y;
+	new->pos.x = ft_roundf_to_grid(action->world_pos.x, 0);
+	new->pos.z =ft_roundf_to_grid(action->world_pos.y, 0);
 	new->bbox.start = vec2(new->pos.x - 0.2f, new->pos.z + 0.2f);
 	new->bbox.end = vec2(new->pos.x + 0.2f, new->pos.z - 0.2f);
 	new->pos.y = 0; //get_highest_floor_height(&sector->walls, sector->nb_of_walls); // need to calculate height difference between sector floor and entity height

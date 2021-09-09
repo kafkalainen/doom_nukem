@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 16:29:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 17:38:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,5 +357,6 @@ unsigned char	*delete_char_from_string(unsigned char **string);
 t_xy			world_to_screen(t_xy x0, float scalarf, t_xy offsetf,
 					t_buffer *buffer);
 t_xy			ndc_to_world(t_xy ndc, t_xy offset, float scalar);
+float			ft_roundf_to_grid(float nb, int prec);
 
 #endif

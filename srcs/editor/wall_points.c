@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_points.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 17:10:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 17:56:26 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,25 @@ static int	bake_last_point(t_editor_sector *sector, t_action *action,
 	return (0);
 }
 
+float	ft_roundf_to_grid(float nb, int prec)
+{
+	long double	fraction;
+
+	if (prec < 0)
+		return (nb);
+	fraction = 0.5;
+	while (prec)
+	{
+		fraction = fraction * 0.1;
+		prec--;
+	}
+	if (nb > 0)
+		nb += fraction;
+	else
+		nb -= fraction;
+	return (nb);
+}
+
 int	add_point_to_list(t_editor_sector *sector, t_mouse_data *data,
 	t_action *action)
 {
@@ -92,7 +111,8 @@ int	add_point_to_list(t_editor_sector *sector, t_mouse_data *data,
 	t_screen_xy		new_coord;
 
 	point = NULL;
-	new_coord = (t_screen_xy){ft_roundf(action->world_pos.x, 0), ft_roundf(action->world_pos.y, 0)};
+	new_coord = (t_screen_xy){ft_roundf_to_grid(action->world_pos.x, 0),
+			ft_roundf_to_grid(action->world_pos.y, 0)};
 	if (sector == NULL)
 		return (1);
 	if (sector->nb_of_walls > 1 && check_for_last_point(sector, data, action))
