@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 21:18:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 21:29:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void		draw_buttons(t_editor *editor, int end_sector, t_texture **textures);
 void		draw_crosshair(t_buffer *buffer);
 void		draw_editor_sectors(t_editor *editor);
 void		draw_editor_entities(t_editor *editor, t_texture **textures);
-void		draw_entity_textfields(t_entity_list **list, int selected_entity,
-				t_buffer *buffer, t_texture **textures);
+void		draw_entity_textfields(t_entity_list *entity, t_buffer *buffer,
+				t_texture **textures);
 void		draw_frame(t_home *home, t_frame *frame, t_player *plr);
 void		draw_image(t_xy offset, t_texel *tex, t_buffer *buffer,
 				float scale);

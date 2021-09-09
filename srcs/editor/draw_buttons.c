@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 21:22:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 21:50:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,34 @@ void	draw_sector_textfields(t_editor_sector *sector, t_buffer *buffer, t_texture
 
 int	get_color_from_action_data(int i, t_action *action, int end_sector)
 {
-	if ((i == 7 && action->player_start_assigned) || (i == 4 && end_sector >= 0))
+	if ((i == button_plr_start && action->player_start_assigned) || (i == button_assign_end_sector && end_sector >= 0))
 		return (get_color(green));
-	else if (i == 7 || i == 4)
+	else if (i == button_plr_start || i == button_assign_end_sector)
 		return (get_color(red));
 	return (get_color(white));
+}
+
+void	draw_wall_textfields(t_editor_walls *wall, t_buffer *buffer, t_texture **textures)
+{
+	t_plx_modifier	mod;
+	char			*temp;
+	t_box			box;
+	float			scale;
+	t_texel			*tex;
+
+	if (!wall)
+		return ;
+	mod.colour = get_color(white);
+	mod.size = TEXT_SIZE;
+	temp = ft_itoa(wall->idx);
+	mod.len = ft_strlen(temp);
+	ft_str_pxl(buffer, vec2(165, 56), temp, mod);
+	ft_strdel(&temp);
+	box.start = vec2(32, 110);
+	box.end = vec2(132, 220);
+	tex = get_tex(wall->type, textures);
+	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
+	draw_image(box.start, tex, buffer, scale);
 }
 
 void	draw_buttons(t_editor *editor, int end_sector, t_texture **textures)
@@ -83,9 +106,11 @@ void	draw_buttons(t_editor *editor, int end_sector, t_texture **textures)
 		i++;
 	}
 	if (editor->action.draw_depth == entity)
-		draw_entity_textfields(&editor->entity_list, editor->action.selected_entity, &editor->buffer, textures);
+		draw_entity_textfields(editor->temp_entity, &editor->buffer, textures);
 	if (editor->action.draw_depth == sector)
 		draw_sector_textfields(editor->temp_sector, &editor->buffer, textures);
+	if (editor->action.draw_depth == wall)
+		draw_wall_textfields(editor->temp_wall, &editor->buffer, textures);
 }
 
 void	draw_test_image(t_xy offset, t_texel *tex, t_buffer *buffer, t_xy scale) // bad name, possible duplicate, if the original can be modified for sprite maps
@@ -112,37 +137,32 @@ void	draw_test_image(t_xy offset, t_texel *tex, t_buffer *buffer, t_xy scale) //
 	}
 }
 
-void	draw_entity_textfields(t_entity_list **list, int selected_entity, t_buffer *buffer, t_texture **textures)
+void	draw_entity_textfields(t_entity_list *entity, t_buffer *buffer, t_texture **textures)
 {
-	t_entity_list	*temp;
 	t_plx_modifier	mod;
 	char			*str;
 	t_box			box;
 	t_texel			*tex;
 	t_xy			scale;
 
-	(void)textures;
-	temp = *list;
-	while (temp != NULL && temp->entity_idx != selected_entity)
-		temp = temp->next;
-	if (!temp)
+	if (!entity)
 		return ;
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
-	str = ft_itoa(temp->entity_idx);
+	str = ft_itoa(entity->entity_idx);
 	mod.len = ft_strlen(str);
 	ft_str_pxl(buffer, vec2(165, 56), str, mod);
 	ft_strdel(&str);
-	str = ft_itoa(temp->entity_type);
+	str = ft_itoa(entity->entity_type);
 	mod.len = ft_strlen(str);
 	ft_str_pxl(buffer, vec2(165, 84), str, mod);
 	ft_strdel(&str);
 	box.start = vec2(32, 110);
 	box.end = vec2(132, 220);
 	draw_box(box, buffer, get_color(black));
-	tex = get_tex(editor_select_entity_tex(temp->entity_type), textures);
-	if (temp->entity_type == skull_skulker || temp->entity_type == thing ||
-		temp->entity_type == drone || temp->entity_type == crewmember)
+	tex = get_tex(editor_select_entity_tex(entity->entity_type), textures);
+	if (entity->entity_type == skull_skulker || entity->entity_type == thing ||
+		entity->entity_type == drone || entity->entity_type == crewmember)
 	{
 		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / 128);
 		scale.x = 128;
@@ -155,10 +175,10 @@ void	draw_entity_textfields(t_entity_list **list, int selected_entity, t_buffer 
 		draw_image(box.start, tex, buffer, scale.w);
 	}
 	mod.len = 1;
-	ft_c_pxl(buffer, vec2(165, 229), '0' + temp->is_linked, mod);
-	ft_c_pxl(buffer, vec2(165, 259), '0' + temp->is_revealed, mod);
-	ft_c_pxl(buffer, vec2(165, 289), '0' + temp->is_static, mod);
-	ft_c_pxl(buffer, vec2(165, 325), '0' + temp->state, mod);
+	ft_c_pxl(buffer, vec2(165, 229), '0' + entity->is_linked, mod);
+	ft_c_pxl(buffer, vec2(165, 259), '0' + entity->is_revealed, mod);
+	ft_c_pxl(buffer, vec2(165, 289), '0' + entity->is_static, mod);
+	ft_c_pxl(buffer, vec2(165, 325), '0' + entity->state, mod);
 }
 
 void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text)

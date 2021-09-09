@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 21:06:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 21:36:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,15 @@ static int	buttons_create_wall_layer(t_button **blist, int i)
 		(t_button_info){"wall index:", 0, wall});
 	create_button(blist[i++], (t_box){vec2(32, 80), vec2(275, 105)},
 		(t_button_info){"Wall texture:", 0, wall});
-	create_button(blist[i++], (t_box){vec2(32, 80), vec2(275, 105)},
+	create_button(blist[i++], (t_box){vec2(32, 225), vec2(275, 250)},
 		(t_button_info){"Convert to portal", 0, wall});
-	create_button(blist[i++], (t_box){vec2(32, 110), vec2(275, 135)},
+	create_button(blist[i++], (t_box){vec2(32, 255), vec2(275, 280)},
 		(t_button_info){"wall ceiling height:", 0, wall});
-	create_button(blist[i++], (t_box){vec2(32, 140), vec2(240, 165)},
+	create_button(blist[i++], (t_box){vec2(32, 285), vec2(240, 310)},
 		(t_button_info){"wall floor height:", 0, wall});
-	create_button(blist[i++], (t_box){vec2(32, 170), vec2(275, 195)},
+	create_button(blist[i++], (t_box){vec2(32, 315), vec2(275, 335)},
 		(t_button_info){"Add light button", 0, wall});
-	create_button(blist[i++], (t_box){vec2(32, 230), vec2(275, 255)},
+	create_button(blist[i++], (t_box){vec2(32, 340), vec2(275, 365)},
 		(t_button_info){"Add powerstation", 0, wall});
 	return (i);
 }
