@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/05 23:19:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ t_bool	open_door(t_sector **sectors, t_player *plr, int active_item)
 		if (check_for_matching_key(wall, plr, active_item))
 		{
 			portal_behind = get_portal_by_idx(plr->cur_sector,
-					sectors[wall->top.idx]);
+					sectors[wall->top.type]);
 			check_for_matching_key(portal_behind, plr, active_item);
 			portal_behind->open_until = plr->time + 5000;
 			wall->open_until = plr->time + 5000;

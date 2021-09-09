@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:14:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 13:05:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static t_bool	check_if_in_next_sector(t_home *home,
 				&& vec3_dot_product(
 					vec3_mul(entity->dir, -1.0f), wall->top.normal) > 0.0f)
 			{
-				if (wall->top.idx == plr->cur_sector)
+				if (wall->top.type == plr->cur_sector)
 				{
 					entity->is_aggroed = 1;
 					return (true);
 				}
 				else
-					check_if_in_next_sector(home, plr, entity, wall->top.idx);
+					check_if_in_next_sector(home, plr, entity, wall->top.type);
 			}
 			wall = wall->next;
 		}

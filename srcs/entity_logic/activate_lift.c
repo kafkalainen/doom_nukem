@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:50:13 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 10:57:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static float	portal_height_diff(t_wall *portal, t_sector *connection,
 	portal_behind = connection->walls;
 	while (i < connection->nb_of_walls)
 	{
-		if (portal_behind->top.idx == idx)
+		if (portal_behind->top.type == idx)
 			return (portal_behind->bottom.p[0].y - portal->bottom.p[0].y);
 		portal_behind = portal_behind->next;
 		i++;
@@ -40,9 +40,9 @@ static float	get_floor_height_diff(t_home *home, int sector_idx,
 	portal = home->sectors[sector_idx]->walls;
 	while (j < home->sectors[sector_idx]->nb_of_walls)
 	{
-		if (portal->top.idx >= 0
-			&& home->sectors[portal->top.idx]->is_lift == next_floor)
-			return (portal_height_diff(portal, home->sectors[portal->top.idx],
+		if (portal->top.type >= 0
+			&& home->sectors[portal->top.type]->is_lift == next_floor)
+			return (portal_height_diff(portal, home->sectors[portal->top.type],
 					sector_idx));
 		portal = portal->next;
 		j++;
@@ -59,7 +59,7 @@ void	bolt_lift_doors(t_sector *lift, Uint32 state)
 	portal = lift->walls;
 	while (j < lift->nb_of_walls)
 	{
-		if (portal->top.idx >= 0 && portal->is_door)
+		if (portal->top.type >= 0 && portal->is_door)
 		{
 			lock_the_door(portal, portal->next);
 			portal->open_until = 0;
@@ -81,8 +81,8 @@ void	bolt_lift_door(t_sector *lift, t_sector **sectors,
 	portal = lift->walls;
 	while (j < lift->nb_of_walls)
 	{
-		if (portal->top.idx >= 0 && portal->is_door
-			&& sectors[portal->top.idx]->is_lift == next_floor)
+		if (portal->top.type >= 0 && portal->is_door
+			&& sectors[portal->top.type]->is_lift == next_floor)
 			portal->is_locked = state;
 		portal = portal->next;
 		j++;

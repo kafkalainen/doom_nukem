@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:21:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:55:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:38:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ static void	initialize_triangle_index(t_triangle *tri, t_entity *entity)
 	if (entity->is_static)
 	{
 		if (entity->is_active && entity->state)
-			tri->idx = entity->sprite_index;
+			tri->type = entity->sprite_index;
 		else
-			tri->idx = entity->alt_sprite_index;
+			tri->type = entity->alt_sprite_index;
 	}
 	else
 	{
 		if (entity->is_revealed)
-			tri->idx = entity->alt_sprite_index;
+			tri->type = entity->alt_sprite_index;
 		else
-			tri->idx = entity->sprite_index;
+			tri->type = entity->sprite_index;
 	}
 }
 

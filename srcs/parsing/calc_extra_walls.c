@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 12:05:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 09:49:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static Uint32	generate_a_new_lower_wall(t_wall *portal, t_wall *portal_behind)
 	portal_behind->bottom.p[2].y = portal->bottom.p[0].y;
 	portal_behind->bottom.p[0].y = portal->bottom.p[2].y;
 	portal_behind->top.p[0].y = portal->bottom.p[2].y;
-	if (portal->next->top.idx < 0)
-		left.idx = portal->next->top.idx;
+	if (portal->next->top.type < 0)
+		left.idx = portal->next->top.type;
 	else
 		left.idx = -2;
 	new_wall = new_point(&left, &right);
@@ -57,8 +57,8 @@ static Uint32	generate_a_new_top_wall(t_wall *portal, t_wall *portal_behind)
 	portal_behind->top.p[2].y = portal->top.p[1].y;
 	portal_behind->top.p[1].y = portal->top.p[2].y;
 	portal_behind->bottom.p[1].y = portal->top.p[1].y;
-	if (portal->next->top.idx < 0)
-		left.idx = portal->next->top.idx;
+	if (portal->next->top.type < 0)
+		left.idx = portal->next->top.type;
 	else
 		left.idx = -2;
 	new_wall = new_point(&left, &right);
@@ -117,11 +117,11 @@ void	calc_extra_walls(t_home *home)
 		current_portal = home->sectors[i]->walls;
 		while (!home->sectors[i]->is_lift && j < home->sectors[i]->nb_of_walls)
 		{
-			if (current_portal->top.idx >= 0)
+			if (current_portal->top.type >= 0)
 			{
 				portal_behind = get_portal_by_idx(i,
-						home->sectors[current_portal->top.idx]);
-				home->sectors[current_portal->top.idx]->nb_of_walls
+						home->sectors[current_portal->top.type]);
+				home->sectors[current_portal->top.type]->nb_of_walls
 					+= generate_wall_logic(current_portal, portal_behind);
 				home->sectors[i]->nb_of_walls += generate_doors(current_portal);
 			}

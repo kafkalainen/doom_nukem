@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_sector_2.c                                   :+:      :+:    :+:   */
+/*   parse_sector_b.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:29:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 10:58:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:39:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	get_door_lock(int door_idx)
 
 void	initialize_door(t_wall *wall, t_point_data *left, t_point_data *right)
 {
-	wall->top.idx = change_door_to_portal(left->idx);
-	wall->bottom.idx = change_door_to_portal(left->idx);
+	wall->top.type = change_door_to_portal(left->idx);
+	wall->bottom.type = change_door_to_portal(left->idx);
 	wall->is_door = 0;
 	wall->is_closed = 0;
 	wall->open_until = 0;

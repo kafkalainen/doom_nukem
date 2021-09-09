@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:28:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/16 15:48:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_wall	*get_portal_by_idx(int idx, t_sector *sector)
 	temp = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
-		if (temp->top.idx == idx || temp->top.idx == idx + DOOR_INDEX)
+		if (temp->top.type == idx || temp->top.type == idx + DOOR_INDEX)
 			return (temp);
 		temp = temp->next;
 		i++;

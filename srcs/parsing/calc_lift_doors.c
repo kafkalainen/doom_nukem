@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:02:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 08:53:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	generate_doors_to_portals(t_sector *original, t_sector **next,
 	t_wall	*portal_behind;
 
 	portal_behind = get_portal_by_idx(original->idx_sector,
-			next[portal->top.idx]);
+			next[portal->top.type]);
 	portal->is_door = 1;
 	portal_behind->is_door = 1;
 	portal->is_locked = unlocked;
 	portal_behind->is_locked = unlocked;
 	original->nb_of_walls += generate_doors(portal);
-	next[portal->top.idx]->nb_of_walls += generate_doors(portal_behind);
+	next[portal->top.type]->nb_of_walls += generate_doors(portal_behind);
 }
 
 void	calc_lift_doors(t_home *home)
@@ -41,8 +41,8 @@ void	calc_lift_doors(t_home *home)
 		while (home->sectors[i]->is_lift
 			&& j < home->sectors[i]->nb_of_walls)
 		{
-			if (current_portal->top.idx >= 0 && !current_portal->is_door
-				&& home->sectors[current_portal->top.idx]->is_lift)
+			if (current_portal->top.type >= 0 && !current_portal->is_door
+				&& home->sectors[current_portal->top.type]->is_lift)
 				generate_doors_to_portals(home->sectors[i], home->sectors,
 					current_portal);
 			current_portal = current_portal->next;

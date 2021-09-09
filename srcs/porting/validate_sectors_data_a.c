@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:06:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 08:34:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 // 	temp = sector->walls;
 // 	while (j < sector->nb_of_walls)
 // 	{
-// 		if (temp->top.idx == i || temp->top.idx - DOOR_INDEX == i)
+// 		if (temp->top.type == i || temp->top.type - DOOR_INDEX == i)
 // 		{
 // 			if (temp->top.p[1].x == p0->x
 // 				&& temp->top.p[1].z == p0->z
@@ -47,20 +47,20 @@
 // 	temp = home->sectors[i]->walls;
 // 	while (j < home->sectors[i]->nb_of_walls)
 // 	{
-// 		if (temp->top.idx >= 0)
+// 		if (temp->top.type >= 0)
 // 		{
 // 			if (home->nbr_of_sectors == 1)
 // 				return (true);
-// 			if (temp->top.idx >= DOOR_INDEX)
+// 			if (temp->top.type >= DOOR_INDEX)
 // 			{
 // 				if (!(check_valid_connection(&temp->top.p[2], &temp->top.p[1],
-// 							home->sectors[temp->top.idx - DOOR_INDEX], i)))
+// 							home->sectors[temp->top.type - DOOR_INDEX], i)))
 // 					return (true);
 // 			}
 // 			else
 // 			{
 // 				if (!(check_valid_connection(&temp->top.p[2], &temp->top.p[1],
-// 							home->sectors[temp->top.idx], i)))
+// 							home->sectors[temp->top.type], i)))
 // 					return (true);
 // 			}
 // 		}

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/02 13:41:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
 	while (i < home->sectors[frame->idx]->nb_of_walls
 		&& !check_connection(frame->left.wall, frame))
 	{
-		if (frame->left.wall->top.idx >= 0)
+		if (frame->left.wall->top.type >= 0)
 		{
 			if (vec3_dot_product(frame->left.wall->top.normal,
 					plr->look_dir) < SQR2)
 			{
-				setup_frame(frame, &new_frame, frame->left.wall->top.idx);
+				setup_frame(frame, &new_frame, frame->left.wall->top.type);
 				scan_fov(home, &new_frame, plr);
 			}
 		}

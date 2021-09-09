@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 12:22:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 		{
 			if (check_if_open_portal(wall))
 			{
-				*hole = loop_through_sector(home, ray, wall->top.idx);
+				*hole = loop_through_sector(home, ray, wall->top.type);
 				break ;
 			}
 			else

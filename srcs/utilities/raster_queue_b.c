@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 12:13:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/07/07 15:09:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	add_walls(t_home *home, t_frame *frame, t_player *plr)
 	wall = home->sectors[frame->idx]->walls;
 	while (i < home->sectors[frame->idx]->nb_of_walls * 2)
 	{
-		if (wall->top.idx < 0)
+		if (wall->top.type < 0)
 		{
 			if (enqueue_to_raster(frame->transformed, &wall->top))
 				draw_queue_empty(frame, home, plr, &flag);

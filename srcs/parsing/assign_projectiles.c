@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 10:31:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 08:32:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	initialize_projectile_triangles(t_projectile *projectile)
 	projectile->bot.p[2] = (t_xyz){0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
 	if (projectile->is_active)
 	{
-		projectile->top.idx = projectile->sprite_index;
-		projectile->bot.idx = projectile->sprite_index;
+		projectile->top.type = projectile->sprite_index;
+		projectile->bot.type = projectile->sprite_index;
 	}
 	else
 	{
-		projectile->top.idx = projectile->alt_sprite_index;
-		projectile->bot.idx = projectile->alt_sprite_index;
+		projectile->top.type = projectile->alt_sprite_index;
+		projectile->bot.type = projectile->alt_sprite_index;
 	}
 	projectile->top.normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
 	projectile->bot.normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};

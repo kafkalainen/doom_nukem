@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 20:06:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 14:16:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:38:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ void	set_lighting(t_lighting *light, t_triangle *tri)
 	{
 		if (light->state == TRUE && light->diffuse_power > 0.0f)
 		{
-			if (tri->idx == -enemy0 || tri->idx == -enemy1)
+			if (tri->type == -enemy0 || tri->type == -enemy1)
 			{
 				tri->lu[0] = calculate_enemy_light_intensity(light, tri, 0);
 				tri->lu[1] = calculate_enemy_light_intensity(light, tri, 1);
 				tri->lu[2] = calculate_enemy_light_intensity(light, tri, 2);
 			}
-			else if (tri->idx == -bullet)
+			else if (tri->type == -bullet)
 				initialize_lumels(&tri->lu[0], &tri->lu[1], &tri->lu[2], 1.0f);
 			else
 			{

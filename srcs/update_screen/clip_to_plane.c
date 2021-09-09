@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 14:41:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:41:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ int	clip_against_plane(t_plane *plane, t_triangle *src,
 	check_if_inside_triangle(d[0], &loc, src, 0);
 	check_if_inside_triangle(d[1], &loc, src, 1);
 	check_if_inside_triangle(d[2], &loc, src, 2);
-	triangle1->idx = src->idx;
-	triangle2->idx = src->idx;
+	triangle1->type = src->type;
+	triangle2->type = src->type;
 	if (loc.inside == 0)
 		return (0);
 	if (loc.inside == 3)

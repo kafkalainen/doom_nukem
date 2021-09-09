@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:23:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 12:18:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ Uint32	lock_lift(t_home *home, t_sector *lift)
 	cur_wall = lift->walls;
 	while (i < lift->nb_of_walls)
 	{
-		if (cur_wall->top.idx >= 0
-			&& home->sectors[cur_wall->top.idx]->is_lift == lift->lift_dir)
+		if (cur_wall->top.type >= 0
+			&& home->sectors[cur_wall->top.type]->is_lift == lift->lift_dir)
 		{
 			portal = get_portal_by_idx(lift->idx_sector,
-					home->sectors[cur_wall->top.idx]);
+					home->sectors[cur_wall->top.type]);
 			update_heights(home, lift, cur_wall, portal);
 		}
 		cur_wall = cur_wall->next;

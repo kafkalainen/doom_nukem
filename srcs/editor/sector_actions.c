@@ -11,8 +11,8 @@ void	create_new_sector(t_sector_list **head, t_action *action)
 	new->bbox.start = vec2(0, 0);
 	new->bbox.end = vec2((0), (0));
 	new->nb_of_walls = 0;
-	new->tex_ceil = 0;
-	new->tex_floor = 0;
+	new->tex_ceil = -surf0;
+	new->tex_floor = -surf0;
 	new->light.pos.x = 0;
 	new->light.pos.y = 0;
 	new->has_light_button = 0;

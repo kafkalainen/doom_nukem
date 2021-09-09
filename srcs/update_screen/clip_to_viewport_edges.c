@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:51:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 11:42:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static void	clipper_viewport_edges(t_planes planes,
 			new_triangles = raster_queue->size;
 			current_plane++;
 		}
-		tex = get_tex(arg->view_list->array[i].idx, arg->textures);
+		tex = get_tex(arg->view_list->array[i].type, arg->textures);
 		draw_polygon(arg->buffer, arg->depth_buffer, raster_queue, tex);
 		i++;
 	}
