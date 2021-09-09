@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 13:44:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	draw_wall_bbox(t_editor_walls *wall, t_editor_sector *cur_sector,
 static void	draw_line_to_mouse_cursor(int active, t_editor_walls *wall,
 			t_editor *editor)
 {
-	if (editor->action.edit_sector && active > 0)
+	if (editor->action.create_sector == 2 && active > 0)
 	{
 		draw_line(
 			world_to_screen(
@@ -80,7 +80,7 @@ void	draw_editor_sectors(t_editor *editor)
 			left_point = left_point->next;
 		}
 		if (sector_list->idx_sector == editor->action.selected_sector
-			&& editor->action.edit_sector)
+			&& editor->action.create_sector == 2)
 			i = sector_list->nb_of_walls;
 		sector_list = sector_list->next;
 	}

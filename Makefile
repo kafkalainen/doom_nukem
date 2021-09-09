@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/09 09:32:46 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/09 13:25:05 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS = \
 	editor$(SLASH)editor_events.c \
 	editor$(SLASH)button_actions.c \
 	editor$(SLASH)editor_entity.c \
+	editor$(SLASH)editor_create_new_sector.c \
 	editor$(SLASH)event_actions.c \
 	editor$(SLASH)handle_events.c \
 	editor$(SLASH)handle_events2.c \

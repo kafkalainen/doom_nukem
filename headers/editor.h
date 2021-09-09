@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 12:49:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 13:39:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,9 +320,9 @@ void			free_all_entities(t_entity_list **head);
 ** Sector creation and manipulation
 */
 
-void			create_new_sector(t_editor_sector **head, t_action *action);
-int				handle_sector(t_editor_sector **head, t_mouse_data *mouse_data,
-					t_action *action);
+void			editor_create_new_sector(t_editor_sector **head, t_action *action);
+int				editor_new_sector_wallpoints(t_editor_sector **head,
+					t_mouse_data *mouse_data, t_action *action);
 void			edit_story(t_editor_sector *sector, t_action *action);
 
 void			editor_free_walls(t_editor_walls **head, int nbr_of_walls);

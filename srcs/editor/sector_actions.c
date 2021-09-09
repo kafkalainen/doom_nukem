@@ -1,51 +1,5 @@
 #include "../../headers/doom_nukem.h"
 
-void	create_new_sector(t_editor_sector **head, t_action *action)
-{
-	t_editor_sector	*temp;
-	t_editor_sector	*new;
-
-	new = (t_editor_sector*)malloc(sizeof(t_editor_sector));
-	if (!new)
-		error_output("Memory allocation of sector failed\n");
-	new->bbox.start = vec2(0, 0);
-	new->bbox.end = vec2((0), (0));
-	new->nb_of_walls = 0;
-	new->tex_ceil = -surf0;
-	new->tex_floor = -surf0;
-	new->light.pos.x = 0;
-	new->light.pos.y = 0;
-	new->has_light_button = 0;
-	new->has_light_source = 0;
-	new->light.intensity = 0;
-	new->light.is_linked = 0;
-	new->light.state = 0;
-	new->idx_sector = 0;
-	new->centroid = vec2(0.0f, 0.0f);
-	if (action->create_elev_button)
-		new->is_elevator = 1;
-	else
-		new->is_elevator = 0;
-	new->sector_plot = NULL;
-	new->walls = NULL;
-	new->next = NULL;
-	if (*head == NULL)
-		*head = new;
-	else
-	{
-		temp = *head;
-		while (temp->next != NULL)
-		{
-			new->idx_sector++;
-			temp = temp->next;
-		}
-		new->idx_sector++;
-		temp->next = new;
-		new->next = NULL;
-	}
-	action->selected_sector = new->idx_sector;
-}
-
 void	handle_removal(t_editor_sector *sector_list, t_action *action)
 {
 	t_editor_walls *temp;
@@ -75,28 +29,25 @@ void	editor_free_walls(t_editor_walls **head, int nbr_of_walls)
 	}
 }
 
-int		handle_sector(t_editor_sector **head, t_mouse_data *mouse_data, t_action *action)
+int		editor_new_sector_wallpoints(t_editor_sector **head,
+		t_mouse_data *mouse_data, t_action *action)
 {
 	t_editor_sector	*temp;
 
 	temp = *head;
 	while (temp != NULL && temp->idx_sector != action->selected_sector)
 		temp = temp->next;
-	printf("sectors_created_2: %d\n", temp->idx_sector);
-	if (action->edit_sector && action->delete)
+	if (action->delete)
 	{
 		handle_removal(temp, action);
 		action->delete = 0;
-		printf("out of handle removal \n");
 		return (0);
 	}
-	if (action->edit_sector && mouse_data->i_mbleft)
+	if (mouse_data->i_mbleft)
 	{
 		if (add_point_to_list(temp, mouse_data, action) == 3)
 			return (1);
 	}
-	if (action->selected_sector >= 0 && action->input_active == 14)
-		edit_story(temp, action);
 	mouse_data->i_mbleft = 0;
 	return (0);
 }

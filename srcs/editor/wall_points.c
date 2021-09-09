@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 13:34:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static int	bake_last_point(t_editor_sector *sector, t_action *action,
 		action->selected_sector = sector->idx_sector;
 		assign_sector_bbox(sector);
 		action->edit_sector = 0;
+		action->create_sector = 0;
 	}
 	return (0);
 }

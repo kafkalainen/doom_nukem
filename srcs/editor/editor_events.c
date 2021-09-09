@@ -77,7 +77,10 @@ void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 		// 	printf("Current offset x %f and y %f\n", action->offsetf.x, action->offsetf.y);
 		// }
 		if (keysym == SDLK_f)
-			action->create_sector = 1;
+		{
+			if (action->create_sector == 0)
+				action->create_sector = 1;
+		}
 		if (keysym == SDLK_g && action->grid == 0)
 			action->grid = 1;
 		else if (keysym == SDLK_g && action->grid == 1)
