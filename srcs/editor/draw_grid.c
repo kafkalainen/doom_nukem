@@ -6,23 +6,49 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 17:58:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 09:11:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
+static void	calc_cells_on_axis(t_action *action, int *start, int *cells_on_axis,
+			char axis)
+{
+	int	offset_cells;
+
+	if (action->scalarf != 0.0f)
+	{
+		*cells_on_axis = 2.0f / action->scalarf;
+		if (axis == 'x')
+			offset_cells = action->offsetf.x / action->scalarf;
+		else
+			offset_cells = action->offsetf.y / action->scalarf;
+	}
+	else
+	{
+		*cells_on_axis = 2.0f;
+		if (axis == 'x')
+			offset_cells = action->offsetf.x;
+		else
+			offset_cells = action->offsetf.y;
+	}
+	if (offset_cells >= 0)
+	{
+		*start -= offset_cells;
+	}
+	else
+		*cells_on_axis -= offset_cells;
+}
+
 static void	draw_grid_horizontal(t_buffer *buffer, t_action *action)
 {
-	unsigned int	cells_on_y_axis;
-	unsigned int	i;
-	int				val;
+	int					cells_on_y_axis;
+	int					i;
+	int					val;
 
 	i = 0;
-	if (action->scalarf != 0.0f)
-		cells_on_y_axis = 2.0f / action->scalarf;
-	else
-		cells_on_y_axis = 2.0f;
+	calc_cells_on_axis(action, &i, &cells_on_y_axis, 'y');
 	while (i <= cells_on_y_axis)
 	{
 		val = 0.5f * buffer->height * (i * action->scalarf + action->offsetf.y);
@@ -37,15 +63,12 @@ static void	draw_grid_horizontal(t_buffer *buffer, t_action *action)
 
 static void	draw_grid_vertical(t_buffer *buffer, t_action *action)
 {
-	unsigned int	cells_on_x_axis;
-	unsigned int	i;
-	int				val;
+	int					cells_on_x_axis;
+	int					i;
+	int					val;
 
 	i = 0;
-	if (action->scalarf != 0.0f)
-		cells_on_x_axis = 2.0f / action->scalarf;
-	else
-		cells_on_x_axis = 2.0f;
+	calc_cells_on_axis(action, &i, &cells_on_x_axis, 'x');
 	while (i <= cells_on_x_axis)
 	{
 		val = TOOLBAR_WIDTH + (0.5f * (buffer->width - TOOLBAR_WIDTH)
@@ -60,8 +83,8 @@ static void	draw_grid_vertical(t_buffer *buffer, t_action *action)
 
 static void	draw_axes(t_buffer *buffer, t_action *action)
 {
-	t_xy			origo;
-	t_plx_modifier	mod;
+	t_xy				origo;
+	t_plx_modifier		mod;
 
 	mod.size = 3;
 	mod.len = 1;
