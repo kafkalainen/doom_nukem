@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/10 18:27:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 21:25:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,8 +298,9 @@ void			close_editor_wall_list(t_editor_walls **head);
 /*
 **				Validity checks
 */
-
 void			close_editor_wall_list(t_editor_walls **head);
+t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
+					t_screen_xy c, t_screen_xy b);
 void			remove_last_point(t_editor_walls **walls, int *nb_of_walls,
 					int selected_point);
 int				check_for_last_point(t_editor_sector *sector, t_action *action);
