@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 19:23:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 19:25:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	edit_wall_ruleset(int *keysym, unsigned char **string)
 	if (*keysym == SDLK_SLASH || *keysym == SDLK_MINUS)
 	{
 		*keysym = '-';
-		printf("vittu\n");
 		return (true);
 	}
 	if (!ft_isdigit(*keysym))
