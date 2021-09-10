@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 14:59:12 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 18:38:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 15:08:09 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Uint32	ft_adler32(unsigned char *data, ssize_t size)
 	i = 0;
 	a = 0;
 	b = 0;
-	while (i < size && data[i] != '\0')
+	while (i < size)
 	{
 		a = (a + data[i]) % MOD_ADLER;
 		b = (b + a) % MOD_ADLER;
