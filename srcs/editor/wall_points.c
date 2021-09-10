@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 16:19:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 16:59:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ static int	add_last_point(t_editor_sector **head, t_editor_sector *sector,
 			return (3);
 		}
 		assign_sector_bbox(sector);
-		if (check_if_another_sector_is_inside(sector, head))
-		{
-			ft_putendl("ERROR: Another sector inside");
-			return (3);
-		}
+		// if (check_if_another_sector_is_inside(sector, head))
+		// {
+		// 	ft_putendl("ERROR: Another sector inside");
+		// 	return (3);
+		// }
 		sector->centroid = calculate_centroid(sector);
 		editor_sort_wall_vertices(sector);
 		action->create_sector = idle;
