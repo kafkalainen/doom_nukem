@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 14:09:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 09:38:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ t_xyz		multi_vec_matrix(t_xyz *src, t_m4x4 *x);
 t_xy		vec2(float x, float y);
 t_xy		vec2_add(t_xy a, t_xy b);
 float		vec2_ang(t_xy a, t_xy b);
+float		vec2_ang_simple(t_xy a, t_xy b);
 float		vec2_cross(t_xy a, t_xy b);
 t_xy		vec2_dec(t_xy a, t_xy b);
 t_xy		vec2_div(t_xy a, float scalar);

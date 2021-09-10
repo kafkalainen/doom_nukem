@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 15:13:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 09:13:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 10:15:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static t_bool	compare_points(t_editor_walls *wall, t_editor_walls *next)
 {
-	if (wall->center_angle < next->center_angle)
+	if (wall->center_angle > next->center_angle)
 		return (true);
 	else
 	{
 		if (wall->center_angle == next->center_angle
-			&& wall->dist_from_center < next->dist_from_center)
+			&& wall->dist_from_center > next->dist_from_center)
 			return (true);
 	}
 	return (false);
@@ -29,18 +29,20 @@ static void	calculate_angles_and_distances(t_editor_sector *sector)
 {
 	int				i;
 	t_editor_walls	*cur_wall;
-	t_xy			y_axis;
 
 	cur_wall = sector->walls;
-	y_axis = vec2(0.0f, 1.0f);
+	i = 0;
 	while (i < sector->nb_of_walls)
 	{
-		cur_wall->centroid_vec = vec2_add(sector->centroid, vec2(cur_wall->x0.x,
-			cur_wall->x0.y));
+		cur_wall->centroid_vec = vec2_dec(vec2(cur_wall->x0.x,
+			cur_wall->x0.y), sector->centroid);
+		cur_wall->dist_from_center = vec2_mag(cur_wall->centroid_vec);
 		cur_wall->centroid_vec = vec2_unit_vector(cur_wall->centroid_vec);
-		cur_wall->center_angle = vec2_ang(cur_wall->centroid_vec, y_axis);
-		cur_wall->dist_from_center = vec2_eucl_dist(sector->centroid, vec2(cur_wall->x0.x,
-			cur_wall->x0.y));
+		cur_wall->center_angle = atan2f(cur_wall->centroid_vec.y, cur_wall->centroid_vec.x);
+		if (cur_wall->center_angle < 0.0f)
+			cur_wall->center_angle = TWO_PI + cur_wall->center_angle;
+		if (cur_wall->center_angle == TWO_PI)
+			cur_wall->center_angle = 0.0f;
 		cur_wall = cur_wall->next;
 		i++;
 	}
@@ -57,14 +59,16 @@ static void	sort_list(t_editor_walls **head, int nb_of_walls)
 		return ;
 	current = *head;
 	i = 0;
-	while (i < nb_of_walls)
+	while (i < nb_of_walls - 1)
 	{
 		j = 0;
 		index = current->next;
 		while (j < nb_of_walls)
 		{
 			if (compare_points(current, index))
+			{
 				swap_node_data(current, index);
+			}
 			index = index->next;
 			j++;
 		}
@@ -73,8 +77,27 @@ static void	sort_list(t_editor_walls **head, int nb_of_walls)
 	}
 }
 
+void	print_wall_points(t_editor_walls *head, int nb_of_walls)
+{
+	int	i;
+	t_editor_walls *temp;
+
+	i = 0;
+	temp = head;
+	while (i < nb_of_walls)
+	{
+		printf("idx %d x %d y %d\n", temp->idx, temp->x0.x, temp->x0.y);
+		temp = temp->next;
+		i++;
+	}
+}
+
 void	editor_sort_wall_vertices(t_editor_sector *sector)
 {
 	calculate_angles_and_distances(sector);
+	ft_putendl("ORIGINAL");
+	print_wall_points(sector->walls, sector->nb_of_walls);
 	sort_list(&sector->walls, sector->nb_of_walls);
+	ft_putendl("SWAPPED");
+	print_wall_points(sector->walls, sector->nb_of_walls);
 }

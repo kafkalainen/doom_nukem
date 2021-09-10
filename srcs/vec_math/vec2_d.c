@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 11:36:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 14:12:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 09:38:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,9 @@ t_xy	vec2_div(t_xy a, float scalar)
 		a.y * scalar,
 		1.0f
 	});
+}
+
+float	vec2_ang_simple(t_xy a, t_xy b)
+{
+	return (acosf(vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b))));
 }
