@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 23:17:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 13:30:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,42 @@ int	get_color_from_action_data(int i, t_action *action, int end_sector)
 	return (get_color(white));
 }
 
-void	draw_wall_textfields(t_editor_walls *wall, t_buffer *buffer, t_texture **textures)
+static void	draw_wall_info(t_editor_walls *wall, t_buffer *buffer)
 {
 	t_plx_modifier	mod;
 	char			*temp;
-	t_box			box;
-	float			scale;
-	t_texel			*tex;
 
-	if (!wall)
-		return ;
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
 	temp = ft_itoa(wall->idx);
 	mod.len = ft_strlen(temp);
 	ft_str_pxl(buffer, vec2(165, 56), temp, mod);
 	ft_strdel(&temp);
+	temp = ft_itoa(wall->height.ceiling);
+	mod.len = ft_strlen(temp);
+	ft_str_pxl(buffer, vec2(255, 258), temp, mod);
+	ft_strdel(&temp);
+	temp = ft_itoa(wall->height.ground);
+	mod.len = ft_strlen(temp);
+	ft_str_pxl(buffer, vec2(255, 288), temp, mod);
+	ft_strdel(&temp);
+}
+
+void	draw_wall_textfields(t_editor_walls *wall, t_buffer *buffer, t_texture **textures)
+{
+	t_box			box;
+	float			scale;
+	t_texel			*tex;
+
+	if (!wall)
+		return ;
+	
 	box.start = vec2(32, 110);
 	box.end = vec2(132, 220);
 	tex = get_tex(wall->type, textures);
 	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 	draw_image(box.start, tex, buffer, scale);
+	draw_wall_info(wall, buffer);
 }
 
 void	draw_buttons(t_editor *editor, int end_sector, t_texture **textures)
