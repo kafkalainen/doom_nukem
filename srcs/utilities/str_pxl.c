@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 13:13:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 17:40:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static t_pxl_c	letter_logic(int c, int letter_colour)
 	if (c >= '0' && c <= '9')
 		return (pxl_numbers(c, get_color(black), letter_colour));
 	if (c == ':' || c == '\'' || c == '!' || c == '?' || c == ' '
-		|| c == '.' || c == ',' || c == '(' || c == ')' || c == '%')
+		|| c == '.' || c == ',' || c == '(' || c == ')' || c == '%'
+		|| c == '-')
 		return (pxl_numbers(c, get_color(black), letter_colour));
 	return (pxl_numbers(' ', get_color(black), letter_colour));
 }
