@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 11:31:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 19:32:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 void	link_maps(t_action *action, unsigned char **linked_mapname,
 		char **map_names)
 {
+	if (*linked_mapname)
+	{
+		free(*linked_mapname);
+		*linked_mapname = NULL;
+	}
 	*linked_mapname = (unsigned char *)ft_strjoin("./map_files/",
 						map_names[action->option]);
 	action->link_maps = 0;
