@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 14:26:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 17:24:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,33 @@ t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
 	return (NULL);
 }
 
-// void	editor_edit_wall(t_editor_walls *wall, t_action *action)
-// {
-// 	if (action->edit_ceiling_height)
-	
-// }
+void	editor_edit_wall(t_editor_walls *wall, t_action *action, t_editor_sector *sector)
+{
+	unsigned char	*temp;
+	(void)sector;
+	if (action->edit_ceiling_height)
+	{
+		temp = (unsigned char *)ft_itoa(wall->height.ceiling);
+		read_input_string(&temp, action);
+		if (temp == NULL)
+			wall->height.ceiling = 0;
+		else
+			wall->height.ceiling = ft_atoi((const char *)temp);
+		if (temp != NULL)
+			ft_strdel((char **)&temp);
+		if (wall->height.ceiling > 99)
+			wall->height.ceiling = 99;
+		if (wall->height.ceiling < -99)
+			wall->height.ceiling = -99;
+		
+		if (!action->input_active)
+		{
+			action->edit_wall = 0;
+			action->edit_ceiling_height = 0;
+		}
+		
+	}
+}
 
 int		handle_events(t_editor *editor, t_home *home)
 {
@@ -68,8 +90,8 @@ int		handle_events(t_editor *editor, t_home *home)
 		unlink_selected_entity(&editor->entity_list,
 			editor->action.selected_entity, &editor->action.unlink_entity);
 	}
-	// if (editor->action.edit_wall && editor->temp_wall != NULL)
-	// 	editor_edit_wall(editor->temp_wall, &editor->action);
+	if (editor->action.edit_wall && editor->temp_wall != NULL && editor->temp_sector != NULL)
+		editor_edit_wall(editor->temp_wall, &editor->action, editor->temp_sector);
 	if (editor->action.create_sector == allocate)
 	{
 		editor_create_new_sector(&editor->sector_list, &editor->action);
