@@ -154,6 +154,7 @@ typedef struct s_player
 	int				plot_state;
 	int				active_inv;
 	int				enemy_sighted;
+	int				controls_enabled;
 	Uint32			time;
 	Uint32			message_time;
 	Uint32			display_object;

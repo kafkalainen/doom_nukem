@@ -47,6 +47,7 @@ static void	initialize_player_game_states(t_player *plr)
 	plr->dead = 0;
 	plr->reload = 0;
 	plr->recharge = 0;
+	plr->controls_enabled = 1;
 }
 
 static void	initialize_input_values(t_input *input)

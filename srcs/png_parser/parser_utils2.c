@@ -14,7 +14,7 @@
 
 void	parse_png(t_png *png)
 {
-	validate_signature(png->source.buf);
+	//validate_signature(png->source.buf);
 	parse_data(png);
 	decode_png(png);
 }

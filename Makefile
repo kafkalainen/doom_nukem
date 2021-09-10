@@ -37,6 +37,10 @@ SRCS = \
 	editor$(SLASH)sector_actions.c \
 	editor$(SLASH)sector_properties.c \
 	editor$(SLASH)editor_load_map.c \
+	editor$(SLASH)editor_load_map2.c \
+	editor$(SLASH)editor_load_map3.c \
+	editor$(SLASH)editor_load_map4.c \
+	editor$(SLASH)editor_load_map5.c \
 	editor$(SLASH)get_ndc.c \
 	editor$(SLASH)draw_grid.c \
 	editor$(SLASH)draw_editor_sectors.c \

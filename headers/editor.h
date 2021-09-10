@@ -304,6 +304,7 @@ int				check_for_last_point(t_editor_sector *sector,
 int				check_for_intersecting_lines(t_editor_sector *sector,
 					t_screen_xy p0, t_screen_xy p1);
 int				check_if_non_convex(t_editor_sector *sector);
+
 /*
 ** Entities
 */
@@ -325,8 +326,10 @@ void			free_all_entities(t_entity_list **head);
 /*
 ** Sector creation and manipulation
 */
+
 t_xy			calculate_centroid(t_editor_sector *sector);
-void			editor_create_new_sector(t_editor_sector **head, t_action *action);
+void			editor_create_new_sector(t_editor_sector **head,
+				t_action *action);
 int				editor_new_sector_wallpoints(t_editor_sector **head,
 					t_mouse_data *mouse_data, t_action *action);
 void			editor_sort_wall_vertices(t_editor_sector *sector);
@@ -339,6 +342,7 @@ void			editor_free_selected_sector(t_editor_sector **head,
 /*
 ** Editor map loading stuff
 */
+
 t_xy			get_ndc(t_buffer *buffer, t_screen_xy coord);
 void			init_actions(t_action *action);
 void			init_mouse_data(t_mouse_data *mouse_data);
@@ -357,5 +361,35 @@ t_xy			world_to_screen(t_xy x0, float scalarf, t_xy offsetf,
 t_xy			ndc_to_world(t_xy ndc, t_xy offset, float scalar);
 float			ft_roundf_to_grid(float nb, int prec);
 int				editor_select_entity_tex(Uint32 type);
+void			free_walls(t_editor_walls **head, int nbr_of_walls);
+
+int				editor_get_sector_data(unsigned char *buf,
+				unsigned int *pos, ssize_t size, t_editor_sector **head);
+void			reload_editor_with_defaults(t_editor *editor, char *path);
+int				editor_parse_map_name(t_editor *editor, ssize_t size,
+				unsigned char *buf, unsigned int **pos);
+int				editor_get_map_header(unsigned int *pos, unsigned char *buf,
+				t_editor *editor, ssize_t size);
+int				editor_get_player_position(unsigned int *pos,
+				unsigned char *buf, t_plr_pos *plr, ssize_t size);
+int				editor_parse_vertex_data(t_editor_sector *new,
+				unsigned char *buf, unsigned int *pos, ssize_t size);
+t_editor_walls	*editor_new_point(t_point_data *data);
+int				editor_parse_coordinates(t_point_data *data,
+				unsigned int ***pos, unsigned char **buf, ssize_t size);
+int				editor_add_points(t_editor_sector *sector,
+				unsigned char *buf, unsigned int **pos, ssize_t size);
+int				editor_parse_light_data(t_editor_sector *new,
+				unsigned char *buf, unsigned int *pos, ssize_t size);
+char			*editor_get_next_string(unsigned char *buf,
+				unsigned int **pos, ssize_t size);
+int				editor_parse_story_data(t_editor_sector *new,
+				unsigned char *buf, unsigned int *pos, ssize_t size);
+int				editor_parse_sector_data(t_editor *editor, unsigned char *buf,
+				ssize_t size);
+int				editor_check_entity_data_header(unsigned char **buf,
+				unsigned int *pos, ssize_t size);
+int				editor_get_entity_data(unsigned char *buf,
+				t_entity_list *entity, unsigned int *pos, ssize_t size);
 
 #endif
