@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/10 21:25:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 21:30:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ typedef struct s_mouse_data
 
 typedef struct s_editor_walls
 {
-	unsigned char			*int_string;
 	t_screen_xy				x0;
 	t_screen_xy				norm;
 	t_xy					centroid_vec;
@@ -221,6 +220,9 @@ typedef struct s_editor
 	t_editor_sector			*temp_sector;
 	t_editor_walls			*temp_wall;
 	char					**map_names;
+	unsigned char			*int_string;
+	unsigned char			*mapname;
+	unsigned char			*linked_mapname;
 	t_mouse_data			mouse_data;
 	t_buffer				buffer;
 	t_window				win;
@@ -228,8 +230,7 @@ typedef struct s_editor
 	t_plr_pos				plr;
 	int						grid_size;
 	int						end_sector;
-	unsigned char			*mapname;
-	unsigned char			*linked_mapname;
+
 }					t_editor;
 
 // SDL DRAWING STUFF
