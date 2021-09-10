@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 12:20:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 13:16:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void	write_message(t_buffer *buffer, t_player *plr, char *msg,
 
 	percentage = 1.0f - ((plr->message_time - plr->time - 5000) * 0.0002f);
 	mod->len = (size_t)(ft_strlen(msg) * percentage);
-	ft_str_pxl(buffer,vec2(100, SCREEN_HEIGHT - 30),
-		msg, *mod);
+	ft_str_pxl(buffer, vec2(100, SCREEN_HEIGHT - 30), msg, *mod);
 }
 
 void	draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr)

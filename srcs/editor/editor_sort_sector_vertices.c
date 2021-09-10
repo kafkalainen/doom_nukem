@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 15:13:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 10:15:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 13:10:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,27 +77,22 @@ static void	sort_list(t_editor_walls **head, int nb_of_walls)
 	}
 }
 
-void	print_wall_points(t_editor_walls *head, int nb_of_walls)
-{
-	int	i;
-	t_editor_walls *temp;
-
-	i = 0;
-	temp = head;
-	while (i < nb_of_walls)
-	{
-		printf("idx %d x %d y %d\n", temp->idx, temp->x0.x, temp->x0.y);
-		temp = temp->next;
-		i++;
-	}
-}
-
+// PRINT
+// void	print_wall_points(t_editor_walls *head, int nb_of_walls)
+// {
+// 	int	i;
+// 	t_editor_walls *temp;
+// 	i = 0;
+// 	temp = head;
+// 	while (i < nb_of_walls)
+// 	{
+// 		printf("idx %d x %d y %d\n", temp->idx, temp->x0.x, temp->x0.y);
+// 		temp = temp->next;
+// 		i++;
+// 	}
+// }
 void	editor_sort_wall_vertices(t_editor_sector *sector)
 {
 	calculate_angles_and_distances(sector);
-	ft_putendl("ORIGINAL");
-	print_wall_points(sector->walls, sector->nb_of_walls);
 	sort_list(&sector->walls, sector->nb_of_walls);
-	ft_putendl("SWAPPED");
-	print_wall_points(sector->walls, sector->nb_of_walls);
 }
