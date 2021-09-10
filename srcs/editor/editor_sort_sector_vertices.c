@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 15:13:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 17:04:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 08:39:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,39 +46,35 @@ static void	calculate_angles_and_distances(t_editor_sector *sector)
 	}
 }
 
-void	editor_sort_wall_vertices(t_editor_sector *sector)
+static void	sort_list(t_editor_walls **head, int nb_of_walls)
 {
 	int				i;
 	int				j;
-	t_editor_walls	*swap;
-	t_editor_walls	*head;
-	t_editor_walls	*temp;
-	t_editor_walls	*temp2;
+	t_editor_walls	*current;
+	t_editor_walls	*index;
 
-	calculate_angles_and_distances(sector);
-	temp = sector->walls;
-	temp2 = sector->walls;
-	head = sector->walls;
-	j = 0;
-	while (j < sector->nb_of_walls)
+	if (!*head)
+		return ;
+	current = *head;
+	i = 0;
+	while (i < nb_of_walls)
 	{
-		i = 0;
-		temp = temp2;
-		while (i < sector->nb_of_walls && compare_points(temp, temp->next))
+		j = 0;
+		index = current->next;
+		while (j < nb_of_walls)
 		{
-			temp = temp->next;
-			i++;
-		}
-		if (i != sector->nb_of_walls)
-		{
-			swap = temp->next;
-			temp->next = temp;
-			temp = swap;
-		}
-		else
-		{
-			temp2 = temp2->next;
+			if (compare_points(current, index))
+				swap_node_data(current, index);
+			index = index->next;
 			j++;
 		}
+		i++;
+		current = current->next;
 	}
+}
+
+void	editor_sort_wall_vertices(t_editor_sector *sector)
+{
+	calculate_angles_and_distances(sector);
+	sort_list(&sector->walls, sector->nb_of_walls);
 }

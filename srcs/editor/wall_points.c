@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 17:10:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 08:59:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	bake_last_point(t_editor_sector *sector, t_action *action,
 		action->selected_sector = sector->idx_sector;
 		assign_sector_bbox(sector);
 		sector->centroid = calculate_centroid(sector);
-		// editor_sort_wall_vertices(sector);
+		editor_sort_wall_vertices(sector);
 		action->create_sector = idle;
 	}
 	return (0);
@@ -92,7 +92,7 @@ int	add_point_to_list(t_editor_sector *sector, t_mouse_data *data,
 	t_screen_xy		new_coord;
 
 	point = NULL;
-	new_coord = (t_screen_xy){ft_roundf(action->world_pos.x, 0), ft_roundf(action->world_pos.y, 0)};
+	new_coord = round_coordinates(action->world_pos);
 	if (sector == NULL)
 		return (1);
 	if (sector->nb_of_walls > 1 && check_for_last_point(sector, data, action))

@@ -92,6 +92,9 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_bu
 		action->mouse_pos = get_ndc(buffer, pos);
 		action->world_pos = ndc_to_world(action->mouse_pos, action->offsetf,
 			action->scalarf);
+		// printf("World coordinate is x %f, y %f\n", action->world_pos.x, action->world_pos.y);
+		// t_screen_xy round = round_coordinates(action->world_pos);
+		// printf("Rounded coordinate is x %d, y %d\n", round.x, round.y);
 	}
 	if (e->type == SDL_MOUSEWHEEL && e->wheel.y > 0 && action->scalarf < ZOOM_IN_MAX)
 		mouse_zoom(action, 1);

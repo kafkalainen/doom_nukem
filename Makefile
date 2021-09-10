@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/09 16:19:09 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/10 08:59:44 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -192,10 +192,12 @@ SRCS = \
 	utilities$(SLASH)raster_queue_a.c \
 	utilities$(SLASH)raster_queue_b.c \
 	utilities$(SLASH)raster_queue_c.c \
+	utilities$(SLASH)round_coordinates.c \
 	utilities$(SLASH)setup.c \
 	utilities$(SLASH)str_pxl.c \
 	utilities$(SLASH)system_calls.c \
 	utilities$(SLASH)swap_and_sort.c \
+	utilities$(SLASH)swap_node_data.c \
 	utilities$(SLASH)init_skybox.c \
 	utilities$(SLASH)init_hud_elements.c \
 	vec_math$(SLASH)vec2_a.c \
