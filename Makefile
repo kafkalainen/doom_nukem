@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/10 08:59:44 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/10 16:08:31 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ SRCS = \
 	editor$(SLASH)calculate_centroid.c \
 	editor$(SLASH)check_if_non_convex.c \
 	editor$(SLASH)check_for_intersecting_lines.c \
+	editor$(SLASH)check_all_sectors_for_intersecting_lines.c \
+	editor$(SLASH)check_if_another_sector_is_inside.c \
 	editor$(SLASH)draw_buttons.c \
 	editor$(SLASH)draw_editor_sector_bbox.c \
 	editor$(SLASH)draw_editor_entities.c \

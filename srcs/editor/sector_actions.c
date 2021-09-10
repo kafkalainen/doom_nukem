@@ -45,8 +45,12 @@ int		editor_new_sector_wallpoints(t_editor_sector **head,
 	}
 	if (mouse_data->i_mbleft)
 	{
-		if (add_point_to_list(temp, mouse_data, action) == 3)
+		if (add_point_to_list(head, temp, action) == 3)
+		{
+			action->delete = true;
+			action->create_sector = idle;
 			return (1);
+		}
 	}
 	mouse_data->i_mbleft = 0;
 	return (0);

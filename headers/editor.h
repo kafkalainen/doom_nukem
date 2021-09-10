@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/10 12:49:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 16:04:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,8 @@ void			wall_button_actions(t_action *action, int i);
 void			sector_button_actions(t_action *action, int i);
 t_bool			check_bbox(t_xy start, t_xy end, t_xy click);
 t_bool			check_bbox_ui(t_xy start, t_xy end, t_xy click);
+t_bool			check_if_another_sector_is_inside(t_editor_sector *tested,
+					t_editor_sector **head);
 
 /*
 ** Event handler and event related
@@ -288,7 +290,7 @@ int				clicked_inside_ui(int x, int y, int height, int width);
 */
 t_editor_walls	*new_wall_point(t_screen_xy world_coord);
 void			add_point_end(t_editor_walls **point, t_editor_walls *new);
-int				add_point_to_list(t_editor_sector *sector, t_mouse_data *data,
+int				add_point_to_list(t_editor_sector **head, t_editor_sector *sector,
 					t_action *action);
 void			close_editor_wall_list(t_editor_walls **head);
 
@@ -299,9 +301,10 @@ void			close_editor_wall_list(t_editor_walls **head);
 void			close_editor_wall_list(t_editor_walls **head);
 void			remove_last_point(t_editor_walls **walls, int *nb_of_walls,
 					int selected_point);
-int				check_for_last_point(t_editor_sector *sector,
-					t_mouse_data *data, t_action *action);
+int				check_for_last_point(t_editor_sector *sector, t_action *action);
 int				check_for_intersecting_lines(t_editor_sector *sector,
+					t_screen_xy p0, t_screen_xy p1);
+t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,
 					t_screen_xy p0, t_screen_xy p1);
 int				check_if_non_convex(t_editor_sector *sector);
 
