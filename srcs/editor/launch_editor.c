@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 18:48:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 15:22:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	init_actions(t_action *action)
 	action->link_entity = 0;
 	action->prev_entity = -1;
 	action->edit_sector = idle;
-	action->input_active = -1;
+	action->input_active = 0;
 	action->keysym = -1;
 	action-> move = 0;
 	action->link_maps = 0;

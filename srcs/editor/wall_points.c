@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 09:14:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 16:59:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ void	close_editor_wall_list(t_editor_walls **head)
 	temp->next = *head;
 }
 
-int	check_for_last_point(t_editor_sector *sector, t_mouse_data *data,
-	t_action *action)
+int	check_for_last_point(t_editor_sector *sector, t_action *action)
 {
 	t_xy		mouse;
 	double		dist;
 
-	(void)data;
 	mouse = vec2(action->world_pos.x, action->world_pos.y);
 	dist = sqrt(pow(fabs(sector->walls->x0.x - mouse.x), 2.0f) +
 		pow(fabs(sector->walls->x0.y - mouse.y), 2.0f));
@@ -60,24 +58,29 @@ void	remove_last_point(t_editor_walls **walls, int *nb_of_walls,
 	return ;
 }
 
-static int	bake_last_point(t_editor_sector *sector, t_action *action,
-			t_editor_walls *point)
+static int	add_last_point(t_editor_sector **head, t_editor_sector *sector,
+			t_action *action, t_editor_walls *point)
 {
 	point = sector->walls;
 	while (point && point->next)
 		point = point->next;
-	if (check_for_intersecting_lines(sector, point->x0, sector->walls->x0))
+	if (check_all_sectors_for_intersecting_lines(head, point->x0, sector->walls->x0))
 		ft_putendl("ERROR: Cannot close sector, lines intersecting.");
 	else
 	{
 		close_editor_wall_list(&sector->walls);
+		action->selected_sector = sector->idx_sector;
 		if (check_if_non_convex(sector))
 		{
 			ft_putendl("ERROR: Non-convex sector.");
 			return (3);
 		}
-		action->selected_sector = sector->idx_sector;
 		assign_sector_bbox(sector);
+		// if (check_if_another_sector_is_inside(sector, head))
+		// {
+		// 	ft_putendl("ERROR: Another sector inside");
+		// 	return (3);
+		// }
 		sector->centroid = calculate_centroid(sector);
 		editor_sort_wall_vertices(sector);
 		action->create_sector = idle;
@@ -104,8 +107,7 @@ float	ft_roundf_to_grid(float nb, int prec)
 	return (nb);
 }
 
-int	add_point_to_list(t_editor_sector *sector, t_mouse_data *data,
-	t_action *action)
+int	add_point_to_list(t_editor_sector **head, t_editor_sector *sector, t_action *action)
 {
 	t_editor_walls	*point;
 	t_screen_xy		new_coord;
@@ -114,12 +116,12 @@ int	add_point_to_list(t_editor_sector *sector, t_mouse_data *data,
 	new_coord = round_coordinates(action->world_pos);
 	if (sector == NULL)
 		return (1);
-	if (sector->nb_of_walls > 1 && check_for_last_point(sector, data, action))
-		return (bake_last_point(sector, action, point));
+	if (sector->nb_of_walls > 1 && check_for_last_point(sector, action))
+		return (add_last_point(head, sector, action, point));
 	point = sector->walls;
 	while (point && point->next)
 		point = point->next;
-	if (point && check_for_intersecting_lines(sector, point->x0, new_coord))
+	if (point && check_all_sectors_for_intersecting_lines(head, point->x0, new_coord))
 		ft_putendl("ERROR: Cannot put down the point, intersecting with other lines.");
 	else
 	{

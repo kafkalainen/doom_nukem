@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:25:29 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 18:37:40 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 15:22:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	save_editor_map(t_editor *editor, t_home *home)
 {
 	if (editor->mapname == NULL || editor->action.input_active || !editor->action.map_name_set)
 		read_input_string(&editor->mapname, &editor->action);
-	if (editor->action.input_active == -1 || editor->action.map_name_set)
+	if (!editor->action.input_active || editor->action.map_name_set)
 	{
 		if (!editor->action.map_name_set && editor->mapname != NULL)
 		{

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/10 14:29:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 15:40:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,27 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 	}
 }
 
+void	draw_wall_input(t_editor_walls *wall, t_buffer *buffer, t_action *action)
+{
+	char			*temp;
+	t_plx_modifier	mod;
+	int				midpoint;
+
+	mod.colour = get_color(orange);
+	mod.size = TEXT_SIZE;
+	midpoint = (buffer->width * 0.5) - 100;
+	if (action->edit_ceiling_height)
+	{
+		mod.len = 45;
+		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Input new ceiling height using number keys:", mod);
+		temp = ft_itoa(wall->height.ceiling);
+		mod.len = ft_strlen(temp) + 1;
+		mod.colour = get_color(white);
+		ft_str_pxl(buffer, vec2(midpoint - 100, 70), temp, mod);
+	}
+	
+}
+
 void	draw_ui(t_editor *editor, t_texture **textures)
 {
 	t_editor_sector	*temp;
@@ -289,4 +310,6 @@ void	draw_ui(t_editor *editor, t_texture **textures)
 		draw_input_string(editor->mapname, &editor->buffer, (editor->buffer.width * 0.5), map_saving);
 	if (editor->action.open_file || editor->action.link_maps)
 		update_editor_load_menu(&editor->buffer, &editor->action, editor->map_names);
+	if (editor->action.edit_wall)
+		draw_wall_input(editor->temp_wall, &editor->buffer, &editor->action);
 }

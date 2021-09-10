@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 17:24:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 17:51:44 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,12 @@ int		handle_events(t_editor *editor, t_home *home)
 		editor->action.create_sector++;
 	}
 	if (editor->action.create_sector == user_input)
-		editor_new_sector_wallpoints(&editor->sector_list,
-			&editor->mouse_data, &editor->action);
+	{
+		if (editor_new_sector_wallpoints(&editor->sector_list,
+			&editor->mouse_data, &editor->action))
+			editor_free_selected_sector(&editor->sector_list,
+				&editor->entity_list, &editor->action);
+	}
 	if (editor->action.save_file)
 		save_editor_map(editor, home);
 	if (editor->action.create_entity == user_input)
@@ -116,14 +120,14 @@ int		handle_events(t_editor *editor, t_home *home)
 			check_ui_events(editor->mouse_data.x, editor->mouse_data.y,
 				&editor->button_list, &editor->action);
 			editor->mouse_data.i_mbleft = 0;
-		}		
+		}
 		else if (clicked_inside_grid(editor->mouse_data.x, editor->mouse_data.y,
 				editor->buffer.height, editor->buffer.width))
 		{
 			check_grid_events(editor);
 			editor->mouse_data.i_mbleft = 0;
 		}
-			
+
 	}
 	if (editor->action.link_maps == 2)
 		link_maps(&editor->action, &editor->linked_mapname, editor->map_names);

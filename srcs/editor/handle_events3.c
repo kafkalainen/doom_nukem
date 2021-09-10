@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 14:26:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 17:23:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,33 @@ unsigned char	*delete_char_from_string(unsigned char **string)
 	return (temp);
 }
 
-int	save_mapname_ruleset(int keysym, int prev_keysym, unsigned char **string)
+int	save_mapname_ruleset(int keysym, unsigned char **string)
 {
-	if (prev_keysym == SDLK_RSHIFT && keysym == SDLK_RETURN)
-		return (FALSE);
 	if (ft_isspace(keysym))
-		return (FALSE);
+		return (false);
 	if (!ft_isalnum(keysym))
-		return (FALSE);
+		return (false);
 	if (*string != NULL && ft_strlen((const char *)*string) > MAX_FILE_NAME_LENGTH)
-		return (FALSE);
-	return (TRUE);
+		return (false);
+	return (true);
+}
+
+int	edit_wall_ruleset(int keysym, unsigned char **string)
+{
+	if (keysym == SDLK_MINUS || keysym == SDLK_SLASH)
+	{
+		if (*string)
+		{
+			free(*string);
+			*string = (unsigned char *)ft_strdup("-1");
+		}
+		return (false);
+	}
+	if (!ft_isdigit(keysym))
+		return (false);
+	if (*string != NULL && ft_strlen((const char *)*string) > 2)
+		return (false);
+	return (true);
 }
 
 void	read_input_string(unsigned char **string, t_action *action)
@@ -66,7 +82,12 @@ void	read_input_string(unsigned char **string, t_action *action)
 
 	if (action->keysym == SDLK_BACKSPACE && *string != NULL)
 		*string = delete_char_from_string(string);
-	if (action->save_file && !save_mapname_ruleset(action->keysym, action->prev_keysym, string))
+	if (action->save_file && !save_mapname_ruleset(action->keysym, string))
+	{
+		action->keysym = -1;
+		return ;
+	}
+	if (action->edit_wall && !edit_wall_ruleset(action->keysym, string))
 	{
 		action->keysym = -1;
 		return ;

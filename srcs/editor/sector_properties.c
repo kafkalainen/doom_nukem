@@ -5,7 +5,7 @@ void	edit_story(t_editor_sector *sector, t_action *action)
 	// char	temp;
 	char 	c[2];
 
-	if (action->input_active >= 0 && action->keysym >= 48 && action->keysym <= 128)
+	if (action->input_active && action->keysym >= 48 && action->keysym <= 128)
 	{
 		c[0] = action->keysym;
 		c[1] = '\0';
