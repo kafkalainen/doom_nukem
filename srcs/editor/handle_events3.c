@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 18:49:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 19:23:53 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ void	read_input_string(unsigned char **string, t_action *action)
 		action->keysym = -1;
 		return ;
 	}
-		
-	// ruleset for map name
 	// ruleset for plot strings
-	// ruleset for number input
 	if (action->input_active)
 	{
 		c = action->keysym;

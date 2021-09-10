@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 19:00:55 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 19:21:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,33 @@ void	editor_edit_wall(t_editor_walls *wall, t_action *action, t_editor_sector *s
 			if (wall->int_string)
 				free(wall->int_string);
 			wall->int_string = NULL;
-			action->edit_wall = 0;
-			
 		}
 	}
-	if (action->edit_floor_height)
+	if (action->change_wall_texture)
 	{
-
+		if (wall->type == -wall0)
+			wall->type = -wall1;
+		else if (wall->type == -wall1)
+			wall->type = -wall2;
+		else if (wall->type == -wall2)
+			wall->type = -wall3;
+		else if (wall->type == -wall3)
+			wall->type = -wall4;
+		else if (wall->type == -wall4)
+			wall->type = -wall5;
+		else if (wall->type == -wall5)
+			wall->type = -wall6;
+		else if (wall->type == -wall6)
+			wall->type = -wall7;
+		else if (wall->type == -wall7)
+			wall->type = -wall8;
+		else if (wall->type == -wall8)
+			wall->type = -wall9;
+		else if (wall->type == -wall9)
+			wall->type = -wall0;
+		action->change_wall_texture = 0;
 	}
+	action->edit_wall = 0;
 }
 
 int		handle_events(t_editor *editor, t_home *home)
