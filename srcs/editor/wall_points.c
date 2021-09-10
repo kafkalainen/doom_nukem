@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 08:59:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 09:14:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,25 @@ static int	bake_last_point(t_editor_sector *sector, t_action *action,
 		action->create_sector = idle;
 	}
 	return (0);
+}
+
+float	ft_roundf_to_grid(float nb, int prec)
+{
+	long double	fraction;
+
+	if (prec < 0)
+		return (nb);
+	fraction = 0.5;
+	while (prec)
+	{
+		fraction = fraction * 0.1;
+		prec--;
+	}
+	if (nb > 0)
+		nb += fraction;
+	else
+		nb -= fraction;
+	return (nb);
 }
 
 int	add_point_to_list(t_editor_sector *sector, t_mouse_data *data,

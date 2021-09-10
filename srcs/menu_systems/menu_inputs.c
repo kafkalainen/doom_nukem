@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/08 18:19:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/09 23:34:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	update_main_menu(t_buffer *buffer, int *option)
 		else
 			mod.colour = get_color(white);
 		ft_str_pxl(buffer, vec2((SCREEN_WIDTH * 0.5) - 75,
-			((SCREEN_HEIGHT * 0.5) - 45) + y), (char *)arr[i], mod);
+				((SCREEN_HEIGHT * 0.5) - 45) + y), (char *)arr[i], mod);
 		y += 30;
 		i++;
 	}

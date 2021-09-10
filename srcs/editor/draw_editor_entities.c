@@ -3,22 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_entities.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 15:08:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/09 20:13:08 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static int	select_entity_tex(Uint32 type)
+int	editor_select_entity_tex(Uint32 type)
 {
 	if (type == skull_skulker)
+		return (-enemy0);
+	else if (type == thing)
+		return (-enemy1);
+	else if (type == lift_button)
+		return (-button_on);
+	else if (type == light_button)
+		return (-button_on);
+	else if (type == powerstation)
+		return (-power_station_ready);
+	else if (type == lamp)
+		return (-lamp_on);
+	else if (type == ammo_pack)
 		return (-ammo_pack_sprite);
-	else
+	else if (type == keycard_engineering)
+		return (-engineering_keycard_sprite);
+	else if (type == keycard_cleaning)
 		return (-cleaning_keycard_sprite);
-
+	else if (type == keycard_military)
+		return (-military_keycard_sprite);
+	return (-enemy0);
 }
 
 static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
@@ -29,7 +45,7 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 	t_texel	*tex;
 	float	scale;
 
-	tex = get_tex(select_entity_tex(entity->entity_type), textures);
+	tex = get_tex(editor_select_entity_tex(entity->entity_type), textures);
 	box.start = world_to_screen(entity->bbox.start, editor->action.scalarf,
 				editor->action.offsetf, &editor->buffer);
 	box.end = world_to_screen(entity->bbox.end, editor->action.scalarf,
