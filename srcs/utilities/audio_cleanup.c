@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:07:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 12:30:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:18:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	cleanup_rahikainen_audio_sources(t_audio *audio)
 	free_sound(&audio->rahikainen_damage[2]);
 	free_sound(&audio->rahikainen_damage[3]);
 	free_sound(&audio->rahikainen_damage[4]);
+	free_sound(&audio->rahikainen_die);
 }
 
 void	cleanup_audio_source(t_audio *audio)
@@ -65,6 +66,7 @@ void	cleanup_audio_source(t_audio *audio)
 	free_sound(&audio->unlock_door);
 	free_sound(&audio->power_station_depleted);
 	free_sound(&audio->recharge);
+	free_sound(&audio->battery_low);
 	cleanup_rahikainen_audio_sources(audio);
 	cleanup_enemy_audio_sources(audio);
 }

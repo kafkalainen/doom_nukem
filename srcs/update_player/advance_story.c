@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 08:37:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:20:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	end_level(t_home *home, t_player *plr)
 	}
 	if (plr->power_points <= 0 && plr->dead == 0)
 	{
-		play_sound(plr->audio.rahikainen_damage[1], 30);
+		play_sound(plr->audio.rahikainen_die, 30);
 		plr->dead = 1;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_all_audio_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:15:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 18:52:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:13:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	write_rahikainen(int *fd)
 		"doom_rahikainen_ugh_3 #");
 	write_audio_data(fd, "./audio/rahikainen_damage.wav",
 		"doom_rahikainen_damage #");
+	write_audio_data(fd, "./audio/rahikainen_die.wav",
+		"doom_rahikainen_die #");
 }
 
 static void	write_enemy(int *fd)
@@ -67,5 +69,7 @@ int	write_all_audio_data(int *fd)
 	write_audio_data(fd, "./audio/door_unlocked.wav", "doom_door_unlocked #");
 	write_audio_data(fd, "./audio/power_station_depleted.wav",
 		"doom_power_station_depleted #");
+	write_audio_data(fd, "./audio/battery_low.wav", "doom_battery_low #");
+	write_audio_data(fd, "./audio/charging_suit.wav", "doom_charging_suit #");
 	return (0);
 }

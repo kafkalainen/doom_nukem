@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:23:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 13:38:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:18:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	load_rahikainen(t_audio *audio)
 	audio->rahikainen_damage[2] = Mix_LoadWAV("temp/rahikainen_ugh_2.wav");
 	audio->rahikainen_damage[3] = Mix_LoadWAV("temp/rahikainen_ugh_3.wav");
 	audio->rahikainen_damage[4] = Mix_LoadWAV("temp/rahikainen_damage.wav");
+	audio->rahikainen_die = Mix_LoadWAV("temp/rahikainen_die.wav");
 }
 
 static void	load_enemy(t_audio *audio)
@@ -48,7 +49,13 @@ static t_bool	check_invalid_pointers(t_audio *audio)
 		|| !audio->skull_skulker_damage || !audio->skull_skulker_death
 		|| !audio->thing_aggro || !audio->thing_attack
 		|| !audio->thing_damage || !audio->thing_death
-		|| !audio->recharge || !audio->power_station_depleted)
+		|| !audio->recharge || !audio->power_station_depleted
+		|| !audio->battery_low || !audio->rahikainen_ramble[0]
+		|| !audio->rahikainen_ramble[1] || !audio->rahikainen_ramble[2]
+		|| !audio->rahikainen_ramble[3] || !audio->rahikainen_damage[0]
+		|| !audio->rahikainen_damage[1] || !audio->rahikainen_damage[2]
+		|| !audio->rahikainen_damage[3] || !audio->rahikainen_damage[4]
+		|| !audio->rahikainen_die)
 		return (true);
 	else
 		return (false);
@@ -72,9 +79,10 @@ int	load_game_audio(t_audio *audio)
 	audio->plasma_gun_no_ammo = Mix_LoadWAV("temp/out_of_ammo.wav");
 	audio->reload = Mix_LoadWAV("temp/reload.wav");
 	audio->unlock_door = Mix_LoadWAV("temp/door_unlocked.wav");
-	audio->recharge = Mix_LoadWAV("temp/error.wav");
+	audio->recharge = Mix_LoadWAV("temp/charging_suit.wav");
 	audio->power_station_depleted
 		= Mix_LoadWAV("temp/power_station_depleted.wav");
+	audio->battery_low = Mix_LoadWAV("temp/battery_low.wav");
 	if (check_invalid_pointers(audio))
 	{
 		ft_putendl("ERROR: Couldn't load audio.");

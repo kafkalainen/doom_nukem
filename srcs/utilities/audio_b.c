@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:34:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 12:35:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:33:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,15 @@ void	play_footsteps(t_audio *audio)
 	}
 }
 
-void	play_sound(Mix_Chunk *sound, int volume)
+int	play_sound(Mix_Chunk *sound, int volume)
 {
+	int	channel;
+
 	if (!sound)
-		return ;
+		return (-1);
 	Mix_VolumeChunk(sound, volume);
-	Mix_PlayChannel(-1, sound, 0);
+	channel = Mix_PlayChannel(-1, sound, 0);
+	return (channel);
 }
 
 void	toggle_music(Mix_Music *music)

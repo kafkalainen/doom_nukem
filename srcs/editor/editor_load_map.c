@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 11:04:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,9 +160,9 @@ t_editor_walls	*editor_new_point(t_point_data *data)
 	{
 		new->x0.x = data->x;
 		new->x0.y = data->y;
-		new->idx = data->idx;
-		new->bbox.start = vec2(new->x0.x - 1, new->x0.y - 1);
-		new->bbox.end = vec2((new->x0.x + 1), (new->x0.y + 1));
+		new->type = data->idx;
+		new->bbox.start = vec2(new->x0.x - 0.2f, new->x0.y + 0.2f);
+		new->bbox.end = vec2(new->x0.x + 0.2f, new->x0.y - 0.2f);
 		new->height.ground = data->ground;
 		new->height.ceiling = data->ceiling;
 		new->next = NULL;

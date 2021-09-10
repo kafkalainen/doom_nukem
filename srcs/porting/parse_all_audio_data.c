@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_all_audio_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:40:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 18:48:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:11:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	parse_rahikainen(unsigned char *buf, unsigned int *pos,
 	parse_audio_data(buf, pos, "./temp/rahikainen_ugh_2.wav", size);
 	parse_audio_data(buf, pos, "./temp/rahikainen_ugh_3.wav", size);
 	parse_audio_data(buf, pos, "./temp/rahikainen_damage.wav", size);
+	parse_audio_data(buf, pos, "./temp/rahikainen_die.wav", size);
 }
 
 static void	parse_enemy(unsigned char *buf, unsigned int *pos,
@@ -65,5 +66,7 @@ int	parse_all_audio_data(unsigned char *buf, ssize_t size)
 	parse_audio_data(buf, &pos, "./temp/reload.wav", size);
 	parse_audio_data(buf, &pos, "./temp/door_unlocked.wav", size);
 	parse_audio_data(buf, &pos, "./temp/power_station_depleted.wav", size);
+	parse_audio_data(buf, &pos, "./temp/battery_low.wav", size);
+	parse_audio_data(buf, &pos, "./temp/charging_suit.wav", size);
 	return (0);
 }

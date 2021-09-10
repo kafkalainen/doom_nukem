@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 12:25:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:14:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	initialize_player_audio_to_null(t_audio *audio)
 	audio->rahikainen_damage[2] = NULL;
 	audio->rahikainen_damage[3] = NULL;
 	audio->rahikainen_damage[4] = NULL;
+	audio->rahikainen_die = NULL;
 }
 
 void	initialize_audio_to_null(t_audio *audio)
@@ -51,4 +52,5 @@ void	initialize_audio_to_null(t_audio *audio)
 	audio->thing_death = NULL;
 	audio->recharge = NULL;
 	audio->power_station_depleted = NULL;
+	audio->battery_low = NULL;
 }

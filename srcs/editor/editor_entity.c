@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 18:30:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:00:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,7 @@ void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *
 		new->entity_type = powerstation;
 	else
 		new->entity_type = skull_skulker;
-	new->is_active = 0;
+	new->is_active = true;
 	new->is_linked = 0;
 	new->is_revealed = 0;
 	new->is_static = 0;
@@ -295,8 +295,8 @@ void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *
 	// else
 	// {
 		new->dir.x = 0;
-		new->dir.y = -1;
-		new->dir.z = 0;
+		new->dir.y = 0;
+		new->dir.z = -1;
 	// }
 	new->state = 0;
 	new->entity_idx = 0;
