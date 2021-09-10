@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/10 13:10:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 13:14:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -461,9 +461,9 @@ int	editor_parse_entity_data(t_editor *editor, unsigned char *buf, ssize_t size)
 		i++;
 	}
 	pos += get_next_breaker(buf + pos);
-	// if (pos > (unsigned int)size
-	// 	|| !ft_strnequ((const char *)buf + pos, "#doom_nukem_textures", 20))
-	// 	error_output("ERROR: Invalid data ender for entities.");
+	if (pos > (unsigned int)size
+		|| !ft_strnequ((const char *)buf + pos, "#doom_nukem_textures", 20))
+		error_output("ERROR: Invalid data ender for entities.");
 	return (0);
 }
 
