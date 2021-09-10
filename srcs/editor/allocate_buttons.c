@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 21:36:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:30:54 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ static int	buttons_create_wall_layer(t_button **blist, int i)
 		(t_button_info){"Wall texture:", 0, wall});
 	create_button(blist[i++], (t_box){vec2(32, 225), vec2(275, 250)},
 		(t_button_info){"Convert to portal", 0, wall});
-	create_button(blist[i++], (t_box){vec2(32, 255), vec2(275, 280)},
+	create_button(blist[i++], (t_box){vec2(32, 255), vec2(245, 280)},
 		(t_button_info){"wall ceiling height:", 0, wall});
-	create_button(blist[i++], (t_box){vec2(32, 285), vec2(240, 310)},
+	create_button(blist[i++], (t_box){vec2(32, 285), vec2(245, 310)},
 		(t_button_info){"wall floor height:", 0, wall});
 	create_button(blist[i++], (t_box){vec2(32, 315), vec2(275, 335)},
 		(t_button_info){"Add light button", 0, wall});
