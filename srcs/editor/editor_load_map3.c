@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_load_map2.c                                 :+:      :+:    :+:   */
+/*   editor_load_map3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 13:20:40 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/09/10 19:08:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_editor_walls	*editor_new_point(t_point_data *data)
 		new->height.ground = data->ground;
 		new->height.ceiling = data->ceiling;
 		new->next = NULL;
+		new->int_string = NULL;
 	}
 	else
 	{
