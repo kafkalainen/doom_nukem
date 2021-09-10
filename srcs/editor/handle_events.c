@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 18:39:19 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 14:26:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
 	return (NULL);
 }
 
+// void	editor_edit_wall(t_editor_walls *wall, t_action *action)
+// {
+// 	if (action->edit_ceiling_height)
+	
+// }
+
 int		handle_events(t_editor *editor, t_home *home)
 {
 	if (editor->action.edit_entity)
@@ -62,6 +68,8 @@ int		handle_events(t_editor *editor, t_home *home)
 		unlink_selected_entity(&editor->entity_list,
 			editor->action.selected_entity, &editor->action.unlink_entity);
 	}
+	// if (editor->action.edit_wall && editor->temp_wall != NULL)
+	// 	editor_edit_wall(editor->temp_wall, &editor->action);
 	if (editor->action.create_sector == allocate)
 	{
 		editor_create_new_sector(&editor->sector_list, &editor->action);

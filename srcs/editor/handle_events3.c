@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 11:11:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 14:26:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,34 @@ unsigned char	*delete_char_from_string(unsigned char **string)
 	return (temp);
 }
 
+int	save_mapname_ruleset(int keysym, int prev_keysym, unsigned char **string)
+{
+	if (prev_keysym == SDLK_RSHIFT && keysym == SDLK_RETURN)
+		return (FALSE);
+	if (ft_isspace(keysym))
+		return (FALSE);
+	if (!ft_isalnum(keysym))
+		return (FALSE);
+	if (*string != NULL && ft_strlen((const char *)*string) > MAX_FILE_NAME_LENGTH)
+		return (FALSE);
+	return (TRUE);
+}
+
 void	read_input_string(unsigned char **string, t_action *action)
 {
 	char	c;
 
 	if (action->keysym == SDLK_BACKSPACE && *string != NULL)
 		*string = delete_char_from_string(string);
-	if (ft_isspace(action->keysym)
-		|| (*string != NULL
-			&& ft_strlen((const char *)*string) > MAX_FILE_NAME_LENGTH
-			&& action->save_file))
+	if (action->save_file && !save_mapname_ruleset(action->keysym, action->prev_keysym, string))
 	{
 		action->keysym = -1;
 		return ;
 	}
-	if (action->input_active && ft_isprint(action->keysym))
+	// ruleset for map name
+	// ruleset for plot strings
+	// ruleset for number input
+	if (action->input_active)
 	{
 		c = action->keysym;
 		if (*string == NULL)

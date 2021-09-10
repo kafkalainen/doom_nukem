@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/10 13:30:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 14:29:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_sector_textfields(t_editor_sector *sector, t_buffer *buffer, t_texture
 	draw_image(box.start, tex, buffer, scale);
 	if (sector->sector_plot)
 	{
-		mod.len = ft_strlen((const char *)sector->sector_plot);
+		mod.len = ft_strlen((const char *)sector->sector_plot) + 1;
 		ft_str_pxl(buffer, vec2(32, 580), (char *)sector->sector_plot, mod);
 	}
 }
@@ -165,11 +165,11 @@ void	draw_entity_textfields(t_entity_list *entity, t_buffer *buffer, t_texture *
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
 	str = ft_itoa(entity->entity_idx);
-	mod.len = ft_strlen(str);
+	mod.len = ft_strlen(str) + 1;
 	ft_str_pxl(buffer, vec2(165, 56), str, mod);
 	ft_strdel(&str);
 	str = ft_itoa(entity->entity_type);
-	mod.len = ft_strlen(str);
+	mod.len = ft_strlen(str) + 1;
 	ft_str_pxl(buffer, vec2(165, 84), str, mod);
 	ft_strdel(&str);
 	box.start = vec2(32, 110);
@@ -205,12 +205,12 @@ void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, in
 	(void)help_text;
 	if (help_text == map_saving)
 	{
-		mod.len = 25;
+		mod.len = 26;
 		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Please input text string", mod);
 	}
 	if (string != NULL)
 	{
-		mod.len = ft_strlen((const char *)string);
+		mod.len = ft_strlen((const char *)string) + 1;
 		ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)string, mod);
 	}
 }
