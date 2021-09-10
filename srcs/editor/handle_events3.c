@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 17:23:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 18:49:54 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,17 @@ int	save_mapname_ruleset(int keysym, unsigned char **string)
 	return (true);
 }
 
-int	edit_wall_ruleset(int keysym, unsigned char **string)
+int	edit_wall_ruleset(int *keysym, unsigned char **string)
 {
-	if (keysym == SDLK_MINUS || keysym == SDLK_SLASH)
-	{
-		if (*string)
-		{
-			free(*string);
-			*string = (unsigned char *)ft_strdup("-1");
-		}
-		return (false);
-	}
-	if (!ft_isdigit(keysym))
-		return (false);
 	if (*string != NULL && ft_strlen((const char *)*string) > 2)
+		return (false);
+	if (*keysym == SDLK_SLASH || *keysym == SDLK_MINUS)
+	{
+		*keysym = '-';
+		printf("vittu\n");
+		return (true);
+	}
+	if (!ft_isdigit(*keysym))
 		return (false);
 	return (true);
 }
@@ -82,16 +79,13 @@ void	read_input_string(unsigned char **string, t_action *action)
 
 	if (action->keysym == SDLK_BACKSPACE && *string != NULL)
 		*string = delete_char_from_string(string);
-	if (action->save_file && !save_mapname_ruleset(action->keysym, string))
+	if ((action->save_file && !save_mapname_ruleset(action->keysym, string)) ||
+		(action->edit_wall && !edit_wall_ruleset(&action->keysym, string)))
 	{
 		action->keysym = -1;
 		return ;
 	}
-	if (action->edit_wall && !edit_wall_ruleset(action->keysym, string))
-	{
-		action->keysym = -1;
-		return ;
-	}
+		
 	// ruleset for map name
 	// ruleset for plot strings
 	// ruleset for number input

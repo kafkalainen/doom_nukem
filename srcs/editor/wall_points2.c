@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_points2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:05:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 18:20:30 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_editor_walls	*new_wall_point(t_screen_xy world_coord)
 		new->height.ground = 0;
 		new->height.ceiling = 3;
 		new->next = NULL;
+		new->int_string = NULL;
 	}
 	else
 	{

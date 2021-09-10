@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 17:51:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 19:00:55 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,29 +55,40 @@ t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
 
 void	editor_edit_wall(t_editor_walls *wall, t_action *action, t_editor_sector *sector)
 {
-	unsigned char	*temp;
 	(void)sector;
-	if (action->edit_ceiling_height)
+	if (action->edit_ceiling_height || action->edit_floor_height)
 	{
-		temp = (unsigned char *)ft_itoa(wall->height.ceiling);
-		read_input_string(&temp, action);
-		if (temp == NULL)
-			wall->height.ceiling = 0;
-		else
-			wall->height.ceiling = ft_atoi((const char *)temp);
-		if (temp != NULL)
-			ft_strdel((char **)&temp);
-		if (wall->height.ceiling > 99)
-			wall->height.ceiling = 99;
-		if (wall->height.ceiling < -99)
-			wall->height.ceiling = -99;
-		
+		read_input_string(&wall->int_string, action);
 		if (!action->input_active)
 		{
+			if (action->edit_ceiling_height && wall->int_string)
+			{
+				wall->height.ceiling = ft_atoi((const char *)wall->int_string);
+				if (wall->height.ceiling > 99)
+					wall->height.ceiling = 99;
+				if (wall->height.ceiling < -99)
+					wall->height.ceiling = -99;
+				action->edit_ceiling_height = 0;
+			}
+			if (action->edit_floor_height && wall->int_string)
+			{
+				wall->height.ground = ft_atoi((const char *)wall->int_string);
+				if (wall->height.ground > 99)
+					wall->height.ground = 99;
+				if (wall->height.ground < -99)
+					wall->height.ground = -99;
+				action->edit_floor_height = 0;
+			}
+			if (wall->int_string)
+				free(wall->int_string);
+			wall->int_string = NULL;
 			action->edit_wall = 0;
-			action->edit_ceiling_height = 0;
+			
 		}
-		
+	}
+	if (action->edit_floor_height)
+	{
+
 	}
 }
 
@@ -112,7 +123,7 @@ int		handle_events(t_editor *editor, t_home *home)
 			editor->temp_sector);
 		editor->action.create_entity = idle;
 	}
-	if (editor->mouse_data.i_mbleft)
+	if (editor->mouse_data.i_mbleft && !editor->action.input_active)
 	{
 		if (clicked_inside_ui(editor->mouse_data.x, editor->mouse_data.y,
 				editor->buffer.height, editor->buffer.width))
