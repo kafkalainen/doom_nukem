@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/09 21:44:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:49:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,6 +310,8 @@ int				check_if_non_convex(t_editor_sector *sector);
 
 void			create_new_entity(t_entity_list **head,
 					t_action *action, t_editor_sector *sector);
+int				editor_parse_entity_data(t_editor *editor, unsigned char *buf,
+					ssize_t size);
 void			delete_selected_entity(t_entity_list **head, t_action *action);
 unsigned int	get_entity_count(t_entity_list **list);
 t_entity_list	*get_selected_entity(t_entity_list **head, t_mouse_data	mdata);

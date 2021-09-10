@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/10 12:36:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:48:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -390,30 +390,29 @@ Uint32	editor_parse_coordinate(t_editor_xyz *coord, unsigned char *buf,
 	return (0);
 }
 
-int	editor_get_entity_data(unsigned char *buf, t_entity_list **entity,
+int	editor_get_entity_data(unsigned char *buf, t_entity_list *entity,
 		unsigned int *pos, ssize_t size)
 {
-	t_entity_list	*temp;
-
-	temp = *entity;
-	if (get_next_int_value(&temp->entity_type, buf, &pos, size))
+	if (get_next_int_value(&entity->entity_type, buf, &pos, size))
 		return (1);
-	if (get_next_int_value(&temp->sector_idx, buf, &pos, size))
+	if (get_next_int_value(&entity->sector_idx, buf, &pos, size))
 		return (1);
-	if (editor_parse_coordinate(&temp->pos, buf, &pos, size))
+	if (editor_parse_coordinate(&entity->pos, buf, &pos, size))
 		return (1);
-	if (editor_parse_coordinate(&temp->dir, buf, &pos, size))
+	if (editor_parse_coordinate(&entity->dir, buf, &pos, size))
 		return (1);
-	if (get_next_int_value(&temp->is_static, buf, &pos, size))
+	if (get_next_int_value(&entity->is_static, buf, &pos, size))
 		return (1);
-	if (get_next_int_value(&temp->is_active, buf, &pos, size))
+	if (get_next_int_value(&entity->is_active, buf, &pos, size))
 		return (1);
-	if (get_next_int_value(&temp->is_revealed, buf, &pos, size))
+	if (get_next_int_value(&entity->is_revealed, buf, &pos, size))
 		return (1);
-	if (get_next_int_value(&temp->state, buf, &pos, size))
+	if (get_next_int_value(&entity->state, buf, &pos, size))
 		return (1);
-	if (get_next_int_value(&temp->is_linked, buf, &pos, size))
+	if (get_next_int_value(&entity->is_linked, buf, &pos, size))
 		return (1);
+	entity->bbox.start = vec2(entity->pos.x - 0.2f, entity->pos.z + 0.2f);
+	entity->bbox.end = vec2(entity->pos.x + 0.2f, entity->pos.z - 0.2f);
 	return (0);
 }
 
@@ -452,7 +451,7 @@ int	editor_parse_entity_data(t_editor *editor, unsigned char *buf, ssize_t size)
 	while (i < nbr_of_entities)
 	{
 		temp = new_entity(&editor->entity_list);
-		if (editor_get_entity_data(buf, &temp, &pos, size))
+		if (editor_get_entity_data(buf, temp, &pos, size))
 			return (1);
 		i++;
 	}

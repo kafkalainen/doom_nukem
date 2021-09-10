@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/10 12:00:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 12:43:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,17 +261,8 @@ int		get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls)
 // 	}
 // }
 
-void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *sector)
+void	initialize_entity_data(t_entity_list *new, t_action *action, t_editor_sector *sector)
 {
-	t_entity_list	*temp;
-	t_entity_list	*new;
-
-	if (sector == NULL)
-		return ;
-	(void)sector;
-	new = (t_entity_list *)malloc(sizeof(t_entity_list));
-	if (!new)
-		error_output("Memory allocation of new entity failed\n");
 	if (action->create_elev_button)
 		new->entity_type = lift_button;
 	else if (action->create_light_button)
@@ -286,7 +277,7 @@ void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *
 	new->is_static = 0;
 	new->sector_idx = sector->idx_sector;
 	new->pos.x = ft_roundf_to_grid(action->world_pos.x, 0);
-	new->pos.z =ft_roundf_to_grid(action->world_pos.y, 0);
+	new->pos.z = ft_roundf_to_grid(action->world_pos.y, 0);
 	new->bbox.start = vec2(new->pos.x - 0.2f, new->pos.z + 0.2f);
 	new->bbox.end = vec2(new->pos.x + 0.2f, new->pos.z - 0.2f);
 	new->pos.y = get_highest_floor_height(&sector->walls, sector->nb_of_walls); // need to calculate height difference between sector floor and entity height
@@ -294,12 +285,25 @@ void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *
 	// 	get_direction_from_wall_point(&new->dir, &sector->walls, sector->nb_of_walls, action->selected_wall);
 	// else
 	// {
-		new->dir.x = 0;
-		new->dir.y = 0;
-		new->dir.z = -1;
+	new->dir.x = 0;
+	new->dir.y = 0;
+	new->dir.z = -1;
 	// }
 	new->state = 0;
 	new->entity_idx = 0;
+}
+
+void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *sector)
+{
+	t_entity_list	*temp;
+	t_entity_list	*new;
+
+	if (sector == NULL)
+		return ;
+	new = (t_entity_list *)malloc(sizeof(t_entity_list));
+	if (!new)
+		error_output("Memory allocation of new entity failed\n");
+	initialize_entity_data(new, action, sector);
 	new->next = NULL;
 	if (*head == NULL)
 		*head = new;
