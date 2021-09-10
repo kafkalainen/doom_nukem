@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 19:25:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 21:10:30 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	save_mapname_ruleset(int keysym, unsigned char **string)
 	return (true);
 }
 
-int	edit_wall_ruleset(int *keysym, unsigned char **string)
+int	int_string_ruleset(int *keysym, unsigned char **string)
 {
 	if (*string != NULL && ft_strlen((const char *)*string) > 2)
 		return (false);
@@ -79,7 +79,8 @@ void	read_input_string(unsigned char **string, t_action *action)
 	if (action->keysym == SDLK_BACKSPACE && *string != NULL)
 		*string = delete_char_from_string(string);
 	if ((action->save_file && !save_mapname_ruleset(action->keysym, string)) ||
-		(action->edit_wall && !edit_wall_ruleset(&action->keysym, string)))
+		((action->edit_ceiling_height || action->edit_floor_height ||
+		action->set_light_intensity) && !int_string_ruleset(&action->keysym, string)))
 	{
 		action->keysym = -1;
 		return ;

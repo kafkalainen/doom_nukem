@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 19:46:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 21:22:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,35 +53,35 @@ t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
 	return (NULL);
 }
 
-void	editor_edit_wall(t_editor_walls *wall, t_action *action, t_editor_sector *sector)
+void	editor_edit_wall(t_editor_walls *wall, t_action *action, int *nbr_of_walls, unsigned char **int_string)
 {
-	(void)sector;
+	(void)nbr_of_walls;
 	if (action->edit_ceiling_height || action->edit_floor_height)
 	{
-		read_input_string(&wall->int_string, action);
+		read_input_string(int_string, action);
 		if (!action->input_active)
 		{
-			if (action->edit_ceiling_height && wall->int_string)
+			if (action->edit_ceiling_height && *int_string)
 			{
-				wall->height.ceiling = ft_atoi((const char *)wall->int_string);
+				wall->height.ceiling = ft_atoi((const char *)*int_string);
 				if (wall->height.ceiling > 99)
 					wall->height.ceiling = 99;
 				if (wall->height.ceiling < -99)
 					wall->height.ceiling = -99;
 				action->edit_ceiling_height = 0;
 			}
-			if (action->edit_floor_height && wall->int_string)
+			if (action->edit_floor_height && int_string)
 			{
-				wall->height.ground = ft_atoi((const char *)wall->int_string);
+				wall->height.ground = ft_atoi((const char *)*int_string);
 				if (wall->height.ground > 99)
 					wall->height.ground = 99;
 				if (wall->height.ground < -99)
 					wall->height.ground = -99;
 				action->edit_floor_height = 0;
 			}
-			if (wall->int_string)
-				free(wall->int_string);
-			wall->int_string = NULL;
+			if (*int_string)
+				free(*int_string);
+			*int_string = NULL;
 			action->edit_wall = 0;
 		}
 	}
@@ -112,7 +112,7 @@ void	editor_edit_wall(t_editor_walls *wall, t_action *action, t_editor_sector *s
 	}
 }
 
-void	editor_edit_sector(t_editor_sector *sector, t_action *action)
+void	editor_edit_sector(t_editor_sector *sector, t_action *action, unsigned char **int_string)
 {
 	if (action->change_ceiling_texture)
 	{
@@ -164,6 +164,26 @@ void	editor_edit_sector(t_editor_sector *sector, t_action *action)
 		action->change_floor_texture = 0;
 		action->edit_sector = 0;
 	}
+	if (action->set_light_intensity)
+	{
+		read_input_string(int_string, action);
+		if (!action->input_active)
+		{
+			if (*int_string)
+			{
+				sector->light.intensity = ft_atoi((const char *)*int_string);
+				if (sector->light.intensity > 100)
+					sector->light.intensity = 100;
+				if (sector->light.intensity < 0)
+					sector->light.intensity = 0;
+				action->edit_floor_height = 0;
+				free(*int_string);
+				*int_string = NULL;
+			}
+			action->set_light_intensity = 0;
+			action->edit_sector = 0;
+		}
+	}
 }
 
 int		handle_events(t_editor *editor, t_home *home)
@@ -176,9 +196,9 @@ int		handle_events(t_editor *editor, t_home *home)
 			editor->action.selected_entity, &editor->action.unlink_entity);
 	}
 	if (editor->action.edit_wall && editor->temp_wall != NULL && editor->temp_sector != NULL)
-		editor_edit_wall(editor->temp_wall, &editor->action, editor->temp_sector);
+		editor_edit_wall(editor->temp_wall, &editor->action, &editor->temp_sector->nb_of_walls, &editor->int_string);
 	if (editor->action.edit_sector && editor->temp_sector != NULL)
-		editor_edit_sector(editor->temp_sector, &editor->action);
+		editor_edit_sector(editor->temp_sector, &editor->action, &editor->int_string);
 	if (editor->action.create_sector == allocate)
 	{
 		editor_create_new_sector(&editor->sector_list, &editor->action);

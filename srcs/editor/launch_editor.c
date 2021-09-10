@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/10 15:22:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 20:44:58 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ static t_editor	setup_editor(t_editor *editor, t_home *home)
 	editor->temp_sector = NULL;
 	editor->temp_wall = NULL;
 	editor->map_names = NULL;
+	editor->int_string = NULL;
 	editor->end_sector = -1;
 	editor->plr.x = 0;
 	editor->plr.z = 0;

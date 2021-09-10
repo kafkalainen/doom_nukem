@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/10 18:53:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 21:23:21 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_sector_textfields(t_editor_sector *sector, t_buffer *buffer, t_texture
 	mod.colour = get_color(white);
 	mod.size = TEXT_SIZE;
 	temp = ft_itoa(sector->idx_sector);
-	mod.len = ft_strlen(temp);
+	mod.len = ft_strlen(temp) + 1;
 	ft_str_pxl(buffer, vec2(165, 56), temp, mod);
 	ft_strdel(&temp);
 	box.start = vec2(32, 110);
@@ -38,6 +38,10 @@ void	draw_sector_textfields(t_editor_sector *sector, t_buffer *buffer, t_texture
 	tex = get_tex(sector->tex_ceil, textures);
 	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 	draw_image(box.start, tex, buffer, scale);
+	temp = ft_itoa(sector->light.intensity);
+	mod.len = ft_strlen(temp) + 1;
+	ft_str_pxl(buffer, vec2(250, 348), temp, mod);
+	ft_strdel(&temp);
 	if (sector->sector_plot)
 	{
 		mod.len = ft_strlen((const char *)sector->sector_plot) + 1;
@@ -260,7 +264,7 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 	}
 }
 
-void	draw_wall_input(t_editor_walls *wall, t_buffer *buffer, t_action *action)
+void	draw_int_string_input(t_buffer *buffer, t_action *action, unsigned char **int_string)
 {
 	t_plx_modifier	mod;
 	int				midpoint;
@@ -270,24 +274,35 @@ void	draw_wall_input(t_editor_walls *wall, t_buffer *buffer, t_action *action)
 	midpoint = (buffer->width * 0.5) - 100;
 	if (action->edit_ceiling_height)
 	{
-		mod.len = 45;
-		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Input new ceiling height using number keys:", mod);
-		if (wall->int_string != NULL)
+		mod.len = 57;
+		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Input new ceiling height using number keys (-99 -- 99):", mod);
+		if (*int_string != NULL)
 		{
-			mod.len = ft_strlen((const char *)wall->int_string) + 1;
+			mod.len = ft_strlen((const char *)*int_string) + 1;
 			mod.colour = get_color(white);
-			ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)wall->int_string, mod);
+			ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)*int_string, mod);
 		}
 	}
 	if (action->edit_floor_height)
 	{
-		mod.len = 43;
-		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Input new floor height using number keys:", mod);
-		if (wall->int_string != NULL)
+		mod.len = 55;
+		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Input new floor height using number keys (-99 -- 99):", mod);
+		if (*int_string != NULL)
 		{
-			mod.len = ft_strlen((const char *)wall->int_string) + 1;
+			mod.len = ft_strlen((const char *)*int_string) + 1;
 			mod.colour = get_color(white);
-			ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)wall->int_string, mod);
+			ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)*int_string, mod);
+		}
+	}
+	if (action->set_light_intensity)
+	{
+		mod.len = 52;
+		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Set new light intensity using number keys (0-100):", mod);
+		if (*int_string != NULL)
+		{
+			mod.len = ft_strlen((const char *)*int_string) + 1;
+			mod.colour = get_color(white);
+			ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)*int_string, mod);
 		}
 	}
 }
@@ -321,6 +336,6 @@ void	draw_ui(t_editor *editor, t_texture **textures)
 		draw_input_string(editor->mapname, &editor->buffer, (editor->buffer.width * 0.5), map_saving);
 	if (editor->action.open_file || editor->action.link_maps)
 		update_editor_load_menu(&editor->buffer, &editor->action, editor->map_names);
-	if (editor->action.edit_wall)
-		draw_wall_input(editor->temp_wall, &editor->buffer, &editor->action);
+	if (editor->action.set_light_intensity || editor->action.edit_ceiling_height || editor->action.edit_floor_height)
+		draw_int_string_input(&editor->buffer, &editor->action, &editor->int_string);
 }
