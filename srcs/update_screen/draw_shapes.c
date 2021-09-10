@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 13:12:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 13:16:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	draw_rect_center(t_xy xy, t_xy wh, t_frame *frame)
 
 void	draw_box(t_box box, t_buffer *buffer, Uint32 color)
 {
-	float end;
-	float start;
+	float	end;
+	float	start;
 
 	end = box.end.y;
 	start = box.start.y;

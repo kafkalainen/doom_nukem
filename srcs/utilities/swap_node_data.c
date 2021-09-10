@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 08:01:34 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 08:32:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 13:12:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	copy_data_from_node(t_editor_walls *to, t_editor_walls *from)
 
 void	swap_node_data(t_editor_walls *data_0, t_editor_walls *data_1)
 {
-	t_editor_walls swap;
+	t_editor_walls	swap;
 
 	if (!data_0 || !data_1)
 		return ;
