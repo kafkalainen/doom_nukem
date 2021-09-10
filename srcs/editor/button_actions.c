@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 13:56:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 19:36:26 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,11 @@ void	wall_button_actions(t_action *action, int i)
 		action->convert_to_portal = 1;
 	else if (i == button_set_ceiling_height)
 	{
-		printf("edit walls ceiling height\n");
 		action->edit_ceiling_height = 1;
 		action->input_active = 1;
 	}
 	else if (i == button_set_floor_height)
 	{
-		printf("edit walls floor height\n");
 		action->edit_floor_height = 1;
 		action->input_active = 1;
 	}

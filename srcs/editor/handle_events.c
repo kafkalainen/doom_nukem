@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 19:26:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/10 19:46:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,60 @@ void	editor_edit_wall(t_editor_walls *wall, t_action *action, t_editor_sector *s
 	}
 }
 
+void	editor_edit_sector(t_editor_sector *sector, t_action *action)
+{
+	if (action->change_ceiling_texture)
+	{
+		if (sector->tex_ceil == -surf0)
+			sector->tex_ceil = -surf1;
+		else if (sector->tex_ceil == -surf1)
+			sector->tex_ceil = -surf2;
+		else if (sector->tex_ceil == -surf2)
+			sector->tex_ceil = -surf3;
+		else if (sector->tex_ceil == -surf3)
+			sector->tex_ceil = -surf4;
+		else if (sector->tex_ceil == -surf4)
+			sector->tex_ceil = -surf5;
+		else if (sector->tex_ceil == -surf5)
+			sector->tex_ceil = -surf6;
+		else if (sector->tex_ceil == -surf6)
+			sector->tex_ceil = -surf7;
+		else if (sector->tex_ceil == -surf7)
+			sector->tex_ceil = -surf8;
+		else if (sector->tex_ceil == -surf8)
+			sector->tex_ceil = -surf9;
+		else if (sector->tex_ceil == -surf9)
+			sector->tex_ceil = -surf0;
+		action->change_ceiling_texture = 0;
+		action->edit_sector = 0;
+	}
+	if (action->change_floor_texture)
+	{
+		if (sector->tex_floor == -surf0)
+			sector->tex_floor = -surf1;
+		else if (sector->tex_floor == -surf1)
+			sector->tex_floor = -surf2;
+		else if (sector->tex_floor == -surf2)
+			sector->tex_floor = -surf3;
+		else if (sector->tex_floor == -surf3)
+			sector->tex_floor = -surf4;
+		else if (sector->tex_floor == -surf4)
+			sector->tex_floor = -surf5;
+		else if (sector->tex_floor == -surf5)
+			sector->tex_floor = -surf6;
+		else if (sector->tex_floor == -surf6)
+			sector->tex_floor = -surf7;
+		else if (sector->tex_floor == -surf7)
+			sector->tex_floor = -surf8;
+		else if (sector->tex_floor == -surf8)
+			sector->tex_floor = -surf9;
+		else if (sector->tex_floor == -surf9)
+			sector->tex_floor = -surf0;
+		action->change_floor_texture = 0;
+		action->edit_sector = 0;
+	}
+}
+
 int		handle_events(t_editor *editor, t_home *home)
 {
 	if (editor->action.edit_entity)
@@ -123,6 +177,8 @@ int		handle_events(t_editor *editor, t_home *home)
 	}
 	if (editor->action.edit_wall && editor->temp_wall != NULL && editor->temp_sector != NULL)
 		editor_edit_wall(editor->temp_wall, &editor->action, editor->temp_sector);
+	if (editor->action.edit_sector && editor->temp_sector != NULL)
+		editor_edit_sector(editor->temp_sector, &editor->action);
 	if (editor->action.create_sector == allocate)
 	{
 		editor_create_new_sector(&editor->sector_list, &editor->action);
