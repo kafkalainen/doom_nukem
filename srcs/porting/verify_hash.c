@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_hash.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:45:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 12:20:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 15:00:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	verify_hash(unsigned char *buf, ssize_t size)
 	pos += get_next_breaker(buf + pos);
 	if (pos > size)
 		error_output("Reading past memory pointer\n");
-	new_hash = ft_adler32(buf + pos, size);
+	new_hash = ft_adler32(buf + pos, size - pos);
 	printf("Original hash: %i, new hash: %i\n", orig_hash, new_hash);
 	if (orig_hash != new_hash)
 		error_output("Hash verification failed\n");
