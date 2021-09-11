@@ -110,6 +110,10 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_bu
 			action->create_entity = user_input;
 		if (e->button.button == SDL_BUTTON_RIGHT && action->create_entity == allocate)
 			action->create_entity = idle;
+		if (e->button.button == SDL_BUTTON_LEFT && action->convert_to_portal == allocate)
+			action->convert_to_portal = user_input;
+		if (e->button.button == SDL_BUTTON_RIGHT && action->convert_to_portal == allocate)
+			action->convert_to_portal = idle;
 		if ((e->button.button == SDL_BUTTON_LEFT && action->selected_entity >= 0 && action->link_entity == 1))
 		{
 			action->prev_entity = action->selected_entity;

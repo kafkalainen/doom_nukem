@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 12:05:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 13:02:54 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,25 @@ void	check_grid_events(t_editor *editor)
 			editor->action.draw_depth = depth_zero;
 		}
 	}
-	if (editor->action.assign_player_start == 2)
+	// if (editor->action.convert_to_portal == user_input)
+	// {
+	// 	if (editor->temp_sector && editor->temp_wall)
+	// 	{
+			
+	// 	}
+
+	// }
+	if (editor->action.assign_player_start == user_input)
 		editor->action.player_start_assigned
 			= assign_player_start(&editor->sector_list, &editor->action.world_pos,
 				&editor->plr, &editor->action.assign_player_start);
-	if (editor->action.assign_end_sector == 2)
+	if (editor->action.assign_end_sector == user_input)
 		assign_end_sector(&editor->sector_list, &editor->action.world_pos,
 			&editor->end_sector, &editor->action.assign_end_sector);
-	if (editor->action.link_entity == 2 && editor->action.prev_entity != -1 && editor->temp_entity != NULL)
+	if (editor->action.link_entity == user_input && editor->action.prev_entity != -1 && editor->temp_entity != NULL)
 	{
 		link_entities(&editor->entity_list, editor->action.world_pos, editor->action.prev_entity);
-		editor->action.link_entity = 0;
+		editor->action.link_entity = idle;
 	}
 }
 

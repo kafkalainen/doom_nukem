@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_sectors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 13:54:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 13:08:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static void	draw_line_to_mouse_cursor(int active, t_editor_walls *wall,
 }
 
 static void	draw_wall_line(t_editor_walls *left_point, t_editor_walls *right_point,
-			t_editor *editor)
+			t_editor *editor, Uint32 color)
 {
 	draw_line(
 		world_to_screen(vec2(left_point->x0.x, left_point->x0.y),
 			editor->action.scalarf, editor->action.offsetf, &editor->buffer),
 		world_to_screen(vec2(right_point->x0.x, right_point->x0.y),
 			editor->action.scalarf, editor->action.offsetf, &editor->buffer),
-		get_color(white), &editor->buffer);
+		color, &editor->buffer);
 }
 
 void	draw_editor_sectors(t_editor *editor)
@@ -63,6 +63,7 @@ void	draw_editor_sectors(t_editor *editor)
 	t_editor_sector	*sector_list;
 	t_editor_walls	*left_point;
 	t_editor_walls	*right_point;
+	Uint32			color;
 
 	sector_list = editor->sector_list;
 	while (sector_list)
@@ -73,9 +74,13 @@ void	draw_editor_sectors(t_editor *editor)
 		draw_bbox_sector(sector_list, &editor->buffer, &editor->action);
 		while (left_point && left_point->next && i < sector_list->nb_of_walls)
 		{
+			if (sector_list->idx_sector == editor->action.selected_sector && i == editor->action.selected_wall)
+				color = get_color(red);
+			else
+				color = get_color(white);
 			draw_wall_bbox(left_point, sector_list, editor);
 			right_point = left_point->next;
-			draw_wall_line(left_point, right_point, editor);
+			draw_wall_line(left_point, right_point, editor, color);
 			i++;
 			left_point = left_point->next;
 		}
