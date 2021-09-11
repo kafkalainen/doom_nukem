@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 14:40:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 16:38:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,29 @@ void	editor_edit_wall(t_editor_walls *wall, t_action *action, int *nbr_of_walls,
 	}
 	if (action->change_wall_texture)
 	{
-		if (wall->type == -wall0)
-			wall->type = -wall1;
-		else if (wall->type == -wall1)
-			wall->type = -wall2;
-		else if (wall->type == -wall2)
-			wall->type = -wall3;
-		else if (wall->type == -wall3)
-			wall->type = -wall4;
-		else if (wall->type == -wall4)
-			wall->type = -wall5;
-		else if (wall->type == -wall5)
-			wall->type = -wall6;
-		else if (wall->type == -wall6)
-			wall->type = -wall7;
-		else if (wall->type == -wall7)
-			wall->type = -wall8;
-		else if (wall->type == -wall8)
-			wall->type = -wall9;
-		else if (wall->type == -wall9)
-			wall->type = -wall0;
+		if (wall->type < 0)
+		{
+			if (wall->type == -wall0)
+				wall->type = -wall1;
+			else if (wall->type == -wall1)
+				wall->type = -wall2;
+			else if (wall->type == -wall2)
+				wall->type = -wall3;
+			else if (wall->type == -wall3)
+				wall->type = -wall4;
+			else if (wall->type == -wall4)
+				wall->type = -wall5;
+			else if (wall->type == -wall5)
+				wall->type = -wall6;
+			else if (wall->type == -wall6)
+				wall->type = -wall7;
+			else if (wall->type == -wall7)
+				wall->type = -wall8;
+			else if (wall->type == -wall8)
+				wall->type = -wall9;
+			else if (wall->type == -wall9)
+				wall->type = -wall0;
+		}
 		action->change_wall_texture = 0;
 		action->edit_wall = 0;
 	}

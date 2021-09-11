@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 14:08:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 16:44:16 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	draw_wall_textfields(t_editor_walls *wall, t_buffer *buffer, t_texture **te
 	float			scale;
 	t_texel			*tex;
 
-	if (!wall)
+	if (!wall || wall->type >= 0)
 		return ;
 	
 	box.start = vec2(32, 110);

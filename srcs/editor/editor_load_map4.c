@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 11:23:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:48:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	editor_add_points(t_editor_sector *sector,
 		i++;
 	}
 	close_editor_wall_list(&sector->walls);
+	sector->centroid = calculate_centroid(sector);
 	assign_sector_bbox(sector);
 	return (0);
 }

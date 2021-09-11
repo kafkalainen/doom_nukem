@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 14:41:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:21:21 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -412,5 +412,6 @@ void			notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
 					int *notify_time);
 void			add_notification(char **line, char *message, int *time,
 					int amount);
-
+t_bool			editor_check_if_lseg_intersects(t_editor_walls *wall,
+					t_screen_xy pos, t_screen_xy dir);
 #endif

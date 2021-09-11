@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_intersecting_lines.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 08:58:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 11:24:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:20:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	editor_orientation_of_three_points(t_screen_xy a,
 		return (c_clockwise);
 }
 
-static int	editor_check_if_lseg_intersects(t_editor_walls *wall,
+t_bool	editor_check_if_lseg_intersects(t_editor_walls *wall,
 				t_screen_xy pos, t_screen_xy dir)
 {
 	int	or[4];
