@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 14:19:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:46:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ enum e_buttons
 	button_is_elevator,
 	button_create_light_src,
 	button_input_active,
+	button_convert_to_portal,
 	button_wall_index,
 	button_change_wall_tex,
-	button_convert_to_portal,
 	button_set_ceiling_height,
 	button_set_floor_height,
 	button_create_light_button,
@@ -129,6 +129,8 @@ typedef struct s_action
 	int				link_entity;
 	int				unlink_entity;
 	int				prev_entity;
+	int				prev_wall;
+	int				prev_sector;
 	int				edit_sector;
 	int				input_active;
 	int				keysym;
@@ -296,7 +298,7 @@ int				clicked_inside_ui(int x, int y, int height, int width);
 */
 t_editor_walls	*new_wall_point(t_screen_xy world_coord);
 void			add_point_end(t_editor_walls **point, t_editor_walls *new);
-int				add_point_to_list(t_editor_sector **head, t_editor_sector *sector,
+int				add_point_to_list(t_editor *editor, t_editor_sector *sector,
 					t_action *action);
 void			close_editor_wall_list(t_editor_walls **head);
 
@@ -306,7 +308,7 @@ void			close_editor_wall_list(t_editor_walls **head);
 void			close_editor_wall_list(t_editor_walls **head);
 void			remove_last_point(t_editor_walls **walls, int *nb_of_walls,
 					int selected_point);
-int				check_for_last_point(t_editor_sector *sector, t_action *action);
+t_bool			check_for_last_point(t_editor_sector *sector, t_action *action);
 t_bool			check_for_intersecting_lines(t_editor_sector *sector,
 					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,
@@ -315,8 +317,7 @@ int				check_if_non_convex(t_editor_sector *sector);
 t_bool			editor_check_if_same_point(t_screen_xy p0, t_screen_xy p1);
 int				editor_orientation_of_three_points(t_screen_xy a,
 					t_screen_xy b, t_screen_xy c);
-t_bool			editor_get_scalar_to_intersection(t_screen_xy pos, t_screen_xy dir,
-					t_editor_walls *wall, float *t);
+void			editor_reset_wall_indexes(t_editor_walls **walls, int nbr_of_walls);
 
 /*
 ** Entities
@@ -343,7 +344,7 @@ void			free_all_entities(t_entity_list **head);
 t_xy			calculate_centroid(t_editor_sector *sector);
 void			editor_create_new_sector(t_editor_sector **head,
 				t_action *action);
-int				editor_new_sector_wallpoints(t_editor_sector **head,
+int				editor_new_sector_wallpoints(t_editor *editor,
 					t_mouse_data *mouse_data, t_action *action);
 void			editor_sort_wall_vertices(t_editor_sector *sector);
 void			editor_free_walls(t_editor_walls **head, int nbr_of_walls);
@@ -405,9 +406,9 @@ int				editor_get_entity_data(unsigned char *buf,
 				t_entity_list *entity, unsigned int *pos, ssize_t size);
 t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
 					t_screen_xy c, t_screen_xy b);
+void			create_portal_between_sectors(t_editor_sector **head, t_action *action);
 void			notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
 					int *notify_time);
-void			add_notification(char **line, char *message, int *time,
-					int amount);
+void			add_notification(t_editor *editor, char *message, int amount);
 
 #endif

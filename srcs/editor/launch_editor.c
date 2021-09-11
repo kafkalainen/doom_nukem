@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/11 14:22:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:48:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	init_actions(t_action *action)
 	action->create_light_source = 0;
 	action->add_wall_point = 0;
 	action->write_sector_story = 0;
+	action->prev_sector = -1;
+	action->prev_wall = -1;
 }
 
 static t_editor	setup_editor(t_editor *editor, t_home *home)
@@ -96,8 +98,7 @@ static t_editor	setup_editor(t_editor *editor, t_home *home)
 	editor->buffer.height = 900;
 	editor->cur_time = SDL_GetTicks();
 	editor->notification = NULL;
-	add_notification(&editor->notification, "Hello user, welcome to editor",
-		&editor->notify_time, 3000);
+	add_notification(editor, "Hello, welcome to doom-nukem editor", 3000);
 	// SDL_SetWindowFullscreen(home->win.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	// SDL_GetWindowSize(home->win.window, &editor->buffer.width, &editor->buffer.height);
 	// SDL_SetWindowFullscreen(home->win.window, 0);

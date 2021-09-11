@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_grid_events.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 14:18:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:46:44 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ void	check_grid_events(t_editor *editor)
 			editor->temp_sector = NULL;
 			editor->action.draw_depth = depth_zero;
 		}
+	}
+	if (editor->action.convert_to_portal == user_input)
+	{
+		if (editor->temp_sector && editor->action.prev_sector != -1)
+			create_portal_between_sectors(&editor->sector_list, &editor->action);
+		editor->action.convert_to_portal = idle;
 	}
 	if (editor->action.assign_player_start == user_input)
 		editor->action.player_start_assigned

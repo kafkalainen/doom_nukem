@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_points.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 13:14:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:44:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,17 @@ void	close_editor_wall_list(t_editor_walls **head)
 	temp->next = *head;
 }
 
-int	check_for_last_point(t_editor_sector *sector, t_action *action)
+t_bool	check_for_last_point(t_editor_sector *sector, t_action *action)
 {
-	t_xy		mouse;
-	double		dist;
+	float	dist;
 
-	mouse = vec2(action->world_pos.x, action->world_pos.y);
-	dist = sqrt(pow(fabs(sector->walls->x0.x - mouse.x), 2.0f) +
-		pow(fabs(sector->walls->x0.y - mouse.y), 2.0f));
-	if (!sector->walls)
-		return (0);
-	if (dist <= 1)
-		return (1);
-	return (0);
+	if (!sector || !sector->walls)
+		return (false);
+	dist = vec2_eucl_dist(action->world_pos,
+			vec2(sector->walls->x0.x, sector->walls->x0.y));
+	if (dist <= 0.5f)
+		return (true);
+	return (false);
 }
 
 void	remove_last_point(t_editor_walls **walls, int *nb_of_walls,
@@ -46,7 +44,7 @@ void	remove_last_point(t_editor_walls **walls, int *nb_of_walls,
 
 	i = 0;
 	previous = *walls;
-	while(previous != NULL && i++ < selected_point - 1)
+	while (previous != NULL && i++ < selected_point - 1)
 		previous = previous->next;
 	deleted = previous->next;
 	if (deleted == NULL)
@@ -58,38 +56,24 @@ void	remove_last_point(t_editor_walls **walls, int *nb_of_walls,
 	return ;
 }
 
-void	editor_reset_wall_indexes(t_editor_walls **walls, int nbr_of_walls)
-{
-	t_editor_walls	*temp;
-	int				idx;
-
-	temp = *walls;
-	idx = 0;
-	while (idx < nbr_of_walls)
-	{
-		temp->idx = idx;
-		temp = temp->next;
-		idx++;
-	}
-}
-
-static int	add_last_point(t_editor_sector **head, t_editor_sector *sector,
+static int	add_last_point(t_editor *editor, t_editor_sector *sector,
 			t_action *action, t_editor_walls *point)
 {
 	point = sector->walls;
 	while (point && point->next)
 		point = point->next;
-	if (check_all_sectors_for_intersecting_lines(head, point->x0, sector->walls->x0))
-		ft_putendl("ERROR: Cannot close sector, lines intersecting.");
+	if (check_all_sectors_for_intersecting_lines(&editor->sector_list,
+			point->x0, sector->walls->x0))
+		add_notification(editor, "ERROR: Cannot close, lines isecting.", 4000);
 	else
 	{
 		close_editor_wall_list(&sector->walls);
 		action->selected_sector = sector->idx_sector;
 		assign_sector_bbox(sector);
 		if (check_if_non_convex(sector)
-			|| check_if_another_sector_is_inside(sector, head))
+			|| check_if_another_sector_is_inside(sector, &editor->sector_list))
 		{
-			ft_putendl("ERROR: Non-convex sector or another sector inside.");
+			add_notification(editor, "ERROR: Non-convex / sector inside", 4000);
 			return (3);
 		}
 		sector->centroid = calculate_centroid(sector);
@@ -100,26 +84,8 @@ static int	add_last_point(t_editor_sector **head, t_editor_sector *sector,
 	return (0);
 }
 
-float	ft_roundf_to_grid(float nb, int prec)
-{
-	long double	fraction;
-
-	if (prec < 0)
-		return (nb);
-	fraction = 0.5;
-	while (prec)
-	{
-		fraction = fraction * 0.1;
-		prec--;
-	}
-	if (nb > 0)
-		nb += fraction;
-	else
-		nb -= fraction;
-	return (nb);
-}
-
-int	add_point_to_list(t_editor_sector **head, t_editor_sector *sector, t_action *action)
+int	add_point_to_list(t_editor *editor, t_editor_sector *sector,
+	t_action *action)
 {
 	t_editor_walls	*point;
 	t_screen_xy		new_coord;
@@ -129,12 +95,13 @@ int	add_point_to_list(t_editor_sector **head, t_editor_sector *sector, t_action 
 	if (sector == NULL)
 		return (1);
 	if (sector->nb_of_walls > 1 && check_for_last_point(sector, action))
-		return (add_last_point(head, sector, action, point));
+		return (add_last_point(editor, sector, action, point));
 	point = sector->walls;
 	while (point && point->next)
 		point = point->next;
-	if (point && check_all_sectors_for_intersecting_lines(head, point->x0, new_coord))
-		ft_putendl("ERROR: Cannot put down the point, intersecting with other lines.");
+	if (point && check_all_sectors_for_intersecting_lines(
+			&editor->sector_list, point->x0, new_coord))
+		add_notification(editor, "ERROR: Cannot close, lines isecting.", 5000);
 	else
 	{
 		point = new_wall_point(new_coord);
@@ -143,7 +110,7 @@ int	add_point_to_list(t_editor_sector **head, t_editor_sector *sector, t_action 
 		else
 			error_output("Error while allocating wallpoints.");
 		sector->nb_of_walls += 1;
-		action->selected_point +=1;
+		action->selected_point += 1;
 	}
 	return (0);
 }

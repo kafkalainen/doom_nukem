@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 12:56:28 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:08:09 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -349,19 +349,19 @@ void	draw_help_text(t_action *action, t_buffer *buffer)
 void	draw_ui(t_editor *editor, t_texture **textures)
 {
 	t_editor_sector	*temp;
+	t_editor_sector *head;
 	t_entity_list	*ent;
 	t_entity_list	*tempo;
 
 	temp = editor->sector_list;
+	head = editor->sector_list;
 	if (editor->action.grid == 1)
 		draw_grid(&editor->buffer, &editor->action);
-	while (temp && temp->idx_sector != editor->action.selected_sector)
-		temp = temp->next;
 	draw_editor_sectors(editor);
 	draw_editor_entities(editor, textures);
 	ent = editor->entity_list;
 	tempo = editor->entity_list;
-	if (editor->action.link_entity == 1)
+	if (editor->action.link_entity == allocate)
 	{
 		while (tempo->entity_idx != editor->action.selected_entity)
 			tempo = tempo->next;
@@ -370,6 +370,20 @@ void	draw_ui(t_editor *editor, t_texture **textures)
 				&editor->buffer),
 			vec2(editor->mouse_data.x, editor->mouse_data.y), get_color(blue), &editor->buffer);
 		editor->entity_list = ent;
+	}
+	if (editor->action.convert_to_portal)
+	{
+		while (temp != NULL && temp->idx_sector != editor->action.prev_sector)
+			temp = temp->next;
+		if (temp)
+		{
+			draw_line(
+			world_to_screen(vec2(temp->centroid.x, temp->centroid.y), editor->action.scalarf, editor->action.offsetf,
+				&editor->buffer),
+			world_to_screen(vec2(editor->action.world_pos.x, editor->action.world_pos.y), editor->action.scalarf,
+				editor->action.offsetf, &editor->buffer), get_color(blue), &editor->buffer);
+		}
+		editor->sector_list = head;
 	}
 	if (editor->action.convert_to_portal)
 		draw_help_text(&editor->action, &editor->buffer);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 14:19:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:46:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int		handle_events(t_editor *editor, t_home *home)
 	}
 	if (editor->action.create_sector == user_input)
 	{
-		if (editor_new_sector_wallpoints(&editor->sector_list,
+		if (editor_new_sector_wallpoints(editor,
 			&editor->mouse_data, &editor->action))
 			editor_free_selected_sector(&editor->sector_list,
 				&editor->entity_list, &editor->action);
@@ -196,6 +196,8 @@ int		handle_events(t_editor *editor, t_home *home)
 			check_ui_events(editor->mouse_data.x, editor->mouse_data.y,
 				&editor->button_list, &editor->action);
 			editor->mouse_data.i_mbleft = 0;
+			if (editor->action.convert_to_portal == allocate && editor->temp_sector)
+				editor->action.prev_sector = editor->temp_sector->idx_sector;
 		}
 		else if (clicked_inside_grid(editor->mouse_data.x, editor->mouse_data.y,
 				editor->buffer.height, editor->buffer.width))
