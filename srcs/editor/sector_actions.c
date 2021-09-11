@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sector_actions.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/11 14:51:17 by jnivala           #+#    #+#             */
+/*   Updated: 2021/09/11 14:51:19 by jnivala          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/doom_nukem.h"
 
 void	handle_removal(t_editor_sector *sector_list, t_action *action)
@@ -29,12 +41,12 @@ void	editor_free_walls(t_editor_walls **head, int nbr_of_walls)
 	}
 }
 
-int		editor_new_sector_wallpoints(t_editor_sector **head,
+int		editor_new_sector_wallpoints(t_editor *editor,
 		t_mouse_data *mouse_data, t_action *action)
 {
 	t_editor_sector	*temp;
 
-	temp = *head;
+	temp = editor->sector_list;
 	while (temp != NULL && temp->idx_sector != action->selected_sector)
 		temp = temp->next;
 	if (action->delete)
@@ -45,7 +57,7 @@ int		editor_new_sector_wallpoints(t_editor_sector **head,
 	}
 	if (mouse_data->i_mbleft)
 	{
-		if (add_point_to_list(head, temp, action) == 3)
+		if (add_point_to_list(editor, temp, action) == 3)
 		{
 			action->delete = true;
 			action->create_sector = idle;

@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   wall_points2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:05:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 20:49:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:08:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+void	editor_reset_wall_indexes(t_editor_walls **walls, int nbr_of_walls)
+{
+	t_editor_walls	*temp;
+	int				idx;
+
+	temp = *walls;
+	idx = 0;
+	while (idx < nbr_of_walls)
+	{
+		temp->idx = idx;
+		temp = temp->next;
+		idx++;
+	}
+}
 
 void	add_point_end(t_editor_walls **point, t_editor_walls *new)
 {
