@@ -62,15 +62,15 @@ void	draw_editor_sectors(t_editor *editor)
 	int				i;
 	t_editor_sector	*sector_list;
 	t_editor_walls	*left_point;
-	t_editor_walls	*right_point;
 	Uint32			color;
 
+	left_point = NULL;
+	i = 0;
 	sector_list = editor->sector_list;
 	while (sector_list)
 	{
 		i = 0;
 		left_point = sector_list->walls;
-		right_point = left_point;
 		draw_bbox_sector(sector_list, &editor->buffer, &editor->action);
 		while (left_point && left_point->next && i < sector_list->nb_of_walls)
 		{
@@ -79,8 +79,7 @@ void	draw_editor_sectors(t_editor *editor)
 			else
 				color = get_color(white);
 			draw_wall_bbox(left_point, sector_list, editor);
-			right_point = left_point->next;
-			draw_wall_line(left_point, right_point, editor, color);
+			draw_wall_line(left_point, left_point->next, editor, color);
 			i++;
 			left_point = left_point->next;
 		}
