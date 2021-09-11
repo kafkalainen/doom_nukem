@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 15:08:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:35:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -406,7 +406,6 @@ t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
 					t_screen_xy c, t_screen_xy b);
 void			notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
 					int *notify_time);
-void			add_notification(char **line, char *message, int *time,
-					int amount);
+void			add_notification(t_editor *editor, char *message, int amount);
 
 #endif

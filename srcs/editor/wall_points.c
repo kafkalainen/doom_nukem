@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 15:09:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:44:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ static int	add_last_point(t_editor *editor, t_editor_sector *sector,
 		point = point->next;
 	if (check_all_sectors_for_intersecting_lines(&editor->sector_list,
 			point->x0, sector->walls->x0))
-		add_notification(
-			&editor->notification, "ERROR: Cannot close sector, lines intersecting.",
-			&editor->notify_time, 5000);
+		add_notification(editor, "ERROR: Cannot close, lines isecting.", 4000);
 	else
 	{
 		close_editor_wall_list(&sector->walls);
@@ -75,9 +73,7 @@ static int	add_last_point(t_editor *editor, t_editor_sector *sector,
 		if (check_if_non_convex(sector)
 			|| check_if_another_sector_is_inside(sector, &editor->sector_list))
 		{
-			add_notification(
-			&editor->notification, "ERROR: Non-convex sector or another sector inside.",
-			&editor->notify_time, 5000);
+			add_notification(editor, "ERROR: Non-convex / sector inside", 4000);
 			return (3);
 		}
 		sector->centroid = calculate_centroid(sector);
@@ -88,7 +84,8 @@ static int	add_last_point(t_editor *editor, t_editor_sector *sector,
 	return (0);
 }
 
-int	add_point_to_list(t_editor *editor, t_editor_sector *sector, t_action *action)
+int	add_point_to_list(t_editor *editor, t_editor_sector *sector,
+	t_action *action)
 {
 	t_editor_walls	*point;
 	t_screen_xy		new_coord;
@@ -102,11 +99,9 @@ int	add_point_to_list(t_editor *editor, t_editor_sector *sector, t_action *actio
 	point = sector->walls;
 	while (point && point->next)
 		point = point->next;
-	if (point && check_all_sectors_for_intersecting_lines(&editor->sector_list, point->x0,
-		new_coord))
-		add_notification(
-			&editor->notification, "ERROR: Cannot close sector, lines intersecting.",
-			&editor->notify_time, 5000);
+	if (point && check_all_sectors_for_intersecting_lines(
+			&editor->sector_list, point->x0, new_coord))
+		add_notification(editor, "ERROR: Cannot close, lines isecting.", 5000);
 	else
 	{
 		point = new_wall_point(new_coord);
@@ -115,7 +110,7 @@ int	add_point_to_list(t_editor *editor, t_editor_sector *sector, t_action *actio
 		else
 			error_output("Error while allocating wallpoints.");
 		sector->nb_of_walls += 1;
-		action->selected_point +=1;
+		action->selected_point += 1;
 	}
 	return (0);
 }

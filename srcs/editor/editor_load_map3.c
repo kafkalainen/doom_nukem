@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 15:14:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:16:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int				editor_get_map_header(unsigned int *pos, unsigned char *buf,
-		t_editor *editor, ssize_t size)
+int	editor_get_map_header(unsigned int *pos, unsigned char *buf,
+	t_editor *editor, ssize_t size)
 {
 	int	linked;
 	int	nbr_of_sectors;
@@ -36,8 +36,8 @@ int				editor_get_map_header(unsigned int *pos, unsigned char *buf,
 	return (nbr_of_sectors);
 }
 
-int				editor_get_player_position(unsigned int *pos,
-				unsigned char *buf, t_plr_pos *plr, ssize_t size)
+int	editor_get_player_position(unsigned int *pos,
+	unsigned char *buf, t_plr_pos *plr, ssize_t size)
 {
 	*pos += get_next_breaker(buf + *pos) + 1;
 	if (*pos > (unsigned int)size)
@@ -54,8 +54,8 @@ int				editor_get_player_position(unsigned int *pos,
 	return (0);
 }
 
-int				editor_parse_vertex_data(t_editor_sector *new,
-				unsigned char *buf, unsigned int *pos, ssize_t size)
+int	editor_parse_vertex_data(t_editor_sector *new,
+	unsigned char *buf, unsigned int *pos, ssize_t size)
 {
 	new->idx_sector = ft_atoi((const char *)buf + *pos);
 	if (get_next_int_value(&new->nb_of_walls, buf, &pos, size))
