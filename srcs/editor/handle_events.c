@@ -3,55 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 10:04:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:03:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-t_editor_sector	*get_clicked_sector(t_editor_sector **list, t_xy click,
-				int *selected_sector)
-{
-	t_editor_sector	*temp;
-
-	temp = *list;
-	while (temp != NULL)
-	{
-		if (check_bbox(temp->bbox.start, temp->bbox.end, click))
-		{
-			*selected_sector = temp->idx_sector;
-			return (temp);
-		}
-		temp = temp->next;
-	}
-	*selected_sector = -1;
-	return (NULL);
-}
-
-t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
-				int *selected_wall, int nbr_of_walls)
-{
-	t_editor_walls	*temp;
-	int				i;
-
-	i = 0;
-	temp = *walls;
-	while (temp != NULL && i < nbr_of_walls)
-	{
-		if (check_bbox(temp->bbox.start, temp->bbox.end, click))
-		{
-			*selected_wall = temp->idx;
-			return (temp);
-		}
-		i++;
-		temp = temp->next;
-	}
-	*selected_wall = -1;
-	return (NULL);
-}
 
 void	editor_edit_wall(t_editor_walls *wall, t_action *action, int *nbr_of_walls, unsigned char **int_string)
 {
@@ -197,6 +156,8 @@ void	editor_edit_sector(t_editor_sector *sector, t_action *action, unsigned char
 
 int		handle_events(t_editor *editor, t_home *home)
 {
+	editor->delta_time = SDL_GetTicks() - editor->cur_time;
+	editor->cur_time = SDL_GetTicks();
 	if (editor->action.edit_entity)
 		edit_entity(editor->temp_entity, &editor->action);
 	if (editor->action.unlink_entity)
@@ -258,5 +219,8 @@ int		handle_events(t_editor *editor, t_home *home)
 	}
 	if (editor->action.open_file == 2)
 		editor_load_map(editor);
+	if (editor->notify_time)
+		notify_user(&editor->notification, &editor->buffer,
+			editor->delta_time, &editor->notify_time);
 	return (1);
 }
