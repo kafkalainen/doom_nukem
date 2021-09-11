@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/10 23:54:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 11:33:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ typedef struct s_action
 	int				set_light_intensity;
 	int				create_light_source;
 	int				add_wall_point;
+	int				write_sector_story;
 }					t_action;
 
 typedef struct s_editor_xyz
@@ -300,8 +301,6 @@ void			close_editor_wall_list(t_editor_walls **head);
 **				Validity checks
 */
 void			close_editor_wall_list(t_editor_walls **head);
-t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
-					t_screen_xy c, t_screen_xy b);
 void			remove_last_point(t_editor_walls **walls, int *nb_of_walls,
 					int selected_point);
 int				check_for_last_point(t_editor_sector *sector, t_action *action);
@@ -344,7 +343,6 @@ void			editor_create_new_sector(t_editor_sector **head,
 int				editor_new_sector_wallpoints(t_editor_sector **head,
 					t_mouse_data *mouse_data, t_action *action);
 void			editor_sort_wall_vertices(t_editor_sector *sector);
-void			edit_story(t_editor_sector *sector, t_action *action);
 void			editor_free_walls(t_editor_walls **head, int nbr_of_walls);
 void			editor_free_sector(t_editor_sector **head);
 void			editor_free_selected_sector(t_editor_sector **head,

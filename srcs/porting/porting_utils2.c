@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   porting_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 16:44:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 11:17:08 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	get_nbr_of_lines(unsigned char *plot)
 	lines = 1;
 	while (plot[i] != '\0')
 	{
-		if (plot[i] == '\n')
+		if (plot[i] == '\n' && plot[i + 1])
 			lines++;
 		i++;
 	}

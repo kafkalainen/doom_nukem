@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_load_map2.c                                 :+:      :+:    :+:   */
+/*   editor_load_map4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 13:20:40 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/09/11 11:23:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,17 @@ int	editor_parse_story_data(t_editor_sector *new, unsigned char *buf,
 	while (i < lines)
 	{
 		if (new->sector_plot == NULL)
+		{
 			new->sector_plot = (unsigned char *)editor_get_next_string(buf, &pos, size);
+			if (lines > 1)
+				new->sector_plot = (unsigned char *)ft_strjoin_freeable((char *)new->sector_plot, "\n", 1, 0);
+		}
 		else
+		{
 			new->sector_plot = (unsigned char *)ft_strjoin_freeable((char *)new->sector_plot, editor_get_next_string(buf, &pos, size), 1, 1);
+			if (i < (lines - 1))
+				new->sector_plot = (unsigned char *)ft_strjoin_freeable((char *)new->sector_plot, "\n", 1, 0);
+		}
 		if (new->sector_plot == NULL)
 			return (1);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/10 20:44:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 10:17:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	init_actions(t_action *action)
 	action->set_light_intensity = 0;
 	action->create_light_source = 0;
 	action->add_wall_point = 0;
+	action->write_sector_story = 0;
 }
 
 static t_editor	setup_editor(t_editor *editor, t_home *home)
@@ -166,6 +167,8 @@ void	launch_editor(t_home *home, SDL_Event *e)
 		free(editor.mapname);
 	if (editor.linked_mapname)
 		free(editor.linked_mapname);
+	if (editor.int_string)
+		free(editor.int_string);
 	editor.temp_entity = NULL;
 	editor.temp_sector = NULL;
 	editor.temp_wall = NULL;

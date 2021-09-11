@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 21:22:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 10:04:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	editor_edit_wall(t_editor_walls *wall, t_action *action, int *nbr_of_walls,
 					wall->height.ceiling = -99;
 				action->edit_ceiling_height = 0;
 			}
-			if (action->edit_floor_height && int_string)
+			if (action->edit_floor_height && *int_string)
 			{
 				wall->height.ground = ft_atoi((const char *)*int_string);
 				if (wall->height.ground > 99)
@@ -181,6 +181,15 @@ void	editor_edit_sector(t_editor_sector *sector, t_action *action, unsigned char
 				*int_string = NULL;
 			}
 			action->set_light_intensity = 0;
+			action->edit_sector = 0;
+		}
+	}
+	if (action->write_sector_story)
+	{
+		read_input_string(&sector->sector_plot, action);
+		if (!action->input_active)
+		{
+			action->write_sector_story = 0;
 			action->edit_sector = 0;
 		}
 	}

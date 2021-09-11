@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 21:29:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 09:39:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ void		draw_frame(t_home *home, t_frame *frame, t_player *plr);
 void		draw_image(t_xy offset, t_texel *tex, t_buffer *buffer,
 				float scale);
 void		draw_test_image(t_xy offset, t_texel *tex, t_buffer *buffer, t_xy scale); // comment to mark this here
-void		draw_input_string(unsigned char *string, t_buffer *buffer,
-				int midpoint, int help_text);
 void		draw_grid(t_buffer *buffer, t_action *action);
 void		draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr);
 int			draw_horizontal_line(t_buffer *buffer, float *depth_buffer,

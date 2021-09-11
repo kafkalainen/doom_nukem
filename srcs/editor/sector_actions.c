@@ -123,6 +123,8 @@ void	editor_free_selected_sector(t_editor_sector **head, t_entity_list **entity_
 		*head = temp->next;
 		// delete_entities_from_sector(entity_head, temp->idx_sector, action);
 		editor_free_walls(&temp->walls, temp->nb_of_walls);
+		if (temp->sector_plot)
+			free(temp->sector_plot);
 		free(temp);
 		reset_sector_indexes(head);
 		action->delete = 0;
@@ -139,6 +141,8 @@ void	editor_free_selected_sector(t_editor_sector **head, t_entity_list **entity_
 	prev->next = temp->next;
 	// delete_entities_from_sector(entity_head, temp->idx_sector, action);
 	editor_free_walls(&temp->walls, temp->nb_of_walls);
+	if (temp->sector_plot)
+		free(temp->sector_plot);
 	free(temp);
 	reset_sector_indexes(head);
 	action->delete = 0;
