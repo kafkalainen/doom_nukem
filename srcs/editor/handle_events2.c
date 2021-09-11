@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 19:32:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 12:03:30 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,19 @@ void	check_grid_events(t_editor *editor)
 			|| editor->action.selected_sector >= 0))
 	{
 		if (editor->action.selected_entity >= 0)
+		{
 			delete_selected_entity(&editor->entity_list, &editor->action);
+			editor->temp_entity = NULL;
+			editor->action.draw_depth = depth_zero;
+		}
 		else if (editor->action.selected_sector >= 0)
+		{
 			editor_free_selected_sector(&editor->sector_list,
 				&editor->entity_list, &editor->action);
+			editor->temp_sector = NULL;
+			editor->action.draw_depth = depth_zero;
+		}
+			
 	}
 	if (editor->action.assign_player_start == 2)
 		editor->action.player_start_assigned

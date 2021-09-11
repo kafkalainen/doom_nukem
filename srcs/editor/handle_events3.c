@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 11:11:11 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 11:34:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int	write_story_ruleset(int *keysym, unsigned char **string)
 		if (c == '\n')
 			return (false);
 		*keysym = '\n';
-		printf("accepted newline\n");
 		return (true);
 	}
 	if (!ft_isprint(*keysym))
