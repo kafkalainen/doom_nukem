@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 14:48:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 15:46:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,8 @@ int		handle_events(t_editor *editor, t_home *home)
 			check_ui_events(editor->mouse_data.x, editor->mouse_data.y,
 				&editor->button_list, &editor->action);
 			editor->mouse_data.i_mbleft = 0;
+			if (editor->action.convert_to_portal == allocate && editor->temp_sector)
+				editor->action.prev_sector = editor->temp_sector->idx_sector;
 		}
 		else if (clicked_inside_grid(editor->mouse_data.x, editor->mouse_data.y,
 				editor->buffer.height, editor->buffer.width))
