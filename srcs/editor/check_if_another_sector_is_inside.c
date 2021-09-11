@@ -6,22 +6,22 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:45:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 11:29:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 11:36:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
 // // DEBUGGING
-static void		print_point(t_screen_xy point, char *str)
-{
-	ft_putendl(str);
-	ft_putstr("x: ");
-	ft_putnbr(point.x);
-	ft_putstr(" y: ");
-	ft_putnbr(point.y);
-	ft_putchar('\n');
-}
+// static void		print_point(t_screen_xy point, char *str)
+// {
+// 	ft_putendl(str);
+// 	ft_putstr("x: ");
+// 	ft_putnbr(point.x);
+// 	ft_putstr(" y: ");
+// 	ft_putnbr(point.y);
+// 	ft_putchar('\n');
+// }
 
 static t_bool	check_point_is_on_bbox_line(t_editor_walls *wall,
 				t_box *box)

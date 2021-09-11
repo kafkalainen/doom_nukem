@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 11:33:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 11:36:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,5 +400,7 @@ int				editor_check_entity_data_header(unsigned char **buf,
 				unsigned int *pos, ssize_t size);
 int				editor_get_entity_data(unsigned char *buf,
 				t_entity_list *entity, unsigned int *pos, ssize_t size);
+t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
+					t_screen_xy c, t_screen_xy b);
 
 #endif
