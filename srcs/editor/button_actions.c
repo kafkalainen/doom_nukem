@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/10 21:14:19 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 09:09:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	sector_button_actions(t_action *action, int i)
 	else if (i == button_create_light_src)
 		action->create_light_source = 1;
 	else if (i == button_input_active)
-		action->input_active = 1;
+	{
+		action->write_sector_story = 1;
+		action->input_active = 1;	
+	}
 	else if (i == button_add_wall_point)
 		action->add_wall_point = 1;
 }

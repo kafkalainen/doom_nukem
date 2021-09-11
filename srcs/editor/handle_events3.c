@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 21:10:30 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 11:11:11 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,18 @@ unsigned char	*delete_char_from_string(unsigned char **string)
 	int				size;
 
 	size = ft_strlen((const char *)*string);
-	if (size > 0)
+	if (size > 1)
 	{
 		temp = (unsigned char *)ft_strndup((const char *)*string, size - 1);
 		free(*string);
 	}
 	else
+	{
+		if (*string != NULL)
+			free(*string);
 		return (NULL);
+	}
+		
 	return (temp);
 }
 
@@ -72,6 +77,40 @@ int	int_string_ruleset(int *keysym, unsigned char **string)
 	return (true);
 }
 
+int	get_last_written_character(unsigned char *string)
+{
+	int	i;
+
+	i = 0;
+	while (string[i])
+		i++;
+	if (i == 0)
+		return ('\n');
+	return ((int)string[i - 1]);
+}
+
+int	write_story_ruleset(int *keysym, unsigned char **string)
+{
+	int	c;
+
+	if (*keysym == '#')
+		return (false);
+	if (*keysym == SDLK_TAB)
+	{
+		if (*string == NULL)
+			return (false);
+		c = get_last_written_character(*string);
+		if (c == '\n')
+			return (false);
+		*keysym = '\n';
+		printf("accepted newline\n");
+		return (true);
+	}
+	if (!ft_isprint(*keysym))
+		return (false);
+	return (true);
+}
+
 void	read_input_string(unsigned char **string, t_action *action)
 {
 	char	c;
@@ -80,12 +119,12 @@ void	read_input_string(unsigned char **string, t_action *action)
 		*string = delete_char_from_string(string);
 	if ((action->save_file && !save_mapname_ruleset(action->keysym, string)) ||
 		((action->edit_ceiling_height || action->edit_floor_height ||
-		action->set_light_intensity) && !int_string_ruleset(&action->keysym, string)))
+		action->set_light_intensity) && !int_string_ruleset(&action->keysym, string)) ||
+		(action->write_sector_story && !write_story_ruleset(&action->keysym, string)))
 	{
 		action->keysym = -1;
 		return ;
 	}
-	// ruleset for plot strings
 	if (action->input_active)
 	{
 		c = action->keysym;

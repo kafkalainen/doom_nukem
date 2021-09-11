@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/10 21:23:21 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 10:58:19 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ void	draw_sector_textfields(t_editor_sector *sector, t_buffer *buffer, t_texture
 	mod.len = ft_strlen(temp) + 1;
 	ft_str_pxl(buffer, vec2(250, 348), temp, mod);
 	ft_strdel(&temp);
-	if (sector->sector_plot)
-	{
-		mod.len = ft_strlen((const char *)sector->sector_plot) + 1;
-		ft_str_pxl(buffer, vec2(32, 580), (char *)sector->sector_plot, mod);
-	}
 }
 
 int	get_color_from_action_data(int i, t_action *action, int end_sector)
@@ -203,19 +198,46 @@ void	draw_entity_textfields(t_entity_list *entity, t_buffer *buffer, t_texture *
 void	draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text)
 {
 	t_plx_modifier	mod;
+	int				y;
+	int				i;
+	int				lines;
+	char			**arr;
 
 	mod.colour = get_color(orange);
 	mod.size = TEXT_SIZE;
-	(void)help_text;
 	if (help_text == map_saving)
 	{
 		mod.len = 26;
 		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Please input text string", mod);
+		if (string != NULL)
+		{
+			mod.colour = get_color(white);
+			mod.len = ft_strlen((const char *)string) + 1;
+			ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)string, mod);
+		}
 	}
-	if (string != NULL)
+	if (help_text == story_string)
 	{
-		mod.len = ft_strlen((const char *)string) + 1;
-		ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)string, mod);
+		mod.len = 86;
+		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Please input sector story string, end writing with 'Return'. Add newline with 'Tab':", mod);
+		if (string != NULL)
+		{
+			i = 0;
+			y = 20;
+			lines = get_nbr_of_lines(string);
+			arr = ft_strsplit((const char *)string, '\n');
+			if (arr)
+			{
+				mod.colour = get_color(white);
+				while (i < lines && arr[i])
+				{
+					mod.len = ft_strlen(arr[i]);
+					ft_str_pxl(buffer, vec2(midpoint - 100, 70 + (i * y)),arr[i], mod);
+					i++;
+				}
+				free_array((unsigned char **)arr);
+			}
+		}
 	}
 }
 
@@ -338,4 +360,6 @@ void	draw_ui(t_editor *editor, t_texture **textures)
 		update_editor_load_menu(&editor->buffer, &editor->action, editor->map_names);
 	if (editor->action.set_light_intensity || editor->action.edit_ceiling_height || editor->action.edit_floor_height)
 		draw_int_string_input(&editor->buffer, &editor->action, &editor->int_string);
+	if (editor->action.write_sector_story && editor->temp_sector != NULL)
+		draw_input_string(editor->temp_sector->sector_plot, &editor->buffer, (editor->buffer.width * 0.5), story_string);
 }
