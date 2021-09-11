@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/11 13:29:38 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:39:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,10 @@ static t_editor	setup_editor(t_editor *editor, t_home *home)
 	editor->button_list = create_button_list(editor->button_list);
 	editor->buffer.width = 1200;
 	editor->buffer.height = 900;
+	editor->cur_time = SDL_GetTicks();
+	editor->notification = NULL;
+	add_notification(&editor->notification, "Hello user, welcome to editor",
+		&editor->notify_time, 3000);
 	// SDL_SetWindowFullscreen(home->win.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	// SDL_GetWindowSize(home->win.window, &editor->buffer.width, &editor->buffer.height);
 	// SDL_SetWindowFullscreen(home->win.window, 0);

@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/11 14:16:39 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/11 14:41:39 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,41 +14,46 @@ NAME = doom-nukem
 
 SRCS = \
 	main.c \
+	editor$(SLASH)allocate_buttons.c \
+	editor$(SLASH)button_actions.c \
 	editor$(SLASH)calculate_centroid.c \
-	editor$(SLASH)check_if_non_convex.c \
-	editor$(SLASH)check_for_intersecting_lines.c \
 	editor$(SLASH)check_all_sectors_for_intersecting_lines.c \
+	editor$(SLASH)check_for_intersecting_lines.c \
+	editor$(SLASH)check_grid_events.c \
 	editor$(SLASH)check_if_another_sector_is_inside.c \
 	editor$(SLASH)create_portals.c \
+	editor$(SLASH)check_if_non_convex.c \
 	editor$(SLASH)draw_buttons.c \
-	editor$(SLASH)draw_editor_sector_bbox.c \
 	editor$(SLASH)draw_editor_entities.c \
-	editor$(SLASH)launch_editor.c \
-	editor$(SLASH)allocate_buttons.c \
-	editor$(SLASH)wall_points.c \
-	editor$(SLASH)wall_points2.c \
+	editor$(SLASH)draw_editor_sectors.c \
+	editor$(SLASH)draw_editor_sector_bbox.c \
+	editor$(SLASH)draw_grid.c \
 	editor$(SLASH)editor_events.c \
-	editor$(SLASH)button_actions.c \
 	editor$(SLASH)editor_entity.c \
 	editor$(SLASH)editor_create_new_sector.c \
-	editor$(SLASH)editor_sort_sector_vertices.c \
-	editor$(SLASH)event_actions.c \
 	editor$(SLASH)editor_get_scalar_to_intersection.c \
-	editor$(SLASH)handle_events.c \
-	editor$(SLASH)handle_events2.c \
-	editor$(SLASH)handle_events3.c \
-	editor$(SLASH)handle_events4.c \
-	editor$(SLASH)sector_actions.c \
 	editor$(SLASH)editor_load_map.c \
 	editor$(SLASH)editor_load_map2.c \
 	editor$(SLASH)editor_load_map3.c \
 	editor$(SLASH)editor_load_map4.c \
 	editor$(SLASH)editor_load_map5.c \
+	editor$(SLASH)editor_sort_sector_vertices.c \
+	editor$(SLASH)event_actions.c \
+	editor$(SLASH)get_clicked_entity.c \
+	editor$(SLASH)get_clicked_sector.c \
+	editor$(SLASH)get_clicked_wall.c \
 	editor$(SLASH)get_ndc.c \
-	editor$(SLASH)draw_grid.c \
-	editor$(SLASH)draw_editor_sectors.c \
-	editor$(SLASH)world_to_screen.c \
+	editor$(SLASH)handle_events.c \
+	editor$(SLASH)handle_events2.c \
+	editor$(SLASH)handle_events3.c \
+	editor$(SLASH)handle_events4.c \
+	editor$(SLASH)launch_editor.c \
 	editor$(SLASH)ndc_to_world.c \
+	editor$(SLASH)notify_user.c \
+	editor$(SLASH)sector_actions.c \
+	editor$(SLASH)wall_points.c \
+	editor$(SLASH)wall_points2.c \
+	editor$(SLASH)world_to_screen.c \
 	entity_logic$(SLASH)activate_lift.c \
 	entity_logic$(SLASH)attack_player.c \
 	entity_logic$(SLASH)check_aggro.c \

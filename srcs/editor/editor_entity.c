@@ -6,29 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/10 12:43:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 12:38:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click, int *selected_entity)
-{
-	t_entity_list	*temp;
-
-	temp = *list;
-	while (temp != NULL)
-	{
-		if (check_bbox(temp->bbox.start, temp->bbox.end, click))
-		{
-			*selected_entity = temp->entity_idx;
-			return (temp);
-		}
-		temp = temp->next;
-	}
-	*selected_entity = -1;
-	return (NULL);
-}
 
 int		get_new_link_index(t_entity_list **list, int current_entity)
 {

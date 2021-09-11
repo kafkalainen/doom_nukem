@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 14:17:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:41:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,10 +221,14 @@ typedef struct s_editor
 	t_entity_list			*temp_entity;
 	t_editor_sector			*temp_sector;
 	t_editor_walls			*temp_wall;
+	Uint32					delta_time;
+	Uint32					cur_time;
+	int						notify_time;
 	char					**map_names;
 	unsigned char			*int_string;
 	unsigned char			*mapname;
 	unsigned char			*linked_mapname;
+	char					*notification;
 	t_mouse_data			mouse_data;
 	t_buffer				buffer;
 	t_window				win;
@@ -404,5 +408,9 @@ int				editor_get_entity_data(unsigned char *buf,
 t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
 					t_screen_xy c, t_screen_xy b);
 void			create_portal_between_sectors(t_editor_sector **head, t_action *action);
+void			notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
+					int *notify_time);
+void			add_notification(char **line, char *message, int *time,
+					int amount);
 
 #endif
