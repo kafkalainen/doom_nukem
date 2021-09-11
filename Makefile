@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2021/09/11 15:06:50 by jnivala          ###   ########.fr        #
-=======
-#    Updated: 2021/09/11 14:41:39 by rzukale          ###   ########.fr        #
->>>>>>> da36a02f5221eb0b694e9bb56fb6dc37a63fbdf7
+#    Updated: 2021/09/11 15:47:18 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
