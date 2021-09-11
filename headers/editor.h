@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 12:11:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:17:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ enum e_buttons
 	button_is_elevator,
 	button_create_light_src,
 	button_input_active,
+	button_convert_to_portal,
 	button_wall_index,
 	button_change_wall_tex,
-	button_convert_to_portal,
 	button_set_ceiling_height,
 	button_set_floor_height,
 	button_create_light_button,
@@ -129,6 +129,8 @@ typedef struct s_action
 	int				link_entity;
 	int				unlink_entity;
 	int				prev_entity;
+	int				prev_wall;
+	int				prev_sector;
 	int				edit_sector;
 	int				input_active;
 	int				keysym;
@@ -401,5 +403,6 @@ int				editor_get_entity_data(unsigned char *buf,
 				t_entity_list *entity, unsigned int *pos, ssize_t size);
 t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
 					t_screen_xy c, t_screen_xy b);
+void			create_portal_between_sectors(t_editor_sector **head, t_action *action);
 
 #endif

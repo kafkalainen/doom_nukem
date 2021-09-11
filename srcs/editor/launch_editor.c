@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/11 10:17:35 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 13:29:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	init_actions(t_action *action)
 	action->create_light_source = 0;
 	action->add_wall_point = 0;
 	action->write_sector_story = 0;
+	action->prev_sector = -1;
+	action->prev_wall = -1;
 }
 
 static t_editor	setup_editor(t_editor *editor, t_home *home)

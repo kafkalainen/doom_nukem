@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 12:08:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 13:56:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static int	buttons_create_sector_layer(t_button **blist, int i)
 		(t_button_info){"Add light source", 1, sector});
 	create_button(blist[i++], (t_box){vec2(32, 435), vec2(205, 460)},
 		(t_button_info){"Write plot", 1, sector});
+	create_button(blist[i++], (t_box){vec2(32, 465), vec2(275, 490)},
+		(t_button_info){"Create portal between sectors", 0, sector});
 	return (i);
 }
 
@@ -73,8 +75,6 @@ static int	buttons_create_wall_layer(t_button **blist, int i)
 		(t_button_info){"wall index:", 0, wall});
 	create_button(blist[i++], (t_box){vec2(32, 80), vec2(275, 105)},
 		(t_button_info){"Wall texture:", 0, wall});
-	create_button(blist[i++], (t_box){vec2(32, 225), vec2(275, 250)},
-		(t_button_info){"Convert to portal", 0, wall});
 	create_button(blist[i++], (t_box){vec2(32, 255), vec2(245, 280)},
 		(t_button_info){"wall ceiling height:", 0, wall});
 	create_button(blist[i++], (t_box){vec2(32, 285), vec2(245, 310)},

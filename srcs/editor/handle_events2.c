@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 13:02:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:21:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,13 @@ void	check_grid_events(t_editor *editor)
 			editor->action.draw_depth = depth_zero;
 		}
 	}
-	// if (editor->action.convert_to_portal == user_input)
-	// {
-	// 	if (editor->temp_sector && editor->temp_wall)
-	// 	{
-			
-	// 	}
-
-	// }
+	if (editor->action.convert_to_portal == user_input)
+	{
+		if (editor->temp_sector && editor->action.prev_sector != -1)
+			create_portal_between_sectors(&editor->sector_list, &editor->action);
+		editor->action.prev_sector = -1;
+		editor->action.convert_to_portal = idle;
+	}
 	if (editor->action.assign_player_start == user_input)
 		editor->action.player_start_assigned
 			= assign_player_start(&editor->sector_list, &editor->action.world_pos,
