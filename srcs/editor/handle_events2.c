@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 12:03:30 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 12:05:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	check_grid_events(t_editor *editor)
 			editor->temp_sector = NULL;
 			editor->action.draw_depth = depth_zero;
 		}
-			
 	}
 	if (editor->action.assign_player_start == 2)
 		editor->action.player_start_assigned

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 10:04:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 12:17:28 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	editor_edit_wall(t_editor_walls *wall, t_action *action, int *nbr_of_walls,
 					wall->height.ceiling = 99;
 				if (wall->height.ceiling < -99)
 					wall->height.ceiling = -99;
-				action->edit_ceiling_height = 0;
 			}
 			if (action->edit_floor_height && *int_string)
 			{
@@ -77,12 +76,13 @@ void	editor_edit_wall(t_editor_walls *wall, t_action *action, int *nbr_of_walls,
 					wall->height.ground = 99;
 				if (wall->height.ground < -99)
 					wall->height.ground = -99;
-				action->edit_floor_height = 0;
 			}
 			if (*int_string)
 				free(*int_string);
 			*int_string = NULL;
 			action->edit_wall = 0;
+			action->edit_ceiling_height = 0;
+			action->edit_floor_height = 0;
 		}
 	}
 	if (action->change_wall_texture)
@@ -176,7 +176,6 @@ void	editor_edit_sector(t_editor_sector *sector, t_action *action, unsigned char
 					sector->light.intensity = 100;
 				if (sector->light.intensity < 0)
 					sector->light.intensity = 0;
-				action->edit_floor_height = 0;
 				free(*int_string);
 				*int_string = NULL;
 			}
