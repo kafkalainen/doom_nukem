@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/10 16:08:31 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/11 10:30:50 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS = \
 	editor$(SLASH)editor_create_new_sector.c \
 	editor$(SLASH)editor_sort_sector_vertices.c \
 	editor$(SLASH)event_actions.c \
+	editor$(SLASH)editor_get_scalar_to_intersection.c \
 	editor$(SLASH)handle_events.c \
 	editor$(SLASH)handle_events2.c \
 	editor$(SLASH)handle_events3.c \
@@ -120,7 +121,6 @@ SRCS = \
 	engine$(SLASH)get_next_wall_tex.c \
 	engine$(SLASH)get_portal_by_idx.c \
 	engine$(SLASH)get_wall_height.c \
-	engine$(SLASH)get_wall_points.c \
 	engine$(SLASH)line_line_intersection.c \
 	engine$(SLASH)line_segment_check.c \
 	engine$(SLASH)recursion_checks.c \

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/10 21:30:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 23:54:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,11 +305,16 @@ t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
 void			remove_last_point(t_editor_walls **walls, int *nb_of_walls,
 					int selected_point);
 int				check_for_last_point(t_editor_sector *sector, t_action *action);
-int				check_for_intersecting_lines(t_editor_sector *sector,
+t_bool			check_for_intersecting_lines(t_editor_sector *sector,
 					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,
 					t_screen_xy p0, t_screen_xy p1);
 int				check_if_non_convex(t_editor_sector *sector);
+t_bool			editor_check_if_same_point(t_screen_xy p0, t_screen_xy p1);
+int				editor_orientation_of_three_points(t_screen_xy a,
+					t_screen_xy b, t_screen_xy c);
+t_bool			editor_get_scalar_to_intersection(t_screen_xy pos, t_screen_xy dir,
+					t_editor_walls *wall, float *t);
 
 /*
 ** Entities

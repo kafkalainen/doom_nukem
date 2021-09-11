@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2_d.c                                           :+:      :+:    :+:   */
+/*   editor_get_scalar_to_intersection.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 11:36:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 11:16:32 by jnivala          ###   ########.fr       */
+/*   Created: 2021/09/11 10:26:51 by jnivala           #+#    #+#             */
+/*   Updated: 2021/09/11 10:53:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-/*
-**	Get distance to intersection gets the scalar of the vector dir. If there
-**	is no scalar, function will return false.
-*/
-t_bool	vec2_get_scalar_to_intersection(t_xy pos, t_xy dir, t_wall *wall,
-		float *t)
+t_bool	editor_get_scalar_to_intersection(t_screen_xy pos, t_screen_xy dir,
+		t_editor_walls *wall, float *t)
 {
 	t_xy	vectors[3];
 	float	dot;
 	float	t1;
 	float	t2;
 
-	vectors[0] = vec2_dec(pos, vec2(wall->top.p[1].x, wall->top.p[1].z));
-	vectors[1] = vec2_dec(vec2(wall->top.p[2].x, wall->top.p[2].z),
-			vec2(wall->top.p[1].x, wall->top.p[1].z));
+	vectors[0] = vec2_dec(vec2(pos.x, pos.y), vec2(wall->x0.x, wall->x0.y));
+	vectors[1] = vec2_dec(vec2(wall->next->x0.x, wall->next->x0.y),
+			vec2(wall->x0.x, wall->x0.y));
 	vectors[2] = vec2(-dir.y, dir.x);
 	dot = vec2_dot(vectors[1], vectors[2]);
 	if (fabsf(dot) < 0.000001)
@@ -40,19 +36,4 @@ t_bool	vec2_get_scalar_to_intersection(t_xy pos, t_xy dir, t_wall *wall,
 		return (true);
 	}
 	return (false);
-}
-
-t_xy	vec2_div(t_xy a, float scalar)
-{
-	scalar = 1 / scalar;
-	return ((t_xy){
-		a.x * scalar,
-		a.y * scalar,
-		1.0f
-	});
-}
-
-float	vec2_ang_simple(t_xy a, t_xy b)
-{
-	return (acosf(vec2_dot(a, b) / (vec2_mag(a) * vec2_mag(b))));
 }

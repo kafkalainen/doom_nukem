@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 08:58:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 11:24:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static int	editor_point_is_on_the_lseg(t_screen_xy a,
+t_bool	editor_point_is_on_the_lseg(t_screen_xy a,
 			t_screen_xy c, t_screen_xy b)
 {
 	t_xy	vec_ab;
@@ -23,16 +23,16 @@ static int	editor_point_is_on_the_lseg(t_screen_xy a,
 	vec_ab = vec2_dec(vec2(b.x, b.y), vec2(a.x, a.y));
 	vec_ac = vec2_dec(vec2(c.x, c.y), vec2(a.x, a.y));
 	if (vec2_cross(vec_ab, vec_ac) != 0)
-		return (0);
+		return (false);
 	dot_ab_ab = vec2_dot(vec_ab, vec_ab);
 	dot_ab_ac = vec2_dot(vec_ab, vec_ac);
 	if (dot_ab_ac > 0 && dot_ab_ac < dot_ab_ab)
-		return (1);
+		return (true);
 	else
-		return (0);
+		return (false);
 }
 
-static int	editor_orientation_of_three_points(t_screen_xy a,
+int	editor_orientation_of_three_points(t_screen_xy a,
 			t_screen_xy b, t_screen_xy c)
 {
 	float	slope;
@@ -46,7 +46,7 @@ static int	editor_orientation_of_three_points(t_screen_xy a,
 		return (c_clockwise);
 }
 
-static t_bool	editor_check_if_lseg_intersects(t_editor_walls *wall,
+static int	editor_check_if_lseg_intersects(t_editor_walls *wall,
 				t_screen_xy pos, t_screen_xy dir)
 {
 	int	or[4];
@@ -59,26 +59,29 @@ static t_bool	editor_check_if_lseg_intersects(t_editor_walls *wall,
 	or[3] = editor_orientation_of_three_points(pos, dir, wall->next->x0);
 	if (or[0] != or[1] && or[2] != or[3])
 		return (true);
-	if (or[0] == colinear && editor_point_is_on_the_lseg(wall->x0, pos, wall->next->x0))
+	if (or[0] == colinear && editor_point_is_on_the_lseg(wall->x0, pos,
+			wall->next->x0))
 		return (true);
-	if (or[1] == colinear && editor_point_is_on_the_lseg(wall->x0, dir, wall->next->x0))
+	if (or[1] == colinear && editor_point_is_on_the_lseg(wall->x0, dir,
+			wall->next->x0))
 		return (true);
 	if (or[2] == colinear && editor_point_is_on_the_lseg(pos, wall->x0, dir))
 		return (true);
-	if (or[3] == colinear && editor_point_is_on_the_lseg(pos, wall->next->x0, dir))
+	if (or[3] == colinear && editor_point_is_on_the_lseg(pos, wall->next->x0,
+			dir))
 		return (true);
 	return (false);
 }
 
-static int	editor_check_if_same_point(t_screen_xy p0, t_screen_xy p1)
+t_bool	editor_check_if_same_point(t_screen_xy p0, t_screen_xy p1)
 {
 	if (p0.x == p1.x && p0.y == p1.y)
-		return (1);
+		return (true);
 	else
-		return (0);
+		return (false);
 }
 
-int	check_for_intersecting_lines(t_editor_sector *sector,
+t_bool	check_for_intersecting_lines(t_editor_sector *sector,
 	t_screen_xy p0, t_screen_xy p1)
 {
 	int				i;
@@ -98,11 +101,11 @@ int	check_for_intersecting_lines(t_editor_sector *sector,
 				&& !editor_check_if_same_point(p1, temp->x0))
 			{
 				if (editor_check_if_lseg_intersects(temp, p0, p1))
-					return (1);
+					return (true);
 			}
 		}
 		temp = temp->next;
 		i++;
 	}
-	return (0);
+	return (false);
 }

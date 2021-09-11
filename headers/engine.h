@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 16:14:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 23:30:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ enum e_lines
 	c_clockwise = 2,
 };
 
+void			add_ceiling(t_home *home, t_frame *frame, t_player *plr);
+void			add_ground(t_home *home, t_frame *frame, t_player *plr);
+void			add_walls(t_home *home, t_frame *frame, t_player *plr);
+void			add_entities(t_home *home, t_frame *frame, t_player *plr);
+void			add_projectiles(t_home *home, t_frame *frame, t_player *plr);
 void			calc_intersection(t_wall *pgon, t_ray *ray,
 					t_intersection *sect);
 void			calc_sector_bounds(t_sector *sector);
@@ -56,8 +61,6 @@ void			continue_from_last_sector(t_wall *start, t_ray_pt *fov,
 int				get_next_wall_tex(t_wall **current_head, int nbr_of_walls);
 t_texel			*get_tex(int idx, t_texture	**textures);
 void			get_wall_pts(t_frame *frame, int walls, t_player *plr);
-void			get_l_pt(t_wall *start, t_ray ray, t_frame *frame, int walls);
-void			get_r_pt(t_wall *start, t_ray ray, t_frame *frame, int walls);
 float			get_wall_height(float left_ground, float right_ground,
 					float left_ceiling, float right_ceiling);
 t_wall			*get_portal_by_idx(int idx, t_sector *sector);
@@ -87,11 +90,6 @@ int				check_intersection(t_wall *p0, t_xy pos, t_xy dir);
 void			quick_reset_queue(t_raster_queue *queue);
 void			draw_queue_empty(t_frame *frame, t_home *home,
 					t_player *plr, int *idx);
-void			add_ceiling(t_home *home, t_frame *frame, t_player *plr);
-void			add_ground(t_home *home, t_frame *frame, t_player *plr);
-void			add_walls(t_home *home, t_frame *frame, t_player *plr);
-void			add_entities(t_home *home, t_frame *frame, t_player *plr);
-void			add_projectiles(t_home *home, t_frame *frame, t_player *plr);
 t_wall			*check_if_too_close_to_walls(t_sector *sector, float width,
 					t_xyz pos, t_xyz dir);
 void			check_if_moved_through_portal(int *cur_sector, t_xyz pos,

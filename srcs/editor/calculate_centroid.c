@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:03:31 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 14:21:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/10 21:16:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ t_xy	calculate_centroid(t_editor_sector *sector)
 		cur_wall = cur_wall->next;
 	}
 	centroid = vec2_div(centroid, sector->nb_of_walls);
-	// printf("centroid x %f, y %f\n", centroid.x, centroid.y);
 	return (centroid);
 }
