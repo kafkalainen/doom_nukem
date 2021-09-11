@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 16:38:52 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 16:48:20 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ int		handle_events(t_editor *editor, t_home *home)
 	}
 	if (editor->action.create_sector == user_input)
 	{
-		if (editor_new_sector_wallpoints(&editor->sector_list,
+		if (editor_new_sector_wallpoints(editor,
 			&editor->mouse_data, &editor->action))
 			editor_free_selected_sector(&editor->sector_list,
 				&editor->entity_list, &editor->action);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/11 14:41:39 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/11 15:47:18 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS = \
 	editor$(SLASH)editor_events.c \
 	editor$(SLASH)editor_entity.c \
 	editor$(SLASH)editor_create_new_sector.c \
-	editor$(SLASH)editor_get_scalar_to_intersection.c \
 	editor$(SLASH)editor_load_map.c \
 	editor$(SLASH)editor_load_map2.c \
 	editor$(SLASH)editor_load_map3.c \
@@ -194,6 +193,7 @@ SRCS = \
 	utilities$(SLASH)audio_cleanup.c \
 	utilities$(SLASH)error_output.c \
 	utilities$(SLASH)fps_timer.c \
+	utilities$(SLASH)ft_roundf_to_grid.c \
 	utilities$(SLASH)initialize_player.c \
 	utilities$(SLASH)is_negative.c \
 	utilities$(SLASH)mem_functions_a.c \
