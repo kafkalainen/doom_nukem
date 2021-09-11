@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 16:48:20 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 17:37:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	editor_edit_wall(t_editor_walls *wall, t_action *action, int *nbr_of_walls,
 	}
 }
 
-void	editor_edit_sector(t_editor_sector *sector, t_action *action, unsigned char **int_string)
+void	editor_edit_sector(t_editor_sector *sector, t_editor *editor)
 {
-	if (action->change_ceiling_texture)
+	if (editor->action.change_ceiling_texture)
 	{
 		if (sector->tex_ceil == -surf0)
 			sector->tex_ceil = -surf1;
@@ -98,10 +98,10 @@ void	editor_edit_sector(t_editor_sector *sector, t_action *action, unsigned char
 			sector->tex_ceil = -surf9;
 		else if (sector->tex_ceil == -surf9)
 			sector->tex_ceil = -surf0;
-		action->change_ceiling_texture = 0;
-		action->edit_sector = 0;
+		editor->action.change_ceiling_texture = 0;
+		editor->action.edit_sector = 0;
 	}
-	if (action->change_floor_texture)
+	if (editor->action.change_floor_texture)
 	{
 		if (sector->tex_floor == -surf0)
 			sector->tex_floor = -surf1;
@@ -123,36 +123,57 @@ void	editor_edit_sector(t_editor_sector *sector, t_action *action, unsigned char
 			sector->tex_floor = -surf9;
 		else if (sector->tex_floor == -surf9)
 			sector->tex_floor = -surf0;
-		action->change_floor_texture = 0;
-		action->edit_sector = 0;
+		editor->action.change_floor_texture = 0;
+		editor->action.edit_sector = 0;
 	}
-	if (action->set_light_intensity)
+	if (editor->action.set_light_intensity)
 	{
-		read_input_string(int_string, action);
-		if (!action->input_active)
+		read_input_string(&editor->int_string, &editor->action);
+		if (!editor->action.input_active)
 		{
-			if (*int_string)
+			if (editor->int_string)
 			{
-				sector->light.intensity = ft_atoi((const char *)*int_string);
+				sector->light.intensity = ft_atoi((const char *)editor->int_string);
 				if (sector->light.intensity > 100)
 					sector->light.intensity = 100;
 				if (sector->light.intensity < 0)
 					sector->light.intensity = 0;
-				free(*int_string);
-				*int_string = NULL;
+				free(editor->int_string);
+				editor->int_string = NULL;
 			}
-			action->set_light_intensity = 0;
-			action->edit_sector = 0;
+			editor->action.set_light_intensity = 0;
+			editor->action.edit_sector = 0;
 		}
 	}
-	if (action->write_sector_story)
+	if (editor->action.write_sector_story)
 	{
-		read_input_string(&sector->sector_plot, action);
-		if (!action->input_active)
+		read_input_string(&sector->sector_plot, &editor->action);
+		if (!editor->action.input_active)
 		{
-			action->write_sector_story = 0;
-			action->edit_sector = 0;
+			editor->action.write_sector_story = 0;
+			editor->action.edit_sector = 0;
 		}
+	}
+	if (editor->action.create_light_source)
+	{
+		editor->action.world_pos.x = editor->temp_sector->centroid.x;
+		editor->action.world_pos.y = editor->temp_sector->centroid.y;
+		create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector);
+		t_entity_list	*temp;
+		t_entity_list	*head;
+		head = editor->entity_list;
+		temp = editor->entity_list;
+		while (temp != NULL && temp->entity_idx != editor->temp_sector->idx_sector && temp->entity_type != lamp)
+			temp = temp->next;
+		if (temp)
+		{
+			editor->temp_sector->light.pos.x = temp->pos.x;
+			editor->temp_sector->light.pos.y = temp->pos.y;
+			editor->temp_sector->light.state = 1;
+		}
+		editor->entity_list = head;
+		editor->action.create_light_source = 0;
+		editor->action.edit_sector = 0;
 	}
 }
 
@@ -170,7 +191,7 @@ int		handle_events(t_editor *editor, t_home *home)
 	if (editor->action.edit_wall && editor->temp_wall != NULL && editor->temp_sector != NULL)
 		editor_edit_wall(editor->temp_wall, &editor->action, &editor->temp_sector->nb_of_walls, &editor->int_string);
 	if (editor->action.edit_sector && editor->temp_sector != NULL)
-		editor_edit_sector(editor->temp_sector, &editor->action, &editor->int_string);
+		editor_edit_sector(editor->temp_sector, editor);
 	if (editor->action.create_sector == allocate)
 	{
 		editor_create_new_sector(&editor->sector_list, &editor->action);

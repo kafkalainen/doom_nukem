@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/11 12:38:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 17:41:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,8 @@ void	initialize_entity_data(t_entity_list *new, t_action *action, t_editor_secto
 		new->entity_type = light_button;
 	else if (action->create_powerstation)
 		new->entity_type = powerstation;
+	else if (action->create_light_source)
+		new->entity_type = lamp;
 	else
 		new->entity_type = skull_skulker;
 	new->is_active = true;
@@ -262,14 +264,27 @@ void	initialize_entity_data(t_entity_list *new, t_action *action, t_editor_secto
 	new->pos.z = ft_roundf_to_grid(action->world_pos.y, 0);
 	new->bbox.start = vec2(new->pos.x - 0.2f, new->pos.z + 0.2f);
 	new->bbox.end = vec2(new->pos.x + 0.2f, new->pos.z - 0.2f);
-	new->pos.y = get_highest_floor_height(&sector->walls, sector->nb_of_walls); // need to calculate height difference between sector floor and entity height
+	if (new->entity_type == lamp)
+	{
+		new->pos.y = 3.0f; // testing
+		new->dir.x = 0;
+		new->dir.y = -1;
+		new->dir.z = 0;
+		new->is_static = 1;
+	}
+	else
+	{
+		new->pos.y = get_highest_floor_height(&sector->walls, sector->nb_of_walls);
+		new->dir.x = 0;
+		new->dir.y = 0;
+		new->dir.z = -1;
+	}
+		 // need to calculate height difference between sector floor and entity height
 	// if (new->entity_type == elevator_button || new->entity_type == light_button || new->entity_type == powerstation)
 	// 	get_direction_from_wall_point(&new->dir, &sector->walls, sector->nb_of_walls, action->selected_wall);
 	// else
 	// {
-	new->dir.x = 0;
-	new->dir.y = 0;
-	new->dir.z = -1;
+		
 	// }
 	new->state = 0;
 	new->entity_idx = 0;
