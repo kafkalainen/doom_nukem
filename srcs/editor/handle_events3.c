@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 11:34:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:34:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ unsigned char	*delete_char_from_string(unsigned char **string)
 			free(*string);
 		return (NULL);
 	}
-		
+
 	return (temp);
 }
 
@@ -112,7 +112,7 @@ int	write_story_ruleset(int *keysym, unsigned char **string)
 
 void	read_input_string(unsigned char **string, t_action *action)
 {
-	char	c;
+	char	c[2];
 
 	if (action->keysym == SDLK_BACKSPACE && *string != NULL)
 		*string = delete_char_from_string(string);
@@ -126,13 +126,14 @@ void	read_input_string(unsigned char **string, t_action *action)
 	}
 	if (action->input_active)
 	{
-		c = action->keysym;
+		c[0] = action->keysym;
+		c[1] = '\0';
 		if (*string == NULL)
-			*string = (unsigned char *)ft_strdup((const char *)&c);
+			*string = (unsigned char *)ft_strdup((const char *)c);
 		else
 		{
 			*string = (unsigned char *)ft_strjoin_freeable((char *)*string,
-					(char *)&c, 1, 0);
+					(char *)c, 1, 0);
 		}
 	}
 	action->keysym = -1;
