@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 12:30:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 12:08:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static int	buttons_create_sector_layer(t_button **blist, int i)
 		(t_button_info){"Add light source", 1, sector});
 	create_button(blist[i++], (t_box){vec2(32, 435), vec2(205, 460)},
 		(t_button_info){"Write plot", 1, sector});
-	create_button(blist[i++], (t_box){vec2(32, 465), vec2(240, 490)},
-		(t_button_info){"Add new wall point", 1, sector});
 	return (i);
 }
 

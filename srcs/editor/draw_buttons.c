@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 10:58:19 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 12:56:28 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,6 +329,23 @@ void	draw_int_string_input(t_buffer *buffer, t_action *action, unsigned char **i
 	}
 }
 
+void	draw_help_text(t_action *action, t_buffer *buffer)
+{
+	t_plx_modifier	mod;
+	int				midpoint;
+
+	mod.colour = get_color(orange);
+	mod.size = TEXT_SIZE;
+	midpoint = (buffer->width * 0.5) - 100;
+	if (action->convert_to_portal)
+	{
+		mod.len = 76;
+		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Use Mouse left click to select the sector you want the portal to point to:", mod);
+		mod.len = 32;
+		ft_str_pxl(buffer, vec2(midpoint - 100, 70), "Use Mouse right click to cancel", mod);
+	}
+}
+
 void	draw_ui(t_editor *editor, t_texture **textures)
 {
 	t_editor_sector	*temp;
@@ -354,6 +371,8 @@ void	draw_ui(t_editor *editor, t_texture **textures)
 			vec2(editor->mouse_data.x, editor->mouse_data.y), get_color(blue), &editor->buffer);
 		editor->entity_list = ent;
 	}
+	if (editor->action.convert_to_portal)
+		draw_help_text(&editor->action, &editor->buffer);
 	if (editor->action.save_file)
 		draw_input_string(editor->mapname, &editor->buffer, (editor->buffer.width * 0.5), map_saving);
 	if (editor->action.open_file || editor->action.link_maps)

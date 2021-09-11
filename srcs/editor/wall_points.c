@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_points.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 23:17:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 13:14:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,21 @@ void	remove_last_point(t_editor_walls **walls, int *nb_of_walls,
 	return ;
 }
 
+void	editor_reset_wall_indexes(t_editor_walls **walls, int nbr_of_walls)
+{
+	t_editor_walls	*temp;
+	int				idx;
+
+	temp = *walls;
+	idx = 0;
+	while (idx < nbr_of_walls)
+	{
+		temp->idx = idx;
+		temp = temp->next;
+		idx++;
+	}
+}
+
 static int	add_last_point(t_editor_sector **head, t_editor_sector *sector,
 			t_action *action, t_editor_walls *point)
 {
@@ -79,6 +94,7 @@ static int	add_last_point(t_editor_sector **head, t_editor_sector *sector,
 		}
 		sector->centroid = calculate_centroid(sector);
 		editor_sort_wall_vertices(sector);
+		editor_reset_wall_indexes(&sector->walls, sector->nb_of_walls);
 		action->create_sector = idle;
 	}
 	return (0);

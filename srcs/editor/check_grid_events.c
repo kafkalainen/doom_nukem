@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 13:41:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:18:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,29 @@ void	check_grid_events(t_editor *editor)
 			|| editor->action.selected_sector >= 0))
 	{
 		if (editor->action.selected_entity >= 0)
+		{
 			delete_selected_entity(&editor->entity_list, &editor->action);
+			editor->temp_entity = NULL;
+			editor->action.draw_depth = depth_zero;
+		}
 		else if (editor->action.selected_sector >= 0)
+		{
 			editor_free_selected_sector(&editor->sector_list,
 				&editor->entity_list, &editor->action);
+			editor->temp_sector = NULL;
+			editor->action.draw_depth = depth_zero;
+		}
 	}
-	if (editor->action.assign_player_start == 2)
+	if (editor->action.assign_player_start == user_input)
 		editor->action.player_start_assigned
 			= assign_player_start(&editor->sector_list, &editor->action.world_pos,
 				&editor->plr, &editor->action.assign_player_start);
-	if (editor->action.assign_end_sector == 2)
+	if (editor->action.assign_end_sector == user_input)
 		assign_end_sector(&editor->sector_list, &editor->action.world_pos,
 			&editor->end_sector, &editor->action.assign_end_sector);
-	if (editor->action.link_entity == 2 && editor->action.prev_entity != -1 && editor->temp_entity != NULL)
+	if (editor->action.link_entity == user_input && editor->action.prev_entity != -1 && editor->temp_entity != NULL)
 	{
 		link_entities(&editor->entity_list, editor->action.world_pos, editor->action.prev_entity);
-		editor->action.link_entity = 0;
+		editor->action.link_entity = idle;
 	}
 }

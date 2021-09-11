@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 14:06:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:19:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ enum e_buttons
 	button_is_elevator,
 	button_create_light_src,
 	button_input_active,
-	button_add_wall_point,
 	button_wall_index,
 	button_change_wall_tex,
 	button_convert_to_portal,

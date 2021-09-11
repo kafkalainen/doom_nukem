@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/11 14:11:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:22:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static t_editor	setup_editor(t_editor *editor, t_home *home)
 	editor->buffer.width = 1200;
 	editor->buffer.height = 900;
 	editor->cur_time = SDL_GetTicks();
+	editor->notification = NULL;
 	add_notification(&editor->notification, "Hello user, welcome to editor",
 		&editor->notify_time, 3000);
 	// SDL_SetWindowFullscreen(home->win.window, SDL_WINDOW_FULLSCREEN_DESKTOP);

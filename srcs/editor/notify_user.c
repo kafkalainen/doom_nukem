@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 13:11:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 14:05:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/11 14:21:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
 
 void	add_notification(char **line, char *message, int *time, int amount)
 {
+	if (*line != NULL)
+		return ;
 	*line = ft_strdup(message);
 	*time = amount;
 }
