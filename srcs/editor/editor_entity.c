@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/12 21:55:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 22:29:11 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,7 @@ void	get_direction_from_wall(t_entity_list *new, t_editor_sector *sector, int wa
 			new->dir.z = 1;
 		}
 	}
+	
 	new->dir.y = 0;
 }
 
