@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/11 13:52:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 22:11:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,19 +99,10 @@ void	wall_button_actions(t_action *action, int i)
 		action->edit_floor_height = 1;
 		action->input_active = 1;
 	}
-
 	else if (i == button_create_light_button)
-	{
 		action->create_light_button = 1;
-		printf("add a light button\n");
-	}
-
 	else if (i == button_create_powerstation)
-	{
 		action->create_powerstation = 1;
-		printf("add a powerstation\n");
-	}
-
 }
 
 t_bool	check_bbox(t_xy start, t_xy end, t_xy click)

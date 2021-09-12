@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/12 21:55:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 22:12:20 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,13 @@ void	editor_edit_wall(t_editor *editor)
 		if (entity_creation_is_allowed(&editor->entity_list, editor->temp_sector, &editor->action))
 			create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector, editor->temp_sector->centroid);
 		editor->action.create_light_button = 0;
+		editor->action.edit_wall = 0;
+	}
+	if (editor->action.create_powerstation)
+	{
+		if (entity_creation_is_allowed(&editor->entity_list, editor->temp_sector, &editor->action))
+			create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector, editor->temp_sector->centroid);
+		editor->action.create_powerstation = 0;
 		editor->action.edit_wall = 0;
 	}
 }
