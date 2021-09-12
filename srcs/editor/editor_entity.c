@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/12 19:14:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 20:25:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	delete_selected_entity(t_entity_list **head, t_action *action)
 	t_entity_list	*prev;
 
 	temp = *head;
-	if (temp == NULL)
+	if (!temp)
 		return ;
 	if (temp != NULL && temp->entity_idx == action->selected_entity)
 	{
@@ -177,6 +177,8 @@ void	edit_entity(t_entity_list *entity, t_action *action, t_editor_sector *secto
 			entity->is_linked = 0;
 		else
 			entity->is_linked = 1;
+		if (entity->entity_type == lamp)
+			sector->light.is_linked = entity->is_linked;
 		action->toggle_entity_is_linked = 0;
 	}
 	else if (action->toggle_is_revealed)
@@ -414,13 +416,6 @@ void	initialize_entity_data(t_entity_list *new, t_action *action, t_editor_secto
 		init_non_static_entity(new, sector, pos);
 	new->bbox.start = vec2(new->pos.x - 0.2f, new->pos.z + 0.2f);
 	new->bbox.end = vec2(new->pos.x + 0.2f, new->pos.z - 0.2f);
-		 // need to calculate height difference between sector floor and entity height
-	// if (new->entity_type == elevator_button || new->entity_type == light_button || new->entity_type == powerstation)
-	// 	get_direction_from_wall_point(&new->dir, &sector->walls, sector->nb_of_walls, action->selected_wall);
-	// else
-	// {
-		
-	// }
 	new->entity_idx = 0;
 }
 

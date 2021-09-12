@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 14:46:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 20:00:01 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	check_grid_events(t_editor *editor)
 		{
 			delete_selected_entity(&editor->entity_list, &editor->action);
 			editor->temp_entity = NULL;
+			editor->temp_sector = NULL;
+			editor->action.selected_sector = -1;
 			editor->action.draw_depth = depth_zero;
 		}
 		else if (editor->action.selected_sector >= 0)

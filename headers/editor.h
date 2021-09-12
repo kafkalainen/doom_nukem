@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/12 18:18:21 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 19:30:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,8 +208,6 @@ typedef struct s_editor_sector
 	int						tex_floor;
 	int						tex_ceil;
 	int						is_elevator;
-	int						has_light_button;
-	int						has_light_source;
 	struct s_editor_sector	*next;
 }					t_editor_sector;
 

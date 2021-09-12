@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_create_new_sector.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:22:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 13:26:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/12 19:30:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void	editor_initialize_sector_values(t_editor_sector *new,
 	new->tex_floor = -surf0;
 	new->light.pos.x = 0;
 	new->light.pos.y = 0;
-	new->has_light_button = 0;
-	new->has_light_source = 0;
 	new->light.intensity = 0;
 	new->light.is_linked = 0;
 	new->light.state = 0;

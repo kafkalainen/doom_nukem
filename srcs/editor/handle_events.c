@@ -6,17 +6,47 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/12 18:18:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 20:37:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
+t_bool	entity_creation_is_allowed(t_entity_list **head, t_editor_sector *sector, t_action *action)
+{
+	t_entity_list	*temp;
+	// t_editor_walls	*wall;
+	// int				i;
+
+	temp = *head;
+	if (action->create_light_button) // only 1 allowed
+	{
+		while (temp != NULL)
+		{
+			if (temp->entity_type == light_button && temp->sector_idx == sector->idx_sector)
+				return (false);
+			temp = temp->next;
+		}
+	}
+	if (action->create_light_source) // only 1 allowed
+	{
+		while (temp != NULL)
+		{
+			if (temp->entity_type == lamp && temp->sector_idx == sector->idx_sector)
+				return (false);
+			temp = temp->next;
+		}
+	}
+	// if (action->create_elev_button) // has to be in elevator sector
+	// {
+
+	// }
+	// if (action->create_powerstation) // cannot create on top of something
+	return (true);
+}
+
 void	editor_edit_wall(t_editor *editor)
 {
-	t_editor_walls	*wall;
-
-	wall = editor->temp_wall;
 	if (editor->action.edit_ceiling_height || editor->action.edit_floor_height)
 	{
 		read_input_string(&editor->int_string, &editor->action);
@@ -24,19 +54,19 @@ void	editor_edit_wall(t_editor *editor)
 		{
 			if (editor->action.edit_ceiling_height && editor->int_string)
 			{
-				wall->height.ceiling = ft_atoi((const char *)editor->int_string);
-				if (wall->height.ceiling > 99)
-					wall->height.ceiling = 99;
-				if (wall->height.ceiling < -99)
-					wall->height.ceiling = -99;
+				editor->temp_wall->height.ceiling = ft_atoi((const char *)editor->int_string);
+				if (editor->temp_wall->height.ceiling > 99)
+					editor->temp_wall->height.ceiling = 99;
+				if (editor->temp_wall->height.ceiling < -99)
+					editor->temp_wall->height.ceiling = -99;
 			}
 			if (editor->action.edit_floor_height && editor->int_string)
 			{
-				wall->height.ground = ft_atoi((const char *)editor->int_string);
-				if (wall->height.ground > 99)
-					wall->height.ground = 99;
-				if (wall->height.ground < -99)
-					wall->height.ground = -99;
+				editor->temp_wall->height.ground = ft_atoi((const char *)editor->int_string);
+				if (editor->temp_wall->height.ground > 99)
+					editor->temp_wall->height.ground = 99;
+				if (editor->temp_wall->height.ground < -99)
+					editor->temp_wall->height.ground = -99;
 			}
 			if (editor->int_string)
 				free(editor->int_string);
@@ -48,37 +78,56 @@ void	editor_edit_wall(t_editor *editor)
 	}
 	if (editor->action.change_wall_texture)
 	{
-		if (wall->type < 0)
+		if (editor->temp_wall->type < 0)
 		{
-			if (wall->type == -wall0)
-				wall->type = -wall1;
-			else if (wall->type == -wall1)
-				wall->type = -wall2;
-			else if (wall->type == -wall2)
-				wall->type = -wall3;
-			else if (wall->type == -wall3)
-				wall->type = -wall4;
-			else if (wall->type == -wall4)
-				wall->type = -wall5;
-			else if (wall->type == -wall5)
-				wall->type = -wall6;
-			else if (wall->type == -wall6)
-				wall->type = -wall7;
-			else if (wall->type == -wall7)
-				wall->type = -wall8;
-			else if (wall->type == -wall8)
-				wall->type = -wall9;
-			else if (wall->type == -wall9)
-				wall->type = -wall0;
+			if (editor->temp_wall->type == -wall0)
+				editor->temp_wall->type = -wall1;
+			else if (editor->temp_wall->type == -wall1)
+				editor->temp_wall->type = -wall2;
+			else if (editor->temp_wall->type == -wall2)
+				editor->temp_wall->type = -wall3;
+			else if (editor->temp_wall->type == -wall3)
+				editor->temp_wall->type = -wall4;
+			else if (editor->temp_wall->type == -wall4)
+				editor->temp_wall->type = -wall5;
+			else if (editor->temp_wall->type == -wall5)
+				editor->temp_wall->type = -wall6;
+			else if (editor->temp_wall->type == -wall6)
+				editor->temp_wall->type = -wall7;
+			else if (editor->temp_wall->type == -wall7)
+				editor->temp_wall->type = -wall8;
+			else if (editor->temp_wall->type == -wall8)
+				editor->temp_wall->type = -wall9;
+			else if (editor->temp_wall->type == -wall9)
+				editor->temp_wall->type = -wall0;
 		}
 		editor->action.change_wall_texture = 0;
 		editor->action.edit_wall = 0;
 	}
 	if (editor->action.create_light_button)
 	{
-		create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector, editor->temp_sector->centroid);
+		if (entity_creation_is_allowed(&editor->entity_list, editor->temp_sector, &editor->action))
+			create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector, editor->temp_sector->centroid);
 		editor->action.create_light_button = 0;
 		editor->action.edit_wall = 0;
+	}
+}
+
+void	update_sector_light_values(t_editor_sector *sector, t_entity_list **head)
+{
+	t_entity_list	*temp;
+
+	temp = *head;
+	while (temp != NULL)
+	{
+		if (temp->sector_idx == sector->idx_sector && temp->entity_type == lamp)
+		{
+			sector->light.pos.x = temp->pos.x;
+			sector->light.pos.y = temp->pos.y;
+			sector->light.state = temp->state;
+			break ;
+		}
+		temp = temp->next;
 	}
 }
 
@@ -167,20 +216,11 @@ void	editor_edit_sector(t_editor *editor)
 	}
 	if (editor->action.create_light_source)
 	{
-		create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector, editor->temp_sector->centroid);
-		t_entity_list	*temp;
-		t_entity_list	*head;
-		head = editor->entity_list;
-		temp = editor->entity_list;
-		while (temp != NULL && temp->entity_idx != editor->temp_sector->idx_sector && temp->entity_type != lamp)
-			temp = temp->next;
-		if (temp)
+		if (entity_creation_is_allowed(&editor->entity_list, editor->temp_sector, &editor->action))
 		{
-			editor->temp_sector->light.pos.x = temp->pos.x;
-			editor->temp_sector->light.pos.y = temp->pos.y;
-			editor->temp_sector->light.state = temp->state;
+			create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector, editor->temp_sector->centroid);
+			update_sector_light_values(editor->temp_sector, &editor->entity_list);
 		}
-		editor->entity_list = head;
 		editor->action.create_light_source = 0;
 		editor->action.edit_sector = 0;
 	}
