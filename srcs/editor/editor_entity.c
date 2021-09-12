@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/11 17:41:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 19:14:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	delete_selected_entity(t_entity_list **head, t_action *action)
 	action->selected_entity = -1;
 }
 
-void	edit_entity(t_entity_list *entity, t_action *action)
+void	edit_entity(t_entity_list *entity, t_action *action, t_editor_sector *sector)
 {
 	if (action->change_entity_type)
 	{
@@ -201,6 +201,8 @@ void	edit_entity(t_entity_list *entity, t_action *action)
 			entity->state = 1;
 		else
 			entity->state = 0;
+		if (entity->entity_type == lamp)
+			sector->light.state = entity->state;
 		action->toggle_state = 0;
 	}
 	action->edit_entity = 0;
@@ -243,42 +245,175 @@ int		get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls)
 // 	}
 // }
 
-void	initialize_entity_data(t_entity_list *new, t_action *action, t_editor_sector *sector)
+int	get_selected_floor_height(t_editor_sector *sector, int wall_idx)
 {
+	t_editor_walls	*temp;
+	int				i;
+
+	temp = sector->walls;
+	i = 0;
+	while (i < sector->nb_of_walls && temp->idx != wall_idx)
+		temp = temp->next;
+	if (!temp)
+		error_output("Wall is null pointer\n");
+	return (temp->height.ground);
+}
+
+t_xy	get_midpoint_of_walls(t_editor_sector *sector, int wall_idx)
+{
+	t_editor_walls	*temp;
+	t_xy			midpoint;
+	int				i;
+
+	temp = sector->walls;
+	i = 0;
+	while (i < sector->nb_of_walls && temp->idx != wall_idx)
+		temp = temp->next;
+	if (!temp)
+		error_output("Wall is null pointer\n");
+	if (temp->x0.x < temp->next->x0.x)
+		midpoint.x = (temp->next->x0.x + temp->x0.x) * 0.5;
+	else
+		midpoint.x = (temp->x0.x + temp->next->x0.x) * 0.5;
+	if (temp->x0.y < temp->next->x0.y)
+		midpoint.y = (temp->next->x0.y + temp->x0.y) * 0.5;
+	else
+		midpoint.y = (temp->x0.y + temp->next->x0.y) * 0.5;
+	midpoint.w = 0.0f;
+	return (midpoint);
+	
+}
+
+void	get_direction_from_wall(t_entity_list *new, t_xy point, t_editor_sector *sector, int wall_idx)
+{
+	t_editor_walls	*temp;
+	int				i;
+	int				x_div;
+	int				y_div;
+	t_xy			dir;
+	t_xy			temp_pos;
+	t_xy			test_dir;
+
+	temp = sector->walls;
+	i = 0;
+	while (i < sector->nb_of_walls && temp->idx != wall_idx)
+		temp = temp->next;
+	if (!temp)
+		error_output("Wall is null pointer\n");
+	x_div = temp->next->x0.x - temp->x0.x;
+	y_div = temp->next->x0.y - temp->x0.y;
+	if (x_div == 0)
+	{
+		if (sector->centroid.x < new->pos.x)
+		{
+			new->dir.x = -1;
+			new->dir.y = 0;
+			new->dir.z = 0;
+		}
+		else
+		{
+			new->dir.x = 1;
+			new->dir.y = 0;
+			new->dir.z = 0;
+		}
+	}
+	else if (y_div == 0)
+	{
+		if (sector->centroid.y < new->pos.z)
+		{
+			new->dir.x = 0;
+			new->dir.y = 0;
+			new->dir.z = -1;
+		}
+		else
+		{
+			new->dir.x = 0;
+			new->dir.y = 0;
+			new->dir.z = 1;
+		}
+	}
+	else
+	{
+		temp_pos.x = new->pos.x;
+		temp_pos.y = new->pos.z;
+		temp_pos.w = 0.0f;
+		dir = vec2_add(point, vec2_dec(sector->centroid, point));
+		test_dir = vec2_normal(point, dir);
+		printf("temp_pos x: %f, y: %f\n", temp_pos.x, temp_pos.y);
+		printf("dir x: %f, y: %f\n", dir.x, dir.y);
+		printf("test dir x: %f, y: %f\n", test_dir.x, test_dir.y);
+		printf("x_div x: %i, x_div y: %i\n", x_div, y_div);
+		new->dir.x = dir.x;
+		new->dir.z = dir.y;
+		new->dir.y = 0;
+	}
+}
+
+void	init_static_entity(t_entity_list *new, t_action *action, t_editor_sector *sector, t_xy pos)
+{
+	t_xy	point;
+
 	if (action->create_elev_button)
 		new->entity_type = lift_button;
 	else if (action->create_light_button)
 		new->entity_type = light_button;
 	else if (action->create_powerstation)
 		new->entity_type = powerstation;
-	else if (action->create_light_source)
-		new->entity_type = lamp;
 	else
-		new->entity_type = skull_skulker;
+		new->entity_type = lamp;
 	new->is_active = true;
 	new->is_linked = 0;
 	new->is_revealed = 0;
-	new->is_static = 0;
+	new->is_static = true;
+	new->state = true;
 	new->sector_idx = sector->idx_sector;
-	new->pos.x = ft_roundf_to_grid(action->world_pos.x, 0);
-	new->pos.z = ft_roundf_to_grid(action->world_pos.y, 0);
-	new->bbox.start = vec2(new->pos.x - 0.2f, new->pos.z + 0.2f);
-	new->bbox.end = vec2(new->pos.x + 0.2f, new->pos.z - 0.2f);
-	if (new->entity_type == lamp)
+	if (action->create_elev_button || action->create_light_button ||
+		action->create_powerstation)
 	{
+		point = get_midpoint_of_walls(sector, action->selected_wall);
+		new->pos.x = point.x;
+		new->pos.z = point.y;
+		new->pos.y = get_selected_floor_height(sector, action->selected_wall) + 1;
+		get_direction_from_wall(new, point, sector, action->selected_wall);
+	}
+	else
+	{
+		new->pos.x = pos.x;
+		new->pos.z = pos.y;
 		new->pos.y = 3.0f; // testing
 		new->dir.x = 0;
 		new->dir.y = -1;
 		new->dir.z = 0;
-		new->is_static = 1;
 	}
+	new->is_static = 1;
+}
+
+void	init_non_static_entity(t_entity_list *new, t_editor_sector *sector, t_xy pos)
+{
+	new->entity_type = skull_skulker;
+	new->is_active = true;
+	new->is_linked = false;
+	new->is_revealed = false;
+	new->is_static = false;
+	new->sector_idx = sector->idx_sector;
+	new->state = false;
+	new->pos.x = ft_roundf_to_grid(pos.x, 0);
+	new->pos.z = ft_roundf_to_grid(pos.y, 0);
+	new->pos.y = get_highest_floor_height(&sector->walls, sector->nb_of_walls);
+	new->dir.x = 0;
+	new->dir.y = 0;
+	new->dir.z = -1;
+}
+
+void	initialize_entity_data(t_entity_list *new, t_action *action, t_editor_sector *sector, t_xy pos)
+{
+	if (action->create_elev_button || action->create_light_button ||
+		action->create_powerstation || action->create_light_source)
+		init_static_entity(new, action, sector, pos);
 	else
-	{
-		new->pos.y = get_highest_floor_height(&sector->walls, sector->nb_of_walls);
-		new->dir.x = 0;
-		new->dir.y = 0;
-		new->dir.z = -1;
-	}
+		init_non_static_entity(new, sector, pos);
+	new->bbox.start = vec2(new->pos.x - 0.2f, new->pos.z + 0.2f);
+	new->bbox.end = vec2(new->pos.x + 0.2f, new->pos.z - 0.2f);
 		 // need to calculate height difference between sector floor and entity height
 	// if (new->entity_type == elevator_button || new->entity_type == light_button || new->entity_type == powerstation)
 	// 	get_direction_from_wall_point(&new->dir, &sector->walls, sector->nb_of_walls, action->selected_wall);
@@ -286,11 +421,10 @@ void	initialize_entity_data(t_entity_list *new, t_action *action, t_editor_secto
 	// {
 		
 	// }
-	new->state = 0;
 	new->entity_idx = 0;
 }
 
-void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *sector)
+void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *sector, t_xy pos)
 {
 	t_entity_list	*temp;
 	t_entity_list	*new;
@@ -300,7 +434,7 @@ void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *
 	new = (t_entity_list *)malloc(sizeof(t_entity_list));
 	if (!new)
 		error_output("Memory allocation of new entity failed\n");
-	initialize_entity_data(new, action, sector);
+	initialize_entity_data(new, action, sector, pos);
 	new->next = NULL;
 	if (*head == NULL)
 		*head = new;

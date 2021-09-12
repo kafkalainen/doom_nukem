@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 16:53:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 18:18:21 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,7 +324,7 @@ void			editor_reset_wall_indexes(t_editor_walls **walls, int nbr_of_walls);
 */
 
 void			create_new_entity(t_entity_list **head,
-					t_action *action, t_editor_sector *sector);
+					t_action *action, t_editor_sector *sector, t_xy pos);
 int				editor_parse_entity_data(t_editor *editor, unsigned char *buf,
 					ssize_t size);
 void			delete_selected_entity(t_entity_list **head, t_action *action);
@@ -334,7 +334,7 @@ t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click,
 					int *selected_entity);
 int				link_entities(t_entity_list **list, t_xy click,
 					int current_entity);
-void			edit_entity(t_entity_list *entity, t_action *action);
+void			edit_entity(t_entity_list *entity, t_action *action, t_editor_sector *sector);
 void			free_all_entities(t_entity_list **head);
 
 /*

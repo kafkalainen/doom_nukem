@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_entity_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:46:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:52:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/12 16:43:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	check_entity_data_header(unsigned char **buf, unsigned int *pos,
 	if (*pos > (unsigned int)size)
 		error_output("ERROR: Invalid buffer length.");
 	home->nbr_of_entities = ft_atoi((const char *)*buf + *pos);
-	home->entity_pool = (t_entity **)malloc(sizeof(t_entity)
+	home->entity_pool = (t_entity **)malloc(sizeof(t_entity *)
 			* (home->nbr_of_entities + 1));
 	if (!home->entity_pool)
 		error_output("ERROR: Memory allocation for entity pool failed.");
@@ -96,7 +96,7 @@ int	parse_entity_data(unsigned char *buf, t_home *home, ssize_t size)
 	check_entity_data_header(&buf, &pos, home, size);
 	while (i < home->nbr_of_entities)
 	{
-		home->entity_pool[i] = ft_memalloc(sizeof(t_entity));
+		home->entity_pool[i] = (t_entity *)ft_memalloc(sizeof(t_entity));
 		home->entity_pool[i]->entity_index = i;
 		if (home->entity_pool[i] == NULL)
 			error_output("ERROR: Memory allocation for an entity failed.");

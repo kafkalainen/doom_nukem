@@ -6,45 +6,47 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 17:37:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 18:18:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	editor_edit_wall(t_editor_walls *wall, t_action *action, int *nbr_of_walls, unsigned char **int_string)
+void	editor_edit_wall(t_editor *editor)
 {
-	(void)nbr_of_walls;
-	if (action->edit_ceiling_height || action->edit_floor_height)
+	t_editor_walls	*wall;
+
+	wall = editor->temp_wall;
+	if (editor->action.edit_ceiling_height || editor->action.edit_floor_height)
 	{
-		read_input_string(int_string, action);
-		if (!action->input_active)
+		read_input_string(&editor->int_string, &editor->action);
+		if (!editor->action.input_active)
 		{
-			if (action->edit_ceiling_height && *int_string)
+			if (editor->action.edit_ceiling_height && editor->int_string)
 			{
-				wall->height.ceiling = ft_atoi((const char *)*int_string);
+				wall->height.ceiling = ft_atoi((const char *)editor->int_string);
 				if (wall->height.ceiling > 99)
 					wall->height.ceiling = 99;
 				if (wall->height.ceiling < -99)
 					wall->height.ceiling = -99;
 			}
-			if (action->edit_floor_height && *int_string)
+			if (editor->action.edit_floor_height && editor->int_string)
 			{
-				wall->height.ground = ft_atoi((const char *)*int_string);
+				wall->height.ground = ft_atoi((const char *)editor->int_string);
 				if (wall->height.ground > 99)
 					wall->height.ground = 99;
 				if (wall->height.ground < -99)
 					wall->height.ground = -99;
 			}
-			if (*int_string)
-				free(*int_string);
-			*int_string = NULL;
-			action->edit_wall = 0;
-			action->edit_ceiling_height = 0;
-			action->edit_floor_height = 0;
+			if (editor->int_string)
+				free(editor->int_string);
+			editor->int_string = NULL;
+			editor->action.edit_wall = 0;
+			editor->action.edit_ceiling_height = 0;
+			editor->action.edit_floor_height = 0;
 		}
 	}
-	if (action->change_wall_texture)
+	if (editor->action.change_wall_texture)
 	{
 		if (wall->type < 0)
 		{
@@ -69,13 +71,22 @@ void	editor_edit_wall(t_editor_walls *wall, t_action *action, int *nbr_of_walls,
 			else if (wall->type == -wall9)
 				wall->type = -wall0;
 		}
-		action->change_wall_texture = 0;
-		action->edit_wall = 0;
+		editor->action.change_wall_texture = 0;
+		editor->action.edit_wall = 0;
+	}
+	if (editor->action.create_light_button)
+	{
+		create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector, editor->temp_sector->centroid);
+		editor->action.create_light_button = 0;
+		editor->action.edit_wall = 0;
 	}
 }
 
-void	editor_edit_sector(t_editor_sector *sector, t_editor *editor)
+void	editor_edit_sector(t_editor *editor)
 {
+	t_editor_sector	*sector;
+
+	sector = editor->temp_sector;
 	if (editor->action.change_ceiling_texture)
 	{
 		if (sector->tex_ceil == -surf0)
@@ -156,9 +167,7 @@ void	editor_edit_sector(t_editor_sector *sector, t_editor *editor)
 	}
 	if (editor->action.create_light_source)
 	{
-		editor->action.world_pos.x = editor->temp_sector->centroid.x;
-		editor->action.world_pos.y = editor->temp_sector->centroid.y;
-		create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector);
+		create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector, editor->temp_sector->centroid);
 		t_entity_list	*temp;
 		t_entity_list	*head;
 		head = editor->entity_list;
@@ -169,7 +178,7 @@ void	editor_edit_sector(t_editor_sector *sector, t_editor *editor)
 		{
 			editor->temp_sector->light.pos.x = temp->pos.x;
 			editor->temp_sector->light.pos.y = temp->pos.y;
-			editor->temp_sector->light.state = 1;
+			editor->temp_sector->light.state = temp->state;
 		}
 		editor->entity_list = head;
 		editor->action.create_light_source = 0;
@@ -182,16 +191,16 @@ int		handle_events(t_editor *editor, t_home *home)
 	editor->delta_time = SDL_GetTicks() - editor->cur_time;
 	editor->cur_time = SDL_GetTicks();
 	if (editor->action.edit_entity)
-		edit_entity(editor->temp_entity, &editor->action);
+		edit_entity(editor->temp_entity, &editor->action, editor->temp_sector);
 	if (editor->action.unlink_entity)
 	{
 		unlink_selected_entity(&editor->entity_list,
 			editor->action.selected_entity, &editor->action.unlink_entity);
 	}
 	if (editor->action.edit_wall && editor->temp_wall != NULL && editor->temp_sector != NULL)
-		editor_edit_wall(editor->temp_wall, &editor->action, &editor->temp_sector->nb_of_walls, &editor->int_string);
+		editor_edit_wall(editor);
 	if (editor->action.edit_sector && editor->temp_sector != NULL)
-		editor_edit_sector(editor->temp_sector, editor);
+		editor_edit_sector(editor);
 	if (editor->action.create_sector == allocate)
 	{
 		editor_create_new_sector(&editor->sector_list, &editor->action);
@@ -209,7 +218,7 @@ int		handle_events(t_editor *editor, t_home *home)
 	if (editor->action.create_entity == user_input)
 	{
 		create_new_entity(&editor->entity_list, &editor->action,
-			editor->temp_sector);
+			editor->temp_sector, editor->action.world_pos);
 		editor->action.create_entity = idle;
 	}
 	if (editor->mouse_data.i_mbleft && !editor->action.input_active)

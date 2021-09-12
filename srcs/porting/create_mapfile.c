@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_mapfile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/07 16:30:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/12 17:23:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	create_map_file(t_home *home, t_editor *editor)
 	write_all_audio_data(&fd);
 	doom_close(&fd);
 	create_hash(editor->mapname);
+	printf("Map saved successfully\n");
 	return (1);
 }
 

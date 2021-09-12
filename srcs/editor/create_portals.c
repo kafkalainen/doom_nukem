@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:16:04 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/11 16:39:11 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/11 17:49:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	create_portal_between_sectors(t_editor_sector **head, t_action *action)
 		if (check_if_lseg_intersects(&vec, &vec_two, &link_from->centroid, &dir))
 		{
 			found = 1;
-			printf("found a wall idx %i\n", wall_one->idx);
 			break ;
 		}
 		wall_one = wall_one->next;
@@ -67,7 +66,6 @@ void	create_portal_between_sectors(t_editor_sector **head, t_action *action)
 		if (check_if_lseg_intersects(&vec, &vec_two, &link_to->centroid, &dir))
 		{
 			found = 1;
-			printf("found a 2nd wall idx %i\n", wall_two->idx);
 			break ;
 		}
 		wall_two = wall_two->next;
