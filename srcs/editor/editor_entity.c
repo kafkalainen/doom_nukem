@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/12 20:25:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/12 21:55:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,24 +229,6 @@ int		get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls)
 	return (highest + 1);
 }
 
-// void	get_direction_from_wall_points(t_editor_xyz *dir, t_editor_walls **walls, int nbr_of_walls, int selected_wall)
-// {
-// 	t_editor_walls	*temp;
-// 	int				i;
-
-// 	i = 0;
-// 	temp = *walls;
-// 	while (temp != NULL && i < nbr_of_walls)
-// 	{
-// 		if (temp->idx == selected_wall)
-// 		{
-
-// 		}
-// 		i++;
-// 		temp = temp->next;
-// 	}
-// }
-
 int	get_selected_floor_height(t_editor_sector *sector, int wall_idx)
 {
 	t_editor_walls	*temp;
@@ -286,15 +268,13 @@ t_xy	get_midpoint_of_walls(t_editor_sector *sector, int wall_idx)
 	
 }
 
-void	get_direction_from_wall(t_entity_list *new, t_xy point, t_editor_sector *sector, int wall_idx)
+void	get_direction_from_wall(t_entity_list *new, t_editor_sector *sector, int wall_idx)
 {
 	t_editor_walls	*temp;
 	int				i;
 	int				x_div;
 	int				y_div;
-	t_xy			dir;
-	t_xy			temp_pos;
-	t_xy			test_dir;
+	t_xy			pos;
 
 	temp = sector->walls;
 	i = 0;
@@ -309,13 +289,11 @@ void	get_direction_from_wall(t_entity_list *new, t_xy point, t_editor_sector *se
 		if (sector->centroid.x < new->pos.x)
 		{
 			new->dir.x = -1;
-			new->dir.y = 0;
 			new->dir.z = 0;
 		}
 		else
 		{
 			new->dir.x = 1;
-			new->dir.y = 0;
 			new->dir.z = 0;
 		}
 	}
@@ -324,31 +302,39 @@ void	get_direction_from_wall(t_entity_list *new, t_xy point, t_editor_sector *se
 		if (sector->centroid.y < new->pos.z)
 		{
 			new->dir.x = 0;
-			new->dir.y = 0;
 			new->dir.z = -1;
 		}
 		else
 		{
 			new->dir.x = 0;
-			new->dir.y = 0;
 			new->dir.z = 1;
 		}
 	}
 	else
 	{
-		temp_pos.x = new->pos.x;
-		temp_pos.y = new->pos.z;
-		temp_pos.w = 0.0f;
-		dir = vec2_add(point, vec2_dec(sector->centroid, point));
-		test_dir = vec2_normal(point, dir);
-		printf("temp_pos x: %f, y: %f\n", temp_pos.x, temp_pos.y);
-		printf("dir x: %f, y: %f\n", dir.x, dir.y);
-		printf("test dir x: %f, y: %f\n", test_dir.x, test_dir.y);
-		printf("x_div x: %i, x_div y: %i\n", x_div, y_div);
-		new->dir.x = dir.x;
-		new->dir.z = dir.y;
-		new->dir.y = 0;
+		pos = get_midpoint_of_walls(sector, wall_idx);
+		if (pos.x < sector->centroid.x && pos.y > sector->centroid.y)
+		{
+			new->dir.x = 1;
+			new->dir.z = -1;
+		}
+		else if (pos.x > sector->centroid.x && pos.y > sector->centroid.y)
+		{
+			new->dir.x = -1;
+			new->dir.z = -1;
+		}
+		else if (pos.x > sector->centroid.x && pos.y < sector->centroid.y)
+		{
+			new->dir.x = -1;
+			new->dir.z = 1;
+		}
+		else if (pos.x < sector->centroid.x && pos.y < sector->centroid.y)
+		{
+			new->dir.x = 1;
+			new->dir.z = 1;
+		}
 	}
+	new->dir.y = 0;
 }
 
 void	init_static_entity(t_entity_list *new, t_action *action, t_editor_sector *sector, t_xy pos)
@@ -376,7 +362,7 @@ void	init_static_entity(t_entity_list *new, t_action *action, t_editor_sector *s
 		new->pos.x = point.x;
 		new->pos.z = point.y;
 		new->pos.y = get_selected_floor_height(sector, action->selected_wall) + 1;
-		get_direction_from_wall(new, point, sector, action->selected_wall);
+		get_direction_from_wall(new, sector, action->selected_wall);
 	}
 	else
 	{
