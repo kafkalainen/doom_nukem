@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 10:52:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/13 10:53:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_bool	activate_power_station(t_entity *power_station, t_player *plr)
 	if (power_station->state)
 	{
 		power_station->state = 0;
-		plr->recharge = 6000;
+		plr->recharge = 5000;
 		play_sound(plr->audio.recharge, 30);
 		return (true);
 	}
