@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/12 22:29:11 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/13 13:37:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,9 +272,7 @@ void	get_direction_from_wall(t_entity_list *new, t_editor_sector *sector, int wa
 {
 	t_editor_walls	*temp;
 	int				i;
-	int				x_div;
-	int				y_div;
-	t_xy			pos;
+	t_xy			norm;
 
 	temp = sector->walls;
 	i = 0;
@@ -282,60 +280,29 @@ void	get_direction_from_wall(t_entity_list *new, t_editor_sector *sector, int wa
 		temp = temp->next;
 	if (!temp)
 		error_output("Wall is null pointer\n");
-	x_div = temp->next->x0.x - temp->x0.x;
-	y_div = temp->next->x0.y - temp->x0.y;
-	if (x_div == 0)
-	{
-		if (sector->centroid.x < new->pos.x)
-		{
-			new->dir.x = -1;
-			new->dir.z = 0;
-		}
-		else
-		{
-			new->dir.x = 1;
-			new->dir.z = 0;
-		}
-	}
-	else if (y_div == 0)
-	{
-		if (sector->centroid.y < new->pos.z)
-		{
-			new->dir.x = 0;
-			new->dir.z = -1;
-		}
-		else
-		{
-			new->dir.x = 0;
-			new->dir.z = 1;
-		}
-	}
-	else
-	{
-		pos = get_midpoint_of_walls(sector, wall_idx);
-		if (pos.x < sector->centroid.x && pos.y > sector->centroid.y)
-		{
-			new->dir.x = 1;
-			new->dir.z = -1;
-		}
-		else if (pos.x > sector->centroid.x && pos.y > sector->centroid.y)
-		{
-			new->dir.x = -1;
-			new->dir.z = -1;
-		}
-		else if (pos.x > sector->centroid.x && pos.y < sector->centroid.y)
-		{
-			new->dir.x = -1;
-			new->dir.z = 1;
-		}
-		else if (pos.x < sector->centroid.x && pos.y < sector->centroid.y)
-		{
-			new->dir.x = 1;
-			new->dir.z = 1;
-		}
-	}
-	
+	norm = vec2_normal(vec2(temp->x0.x, temp->x0.y),vec2(temp->next->x0.x, temp->next->x0.y));
+	new->dir.x = norm.x;
+	new->dir.z = norm.y;
 	new->dir.y = 0;
+}
+
+int		get_lowest_ceiling_height(t_editor_walls **walls, int nbr_of_walls)
+{
+	t_editor_walls	*wall;
+	int				i;
+	int				ceiling_height;
+
+	i = 0;
+	wall = *walls;
+	ceiling_height = wall->height.ceiling;
+	while (i < nbr_of_walls)
+	{
+		if (ceiling_height < wall->height.ceiling)
+			ceiling_height = wall->height.ceiling;
+		i++;
+		wall = wall->next;
+	}
+	return (ceiling_height);
 }
 
 void	init_static_entity(t_entity_list *new, t_action *action, t_editor_sector *sector, t_xy pos)
@@ -369,7 +336,7 @@ void	init_static_entity(t_entity_list *new, t_action *action, t_editor_sector *s
 	{
 		new->pos.x = pos.x;
 		new->pos.z = pos.y;
-		new->pos.y = 3.0f; // testing
+		new->pos.y = get_lowest_ceiling_height(&sector->walls, sector->nb_of_walls);
 		new->dir.x = 0;
 		new->dir.y = -1;
 		new->dir.z = 0;
