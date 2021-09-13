@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/12 22:11:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/13 16:33:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ void		main_button_actions(t_action *action, int i)
 		else
 			action->grid = 1;
 	}
-	else if (i == button_create_sector)
-	{
-		if (action->create_sector == idle)
-			action->create_sector = allocate;
-	}
 	else if (i == button_assign_end_sector)
 		action->assign_end_sector = 1;
 	else if (i == button_link_map  && action->nbr_of_maps > 0)
@@ -42,8 +37,6 @@ void		main_button_actions(t_action *action, int i)
 		action->unlink_maps = 1;
 	else if (i == button_plr_start)
 		action->assign_player_start = 1;
-	else if (i == button_create_elevator)
-		action->create_elevator = 1;
 }
 
 void	sector_button_actions(t_action *action, int i)
@@ -58,6 +51,8 @@ void	sector_button_actions(t_action *action, int i)
 		action->input_active = 1;
 		action->set_light_intensity = 1;
 	}
+	else if (i == button_convert_to_elevator)
+		action->create_elevator = 1;
 	else if (i == button_create_light_src)
 		action->create_light_source = 1;
 	else if (i == button_input_active)
@@ -65,7 +60,7 @@ void	sector_button_actions(t_action *action, int i)
 		action->write_sector_story = 1;
 		action->input_active = 1;	
 	}
-	else if (i == button_convert_to_portal)
+	else if (i == button_create_portal)
 		action->convert_to_portal = 1;
 }
 
@@ -103,6 +98,8 @@ void	wall_button_actions(t_action *action, int i)
 		action->create_light_button = 1;
 	else if (i == button_create_powerstation)
 		action->create_powerstation = 1;
+	else if (i == button_create_elevator_button)
+		action->create_elev_button = 1;
 }
 
 t_bool	check_bbox(t_xy start, t_xy end, t_xy click)

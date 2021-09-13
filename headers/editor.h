@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/13 12:02:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/13 15:48:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,25 @@ enum e_buttons
 	button_save,
 	button_open,
 	button_activate_grid,
-	button_create_sector,
 	button_assign_end_sector,
 	button_link_map,
 	button_unlink_map,
 	button_plr_start,
-	button_create_elevator,
-	button_edit_sector,
+	button_sector_index,
 	button_change_floor_tex,
 	button_change_ceil_tex,
 	button_set_light_intensity,
-	button_is_elevator,
+	button_convert_to_elevator,
 	button_create_light_src,
 	button_input_active,
-	button_convert_to_portal,
+	button_create_portal,
 	button_wall_index,
 	button_change_wall_tex,
 	button_set_ceiling_height,
 	button_set_floor_height,
 	button_create_light_button,
 	button_create_powerstation,
+	button_create_elevator_button,
 	button_entity_index,
 	button_change_entity_type,
 	button_toggle_entity_is_linked,

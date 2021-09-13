@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 13:56:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/13 17:09:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,14 @@ static int	buttons_create_general_layer(t_button **blist, int i)
 		(t_button_info){"Load map", 0, depth_zero});
 	create_button(blist[i++], (t_box){vec2(32, 110), vec2(195, 135)},
 		(t_button_info){"Toggle grid = G", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 140), vec2(185, 165)},
-		(t_button_info){"New Sector = F", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 170), vec2(215, 195)},
+	create_button(blist[i++], (t_box){vec2(32, 140), vec2(215, 165)},
 		(t_button_info){"Assign end sector", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 200), vec2(195, 225)},
+	create_button(blist[i++], (t_box){vec2(32, 170), vec2(195, 195)},
 		(t_button_info){"Link map", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 230), vec2(195, 255)},
+	create_button(blist[i++], (t_box){vec2(32, 200), vec2(195, 225)},
 		(t_button_info){"Unlink map", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 260), vec2(235, 285)},
+	create_button(blist[i++], (t_box){vec2(32, 230), vec2(235, 255)},
 		(t_button_info){"Assign player start", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 290), vec2(195, 315)},
-		(t_button_info){"Create elevator", 0, depth_zero});
 	return (i);
 }
 
@@ -59,7 +55,7 @@ static int	buttons_create_sector_layer(t_button **blist, int i)
 	create_button(blist[i++], (t_box){vec2(32, 345), vec2(235, 370)},
 		(t_button_info){"Set Light intensity", 1, sector});
 	create_button(blist[i++], (t_box){vec2(32, 375), vec2(195, 400)},
-		(t_button_info){"Is elevator", 1, sector});
+		(t_button_info){"Convert to elevator", 1, sector});
 	create_button(blist[i++], (t_box){vec2(32, 405), vec2(210, 430)},
 		(t_button_info){"Add light source", 1, sector});
 	create_button(blist[i++], (t_box){vec2(32, 435), vec2(205, 460)},
@@ -83,6 +79,8 @@ static int	buttons_create_wall_layer(t_button **blist, int i)
 		(t_button_info){"Add light button", 0, wall});
 	create_button(blist[i++], (t_box){vec2(32, 340), vec2(275, 365)},
 		(t_button_info){"Add powerstation", 0, wall});
+	create_button(blist[i++], (t_box){vec2(32, 370), vec2(275, 395)},
+		(t_button_info){"Add elevator button", 0, wall});
 	return (i);
 }
 

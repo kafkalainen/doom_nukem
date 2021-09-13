@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/13 12:04:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/13 17:02:37 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,15 @@ t_bool	entity_creation_is_allowed(t_entity_list **head, t_editor_sector *sector,
 			temp = temp->next;
 		}
 	}
-	// if (action->create_elev_button) // has to be in elevator sector
-	// {
-
-	// }
+	if (action->create_elev_button) // only 1 allowed
+	{
+		while (temp != NULL)
+		{
+			if (temp->entity_type == lift_button && temp->sector_idx == sector->idx_sector)
+				return (false);
+			temp = temp->next;
+		}
+	}
 	// if (action->create_powerstation) // cannot create on top of something
 	return (true);
 }
@@ -127,6 +132,13 @@ void	editor_edit_wall(t_editor *editor)
 		editor->action.create_powerstation = 0;
 		editor->action.edit_wall = 0;
 	}
+	if (editor->action.create_elev_button)
+	{
+		if (entity_creation_is_allowed(&editor->entity_list, editor->temp_sector, &editor->action))
+			create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector, editor->temp_sector->centroid);
+		editor->action.create_elev_button = 0;
+		editor->action.edit_wall = 0;
+	}
 }
 
 void	update_sector_light_values(t_editor_sector *sector, t_entity_list **head)
@@ -145,6 +157,66 @@ void	update_sector_light_values(t_editor_sector *sector, t_entity_list **head)
 		}
 		temp = temp->next;
 	}
+}
+
+t_bool	check_nbr_of_portals(t_editor_walls **walls, int nbr_of_walls)
+{
+	t_editor_walls	*wall;
+	int				i;
+	int				nbr_of_portals;
+
+	i = 0;
+	nbr_of_portals = 0;
+	wall = *walls;
+	while (i < nbr_of_walls)
+	{
+		if (wall->type >= 0)
+			nbr_of_portals++;
+		i++;
+		wall = wall->next;
+	}
+	if (nbr_of_portals != 2)
+		return (false);
+	return (true);
+}
+
+t_bool	check_for_elevator_button(t_entity_list **head, int sector_idx)
+{
+	t_entity_list	*temp;
+
+	temp = *head;
+	while (temp)
+	{
+		if (temp->sector_idx == sector_idx && temp->entity_type == lift_button)
+			break ;
+		temp = temp->next;
+	}
+	if (!temp)
+		return (false);
+	return (true);
+}
+
+t_bool	check_elevator_prerequisites(t_entity_list **head, t_editor_sector **sectors, t_action *action)
+{
+	t_editor_sector	*sector;
+
+	sector = *sectors;
+	while (sector)
+	{
+		if (sector->idx_sector == action->selected_sector)
+			break ;
+		sector = sector->next;
+	}
+	if (!sector)
+		return (false);
+	if (!check_nbr_of_portals(&sector->walls, sector->nb_of_walls))
+		return (false);
+	if (!check_for_elevator_button(head, sector->idx_sector))
+		return (false);
+	// connecting sectors must be:
+	// higher sector lowest floor must be higher than lower floors highest ceiling
+	// lower sector ceiling must be lower than higher sector lowest floor
+	return (true);
 }
 
 void	editor_edit_sector(t_editor *editor)
@@ -238,6 +310,13 @@ void	editor_edit_sector(t_editor *editor)
 			update_sector_light_values(editor->temp_sector, &editor->entity_list);
 		}
 		editor->action.create_light_source = 0;
+		editor->action.edit_sector = 0;
+	}
+	if (editor->action.create_elevator)
+	{
+		if (check_elevator_prerequisites(&editor->entity_list, &editor->sector_list, &editor->action))
+			// convert_sector_to_elevator(editor->temp_sector);
+		editor->action.create_elevator = 0;
 		editor->action.edit_sector = 0;
 	}
 }
