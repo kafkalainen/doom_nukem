@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:25:29 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 09:46:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/13 17:59:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ void	save_editor_map(t_editor *editor, t_home *home)
 			editor->action.map_name_set = 1;
 		}
 		if (check_saving_prerequisites(editor))
+		{
 			create_map_file(home, editor);
+		}
 		editor->action.save_file = 0;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/13 13:37:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/13 19:27:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ int	get_selected_floor_height(t_editor_sector *sector, int wall_idx)
 	return (temp->height.ground);
 }
 
-t_xy	get_midpoint_of_walls(t_editor_sector *sector, int wall_idx)
+void	get_midpoint_of_walls(t_editor_sector *sector, int wall_idx, int *x, int *y)
 {
 	t_editor_walls	*temp;
 	t_xy			midpoint;
@@ -264,8 +264,8 @@ t_xy	get_midpoint_of_walls(t_editor_sector *sector, int wall_idx)
 	else
 		midpoint.y = (temp->x0.y + temp->next->x0.y) * 0.5;
 	midpoint.w = 0.0f;
-	return (midpoint);
-	
+	*x = midpoint.x;
+	*y = midpoint.y;
 }
 
 void	get_direction_from_wall(t_entity_list *new, t_editor_sector *sector, int wall_idx)
@@ -307,8 +307,6 @@ int		get_lowest_ceiling_height(t_editor_walls **walls, int nbr_of_walls)
 
 void	init_static_entity(t_entity_list *new, t_action *action, t_editor_sector *sector, t_xy pos)
 {
-	t_xy	point;
-
 	if (action->create_elev_button)
 		new->entity_type = lift_button;
 	else if (action->create_light_button)
@@ -326,9 +324,7 @@ void	init_static_entity(t_entity_list *new, t_action *action, t_editor_sector *s
 	if (action->create_elev_button || action->create_light_button ||
 		action->create_powerstation)
 	{
-		point = get_midpoint_of_walls(sector, action->selected_wall);
-		new->pos.x = point.x;
-		new->pos.z = point.y;
+		get_midpoint_of_walls(sector, action->selected_wall, &new->pos.x, &new->pos.z);
 		new->pos.y = get_selected_floor_height(sector, action->selected_wall) + 1;
 		get_direction_from_wall(new, sector, action->selected_wall);
 	}
