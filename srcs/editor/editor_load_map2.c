@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/13 11:08:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/13 12:53:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	free_walls(t_editor_walls **head, int nbr_of_walls)
 {
 	t_editor_walls	*temp;
-	int 			i;
+	int				i;
 
 	i = 0;
 	while (*head != NULL && i < nbr_of_walls)
@@ -75,12 +75,14 @@ void	reload_editor_with_defaults(t_editor *editor, char *path)
 	editor->mouse_data.y = 0;
 	editor->mouse_data.x_rel = 0;
 	editor->mouse_data.y_rel = 0;
-	editor->mapname = (unsigned char *)ft_strnew(sizeof(unsigned char) * (ft_strlen((const char *)path) + 1));
-	editor->mapname = (unsigned char *)ft_strcpy((char *)editor->mapname, (const char *)path);
+	editor->mapname = (unsigned char *)ft_strnew(sizeof(unsigned char)
+			* (ft_strlen((const char *)path) + 1));
+	editor->mapname = (unsigned char *)ft_strcpy((char *)editor->mapname,
+			(const char *)path);
 	editor->action.map_name_set = 1;
 }
 
-int		editor_parse_map_name(t_editor *editor, ssize_t size,
+int	editor_parse_map_name(t_editor *editor, ssize_t size,
 		unsigned char *buf, unsigned int **pos)
 {
 	size_t	len;
@@ -89,6 +91,7 @@ int		editor_parse_map_name(t_editor *editor, ssize_t size,
 	if (**pos > (unsigned int)size)
 		return (1);
 	len = get_next_breaker(buf + **pos);
-	editor->linked_mapname = (unsigned char *)ft_strndup((const char *)buf + **pos, len - 1);
+	editor->linked_mapname
+		= (unsigned char *)ft_strndup((const char *)buf + **pos, len - 1);
 	return (0);
 }
