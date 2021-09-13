@@ -18,5 +18,4 @@ void	mouse_zoom(t_action *action, int zoom)
 		action->offsetf.x *= action->scalarf;
 		action->offsetf.y *= action->scalarf;
 	}
-	printf("%f\n", action->scalarf);
 }

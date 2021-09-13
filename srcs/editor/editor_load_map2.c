@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_load_map2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 13:20:40 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/09/13 11:08:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	reload_editor_with_defaults(t_editor *editor, char *path)
 		free(editor->linked_mapname);
 	editor->mapname = NULL;
 	editor->linked_mapname = NULL;
-	init_actions(&editor->action);
+	initialize_actions(&editor->action);
 	editor->mouse_data.i_mbleft = 0;
 	editor->mouse_data.i_mbright = 0;
 	editor->mouse_data.selected = -1;

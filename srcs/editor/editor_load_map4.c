@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_load_map4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 15:48:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/13 12:04:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,19 @@ int	editor_parse_story_data(t_editor_sector *new, unsigned char *buf,
 		return (0);
 	while (i < lines)
 	{
-		if (new->sector_plot == NULL)
+		if (new->plot_line == NULL)
 		{
-			new->sector_plot = (unsigned char *)editor_get_next_string(buf, &pos, size);
+			new->plot_line = (unsigned char *)editor_get_next_string(buf, &pos, size);
 			if (lines > 1)
-				new->sector_plot = (unsigned char *)ft_strjoin_freeable((char *)new->sector_plot, "\n", 1, 0);
+				new->plot_line = (unsigned char *)ft_strjoin_freeable((char *)new->plot_line, "\n", 1, 0);
 		}
 		else
 		{
-			new->sector_plot = (unsigned char *)ft_strjoin_freeable((char *)new->sector_plot, editor_get_next_string(buf, &pos, size), 1, 1);
+			new->plot_line = (unsigned char *)ft_strjoin_freeable((char *)new->plot_line, editor_get_next_string(buf, &pos, size), 1, 1);
 			if (i < (lines - 1))
-				new->sector_plot = (unsigned char *)ft_strjoin_freeable((char *)new->sector_plot, "\n", 1, 0);
+				new->plot_line = (unsigned char *)ft_strjoin_freeable((char *)new->plot_line, "\n", 1, 0);
 		}
-		if (new->sector_plot == NULL)
+		if (new->plot_line == NULL)
 			return (1);
 		i++;
 	}

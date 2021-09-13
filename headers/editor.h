@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/12 19:30:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/13 12:02:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ typedef struct s_editor_sector
 	t_editor_light			light;
 	t_box					bbox;
 	t_xy					centroid;
-	unsigned char			*sector_plot;
+	unsigned char			*plot_line;
 	int						nb_of_walls;
 	int						idx_sector;
 	int						tex_floor;
@@ -342,6 +342,7 @@ void			free_all_entities(t_entity_list **head);
 t_xy			calculate_centroid(t_editor_sector *sector);
 void			editor_create_new_sector(t_editor_sector **head,
 				t_action *action);
+t_editor_sector	*editor_add_new_sector_to_list_end(t_editor_sector **head);
 int				editor_new_sector_wallpoints(t_editor *editor,
 					t_mouse_data *mouse_data, t_action *action);
 void			editor_sort_wall_vertices(t_editor_sector *sector);
@@ -355,7 +356,8 @@ void			editor_free_selected_sector(t_editor_sector **head,
 */
 
 t_xy			get_ndc(t_buffer *buffer, t_screen_xy coord);
-void			init_actions(t_action *action);
+void			initialize_editor_values(t_editor *editor);
+void			initialize_actions(t_action *action);
 void			init_mouse_data(t_mouse_data *mouse_data);
 
 void			editor_load_map(t_editor *editor);
@@ -373,6 +375,7 @@ t_xy			ndc_to_world(t_xy ndc, t_xy offset, float scalar);
 float			ft_roundf_to_grid(float nb, int prec);
 int				editor_select_entity_tex(Uint32 type);
 void			free_walls(t_editor_walls **head, int nbr_of_walls);
+void			free_editor_data(t_editor *editor);
 
 int				editor_get_sector_data(unsigned char *buf,
 				unsigned int *pos, ssize_t size, t_editor_sector **head);

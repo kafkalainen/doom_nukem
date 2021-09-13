@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_load_map2.c                                 :+:      :+:    :+:   */
+/*   editor_load_map5.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaarela <tmaarela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/10 13:20:40 by tmaarela         ###   ########.fr       */
+/*   Updated: 2021/09/13 12:04:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,9 @@
 int	editor_get_sector_data(unsigned char *buf, unsigned int *pos,
 	ssize_t size, t_editor_sector **head)
 {
-	t_editor_sector	*temp;
 	t_editor_sector	*new;
 
-	new = (t_editor_sector *)malloc(sizeof(t_editor_sector));
-	if (!new)
-		return (1);
-	new->next = NULL;
-	if (*head == NULL)
-		*head = new;
-	else
-	{
-		temp = *head;
-		while (temp->next != NULL)
-			temp = temp->next;
-		temp->next = new;
-		new->next = NULL;
-	}
+	new = editor_add_new_sector_to_list_end(head);
 	if (!buf)
 		return (1);
 	*pos += get_next_breaker(buf + *pos) + 1;
@@ -42,7 +28,7 @@ int	editor_get_sector_data(unsigned char *buf, unsigned int *pos,
 	if (*pos > (unsigned int)size)
 		return (1);
 	new->walls = NULL;
-	new->sector_plot = NULL;
+	new->plot_line = NULL;
 	if (editor_parse_vertex_data(new, buf, pos, size))
 		return (1);
 	if (editor_add_points(new, buf, &pos, size))
@@ -54,7 +40,7 @@ int	editor_get_sector_data(unsigned char *buf, unsigned int *pos,
 	return (0);
 }
 
-int		editor_parse_sector_data(t_editor *editor, unsigned char *buf, ssize_t size)
+int	editor_parse_sector_data(t_editor *editor, unsigned char *buf, ssize_t size)
 {
 	unsigned int	pos;
 	int				i;
@@ -63,7 +49,7 @@ int		editor_parse_sector_data(t_editor *editor, unsigned char *buf, ssize_t size
 	i = 0;
 	pos = 0;
 	buf = (unsigned char *)ft_strstr((const char *)buf, "doom_nukem_sectors");
-	if (!buf )
+	if (!buf)
 		return (1);
 	nbr_of_sectors = editor_get_map_header(&pos, buf, editor, size);
 	if (nbr_of_sectors < 0)
@@ -83,7 +69,8 @@ int		editor_parse_sector_data(t_editor *editor, unsigned char *buf, ssize_t size
 	return (0);
 }
 
-int	editor_check_entity_data_header(unsigned char **buf, unsigned int *pos, ssize_t size)
+int	editor_check_entity_data_header(unsigned char **buf, unsigned int *pos,
+	ssize_t size)
 {
 	int	i;
 

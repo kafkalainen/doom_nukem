@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/11 15:47:18 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/13 11:57:21 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS = \
 	editor$(SLASH)editor_events.c \
 	editor$(SLASH)editor_entity.c \
 	editor$(SLASH)editor_create_new_sector.c \
+	editor$(SLASH)editor_add_new_sector_to_list_end.c \
 	editor$(SLASH)editor_load_map.c \
 	editor$(SLASH)editor_load_map2.c \
 	editor$(SLASH)editor_load_map3.c \
@@ -38,6 +39,7 @@ SRCS = \
 	editor$(SLASH)editor_load_map5.c \
 	editor$(SLASH)editor_sort_sector_vertices.c \
 	editor$(SLASH)event_actions.c \
+	editor$(SLASH)free_editor_data.c \
 	editor$(SLASH)get_clicked_entity.c \
 	editor$(SLASH)get_clicked_sector.c \
 	editor$(SLASH)get_clicked_wall.c \
@@ -46,6 +48,8 @@ SRCS = \
 	editor$(SLASH)handle_events2.c \
 	editor$(SLASH)handle_events3.c \
 	editor$(SLASH)handle_events4.c \
+	editor$(SLASH)initialize_actions.c \
+	editor$(SLASH)initialize_editor_values.c \
 	editor$(SLASH)launch_editor.c \
 	editor$(SLASH)ndc_to_world.c \
 	editor$(SLASH)notify_user.c \

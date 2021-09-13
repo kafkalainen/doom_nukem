@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/12 22:32:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/13 12:04:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ void	editor_edit_sector(t_editor *editor)
 	}
 	if (editor->action.write_sector_story)
 	{
-		read_input_string(&sector->sector_plot, &editor->action);
+		read_input_string(&sector->plot_line, &editor->action);
 		if (!editor->action.input_active)
 		{
 			editor->action.write_sector_story = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 16:44:16 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/13 12:05:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	draw_wall_textfields(t_editor_walls *wall, t_buffer *buffer, t_texture **te
 
 	if (!wall || wall->type >= 0)
 		return ;
-	
+
 	box.start = vec2(32, 110);
 	box.end = vec2(132, 220);
 	tex = get_tex(wall->type, textures);
@@ -266,7 +266,7 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 		mod.len = 37;
 		ft_str_pxl(buffer, vec2(310, 70), "Select which map to load into editor", mod);
 	}
-		
+
 	box.start.x = 310;
 	box.start.y = 100;
 	box.end.x = 700;
@@ -394,5 +394,5 @@ void	draw_ui(t_editor *editor, t_texture **textures)
 	if (editor->action.set_light_intensity || editor->action.edit_ceiling_height || editor->action.edit_floor_height)
 		draw_int_string_input(&editor->buffer, &editor->action, &editor->int_string);
 	if (editor->action.write_sector_story && editor->temp_sector != NULL)
-		draw_input_string(editor->temp_sector->sector_plot, &editor->buffer, (editor->buffer.width * 0.5), story_string);
+		draw_input_string(editor->temp_sector->plot_line, &editor->buffer, (editor->buffer.width * 0.5), story_string);
 }

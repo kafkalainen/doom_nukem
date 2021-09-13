@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_create_new_sector.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:22:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/12 19:30:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/13 12:06:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	editor_initialize_sector_values(t_editor_sector *new,
 		new->is_elevator = 1;
 	else
 		new->is_elevator = 0;
-	new->sector_plot = NULL;
+	new->plot_line = NULL;
 	new->walls = NULL;
 	new->next = NULL;
 }
