@@ -90,13 +90,12 @@ int	add_point_to_list(t_editor *editor, t_editor_sector *sector,
 	t_editor_walls	*point;
 	t_screen_xy		new_coord;
 
-	point = NULL;
 	new_coord = round_coordinates(action->world_pos);
 	if (sector == NULL)
 		return (1);
+	point = sector->walls;
 	if (sector->nb_of_walls > 1 && check_for_last_point(sector, action))
 		return (add_last_point(editor, sector, action, point));
-	point = sector->walls;
 	while (point && point->next)
 		point = point->next;
 	if (point && check_all_sectors_for_intersecting_lines(

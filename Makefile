@@ -54,6 +54,7 @@ SRCS = \
 	editor$(SLASH)launch_editor.c \
 	editor$(SLASH)ndc_to_world.c \
 	editor$(SLASH)notify_user.c \
+	editor$(SLASH)read_input_string.c \
 	editor$(SLASH)sector_actions.c \
 	editor$(SLASH)wall_points.c \
 	editor$(SLASH)wall_points2.c \
