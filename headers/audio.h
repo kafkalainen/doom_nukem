@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 12:28:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 13:14:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_audio
 	Mix_Chunk	*thing_attack;
 	Mix_Chunk	*thing_damage;
 	Mix_Chunk	*thing_death;
+	Mix_Chunk	*typing;
 	Mix_Chunk	*unlock_door;
 }				t_audio;
 
@@ -58,5 +59,6 @@ int		load_game_audio(t_audio *audio);
 void	play_footsteps(t_audio *audio);
 int		play_sound(Mix_Chunk *sound, int volume);
 void	toggle_music(Mix_Music *music);
+int		play_sound_and_fadeout(Mix_Chunk *sound, int volume, Uint32 playtime);
 
 #endif

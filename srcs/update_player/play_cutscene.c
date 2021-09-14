@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 08:29:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 12:03:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 13:15:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ void	initialize_cutscene(t_sector *cutscene_sector, t_player *plr, int type)
 			cutscene_sector->story[cutscene_sector->cur_msg]) * 100;
 		plr->cutscene = plr->cutscene_total;
 		plr->ending_played = false;
+		play_sound_and_fadeout(plr->audio.typing, 30, plr->cutscene_total);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:15:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 12:13:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 13:06:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	write_rahikainen(int *fd)
 		"doom_rahikainen_damage #");
 	write_audio_data(fd, "./audio/rahikainen_die.wav",
 		"doom_rahikainen_die #");
+	write_audio_data(fd, "./audio/typing.wav", "doom_typing #");
 }
 
 static void	write_enemy(int *fd)
