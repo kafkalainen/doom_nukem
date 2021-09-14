@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 07:49:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 13:44:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	load_map_file(t_player *plr, t_home *home)
 	buf = (unsigned char *)malloc(sizeof(unsigned char) * (MAX_SIZE + 1));
 	if (!buf)
 		error_output("ERROR: Failed allocate memory for the map.");
-	doom_open(&fd, (const char **)&home->map, TEXT_ONLY, 0644);
+	doom_open(&fd, (const char **)&home->map, READ_ONLY, 0644);
 	if (fd < 0)
 		error_output("ERROR: Failed to open map");
 	else
