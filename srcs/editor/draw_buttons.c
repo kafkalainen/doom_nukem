@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/14 14:10:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 14:32:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,7 +323,7 @@ void	draw_ui(t_editor *editor, t_texture **textures)
 
 	if (editor->action.grid == 1)
 		draw_grid(&editor->buffer, &editor->action);
-	draw_editor_sectors_bboxes(editor);
+	draw_editor_sectors_bboxes(editor, &editor->action);
 	draw_editor_sectors(editor);
 	draw_editor_entities(editor, textures);
 	ent = editor->entity_list;
