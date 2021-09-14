@@ -20,7 +20,6 @@
 # ifdef __unix__
 #  define OS_WINDOWS 0
 #  define READ_ONLY O_RDONLY
-#  define TEXT_ONLY O_RDONLY
 #  define WRITE_ONLY O_WRONLY
 #  define APPEND_FILE O_APPEND
 #  define CHECK_EXIST O_EXCL
@@ -35,7 +34,6 @@
 # elif defined(_WIN32) || defined(WIN32)
 #  define OS_WINDOWS 1
 #  define READ_ONLY _O_BINARY
-#  define TEXT_ONLY _O_TEXT
 #  define WRITE_ONLY _O_WRONLY
 #  define CHECK_EXIST _O_EXCL
 #  define APPEND_FILE _O_APPEND

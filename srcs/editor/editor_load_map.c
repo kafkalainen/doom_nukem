@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/10 13:14:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 13:38:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	editor_load_map(t_editor *editor)
 	buf = (unsigned char *)malloc(sizeof(unsigned char) * (MAX_SIZE + 1));
 	if (!buf)
 		error_output("ERROR: Failed allocate memory for the map.");
-	doom_open(&fd, (const char **)&path, TEXT_ONLY, 0644);
+	doom_open(&fd, (const char **)&path, READ_ONLY, 0644);
 	if (fd < 0)
 		error_output("ERROR: Failed to open map");
 	else
