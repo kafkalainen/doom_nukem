@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/13 12:05:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 14:10:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,75 +288,42 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 
 void	draw_int_string_input(t_buffer *buffer, t_action *action, unsigned char **int_string)
 {
-	t_plx_modifier	mod;
-	int				midpoint;
-
-	mod.colour = get_color(orange);
-	mod.size = TEXT_SIZE;
-	midpoint = (buffer->width * 0.5) - 100;
 	if (action->edit_ceiling_height)
-	{
-		mod.len = 57;
-		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Input new ceiling height using number keys (-99 -- 99):", mod);
-		if (*int_string != NULL)
-		{
-			mod.len = ft_strlen((const char *)*int_string) + 1;
-			mod.colour = get_color(white);
-			ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)*int_string, mod);
-		}
-	}
+		show_user_help("Input new ceiling height using number keys (-99 -- 99):",
+			buffer, 0, get_color(orange));
 	if (action->edit_floor_height)
-	{
-		mod.len = 55;
-		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Input new floor height using number keys (-99 -- 99):", mod);
-		if (*int_string != NULL)
-		{
-			mod.len = ft_strlen((const char *)*int_string) + 1;
-			mod.colour = get_color(white);
-			ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)*int_string, mod);
-		}
-	}
+		show_user_help("Input new floor height using number keys (-99 -- 99):",
+			buffer, 0, get_color(orange));
 	if (action->set_light_intensity)
+		show_user_help("Set new light intensity using number keys (0-100):",
+			buffer, 0, get_color(orange));
+	if (action->edit_floor_height || action->edit_ceiling_height
+		|| action->set_light_intensity)
 	{
-		mod.len = 52;
-		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Set new light intensity using number keys (0-100):", mod);
 		if (*int_string != NULL)
-		{
-			mod.len = ft_strlen((const char *)*int_string) + 1;
-			mod.colour = get_color(white);
-			ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)*int_string, mod);
-		}
+			show_user_help((char *)*int_string, buffer, 1, get_color(white));
 	}
 }
 
 void	draw_help_text(t_action *action, t_buffer *buffer)
 {
-	t_plx_modifier	mod;
-	int				midpoint;
-
-	mod.colour = get_color(orange);
-	mod.size = TEXT_SIZE;
-	midpoint = (buffer->width * 0.5) - 100;
 	if (action->convert_to_portal)
 	{
-		mod.len = 76;
-		ft_str_pxl(buffer, vec2(midpoint - 100, 50), "Use Mouse left click to select the sector you want the portal to point to:", mod);
-		mod.len = 32;
-		ft_str_pxl(buffer, vec2(midpoint - 100, 70), "Use Mouse right click to cancel", mod);
+		show_user_help("Use Mouse left click to select the sector you want the portal to point to.",
+			buffer, 0, get_color(orange));
+		show_user_help("Use Mouse right click to cancel.",
+			buffer, 1, get_color(orange));
 	}
 }
 
 void	draw_ui(t_editor *editor, t_texture **textures)
 {
-	t_editor_sector	*temp;
-	t_editor_sector *head;
 	t_entity_list	*ent;
 	t_entity_list	*tempo;
 
-	temp = editor->sector_list;
-	head = editor->sector_list;
 	if (editor->action.grid == 1)
 		draw_grid(&editor->buffer, &editor->action);
+	draw_editor_sectors_bboxes(editor);
 	draw_editor_sectors(editor);
 	draw_editor_entities(editor, textures);
 	ent = editor->entity_list;
@@ -372,19 +339,7 @@ void	draw_ui(t_editor *editor, t_texture **textures)
 		editor->entity_list = ent;
 	}
 	if (editor->action.convert_to_portal)
-	{
-		while (temp != NULL && temp->idx_sector != editor->action.prev_sector)
-			temp = temp->next;
-		if (temp)
-		{
-			draw_line(
-			world_to_screen(vec2(temp->centroid.x, temp->centroid.y), editor->action.scalarf, editor->action.offsetf,
-				&editor->buffer),
-			world_to_screen(vec2(editor->action.world_pos.x, editor->action.world_pos.y), editor->action.scalarf,
-				editor->action.offsetf, &editor->buffer), get_color(blue), &editor->buffer);
-		}
-		editor->sector_list = head;
-	}
+		draw_convert_to_portal_line(editor);
 	if (editor->action.convert_to_portal)
 		draw_help_text(&editor->action, &editor->buffer);
 	if (editor->action.save_file)

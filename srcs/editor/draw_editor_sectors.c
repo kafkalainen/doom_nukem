@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_sectors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 13:08:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 13:56:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,18 @@ static void	draw_wall_line(t_editor_walls *left_point, t_editor_walls *right_poi
 		color, &editor->buffer);
 }
 
+void	draw_editor_sectors_bboxes(t_editor *editor)
+{
+	t_editor_sector *sector_list;
+
+	sector_list = editor->sector_list;
+	while (sector_list)
+	{
+		draw_bbox_sector(sector_list, &editor->buffer, &editor->action);
+		sector_list = sector_list->next;
+	}
+}
+
 void	draw_editor_sectors(t_editor *editor)
 {
 	int				i;
@@ -71,7 +83,6 @@ void	draw_editor_sectors(t_editor *editor)
 	{
 		i = 0;
 		left_point = sector_list->walls;
-		draw_bbox_sector(sector_list, &editor->buffer, &editor->action);
 		while (left_point && left_point->next && i < sector_list->nb_of_walls)
 		{
 			if (sector_list->idx_sector == editor->action.selected_sector && i == editor->action.selected_wall)

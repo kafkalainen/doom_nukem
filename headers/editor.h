@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/13 15:48:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 13:37:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -412,4 +412,6 @@ void			notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
 void			add_notification(t_editor *editor, char *message, int amount);
 t_bool			editor_check_if_lseg_intersects(t_editor_walls *wall,
 					t_screen_xy pos, t_screen_xy dir);
+void			show_user_help(char *str, t_buffer *buffer, int layer,
+				Uint32 colour);
 #endif
