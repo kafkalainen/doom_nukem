@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 12:14:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 13:23:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	initialize_player_audio_to_null(t_audio *audio)
 	audio->rahikainen_damage[3] = NULL;
 	audio->rahikainen_damage[4] = NULL;
 	audio->rahikainen_die = NULL;
+	audio->typing = NULL;
 }
 
 void	initialize_audio_to_null(t_audio *audio)
@@ -53,4 +54,16 @@ void	initialize_audio_to_null(t_audio *audio)
 	audio->recharge = NULL;
 	audio->power_station_depleted = NULL;
 	audio->battery_low = NULL;
+}
+
+int	play_sound_and_fadeout(Mix_Chunk *sound, int volume, Uint32 playtime)
+{
+	int	channel;
+
+	if (!sound)
+		return (-1);
+	Mix_VolumeChunk(sound, volume);
+	channel = Mix_PlayChannel(-1, sound, 0);
+	Mix_FadeOutChannel(channel, ft_imin(playtime, playtime - 1000));
+	return (channel);
 }

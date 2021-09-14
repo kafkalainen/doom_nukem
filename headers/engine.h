@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 23:30:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 10:25:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_frame
 	t_raster_queue	*transformed;
 	t_buffer		buffer;
 	float			*depth_buffer;
-	Uint32			last_frame;
 	t_ray_pt		left;
 	t_ray_pt		right;
 	t_sides			viewport;
@@ -94,4 +93,5 @@ t_wall			*check_if_too_close_to_walls(t_sector *sector, float width,
 					t_xyz pos, t_xyz dir);
 void			check_if_moved_through_portal(int *cur_sector, t_xyz pos,
 					t_home *home);
+void			update_world(t_player *plr, t_home *home, Uint32 delta_time);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:07:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 12:18:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 13:05:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	cleanup_audio_source(t_audio *audio)
 	free_sound(&audio->power_station_depleted);
 	free_sound(&audio->recharge);
 	free_sound(&audio->battery_low);
+	free_sound(&audio->typing);
 	cleanup_rahikainen_audio_sources(audio);
 	cleanup_enemy_audio_sources(audio);
 }

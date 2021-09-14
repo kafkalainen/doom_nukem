@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 23:25:16 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 11:29:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,32 @@ void	process_inputs_game_loop(t_player *plr, int *game_state, SDL_Event *e)
 	}
 }
 
-void	update_world(t_player *plr, t_home *home)
+void	update_world(t_player *plr, t_home *home, Uint32 delta_time)
 {
-	Uint32	current_time;
-	Uint32	delta_time;
-
-	current_time = SDL_GetTicks();
-	delta_time = current_time - plr->time;
-	if (delta_time < 1)
-		return ;
-	plr->time = current_time;
 	update_player(plr, home, delta_time);
 	update_entities(home, plr, delta_time);
 	update_projectiles(home, plr, delta_time);
-	update_lifts(home, plr, current_time, delta_time);
+	update_lifts(home, plr, plr->time, delta_time);
 	update_doors(home->sectors, home->nbr_of_sectors, plr->time, delta_time);
 }
 
 void	launch_game_loop(t_home *home, t_player *plr,
 	t_frame *frame, SDL_Event *e)
 {
+	Uint32	delta_time;
+
 	while (home->game_state == GAME_LOOP)
 	{
 		fps_timer(&home->t);
-		process_inputs_game_loop(plr, &home->game_state, e);
-		update_world(plr, home);
+		delta_time = home->t.frame_time_last - plr->time;
+		plr->time = home->t.frame_time_last;
+		if (plr->plot_state == start_cutscene || plr->plot_state == end_cutscene)
+			update_cutscene(plr, home, delta_time);
+		else
+		{
+			process_inputs_game_loop(plr, &home->game_state, e);
+			update_world(plr, home, delta_time);
+		}
 		update_screen(home, frame, plr);
 		render_buffer(frame->buffer.pxl_buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);

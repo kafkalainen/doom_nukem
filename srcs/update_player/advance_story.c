@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 13:16:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 11:58:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,18 @@ void	write_message(t_buffer *buffer, t_player *plr, char *msg,
 		t_plx_modifier *mod)
 {
 	float			percentage;
+	t_xy			offset;
 
 	percentage = 1.0f - ((plr->message_time - plr->time - 5000) * 0.0002f);
 	mod->len = (size_t)(ft_strlen(msg) * percentage);
-	ft_str_pxl(buffer, vec2(100, SCREEN_HEIGHT - 30), msg, *mod);
+	if (mod->len > 0)
+	{
+		offset.x = 0.5f * (buffer->width - (mod->len * mod->size * 5));
+			if (mod->len % 2)
+				offset.x -= (mod->size * 5 * 0.5f);
+			offset.y = SCREEN_HEIGHT - 100;
+		ft_str_pxl(buffer, offset, msg, *mod);
+	}
 }
 
 void	draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr)
@@ -80,26 +88,21 @@ void	draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr)
 	if (plr->plot_state == sector_plot && plr->message_time > plr->time)
 		write_message(buffer, plr,
 			home->sectors[plr->msg_sector]->story[cur_story], &mod);
-	if (plr->plot_state != sector_plot
-		&& plr->message_time > (plr->time + 3000))
-		write_message(buffer, plr, home->story[plr->plot_state], &mod);
-	else if (plr->plot_state != sector_plot && plr->message_time > plr->time)
-	{
-		mod.len = (size_t)(ft_strlen(home->story[plr->plot_state]));
-		ft_str_pxl(buffer, vec2(100, SCREEN_HEIGHT - 30),
-			home->story[plr->plot_state], mod);
-	}
+	// if (plr->plot_state != sector_plot
+	// 	&& plr->message_time > (plr->time + 3000))
+	// 	write_message(buffer, plr, home->story[plr->plot_state], &mod);
+	// else if (plr->plot_state != sector_plot && plr->message_time > plr->time)
+	// {
+	// 	mod.len = (size_t)(ft_strlen(home->story[plr->plot_state]));
+	// 	ft_str_pxl(buffer, vec2(100, SCREEN_HEIGHT - 30),
+	// 		home->story[plr->plot_state], mod);
+	// }
 }
 
 void	end_level(t_home *home, t_player *plr)
 {
 	if (plr->cur_sector == home->end_sector)
-	{
-		if (home->linked_map)
-			home->game_state = GAME_CONTINUE;
-		else
-			home->game_state = MAIN_MENU;
-	}
+		initialize_cutscene(home->sectors[home->end_sector], plr, end_cutscene);
 	if (plr->power_points <= 0 && plr->dead == 0)
 	{
 		play_sound(plr->audio.rahikainen_die, 30);

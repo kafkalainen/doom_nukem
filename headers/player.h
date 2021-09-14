@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/07 11:58:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 11:10:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ enum e_plot_states
 {
 	no_plot,
 	sector_plot,
+	start_cutscene,
+	end_cutscene,
 	beginning1,
 	beginning2,
 	beginning3,
@@ -149,12 +151,16 @@ typedef struct s_player
 	float			power_points;
 	float			fuel_points;
 	float			dead;
+	int				start_sector;
 	int				cur_sector;
 	int				msg_sector;
 	int				plot_state;
 	int				active_inv;
 	int				enemy_sighted;
 	int				controls_enabled;
+	t_bool			ending_played;
+	int				cutscene;
+	int				cutscene_total;
 	Uint32			time;
 	Uint32			message_time;
 	Uint32			display_object;
@@ -203,8 +209,8 @@ float			get_ground_hit_point(t_sector *sector, t_ray *ray,
 float			get_player_hit_point(t_ray *ray, t_bullet_hole *hole,
 					int bullet_sector);
 void			gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
+void			initialize_cutscene(t_sector *cutscene_sector, t_player *plr, int type);
 void			initialize_player_target_triangles(t_player *plr);
-void			init_cutscene(char **array);
 void			initialize_player(t_player *plr);
 char			**init_story(void);
 t_bool			jetpack(t_player *plr, t_home *home, Uint32 t);
@@ -225,5 +231,6 @@ Uint32			test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 void			player_take_damage(t_player *plr, Uint32 damage, Uint32 time);
 void			reload_weapon(t_player *plr, Uint32 t);
 void			recharge_suit(t_player *plr, Uint32 t);
+void			update_cutscene(t_player *plr, t_home *home, Uint32 t);
 
 #endif
