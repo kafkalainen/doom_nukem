@@ -24,25 +24,24 @@ int	get_last_written_character(unsigned char *string)
 	return ((int)string[i - 1]);
 }
 
-int	write_story_ruleset(int *keysym, unsigned char **string)
+unsigned char	*delete_char_from_string(unsigned char **string)
 {
-	int	c;
+	unsigned char	*temp;
+	int				size;
 
-	if (*keysym == '#')
-		return (false);
-	if (*keysym == SDLK_TAB)
+	size = ft_strlen((const char *)*string);
+	if (size > 1)
 	{
-		if (*string == NULL)
-			return (false);
-		c = get_last_written_character(*string);
-		if (c == '\n')
-			return (false);
-		*keysym = '\n';
-		return (true);
+		temp = (unsigned char *)ft_strndup((const char *)*string, size - 1);
+		free(*string);
 	}
-	if (!ft_isprint(*keysym))
-		return (false);
-	return (true);
+	else
+	{
+		if (*string != NULL)
+			free(*string);
+		return (NULL);
+	}
+	return (temp);
 }
 
 void	unlink_selected_entity(t_entity_list **list, int entity_idx,

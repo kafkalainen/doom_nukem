@@ -368,6 +368,7 @@ int				check_saving_prerequisites(t_editor *editor);
 void			save_editor_map(t_editor *editor, t_home *home);
 void			read_input_string(unsigned char **string, t_action *action);
 unsigned char	*delete_char_from_string(unsigned char **string);
+int				get_last_written_character(unsigned char *string);
 t_xy			world_to_screen(t_xy x0, float scalarf, t_xy offsetf,
 					t_buffer *buffer);
 t_xy			ndc_to_world(t_xy ndc, t_xy offset, float scalar);
