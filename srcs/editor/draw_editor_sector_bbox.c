@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 09:31:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 14:42:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	draw_bbox_sector(t_editor_sector *sector, t_buffer *buffer,
 	bbox_scaled.end = world_to_screen(sector->bbox.end, action->scalarf,
 		action->offsetf, buffer);
 	if (action->selected_sector == sector->idx_sector)
-		color = get_color(lightgreen);
+		color = get_color(wheat);
 	else
-		color = get_color(blue);
+		color = get_color(gray);
 	draw_box(bbox_scaled, buffer, color);
 }
