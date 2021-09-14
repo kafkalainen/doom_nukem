@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/13 19:29:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:06:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ t_bool	check_for_elevator_button(t_entity_list **head, int sector_idx)
 	return (true);
 }
 
-void	get_lowest_floor_highest_ceiling(t_editor_sector *sector, int *height)
+void	get_lowest_floor(t_editor_sector *sector, int *height)
 {
 	t_editor_walls	*wall;
 	int				i;
@@ -213,29 +213,34 @@ void	get_lowest_floor_highest_ceiling(t_editor_sector *sector, int *height)
 	}
 }
 
-t_bool	sectors_aligned(t_editor_sector *first, t_editor_sector *second, int first_height, int second_height)
+t_bool	sectors_aligned(t_editor_sector *first, t_editor_sector *second, t_screen_xy heights, t_editor_sector *elev_sector)
 {
-	if (first_height == second_height)
+	int	lift_height;
+
+	get_lowest_floor(elev_sector, &lift_height);
+	if (heights.x == heights.y)
 		return (false);
-	if (first_height > second_height)
-	{
-		first->is_elevator = upper;
-		second->is_elevator = lower;
-	}
-	else
+	if (lift_height == heights.x)
 	{
 		first->is_elevator = lower;
 		second->is_elevator = upper;
+		elev_sector->is_elevator = second->idx_sector;
+		return (true);
 	}
-	return (true);
+	else if (lift_height == heights.y)
+	{
+		first->is_elevator = upper;
+		second->is_elevator = lower;
+		return (true);
+	}
+	return (false);
 }
 
-t_bool	compare_floors_to_ceilings(t_editor_sector **sectors, int first_idx, int second_idx)
+t_bool	compare_floors_to_ceilings(t_editor_sector **sectors, int first_idx, int second_idx, t_editor_sector *elev_sector)
 {
 	t_editor_sector	*first;
 	t_editor_sector *second;
-	int			floor_height_one;
-	int			floor_height_two;
+	t_screen_xy		floor_heights;
 
 	first = *sectors;
 	second = *sectors;
@@ -255,9 +260,9 @@ t_bool	compare_floors_to_ceilings(t_editor_sector **sectors, int first_idx, int 
 	}
 	if (!second)
 		return (false);
-	get_lowest_floor_highest_ceiling(first, &floor_height_one);
-	get_lowest_floor_highest_ceiling(second, &floor_height_two);
-	if (!sectors_aligned(first, second, floor_height_one, floor_height_two))
+	get_lowest_floor(first, &floor_heights.x);
+	get_lowest_floor(second, &floor_heights.y);
+	if (!sectors_aligned(first, second, floor_heights, elev_sector))
 		return (false);
 	return (true);
 }
@@ -274,6 +279,8 @@ t_bool	verify_connecting_sectors(t_editor_sector **sectors, t_editor_sector *ele
 	first_sector_idx = -1;
 	i = 0;
 	nbr_of_portals = 0;
+	first_sector_idx = -1;
+	scdn_sector_idx = -1;
 	wall = elev_sector->walls;
 	while (i < elev_sector->nb_of_walls)
 	{
@@ -288,7 +295,7 @@ t_bool	verify_connecting_sectors(t_editor_sector **sectors, t_editor_sector *ele
 		i++;
 		wall = wall->next;
 	}
-	if (!compare_floors_to_ceilings(sectors, first_sector_idx, scdn_sector_idx))
+	if (!compare_floors_to_ceilings(sectors, first_sector_idx, scdn_sector_idx, elev_sector))
 		return (false);
 	return (true);
 }
@@ -312,6 +319,7 @@ t_bool	check_elevator_prerequisites(t_entity_list **head, t_editor_sector **sect
 		return (false);
 	if (!verify_connecting_sectors(sectors, sector))
 		return (false);
+	printf("elevator requirements fulfilled, converting to lift\n");
 	return (true);
 }
 
@@ -328,7 +336,7 @@ void	convert_sector_to_lift(t_editor_sector *sector, t_entity_list **head)
 	}
 	if (!temp)
 		return ;
-	temp->is_linked = upper;
+	temp->is_linked = sector->idx_sector + 2;
 	sector->is_elevator = lift;
 	// connecting portals need to be modified to include door textures
 }
@@ -502,8 +510,5 @@ int		handle_events(t_editor *editor, t_home *home)
 	}
 	if (editor->action.open_file == 2)
 		editor_load_map(editor);
-	if (editor->notify_time)
-		notify_user(&editor->notification, &editor->buffer,
-			editor->delta_time, &editor->notify_time);
 	return (1);
 }
