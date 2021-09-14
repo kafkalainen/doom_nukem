@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_cutscene.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 08:29:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 13:15:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 13:48:51 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	update_cutscene(t_player *plr, t_home *home, Uint32 t)
 {
 	t_sector *temp;
 
+	temp = NULL;
 	if (plr->plot_state == start_cutscene)
 		temp = home->sectors[plr->start_sector];
 	if (plr->plot_state == end_cutscene)
