@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/14 17:00:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:06:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,18 @@ void	draw_wall_textfields(t_editor_walls *wall, t_buffer *buffer, t_texture **te
 	float			scale;
 	t_texel			*tex;
 
-	if (!wall || wall->type >= 0)
+	if (!wall)
 		return ;
 
-	box.start = vec2(32, 110);
-	box.end = vec2(132, 220);
-	tex = get_tex(wall->type, textures);
-	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
-	draw_image(box.start, tex, buffer, scale);
 	draw_wall_info(wall, buffer);
+	if (wall->type < 0)
+	{
+		box.start = vec2(32, 110);
+		box.end = vec2(132, 220);
+		tex = get_tex(wall->type, textures);
+		scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
+		draw_image(box.start, tex, buffer, scale);
+	}
 }
 
 void	draw_buttons(t_editor *editor, int end_sector, t_texture **textures)
