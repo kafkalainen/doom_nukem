@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/13 19:27:35 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:53:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -395,5 +395,4 @@ void	create_new_entity(t_entity_list **head, t_action *action, t_editor_sector *
 		temp->next = new;
 		new->next = NULL;
 	}
-	printf("entity idx: %i, ent pos x: %i, y: %i\n", new->entity_idx, new->pos.x, new->pos.z);
 }

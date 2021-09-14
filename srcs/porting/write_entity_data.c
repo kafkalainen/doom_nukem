@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:54:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/12 20:28:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 18:03:30 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	write_entity_data(int *fd, t_editor *editor)
 			ft_itoa(get_entity_count(&editor->entity_list)), 0, 1);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf, "\n", 1, 0);
 	if (doom_write(fd, (const void **)&buf, ft_strlen((const char *)buf)) == -1)
-		printf("failed to add entity numbers\n");
+		error_output("failed to add entity numbers\n");
 	ft_strdel((char **)&buf);
 	temp = editor->entity_list;
 	while (temp != NULL)
@@ -132,7 +132,7 @@ void	write_entity_data(int *fd, t_editor *editor)
 		buf = get_writable_entity_data(temp);
 		if (doom_write(fd, (const void **)&buf,
 				ft_strlen((const char *)buf)) == -1)
-			printf("failed to add entity data\n");
+			error_output("failed to add entity data\n");
 		ft_strdel((char **)&buf);
 		temp = temp->next;
 	}

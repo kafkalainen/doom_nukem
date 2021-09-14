@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:43:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 16:12:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 18:01:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	load_texture(char *path, t_texture **tex_array, int i)
 {
 	t_png	png;
 
-	printf("%s\n", path);
+	ft_putstr("Loading texture: ");
+	ft_putstr(path);
+	ft_putchar('\n');
 	png = png_parser(path);
 	tex_array[i] = create_texture(&png, (i * (-1)));
 	if (!tex_array[i])
@@ -44,30 +46,4 @@ void	load_texture(char *path, t_texture **tex_array, int i)
 	else
 		convert_to_uint32(tex_array[i]->tex.texels, tex_array[i]);
 	free_png(png);
-}
-
-/*
-** Init textures for editor
-*/
-
-void	cycle_textures(t_home *home, struct dirent *dir_entry, DIR *dir)
-{
-	int		i;
-	char	*found;
-	char	*buf;
-
-	i = 2;
-	dir_entry = readdir(dir);
-	while (dir_entry != NULL)
-	{
-		found = ft_strstr(dir_entry->d_name, ".png");
-		if (found != NULL && ft_strcmp(dir_entry->d_name, "dsky.png") != 0)
-		{
-			printf("%s index: %i\n", dir_entry->d_name, i);
-			buf = ft_strjoin("textures/", dir_entry->d_name);
-			load_texture(buf, home->textures, i++);
-			ft_strdel(&buf);
-		}
-		dir_entry = readdir(dir);
-	}
 }

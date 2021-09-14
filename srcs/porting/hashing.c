@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 14:59:12 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/14 13:33:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:59:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	write_hash_to_file(unsigned char *path,
 	tmp = (unsigned char *)ft_strjoin_freeable(ft_itoa(hash), "\n", 1, 0);
 	if (doom_write(&fd, (const void **)&tmp,
 			ft_strlen((const char *)tmp)) == -1)
-		printf("failed to write hash to file\n");
+		error_output("failed to write hash to file\n");
 	if (doom_write(&fd, (const void **)&buf, size) == -1)
-		printf("failed to write map data\n");
+		error_output("failed to write map data\n");
 	ft_strdel((char **)&tmp);
 	ft_strdel((char **)&buf);
 	doom_close(&fd);

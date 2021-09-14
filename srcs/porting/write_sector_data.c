@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_sector_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 16:47:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/13 12:04:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 18:03:38 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	write_sector_data(int *fd,
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
 			get_player_start(editor->plr), 1, 1);
 	if (doom_write(fd, (const void **)&buf, ft_strlen((const char *)buf)) == -1)
-		printf("failed to add sector numbers\n");
+		error_output("failed to add sector numbers\n");
 	ft_strdel((char **)&buf);
 	temp = editor->sector_list;
 	while (temp != NULL)
@@ -100,7 +100,7 @@ void	write_sector_data(int *fd,
 		buf = get_writable_sector_data(temp);
 		if (doom_write(fd, (const void **)&buf,
 				ft_strlen((const char *)buf)) == -1)
-			printf("failed to add sector data\n");
+			error_output("failed to add sector data\n");
 		ft_strdel((char **)&buf);
 		temp = temp->next;
 	}

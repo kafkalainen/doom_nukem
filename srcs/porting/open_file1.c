@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 13:44:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:51:00 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	load_map_file(t_player *plr, t_home *home)
 		ret = parse_entity_data(buf, home, size);
 		parse_texture_data(buf, home, size);
 		if (doom_mkdir() == -1)
-			error_output("ERROR: Failed to create temporary directory.");
+			ft_putstr("ERROR: Failed to create temporary directory.\n");
 		parse_all_audio_data(buf, size);
 		free(buf);
 		buf = NULL;

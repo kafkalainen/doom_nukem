@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sector_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:51:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/13 12:04:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:55:44 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ void	handle_removal(t_editor_sector *sector_list, t_action *action)
 	t_editor_walls *temp;
 
 	temp = sector_list->walls;
-	printf("in handle_removal\n");
 	if (sector_list->nb_of_walls == 1)
 		return ;
 	while (temp && sector_list->nb_of_walls > action->selected_point)
 	{
-		printf("selected point %d nb_of walls is %d\n", action->selected_point, sector_list->nb_of_walls);
 		remove_last_point(&temp, &sector_list->nb_of_walls, action->selected_point);
 	}
 	action->selected_point -= 1;

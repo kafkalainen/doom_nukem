@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/12 17:23:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:58:58 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	write_audio_data(int *fd, char *path, char *asset_name)
 			WRITE_BREAKER, 1, 0);
 	if (doom_write(fd, (const void **)&tmp,
 			ft_strlen((const char *)tmp)) == -1)
-		printf("Failed to write audio data point start\n");
+		error_output("Failed to write audio data point start\n");
 	if (doom_write(fd, (const void **)&asset.buf, asset.size) == -1)
-		printf("Failed to write audio data\n");
+		error_output("Failed to write audio data\n");
 	ft_strdel((char **)&tmp);
 	tmp = (unsigned char *)ft_strnew(sizeof(unsigned char) * 2);
 	tmp = (unsigned char *)ft_strcpy((char *)tmp, (const char *)"\n");
 	if (doom_write(fd, (const void **)&tmp, 1) == -1)
-		printf("failed to write texture\n");
+		error_output("failed to write texture\n");
 	ft_strdel((char **)&tmp);
 	free(tmp);
 	free(asset.buf);
@@ -75,7 +75,6 @@ int	create_map_file(t_home *home, t_editor *editor)
 	write_all_audio_data(&fd);
 	doom_close(&fd);
 	create_hash(editor->mapname);
-	printf("Map saved successfully\n");
 	return (1);
 }
 

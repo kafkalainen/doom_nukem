@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/14 11:03:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:59:13 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	get_map_count(int *count, DIR **dir, struct dirent **dir_entry)
 	rewinddir(*dir);
 	if ((*count) == 0)
 	{
-		printf("no maps to load\n");
 		closedir(*dir);
 		return (-1);
 	}

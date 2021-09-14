@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/14 17:06:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:55:11 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,7 +319,6 @@ t_bool	check_elevator_prerequisites(t_entity_list **head, t_editor_sector **sect
 		return (false);
 	if (!verify_connecting_sectors(sectors, sector))
 		return (false);
-	printf("elevator requirements fulfilled, converting to lift\n");
 	return (true);
 }
 

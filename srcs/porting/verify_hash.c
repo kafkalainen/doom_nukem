@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:45:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 15:00:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 18:03:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	verify_hash(unsigned char *buf, ssize_t size)
 	if (pos > size)
 		error_output("Reading past memory pointer\n");
 	new_hash = ft_adler32(buf + pos, size - pos);
-	printf("Original hash: %i, new hash: %i\n", orig_hash, new_hash);
 	if (orig_hash != new_hash)
 		error_output("Hash verification failed\n");
+	else
+		ft_putstr("Verification successfull\n");
 }

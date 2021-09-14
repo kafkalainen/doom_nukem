@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:25:29 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/13 17:59:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:57:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	check_saving_prerequisites(t_editor *editor)
 		return (FALSE);
 	if (!check_plr_start_and_end_sector_exists(&editor->sector_list, editor->plr, editor->end_sector))
 		return (FALSE);
-	printf("Saving map into file\n");
 	return (TRUE);
 }
 
