@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/14 14:46:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 15:10:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,6 @@ t_bool	sectors_aligned(t_editor_sector *first, t_editor_sector *second, t_screen
 	{
 		first->is_elevator = upper;
 		second->is_elevator = lower;
-		elev_sector->is_elevator = first->idx_sector;
 		return (true);
 	}
 	return (false);
@@ -337,7 +336,7 @@ void	convert_sector_to_lift(t_editor_sector *sector, t_entity_list **head)
 	}
 	if (!temp)
 		return ;
-	temp->is_linked = sector->is_elevator;
+	temp->is_linked = sector->idx_sector + 2;
 	sector->is_elevator = lift;
 	// connecting portals need to be modified to include door textures
 }
