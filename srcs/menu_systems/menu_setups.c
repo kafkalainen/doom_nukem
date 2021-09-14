@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 23:33:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 11:03:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,16 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 	ft_putendl_fd(home->map, 1);
 	initialize_player(plr);
 	if (initialize_skybox(&home->skybox))
-		error_output("Memory allocation failed!\n");
+		error_output("Memory allocation failed for skybox.");
 	if (initialize_hud(&plr->hud))
-		error_output("Memalloc failed for HUD\n");
+		error_output("Memalloc failed for HUD.");
 	if (load_map_file(plr, home))
-		error_output("Error while loading map!\n");
+		error_output("Error while loading map!");
 	if (setup_fps(&home->t))
-		error_output("Memory allocation failed!\n");
+		error_output("Memory allocation failed!");
 	if (load_game_audio(&plr->audio))
-		error_output("Loading game audio failed!\n");
+		error_output("Loading game audio failed!");
+	initialize_cutscene(home->sectors[plr->start_sector], plr, start_cutscene);
 	toggle_music(plr->audio.music);
 	*menu_option = 0;
 	SDL_SetRelativeMouseMode(SDL_TRUE);

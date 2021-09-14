@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 08:36:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 11:29:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,23 @@ void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
 
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
-	frame->idx = plr->cur_sector;
-	frame->old_idx = old_sector;
-	reset_depth_buffer(frame->depth_buffer);
-	add_skybox(frame, home, plr, &home->skybox);
-	draw_sector(frame, home, plr, -1);
-	scan_fov(home, frame, plr);
-	if (plr->input.info)
-		draw_info(frame, plr, (int)home->t.fps);
-	draw_heads_up_display(home, frame, plr);
-	draw_plot_state(home, &frame->buffer, plr);
-	draw_object_data(&frame->buffer, plr);
+	if (plr->plot_state == start_cutscene)
+		draw_cutscene(&frame->buffer, plr, home->sectors[plr->start_sector]);
+	else if (plr->plot_state == end_cutscene)
+		draw_cutscene(&frame->buffer, plr, home->sectors[home->end_sector]);
+	else
+	{
+		frame->idx = plr->cur_sector;
+		frame->old_idx = old_sector;
+		reset_depth_buffer(frame->depth_buffer);
+		add_skybox(frame, home, plr, &home->skybox);
+		draw_sector(frame, home, plr, -1);
+		scan_fov(home, frame, plr);
+		if (plr->input.info)
+			draw_info(frame, plr, (int)home->t.fps);
+		draw_heads_up_display(home, frame, plr);
+		draw_plot_state(home, &frame->buffer, plr);
+		draw_object_data(&frame->buffer, plr);
+	}
 	return ;
 }

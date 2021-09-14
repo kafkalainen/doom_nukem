@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 23:30:51 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 07:49:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ static int	get_plr(unsigned int *pos, unsigned char *buf,
 	*pos += get_next_breaker(buf + *pos) + 1;
 	if (*pos > (unsigned int)size)
 		return (1);
-	plr->cur_sector = ft_atoi((const char *)buf + *pos);
-	plr->msg_sector = plr->cur_sector;
+	plr->start_sector = ft_atoi((const char *)buf + *pos);
+	plr->cur_sector = plr->start_sector;
+	plr->msg_sector = plr->start_sector;
 	return (0);
 }
 

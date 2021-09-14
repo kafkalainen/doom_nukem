@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_functions.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 09:39:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 09:37:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void		draw_bbox_sector(t_editor_sector *sector, t_buffer *buffer,
 				t_action *action);
 void		draw_buttons(t_editor *editor, int end_sector, t_texture **textures);
 void		draw_crosshair(t_buffer *buffer);
+void		draw_cutscene(t_buffer *buffer, t_player *plr, t_sector *sector);
 void		draw_editor_sectors(t_editor *editor);
 void		draw_editor_entities(t_editor *editor, t_texture **textures);
 void		draw_entity_textfields(t_entity_list *entity, t_buffer *buffer,

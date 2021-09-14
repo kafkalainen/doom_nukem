@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/13 11:57:21 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/14 08:54:58 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -153,6 +153,7 @@ SRCS = \
 	update_player$(SLASH)key_input_toggle.c \
 	update_player$(SLASH)mouse_handle.c \
 	update_player$(SLASH)plr_inside.c \
+	update_player$(SLASH)play_cutscene.c \
 	update_player$(SLASH)player_look.c \
 	update_player$(SLASH)player_move.c \
 	update_player$(SLASH)player_use.c \

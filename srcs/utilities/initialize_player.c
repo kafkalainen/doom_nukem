@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 08:42:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 11:14:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	initialize_player_game_states(t_player *plr)
 	plr->inventory[3].in_use = 0;
 	plr->steps = 0.0f;
 	plr->plot_state = no_plot;
+	plr->ending_played = false;
 	plr->wep[0].ammo = 10;
 	plr->wep[0].fire_rate = 1.0f;
 	plr->wep[0].type = 0;
@@ -81,6 +82,7 @@ void	initialize_player(t_player *plr)
 	initialize_player_movement_vectors(plr);
 	plr->time = SDL_GetTicks();
 	plr->message_time = 0;
+	plr->cutscene = 0;
 	initialize_player_game_states(plr);
 	initialize_input_values(&plr->input);
 }
