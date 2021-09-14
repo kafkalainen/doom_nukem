@@ -270,6 +270,8 @@ t_bool	verify_connecting_sectors(t_editor_sector **sectors, t_editor_sector *ele
 	int				scdn_sector_idx;
 	int				nbr_of_portals;
 
+	scdn_sector_idx = -1;
+	first_sector_idx = -1;
 	i = 0;
 	nbr_of_portals = 0;
 	wall = elev_sector->walls;
