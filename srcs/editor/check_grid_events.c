@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_grid_events.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/12 20:00:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 16:36:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,37 @@ static void	setup_selected_sector_draw_depth(t_editor *editor)
 	}
 }
 
+static void	reset_sector_light_info(t_editor_sector *sector)
+{
+	sector->light.intensity = 0;
+	sector->light.is_linked = 0;
+	sector->light.state = 0;
+	sector->light.pos = (t_screen_xy){-1.0f, -1.0f};
+}
+
+static void	handle_delete(t_editor *editor)
+{
+	if (editor->action.selected_entity >= 0)
+	{
+		if (editor->temp_entity->entity_type == lamp)
+			reset_sector_light_info(editor->temp_sector);
+		delete_selected_entity(&editor->entity_list, &editor->action);
+		editor->temp_entity = NULL;
+		editor->temp_sector = NULL;
+		editor->action.selected_sector = -1;
+		editor->action.draw_depth = depth_zero;
+		add_notification(editor, "Removed entity.", 2000);
+	}
+	else if (editor->action.selected_sector >= 0)
+	{
+		editor_free_selected_sector(&editor->sector_list,
+			&editor->entity_list, &editor->action);
+		editor->temp_sector = NULL;
+		editor->action.draw_depth = depth_zero;
+		add_notification(editor, "Removed sector.", 2000);
+	}
+}
+
 void	check_grid_events(t_editor *editor)
 {
 	setup_selected_sector_draw_depth(editor);
@@ -43,23 +74,7 @@ void	check_grid_events(t_editor *editor)
 	if (editor->action.delete
 		&& (editor->action.selected_entity >= 0
 			|| editor->action.selected_sector >= 0))
-	{
-		if (editor->action.selected_entity >= 0)
-		{
-			delete_selected_entity(&editor->entity_list, &editor->action);
-			editor->temp_entity = NULL;
-			editor->temp_sector = NULL;
-			editor->action.selected_sector = -1;
-			editor->action.draw_depth = depth_zero;
-		}
-		else if (editor->action.selected_sector >= 0)
-		{
-			editor_free_selected_sector(&editor->sector_list,
-				&editor->entity_list, &editor->action);
-			editor->temp_sector = NULL;
-			editor->action.draw_depth = depth_zero;
-		}
-	}
+		handle_delete(editor);
 	if (editor->action.convert_to_portal == user_input)
 	{
 		if (editor->temp_sector && editor->action.prev_sector != -1)

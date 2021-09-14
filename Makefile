@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/14 14:06:36 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/14 16:59:42 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,12 @@ SRCS = \
 	editor$(SLASH)create_portals.c \
 	editor$(SLASH)check_if_non_convex.c \
 	editor$(SLASH)draw_buttons.c \
-	editor$(SLASH)draw_convert_to_portal_line.c \
+	editor$(SLASH)draw_visual_help_lines.c \
 	editor$(SLASH)draw_editor_entities.c \
 	editor$(SLASH)draw_editor_sectors.c \
 	editor$(SLASH)draw_editor_sector_bbox.c \
 	editor$(SLASH)draw_grid.c \
+	editor$(SLASH)draw_ui.c \
 	editor$(SLASH)editor_events.c \
 	editor$(SLASH)editor_entity.c \
 	editor$(SLASH)editor_create_new_sector.c \

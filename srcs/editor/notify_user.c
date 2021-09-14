@@ -6,11 +6,24 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 13:11:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 13:47:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 16:43:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+void	show_editor_usage(t_buffer *buffer)
+{
+	show_user_help("Press E to create entity.", buffer, 38, get_color(white));
+	show_user_help("Press F to create a new sector.",
+		buffer, 39, get_color(white));
+	show_user_help("Press L to link a light button and a light.",
+		buffer, 40, get_color(white));
+	show_user_help("Press U to unlink a light button and a light.",
+		buffer, 41, get_color(white));
+	show_user_help("Press R to remove an entity or a sector.",
+		buffer, 42, get_color(white));
+}
 
 void	show_user_help(char *str, t_buffer *buffer, int layer, Uint32 colour)
 {
@@ -45,7 +58,7 @@ void	notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
 	{
 		*notify_time -= delta_time;
 		offset = (t_xy){0.0f, 0.0f, 1.0f};
-		mod.colour = get_color(orange);
+		mod.colour = get_color(yellow);
 		mod.len = ft_strlen((const char *)*str);
 		mod.size = TEXT_SIZE;
 		if (mod.len > 1)
@@ -53,7 +66,7 @@ void	notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
 			offset.x = 0.5f * (buffer->width - (mod.len * mod.size * 5));
 			if (mod.len % 2)
 				offset.x -= (mod.size * 5 * 0.5f);
-			offset.y = 100.0f;
+			offset.y = 50.0f;
 		}
 		ft_str_pxl(buffer, offset, *str, mod);
 	}

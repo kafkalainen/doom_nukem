@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/14 14:46:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 15:57:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -511,8 +511,5 @@ int		handle_events(t_editor *editor, t_home *home)
 	}
 	if (editor->action.open_file == 2)
 		editor_load_map(editor);
-	if (editor->notify_time)
-		notify_user(&editor->notification, &editor->buffer,
-			editor->delta_time, &editor->notify_time);
 	return (1);
 }

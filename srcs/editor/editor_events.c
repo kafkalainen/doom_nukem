@@ -75,7 +75,7 @@ void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 			action->link_entity = 1;
 		if (keysym == SDLK_u && action->selected_entity >= 0)
 			action->unlink_entity = 1;
-		if (keysym == SDLK_DELETE)
+		if (keysym == SDLK_r)
 			action->delete = 1;
 	}
 }

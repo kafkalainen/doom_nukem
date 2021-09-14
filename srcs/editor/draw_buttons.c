@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/14 14:32:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:00:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,7 +286,8 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action, char **map_name
 	}
 }
 
-void	draw_int_string_input(t_buffer *buffer, t_action *action, unsigned char **int_string)
+void	draw_int_string_input(t_buffer *buffer, t_action *action,
+		unsigned char **int_string)
 {
 	if (action->edit_ceiling_height)
 		show_user_help("Input new ceiling height using number keys (-99 -- 99):",
@@ -309,45 +310,30 @@ void	draw_help_text(t_action *action, t_buffer *buffer)
 {
 	if (action->convert_to_portal)
 	{
-		show_user_help("Use Mouse left click to select the sector you want the portal to point to.",
+		show_user_help("Use Mouse left click to select the sector",
 			buffer, 0, get_color(orange));
-		show_user_help("Use Mouse right click to cancel.",
+		show_user_help("you want the portal to point to.",
 			buffer, 1, get_color(orange));
+		show_user_help("Use Mouse right click to cancel.",
+			buffer, 2, get_color(orange));
 	}
-}
-
-void	draw_ui(t_editor *editor, t_texture **textures)
-{
-	t_entity_list	*ent;
-	t_entity_list	*tempo;
-
-	if (editor->action.grid == 1)
-		draw_grid(&editor->buffer, &editor->action);
-	draw_editor_sectors_bboxes(editor, &editor->action);
-	draw_editor_sectors(editor);
-	draw_editor_entities(editor, textures);
-	ent = editor->entity_list;
-	tempo = editor->entity_list;
-	if (editor->action.link_entity == allocate)
+	if (action->delete)
 	{
-		while (tempo->entity_idx != editor->action.selected_entity)
-			tempo = tempo->next;
-		draw_line(
-			world_to_screen(vec2(tempo->pos.x, tempo->pos.z), editor->action.scalarf, editor->action.offsetf,
-				&editor->buffer),
-			vec2(editor->mouse_data.x, editor->mouse_data.y), get_color(blue), &editor->buffer);
-		editor->entity_list = ent;
+		show_user_help("Click entity or sector you wish to delete.",
+			buffer, 0, get_color(orange));
 	}
-	if (editor->action.convert_to_portal)
-		draw_convert_to_portal_line(editor);
-	if (editor->action.convert_to_portal)
-		draw_help_text(&editor->action, &editor->buffer);
-	if (editor->action.save_file)
-		draw_input_string(editor->mapname, &editor->buffer, (editor->buffer.width * 0.5), map_saving);
-	if (editor->action.open_file || editor->action.link_maps)
-		update_editor_load_menu(&editor->buffer, &editor->action, editor->map_names);
-	if (editor->action.set_light_intensity || editor->action.edit_ceiling_height || editor->action.edit_floor_height)
-		draw_int_string_input(&editor->buffer, &editor->action, &editor->int_string);
-	if (editor->action.write_sector_story && editor->temp_sector != NULL)
-		draw_input_string(editor->temp_sector->plot_line, &editor->buffer, (editor->buffer.width * 0.5), story_string);
+	if (action->create_sector == user_input)
+	{
+		show_user_help("Create at least three points to create a sector.",
+			buffer, 0, get_color(orange));
+		show_user_help("Sector has to be a convex polygon.",
+			buffer, 1, get_color(orange));
+		show_user_help("Last point must close sector.",
+			buffer, 2, get_color(orange));
+	}
+	if (action->create_entity == allocate)
+	{
+		show_user_help("Click a point in a selected sector to create an entity.",
+			buffer, 0, get_color(orange));
+	}
 }

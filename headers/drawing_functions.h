@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/14 14:31:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:01:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,20 @@ void		draw_editor_sectors(t_editor *editor);
 void		draw_editor_entities(t_editor *editor, t_texture **textures);
 void		draw_entity_textfields(t_entity_list *entity, t_buffer *buffer,
 				t_texture **textures);
+void		draw_entity_link_line(t_editor *editor);
 void		draw_frame(t_home *home, t_frame *frame, t_player *plr);
 void		draw_image(t_xy offset, t_texel *tex, t_buffer *buffer,
 				float scale);
 void		draw_test_image(t_xy offset, t_texel *tex, t_buffer *buffer, t_xy scale); // comment to mark this here
 void		draw_grid(t_buffer *buffer, t_action *action);
 void		draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr);
+void		draw_help_text(t_action *action, t_buffer *buffer);
 int			draw_horizontal_line(t_buffer *buffer, float *depth_buffer,
 				t_texel *tex, t_steps *step);
 void		draw_hud_ammo_left(t_buffer *buffer, t_player *plr);
 void		draw_info(t_frame *frame, t_player *plr, int nb_fps);
+void		draw_int_string_input(t_buffer *buffer, t_action *action,
+				unsigned char **int_string);
 void		draw_inventory_images(t_home *home, t_player *plr, t_buffer *buffer);
 void		draw_inventory_slots(t_player *plr, t_buffer *buffer);
 int			draw_line(t_xy p0, t_xy p1, Uint32 colour, t_buffer *buffer);
@@ -125,6 +129,7 @@ void		reset_depth_buffer(float *depth_buffer);
 t_triangle	rotate_triangle(t_triangle *src, float angle, char dir);
 t_triangle	scale_triangle(t_triangle *src, t_xyz scale);
 void		set_lighting(t_lighting *light, t_triangle *tri);
+void		show_editor_usage(t_buffer *buffer);
 t_xyz		translate_point(t_xyz *src, t_xyz translation);
 t_triangle	translate_triangle(t_triangle *src, t_xyz translation);
 void		update_editor_load_menu(t_buffer *buffer, t_action *action,
