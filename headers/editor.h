@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/14 13:37:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 18:09:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ typedef struct s_action
 	int				change_entity_type;
 	int				toggle_entity_is_linked;
 	int				toggle_is_revealed;
-	int				toggle_is_static;
 	int				toggle_state;
 	int				create_elevator;
 	int				create_elev_button;

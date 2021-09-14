@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_actions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/13 11:28:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/14 18:10:44 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void initialize_toggles(t_action *action)
 {
 	action->change_entity_type = 0;
 	action->toggle_entity_is_linked = 0;
-	action->toggle_is_static = 0;
 	action->toggle_is_revealed = 0;
 	action->create_elevator = 0;
 	action->create_light_button = 0;

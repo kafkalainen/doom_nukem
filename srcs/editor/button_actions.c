@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/13 16:33:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 18:09:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void	entity_button_actions(t_action *action, int i)
 		action->toggle_entity_is_linked = 1;
 	else if (i == button_toggle_is_revealed)
 		action->toggle_is_revealed = 1;
-	else if (i == button_toggle_is_static)
-		action->toggle_is_static = 1;
 	else if (i == button_toggle_state)
 		action->toggle_state = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/14 17:53:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/14 18:09:11 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,14 +188,6 @@ void	edit_entity(t_entity_list *entity, t_action *action, t_editor_sector *secto
 		else
 			entity->is_revealed = 0;
 		action->toggle_is_revealed = 0;
-	}
-	else if (action->toggle_is_static)
-	{
-		if (entity->is_static == 0)
-			entity->is_static = 1;
-		else
-			entity->is_static = 0;
-		action->toggle_is_static = 0;
 	}
 	else if (action->toggle_state)
 	{
