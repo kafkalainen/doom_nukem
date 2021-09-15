@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:03:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 18:05:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 20:04:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static void	draw_story_input(unsigned char *string, t_buffer *buffer,
 		return ;
 	i = 0;
 	y = 20;
+	mod.size = TEXT_SIZE;
 	lines = get_nbr_of_lines(string);
 	arr = ft_strsplit((const char *)string, '\n');
 	if (arr)
@@ -100,7 +101,7 @@ static void	draw_story_input(unsigned char *string, t_buffer *buffer,
 		mod.colour = get_color(white);
 		while (i < lines && arr[i])
 		{
-			mod.len = ft_strlen(arr[i]);
+			mod.len = ft_strlen(arr[i]) + 1;
 			ft_str_pxl(buffer, vec2(midpoint - 100, 70 + (i * y)), arr[i], mod);
 			i++;
 		}
@@ -133,6 +134,7 @@ void	draw_input_string(unsigned char *string, t_buffer *buffer,
 		ft_str_pxl(buffer, vec2(midpoint - 200, 50),
 			"Please input sector story string, end writing with 'Return'."
 			" Add newline with 'Tab':", mod);
-		draw_story_input(string, buffer, midpoint);
+		if (string)
+			draw_story_input(string, buffer, midpoint);
 	}
 }
