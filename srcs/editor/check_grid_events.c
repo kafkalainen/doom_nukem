@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 10:14:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 11:26:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,12 @@ static void	setup_selected_sector_draw_depth(t_editor *editor)
 }
 
 //REVISIT
-static void	reset_sector_light_info(t_editor_sector *sector, t_entity_list **entities)
+static void	reset_sector_light_info(t_entity_list **entities, t_editor_sector **sectors,
+			t_entity_list *deleted_entity, t_editor_sector *sector)
 {
-	t_entity_list *linked_entity;
-
-	if (sector->light.is_linked > 1)
+	if (deleted_entity->is_linked > 1)
 	{
-		ft_putendl("was linked");
-		linked_entity = get_linked_entity(entities, sector->light.is_linked, 0);
-		linked_entity->is_linked = 0;
+		unlink_linked_light_links(entities, sectors, deleted_entity);
 	}
 	sector->light.intensity = 0;
 	sector->light.is_linked = 0;
@@ -59,7 +56,8 @@ static void	handle_delete(t_editor *editor)
 		if (editor->temp_entity->entity_type == lamp)
 		{
 			ft_putendl("Deleted a lamp");
-			reset_sector_light_info(editor->temp_sector, &editor->entity_list);
+			reset_sector_light_info(&editor->entity_list, &editor->sector_list,
+				editor->temp_entity, editor->temp_sector);
 		}
 		delete_selected_entity(&editor->entity_list, &editor->action);
 		editor->temp_entity = NULL;
