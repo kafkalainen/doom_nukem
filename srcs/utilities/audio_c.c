@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:23:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 13:18:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:09:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,28 @@ static t_bool	check_invalid_pointers(t_audio *audio)
 		return (false);
 }
 
+static void	load_door_effects(t_audio *audio)
+{
+	audio->door = Mix_LoadWAV("temp/door_opens_and_closes.wav");
+	audio->bolt_locked = Mix_LoadWAV("temp/bolt_locked.wav");
+	audio->bolt_unlocked = Mix_LoadWAV("temp/bolt_unlocked.wav");
+	audio->unlock_door = Mix_LoadWAV("temp/door_unlocked.wav");
+}
+
 int	load_game_audio(t_audio *audio)
 {
 	cleanup_audio_source(audio);
 	audio->music = Mix_LoadMUS("temp/eerie_by_eparviai.wav");
 	audio->footstep1 = Mix_LoadWAV("temp/footstep1.wav");
 	audio->footstep2 = Mix_LoadWAV("temp/footstep2.wav");
-	audio->door = Mix_LoadWAV("temp/door_opens_and_closes.wav");
 	audio->button = Mix_LoadWAV("temp/button.wav");
 	audio->plasma_gun = Mix_LoadWAV("temp/plasma_gun.wav");
 	audio->error = Mix_LoadWAV("temp/error.wav");
 	load_rahikainen(audio);
 	load_enemy(audio);
-	audio->bolt_locked = Mix_LoadWAV("temp/bolt_locked.wav");
-	audio->bolt_unlocked = Mix_LoadWAV("temp/bolt_unlocked.wav");
 	audio->lift = Mix_LoadWAV("temp/lift.wav");
 	audio->plasma_gun_no_ammo = Mix_LoadWAV("temp/out_of_ammo.wav");
 	audio->reload = Mix_LoadWAV("temp/reload.wav");
-	audio->unlock_door = Mix_LoadWAV("temp/door_unlocked.wav");
 	audio->recharge = Mix_LoadWAV("temp/charging_suit.wav");
 	audio->power_station_depleted
 		= Mix_LoadWAV("temp/power_station_depleted.wav");

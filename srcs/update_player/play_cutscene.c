@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_cutscene.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 08:29:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 13:48:51 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:06:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,25 @@ void	draw_cutscene(t_buffer *buffer, t_player *plr, t_sector *sector)
 	if (mod.len > 0)
 	{
 		offset.x = 0.5f * (buffer->width - (mod.len * mod.size * 5));
-			if (mod.len % 2)
-				offset.x -= (mod.size * 5 * 0.5f);
-			offset.y = 300;
+		if (mod.len % 2)
+			offset.x -= (mod.size * 5 * 0.5f);
+		offset.y = 300;
 		ft_str_pxl(buffer, offset, sector->story[sector->cur_msg], mod);
 	}
 }
 
+static void	end_logic(t_player *plr, t_home *home)
+{
+	plr->plot_state = no_plot;
+	if (home->linked_map)
+		home->game_state = GAME_CONTINUE;
+	else
+		home->game_state = MAIN_MENU;
+}
+
 void	update_cutscene(t_player *plr, t_home *home, Uint32 t)
 {
-	t_sector *temp;
+	t_sector	*temp;
 
 	temp = NULL;
 	if (plr->plot_state == start_cutscene)
@@ -53,15 +62,7 @@ void	update_cutscene(t_player *plr, t_home *home, Uint32 t)
 			if (plr->plot_state == start_cutscene)
 				plr->plot_state = no_plot;
 			else if (plr->plot_state == end_cutscene)
-			{
-				plr->plot_state = no_plot;
-				if (home->linked_map)
-					home->game_state = GAME_CONTINUE;
-				else
-					home->game_state = MAIN_MENU;
-			}
-			else
-				return ;
+				end_logic(plr, home);
 		}
 	}
 }
@@ -73,7 +74,7 @@ void	initialize_cutscene(t_sector *cutscene_sector, t_player *plr, int type)
 	{
 		plr->plot_state = type;
 		plr->cutscene_total = ft_strlen(
-			cutscene_sector->story[cutscene_sector->cur_msg]) * 100;
+				cutscene_sector->story[cutscene_sector->cur_msg]) * 100;
 		plr->cutscene = plr->cutscene_total;
 		plr->ending_played = false;
 		play_sound_and_fadeout(plr->audio.typing, 30, plr->cutscene_total);

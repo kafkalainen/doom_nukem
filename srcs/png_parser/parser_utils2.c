@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 15:19:58 by rzukale           #+#    #+#             */
-/*   Updated: 2021/06/05 15:32:43 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:00:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
+// REVISIT
+//validate_signature(png->source.buf);
 void	parse_png(t_png *png)
 {
-	//validate_signature(png->source.buf);
 	parse_data(png);
 	decode_png(png);
 }
