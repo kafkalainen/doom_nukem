@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/15 10:58:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 14:59:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ enum e_buttons
 	button_create_light_src,
 	button_input_active,
 	button_create_portal,
+	button_set_all_ceiling_heights,
+	button_set_all_floor_heights,
 	button_wall_index,
 	button_change_wall_tex,
 	button_set_ceiling_height,
@@ -169,6 +171,8 @@ typedef struct s_action
 	int				create_light_source;
 	int				add_wall_point;
 	int				write_sector_story;
+	int				set_all_sector_ceiling_heights;
+	int				set_all_sector_floor_heights;
 }					t_action;
 
 typedef struct s_editor_xyz

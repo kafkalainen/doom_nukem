@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/14 17:06:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:24:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,8 +301,15 @@ void	draw_int_string_input(t_buffer *buffer, t_action *action,
 	if (action->set_light_intensity)
 		show_user_help("Set new light intensity using number keys (0-100):",
 			buffer, 0, get_color(orange));
+	if (action->set_all_sector_ceiling_heights)
+		show_user_help("Set new ceiling height for all walls (-99 -- 99):",
+			buffer, 0, get_color(orange));
+	if (action->set_all_sector_floor_heights)
+		show_user_help("Set new floor height for all walls (-99 -- 99):",
+			buffer, 0, get_color(orange));
 	if (action->edit_floor_height || action->edit_ceiling_height
-		|| action->set_light_intensity)
+		|| action->set_light_intensity || action->set_all_sector_ceiling_heights
+		|| action->set_all_sector_floor_heights)
 	{
 		if (*int_string != NULL)
 			show_user_help((char *)*int_string, buffer, 1, get_color(white));

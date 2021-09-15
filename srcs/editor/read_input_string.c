@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input_string.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eparviai <eparviai@student.hive.fi>         +#+  +:+       +#+       */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/11 14:34:53 by eparviai          ###   ########.fr      */
+/*   Updated: 2021/09/15 15:39:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ static int	verify_action(unsigned char **string, t_action *action)
 {
 	if ((action->save_file && !save_mapname_ruleset(action->keysym, string))
 		|| ((action->edit_ceiling_height
-				|| action->edit_floor_height || action->set_light_intensity)
+				|| action->edit_floor_height || action->set_light_intensity
+				|| action->set_all_sector_ceiling_heights
+				|| action->set_all_sector_floor_heights)
 			&& !int_string_ruleset(&action->keysym, string))
 		|| (action->write_sector_story
 			&& !write_story_ruleset(&action->keysym, string)))
