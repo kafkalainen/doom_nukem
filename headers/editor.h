@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/14 18:09:35 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 09:48:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,8 +328,10 @@ unsigned int	get_entity_count(t_entity_list **list);
 t_entity_list	*get_selected_entity(t_entity_list **head, t_mouse_data	mdata);
 t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click,
 					int *selected_entity);
-int				link_entities(t_entity_list **list, t_xy click,
-					int current_entity);
+t_entity_list	*get_entity_with_idx(t_entity_list **list, int idx);
+t_bool			link_entities(t_entity_list **list, t_editor_sector **sector_list,
+					t_xy click, int current_entity);
+t_bool			link_allowed(t_entity_list *from, t_entity_list *to);
 void			edit_entity(t_entity_list *entity, t_action *action, t_editor_sector *sector);
 void			free_all_entities(t_entity_list **head);
 
@@ -348,6 +350,7 @@ void			editor_free_walls(t_editor_walls **head, int nbr_of_walls);
 void			editor_free_sector(t_editor_sector **head);
 void			editor_free_selected_sector(t_editor_sector **head,
 					t_entity_list **entity_head, t_action *action);
+t_editor_sector	*get_editor_sector_with_idx(t_editor_sector **list, int idx);
 
 /*
 ** Editor map loading stuff
@@ -368,6 +371,7 @@ void			save_editor_map(t_editor *editor, t_home *home);
 void			read_input_string(unsigned char **string, t_action *action);
 unsigned char	*delete_char_from_string(unsigned char **string);
 int				get_last_written_character(unsigned char *string);
+t_entity_list	*get_linked_entity(t_entity_list **list, int link);
 t_xy			world_to_screen(t_xy x0, float scalarf, t_xy offsetf,
 					t_buffer *buffer);
 t_xy			ndc_to_world(t_xy ndc, t_xy offset, float scalar);

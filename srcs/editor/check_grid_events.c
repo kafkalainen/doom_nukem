@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 16:36:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 09:22:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,16 @@ static void	setup_selected_sector_draw_depth(t_editor *editor)
 	}
 }
 
-static void	reset_sector_light_info(t_editor_sector *sector)
+static void	reset_sector_light_info(t_editor_sector *sector, t_entity_list **entities)
 {
+	t_entity_list *linked_entity;
+
+	if (sector->light.is_linked > 1)
+	{
+		ft_putendl("was linked");
+		linked_entity = get_linked_entity(entities, sector->light.is_linked);
+		linked_entity->is_linked = 0;
+	}
 	sector->light.intensity = 0;
 	sector->light.is_linked = 0;
 	sector->light.state = 0;
@@ -48,7 +56,10 @@ static void	handle_delete(t_editor *editor)
 	if (editor->action.selected_entity >= 0)
 	{
 		if (editor->temp_entity->entity_type == lamp)
-			reset_sector_light_info(editor->temp_sector);
+		{
+			ft_putendl("Deleted a lamp");
+			reset_sector_light_info(editor->temp_sector, &editor->entity_list);
+		}
 		delete_selected_entity(&editor->entity_list, &editor->action);
 		editor->temp_entity = NULL;
 		editor->temp_sector = NULL;
@@ -90,7 +101,7 @@ void	check_grid_events(t_editor *editor)
 			&editor->end_sector, &editor->action.assign_end_sector);
 	if (editor->action.link_entity == user_input && editor->action.prev_entity != -1 && editor->temp_entity != NULL)
 	{
-		link_entities(&editor->entity_list, editor->action.world_pos, editor->action.prev_entity);
+		link_entities(&editor->entity_list, &editor->sector_list, editor->action.world_pos, editor->action.prev_entity);
 		editor->action.link_entity = idle;
 	}
 }

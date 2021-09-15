@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocate_buttons.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/13 17:09:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 08:39:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static int	buttons_create_sector_layer(t_button **blist, int i)
 	create_button(blist[i++], (t_box){vec2(32, 215), vec2(240, 235)},
 		(t_button_info){"Sector ceiling tex:", 0, sector});
 	create_button(blist[i++], (t_box){vec2(32, 345), vec2(235, 370)},
-		(t_button_info){"Set Light intensity", 1, sector});
+		(t_button_info){"Set light intensity", 1, sector});
 	create_button(blist[i++], (t_box){vec2(32, 375), vec2(195, 400)},
-		(t_button_info){"Convert to elevator", 1, sector});
+		(t_button_info){"Convert sector to a lift", 1, sector});
 	create_button(blist[i++], (t_box){vec2(32, 405), vec2(210, 430)},
 		(t_button_info){"Add light source", 1, sector});
 	create_button(blist[i++], (t_box){vec2(32, 435), vec2(205, 460)},

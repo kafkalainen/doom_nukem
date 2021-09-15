@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/14 18:09:11 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 09:53:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,51 +54,37 @@ int		get_new_link_index(t_entity_list **list, int current_entity)
 	return (highest);
 }
 
-int	link_allowed(t_entity_list *entity1, t_entity_list *entity2)
+t_bool	link_allowed(t_entity_list *from, t_entity_list *to)
 {
-	if ((entity1->entity_type == light_button && entity2->entity_type == lamp) ||
- 		(entity2->entity_type == light_button && entity1->entity_type == lamp))
-		return (TRUE);
-	return (FALSE);
+	if ((from->entity_type == light_button && to->entity_type == lamp) ||
+ 		(from->entity_type == lamp && to->entity_type == light_button))
+		return (true);
+	return (false);
 }
 
-int	link_entities(t_entity_list **list, t_xy click, int current_entity)
+t_bool	link_entities(t_entity_list **entities, t_editor_sector **sectors,
+		t_xy click, int current_entity)
 {
-	t_entity_list	*temp;
-	t_entity_list	*curr;
-	int				link_nbr;
+	t_entity_list	*starting_link;
+	t_entity_list	*clicked_entity;
+	t_editor_sector	*clicked_entity_sector;
+	int				click_entity_idx;
 
-	temp = *list;
-	curr = *list;
-	while (curr != NULL && curr->entity_idx != current_entity)
-		curr = curr->next;
-	if (!curr)
-		return (FALSE);
-	// while (temp != NULL && !check_entity_bbox(temp->bbox, mdata))
-	// 	temp = temp->next;
-	// if (!temp)
-	// 	return (FALSE);
-	// if (link_allowed(curr, temp))
-	// {
-
-	// }
-	if (curr && curr->is_linked > 1)
-		link_nbr = curr->is_linked;
-	else
-		link_nbr = get_new_link_index(list, current_entity);
-	while (temp != NULL)
-	{
-		if (check_bbox(temp->bbox.start, temp->bbox.end, click))
-		{
-			if (temp->is_linked < 2)
-				temp->is_linked = link_nbr;
-			else
-				curr->is_linked = temp->is_linked;
-			return (TRUE);
-		}
-		temp = temp->next;
-	}
-	return (FALSE);
+	starting_link = get_entity_with_idx(entities, current_entity);
+	clicked_entity = get_clicked_entity(entities, click, &click_entity_idx);
+	if (!starting_link || !clicked_entity
+		|| !link_allowed(starting_link, clicked_entity))
+		return (false);
+	starting_link->is_linked = clicked_entity->sector_idx + 2;
+	clicked_entity->is_linked = starting_link->is_linked;
+	clicked_entity_sector = get_editor_sector_with_idx(sectors,
+							clicked_entity->sector_idx);
+	if (!clicked_entity_sector)
+		return (false);
+	clicked_entity_sector->light.is_linked = starting_link->is_linked;
+	clicked_entity_sector->light.state = starting_link->state;
+	clicked_entity->state = starting_link->state;
+	return (true);
 }
 
 void	reset_list_indexes(t_entity_list **head)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_entities.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 20:13:08 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 08:41:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
