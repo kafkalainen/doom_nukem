@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:23:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 13:09:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:26:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	load_game_audio(t_audio *audio)
 	audio->error = Mix_LoadWAV("temp/error.wav");
 	load_rahikainen(audio);
 	load_enemy(audio);
+	load_door_effects(audio);
 	audio->lift = Mix_LoadWAV("temp/lift.wav");
 	audio->plasma_gun_no_ammo = Mix_LoadWAV("temp/out_of_ammo.wav");
 	audio->reload = Mix_LoadWAV("temp/reload.wav");
