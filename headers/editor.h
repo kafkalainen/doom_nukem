@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/15 17:09:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 18:40:20 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -432,4 +432,15 @@ void			show_user_help(char *str, t_buffer *buffer, int layer,
 				Uint32 colour);
 t_editor_walls	*get_intersecting_wall(t_editor_sector *sector,
 				int nbr_of_walls, t_xy dir, t_xy pos);
+void			init_static_entity(t_entity_list *new, t_action *action,
+				t_editor_sector *sector, t_xy pos);
+void			initialize_entity_data(t_entity_list *new, t_action *action,
+				t_editor_sector *sector, t_xy pos);
+int				get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls);
+void			init_non_static_entity(t_entity_list *new,
+				t_editor_sector *sector, t_xy pos);
+int				get_lowest_ceiling_height(t_editor_walls **walls, int nbr_of_walls);
+void			get_direction_from_wall(t_entity_list *new, t_editor_sector *sector, int wall_idx);
+void			get_midpoint_of_walls(t_editor_sector *sector, int wall_idx, int *x, int *y);
+int				get_selected_floor_height(t_editor_sector *sector, int wall_idx);
 #endif
