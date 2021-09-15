@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 17:56:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 12:52:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,11 @@ unsigned char	*get_writable_sector_data3(t_editor_sector *sector,
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
 			WRITE_BREAKER, 1, 0);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
-			ft_itoa(sector->light.is_linked), 1, 1);
+			ft_itoa(sector->light.state), 1, 1);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
 			WRITE_BREAKER, 1, 0);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
-			ft_itoa(sector->light.state), 1, 1);
+			ft_itoa(sector->light.is_linked), 1, 1);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
 			"\n", 1, 0);
 	return (buf);
