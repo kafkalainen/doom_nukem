@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 13:14:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:58:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_audio
 typedef struct s_audio_asset
 {
 	unsigned int	size;
-	unsigned char	*buf;
+	t_uchar			*buf;
 }				t_audio_asset;
 
 void	cleanup_audio(t_audio *audio);

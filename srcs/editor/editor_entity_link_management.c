@@ -6,26 +6,25 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 10:19:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 13:11:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:42:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_bool	link_allowed(t_entity_list *from, t_entity_list *to)
+static void	link_entity_sector(t_entity_list *clicked, t_entity_list *start,
+			t_editor_sector *clicked_sector, t_editor_sector *start_sector)
 {
-	if ((from->entity_type == light_button && to->entity_type == lamp)
-		|| (from->entity_type == lamp && to->entity_type == light_button))
-		return (true);
-	return (false);
-}
-
-t_bool	is_linkable_entity(int entity_type)
-{
-	if (entity_type == light_button || entity_type == lamp)
-		return (true);
-	else
-		return (false);
+	if (clicked->entity_type == lamp)
+	{
+		clicked_sector->light.is_linked = start->is_linked;
+		clicked_sector->light.state = start->state;
+	}
+	if (start->entity_type == lamp)
+	{
+		start_sector->light.is_linked = start->is_linked;
+		start_sector->light.state = clicked->state;
+	}
 }
 
 t_bool	link_entities(t_entity_list **entities, t_editor_sector **sectors,
@@ -51,16 +50,8 @@ t_bool	link_entities(t_entity_list **entities, t_editor_sector **sectors,
 			starting_link->sector_idx);
 	if (!clicked_entity_sector || !starting_link_sector)
 		return (false);
-	if (clicked_entity->entity_type == lamp)
-	{
-		clicked_entity_sector->light.is_linked = starting_link->is_linked;
-		clicked_entity_sector->light.state = starting_link->state;
-	}
-	if (starting_link->entity_type == lamp)
-	{
-		starting_link_sector->light.is_linked = starting_link->is_linked;
-		starting_link_sector->light.state = clicked_entity->state;
-	}
+	link_entity_sector(clicked_entity, starting_link, clicked_entity_sector,
+		starting_link_sector);
 	return (true);
 }
 

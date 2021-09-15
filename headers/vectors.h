@@ -6,12 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 11:16:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:57:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTORS_H
 # define VECTORS_H
+
+typedef unsigned char t_uchar;
 
 typedef enum e_bool
 {
