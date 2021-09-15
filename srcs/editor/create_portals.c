@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:16:04 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/11 17:49:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 16:09:55 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	create_portal_between_sectors(t_editor_sector **head, t_action *action)
 	link_to = *head;
 	while (link_from != NULL && link_from->idx_sector != action->prev_sector)
 		link_from = link_from->next;
-	if (!link_from)
+	if (!link_from || link_from->is_elevator)
 		return ;
 	while (link_to != NULL && link_to->idx_sector != action->selected_sector)
 		link_to = link_to->next;
-	if (!link_to)
+	if (!link_to || link_to->is_elevator)
 		return ;
 	i = 0;
 	found = 0;
