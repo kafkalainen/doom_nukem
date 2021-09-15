@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 15:31:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 17:38:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 		editor_events(e, home, &editor);
 		handle_events(&editor, home);
 		draw_ui(&editor, home->textures);
-		draw_buttons(&editor, editor.end_sector, home->textures);
+		draw_buttons(&editor, home->textures);
 		render_buffer(editor.buffer.pxl_buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}

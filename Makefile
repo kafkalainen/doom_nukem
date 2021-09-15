@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/15 15:52:49 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/15 18:10:32 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,10 @@ SRCS = \
 	editor$(SLASH)draw_editor_entities.c \
 	editor$(SLASH)draw_editor_sectors.c \
 	editor$(SLASH)draw_editor_sector_bbox.c \
+	editor$(SLASH)draw_entity_textfields.c \
+	editor$(SLASH)draw_sector_textfields.c \
+	editor$(SLASH)draw_text_and_strings.c \
+	editor$(SLASH)draw_wall_textfields.c \
 	editor$(SLASH)draw_grid.c \
 	editor$(SLASH)draw_ui.c \
 	editor$(SLASH)editor_add_new_sector_to_list_end.c \
