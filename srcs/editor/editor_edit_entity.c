@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_edit_entity.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 13:21:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 18:56:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	toggle_links(t_action *action, t_entity_list *entity,
 	action->toggle_entity_is_linked = 0;
 }
 
-static void toggle_states(t_action *action, t_entity_list *entity,
+static void	toggle_states(t_action *action, t_entity_list *entity,
 			t_editor *editor)
 {
 	if (entity->state == 0)
