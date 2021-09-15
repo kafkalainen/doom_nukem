@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/15 13:43:30 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/15 15:22:07 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ SRCS = \
 	editor$(SLASH)editor_entity_link_management.c \
 	editor$(SLASH)editor_entity_link_booleans.c \
 	editor$(SLASH)editor_create_new_sector.c \
+	editor$(SLASH)editor_delete_entity.c \
+	editor$(SLASH)editor_delete_wall.c \
 	editor$(SLASH)editor_load_map.c \
 	editor$(SLASH)editor_load_map2.c \
 	editor$(SLASH)editor_load_map3.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_actions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 18:10:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:31:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void initialize_menu_selections(t_action *action)
 {
 	action->grid = 1;
 	action->selected_sector = -1;
-	action->selected_point = -1;
 	action->selected_entity = -1;
 	action->selected_wall = -1;
 	action->create_sector = idle;

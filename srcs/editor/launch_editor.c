@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/13 11:28:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:31:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	init_mouse_data(t_mouse_data *mouse_data)
 void	reset_actions(t_action *action)
 {
 	action->selected_sector = -1;
-	action->selected_point = -1;
 	action->selected_entity = -1;
 	action->selected_wall = -1;
 	action->prev_entity = -1;

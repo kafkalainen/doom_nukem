@@ -6,53 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 11:18:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:03:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-// int		get_new_link_index(t_entity_list **list, int current_entity)
-// {
-// 	int				nbr;
-// 	int				highest;
-// 	t_entity_list	*temp;
-// 	t_entity_list	*link;
-
-// 	nbr = 0;
-// 	temp = *list;
-// 	link = *list;
-// 	while (temp != NULL && temp->entity_idx != current_entity)
-// 	{
-// 		if (temp->entity_idx == current_entity)
-// 		{
-// 			if (temp->is_linked > 1)
-// 				nbr = temp->is_linked;
-// 		}
-// 		temp = temp->next;
-// 	}
-// 	if (nbr > 1)
-// 		return (nbr);
-// 	else
-// 	{
-// 		nbr = 0;
-// 		highest = 2;
-// 		while (link != NULL)
-// 		{
-// 			if (link->is_linked == 2)
-// 				nbr++;
-// 			if (link->is_linked > highest)
-// 				highest = link->is_linked;
-// 			link = link->next;
-// 		}
-// 		if (nbr == 0)
-// 				highest = 2;
-// 		else
-// 			highest++;
-// 		temp->is_linked = highest;
-// 	}
-// 	return (highest);
-// }
 
 void	reset_list_indexes(t_entity_list **head)
 {
@@ -69,37 +27,6 @@ void	reset_list_indexes(t_entity_list **head)
 		temp = temp->next;
 		idx++;
 	}
-}
-
-void	delete_selected_entity(t_entity_list **head, t_action *action)
-{
-	t_entity_list	*temp;
-	t_entity_list	*prev;
-
-	temp = *head;
-	if (!temp)
-		return ;
-	if (temp != NULL && temp->entity_idx == action->selected_entity)
-	{
-		*head = temp->next;
-		free(temp);
-		reset_list_indexes(head);
-		action->delete = 0;
-		action->selected_entity = -1;
-		return ;
-	}
-	while (temp != NULL && temp->entity_idx != action->selected_entity)
-	{
-		prev = temp;
-		temp = temp->next;
-	}
-	if (temp == NULL)
-		return ;
-	prev->next = temp->next;
-	free(temp);
-	reset_list_indexes(head);
-	action->delete = 0;
-	action->selected_entity = -1;
 }
 
 int		get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls)

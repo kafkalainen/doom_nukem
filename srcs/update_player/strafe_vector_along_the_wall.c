@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 09:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 15:21:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 14:17:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	strafe_along_the_wall(t_wall *wall, t_player *plr,
+t_bool	strafe_along_the_wall(t_wall *wall, t_player *plr,
 		t_home *home, Uint32 t)
 {
 	float	angle;
@@ -34,8 +34,8 @@ Uint32	strafe_along_the_wall(t_wall *wall, t_player *plr,
 		plr->pos = plr->test_pos;
 		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 		plr->steps += t * 0.005f;
-		return (TRUE);
+		return (true);
 	}
 	else
-		return (FALSE);
+		return (false);
 }

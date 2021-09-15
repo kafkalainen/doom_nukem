@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 13:56:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:11:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static void	handle_delete(t_editor *editor)
 			reset_sector_light_info(&editor->entity_list, &editor->sector_list,
 				editor->temp_entity, editor->temp_sector);
 		delete_selected_entity(&editor->entity_list, &editor->action);
+		editor->action.delete = 0;
+		editor->action.selected_entity = -1;
 		editor->temp_entity = NULL;
 		editor->temp_sector = NULL;
 		editor->action.selected_sector = -1;
@@ -65,6 +67,8 @@ static void	handle_delete(t_editor *editor)
 	{
 		editor_free_selected_sector(&editor->sector_list,
 			&editor->entity_list, &editor->action);
+		editor->action.delete = 0;
+		editor->action.selected_sector = -1;
 		editor->temp_sector = NULL;
 		editor->action.draw_depth = depth_zero;
 		add_notification(editor, "Removed sector.", 2000);

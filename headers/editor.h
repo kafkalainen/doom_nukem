@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/15 10:58:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:41:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ typedef struct s_action
 	t_xy			world_pos;
 	int				grid;
 	int				selected_sector;
-	int				selected_point;
 	int				selected_entity;
 	int				selected_wall;
 	int				scalar;
@@ -300,8 +299,7 @@ void			close_editor_wall_list(t_editor_walls **head);
 **				Validity checks
 */
 void			close_editor_wall_list(t_editor_walls **head);
-void			remove_last_point(t_editor_walls **walls, int *nb_of_walls,
-					int selected_point);
+void			remove_last_point(t_editor_walls **walls, int *nb_of_walls);
 t_bool			check_for_last_point(t_editor_sector *sector, t_action *action);
 t_bool			check_for_intersecting_lines(t_editor_sector *sector,
 					t_screen_xy p0, t_screen_xy p1);
@@ -322,6 +320,9 @@ void			create_new_entity(t_entity_list **head,
 int				editor_parse_entity_data(t_editor *editor, unsigned char *buf,
 					ssize_t size);
 void			delete_selected_entity(t_entity_list **head, t_action *action);
+void			delete_entity_with_idx(t_entity_list **head, int idx);
+void			delete_entities_from_sector(t_entity_list **entity_head,
+					int sector_idx);
 unsigned int	get_entity_count(t_entity_list **list);
 t_entity_list	*get_selected_entity(t_entity_list **head, t_mouse_data	mdata);
 t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click,
@@ -334,6 +335,7 @@ t_bool			is_linkable_entity(int entity_type);
 t_bool			link_allowed(t_entity_list *from, t_entity_list *to);
 void			edit_entity(t_action *action, t_entity_list *entity, t_editor *editor);
 void			free_all_entities(t_entity_list **head);
+void			reset_list_indexes(t_entity_list **head);
 void			rotate_through_entities(t_entity_list *entity, t_action *action);
 void			update_linked_light_states(t_entity_list **entities,
 					t_editor_sector **sectors, t_entity_list *starting_link,
@@ -356,6 +358,7 @@ void			editor_free_walls(t_editor_walls **head, int nbr_of_walls);
 void			editor_free_sector(t_editor_sector **head);
 void			editor_free_selected_sector(t_editor_sector **head,
 					t_entity_list **entity_head, t_action *action);
+void			editor_remove_last_wall(t_editor_sector *sector_list);
 t_editor_sector	*get_editor_sector_with_idx(t_editor_sector **list, int idx);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 15:44:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:42:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,13 @@ t_bool	check_for_last_point(t_editor_sector *sector, t_action *action)
 	return (false);
 }
 
-void	remove_last_point(t_editor_walls **walls, int *nb_of_walls,
-		int selected_point)
+void	remove_last_point(t_editor_walls **walls, int *nb_of_walls)
 {
 	t_editor_walls	*previous;
 	t_editor_walls	*deleted;
-	int				i;
 
-	i = 0;
 	previous = *walls;
-	while (previous != NULL && i++ < selected_point - 1)
+	while (previous && previous->next && previous->next->next)
 		previous = previous->next;
 	deleted = previous->next;
 	if (deleted == NULL)
@@ -109,7 +106,6 @@ int	add_point_to_list(t_editor *editor, t_editor_sector *sector,
 		else
 			error_output("Error while allocating wallpoints.");
 		sector->nb_of_walls += 1;
-		action->selected_point += 1;
 	}
 	return (0);
 }

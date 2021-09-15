@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/14 17:06:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:48:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,8 +331,10 @@ void	draw_help_text(t_action *action, t_buffer *buffer)
 			buffer, 0, get_color(orange));
 		show_user_help("Sector has to be a convex polygon.",
 			buffer, 1, get_color(orange));
-		show_user_help("Last point must close sector.",
+		show_user_help("Left click creates a point, right deletes last point.",
 			buffer, 2, get_color(orange));
+		show_user_help("Last point must close sector.",
+			buffer, 3, get_color(orange));
 	}
 	if (action->create_entity == allocate)
 	{

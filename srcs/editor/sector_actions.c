@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sector_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:51:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 17:55:44 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:41:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-void	handle_removal(t_editor_sector *sector_list, t_action *action)
-{
-	t_editor_walls *temp;
-
-	temp = sector_list->walls;
-	if (sector_list->nb_of_walls == 1)
-		return ;
-	while (temp && sector_list->nb_of_walls > action->selected_point)
-	{
-		remove_last_point(&temp, &sector_list->nb_of_walls, action->selected_point);
-	}
-	action->selected_point -= 1;
-}
 
 void	editor_free_walls(t_editor_walls **head, int nbr_of_walls)
 {
@@ -39,18 +25,18 @@ void	editor_free_walls(t_editor_walls **head, int nbr_of_walls)
 	}
 }
 
-int		editor_new_sector_wallpoints(t_editor *editor,
-		t_mouse_data *mouse_data, t_action *action)
+int	editor_new_sector_wallpoints(t_editor *editor,
+	t_mouse_data *mouse_data, t_action *action)
 {
 	t_editor_sector	*temp;
 
 	temp = editor->sector_list;
 	while (temp != NULL && temp->idx_sector != action->selected_sector)
 		temp = temp->next;
-	if (action->delete)
+	if (mouse_data->i_mbright)
 	{
-		handle_removal(temp, action);
-		action->delete = 0;
+		editor_remove_last_wall(temp);
+		mouse_data->i_mbright = 0;
 		return (0);
 	}
 	if (mouse_data->i_mbleft)
@@ -66,31 +52,14 @@ int		editor_new_sector_wallpoints(t_editor *editor,
 	return (0);
 }
 
-int		get_sector_count(t_editor_sector **list)
-{
-	t_editor_sector	*temp;
-	unsigned int	i;
-
-	temp = *list;
-	i = 0;
-	while (temp != NULL)
-	{
-		i++;
-		temp = temp->next;
-	}
-	return (i);
-}
-
 void	reset_sector_indexes(t_editor_sector **head)
 {
 	t_editor_sector	*temp;
 	int				idx;
-	int				nbr_of_sectors;
 
-	nbr_of_sectors = get_sector_count(head);
-	temp = *head;
 	idx = 0;
-	while (idx < nbr_of_sectors)
+	temp = *head;
+	while (temp)
 	{
 		temp->idx_sector = idx;
 		temp = temp->next;
@@ -98,47 +67,33 @@ void	reset_sector_indexes(t_editor_sector **head)
 	}
 }
 
-// void	delete_entities_from_sector(t_entity_list **entity_head, int sector_idx, t_action *action)
-// {
-// 	t_entity_list	*temp;
-// 	t_entity_list	*prev;
-// 	int				nbr_of_entities;
-// 	int				i;
-// 	int				nbr_to_delete;
+void	editor_free_sector_data(t_editor_sector **sector,
+		t_entity_list **entity_head)
+{
+	t_editor_sector	*temp;
 
-// 	i = 0;
-// 	nbr_to_delete = 0;
-// 	nbr_of_entities = get_entity_count(entity_head);
-// 	temp = *entity_head;
-// 	while (i < nbr_of_entities && temp != NULL)
-// 	{
-// 		if (temp->sector_idx == sector_idx)
-// 			nbr_to_delete++;
-// 		i++;
-// 		temp = temp->next;
-// 	}
-// }
+	temp = *sector;
+	delete_entities_from_sector(entity_head, temp->idx_sector);
+	editor_free_walls(&temp->walls, temp->nb_of_walls);
+	if (temp->plot_line)
+		free(temp->plot_line);
+	free(temp);
+}
 
-void	editor_free_selected_sector(t_editor_sector **head, t_entity_list **entity_head, t_action *action)
+void	editor_free_selected_sector(t_editor_sector **head,
+		t_entity_list **entity_head, t_action *action)
 {
 	t_editor_sector	*temp;
 	t_editor_sector	*prev;
 
-	temp = *head;
-	(void)entity_head;
-	if (temp == NULL)
+	if (!*head)
 		return ;
+	temp = *head;
 	if (temp != NULL && temp->idx_sector == action->selected_sector)
 	{
 		*head = temp->next;
-		// delete_entities_from_sector(entity_head, temp->idx_sector, action);
-		editor_free_walls(&temp->walls, temp->nb_of_walls);
-		if (temp->plot_line)
-			free(temp->plot_line);
-		free(temp);
+		editor_free_sector_data(&temp, entity_head);
 		reset_sector_indexes(head);
-		action->delete = 0;
-		action->selected_sector = -1;
 		return ;
 	}
 	while (temp != NULL && temp->idx_sector != action->selected_sector)
@@ -149,12 +104,6 @@ void	editor_free_selected_sector(t_editor_sector **head, t_entity_list **entity_
 	if (temp == NULL)
 		return ;
 	prev->next = temp->next;
-	// delete_entities_from_sector(entity_head, temp->idx_sector, action);
-	editor_free_walls(&temp->walls, temp->nb_of_walls);
-	if (temp->plot_line)
-		free(temp->plot_line);
-	free(temp);
+	editor_free_sector_data(&temp, entity_head);
 	reset_sector_indexes(head);
-	action->delete = 0;
-	action->selected_sector = -1;
 }
