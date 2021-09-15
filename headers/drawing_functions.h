@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 18:11:11 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 19:23:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void		draw_crosshair(t_buffer *buffer);
 void		draw_cutscene(t_buffer *buffer, t_player *plr, t_sector *sector);
 void		draw_editor_sectors_bboxes(t_editor *editor, t_action *action);
 void		draw_editor_sectors(t_editor *editor);
+void		draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,
+			t_editor_walls *left_point, Uint32 color);
 void		draw_editor_entities(t_editor *editor, t_texture **textures);
 void		draw_entity_textfields(t_entity_list *entity, t_buffer *buffer,
 				t_texture **textures);

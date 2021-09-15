@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_sector_bbox.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 09:31:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 11:04:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 19:24:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,24 @@ void	draw_bbox_sector(t_editor_sector *sector, t_buffer *buffer,
 	else
 		color = get_color(gray);
 	draw_box(bbox_scaled, buffer, color);
+}
+
+void	draw_editor_sectors_bboxes(t_editor *editor, t_action *action)
+{
+	t_editor_sector	*sector_list;
+
+	sector_list = editor->sector_list;
+	while (sector_list)
+	{
+		if (action->selected_sector != sector_list->idx_sector)
+			draw_bbox_sector(sector_list, &editor->buffer, &editor->action);
+		sector_list = sector_list->next;
+	}
+	sector_list = editor->sector_list;
+	while (sector_list)
+	{
+		if (action->selected_sector == sector_list->idx_sector)
+			draw_bbox_sector(sector_list, &editor->buffer, &editor->action);
+		sector_list = sector_list->next;
+	}
 }
