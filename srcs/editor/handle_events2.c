@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 14:40:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 18:45:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	link_maps(t_action *action, unsigned char **linked_mapname,
 		*linked_mapname = NULL;
 	}
 	*linked_mapname = (unsigned char *)ft_strjoin("./map_files/",
-						map_names[action->option]);
+			map_names[action->option]);
 	action->link_maps = 0;
 	action->option = 0;
 	action->start = 0;
@@ -55,7 +55,7 @@ void	assign_end_sector(t_editor_sector **list, t_xy *click, int *end_sector,
 
 	temp = *list;
 	while (temp != NULL && !check_bbox(temp->bbox.start, temp->bbox.end,
-		*click))
+			*click))
 		temp = temp->next;
 	if (temp == NULL)
 		return ;
@@ -70,7 +70,7 @@ int	assign_player_start(t_editor_sector **list, t_xy *click, t_plr_pos *plr,
 
 	temp = *list;
 	while (temp != NULL && !check_bbox(temp->bbox.start, temp->bbox.end,
-		*click))
+			*click))
 		temp = temp->next;
 	if (temp == NULL)
 		return (FALSE);
