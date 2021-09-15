@@ -6,13 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 10:57:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:23:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_bool	entity_creation_is_allowed(t_entity_list **head, t_editor_sector *sector, t_action *action)
+t_bool	entity_creation_is_allowed(t_entity_list **head,
+		t_editor_sector *sector, t_action *action)
 {
 	t_entity_list	*temp;
 	t_editor_walls	*wall;
@@ -68,7 +69,8 @@ void	editor_edit_wall(t_editor *editor)
 		{
 			if (editor->action.edit_ceiling_height && editor->int_string)
 			{
-				editor->temp_wall->height.ceiling = ft_atoi((const char *)editor->int_string);
+				editor->temp_wall->height.ceiling
+					= ft_atoi((const char *)editor->int_string);
 				if (editor->temp_wall->height.ceiling > 99)
 					editor->temp_wall->height.ceiling = 99;
 				if (editor->temp_wall->height.ceiling < -99)
@@ -76,7 +78,8 @@ void	editor_edit_wall(t_editor *editor)
 			}
 			if (editor->action.edit_floor_height && editor->int_string)
 			{
-				editor->temp_wall->height.ground = ft_atoi((const char *)editor->int_string);
+				editor->temp_wall->height.ground
+					= ft_atoi((const char *)editor->int_string);
 				if (editor->temp_wall->height.ground > 99)
 					editor->temp_wall->height.ground = 99;
 				if (editor->temp_wall->height.ground < -99)
@@ -141,7 +144,8 @@ void	editor_edit_wall(t_editor *editor)
 	}
 }
 
-void	update_sector_light_values(t_editor_sector *sector, t_entity_list **head)
+void	update_sector_light_values(t_editor_sector *sector,
+		t_entity_list **head)
 {
 	t_entity_list	*temp;
 
@@ -187,7 +191,8 @@ t_bool	check_for_elevator_button(t_entity_list **head, int sector_idx)
 	temp = *head;
 	while (temp)
 	{
-		if (temp->sector_idx == sector_idx && temp->entity_type == lift_button)
+		if (temp->sector_idx == sector_idx
+			&& temp->entity_type == lift_button)
 			break ;
 		temp = temp->next;
 	}
@@ -213,7 +218,8 @@ void	get_lowest_floor(t_editor_sector *sector, int *height)
 	}
 }
 
-t_bool	sectors_aligned(t_editor_sector *first, t_editor_sector *second, t_screen_xy heights, t_editor_sector *elev_sector)
+t_bool	sectors_aligned(t_editor_sector *first, t_editor_sector *second,
+		t_screen_xy heights, t_editor_sector *elev_sector)
 {
 	int	lift_height;
 
@@ -236,7 +242,8 @@ t_bool	sectors_aligned(t_editor_sector *first, t_editor_sector *second, t_screen
 	return (false);
 }
 
-t_bool	compare_floors_to_ceilings(t_editor_sector **sectors, int first_idx, int second_idx, t_editor_sector *elev_sector)
+t_bool	compare_floors_to_ceilings(t_editor_sector **sectors, int first_idx,
+		int second_idx, t_editor_sector *elev_sector)
 {
 	t_editor_sector	*first;
 	t_editor_sector *second;
@@ -267,7 +274,8 @@ t_bool	compare_floors_to_ceilings(t_editor_sector **sectors, int first_idx, int 
 	return (true);
 }
 
-t_bool	verify_connecting_sectors(t_editor_sector **sectors, t_editor_sector *elev_sector)
+t_bool	verify_connecting_sectors(t_editor_sector **sectors,
+		t_editor_sector *elev_sector)
 {
 	t_editor_walls	*wall;
 	int				i;
@@ -300,7 +308,8 @@ t_bool	verify_connecting_sectors(t_editor_sector **sectors, t_editor_sector *ele
 	return (true);
 }
 
-t_bool	check_elevator_prerequisites(t_entity_list **head, t_editor_sector **sectors, t_action *action)
+t_bool	check_elevator_prerequisites(t_entity_list **head,
+		t_editor_sector **sectors, t_action *action)
 {
 	t_editor_sector	*sector;
 
@@ -322,7 +331,8 @@ t_bool	check_elevator_prerequisites(t_entity_list **head, t_editor_sector **sect
 	return (true);
 }
 
-void	convert_sector_to_lift(t_editor_sector *sector, t_entity_list **head)
+void	convert_sector_to_lift(t_editor_sector *sector,
+		t_entity_list **head)
 {
 	t_entity_list	*temp;
 

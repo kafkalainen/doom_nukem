@@ -6,13 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 11:18:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:21:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	toggle_links(t_action *action, t_entity_list *entity, t_editor *editor)
+static void	toggle_links(t_action *action, t_entity_list *entity,
+			t_editor *editor)
 {
 	if (is_linkable_entity(entity->entity_type) && entity->is_linked == 1)
 		entity->is_linked = 0;
@@ -24,7 +25,8 @@ static void	toggle_links(t_action *action, t_entity_list *entity, t_editor *edit
 	action->toggle_entity_is_linked = 0;
 }
 
-static void toggle_states(t_action *action, t_entity_list *entity, t_editor *editor)
+static void toggle_states(t_action *action, t_entity_list *entity,
+			t_editor *editor)
 {
 	if (entity->state == 0)
 		entity->state = 1;
