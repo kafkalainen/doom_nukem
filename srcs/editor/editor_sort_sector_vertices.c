@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 15:13:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 17:55:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 19:30:48 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ static void	calculate_angles_and_distances(t_editor_sector *sector)
 	while (i < sector->nb_of_walls)
 	{
 		cur_wall->centroid_vec = vec2_dec(vec2(cur_wall->x0.x,
-			cur_wall->x0.y), sector->centroid);
+					cur_wall->x0.y), sector->centroid);
 		cur_wall->dist_from_center = vec2_mag(cur_wall->centroid_vec);
 		cur_wall->centroid_vec = vec2_unit_vector(cur_wall->centroid_vec);
-		cur_wall->center_angle = atan2f(cur_wall->centroid_vec.y, cur_wall->centroid_vec.x);
+		cur_wall->center_angle = atan2f(cur_wall->centroid_vec.y,
+				cur_wall->centroid_vec.x);
 		if (cur_wall->center_angle < 0.0f)
 			cur_wall->center_angle = TWO_PI + cur_wall->center_angle;
 		if (cur_wall->center_angle == TWO_PI)

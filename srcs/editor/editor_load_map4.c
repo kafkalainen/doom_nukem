@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_load_map4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 14:01:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 19:35:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,19 @@ int	editor_parse_story_data(t_editor_sector *new, unsigned char *buf,
 	{
 		if (new->plot_line == NULL)
 		{
-			new->plot_line
-				= (t_uchar *)editor_get_next_string(buf, &pos, size);
+			new->plot_line = (t_uchar *)editor_get_next_string(buf, &pos, size);
 			if (lines > 1)
-				new->plot_line
-					= (t_uchar *)ft_strjoin_freeable((char *)new->plot_line, "\n", 1, 0);
+				new->plot_line = (t_uchar *)ft_strjoin_freeable(
+						(char *)new->plot_line, "\n", 1, 0);
 		}
 		else
 		{
-			new->plot_line = (t_uchar *)ft_strjoin_freeable((char *)new->plot_line,
-						editor_get_next_string(buf, &pos, size), 1, 1);
+			new->plot_line = (t_uchar *)ft_strjoin_freeable(
+					(char *)new->plot_line,
+					editor_get_next_string(buf, &pos, size), 1, 1);
 			if (i < (lines - 1))
-				new->plot_line = (t_uchar *)ft_strjoin_freeable((char *)new->plot_line, "\n", 1, 0);
+				new->plot_line = (t_uchar *)ft_strjoin_freeable(
+						(char *)new->plot_line, "\n", 1, 0);
 		}
 		if (new->plot_line == NULL)
 			return (1);

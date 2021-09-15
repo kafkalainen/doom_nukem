@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_editor_data.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:18:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/13 11:26:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 19:27:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 static void	free_buttons(t_editor *editor)
 {
 	int	i;
-	i = -1;
 
+	i = -1;
 	while (++i < NBR_BUTTONS)
 	{
 		free(editor->button_list[i]->info.text);
 		editor->button_list[i]->info.text = NULL;
 		free(editor->button_list[i]);
 		editor->button_list[i] = NULL;
-
 	}
 	free(editor->button_list);
 	editor->button_list = NULL;
