@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/15 13:43:30 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/15 15:47:19 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS = \
 	main.c \
 	editor$(SLASH)allocate_buttons.c \
 	editor$(SLASH)button_actions.c \
+	editor$(SLASH)bounding_box_checks.c \
 	editor$(SLASH)calculate_centroid.c \
 	editor$(SLASH)check_all_sectors_for_intersecting_lines.c \
 	editor$(SLASH)check_for_intersecting_lines.c \
