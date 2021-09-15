@@ -6,86 +6,53 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 09:53:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 11:00:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int		get_new_link_index(t_entity_list **list, int current_entity)
-{
-	int				nbr;
-	int				highest;
-	t_entity_list	*temp;
-	t_entity_list	*link;
+// int		get_new_link_index(t_entity_list **list, int current_entity)
+// {
+// 	int				nbr;
+// 	int				highest;
+// 	t_entity_list	*temp;
+// 	t_entity_list	*link;
 
-	nbr = 0;
-	temp = *list;
-	link = *list;
-	while (temp != NULL && temp->entity_idx != current_entity)
-	{
-		if (temp->entity_idx == current_entity)
-		{
-			if (temp->is_linked > 1)
-				nbr = temp->is_linked;
-		}
-		temp = temp->next;
-	}
-	if (nbr > 1)
-		return (nbr);
-	else
-	{
-		nbr = 0;
-		highest = 2;
-		while (link != NULL)
-		{
-			if (link->is_linked == 2)
-				nbr++;
-			if (link->is_linked > highest)
-				highest = link->is_linked;
-			link = link->next;
-		}
-		if (nbr == 0)
-				highest = 2;
-		else
-			highest++;
-		temp->is_linked = highest;
-	}
-	return (highest);
-}
-
-t_bool	link_allowed(t_entity_list *from, t_entity_list *to)
-{
-	if ((from->entity_type == light_button && to->entity_type == lamp) ||
- 		(from->entity_type == lamp && to->entity_type == light_button))
-		return (true);
-	return (false);
-}
-
-t_bool	link_entities(t_entity_list **entities, t_editor_sector **sectors,
-		t_xy click, int current_entity)
-{
-	t_entity_list	*starting_link;
-	t_entity_list	*clicked_entity;
-	t_editor_sector	*clicked_entity_sector;
-	int				click_entity_idx;
-
-	starting_link = get_entity_with_idx(entities, current_entity);
-	clicked_entity = get_clicked_entity(entities, click, &click_entity_idx);
-	if (!starting_link || !clicked_entity
-		|| !link_allowed(starting_link, clicked_entity))
-		return (false);
-	starting_link->is_linked = clicked_entity->sector_idx + 2;
-	clicked_entity->is_linked = starting_link->is_linked;
-	clicked_entity_sector = get_editor_sector_with_idx(sectors,
-							clicked_entity->sector_idx);
-	if (!clicked_entity_sector)
-		return (false);
-	clicked_entity_sector->light.is_linked = starting_link->is_linked;
-	clicked_entity_sector->light.state = starting_link->state;
-	clicked_entity->state = starting_link->state;
-	return (true);
-}
+// 	nbr = 0;
+// 	temp = *list;
+// 	link = *list;
+// 	while (temp != NULL && temp->entity_idx != current_entity)
+// 	{
+// 		if (temp->entity_idx == current_entity)
+// 		{
+// 			if (temp->is_linked > 1)
+// 				nbr = temp->is_linked;
+// 		}
+// 		temp = temp->next;
+// 	}
+// 	if (nbr > 1)
+// 		return (nbr);
+// 	else
+// 	{
+// 		nbr = 0;
+// 		highest = 2;
+// 		while (link != NULL)
+// 		{
+// 			if (link->is_linked == 2)
+// 				nbr++;
+// 			if (link->is_linked > highest)
+// 				highest = link->is_linked;
+// 			link = link->next;
+// 		}
+// 		if (nbr == 0)
+// 				highest = 2;
+// 		else
+// 			highest++;
+// 		temp->is_linked = highest;
+// 	}
+// 	return (highest);
+// }
 
 void	reset_list_indexes(t_entity_list **head)
 {
@@ -135,38 +102,36 @@ void	delete_selected_entity(t_entity_list **head, t_action *action)
 	action->selected_entity = -1;
 }
 
-void	edit_entity(t_entity_list *entity, t_action *action, t_editor_sector *sector)
+static void	toggle_links(t_action *action, t_entity_list *entity, t_editor *editor)
+{
+	if (is_linkable_entity(entity->entity_type) && entity->is_linked == 1)
+		entity->is_linked = 0;
+	else if (is_linkable_entity(entity->entity_type) && entity->is_linked == 0)
+		entity->is_linked = 1;
+	else if (is_linkable_entity(entity->entity_type) && entity->is_linked > 1)
+		unlink_linked_light_links(&editor->entity_list, &editor->sector_list,
+			entity);
+	action->toggle_entity_is_linked = 0;
+}
+
+static void toggle_states(t_action *action, t_entity_list *entity, t_editor *editor)
+{
+	if (is_linkable_entity(entity->entity_type) && entity->is_linked > 1)
+		update_linked_light_states(&editor->entity_list, &editor->sector_list,
+			entity, 1);
+	else if (entity->state == 0)
+		entity->state = 1;
+	else
+		entity->state = 0;
+	action->toggle_state = 0;
+}
+
+void	edit_entity(t_action *action, t_entity_list *entity, t_editor *editor)
 {
 	if (action->change_entity_type)
-	{
-		if (entity->entity_type == skull_skulker)
-			entity->entity_type = thing;
-		else if (entity->entity_type == thing)
-			entity->entity_type = drone;
-		else if (entity->entity_type == drone)
-			entity->entity_type = crewmember;
-		else if (entity->entity_type == crewmember)
-			entity->entity_type = ammo_pack;
-		else if (entity->entity_type == ammo_pack)
-			entity->entity_type = keycard_cleaning;
-		else if (entity->entity_type == keycard_cleaning)
-			entity->entity_type = keycard_engineering;
-		else if (entity->entity_type == keycard_engineering)
-			entity->entity_type = keycard_military;
-		else if (entity->entity_type == keycard_military)
-			entity->entity_type = skull_skulker;
-		action->change_entity_type = 0;
-	}
+		rotate_through_entities(entity, action);
 	else if (action->toggle_entity_is_linked)
-	{
-		if (entity->is_linked > 0)
-			entity->is_linked = 0;
-		else
-			entity->is_linked = 1;
-		if (entity->entity_type == lamp)
-			sector->light.is_linked = entity->is_linked;
-		action->toggle_entity_is_linked = 0;
-	}
+		toggle_links(action, entity, editor);
 	else if (action->toggle_is_revealed)
 	{
 		if (entity->is_revealed == 0)
@@ -176,15 +141,7 @@ void	edit_entity(t_entity_list *entity, t_action *action, t_editor_sector *secto
 		action->toggle_is_revealed = 0;
 	}
 	else if (action->toggle_state)
-	{
-		if (entity->state == 0)
-			entity->state = 1;
-		else
-			entity->state = 0;
-		if (entity->entity_type == lamp)
-			sector->light.state = entity->state;
-		action->toggle_state = 0;
-	}
+		toggle_states(action, entity, editor);
 	action->edit_entity = 0;
 }
 

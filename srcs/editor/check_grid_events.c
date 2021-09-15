@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 09:22:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 10:14:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	setup_selected_sector_draw_depth(t_editor *editor)
 	}
 }
 
+//REVISIT
 static void	reset_sector_light_info(t_editor_sector *sector, t_entity_list **entities)
 {
 	t_entity_list *linked_entity;
@@ -42,7 +43,7 @@ static void	reset_sector_light_info(t_editor_sector *sector, t_entity_list **ent
 	if (sector->light.is_linked > 1)
 	{
 		ft_putendl("was linked");
-		linked_entity = get_linked_entity(entities, sector->light.is_linked);
+		linked_entity = get_linked_entity(entities, sector->light.is_linked, 0);
 		linked_entity->is_linked = 0;
 	}
 	sector->light.intensity = 0;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 14:34:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 10:55:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,4 @@ unsigned char	*delete_char_from_string(unsigned char **string)
 		return (NULL);
 	}
 	return (temp);
-}
-
-void	unlink_selected_entity(t_entity_list **list, int entity_idx,
-		int *unlink_state)
-{
-	t_entity_list	*temp;
-
-	temp = *list;
-	while (temp != NULL && temp->entity_idx != entity_idx)
-		temp = temp->next;
-	if (temp != NULL)
-		temp->is_linked = 0;
-	*unlink_state = 0;
 }

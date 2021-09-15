@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/14 17:55:11 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 10:57:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -447,12 +447,10 @@ int		handle_events(t_editor *editor, t_home *home)
 	editor->delta_time = SDL_GetTicks() - editor->cur_time;
 	editor->cur_time = SDL_GetTicks();
 	if (editor->action.edit_entity)
-		edit_entity(editor->temp_entity, &editor->action, editor->temp_sector);
+		edit_entity(&editor->action, editor->temp_entity, editor);
 	if (editor->action.unlink_entity)
-	{
-		unlink_selected_entity(&editor->entity_list,
-			editor->action.selected_entity, &editor->action.unlink_entity);
-	}
+		unlink_linked_light_links(&editor->entity_list,
+			&editor->sector_list, editor->temp_entity);
 	if (editor->action.edit_wall && editor->temp_wall != NULL && editor->temp_sector != NULL)
 		editor_edit_wall(editor);
 	if (editor->action.edit_sector && editor->temp_sector != NULL)

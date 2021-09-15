@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/15 09:54:11 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/15 10:24:01 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,11 @@ SRCS = \
 	editor$(SLASH)draw_editor_sector_bbox.c \
 	editor$(SLASH)draw_grid.c \
 	editor$(SLASH)draw_ui.c \
+	editor$(SLASH)editor_add_new_sector_to_list_end.c \
 	editor$(SLASH)editor_events.c \
 	editor$(SLASH)editor_entity.c \
+	editor$(SLASH)editor_entity_link_management.c \
 	editor$(SLASH)editor_create_new_sector.c \
-	editor$(SLASH)editor_add_new_sector_to_list_end.c \
 	editor$(SLASH)editor_load_map.c \
 	editor$(SLASH)editor_load_map2.c \
 	editor$(SLASH)editor_load_map3.c \
@@ -58,6 +59,7 @@ SRCS = \
 	editor$(SLASH)launch_editor.c \
 	editor$(SLASH)ndc_to_world.c \
 	editor$(SLASH)notify_user.c \
+	editor$(SLASH)rotate_through_entities.c \
 	editor$(SLASH)read_input_string.c \
 	editor$(SLASH)sector_actions.c \
 	editor$(SLASH)wall_points.c \
