@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocate_buttons.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 08:39:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 14:28:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ static int	buttons_create_sector_layer(t_button **blist, int i)
 		(t_button_info){"Write plot", 1, sector});
 	create_button(blist[i++], (t_box){vec2(32, 465), vec2(275, 490)},
 		(t_button_info){"Create portal between sectors", 0, sector});
+	create_button(blist[i++], (t_box){vec2(32, 495), vec2(275, 520)},
+		(t_button_info){"Set all ceiling heights", 0, sector});
+	create_button(blist[i++], (t_box){vec2(32, 525), vec2(275, 550)},
+		(t_button_info){"Set all floor heights", 0, sector});
 	return (i);
 }
 

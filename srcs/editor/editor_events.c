@@ -110,24 +110,24 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e, t_action *action, t_bu
 			action->convert_to_portal = user_input;
 		if (e->button.button == SDL_BUTTON_RIGHT && action->convert_to_portal == allocate)
 			action->convert_to_portal = idle;
-		if ((e->button.button == SDL_BUTTON_LEFT && action->selected_entity >= 0 && action->link_entity == 1))
+		if ((e->button.button == SDL_BUTTON_LEFT && action->selected_entity >= 0 && action->link_entity == allocate))
 		{
 			action->prev_entity = action->selected_entity;
-			action->link_entity = 2;
+			action->link_entity = user_input;
 		}
-		if (e->button.button == SDL_BUTTON_RIGHT && action->link_entity == 1)
+		if (e->button.button == SDL_BUTTON_RIGHT && action->link_entity == allocate)
 		{
 			action->prev_entity = -1;
-			action->link_entity = 0;
+			action->link_entity = idle;
 		}
-		if (e->button.button == SDL_BUTTON_LEFT && action->assign_player_start == 1)
-			action->assign_player_start = 2;
-		if (e->button.button == SDL_BUTTON_RIGHT && action->assign_player_start == 1)
-			action->assign_player_start = 0;
-		if (e->button.button == SDL_BUTTON_LEFT && action->assign_end_sector == 1)
-			action->assign_end_sector = 2;
-		if (e->button.button == SDL_BUTTON_RIGHT && action->assign_end_sector == 1)
-			action->assign_end_sector = 0;
+		if (e->button.button == SDL_BUTTON_LEFT && action->assign_player_start == allocate)
+			action->assign_player_start = user_input;
+		if (e->button.button == SDL_BUTTON_RIGHT && action->assign_player_start == allocate)
+			action->assign_player_start = idle;
+		if (e->button.button == SDL_BUTTON_LEFT && action->assign_end_sector == allocate)
+			action->assign_end_sector = user_input;
+		if (e->button.button == SDL_BUTTON_RIGHT && action->assign_end_sector == allocate)
+			action->assign_end_sector = idle;
 	}
 	if (e->type == SDL_MOUSEBUTTONUP)
 	{

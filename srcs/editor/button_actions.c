@@ -6,13 +6,13 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/14 18:09:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:45:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void		main_button_actions(t_action *action, int i)
+void	main_button_actions(t_action *action, int i)
 {
 	if (i == button_save)
 	{
@@ -31,12 +31,28 @@ void		main_button_actions(t_action *action, int i)
 	}
 	else if (i == button_assign_end_sector)
 		action->assign_end_sector = 1;
-	else if (i == button_link_map  && action->nbr_of_maps > 0)
+	else if (i == button_link_map && action->nbr_of_maps > 0)
 		action->link_maps = 1;
 	else if (i == button_unlink_map)
 		action->unlink_maps = 1;
 	else if (i == button_plr_start)
 		action->assign_player_start = 1;
+}
+
+static void	sector_button_actions_two(t_action *action, int i)
+{
+	if (i == button_create_portal)
+		action->convert_to_portal = 1;
+	else if (i == button_set_all_ceiling_heights)
+	{
+		action->set_all_sector_ceiling_heights = 1;
+		action->input_active = 1;
+	}
+	else if (i == button_set_all_floor_heights)
+	{
+		action->set_all_sector_floor_heights = 1;
+		action->input_active = 1;
+	}
 }
 
 void	sector_button_actions(t_action *action, int i)
@@ -58,10 +74,9 @@ void	sector_button_actions(t_action *action, int i)
 	else if (i == button_input_active)
 	{
 		action->write_sector_story = 1;
-		action->input_active = 1;	
+		action->input_active = 1;
 	}
-	else if (i == button_create_portal)
-		action->convert_to_portal = 1;
+	sector_button_actions_two(action, i);
 }
 
 void	entity_button_actions(t_action *action, int i)
@@ -98,22 +113,4 @@ void	wall_button_actions(t_action *action, int i)
 		action->create_powerstation = 1;
 	else if (i == button_create_elevator_button)
 		action->create_elev_button = 1;
-}
-
-t_bool	check_bbox(t_xy start, t_xy end, t_xy click)
-{
-	if (start.x <= click.x && start.y >= click.y &&
-		end.x >= click.x && end.y <= click.y)
-		return (true);
-	else
-		return (false);
-}
-
-t_bool	check_bbox_ui(t_xy start, t_xy end, t_xy click)
-{
-	if (start.x <= click.x && start.y <= click.y &&
-		end.x >= click.x && end.y >= click.y)
-		return (true);
-	else
-		return (false);
 }

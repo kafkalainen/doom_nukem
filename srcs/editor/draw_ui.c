@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_ui.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 16:58:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 11:08:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:35:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static t_bool	initialize_int_string_logic(t_action *action)
 {
 	if (action->set_light_intensity
 		|| action->edit_ceiling_height
-		|| action->edit_floor_height)
+		|| action->edit_floor_height
+		|| action->set_all_sector_ceiling_heights
+		|| action->set_all_sector_floor_heights)
 		return (true);
 	return (false);
 }

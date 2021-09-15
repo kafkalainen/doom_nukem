@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 13:23:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:37:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,7 +347,52 @@ void	convert_sector_to_lift(t_editor_sector *sector,
 		return ;
 	temp->is_linked = sector->idx_sector + 2;
 	sector->is_elevator = lift;
-	// connecting portals need to be modified to include door textures
+}
+
+void	editor_set_all_sector_floor_heights(t_editor_sector *sector, unsigned char **int_string)
+{
+	int				floor_height;
+	t_editor_walls	*wall;
+	int				i;
+
+	i = 0;
+	wall = sector->walls;
+	floor_height = ft_atoi((const char *)*int_string);
+	if (floor_height > 99)
+		floor_height = 99;
+	if (floor_height < -99)
+		floor_height = -99;
+	free(*int_string);
+	*int_string = NULL;
+	while (i < sector->nb_of_walls)
+	{
+		wall->height.ground = floor_height;
+		wall = wall->next;
+		i++;
+	}
+}
+
+void	editor_set_all_sector_ceiling_heights(t_editor_sector *sector, unsigned char **int_string)
+{
+	int				ceiling_height;
+	t_editor_walls	*wall;
+	int				i;
+
+	i = 0;
+	wall = sector->walls;
+	ceiling_height = ft_atoi((const char *)*int_string);
+	if (ceiling_height > 99)
+		ceiling_height = 99;
+	if (ceiling_height < -99)
+		ceiling_height = -99;
+	free(*int_string);
+	*int_string = NULL;
+	while (i < sector->nb_of_walls)
+	{
+		wall->height.ceiling = ceiling_height;
+		wall = wall->next;
+		i++;
+	}
 }
 
 void	editor_edit_sector(t_editor *editor)
@@ -449,6 +494,28 @@ void	editor_edit_sector(t_editor *editor)
 			convert_sector_to_lift(editor->temp_sector, &editor->entity_list);
 		editor->action.create_elevator = 0;
 		editor->action.edit_sector = 0;
+	}
+	if (editor->action.set_all_sector_ceiling_heights)
+	{
+		read_input_string(&editor->int_string, &editor->action);
+		if (!editor->action.input_active)
+		{
+			if (editor->int_string)
+				editor_set_all_sector_ceiling_heights(editor->temp_sector, &editor->int_string);
+			editor->action.set_all_sector_ceiling_heights = 0;
+			editor->action.edit_sector = 0;
+		}
+	}
+	if (editor->action.set_all_sector_floor_heights)
+	{
+		read_input_string(&editor->int_string, &editor->action);
+		if (!editor->action.input_active)
+		{
+			if (editor->int_string)
+				editor_set_all_sector_floor_heights(editor->temp_sector, &editor->int_string);
+			editor->action.set_all_sector_floor_heights = 0;
+			editor->action.edit_sector = 0;
+		}
 	}
 }
 

@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 15:31:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 15:52:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void initialize_menu_selections(t_action *action)
+static void	initialize_menu_selections(t_action *action)
 {
 	action->grid = 1;
 	action->selected_sector = -1;
@@ -32,7 +32,7 @@ static void initialize_menu_selections(t_action *action)
 	action->edit_entity = 0;
 }
 
-static void initialize_toggles(t_action *action)
+static void	initialize_toggles(t_action *action)
 {
 	action->change_entity_type = 0;
 	action->toggle_entity_is_linked = 0;
@@ -56,9 +56,11 @@ static void initialize_toggles(t_action *action)
 	action->set_light_intensity = 0;
 	action->create_light_source = 0;
 	action->add_wall_point = 0;
+	action->set_all_sector_ceiling_heights = 0;
+	action->set_all_sector_floor_heights = 0;
 }
 
-static void initialize_input(t_action *action)
+static void	initialize_input(t_action *action)
 {
 	action->input_active = 0;
 	action->keysym = -1;

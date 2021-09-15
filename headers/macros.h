@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/13 15:27:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 14:28:36 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MACROS_H
 
 # define BUFF_SIZE 16
-# define NBR_BUTTONS 28
+# define NBR_BUTTONS 30
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 
