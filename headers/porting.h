@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   porting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 16:27:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ unsigned char	*get_writable_sector_data2(t_editor_sector *sector,
 unsigned char	*get_sector_plot(unsigned char *plot);
 unsigned char	*write_plot_lines(unsigned char *plot);
 unsigned char	*get_writable_wall_data(t_editor_walls *wall);
+void			parse_map_data(unsigned char *buf, t_player *plr,
+				t_home *home, ssize_t size);
 
 #endif

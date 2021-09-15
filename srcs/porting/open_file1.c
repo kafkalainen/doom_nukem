@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 17:51:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 16:27:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,11 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 	return (0);
 }
 
-//validate_sectors_data(home, plr);
 int	load_map_file(t_player *plr, t_home *home)
 {
 	int				fd;
 	unsigned char	*buf;
 	ssize_t			size;
-	int				ret;
 
 	buf = (unsigned char *)malloc(sizeof(unsigned char) * (MAX_SIZE + 1));
 	if (!buf)
@@ -114,16 +112,7 @@ int	load_map_file(t_player *plr, t_home *home)
 			read_error_output("ERROR: Failed to read map.", &buf);
 		buf[size] = '\0';
 		verify_hash(buf, size);
-		ret = parse_sector_data(buf, plr, home, size);
-		ret = parse_entity_data(buf, home, size);
-		parse_texture_data(buf, home, size);
-		if (doom_mkdir() == -1)
-			ft_putstr("ERROR: Failed to create temporary directory.\n");
-		parse_all_audio_data(buf, size);
-		free(buf);
-		buf = NULL;
-		if (ret)
-			error_output("ERROR: Failed to read map.");
+		parse_map_data(buf, plr, home, size);
 		calc_map_properties(home, plr);
 	}
 	return (0);
