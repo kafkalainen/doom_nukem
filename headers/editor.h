@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/15 15:53:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 17:09:48 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -430,4 +430,6 @@ t_bool			editor_check_if_lseg_intersects(t_editor_walls *wall,
 					t_screen_xy pos, t_screen_xy dir);
 void			show_user_help(char *str, t_buffer *buffer, int layer,
 				Uint32 colour);
+t_editor_walls	*get_intersecting_wall(t_editor_sector *sector,
+				int nbr_of_walls, t_xy dir, t_xy pos);
 #endif
