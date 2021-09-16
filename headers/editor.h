@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 14:26:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:14:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -380,6 +380,8 @@ t_editor_sector	*get_linked_sector(t_editor_sector **list, int link,
 					int cur_idx);
 void			translate_towards_centroid(t_editor_sector *sector);
 int				editor_sector_remove_wallpoint(t_editor *editor, t_editor_sector *sector);
+void			check_for_portals_and_set_defaults(t_editor_sector *sector, t_editor_sector **head);
+void			reset_portals_to_default_walls(t_editor_sector *sector, int sector_idx);
 
 /*
 ** Editor map loading stuff

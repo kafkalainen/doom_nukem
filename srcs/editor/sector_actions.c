@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:51:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 14:31:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:13:36 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	editor_free_selected_sector(t_editor_sector **head,
 	if (temp != NULL && temp->idx_sector == action->selected_sector)
 	{
 		*head = temp->next;
+		check_for_portals_and_set_defaults(temp, head);
 		editor_free_sector_data(&temp, entity_head);
 		reset_sector_indexes(head);
 		return ;
@@ -101,6 +102,7 @@ void	editor_free_selected_sector(t_editor_sector **head,
 	if (temp == NULL)
 		return ;
 	prev->next = temp->next;
+	check_for_portals_and_set_defaults(temp, head);
 	editor_free_sector_data(&temp, entity_head);
 	reset_sector_indexes(head);
 }
