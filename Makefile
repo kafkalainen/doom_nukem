@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/16 09:06:02 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/16 09:39:52 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRCS = \
 	editor$(SLASH)rotate_through_entities.c \
 	editor$(SLASH)read_input_string.c \
 	editor$(SLASH)sector_actions.c \
+	editor$(SLASH)translate_towards_centroid.c \
 	editor$(SLASH)wall_points.c \
 	editor$(SLASH)wall_points2.c \
 	editor$(SLASH)world_to_screen.c \

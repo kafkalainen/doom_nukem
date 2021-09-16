@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 09:06:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 10:02:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,20 @@ static void	draw_line_to_mouse_cursor(int active, t_editor_walls *wall,
 static void	draw_wall_line(t_editor_walls *left_point,
 	t_editor_walls *right_point, t_editor *editor, Uint32 color)
 {
-	draw_line(
-		world_to_screen(vec2(left_point->x0.x, left_point->x0.y),
-			editor->action.scalarf, editor->action.offsetf, &editor->buffer),
-		world_to_screen(vec2(right_point->x0.x, right_point->x0.y),
-			editor->action.scalarf, editor->action.offsetf, &editor->buffer),
-		color, &editor->buffer);
+	t_xy	left;
+	t_xy	right;
+
+	left = world_to_screen(vec2(left_point->x0.x, left_point->x0.y),
+			editor->action.scalarf, editor->action.offsetf, &editor->buffer);
+	right = world_to_screen(vec2(right_point->x0.x, right_point->x0.y),
+			editor->action.scalarf, editor->action.offsetf, &editor->buffer);
+	draw_line(left, right, color, &editor->buffer);
+	if (left.y != right.y)
+		draw_line(vec2(left.x + 1, left.y), vec2(right.x + 1, right.y),
+				color, &editor->buffer);
+	else
+		draw_line(vec2(left.x, left.y + 1), vec2(right.x, right.y + 1),
+				color, &editor->buffer);
 }
 
 void	draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,

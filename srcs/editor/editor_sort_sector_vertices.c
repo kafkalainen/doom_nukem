@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_sort_sector_vertices.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 15:13:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 19:30:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 10:15:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,6 @@ void	editor_sort_wall_vertices(t_editor_sector *sector)
 {
 	calculate_angles_and_distances(sector);
 	sort_list(&sector->walls, sector->nb_of_walls);
+	editor_reset_wall_indexes(&sector->walls, sector->nb_of_walls);
+	translate_towards_centroid(sector);
 }

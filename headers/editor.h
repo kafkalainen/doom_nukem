@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 08:41:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 09:41:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,7 +313,8 @@ int				check_if_non_convex(t_editor_sector *sector);
 t_bool			editor_check_if_same_point(t_screen_xy p0, t_screen_xy p1);
 int				editor_orientation_of_three_points(t_screen_xy a,
 					t_screen_xy b, t_screen_xy c);
-void			editor_reset_wall_indexes(t_editor_walls **walls, int nbr_of_walls);
+void			editor_reset_wall_indexes(t_editor_walls **walls,
+					int nbr_of_walls);
 
 /*
 ** Entities
@@ -332,15 +333,18 @@ t_entity_list	*get_selected_entity(t_entity_list **head, t_mouse_data	mdata);
 t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click,
 					int *selected_entity);
 t_entity_list	*get_entity_with_idx(t_entity_list **list, int idx);
-t_bool			link_entities(t_entity_list **list, t_editor_sector **sector_list,
+t_bool			link_entities(t_entity_list **list,
+					t_editor_sector **sector_list,
 					t_xy click, int current_entity);
 t_entity_list	*get_linked_entity(t_entity_list **list, int link, int cur_idx);
 t_bool			is_linkable_entity(int entity_type);
 t_bool			link_allowed(t_entity_list *from, t_entity_list *to);
-void			edit_entity(t_action *action, t_entity_list *entity, t_editor *editor);
+void			edit_entity(t_action *action, t_entity_list *entity,
+					t_editor *editor);
 void			free_all_entities(t_entity_list **head);
 void			reset_list_indexes(t_entity_list **head);
-void			rotate_through_entities(t_entity_list *entity, t_action *action);
+void			rotate_through_entities(t_entity_list *entity,
+					t_action *action);
 void			update_linked_light_states(t_entity_list **entities,
 					t_editor_sector **sectors, t_entity_list *starting_link,
 					int state);
@@ -353,7 +357,7 @@ void			unlink_linked_light_links(t_entity_list **entities,
 
 t_xy			calculate_centroid(t_editor_sector *sector);
 void			editor_create_new_sector(t_editor_sector **head,
-				t_action *action);
+					t_action *action);
 t_editor_sector	*editor_add_new_sector_to_list_end(t_editor_sector **head);
 int				editor_new_sector_wallpoints(t_editor *editor,
 					t_mouse_data *mouse_data, t_action *action);
@@ -365,6 +369,7 @@ void			editor_free_selected_sector(t_editor_sector **head,
 void			editor_remove_last_wall(t_editor_sector *sector_list);
 void			editor_reset_player_and_end(t_editor *editor, t_action *action);
 t_editor_sector	*get_editor_sector_with_idx(t_editor_sector **list, int idx);
+void			translate_towards_centroid(t_editor_sector *sector);
 
 /*
 ** Editor map loading stuff
@@ -394,54 +399,60 @@ void			free_walls(t_editor_walls **head, int nbr_of_walls);
 void			free_editor_data(t_editor *editor);
 
 int				editor_get_sector_data(unsigned char *buf,
-				unsigned int *pos, ssize_t size, t_editor_sector **head);
+					unsigned int *pos, ssize_t size, t_editor_sector **head);
 void			reload_editor_with_defaults(t_editor *editor, char *path);
 int				editor_parse_map_name(t_editor *editor, ssize_t size,
-				unsigned char *buf, unsigned int **pos);
+					unsigned char *buf, unsigned int **pos);
 int				editor_get_map_header(unsigned int *pos, unsigned char *buf,
-				t_editor *editor, ssize_t size);
+					t_editor *editor, ssize_t size);
 int				editor_get_player_position(unsigned int *pos,
-				unsigned char *buf, t_plr_pos *plr, ssize_t size);
+					unsigned char *buf, t_plr_pos *plr, ssize_t size);
 int				editor_parse_vertex_data(t_editor_sector *new,
-				unsigned char *buf, unsigned int *pos, ssize_t size);
+					unsigned char *buf, unsigned int *pos, ssize_t size);
 t_editor_walls	*editor_new_point(t_point_data *data);
 int				editor_parse_coordinates(t_point_data *data,
-				unsigned int ***pos, unsigned char **buf, ssize_t size);
+					unsigned int ***pos, unsigned char **buf, ssize_t size);
 int				editor_add_points(t_editor_sector *sector,
-				unsigned char *buf, unsigned int **pos, ssize_t size);
+					unsigned char *buf, unsigned int **pos, ssize_t size);
 int				editor_parse_light_data(t_editor_sector *new,
-				unsigned char *buf, unsigned int *pos, ssize_t size);
+					unsigned char *buf, unsigned int *pos, ssize_t size);
 char			*editor_get_next_string(unsigned char *buf,
-				unsigned int **pos, ssize_t size);
+					unsigned int **pos, ssize_t size);
 int				editor_parse_story_data(t_editor_sector *new,
-				unsigned char *buf, unsigned int *pos, ssize_t size);
+					unsigned char *buf, unsigned int *pos, ssize_t size);
 int				editor_parse_sector_data(t_editor *editor, unsigned char *buf,
-				ssize_t size);
+					ssize_t size);
 int				editor_check_entity_data_header(unsigned char **buf,
-				unsigned int *pos, ssize_t size);
+					unsigned int *pos, ssize_t size);
 int				editor_get_entity_data(unsigned char *buf,
-				t_entity_list *entity, unsigned int *pos, ssize_t size);
+					t_entity_list *entity, unsigned int *pos, ssize_t size);
 t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
 					t_screen_xy c, t_screen_xy b);
-void			create_portal_between_sectors(t_editor_sector **head, t_action *action);
+void			create_portal_between_sectors(t_editor_sector **head,
+					t_action *action);
 void			notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
 					int *notify_time);
 void			add_notification(t_editor *editor, char *message, int amount);
 t_bool			editor_check_if_lseg_intersects(t_editor_walls *wall,
 					t_screen_xy pos, t_screen_xy dir);
 void			show_user_help(char *str, t_buffer *buffer, int layer,
-				Uint32 colour);
+					Uint32 colour);
 t_editor_walls	*get_intersecting_wall(t_editor_sector *sector,
-				int nbr_of_walls, t_xy dir, t_xy pos);
+					int nbr_of_walls, t_xy dir, t_xy pos);
 void			init_static_entity(t_entity_list *new, t_action *action,
-				t_editor_sector *sector, t_xy pos);
+					t_editor_sector *sector, t_xy pos);
 void			initialize_entity_data(t_entity_list *new, t_action *action,
-				t_editor_sector *sector, t_xy pos);
-int				get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls);
+					t_editor_sector *sector, t_xy pos);
+int				get_highest_floor_height(t_editor_walls **walls,
+					int nbr_of_walls);
 void			init_non_static_entity(t_entity_list *new,
-				t_editor_sector *sector, t_xy pos);
-int				get_lowest_ceiling_height(t_editor_walls **walls, int nbr_of_walls);
-void			get_direction_from_wall(t_entity_list *new, t_editor_sector *sector, int wall_idx);
-void			get_midpoint_of_walls(t_editor_sector *sector, int wall_idx, int *x, int *y);
-int				get_selected_floor_height(t_editor_sector *sector, int wall_idx);
+					t_editor_sector *sector, t_xy pos);
+int				get_lowest_ceiling_height(t_editor_walls **walls,
+					int nbr_of_walls);
+void			get_direction_from_wall(t_entity_list *new,
+					t_editor_sector *sector, int wall_idx);
+void			get_midpoint_of_walls(t_editor_sector *sector,
+					int wall_idx, int *x, int *y);
+int				get_selected_floor_height(t_editor_sector *sector,
+					int wall_idx);
 #endif

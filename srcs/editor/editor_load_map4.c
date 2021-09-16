@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_load_map4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 19:35:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 10:15:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	editor_add_points(t_editor_sector *sector,
 	}
 	close_editor_wall_list(&sector->walls);
 	sector->centroid = calculate_centroid(sector);
+	editor_sort_wall_vertices(sector);
 	assign_sector_bbox(sector);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 13:00:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 10:09:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ int	draw_line(t_xy p0, t_xy p1, Uint32 colour, t_buffer *buffer)
 	delta.x = p1.x - p0.x;
 	delta.y = p1.y - p0.y;
 	pixels = sqrt((delta.x * delta.x) + (delta.y * delta.y));
+	if (!pixels)
+		return (FALSE);
 	delta.x /= pixels;
 	delta.y /= pixels;
 	pixel.x = p0.x;
 	pixel.y = p0.y;
 	while (pixels)
 	{
-		corr_pxl.x = (int)pixel.x;
-		corr_pxl.y = (int)pixel.y;
+		corr_pxl = (t_pxl_coords){(int)pixel.x, (int)pixel.y};
 		put_pixel(buffer, corr_pxl, colour);
-		pixel.x += delta.x;
-		pixel.y += delta.y;
+		pixel = vec2_add(pixel, delta);
 		--pixels;
 	}
 	return (TRUE);
