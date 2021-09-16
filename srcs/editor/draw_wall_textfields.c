@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_textfields.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:08:33 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 18:08:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 14:21:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	draw_wall_textfields(t_editor_walls *wall,
 		box.end = vec2(132, 220);
 		tex = get_tex(wall->type, textures);
 		scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
-		draw_image(box.start, tex, buffer, scale);
+		draw_image_static(box.start, tex, buffer, scale);
 	}
 }

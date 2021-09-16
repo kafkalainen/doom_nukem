@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_entities.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 20:13:40 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:06:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,69 @@ int	editor_select_entity_tex(Uint32 type)
 	return (-enemy0);
 }
 
+void	draw_image_static(t_xy offset, t_texel *tex, t_buffer *buffer,
+		float scale)
+{
+	t_pxl_coords	cur;
+	t_pxl_coords	image;
+	t_uvz			txl;
+	t_uv			cur_texel;
+
+	cur = (t_pxl_coords){0, 0};
+	image = (t_pxl_coords){tex->height * scale, tex->width * scale};
+	txl = (t_uvz){0.0f, 0.0f, 1.0f};
+	scale = 1.0f / (tex->height * scale);
+	while (cur.y < image.y)
+	{
+		cur.x = 0;
+		txl.u = 0.0f;
+		while (cur.x < image.x)
+		{
+			cur_texel = (t_uv){txl.u * (tex->width - 1),
+				txl.v * (tex->height - 1)};
+			put_pixel(buffer, (t_pxl_coords){cur.x + offset.x,
+				cur.y + offset.y},
+				tex->texels[cur_texel.v * tex->width + cur_texel.u]);
+			txl.u += scale;
+			cur.x++;
+		}
+		txl.v += scale;
+		cur.y++;
+	}
+}
+
 static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 			t_texture **textures)
 {
-	t_box	box;
-	Uint32	color;
-	t_texel	*tex;
-	float	scale;
+	t_box			box;
+	Uint32			color;
+	t_texel			*tex;
+	t_xy			scale;
 
 	tex = get_tex(editor_select_entity_tex(entity->entity_type), textures);
 	box.start = world_to_screen(entity->bbox.start, editor->action.scalarf,
 			editor->action.offsetf, &editor->buffer);
 	box.end = world_to_screen(entity->bbox.end, editor->action.scalarf,
 			editor->action.offsetf, &editor->buffer);
-	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 	if (entity->entity_idx == editor->action.selected_entity)
 		color = get_color(white);
 	else
 		color = get_color(red);
 	draw_box(box, &editor->buffer, color);
-	draw_image(box.start, tex, &editor->buffer, scale);
+	if (entity->entity_type == skull_skulker || entity->entity_type == thing
+		|| entity->entity_type == drone || entity->entity_type == crewmember)
+	{
+		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / 128);
+		scale.x = 128;
+		scale.y = 128;
+		draw_multisprite_image(box.start, tex, &editor->buffer, scale);
+	}
+	else
+	{
+		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
+		draw_image_static(box.start, tex, &editor->buffer, scale.w);
+	}
+
 }
 
 void	draw_editor_entities(t_editor *editor, t_texture **textures)

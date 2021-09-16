@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_entity_textfields.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:07:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 18:08:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:00:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,29 @@ void	draw_multisprite_image(t_xy offset, t_texel *tex,
 	t_buffer *buffer, t_xy scale)
 {
 	t_screen_xy	current;
+	t_screen_xy	image;
+	t_uvz		txl;
+	t_uv		cur_texel;
 
-	current.x = 0;
-	current.y = 0;
-	scale.w = 1 / scale.w;
-	while (current.y < scale.y)
+	current = (t_screen_xy){0, 0};
+	image = (t_screen_xy){TEX_SIZE * scale.w, TEX_SIZE * scale.w};
+	txl = (t_uvz){0.0f, 0.0f, 1.0f};
+	scale.x = 0.1f / (TEX_SIZE * scale.w);
+	scale.y = 0.166666667f / (TEX_SIZE * scale.w);
+	while (current.y < image.y)
 	{
 		current.x = 0;
-		while (current.x < scale.x)
+		txl.u = 0.0f;
+		while (current.x < image.x)
 		{
-			put_pixel(
-				buffer,
-				(t_pxl_coords){current.x + offset.x,
-				current.y + offset.y},
-				(Uint32)tex->texels[(tex->width * current.y
-					* (int)scale.w) + current.x * (int)scale.w]);
+			cur_texel.v = txl.v * (tex->height - 1);
+			cur_texel.u = txl.u * (tex->width - 1);
+			put_pixel(buffer, (t_pxl_coords){current.x + offset.x,
+				current.y + offset.y}, (Uint32)tex->texels[cur_texel.v * tex->width + cur_texel.u]);
 			current.x++;
+			txl.u += scale.x;
 		}
+		txl.v += scale.y;
 		current.y++;
 	}
 }
@@ -59,7 +65,7 @@ static void	draw_entity_textures(t_entity_list *entity,
 	else
 	{
 		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
-		draw_image(box.start, tex, buffer, scale.w);
+		draw_image_static(box.start, tex, buffer, scale.w);
 	}
 }
 
