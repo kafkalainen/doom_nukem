@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/16 08:42:21 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/16 09:06:02 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = \
 	editor$(SLASH)draw_editor_sectors.c \
 	editor$(SLASH)draw_editor_sector_bbox.c \
 	editor$(SLASH)draw_entity_textfields.c \
+	editor$(SLASH)draw_sector_special_info.c \
 	editor$(SLASH)draw_sector_textfields.c \
 	editor$(SLASH)draw_text_and_strings.c \
 	editor$(SLASH)draw_wall_textfields.c \

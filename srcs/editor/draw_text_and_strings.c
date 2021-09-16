@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_text_and_strings.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:03:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 20:04:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 08:55:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ void	draw_help_text(t_action *action, t_buffer *buffer)
 			buffer, 2, get_color(orange));
 	}
 	if (action->delete)
-	{
 		show_user_help("Click entity or sector you wish to delete.",
 			buffer, 0, get_color(orange));
-	}
+	if (action->assign_player_start)
+		show_user_help("Click sector where you wish player to start.",
+			buffer, 0, get_color(orange));
+	if (action->assign_end_sector)
+		show_user_help("Click sector what you wish to be an end sector.",
+			buffer, 0, get_color(orange));
 	draw_help_text_two(action, buffer);
 }
 

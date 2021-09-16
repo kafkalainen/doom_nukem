@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_sectors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 19:24:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 09:06:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,5 @@ void	draw_editor_sectors(t_editor *editor)
 	left_point = NULL;
 	sector_list = editor->sector_list;
 	draw_editor_sector(editor, sector_list, left_point, color);
+	draw_sector_special_info(editor);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_functions.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 19:23:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 09:05:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void		draw_rect_center(t_xy xy, t_xy wh, t_frame *frame);
 void		draw_rect(t_xy xy, t_xy wh, t_buffer *buffer, int color);
 int			draw_sector(t_frame *frame, t_home *home, t_player *plr,
 				int sector_idx);
+void		draw_sector_special_info(t_editor *editor);
 void		draw_sector_textfields(t_editor_sector *sector, t_buffer *buffer, t_texture **textures);
 void		draw_segment(t_buffer *buffer, float *depth_buffer, t_texel *tex,
 				t_steps *step);
