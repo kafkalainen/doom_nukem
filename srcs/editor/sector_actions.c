@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:51:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 16:20:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:49:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ int	editor_new_sector_wallpoints(t_editor *editor,
 	{
 		if (add_point_to_list(editor, temp, action) == 3)
 		{
-			action->delete = true;
+			editor->action.selected_sector = temp->idx_sector;
+			editor_reset_player_and_end(editor, &editor->action);
+			editor_free_selected_sector(&editor->sector_list,
+				&editor->entity_list, &editor->action);
+			editor->temp_sector = NULL;
+			editor->action.draw_depth = depth_zero;
 			action->create_sector = idle;
 			return (1);
 		}

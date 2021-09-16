@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 10:18:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:51:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ static int	add_last_point(t_editor *editor, t_editor_sector *sector,
 		action->selected_sector = sector->idx_sector;
 		assign_sector_bbox(sector);
 		if (check_if_non_convex(sector)
-			|| check_if_another_sector_is_inside(sector, &editor->sector_list))
+			|| check_if_another_sector_is_inside(sector, &editor->sector_list)
+			|| check_if_completely_inside(sector, &editor->sector_list))
 		{
-			add_notification(editor, "ERROR: Non-convex / sector inside", 4000);
+			add_notification(editor, "ERROR: Non-convex or inside", 4000);
 			return (3);
 		}
 		sector->centroid = calculate_centroid(sector);

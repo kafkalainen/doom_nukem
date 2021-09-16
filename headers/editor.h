@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 11:24:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:38:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,8 +258,6 @@ void			wall_button_actions(t_action *action, int i);
 void			sector_button_actions(t_action *action, int i);
 t_bool			check_bbox(t_xy start, t_xy end, t_xy click);
 t_bool			check_bbox_ui(t_xy start, t_xy end, t_xy click);
-t_bool			check_if_another_sector_is_inside(t_editor_sector *tested,
-					t_editor_sector **head);
 
 /*
 ** Event handler and event related
@@ -309,7 +307,11 @@ t_bool			check_for_intersecting_lines(t_editor_sector *sector,
 					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,
 					t_screen_xy p0, t_screen_xy p1);
+t_bool			check_if_another_sector_is_inside(t_editor_sector *tested,
+					t_editor_sector **head);
 int				check_if_non_convex(t_editor_sector *sector);
+t_bool			check_if_completely_inside(t_editor_sector *tested,
+					t_editor_sector **head);
 t_bool			editor_check_if_same_point(t_screen_xy p0, t_screen_xy p1);
 int				editor_orientation_of_three_points(t_screen_xy a,
 					t_screen_xy b, t_screen_xy c);
