@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/16 14:32:01 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/16 15:17:41 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,13 +38,14 @@ SRCS = \
 	editor$(SLASH)draw_ui.c \
 	editor$(SLASH)editor_add_new_sector_to_list_end.c \
 	editor$(SLASH)editor_create_entity.c \
+	editor$(SLASH)editor_edit_entity.c \
+	editor$(SLASH)editor_edit_wall.c \
 	editor$(SLASH)editor_entity_creation_helpers.c \
+	editor$(SLASH)editor_entity_link_booleans.c \
+	editor$(SLASH)editor_entity_link_management.c \
 	editor$(SLASH)editor_events.c \
 	editor$(SLASH)editor_keyboard.c \
 	editor$(SLASH)editor_entity.c \
-	editor$(SLASH)editor_edit_entity.c \
-	editor$(SLASH)editor_entity_link_management.c \
-	editor$(SLASH)editor_entity_link_booleans.c \
 	editor$(SLASH)editor_create_new_sector.c \
 	editor$(SLASH)editor_delete_entity.c \
 	editor$(SLASH)editor_delete_wall.c \
@@ -65,6 +66,7 @@ SRCS = \
 	editor$(SLASH)get_linked_entity.c \
 	editor$(SLASH)get_linked_sector.c \
 	editor$(SLASH)get_entity_with_idx.c \
+	editor$(SLASH)get_entity_colour.c \
 	editor$(SLASH)get_editor_sector_with_idx.c \
 	editor$(SLASH)get_ndc.c \
 	editor$(SLASH)handle_events.c \

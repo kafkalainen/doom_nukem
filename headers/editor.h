@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 15:14:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:55:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,6 +296,7 @@ void			add_point_end(t_editor_walls **point, t_editor_walls *new);
 int				add_point_to_list(t_editor *editor, t_editor_sector *sector,
 					t_action *action);
 void			close_editor_wall_list(t_editor_walls **head);
+void			editor_edit_wall(t_editor *editor);
 
 /*
 **				Validity checks
@@ -333,6 +334,7 @@ void			delete_entity_with_idx(t_entity_list **head, int idx);
 void			delete_entities_from_sector(t_entity_list **entity_head,
 					int sector_idx);
 unsigned int	get_entity_count(t_entity_list **list);
+t_uint			get_entity_colour(t_entity_list *entity, int selected_entity);
 t_entity_list	*get_selected_entity(t_entity_list **head, t_mouse_data	mdata);
 t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click,
 					int *selected_entity);
