@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 12:33:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 14:17:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static void	draw_map_list(t_buffer *buffer, t_action *action,
 			mod.colour = get_color(red);
 		else
 			mod.colour = get_color(white);
+		mod.size = TEXT_SIZE;
 		mod.len = ft_strlen(map_names[i]);
 		ft_str_pxl(buffer, vec2(310, 100 + y),
 			map_names[i], mod);

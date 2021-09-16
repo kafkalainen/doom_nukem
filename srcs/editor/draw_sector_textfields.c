@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sector_textfields.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:06:36 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 18:07:20 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 14:21:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static void	draw_sector_textfield_textures(t_editor_sector *sector,
 	box.end = vec2(132, 210);
 	tex = get_tex(sector->tex_floor, textures);
 	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
-	draw_image(box.start, tex, buffer, scale);
+	draw_image_static(box.start, tex, buffer, scale);
 	box.start = vec2(32, 240);
 	box.end = vec2(132, 340);
 	tex = get_tex(sector->tex_ceil, textures);
 	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
-	draw_image(box.start, tex, buffer, scale);
+	draw_image_static(box.start, tex, buffer, scale);
 }
 
 void	draw_sector_textfields(t_editor_sector *sector,
