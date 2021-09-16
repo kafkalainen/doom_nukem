@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 16:27:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 17:39:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	get_map_header(unsigned int *pos, unsigned char **buf,
 		if (parse_map_name(&home->map, size, *buf, &pos))
 			return (1);
 	}
+	else
+		ft_strdel(&home->map);
 	return (0);
 }
 
