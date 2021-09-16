@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/15 15:53:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 16:30:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,6 +363,7 @@ void			editor_free_sector(t_editor_sector **head);
 void			editor_free_selected_sector(t_editor_sector **head,
 					t_entity_list **entity_head, t_action *action);
 void			editor_remove_last_wall(t_editor_sector *sector_list);
+void			editor_reset_player_and_end(t_editor *editor, t_action *action);
 t_editor_sector	*get_editor_sector_with_idx(t_editor_sector **list, int idx);
 
 /*
@@ -379,7 +380,7 @@ void			load_map_names_to_memory(t_editor *editor);
 void			editor_free_all_sectors(t_editor_sector **head);
 void			assign_sector_bbox(t_editor_sector *sector);
 
-int				check_saving_prerequisites(t_editor *editor);
+t_bool			check_saving_prerequisites(t_editor *editor);
 void			save_editor_map(t_editor *editor, t_home *home);
 void			read_input_string(unsigned char **string, t_action *action);
 unsigned char	*delete_char_from_string(unsigned char **string);

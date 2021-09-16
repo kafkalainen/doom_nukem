@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 15:11:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 16:31:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void	handle_delete(t_editor *editor)
 	}
 	else if (editor->action.selected_sector >= 0)
 	{
+		editor_reset_player_and_end(editor, &editor->action);
 		editor_free_selected_sector(&editor->sector_list,
 			&editor->entity_list, &editor->action);
 		editor->action.delete = 0;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:01:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/13 11:12:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 16:36:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	initialize_editor_values(t_editor *editor)
 	editor->end_sector = -1;
 	editor->plr.x = 0;
 	editor->plr.z = 0;
-	editor->plr.sector = 0;
+	editor->plr.sector = -1;
 }

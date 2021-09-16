@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:25:29 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/14 17:57:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/15 16:38:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
 
 void	check_ui_events(int x, int y, t_button ***blist, t_action *action)
 {
@@ -59,13 +58,24 @@ int	clicked_inside_ui(int x, int y, int height, int width)
 	return (FALSE);
 }
 
-int	check_saving_prerequisites(t_editor *editor)
+t_bool	check_saving_prerequisites(t_editor *editor)
 {
-	if (editor->mapname == NULL || !editor->action.player_start_assigned || !editor->end_sector)
-		return (FALSE);
-	if (!check_plr_start_and_end_sector_exists(&editor->sector_list, editor->plr, editor->end_sector))
-		return (FALSE);
-	return (TRUE);
+	if (!editor->mapname)
+	{
+		add_notification(editor, "Cannot save. Map name missing.", 3000);
+		return (false);
+	}
+	if (!editor->action.player_start_assigned)
+	{
+		add_notification(editor, "Cannot save. Player start missing.", 3000);
+		return (false);
+	}
+	if (editor->end_sector == -1)
+	{
+		add_notification(editor, "Cannot save. Level end missing.", 3000);
+		return (false);
+	}
+	return (true);
 }
 
 void	save_editor_map(t_editor *editor, t_home *home)

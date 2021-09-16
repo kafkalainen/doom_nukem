@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/15 15:52:49 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/15 16:32:14 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS = \
 	editor$(SLASH)editor_load_map3.c \
 	editor$(SLASH)editor_load_map4.c \
 	editor$(SLASH)editor_load_map5.c \
+	editor$(SLASH)editor_reset_player_and_end.c \
 	editor$(SLASH)editor_sort_sector_vertices.c \
 	editor$(SLASH)event_actions.c \
 	editor$(SLASH)free_editor_data.c \
