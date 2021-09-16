@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity_link_management.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 10:19:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 11:25:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 12:33:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_bool	link_entities(t_entity_list **entities, t_editor_sector **sectors,
 	starting_link_sector = get_editor_sector_with_idx(sectors,
 			starting_link->sector_idx);
 	return (link_entity_sector(clicked_entity, starting_link,
-		clicked_entity_sector, starting_link_sector));
+			clicked_entity_sector, starting_link_sector));
 }
 
 void	update_linked_light_states(t_entity_list **entities,

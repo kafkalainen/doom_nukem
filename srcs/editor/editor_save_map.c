@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_save_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:49:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/16 10:22:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 12:29:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	save_editor_map(t_editor *editor, t_home *home)
 		}
 		if (check_saving_prerequisites(editor))
 		{
-			create_map_file(home, editor);
+			if(create_map_file(home, editor) == 1)
+				add_notification(editor, "Map saved successfully\n", 3000);
+			else
+				add_notification(editor, "Error: Map saving failed\n", 3000);
 		}
 		editor->action.save_file = 0;
 	}
