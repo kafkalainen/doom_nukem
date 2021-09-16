@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:49:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/16 08:44:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 10:22:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,17 @@ t_bool	check_saving_prerequisites(t_editor *editor)
 
 void	save_editor_map(t_editor *editor, t_home *home)
 {
-	if (editor->mapname == NULL || editor->action.input_active || !editor->action.map_name_set)
+	if (editor->mapname == NULL || editor->action.input_active
+		|| !editor->action.map_name_set)
 		read_input_string(&editor->mapname, &editor->action);
 	if (!editor->action.input_active || editor->action.map_name_set)
 	{
 		if (!editor->action.map_name_set && editor->mapname != NULL)
 		{
-			editor->mapname = (unsigned char *)ft_strjoin_freeable((char *)editor->mapname, ".DN", 1, 0);
-			editor->mapname = (unsigned char *)ft_strjoin_freeable("./map_files/", (char *)editor->mapname, 0, 1);
+			editor->mapname = (t_uchar *)ft_strjoin_freeable(
+					(char *)editor->mapname, ".DN", 1, 0);
+			editor->mapname = (t_uchar *)ft_strjoin_freeable("./map_files/",
+					(char *)editor->mapname, 0, 1);
 			editor->action.map_name_set = 1;
 		}
 		if (check_saving_prerequisites(editor))

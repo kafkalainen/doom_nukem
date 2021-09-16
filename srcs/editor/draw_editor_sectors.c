@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 10:02:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 10:20:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ static void	draw_wall_line(t_editor_walls *left_point,
 	draw_line(left, right, color, &editor->buffer);
 	if (left.y != right.y)
 		draw_line(vec2(left.x + 1, left.y), vec2(right.x + 1, right.y),
-				color, &editor->buffer);
+			color, &editor->buffer);
 	else
 		draw_line(vec2(left.x, left.y + 1), vec2(right.x, right.y + 1),
-				color, &editor->buffer);
+			color, &editor->buffer);
 }
 
 void	draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,

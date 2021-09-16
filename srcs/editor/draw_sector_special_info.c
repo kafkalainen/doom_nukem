@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 08:59:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 09:26:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 10:19:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	draw_sector_letter(t_editor_sector *temp, t_editor	*editor,
 	t_xy			screen_coord;
 
 	screen_coord = world_to_screen(temp->centroid,
-				editor->action.scalarf, editor->action.offsetf,
-				&editor->buffer);
+			editor->action.scalarf, editor->action.offsetf,
+			&editor->buffer);
 	screen_coord.x -= 2.5f * mod->size;
 	screen_coord.y -= 3.5f * mod->size;
 	ft_c_pxl(&editor->buffer, screen_coord, c, *mod);
