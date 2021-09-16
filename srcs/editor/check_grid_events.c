@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 12:33:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 18:33:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,8 @@ static void	handle_delete(t_editor *editor)
 			reset_sector_light_info(&editor->entity_list, &editor->sector_list,
 				editor->temp_entity, editor->temp_sector);
 		delete_selected_entity(&editor->entity_list, &editor->action);
-		editor->action.delete = 0;
 		editor->action.selected_entity = -1;
 		editor->temp_entity = NULL;
-		editor->temp_sector = NULL;
-		editor->action.selected_sector = -1;
-		editor->action.draw_depth = depth_zero;
 		add_notification(editor, "Removed entity.", 2000);
 	}
 	else if (editor->action.selected_sector >= 0)
@@ -65,12 +61,15 @@ static void	handle_delete(t_editor *editor)
 		editor_reset_player_and_end(editor, &editor->action);
 		editor_free_selected_sector(&editor->sector_list,
 			&editor->entity_list, &editor->action);
-		editor->action.delete = 0;
-		editor->action.selected_sector = -1;
-		editor->temp_sector = NULL;
-		editor->action.draw_depth = depth_zero;
+		if (editor->plr.sector >= 0 || editor->end_sector.sector >= 0)
+			verify_plr_start_end_sector_coordinates(&editor->plr,
+				&editor->sector_list, &editor->end_sector);
 		add_notification(editor, "Removed sector.", 2000);
 	}
+	editor->action.selected_sector = -1;
+	editor->temp_sector = NULL;
+	editor->action.draw_depth = depth_zero;
+	editor->action.delete = 0;
 }
 
 static void	check_grind_events_two(t_editor *editor)

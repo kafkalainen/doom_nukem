@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_sector_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 16:47:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 13:21:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 18:12:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	write_sector_data(int *fd,
 	i = check_if_linked(editor->linked_mapname);
 	buf = NULL;
 	nbr_of_sectors = get_nbr_of_sectors(&editor->sector_list);
-	buf = write_map_header(nbr_of_sectors, editor->end_sector,
+	buf = write_map_header(nbr_of_sectors, editor->end_sector.sector,
 			i, editor->linked_mapname);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
 			get_player_start(editor->plr), 1, 1);

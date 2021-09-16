@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:49:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/16 12:29:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 18:11:08 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_bool	check_saving_prerequisites(t_editor *editor)
 		add_notification(editor, "Cannot save. Player start missing.", 3000);
 		return (false);
 	}
-	if (editor->end_sector == -1)
+	if (editor->end_sector.sector == -1)
 	{
 		add_notification(editor, "Cannot save. Level end missing.", 3000);
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 18:45:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 18:21:00 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	check_plr_start_and_end_sector_exists(t_editor_sector **list,
 	return (TRUE);
 }
 
-void	assign_end_sector(t_editor_sector **list, t_xy *click, int *end_sector,
-		int *sector_assigned)
+void	assign_end_sector(t_editor_sector **list, t_xy *click,
+	t_plr_pos *end_sector, int *sector_assigned)
 {
 	t_editor_sector	*temp;
 
@@ -59,7 +59,9 @@ void	assign_end_sector(t_editor_sector **list, t_xy *click, int *end_sector,
 		temp = temp->next;
 	if (temp == NULL)
 		return ;
-	*end_sector = temp->idx_sector;
+	end_sector->sector = temp->idx_sector;
+	end_sector->x = click->x;
+	end_sector->z = click->y;
 	*sector_assigned = 0;
 }
 

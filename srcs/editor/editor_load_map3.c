@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_load_map3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 15:16:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 18:10:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	editor_get_map_header(unsigned int *pos, unsigned char *buf,
 	linked = 0;
 	if (get_next_int_value(&nbr_of_sectors, buf, &pos, size))
 		return (-1);
-	if (get_next_int_value(&editor->end_sector, buf, &pos, size))
+	if (get_next_int_value(&editor->end_sector.sector, buf, &pos, size))
 		return (-1);
-	if (nbr_of_sectors <= 0 || editor->end_sector <= 0)
+	if (nbr_of_sectors <= 0 || editor->end_sector.sector <= 0)
 		return (-1);
 	if (get_next_int_value(&linked, buf, &pos, size))
 		return (-1);

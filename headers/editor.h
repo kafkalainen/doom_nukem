@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 15:55:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 18:36:37 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,9 +233,8 @@ typedef struct s_editor
 	t_window				win;
 	t_action				action;
 	t_plr_pos				plr;
+	t_plr_pos				end_sector;
 	int						grid_size;
-	int						end_sector;
-
 }					t_editor;
 
 // SDL DRAWING STUFF
@@ -276,7 +275,7 @@ int				clicked_inside_grid(int x, int y, int height, int width);
 int				check_plr_start_and_end_sector_exists(
 					t_editor_sector **list, t_plr_pos plr, int end_sector);
 void			assign_end_sector(t_editor_sector **list, t_xy *click,
-					int *end_sector, int *sector_assigned);
+					t_plr_pos *end_sector, int *sector_assigned);
 int				assign_player_start(t_editor_sector **list, t_xy *click,
 					t_plr_pos *plr, int *assign_player_start);
 t_editor_sector	*get_clicked_sector(t_editor_sector **list,
@@ -377,6 +376,10 @@ void			editor_free_selected_sector(t_editor_sector **head,
 					t_entity_list **entity_head, t_action *action);
 void			editor_remove_last_wall(t_editor_sector *sector_list);
 void			editor_reset_player_and_end(t_editor *editor, t_action *action);
+void			verify_plr_start_end_sector_coordinates(t_plr_pos *plr, t_editor_sector **head, t_plr_pos *end);
+void			check_pos_coordinates_to_sectors(t_plr_pos *pos, t_editor_sector **head);
+void			check_pos_coordinates_to_sectors(t_plr_pos *pos, t_editor_sector **head);
+void			verify_plr_start_end_sector_coordinates(t_plr_pos *plr, t_editor_sector **head, t_plr_pos *end);
 t_editor_sector	*get_editor_sector_with_idx(t_editor_sector **list, int idx);
 t_editor_sector	*get_linked_sector(t_editor_sector **list, int link,
 					int cur_idx);

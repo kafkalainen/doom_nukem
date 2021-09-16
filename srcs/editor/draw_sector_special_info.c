@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sector_special_info.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 08:59:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 10:19:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 18:09:54 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_sector_special_info(t_editor *editor)
 	mod.len = 1;
 	while (temp)
 	{
-		if (temp->idx_sector == editor->end_sector)
+		if (temp->idx_sector == editor->end_sector.sector)
 			draw_sector_letter(temp, editor, 'e', &mod);
 		if (temp->idx_sector == editor->plr.sector)
 			draw_sector_letter(temp, editor, 'p', &mod);

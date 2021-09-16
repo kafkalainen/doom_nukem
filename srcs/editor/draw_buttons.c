@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 14:51:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 18:09:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	draw_button(t_editor *editor, t_button *button, int i)
 	mod.size = TEXT_SIZE;
 	mod.len = ft_strlen((const char *)button->info.text);
 	mod.colour = get_color_from_action_data(i,
-			&editor->action, editor->end_sector);
+			&editor->action, editor->end_sector.sector);
 	box.start = button->ltop;
 	box.end = button->wh;
 	draw_box(box, &editor->buffer, get_color(0xAAAAAA));
