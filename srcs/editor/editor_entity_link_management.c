@@ -6,15 +6,17 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 10:19:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 13:42:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:25:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	link_entity_sector(t_entity_list *clicked, t_entity_list *start,
-			t_editor_sector *clicked_sector, t_editor_sector *start_sector)
+static t_bool	link_entity_sector(t_entity_list *clicked, t_entity_list *start,
+				t_editor_sector *clicked_sector, t_editor_sector *start_sector)
 {
+	if (!clicked_sector || !start_sector)
+		return (false);
 	if (clicked->entity_type == lamp)
 	{
 		clicked_sector->light.is_linked = start->is_linked;
@@ -25,6 +27,7 @@ static void	link_entity_sector(t_entity_list *clicked, t_entity_list *start,
 		start_sector->light.is_linked = start->is_linked;
 		start_sector->light.state = clicked->state;
 	}
+	return (true);
 }
 
 t_bool	link_entities(t_entity_list **entities, t_editor_sector **sectors,
@@ -39,7 +42,7 @@ t_bool	link_entities(t_entity_list **entities, t_editor_sector **sectors,
 	starting_link = get_entity_with_idx(entities, current_entity);
 	clicked_entity = get_clicked_entity(entities, click, &click_entity_idx);
 	if (!starting_link || !clicked_entity
-		|| !link_allowed(starting_link, clicked_entity))
+		|| !link_allowed(starting_link, clicked_entity, entities, sectors))
 		return (false);
 	starting_link->is_linked = clicked_entity->sector_idx + 2;
 	clicked_entity->is_linked = starting_link->is_linked;
@@ -48,11 +51,8 @@ t_bool	link_entities(t_entity_list **entities, t_editor_sector **sectors,
 			clicked_entity->sector_idx);
 	starting_link_sector = get_editor_sector_with_idx(sectors,
 			starting_link->sector_idx);
-	if (!clicked_entity_sector || !starting_link_sector)
-		return (false);
-	link_entity_sector(clicked_entity, starting_link, clicked_entity_sector,
-		starting_link_sector);
-	return (true);
+	return (link_entity_sector(clicked_entity, starting_link,
+		clicked_entity_sector, starting_link_sector));
 }
 
 void	update_linked_light_states(t_entity_list **entities,

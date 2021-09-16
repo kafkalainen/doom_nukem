@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_linked_entity.c                                :+:      :+:    :+:   */
+/*   get_linked_sector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/15 08:44:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 11:23:47 by jnivala          ###   ########.fr       */
+/*   Created: 2021/09/16 10:32:13 by jnivala           #+#    #+#             */
+/*   Updated: 2021/09/16 10:59:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_entity_list	*get_linked_entity(t_entity_list **list, int link, int cur_idx)
+t_editor_sector	*get_linked_sector(t_editor_sector **list, int link,
+				int cur_idx)
 {
-	t_entity_list	*tmp;
+	t_editor_sector	*tmp;
 
 	tmp = *list;
 	if (link == 0 || link == 1)
 		return (NULL);
 	while (tmp != NULL)
 	{
-		if (tmp->is_linked == link && tmp->entity_idx != cur_idx)
+		if (tmp->idx_sector == link - 2 && tmp->idx_sector != cur_idx)
 			return (tmp);
 		tmp = tmp->next;
 	}
 	return (NULL);
 }
 
-t_uint	calc_linked_entities(t_entity_list **list, int link, int link_type)
+t_uint	calc_linked_sectors(t_editor_sector **list, int link,
+		int link_type)
 {
-	t_entity_list	*tmp;
+	t_editor_sector	*tmp;
 	t_uint			links;
 
 	tmp = *list;
@@ -39,7 +41,7 @@ t_uint	calc_linked_entities(t_entity_list **list, int link, int link_type)
 		return (links);
 	while (tmp != NULL)
 	{
-		if (tmp->is_linked == link && is_linkable_entity(link_type))
+		if (tmp->idx_sector == link - 2 && is_linkable_entity(link_type))
 			links++;
 		tmp = tmp->next;
 	}

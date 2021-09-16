@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/16 09:39:52 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/16 10:34:57 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS = \
 	editor$(SLASH)get_clicked_sector.c \
 	editor$(SLASH)get_clicked_wall.c \
 	editor$(SLASH)get_linked_entity.c \
+	editor$(SLASH)get_linked_sector.c \
 	editor$(SLASH)get_entity_with_idx.c \
 	editor$(SLASH)get_editor_sector_with_idx.c \
 	editor$(SLASH)get_ndc.c \

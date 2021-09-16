@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 09:41:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:24:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,6 +320,8 @@ void			editor_reset_wall_indexes(t_editor_walls **walls,
 ** Entities
 */
 
+t_uint			calc_linked_entities(t_entity_list **list, int link,
+					int link_type);
 void			create_new_entity(t_entity_list **head,
 					t_action *action, t_editor_sector *sector, t_xy pos);
 int				editor_parse_entity_data(t_editor *editor, unsigned char *buf,
@@ -338,7 +340,8 @@ t_bool			link_entities(t_entity_list **list,
 					t_xy click, int current_entity);
 t_entity_list	*get_linked_entity(t_entity_list **list, int link, int cur_idx);
 t_bool			is_linkable_entity(int entity_type);
-t_bool			link_allowed(t_entity_list *from, t_entity_list *to);
+t_bool			link_allowed(t_entity_list *from, t_entity_list *to,
+					t_entity_list **entities, t_editor_sector **sectors);
 void			edit_entity(t_action *action, t_entity_list *entity,
 					t_editor *editor);
 void			free_all_entities(t_entity_list **head);
@@ -355,6 +358,8 @@ void			unlink_linked_light_links(t_entity_list **entities,
 ** Sector creation and manipulation
 */
 
+t_uint			calc_linked_sectors(t_editor_sector **list, int link,
+					int link_type);
 t_xy			calculate_centroid(t_editor_sector *sector);
 void			editor_create_new_sector(t_editor_sector **head,
 					t_action *action);
@@ -369,6 +374,8 @@ void			editor_free_selected_sector(t_editor_sector **head,
 void			editor_remove_last_wall(t_editor_sector *sector_list);
 void			editor_reset_player_and_end(t_editor *editor, t_action *action);
 t_editor_sector	*get_editor_sector_with_idx(t_editor_sector **list, int idx);
+t_editor_sector	*get_linked_sector(t_editor_sector **list, int link,
+					int cur_idx);
 void			translate_towards_centroid(t_editor_sector *sector);
 
 /*
