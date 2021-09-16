@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_functions.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/14 17:01:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 19:23:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,14 @@ void		death_animation(t_home *home, t_player *plr, Uint32 t);
 void		draw_box(t_box box, t_buffer *buffer, Uint32 color);
 void		draw_bbox_sector(t_editor_sector *sector, t_buffer *buffer,
 				t_action *action);
-void		draw_buttons(t_editor *editor, int end_sector, t_texture **textures);
+void		draw_buttons(t_editor *editor, t_texture **textures);
 void		draw_convert_to_portal_line(t_editor *editor);
 void		draw_crosshair(t_buffer *buffer);
 void		draw_cutscene(t_buffer *buffer, t_player *plr, t_sector *sector);
 void		draw_editor_sectors_bboxes(t_editor *editor, t_action *action);
 void		draw_editor_sectors(t_editor *editor);
+void		draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,
+			t_editor_walls *left_point, Uint32 color);
 void		draw_editor_entities(t_editor *editor, t_texture **textures);
 void		draw_entity_textfields(t_entity_list *entity, t_buffer *buffer,
 				t_texture **textures);
@@ -88,7 +90,7 @@ void		draw_entity_link_line(t_editor *editor);
 void		draw_frame(t_home *home, t_frame *frame, t_player *plr);
 void		draw_image(t_xy offset, t_texel *tex, t_buffer *buffer,
 				float scale);
-void		draw_test_image(t_xy offset, t_texel *tex, t_buffer *buffer, t_xy scale); // comment to mark this here
+void		draw_multisprite_image(t_xy offset, t_texel *tex, t_buffer *buffer, t_xy scale);
 void		draw_grid(t_buffer *buffer, t_action *action);
 void		draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr);
 void		draw_help_text(t_action *action, t_buffer *buffer);
@@ -135,5 +137,6 @@ t_triangle	translate_triangle(t_triangle *src, t_xyz translation);
 void		update_editor_load_menu(t_buffer *buffer, t_action *action,
 				char **map_names);
 void		draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text);
+void		draw_wall_textfields(t_editor_walls *wall, t_buffer *buffer, t_texture **textures);
 
 #endif

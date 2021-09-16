@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 15:31:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 18:18:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,18 @@ void	reset_actions(t_action *action)
 static void	setup_editor(t_editor *editor, t_home *home)
 {
 	initialize_editor_values(editor);
-	editor->button_list = (t_button **)malloc(sizeof(t_button*) * NBR_BUTTONS);
+	editor->button_list = (t_button **)malloc(sizeof(t_button *) * NBR_BUTTONS);
 	if (!editor->button_list)
 		error_output("ERROR: Memory allocation of button list failed!");
 	editor->button_list = create_button_list(editor->button_list);
 	add_notification(editor, "Hello, welcome to doom-nukem editor", 3000);
-	SDL_SetWindowSize(home->win.window, editor->buffer.width, editor->buffer.height);
-	SDL_SetWindowPosition(home->win.window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-	if (!(editor->buffer.pxl_buffer = (Uint32*)malloc(sizeof(Uint32) *
-		(Uint32)editor->buffer.width * (Uint32)editor->buffer.height)))
+	SDL_SetWindowSize(home->win.window,
+		editor->buffer.width, editor->buffer.height);
+	SDL_SetWindowPosition(home->win.window,
+		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+	editor->buffer.pxl_buffer = (Uint32 *)malloc(sizeof(Uint32)
+			* (Uint32)editor->buffer.width * (Uint32)editor->buffer.height);
+	if (!editor->buffer.pxl_buffer)
 		error_output("ERROR: Memory for drawing bufferallocation failed!");
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 	init_textures(home);
@@ -77,13 +80,14 @@ void	launch_editor(t_home *home, SDL_Event *e)
 		editor_events(e, home, &editor);
 		handle_events(&editor, home);
 		draw_ui(&editor, home->textures);
-		draw_buttons(&editor, editor.end_sector, home->textures);
+		draw_buttons(&editor, home->textures);
 		render_buffer(editor.buffer.pxl_buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
 	free_editor_data(&editor);
 	free_all_textures(home->textures, NUM_TEX);
 	SDL_SetWindowSize(home->win.window, SCREEN_WIDTH, SCREEN_HEIGHT);
-	SDL_SetWindowPosition(home->win.window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+	SDL_SetWindowPosition(home->win.window,
+		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
 }

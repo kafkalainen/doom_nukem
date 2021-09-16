@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_sectors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 14:45:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 19:24:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	draw_wall_bbox(t_editor_walls *wall, t_editor_sector *cur_sector,
 	Uint32	color;
 
 	box.start = world_to_screen(wall->bbox.start, editor->action.scalarf,
-				editor->action.offsetf, &editor->buffer);
+			editor->action.offsetf, &editor->buffer);
 	box.end = world_to_screen(wall->bbox.end, editor->action.scalarf,
-				editor->action.offsetf, &editor->buffer);
+			editor->action.offsetf, &editor->buffer);
 	if (wall->idx == editor->action.selected_wall
 		&& cur_sector->idx_sector == editor->action.selected_sector)
 		color = get_color(white);
@@ -46,8 +46,8 @@ static void	draw_line_to_mouse_cursor(int active, t_editor_walls *wall,
 	}
 }
 
-static void	draw_wall_line(t_editor_walls *left_point, t_editor_walls *right_point,
-			t_editor *editor, Uint32 color)
+static void	draw_wall_line(t_editor_walls *left_point,
+	t_editor_walls *right_point, t_editor *editor, Uint32 color)
 {
 	draw_line(
 		world_to_screen(vec2(left_point->x0.x, left_point->x0.y),
@@ -57,43 +57,19 @@ static void	draw_wall_line(t_editor_walls *left_point, t_editor_walls *right_poi
 		color, &editor->buffer);
 }
 
-void	draw_editor_sectors_bboxes(t_editor *editor, t_action *action)
-{
-	t_editor_sector *sector_list;
-
-	sector_list = editor->sector_list;
-	while (sector_list)
-	{
-		if (action->selected_sector != sector_list->idx_sector)
-			draw_bbox_sector(sector_list, &editor->buffer, &editor->action);
-		sector_list = sector_list->next;
-	}
-	sector_list = editor->sector_list;
-	while (sector_list)
-	{
-		if (action->selected_sector == sector_list->idx_sector)
-			draw_bbox_sector(sector_list, &editor->buffer, &editor->action);
-		sector_list = sector_list->next;
-	}
-}
-
-void	draw_editor_sectors(t_editor *editor)
+void	draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,
+	t_editor_walls *left_point, Uint32 color)
 {
 	int				i;
-	t_editor_sector	*sector_list;
-	t_editor_walls	*left_point;
-	Uint32			color;
 
-	left_point = NULL;
-	i = 0;
-	sector_list = editor->sector_list;
 	while (sector_list)
 	{
 		i = 0;
 		left_point = sector_list->walls;
 		while (left_point && left_point->next && i < sector_list->nb_of_walls)
 		{
-			if (sector_list->idx_sector == editor->action.selected_sector && i == editor->action.selected_wall)
+			if (sector_list->idx_sector == editor->action.selected_sector
+				&& i == editor->action.selected_wall)
 				color = get_color(red);
 			else
 				color = get_color(white);
@@ -108,4 +84,16 @@ void	draw_editor_sectors(t_editor *editor)
 		sector_list = sector_list->next;
 	}
 	draw_line_to_mouse_cursor(i, left_point, editor);
+}
+
+void	draw_editor_sectors(t_editor *editor)
+{
+	t_editor_sector	*sector_list;
+	t_editor_walls	*left_point;
+	Uint32			color;
+
+	color = 0;
+	left_point = NULL;
+	sector_list = editor->sector_list;
+	draw_editor_sector(editor, sector_list, left_point, color);
 }

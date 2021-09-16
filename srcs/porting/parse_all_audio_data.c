@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_all_audio_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:40:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 13:06:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 16:21:26 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	parse_rahikainen(unsigned char *buf, unsigned int *pos,
 			ssize_t size)
 {
-
 	parse_audio_data(buf, pos, "./temp/rahikainen_1.wav", size);
 	parse_audio_data(buf, pos, "./temp/rahikainen_2.wav", size);
 	parse_audio_data(buf, pos, "./temp/rahikainen_3.wav", size);
@@ -42,6 +41,17 @@ static void	parse_enemy(unsigned char *buf, unsigned int *pos,
 	parse_audio_data(buf, pos, "./temp/thing_die.wav", size);
 }
 
+static void	parse_plr_action_sounds(unsigned char *buf, unsigned int *pos,
+			ssize_t size)
+{
+	parse_audio_data(buf, pos, "./temp/footstep1.wav", size);
+	parse_audio_data(buf, pos, "./temp/footstep2.wav", size);
+	parse_audio_data(buf, pos, "./temp/door_opens_and_closes.wav", size);
+	parse_audio_data(buf, pos, "./temp/button.wav", size);
+	parse_audio_data(buf, pos, "./temp/plasma_gun.wav", size);
+	parse_audio_data(buf, pos, "./temp/error.wav", size);
+}
+
 int	parse_all_audio_data(unsigned char *buf, ssize_t size)
 {
 	unsigned int	pos;
@@ -52,12 +62,7 @@ int	parse_all_audio_data(unsigned char *buf, ssize_t size)
 	if (pos > (unsigned int)size)
 		error_output("Pointer points outside memory address\n");
 	parse_audio_data(buf, &pos, "./temp/eerie_by_eparviai.wav", size);
-	parse_audio_data(buf, &pos, "./temp/footstep1.wav", size);
-	parse_audio_data(buf, &pos, "./temp/footstep2.wav", size);
-	parse_audio_data(buf, &pos, "./temp/door_opens_and_closes.wav", size);
-	parse_audio_data(buf, &pos, "./temp/button.wav", size);
-	parse_audio_data(buf, &pos, "./temp/plasma_gun.wav", size);
-	parse_audio_data(buf, &pos, "./temp/error.wav", size);
+	parse_plr_action_sounds(buf, &pos, size);
 	parse_rahikainen(buf, &pos, size);
 	parse_enemy(buf, &pos, size);
 	parse_audio_data(buf, &pos, "./temp/bolt_locked.wav", size);

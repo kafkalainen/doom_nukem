@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_points2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:05:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/11 15:08:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 19:29:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,16 @@ void	add_point_end(t_editor_walls **point, t_editor_walls *new)
 	}
 }
 
-void		assign_sector_bbox(t_editor_sector *sector)
+static void	assign_final_bboxes(t_editor_sector *sector,
+	t_screen_xy min, t_screen_xy max)
+{
+	sector->bbox.start.x = min.x;
+	sector->bbox.start.y = max.y;
+	sector->bbox.end.x = max.x;
+	sector->bbox.end.y = min.y;
+}
+
+void	assign_sector_bbox(t_editor_sector *sector)
 {
 	t_screen_xy		min;
 	t_screen_xy		max;
@@ -79,10 +88,7 @@ void		assign_sector_bbox(t_editor_sector *sector)
 		temp = temp->next;
 		i++;
 	}
-	sector->bbox.start.x = min.x;
-	sector->bbox.start.y = max.y;
-	sector->bbox.end.x = max.x;
-	sector->bbox.end.y = min.y;
+	assign_final_bboxes(sector, min, max);
 }
 
 t_editor_walls	*new_wall_point(t_screen_xy world_coord)

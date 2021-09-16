@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/07 16:22:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 16:27:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,21 @@ void	parse_audio_data(unsigned char *buf, unsigned int *pos,
 	if (create_temp_audio_file(asset.buf, asset.size, path) == -1)
 		error_output("Failed to create temp audio file\n");
 	free(asset.buf);
+}
+
+void	parse_map_data(unsigned char *buf, t_player *plr,
+	t_home *home, ssize_t size)
+{
+	int	ret;
+
+	ret = parse_sector_data(buf, plr, home, size);
+	ret = parse_entity_data(buf, home, size);
+	parse_texture_data(buf, home, size);
+	if (doom_mkdir() == -1)
+		ft_putstr("ERROR: Failed to create temporary directory.\n");
+	parse_all_audio_data(buf, size);
+	free(buf);
+	buf = NULL;
+	if (ret)
+		error_output("ERROR: Failed to read map.");
 }

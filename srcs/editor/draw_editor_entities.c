@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_entities.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 08:41:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 20:13:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 
 	tex = get_tex(editor_select_entity_tex(entity->entity_type), textures);
 	box.start = world_to_screen(entity->bbox.start, editor->action.scalarf,
-				editor->action.offsetf, &editor->buffer);
+			editor->action.offsetf, &editor->buffer);
 	box.end = world_to_screen(entity->bbox.end, editor->action.scalarf,
-				editor->action.offsetf, &editor->buffer);
+			editor->action.offsetf, &editor->buffer);
 	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 	if (entity->entity_idx == editor->action.selected_entity)
 		color = get_color(white);
@@ -62,9 +62,7 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 void	draw_editor_entities(t_editor *editor, t_texture **textures)
 {
 	t_entity_list	*temp;
-	t_entity_list	*head;
 
-	head = editor->entity_list;
 	temp = editor->entity_list;
 	while (temp != NULL)
 	{
@@ -87,5 +85,4 @@ void	draw_editor_entities(t_editor *editor, t_texture **textures)
 		// }
 		temp = temp->next;
 	}
-	editor->entity_list = head;
 }

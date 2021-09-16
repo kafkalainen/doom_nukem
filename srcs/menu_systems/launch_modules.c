@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/14 11:29:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/15 16:38:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	launch_game_loop(t_home *home, t_player *plr,
 		fps_timer(&home->t);
 		delta_time = home->t.frame_time_last - plr->time;
 		plr->time = home->t.frame_time_last;
-		if (plr->plot_state == start_cutscene || plr->plot_state == end_cutscene)
+		if (plr->plot_state == start_cutscene
+			|| plr->plot_state == end_cutscene)
 			update_cutscene(plr, home, delta_time);
 		else
 		{

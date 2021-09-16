@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/15 16:32:14 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/16 08:42:21 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,15 @@ SRCS = \
 	editor$(SLASH)draw_editor_entities.c \
 	editor$(SLASH)draw_editor_sectors.c \
 	editor$(SLASH)draw_editor_sector_bbox.c \
+	editor$(SLASH)draw_entity_textfields.c \
+	editor$(SLASH)draw_sector_textfields.c \
+	editor$(SLASH)draw_text_and_strings.c \
+	editor$(SLASH)draw_wall_textfields.c \
 	editor$(SLASH)draw_grid.c \
 	editor$(SLASH)draw_ui.c \
 	editor$(SLASH)editor_add_new_sector_to_list_end.c \
+	editor$(SLASH)editor_create_entity.c \
+	editor$(SLASH)editor_entity_creation_helpers.c \
 	editor$(SLASH)editor_events.c \
 	editor$(SLASH)editor_entity.c \
 	editor$(SLASH)editor_edit_entity.c \
@@ -46,6 +52,7 @@ SRCS = \
 	editor$(SLASH)editor_load_map4.c \
 	editor$(SLASH)editor_load_map5.c \
 	editor$(SLASH)editor_reset_player_and_end.c \
+	editor$(SLASH)editor_save_map.c \
 	editor$(SLASH)editor_sort_sector_vertices.c \
 	editor$(SLASH)event_actions.c \
 	editor$(SLASH)free_editor_data.c \
