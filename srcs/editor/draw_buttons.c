@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 08:48:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 12:33:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	get_color_from_action_data(int i, t_action *action, int end_sector)
 	if ((i == button_plr_start && action->player_start_assigned)
 		|| (i == button_assign_end_sector && end_sector >= 0))
 		return (get_color(green));
-	else if (i == button_plr_start || (i == button_assign_end_sector && end_sector < 0))
+	else if (i == button_plr_start || (i == button_assign_end_sector
+			&& end_sector < 0))
 		return (get_color(red));
 	return (get_color(white));
 }

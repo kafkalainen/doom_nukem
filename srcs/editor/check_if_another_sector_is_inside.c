@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:45:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/11 11:36:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 11:39:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,34 @@ t_bool	check_if_another_sector_is_inside(t_editor_sector *tested,
 		temp = temp->next;
 	}
 	temp = original_head;
+	return (false);
+}
+
+t_bool	check_if_completely_inside(t_editor_sector *tested,
+		t_editor_sector **head)
+{
+	int				i;
+	int				points_inside;
+	t_editor_walls	*cur_wall;
+	t_editor_sector	*temp;
+
+	temp = *head;
+	while (temp->next)
+	{
+		i = 0;
+		points_inside = 0;
+		cur_wall = tested->walls;
+		while (i < tested->nb_of_walls)
+		{
+			if (check_bbox(temp->bbox.start, temp->bbox.end,
+					vec2(cur_wall->x0.x, cur_wall->x0.y)))
+				points_inside++;
+			cur_wall = cur_wall->next;
+			i++;
+		}
+		if (points_inside >= tested->nb_of_walls)
+			return (true);
+		temp = temp->next;
+	}
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 11:15:57 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/14 17:58:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/16 12:26:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	create_map_file(t_home *home, t_editor *editor)
 	write_entity_data(&fd, editor);
 	write_texture_data(&fd, home);
 	write_all_audio_data(&fd);
-	doom_close(&fd);
+	if (doom_close(&fd) == -1)
+		return (-1);
 	create_hash(editor->mapname);
 	return (1);
 }
