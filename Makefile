@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/16 10:34:57 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/16 14:32:01 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ SRCS = \
 	editor$(SLASH)rotate_through_entities.c \
 	editor$(SLASH)read_input_string.c \
 	editor$(SLASH)sector_actions.c \
+	editor$(SLASH)sector_actions2.c \
 	editor$(SLASH)translate_towards_centroid.c \
 	editor$(SLASH)wall_points.c \
 	editor$(SLASH)wall_points2.c \

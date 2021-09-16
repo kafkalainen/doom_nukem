@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 11:38:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 14:26:54 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,6 +379,7 @@ t_editor_sector	*get_editor_sector_with_idx(t_editor_sector **list, int idx);
 t_editor_sector	*get_linked_sector(t_editor_sector **list, int link,
 					int cur_idx);
 void			translate_towards_centroid(t_editor_sector *sector);
+int				editor_sector_remove_wallpoint(t_editor *editor, t_editor_sector *sector);
 
 /*
 ** Editor map loading stuff
