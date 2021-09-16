@@ -38,13 +38,14 @@ SRCS = \
 	editor$(SLASH)draw_ui.c \
 	editor$(SLASH)editor_add_new_sector_to_list_end.c \
 	editor$(SLASH)editor_create_entity.c \
+	editor$(SLASH)editor_edit_entity.c \
+	editor$(SLASH)editor_edit_wall.c \
 	editor$(SLASH)editor_entity_creation_helpers.c \
+	editor$(SLASH)editor_entity_link_booleans.c \
+	editor$(SLASH)editor_entity_link_management.c \
 	editor$(SLASH)editor_events.c \
 	editor$(SLASH)editor_keyboard.c \
 	editor$(SLASH)editor_entity.c \
-	editor$(SLASH)editor_edit_entity.c \
-	editor$(SLASH)editor_entity_link_management.c \
-	editor$(SLASH)editor_entity_link_booleans.c \
 	editor$(SLASH)editor_create_new_sector.c \
 	editor$(SLASH)editor_delete_entity.c \
 	editor$(SLASH)editor_delete_wall.c \

@@ -24,5 +24,7 @@ void			mouse_handle(t_player *plr, SDL_Event *e);
 void	        editor_keyboard(SDL_Keycode keysym, t_action *action);
 void	        editor_mouse(t_mouse_data *mouse_data, SDL_Event *e,
 	t_action *action, t_buffer *buffer);
+t_bool	        entity_creation_is_allowed(t_entity_list **head,
+	t_editor_sector *sector, t_action *action);
 
 #endif

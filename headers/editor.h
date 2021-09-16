@@ -296,6 +296,7 @@ void			add_point_end(t_editor_walls **point, t_editor_walls *new);
 int				add_point_to_list(t_editor *editor, t_editor_sector *sector,
 					t_action *action);
 void			close_editor_wall_list(t_editor_walls **head);
+void			editor_edit_wall(t_editor *editor);
 
 /*
 **				Validity checks
