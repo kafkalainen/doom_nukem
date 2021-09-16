@@ -21,5 +21,8 @@ void			key_input(t_player *plr, SDL_Event *e, int *game_state);
 void			keys_down(t_player *plr, SDL_KeyCode sym, int *game_state);
 void			keys_up(t_player *plr, SDL_KeyCode sym);
 void			mouse_handle(t_player *plr, SDL_Event *e);
+void	        editor_keyboard(SDL_Keycode keysym, t_action *action);
+void	        editor_mouse(t_mouse_data *mouse_data, SDL_Event *e,
+	t_action *action, t_buffer *buffer);
 
 #endif
