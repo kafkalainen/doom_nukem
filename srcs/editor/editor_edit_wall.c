@@ -61,8 +61,8 @@ static	void	handle_wall_height(t_height *height,
 			height->ground = -99;
 	}
 	if (int_string)
-		free(int_string);
-	int_string = NULL;
+		free(*int_string);
+	*int_string = NULL;
 	action->edit_wall = 0;
 	action->edit_ceiling_height = 0;
 	action->edit_floor_height = 0;
