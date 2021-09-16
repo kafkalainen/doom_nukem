@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 15:06:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:16:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 			t_texture **textures)
 {
 	t_box			box;
-	Uint32			color;
+	Uint32			colour;
 	t_texel			*tex;
 	t_xy			scale;
 
@@ -81,11 +81,8 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 			editor->action.offsetf, &editor->buffer);
 	box.end = world_to_screen(entity->bbox.end, editor->action.scalarf,
 			editor->action.offsetf, &editor->buffer);
-	if (entity->entity_idx == editor->action.selected_entity)
-		color = get_color(white);
-	else
-		color = get_color(red);
-	draw_box(box, &editor->buffer, color);
+	colour = get_entity_colour(entity, editor->action.selected_entity);
+	draw_box(box, &editor->buffer, colour);
 	if (entity->entity_type == skull_skulker || entity->entity_type == thing
 		|| entity->entity_type == drone || entity->entity_type == crewmember)
 	{
