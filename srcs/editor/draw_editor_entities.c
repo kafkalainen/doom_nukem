@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 14:50:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 15:06:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,32 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 	t_box			box;
 	Uint32			color;
 	t_texel			*tex;
-	float			scale;
+	t_xy			scale;
 
 	tex = get_tex(editor_select_entity_tex(entity->entity_type), textures);
 	box.start = world_to_screen(entity->bbox.start, editor->action.scalarf,
 			editor->action.offsetf, &editor->buffer);
 	box.end = world_to_screen(entity->bbox.end, editor->action.scalarf,
 			editor->action.offsetf, &editor->buffer);
-	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 	if (entity->entity_idx == editor->action.selected_entity)
 		color = get_color(white);
 	else
 		color = get_color(red);
 	draw_box(box, &editor->buffer, color);
-	draw_image_static(box.start, tex, &editor->buffer, scale);
+	if (entity->entity_type == skull_skulker || entity->entity_type == thing
+		|| entity->entity_type == drone || entity->entity_type == crewmember)
+	{
+		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / 128);
+		scale.x = 128;
+		scale.y = 128;
+		draw_multisprite_image(box.start, tex, &editor->buffer, scale);
+	}
+	else
+	{
+		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
+		draw_image_static(box.start, tex, &editor->buffer, scale.w);
+	}
+
 }
 
 void	draw_editor_entities(t_editor *editor, t_texture **textures)

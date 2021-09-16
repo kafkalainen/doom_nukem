@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sector_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:51:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 11:49:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 14:31:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,18 @@ int	editor_new_sector_wallpoints(t_editor *editor,
 {
 	t_editor_sector	*temp;
 
-	temp = editor->sector_list;
-	while (temp != NULL && temp->idx_sector != action->selected_sector)
-		temp = temp->next;
-	if (mouse_data->i_mbright)
-	{
-		editor_remove_last_wall(temp);
-		mouse_data->i_mbright = 0;
-		return (0);
-	}
-	if (mouse_data->i_mbleft)
+	temp = get_editor_sector_with_idx(&editor->sector_list,
+			action->selected_sector);
+	if (temp && mouse_data->i_mbright)
+		return (editor_sector_remove_wallpoint(editor, temp));
+	if (temp && mouse_data->i_mbleft)
 	{
 		if (add_point_to_list(editor, temp, action) == 3)
 		{
-			editor->action.selected_sector = temp->idx_sector;
-			editor_reset_player_and_end(editor, &editor->action);
-			editor_free_selected_sector(&editor->sector_list,
-				&editor->entity_list, &editor->action);
 			editor->temp_sector = NULL;
 			editor->action.draw_depth = depth_zero;
-			action->create_sector = idle;
+			editor->action.create_sector = idle;
+			editor->mouse_data.i_mbleft = 0;
 			return (1);
 		}
 	}

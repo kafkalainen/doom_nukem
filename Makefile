@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/16 10:34:57 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/16 14:32:01 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS = \
 	editor$(SLASH)editor_create_entity.c \
 	editor$(SLASH)editor_entity_creation_helpers.c \
 	editor$(SLASH)editor_events.c \
+	editor$(SLASH)editor_keyboard.c \
 	editor$(SLASH)editor_entity.c \
 	editor$(SLASH)editor_edit_entity.c \
 	editor$(SLASH)editor_entity_link_management.c \
@@ -52,6 +53,7 @@ SRCS = \
 	editor$(SLASH)editor_load_map3.c \
 	editor$(SLASH)editor_load_map4.c \
 	editor$(SLASH)editor_load_map5.c \
+	editor$(SLASH)editor_mouse.c \
 	editor$(SLASH)editor_reset_player_and_end.c \
 	editor$(SLASH)editor_save_map.c \
 	editor$(SLASH)editor_sort_sector_vertices.c \
@@ -77,6 +79,7 @@ SRCS = \
 	editor$(SLASH)rotate_through_entities.c \
 	editor$(SLASH)read_input_string.c \
 	editor$(SLASH)sector_actions.c \
+	editor$(SLASH)sector_actions2.c \
 	editor$(SLASH)translate_towards_centroid.c \
 	editor$(SLASH)wall_points.c \
 	editor$(SLASH)wall_points2.c \

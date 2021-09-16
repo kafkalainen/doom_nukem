@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 14:17:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/16 14:51:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,10 @@ void	draw_buttons(t_editor *editor, t_texture **textures)
 }
 
 static void	draw_map_list(t_buffer *buffer, t_action *action,
-	char **map_names)
+	char **map_names, t_plx_modifier *mod)
 {
 	int				y;
 	int				i;
-	t_plx_modifier	mod;
 	t_box			box;
 
 	box.start.x = 310;
@@ -82,13 +81,12 @@ static void	draw_map_list(t_buffer *buffer, t_action *action,
 	while (i <= action->end)
 	{
 		if (i == action->option)
-			mod.colour = get_color(red);
+			mod->colour = get_color(red);
 		else
-			mod.colour = get_color(white);
-		mod.size = TEXT_SIZE;
-		mod.len = ft_strlen(map_names[i]);
+			mod->colour = get_color(white);
+		mod->len = ft_strlen(map_names[i]);
 		ft_str_pxl(buffer, vec2(310, 100 + y),
-			map_names[i], mod);
+			map_names[i], *mod);
 		y += 15;
 		i++;
 	}
@@ -118,5 +116,5 @@ void	update_editor_load_menu(t_buffer *buffer, t_action *action,
 		ft_str_pxl(buffer, vec2(310, 70),
 			"Select which map to load into editor", mod);
 	}
-	draw_map_list(buffer, action, map_names);
+	draw_map_list(buffer, action, map_names, &mod);
 }
