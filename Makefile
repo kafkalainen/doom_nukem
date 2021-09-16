@@ -40,6 +40,7 @@ SRCS = \
 	editor$(SLASH)editor_create_entity.c \
 	editor$(SLASH)editor_entity_creation_helpers.c \
 	editor$(SLASH)editor_events.c \
+	editor$(SLASH)editor_keyboard.c \
 	editor$(SLASH)editor_entity.c \
 	editor$(SLASH)editor_edit_entity.c \
 	editor$(SLASH)editor_entity_link_management.c \
@@ -52,6 +53,7 @@ SRCS = \
 	editor$(SLASH)editor_load_map3.c \
 	editor$(SLASH)editor_load_map4.c \
 	editor$(SLASH)editor_load_map5.c \
+	editor$(SLASH)editor_mouse.c \
 	editor$(SLASH)editor_reset_player_and_end.c \
 	editor$(SLASH)editor_save_map.c \
 	editor$(SLASH)editor_sort_sector_vertices.c \
