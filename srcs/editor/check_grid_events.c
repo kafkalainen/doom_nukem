@@ -14,8 +14,6 @@
 
 static void	setup_selected_sector_draw_depth(t_editor *editor)
 {
-	editor->temp_sector = get_clicked_sector(&editor->sector_list,
-			editor->action.world_pos, &editor->action.selected_sector);
 	if (editor->temp_sector)
 	{
 		editor->action.draw_depth = sector;
@@ -30,6 +28,9 @@ static void	setup_selected_sector_draw_depth(t_editor *editor)
 		else if (editor->temp_wall)
 			editor->action.draw_depth = wall;
 	}
+	if (!editor->temp_wall && !editor->temp_entity)
+		editor->temp_sector = get_clicked_sector(&editor->sector_list,
+			editor->action.world_pos, &editor->action.selected_sector);
 }
 
 static void	reset_sector_light_info(t_entity_list **entities,
