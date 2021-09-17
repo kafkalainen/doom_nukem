@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:08:33 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 16:15:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:24:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static void	draw_wall_info(t_editor_walls *wall, t_buffer *buffer)
 	mod.size = TEXT_SIZE;
 	temp = ft_itoa(wall->idx);
 	mod.len = ft_strlen(temp);
-	ft_str_pxl(buffer, vec2(250, 56), temp, mod);
+	ft_str_pxl(buffer, vec2(260, 56), temp, mod);
 	ft_strdel(&temp);
 	temp = ft_itoa(wall->height.ceiling);
 	mod.len = ft_strlen(temp);
-	ft_str_pxl(buffer, vec2(250, 258), temp, mod);
+	ft_str_pxl(buffer, vec2(260, 221), temp, mod);
 	ft_strdel(&temp);
 	temp = ft_itoa(wall->height.ground);
 	mod.len = ft_strlen(temp);
-	ft_str_pxl(buffer, vec2(250, 288), temp, mod);
+	ft_str_pxl(buffer, vec2(260, 251), temp, mod);
 	ft_strdel(&temp);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:27:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 16:02:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 17:16:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,21 @@ static void	draw_button_logic(t_editor *editor, t_button *button, int i)
 		set_to_inactive(editor, button, lift_button);
 	if (i == button_create_light_button)
 		set_to_inactive(editor, button, light_button);
-
+	if (i == button_change_to_door)
+	{
+		if (editor->temp_wall && editor->temp_wall->type >= 0)
+			button->is_active = true;
+		else
+			button->is_active = false;
+	}
+	if (i == button_toggle_entity_is_linked)
+	{
+		if (editor->temp_entity->entity_type == light_button
+		||	editor->temp_entity->entity_type == lamp)
+			button->is_active = true;
+		else
+			button->is_active = false;
+	}
 }
 
 void	draw_button(t_editor *editor, t_button *button, int i)

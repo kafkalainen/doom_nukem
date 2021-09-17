@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_edit_wall.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 14:37:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:18:45 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,34 @@ static	void	change_wall_texture(int	*wall_type, t_action *action)
 	action->edit_wall = 0;
 }
 
-static	void	handle_wall_height(t_height *height,
+static void set_new_ceiling_ground(t_height *height,
 	unsigned char **int_string, t_action *action)
 {
-	if (action->edit_ceiling_height && int_string)
+	int temp;
+
+	temp = ft_atoi((const char *)*int_string);
+	if (temp > 99)
+		temp = 99;
+	if (temp < -99)
+		temp = -99;
+	if (action->edit_ceiling_height)
 	{
-		height->ceiling = ft_atoi((const char *)*int_string);
-		if (height->ceiling > 99)
-			height->ceiling = 99;
-		if (height->ceiling < -99)
-			height->ceiling = -99;
+		if (temp > height->ground)
+			height->ceiling = temp;
 	}
-	if (action->edit_floor_height && int_string)
+	if (action->edit_floor_height)
 	{
-		height->ground = ft_atoi((const char *)*int_string);
-		if (height->ground > 99)
-			height->ground = 99;
-		if (height->ground < -99)
-			height->ground = -99;
+		if (temp < height->ceiling)
+			height->ground = temp;
 	}
-	if (int_string)
+}
+
+static void handle_wall_height(t_height *height,
+	unsigned char **int_string, t_action *action)
+{
+	if (*int_string)
+		set_new_ceiling_ground(height, int_string, action);
+	if (*int_string)
 		free(*int_string);
 	*int_string = NULL;
 	action->edit_wall = 0;
