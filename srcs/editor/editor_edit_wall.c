@@ -120,6 +120,6 @@ void	editor_edit_wall(t_editor *editor)
 		|| editor->action.create_elev_button)
 		create_entities(editor);
 	if (editor->action.cycle_door)
-		editor->action.cycle_door = cycle_door(editor->sector_list,
+		editor->action.cycle_door = cycle_door(&editor->sector_list,
 		editor->temp_wall, editor->temp_sector->idx_sector);
 }
