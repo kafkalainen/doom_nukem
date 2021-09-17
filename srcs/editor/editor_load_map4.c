@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/16 10:15:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 10:55:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,38 +71,42 @@ char	*editor_get_next_string(unsigned char *buf,
 	return (str);
 }
 
-int	editor_parse_story_data(t_editor_sector *new, unsigned char *buf,
+t_uchar	*editor_get_new_string(unsigned char *buf,
+			unsigned int **pos, ssize_t size, int lines)
+{
+	t_uchar	*str;
+
+	str = (t_uchar *)editor_get_next_string(buf, pos, size);
+	if (lines)
+		return ((t_uchar *)ft_strjoin_newline((char **)&str));
+	else
+		return (str);
+}
+
+int	editor_parse_story_data(t_editor_sector *sec, unsigned char *buf,
 	unsigned int *pos, ssize_t size)
 {
-	int	i;
 	int	lines;
 
-	i = 0;
 	if (get_next_int_value(&lines, buf, &pos, size))
 		return (1);
 	if (lines == 0)
 		return (0);
-	while (i < lines)
+	while (lines)
 	{
-		if (new->plot_line == NULL)
-		{
-			new->plot_line = (t_uchar *)editor_get_next_string(buf, &pos, size);
-			if (lines > 1)
-				new->plot_line = (t_uchar *)ft_strjoin_freeable(
-						(char *)new->plot_line, "\n", 1, 0);
-		}
+		if (sec->plot_line == NULL)
+			sec->plot_line = editor_get_new_string(buf, &pos, size, lines);
 		else
 		{
-			new->plot_line = (t_uchar *)ft_strjoin_freeable(
-					(char *)new->plot_line,
+			sec->plot_line = (t_uchar *)ft_strjoin_freeable(
+					(char *)sec->plot_line,
 					editor_get_next_string(buf, &pos, size), 1, 1);
-			if (i < (lines - 1))
-				new->plot_line = (t_uchar *)ft_strjoin_freeable(
-						(char *)new->plot_line, "\n", 1, 0);
+			if (lines - 1)
+				sec->plot_line = ft_strjoin_newline((char **)&sec->plot_line);
 		}
-		if (new->plot_line == NULL)
+		if (sec->plot_line == NULL)
 			return (1);
-		i++;
+		lines--;
 	}
 	return (0);
 }

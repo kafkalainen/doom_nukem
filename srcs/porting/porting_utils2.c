@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   porting_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 16:44:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/11 11:17:08 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 10:56:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+t_uchar	*ft_strjoin_newline(char **str)
+{
+	return ((t_uchar *)ft_strjoin_freeable(*str, "\n", 1, 0));
+}
 
 char	*ft_strjoin_freeable(char *s1, char *s2, int free_one, int free_two)
 {

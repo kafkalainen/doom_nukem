@@ -6,31 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 08:29:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 13:06:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 09:41:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-void	draw_cutscene(t_buffer *buffer, t_player *plr, t_sector *sector)
-{
-	float			percentage;
-	t_xy			offset;
-	t_plx_modifier	mod;
-
-	mod.size = TEXT_SIZE;
-	mod.colour = get_color(limegreen);
-	percentage = 1.0f - plr->cutscene / (float)plr->cutscene_total;
-	mod.len = (size_t)(ft_strlen(sector->story[sector->cur_msg]) * percentage);
-	if (mod.len > 0)
-	{
-		offset.x = 0.5f * (buffer->width - (mod.len * mod.size * 5));
-		if (mod.len % 2)
-			offset.x -= (mod.size * 5 * 0.5f);
-		offset.y = 300;
-		ft_str_pxl(buffer, offset, sector->story[sector->cur_msg], mod);
-	}
-}
 
 static void	end_logic(t_player *plr, t_home *home)
 {

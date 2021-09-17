@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:03:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/16 08:55:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 09:29:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,61 +84,45 @@ void	draw_int_string_input(t_buffer *buffer, t_action *action,
 	}
 }
 
-static void	draw_story_input(unsigned char *string, t_buffer *buffer,
-	int midpoint)
+static void	draw_story_input(unsigned char *string, t_buffer *buffer)
 {
-	t_plx_modifier	mod;
-	int				y;
-	int				i;
-	int				lines;
-	char			**arr;
-
+	int		i;
+	int		lines;
+	char	**arr;
 	if (!string)
 		return ;
 	i = 0;
-	y = 20;
-	mod.size = TEXT_SIZE;
 	lines = get_nbr_of_lines(string);
 	arr = ft_strsplit((const char *)string, '\n');
 	if (arr)
 	{
-		mod.colour = get_color(white);
 		while (i < lines && arr[i])
 		{
-			mod.len = ft_strlen(arr[i]) + 1;
-			ft_str_pxl(buffer, vec2(midpoint - 100, 70 + (i * y)), arr[i], mod);
+			show_user_help(arr[i], buffer, i + 3, get_color(white));
 			i++;
 		}
 		free_array((unsigned char **)arr);
 	}
 }
 
-void	draw_input_string(unsigned char *string, t_buffer *buffer,
-	int midpoint, int help_text)
+void	draw_input_string(unsigned char *string, t_buffer *buffer, int help_text)
 {
-	t_plx_modifier	mod;
-
-	mod.colour = get_color(orange);
-	mod.size = TEXT_SIZE;
 	if (help_text == map_saving)
 	{
-		mod.len = 26;
-		ft_str_pxl(buffer, vec2(midpoint - 100, 50),
-			"Please input text string", mod);
+		show_user_help(
+			"Please input text string:", buffer, 0, get_color(orange));
 		if (string != NULL)
-		{
-			mod.colour = get_color(white);
-			mod.len = ft_strlen((const char *)string) + 1;
-			ft_str_pxl(buffer, vec2(midpoint - 100, 70), (char *)string, mod);
-		}
+			show_user_help((char *)string, buffer, 1, get_color(orange));
 	}
 	if (help_text == story_string)
 	{
-		mod.len = 86;
-		ft_str_pxl(buffer, vec2(midpoint - 200, 50),
-			"Please input sector story string, end writing with 'Return'."
-			" Add newline with 'Tab':", mod);
-		if (string)
-			draw_story_input(string, buffer, midpoint);
+		show_user_help("Please input sector story string.",
+			buffer, 0, get_color(orange));
+		show_user_help("Add newlines with 'Tab' key.",
+			buffer, 1, get_color(orange));
+		show_user_help("End writing and save plot with 'Return' key.",
+			buffer, 2, get_color(orange));
+		if (string != NULL)
+			draw_story_input(string, buffer);
 	}
 }

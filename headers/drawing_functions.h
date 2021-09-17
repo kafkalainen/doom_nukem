@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/16 14:22:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 09:26:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ t_xyz		translate_point(t_xyz *src, t_xyz translation);
 t_triangle	translate_triangle(t_triangle *src, t_xyz translation);
 void		update_editor_load_menu(t_buffer *buffer, t_action *action,
 				char **map_names);
-void		draw_input_string(unsigned char *string, t_buffer *buffer, int midpoint, int help_text);
+void		draw_input_string(unsigned char *string, t_buffer *buffer, int help_text);
 void		draw_wall_textfields(t_editor_walls *wall, t_buffer *buffer, t_texture **textures);
 
 #endif

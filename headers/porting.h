@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   porting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 16:27:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 10:56:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int				open_map_file(t_home *home, char *path);
 void			write_sector_data(int *fd, t_editor *editor);
 void			write_entity_data(int *fd, t_editor *editor);
 char			*ft_strjoin_freeable(char *s1, char *s2, int free_one, int free_two);
+t_uchar			*ft_strjoin_newline(char **str);
 Uint32			ft_adler32(unsigned char *data, ssize_t size);
 void			create_hash(unsigned char *tmp);
 void			verify_hash(unsigned char *buf, ssize_t size);

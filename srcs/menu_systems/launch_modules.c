@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 16:38:42 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 10:42:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	process_inputs_game_loop(t_player *plr, int *game_state, SDL_Event *e)
 			break ;
 		}
 		key_input(plr, e, game_state);
-		mouse_handle(plr, e);
+		if (plr->cutscene != start_cutscene || plr->cutscene != end_cutscene)
+			mouse_handle(plr, e);
 	}
 }
 
@@ -49,10 +50,8 @@ void	launch_game_loop(t_home *home, t_player *plr,
 			|| plr->plot_state == end_cutscene)
 			update_cutscene(plr, home, delta_time);
 		else
-		{
-			process_inputs_game_loop(plr, &home->game_state, e);
 			update_world(plr, home, delta_time);
-		}
+		process_inputs_game_loop(plr, &home->game_state, e);
 		update_screen(home, frame, plr);
 		render_buffer(frame->buffer.pxl_buffer, home->win.ScreenSurface);
 		SDL_UpdateWindowSurface(home->win.window);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_ui.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 16:58:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 15:35:18 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 09:27:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	draw_ui(t_editor *editor, t_texture **textures)
 	if (editor->action.convert_to_portal)
 		draw_convert_to_portal_line(editor);
 	if (editor->action.save_file)
-		draw_input_string(editor->mapname, &editor->buffer,
-			(editor->buffer.width * 0.5), map_saving);
+		draw_input_string(editor->mapname, &editor->buffer, map_saving);
 	if (editor->action.open_file || editor->action.link_maps)
 		update_editor_load_menu(&editor->buffer, &editor->action,
 			editor->map_names);
@@ -45,7 +44,7 @@ void	draw_ui(t_editor *editor, t_texture **textures)
 			&editor->int_string);
 	if (editor->action.write_sector_story && editor->temp_sector != NULL)
 		draw_input_string(editor->temp_sector->plot_line,
-			&editor->buffer, (editor->buffer.width * 0.5), story_string);
+			&editor->buffer, story_string);
 	draw_help_text(&editor->action, &editor->buffer);
 	show_editor_usage(&editor->buffer);
 	notify_user(&editor->notification, &editor->buffer,
