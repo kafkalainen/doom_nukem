@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 10:25:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 12:33:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void			interpolate_y(t_height *height, t_xy cutpoint,
 					t_wall *p0, t_wall *p1);
 void			interpolate_uv(t_xy *ground_uv, t_xy cutpoint,
 					t_wall *p0, t_wall *p1);
+t_bool			is_triangle_visible(t_triangle *viewed_tri, t_xyz pos);
 t_xy			line_intersection(t_intersection *sect);
 void			precalc_ground_texels(t_home *home);
 void			scan_fov(t_home *home, t_frame *frame, t_player *plr);

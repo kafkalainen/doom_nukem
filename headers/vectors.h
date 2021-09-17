@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 10:52:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 12:41:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,6 @@ t_xyz		vec3_cross_product(t_xyz a, t_xyz b);
 t_m4x4		point_at_matrix(t_xyz up, t_xyz forward, t_xyz right,
 				t_xyz location);
 t_m4x4		inverse_matrix(t_m4x4 *rot_trans_matrix);
-t_triangle	apply_camera(t_xyz pos, t_xyz target, t_xyz up, t_triangle *src);
 t_m4x4		identity_matrix(void);
 t_m4x4		multiply_matrix(t_m4x4 *m1, t_m4x4 *m2);
 t_triangle	apply_world_matrix(float angle_x, float angle_z,

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 16:21:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 12:47:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 {
 	Uint32		i;
 	size_t		current_size;
-	t_triangle	current_viewed_triangle;
+	t_triangle	viewed_tri;
 
 	create_target_vector(plr);
 	current_size = frame->transformed->size;
@@ -53,18 +53,18 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 	i = 0;
 	while (i < current_size)
 	{
-		front(frame->transformed, &current_viewed_triangle);
-		if (vec3_dot_product(current_viewed_triangle.normal,
-				vec3_dec(current_viewed_triangle.p[0],
-					plr->pos)) < 0)
+		front(frame->transformed, &viewed_tri);
+		if (is_triangle_visible(&viewed_tri, plr->pos))
+			set_lighting(lights, &viewed_tri);
+		else
 		{
-			set_lighting(lights, &current_viewed_triangle);
-			current_viewed_triangle = apply_camera(
-					plr->pos, plr->target, plr->up,
-					&current_viewed_triangle);
-			clip_to_near_plane(&current_viewed_triangle, &frame->viewport,
-				frame->triangles_in_view);
+			initialize_lumels(&viewed_tri.lu[0], &viewed_tri.lu[1],
+				&viewed_tri.lu[2], 0.275f);
+			viewed_tri.type = -wall7;
 		}
+		viewed_tri = apply_camera(plr, &viewed_tri);
+		clip_to_near_plane(&viewed_tri, &frame->viewport,
+			frame->triangles_in_view);
 		dequeue(frame->transformed);
 		i++;
 	}

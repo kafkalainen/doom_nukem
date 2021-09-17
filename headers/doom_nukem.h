@@ -61,12 +61,12 @@
 
 # include "../libft/libft.h"
 # include "engine.h"
+# include "typewriter.h"
 # include "editor.h"
 # include "drawing_functions.h"
 # include "events.h"
 # include "porting.h"
 # include "parsing.h"
-# include "typewriter.h"
 # include "menu_systems.h"
 
 /*

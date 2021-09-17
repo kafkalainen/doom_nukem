@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 18:36:37 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 11:56:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,9 @@ typedef struct s_button_info
 typedef struct s_button
 {
 	t_button_info	info;
-	t_xy			ltop;
-	t_xy			wh;
+	t_box			box;
+	t_plx_modifier	mod;
+	t_xy			text_loc;
 }					t_button;
 
 typedef struct s_plr_pos

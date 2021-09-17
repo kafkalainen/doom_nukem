@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocate_buttons.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 14:28:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 12:05:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,35 @@
 
 void	create_button(t_button *list, t_box box, t_button_info info)
 {
+	list->mod.len = ft_strlen((const char *)info.text);
+	list->mod.size = TEXT_SIZE;
+	list->mod.colour = get_color(white);
 	list->info.inputfield = info.inputfield;
 	list->info.draw_depth = info.draw_depth;
-	list->ltop = box.start;
-	list->wh = box.end;
-	list->info.text = (char *)malloc(sizeof(char)
-			* (ft_strlen((const char *)info.text) + 1));
+	list->box = box;
+	list->info.text = ft_strdup((const char *)info.text);
 	if (!list->info.text)
-		error_output("Memory allocation failed\n");
-	list->info.text = ft_strcpy(list->info.text, (const char *)info.text);
+		error_output("Memory allocation failed.");
+	list->text_loc.x = box.start.x + 0.5f * ((box.end.x - box.start.x) -
+		(list->mod.len * list->mod.size * 5));
+	if (list->mod.len % 2)
+		list->text_loc.x -= (list->mod.size * 5 * 0.5f);
+	list->text_loc.y = box.start.y + list->mod.size * 7 * 0.5f;
 }
 
 static int	buttons_create_general_layer(t_button **blist, int i)
 {
-	create_button(blist[i++], (t_box){vec2(32, 52), vec2(195, 75)},
+	create_button(blist[i++], (t_box){vec2(32, 52), vec2(235, 75)},
 		(t_button_info){"Save map", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 80), vec2(195, 105)},
+	create_button(blist[i++], (t_box){vec2(32, 80), vec2(235, 105)},
 		(t_button_info){"Load map", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 110), vec2(195, 135)},
+	create_button(blist[i++], (t_box){vec2(32, 110), vec2(235, 135)},
 		(t_button_info){"Toggle grid = G", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 140), vec2(215, 165)},
+	create_button(blist[i++], (t_box){vec2(32, 140), vec2(235, 165)},
 		(t_button_info){"Assign end sector", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 170), vec2(195, 195)},
+	create_button(blist[i++], (t_box){vec2(32, 170), vec2(235, 195)},
 		(t_button_info){"Link map", 0, depth_zero});
-	create_button(blist[i++], (t_box){vec2(32, 200), vec2(195, 225)},
+	create_button(blist[i++], (t_box){vec2(32, 200), vec2(235, 225)},
 		(t_button_info){"Unlink map", 0, depth_zero});
 	create_button(blist[i++], (t_box){vec2(32, 230), vec2(235, 255)},
 		(t_button_info){"Assign player start", 0, depth_zero});

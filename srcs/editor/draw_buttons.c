@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/16 18:09:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 12:01:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,11 @@ int	get_color_from_action_data(int i, t_action *action, int end_sector)
 
 static void	draw_button(t_editor *editor, t_button *button, int i)
 {
-	t_plx_modifier	mod;
-	t_box			box;
-
-	mod.colour = get_color(white);
-	mod.size = TEXT_SIZE;
-	mod.len = ft_strlen((const char *)button->info.text);
-	mod.colour = get_color_from_action_data(i,
+	button->mod.colour = get_color_from_action_data(i,
 			&editor->action, editor->end_sector.sector);
-	box.start = button->ltop;
-	box.end = button->wh;
-	draw_box(box, &editor->buffer, get_color(0xAAAAAA));
-	ft_str_pxl(&editor->buffer, vec2(button->ltop.x + 8, button->ltop.y + 4),
-		button->info.text, mod);
+	draw_box(button->box, &editor->buffer, get_color(0xAAAAAA));
+	ft_str_pxl(&editor->buffer, button->text_loc,
+		button->info.text, button->mod);
 }
 
 void	draw_buttons(t_editor *editor, t_texture **textures)

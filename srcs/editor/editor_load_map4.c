@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 10:55:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 12:31:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_uchar	*editor_get_new_string(unsigned char *buf,
 	t_uchar	*str;
 
 	str = (t_uchar *)editor_get_next_string(buf, pos, size);
-	if (lines)
+	if (lines > 1)
 		return ((t_uchar *)ft_strjoin_newline((char **)&str));
 	else
 		return (str);

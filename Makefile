@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/17 11:27:52 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/17 12:45:30 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -159,6 +159,7 @@ SRCS = \
 	engine$(SLASH)get_next_wall_tex.c \
 	engine$(SLASH)get_portal_by_idx.c \
 	engine$(SLASH)get_wall_height.c \
+	engine$(SLASH)is_triangle_visible.c \
 	engine$(SLASH)line_line_intersection.c \
 	engine$(SLASH)line_segment_check.c \
 	engine$(SLASH)recursion_checks.c \
