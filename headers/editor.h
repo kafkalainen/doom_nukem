@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 11:56:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 14:22:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ enum e_buttons
 	button_sector_index,
 	button_change_floor_tex,
 	button_change_ceil_tex,
-	button_set_light_intensity,
 	button_convert_to_elevator,
 	button_create_light_src,
+	button_set_light_intensity,
 	button_input_active,
 	button_create_portal,
 	button_set_all_ceiling_heights,
@@ -47,6 +47,7 @@ enum e_buttons
 	button_create_light_button,
 	button_create_powerstation,
 	button_create_elevator_button,
+	button_change_to_door,
 	button_entity_index,
 	button_change_entity_type,
 	button_toggle_entity_is_linked,
@@ -86,6 +87,7 @@ typedef struct s_editor_walls
 
 typedef struct s_editor_light
 {
+	t_bool			is_light;
 	t_screen_xy		pos;
 	int				intensity;
 	int				is_linked;

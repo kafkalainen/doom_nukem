@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 11:28:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 14:00:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		draw_box(t_box box, t_buffer *buffer, Uint32 color);
 void		draw_bbox_sector(t_editor_sector *sector, t_buffer *buffer,
 				t_action *action);
 void		draw_buttons(t_editor *editor, t_texture **textures);
+void		draw_button(t_editor *editor, t_button *button, int i);
 void		draw_convert_to_portal_line(t_editor *editor);
 void		draw_crosshair(t_buffer *buffer);
 void		draw_cutscene(t_buffer *buffer, t_player *plr, t_sector *sector);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 12:01:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 13:26:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@ int	get_color_from_action_data(int i, t_action *action, int end_sector)
 			&& end_sector < 0))
 		return (get_color(red));
 	return (get_color(white));
-}
-
-static void	draw_button(t_editor *editor, t_button *button, int i)
-{
-	button->mod.colour = get_color_from_action_data(i,
-			&editor->action, editor->end_sector.sector);
-	draw_box(button->box, &editor->buffer, get_color(0xAAAAAA));
-	ft_str_pxl(&editor->buffer, button->text_loc,
-		button->info.text, button->mod);
 }
 
 void	draw_buttons(t_editor *editor, t_texture **textures)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:22:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/13 12:06:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 14:15:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static void	editor_initialize_sector_values(t_editor_sector *new,
 	new->nb_of_walls = 0;
 	new->tex_ceil = -surf0;
 	new->tex_floor = -surf0;
-	new->light.pos.x = 0;
-	new->light.pos.y = 0;
+	new->light.is_light = false;
+	new->light.pos.x = -1;
+	new->light.pos.y = -1;
 	new->light.intensity = 0;
 	new->light.is_linked = 0;
 	new->light.state = 0;
