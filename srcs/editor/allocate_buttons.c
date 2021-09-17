@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 14:24:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 15:48:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	create_button(t_button *list, t_box box, t_button_info info)
 	list->mod.colour = get_color(white);
 	list->info.inputfield = info.inputfield;
 	list->info.draw_depth = info.draw_depth;
+	list->is_active = true;
 	list->box = box;
 	list->info.text = ft_strdup((const char *)info.text);
 	if (!list->info.text)
@@ -27,12 +28,12 @@ void	create_button(t_button *list, t_box box, t_button_info info)
 		+ 0.5f * ((box.end.x - box.start.x) - (list->mod.len * list->mod.size * 5));
 	if (list->mod.len % 2)
 		list->text_loc.x -= (list->mod.size * 5 * 0.5f);
-	list->text_loc.y = box.start.y + list->mod.size * 7 * 0.5f;
+	list->text_loc.y = (box.start.y - 1) + list->mod.size * 7 * 0.5f;
 }
 
 static void	buttons_create_general_layer(t_button **blist)
 {
-	create_button(blist[0], (t_box){vec2(48, 52), vec2(251, 75)},
+	create_button(blist[0], (t_box){vec2(48, 50), vec2(251, 75)},
 		(t_button_info){"Save map", 0, depth_zero});
 	create_button(blist[1], (t_box){vec2(48, 80), vec2(251, 105)},
 		(t_button_info){"Load map", 0, depth_zero});
@@ -50,25 +51,25 @@ static void	buttons_create_general_layer(t_button **blist)
 
 static void	buttons_create_sector_layer(t_button **blist)
 {
-	create_button(blist[7], (t_box){vec2(10, 52), vec2(290, 75)},
+	create_button(blist[7], (t_box){vec2(10, 50), vec2(290, 75)},
 		(t_button_info){"Sector idx:", 0, sector});
 	create_button(blist[8], (t_box){vec2(10, 80), vec2(290, 105)},
 		(t_button_info){"Sector floor tex:", 0, sector});
-	create_button(blist[9], (t_box){vec2(10, 215), vec2(290, 235)},
+	create_button(blist[9], (t_box){vec2(10, 215), vec2(290, 240)},
 		(t_button_info){"Sector ceiling tex:", 0, sector});
-	create_button(blist[10], (t_box){vec2(10, 375), vec2(190, 400)},
+	create_button(blist[10], (t_box){vec2(10, 350), vec2(290, 375)},
 		(t_button_info){"Convert sector to a lift", 1, sector});
-	create_button(blist[11], (t_box){vec2(10, 405), vec2(290, 430)},
+	create_button(blist[11], (t_box){vec2(10, 380), vec2(290, 405)},
 		(t_button_info){"Add light source", 1, sector});
-	create_button(blist[12], (t_box){vec2(10, 345), vec2(290, 370)},
+	create_button(blist[12], (t_box){vec2(10, 410), vec2(290, 435)},
 		(t_button_info){"Set light intensity", 1, sector});
-	create_button(blist[13], (t_box){vec2(10, 435), vec2(290, 460)},
+	create_button(blist[13], (t_box){vec2(10, 440), vec2(290, 465)},
 		(t_button_info){"Write plot", 1, sector});
-	create_button(blist[14], (t_box){vec2(10, 465), vec2(290, 490)},
+	create_button(blist[14], (t_box){vec2(10, 470), vec2(290, 495)},
 		(t_button_info){"Create portal to sector", 0, sector});
-	create_button(blist[15], (t_box){vec2(10, 525), vec2(290, 550)},
+	create_button(blist[15], (t_box){vec2(10, 500), vec2(290, 525)},
 		(t_button_info){"Set all ceiling heights", 0, sector});
-	create_button(blist[16], (t_box){vec2(10, 555), vec2(290, 580)},
+	create_button(blist[16], (t_box){vec2(10, 530), vec2(290, 555)},
 		(t_button_info){"Set all floor heights", 0, sector});
 }
 
@@ -89,7 +90,7 @@ static void	buttons_create_wall_layer(t_button **blist)
 	create_button(blist[23], (t_box){vec2(32, 370), vec2(275, 395)},
 		(t_button_info){"Add elevator button", 0, wall});
 	create_button(blist[24], (t_box){vec2(10, 400), vec2(290, 425)},
-		(t_button_info){"Change to door", 0, sector});
+		(t_button_info){"Change to door", 0, wall});
 }
 
 t_button	**create_button_list(t_button **blist)

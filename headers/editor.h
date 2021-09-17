@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 14:22:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 15:14:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct s_editor_walls
 
 typedef struct s_editor_light
 {
-	t_bool			is_light;
 	t_screen_xy		pos;
 	int				intensity;
 	int				is_linked;
@@ -107,6 +106,7 @@ typedef struct s_button
 	t_box			box;
 	t_plx_modifier	mod;
 	t_xy			text_loc;
+	t_bool			is_active;
 }					t_button;
 
 typedef struct s_plr_pos
@@ -327,6 +327,8 @@ void			editor_reset_wall_indexes(t_editor_walls **walls,
 
 t_uint			calc_linked_entities(t_entity_list **list, int link,
 					int link_type);
+int				calc_entities_in_sector_with_type(t_entity_list **head,
+					int sector_idx, int	entity_type);
 void			create_new_entity(t_entity_list **head,
 					t_action *action, t_editor_sector *sector, t_xy pos);
 int				editor_parse_entity_data(t_editor *editor, unsigned char *buf,
