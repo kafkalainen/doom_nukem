@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 09:26:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 11:28:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void		draw_editor_sectors(t_editor *editor);
 void		draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,
 			t_editor_walls *left_point, Uint32 color);
 void		draw_editor_entities(t_editor *editor, t_texture **textures);
+void		draw_editor_entity_links(t_entity_list *entity, t_editor *editor);
 void		draw_entity_textfields(t_entity_list *entity, t_buffer *buffer,
 				t_texture **textures);
 void		draw_entity_link_line(t_editor *editor);

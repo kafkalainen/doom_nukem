@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 11:04:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 11:29:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	draw_editor_entities(t_editor *editor, t_texture **textures)
 	while (temp != NULL)
 	{
 		draw_entity_bbox(temp, editor, textures);
-		// draw_entity_links(temp)
+		draw_editor_entity_links(temp, editor);
 		temp = temp->next;
 	}
 }
