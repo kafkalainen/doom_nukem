@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_grid_events.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 14:37:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:37:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,14 @@
 static void	setup_selected_sector_draw_depth(t_editor *editor)
 {
 	if (editor->temp_sector)
-	{
-		editor->action.draw_depth = sector;
-		editor->action.prev_entity = editor->action.selected_entity;
-		editor->temp_entity = get_clicked_entity(&editor->entity_list,
-				editor->action.world_pos, &editor->action.selected_entity);
-		editor->temp_wall = get_clicked_wall(&editor->temp_sector->walls,
-				editor->action.world_pos, &editor->action.selected_wall,
-				editor->temp_sector->nb_of_walls);
-		if (editor->temp_entity)
-			editor->action.draw_depth = entity;
-		else if (editor->temp_wall)
-			editor->action.draw_depth = wall;
-	}
+		check_for_objects_inside_sector_bbox(editor);
 	if (!editor->temp_wall && !editor->temp_entity)
+	{
 		editor->temp_sector = get_clicked_sector(&editor->sector_list,
-			editor->action.world_pos, &editor->action.selected_sector);
+				editor->action.world_pos, &editor->action.selected_sector);
+		if (editor->temp_sector)
+			check_for_objects_inside_sector_bbox(editor);
+	}
 }
 
 static void	reset_sector_light_info(t_entity_list **entities,
@@ -84,6 +76,12 @@ static void	check_grind_events_two(t_editor *editor)
 		else
 			add_notification(editor, "Linking failed.", 2000);
 		editor->action.link_entity = idle;
+	}
+	if (editor->action.create_entity == user_input)
+	{
+		create_new_entity(&editor->entity_list, &editor->action,
+			editor->temp_sector, editor->action.world_pos);
+		editor->action.create_entity = idle;
 	}
 }
 

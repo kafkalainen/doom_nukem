@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 16:40:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 17:10:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ enum e_buttons
 	button_entity_index,
 	button_change_entity_type,
 	button_toggle_entity_is_linked,
-	button_toggle_is_revealed,
 	button_toggle_is_static,
 	button_toggle_state,
 };
@@ -286,6 +285,7 @@ t_editor_sector	*get_clicked_sector(t_editor_sector **list,
 t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
 					int *selected_wall, int nbr_of_walls);
 void			check_grid_events(t_editor *editor);
+void			check_for_objects_inside_sector_bbox(t_editor *editor);
 void			link_maps(t_action *action, unsigned char **linked_mapname,
 					char **map_names);
 int				clicked_inside_ui(int x, int y, int height, int width);

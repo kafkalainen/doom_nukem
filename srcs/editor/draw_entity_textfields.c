@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_entity_textfields.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:07:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/16 18:30:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 17:02:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static void	draw_entity_textures(t_entity_list *entity,
 	t_xy			scale;
 	t_box			box;
 
-	box.start = vec2(32, 110);
-	box.end = vec2(132, 220);
+	box.start = vec2(100, 110);
+	box.end = vec2(200, 220);
 	draw_box(box, buffer, get_color(black));
 	tex = get_tex(editor_select_entity_tex(entity->entity_type), textures);
 	if (entity->entity_type == skull_skulker || entity->entity_type == thing
@@ -94,16 +94,15 @@ void	draw_entity_textfields(t_entity_list *entity,
 	mod.size = TEXT_SIZE;
 	str = ft_itoa(entity->entity_idx);
 	mod.len = ft_strlen(str) + 1;
-	ft_str_pxl(buffer, vec2(165, 56), str, mod);
+	ft_str_pxl(buffer, vec2(265, 56), str, mod);
 	ft_strdel(&str);
 	str = ft_itoa(entity->entity_type);
 	mod.len = ft_strlen(str) + 1;
-	ft_str_pxl(buffer, vec2(165, 84), str, mod);
+	ft_str_pxl(buffer, vec2(265, 84), str, mod);
 	ft_strdel(&str);
 	mod.len = 1;
-	ft_c_pxl(buffer, vec2(165, 229), '0' + entity->is_linked, mod);
-	ft_c_pxl(buffer, vec2(165, 259), '0' + entity->is_revealed, mod);
-	ft_c_pxl(buffer, vec2(165, 289), '0' + entity->is_static, mod);
-	ft_c_pxl(buffer, vec2(165, 325), '0' + entity->state, mod);
+	ft_c_pxl(buffer, vec2(265, 231), '0' + entity->is_linked, mod);
+	ft_c_pxl(buffer, vec2(265, 261), '0' + entity->is_revealed, mod);
+	ft_c_pxl(buffer, vec2(265, 291), '0' + entity->state, mod);
 	draw_entity_textures(entity, buffer, textures);
 }

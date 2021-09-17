@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 14:43:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:18:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ t_bool	sectors_aligned(t_editor_sector *first, t_editor_sector *second,
 	{
 		first->is_elevator = upper;
 		second->is_elevator = lower;
+		elev_sector->is_elevator = first->idx_sector;
 		return (true);
 	}
 	return (false);
@@ -114,7 +115,7 @@ t_bool	compare_floors_to_ceilings(t_editor_sector **sectors, int first_idx,
 		int second_idx, t_editor_sector *elev_sector)
 {
 	t_editor_sector	*first;
-	t_editor_sector *second;
+	t_editor_sector	*second;
 	t_screen_xy		floor_heights;
 
 	first = *sectors;
@@ -171,7 +172,8 @@ t_bool	verify_connecting_sectors(t_editor_sector **sectors,
 		i++;
 		wall = wall->next;
 	}
-	if (!compare_floors_to_ceilings(sectors, first_sector_idx, scdn_sector_idx, elev_sector))
+	if (!compare_floors_to_ceilings(sectors, first_sector_idx,
+			scdn_sector_idx, elev_sector))
 		return (false);
 	return (true);
 }
@@ -207,7 +209,8 @@ void	convert_sector_to_lift(t_editor_sector *sector,
 	temp = *head;
 	while (temp)
 	{
-		if (temp->sector_idx == sector->idx_sector && temp->entity_type == lift_button)
+		if (temp->sector_idx == sector->idx_sector
+			&& temp->entity_type == lift_button)
 			break ;
 		temp = temp->next;
 	}
@@ -217,7 +220,8 @@ void	convert_sector_to_lift(t_editor_sector *sector,
 	sector->is_elevator = lift;
 }
 
-void	editor_set_all_sector_floor_heights(t_editor_sector *sector, unsigned char **int_string)
+void	editor_set_all_sector_floor_heights(t_editor_sector *sector,
+	unsigned char **int_string)
 {
 	int				floor_height;
 	t_editor_walls	*wall;
@@ -234,13 +238,15 @@ void	editor_set_all_sector_floor_heights(t_editor_sector *sector, unsigned char 
 	*int_string = NULL;
 	while (i < sector->nb_of_walls)
 	{
-		wall->height.ground = floor_height;
+		if (wall->height.ceiling > floor_height)
+			wall->height.ground = floor_height;
 		wall = wall->next;
 		i++;
 	}
 }
 
-void	editor_set_all_sector_ceiling_heights(t_editor_sector *sector, unsigned char **int_string)
+void	editor_set_all_sector_ceiling_heights(t_editor_sector *sector,
+	unsigned char **int_string)
 {
 	int				ceiling_height;
 	t_editor_walls	*wall;
@@ -257,7 +263,8 @@ void	editor_set_all_sector_ceiling_heights(t_editor_sector *sector, unsigned cha
 	*int_string = NULL;
 	while (i < sector->nb_of_walls)
 	{
-		wall->height.ceiling = ceiling_height;
+		if (wall->height.ground < ceiling_height)
+			wall->height.ceiling = ceiling_height;
 		wall = wall->next;
 		i++;
 	}
@@ -325,7 +332,8 @@ void	editor_edit_sector(t_editor *editor)
 		{
 			if (editor->int_string)
 			{
-				sector->light.intensity = ft_atoi((const char *)editor->int_string);
+				sector->light.intensity = ft_atoi(
+						(const char *)editor->int_string);
 				if (sector->light.intensity > 100)
 					sector->light.intensity = 100;
 				if (sector->light.intensity < 0)
@@ -348,17 +356,21 @@ void	editor_edit_sector(t_editor *editor)
 	}
 	if (editor->action.create_light_source)
 	{
-		if (entity_creation_is_allowed(&editor->entity_list, editor->temp_sector, &editor->action))
+		if (entity_creation_is_allowed(&editor->entity_list,
+				editor->temp_sector, &editor->action))
 		{
-			create_new_entity(&editor->entity_list, &editor->action, editor->temp_sector, editor->temp_sector->centroid);
-			update_sector_light_values(editor->temp_sector, &editor->entity_list);
+			create_new_entity(&editor->entity_list, &editor->action,
+				editor->temp_sector, editor->temp_sector->centroid);
+			update_sector_light_values(editor->temp_sector,
+				&editor->entity_list);
 		}
 		editor->action.create_light_source = 0;
 		editor->action.edit_sector = 0;
 	}
 	if (editor->action.create_elevator)
 	{
-		if (check_elevator_prerequisites(&editor->entity_list, &editor->sector_list, &editor->action))
+		if (check_elevator_prerequisites(&editor->entity_list,
+				&editor->sector_list, &editor->action))
 			convert_sector_to_lift(editor->temp_sector, &editor->entity_list);
 		editor->action.create_elevator = 0;
 		editor->action.edit_sector = 0;
@@ -369,7 +381,8 @@ void	editor_edit_sector(t_editor *editor)
 		if (!editor->action.input_active)
 		{
 			if (editor->int_string)
-				editor_set_all_sector_ceiling_heights(editor->temp_sector, &editor->int_string);
+				editor_set_all_sector_ceiling_heights(editor->temp_sector,
+					&editor->int_string);
 			editor->action.set_all_sector_ceiling_heights = 0;
 			editor->action.edit_sector = 0;
 		}
@@ -380,14 +393,15 @@ void	editor_edit_sector(t_editor *editor)
 		if (!editor->action.input_active)
 		{
 			if (editor->int_string)
-				editor_set_all_sector_floor_heights(editor->temp_sector, &editor->int_string);
+				editor_set_all_sector_floor_heights(editor->temp_sector,
+					&editor->int_string);
 			editor->action.set_all_sector_floor_heights = 0;
 			editor->action.edit_sector = 0;
 		}
 	}
 }
 
-int		handle_events(t_editor *editor, t_home *home)
+int	handle_events(t_editor *editor, t_home *home)
 {
 	editor->delta_time = SDL_GetTicks() - editor->cur_time;
 	editor->cur_time = SDL_GetTicks();
@@ -396,7 +410,8 @@ int		handle_events(t_editor *editor, t_home *home)
 	if (editor->action.unlink_entity)
 		unlink_linked_light_links(&editor->entity_list,
 			&editor->sector_list, editor->temp_entity);
-	if (editor->action.edit_wall && editor->temp_wall != NULL && editor->temp_sector != NULL)
+	if (editor->action.edit_wall && editor->temp_wall != NULL
+		&& editor->temp_sector != NULL)
 		editor_edit_wall(editor);
 	if (editor->action.edit_sector && editor->temp_sector != NULL)
 		editor_edit_sector(editor);
@@ -408,18 +423,12 @@ int		handle_events(t_editor *editor, t_home *home)
 	if (editor->action.create_sector == user_input)
 	{
 		if (editor_new_sector_wallpoints(editor,
-			&editor->mouse_data, &editor->action))
+				&editor->mouse_data, &editor->action))
 			editor_free_selected_sector(&editor->sector_list,
 				&editor->entity_list, &editor->action);
 	}
 	if (editor->action.save_file)
 		save_editor_map(editor, home);
-	if (editor->action.create_entity == user_input)
-	{
-		create_new_entity(&editor->entity_list, &editor->action,
-			editor->temp_sector, editor->action.world_pos);
-		editor->action.create_entity = idle;
-	}
 	if (editor->mouse_data.i_mbleft && !editor->action.input_active)
 	{
 		if (clicked_inside_ui(editor->mouse_data.x, editor->mouse_data.y,
@@ -428,7 +437,8 @@ int		handle_events(t_editor *editor, t_home *home)
 			check_ui_events(editor->mouse_data.x, editor->mouse_data.y,
 				&editor->button_list, &editor->action);
 			editor->mouse_data.i_mbleft = 0;
-			if (editor->action.convert_to_portal == allocate && editor->temp_sector)
+			if (editor->action.convert_to_portal == allocate
+				&& editor->temp_sector)
 				editor->action.prev_sector = editor->temp_sector->idx_sector;
 		}
 		else if (clicked_inside_grid(editor->mouse_data.x, editor->mouse_data.y,
@@ -437,7 +447,6 @@ int		handle_events(t_editor *editor, t_home *home)
 			check_grid_events(editor);
 			editor->mouse_data.i_mbleft = 0;
 		}
-
 	}
 	if (editor->action.link_maps == 2)
 		link_maps(&editor->action, &editor->linked_mapname, editor->map_names);
