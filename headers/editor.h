@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 15:14:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:40:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,6 +361,7 @@ void			update_linked_light_states(t_entity_list **entities,
 					int state);
 void			unlink_linked_light_links(t_entity_list **entities,
 					t_editor_sector **sectors, t_entity_list *starting_link);
+int				editor_calc_active_portals(t_editor_sector *sector, int selected_wall);
 
 /*
 ** Sector creation and manipulation
