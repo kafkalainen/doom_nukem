@@ -175,6 +175,7 @@ typedef struct s_action
 	int				write_sector_story;
 	int				set_all_sector_ceiling_heights;
 	int				set_all_sector_floor_heights;
+	t_bool			cycle_door;
 }					t_action;
 
 typedef struct s_editor_xyz
