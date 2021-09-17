@@ -24,6 +24,7 @@ SRCS = \
 	editor$(SLASH)check_grid_events2.c \
 	editor$(SLASH)check_if_another_sector_is_inside.c \
 	editor$(SLASH)create_portals.c \
+	editor$(SLASH)cycle_door.c \
 	editor$(SLASH)check_if_non_convex.c \
 	editor$(SLASH)draw_button.c \
 	editor$(SLASH)draw_buttons.c \
