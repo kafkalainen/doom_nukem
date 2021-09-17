@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 15:16:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 11:04:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	draw_image_static(t_xy offset, t_texel *tex, t_buffer *buffer,
 	scale = 1.0f / (tex->height * scale);
 	while (cur.y < image.y)
 	{
-		cur.x = 0;
+		cur.x = -1;
 		txl.u = 0.0f;
-		while (cur.x < image.x)
+		while (++cur.x < image.x)
 		{
 			cur_texel = (t_uv){txl.u * (tex->width - 1),
 				txl.v * (tex->height - 1)};
@@ -61,7 +61,6 @@ void	draw_image_static(t_xy offset, t_texel *tex, t_buffer *buffer,
 				cur.y + offset.y},
 				tex->texels[cur_texel.v * tex->width + cur_texel.u]);
 			txl.u += scale;
-			cur.x++;
 		}
 		txl.v += scale;
 		cur.y++;
@@ -96,7 +95,6 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 		draw_image_static(box.start, tex, &editor->buffer, scale.w);
 	}
-
 }
 
 void	draw_editor_entities(t_editor *editor, t_texture **textures)
@@ -107,22 +105,7 @@ void	draw_editor_entities(t_editor *editor, t_texture **textures)
 	while (temp != NULL)
 	{
 		draw_entity_bbox(temp, editor, textures);
-		// draw_entity_links(temp, editor);
-		// if (temp->is_linked)
-		// {
-		// 	while (link != NULL)
-		// 	{
-		// 		if (link->is_linked == temp->is_linked && link->is_linked > 1)
-		// 			draw_line(
-		// 				world_to_screen(vec2(temp->pos.x, temp->pos.z), editor->action.scalarf, editor->action.offsetf,
-		// 					&editor->buffer),
-		// 				world_to_screen(vec2(link->pos.x, link->pos.z), editor->action.scalarf, editor->action.offsetf,
-		// 					&editor->buffer),
-		// 				get_color(blue), &editor->buffer);
-		// 		link = link->next;
-		// 	}
-		// 	link = head;
-		// }
+		// draw_entity_links(temp)
 		temp = temp->next;
 	}
 }

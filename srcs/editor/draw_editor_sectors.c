@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 10:20:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 11:17:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,21 @@ static void	draw_wall_line(t_editor_walls *left_point,
 			editor->action.scalarf, editor->action.offsetf, &editor->buffer);
 	draw_line(left, right, color, &editor->buffer);
 	if (left.y != right.y)
+	{
 		draw_line(vec2(left.x + 1, left.y), vec2(right.x + 1, right.y),
 			color, &editor->buffer);
+		if (left_point->idx == editor->action.selected_wall)
+			draw_line(vec2(left.x + 2, left.y), vec2(right.x + 2, right.y),
+				color, &editor->buffer);
+	}
 	else
+	{
 		draw_line(vec2(left.x, left.y + 1), vec2(right.x, right.y + 1),
 			color, &editor->buffer);
+		if (left_point->idx == editor->action.selected_wall)
+			draw_line(vec2(left.x, left.y + 2), vec2(right.x, right.y + 2),
+				color, &editor->buffer);
+	}
 }
 
 void	draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,
@@ -78,7 +88,7 @@ void	draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,
 		{
 			if (sector_list->idx_sector == editor->action.selected_sector
 				&& i == editor->action.selected_wall)
-				color = get_color(red);
+				color = get_color(darkgoldenrod);
 			else
 				color = get_color(white);
 			draw_wall_bbox(left_point, sector_list, editor);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:03:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 09:29:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 11:00:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static void	draw_story_input(unsigned char *string, t_buffer *buffer)
 	int		i;
 	int		lines;
 	char	**arr;
+
 	if (!string)
 		return ;
 	i = 0;
@@ -105,7 +106,8 @@ static void	draw_story_input(unsigned char *string, t_buffer *buffer)
 	}
 }
 
-void	draw_input_string(unsigned char *string, t_buffer *buffer, int help_text)
+void	draw_input_string(unsigned char *string, t_buffer *buffer,
+		int help_text)
 {
 	if (help_text == map_saving)
 	{
