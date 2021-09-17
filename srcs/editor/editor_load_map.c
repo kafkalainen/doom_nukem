@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/14 13:38:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 17:32:00 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,18 @@ int	editor_parse_entity_data(t_editor *editor, unsigned char *buf, ssize_t size)
 	return (0);
 }
 
+static	void	set_end_sector_coordinates(t_plr_pos *end,
+	t_editor_sector **head)
+{
+	t_editor_sector	*temp;
+
+	temp = get_editor_sector_with_idx(head, end->sector);
+	if (!temp)
+		error_output("ERROR: Invalid end sector.\n");
+	end->x = (int)temp->centroid.x;
+	end->z = (int)temp->centroid.y;
+}
+
 void	read_map_data(t_editor *editor, unsigned char *buf, ssize_t size)
 {
 	int	ret;
@@ -74,6 +86,7 @@ void	read_map_data(t_editor *editor, unsigned char *buf, ssize_t size)
 	ret = editor_parse_entity_data(editor, buf, size);
 	if (ret)
 		error_output("something went horribly wrong\n");
+	set_end_sector_coordinates(&editor->end_sector, &editor->sector_list);
 }
 
 void	editor_load_map(t_editor *editor)
