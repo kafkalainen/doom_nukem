@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 15:48:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:16:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ static void	buttons_create_sector_layer(t_button **blist)
 
 static void	buttons_create_wall_layer(t_button **blist)
 {
-	create_button(blist[17], (t_box){vec2(32, 52), vec2(275, 75)},
+	create_button(blist[17], (t_box){vec2(10, 50), vec2(290, 75)},
 		(t_button_info){"wall index:", 0, wall});
-	create_button(blist[18], (t_box){vec2(32, 80), vec2(275, 105)},
+	create_button(blist[18], (t_box){vec2(10, 80), vec2(290, 105)},
 		(t_button_info){"Wall texture:", 0, wall});
-	create_button(blist[19], (t_box){vec2(32, 255), vec2(245, 280)},
+	create_button(blist[19], (t_box){vec2(10, 225), vec2(290, 250)},
 		(t_button_info){"wall ceiling height:", 0, wall});
-	create_button(blist[20], (t_box){vec2(32, 285), vec2(245, 310)},
+	create_button(blist[20], (t_box){vec2(10, 285), vec2(290, 310)},
 		(t_button_info){"wall floor height:", 0, wall});
 	create_button(blist[21], (t_box){vec2(32, 315), vec2(275, 335)},
 		(t_button_info){"Add light button", 0, wall});
