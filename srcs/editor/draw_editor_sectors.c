@@ -80,6 +80,7 @@ void	draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,
 {
 	int				i;
 
+	i = 0;
 	while (sector_list)
 	{
 		i = 0;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/17 13:45:14 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/17 16:37:53 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = \
 	editor$(SLASH)check_all_sectors_for_intersecting_lines.c \
 	editor$(SLASH)check_for_intersecting_lines.c \
 	editor$(SLASH)check_grid_events.c \
+	editor$(SLASH)check_grid_events2.c \
 	editor$(SLASH)check_if_another_sector_is_inside.c \
 	editor$(SLASH)create_portals.c \
 	editor$(SLASH)check_if_non_convex.c \
@@ -42,6 +43,7 @@ SRCS = \
 	editor$(SLASH)editor_create_entity.c \
 	editor$(SLASH)editor_edit_entity.c \
 	editor$(SLASH)editor_edit_wall.c \
+	editor$(SLASH)editor_entity_creation_is_allowed.c \
 	editor$(SLASH)editor_entity_creation_helpers.c \
 	editor$(SLASH)editor_entity_link_booleans.c \
 	editor$(SLASH)editor_entity_link_management.c \

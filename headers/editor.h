@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 14:22:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:36:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct s_editor_walls
 
 typedef struct s_editor_light
 {
-	t_bool			is_light;
 	t_screen_xy		pos;
 	int				intensity;
 	int				is_linked;
@@ -107,6 +106,7 @@ typedef struct s_button
 	t_box			box;
 	t_plx_modifier	mod;
 	t_xy			text_loc;
+	t_bool			is_active;
 }					t_button;
 
 typedef struct s_plr_pos
@@ -286,6 +286,7 @@ t_editor_sector	*get_clicked_sector(t_editor_sector **list,
 t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
 					int *selected_wall, int nbr_of_walls);
 void			check_grid_events(t_editor *editor);
+void			check_for_objects_inside_sector_bbox(t_editor *editor);
 void			link_maps(t_action *action, unsigned char **linked_mapname,
 					char **map_names);
 int				clicked_inside_ui(int x, int y, int height, int width);
@@ -327,6 +328,8 @@ void			editor_reset_wall_indexes(t_editor_walls **walls,
 
 t_uint			calc_linked_entities(t_entity_list **list, int link,
 					int link_type);
+int				calc_entities_in_sector_with_type(t_entity_list **head,
+					int sector_idx, int	entity_type);
 void			create_new_entity(t_entity_list **head,
 					t_action *action, t_editor_sector *sector, t_xy pos);
 int				editor_parse_entity_data(t_editor *editor, unsigned char *buf,

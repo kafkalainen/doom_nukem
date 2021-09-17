@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:25:29 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 12:00:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 15:14:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	check_ui_events(int x, int y, t_button ***blist, t_action *action)
 	{
 		if (list[i]->info.draw_depth == action->draw_depth)
 		{
-			if (check_bbox_ui(list[i]->box.start, list[i]->box.end, click_ui))
+			if (check_bbox_ui(list[i]->box.start, list[i]->box.end, click_ui)
+				&& list[i]->is_active)
 			{
 				check_button_events(list[i], action, i);
 				break ;

@@ -6,60 +6,11 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 16:14:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:18:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-t_bool	entity_creation_is_allowed(t_entity_list **head,
-		t_editor_sector *sector, t_action *action)
-{
-	t_entity_list	*temp;
-	t_editor_walls	*wall;
-	int				i;
-
-	temp = *head;
-	wall = sector->walls;
-	i = 0;
-	while (i < sector->nb_of_walls)
-	{
-		if (action->selected_wall == wall->idx && wall->type >= 0)
-			return (false);
-		wall = wall->next;
-		i++;
-	}
-	if (action->create_light_button) // only 1 allowed
-	{
-		while (temp != NULL)
-		{
-			if (temp->entity_type == light_button
-				&& temp->sector_idx == sector->idx_sector)
-				return (false);
-			temp = temp->next;
-		}
-	}
-	if (action->create_light_source) // only 1 allowed
-	{
-		while (temp != NULL)
-		{
-			if (temp->entity_type == lamp && temp->sector_idx == sector->idx_sector)
-				return (false);
-			temp = temp->next;
-		}
-	}
-	if (action->create_elev_button) // only 1 allowed
-	{
-		while (temp != NULL)
-		{
-			if (temp->entity_type == lift_button && temp->sector_idx == sector->idx_sector)
-				return (false);
-			temp = temp->next;
-		}
-	}
-	// if (action->create_powerstation) // cannot create on top of something
-	return (true);
-}
 
 void	update_sector_light_values(t_editor_sector *sector,
 		t_entity_list **head)

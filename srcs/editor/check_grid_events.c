@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 16:12:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:37:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 
 static void	setup_selected_sector_draw_depth(t_editor *editor)
 {
-	editor->temp_sector = get_clicked_sector(&editor->sector_list,
-			editor->action.world_pos, &editor->action.selected_sector);
 	if (editor->temp_sector)
+		check_for_objects_inside_sector_bbox(editor);
+	if (!editor->temp_wall && !editor->temp_entity)
 	{
-		editor->action.draw_depth = sector;
-		editor->action.prev_entity = editor->action.selected_entity;
-		editor->temp_entity = get_clicked_entity(&editor->entity_list,
-				editor->action.world_pos, &editor->action.selected_entity);
-		editor->temp_wall = get_clicked_wall(&editor->temp_sector->walls,
-				editor->action.world_pos, &editor->action.selected_wall,
-				editor->temp_sector->nb_of_walls);
-		if (editor->temp_entity)
-			editor->action.draw_depth = entity;
-		else if (editor->temp_wall)
-			editor->action.draw_depth = wall;
+		editor->temp_sector = get_clicked_sector(&editor->sector_list,
+				editor->action.world_pos, &editor->action.selected_sector);
+		if (editor->temp_sector)
+			check_for_objects_inside_sector_bbox(editor);
 	}
 }
 
@@ -38,7 +31,6 @@ static void	reset_sector_light_info(t_entity_list **entities,
 {
 	if (deleted_entity->is_linked > 1)
 		unlink_linked_light_links(entities, sectors, deleted_entity);
-	sector->light.is_light = false;
 	sector->light.intensity = 0;
 	sector->light.is_linked = 0;
 	sector->light.state = 0;
