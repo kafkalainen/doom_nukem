@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_grid_events.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 14:15:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:12:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ static void	check_grind_events_two(t_editor *editor)
 		else
 			add_notification(editor, "Linking failed.", 2000);
 		editor->action.link_entity = idle;
+	}
+	if (editor->action.create_entity == user_input)
+	{
+		create_new_entity(&editor->entity_list, &editor->action,
+			editor->temp_sector, editor->action.world_pos);
+		editor->action.create_entity = idle;
 	}
 }
 
