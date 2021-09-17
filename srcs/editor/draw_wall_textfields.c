@@ -37,18 +37,25 @@ void	draw_wall_textfields(t_editor_walls *wall,
 	t_buffer *buffer, t_texture **textures)
 {
 	t_box			box;
-	float			scale;
 	t_texel			*tex;
 
 	if (!wall)
 		return ;
+	box.start = vec2(32, 110);
+	box.end = vec2(132, 220);
 	draw_wall_info(wall, buffer);
 	if (wall->type < 0)
 	{
-		box.start = vec2(32, 110);
-		box.end = vec2(132, 220);
 		tex = get_tex(wall->type, textures);
-		scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
-		draw_image_static(box.start, tex, buffer, scale);
+		draw_image_static(box.start, tex, buffer, 
+			(float)(ft_fabsf(box.end.x - box.start.x) / tex->width));
+	}
+	else if (wall->type < 3000)
+		return ;
+	else
+	{
+		tex = get_tex(-door, textures);
+		draw_image_static(box.start, tex, buffer, 
+			(float)(ft_fabsf(box.end.x - box.start.x) / tex->width));
 	}
 }
