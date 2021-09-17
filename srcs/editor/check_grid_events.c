@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 14:15:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 14:37:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	reset_sector_light_info(t_entity_list **entities,
 {
 	if (deleted_entity->is_linked > 1)
 		unlink_linked_light_links(entities, sectors, deleted_entity);
-	sector->light.is_light = false;
 	sector->light.intensity = 0;
 	sector->light.is_linked = 0;
 	sector->light.state = 0;

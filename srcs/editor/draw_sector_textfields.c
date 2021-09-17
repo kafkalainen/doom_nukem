@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:06:36 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/16 14:21:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 15:52:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	draw_sector_textfield_textures(t_editor_sector *sector,
 	tex = get_tex(sector->tex_floor, textures);
 	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 	draw_image_static(box.start, tex, buffer, scale);
-	box.start = vec2(32, 240);
-	box.end = vec2(132, 340);
+	box.start = vec2(32, 245);
+	box.end = vec2(132, 345);
 	tex = get_tex(sector->tex_ceil, textures);
 	scale = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 	draw_image_static(box.start, tex, buffer, scale);
@@ -47,7 +47,7 @@ void	draw_sector_textfields(t_editor_sector *sector,
 	ft_strdel(&temp);
 	temp = ft_itoa(sector->light.intensity);
 	mod.len = ft_strlen(temp) + 1;
-	ft_str_pxl(buffer, vec2(250, 348), temp, mod);
+	ft_str_pxl(buffer, vec2(250, 416), temp, mod);
 	ft_strdel(&temp);
 	draw_sector_textfield_textures(sector, buffer, textures);
 }

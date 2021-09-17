@@ -6,31 +6,51 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:27:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 13:59:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:02:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_bool	draw_button_logic(t_editor *editor, int i)
+static void	set_to_inactive(t_editor *editor, t_button *button, int type)
+{
+	if (editor->temp_sector
+			&& calc_entities_in_sector_with_type(&editor->entity_list,
+			editor->temp_sector->idx_sector, type))
+		button->is_active = false;
+	else
+		button->is_active = true;
+}
+
+static void	draw_button_logic(t_editor *editor, t_button *button, int i)
 {
 	if (i == button_set_light_intensity)
 	{
-		if (editor->action.selected_sector >= 0
-			&& !calc_linked_entities(&editor->entity_list,
-				editor->action.selected_sector + 2, lamp))
-			return (false);
+		if (editor->temp_sector
+			&& !calc_entities_in_sector_with_type(&editor->entity_list,
+				editor->temp_sector->idx_sector, lamp))
+			button->is_active = false;
+		else
+			button->is_active = true;
 	}
-	return (true);
+	if (i == button_create_light_src)
+		set_to_inactive(editor, button, lamp);
+	if (i == button_create_elevator_button)
+		set_to_inactive(editor, button, lift_button);
+	if (i == button_create_light_button)
+		set_to_inactive(editor, button, light_button);
+
 }
 
 void	draw_button(t_editor *editor, t_button *button, int i)
 {
-	if (!draw_button_logic(editor, i))
-		return ;
-	button->mod.colour = get_color_from_action_data(i,
-			&editor->action, editor->end_sector.sector);
-	draw_box(button->box, &editor->buffer, get_color(0xAAAAAA));
+	draw_button_logic(editor, button, i);
+	if (button->is_active)
+		button->mod.colour = get_color_from_action_data(i,
+				&editor->action, editor->end_sector.sector);
+	else
+		button->mod.colour = get_color(gray);
+	draw_box(button->box, &editor->buffer, get_color(gray));
 	ft_str_pxl(&editor->buffer, button->text_loc,
 		button->info.text, button->mod);
 }

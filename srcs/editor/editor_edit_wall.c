@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 14:26:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/17 14:37:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,8 @@ static void	create_entities(t_editor *editor)
 	{
 		if (entity_creation_is_allowed(&editor->entity_list,
 				editor->temp_sector, &editor->action))
-		{
 			create_new_entity(&editor->entity_list, &editor->action,
 				editor->temp_sector, editor->temp_sector->centroid);
-			editor->temp_sector->light.is_light = true;
-		}
 		editor->action.create_light_button = 0;
 	}
 	if (editor->action.create_powerstation)
