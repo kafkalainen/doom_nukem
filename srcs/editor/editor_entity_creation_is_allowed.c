@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:43:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 16:15:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/20 16:37:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	calc_entities_in_sector_with_type(t_entity_list **head,
 t_bool	check_non_static_entities_for_overlap(t_entity_list **head, t_editor_sector *sector, t_xy pos)
 {
 	t_entity_list	*temp;
+	t_editor_walls	*wall;
+	int				i;
 	t_screen_xy		x0;
 
 	x0.x = ft_roundf_to_grid(pos.x, 0);
@@ -44,7 +46,15 @@ t_bool	check_non_static_entities_for_overlap(t_entity_list **head, t_editor_sect
 			return (false);
 		temp = temp->next;
 	}
-	(void)sector;
+	i = 0;
+	wall = sector->walls;
+	while (i < sector->nb_of_walls)
+	{
+		if (wall->x0.x == x0.x && wall->x0.y == x0.y)
+			return (false);
+		wall = wall->next;
+		i++;
+	}
 	return (true);
 }
 
@@ -78,6 +88,8 @@ t_bool	entity_creation_is_allowed(t_entity_list **head,
 	int				i;
 	t_editor_walls	*wall;
 
+	if (!sector)
+		return (false);
 	wall = sector->walls;
 	i = 0;
 	while (i < sector->nb_of_walls)
