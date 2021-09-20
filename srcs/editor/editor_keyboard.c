@@ -15,13 +15,13 @@
 static	void	handle_hotkeys(SDL_Keycode keysym, t_action *action)
 {
 	if (keysym == SDLK_w)
-		action->offsetf.y -= action->scalarf * 0.1f;
-	if (keysym == SDLK_s)
 		action->offsetf.y += action->scalarf * 0.1f;
+	if (keysym == SDLK_s)
+		action->offsetf.y -= action->scalarf * 0.1f;
 	if (keysym == SDLK_d)
-		action->offsetf.x += action->scalarf * 0.1f;
-	if (keysym == SDLK_a)
 		action->offsetf.x -= action->scalarf * 0.1f;
+	if (keysym == SDLK_a)
+		action->offsetf.x += action->scalarf * 0.1f;
 	if (keysym == SDLK_f)
 	{
 		if (action->create_sector == idle)

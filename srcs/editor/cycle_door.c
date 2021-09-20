@@ -20,7 +20,9 @@ static void	assign_portal_type(t_editor_walls *selected, t_editor_walls *opposit
 
 static void	normalize_idx(int *idx, int *opposite)
 {
-	if (*idx > 11999)
+	if (*idx > 14999)
+		*idx -= SECRET_DOOR;
+	else if (*idx > 11999)
 		*idx -= MILITARY_INDEX;
 	else if (*idx > 8999)
 		*idx -= ENGINEERING_INDEX;
@@ -28,7 +30,9 @@ static void	normalize_idx(int *idx, int *opposite)
 		*idx -= CLEANING_INDEX;
 	else if (*idx > 2999)
 		*idx -= DOOR_INDEX;
-	if (*opposite > 11999)
+	if (*opposite > 14999)
+		*opposite -= SECRET_DOOR;
+	else if (*opposite > 11999)
 		*opposite -= MILITARY_INDEX;
 	else if (*opposite > 8999)
 		*opposite -= ENGINEERING_INDEX;
@@ -40,7 +44,9 @@ static void	normalize_idx(int *idx, int *opposite)
 
 static	void	inflate_idx(int *inflatable, int *amount)
 {
-	if (*amount > 11999)
+	if (*amount > 14999)
+		*inflatable += SECRET_DOOR;
+	else if (*amount > 11999)
 		*inflatable += MILITARY_INDEX;
 	else if (*amount > 8999)
 		*inflatable += ENGINEERING_INDEX;
@@ -67,7 +73,7 @@ t_bool	cycle_door(t_editor_sector **sector_list, t_editor_walls *selected, int i
 		sector = sector->next;
 	while (sector->walls->type != inflated_idx)
 		sector->walls = sector->walls->next;
-	if (inflated_idx >= MILITARY_INDEX)
+	if (inflated_idx >= SECRET_DOOR)
 		assign_portal_type(selected, sector->walls, idx, opposite);
 	else if (selected->type >= 0)
 	{

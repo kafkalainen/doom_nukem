@@ -302,6 +302,7 @@ void			close_editor_wall_list(t_editor_walls **head);
 void			editor_edit_wall(t_editor *editor);
 t_bool			cycle_door(t_editor_sector **sector_list, t_editor_walls *selected,
 					int opposite);
+t_bool			change_wall_texture(int	*wall_type, t_action *action);
 
 /*
 **				Validity checks

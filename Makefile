@@ -18,6 +18,7 @@ SRCS = \
 	editor$(SLASH)button_actions.c \
 	editor$(SLASH)bounding_box_checks.c \
 	editor$(SLASH)calculate_centroid.c \
+	editor$(SLASH)change_wall_texture.c \
 	editor$(SLASH)check_all_sectors_for_intersecting_lines.c \
 	editor$(SLASH)check_for_intersecting_lines.c \
 	editor$(SLASH)check_grid_events.c \
