@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 17:18:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/20 16:50:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define MINIMAP_SIZE 10
 # define ZOOM_OUT_MAX 0.031250f
 # define ZOOM_IN_MAX 2.0f
+# define PORTAL_HEIGHT 5
 
 /*
 **  Number of textures has been counted as follows:

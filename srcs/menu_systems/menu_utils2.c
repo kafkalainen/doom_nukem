@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:44:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 23:38:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/20 17:00:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	update_option_load_menu(int *game_state, t_menu *menu, int sym)
 
 // REVISIT ADD STORY STRING MANAGEMENT
 // free_story(&home->story);
-void	free_game_assets(t_home *home)
+void	free_game_assets(t_home *home, t_audio *audio)
 {
 	if (home->t.frame_times)
 		free(home->t.frame_times);
@@ -92,4 +92,5 @@ void	free_game_assets(t_home *home)
 	free_all_textures(home->textures, NUM_TEX);
 	free_entities(home);
 	free_projectiles(home);
+	cleanup_audio_source(audio);
 }
