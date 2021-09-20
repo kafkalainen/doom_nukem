@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:43:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 16:37:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/20 16:44:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	calc_entities_in_sector_with_type(t_entity_list **head,
 	return (count);
 }
 
-t_bool	check_non_static_entities_for_overlap(t_entity_list **head, t_editor_sector *sector, t_xy pos)
+t_bool	check_non_static_entities_for_overlap(t_entity_list **head,
+	t_editor_sector *sector, t_xy pos)
 {
 	t_entity_list	*temp;
 	t_editor_walls	*wall;
@@ -58,7 +59,8 @@ t_bool	check_non_static_entities_for_overlap(t_entity_list **head, t_editor_sect
 	return (true);
 }
 
-t_bool	check_static_entities_for_overlap(t_entity_list **head, t_editor_sector *sector, int wall_idx, int light_boolean)
+t_bool	check_static_entities_for_overlap(t_entity_list **head,
+	t_editor_sector *sector, int wall_idx, int light_boolean)
 {
 	t_entity_list	*temp;
 	t_screen_xy		x0;
@@ -82,6 +84,33 @@ t_bool	check_static_entities_for_overlap(t_entity_list **head, t_editor_sector *
 	return (true);
 }
 
+static	t_bool	entity_creation_is_allowed_two(t_entity_list **head,
+		t_editor_sector *sector, t_action *action)
+{
+	if (action->create_light_button || action->create_powerstation
+		|| action->create_elev_button || action->create_light_source)
+		if (!check_static_entities_for_overlap(head, sector,
+				action->selected_wall, action->create_light_source))
+			return (false);
+	if (action->create_entity)
+		if (!check_non_static_entities_for_overlap(head,
+				sector, action->world_pos))
+			return (false);
+	if (action->create_light_button
+		&& calc_entities_in_sector_with_type(head, sector->idx_sector,
+			light_button))
+		return (false);
+	if (action->create_light_source
+		&& calc_entities_in_sector_with_type(head, sector->idx_sector,
+			lamp))
+		return (false);
+	if (action->create_elev_button
+		&& calc_entities_in_sector_with_type(head, sector->idx_sector,
+			lift_button))
+		return (false);
+	return (true);
+}
+
 t_bool	entity_creation_is_allowed(t_entity_list **head,
 		t_editor_sector *sector, t_action *action)
 {
@@ -99,23 +128,5 @@ t_bool	entity_creation_is_allowed(t_entity_list **head,
 		wall = wall->next;
 		i++;
 	}
-	if (action->create_light_button || action->create_powerstation || action->create_elev_button || action->create_light_source)
-		if (!check_static_entities_for_overlap(head, sector, action->selected_wall, action->create_light_source))
-			return (false);
-	if (action->create_entity)
-		if (!(check_non_static_entities_for_overlap(head, sector, action->world_pos)))
-			return (false);
-	if (action->create_light_button
-		&& calc_entities_in_sector_with_type(head, sector->idx_sector,
-			light_button))
-		return (false);
-	if (action->create_light_source
-		&& calc_entities_in_sector_with_type(head, sector->idx_sector,
-			lamp))
-		return (false);
-	if (action->create_elev_button
-		&& calc_entities_in_sector_with_type(head, sector->idx_sector,
-			lift_button))
-		return (false);
-	return (true);
+	return (entity_creation_is_allowed_two(head, sector, action));
 }
