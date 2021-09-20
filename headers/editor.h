@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 17:10:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/20 13:29:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -481,4 +481,15 @@ void			get_midpoint_of_walls(t_editor_sector *sector,
 					int wall_idx, int *x, int *y);
 int				get_selected_floor_height(t_editor_sector *sector,
 					int wall_idx);
+
+void			get_lowest_floor(t_editor_sector *sector, int *height);
+t_bool			check_for_elevator_button(t_entity_list **head, int sector_idx);
+t_bool			check_nbr_of_portals(t_editor_walls **walls, int nbr_of_walls);
+void			convert_sector_to_lift(t_editor_sector *sector, t_entity_list **head);
+t_bool			check_elevator_prerequisites(t_entity_list **head, t_editor_sector **sectors, t_action *action);
+t_bool			verify_connecting_sectors(t_editor_sector **sectors, t_editor_sector *elev_sector);
+t_bool			compare_floors_to_ceilings(t_editor_sector **sectors, int first_idx, int second_idx, t_editor_sector *elev_sector);
+t_bool			sectors_aligned(t_editor_sector *first, t_editor_sector *second, t_screen_xy heights, t_editor_sector *elev_sector);
+void			get_connecting_sectors(t_editor_walls *wall, int *first_sector_idx, int *second_sector_idx, int nbr_of_walls);
+
 #endif
