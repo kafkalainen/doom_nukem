@@ -58,6 +58,7 @@ static void	initialize_toggles(t_action *action)
 	action->add_wall_point = 0;
 	action->set_all_sector_ceiling_heights = 0;
 	action->set_all_sector_floor_heights = 0;
+	action->cycle_door = false;
 }
 
 static void	initialize_input(t_action *action)
