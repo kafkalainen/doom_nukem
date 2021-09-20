@@ -111,4 +111,6 @@ void	wall_button_actions(t_action *action, int i)
 		action->create_powerstation = 1;
 	else if (i == button_create_elevator_button)
 		action->create_elev_button = 1;
+	if (i == button_change_to_door)
+		action->cycle_door = true;
 }

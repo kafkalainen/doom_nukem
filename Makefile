@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/17 16:37:53 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/20 13:19:04 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,14 @@ SRCS = \
 	editor$(SLASH)button_actions.c \
 	editor$(SLASH)bounding_box_checks.c \
 	editor$(SLASH)calculate_centroid.c \
+	editor$(SLASH)change_wall_texture.c \
 	editor$(SLASH)check_all_sectors_for_intersecting_lines.c \
 	editor$(SLASH)check_for_intersecting_lines.c \
 	editor$(SLASH)check_grid_events.c \
 	editor$(SLASH)check_grid_events2.c \
 	editor$(SLASH)check_if_another_sector_is_inside.c \
 	editor$(SLASH)create_portals.c \
+	editor$(SLASH)cycle_door.c \
 	editor$(SLASH)check_if_non_convex.c \
 	editor$(SLASH)draw_button.c \
 	editor$(SLASH)draw_buttons.c \
@@ -51,6 +53,8 @@ SRCS = \
 	editor$(SLASH)editor_keyboard.c \
 	editor$(SLASH)editor_entity.c \
 	editor$(SLASH)editor_create_new_sector.c \
+	editor$(SLASH)editor_create_elevator.c \
+	editor$(SLASH)editor_create_elevator2.c \
 	editor$(SLASH)editor_delete_entity.c \
 	editor$(SLASH)editor_delete_wall.c \
 	editor$(SLASH)editor_load_map.c \
