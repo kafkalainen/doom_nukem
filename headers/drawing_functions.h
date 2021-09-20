@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 14:00:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/18 08:46:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void		draw_entity_textfields(t_entity_list *entity, t_buffer *buffer,
 				t_texture **textures);
 void		draw_entity_link_line(t_editor *editor);
 void		draw_frame(t_home *home, t_frame *frame, t_player *plr);
+void		draw_game(t_home *home, t_frame *frame, t_player *plr);
 void		draw_image(t_xy offset, t_texel *tex, t_buffer *buffer,
 				float scale);
 void		draw_image_static(t_xy offset, t_texel *tex,

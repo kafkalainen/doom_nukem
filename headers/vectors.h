@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 12:41:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/20 16:17:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,5 +294,6 @@ t_m3x3		translation_matrix_2d(t_xy translation);
 t_m3x3		rotation_matrix_2d(float angle);
 t_m3x3		multiply_2d_matrix_with_2d_matrix(t_m3x3 *m1, t_m3x3 *m2);
 t_xy		multiply_vec2_with_2d_matrix(t_xy *src, t_m3x3 *x);
+t_bool		point_inside_fov(t_xy p0, t_xy p1, t_xy p2, t_xy p);
 
 #endif

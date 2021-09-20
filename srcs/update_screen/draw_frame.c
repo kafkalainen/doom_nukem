@@ -6,48 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/14 11:29:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/20 17:18:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-// static void	draw_minimap(t_home *home, t_frame *frame)
-// {
-// 	unsigned int	i;
-// 	unsigned int	j;
-// 	t_point			*temp;
-
-// 	i = 0;
-// 	while (i < home->nbr_of_sectors)
-// 	{
-// 		j = 0;
-// 		temp = home->sectors[i]->points;
-// 		while (j < home->sectors[i]->nb_of_walls)
-// 		{
-// 			draw_line(center_to_screen(temp->x0),
-// 				center_to_screen(temp->next->x0),
-// 				greenyellow, frame->buffer);
-// 			temp = temp->next;
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-// static void	draw_player(t_frame *frame)
-// {
-// 	draw_square(frame->buffer, center_to_screen(vec2(-2.0f, -2.0f)),
-// 		yellow, 4);
-// 	draw_line(center_to_screen(vec2(0.0f, 0.0f)),
-// 		center_to_screen(vec2_add(vec2(0.0f, 0.0f),
-// 				vec2_mul(vec2(-PLR_DIR, PLR_DIR), 400))),
-// 		lightgreen, frame->buffer);
-// 	draw_line(center_to_screen((vec2(0.0f, 0.0f)),
-// 		center_to_screen(vec2_add(vec2(0.0f, 0.0f),
-// 				vec2_mul(vec2(PLR_DIR, PLR_DIR), 400))),
-// 		lightgreen, frame->buffer);
-// }
 
 void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
 	 t_skybox *skybox)
@@ -68,6 +31,60 @@ void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
 	}
 }
 
+// static void	draw_minimap(t_home *home, t_frame *frame)
+// {
+// 	unsigned int	i;
+// 	unsigned int	j;
+// 	t_wall			*temp;
+
+// 	i = 0;
+// 	while (i < home->nbr_of_sectors)
+// 	{
+// 		j = 0;
+// 		temp = home->sectors[i]->walls;
+// 		while (j < home->sectors[i]->nb_of_walls)
+// 		{
+// 			if (temp->top.type < 0)
+// 			{
+// 				draw_line(center_to_screen(temp->point),
+// 					center_to_screen(temp->next->point),
+// 					get_color(greenyellow), &frame->buffer);
+// 			}
+// 			else
+// 			{
+// 				draw_line(center_to_screen(temp->point),
+// 					center_to_screen(temp->next->point),
+// 					get_color(red), &frame->buffer);
+// 			}
+// 			temp = temp->next;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
+
+// static void	draw_player(t_frame *frame, t_player *plr)
+// {
+// 	t_xy	offsetpos;
+
+// 	offsetpos = center_to_screen(vec2(plr->pos.x, plr->pos.z));
+// 	offsetpos.x -= 5;
+// 	offsetpos.y -= 5;
+// 	draw_square(&frame->buffer, offsetpos,
+// 		get_color(yellow), 10);
+// }
+
+// static void	draw_left_right(t_frame *frame,
+// t_xy pos, t_xy left, t_xy right, t_uint c)
+// {
+// 	draw_line(center_to_screen(pos),
+// 		center_to_screen(left),
+// 		c, &frame->buffer);
+// 	draw_line(center_to_screen(pos),
+// 		center_to_screen(right),
+// 		c, &frame->buffer);
+// }
+
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
 	if (plr->plot_state == start_cutscene)
@@ -81,7 +98,8 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 		reset_depth_buffer(frame->depth_buffer);
 		add_skybox(frame, home, plr, &home->skybox);
 		draw_sector(frame, home, plr, -1);
-		scan_fov(home, frame, plr);
+		reset_depth_buffer(frame->depth_buffer);
+		draw_game(home, frame, plr);
 		if (plr->input.info)
 			draw_info(frame, plr, (int)home->t.fps);
 		draw_heads_up_display(home, frame, plr);

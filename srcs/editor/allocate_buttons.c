@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 17:07:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/20 17:20:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	create_button(t_button *list, t_box box, t_button_info info)
 	if (!list->info.text)
 		error_output("Memory allocation failed.");
 	list->text_loc.x = box.start.x + list->mod.size * 5 * 0.5f
-		+ 0.5f * ((box.end.x - box.start.x) - (list->mod.len * list->mod.size * 5));
+		+ 0.5f * ((box.end.x - box.start.x)
+			- (list->mod.len * list->mod.size * 5));
 	if (list->mod.len % 2)
 		list->text_loc.x -= (list->mod.size * 5 * 0.5f);
 	list->text_loc.y = (box.start.y - 1) + list->mod.size * 7 * 0.5f;

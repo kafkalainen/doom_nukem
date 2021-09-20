@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 12:42:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/18 09:46:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ typedef struct s_player
 	t_xyz			up;
 	t_xyz			speed;
 	t_xy			dir;
+	t_xy			look2_dir;
 	float			yaw;
 	float			steps;
 	float			pitch;

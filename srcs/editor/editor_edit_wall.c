@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_edit_wall.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 16:18:45 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/20 17:20:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static	void	change_wall_texture(int	*wall_type, t_action *action)
 	action->edit_wall = 0;
 }
 
-static void set_new_ceiling_ground(t_height *height,
+static void	set_new_ceiling_ground(t_height *height,
 	unsigned char **int_string, t_action *action)
 {
-	int temp;
+	int	temp;
 
 	temp = ft_atoi((const char *)*int_string);
 	if (temp > 99)
@@ -63,7 +63,7 @@ static void set_new_ceiling_ground(t_height *height,
 	}
 }
 
-static void handle_wall_height(t_height *height,
+static void	handle_wall_height(t_height *height,
 	unsigned char **int_string, t_action *action)
 {
 	if (*int_string)

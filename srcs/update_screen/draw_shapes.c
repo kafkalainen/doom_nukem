@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/16 10:09:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/18 09:23:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	draw_box(t_box box, t_buffer *buffer, Uint32 color)
 
 t_xy	center_to_screen(t_xy loc)
 {
+	loc.x *= 20;
+	loc.y *= 20;
 	loc.x += 0.5 * SCREEN_WIDTH;
 	loc.y += 0.5 * SCREEN_HEIGHT;
 	return (loc);

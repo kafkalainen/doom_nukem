@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 09:40:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 10:33:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/20 17:19:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void draw_header(t_buffer *buffer, t_sector *sector)
+static void	draw_header(t_buffer *buffer, t_sector *sector)
 {
 	t_plx_modifier	mod;
 	t_xy			offset;

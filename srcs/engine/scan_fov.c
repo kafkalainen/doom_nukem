@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/20 17:14:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,81 @@ void	fill_rasterqueue(t_home *home, t_frame *frame, t_player *plr)
 	add_projectiles(home, frame, plr);
 }
 
-void	scan_fov(t_home *home, t_frame *frame, t_player *plr)
+int	scan_fov(t_home *home, t_fov fov, int sector_count, int **list)
 {
-	unsigned int	i;
-	t_frame			new_frame;
+	t_uint	i;
+	t_wall	*wall;
+	t_fov	new_fov;
+	t_bool	test[2];
 
 	i = 0;
-	quick_reset_queue(frame->transformed);
-	frame->left.wall = home->sectors[frame->idx]->walls;
-	continue_from_last_sector(frame->left.wall, &frame->left, frame);
-	while (i < home->sectors[frame->idx]->nb_of_walls
-		&& !check_connection(frame->left.wall, frame))
+	wall = home->sectors[fov.cur_sector]->walls;
+	*(*list + sector_count) = fov.cur_sector;
+	sector_count += 1;
+	while (i < home->sectors[fov.cur_sector]->nb_of_walls)
 	{
-		if (frame->left.wall->top.type >= 0)
+		if (check_if_portal(wall) && !check_if_already_been_in_this_sector(
+				wall->top.type, *list, sector_count))
 		{
-			if (vec3_dot_product(frame->left.wall->top.normal,
-					plr->look_dir) < SQR2)
-			{
-				setup_frame(frame, &new_frame, frame->left.wall->top.type);
-				scan_fov(home, &new_frame, plr);
-			}
+			assign_booleans_for_fov(&test[0], &test[1], fov, wall);
+			setup_frame(&new_fov, &fov, wall);
+			if (test[0] || test[1])
+				sector_count = scan_fov(home, new_fov, sector_count, list);
+			else if (check_if_facing_player(test[0], test[1], wall, fov))
+				sector_count = scan_fov(home, new_fov, sector_count, list);
 		}
-		frame->left.wall = frame->left.wall->next;
+		wall = wall->next;
 		i++;
 	}
-	fill_rasterqueue(home, frame, plr);
-	if (frame->transformed->size > 0)
-		draw_sector(frame, home, plr, frame->idx);
+	return (sector_count);
+}
+
+// //TESTING
+// draw_minimap(home, frame);
+// draw_player(frame, plr);
+// nb_of_sectors = 0;
+// frame->fov.pos = vec3_to_vec2(plr->pos);
+// // frame->fov.right = vec2_add(frame->fov.pos,
+// // vec2_mul(vec2_rot(plr->look2_dir, 1.0472f
+// // + ft_fabsf(plr->pitch)), 2000.0f));
+// // frame->fov.left = vec2_add(frame->fov.pos,
+// // vec2_mul(vec2_rot(plr->look2_dir, -1.0472f
+// // - ft_fabsf(plr->pitch)), 2000.0f));
+// // frame->fov.right = vec2_add(frame->fov.pos,
+// vec2_mul(vec2_rot(plr->look2_dir, 1.0472f), 2000.0f));
+// // frame->fov.left = vec2_add(frame->fov.pos,
+// vec2_mul(vec2_rot(plr->look2_dir, -1.0472f), 2000.0f));
+// frame->fov.right = vec2_add(frame->fov.pos,
+// vec2_mul(vec2_rot(plr->look2_dir, FOV), 2000.0f));
+// frame->fov.left = vec2_add(frame->fov.pos,
+// vec2_mul(vec2_rot(plr->look2_dir, -FOV), 2000.0f));
+// draw_left_right(frame, frame->fov.pos,
+// frame->fov.left, frame->fov.right, get_color(white));
+// // ft_str_pxl(&frame->buffer, vec2(200, 100),
+// ft_ftoa(frame->fov.angle, 6), (t_plx_modifier){get_color(white), 2, 10});
+// frame->fov.cur_sector = plr->cur_sector;
+// nb_of_sectors = scan_fov(home, frame, frame->fov,
+// nb_of_sectors, &frame->sector_buffer);
+void	draw_game(t_home *home, t_frame *frame, t_player *plr)
+{
+	int	nb_of_sectors;
+
+	nb_of_sectors = 0;
+	quick_reset_queue(frame->transformed);
+	plr->look2_dir = vec2_unit_vector(vec2(plr->look_dir.x, plr->look_dir.z));
+	frame->fov.pos = vec3_to_vec2(plr->pos);
+	frame->fov.right = vec2_add(frame->fov.pos,
+			vec2_mul(vec2_rot(plr->look2_dir, FOV), 2000.0f));
+	frame->fov.left = vec2_add(frame->fov.pos,
+			vec2_mul(vec2_rot(plr->look2_dir, -FOV), 2000.0f));
+	frame->fov.cur_sector = plr->cur_sector;
+	nb_of_sectors = scan_fov(home, frame->fov, nb_of_sectors,
+			&frame->sector_buffer);
+	while (nb_of_sectors--)
+	{
+		frame->idx = frame->sector_buffer[nb_of_sectors];
+		fill_rasterqueue(home, frame, plr);
+		if (frame->transformed->size > 0)
+			draw_sector(frame, home, plr, frame->idx);
+	}
 }

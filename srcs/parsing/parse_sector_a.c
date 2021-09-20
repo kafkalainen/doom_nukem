@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 11:44:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/18 09:00:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_wall	*new_point(t_point_data *left, t_point_data *right)
 	wall = (t_wall *)malloc(sizeof(*wall));
 	if (wall != NULL)
 	{
+		wall->point = (t_xy){left->x, left->y, 1.0f};
 		initialize_wall_triangles(wall, left, right);
 		initialize_top_texels(&wall->top);
 		initialize_bottom_texels(&wall->bottom);

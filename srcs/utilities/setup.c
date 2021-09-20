@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 13:20:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/18 09:10:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int	setup_fps(t_time *time)
 */
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
-	int				ret;
-
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
 	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
@@ -73,9 +71,11 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 			* (SCREEN_WIDTH * SCREEN_HEIGHT + 1));
 	if (!frame->depth_buffer)
 		error_output("Memory allocation failed for depth buffer!");
-	ret = initialize_rasterization_queues(frame);
-	if (ret)
-		clean_up(frame);
+	if (initialize_rasterization_queues(frame))
+		error_output("Memory allocation failed for rasterizer.");
+	frame->sector_buffer = (int *)malloc(sizeof(int) * (3000));
+	if (!frame->sector_buffer)
+		error_output("Memory allocation failed for sector buffer.");
 	home = init_sdl(home, frame);
 	initialize_audio_to_null(&plr->audio);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
