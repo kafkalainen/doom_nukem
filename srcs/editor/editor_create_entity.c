@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_create_entity.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:28:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/20 16:04:12 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/21 15:05:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_non_static_entity(t_entity_list *new,
 	new->pos.y = get_highest_floor_height(&sector->walls, sector->nb_of_walls);
 	new->dir.x = 0;
 	new->dir.y = 0;
-	new->dir.z = 1;
+	new->dir.z = -1;
 }
 
 void	initialize_entity_data(t_entity_list *new, t_action *action,

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 14:00:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 14:49:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	gravity(t_sector *sector, t_player *plr, Uint32 delta_time)
 	static Uint32	total_time;
 
 	g = 0.5f;
-	check_distance_to_ground(sector, plr->height, plr->pos, &drop);
+	if (!check_distance_to_ground(sector, plr->height, plr->pos, &drop))
+		return ;
 	if (drop > 0.0f && !plr->input.jetpack)
 	{
 		total_time += delta_time;

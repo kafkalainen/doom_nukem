@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 09:11:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 16:16:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,9 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 		front(frame->transformed, &viewed_tri);
 		if (is_triangle_visible(&viewed_tri, plr->pos))
 			set_lighting(lights, &viewed_tri);
-		else
-		{
-			if (viewed_tri.type != -door)
-				show_hull(&viewed_tri);
-		}
+		else if (viewed_tri.type != -door
+			|| viewed_tri.type != -bullet_decal)
+			show_hull(&viewed_tri);
 		viewed_tri = apply_camera(plr, &viewed_tri);
 		clip_to_near_plane(&viewed_tri, &frame->viewport,
 			frame->triangles_in_view);

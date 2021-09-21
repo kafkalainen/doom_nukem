@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity_creation_helpers.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 18:32:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/21 15:42:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ void	init_static_entity(t_entity_list *new, t_action *action,
 				action->selected_wall) + 1;
 		get_direction_from_wall(new, sector, action->selected_wall);
 	}
-	else
+	else if (new->entity_type == lamp)
 		init_lamp_pos_dir(new, sector, pos);
 }

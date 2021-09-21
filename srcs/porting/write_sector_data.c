@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_sector_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 16:47:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/16 18:12:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/21 14:53:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	*get_player_start(t_plr_pos plr)
 {
 	char	*buf;
 
-	(void)plr;
 	buf = ft_strjoin_freeable(WRITE_BREAKER, ft_itoa(plr.x), 0, 1);
 	buf = ft_strjoin_freeable(buf, WRITE_BREAKER, 1, 0);
 	buf = ft_strjoin_freeable(buf, ft_itoa(plr.z), 1, 1);
