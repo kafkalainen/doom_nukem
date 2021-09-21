@@ -13,7 +13,7 @@
 #ifndef COLOURS_H
 # define COLOURS_H
 
-typedef struct s_argb
+typedef struct	s_argb
 {
 	Uint8		alpha;
 	Uint8		red;
@@ -21,7 +21,7 @@ typedef struct s_argb
 	Uint8		blue;
 }			t_argb;
 
-enum e_colour
+enum			e_colour
 {
 	lightpink = 0xffb6c1,
 	pink = 0xffc0cb,
@@ -163,6 +163,6 @@ enum e_colour
 	black = 0x000000
 };
 
-t_argb	int2argb(int color);
+t_argb				int2argb(int color);
 
 #endif

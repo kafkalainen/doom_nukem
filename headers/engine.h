@@ -13,15 +13,15 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
-typedef struct s_fov
+typedef struct	s_fov
 {
 	t_xy			left;
 	t_xy			right;
 	t_xy			pos;
 	int				cur_sector;
-}					t_fov;
+}				t_fov;
 
-typedef struct s_frame
+typedef struct	s_frame
 {
 	t_raster_queue	**raster_queue;
 	t_raster_queue	*triangles_in_view;
@@ -35,7 +35,7 @@ typedef struct s_frame
 	int				old_idx;
 }					t_frame;
 
-enum e_lines
+enum			e_lines
 {
 	colinear = 0,
 	clockwise = 1,
