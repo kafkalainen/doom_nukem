@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 14:27:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 16:29:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
 	portal = home->sectors[*cur_sector]->walls;
 	while (i < home->sectors[*cur_sector]->nb_of_walls)
 	{
-		if (check_if_open_portal(portal) &&
-			check_distance_to_ground(home->sectors[portal->top.type],
+		if (check_if_open_portal(portal)
+			&& check_distance_to_ground(home->sectors[portal->top.type],
 				1.5f, pos, &dist))
 		{
 			*cur_sector = portal->top.type;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 13:56:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 16:26:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	place_entity_to_ground(t_entity *entity, t_home *home)
 	float	distance;
 
 	check_distance_to_ground(home->sectors[entity->sector_idx],
-			entity->legs, entity->pos, &distance);
+		entity->legs, entity->pos, &distance);
 	if (distance > entity->legs)
 		entity->pos.y -= entity->legs;
 }
