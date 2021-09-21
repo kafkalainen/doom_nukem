@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 17:06:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 09:10:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ t_wall			*check_if_too_close_to_walls(t_sector *sector, float width,
 					t_xyz pos, t_xyz dir);
 void			check_if_moved_through_portal(int *cur_sector, t_xyz pos,
 					t_home *home);
+void			show_hull(t_triangle *viewed_tri);
 void			update_world(t_player *plr, t_home *home, Uint32 delta_time);
 #endif
