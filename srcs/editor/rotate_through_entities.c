@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 10:22:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 09:15:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/21 09:19:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 static void	init_static_entity_values(t_entity_list *entity)
 {
 	entity->is_static = true;
-	entity->state = false;
+	entity->state = true;
 }
 
 static void	init_non_static_entity_values(t_entity_list *entity)
 {
 	entity->is_static = false;
 	entity->is_linked = false;
-	entity->state = true;
+	entity->state = false;
 }
 
 void	rotate_through_entities(t_entity_list *entity, t_action *action)
