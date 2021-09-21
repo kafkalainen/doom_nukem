@@ -33,7 +33,7 @@ typedef struct	s_frame
 	t_sides			viewport;
 	int				idx;
 	int				old_idx;
-}					t_frame;
+}				t_frame;
 
 enum			e_lines
 {
@@ -101,4 +101,5 @@ void			check_if_moved_through_portal(int *cur_sector, t_xyz pos,
 t_bool			ship_part(int type);
 void			show_hull(t_triangle *viewed_tri);
 void			update_world(t_player *plr, t_home *home, Uint32 delta_time);
+
 #endif
