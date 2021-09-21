@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/20 17:01:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/21 09:35:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
 	ft_putstr("You chose: ");
 	ft_putendl_fd(home->map, 1);
 	initialize_player(plr);
-	if (initialize_skybox(&home->skybox))
-		error_output("Memory allocation failed for skybox.");
 	if (initialize_hud(&plr->hud))
 		error_output("Memalloc failed for HUD.");
 	if (load_map_file(plr, home))
 		error_output("Error while loading map!");
+	if (initialize_skybox(&home->skybox, home->sectors, home->nbr_of_sectors))
+		error_output("Memory allocation failed for skybox.");
 	if (setup_fps(&home->t))
 		error_output("Memory allocation failed!");
 	if (load_game_audio(&plr->audio))

@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/21 09:14:43 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/21 09:49:31 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -239,6 +239,7 @@ SRCS = \
 	utilities$(SLASH)error_output.c \
 	utilities$(SLASH)fps_timer.c \
 	utilities$(SLASH)ft_roundf_to_grid.c \
+	utilities$(SLASH)get_map_maximum_values.c \
 	utilities$(SLASH)initialize_player.c \
 	utilities$(SLASH)is_negative.c \
 	utilities$(SLASH)mem_functions_a.c \

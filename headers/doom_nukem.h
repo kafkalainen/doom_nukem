@@ -85,9 +85,12 @@ void		error_output_sdl(char *msg, t_home *home, t_frame *frame);
 int			free_all(t_frame *frame, t_audio *audio, Uint32 *buffer,
 				char **chosen_map);
 void		fps_timer(t_time *t);
+void		get_map_maximum_values(float *max, t_sector **sectors,
+				t_uint nb_of_sectors);
 int			give_sign(float number);
 int			initialize_rasterization_queues(t_frame *frame);
-int			initialize_skybox(t_skybox *skybox);
+int			initialize_skybox(t_skybox *skybox, t_sector **sectors,
+				t_uint nb_of_sectors);
 int			initialize_hud(t_hud *hud);
 int			is_negative(float z);
 void		map_error_output(int i, t_home *home);
