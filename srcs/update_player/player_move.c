@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 14:27:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,19 @@ void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
 {
 	Uint32	i;
 	t_wall	*portal;
+	float	dist;
 
 	i = 0;
 	portal = home->sectors[*cur_sector]->walls;
 	while (i < home->sectors[*cur_sector]->nb_of_walls)
 	{
-		if (check_if_open_portal(portal))
+		if (check_if_open_portal(portal) &&
+			check_distance_to_ground(home->sectors[portal->top.type],
+				1.5f, pos, &dist))
 		{
-			if (vec3_signed_distance_to_plane(pos,
-					portal->top.normal, portal->top.p[0]) < 0)
-			{
-				*cur_sector = portal->top.type;
-				if (home->sectors[*cur_sector]->lights.is_linked == 1)
-					home->sectors[*cur_sector]->lights.state = TRUE;
-			}
+			*cur_sector = portal->top.type;
+			if (home->sectors[*cur_sector]->lights.is_linked == 1)
+				home->sectors[*cur_sector]->lights.state = true;
 		}
 		portal = portal->next;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 15:08:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 14:39:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,9 @@ void	jump(t_player *plr, t_sector *sector)
 	t_xyz	new_pos;
 
 	new_pos = (t_xyz){plr->pos.x, plr->pos.y + 2.0f, plr->pos.z, plr->pos.w};
-	if (plr->input.jump == 1
-		&& !check_distance_to_ceiling(sector, &new_pos)
-		&& check_distance_to_ground(sector, plr->height, plr->pos) <= 0)
+	if (plr->input.jump == 1 && !check_distance_to_ceiling(sector, &new_pos))
 	{
-		plr->speed.y += 0.08f;
-	}
-	else
-	{
+		plr->speed.y += 4.0f;
 		plr->input.jump = 0;
 	}
 }

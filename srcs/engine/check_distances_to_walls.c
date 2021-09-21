@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 11:37:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 13:33:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../../headers/doom_nukem.h"
 
-static Uint32	check_if_too_close_to_a_wall(t_wall *wall, float width,
+static t_bool	check_if_too_close_to_a_wall(t_wall *wall, float width,
 	t_xyz pos, t_xyz dir)
 {
 	t_xyz	isection;
@@ -22,15 +22,15 @@ static Uint32	check_if_too_close_to_a_wall(t_wall *wall, float width,
 		if (vec3_ray_triangle_intersect(&wall->top, pos, dir, &isection))
 		{
 			if (get_distance_squared(isection, pos) < width * width)
-				return (TRUE);
+				return (true);
 		}
 		if (vec3_ray_triangle_intersect(&wall->bottom, pos, dir, &isection))
 		{
 			if (get_distance_squared(isection, pos) < width * width)
-				return (TRUE);
+				return (true);
 		}
 	}
-	return (FALSE);
+	return (false);
 }
 
 t_wall	*check_if_too_close_to_walls(t_sector *sector, float width,

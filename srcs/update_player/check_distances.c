@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 15:11:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 14:00:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,30 @@ float	calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 	return (surf_dist);
 }
 
-float	check_distance_to_ground(t_sector *sector, float height, t_xyz pos)
+t_bool	check_distance_to_ground(t_sector *sector, float height, t_xyz pos, float *dist)
 {
 	unsigned int	i;
 	t_surface		*ground;
+	t_xyz			isection;
 	float			surf_dist;
+	t_bool			state;
 
 	i = 0;
 	ground = sector->ground;
 	while (i < sector->nb_of_ground)
 	{
-		if (point_inside_a_triangle_surface(ground->tri.p[0], ground->tri.p[1],
-				ground->tri.p[2], pos))
+		state = vec3_ray_triangle_intersect(&ground->tri, pos,
+			vec3(0.0f, -1.0f, 0.0f), &isection);
+		if (state)
 			break ;
 		ground = ground->next;
 		i++;
 	}
-	surf_dist = vec3_dot_product(vec3_dec(pos, ground->tri.p[0]),
-			ground->tri.normal);
-	return (surf_dist - height);
+	if (state)
+	{
+		surf_dist = pos.y - isection.y;
+		*dist = surf_dist - height;
+		return (true);
+	}
+	return (false);
 }
