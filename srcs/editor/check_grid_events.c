@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 16:37:06 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/21 09:57:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,13 @@ static void	check_grind_events_two(t_editor *editor)
 	}
 	if (editor->action.create_entity == user_input)
 	{
-		if (entity_creation_is_allowed(&editor->entity_list, editor->temp_sector, &editor->action))
+		if (entity_creation_is_allowed(&editor->entity_list,
+				editor->temp_sector, &editor->action))
 			create_new_entity(&editor->entity_list, &editor->action,
 				editor->temp_sector, editor->action.world_pos);
 		editor->action.create_entity = idle;
 	}
+	editor->mouse_data.i_mbleft = 0;
 }
 
 void	check_grid_events(t_editor *editor)

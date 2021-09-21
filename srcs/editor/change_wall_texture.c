@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   change_wall_texture.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eparviai <eparviai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 16:18:45 by eparviai         ###   ########.fr       */
+/*   Updated: 2021/09/21 09:48:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_bool  change_normal_wall_texture(int *wall_type)
+static t_bool	change_normal_wall_texture(int *wall_type)
 {
 	if (*wall_type == -wall0)
 		*wall_type = -wall1;
@@ -34,12 +34,11 @@ static t_bool  change_normal_wall_texture(int *wall_type)
 		*wall_type = -wall9;
 	else if (*wall_type == -wall9)
 		*wall_type = -wall0;
-    return (false);
+	return (false);
 }
 
-static t_bool  change_secret_wall_texture(int *wall_type)
+static t_bool	change_secret_wall_texture(int *wall_type)
 {
-    
 	if (*wall_type == -wall0)
 		*wall_type = -wall1;
 	else if (*wall_type == -wall1)
@@ -60,14 +59,15 @@ static t_bool  change_secret_wall_texture(int *wall_type)
 		*wall_type = -wall9;
 	else if (*wall_type == -wall9)
 		*wall_type = -wall0;
-    return (false);
+	return (false);
 }
 
 t_bool	change_wall_texture(int	*wall_type, t_action *action)
 {
 	if (*wall_type < 0)
-        action->change_wall_texture = change_normal_wall_texture(wall_type);
-	else if (*wall_type >= SECRET_DOOR && *wall_type < (SECRET_DOOR + DOOR_INDEX))
-        action->change_wall_texture = change_secret_wall_texture(wall_type);
+		action->change_wall_texture = change_normal_wall_texture(wall_type);
+	else if (*wall_type >= SECRET_DOOR
+		&& *wall_type < (SECRET_DOOR + DOOR_INDEX))
+		action->change_wall_texture = change_secret_wall_texture(wall_type);
 	return (false);
 }

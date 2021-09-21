@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cycle_door.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eparviai <eparviai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:21:22 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 15:57:48 by eparviai         ###   ########.fr       */
+/*   Updated: 2021/09/21 09:44:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	assign_portal_type(t_editor_walls *selected, t_editor_walls *opposite, int idx, int opposite_idx)
+static void	assign_portal_type(t_editor_walls *selected,
+	t_editor_walls *opposite, int idx, int opposite_idx)
 {
 	selected->type = opposite_idx;
 	opposite->type = idx;
@@ -39,7 +40,7 @@ static void	normalize_idx(int *idx, int *opposite)
 	else if (*opposite > 5999)
 		*opposite -= CLEANING_INDEX;
 	else if (*opposite > 2999)
-		*opposite -= DOOR_INDEX;	
+		*opposite -= DOOR_INDEX;
 }
 
 static	void	inflate_idx(int *inflatable, int *amount)
@@ -53,14 +54,15 @@ static	void	inflate_idx(int *inflatable, int *amount)
 	else if (*amount > 5999)
 		*inflatable += CLEANING_INDEX;
 	else if (*amount > 2999)
-		*inflatable += DOOR_INDEX;	
+		*inflatable += DOOR_INDEX;
 }
 
-t_bool	cycle_door(t_editor_sector **sector_list, t_editor_walls *selected, int idx)
+t_bool	cycle_door(t_editor_sector **sector_list,
+	t_editor_walls *selected, int idx)
 {
-	int 			opposite;
+	int				opposite;
 	int				inflated_idx;
-	t_editor_sector *sector;
+	t_editor_sector	*sector;
 
 	if (!sector_list && !selected)
 		error_output("sector_list and|or selected wall is null");
@@ -81,5 +83,5 @@ t_bool	cycle_door(t_editor_sector **sector_list, t_editor_walls *selected, int i
 		assign_portal_type(selected, sector->walls, (inflated_idx + DOOR_INDEX),
 			(opposite + DOOR_INDEX));
 	}
-	return (false);	
+	return (false);
 }

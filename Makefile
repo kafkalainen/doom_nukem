@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/21 09:49:31 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/21 10:54:46 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ SRCS = \
 	editor$(SLASH)editor_add_new_sector_to_list_end.c \
 	editor$(SLASH)editor_create_entity.c \
 	editor$(SLASH)editor_edit_entity.c \
+	editor$(SLASH)editor_edit_sector.c \
+	editor$(SLASH)editor_edit_sector2.c \
 	editor$(SLASH)editor_edit_wall.c \
 	editor$(SLASH)editor_entity_creation_is_allowed.c \
 	editor$(SLASH)editor_entity_creation_helpers.c \
