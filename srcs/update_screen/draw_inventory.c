@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_inventory.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:38:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 14:50:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 09:28:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	draw_inventory_images(t_home *home, t_player *plr, t_buffer *buffer)
 	{
 		if (plr->inventory[i + 2].in_use)
 		{
-			tex = home->textures[plr->inventory->sprite_idx]->tex;
+			tex = home->textures[plr->inventory[i + 2].sprite_idx]->tex;
 			draw_image(vec2(offset.x + i * (32 + gap),
 					offset.y), &tex, buffer, 0.25f);
 		}
