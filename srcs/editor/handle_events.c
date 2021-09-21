@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:23:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/20 13:12:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/21 08:55:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	update_sector_light_values(t_editor_sector *sector,
 		if (temp->sector_idx == sector->idx_sector && temp->entity_type == lamp)
 		{
 			sector->light.pos.x = temp->pos.x;
-			sector->light.pos.y = temp->pos.y;
+			sector->light.pos.y = temp->pos.z;
 			sector->light.state = temp->state;
 			break ;
 		}

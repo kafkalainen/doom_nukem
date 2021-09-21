@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/18 08:26:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 09:11:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 			set_lighting(lights, &viewed_tri);
 		else
 		{
-			initialize_lumels(&viewed_tri.lu[0], &viewed_tri.lu[1],
-				&viewed_tri.lu[2], 0.275f);
-			viewed_tri.type = -wall7;
+			if (viewed_tri.type != -door)
+				show_hull(&viewed_tri);
 		}
 		viewed_tri = apply_camera(plr, &viewed_tri);
 		clip_to_near_plane(&viewed_tri, &frame->viewport,

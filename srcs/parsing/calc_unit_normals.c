@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:20:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 09:00:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	calc_wall_normals(t_sector *sector)
 		if (walls->top.type == -door)
 		{
 			walls->top = translate_triangle(&walls->top,
-					vec3_mul(walls->top.normal, -0.05f));
+					vec3_mul(walls->top.normal, 0.08f));
 			walls->bottom = translate_triangle(&walls->bottom,
-					vec3_mul(walls->bottom.normal, -0.05f));
+					vec3_mul(walls->bottom.normal, 0.08f));
 		}
 		walls = walls->next;
 		i++;
