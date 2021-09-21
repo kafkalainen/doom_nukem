@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/20 13:19:04 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/21 09:14:43 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -171,6 +171,7 @@ SRCS = \
 	engine$(SLASH)line_segment_check.c \
 	engine$(SLASH)recursion_checks.c \
 	engine$(SLASH)scan_fov.c \
+	engine$(SLASH)show_hull.c \
 	engine$(SLASH)setup_frame.c \
 	engine$(SLASH)check_distances_to_walls.c \
 	update_player$(SLASH)activate_object.c \
