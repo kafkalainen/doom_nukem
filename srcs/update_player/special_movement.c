@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 17:28:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/21 17:49:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,14 @@ void	crouch(t_player *plr)
 
 void	jump(t_player *plr, t_sector *sector)
 {
-	t_xyz	new_pos;
 	float	dist;
 
 	dist = 0.0f;
-	new_pos = (t_xyz){plr->pos.x, plr->pos.y, plr->pos.z, plr->pos.w};
 	check_distance_to_ground(sector, plr->height, plr->pos, &dist);
-	if (plr->input.jump && dist <= 0.0f && !check_distance_to_ceiling(sector, &new_pos))
-			plr->speed.y += 4.0f;
-	if (check_distance_to_ceiling(sector, &new_pos))
+	if (plr->input.jump && dist <= 0.0f
+		&& !check_distance_to_ceiling(sector, &plr->pos))
+		plr->speed.y += 4.0f;
+	if (check_distance_to_ceiling(sector, &plr->pos))
 		plr->speed.y -= 4.0f;
 	plr->input.jump = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 17:21:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/21 17:47:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_bool	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 		ceiling = ceiling->next;
 		i++;
 	}
-	if ((*new_loc).y < (isection.y - 0.25f))
+	if ((*new_loc).y < (isection.y - 0.35f))
 		return (false);
 	else
 		return (true);
