@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   editor_edit_wall.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/20 17:23:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 09:37:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void set_new_ceiling_ground(t_height *height,
+static void	set_new_ceiling_ground(t_height *height,
 	unsigned char **int_string, t_action *action)
 {
 	int	temp;
@@ -87,11 +87,11 @@ void	editor_edit_wall(t_editor *editor)
 	}
 	if (editor->action.change_wall_texture)
 		editor->action.edit_wall = change_wall_texture(&editor->temp_wall->type,
-			&editor->action);
+				&editor->action);
 	if (editor->action.create_light_button || editor->action.create_powerstation
 		|| editor->action.create_elev_button)
 		create_entities(editor);
 	if (editor->action.cycle_door)
 		editor->action.cycle_door = cycle_door(&editor->sector_list,
-		editor->temp_wall, editor->temp_sector->idx_sector);
+				editor->temp_wall, editor->temp_sector->idx_sector);
 }

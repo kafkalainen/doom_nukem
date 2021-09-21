@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/20 13:29:35 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/21 10:19:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,7 @@ void			check_event(t_mouse_data *mouse_data, t_button **list,
 					t_action *action);
 void			editor_events(SDL_Event *e, t_home *home, t_editor *editor);
 void			mouse_zoom(t_action *action, int zoom);
-int				handle_events(t_editor *editor, t_home *home);
+void			handle_events(t_editor *editor, t_home *home);
 void			reset_actions(t_action *action);
 void			new_check_event(t_editor *editor);
 void			check_ui_events(int x, int y, t_button ***blist,
@@ -492,5 +492,10 @@ t_bool			verify_connecting_sectors(t_editor_sector **sectors, t_editor_sector *e
 t_bool			compare_floors_to_ceilings(t_editor_sector **sectors, int first_idx, int second_idx, t_editor_sector *elev_sector);
 t_bool			sectors_aligned(t_editor_sector *first, t_editor_sector *second, t_screen_xy heights, t_editor_sector *elev_sector);
 void			get_connecting_sectors(t_editor_walls *wall, int *first_sector_idx, int *second_sector_idx, int nbr_of_walls);
+void			editor_edit_sector(t_editor *editor);
+void			editor_edit_change_sector_ceiling_tex(t_editor *editor);
+void			editor_set_all_sector_ceiling_heights(t_editor_sector *sector, unsigned char **int_string);
+void			editor_set_all_sector_floor_heights(t_editor_sector *sector, unsigned char **int_string);
+void			update_sector_light_values(t_editor_sector *sector, t_entity_list **head);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_button.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:27:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 17:16:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 09:50:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,30 @@
 static void	set_to_inactive(t_editor *editor, t_button *button, int type)
 {
 	if (editor->temp_sector
-			&& calc_entities_in_sector_with_type(&editor->entity_list,
+		&& calc_entities_in_sector_with_type(&editor->entity_list,
 			editor->temp_sector->idx_sector, type))
 		button->is_active = false;
 	else
 		button->is_active = true;
+}
+
+static void	draw_button_logic_two(t_editor *editor, t_button *button, int i)
+{
+	if (i == button_change_to_door)
+	{
+		if (editor->temp_wall && editor->temp_wall->type >= 0)
+			button->is_active = true;
+		else
+			button->is_active = false;
+	}
+	if (i == button_toggle_entity_is_linked)
+	{
+		if (editor->temp_entity->entity_type == light_button
+			|| editor->temp_entity->entity_type == lamp)
+			button->is_active = true;
+		else
+			button->is_active = false;
+	}
 }
 
 static void	draw_button_logic(t_editor *editor, t_button *button, int i)
@@ -39,21 +58,7 @@ static void	draw_button_logic(t_editor *editor, t_button *button, int i)
 		set_to_inactive(editor, button, lift_button);
 	if (i == button_create_light_button)
 		set_to_inactive(editor, button, light_button);
-	if (i == button_change_to_door)
-	{
-		if (editor->temp_wall && editor->temp_wall->type >= 0)
-			button->is_active = true;
-		else
-			button->is_active = false;
-	}
-	if (i == button_toggle_entity_is_linked)
-	{
-		if (editor->temp_entity->entity_type == light_button
-		||	editor->temp_entity->entity_type == lamp)
-			button->is_active = true;
-		else
-			button->is_active = false;
-	}
+	draw_button_logic_two(editor, button, i);
 }
 
 void	draw_button(t_editor *editor, t_button *button, int i)
