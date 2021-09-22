@@ -13,7 +13,7 @@
 #ifndef AUDIO_H
 # define AUDIO_H
 
-typedef struct s_audio
+typedef struct	s_audio
 {
 	Mix_Music	*music;
 	Mix_Chunk	*battery_low;
@@ -45,7 +45,7 @@ typedef struct s_audio
 	Mix_Chunk	*unlock_door;
 }				t_audio;
 
-typedef struct s_audio_asset
+typedef struct	s_audio_asset
 {
 	unsigned int	size;
 	t_uchar			*buf;

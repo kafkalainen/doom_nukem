@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_movement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 14:39:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 17:49:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,16 @@ void	crouch(t_player *plr)
 
 void	jump(t_player *plr, t_sector *sector)
 {
-	t_xyz	new_pos;
+	float	dist;
 
-	new_pos = (t_xyz){plr->pos.x, plr->pos.y + 2.0f, plr->pos.z, plr->pos.w};
-	if (plr->input.jump == 1 && !check_distance_to_ceiling(sector, &new_pos))
-	{
+	dist = 0.0f;
+	check_distance_to_ground(sector, plr->height, plr->pos, &dist);
+	if (plr->input.jump && dist <= 0.0f
+		&& !check_distance_to_ceiling(sector, &plr->pos))
 		plr->speed.y += 4.0f;
-		plr->input.jump = 0;
-	}
+	if (check_distance_to_ceiling(sector, &plr->pos))
+		plr->speed.y -= 4.0f;
+	plr->input.jump = 0;
 }
 
 t_bool	jetpack(t_player *plr, t_home *home, Uint32 t)
