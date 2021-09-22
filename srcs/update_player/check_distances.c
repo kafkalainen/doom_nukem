@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_distances.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 17:47:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 10:16:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_bool	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 	while (i < sector->nb_of_ceil)
 	{
 		state = vec3_ray_triangle_intersect(&ceiling->tri, *new_loc,
-				vec3(0.0f, -1.0f, 0.0f), &isection);
+				vec3(0.0f, 1.0f, 0.0f), &isection);
 		if (state)
 			break ;
 		ceiling = ceiling->next;

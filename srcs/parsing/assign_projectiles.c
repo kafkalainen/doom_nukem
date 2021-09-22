@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 10:31:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:37:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 11:39:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,8 @@ void	initialize_projectile_triangles(t_projectile *projectile)
 	t_xy	size;
 
 	size = vec2(0.25f, 0.25f);
-	projectile->top.p[0] = (t_xyz){-0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
-	projectile->top.p[1] = (t_xyz){-0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
-	projectile->top.p[2] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
-	projectile->bot.p[0] = (t_xyz){-0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
-	projectile->bot.p[1] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
-	projectile->bot.p[2] = (t_xyz){0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
+	initialize_top_triangle(bullet_decal, &projectile->top, size);
+	initialize_bot_triangle(bullet_decal, &projectile->bot, size);
 	if (projectile->is_active)
 	{
 		projectile->top.type = projectile->sprite_index;

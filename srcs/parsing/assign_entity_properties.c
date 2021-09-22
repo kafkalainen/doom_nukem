@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 15:00:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 11:04:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,15 @@ static void	initialize_static_entity(t_entity *current)
 			vec3_mul(current->top.normal, 0.15f));
 }
 
-static void	initialize_entity_movement(t_entity *entity)
+static void	initialize_entity_movement(t_entity *entity, t_home *home)
 {
 	if (entity->is_static == 1)
 	{
 		if (entity->type >= light_button
 			&& entity->type <= keycard_military)
 		{
+			if (entity->type == lamp)
+				initialize_lamp_to_ceiling(entity, home);
 			initialize_static_entity(entity);
 			entity->velocity = 0;
 		}
@@ -123,7 +125,7 @@ Uint32	assign_entity_properties(t_home *home, t_xyz plr_pos)
 	{
 		initialize_entity_triangles(home->entity_pool[i]);
 		initialize_entity_values(home->entity_pool[i], plr_pos);
-		initialize_entity_movement(home->entity_pool[i]);
+		initialize_entity_movement(home->entity_pool[i], home);
 		initialize_entity_textures(home->entity_pool[i]);
 		i++;
 	}

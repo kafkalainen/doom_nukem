@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:41:54 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 08:33:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 11:29:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,45 @@ static t_xy	size_logic(t_entity *entity)
 	return (size);
 }
 
+void	initialize_top_triangle(int type, t_triangle *top, t_xy size)
+{
+	if (type == lamp || type == -bullet_decal)
+	{
+		top->p[0] = (t_xyz){-0.5f * size.x, 0.0f, -0.5f * size.y, 1.0f};
+		top->p[1] = (t_xyz){-0.5f * size.x, 0.0f, 0.5f * size.y, 1.0f};
+		top->p[2] = (t_xyz){0.5f * size.x, 0.0f, 0.5f * size.y, 1.0f};
+	}
+	else
+	{
+		top->p[0] = (t_xyz){-0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
+		top->p[1] = (t_xyz){-0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
+		top->p[2] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
+	}
+}
+
+void	initialize_bot_triangle(int type, t_triangle *bot, t_xy size)
+{
+	if (type == lamp || type == -bullet_decal)
+	{
+		bot->p[0] = (t_xyz){-0.5f * size.x, 0.0f, -0.5f * size.y, 1.0f};
+		bot->p[1] = (t_xyz){0.5f * size.x, 0.0f, 0.5f * size.y, 1.0f};
+		bot->p[2] = (t_xyz){0.5f * size.x, 0.0f, -0.5f * size.y, 1.0f};
+	}
+	else
+	{
+		bot->p[0] = (t_xyz){-0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
+		bot->p[1] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
+		bot->p[2] = (t_xyz){0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
+	}
+}
+
 void	initialize_entity_triangles(t_entity *entity)
 {
 	t_xy	size;
 
 	size = size_logic(entity);
-	entity->top.p[0] = (t_xyz){-0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
-	entity->top.p[1] = (t_xyz){-0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
-	entity->top.p[2] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
-	entity->bot.p[0] = (t_xyz){-0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
-	entity->bot.p[1] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
-	entity->bot.p[2] = (t_xyz){0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
+	initialize_top_triangle(entity->type, &entity->top, size);
+	initialize_bot_triangle(entity->type, &entity->bot, size);
 	if (entity->type == thing)
 	{
 		entity->height = 1.5f;

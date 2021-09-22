@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 16:36:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 11:30:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,14 @@ void			free_sectors(t_home *home);
 int				free_sectors_and_exit(int error_code, t_home *home);
 void			free_sectors_n(t_home *home, size_t	n);
 int				free_surfaces(t_surface **head, unsigned int nbr_of_surfaces);
-void			initialize_top_texels(t_triangle *top);
+void			initialize_bot_triangle(int type, t_triangle *bot, t_xy size);
 void			initialize_bottom_texels(t_triangle *bottom);
+void			initialize_top_texels(t_triangle *top);
+void			initialize_top_triangle(int type, t_triangle *top, t_xy size);
 void			initialize_sector_pointers(t_sector *new_sector);
 void			initialize_door(t_wall *wall, t_point_data *left,
 					t_point_data *right);
+void			initialize_lamp_to_ceiling(t_entity *entity, t_home *home);
 void			initialize_switches(t_wall *wall, t_point_data *left);
 void			initialize_wall_triangles(t_wall *wall, t_point_data *left,
 					t_point_data *right);

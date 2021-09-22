@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/21 16:50:06 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/22 10:20:57 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,6 +126,7 @@ SRCS = \
 	parsing$(SLASH)get_next_value.c \
 	parsing$(SLASH)initialize_entity_textures.c \
 	parsing$(SLASH)initialize_entity_triangles.c \
+	parsing$(SLASH)initialize_lamp_to_ceiling.c \
 	parsing$(SLASH)map_texel.c \
 	parsing$(SLASH)parse_entity_data.c \
 	parsing$(SLASH)parse_number_data.c \
