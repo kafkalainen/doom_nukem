@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/22 09:38:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:32:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -516,5 +516,6 @@ void			editor_set_all_sector_floor_heights(t_editor_sector *sector,
 					unsigned char **int_string);
 void			update_sector_light_values(t_editor_sector *sector,
 					t_entity_list **head);
+void			update_all_entity_heights(t_editor *editor);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:56:22 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 18:32:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:26:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	get_highest_floor_height(t_editor_walls **walls, int nbr_of_walls)
 	int				i;
 	int				highest;
 
-	highest = 0;
+	highest = -99;
 	i = 0;
 	temp = *walls;
 	while (temp != NULL && i < nbr_of_walls)

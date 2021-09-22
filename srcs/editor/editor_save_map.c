@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_save_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:49:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 08:53:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:31:00 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	save_editor_map(t_editor *editor, t_home *home)
 		}
 		if (check_saving_prerequisites(editor))
 		{
+			update_all_entity_heights(editor);
 			if (create_map_file(home, editor) == 1)
 				add_notification(editor, "Map saved successfully", 3000);
 			else

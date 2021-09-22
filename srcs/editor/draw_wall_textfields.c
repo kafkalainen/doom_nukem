@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_textfields.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:08:33 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 16:24:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:35:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	display_wall_tex(t_editor_walls *wall, t_buffer *buffer,
 static void	display_door_tex(t_editor_walls *wall, t_buffer *buffer,
 	t_texture **textures, t_box *box)
 {
-	t_editor_walls *prev;
+	t_editor_walls	*prev;
 	t_texel			*tex;
 
 	if (wall->type < SECRET_DOOR)
