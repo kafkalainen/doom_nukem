@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:08:33 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/22 17:35:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 18:37:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ static void	display_door_tex(t_editor_walls *wall, t_buffer *buffer,
 
 	if (wall->type < SECRET_DOOR)
 	{
+		tex = get_tex(-door, textures);
 		if (wall->type >= MILITARY_INDEX)
 			tex = get_tex(-military_keycard_sprite, textures);
 		else if (wall->type >= ENGINEERING_INDEX)
 			tex = get_tex(-engineering_keycard_sprite, textures);
 		else if (wall->type >= CLEANING_INDEX)
 			tex = get_tex(-cleaning_keycard_sprite, textures);
-		else
-			tex = get_tex(-door, textures);
 		draw_image_static(box->start, tex, buffer,
 			(float)(ft_fabsf(box->end.x - box->start.x) / tex->width));
 	}
