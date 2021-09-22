@@ -73,15 +73,12 @@ void	editor_mouse(t_mouse_data *mouse_data, SDL_Event *e,
 {
 	t_screen_xy	pos;
 
-	if (e->type == SDL_MOUSEMOTION)
-	{
-		mouse_data->x = e->motion.x;
-		mouse_data->y = e->motion.y;
-		SDL_GetMouseState(&pos.x, &pos.y);
-		action->mouse_pos = get_ndc(buffer, pos);
-		action->world_pos = ndc_to_world(action->mouse_pos, action->offsetf,
-				action->scalarf);
-	}
+	mouse_data->x = e->motion.x;
+	mouse_data->y = e->motion.y;
+	SDL_GetMouseState(&pos.x, &pos.y);
+	action->mouse_pos = get_ndc(buffer, pos);
+	action->world_pos = ndc_to_world(action->mouse_pos, action->offsetf,
+			action->scalarf);
 	if (e->type == SDL_MOUSEWHEEL && e->wheel.y > 0
 		&& action->scalarf < ZOOM_IN_MAX)
 		mouse_zoom(action, 1);
