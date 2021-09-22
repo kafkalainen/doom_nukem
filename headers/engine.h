@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 16:43:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/21 17:09:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ t_bool			check_connection(t_wall *point, t_frame *frame);
 t_bool			check_if_portal(t_wall *point);
 int				check_if_lseg_intersects(t_xy *p0, t_xy *p1, t_xy *pos,
 					t_xy *dir);
-t_bool			check_if_already_been_in_this_sector(int cur_sector, int *sector_list,
-					int nb_of_sectors);
+t_bool			check_if_already_been_in_this_sector(int cur_sector,
+					int *sector_list, int nb_of_sectors);
 t_bool			check_if_facing_player(t_bool left, t_bool right, t_wall *wall,
 					t_fov fov);
 int				get_next_wall_tex(t_wall **current_head, int nbr_of_walls);
