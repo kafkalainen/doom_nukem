@@ -22,7 +22,8 @@ static int	get_map_header(unsigned int *pos, unsigned char **buf,
 		return (1);
 	if (get_next_int_value(&home->end_sector, *buf, &pos, size))
 		return (1);
-	if (home->nbr_of_sectors <= 0 || home->end_sector <= 0)
+	if (home->nbr_of_sectors <= 0 || home->end_sector < 0
+		|| home->end_sector > (int)home->nbr_of_sectors)
 		return (1);
 	if (get_next_uint_value(&home->linked_map, *buf, &pos, size))
 		return (1);
