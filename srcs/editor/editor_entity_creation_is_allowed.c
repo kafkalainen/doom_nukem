@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity_creation_is_allowed.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:43:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 16:44:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:57:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
 int	calc_entities_in_sector_with_type(t_entity_list **head,
-		int sector_idx, int	entity_type)
+	int sector_idx, int entity_type)
 {
 	t_entity_list	*temp;
 	int				count;

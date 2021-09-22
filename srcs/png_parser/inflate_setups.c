@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inflate_setups.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 13:04:19 by rzukale           #+#    #+#             */
-/*   Updated: 2021/07/21 16:03:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 10:02:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	setup_tree_helper(t_tree_helper *h, const unsigned int *bitlen,
 	ft_memset(h->nextcode, 0, sizeof(h->nextcode));
 	h->n = 0;
 	while (h->n < tree->numcodes)
-		h->blcount[bitlen[h->n++]]++;
+	{
+		h->blcount[bitlen[h->n]]++;
+		h->n++;
+	}
 	h->n = 0;
 	while (++h->n <= tree->maxbitlen)
 		h->nextcode[h->n] = (h->nextcode[h->n - 1] + h->blcount[h->n - 1]) << 1;

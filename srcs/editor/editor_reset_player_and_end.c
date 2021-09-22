@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_reset_player_and_end.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/15 16:22:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 18:33:21 by rzukale          ###   ########.fr       */
+/*   Created: 2021/09/22 09:51:43 by jnivala           #+#    #+#             */
+/*   Updated: 2021/09/22 09:51:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
