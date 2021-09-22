@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 10:56:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:47:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int				write_all_audio_data(int *fd);
 int				open_map_file(t_home *home, char *path);
 void			write_sector_data(int *fd, t_editor *editor);
 void			write_entity_data(int *fd, t_editor *editor);
-char			*ft_strjoin_freeable(char *s1, char *s2, int free_one, int free_two);
+char			*ft_strjoin_freeable(char *s1, char *s2,
+					int free_one, int free_two);
 t_uchar			*ft_strjoin_newline(char **str);
 Uint32			ft_adler32(unsigned char *data, ssize_t size);
 void			create_hash(unsigned char *tmp);
@@ -84,6 +85,6 @@ unsigned char	*get_sector_plot(unsigned char *plot);
 unsigned char	*write_plot_lines(unsigned char *plot);
 unsigned char	*get_writable_wall_data(t_editor_walls *wall);
 void			parse_map_data(unsigned char *buf, t_player *plr,
-				t_home *home, ssize_t size);
+					t_home *home, ssize_t size);
 
 #endif

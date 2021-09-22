@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 13:58:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:45:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AUDIO_H
 # define AUDIO_H
 
-typedef struct	s_audio
+typedef struct s_audio
 {
 	Mix_Music	*music;
 	Mix_Chunk	*battery_low;
@@ -45,7 +45,7 @@ typedef struct	s_audio
 	Mix_Chunk	*unlock_door;
 }				t_audio;
 
-typedef struct	s_audio_asset
+typedef struct s_audio_asset
 {
 	unsigned int	size;
 	t_uchar			*buf;

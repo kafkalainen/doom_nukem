@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/21 14:24:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:44:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,8 @@ t_wall			*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir);
 t_bool			check_if_open_portal(t_wall *wall);
 t_xyz			check_y(t_sector *sector, t_player *plr, t_xyz pos);
 t_bool			check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
-t_bool			check_distance_to_ground(t_sector *sector, float height, t_xyz pos,
-					float *dist);
+t_bool			check_distance_to_ground(t_sector *sector, float height,
+					t_xyz pos, float *dist);
 t_bool			check_for_matching_key(t_wall *wall, t_player *plr,
 					int keycard);
 Uint32			update_doors(t_sector **sectors, Uint32 nb_of_sectors,
@@ -211,7 +211,8 @@ float			get_ground_hit_point(t_sector *sector, t_ray *ray,
 float			get_player_hit_point(t_ray *ray, t_bullet_hole *hole,
 					int bullet_sector);
 void			gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
-void			initialize_cutscene(t_sector *cutscene_sector, t_player *plr, int type);
+void			initialize_cutscene(t_sector *cutscene_sector,
+					t_player *plr, int type);
 void			initialize_player_target_triangles(t_player *plr);
 void			initialize_player(t_player *plr);
 char			**init_story(void);

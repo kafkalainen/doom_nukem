@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/18 09:10:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:41:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 		error_output_sdl("Fatal: Failed to create a window.", home, frame);
 	SDL_SetWindowPosition(home->win.window,
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
-	if (home->win.ScreenSurface == NULL)
+	home->win.screen = SDL_GetWindowSurface(home->win.window);
+	if (home->win.screen == NULL)
 		error_output_sdl("Fatal: Failed to get window surface", home, frame);
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		error_output_sdl("Fatal: SDL_mixer could not initialize!", home, frame);

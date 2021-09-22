@@ -6,16 +6,16 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 16:17:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:48:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTORS_H
 # define VECTORS_H
 
-typedef unsigned char t_uchar;
+typedef unsigned char	t_uchar;
 
-typedef unsigned int t_uint;
+typedef unsigned int	t_uint;
 
 typedef enum e_bool
 {
@@ -42,13 +42,11 @@ typedef struct s_xy
 	float			w;
 }					t_xy;
 
-typedef	struct		s_box
+typedef struct s_box
 {
 	t_xy			start;
 	t_xy			end;
 }					t_box;
-
-typedef t_xy	t_range;
 
 typedef struct s_xyz
 {

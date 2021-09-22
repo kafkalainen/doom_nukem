@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typewriter.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 09:46:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 18:42:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:46:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ t_pxl_c			pxl_alphabet(int l, int b, int c);
 t_pxl_c			pxl_numbers(int l, int b, int c);
 void			ft_str_pxl(t_buffer *buffer, t_xy coord, char *str,
 					t_plx_modifier mod);
-void			ft_c_pxl(t_buffer *buffer, t_xy coord, char c, t_plx_modifier mod);
+void			ft_c_pxl(t_buffer *buffer, t_xy coord, char c,
+					t_plx_modifier mod);
 #endif

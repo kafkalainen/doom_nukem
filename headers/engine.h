@@ -6,14 +6,14 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 17:09:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:45:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENGINE_H
 # define ENGINE_H
 
-typedef struct	s_fov
+typedef struct s_fov
 {
 	t_xy			left;
 	t_xy			right;
@@ -21,7 +21,7 @@ typedef struct	s_fov
 	int				cur_sector;
 }				t_fov;
 
-typedef struct	s_frame
+typedef struct s_frame
 {
 	t_raster_queue	**raster_queue;
 	t_raster_queue	*triangles_in_view;

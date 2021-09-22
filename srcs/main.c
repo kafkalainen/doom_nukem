@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 18:26:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:41:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
 		}
 		if (home.game_state == EDITOR)
 			launch_editor(&home, &e);
-		render_buffer(menu.buffer.pxl_buffer, home.win.ScreenSurface);
+		render_buffer(menu.buffer.pxl_buffer, home.win.screen);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
 	return (free_all(&frame, &plr.audio, menu.buffer.pxl_buffer, &home.map));

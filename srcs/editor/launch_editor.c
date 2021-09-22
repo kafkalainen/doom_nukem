@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 18:18:46 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:41:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	setup_editor(t_editor *editor, t_home *home)
 			* (Uint32)editor->buffer.width * (Uint32)editor->buffer.height);
 	if (!editor->buffer.pxl_buffer)
 		error_output("ERROR: Memory for drawing bufferallocation failed!");
-	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
+	home->win.screen = SDL_GetWindowSurface(home->win.window);
 	init_textures(home);
 	init_mouse_data(&editor->mouse_data);
 	initialize_actions(&editor->action);
@@ -81,7 +81,7 @@ void	launch_editor(t_home *home, SDL_Event *e)
 		handle_events(&editor, home);
 		draw_ui(&editor, home->textures);
 		draw_buttons(&editor, home->textures);
-		render_buffer(editor.buffer.pxl_buffer, home->win.ScreenSurface);
+		render_buffer(editor.buffer.pxl_buffer, home->win.screen);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
 	free_editor_data(&editor);
@@ -89,5 +89,5 @@ void	launch_editor(t_home *home, SDL_Event *e)
 	SDL_SetWindowSize(home->win.window, SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_SetWindowPosition(home->win.window,
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-	home->win.ScreenSurface = SDL_GetWindowSurface(home->win.window);
+	home->win.screen = SDL_GetWindowSurface(home->win.window);
 }

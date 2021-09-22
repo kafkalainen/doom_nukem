@@ -77,7 +77,8 @@ void		clean_up(t_frame *frame);
 int			doom_close(int *fd);
 ssize_t		doom_write(int *fd, const void **buf, size_t count);
 void		doom_open(int *fd, const char **path, int mode, mode_t rights);
-void		doom_read(ssize_t *read_bytes, int *fd, void **buf, size_t nb_of_bytes);
+void		doom_read(ssize_t *read_bytes, int *fd,
+				void **buf, size_t nb_of_bytes);
 int			doom_mkdir(void);
 void		draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void		error_output(char *msg);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/07 11:47:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:45:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 typedef struct s_window
 {
 	SDL_Window		*window;
-	SDL_Surface		*ScreenSurface;
+	SDL_Surface		*screen;
 	int				width;
 	int				height;
 }					t_window;
 
-typedef	struct		s_buffer
+typedef struct s_buffer
 {
 	int				width;
 	int				height;
 	Uint32			*pxl_buffer;
 }					t_buffer;
 
-typedef	struct		s_pxl_coords
+typedef struct s_pxl_coords
 {
 	int				x;
 	int				y;

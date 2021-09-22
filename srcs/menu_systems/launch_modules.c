@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_modules.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/20 17:00:18 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:41:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	launch_game_loop(t_home *home, t_player *plr,
 			update_world(plr, home, delta_time);
 		process_inputs_game_loop(plr, &home->game_state, e);
 		update_screen(home, frame, plr);
-		render_buffer(frame->buffer.pxl_buffer, home->win.ScreenSurface);
+		render_buffer(frame->buffer.pxl_buffer, home->win.screen);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
 	free_game_assets(home, &plr->audio);
@@ -90,7 +90,7 @@ void	launch_load_menu_loop(t_menu *menu, t_home *home, SDL_Event *e)
 	{
 		process_inputs_load_menu(&home->game_state, e, menu);
 		update_load_menu(menu, e->key.keysym.sym);
-		render_buffer(menu->buffer.pxl_buffer, home->win.ScreenSurface);
+		render_buffer(menu->buffer.pxl_buffer, home->win.screen);
 		SDL_UpdateWindowSurface(home->win.window);
 	}
 	if (menu->selected)

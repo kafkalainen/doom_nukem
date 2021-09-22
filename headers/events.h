@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:53:09 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/03 15:33:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:48:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void			key_input(t_player *plr, SDL_Event *e, int *game_state);
 void			keys_down(t_player *plr, SDL_KeyCode sym, int *game_state);
 void			keys_up(t_player *plr, SDL_KeyCode sym);
 void			mouse_handle(t_player *plr, SDL_Event *e);
-void	        editor_keyboard(SDL_Keycode keysym, t_action *action);
-void	        editor_mouse(t_mouse_data *mouse_data, SDL_Event *e,
-	t_action *action, t_buffer *buffer);
-t_bool	        entity_creation_is_allowed(t_entity_list **head,
-	t_editor_sector *sector, t_action *action);
+void			editor_keyboard(SDL_Keycode keysym, t_action *action);
+void			editor_mouse(t_mouse_data *mouse_data, SDL_Event *e,
+					t_action *action, t_buffer *buffer);
+t_bool			entity_creation_is_allowed(t_entity_list **head,
+					t_editor_sector *sector, t_action *action);
 
 #endif

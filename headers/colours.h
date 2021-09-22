@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   colours.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:37:29 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/11 12:55:37 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 09:41:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOURS_H
 # define COLOURS_H
 
-typedef struct	s_argb
+typedef struct s_argb
 {
 	Uint8		alpha;
 	Uint8		red;
