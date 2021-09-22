@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_movement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 17:49:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 12:00:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	set_height(t_player *plr, char direction)
 		return ;
 }
 
-void	crouch(t_player *plr)
+void	crouch(t_player *plr, t_sector *sector)
 {
 	static Uint32	animation_start = 0;
 	static Uint32	animation_end = 0;
@@ -57,7 +57,8 @@ void	crouch(t_player *plr)
 		else
 			animation_start = 0;
 	}
-	else if (plr->input.crouch == 0)
+	else if (plr->input.crouch == 0
+		&& !check_distance_to_ceiling(sector, &plr->pos))
 	{
 		set_animation_on(&animation_start, &animation_end, &plr->time, 100);
 		if (plr->time <= animation_end)

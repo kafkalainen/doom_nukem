@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/22 09:44:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 11:53:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ t_bool			check_for_matching_key(t_wall *wall, t_player *plr,
 Uint32			update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 					Uint32 current_time, Uint32 delta_time);
 void			create_target_vector(t_player *plr);
-void			crouch(t_player *plr);
+void			crouch(t_player *plr, t_sector *sector);
 void			draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr);
 void			end_level(t_home *home, t_player *plr);
 t_bool			evolve_story(t_player *plr, t_sector *sector,

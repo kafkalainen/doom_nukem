@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 13:26:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 11:54:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void	update_player_values(t_player *plr, Uint32 delta_time)
 void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 {
 	update_player_values(plr, delta_time);
-	crouch(plr);
+	crouch(plr, home->sectors[plr->cur_sector]);
 	plr_shoot_handle(home, plr, delta_time);
 	if (!plr->input.jetpack)
 		jump(plr, home->sectors[plr->cur_sector]);
