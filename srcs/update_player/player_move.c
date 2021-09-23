@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 13:22:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 14:54:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ void	player_place_feet_to_ground(t_sector *sector, t_player *plr)
 	float			dist;
 
 	i = 0;
-	check_distance_to_ground(sector, plr->height, plr->pos, &dist);
-	if (dist > 0)
+	if (check_distance_to_ground(sector, plr->height, plr->pos, &dist)
+		&& dist > 0)
 		return ;
 	pos = vec3(plr->pos.x, 100.0f, plr->pos.z);
 	ground = sector->ground;
 	while (i < sector->nb_of_ground)
 	{
 		if (vec3_ray_triangle_intersect(&ground->tri, pos,
-			vec3(0.0f, -1.0f, 0.0f), &isection))
+				vec3(0.0f, -1.0f, 0.0f), &isection))
 			break ;
 		ground = ground->next;
 		i++;
@@ -97,7 +97,7 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 	plr->move_dir = vec3_unit_vector(plr->move_dir);
 	plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
 	if (!check_if_vertically_possible(home, plr->test_pos, plr->height,
-		plr->cur_sector))
+			plr->cur_sector))
 		return (false);
 	wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
 			plr->width, plr->test_pos, plr->move_dir);

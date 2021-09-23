@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 13:26:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 14:56:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_bool	calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc,
 	if (state)
 	{
 		*dist = vec3_dot_product(vec3_dec(*new_loc, ceiling->tri.p[0]),
-			ceiling->tri.normal);
+				ceiling->tri.normal);
 	}
 	return (state);
 }
@@ -86,7 +86,7 @@ t_bool	calc_distance_to_ground(t_sector *sector, t_xyz *new_loc,
 	if (state)
 	{
 		*dist = vec3_dot_product(vec3_dec(*new_loc, ground->tri.p[0]),
-			ground->tri.normal);
+				ground->tri.normal);
 	}
 	return (state);
 }
@@ -120,7 +120,7 @@ t_bool	check_distance_to_ground(t_sector *sector, float height,
 	return (false);
 }
 
-int		find_current_sector(t_home *home, t_xyz pos)
+int	find_current_sector(t_home *home, t_xyz pos)
 {
 	t_uint			idx;
 	t_uint			j;

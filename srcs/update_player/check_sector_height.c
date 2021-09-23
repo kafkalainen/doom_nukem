@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 08:55:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 12:02:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 14:55:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ t_bool	check_if_vertically_possible(t_home *home, t_xyz test_pos, float height,
 	float	dist_to_ground;
 
 	if (!calc_distance_to_ceiling(home->sectors[cur_sector],
-		&test_pos, &dist_to_ceiling))
+			&test_pos, &dist_to_ceiling))
 	{
 		cur_sector = find_current_sector(home, test_pos);
 		calc_distance_to_ceiling(home->sectors[cur_sector],
 			&test_pos, &dist_to_ceiling);
 	}
 	if (!calc_distance_to_ground(home->sectors[cur_sector],
-		&test_pos, &dist_to_ground))
+			&test_pos, &dist_to_ground))
 	{
 		cur_sector = find_current_sector(home, test_pos);
 		calc_distance_to_ground(home->sectors[cur_sector],

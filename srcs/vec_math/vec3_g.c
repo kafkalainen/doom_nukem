@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 11:39:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 14:32:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 14:57:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,5 @@ t_bool	vec3_ray_triangle_intersect(t_triangle *tri, t_xyz pos, t_xyz dir,
 	{
 		return (true);
 	}
-	// if (vec3_dot_product(vec3_unit_vector(vec3_dec(tri->p[1], tri->p[0])), dir)
-	// 	== 1.0f)
-	// 	return (true);
-	// if (vec3_dot_product(vec3_unit_vector(vec3_dec(tri->p[2], tri->p[1])), dir)
-	// 	== 1.0f)
-	// 	return (true);
-	// if (vec3_dot_product(vec3_unit_vector(vec3_dec(tri->p[0], tri->p[2])), dir)
-	// 	== 1.0f)
-	// 	return (true);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 14:52:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 13:05:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 14:52:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ Uint32	update_lifts(t_home *home, t_player *plr,
 					home->sectors[i]->velocity * delta_time * 0.001f);
 				translate_entities(home,
 					home->sectors[i]->velocity * delta_time * 0.001f, i);
-				player_place_feet_to_ground(home->sectors[i], plr);
+				plr->pos.y += home->sectors[i]->velocity * delta_time * 0.001f;
 			}
 			else
 				lock_lift(home, home->sectors[i]);
