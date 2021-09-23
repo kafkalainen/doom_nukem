@@ -6,11 +6,32 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 10:07:21 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 08:50:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 11:00:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+void	rotate_moving_projectile(t_projectile *current, t_player *plr)
+{
+	float	angle[3];
+	t_m4x4	y;
+	t_m4x4	combined;
+	t_xyz	vec_to_plr;
+
+	vec_to_plr = vec3_unit_vector(vec3_dec(plr->pos, current->pos));
+	angle[1] = vec3_ang_axis(current->top.normal, vec_to_plr, 'y');
+	y = rotation_matrix_y(angle[1]);
+	combined = y;
+	current->top.p[0] = multi_vec_matrix(&current->top.p[0], &combined);
+	current->top.p[1] = multi_vec_matrix(&current->top.p[1], &combined);
+	current->top.p[2] = multi_vec_matrix(&current->top.p[2], &combined);
+	current->bot.p[0] = multi_vec_matrix(&current->bot.p[0], &combined);
+	current->bot.p[1] = multi_vec_matrix(&current->bot.p[1], &combined);
+	current->bot.p[2] = multi_vec_matrix(&current->bot.p[2], &combined);
+	current->top.normal = vec_to_plr;
+	current->bot.normal = vec_to_plr;
+}
 
 t_bool	projectile_movement(t_home *home, t_player *plr, t_projectile *current,
 		Uint32 t)
@@ -59,7 +80,7 @@ static void	update_projectile(t_projectile *current, t_home *home,
 	t_bullet_hole	hole;
 
 	initialize_projectile_triangles(current);
-	rotate_projectile_based_on_axes(current->move_dir, current);
+	rotate_moving_projectile(current, plr);
 	if (!projectile_movement(home, plr, current, t))
 	{
 		initialize_trajectory(&trajectory, current, plr);

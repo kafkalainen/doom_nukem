@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 11:04:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 11:00:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,28 @@ static void	initialize_static_entity(t_entity *current)
 			vec3_mul(current->top.normal, 0.15f));
 }
 
+static void	initialize_moving_entity(t_entity *current)
+{
+	float	angle[3];
+	t_m4x4	y;
+	t_m4x4	combined;
+
+	angle[1] = vec3_ang_axis(current->top.normal, current->vec_to_plr, 'y');
+	y = rotation_matrix_y(angle[1]);
+	combined = y;
+	current->top.p[0] = multi_vec_matrix(&current->top.p[0], &combined);
+	current->top.p[1] = multi_vec_matrix(&current->top.p[1], &combined);
+	current->top.p[2] = multi_vec_matrix(&current->top.p[2], &combined);
+	current->bot.p[0] = multi_vec_matrix(&current->bot.p[0], &combined);
+	current->bot.p[1] = multi_vec_matrix(&current->bot.p[1], &combined);
+	current->bot.p[2] = multi_vec_matrix(&current->bot.p[2], &combined);
+	current->top.normal = current->vec_to_plr;
+	current->bot.normal = current->vec_to_plr;
+}
+
 static void	initialize_entity_movement(t_entity *entity, t_home *home)
 {
-	if (entity->is_static == 1)
+	if (entity->is_static == true)
 	{
 		if (entity->type >= light_button
 			&& entity->type <= keycard_military)
@@ -71,7 +90,7 @@ static void	initialize_entity_movement(t_entity *entity, t_home *home)
 			entity->velocity = 0;
 		}
 	}
-	else if (entity->is_static == 0)
+	else if (entity->is_static == false)
 	{
 		if (entity->type == crewmember || entity->type == thing)
 			entity->velocity = ENTITY_VELOCITY_1;
@@ -80,10 +99,7 @@ static void	initialize_entity_movement(t_entity *entity, t_home *home)
 			entity->velocity = ENTITY_VELOCITY_2;
 		else
 			entity->velocity = 0;
-	}
-	else
-	{
-		error_output("ERROR: Entity has no is_static property.");
+		initialize_moving_entity(entity);
 	}
 }
 

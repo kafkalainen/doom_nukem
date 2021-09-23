@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_edit_sector2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:14:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/21 10:15:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/23 10:23:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	update_sector_light_values(t_editor_sector *sector,
 			sector->light.pos.x = temp->pos.x;
 			sector->light.pos.y = temp->pos.z;
 			sector->light.state = temp->state;
+			sector->light.intensity = 30;
 			break ;
 		}
 		temp = temp->next;
