@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 09:40:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 11:29:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ Uint32			assign_entity_properties(t_home *home, t_xyz plr_pos);
 void			assign_projectiles(t_home *home);
 void			calc_lift_doors(t_home *home);
 void			calc_map_properties(t_home *home, t_player *plr);
-float			calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
+t_bool			calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc,
+					float *dist);
+t_bool			calc_distance_to_ground(t_sector *sector, t_xyz *new_loc,
+					float *dist);
 void			calc_light_sources(t_home *home);
 void			calc_unit_normals(t_home *home);
 int				change_door_to_portal(int door);

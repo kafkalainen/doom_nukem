@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 10:16:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 13:26:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,58 @@ t_bool	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 		return (true);
 }
 
-float	calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
+t_bool	calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc,
+		float *dist)
 {
 	unsigned int	i;
 	t_surface		*ceiling;
-	float			surf_dist;
+	t_xyz			isection;
+	t_bool			state;
 
 	i = 0;
 	ceiling = sector->ceiling;
 	while (i < sector->nb_of_ceil)
 	{
-		if (point_inside_a_triangle_surface(ceiling->tri.p[0],
-				ceiling->tri.p[1], ceiling->tri.p[2], *new_loc))
+		state = vec3_ray_triangle_intersect(&ceiling->tri, *new_loc,
+				vec3(0.0f, 1.0f, 0.0f), &isection);
+		if (state)
 			break ;
 		ceiling = ceiling->next;
 		i++;
 	}
-	surf_dist = vec3_dot_product(vec3_dec(*new_loc, ceiling->tri.p[0]),
+	if (state)
+	{
+		*dist = vec3_dot_product(vec3_dec(*new_loc, ceiling->tri.p[0]),
 			ceiling->tri.normal);
-	return (surf_dist);
+	}
+	return (state);
+}
+
+t_bool	calc_distance_to_ground(t_sector *sector, t_xyz *new_loc,
+		float *dist)
+{
+	unsigned int	i;
+	t_surface		*ground;
+	t_xyz			isection;
+	t_bool			state;
+
+	i = 0;
+	ground = sector->ground;
+	while (i < sector->nb_of_ground)
+	{
+		state = vec3_ray_triangle_intersect(&ground->tri, *new_loc,
+				vec3(0.0f, -1.0f, 0.0f), &isection);
+		if (state)
+			break ;
+		ground = ground->next;
+		i++;
+	}
+	if (state)
+	{
+		*dist = vec3_dot_product(vec3_dec(*new_loc, ground->tri.p[0]),
+			ground->tri.normal);
+	}
+	return (state);
 }
 
 t_bool	check_distance_to_ground(t_sector *sector, float height,
@@ -83,6 +116,31 @@ t_bool	check_distance_to_ground(t_sector *sector, float height,
 		surf_dist = pos.y - isection.y;
 		*dist = surf_dist - height;
 		return (true);
+	}
+	return (false);
+}
+
+int		find_current_sector(t_home *home, t_xyz pos)
+{
+	t_uint			idx;
+	t_uint			j;
+	t_surface		*ground;
+	t_xyz			isection;
+
+	idx = 0;
+	while (idx < home->nbr_of_sectors)
+	{
+		j = 0;
+		ground = home->sectors[idx]->ground;
+		while (j < home->sectors[idx]->nb_of_ground)
+		{
+			if (vec3_ray_triangle_intersect(&ground->tri, pos,
+					vec3(0.0f, -1.0f, 0.0f), &isection))
+				return (idx);
+			ground = ground->next;
+			j++;
+		}
+		idx++;
 	}
 	return (false);
 }

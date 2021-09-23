@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:06:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 11:20:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,20 @@
 // 	map_error_output(3, home);
 // if (check_if_convex(home->sectors[i]))
 // 	map_error_output(4, home);
-int	validate_sectors_data(t_home *home, t_player *plr)
-{
-	unsigned int	i;
+// int	validate_sectors_data(t_home *home, t_player *plr)
+// {
+// 	unsigned int	i;
 
-	i = 0;
-	if (!(plr_inside(home->sectors[plr->cur_sector], plr)))
-		map_error_output(6, home);
-	while (i < home->nbr_of_sectors)
-	{
-		if (home->sectors[i]->nb_of_walls < 3)
-			map_error_output(7, home);
-		if (check_if_sector_has_same_points(home->sectors[i]))
-			map_error_output(2, home);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	if (!(plr_inside(home->sectors[plr->cur_sector], plr)))
+// 		map_error_output(6, home);
+// 	while (i < home->nbr_of_sectors)
+// 	{
+// 		if (home->sectors[i]->nb_of_walls < 3)
+// 			map_error_output(7, home);
+// 		if (check_if_sector_has_same_points(home->sectors[i]))
+// 			map_error_output(2, home);
+// 		i++;
+// 	}
+// 	return (0);
+// }

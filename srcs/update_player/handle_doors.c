@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 08:59:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 14:36:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	lock_the_door(t_wall *dimensions, t_wall *door)
 	door->bottom.uv[1] = dimensions->bottom.uv[1];
 	door->bottom.uv[2] = dimensions->bottom.uv[2];
 	door->top = translate_triangle(&door->top,
-			vec3_mul(door->top.normal, 0.08f));
+			vec3_mul(door->top.normal, 0.06f));
 	door->bottom = translate_triangle(&door->bottom,
-			vec3_mul(door->bottom.normal, 0.08f));
+			vec3_mul(door->bottom.normal, 0.06f));
 }
 
 /*

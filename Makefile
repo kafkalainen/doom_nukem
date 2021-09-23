@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/23 10:17:09 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/23 13:09:11 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -198,7 +198,6 @@ SRCS = \
 	update_player$(SLASH)key_input.c \
 	update_player$(SLASH)key_input_toggle.c \
 	update_player$(SLASH)mouse_handle.c \
-	update_player$(SLASH)plr_inside.c \
 	update_player$(SLASH)play_cutscene.c \
 	update_player$(SLASH)player_look.c \
 	update_player$(SLASH)player_move.c \
@@ -209,7 +208,6 @@ SRCS = \
 	update_player$(SLASH)shooting.c \
 	update_player$(SLASH)strafe_vector_along_the_wall.c \
 	update_player$(SLASH)player_take_damage.c \
-	update_player$(SLASH)player_place_feet_to_ground.c \
 	update_player$(SLASH)reload_weapon.c \
 	update_player$(SLASH)recharge_suit.c \
 	update_screen$(SLASH)apply_matrices_a.c \

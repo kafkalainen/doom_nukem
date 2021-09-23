@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 12:00:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 13:53:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ t_bool	jetpack(t_player *plr, t_home *home, Uint32 t)
 		{
 			plr->pos = plr->test_pos;
 			check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
-			player_place_feet_to_ground(home, plr);
 			return (true);
 		}
 	}

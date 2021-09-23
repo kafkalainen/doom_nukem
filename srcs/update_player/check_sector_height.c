@@ -6,23 +6,35 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 08:55:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 09:08:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 12:02:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_bool	check_sector_height(t_xyz pos, float height, t_sector *sector)
+t_bool	check_if_vertically_possible(t_home *home, t_xyz test_pos, float height,
+		int cur_sector)
 {
 	float	dist_to_ceiling;
 	float	dist_to_ground;
 
-	if (check_distance_to_ceiling(sector, &pos))
-		return (false);
-	dist_to_ceiling = calc_distance_to_ceiling(sector, &pos);
-	check_distance_to_ground(sector, height, pos, &dist_to_ground);
-	if (dist_to_ground + dist_to_ceiling >= height)
+	if (!calc_distance_to_ceiling(home->sectors[cur_sector],
+		&test_pos, &dist_to_ceiling))
+	{
+		cur_sector = find_current_sector(home, test_pos);
+		calc_distance_to_ceiling(home->sectors[cur_sector],
+			&test_pos, &dist_to_ceiling);
+	}
+	if (!calc_distance_to_ground(home->sectors[cur_sector],
+		&test_pos, &dist_to_ground))
+	{
+		cur_sector = find_current_sector(home, test_pos);
+		calc_distance_to_ground(home->sectors[cur_sector],
+			&test_pos, &dist_to_ground);
+	}
+	if (height <= (dist_to_ceiling + dist_to_ground))
 		return (true);
-	else
-		return (false);
+	printf("Not possible height is %f and room height %f\n",
+		height, dist_to_ceiling + dist_to_ground);
+	return (false);
 }
