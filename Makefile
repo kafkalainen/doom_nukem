@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/23 13:09:11 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/23 16:00:44 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ SRCS = \
 	editor$(SLASH)get_entity_with_idx.c \
 	editor$(SLASH)get_entity_colour.c \
 	editor$(SLASH)get_editor_sector_with_idx.c \
+	editor$(SLASH)get_editor_wall_with_type.c \
 	editor$(SLASH)get_ndc.c \
 	editor$(SLASH)handle_events.c \
 	editor$(SLASH)handle_events2.c \
