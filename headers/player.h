@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/22 11:53:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 09:04:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ t_entity		*activate_object(t_home *home, t_player *plr);
 t_wall			*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir);
 t_bool			check_if_open_portal(t_wall *wall);
 t_xyz			check_y(t_sector *sector, t_player *plr, t_xyz pos);
+t_bool			check_sector_height(t_xyz pos, float height, t_sector *sector);
 t_bool			check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
 t_bool			check_distance_to_ground(t_sector *sector, float height,
 					t_xyz pos, float *dist);

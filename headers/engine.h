@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 09:45:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 09:33:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ float			get_wall_height(float left_ground, float right_ground,
 t_wall			*get_portal_by_idx(int idx, t_sector *sector);
 t_bool			vec2_get_scalar_to_intersection(t_xy pos, t_xy dir,
 					t_wall *wall, float *t);
-void			interpolate_y(t_height *height, t_xy cutpoint,
-					t_wall *p0, t_wall *p1);
 void			interpolate_uv(t_xy *ground_uv, t_xy cutpoint,
 					t_wall *p0, t_wall *p1);
 t_bool			is_triangle_visible(t_triangle *viewed_tri, t_xyz pos);

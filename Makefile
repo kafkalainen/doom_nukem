@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/22 10:20:57 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/23 09:42:05 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,7 +122,7 @@ SRCS = \
 	parsing$(SLASH)check_portal_height_diff.c \
 	parsing$(SLASH)check_if_same_point.c \
 	parsing$(SLASH)free_sector.c \
-	parsing$(SLASH)generate_doors.c \
+	parsing$(SLASH)generate_door.c \
 	parsing$(SLASH)get_next_value.c \
 	parsing$(SLASH)initialize_entity_textures.c \
 	parsing$(SLASH)initialize_entity_triangles.c \
@@ -133,6 +133,7 @@ SRCS = \
 	parsing$(SLASH)parse_sector_a.c \
 	parsing$(SLASH)parse_sector_b.c \
 	parsing$(SLASH)parse_surfaces.c \
+	parsing$(SLASH)resize_portal.c \
 	parsing$(SLASH)triangulate_floor_and_ceiling.c \
 	png_parser$(SLASH)color_utils.c \
 	png_parser$(SLASH)crc.c \
@@ -181,6 +182,7 @@ SRCS = \
 	update_player$(SLASH)activate_object.c \
 	update_player$(SLASH)advance_story.c \
 	update_player$(SLASH)check_distances.c \
+	update_player$(SLASH)check_sector_height.c \
 	update_player$(SLASH)check_for_matching_key.c \
 	update_player$(SLASH)check_if_open_portal.c \
 	update_player$(SLASH)get_bullet_hit_point.c \

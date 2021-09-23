@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_edit_sector.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:12:08 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/21 10:14:17 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/23 09:16:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	editor_edit_sector(t_editor *editor)
 		if (check_elevator_prerequisites(&editor->entity_list,
 				&editor->sector_list, &editor->action))
 			convert_sector_to_lift(editor->temp_sector, &editor->entity_list);
+		add_notification(editor, "Converted to lift", 3000);
 		editor->action.create_elevator = 0;
 		editor->action.edit_sector = 0;
 	}

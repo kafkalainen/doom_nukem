@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 11:30:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 09:40:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int				change_door_to_portal(int door);
 int				check_if_lines_cut(t_sector *sector);
 int				check_if_sector_has_same_points(t_sector *sector);
 Uint32			check_if_same_point(t_xyz a, t_xyz b);
-Uint32			check_portal_floor_difference(t_wall *portal,
-					t_wall *portal_behind);
-Uint32			check_portal_ceiling_difference(t_wall *portal,
-					t_wall *portal_behind);
+void			check_portal_floor_difference(t_wall *portal,
+					t_wall *portal_behind, t_bool *validation);
+void			check_portal_ceiling_difference(t_wall *portal,
+					t_wall *portal_behind, t_bool *validation);
 int				close_linkedlist(t_wall **point);
 void			close_surface_list(t_surface **head);
 void			free_entities(t_home *home);
@@ -54,7 +54,7 @@ void			initialize_lamp_to_ceiling(t_entity *entity, t_home *home);
 void			initialize_switches(t_wall *wall, t_point_data *left);
 void			initialize_wall_triangles(t_wall *wall, t_point_data *left,
 					t_point_data *right);
-Uint32			generate_doors(t_wall *current_portal);
+Uint32			generate_door(t_wall *portal);
 t_sector		*get_sector_data(unsigned char *buf, unsigned int *pos,
 					ssize_t size);
 int				get_door_lock(int door_idx);
@@ -76,6 +76,7 @@ int				parse_story_data(t_sector *new_sector, unsigned char *buf,
 int				parse_sector_data(unsigned char *buf, t_player *plr,
 					t_home *home, ssize_t size);
 int				parse_pixel_data(char *ptr, t_texture *tex);
+void			resize_portal(t_wall *front, t_wall *behind, char c);
 int				set_to_null(t_texture **tex, int error);
 unsigned int	triangulate_floor(t_sector *sector, char choice);
 unsigned int	triangulate_ceiling(t_sector *sector, char choice);

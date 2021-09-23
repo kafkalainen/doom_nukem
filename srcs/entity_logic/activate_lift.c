@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:50:13 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:37:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/23 10:02:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	activate_lift(t_home *home, t_entity *entity, t_player *plr)
 	{
 		if (home->sectors[entity->is_linked - 2]->moving_until < plr->time)
 		{
-			if (entity->state)
+			if (!entity->state)
 			{
 				home->sectors[entity->is_linked - 2]->lift_dir = upper;
 				height
