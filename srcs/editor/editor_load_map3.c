@@ -24,7 +24,8 @@ int	editor_get_map_header(unsigned int *pos, unsigned char *buf,
 		return (-1);
 	if (get_next_int_value(&editor->end_sector.sector, buf, &pos, size))
 		return (-1);
-	if (nbr_of_sectors <= 0 || editor->end_sector.sector <= 0)
+	if (nbr_of_sectors <= 0 || editor->end_sector.sector < 0
+		|| editor->end_sector.sector > nbr_of_sectors)
 		return (-1);
 	if (get_next_int_value(&linked, buf, &pos, size))
 		return (-1);

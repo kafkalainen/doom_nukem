@@ -3,14 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_textfields.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:08:33 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 16:24:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/22 18:37:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+static void	display_wall_tex(t_editor_walls *wall, t_buffer *buffer,
+	t_texture **textures, t_box *box)
+{
+	t_texel			*tex;
+
+	tex = get_tex(wall->type, textures);
+	draw_image_static(box->start, tex, buffer,
+		(float)(ft_fabsf(box->end.x - box->start.x) / tex->width));
+}
+
+static void	display_door_tex(t_editor_walls *wall, t_buffer *buffer,
+	t_texture **textures, t_box *box)
+{
+	t_editor_walls	*prev;
+	t_texel			*tex;
+
+	if (wall->type < SECRET_DOOR)
+	{
+		tex = get_tex(-door, textures);
+		if (wall->type >= MILITARY_INDEX)
+			tex = get_tex(-military_keycard_sprite, textures);
+		else if (wall->type >= ENGINEERING_INDEX)
+			tex = get_tex(-engineering_keycard_sprite, textures);
+		else if (wall->type >= CLEANING_INDEX)
+			tex = get_tex(-cleaning_keycard_sprite, textures);
+		draw_image_static(box->start, tex, buffer,
+			(float)(ft_fabsf(box->end.x - box->start.x) / tex->width));
+	}
+	else if (wall->type >= SECRET_DOOR
+		&& wall->type < (SECRET_DOOR + DOOR_INDEX))
+	{
+		prev = wall;
+		while (prev->next->idx != wall->idx)
+			prev = prev->next;
+		tex = get_tex(prev->type, textures);
+		draw_image_static(box->start, tex, buffer,
+			(float)(ft_fabsf(box->end.x - box->start.x) / tex->width));
+	}
+}
 
 static void	draw_wall_info(t_editor_walls *wall, t_buffer *buffer)
 {
@@ -37,7 +77,6 @@ void	draw_wall_textfields(t_editor_walls *wall,
 	t_buffer *buffer, t_texture **textures)
 {
 	t_box			box;
-	t_texel			*tex;
 
 	if (!wall)
 		return ;
@@ -45,17 +84,9 @@ void	draw_wall_textfields(t_editor_walls *wall,
 	box.end = vec2(200, 220);
 	draw_wall_info(wall, buffer);
 	if (wall->type < 0)
-	{
-		tex = get_tex(wall->type, textures);
-		draw_image_static(box.start, tex, buffer,
-			(float)(ft_fabsf(box.end.x - box.start.x) / tex->width));
-	}
+		display_wall_tex(wall, buffer, textures, &box);
 	else if (wall->type < 3000)
 		return ;
 	else
-	{
-		tex = get_tex(-door, textures);
-		draw_image_static(box.start, tex, buffer,
-			(float)(ft_fabsf(box.end.x - box.start.x) / tex->width));
-	}
+		display_door_tex(wall, buffer, textures, &box);
 }

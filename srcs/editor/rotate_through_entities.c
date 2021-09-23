@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 10:22:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 09:38:25 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/22 19:00:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ void	rotate_through_entities(t_entity_list *entity, t_action *action)
 	if (entity->entity_type == skull_skulker)
 		entity->entity_type = thing;
 	else if (entity->entity_type == thing)
-		entity->entity_type = drone;
-	else if (entity->entity_type == drone)
-		entity->entity_type = crewmember;
-	else if (entity->entity_type == crewmember)
 		entity->entity_type = ammo_pack;
 	else if (entity->entity_type == ammo_pack)
 		entity->entity_type = keycard_cleaning;

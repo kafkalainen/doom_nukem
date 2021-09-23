@@ -22,8 +22,8 @@
 # define FOV 1.57079616f
 # define MAP_MAX_LINES 128
 # define MINIMAP_SIZE 10
-# define ZOOM_OUT_MAX 0.031250f
-# define ZOOM_IN_MAX 2.0f
+# define ZOOM_OUT_MAX 0.015625f
+# define ZOOM_IN_MAX 0.25f
 # define PORTAL_HEIGHT 5
 
 /*

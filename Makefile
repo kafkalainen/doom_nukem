@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2021/09/23 09:42:05 by jnivala          ###   ########.fr        #
+=======
+#    Updated: 2021/09/22 17:33:23 by rzukale          ###   ########.fr        #
+>>>>>>> 13438f921099d344a97bd7b7ce6da866398326d6
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +72,7 @@ SRCS = \
 	editor$(SLASH)editor_reset_player_and_end.c \
 	editor$(SLASH)editor_save_map.c \
 	editor$(SLASH)editor_sort_sector_vertices.c \
+	editor$(SLASH)editor_update_entity_values.c \
 	editor$(SLASH)event_actions.c \
 	editor$(SLASH)free_editor_data.c \
 	editor$(SLASH)get_clicked_entity.c \

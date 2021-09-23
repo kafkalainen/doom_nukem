@@ -16,6 +16,10 @@ static void	check_player_dir(t_player *plr)
 {
 	t_m4x4	matrix;
 
+	if (plr->input.left == 1 && plr->input.up == 0)
+		matrix = rotation_matrix_y(PI_BY_TWO);
+	if (plr->input.right == 1 && plr->input.up == 0)
+		matrix = rotation_matrix_y(-PI_BY_TWO);
 	if (plr->input.up == 1)
 	{
 		if (plr->input.left == 1)
@@ -34,10 +38,6 @@ static void	check_player_dir(t_player *plr)
 		else
 			matrix = rotation_matrix_y(PI);
 	}
-	if (plr->input.left == 1 && plr->input.up == 0)
-		matrix = rotation_matrix_y(PI_BY_TWO);
-	if (plr->input.right == 1 && plr->input.up == 0)
-		matrix = rotation_matrix_y(-PI_BY_TWO);
 	plr->move_dir = multi_vec_matrix(&plr->look_dir, &matrix);
 }
 
