@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:51:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 15:13:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/23 15:59:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,32 @@ int	editor_new_sector_wallpoints(t_editor *editor,
 	return (0);
 }
 
+static void	loop_for_portals_and_set_them_to_new_idx(t_editor_sector *sector, t_editor_sector **head, int new_idx)
+{
+	t_editor_walls	*wall;
+	t_editor_walls	*temp_wall;
+	t_editor_sector	*temp;
+	int				i;
+
+	i = 0;
+	wall = sector->walls;
+	while (i < sector->nb_of_walls)
+	{
+		if (wall->type >= 0)
+		{
+			temp = get_editor_sector_with_idx(head, wall->type);
+			if (temp)
+			{
+				temp_wall = get_editor_wall_with_type(&temp->walls, temp->nb_of_walls, sector->idx_sector);
+				if (temp_wall)
+					temp_wall->type = new_idx;
+			}
+		}
+		i++;
+		wall = wall->next;
+	}
+}
+
 void	reset_sector_indexes(t_editor_sector **head)
 {
 	t_editor_sector	*temp;
@@ -58,6 +84,7 @@ void	reset_sector_indexes(t_editor_sector **head)
 	temp = *head;
 	while (temp)
 	{
+		loop_for_portals_and_set_them_to_new_idx(temp, head, idx);
 		temp->idx_sector = idx;
 		temp = temp->next;
 		idx++;
