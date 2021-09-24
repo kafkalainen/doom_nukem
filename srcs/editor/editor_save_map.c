@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:49:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/22 17:31:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/24 10:09:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ t_bool	check_saving_prerequisites(t_editor *editor)
 	if (editor->end_sector.sector == -1)
 	{
 		add_notification(editor, "Cannot save. Level end missing.", 3000);
+		return (false);
+	}
+	if (editor->end_sector.sector == editor->plr.sector)
+	{
+		add_notification(editor,
+			"Cannot save. Player start sector cannot also be level end sector.",
+			3000);
 		return (false);
 	}
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/24 12:55:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 14:48:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	set_new_ceiling_ground(t_height *height, t_uchar **int_string,
 			t_action *action, t_editor *editor)
 {
-	int	input_value;
-	int	temp;
+	int				input_value;
+	int				temp;
 
 	input_value = ft_atoi((const char *)*int_string);
 	snap_to_range(&input_value);
@@ -26,6 +26,7 @@ static void	set_new_ceiling_ground(t_height *height, t_uchar **int_string,
 		{
 			temp = height->ceiling;
 			height->ceiling = input_value;
+			validate_door_size(editor, &height->ceiling, temp);
 		}
 	}
 	if (action->edit_floor_height)
@@ -34,11 +35,9 @@ static void	set_new_ceiling_ground(t_height *height, t_uchar **int_string,
 		{
 			temp = height->ground;
 			height->ground = input_value;
+			validate_door_size(editor, &height->ground, temp);
 		}
 	}
-	if (editor->temp_wall->type > 2999
-		&& !check_door_height(editor, editor->temp_wall, editor->temp_sector))
-		height->ceiling = temp;
 }
 
 static void	handle_wall_height(t_editor *editor)

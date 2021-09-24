@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 11:10:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 12:26:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 14:47:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,17 @@ t_bool	check_door_height(t_editor *editor, t_editor_walls *way,
 	return (false);
 }
 
-t_bool	check_legal_doors(t_editor *editor, t_editor_sector *sector)
+void	validate_door_size(t_editor *editor, float *height, int val)
 {
-	t_editor_walls	*wall;
-	int				i;
+	t_editor_walls *wall;
 
-	i = 0;
-	wall = sector->walls;
-	while (i < sector->nb_of_walls)
-	{
-		if (wall->type > 2999)
-		{
-			if (!check_door_height(editor, wall, sector))
-				return (false);
-		}
-		wall = wall->next;
-		i++;
-	}
-	return (true);
+	if (!editor->temp_wall)
+		return ;
+	wall = get_previous_wall(editor->temp_wall, editor->temp_sector);
+	if (editor->temp_wall->type > 2999
+		&& !check_door_height(editor, editor->temp_wall, editor->temp_sector))
+		*height = val;
+	if (wall && wall->type > 2999
+		&& !check_door_height(editor, wall, editor->temp_sector))
+		*height = val;
 }

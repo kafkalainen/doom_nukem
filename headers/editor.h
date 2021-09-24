@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/24 12:28:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 14:47:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,7 +314,6 @@ t_bool			check_for_intersecting_lines(t_editor_sector *sector,
 					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_door_height(t_editor *editor, t_editor_walls *way,
 					t_editor_sector *current);
-t_bool			check_legal_doors(t_editor *editor, t_editor_sector *sector);
 t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,
 					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_if_another_sector_is_inside(t_editor_sector *tested,
@@ -329,6 +328,7 @@ void			editor_reset_wall_indexes(t_editor_walls **walls,
 					int nbr_of_walls);
 int				get_portal_idx(int idx);
 void			snap_to_range(int *height);
+void			validate_door_size(t_editor *editor, float *height, int val);
 
 /*
 ** Entities
@@ -348,8 +348,8 @@ void			delete_entities_from_sector(t_entity_list **entity_head,
 					int sector_idx);
 unsigned int	get_entity_count(t_entity_list **list);
 t_uint			get_entity_colour(t_entity_list *entity, int selected_entity);
-t_editor_walls	*get_editor_wall_with_type(t_editor_walls **list, int nb_of_walls,
-					int idx);
+t_editor_walls	*get_editor_wall_with_type(t_editor_walls **list,
+					int nb_of_walls, int idx);
 t_entity_list	*get_selected_entity(t_entity_list **head, t_mouse_data	mdata);
 t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click,
 					int *selected_entity);
@@ -410,6 +410,11 @@ int				editor_sector_remove_wallpoint(t_editor *editor,
 					t_editor_sector *sector);
 void			check_for_portals_and_set_defaults(t_editor_sector *sector,
 					t_editor_sector **head);
+void			loop_through_entities_and_reset_indexes(t_editor_sector *sector,
+					t_entity_list **head, int new_idx);
+void			loop_for_portals_and_set_them_to_new_idx(
+					t_editor_sector *sector,
+					t_editor_sector **head, int new_idx);
 void			reset_portals_to_default_walls(t_editor_sector *sector,
 					int sector_idx);
 
@@ -497,6 +502,8 @@ void			get_midpoint_of_walls(t_editor_sector *sector,
 					int wall_idx, int *x, int *y);
 int				get_selected_floor_height(t_editor_sector *sector,
 					int wall_idx);
+t_editor_walls	*get_previous_wall(t_editor_walls *wall,
+				t_editor_sector *sector);
 
 void			get_lowest_floor(t_editor_sector *sector, int *height);
 t_bool			check_for_elevator_button(t_entity_list **head, int sector_idx);
