@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/18 08:27:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 16:33:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 typedef struct s_wall
 {
 	t_triangle			top;
-	t_triangle			bottom;
+	t_triangle			bot;
 	t_xy				point;
 	Uint32				is_door;
 	Uint32				is_closed;

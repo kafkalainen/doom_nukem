@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 11:37:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 13:33:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 16:35:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_bool	check_if_too_close_to_a_wall(t_wall *wall, float width,
 			if (get_distance_squared(isection, pos) < width * width)
 				return (true);
 		}
-		if (vec3_ray_triangle_intersect(&wall->bottom, pos, dir, &isection))
+		if (vec3_ray_triangle_intersect(&wall->bot, pos, dir, &isection))
 		{
 			if (get_distance_squared(isection, pos) < width * width)
 				return (true);

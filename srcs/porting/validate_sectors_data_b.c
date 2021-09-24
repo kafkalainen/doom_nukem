@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 19:09:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 08:35:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 16:46:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static int	triangle_same_triangles(t_wall *test, t_wall *temp,
 		&& test->top.p[0].z == temp->top.p[0].z
 		&& i != j)
 		return (1);
-	else if (test->bottom.p[2].x == temp->bottom.p[2].x
-		&& test->bottom.p[2].y == temp->bottom.p[2].y
-		&& test->bottom.p[2].z == temp->bottom.p[2].z
+	else if (test->bot.p[2].x == temp->bot.p[2].x
+		&& test->bot.p[2].y == temp->bot.p[2].y
+		&& test->bot.p[2].z == temp->bot.p[2].z
 		&& i != j)
 		return (1);
 	else
@@ -94,7 +94,7 @@ int	check_if_sector_has_same_points(t_sector *sector)
 		while (j < sector->nb_of_walls)
 		{
 			if (triangle_same_points_test(&test->top)
-				|| triangle_same_points_test(&test->bottom))
+				|| triangle_same_points_test(&test->bot))
 				return (1);
 			if (triangle_same_triangles(test, temp, i, j))
 				return (1);

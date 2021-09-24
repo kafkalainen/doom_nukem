@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 08:24:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 16:35:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 17:08:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	check_portal_floor_difference(t_wall *portal,
 	t_wall *portal_behind, t_bool *validation)
 {
-	if (portal->bottom.p[0].y > portal_behind->bottom.p[2].y)
+	if (portal->bot.p[0].y > portal_behind->bot.p[2].y)
 		*validation = true;
-	else if (portal->bottom.p[2].y > portal_behind->bottom.p[0].y)
+	else if (portal->bot.p[2].y > portal_behind->bot.p[0].y)
 		*validation = true;
 	else
 		*validation = false;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 08:19:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 08:30:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 17:57:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_wall	*get_highest_ground(t_sector *sector)
 	highest_ground = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
-		if (current_ground->bottom.p[0].y > highest_ground->bottom.p[0].y)
+		if (current_ground->bot.p[0].y > highest_ground->bot.p[0].y)
 			highest_ground = current_ground;
 		i++;
 	}
@@ -58,7 +58,7 @@ unsigned int	triangulate_floor(t_sector *sector, char choice)
 	i = 0;
 	sector->ground = NULL;
 	current_wall = get_highest_ground(sector);
-	origin = current_wall->bottom.p[0];
+	origin = current_wall->bot.p[0];
 	current_wall = current_wall->next;
 	while (i < sector->nb_of_walls - 2)
 	{

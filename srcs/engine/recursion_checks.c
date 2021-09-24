@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 17:17:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 17:05:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	check_if_portal(t_wall *wall)
 {
-	if (wall->top.type >= 0 && wall->bottom.type >= 0)
+	if (wall->top.type >= 0 && wall->bot.type >= 0)
 		return (true);
 	else
 		return (false);

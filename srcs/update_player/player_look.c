@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 11:17:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 09:03:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 16:49:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	check_if_doors(t_home *home, t_player *plr, t_bool *visible_object)
 		{
 			if (vec3_ray_triangle_intersect(&wall->top,
 					plr->pos, plr->look_dir, &isection)
-				|| vec3_ray_triangle_intersect(&wall->bottom,
+				|| vec3_ray_triangle_intersect(&wall->bot,
 					plr->pos, plr->look_dir, &isection))
 				*visible_object = 1;
 			if (*visible_object && get_distance_squared(isection, plr->pos)

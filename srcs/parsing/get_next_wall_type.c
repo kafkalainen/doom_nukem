@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_hull.c                                        :+:      :+:    :+:   */
+/*   get_next_wall_type.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/21 09:04:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 16:37:07 by jnivala          ###   ########.fr       */
+/*   Created: 2021/09/24 17:10:29 by jnivala           #+#    #+#             */
+/*   Updated: 2021/09/24 17:12:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	show_hull(t_triangle *viewed_tri)
+void	get_next_wall_type(t_wall *portal, int *next)
 {
-	if (viewed_tri->hull)
-	{
-		initialize_lumels(&viewed_tri->lu[0], &viewed_tri->lu[1],
-			&viewed_tri->lu[2], 0.275f);
-		viewed_tri->type = -wall7;
-	}
+	if (portal->next->top.type < 0 && portal->next->top.type != -door)
+		*next = portal->next->top.type;
+	else
+		*next = -2;
 }

@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 15:50:22 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 11:38:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 20:38:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_bool		test_type(t_editor_walls *tmp, int type)
+static t_bool	test_type(t_editor_walls *tmp, int type)
 {
 	if (tmp->type == type)
 		return (true);

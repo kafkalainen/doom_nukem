@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:02:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 08:48:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 17:45:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	generate_doors_to_portals(t_sector *original, t_sector **next,
 	portal_behind->is_door = 1;
 	portal->is_locked = unlocked;
 	portal_behind->is_locked = unlocked;
-	original->nb_of_walls += generate_door(portal);
-	next[portal->top.type]->nb_of_walls += generate_door(portal_behind);
+	generate_door(portal, &original->nb_of_walls);
+	generate_door(portal_behind, &next[portal->top.type]->nb_of_walls);
 }
 
 void	calc_lift_doors(t_home *home)

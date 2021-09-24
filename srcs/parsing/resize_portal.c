@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 09:40:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 09:40:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 17:59:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	resize_portal(t_wall *front, t_wall *behind, char c)
 		min_ceil[1] = ft_fmin(front->top.p[2].y, behind->top.p[1].y);
 		behind->top.p[2].y = min_ceil[0];
 		behind->top.p[1].y = min_ceil[1];
-		behind->bottom.p[1].y = min_ceil[0];
+		behind->bot.p[1].y = min_ceil[0];
 	}
 	else
 	{
-		min_ceil[0] = ft_fmax(front->bottom.p[0].y, behind->bottom.p[2].y);
-		min_ceil[1] = ft_fmax(front->bottom.p[2].y, behind->bottom.p[0].y);
-		behind->bottom.p[2].y = min_ceil[0];
-		behind->bottom.p[0].y = min_ceil[1];
+		min_ceil[0] = ft_fmax(front->bot.p[0].y, behind->bot.p[2].y);
+		min_ceil[1] = ft_fmax(front->bot.p[2].y, behind->bot.p[0].y);
+		behind->bot.p[2].y = min_ceil[0];
+		behind->bot.p[0].y = min_ceil[1];
 		behind->top.p[0].y = min_ceil[1];
 	}
 }

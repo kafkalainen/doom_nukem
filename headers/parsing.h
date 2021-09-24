@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 11:29:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 17:47:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			initialize_lamp_to_ceiling(t_entity *entity, t_home *home);
 void			initialize_switches(t_wall *wall, t_point_data *left);
 void			initialize_wall_triangles(t_wall *wall, t_point_data *left,
 					t_point_data *right);
-Uint32			generate_door(t_wall *portal);
+void			generate_door(t_wall *portal, t_uint *nb_of_walls);
 t_sector		*get_sector_data(unsigned char *buf, unsigned int *pos,
 					ssize_t size);
 int				get_door_lock(int door_idx);

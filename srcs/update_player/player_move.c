@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 15:06:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 16:50:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_wall	*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir)
 	while (i < sector->nb_of_walls)
 	{
 		if (vec3_ray_triangle_intersect(&temp->top, pos, dir, &isection)
-			|| vec3_ray_triangle_intersect(&temp->bottom, pos, dir, &isection))
+			|| vec3_ray_triangle_intersect(&temp->bot, pos, dir, &isection))
 		{
 			if (get_distance_squared(pos, isection) <= OPEN_DOOR_DISTANCE)
 				return (temp);

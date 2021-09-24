@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 14:52:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 14:52:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 16:37:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	translate_walls(t_sector *sector, t_xyz direction)
 	while (i < sector->nb_of_walls)
 	{
 		wall->top = translate_triangle(&wall->top, direction);
-		wall->bottom = translate_triangle(&wall->bottom, direction);
+		wall->bot = translate_triangle(&wall->bot, direction);
 		wall = wall->next;
 		i++;
 	}
