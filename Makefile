@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/23 16:00:44 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/24 12:52:41 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS = \
 	editor$(SLASH)check_for_intersecting_lines.c \
 	editor$(SLASH)check_grid_events.c \
 	editor$(SLASH)check_grid_events2.c \
+	editor$(SLASH)check_door_height.c \
 	editor$(SLASH)check_if_another_sector_is_inside.c \
 	editor$(SLASH)create_portals.c \
 	editor$(SLASH)cycle_door.c \

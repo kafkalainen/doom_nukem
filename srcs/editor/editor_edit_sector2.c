@@ -6,11 +6,19 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:14:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/23 10:23:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 12:28:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+void	snap_to_range(int *height)
+{
+	if (*height > 99)
+		*height = 99;
+	if (*height < -99)
+		*height = -99;
+}
 
 void	update_sector_light_values(t_editor_sector *sector,
 		t_entity_list **head)
@@ -33,52 +41,62 @@ void	update_sector_light_values(t_editor_sector *sector,
 }
 
 void	editor_set_all_sector_floor_heights(t_editor_sector *sector,
-	unsigned char **int_string)
+	unsigned char **int_string, t_editor *editor)
 {
 	int				floor_height;
 	t_editor_walls	*wall;
 	int				i;
+	int				tmp;
 
 	i = 0;
 	wall = sector->walls;
 	floor_height = ft_atoi((const char *)*int_string);
-	if (floor_height > 99)
-		floor_height = 99;
-	if (floor_height < -99)
-		floor_height = -99;
-	free(*int_string);
-	*int_string = NULL;
-	while (i < sector->nb_of_walls)
+	snap_to_range(&floor_height);
+	ft_strdel((char **)int_string);
+	while (i++ < sector->nb_of_walls)
 	{
 		if (wall->height.ceiling > floor_height)
+		{
+			tmp = wall->height.ground;
 			wall->height.ground = floor_height;
+			if (wall->type > 2999 && !check_door_height(editor, wall, sector))
+			{
+				wall->height.ground = tmp;
+				floor_height = tmp;
+				i = 0;
+			}
+		}
 		wall = wall->next;
-		i++;
 	}
 }
 
 void	editor_set_all_sector_ceiling_heights(t_editor_sector *sector,
-	unsigned char **int_string)
+	unsigned char **int_string, t_editor *editor)
 {
 	int				ceiling_height;
 	t_editor_walls	*wall;
 	int				i;
+	int				tmp;
 
 	i = 0;
 	wall = sector->walls;
 	ceiling_height = ft_atoi((const char *)*int_string);
-	if (ceiling_height > 99)
-		ceiling_height = 99;
-	if (ceiling_height < -99)
-		ceiling_height = -99;
-	free(*int_string);
-	*int_string = NULL;
-	while (i < sector->nb_of_walls)
+	snap_to_range(&ceiling_height);
+	ft_strdel((char **)int_string);
+	while (i++ < sector->nb_of_walls)
 	{
 		if (wall->height.ground < ceiling_height)
+		{
+			tmp = wall->height.ceiling;
 			wall->height.ceiling = ceiling_height;
+			if (wall->type > 2999 && !check_door_height(editor, wall, sector))
+			{
+				wall->height.ceiling = tmp;
+				ceiling_height = tmp;
+				i = 0;
+			}
+		}
 		wall = wall->next;
-		i++;
 	}
 }
 
