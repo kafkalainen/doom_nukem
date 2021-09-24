@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/24 10:11:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/24 13:43:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ enum e_buttons
 	button_create_powerstation,
 	button_create_elevator_button,
 	button_change_to_door,
+	button_change_to_window,
 	button_entity_index,
 	button_change_entity_type,
 	button_toggle_entity_is_linked,
@@ -175,6 +176,7 @@ typedef struct s_action
 	int				set_all_sector_ceiling_heights;
 	int				set_all_sector_floor_heights;
 	t_bool			cycle_door;
+	t_bool			convert_to_window;
 }					t_action;
 
 typedef struct s_editor_xyz

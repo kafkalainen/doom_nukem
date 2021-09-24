@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/23 16:00:44 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/24 14:48:42 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS = \
 	editor$(SLASH)editor_edit_sector.c \
 	editor$(SLASH)editor_edit_sector2.c \
 	editor$(SLASH)editor_edit_wall.c \
+	editor$(SLASH)editor_edit_wall_window.c \
 	editor$(SLASH)editor_entity_creation_is_allowed.c \
 	editor$(SLASH)editor_entity_creation_helpers.c \
 	editor$(SLASH)editor_entity_link_booleans.c \

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 15:45:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/24 13:45:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	initialize_actions(t_action *action)
 	initialize_menu_selections(action);
 	initialize_toggles(action);
 	initialize_input(action);
+	action->convert_to_window = false;
 }
