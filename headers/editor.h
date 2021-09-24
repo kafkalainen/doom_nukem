@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/24 13:43:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/24 14:58:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,6 +314,8 @@ void			remove_last_point(t_editor_walls **walls, int *nb_of_walls);
 t_bool			check_for_last_point(t_editor_sector *sector, t_action *action);
 t_bool			check_for_intersecting_lines(t_editor_sector *sector,
 					t_screen_xy p0, t_screen_xy p1);
+t_bool			check_door_height(t_editor *editor, t_editor_walls *way,
+					t_editor_sector *current);
 t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,
 					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_if_another_sector_is_inside(t_editor_sector *tested,
@@ -326,6 +328,9 @@ int				editor_orientation_of_three_points(t_screen_xy a,
 					t_screen_xy b, t_screen_xy c);
 void			editor_reset_wall_indexes(t_editor_walls **walls,
 					int nbr_of_walls);
+int				get_portal_idx(int idx);
+void			snap_to_range(int *height);
+void			validate_door_size(t_editor *editor, float *height, int val);
 
 /*
 ** Entities
@@ -499,6 +504,8 @@ void			get_midpoint_of_walls(t_editor_sector *sector,
 					int wall_idx, int *x, int *y);
 int				get_selected_floor_height(t_editor_sector *sector,
 					int wall_idx);
+t_editor_walls	*get_previous_wall(t_editor_walls *wall,
+				t_editor_sector *sector);
 
 void			get_lowest_floor(t_editor_sector *sector, int *height);
 t_bool			check_for_elevator_button(t_entity_list **head, int sector_idx);
@@ -520,9 +527,9 @@ void			get_connecting_sectors(t_editor_walls *wall,
 void			editor_edit_sector(t_editor *editor);
 void			editor_edit_change_sector_ceiling_tex(t_editor *editor);
 void			editor_set_all_sector_ceiling_heights(t_editor_sector *sector,
-					unsigned char **int_string);
+					unsigned char **int_string, t_editor *editor);
 void			editor_set_all_sector_floor_heights(t_editor_sector *sector,
-					unsigned char **int_string);
+					unsigned char **int_string, t_editor *editor);
 void			update_sector_light_values(t_editor_sector *sector,
 					t_entity_list **head);
 void			update_all_entity_heights(t_editor *editor);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:12:08 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/23 09:16:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 11:43:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	editor_edit_sector_ceiling_floor_heights(t_editor *editor)
 		{
 			if (editor->int_string)
 				editor_set_all_sector_ceiling_heights(editor->temp_sector,
-					&editor->int_string);
+					&editor->int_string, editor);
 			editor->action.set_all_sector_ceiling_heights = 0;
 			editor->action.edit_sector = 0;
 		}
@@ -106,7 +106,7 @@ static void	editor_edit_sector_ceiling_floor_heights(t_editor *editor)
 		{
 			if (editor->int_string)
 				editor_set_all_sector_floor_heights(editor->temp_sector,
-					&editor->int_string);
+					&editor->int_string, editor);
 			editor->action.set_all_sector_floor_heights = 0;
 			editor->action.edit_sector = 0;
 		}
