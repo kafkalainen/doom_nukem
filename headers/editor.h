@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/23 15:53:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 10:11:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,8 +343,8 @@ void			delete_entities_from_sector(t_entity_list **entity_head,
 					int sector_idx);
 unsigned int	get_entity_count(t_entity_list **list);
 t_uint			get_entity_colour(t_entity_list *entity, int selected_entity);
-t_editor_walls	*get_editor_wall_with_type(t_editor_walls **list, int nb_of_walls,
-					int idx);
+t_editor_walls	*get_editor_wall_with_type(t_editor_walls **list,
+					int nb_of_walls, int idx);
 t_entity_list	*get_selected_entity(t_entity_list **head, t_mouse_data	mdata);
 t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click,
 					int *selected_entity);
@@ -405,6 +405,11 @@ int				editor_sector_remove_wallpoint(t_editor *editor,
 					t_editor_sector *sector);
 void			check_for_portals_and_set_defaults(t_editor_sector *sector,
 					t_editor_sector **head);
+void			loop_through_entities_and_reset_indexes(t_editor_sector *sector,
+					t_entity_list **head, int new_idx);
+void			loop_for_portals_and_set_them_to_new_idx(
+					t_editor_sector *sector,
+					t_editor_sector **head, int new_idx);
 void			reset_portals_to_default_walls(t_editor_sector *sector,
 					int sector_idx);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_edit_wall.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/23 16:10:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 09:59:20 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,24 @@ static void	handle_wall_height(t_height *height,
 
 static t_bool	check_legal_door_height(t_editor *editor)
 {
-	t_editor_sector *sector;
+	t_editor_sector	*sector;
 	t_editor_walls	*wall;
+
 	if ((editor->temp_wall->height.ceiling
-		- editor->temp_wall->height.ground) > 5
+			- editor->temp_wall->height.ground) > 5
 		&& (editor->temp_wall->height.ceiling
-		- editor->temp_wall->height.ground) < 2)
+			- editor->temp_wall->height.ground) < 2)
 	{
-		sector = get_editor_sector_with_idx(&editor->sector_list, editor->temp_wall->type);
+		sector = get_editor_sector_with_idx(&editor->sector_list,
+				editor->temp_wall->type);
 		wall = get_editor_wall_with_type(&sector->walls, sector->nb_of_walls,
-			editor->temp_sector->idx_sector);
+				editor->temp_sector->idx_sector);
 		if ((ft_imin(editor->temp_wall->height.ceiling, wall->height.ceiling)
-			- ft_imax(editor->temp_wall->height.ground, wall->height.ground)) < 2
+				- ft_imax(editor->temp_wall->height.ground,
+					wall->height.ground)) < 2
 			&& ft_imin(editor->temp_wall->height.ceiling, wall->height.ceiling)
-			- ft_imax(editor->temp_wall->height.ground, wall->height.ground) > 5)
+			- ft_imax(editor->temp_wall->height.ground,
+				wall->height.ground) > 5)
 			return (true);
 	}
 	return (false);
@@ -116,11 +120,12 @@ void	editor_edit_wall(t_editor *editor)
 	{
 		if (check_legal_door_height(editor))
 		{
-			add_notification(editor, "Door height must be between 2 and 4", 3000);
+			add_notification(editor,
+				"Door height must be between 2 and 4", 3000);
 			editor->action.cycle_door = false;
 		}
 		else
 			editor->action.cycle_door = cycle_door(&editor->sector_list,
-				editor->temp_wall, editor->temp_sector->idx_sector);
+					editor->temp_wall, editor->temp_sector->idx_sector);
 	}
 }
