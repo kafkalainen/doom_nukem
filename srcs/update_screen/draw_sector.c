@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/25 12:29:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 09:04:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
 
 //REVISIT
 //CLIP FIRST AGAINST NEAR PLANE, THEN AGAINST FAR PLANE.
