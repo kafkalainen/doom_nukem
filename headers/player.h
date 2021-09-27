@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/24 16:32:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 13:21:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ void			update_player(t_player *plr, t_home *home, Uint32 delta_time);
 void			shooting_handle(t_home *home, t_ray *ray);
 t_bool			strafe_along_the_wall(t_wall *wall, t_player *plr,
 					t_home *home, Uint32 t);
-Uint32			test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
+t_bool			test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 					t_ray *ray);
 void			player_take_damage(t_player *plr, Uint32 damage, Uint32 time);
 void			reload_weapon(t_player *plr, Uint32 t);
