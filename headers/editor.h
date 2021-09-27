@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/24 14:58:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:09:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -477,7 +477,7 @@ int				editor_get_entity_data(unsigned char *buf,
 					t_entity_list *entity, unsigned int *pos, ssize_t size);
 t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
 					t_screen_xy c, t_screen_xy b);
-void			create_portal_between_sectors(t_editor_sector **head,
+t_bool			create_portal_between_sectors(t_editor_sector **head,
 					t_action *action);
 void			notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
 					int *notify_time);
@@ -533,5 +533,8 @@ void			editor_set_all_sector_floor_heights(t_editor_sector *sector,
 void			update_sector_light_values(t_editor_sector *sector,
 					t_entity_list **head);
 void			update_all_entity_heights(t_editor *editor);
+t_bool			convert_to_windowed_wall(t_editor_walls *wall,
+					t_editor_sector *sector,
+					t_editor_sector **head);
 
 #endif

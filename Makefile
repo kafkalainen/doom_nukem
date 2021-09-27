@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/24 14:58:32 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/27 14:26:39 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,6 @@ SRCS = \
 	editor$(SLASH)editor_edit_sector.c \
 	editor$(SLASH)editor_edit_sector2.c \
 	editor$(SLASH)editor_edit_wall.c \
-	editor$(SLASH)editor_edit_wall_window.c \
 	editor$(SLASH)editor_entity_creation_is_allowed.c \
 	editor$(SLASH)editor_entity_creation_helpers.c \
 	editor$(SLASH)editor_entity_link_booleans.c \
@@ -83,6 +82,7 @@ SRCS = \
 	editor$(SLASH)get_editor_sector_with_idx.c \
 	editor$(SLASH)get_editor_wall_with_type.c \
 	editor$(SLASH)get_ndc.c \
+	editor$(SLASH)get_previous_wall.c \
 	editor$(SLASH)handle_events.c \
 	editor$(SLASH)handle_events2.c \
 	editor$(SLASH)handle_events3.c \
