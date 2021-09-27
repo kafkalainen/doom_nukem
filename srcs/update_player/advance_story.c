@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 14:34:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 15:41:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	write_message(t_buffer *buffer, t_player *plr, char *msg,
 
 	percentage = 1.0f - ((plr->message_time - plr->time - 5000) * 0.0002f);
 	mod->len = (size_t)(ft_strlen(msg) * percentage);
+	if (mod->len > 90)
+		mod->len = 90;
 	if (mod->len > 0)
 	{
 		offset.x = 0.5f * (buffer->width - (mod->len * mod->size * 5));

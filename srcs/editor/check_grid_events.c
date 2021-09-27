@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_grid_events.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 14:11:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 15:52:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,11 @@ void	check_grid_events(t_editor *editor)
 	{
 		if (editor->temp_sector && editor->action.prev_sector != -1)
 		{
-			if (create_portal_between_sectors(&editor->sector_list, &editor->action))
-				add_notification(editor, "Portal created successfully", 3000);
+			if (create_portal_between_sectors(&editor->sector_list,
+				&editor->action))
+				add_notification(editor, "Created successfully", 3000);
 			else
-				add_notification(editor, "ERROR: Could not create portal", 3000);
+				add_notification(editor, "ERROR: Could not create", 3000);
 		}
 		editor->action.convert_to_portal = idle;
 	}

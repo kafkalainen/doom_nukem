@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 09:40:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 15:28:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 15:51:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	draw_header(t_buffer *buffer, t_sector *sector)
 	temp = sector->story[0];
 	temp += 8;
 	mod.len = ft_strlen(temp);
+	if (mod.len > 90)
+		mod.len = 90;
 	offset.x = 0.5f * (buffer->width - (mod.len * mod.size * 5));
 	if (mod.len % 2)
 		offset.x -= (mod.size * 5 * 0.5f);
@@ -42,6 +44,8 @@ static void	draw_previous_lines(t_buffer *buffer, t_sector *sector)
 	while (msgs-- > 1)
 	{
 		mod.len = ft_strlen(sector->story[msgs]);
+		if (mod.len > 90)
+			mod.len = 90;
 		offset.x = 0.5f * (buffer->width - (mod.len * mod.size * 5));
 		if (mod.len % 2)
 			offset.x -= (mod.size * 5 * 0.5f);
@@ -60,6 +64,8 @@ static void	draw_current_line(t_buffer *buffer, t_player *plr, t_sector *sector)
 	mod.colour = get_color(limegreen);
 	percentage = 1.0f - plr->cutscene / (float)plr->cutscene_total;
 	mod.len = (size_t)(ft_strlen(sector->story[sector->cur_msg]) * percentage);
+	if (mod.len > 90)
+		mod.len = 90;
 	if (mod.len > 0 && sector->cur_msg != 0)
 	{
 		offset.x = 0.5f * (buffer->width - (mod.len * mod.size * 5));
