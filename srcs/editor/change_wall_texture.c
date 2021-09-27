@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_wall_texture.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/27 09:51:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:33:21 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
