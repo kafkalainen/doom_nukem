@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/24 17:14:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:24:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ unsigned char	*get_writable_sector_data3(t_editor_sector *sector,
 					unsigned char *buf);
 unsigned char	*get_writable_sector_data2(t_editor_sector *sector,
 					unsigned char *buf);
-void			get_next_wall_type(t_wall *portal, int *next);
 unsigned char	*get_sector_plot(unsigned char *plot);
 unsigned char	*write_plot_lines(unsigned char *plot);
 unsigned char	*get_writable_wall_data(t_editor_walls *wall);
