@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 13:07:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 16:04:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static t_bool	skull_skulker_attack(t_entity *entity, t_player *plr, Uint32 t)
 	if (get_distance_squared(plr->pos, entity->pos) < 4.00f)
 	{
 		entity->sprite_state = attack;
+		pick_next_frame(entity, t);
 		if (entity->anim_offset >= 4
 			&& (int)(entity->cooldown - t) < 0)
 		{
@@ -37,7 +38,6 @@ static t_bool	skull_skulker_attack(t_entity *entity, t_player *plr, Uint32 t)
 			play_sound(plr->audio.skull_skulker_attack, 30);
 			return (true);
 		}
-		pick_next_frame(entity, t);
 	}
 	return (false);
 }
