@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 12:05:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 20:45:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:15:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,33 +147,34 @@ static void	add_wall_logic(t_wall *current_portal,
 **	2D map is converted to 3D coordinates. When we encounter a portal
 **	in map data, that is higher or lower than the next sector, we generate
 **	A wall behind that portal.
-**	If a door is found, we generate doors to the current sector.
+**	If a door is found, we generate doors to the sector behind that portal.
+**	If a window is found, we generate window to the sector behind that portal.
 */
 void	calc_extra_walls(t_home *home)
 {
 	int			type;
-	Uint32		i;
-	Uint32		j;
+	t_uint		i[2];
 	t_wall		*from;
 	t_wall		*to;
 
-	i = 0;
-	while (i < home->nbr_of_sectors)
+	i[0] = 0;
+	while (i[0] < home->nbr_of_sectors)
 	{
-		j = 0;
-		from = home->sectors[i]->walls;
-		while (j++ < home->sectors[i]->nb_of_walls)
+		i[1] = 0;
+		from = home->sectors[i[0]]->walls;
+		while (i[1]++ < home->sectors[i[0]]->nb_of_walls)
 		{
 			type = from->top.type;
 			if (type >= 0 && home->sectors[type]->is_lift != lift
-				&& home->sectors[i]->is_lift != lift)
+				&& home->sectors[i[0]]->is_lift != lift)
 			{
-				to = get_portal_by_idx(i, home->sectors[type]);
+				to = get_portal_by_idx(i[0], home->sectors[type]);
 				add_wall_logic(from, to, &home->sectors[type]->nb_of_walls);
 				generate_door(to, &home->sectors[type]->nb_of_walls);
+				generate_window(to, &home->sectors[type]->nb_of_walls);
 			}
 			from = from->next;
 		}
-		i++;
+		i[0]++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 17:14:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 11:47:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,5 @@ void	wall_button_actions(t_action *action, int i)
 	else if (i == button_create_elevator_button)
 		action->create_elev_button = 1;
 	if (i == button_change_to_door)
-		action->cycle_door = true;
+		action->cycle_portal = true;
 }

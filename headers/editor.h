@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/27 13:09:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:14:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,8 @@ t_bool			check_bbox_ui(t_xy start, t_xy end, t_xy click);
 
 void			check_event(t_mouse_data *mouse_data, t_button **list,
 					t_action *action);
+void			display_door_tex_string(t_editor_walls *wall,
+					t_buffer *buffer);
 void			editor_events(SDL_Event *e, t_home *home, t_editor *editor);
 void			mouse_zoom(t_action *action, int zoom);
 void			handle_events(t_editor *editor, t_home *home);

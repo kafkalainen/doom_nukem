@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_wall_texture.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/21 09:48:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 09:51:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static t_bool	change_normal_wall_texture(int *wall_type)
 	else if (*wall_type == -wall3)
 		*wall_type = -wall4;
 	else if (*wall_type == -wall4)
-		*wall_type = -wall5;
-	else if (*wall_type == -wall5)
-		*wall_type = -wall6;
-	else if (*wall_type == -wall6)
+		*wall_type = -small_window;
+	else if (*wall_type == -small_window)
+		*wall_type = -large_window;
+	else if (*wall_type == -large_window)
 		*wall_type = -wall7;
 	else if (*wall_type == -wall7)
 		*wall_type = -wall8;

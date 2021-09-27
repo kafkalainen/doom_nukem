@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/27 09:01:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 11:48:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ void	editor_edit_wall(t_editor *editor)
 	if (editor->action.create_light_button || editor->action.create_powerstation
 		|| editor->action.create_elev_button)
 		create_entities(editor);
-	if (editor->action.cycle_door)
+	if (editor->action.cycle_portal)
 	{
 		if (!check_door_height(editor, editor->temp_wall,
 				editor->temp_sector))
-			editor->action.cycle_door = false;
+			editor->action.cycle_portal = false;
 		else
-			editor->action.cycle_door = cycle_door(&editor->sector_list,
+			editor->action.cycle_portal = cycle_portal(&editor->sector_list,
 					editor->temp_wall, editor->temp_sector->idx_sector);
 	}
 }

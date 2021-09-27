@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:20:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 20:32:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:50:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	add_non_hull_portals(t_sector *sector)
 	walls = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
-		if (walls->is_door)
+		if (walls->is_door || walls->is_window)
 		{
 			walls->next->top.hull = false;
 			walls->next->bot.hull = false;

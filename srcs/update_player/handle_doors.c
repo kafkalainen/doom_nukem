@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 20:13:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:10:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
 		if (!wall->is_closed)
 		{
 			lock_the_door(wall, wall->next);
-			wall->is_closed = 1;
+			wall->is_closed = true;
 		}
 		return (1);
 	}
 	else
 	{
 		if (wall->next->height - current_height > 1.5f)
-			wall->is_closed = 0;
+			wall->is_closed = false;
 		if (wall->open_until - 2500 > current_time)
 			translate_door(wall->next, wall->height * 0.4f,
 				delta_time * 0.001f);

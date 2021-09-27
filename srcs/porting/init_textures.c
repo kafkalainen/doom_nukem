@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 16:10:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 09:51:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:09:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ static void	init_wall_and_floor_textures(t_home *home)
 	load_texture("textures/scraps.png", home->textures, surf7);
 	load_texture("textures/hull.png", home->textures, surf8);
 	load_texture("textures/plate.png", home->textures, surf9);
-	load_texture("textures/hull_window_large.png", home->textures, hull_large_window);
-	load_texture("textures/hull_window_small.png", home->textures, hull_small_window);
 }
 
 static void	init_pickupables(t_home *home)
@@ -84,6 +82,10 @@ void	init_textures(t_home *home)
 	load_texture("textures/thing.png", home->textures, enemy3);
 	load_texture("textures/plasma_ball.png", home->textures, bullet);
 	load_texture("textures/muzzle.png", home->textures, muzzleflash);
+	load_texture("textures/hull_window_large.png", home->textures,
+		hull_large_window);
+	load_texture("textures/hull_window_small.png", home->textures,
+		hull_small_window);
 	init_pickupables(home);
 	init_asset_textures(home);
 	home->textures[NUM_TEX - 1] = assign_empty_texture();

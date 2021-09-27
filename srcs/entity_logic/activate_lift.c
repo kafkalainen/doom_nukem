@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:50:13 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 17:06:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:09:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	bolt_lift_doors(t_sector *lift, Uint32 state)
 		{
 			lock_the_door(portal, portal->next);
 			portal->open_until = 0;
-			portal->is_closed = 1;
+			portal->is_closed = true;
 			portal->is_locked = state;
 		}
 		portal = portal->next;

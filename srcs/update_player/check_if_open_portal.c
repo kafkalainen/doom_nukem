@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 11:50:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 11:16:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 13:26:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_bool	check_if_open_portal(t_wall *wall)
 {
-	if ((wall->top.type >= 0 && !wall->is_door) || (wall->is_door
-			&& !wall->is_closed && wall->is_locked == unlocked))
+	if ((wall->top.type >= 0 && !wall->is_door && !wall->is_window)
+		|| (wall->is_door && !wall->is_closed && wall->is_locked == unlocked))
 	{
 		return (true);
 	}

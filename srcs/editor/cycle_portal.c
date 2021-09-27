@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cycle_door.c                                       :+:      :+:    :+:   */
+/*   cycle_portal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:21:22 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/24 10:57:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 13:04:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 int	get_portal_idx(int idx)
 {
-	if (idx > 14999)
-		idx -= SECRET_DOOR;
+	if (idx > 20999)
+		idx -= LARGE_WINDOW_INDEX;
+	else if (idx > 17999)
+		idx -= SMALL_WINDOW_INDEX;
+	else if (idx > 14999)
+		idx -= SECRET_INDEX;
 	else if (idx > 11999)
 		idx -= MILITARY_INDEX;
 	else if (idx > 8999)
@@ -36,8 +40,12 @@ static void	assign_portal_type(t_editor_walls *selected,
 
 static void	normalize_idx(int *idx)
 {
-	if (*idx > 14999)
-		*idx -= SECRET_DOOR;
+	if (*idx > 20999)
+		*idx -= LARGE_WINDOW_INDEX;
+	else if (*idx > 17999)
+		*idx -= SMALL_WINDOW_INDEX;
+	else if (*idx > 14999)
+		*idx -= SECRET_INDEX;
 	else if (*idx > 11999)
 		*idx -= MILITARY_INDEX;
 	else if (*idx > 8999)
@@ -50,8 +58,12 @@ static void	normalize_idx(int *idx)
 
 static	void	inflate_idx(int *inflatable, int *amount)
 {
-	if (*amount > 14999)
-		*inflatable += SECRET_DOOR;
+	if (*amount > 20999)
+		*inflatable += LARGE_WINDOW_INDEX;
+	else if (*amount > 17999)
+		*inflatable += SMALL_WINDOW_INDEX;
+	else if (*amount > 14999)
+		*inflatable += SECRET_INDEX;
 	else if (*amount > 11999)
 		*inflatable += MILITARY_INDEX;
 	else if (*amount > 8999)
@@ -62,7 +74,7 @@ static	void	inflate_idx(int *inflatable, int *amount)
 		*inflatable += DOOR_INDEX;
 }
 
-t_bool	cycle_door(t_editor_sector **sector_list,
+t_bool	cycle_portal(t_editor_sector **sector_list,
 	t_editor_walls *selected, int idx)
 {
 	int				opposite;
@@ -81,7 +93,7 @@ t_bool	cycle_door(t_editor_sector **sector_list,
 		sector = sector->next;
 	while (sector->walls->type != inflated_idx)
 		sector->walls = sector->walls->next;
-	if (inflated_idx >= SECRET_DOOR)
+	if (inflated_idx >= LARGE_WINDOW_INDEX)
 		assign_portal_type(selected, sector->walls, idx, opposite);
 	else if (selected->type >= 0)
 	{

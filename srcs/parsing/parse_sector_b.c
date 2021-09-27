@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:29:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 16:45:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 13:19:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	get_door_lock(int door_idx)
 		return (cleaning_lock);
 	else if (door_idx >= ENGINEERING_INDEX && door_idx < MILITARY_INDEX)
 		return (engineering_lock);
-	else if (door_idx >= MILITARY_INDEX && door_idx < SECRET_DOOR)
+	else if (door_idx >= MILITARY_INDEX && door_idx < SECRET_INDEX)
 		return (military_lock);
-	else if (door_idx >= SECRET_DOOR)
+	else if (door_idx >= SECRET_INDEX && door_idx < SMALL_WINDOW_INDEX)
 		return (unlocked);
 	else
 		return (locked);
@@ -53,13 +53,18 @@ void	initialize_door(t_wall *wall, t_point_data *left, t_point_data *right)
 	wall->top.type = change_door_to_portal(left->idx);
 	wall->bot.type = change_door_to_portal(left->idx);
 	wall->is_door = 0;
-	wall->is_closed = 0;
+	wall->is_window = 0;
+	wall->is_closed = false;
 	wall->open_until = 0;
 	wall->height = get_wall_height(left->ground, right->ground,
 			left->ceiling, right->ceiling);
 	if (left->idx >= DOOR_INDEX)
 	{
-		if (left->idx >= SECRET_DOOR)
+		if (left->idx >= LARGE_WINDOW_INDEX)
+			wall->is_window = 2;
+		else if (left->idx >= SMALL_WINDOW_INDEX)
+			wall->is_window = 1;
+		else if (left->idx >= SECRET_INDEX)
 			wall->is_door = 2;
 		else
 			wall->is_door = 1;

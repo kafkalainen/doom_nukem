@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/20 17:20:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 13:15:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ void	create_button(t_button *list, t_box box, t_button_info info)
 	list->info.text = ft_strdup((const char *)info.text);
 	if (!list->info.text)
 		error_output("Memory allocation failed.");
-	list->text_loc.x = box.start.x + list->mod.size * 5 * 0.5f
-		+ 0.5f * ((box.end.x - box.start.x)
-			- (list->mod.len * list->mod.size * 5));
-	if (list->mod.len % 2)
-		list->text_loc.x -= (list->mod.size * 5 * 0.5f);
+	list->text_loc.x = center_text_x_axis(box.start.x, box.end.x,
+			list->mod.size, list->mod.len);
 	list->text_loc.y = (box.start.y - 1) + list->mod.size * 7 * 0.5f;
 }
 
@@ -80,18 +77,18 @@ static void	buttons_create_wall_layer(t_button **blist)
 		(t_button_info){"Wall index:", 0, wall});
 	create_button(blist[18], (t_box){vec2(10, 80), vec2(290, 105)},
 		(t_button_info){"Wall texture:", 0, wall});
-	create_button(blist[19], (t_box){vec2(10, 215), vec2(290, 240)},
+	create_button(blist[19], (t_box){vec2(10, 245), vec2(290, 270)},
 		(t_button_info){"wall ceiling height:", 0, wall});
-	create_button(blist[20], (t_box){vec2(10, 245), vec2(290, 270)},
+	create_button(blist[20], (t_box){vec2(10, 275), vec2(290, 300)},
 		(t_button_info){"Wall floor height:", 0, wall});
-	create_button(blist[21], (t_box){vec2(10, 275), vec2(290, 300)},
+	create_button(blist[21], (t_box){vec2(10, 305), vec2(290, 330)},
 		(t_button_info){"Add light button", 0, wall});
-	create_button(blist[22], (t_box){vec2(10, 305), vec2(290, 330)},
+	create_button(blist[22], (t_box){vec2(10, 335), vec2(290, 360)},
 		(t_button_info){"Add powerstation", 0, wall});
-	create_button(blist[23], (t_box){vec2(10, 335), vec2(290, 360)},
+	create_button(blist[23], (t_box){vec2(10, 365), vec2(290, 390)},
 		(t_button_info){"Add lift button", 0, wall});
-	create_button(blist[24], (t_box){vec2(10, 365), vec2(290, 390)},
-		(t_button_info){"Change to door", 0, wall});
+	create_button(blist[24], (t_box){vec2(10, 395), vec2(290, 420)},
+		(t_button_info){"Cycle through portals", 0, wall});
 }
 
 t_button	**create_button_list(t_button **blist)

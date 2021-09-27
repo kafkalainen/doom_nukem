@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_actions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 15:45:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 11:48:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	initialize_toggles(t_action *action)
 	action->add_wall_point = 0;
 	action->set_all_sector_ceiling_heights = 0;
 	action->set_all_sector_floor_heights = 0;
-	action->cycle_door = false;
+	action->cycle_portal = false;
 }
 
 static void	initialize_input(t_action *action)

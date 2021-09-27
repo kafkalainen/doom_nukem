@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:19:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 17:50:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:19:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	get_next_wall_tex(t_wall **current_head, int nbr_of_walls)
 	temp = *current_head;
 	while (nbr_of_walls)
 	{
-		if (temp->top.type < 0 && temp->top.type != -door)
+		if (temp->top.type < 0 && temp->top.type != -door
+			&& temp->top.type != -small_window
+			&& temp->top.type != -large_window)
 			return (temp->top.type);
 		temp = temp->next;
 		nbr_of_walls--;
