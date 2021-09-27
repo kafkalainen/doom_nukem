@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/27 14:09:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:52:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ enum e_buttons
 	button_create_powerstation,
 	button_create_elevator_button,
 	button_change_to_door,
-	button_change_to_window,
 	button_entity_index,
 	button_change_entity_type,
 	button_toggle_entity_is_linked,
@@ -175,8 +174,7 @@ typedef struct s_action
 	int				write_sector_story;
 	int				set_all_sector_ceiling_heights;
 	int				set_all_sector_floor_heights;
-	t_bool			cycle_door;
-	t_bool			convert_to_window;
+	t_bool			cycle_portal;
 }					t_action;
 
 typedef struct s_editor_xyz
@@ -269,6 +267,8 @@ t_bool			check_bbox_ui(t_xy start, t_xy end, t_xy click);
 
 void			check_event(t_mouse_data *mouse_data, t_button **list,
 					t_action *action);
+void			display_door_tex_string(t_editor_walls *wall,
+					t_buffer *buffer);
 void			editor_events(SDL_Event *e, t_home *home, t_editor *editor);
 void			mouse_zoom(t_action *action, int zoom);
 void			handle_events(t_editor *editor, t_home *home);
@@ -302,7 +302,7 @@ int				add_point_to_list(t_editor *editor, t_editor_sector *sector,
 					t_action *action);
 void			close_editor_wall_list(t_editor_walls **head);
 void			editor_edit_wall(t_editor *editor);
-t_bool			cycle_door(t_editor_sector **sector_list,
+t_bool			cycle_portal(t_editor_sector **sector_list,
 					t_editor_walls *selected, int opposite);
 t_bool			change_wall_texture(int	*wall_type, t_action *action);
 
@@ -505,7 +505,7 @@ void			get_midpoint_of_walls(t_editor_sector *sector,
 int				get_selected_floor_height(t_editor_sector *sector,
 					int wall_idx);
 t_editor_walls	*get_previous_wall(t_editor_walls *wall,
-				t_editor_sector *sector);
+					t_editor_sector *sector);
 
 void			get_lowest_floor(t_editor_sector *sector, int *height);
 t_bool			check_for_elevator_button(t_entity_list **head, int sector_idx);

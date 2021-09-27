@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/24 13:43:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:31:51 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,5 @@ void	wall_button_actions(t_action *action, int i)
 	else if (i == button_create_elevator_button)
 		action->create_elev_button = 1;
 	if (i == button_change_to_door)
-		action->cycle_door = true;
-	if (i == button_change_to_window)
-		action->convert_to_window = true;
+		action->cycle_portal = true;
 }

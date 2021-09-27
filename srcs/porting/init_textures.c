@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 16:10:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 16:14:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:09:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	init_wall_and_floor_textures(t_home *home)
 	load_texture("textures/loading_bay.png", home->textures, wall2);
 	load_texture("textures/rusty_wall.png", home->textures, wall3);
 	load_texture("textures/white.png", home->textures, wall4);
-	load_texture("textures/rusty_window.png", home->textures, wall5);
-	load_texture("textures/bridge_window.png", home->textures, wall6);
+	load_texture("textures/rusty_window.png", home->textures, small_window);
+	load_texture("textures/bridge_window.png", home->textures, large_window);
 	load_texture("textures/hull2.png", home->textures, wall7);
 	load_texture("textures/yellow.png", home->textures, wall8);
 	load_texture("textures/white.png", home->textures, wall9);
@@ -82,6 +82,10 @@ void	init_textures(t_home *home)
 	load_texture("textures/thing.png", home->textures, enemy3);
 	load_texture("textures/plasma_ball.png", home->textures, bullet);
 	load_texture("textures/muzzle.png", home->textures, muzzleflash);
+	load_texture("textures/hull_window_large.png", home->textures,
+		hull_large_window);
+	load_texture("textures/hull_window_small.png", home->textures,
+		hull_small_window);
 	init_pickupables(home);
 	init_asset_textures(home);
 	home->textures[NUM_TEX - 1] = assign_empty_texture();

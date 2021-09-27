@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/24 13:39:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:59:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MACROS_H
 
 # define BUFF_SIZE 16
-# define NBR_BUTTONS 31
+# define NBR_BUTTONS 30
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 
@@ -39,7 +39,7 @@
 **  - Door
 **  - Lamp on / off
 */
-# define NUM_TEX 44
+# define NUM_TEX 46
 # define MAX_FILE_NAME_LENGTH 50
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
@@ -69,7 +69,9 @@
 # define CLEANING_INDEX 6000
 # define ENGINEERING_INDEX 9000
 # define MILITARY_INDEX 12000
-# define SECRET_DOOR 15000
+# define SECRET_INDEX 15000
+# define SMALL_WINDOW_INDEX 18000
+# define LARGE_WINDOW_INDEX 21000
 # define SUBDIV 16.0f
 # define DENOMSUBDIV 0.0625f
 # define STORY_STRINGS 30

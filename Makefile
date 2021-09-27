@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/27 14:26:39 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/27 14:29:17 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = \
 	editor$(SLASH)check_door_height.c \
 	editor$(SLASH)check_if_another_sector_is_inside.c \
 	editor$(SLASH)create_portals.c \
-	editor$(SLASH)cycle_door.c \
+	editor$(SLASH)cycle_portal.c \
 	editor$(SLASH)check_if_non_convex.c \
 	editor$(SLASH)draw_button.c \
 	editor$(SLASH)draw_buttons.c \
@@ -40,6 +40,7 @@ SRCS = \
 	editor$(SLASH)draw_sector_textfields.c \
 	editor$(SLASH)draw_text_and_strings.c \
 	editor$(SLASH)draw_wall_textfields.c \
+	editor$(SLASH)draw_wall_texture_strings.c \
 	editor$(SLASH)draw_grid.c \
 	editor$(SLASH)draw_ui.c \
 	editor$(SLASH)editor_add_new_sector_to_list_end.c \
@@ -127,6 +128,7 @@ SRCS = \
 	parsing$(SLASH)check_if_same_point.c \
 	parsing$(SLASH)free_sector.c \
 	parsing$(SLASH)generate_door.c \
+	parsing$(SLASH)generate_window.c \
 	parsing$(SLASH)get_next_value.c \
 	parsing$(SLASH)initialize_entity_textures.c \
 	parsing$(SLASH)initialize_entity_triangles.c \

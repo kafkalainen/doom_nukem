@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 09:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 14:17:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 18:00:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_bool	strafe_along_the_wall(t_wall *wall, t_player *plr,
 	t_xyz	wall_vector;
 	t_wall	*new_wall;
 
-	wall_vector = vec3_unit_vector(vec3_dec(wall->bottom.p[0],
-				wall->bottom.p[2]));
+	wall_vector = vec3_unit_vector(vec3_dec(wall->bot.p[0],
+				wall->bot.p[2]));
 	angle = vec3_angle(plr->move_dir, wall_vector);
 	if (angle < 1.57f && angle >= 0.0f)
 		wall_vector = wall_vector;

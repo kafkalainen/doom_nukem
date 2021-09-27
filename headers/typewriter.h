@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 09:46:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 09:46:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 13:08:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,6 @@ void			ft_str_pxl(t_buffer *buffer, t_xy coord, char *str,
 					t_plx_modifier mod);
 void			ft_c_pxl(t_buffer *buffer, t_xy coord, char c,
 					t_plx_modifier mod);
+int				center_text_x_axis(int start, int end, size_t size,
+					size_t len);
 #endif

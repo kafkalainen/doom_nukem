@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 09:59:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 16:45:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_wall	*new_point(t_point_data *left, t_point_data *right)
 		wall->point = (t_xy){left->x, left->y, 1.0f};
 		initialize_wall_triangles(wall, left, right);
 		initialize_top_texels(&wall->top);
-		initialize_bottom_texels(&wall->bottom);
+		initialize_bottom_texels(&wall->bot);
 		initialize_door(wall, left, right);
 		wall->next = NULL;
 	}

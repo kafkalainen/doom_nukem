@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:20:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 14:36:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:50:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,9 @@ static void	calc_wall_normals(t_sector *sector)
 	while (i < sector->nb_of_walls)
 	{
 		walls->top.normal = triangle_normal(&walls->top);
-		walls->bottom.normal = triangle_normal(&walls->bottom);
-		if (walls->top.type == -door)
-		{
-			walls->top = translate_triangle(&walls->top,
-					vec3_mul(walls->top.normal, 0.06f));
-			walls->bottom = translate_triangle(&walls->bottom,
-					vec3_mul(walls->bottom.normal, 0.06f));
-		}
+		walls->bot.normal = triangle_normal(&walls->bot);
+		walls->top.hull = true;
+		walls->bot.hull = true;
 		walls = walls->next;
 		i++;
 	}
@@ -45,6 +40,7 @@ static void	calc_ceil_ground_normals(t_sector *sector)
 	while (i < sector->nb_of_ceil)
 	{
 		ceil_ground->tri.normal = triangle_normal(&ceil_ground->tri);
+		ceil_ground->tri.hull = true;
 		ceil_ground = ceil_ground->next;
 		i++;
 	}
@@ -53,7 +49,27 @@ static void	calc_ceil_ground_normals(t_sector *sector)
 	while (i < sector->nb_of_ground)
 	{
 		ceil_ground->tri.normal = triangle_normal(&ceil_ground->tri);
+		ceil_ground->tri.hull = true;
 		ceil_ground = ceil_ground->next;
+		i++;
+	}
+}
+
+static void	add_non_hull_portals(t_sector *sector)
+{
+	t_uint	i;
+	t_wall	*walls;
+
+	i = 0;
+	walls = sector->walls;
+	while (i < sector->nb_of_walls)
+	{
+		if (walls->is_door || walls->is_window)
+		{
+			walls->next->top.hull = false;
+			walls->next->bot.hull = false;
+		}
+		walls = walls->next;
 		i++;
 	}
 }
@@ -67,6 +83,7 @@ void	calc_unit_normals(t_home *home)
 	{
 		calc_wall_normals(home->sectors[i]);
 		calc_ceil_ground_normals(home->sectors[i]);
+		add_non_hull_portals(home->sectors[i]);
 		i++;
 	}
 }

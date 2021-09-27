@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 11:10:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 14:47:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 20:37:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_bool	check_door_height(t_editor *editor, t_editor_walls *way,
 
 void	validate_door_size(t_editor *editor, float *height, int val)
 {
-	t_editor_walls *wall;
+	t_editor_walls	*wall;
 
 	if (!editor->temp_wall)
 		return ;

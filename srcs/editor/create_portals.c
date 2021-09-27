@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:16:04 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/27 14:20:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:54:37 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ t_bool	create_portal_between_sectors(t_editor_sector **head, t_action *action)
 			vec2_dec(action->world_pos, link_from->centroid));
 	wall = get_intersecting_wall(link_from, link_from->nb_of_walls,
 			dir, link_from->centroid);
-	dir = vec2_add(link_to->centroid, vec2_dec(link_from->centroid,
-				link_to->centroid));
 	if (!wall)
 		return (false);
 	wall_two = get_matching_wall_coord(link_to, wall->x0, wall->next->x0);

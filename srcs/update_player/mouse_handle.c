@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/08 08:36:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 08:58:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	mouse_handle(t_player *plr, SDL_Event *e)
 			plr->dir = vec2(0.0f, 0.0f);
 		if (plr->dir.x > TWO_PI)
 			plr->dir = vec2(TWO_PI, TWO_PI);
-		plr->pitch += e->motion.yrel * 0.01f;
+		plr->pitch += -e->motion.yrel * 0.01f;
 		plr->hud.vm_ry += -e->motion.yrel * DEG_TO_RAD * 3;
 		if (plr->pitch < -1.4)
 			plr->pitch = -1.4;

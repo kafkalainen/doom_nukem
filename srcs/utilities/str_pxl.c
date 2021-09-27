@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 08:38:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 17:40:52 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 13:37:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,14 @@ void	ft_c_pxl(t_buffer *buffer, t_xy coord,
 	c2 = ft_toupper(c);
 	handle_letter(buffer, coord, c2, mod);
 	coord.x += 5 * mod.size;
+}
+
+int	center_text_x_axis(int start, int end, size_t size, size_t len)
+{
+	int	x;
+
+	x = start + size * 5 * 0.5f + 0.5f * ((end - start) - (len * size * 5));
+	if (len % 2)
+		x -= size * 5 * 0.5f;
+	return (x);
 }

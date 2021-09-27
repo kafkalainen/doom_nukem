@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:18:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 11:08:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 08:54:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_m4x4	rotation_matrix_x(float angle)
 {
 	return ((t_m4x4){{
 			{1.0, 0.0f, 0.0f, 0.0f},
-			{0.0f, cosf(angle), sinf(angle), 0.0f},
-			{0.0f, -sinf(angle), cosf(angle), 0.0f},
+			{0.0f, cosf(angle), -sinf(angle), 0.0f},
+			{0.0f, sinf(angle), cosf(angle), 0.0f},
 			{0.0f, 0.0f, 0.0f, 1.0f}}});
 }
 
@@ -51,8 +51,8 @@ t_m4x4	rotation_matrix_y(float angle)
 t_m4x4	rotation_matrix_z(float angle)
 {
 	return ((t_m4x4){{
-			{cosf(angle), sinf(angle), 0.0f, 0.0f},
-			{-sinf(angle), cosf(angle), 0.0f, 0.0f},
+			{cosf(angle), -sinf(angle), 0.0f, 0.0f},
+			{sinf(angle), cosf(angle), 0.0f, 0.0f},
 			{0.0f, 0.0f, 1.0f, 0.0f},
 			{0.0f, 0.0f, 0.0f, 1.0f}}});
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/20 17:18:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/25 11:21:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 		draw_sector(frame, home, plr, -1);
 		reset_depth_buffer(frame->depth_buffer);
 		draw_game(home, frame, plr);
+		// draw_fog()
 		if (plr->input.info)
 			draw_info(frame, plr, (int)home->t.fps);
 		draw_heads_up_display(home, frame, plr);

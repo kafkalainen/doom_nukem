@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/22 09:47:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:24:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,4 @@ unsigned char	*write_plot_lines(unsigned char *plot);
 unsigned char	*get_writable_wall_data(t_editor_walls *wall);
 void			parse_map_data(unsigned char *buf, t_player *plr,
 					t_home *home, ssize_t size);
-
 #endif

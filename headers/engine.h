@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 09:33:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/25 10:58:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ typedef struct s_fov
 	int				cur_sector;
 }				t_fov;
 
+/*
+**	REVISIT
+**	Add explanations
+**
+*/
 typedef struct s_frame
 {
 	t_raster_queue	**raster_queue;

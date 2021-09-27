@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:41:54 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 11:29:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 08:43:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	initialize_top_triangle(int type, t_triangle *top, t_xy size)
 		top->p[1] = (t_xyz){-0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
 		top->p[2] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
 	}
+	top->hull = false;
 }
 
 void	initialize_bot_triangle(int type, t_triangle *bot, t_xy size)
@@ -61,6 +62,7 @@ void	initialize_bot_triangle(int type, t_triangle *bot, t_xy size)
 		bot->p[1] = (t_xyz){0.5f * size.x, 0.5f * size.y, 0.0f, 1.0f};
 		bot->p[2] = (t_xyz){0.5f * size.x, -0.5f * size.y, 0.0f, 1.0f};
 	}
+	bot->hull = false;
 }
 
 void	initialize_entity_triangles(t_entity *entity)

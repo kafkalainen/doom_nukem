@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 13:45:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:33:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	initialize_toggles(t_action *action)
 	action->add_wall_point = 0;
 	action->set_all_sector_ceiling_heights = 0;
 	action->set_all_sector_floor_heights = 0;
-	action->cycle_door = false;
+	action->cycle_portal = false;
 }
 
 static void	initialize_input(t_action *action)
@@ -77,5 +77,4 @@ void	initialize_actions(t_action *action)
 	initialize_menu_selections(action);
 	initialize_toggles(action);
 	initialize_input(action);
-	action->convert_to_window = false;
 }

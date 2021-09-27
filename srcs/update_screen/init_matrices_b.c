@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 09:07:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 14:41:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/25 12:28:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ t_m4x4	identity_matrix(void)
 }
 
 /*
-**	Precalculated values, when Z_FAR and Z_NEAR are fixed at 0.1f and 1000.f
+**	Precalculated values, when Z_FAR and Z_NEAR are fixed at 0.1f and 1000.0f
 **	Z_FAR / (Z_FAR - Z_NEAR) = 1.00010001f
+**	1.001001001f
+**	-0.1001001f
 **	(-Z_FAR * Z_NEAR) / (Z_FAR - Z_NEAR) = -100 / 999.9 = -0.100010001f
 */
+//1000
 t_m4x4	projection_matrix(void)
 {
 	return ((t_m4x4){{
@@ -36,6 +39,39 @@ t_m4x4	projection_matrix(void)
 			{0.0f, 0.0f, -0.0100010001f, 0.0f}
 		}});
 }
+
+//100
+// t_m4x4	projection_matrix(void)
+// {
+// 	return ((t_m4x4){{
+// 			{0.750000983f, 0.0f, 0.0f, 0.0f},
+// 			{0.0f, 1.00000131f, 0.0f, 0.0f},
+// 			{0.0f, 0.0f, 1.001001001f, 1.0f},
+// 			{0.0f, 0.0f, -0.1001001f, 0.0f}
+// 		}});
+// }
+
+//10
+// t_m4x4	projection_matrix(void)
+// {
+// 	return ((t_m4x4){{
+// 			{0.750000983f, 0.0f, 0.0f, 0.0f},
+// 			{0.0f, 1.00000131f, 0.0f, 0.0f},
+// 			{0.0f, 0.0f, 1.01010101f, 1.0f},
+// 			{0.0f, 0.0f, -0.101010101f, 0.0f}
+// 		}});
+// }
+
+//5
+// t_m4x4	projection_matrix(void)
+// {
+// 	return ((t_m4x4){{
+// 			{0.750000983f, 0.0f, 0.0f, 0.0f},
+// 			{0.0f, 1.00000131f, 0.0f, 0.0f},
+// 			{0.0f, 0.0f, 1.020408163, 1.0f},
+// 			{0.0f, 0.0f, -0.102040816, 0.0f}
+// 		}});
+// }
 
 /*
 **	Only works with translations and transformations!

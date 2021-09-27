@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 11:15:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 13:21:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-Uint32	test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
+t_bool	test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 		t_ray *ray)
 {
 	t_plane	plane;
@@ -34,11 +34,11 @@ Uint32	test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 				*d = distance;
 				hole_2->point = hole;
 				hole_2->normal = tri->normal;
-				return (1);
+				return (true);
 			}
 		}
 	}
-	return (0);
+	return (false);
 }
 
 static t_bullet_hole	loop_through_sector(t_home *home, t_ray *ray,
@@ -88,7 +88,7 @@ float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 	while (i < home->sectors[bullet_sector]->nb_of_walls)
 	{
 		if (test_triangle(&wall->top, hole, &d, ray)
-			|| test_triangle(&wall->bottom, hole, &d, ray))
+			|| test_triangle(&wall->bot, hole, &d, ray))
 		{
 			if (check_if_open_portal(wall))
 			{

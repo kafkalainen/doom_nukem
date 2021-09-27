@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:16:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 16:30:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/24 15:56:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ static void	init_south_west(t_triangle *face, float max)
 		(t_xyz){max, max, 0.0f, 1.0f}, (t_xyz){0.0f, max, 0.0f, 1.0f}},
 	{(t_uvz){0.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 0.0f, 1.0f},
 		(t_uvz){0.0f, 0.0f, 1.0f}}, (float){1.0f}, (float){1.0f},
-		(float){1.0f}, white, -space, (t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
+		(float){1.0f}, false, -space, (t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 	face[1] = (t_triangle){(t_xyz){0.0f, 0.0f, 0.0f, 1.0f}, (t_xyz){max,
 		0.0f, 0.0f, 1.0f}, (t_xyz){max, max, 0.0f, 1.0f}, {(t_uvz){0.0f,
 		1.0f, 1.0f}, (t_uvz){1.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 0.0f, 1.0f}},
-		(float){1.0f}, (float){1.0f}, (float){1.0f}, white, -space,
+		(float){1.0f}, (float){1.0f}, (float){1.0f}, false, -space,
 		(t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 	face[2] = (t_triangle){{(t_xyz){max, 0.0f, 0.0f, 1.0f}, (t_xyz){max,
 		max, max, 1.0f}, (t_xyz){max, max, 0.0f, 1.0f}},
 	{(t_uvz){0.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 0.0f, 1.0f}, (t_uvz){0.0f, 0.0f,
-		1.0f}}, (float){1.0f}, (float){1.0f}, (float){1.0f}, white, -space,
+		1.0f}}, (float){1.0f}, (float){1.0f}, (float){1.0f}, false, -space,
 		(t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 	face[3] = (t_triangle){{(t_xyz){max, 0.0f, 0.0f, 1.0f}, (t_xyz){max,
 		0.0f, max, 1.0f}, (t_xyz){max, max, max, 1.0f}},
 	{(t_uvz){0.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 0.0f,
 		1.0f}}, (float){1.0f}, (float){1.0f}, (float){1.0f},
-		white, -space, (t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
+		false, -space, (t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 }
 
 static void	init_north_east(t_triangle *face, float max)
@@ -42,22 +42,22 @@ static void	init_north_east(t_triangle *face, float max)
 		max, max, 1.0f}, (t_xyz){max, max, max, 1.0f}},
 	{(t_uvz){0.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 0.0f, 1.0f},
 		(t_uvz){0.0f, 0.0f, 1.0f}},
-		(float){1.0f}, (float){1.0f}, (float){1.0f}, white, -space,
+		(float){1.0f}, (float){1.0f}, (float){1.0f}, false, -space,
 		(t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 	face[5] = (t_triangle){{(t_xyz){max, 0.0f, max, 1.0f}, (t_xyz){0.0f,
 		0.0f, max, 1.0f}, (t_xyz){0.0f, max, max, 1.0f}},
 	{(t_uvz){0.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 1.0f, 1.0f}, (t_uvz){1.0f,
 		0.0f, 1.0f}}, (float){1.0f}, (float){1.0f}, (float){1.0f},
-		white, -space, (t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
+		false, -space, (t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 	face[6] = (t_triangle){{(t_xyz){0.0f, 0.0f, max, 1.0f}, (t_xyz){0.0f,
 		max, 0.0f, 1.0f}, (t_xyz){0.0f, max, max, 1.0f}},
 	{(t_uvz){0.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 0.0f, 1.0f}, (t_uvz){0.0f,
 		0.0f, 1.0f}}, (float){1.0f}, (float){1.0f}, (float){1.0f},
-		white, -space, (t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
+		false, -space, (t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 	face[7] = (t_triangle){{(t_xyz){0.0f, 0.0f, max, 1.0f}, (t_xyz){0.0f,
 		0.0f, 0.0f, 1.0f}, (t_xyz){0.0f, max, 0.0f, 1.0f}}, {(t_uvz){0.0f,
 		1.0f, 1.0f}, (t_uvz){1.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 0.0f, 1.0f}},
-		(float){1.0f}, (float){1.0f}, (float){1.0f}, white, -space,
+		(float){1.0f}, (float){1.0f}, (float){1.0f}, false, -space,
 		(t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 }
 
@@ -67,25 +67,25 @@ static void	init_top_bottom(t_triangle *face, float max)
 		(t_xyz){max, max, max, 1.0f},
 		(t_xyz){0.0f, max, max, 1.0f}}, {(t_uvz){0.0f, 1.0f, 0.0f},
 		(t_uvz){1.0f, 0.0f, 1.0f}, (t_uvz){0.0f, 0.0f, 1.0f}},
-		(float){1.0f}, (float){1.0f}, (float){1.0f}, white, -space,
+		(float){1.0f}, (float){1.0f}, (float){1.0f}, false, -space,
 		(t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 	face[9] = (t_triangle){{(t_xyz){0.0f, max, 0.0f, 1.0f},
 		(t_xyz){max, max, 0.0f, 1.0f},
 		(t_xyz){max, max, max, 1.0f}}, {(t_uvz){0.0f, 1.0f, 1.0f},
 		(t_uvz){1.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 0.0f, 1.0f}},
-		(float){1.0f}, (float){1.0f}, (float){1.0f}, white, -space,
+		(float){1.0f}, (float){1.0f}, (float){1.0f}, false, -space,
 		(t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 	face[10] = (t_triangle){{(t_xyz){max, 0.0f, max, 1.0f},
 		(t_xyz){0.0f, 0.0f, 0.0f, 1.0f},
 		(t_xyz){0.0f, 0.0f, max, 1.0f}}, {(t_uvz){0.0f, 1.0f, 1.0f},
 		(t_uvz){1.0f, 0.0f, 1.0f}, (t_uvz){0.0f, 0.0f, 1.0f}},
-		(float){1.0f}, (float){1.0f}, (float){1.0f}, white, -space,
+		(float){1.0f}, (float){1.0f}, (float){1.0f}, false, -space,
 		(t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 	face[11] = (t_triangle){{(t_xyz){max, 0.0f, max, 1.0f},
 		(t_xyz){max, 0.0f, 0.0f, 1.0f},
 		(t_xyz){0.0f, 0.0f, 0.0f, 1.0f}}, {(t_uvz){0.0f, 1.0f, 1.0f},
 		(t_uvz){1.0f, 1.0f, 1.0f}, (t_uvz){1.0f, 0.0f, 1.0f}},
-		(float){1.0f}, (float){1.0f}, (float){1.0f}, white, -space,
+		(float){1.0f}, (float){1.0f}, (float){1.0f}, false, -space,
 		(t_xyz){0.0f, 0.0f, 0.0f, 1.0f}};
 }
 

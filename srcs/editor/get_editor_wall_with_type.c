@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 15:50:22 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 11:38:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:29:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_bool		test_type(t_editor_walls *tmp, int type)
+static t_bool	test_type(t_editor_walls *tmp, int type)
 {
 	if (tmp->type == type)
 		return (true);
@@ -24,7 +24,11 @@ static t_bool		test_type(t_editor_walls *tmp, int type)
 		return (true);
 	else if (tmp->type == type + MILITARY_INDEX)
 		return (true);
-	else if (tmp->type == type + SECRET_DOOR)
+	else if (tmp->type == type + SECRET_INDEX)
+		return (true);
+	else if (tmp->type == type + SMALL_WINDOW_INDEX)
+		return (true);
+	else if (tmp->type == type + LARGE_WINDOW_INDEX)
 		return (true);
 	else
 		return (false);

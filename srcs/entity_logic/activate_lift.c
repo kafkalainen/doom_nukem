@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:50:13 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 10:02:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:09:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static float	portal_height_diff(t_wall *portal, t_sector *connection,
 	while (i < connection->nb_of_walls)
 	{
 		if (portal_behind->top.type == idx)
-			return (portal_behind->bottom.p[0].y - portal->bottom.p[0].y);
+			return (portal_behind->bot.p[0].y - portal->bot.p[0].y);
 		portal_behind = portal_behind->next;
 		i++;
 	}
@@ -63,7 +63,7 @@ void	bolt_lift_doors(t_sector *lift, Uint32 state)
 		{
 			lock_the_door(portal, portal->next);
 			portal->open_until = 0;
-			portal->is_closed = 1;
+			portal->is_closed = true;
 			portal->is_locked = state;
 		}
 		portal = portal->next;
