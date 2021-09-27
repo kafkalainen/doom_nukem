@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/20 16:50:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:12:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 **  - Door
 **  - Lamp on / off
 */
-# define NUM_TEX 44
+# define NUM_TEX 46
 # define MAX_FILE_NAME_LENGTH 50
 # define MAX_INT 2147483647
 # define PLR_DIR 0.785398163f
@@ -69,7 +69,9 @@
 # define CLEANING_INDEX 6000
 # define ENGINEERING_INDEX 9000
 # define MILITARY_INDEX 12000
-# define SECRET_DOOR 15000
+# define SECRET_INDEX 15000
+# define SMALL_WINDOW_INDEX 18000
+# define LARGE_WINDOW_INDEX 21000
 # define SUBDIV 16.0f
 # define DENOMSUBDIV 0.0625f
 # define STORY_STRINGS 30

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/22 09:44:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 09:50:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ enum			e_texture_idx
 	wall2,
 	wall3,
 	wall4,
-	wall5,
-	wall6,
+	small_window,
+	large_window,
 	wall7,
 	wall8,
 	wall9,
@@ -57,7 +57,9 @@ enum			e_texture_idx
 	ammo_pack_sprite,
 	cleaning_keycard_sprite,
 	engineering_keycard_sprite,
-	military_keycard_sprite
+	military_keycard_sprite,
+	hull_small_window,
+	hull_large_window
 };
 
 /*

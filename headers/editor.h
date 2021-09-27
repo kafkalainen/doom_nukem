@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/24 14:47:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 13:09:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ typedef struct s_action
 	int				write_sector_story;
 	int				set_all_sector_ceiling_heights;
 	int				set_all_sector_floor_heights;
-	t_bool			cycle_door;
+	t_bool			cycle_portal;
 }					t_action;
 
 typedef struct s_editor_xyz
@@ -300,7 +300,7 @@ int				add_point_to_list(t_editor *editor, t_editor_sector *sector,
 					t_action *action);
 void			close_editor_wall_list(t_editor_walls **head);
 void			editor_edit_wall(t_editor *editor);
-t_bool			cycle_door(t_editor_sector **sector_list,
+t_bool			cycle_portal(t_editor_sector **sector_list,
 					t_editor_walls *selected, int opposite);
 t_bool			change_wall_texture(int	*wall_type, t_action *action);
 
@@ -503,7 +503,7 @@ void			get_midpoint_of_walls(t_editor_sector *sector,
 int				get_selected_floor_height(t_editor_sector *sector,
 					int wall_idx);
 t_editor_walls	*get_previous_wall(t_editor_walls *wall,
-				t_editor_sector *sector);
+					t_editor_sector *sector);
 
 void			get_lowest_floor(t_editor_sector *sector, int *height);
 t_bool			check_for_elevator_button(t_entity_list **head, int sector_idx);

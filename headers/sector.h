@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 16:33:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:17:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 **	top and bottom triangle have all texture and positional data for the
 **	wall.
 **	is_door = is portal a door.
+**	is_window = is portal a window.
 **	is_closed = is portal currently closed.
 **	is_locked = is portal currently locked.
 **	300 = unlocked
@@ -33,9 +34,10 @@ typedef struct s_wall
 	t_triangle			top;
 	t_triangle			bot;
 	t_xy				point;
-	Uint32				is_door;
-	Uint32				is_closed;
-	Uint32				is_locked;
+	t_uint				is_door;
+	t_uint				is_window;
+	t_bool				is_closed;
+	t_uint				is_locked;
 	Uint32				open_until;
 	float				height;
 	struct s_wall		*next;
