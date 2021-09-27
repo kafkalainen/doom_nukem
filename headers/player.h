@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/27 13:21:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:34:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ void			create_target_vector(t_player *plr);
 void			crouch(t_player *plr, t_sector *sector);
 void			draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr);
 void			end_level(t_home *home, t_player *plr);
+void			end_logic(t_player *plr, t_home *home);
 t_bool			evolve_story(t_player *plr, t_sector *sector,
 					t_sector *msg_sector);
 int				find_current_sector(t_home *home, t_xyz pos);
