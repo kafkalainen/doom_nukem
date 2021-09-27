@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 13:04:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 14:34:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,11 @@ void	draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr)
 
 void	end_level(t_home *home, t_player *plr)
 {
-	if (plr->cur_sector == home->end_sector)
+	if (plr->cur_sector == home->end_sector
+		&& !home->sectors[home->end_sector]->nb_of_msgs)
+		end_logic(plr, home);
+	else if (plr->cur_sector == home->end_sector
+		&& home->sectors[home->end_sector]->nb_of_msgs)
 		initialize_cutscene(home->sectors[home->end_sector], plr, end_cutscene);
 	if (plr->power_points <= 0 && plr->dead == 0)
 	{
