@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 08:29:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 09:41:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 15:12:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	end_logic(t_player *plr, t_home *home)
+void	end_logic(t_player *plr, t_home *home)
 {
 	plr->plot_state = no_plot;
 	if (home->linked_map)
@@ -36,7 +36,7 @@ void	update_cutscene(t_player *plr, t_home *home, Uint32 t)
 	{
 		temp->cur_msg++;
 		if (temp->cur_msg < temp->nb_of_msgs)
-			plr->cutscene = ft_strlen(temp->story[temp->cur_msg]) * 250;
+			initialize_cutscene(temp, plr, plr->plot_state);
 		else
 		{
 			if (plr->plot_state == start_cutscene)
@@ -54,7 +54,7 @@ void	initialize_cutscene(t_sector *cutscene_sector, t_player *plr, int type)
 	{
 		plr->plot_state = type;
 		plr->cutscene_total = ft_strlen(
-				cutscene_sector->story[cutscene_sector->cur_msg]) * 100;
+				cutscene_sector->story[cutscene_sector->cur_msg]) * 250;
 		plr->cutscene = plr->cutscene_total;
 		plr->ending_played = false;
 		play_sound_and_fadeout(plr->audio.typing, 30, plr->cutscene_total);
