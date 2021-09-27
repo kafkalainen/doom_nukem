@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 14:11:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/27 16:32:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ static void	handle_delete(t_editor *editor)
 
 static void	check_grind_events_two(t_editor *editor)
 {
+	if (editor->action.assign_player_start == user_input)
+		editor->action.player_start_assigned
+			= assign_player_start(&editor->sector_list,
+				&editor->action.world_pos, &editor->plr,
+				&editor->action.assign_player_start);
 	if (editor->action.link_entity == user_input
 		&& editor->action.prev_entity != -1 && editor->temp_entity != NULL)
 	{
@@ -101,18 +106,14 @@ void	check_grid_events(t_editor *editor)
 	{
 		if (editor->temp_sector && editor->action.prev_sector != -1)
 		{
-			if (create_portal_between_sectors(&editor->sector_list, &editor->action))
+			if (create_portal_between_sectors(&editor->sector_list,
+					&editor->action))
 				add_notification(editor, "Portal created successfully", 3000);
 			else
-				add_notification(editor, "ERROR: Could not create portal", 3000);
+				add_notification(editor, "ERROR: Could not create", 3000);
 		}
 		editor->action.convert_to_portal = idle;
 	}
-	if (editor->action.assign_player_start == user_input)
-		editor->action.player_start_assigned
-			= assign_player_start(&editor->sector_list,
-				&editor->action.world_pos, &editor->plr,
-				&editor->action.assign_player_start);
 	if (editor->action.assign_end_sector == user_input)
 		assign_end_sector(&editor->sector_list, &editor->action.world_pos,
 			&editor->end_sector, &editor->action.assign_end_sector);

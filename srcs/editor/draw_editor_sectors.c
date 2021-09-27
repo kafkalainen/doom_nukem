@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_sectors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 11:17:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/27 16:29:01 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,13 @@ void	draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,
 	int				i;
 
 	i = 0;
+	color = get_color(white);
 	while (sector_list)
 	{
 		i = 0;
 		left_point = sector_list->walls;
 		while (left_point && left_point->next && i < sector_list->nb_of_walls)
 		{
-			if (sector_list->idx_sector == editor->action.selected_sector
-				&& i == editor->action.selected_wall)
-				color = get_color(darkgoldenrod);
-			else
-				color = get_color(white);
 			draw_wall_bbox(left_point, sector_list, editor);
 			draw_wall_line(left_point, left_point->next, editor, color);
 			i++;
@@ -102,6 +98,9 @@ void	draw_editor_sector(t_editor *editor, t_editor_sector *sector_list,
 			i = sector_list->nb_of_walls;
 		sector_list = sector_list->next;
 	}
+	if (editor->temp_wall && editor->temp_wall->next)
+		draw_wall_line(editor->temp_wall, editor->temp_wall->next, editor,
+			get_color(darkgoldenrod));
 	draw_line_to_mouse_cursor(i, left_point, editor);
 }
 
