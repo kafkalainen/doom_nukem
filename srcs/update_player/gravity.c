@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 14:36:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 13:00:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,23 @@
 **	v = g * t
 **
 */
-void	gravity(t_sector *sector, t_player *plr, Uint32 delta_time)
+void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 {
-	float			g;
 	float			drop;
 	float			drop_speed;
 	static Uint32	total_time;
 
-	g = 0.5f;
-	if (!check_distance_to_ground(sector, plr->height, plr->pos, &drop))
-		return ;
+	drop_speed = 0.0f;
+	if (!check_distance_to_ground(home->sectors[plr->cur_sector],
+			plr->height, plr->pos, &drop)
+		&& find_current_sector(home, plr->pos) == -1)
+		drop = -1.0f;
 	if (drop > 0.0f && !plr->input.jetpack)
 	{
 		total_time += delta_time;
-		drop_speed = g * total_time * 0.001f;
+		drop_speed = 0.5f * total_time * 0.001f;
+		if (drop_speed > 1.0f)
+			plr->dead = 1;
 		plr->speed.y -= drop_speed;
 	}
 	else

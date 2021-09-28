@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/27 14:34:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 11:48:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ float			get_ground_hit_point(t_sector *sector, t_ray *ray,
 					t_bullet_hole *hole);
 float			get_player_hit_point(t_ray *ray, t_bullet_hole *hole,
 					int bullet_sector);
-void			gravity(t_sector *sector, t_player *plr, Uint32 delta_time);
+void			gravity(t_home *home, t_player *plr, Uint32 delta_time);
 void			initialize_cutscene(t_sector *cutscene_sector,
 					t_player *plr, int type);
 void			initialize_player_target_triangles(t_player *plr);

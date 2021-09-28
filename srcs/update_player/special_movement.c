@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 13:53:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 12:56:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ t_bool	jetpack(t_player *plr, t_home *home, Uint32 t)
 		if (check_distance_to_ceiling(home->sectors[plr->cur_sector],
 				&plr->test_pos))
 			return (false);
+		plr->move_dir = vec3_unit_vector(vec3(plr->look_dir.x,
+					0.0f, plr->look_dir.z));
 		wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
 				plr->width, plr->test_pos, plr->move_dir);
 		if (!wall)
@@ -104,6 +106,7 @@ t_bool	jetpack(t_player *plr, t_home *home, Uint32 t)
 			check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 			return (true);
 		}
+		plr->look_dir = wall->top.normal;
 	}
 	plr->input.jetpack = 0;
 	return (false);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 14:56:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 11:57:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,5 @@ int	find_current_sector(t_home *home, t_xyz pos)
 		}
 		idx++;
 	}
-	return (false);
+	return (-1);
 }
