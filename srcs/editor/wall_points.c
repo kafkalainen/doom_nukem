@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 10:18:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 10:27:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	add_last_point(t_editor *editor, t_editor_sector *sector,
 	else
 	{
 		close_editor_wall_list(&sector->walls);
-		action->selected_sector = sector->idx_sector;
+		action->selected_sector = -1;
 		assign_sector_bbox(sector);
 		if (check_if_non_convex(sector)
 			|| check_if_another_sector_is_inside(sector, &editor->sector_list)
@@ -77,6 +77,8 @@ static int	add_last_point(t_editor *editor, t_editor_sector *sector,
 		sector->centroid = editor_calculate_centroid(sector);
 		editor_sort_wall_vertices(sector);
 		action->create_sector = idle;
+		action->selected_wall = -1;
+		editor->temp_wall = NULL;
 	}
 	return (0);
 }
