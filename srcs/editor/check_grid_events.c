@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 15:52:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 10:22:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	check_grid_events(t_editor *editor)
 		if (editor->temp_sector && editor->action.prev_sector != -1)
 		{
 			if (create_portal_between_sectors(&editor->sector_list,
-				&editor->action))
+					&editor->action))
 				add_notification(editor, "Created successfully", 3000);
 			else
 				add_notification(editor, "ERROR: Could not create", 3000);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 12:31:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 10:18:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	editor_add_points(t_editor_sector *sector,
 		i++;
 	}
 	close_editor_wall_list(&sector->walls);
-	sector->centroid = calculate_centroid(sector);
+	sector->centroid = editor_calculate_centroid(sector);
 	editor_sort_wall_vertices(sector);
 	assign_sector_bbox(sector);
 	return (0);

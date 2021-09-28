@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 10:19:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 09:45:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void			calc_unit_normals(t_home *home);
 int				change_door_to_portal(int door);
 int				check_if_lines_cut(t_sector *sector);
 int				check_if_sector_has_same_points(t_sector *sector);
-Uint32			check_if_same_point(t_xyz a, t_xyz b);
+t_bool			vec3_check_if_same_point(t_xyz a, t_xyz b);
+t_bool			vec2_check_if_same_point(t_xy a, t_xy b);
 void			check_portal_floor_difference(t_wall *portal,
 					t_wall *portal_behind, t_bool *validation);
 void			check_portal_ceiling_difference(t_wall *portal,

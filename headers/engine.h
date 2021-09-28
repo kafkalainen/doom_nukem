@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/25 10:58:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 10:15:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void			calc_intersection(t_wall *pgon, t_ray *ray,
 					t_intersection *sect);
 void			calc_sector_bounds(t_sector *sector);
 void			calc_extra_walls(t_home *home);
-t_bool			check_connection(t_wall *point, t_frame *frame);
+t_xy			calculate_centroid(t_sector *sector);
+t_bool			check_if_hull(t_wall *wall);
 t_bool			check_if_portal(t_wall *point);
 int				check_if_lseg_intersects(t_xy *p0, t_xy *p1, t_xy *pos,
 					t_xy *dir);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/27 14:52:18 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/28 10:14:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,7 +383,7 @@ int				editor_calc_active_portals(t_editor_sector *sector,
 
 t_uint			calc_linked_sectors(t_editor_sector **list, int link,
 					int link_type);
-t_xy			calculate_centroid(t_editor_sector *sector);
+t_xy			editor_calculate_centroid(t_editor_sector *sector);
 void			editor_create_new_sector(t_editor_sector **head,
 					t_action *action);
 t_editor_sector	*editor_add_new_sector_to_list_end(t_editor_sector **head);

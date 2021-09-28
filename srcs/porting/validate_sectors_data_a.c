@@ -6,37 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:06:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 11:20:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 09:39:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-// static t_bool	check_valid_connection(t_xyz *p0, t_xyz *p1,
-// 			t_sector *sector, int i)
-// {
-// 	unsigned int	j;
-// 	t_wall			*temp;
-
-// 	j = 0;
-// 	temp = sector->walls;
-// 	while (j < sector->nb_of_walls)
-// 	{
-// 		if (temp->top.type == i || temp->top.type - DOOR_INDEX == i)
-// 		{
-// 			if (temp->top.p[1].x == p0->x
-// 				&& temp->top.p[1].z == p0->z
-// 				&& temp->top.p[2].x == p1->x
-// 				&& temp->top.p[2].z == p1->z)
-// 				return (true);
-// 			else
-// 				return (false);
-// 		}
-// 		j++;
-// 		temp = temp->next;
-// 	}
-// 	return (false);
-// }
 
 // static t_bool	check_if_portals_connected(int i, t_home *home)
 // {

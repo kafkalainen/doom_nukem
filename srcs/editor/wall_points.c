@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 11:51:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 10:18:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	add_last_point(t_editor *editor, t_editor_sector *sector,
 			add_notification(editor, "ERROR: Non-convex or inside", 4000);
 			return (3);
 		}
-		sector->centroid = calculate_centroid(sector);
+		sector->centroid = editor_calculate_centroid(sector);
 		editor_sort_wall_vertices(sector);
 		action->create_sector = idle;
 	}

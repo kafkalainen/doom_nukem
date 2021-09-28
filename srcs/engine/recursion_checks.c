@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 08:51:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 17:05:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 10:01:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ t_bool	check_if_portal(t_wall *wall)
 		return (false);
 }
 
-t_bool	check_connection(t_wall *point, t_frame *frame)
+t_bool	check_if_hull(t_wall *wall)
 {
-	if (point->top.type == frame->old_idx)
+	if (wall->top.type < 0 && wall->bot.type < 0 && !wall->is_door
+		&& !wall->is_window && wall->top.type != -small_window
+		&& wall->top.type != -large_window
+		&& wall->top.type != -door)
 		return (true);
 	else
 		return (false);
