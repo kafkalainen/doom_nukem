@@ -6,22 +6,20 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 14:41:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 14:49:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
 static void	clip_to_near_and_far_plane(t_triangle *cur,
-	t_sides *viewport, t_raster_queue *triangles_in_view)
+	t_sides *viewport, t_raster_queue *triangles_in_view, t_xyz scale)
 {
 	t_uint		clip_count[2];
 	t_triangle	near[2];
 	t_triangle	far[2];
 	t_triangle	projected;
-	t_xyz		scale;
 
-	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
 	clip_count[0] = clip_to_plane(&viewport->far, cur, &far[0], &far[1]);
 	while (clip_count[0])
 	{
@@ -48,9 +46,11 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 {
 	t_triangle	viewed_tri;
 	t_bool		visible;
+	t_xyz		scale;
 
 	create_target_vector(plr);
 	quick_reset_queue(frame->triangles_in_view);
+	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
 	while (frame->transformed->size)
 	{
 		front(frame->transformed, &viewed_tri);
@@ -63,7 +63,7 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 		{
 			viewed_tri = apply_camera(plr, &viewed_tri);
 			clip_to_near_and_far_plane(&viewed_tri, &frame->viewport,
-				frame->triangles_in_view);
+				frame->triangles_in_view, scale);
 		}
 		dequeue(frame->transformed);
 	}
