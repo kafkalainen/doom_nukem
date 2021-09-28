@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 13:21:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 11:38:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,13 @@ static t_bullet_hole	loop_through_sector(t_home *home, t_ray *ray,
 	return (hitpoints[0]);
 }
 
-static void	set_hole_properties(int *hole_type, int *sector_idx, int cur_sector)
+static void	set_hole_properties(t_wall *wall, int *hole_type, int *sector_idx,
+			int cur_sector)
 {
-	*hole_type = wall_hole;
+	if (wall->is_door)
+		*hole_type = nothing;
+	else
+		*hole_type = wall_hole;
 	*sector_idx = cur_sector;
 }
 
@@ -96,7 +100,7 @@ float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 				break ;
 			}
 			else
-				set_hole_properties(&hole->hole_type, &hole->sector_idx,
+				set_hole_properties(wall, &hole->hole_type, &hole->sector_idx,
 					bullet_sector);
 		}
 		wall = wall->next;
