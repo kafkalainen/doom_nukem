@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_entity_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:46:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/12 16:43:42 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/28 11:05:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 **	Parse entity data parses following map data:
 **	entity_index
-**	entity_type	sector_idx	pos			dir			is_static	is_active
+**	entity_type	sector_idx	pos			dir			is_static
 **	#enum entity	int		#x#z#y		#x#z#y		boolean		boolean
 **	#4				#2		#0#10#2		#1#0#2		#1			#1
 **	#0				#0		#-1#1#2		#1#0#2		#0			#1

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:27:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 09:19:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 10:49:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	draw_button_logic_two(t_editor *editor, t_button *button, int i)
 	}
 	if (i == button_convert_to_elevator)
 	{
-		if (editor->temp_sector->is_elevator)
+		if (!editor->temp_sector->is_elevator)
 			button->is_active = true;
 		else
 			button->is_active = false;

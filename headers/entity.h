@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 15:08:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 11:23:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void				rotate_projectile_based_on_axes(t_xyz normal,
 						t_projectile *current);
 void				set_bullet_hole(t_bullet_hole *hole, t_projectile *current);
 void				set_entity_texels_for_frame(t_entity *entity);
-Uint32				update_lifts(t_home *home, t_player *plr,
+void				update_lifts(t_home *home, t_player *plr,
 						Uint32 current_time, Uint32 delta_time);
 void				update_entities(t_home *home, t_player *plr,
 						Uint32 delta_time);
@@ -148,6 +148,8 @@ Uint32				take_damage(t_entity *entity, Uint32 delta_time);
 void				translate_entity(t_triangle *tri1, t_triangle *tri2,
 						t_entity *entity);
 void				translate_entities(t_home *home, float distance,
+						int sector_idx);
+void				translate_projectiles(t_home *home, float distance,
 						int sector_idx);
 Uint32				translate_sector(t_sector *sector, float distance);
 void				turn_on_lights(t_entity *entity, t_home *home);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/27 16:25:57 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/28 11:12:15 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,6 +115,7 @@ SRCS = \
 	entity_logic$(SLASH)update_lifts.c \
 	entity_logic$(SLASH)update_entities.c \
 	entity_logic$(SLASH)update_projectiles.c \
+	entity_logic$(SLASH)translate_projectiles.c \
 	entity_logic$(SLASH)take_damage.c \
 	parsing$(SLASH)assign_entity_properties.c \
 	parsing$(SLASH)assign_projectiles.c \

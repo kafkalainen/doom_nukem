@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/22 09:45:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 11:04:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct s_projectile
 	float		velocity;
 	t_triangle	top;
 	t_triangle	bot;
-	Uint32		is_active;
+	t_bool		is_active;
 	Uint32		type;
 	int			sprite_index;
 	int			alt_sprite_index;
