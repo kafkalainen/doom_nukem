@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/28 11:12:15 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/28 16:51:35 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,6 +123,7 @@ SRCS = \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_light_sources.c \
 	parsing$(SLASH)calc_map_properties.c \
+	parsing$(SLASH)calc_plr_position.c \
 	parsing$(SLASH)calc_unit_normals.c \
 	parsing$(SLASH)change_door_to_portal.c \
 	parsing$(SLASH)check_portal_height_diff.c \

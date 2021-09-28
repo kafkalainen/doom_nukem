@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 09:45:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 16:50:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_bool			calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc,
 t_bool			calc_distance_to_ground(t_sector *sector, t_xyz *new_loc,
 					float *dist);
 void			calc_light_sources(t_home *home);
+void			calc_plr_position(t_sector *sector, t_player *plr);
 void			calc_unit_normals(t_home *home);
 int				change_door_to_portal(int door);
 int				check_if_lines_cut(t_sector *sector);
