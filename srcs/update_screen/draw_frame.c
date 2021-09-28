@@ -6,30 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/25 11:21:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 16:00:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
-	 t_skybox *skybox)
-{
-	Uint32	i;
-
-	i = 0;
-	quick_reset_queue(frame->transformed);
-	while (i < 12)
-	{
-		if (enqueue_to_raster(frame->transformed, &skybox->face[i]))
-		{
-			draw_sector(frame, home, plr, frame->idx);
-			quick_reset_queue(frame->transformed);
-		}
-		else
-			i++;
-	}
-}
 
 // static void	draw_minimap(t_home *home, t_frame *frame)
 // {
@@ -95,9 +76,6 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	{
 		frame->idx = plr->cur_sector;
 		frame->old_idx = old_sector;
-		reset_depth_buffer(frame->depth_buffer);
-		add_skybox(frame, home, plr, &home->skybox);
-		draw_sector(frame, home, plr, -1);
 		reset_depth_buffer(frame->depth_buffer);
 		draw_game(home, frame, plr);
 		// draw_fog()

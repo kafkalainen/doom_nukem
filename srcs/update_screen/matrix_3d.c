@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:09:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 14:36:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 16:01:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,18 @@ t_m4x4	multiply_matrix(t_m4x4 *m1, t_m4x4 *m2)
 		c++;
 	}
 	return (mult_matrix);
+}
+
+t_triangle	project_to_screen_space(t_triangle *src, t_xyz view_offset,
+			t_xyz scale)
+{
+	t_triangle	projected;
+
+	projected = create_projection(src);
+	triangle_inv_z(&projected);
+	triangle_div(&projected);
+	invert_view(&projected);
+	triangle_add(&projected, view_offset);
+	projected = scale_triangle(&projected, scale);
+	return (projected);
 }

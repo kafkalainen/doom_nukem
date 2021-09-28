@@ -6,24 +6,23 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 15:01:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 16:00:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
 static void	clip_to_near_and_far_plane(t_triangle *cur,
-	t_sides *viewport, t_raster_queue *triangles_in_view, t_xyz scale)
+	t_sides *viewport, t_raster_queue *triangles_in_view)
 {
 	t_uint		clip_count[2];
 	t_triangle	near[2];
 	t_triangle	far[2];
-	t_triangle	projected;
 
 	if (cur->type == -space)
 	{
-		clip_count[0] = 1;
 		far[0] = *cur;
+		clip_count[0] = 1;
 	}
 	else
 		clip_count[0] = clip_to_plane(&viewport->far, cur, &far[0], &far[1]);
@@ -33,13 +32,9 @@ static void	clip_to_near_and_far_plane(t_triangle *cur,
 				&far[clip_count[0] - 1], &near[0], &near[1]);
 		while (clip_count[1])
 		{
-			projected = create_projection(&near[clip_count[1] - 1]);
-			triangle_inv_z(&projected);
-			triangle_div(&projected);
-			invert_view(&projected);
-			triangle_add(&projected, viewport->view_offset);
-			projected = scale_triangle(&projected, scale);
-			triangles_in_view->array[triangles_in_view->size] = projected;
+			triangles_in_view->array[triangles_in_view->size]
+				= project_to_screen_space(&near[clip_count[1] - 1],
+					viewport->view_offset, viewport->scale);
 			triangles_in_view->size += 1;
 			clip_count[1]--;
 		}
@@ -52,11 +47,9 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 {
 	t_triangle	viewed_tri;
 	t_bool		visible;
-	t_xyz		scale;
 
 	create_target_vector(plr);
 	quick_reset_queue(frame->triangles_in_view);
-	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
 	while (frame->transformed->size)
 	{
 		front(frame->transformed, &viewed_tri);
@@ -69,7 +62,7 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 		{
 			viewed_tri = apply_camera(plr, &viewed_tri);
 			clip_to_near_and_far_plane(&viewed_tri, &frame->viewport,
-				frame->triangles_in_view, scale);
+				frame->triangles_in_view);
 		}
 		dequeue(frame->transformed);
 	}
@@ -109,11 +102,8 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr, int sector_idx)
 
 	i = 0;
 	mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
-	if (sector_idx == -1)
-		project_to_player_position(frame, plr, NULL);
-	else
-		project_to_player_position(frame, plr,
-			&home->sectors[sector_idx]->lights);
+	project_to_player_position(frame, plr,
+		&home->sectors[sector_idx]->lights);
 	while (i < MAX_THREADS)
 	{
 		initialize_thread(&args[i], frame, home, i);

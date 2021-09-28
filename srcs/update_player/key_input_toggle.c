@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 10:43:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 16:03:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 		if (sym == SDLK_a)
 			plr->input.left = 1;
 		if (sym == SDLK_q)
-			plr->input.rot_left = 1;
-		if (sym == SDLK_e)
 			plr->input.rot_right = 1;
+		if (sym == SDLK_e)
+			plr->input.rot_left = 1;
 		action_keys(plr, &sym);
 		menu_keys(plr, &sym);
 	}
@@ -104,9 +104,9 @@ void	keys_up(t_player *plr, SDL_KeyCode sym)
 		if (sym == SDLK_a)
 			plr->input.left = 0;
 		if (sym == SDLK_q)
-			plr->input.rot_left = 0;
-		if (sym == SDLK_e)
 			plr->input.rot_right = 0;
+		if (sym == SDLK_e)
+			plr->input.rot_left = 0;
 		if (sym == SDLK_LCTRL)
 			plr->input.crouch = 0;
 		if (sym == SDLK_f)

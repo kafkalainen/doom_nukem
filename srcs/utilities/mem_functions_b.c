@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 15:08:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 16:01:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	initialize_viewport(t_sides *viewport)
 	viewport->far = (t_plane){(t_xyz){0.0f, 0.0f, 100.0f, 1.0f},
 		(t_xyz){0.0f, 0.0f, -1.0f, 0.0f}};
 	viewport->view_offset = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
+	viewport->scale = (t_xyz){0.5 * SCREEN_WIDTH,
+		0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
 	initialize_midplanes(viewport);
 	return (0);
 }

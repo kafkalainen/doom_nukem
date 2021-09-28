@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 20:06:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:38:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 15:16:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static float	calculate_enemy_light_intensity(t_lighting *light,
 
 void	set_lighting(t_lighting *light, t_triangle *tri)
 {
-	if (light)
+	if (light && tri->type != -space)
 	{
 		if (light->state == TRUE && light->diffuse_power > 0.0f)
 		{
