@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/18 08:56:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 13:24:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static int	initialize_viewport(t_sides *viewport)
 		(t_xyz){-1.0f, 0.0f, 0.0f, 0.0f}};
 	viewport->near = (t_plane){(t_xyz){0.0f, 0.0f, 0.1f, 1.0f},
 		(t_xyz){0.0f, 0.0f, 1.0f, 0.0f}};
+	viewport->far = (t_plane){(t_xyz){0.0f, 0.0f, 50.0f, 1.0f},
+		(t_xyz){0.0f, 0.0f, -1.0f, 0.0f}};
 	viewport->view_offset = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
 	initialize_midplanes(viewport);
 	return (0);
@@ -57,10 +59,10 @@ int	initialize_rasterization_queues(t_frame *frame)
 	unsigned int	i;
 
 	i = 0;
-	frame->transformed = create_raster_queue(800);
+	frame->transformed = create_raster_queue(1600);
 	if (!frame->transformed)
 		return (1);
-	frame->triangles_in_view = create_raster_queue(8000);
+	frame->triangles_in_view = create_raster_queue(6400);
 	if (!frame->triangles_in_view)
 		return (1);
 	frame->raster_queue = (t_raster_queue **)malloc(sizeof(t_raster_queue *)
@@ -69,7 +71,7 @@ int	initialize_rasterization_queues(t_frame *frame)
 		return (1);
 	while (i < MAX_THREADS)
 	{
-		frame->raster_queue[i] = create_raster_queue(8000);
+		frame->raster_queue[i] = create_raster_queue(102400);
 		if (!frame->raster_queue[i])
 			return (1);
 		i++;

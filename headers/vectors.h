@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 15:55:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 13:06:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ typedef struct s_deltas
 
 typedef struct s_sides
 {
+	t_plane			far;
 	t_plane			near;
 	t_plane			left;
 	t_plane			right;
