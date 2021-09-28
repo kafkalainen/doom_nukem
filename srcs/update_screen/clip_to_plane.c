@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:58:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 16:53:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 13:57:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	form_a_quadrant(t_point_location *loc, t_plane *plane,
 	return (2);
 }
 
-int	clip_against_plane(t_plane *plane, t_triangle *src,
+int	clip_to_plane(t_plane *plane, t_triangle *src,
 		t_triangle *triangle1, t_triangle *triangle2)
 {
 	t_point_location	loc;

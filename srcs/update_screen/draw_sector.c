@@ -6,55 +6,52 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 09:04:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 14:41:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-//REVISIT
-//CLIP FIRST AGAINST NEAR PLANE, THEN AGAINST FAR PLANE.
-static void	clip_to_near_plane(t_triangle *current_view,
+static void	clip_to_near_and_far_plane(t_triangle *cur,
 	t_sides *viewport, t_raster_queue *triangles_in_view)
 {
-	Uint32		nb_of_clipped_triangles;
+	t_uint		clip_count[2];
+	t_triangle	near[2];
+	t_triangle	far[2];
 	t_triangle	projected;
 	t_xyz		scale;
-	t_triangle	clipped_triangle[2];
 
 	scale = (t_xyz){0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT, 1.0f, 1.0f};
-	nb_of_clipped_triangles = clip_against_plane(&viewport->near,
-			current_view, &clipped_triangle[0], &clipped_triangle[1]);
-	while (nb_of_clipped_triangles)
+	clip_count[0] = clip_to_plane(&viewport->far, cur, &far[0], &far[1]);
+	while (clip_count[0])
 	{
-		projected = create_projection(&clipped_triangle[nb_of_clipped_triangles
-				 - 1]);
-		triangle_inv_z(&projected);
-		projected.p[0] = vec3_div(projected.p[0], projected.p[0].w);
-		projected.p[1] = vec3_div(projected.p[1], projected.p[1].w);
-		projected.p[2] = vec3_div(projected.p[2], projected.p[2].w);
-		invert_view(&projected);
-		triangle_add(&projected, viewport->view_offset);
-		projected = scale_triangle(&projected, scale);
-		triangles_in_view->array[triangles_in_view->size] = projected;
-		triangles_in_view->size += 1;
-		nb_of_clipped_triangles--;
+		clip_count[1] = clip_to_plane(&viewport->near,
+				&far[clip_count[0] - 1], &near[0], &near[1]);
+		while (clip_count[1])
+		{
+			projected = create_projection(&near[clip_count[1] - 1]);
+			triangle_inv_z(&projected);
+			triangle_div(&projected);
+			invert_view(&projected);
+			triangle_add(&projected, viewport->view_offset);
+			projected = scale_triangle(&projected, scale);
+			triangles_in_view->array[triangles_in_view->size] = projected;
+			triangles_in_view->size += 1;
+			clip_count[1]--;
+		}
+		clip_count[0]--;
 	}
 }
 
 static void	project_to_player_position(t_frame *frame, t_player *plr,
 	t_lighting *lights)
 {
-	Uint32		i;
-	size_t		current_size;
 	t_triangle	viewed_tri;
 	t_bool		visible;
 
 	create_target_vector(plr);
-	current_size = frame->transformed->size;
-	frame->triangles_in_view->size = 0;
-	i = 0;
-	while (i++ < current_size)
+	quick_reset_queue(frame->triangles_in_view);
+	while (frame->transformed->size)
 	{
 		front(frame->transformed, &viewed_tri);
 		visible = is_triangle_visible(&viewed_tri, plr->pos);
@@ -65,7 +62,7 @@ static void	project_to_player_position(t_frame *frame, t_player *plr,
 		if (visible || (!visible && viewed_tri.hull))
 		{
 			viewed_tri = apply_camera(plr, &viewed_tri);
-			clip_to_near_plane(&viewed_tri, &frame->viewport,
+			clip_to_near_and_far_plane(&viewed_tri, &frame->viewport,
 				frame->triangles_in_view);
 		}
 		dequeue(frame->transformed);

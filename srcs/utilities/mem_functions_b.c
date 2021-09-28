@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:33:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 13:24:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 14:26:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	initialize_viewport(t_sides *viewport)
 		(t_xyz){-1.0f, 0.0f, 0.0f, 0.0f}};
 	viewport->near = (t_plane){(t_xyz){0.0f, 0.0f, 0.1f, 1.0f},
 		(t_xyz){0.0f, 0.0f, 1.0f, 0.0f}};
-	viewport->far = (t_plane){(t_xyz){0.0f, 0.0f, 50.0f, 1.0f},
+	viewport->far = (t_plane){(t_xyz){0.0f, 0.0f, 100.0f, 1.0f},
 		(t_xyz){0.0f, 0.0f, -1.0f, 0.0f}};
 	viewport->view_offset = (t_xyz){1.0f, 1.0f, 0.0f, 1.0f};
 	initialize_midplanes(viewport);
@@ -71,7 +71,7 @@ int	initialize_rasterization_queues(t_frame *frame)
 		return (1);
 	while (i < MAX_THREADS)
 	{
-		frame->raster_queue[i] = create_raster_queue(102400);
+		frame->raster_queue[i] = create_raster_queue(32);
 		if (!frame->raster_queue[i])
 			return (1);
 		i++;

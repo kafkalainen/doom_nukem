@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:42:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 14:38:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	clip_to_an_edge(t_raster_queue *raster_list,
 		tested = raster_list->array[raster_list->front];
 		dequeue(raster_list);
 		current_triangles--;
-		triangles_to_add = clip_against_plane(&plane, &tested,
+		triangles_to_add = clip_to_plane(&plane, &tested,
 				&clipped[0], &clipped[1]);
 		i = 0;
 		while (i < triangles_to_add)
@@ -86,9 +86,7 @@ static void	clipper_viewport_edges(t_planes planes,
 
 	while (i < arg->view_list->size)
 	{
-		raster_queue->rear = -1;
-		raster_queue->front = -1;
-		raster_queue->size = 0;
+		quick_reset_queue(raster_queue);
 		enqueue_to_raster(raster_queue, &arg->view_list->array[i]);
 		new_triangles = 1;
 		current_plane = 0;

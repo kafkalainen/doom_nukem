@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 11:36:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 11:52:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 13:44:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,12 @@ t_xyz	vec3_intersection_with_ray_and_plane(t_plane *plane, t_xyz origo,
 		return (origo);
 	t = t / denom;
 	return (vec3_add(origo, vec3_mul(dir, t)));
+}
+
+
+void	triangle_div(t_triangle *projected)
+{
+	projected->p[0] = vec3_div(projected->p[0], projected->p[0].w);
+	projected->p[1] = vec3_div(projected->p[1], projected->p[1].w);
+	projected->p[2] = vec3_div(projected->p[2], projected->p[2].w);
 }

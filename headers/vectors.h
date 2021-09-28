@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 13:06:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 13:56:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,7 @@ t_triangle	apply_world_matrix(float angle_x, float angle_z,
 t_xyz		vec3_div(t_xyz a, float scalar);
 t_xyz		vec3_intersection_with_plane(t_plane *plane, t_xyz start, t_xyz end,
 				float *texel_offset);
-int			clip_against_plane(t_plane *plane, t_triangle *src,
+int			clip_to_plane(t_plane *plane, t_triangle *src,
 				t_triangle *triangle1, t_triangle *triangle2);
 void		initialize_locations(t_point_location *loc);
 void		triangle_add(t_triangle *tri, t_xyz	add);
@@ -294,5 +294,5 @@ t_m3x3		rotation_matrix_2d(float angle);
 t_m3x3		multiply_2d_matrix_with_2d_matrix(t_m3x3 *m1, t_m3x3 *m2);
 t_xy		multiply_vec2_with_2d_matrix(t_xy *src, t_m3x3 *x);
 t_bool		point_inside_fov(t_xy p0, t_xy p1, t_xy p2, t_xy p);
-
+void		triangle_div(t_triangle *projected);
 #endif
