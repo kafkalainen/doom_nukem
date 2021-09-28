@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 13:56:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 15:49:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ typedef struct s_sides
 	t_plane			bottom;
 	t_plane			*mid_planes;
 	t_xyz			view_offset;
+	t_xyz			scale;
 }					t_sides;
 
 typedef struct s_planes

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 14:49:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 15:01:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ static void	clip_to_near_and_far_plane(t_triangle *cur,
 	t_triangle	far[2];
 	t_triangle	projected;
 
-	clip_count[0] = clip_to_plane(&viewport->far, cur, &far[0], &far[1]);
+	if (cur->type == -space)
+	{
+		clip_count[0] = 1;
+		far[0] = *cur;
+	}
+	else
+		clip_count[0] = clip_to_plane(&viewport->far, cur, &far[0], &far[1]);
 	while (clip_count[0])
 	{
 		clip_count[1] = clip_to_plane(&viewport->near,

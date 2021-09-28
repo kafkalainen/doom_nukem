@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 17:14:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/28 15:17:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,25 @@ t_texel	*get_tex(int idx, t_texture	**textures)
 		error_output("idx larger or equal to zero\n");
 	idx = -idx;
 	return (&textures[idx]->tex);
+}
+
+void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
+	 t_skybox *skybox)
+{
+	Uint32	i;
+
+	i = 0;
+	quick_reset_queue(frame->transformed);
+	while (i < 12)
+	{
+		if (enqueue_to_raster(frame->transformed, &skybox->face[i]))
+		{
+			draw_sector(frame, home, plr, frame->idx);
+			quick_reset_queue(frame->transformed);
+		}
+		else
+			i++;
+	}
 }
 
 void	fill_rasterqueue(t_home *home, t_frame *frame, t_player *plr)
@@ -99,6 +118,7 @@ void	draw_game(t_home *home, t_frame *frame, t_player *plr)
 	frame->fov.cur_sector = plr->cur_sector;
 	nb_of_sectors = scan_fov(home, frame->fov, nb_of_sectors,
 			&frame->sector_buffer);
+	add_skybox(frame, home, plr, &home->skybox);
 	while (nb_of_sectors--)
 	{
 		frame->idx = frame->sector_buffer[nb_of_sectors];
