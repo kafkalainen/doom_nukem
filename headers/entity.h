@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/28 11:23:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 09:52:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ t_bool				handle_keycards(t_entity *keycard);
 void				initialize_entity_triangles(t_entity *entity);
 void				initialize_projectile_triangles(t_projectile *projectile);
 Uint32				initialize_entity_textures(t_entity *entity);
+t_bool				is_enemy(int type);
 Uint32				lock_lift(t_home *home, t_sector *lift);
 void				lock_the_door(t_wall *dimensions, t_wall *door);
 Uint32				other_dir(Uint32 dir);

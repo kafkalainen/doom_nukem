@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/28 16:51:35 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/29 10:01:20 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,7 @@ SRCS = \
 	entity_logic$(SLASH)entity_move.c \
 	entity_logic$(SLASH)face_entity_towards_player.c \
 	entity_logic$(SLASH)handle_activation.c \
+	entity_logic$(SLASH)is_enemy.c \
 	entity_logic$(SLASH)lock_lift.c \
 	entity_logic$(SLASH)other_dir.c \
 	entity_logic$(SLASH)turn_on_lights.c \

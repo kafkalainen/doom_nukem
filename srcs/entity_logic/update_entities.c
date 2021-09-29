@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 10:44:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 09:55:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,11 @@ void	update_entities(t_home *home, t_player *plr, Uint32 delta_time)
 			= vec3_unit_vector(vec3_dec(plr->pos, cur_entity->pos));
 		if (cur_entity->is_pickupable)
 			show_pickupables(cur_entity, home, delta_time);
-		if (cur_entity->is_active != false)
+		if (is_enemy(cur_entity->type))
 		{
-			if (cur_entity->type == skull_skulker
-				|| cur_entity->type == thing)
+			if (cur_entity->is_active == true)
 				update_entity(home, cur_entity, plr, delta_time);
-		}
-		else
-		{
-			if (cur_entity->type == skull_skulker
-				|| cur_entity->type == thing)
+			else
 				show_dead_entity(cur_entity, plr);
 		}
 		i++;

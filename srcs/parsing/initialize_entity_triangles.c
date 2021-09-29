@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:41:54 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 08:43:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 10:00:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static t_xy	size_logic(t_entity *entity)
 		|| (entity->type >= lamp
 			&& entity->type <= keycard_military))
 		size = vec2(0.5f, 0.5f);
-	else
-		size = vec2(2.0f, 2.0f);
+	else if (entity->type == skull_skulker || entity->type == drone)
+		size = vec2(1.25f, 1.25f);
 	return (size);
 }
 
@@ -82,5 +82,5 @@ void	initialize_entity_triangles(t_entity *entity)
 		entity->height = size.y;
 		entity->legs = size.y * 0.3f;
 	}
-	entity->width = 1.0f;
+	entity->width = 0.8f;
 }

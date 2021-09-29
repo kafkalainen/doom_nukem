@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:07:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 17:02:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 09:38:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	draw_multisprite_image(t_xy offset, t_texel *tex,
 	t_uv		cur_texel;
 
 	reset_multisprite_values(&current, &txl, 0);
-	image = (t_screen_xy){TEX_SIZE * scale.w, TEX_SIZE * scale.w};
-	scale.x = 0.1f / (TEX_SIZE * scale.w);
-	scale.y = 0.166666667f / (TEX_SIZE * scale.w);
+	image = (t_screen_xy){scale.x * scale.w, scale.y * scale.w};
+	scale.x = 0.1f / (scale.x * scale.w);
+	scale.y = 0.166666667f / (scale.y * scale.w);
 	while (current.y < image.y)
 	{
 		reset_multisprite_values(&current, &txl, 1);
@@ -67,12 +67,16 @@ static void	draw_entity_textures(t_entity_list *entity,
 	box.end = vec2(200, 220);
 	draw_box(box, buffer, get_color(black));
 	tex = get_tex(editor_select_entity_tex(entity->entity_type), textures);
-	if (entity->entity_type == skull_skulker || entity->entity_type == thing
-		|| entity->entity_type == drone || entity->entity_type == crewmember)
+	if (entity->entity_type == skull_skulker || entity->entity_type == drone)
 	{
-		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / 128);
-		scale.x = 128;
-		scale.y = 128;
+		scale = (t_xy){SMALL_ENEMY, SMALL_ENEMY,
+			(float)(ft_fabsf(box.end.x - box.start.x) / SMALL_ENEMY)};
+		draw_multisprite_image(box.start, tex, buffer, scale);
+	}
+	else if (entity->entity_type == thing || entity->entity_type == crewmember)
+	{
+		scale = (t_xy){128, 128,
+			(float)(ft_fabsf(box.end.x - box.start.x) / 128)};
 		draw_multisprite_image(box.start, tex, buffer, scale);
 	}
 	else

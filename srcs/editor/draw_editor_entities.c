@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_entities.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/20 14:20:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 09:55:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,11 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 			editor->action.offsetf, &editor->buffer);
 	colour = get_entity_colour(entity, editor->action.selected_entity);
 	draw_box(box, &editor->buffer, colour);
-	if (entity->entity_type == skull_skulker || entity->entity_type == thing
-		|| entity->entity_type == drone || entity->entity_type == crewmember)
+	if (is_enemy(entity->entity_type))
 	{
-		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / 128);
-		scale.x = 128;
-		scale.y = 128;
+		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / SMALL_ENEMY);
+		scale.x = SMALL_ENEMY;
+		scale.y = SMALL_ENEMY;
 		draw_multisprite_image(box.start, tex, &editor->buffer, scale);
 	}
 	else
