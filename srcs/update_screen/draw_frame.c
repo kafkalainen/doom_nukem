@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/28 16:00:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 16:06:58 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,35 @@
 // 		c, &frame->buffer);
 // }
 
+static Uint32	blueshift_color(int take_damage)
+{
+	int	rev_value;
+
+	rev_value = 255 - take_damage;
+	if (rev_value > 220)
+		return (255 << 24 | rev_value << 16 | rev_value << 8 | 255);
+	return (255 << 24 | rev_value << 16 | 220 << 8 | 255);
+}
+
+static void	fill_with_red(t_buffer *buffer, int take_damage)
+{
+	t_pxl_coords	x0;
+	Uint32			color;
+
+	x0.x = 0;
+	color = blueshift_color(take_damage);
+	while (x0.x < buffer->width)
+	{
+		x0.y = 0;
+		while (x0.y < buffer->height)
+		{
+			put_pixel(buffer, x0, color);
+			x0.y++;
+		}
+		x0.x++;
+	}
+}
+
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
 	if (plr->plot_state == start_cutscene)
@@ -81,6 +110,8 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 		// draw_fog()
 		if (plr->input.info)
 			draw_info(frame, plr, (int)home->t.fps);
+		if (plr->take_damage)
+			fill_with_red(&frame->buffer, plr->take_damage);
 		draw_heads_up_display(home, frame, plr);
 		draw_plot_state(home, &frame->buffer, plr);
 		draw_object_data(&frame->buffer, plr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   attack_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 16:04:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 17:20:45 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr)
 
 static t_bool	skull_skulker_attack(t_entity *entity, t_player *plr, Uint32 t)
 {
-	if (get_distance_squared(plr->pos, entity->pos) < 4.00f)
+	if (get_distance_squared(plr->pos, entity->pos) < 9.00f)
 	{
 		entity->sprite_state = attack;
 		pick_next_frame(entity, t);

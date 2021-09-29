@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/28 11:48:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 16:06:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ typedef struct s_player
 	Uint32			reload;
 	Uint32			recharge;
 	unsigned int	active_wep;
+	int				take_damage;
 }					t_player;
 
 enum e_movement
@@ -233,6 +234,7 @@ t_bool			strafe_along_the_wall(t_wall *wall, t_player *plr,
 t_bool			test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 					t_ray *ray);
 void			player_take_damage(t_player *plr, Uint32 damage, Uint32 time);
+void			update_damage_tick(Uint32 delta_time, int *take_damage);
 void			reload_weapon(t_player *plr, Uint32 t);
 void			recharge_suit(t_player *plr, Uint32 t);
 void			update_cutscene(t_player *plr, t_home *home, Uint32 t);
