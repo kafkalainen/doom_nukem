@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/29 09:23:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 10:42:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@
 # define DENOMSUBDIV 0.0625f
 # define STORY_STRINGS 30
 # define SMALL_ENEMY 80
+# define LARGE_ENEMY 64
 
 /*
 ** Compass directions

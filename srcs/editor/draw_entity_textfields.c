@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:07:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/29 09:38:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 10:45:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,14 @@ static void	draw_entity_textures(t_entity_list *entity,
 	box.end = vec2(200, 220);
 	draw_box(box, buffer, get_color(black));
 	tex = get_tex(editor_select_entity_tex(entity->entity_type), textures);
-	if (entity->entity_type == skull_skulker || entity->entity_type == drone)
+	if (is_enemy(entity->entity_type))
 	{
-		scale = (t_xy){SMALL_ENEMY, SMALL_ENEMY,
-			(float)(ft_fabsf(box.end.x - box.start.x) / SMALL_ENEMY)};
-		draw_multisprite_image(box.start, tex, buffer, scale);
-	}
-	else if (entity->entity_type == thing || entity->entity_type == crewmember)
-	{
-		scale = (t_xy){128, 128,
-			(float)(ft_fabsf(box.end.x - box.start.x) / 128)};
+		if (entity->entity_type == skull_skulker || entity->entity_type == drone)
+			scale = (t_xy){SMALL_ENEMY, SMALL_ENEMY,
+				(float)(ft_fabsf(box.end.x - box.start.x) / SMALL_ENEMY)};
+		else if (entity->entity_type == thing || entity->entity_type == crewmember)
+			scale = (t_xy){LARGE_ENEMY, LARGE_ENEMY,
+				(float)(ft_fabsf(box.end.x - box.start.x) / LARGE_ENEMY)};
 		draw_multisprite_image(box.start, tex, buffer, scale);
 	}
 	else
