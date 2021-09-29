@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_grid_events2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 16:37:12 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 16:37:30 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 13:47:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,12 @@ void	check_for_objects_inside_sector_bbox(t_editor *editor)
 		editor->action.draw_depth = entity;
 	else if (editor->temp_wall)
 		editor->action.draw_depth = wall;
+}
+
+t_bool	check_for_valid_map_range(t_xy pos)
+{
+	if (pos.x > -5000 && pos.x < 5000
+		&& pos.y > -5000 && pos.y < 5000)
+		return (true);
+	return (false);
 }

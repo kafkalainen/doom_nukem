@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:22:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/17 14:37:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 13:34:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	editor_initialize_sector_values(t_editor_sector *new,
 			t_action *action)
 {
-	new->bbox.start = vec2(0, 0);
-	new->bbox.end = vec2((0), (0));
+	new->bbox.start = vec2(5000, 5000);
+	new->bbox.end = vec2(-5000, -5000);
 	new->nb_of_walls = 0;
 	new->tex_ceil = -surf0;
 	new->tex_floor = -surf0;

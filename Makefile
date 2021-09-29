@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/29 13:47:26 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/29 15:09:32 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -169,7 +169,6 @@ SRCS = \
 	porting$(SLASH)parse_all_audio_data.c \
 	porting$(SLASH)porting_utils.c \
 	porting$(SLASH)porting_utils2.c \
-	porting$(SLASH)validate_sectors_data_a.c \
 	porting$(SLASH)validate_sectors_data_b.c \
 	porting$(SLASH)verify_hash.c \
 	porting$(SLASH)write_sector_data.c \

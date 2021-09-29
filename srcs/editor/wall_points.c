@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 13:40:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 10:27:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 14:25:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static int	add_last_point(t_editor *editor, t_editor_sector *sector,
 	else
 	{
 		close_editor_wall_list(&sector->walls);
-		action->selected_sector = -1;
 		assign_sector_bbox(sector);
 		if (check_if_non_convex(sector)
 			|| check_if_another_sector_is_inside(sector, &editor->sector_list)
@@ -75,6 +74,7 @@ static int	add_last_point(t_editor *editor, t_editor_sector *sector,
 			return (3);
 		}
 		sector->centroid = editor_calculate_centroid(sector);
+		action->selected_sector = -1;
 		editor_sort_wall_vertices(sector);
 		action->create_sector = idle;
 		action->selected_wall = -1;
@@ -87,9 +87,7 @@ int	add_point_to_list(t_editor *editor, t_editor_sector *sector,
 	t_action *action)
 {
 	t_editor_walls	*point;
-	t_screen_xy		new_coord;
 
-	new_coord = round_coordinates(action->world_pos);
 	if (sector == NULL)
 		return (1);
 	point = sector->walls;
@@ -98,11 +96,14 @@ int	add_point_to_list(t_editor *editor, t_editor_sector *sector,
 	while (point && point->next)
 		point = point->next;
 	if (point && check_all_sectors_for_intersecting_lines(
-			&editor->sector_list, point->x0, new_coord))
+			&editor->sector_list, point->x0,
+			round_coordinates(action->world_pos)))
 		add_notification(editor, "ERROR: Cannot close, lines isecting.", 5000);
+	else if (point && !check_for_valid_map_range(action->world_pos))
+		add_notification(editor, "ERROR: Invalid range.", 2000);
 	else
 	{
-		point = new_wall_point(new_coord);
+		point = new_wall_point(round_coordinates(action->world_pos));
 		if (point)
 			add_point_end(&sector->walls, point);
 		else

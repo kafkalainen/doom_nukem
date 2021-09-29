@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 09:30:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 10:52:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 14:37:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	get_map_maximum_values(float *res, t_sector **sectors,
 	t_wall	*wall;
 	t_uint	i;
 
-	min = vec3(9999.0f, 9999.0f, 99.0f);
-	max = vec3(-9999.0f, -9999.0f, -99.0f);
+	min = vec3(5000.0f, 5000.0f, 100.0f);
+	max = vec3(-5000.0f, -5000.0f, -100.0f);
 	while (nb_of_sectors--)
 	{
 		wall = sectors[nb_of_sectors]->walls;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 09:26:55 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 08:32:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 14:38:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ float	get_ground_hit_point(t_sector *sector, t_ray *ray,
 	float		d;
 
 	i = 0;
-	d = 9999.0f;
+	d = 400000000.0f;
 	surf = sector->ground;
 	while (i < sector->nb_of_ground)
 	{

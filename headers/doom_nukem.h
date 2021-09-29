@@ -94,7 +94,6 @@ int			initialize_skybox(t_skybox *skybox, t_sector **sectors,
 				t_uint nb_of_sectors);
 int			initialize_hud(t_hud *hud);
 int			is_negative(float z);
-void		map_error_output(int i, t_home *home);
 void		read_error_output(char *msg, unsigned char **line);
 t_screen_xy	round_coordinates(t_xy	coord);
 float		set_valid(float angle);
