@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/29 13:27:29 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/29 15:09:32 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,7 @@ SRCS = \
 	entity_logic$(SLASH)take_damage.c \
 	parsing$(SLASH)assign_entity_properties.c \
 	parsing$(SLASH)assign_projectiles.c \
+	parsing$(SLASH)calc_button_locations.c \
 	parsing$(SLASH)calc_lift_doors.c \
 	parsing$(SLASH)calc_extra_walls.c \
 	parsing$(SLASH)calc_light_sources.c \

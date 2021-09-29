@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 10:11:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 19:57:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 15:02:20 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static void	set_lamp_position(t_sector *sector, t_entity *entity,
 		|| vec2_eucl_dist(sector->bounding_box.top_left,
 			sector->bounding_box.bottom_left) < 1.42f
 		|| vec2_eucl_dist(sector->bounding_box.top_right,
+			sector->bounding_box.bottom_right) < 1.42f
+		|| vec2_eucl_dist(sector->bounding_box.top_right,
+			sector->bounding_box.top_left) < 1.42f
+		|| vec2_eucl_dist(sector->bounding_box.bottom_left,
 			sector->bounding_box.bottom_right) < 1.42f)
 	{
 		centroid = calculate_centroid(sector);
