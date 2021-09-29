@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 09:26:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 14:38:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 15:18:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ float	get_ceiling_hit_point(t_sector *sector, t_ray *ray,
 
 	i = 0;
 	d = 400000000.0f;
+	hole->hole_type = nothing;
 	surf = sector->ceiling;
 	while (i < sector->nb_of_ceil)
 	{

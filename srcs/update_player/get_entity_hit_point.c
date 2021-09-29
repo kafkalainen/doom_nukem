@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 09:27:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 14:38:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 15:19:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ float	get_entity_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 
 	i = 0;
 	distance = 400000000.0f;
+	hole->hole_type = nothing;
 	while (i < home->nbr_of_entities)
 	{
 		if (home->entity_pool[i]->is_active
