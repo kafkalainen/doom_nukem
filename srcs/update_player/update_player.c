@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 11:46:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 17:18:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 	if (plr->cur_sector != home->end_sector)
 		evolve_story(plr, home->sectors[plr->cur_sector],
 			home->sectors[plr->msg_sector]);
+	if (plr->take_damage)
+		update_damage_tick(delta_time, &plr->take_damage);
 	if (plr->dead > 0)
 		death_animation(home, plr, delta_time);
 	end_level(home, plr);

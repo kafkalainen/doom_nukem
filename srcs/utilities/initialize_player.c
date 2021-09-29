@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_player.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 15:56:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 15:25:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	initialize_player_game_states(t_player *plr)
 	plr->reload = 0;
 	plr->recharge = 0;
 	plr->controls_enabled = 1;
+	plr->take_damage = 0;
 }
 
 static void	initialize_input_values(t_input *input)
