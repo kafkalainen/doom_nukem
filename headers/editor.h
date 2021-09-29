@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/29 12:23:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 13:48:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,6 +314,7 @@ void			remove_last_point(t_editor_walls **walls, int *nb_of_walls);
 t_bool			check_for_last_point(t_editor_sector *sector, t_action *action);
 t_bool			check_for_intersecting_lines(t_editor_sector *sector,
 					t_screen_xy p0, t_screen_xy p1);
+t_bool			check_for_valid_map_range(t_xy pos);
 t_bool			check_door_height(t_editor *editor, t_editor_walls *way,
 					t_editor_sector *current);
 t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,

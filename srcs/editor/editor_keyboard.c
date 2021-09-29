@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_keyboard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eparviai <eparviai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/15 18:32:33 by eparviai         ###   ########.fr       */
+/*   Updated: 2021/09/29 14:23:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static	void	handle_hotkeys(SDL_Keycode keysym, t_action *action)
 {
 	if (keysym == SDLK_w)
-		action->offsetf.y += action->scalarf * 0.4f;
+		action->offsetf.y += action->scalarf * 0.8f;
 	if (keysym == SDLK_s)
-		action->offsetf.y -= action->scalarf * 0.4f;
+		action->offsetf.y -= action->scalarf * 0.8f;
 	if (keysym == SDLK_d)
-		action->offsetf.x -= action->scalarf * 0.4f;
+		action->offsetf.x -= action->scalarf * 0.8f;
 	if (keysym == SDLK_a)
-		action->offsetf.x += action->scalarf * 0.4f;
+		action->offsetf.x += action->scalarf * 0.8f;
 	if (keysym == SDLK_f)
 	{
 		if (action->create_sector == idle)

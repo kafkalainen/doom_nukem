@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_points2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:05:47 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/15 19:29:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 13:38:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	assign_sector_bbox(t_editor_sector *sector)
 	int				i;
 
 	i = 0;
-	min = (t_screen_xy){9001, 9001};
-	max = (t_screen_xy){-9001, -9001};
+	min = (t_screen_xy){5000, 5000};
+	max = (t_screen_xy){-5000, -5000};
 	temp = sector->walls;
 	while (i < sector->nb_of_walls && temp != NULL)
 	{

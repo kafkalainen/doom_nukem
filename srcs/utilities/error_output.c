@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:39:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/08 10:12:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 13:26:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,5 @@ void	read_error_output(char *msg, unsigned char **buf)
 {
 	ft_strdel((char **)buf);
 	ft_putendl_fd(msg, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	map_error_output(int i, t_home *home)
-{
-	if (i == 1)
-		ft_putendl_fd("ERROR: Player not within the map.", 2);
-	else if (i == 2)
-		ft_putendl_fd("ERROR: Same points.", 2);
-	else if (i == 3)
-		ft_putendl_fd("ERROR: Portal not connected.", 2);
-	else if (i == 4)
-		ft_putendl_fd("ERROR: Sector not convex.", 2);
-	else if (i == 5)
-		ft_putendl_fd("ERROR: Sectors line segments are cutting.", 2);
-	else if (i == 6)
-		ft_putendl_fd("ERROR: Player out of bounds.", 2);
-	else if (i == 7)
-		ft_putendl_fd("ERROR: Sector has less than three walls.", 2);
-	free_sectors(home);
 	exit(EXIT_FAILURE);
 }
