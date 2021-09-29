@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 09:26:55 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 14:38:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 15:18:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ float	get_ground_hit_point(t_sector *sector, t_ray *ray,
 	i = 0;
 	d = 400000000.0f;
 	surf = sector->ground;
+	hole->hole_type = nothing;
 	while (i < sector->nb_of_ground)
 	{
 		if (test_triangle(&surf->tri, hole, &d, ray))

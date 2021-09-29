@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 10:31:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 11:06:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 15:53:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	initialize_projectile_triangles(t_projectile *projectile)
 
 static void	initialize_projectile(t_projectile *projectile)
 {
-	projectile->pos = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
+	projectile->pos = (t_xyz){5001.0f, 5001.0f, -100.0f, 1.0f};
 	projectile->normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
 	projectile->move_dir = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 	projectile->velocity = 0.005f;

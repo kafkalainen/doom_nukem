@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:12:34 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/22 11:47:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 15:40:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	set_bullet_hole(t_bullet_hole *hole, t_projectile *current)
 		current->bot.normal = hole->normal;
 		current->sector_idx = hole->sector_idx;
 	}
+	else
+		current->pos = vec3(5001.0f, 5001.0f, -100.0f);
 }
 
 void	shooting_handle(t_home *home, t_ray *ray)
