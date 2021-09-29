@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/29 09:52:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:10:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ Uint32				initialize_entity_textures(t_entity *entity);
 t_bool				is_enemy(int type);
 Uint32				lock_lift(t_home *home, t_sector *lift);
 void				lock_the_door(t_wall *dimensions, t_wall *door);
+void				make_noise(t_entity *entity, t_player *plr, Uint32 t);
 Uint32				other_dir(Uint32 dir);
 void				pick_next_frame(t_entity *entity, Uint32 t);
 t_bool				pick_up_item(t_entity *item, t_player *plr);
@@ -145,7 +146,7 @@ void				update_lifts(t_home *home, t_player *plr,
 void				update_entities(t_home *home, t_player *plr,
 						Uint32 delta_time);
 void				update_projectiles(t_home *home, t_player *plr, Uint32 t);
-Uint32				take_damage(t_entity *entity, Uint32 delta_time);
+t_bool				take_damage(t_entity *entity, Uint32 delta_time);
 void				translate_entity(t_triangle *tri1, t_triangle *tri2,
 						t_entity *entity);
 void				translate_entities(t_home *home, float distance,

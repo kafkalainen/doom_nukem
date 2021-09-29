@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 09:55:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:27:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	show_pickupables(t_entity *pickupable, t_home *home, Uint32 t)
 
 static void	show_dead_entity(t_entity *cur_enemy, t_player *plr)
 {
-	cur_enemy->state = die_now;
+	cur_enemy->sprite_state = die_now;
 	cur_enemy->sprite_index = 4;
 	rotate_entity_towards_player(cur_enemy, plr);
 	set_entity_texels_for_frame(cur_enemy);
@@ -51,6 +51,8 @@ static void	update_entity(t_home *home, t_entity *cur_enemy,
 	entity_gravity(home->sectors[cur_enemy->sector_idx], cur_enemy, t);
 	if (!cur_enemy->is_aggroed)
 		check_aggro(plr, cur_enemy, home);
+	if (!cur_enemy->is_aggroed)
+		make_noise(cur_enemy, plr, t);
 	if (cur_enemy->is_aggroed)
 		cur_enemy->dir = cur_enemy->vec_to_plr;
 	if (!attack_player(home, cur_enemy, plr, t))

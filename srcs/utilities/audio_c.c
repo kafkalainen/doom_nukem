@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:23:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 13:26:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 11:33:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ static void	load_rahikainen(t_audio *audio)
 
 static void	load_enemy(t_audio *audio)
 {
+	audio->skull_skulker_lulling
+		= Mix_LoadWAV("temp/skull_skulker_lulling.wav");
 	audio->skull_skulker_aggro = Mix_LoadWAV("temp/skull_skulker_aggro.wav");
 	audio->skull_skulker_attack = Mix_LoadWAV("temp/skull_skulker_attack.wav");
 	audio->skull_skulker_damage = Mix_LoadWAV("temp/skull_skulker_damage.wav");
 	audio->skull_skulker_death = Mix_LoadWAV("temp/skull_skulker_death.wav");
+	audio->thing_lulling = Mix_LoadWAV("temp/thing_lulling.wav");
 	audio->thing_aggro = Mix_LoadWAV("temp/thing_aggro.wav");
 	audio->thing_attack = Mix_LoadWAV("temp/thing_attack.wav");
 	audio->thing_damage = Mix_LoadWAV("temp/thing_damage.wav");
@@ -46,9 +49,10 @@ static t_bool	check_invalid_pointers(t_audio *audio)
 		|| !audio->error || !audio->lift || !audio->bolt_locked
 		|| !audio->bolt_unlocked || !audio->plasma_gun_no_ammo
 		|| !audio->reload || !audio->unlock_door
+		|| !audio->skull_skulker_lulling
 		|| !audio->skull_skulker_aggro || !audio->skull_skulker_attack
 		|| !audio->skull_skulker_damage || !audio->skull_skulker_death
-		|| !audio->thing_aggro || !audio->thing_attack
+		|| !audio->thing_aggro || !audio->thing_attack || !audio->thing_lulling
 		|| !audio->thing_damage || !audio->thing_death
 		|| !audio->recharge || !audio->power_station_depleted
 		|| !audio->battery_low || !audio->rahikainen_ramble[0]

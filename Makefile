@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/29 10:01:20 by jnivala          ###   ########.fr        #
+#    Updated: 2021/09/29 12:05:03 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,6 +111,7 @@ SRCS = \
 	entity_logic$(SLASH)handle_activation.c \
 	entity_logic$(SLASH)is_enemy.c \
 	entity_logic$(SLASH)lock_lift.c \
+	entity_logic$(SLASH)make_noise.c \
 	entity_logic$(SLASH)other_dir.c \
 	entity_logic$(SLASH)turn_on_lights.c \
 	entity_logic$(SLASH)update_lifts.c \

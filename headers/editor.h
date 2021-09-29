@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/28 10:26:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:23:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,8 @@ typedef struct s_action
 	int				create_light_source;
 	int				add_wall_point;
 	int				write_sector_story;
-	int				set_all_sector_ceiling_heights;
-	int				set_all_sector_floor_heights;
+	t_bool			set_all_sector_ceiling_heights;
+	t_bool			set_all_sector_floor_heights;
 	t_bool			cycle_portal;
 }					t_action;
 

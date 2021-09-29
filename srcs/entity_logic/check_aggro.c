@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:14:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 11:15:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:15:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_bool	check_for_close_range(float distance_squared,
 	{
 		if (vec3_dot_product(entity->vec_to_plr, entity->dir) > 0.0f)
 		{
-			entity->is_aggroed = 1;
+			entity->is_aggroed = true;
 			return (true);
 		}
 	}
@@ -45,7 +45,7 @@ static t_bool	check_if_in_next_sector(t_home *home,
 			{
 				if (wall->top.type == plr->cur_sector)
 				{
-					entity->is_aggroed = 1;
+					entity->is_aggroed = true;
 					return (true);
 				}
 				else

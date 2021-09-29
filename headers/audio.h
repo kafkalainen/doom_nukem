@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 09:45:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 11:28:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ typedef struct s_audio
 	Mix_Chunk	*rahikainen_damage[5];
 	Mix_Chunk	*reload;
 	Mix_Chunk	*recharge;
+	Mix_Chunk	*skull_skulker_lulling;
 	Mix_Chunk	*skull_skulker_aggro;
 	Mix_Chunk	*skull_skulker_attack;
 	Mix_Chunk	*skull_skulker_damage;
 	Mix_Chunk	*skull_skulker_death;
+	Mix_Chunk	*thing_lulling;
 	Mix_Chunk	*thing_aggro;
 	Mix_Chunk	*thing_attack;
 	Mix_Chunk	*thing_damage;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 09:27:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/26 08:51:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:16:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ float	get_entity_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 			{
 				hole->hole_type = nothing;
 				hole->sector_idx = bullet_sector;
-				home->entity_pool[i]->take_damage = TRUE;
-				home->entity_pool[i]->is_aggroed = TRUE;
+				home->entity_pool[i]->take_damage = true;
+				home->entity_pool[i]->is_aggroed = true;
 			}
 		}
 		i++;

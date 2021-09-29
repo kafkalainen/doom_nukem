@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/28 11:04:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:20:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,16 @@ typedef struct s_entity
 	float		width;
 	float		legs;
 	Uint32		time;
-	Uint32		take_damage;
-	Uint32		is_static;
-	Uint32		is_active;
-	Uint32		is_linked;
-	Uint32		is_revealed;
-	Uint32		type;
-	Uint32		state;
-	Uint32		is_aggroed;
+	t_bool		take_damage;
+	t_bool		is_static;
+	t_bool		is_active;
+	t_uint		is_linked;
+	t_bool		is_revealed;
+	t_uint		type;
+	t_bool		state;
+	t_bool		is_aggroed;
 	t_bool		is_pickupable;
+	int			making_noise;
 	int			cooldown;
 	int			die_animation;
 	int			sprite_index;

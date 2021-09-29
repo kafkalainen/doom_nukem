@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:12:08 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/24 11:43:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:24:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	editor_sector_story_and_light(t_editor *editor)
 		read_input_string(&editor->temp_sector->plot_line, &editor->action);
 		if (!editor->action.input_active)
 		{
-			editor->action.write_sector_story = 0;
+			editor->action.write_sector_story = false;
 			editor->action.edit_sector = 0;
 		}
 	}
@@ -95,7 +95,7 @@ static void	editor_edit_sector_ceiling_floor_heights(t_editor *editor)
 			if (editor->int_string)
 				editor_set_all_sector_ceiling_heights(editor->temp_sector,
 					&editor->int_string, editor);
-			editor->action.set_all_sector_ceiling_heights = 0;
+			editor->action.set_all_sector_ceiling_heights = false;
 			editor->action.edit_sector = 0;
 		}
 	}
@@ -107,7 +107,7 @@ static void	editor_edit_sector_ceiling_floor_heights(t_editor *editor)
 			if (editor->int_string)
 				editor_set_all_sector_floor_heights(editor->temp_sector,
 					&editor->int_string, editor);
-			editor->action.set_all_sector_floor_heights = 0;
+			editor->action.set_all_sector_floor_heights = false;
 			editor->action.edit_sector = 0;
 		}
 	}

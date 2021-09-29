@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_all_audio_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:40:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 16:21:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 11:36:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ static void	parse_rahikainen(unsigned char *buf, unsigned int *pos,
 static void	parse_enemy(unsigned char *buf, unsigned int *pos,
 			ssize_t size)
 {
+	parse_audio_data(buf, pos, "./temp/skull_skulker_lulling.wav", size);
 	parse_audio_data(buf, pos, "./temp/skull_skulker_aggro.wav", size);
 	parse_audio_data(buf, pos, "./temp/skull_skulker_attack.wav", size);
 	parse_audio_data(buf, pos, "./temp/skull_skulker_damage.wav", size);
 	parse_audio_data(buf, pos, "./temp/skull_skulker_death.wav", size);
+	parse_audio_data(buf, pos, "./temp/thing_lulling.wav", size);
 	parse_audio_data(buf, pos, "./temp/thing_aggro.wav", size);
 	parse_audio_data(buf, pos, "./temp/thing_attack.wav", size);
 	parse_audio_data(buf, pos, "./temp/thing_damage.wav", size);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:07:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 13:05:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 11:34:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ static void	free_sound(Mix_Chunk **chunk)
 
 static void	cleanup_enemy_audio_sources(t_audio *audio)
 {
+	free_sound(&audio->skull_skulker_lulling);
 	free_sound(&audio->skull_skulker_aggro);
 	free_sound(&audio->skull_skulker_attack);
 	free_sound(&audio->skull_skulker_damage);
 	free_sound(&audio->skull_skulker_death);
+	free_sound(&audio->thing_lulling);
 	free_sound(&audio->thing_aggro);
 	free_sound(&audio->thing_attack);
 	free_sound(&audio->thing_damage);

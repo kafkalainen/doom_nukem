@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 13:23:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 11:35:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ static void	initialize_player_audio_to_null(t_audio *audio)
 	audio->typing = NULL;
 }
 
+static void	initialize_enemy_audio_to_null(t_audio *audio)
+{
+	audio->skull_skulker_lulling = NULL;
+	audio->skull_skulker_aggro = NULL;
+	audio->skull_skulker_attack = NULL;
+	audio->skull_skulker_damage = NULL;
+	audio->skull_skulker_death = NULL;
+	audio->thing_lulling = NULL;
+	audio->thing_aggro = NULL;
+	audio->thing_attack = NULL;
+	audio->thing_damage = NULL;
+	audio->thing_death = NULL;
+}
+
 void	initialize_audio_to_null(t_audio *audio)
 {
 	audio->footstep1 = NULL;
@@ -43,14 +57,7 @@ void	initialize_audio_to_null(t_audio *audio)
 	audio->plasma_gun_no_ammo = NULL;
 	audio->reload = NULL;
 	audio->unlock_door = NULL;
-	audio->skull_skulker_aggro = NULL;
-	audio->skull_skulker_attack = NULL;
-	audio->skull_skulker_damage = NULL;
-	audio->skull_skulker_death = NULL;
-	audio->thing_aggro = NULL;
-	audio->thing_attack = NULL;
-	audio->thing_damage = NULL;
-	audio->thing_death = NULL;
+	initialize_enemy_audio_to_null(audio);
 	audio->recharge = NULL;
 	audio->power_station_depleted = NULL;
 	audio->battery_low = NULL;

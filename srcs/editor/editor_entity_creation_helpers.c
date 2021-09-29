@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/21 15:42:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:14:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	init_static_shared_vals(t_entity_list *new, int sector_idx)
 {
 	new->is_active = true;
 	new->is_linked = 0;
-	new->is_revealed = 0;
+	new->is_revealed = false;
 	new->is_static = true;
 	new->state = true;
 	new->sector_idx = sector_idx;

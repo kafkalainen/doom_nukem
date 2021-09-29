@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_actions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 14:33:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:24:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	initialize_toggles(t_action *action)
 {
 	action->change_entity_type = 0;
 	action->toggle_entity_is_linked = 0;
-	action->toggle_is_revealed = 0;
+	action->toggle_is_revealed = false;
 	action->create_elevator = 0;
 	action->create_light_button = 0;
 	action->create_elev_button = 0;
@@ -56,8 +56,8 @@ static void	initialize_toggles(t_action *action)
 	action->set_light_intensity = 0;
 	action->create_light_source = 0;
 	action->add_wall_point = 0;
-	action->set_all_sector_ceiling_heights = 0;
-	action->set_all_sector_floor_heights = 0;
+	action->set_all_sector_ceiling_heights = false;
+	action->set_all_sector_floor_heights = false;
 	action->cycle_portal = false;
 }
 
@@ -71,7 +71,7 @@ void	initialize_actions(t_action *action)
 {
 	action->offsetf = vec2(0.0f, 0.0f);
 	action->scalarf = 0.125f;
-	action->write_sector_story = 0;
+	action->write_sector_story = false;
 	action->prev_sector = -1;
 	action->prev_wall = -1;
 	initialize_menu_selections(action);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/13 10:53:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:17:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_bool	activate_power_station(t_entity *power_station, t_player *plr)
 {
 	if (power_station->state)
 	{
-		power_station->state = 0;
+		power_station->state = false;
 		plr->recharge = 5000;
 		play_sound(plr->audio.recharge, 30);
 		return (true);
@@ -74,9 +74,9 @@ t_bool	handle_activation(t_entity *entity, t_home *home, t_player *plr)
 		|| entity->type == lift_button)
 	{
 		if (entity->state)
-			entity->state = 0;
+			entity->state = false;
 		else
-			entity->state = 1;
+			entity->state = true;
 		handle_button(entity, home, plr);
 	}
 	else if (entity->type == powerstation)

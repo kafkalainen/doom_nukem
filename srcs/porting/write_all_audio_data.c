@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:15:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 13:06:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 11:30:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	write_rahikainen(int *fd)
 
 static void	write_enemy(int *fd)
 {
+	write_audio_data(fd, "./audio/skull_skulker_lulling.wav",
+		"doom_skull_skulker_lulling #");
 	write_audio_data(fd, "./audio/skull_skulker_aggro.wav",
 		"doom_skull_skulker_aggro #");
 	write_audio_data(fd, "./audio/skull_skulker_attack.wav",
@@ -43,6 +45,7 @@ static void	write_enemy(int *fd)
 		"doom_skull_skulker_damage #");
 	write_audio_data(fd, "./audio/skull_skulker_death.wav",
 		"doom_skull_skulker_death #");
+	write_audio_data(fd, "./audio/thing_lulling.wav", "doom_thing_lulling #");
 	write_audio_data(fd, "./audio/thing_aggro.wav", "doom_thing_aggro #");
 	write_audio_data(fd, "./audio/thing_attack.wav", "doom_thing_attack #");
 	write_audio_data(fd, "./audio/thing_damage.wav", "doom_thing_damage #");

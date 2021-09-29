@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_edit_entity.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/15 18:56:07 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:17:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static void	toggle_links(t_action *action, t_entity_list *entity,
 static void	toggle_states(t_action *action, t_entity_list *entity,
 			t_editor *editor)
 {
-	if (entity->state == 0)
-		entity->state = 1;
+	if (entity->state == false)
+		entity->state = true;
 	else
-		entity->state = 0;
+		entity->state = false;
 	if (is_linkable_entity(entity->entity_type) && entity->is_linked > 1)
 		update_linked_light_states(&editor->entity_list, &editor->sector_list,
 			entity, entity->state);
-	action->toggle_state = 0;
+	action->toggle_state = false;
 }
 
 void	edit_entity(t_action *action, t_entity_list *entity, t_editor *editor)
@@ -46,11 +46,11 @@ void	edit_entity(t_action *action, t_entity_list *entity, t_editor *editor)
 		toggle_links(action, entity, editor);
 	else if (action->toggle_is_revealed)
 	{
-		if (entity->is_revealed == 0)
-			entity->is_revealed = 1;
+		if (entity->is_revealed == false)
+			entity->is_revealed = true;
 		else
-			entity->is_revealed = 0;
-		action->toggle_is_revealed = 0;
+			entity->is_revealed = false;
+		action->toggle_is_revealed = false;
 	}
 	else if (action->toggle_state)
 		toggle_states(action, entity, editor);

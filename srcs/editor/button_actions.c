@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/27 14:31:51 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 12:24:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static void	sector_button_actions_two(t_action *action, int i)
 		action->convert_to_portal = 1;
 	else if (i == button_set_all_ceiling_heights)
 	{
-		action->set_all_sector_ceiling_heights = 1;
+		action->set_all_sector_ceiling_heights = true;
 		action->input_active = 1;
 	}
 	else if (i == button_set_all_floor_heights)
 	{
-		action->set_all_sector_floor_heights = 1;
+		action->set_all_sector_floor_heights = true;
 		action->input_active = 1;
 	}
 }
@@ -73,7 +73,7 @@ void	sector_button_actions(t_action *action, int i)
 		action->create_light_source = 1;
 	else if (i == button_input_active)
 	{
-		action->write_sector_story = 1;
+		action->write_sector_story = true;
 		action->input_active = 1;
 	}
 	sector_button_actions_two(action, i);
