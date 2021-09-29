@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 11:38:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 14:35:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ static t_bullet_hole	loop_through_sector(t_home *home, t_ray *ray,
 	else if (ray->side == PLAYER)
 		d[3] = get_entity_hit_point(home, ray, &hitpoints[3], bullet_sector);
 	else
-		d[3] = 9999.0f;
+		d[3] = 400000000.0f;
 	d[2] = get_wall_hit_point(home, ray, &hitpoints[2], bullet_sector);
-	if (d[0] != 9999.0f && d[0] <= d[1] && d[0] <= d[2] && d[0] <= d[3])
+	if (d[0] != 400000000.0f && d[0] <= d[1] && d[0] <= d[2] && d[0] <= d[3])
 		return (hitpoints[0]);
-	if (d[1] != 9999.0f && d[1] <= d[0] && d[1] <= d[2] && d[1] <= d[3])
+	if (d[1] != 400000000.0f && d[1] <= d[0] && d[1] <= d[2] && d[1] <= d[3])
 		return (hitpoints[1]);
-	if (d[2] != 9999.0f && d[2] <= d[1] && d[2] <= d[0] && d[2] <= d[3])
+	if (d[2] != 400000000.0f && d[2] <= d[1] && d[2] <= d[0] && d[2] <= d[3])
 		return (hitpoints[2]);
-	if (d[3] != 9999.0f && d[3] <= d[1] && d[3] <= d[0] && d[3] <= d[2])
+	if (d[3] != 400000000.0f && d[3] <= d[1] && d[3] <= d[0] && d[3] <= d[2])
 		return (hitpoints[3]);
 	return (hitpoints[0]);
 }
@@ -87,7 +87,7 @@ float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 	float		d;
 
 	i = 0;
-	d = 999.0f;
+	d = 400000000.0f;
 	wall = home->sectors[bullet_sector]->walls;
 	while (i < home->sectors[bullet_sector]->nb_of_walls)
 	{
