@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 23:34:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 18:06:53 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	update_main_menu(t_buffer *buffer, int *option)
 	int					i;
 	int					y;
 	t_plx_modifier		mod;
-	const char			*arr[] = {"Editor", "Load Map", "Help", "Quit"};
+	const char			*arr[] = {"Editor", "Load Map", "Settings", "Quit"};
 
 	i = 0;
 	y = 0;

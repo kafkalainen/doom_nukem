@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/29 15:09:32 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/30 15:45:14 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -145,6 +145,7 @@ SRCS = \
 	parsing$(SLASH)parse_sector_b.c \
 	parsing$(SLASH)parse_surfaces.c \
 	parsing$(SLASH)resize_portal.c \
+	parsing$(SLASH)set_entity_difficulty.c \
 	parsing$(SLASH)triangulate_floor_and_ceiling.c \
 	png_parser$(SLASH)color_utils.c \
 	png_parser$(SLASH)crc.c \
@@ -284,6 +285,7 @@ SRCS = \
 	vec_math$(SLASH)vec3_g.c \
 	vec_math$(SLASH)vec3_h.c \
 	menu_systems$(SLASH)launch_modules.c \
+	menu_systems$(SLASH)launch_settings_menu.c \
 	menu_systems$(SLASH)menu_inputs.c \
 	menu_systems$(SLASH)menu_setups.c \
 	menu_systems$(SLASH)menu_utils.c \

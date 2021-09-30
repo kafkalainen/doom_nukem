@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_entity_properties.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 14:30:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 15:43:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,18 @@ static void	initialize_entity_movement(t_entity *entity, t_home *home)
 	else if (entity->is_static == false)
 	{
 		if (entity->type == crewmember || entity->type == thing)
-			entity->velocity = ENTITY_VELOCITY_1;
+			entity->velocity = ENTITY_VELOCITY_1 * home->difficulty;
 		else if (entity->type == skull_skulker
 			|| entity->type == drone)
-			entity->velocity = ENTITY_VELOCITY_2;
+			entity->velocity = ENTITY_VELOCITY_2 * home->difficulty;
 		else
 			entity->velocity = 0;
 		initialize_moving_entity(entity);
 	}
 }
 
-static void	initialize_entity_values(t_entity *entity, t_xyz plr_pos)
+static void	initialize_entity_values(t_entity *entity,
+	t_xyz plr_pos, float difficulty)
 {
 	entity->dir = vec3_unit_vector(entity->dir);
 	entity->top.normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
@@ -120,9 +121,9 @@ static void	initialize_entity_values(t_entity *entity, t_xyz plr_pos)
 				vec3_to_vec2(entity->pos)));
 	entity->vec_to_plr = vec3_unit_vector(vec3_dec(plr_pos, entity->pos));
 	if (entity->type == skull_skulker || entity->type == drone)
-		entity->health = 2;
+		entity->health = set_entity_health(entity->type, difficulty);
 	else if (entity->type == crewmember || entity->type == thing)
-		entity->health = 3;
+		entity->health = set_entity_health(entity->type, difficulty);
 	else
 		entity->health = 999;
 	if (entity->type >= ammo_pack && entity->type <= keycard_military)
@@ -140,7 +141,8 @@ Uint32	assign_entity_properties(t_home *home, t_xyz plr_pos)
 	while (i < home->nbr_of_entities)
 	{
 		initialize_entity_triangles(home->entity_pool[i]);
-		initialize_entity_values(home->entity_pool[i], plr_pos);
+		initialize_entity_values(home->entity_pool[i], plr_pos,
+			home->difficulty);
 		initialize_entity_movement(home->entity_pool[i], home);
 		initialize_entity_textures(home->entity_pool[i]);
 		i++;

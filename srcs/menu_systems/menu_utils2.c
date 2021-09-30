@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:44:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/20 17:00:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 18:12:51 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	get_game_state(int *option)
 	if (*option == 1)
 		return (MAP_MENU);
 	if (*option == 2)
-		return (MAIN_MENU);
+		return (MAIN_SETTINGS);
 	if (*option == 3)
 		return (QUIT);
 	return (QUIT);
