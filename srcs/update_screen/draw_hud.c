@@ -64,6 +64,54 @@ static void	draw_hud_image(t_home *home, t_buffer *buffer)
 	}
 }
 
+t_argb			int2argb(int color)
+{
+	return ((t_argb){
+		(color >> 24) & 0xFF,
+		(color >> 16) & 0xFF,
+		(color >> 8) & 0xFF,
+		(color) & 0xFF
+	});
+}
+
+void    modify_pixel_fade(t_buffer *buffer, t_pxl_coords xy, float scalar)
+{
+	Uint32  newcol;
+	t_argb	oldcol;
+
+	oldcol = int2argb(*(buffer->pxl_buffer + (buffer->width * xy.y) + xy.x));
+	oldcol.alpha *= scalar;
+	oldcol.red *= scalar;
+	oldcol.green *= scalar;
+	oldcol.blue *= scalar;
+
+	newcol = ((oldcol.alpha << 24) | (oldcol.red << 16) | (oldcol.green << 8) | (oldcol.blue));
+
+	if (xy.x > buffer->width - 1 || xy.y > buffer->height - 1
+		|| xy.x < 0 || xy.y < 0)
+		return ;
+	*(buffer->pxl_buffer + (buffer->width * xy.y) + xy.x) = newcol;
+}
+
+static void draw_and_manage_fade_in(t_frame *frame)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (y < SCREEN_HEIGHT - 1)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH - 1)
+		{
+			modify_pixel_fade(&frame->buffer, (t_pxl_coords){x, y}, frame->fade);
+			x++;
+		}
+		y++;
+	}
+	frame->fade += 0.002;
+}
+
 static void	draw_mission_failed(t_buffer *buffer)
 {
 	t_plx_modifier	mod;
@@ -91,4 +139,6 @@ void	draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 	draw_crosshair(&frame->buffer);
 	if (plr->dead > 0)
 		draw_mission_failed(&frame->buffer);
+	if (frame->fade < 0.99)
+		draw_and_manage_fade_in(frame);
 }
