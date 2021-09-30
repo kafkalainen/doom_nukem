@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 15:43:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 18:05:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 			plr->width, plr->test_pos, plr->move_dir);
 	if (!wall)
 	{
+		if (walking_into_entity(plr->test_pos, plr->cur_sector,
+				home->entity_pool, home->nbr_of_entities))
+			return (false);
 		plr->pos = plr->test_pos;
 		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 		plr->steps += t * 0.005f;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 13:45:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 17:58:08 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,8 @@ char			**init_story(void);
 t_bool			jetpack(t_player *plr, t_home *home, Uint32 t);
 void			jump(t_player *plr, t_sector *cur_sector);
 t_bool			player_move(t_player *plr, t_home *home, Uint32 t);
+t_bool			walking_into_entity(t_xyz plr_pos, int cur_sector,
+					t_entity **entities, Uint32 nbr_of_entities);
 int				player_use(t_player *plr, t_home *home);
 t_bool			open_door(t_sector **sectors, t_player *plr, int active_item);
 t_bool			player_look(t_home *home, t_player *plr);

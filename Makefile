@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/09/30 15:45:14 by rzukale          ###   ########.fr        #
+#    Updated: 2021/09/30 17:58:41 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -220,6 +220,7 @@ SRCS = \
 	update_player$(SLASH)player_take_damage.c \
 	update_player$(SLASH)reload_weapon.c \
 	update_player$(SLASH)recharge_suit.c \
+	update_player$(SLASH)walk_into_entity.c \
 	update_screen$(SLASH)apply_matrices_a.c \
 	update_screen$(SLASH)apply_matrices_b.c \
 	update_screen$(SLASH)calculate_offsets.c \
