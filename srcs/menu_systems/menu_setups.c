@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/21 09:35:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 13:28:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	setup_menu(t_menu *menu, int *game_state)
 	menu->option = 0;
 	menu->buffer.width = SCREEN_WIDTH;
 	menu->buffer.height = SCREEN_HEIGHT;
+	menu->buffer.lightness = 1.0f;
 	*game_state = MAIN_MENU;
 }
 

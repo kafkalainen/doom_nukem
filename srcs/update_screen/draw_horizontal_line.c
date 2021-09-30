@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:53:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 13:28:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	draw_segment(t_buffer *buffer, float *depth_buffer, t_texel *tex,
 				depth_buffer[step->start_x + step->cur_y * SCREEN_WIDTH]
 					= step->texel_inv.w;
 				put_pixel(buffer, (t_pxl_coords){step->start_x, step->cur_y},
-					colour_scale(colour, lumel));
+					colour_scale(colour, lumel, buffer->lightness));
 			}
 		}
 		step->texel_start = texel_add(&step->texel_start, &step->delta);

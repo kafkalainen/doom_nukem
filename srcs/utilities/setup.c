@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 09:41:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 13:27:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 		error_output("Memory allocation failed!\n");
 	frame->buffer.width = SCREEN_WIDTH;
 	frame->buffer.height = SCREEN_HEIGHT;
+	frame->buffer.lightness = 0.0f;
 	frame->depth_buffer = (float *)malloc(sizeof(float)
 			* (SCREEN_WIDTH * SCREEN_HEIGHT + 1));
-	frame->fade = 0.0f;
 	if (!frame->depth_buffer)
 		error_output("Memory allocation failed for depth buffer!");
 	if (initialize_rasterization_queues(frame))

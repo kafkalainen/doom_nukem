@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/29 12:20:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 13:26:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_buffer
 {
 	int				width;
 	int				height;
+	float			lightness;
 	Uint32			*pxl_buffer;
 }					t_buffer;
 

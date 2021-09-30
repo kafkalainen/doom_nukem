@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 09:27:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 15:19:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 13:46:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ float	get_entity_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 			&& home->entity_pool[i]->sector_idx == bullet_sector)
 		{
 			translate_entity(&tested[0], &tested[1], home->entity_pool[i]);
-			if (test_triangle(&tested[0], hole, &distance, ray)
-				|| test_triangle(&tested[1], hole, &distance, ray))
+			if (test_ray(&tested[0], hole, &distance, ray)
+				|| test_ray(&tested[1], hole, &distance, ray))
 			{
 				hole->hole_type = nothing;
 				hole->sector_idx = bullet_sector;
