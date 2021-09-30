@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 16:29:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 18:09:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 	{
 		total_time += delta_time;
 		drop_speed = 0.5f * total_time * 0.001f;
-		if (drop_speed > 1.0f)
-			plr->dead = 1;
+		// if (drop_speed > 1.0f)
+		// 	plr->dead = 1;
 		plr->speed.y -= drop_speed;
 	}
 	else
@@ -51,23 +51,28 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 */
 void	entity_gravity(t_home *home, t_entity *entity, Uint32 delta_time)
 {
-	float			g;
 	float			drop;
+	float			drop_speed;
 
-	g = 2.0f;
 	drop = 0.0f;
-	if (!check_distance_to_ground(home->sectors[entity->sector_idx],
-		entity->legs, entity->pos, &drop)
-		&& find_current_sector(home, entity->pos) == -1)
-		drop = -1.0f;
+	drop_speed = 0.0f;
+	check_distance_to_ground(home->sectors[entity->sector_idx],
+		entity->legs, entity->pos, &drop);
 	if (entity->falling <= 0 && drop > 0.0f)
-		entity->falling = sqrtf(2 * drop * 2.0f) * 0.5f * 1000;
-	else if (entity->falling > 0 && drop > 0.0f)
 	{
-		entity->falling -= delta_time;
-		drop = 0.5f * g * delta_time * delta_time * 0.001f;
-		entity->pos.y -= drop;
+		entity->falling_total = 0;
+		entity->falling = sqrtf(2 * drop * 2.0f) / 2.0f * 1000;
 	}
-	else
-		return ;
+	else if (entity->falling > 0)
+	{
+		entity->falling_total += delta_time;
+		entity->falling -= delta_time;
+		drop_speed = 2.0f * entity->falling_total * 0.001f;
+		drop = drop_speed * delta_time * 0.001f;
+		entity->pos.y -= drop;
+		if (entity->falling < 0 && drop_speed > 5.0f)
+			entity->health = 0;
+	}
+	if (find_current_sector(home, entity->pos) == -1 && entity->falling <= 0)
+		place_entity_to_ground(entity, home);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 16:34:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 16:39:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_entity
 	t_bool		is_aggroed;
 	t_bool		is_pickupable;
 	int			falling;
+	int			falling_total;
 	int			making_noise;
 	int			cooldown;
 	int			die_animation;

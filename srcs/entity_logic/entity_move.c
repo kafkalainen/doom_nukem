@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 16:05:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 17:58:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	pick_next_frame(t_entity *entity, Uint32 t, int cooldown)
 		entity->anim_offset = ENTITY_SPRITE_MOVE_START;
 }
 
-static void	place_entity_to_ground(t_entity *entity, t_home *home)
+void	place_entity_to_ground(t_entity *entity, t_home *home)
 {
 	unsigned int	i;
 	t_surface		*ground;
@@ -32,8 +32,6 @@ static void	place_entity_to_ground(t_entity *entity, t_home *home)
 	t_xyz			isection;
 
 	i = 0;
-	if (entity->falling > 0)
-		return ;
 	pos = vec3(entity->pos.x, 100.0f, entity->pos.z);
 	ground = home->sectors[entity->sector_idx]->ground;
 	while (i < home->sectors[entity->sector_idx]->nb_of_ground)
@@ -44,7 +42,7 @@ static void	place_entity_to_ground(t_entity *entity, t_home *home)
 		ground = ground->next;
 		i++;
 	}
-	isection.y += entity->legs;
+	isection.y += entity->height;
 	entity->pos = isection;
 }
 
@@ -66,7 +64,6 @@ t_bool	entity_move(t_entity *entity, t_home *home, Uint32 t)
 		entity->pos = entity->test_pos;
 		pick_next_frame(entity, t, MOVE_COOLDOWN);
 		check_if_moved_through_portal(&entity->sector_idx, entity->pos, home);
-		place_entity_to_ground(entity, home);
 		return (true);
 	}
 	entity->dir = wall->top.normal;

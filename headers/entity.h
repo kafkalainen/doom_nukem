@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 14:53:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 17:37:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void				make_noise(t_entity *entity, t_player *plr, Uint32 t);
 Uint32				other_dir(Uint32 dir);
 void				pick_next_frame(t_entity *entity, Uint32 t, int cooldown);
 t_bool				pick_up_item(t_entity *item, t_player *plr);
+void				place_entity_to_ground(t_entity *entity, t_home *home);
 void				rotate_entity_towards_player(t_entity *entity,
 						t_player *plr);
 void				rotate_projectile_based_on_axes(t_xyz normal,
