@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_systems.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:27:23 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/22 09:46:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 18:43:43 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	setup_menu(t_menu *menu, int *game_state);
 void	process_inputs_load_menu(int *game_state, SDL_Event *e, t_menu *menu);
 void	process_inputs_main_menu(int *game_state, SDL_Event *e, int *option);
 void	launch_load_menu_loop(t_menu *menu, t_home *home, SDL_Event *e);
+void	launch_settings_menu(t_menu *menu, t_home *home, SDL_Event *e);
 void	launch_game_loop(t_home *home, t_player *plr,
 			t_frame *frame, SDL_Event *e);
 void	update_main_menu(t_buffer *buffer, int *option);

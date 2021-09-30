@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 13:27:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 15:59:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	initialize_audio_to_null(&plr->audio);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	setup_menu(menu, &home->game_state);
+	home->difficulty = NORMAL;
 }
 
 void	clean_up(t_frame *frame)

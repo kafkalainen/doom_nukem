@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 16:32:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 16:34:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ typedef struct s_home
 	int				nbr_of_textures;
 	int				end_sector;
 	int				game_state;
+	float			difficulty;
 }					t_home;
 
 typedef struct s_arg

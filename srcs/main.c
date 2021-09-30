@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/23 16:15:13 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/30 15:02:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,18 @@ int	free_all(t_frame *frame, t_audio *audio, Uint32 *buffer,
 	return (EXIT_SUCCESS);
 }
 
-void	handle_map_menu(t_menu *menu, t_home *home, SDL_Event *e)
+void	handle_map_and_settings(t_menu *menu, t_home *home, SDL_Event *e)
 {
-	load_map_names(&menu->map_names, &menu->nbr_of_maps);
-	if (menu->nbr_of_maps > 0)
-		launch_load_menu_loop(menu, home, e);
-	else
-		home->game_state = MAIN_MENU;
+	if (home->game_state == MAP_MENU)
+	{
+		load_map_names(&menu->map_names, &menu->nbr_of_maps);
+		if (menu->nbr_of_maps > 0)
+			launch_load_menu_loop(menu, home, e);
+		else
+			home->game_state = MAIN_MENU;
+	}
+	if (home->game_state == MAIN_SETTINGS)
+		launch_settings_menu(menu, home, e);
 }
 
 void	update_main_loop(t_buffer *buffer,
@@ -64,8 +69,8 @@ int	main(int argc, char **argv)
 	while (home.game_state != QUIT)
 	{
 		update_main_loop(&menu.buffer, &home.game_state, &e, &menu.option);
-		if (home.game_state == MAP_MENU)
-			handle_map_menu(&menu, &home, &e);
+		if (home.game_state == MAP_MENU || home.game_state == MAIN_SETTINGS)
+			handle_map_and_settings(&menu, &home, &e);
 		if (home.game_state == GAME_LOOP || home.game_state == GAME_CONTINUE)
 		{
 			setup_game_loop(&home, &plr, &menu.option);

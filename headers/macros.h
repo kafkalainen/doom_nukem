@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/29 10:42:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 14:58:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define FALSE 0
 # define AND &&
 # define OR ||
+# define MAIN_SETTINGS 6
 # define GAME_CONTINUE 5
 # define EDITOR 4
 # define GAME_LOOP 3
@@ -77,6 +78,9 @@
 # define STORY_STRINGS 30
 # define SMALL_ENEMY 80
 # define LARGE_ENEMY 64
+# define EASY 0.75f
+# define NORMAL 1.0f
+# define HARD 1.25f
 
 /*
 ** Compass directions
