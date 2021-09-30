@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 18:12:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 16:05:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,26 @@ void	pick_next_frame(t_entity *entity, Uint32 t, int cooldown)
 
 static void	place_entity_to_ground(t_entity *entity, t_home *home)
 {
-	float	distance;
+	unsigned int	i;
+	t_surface		*ground;
+	t_xyz			pos;
+	t_xyz			isection;
 
-	check_distance_to_ground(home->sectors[entity->sector_idx],
-		entity->legs, entity->pos, &distance);
-	if (distance > entity->legs)
-		entity->pos.y -= entity->legs;
+	i = 0;
+	if (entity->falling > 0)
+		return ;
+	pos = vec3(entity->pos.x, 100.0f, entity->pos.z);
+	ground = home->sectors[entity->sector_idx]->ground;
+	while (i < home->sectors[entity->sector_idx]->nb_of_ground)
+	{
+		if (vec3_ray_triangle_intersect(&ground->tri, pos,
+				vec3(0.0f, -1.0f, 0.0f), &isection))
+			break ;
+		ground = ground->next;
+		i++;
+	}
+	isection.y += entity->legs;
+	entity->pos = isection;
 }
 
 t_bool	entity_move(t_entity *entity, t_home *home, Uint32 t)

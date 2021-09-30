@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 18:03:21 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/30 18:05:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ t_wall	*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir)
 void	player_place_feet_to_ground(t_sector *sector, t_player *plr)
 {
 	unsigned int	i;
+	float			dist;
 	t_surface		*ground;
 	t_xyz			pos;
 	t_xyz			isection;
-	float			dist;
 
 	i = 0;
+	dist = 0.0f;
 	if (check_distance_to_ground(sector, plr->height, plr->pos, &dist)
 		&& dist > 0)
 		return ;

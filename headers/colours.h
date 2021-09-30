@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 09:37:29 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 09:41:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 14:35:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 typedef struct s_argb
 {
-	Uint8		alpha;
-	Uint8		red;
-	Uint8		green;
-	Uint8		blue;
+	t_uchar		alpha;
+	t_uchar		red;
+	t_uchar		green;
+	t_uchar		blue;
 }			t_argb;
 
 enum			e_colour
