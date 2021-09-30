@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   attack_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 17:20:45 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/29 19:09:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr)
 
 static t_bool	skull_skulker_attack(t_entity *entity, t_player *plr, Uint32 t)
 {
-	if (get_distance_squared(plr->pos, entity->pos) < 9.00f)
+	if (get_distance_squared(plr->pos, entity->pos) < 2.00f)
 	{
 		entity->sprite_state = attack;
-		pick_next_frame(entity, t);
+		pick_next_frame(entity, t, ATTACK_COOLDOWN);
 		if (entity->anim_offset >= 4
 			&& (int)(entity->cooldown - t) < 0)
 		{
 			player_take_damage(plr, 1, t);
 			play_sound(plr->audio.skull_skulker_attack, 30);
-			return (true);
 		}
+		return (true);
 	}
 	return (false);
 }
@@ -52,9 +52,9 @@ t_bool	attack_player(t_home *home, t_entity *entity, t_player *plr,
 	if (entity->type == thing)
 	{
 		entity->sprite_state = attack;
-		pick_next_frame(entity, t);
+		pick_next_frame(entity, t, ATTACK_COOLDOWN);
 		if (entity->anim_offset >= 4
-			&& (int)(entity->cooldown - t) < 0)
+			&& (int)(entity->cooldown - t) <= 0)
 			shoot_player(home, entity, plr);
 		return (true);
 	}

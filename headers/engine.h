@@ -38,6 +38,7 @@ typedef struct s_frame
 	t_sides			viewport;
 	int				idx;
 	int				old_idx;
+	float			fade;
 }				t_frame;
 
 enum			e_lines

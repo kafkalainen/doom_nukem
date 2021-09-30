@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/29 18:20:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/30 15:58:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_buffer
 {
 	int				width;
 	int				height;
+	float			lightness;
 	Uint32			*pxl_buffer;
 }					t_buffer;
 

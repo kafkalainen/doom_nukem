@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_editor_values.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:01:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 18:11:39 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/30 13:29:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	initialize_editor_values(t_editor *editor)
 	editor->grid_size = 32;
 	editor->buffer.width = 1200;
 	editor->buffer.height = 900;
+	editor->buffer.lightness = 1.0f;
 	editor->cur_time = SDL_GetTicks();
 	editor->notification = NULL;
 	editor->sector_list = NULL;

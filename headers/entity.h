@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/29 12:10:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/29 19:01:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define ENTITY_HEIGH 128
 # define SPRITE_COUNT 7
 # define ENTITY_COOLDOWN_1 6
-# define ENTITY_COOLDOWN_2 10
-# define ENTITY_COOLDOWN_3 200
+# define ATTACK_COOLDOWN 500
+# define MOVE_COOLDOWN 200
 # define ENTITY_SPRITE_MOVE_START 0
 # define ENTITY_SPRITE_MOVE_END 4
 # define MAX_PROJECTILES 15
@@ -105,7 +105,7 @@ enum e_entity_states
 */
 void				activate_lift(t_home *home, t_entity *entity,
 						t_player *plr);
-Uint32				attack_player(t_home *home, t_entity *entity, t_player *plr,
+t_bool				attack_player(t_home *home, t_entity *entity, t_player *plr,
 						Uint32 t);
 void				bolt_lift_doors(t_sector *sector, Uint32 state);
 void				bolt_lift_door(t_sector *lift, t_sector **sectors,
@@ -115,7 +115,7 @@ t_bool				check_if_entity_is_active(t_entity *entity);
 void				determine_angle_between_entity_and_plr(t_entity *entity,
 						t_player *plr);
 t_bool				die(t_entity *entity, Uint32 t);
-int					entity_move(t_entity *entity, t_home *home, Uint32 t);
+t_bool				entity_move(t_entity *entity, t_home *home, Uint32 t);
 void				entity_chase(t_entity *entity, t_home *home, Uint32 t,
 						t_player *plr);
 void				entity_gravity(t_sector *sector, t_entity *entity,
@@ -133,7 +133,7 @@ Uint32				lock_lift(t_home *home, t_sector *lift);
 void				lock_the_door(t_wall *dimensions, t_wall *door);
 void				make_noise(t_entity *entity, t_player *plr, Uint32 t);
 Uint32				other_dir(Uint32 dir);
-void				pick_next_frame(t_entity *entity, Uint32 t);
+void				pick_next_frame(t_entity *entity, Uint32 t, int cooldown);
 t_bool				pick_up_item(t_entity *item, t_player *plr);
 void				rotate_entity_towards_player(t_entity *entity,
 						t_player *plr);
@@ -146,7 +146,7 @@ void				update_lifts(t_home *home, t_player *plr,
 void				update_entities(t_home *home, t_player *plr,
 						Uint32 delta_time);
 void				update_projectiles(t_home *home, t_player *plr, Uint32 t);
-t_bool				take_damage(t_entity *entity, Uint32 delta_time);
+t_bool				take_damage(t_entity *entity, Uint32 t);
 void				translate_entity(t_triangle *tri1, t_triangle *tri2,
 						t_entity *entity);
 void				translate_entities(t_home *home, float distance,

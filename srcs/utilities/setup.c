@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 18:21:42 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/30 15:59:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 		error_output("Memory allocation failed!\n");
 	frame->buffer.width = SCREEN_WIDTH;
 	frame->buffer.height = SCREEN_HEIGHT;
+	frame->buffer.lightness = 0.0f;
 	frame->depth_buffer = (float *)malloc(sizeof(float)
 			* (SCREEN_WIDTH * SCREEN_HEIGHT + 1));
 	if (!frame->depth_buffer)
@@ -80,7 +81,7 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	initialize_audio_to_null(&plr->audio);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	setup_menu(menu, &home->game_state);
-	home->difficulty = 1.0f;
+	home->difficulty = NORMAL;
 }
 
 void	clean_up(t_frame *frame)

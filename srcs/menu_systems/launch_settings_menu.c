@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:16:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/30 15:22:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/09/30 16:01:09 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,4 @@ void	launch_settings_menu(t_menu *menu, t_home *home, SDL_Event *e)
 		else if (option == 2)
 			home->difficulty = HARD;
 	}
-	printf("new difficulty: %f\n", home->difficulty);
 }

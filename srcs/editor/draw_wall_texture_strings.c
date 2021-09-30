@@ -90,6 +90,7 @@ void	display_door_tex_string(t_editor_walls *wall, t_buffer *buffer)
 
 	coord = vec2(10, 218);
 	mod.size = TEXT_SIZE;
+	mod.len = 0;
 	mod.colour = get_color(white);
 	display_door_tex_string_logic1(coord, wall->type, mod, buffer);
 }

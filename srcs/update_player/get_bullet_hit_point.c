@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 15:19:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 13:48:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_bool	test_triangle(t_triangle *tri, t_bullet_hole *hole_2, float *d,
+t_bool	test_ray(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 		t_ray *ray)
 {
 	t_plane	plane;
@@ -82,7 +82,7 @@ static void	set_hole_properties(t_wall *wall, int *hole_type, int *sector_idx,
 float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 		int bullet_sector)
 {
-	Uint32		i;
+	t_uint		i;
 	t_wall		*wall;
 	float		d;
 
@@ -90,10 +90,10 @@ float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 	d = 400000000.0f;
 	hole->hole_type = nothing;
 	wall = home->sectors[bullet_sector]->walls;
-	while (i < home->sectors[bullet_sector]->nb_of_walls)
+	while (i++ < home->sectors[bullet_sector]->nb_of_walls)
 	{
-		if (test_triangle(&wall->top, hole, &d, ray)
-			|| test_triangle(&wall->bot, hole, &d, ray))
+		if (test_ray(&wall->top, hole, &d, ray)
+			|| test_ray(&wall->bot, hole, &d, ray))
 		{
 			if (check_if_open_portal(wall))
 			{
@@ -105,7 +105,6 @@ float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 					bullet_sector);
 		}
 		wall = wall->next;
-		i++;
 	}
 	return (d);
 }
