@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 13:43:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 16:29:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	fill_with_red(t_buffer *buffer, int take_damage)
 
 static void	draw_and_manage_fade_in(t_frame *frame)
 {
-	frame->buffer.lightness += 0.002f;
+	frame->buffer.lightness += 0.012f;
 }
 
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)

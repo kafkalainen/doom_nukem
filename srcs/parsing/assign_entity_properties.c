@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 14:30:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 15:28:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static void	initialize_entity_values(t_entity *entity, t_xyz plr_pos)
 	entity->is_aggroed = false;
 	entity->sprite_state = 0;
 	entity->anim_offset = 0;
-	entity->time = 0;
+	entity->falling = 0;
 	entity->vec_to_plr_2d = vec2_unit_vector(vec2_dec(vec3_to_vec2(plr_pos),
 				vec3_to_vec2(entity->pos)));
 	entity->vec_to_plr = vec3_unit_vector(vec3_dec(plr_pos, entity->pos));

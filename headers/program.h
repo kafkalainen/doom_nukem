@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 13:26:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 16:32:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ typedef struct s_entity
 	float		height;
 	float		width;
 	float		legs;
-	Uint32		time;
 	t_bool		take_damage;
 	t_bool		is_static;
 	t_bool		is_active;
@@ -101,6 +100,7 @@ typedef struct s_entity
 	t_bool		state;
 	t_bool		is_aggroed;
 	t_bool		is_pickupable;
+	int			falling;
 	int			making_noise;
 	int			cooldown;
 	int			die_animation;
