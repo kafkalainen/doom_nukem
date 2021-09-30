@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strafe_vector_along_the_wall.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 09:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 18:00:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/09/30 17:05:55 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
