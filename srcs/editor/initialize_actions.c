@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 11:53:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:06:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	initialize_menu_selections(t_action *action)
 
 static void	initialize_toggles(t_action *action)
 {
-	action->change_entity_type = 0;
 	action->toggle_entity_is_linked = 0;
 	action->toggle_is_revealed = false;
 	action->create_elevator = 0;
@@ -75,6 +74,7 @@ void	initialize_actions(t_action *action)
 	action->write_sector_story = false;
 	action->prev_sector = -1;
 	action->prev_wall = -1;
+	action->change_entity_type = 0;
 	initialize_menu_selections(action);
 	initialize_toggles(action);
 	initialize_input(action);

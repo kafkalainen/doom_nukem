@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 10:52:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 12:56:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_entity
 	float		height;
 	float		width;
 	float		legs;
+	float		drop_speed;
 	t_bool		is_static;
 	t_bool		is_active;
 	t_uint		is_linked;

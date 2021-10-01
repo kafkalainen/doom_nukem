@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 10:50:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:15:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ static void	initialize_entity_movement(t_entity *entity, t_home *home)
 			entity->velocity = 0;
 		initialize_moving_entity(entity);
 	}
+	entity->drop_speed = 0;
 }
 
 static void	initialize_entity_values(t_entity *entity,

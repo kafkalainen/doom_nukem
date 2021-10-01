@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_player.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 15:25:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:24:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	initialize_player(t_player *plr)
 	plr->time = SDL_GetTicks();
 	plr->message_time = 0;
 	plr->cutscene = 0;
+	plr->drop_time = 0;
 	initialize_player_game_states(plr);
 	initialize_input_values(&plr->input);
 }

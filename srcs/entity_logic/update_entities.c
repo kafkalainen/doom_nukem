@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 10:42:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:37:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	show_pickupables(t_entity *pickupable, t_home *home, Uint32 t)
 {
 	face_entity_towards_player(pickupable);
-	entity_gravity(home, pickupable, t);
+	entity_gravity(home->sectors[pickupable->sector_idx], home, pickupable, t);
 }
 
 static void	show_dead_entity(t_entity *cur_enemy, t_player *plr)
@@ -47,7 +47,7 @@ static void	sound_logic(t_entity *enemy, t_player *plr, char sound)
 static void	update_entity(t_home *home, t_entity *cur_enemy,
 			t_player *plr, Uint32 t)
 {
-	entity_gravity(home, cur_enemy, t);
+	entity_gravity(home->sectors[cur_enemy->sector_idx], home, cur_enemy, t);
 	if (take_damage(cur_enemy, t))
 	{
 		sound_logic(cur_enemy, plr, 'd');
