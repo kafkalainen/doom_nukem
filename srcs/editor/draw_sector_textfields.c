@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:06:36 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/01 14:01:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:24:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,45 +31,33 @@ static void	draw_sector_textfield_textures(t_editor_sector *sector,
 	draw_image_static(box.start, tex, buffer, scale);
 }
 
-static void	draw_gravity_choice_two(t_editor_sector *sector, t_buffer *buffer,
-	t_plx_modifier mod)
-{
-	t_xy	coord;
-
-	coord.y = 591;
-	if (sector->gravity == 10)
-	{
-		mod.len = 7;
-		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
-		ft_str_pxl(buffer, coord, "jupiter", mod);
-	}
-}
-
 static void	draw_gravity_choice(t_editor_sector *sector, t_buffer *buffer,
 	t_plx_modifier mod)
 {
 	t_xy	coord;
 
 	coord.y = 591;
+	mod.len = 7;
 	if (sector->gravity == 2)
 	{
-		mod.len = 5;
 		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
 		ft_str_pxl(buffer, coord, "lunar", mod);
 	}
 	else if (sector->gravity == 4)
 	{
-		mod.len = 7;
 		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
 		ft_str_pxl(buffer, coord, "martian", mod);
 	}
 	else if (sector->gravity == 6)
 	{
-		mod.len = 5;
 		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
 		ft_str_pxl(buffer, coord, "earth", mod);
 	}
-	draw_gravity_choice_two(sector, buffer, mod);
+	if (sector->gravity == 10)
+	{
+		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
+		ft_str_pxl(buffer, coord, "jupiter", mod);
+	}
 }
 
 void	draw_sector_textfields(t_editor_sector *sector,

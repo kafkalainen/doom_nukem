@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 14:18:52 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:21:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,33 +112,35 @@ static void	draw_and_manage_fade_in(t_frame *frame, int plr_is_dead)
 }
 
 // Debugging utility function.
-static void	draw_coordinate(t_buffer *buffer, t_xyz pos, int sector)
-{
-	char	*pstr[3];
-	char	*sec;
+// static void	draw_coordinate(t_buffer *buffer, t_xyz pos, int sector)
+// {
+// 	char	*pstr[3];
+// 	char	*sec;
 
-	ft_str_pxl(buffer, vec2(5.0f, 110.0f),
-		"sector", (t_plx_modifier){get_color(green), 2, 6});
-	sec = ft_itoa(sector);
-	ft_str_pxl(buffer, vec2(5.0f, 130.0f),
-		sec, (t_plx_modifier){get_color(green), 2, 12});
-	ft_str_pxl(buffer, vec2(5.0f, 150.0f),
-		"xyz", (t_plx_modifier){get_color(green), 2, 12});
-	pstr[0] = ft_ftoa(pos.x, 6);
-	pstr[1] = ft_ftoa(pos.y, 6);
-	pstr[2] = ft_ftoa(pos.z, 6);
-	ft_str_pxl(buffer, vec2(5.0f, 170.0f), pstr[0],
-		(t_plx_modifier){get_color(green), 2, 12});
-	ft_str_pxl(buffer, vec2(5.0f, 190.0f), pstr[1],
-		(t_plx_modifier){get_color(green), 2, 12});
-	ft_str_pxl(buffer, vec2(5.0f, 210.0f), pstr[2],
-		(t_plx_modifier){get_color(green), 2, 12});
-	free(pstr[0]);
-	free(pstr[1]);
-	free(pstr[2]);
-	free(sec);
-}
+// 	ft_str_pxl(buffer, vec2(5.0f, 110.0f),
+// 		"sector", (t_plx_modifier){get_color(green), 2, 6});
+// 	sec = ft_itoa(sector);
+// 	ft_str_pxl(buffer, vec2(5.0f, 130.0f),
+// 		sec, (t_plx_modifier){get_color(green), 2, 12});
+// 	ft_str_pxl(buffer, vec2(5.0f, 150.0f),
+// 		"xyz", (t_plx_modifier){get_color(green), 2, 12});
+// 	pstr[0] = ft_ftoa(pos.x, 6);
+// 	pstr[1] = ft_ftoa(pos.y, 6);
+// 	pstr[2] = ft_ftoa(pos.z, 6);
+// 	ft_str_pxl(buffer, vec2(5.0f, 170.0f), pstr[0],
+// 		(t_plx_modifier){get_color(green), 2, 12});
+// 	ft_str_pxl(buffer, vec2(5.0f, 190.0f), pstr[1],
+// 		(t_plx_modifier){get_color(green), 2, 12});
+// 	ft_str_pxl(buffer, vec2(5.0f, 210.0f), pstr[2],
+// 		(t_plx_modifier){get_color(green), 2, 12});
+// 	free(pstr[0]);
+// 	free(pstr[1]);
+// 	free(pstr[2]);
+// 	free(sec);
+// }
 
+// draw_coordinate(&frame->buffer, home->entity_pool[0]->pos,
+// home->entity_pool[0]->sector_idx);
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
 	if (plr->plot_state == start_cutscene)
@@ -151,7 +153,6 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 		frame->old_idx = old_sector;
 		reset_depth_buffer(frame->depth_buffer);
 		draw_game(home, frame, plr);
-		// draw_fog()
 		if (plr->input.info)
 			draw_info(frame, plr, (int)home->t.fps);
 		if (plr->take_damage)
@@ -162,7 +163,5 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 		if (frame->buffer.lightness < 0.99f || plr->dead)
 			draw_and_manage_fade_in(frame, plr->dead);
 	}
-	draw_coordinate(&frame->buffer, home->entity_pool[0]->pos,
-		home->entity_pool[0]->sector_idx);
 	return ;
 }
