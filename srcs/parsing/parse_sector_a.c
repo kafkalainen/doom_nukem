@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:31:08 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 16:45:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:32:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_sector	*get_sector_data(unsigned char *buf, unsigned int *pos,
 	if (!new_sector)
 		return (NULL);
 	initialize_sector_pointers(new_sector);
-	if (parse_vertex_data(new_sector, buf, pos, size))
+	if (parse_sector_header_data(new_sector, buf, pos, size))
 		return (free_sector(&new_sector));
 	if (add_points(new_sector, buf, &pos, size))
 		return (free_sector(&new_sector));

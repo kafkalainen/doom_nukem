@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 12:24:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:53:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	initialize_toggles(t_action *action)
 	action->add_wall_point = 0;
 	action->set_all_sector_ceiling_heights = false;
 	action->set_all_sector_floor_heights = false;
+	action->set_gravity = false;
 	action->cycle_portal = false;
 }
 

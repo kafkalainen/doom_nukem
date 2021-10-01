@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocate_buttons.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/27 14:50:43 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:43:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,27 @@ static void	buttons_create_sector_layer(t_button **blist)
 		(t_button_info){"Set all ceiling heights", 0, sector});
 	create_button(blist[16], (t_box){vec2(10, 530), vec2(290, 555)},
 		(t_button_info){"Set all ground heights", 0, sector});
+	create_button(blist[17], (t_box){vec2(10, 560), vec2(290, 585)},
+		(t_button_info){"Set gravity", 0, sector});
 }
 
 static void	buttons_create_wall_layer(t_button **blist)
 {
-	create_button(blist[17], (t_box){vec2(10, 50), vec2(290, 75)},
+	create_button(blist[18], (t_box){vec2(10, 50), vec2(290, 75)},
 		(t_button_info){"Wall index:", 0, wall});
-	create_button(blist[18], (t_box){vec2(10, 80), vec2(290, 105)},
+	create_button(blist[19], (t_box){vec2(10, 80), vec2(290, 105)},
 		(t_button_info){"Wall texture:", 0, wall});
-	create_button(blist[19], (t_box){vec2(10, 245), vec2(290, 270)},
+	create_button(blist[20], (t_box){vec2(10, 245), vec2(290, 270)},
 		(t_button_info){"wall ceiling height:", 0, wall});
-	create_button(blist[20], (t_box){vec2(10, 275), vec2(290, 300)},
+	create_button(blist[21], (t_box){vec2(10, 275), vec2(290, 300)},
 		(t_button_info){"Wall floor height:", 0, wall});
-	create_button(blist[21], (t_box){vec2(10, 305), vec2(290, 330)},
+	create_button(blist[22], (t_box){vec2(10, 305), vec2(290, 330)},
 		(t_button_info){"Add light button", 0, wall});
-	create_button(blist[22], (t_box){vec2(10, 335), vec2(290, 360)},
+	create_button(blist[23], (t_box){vec2(10, 335), vec2(290, 360)},
 		(t_button_info){"Add powerstation", 0, wall});
-	create_button(blist[23], (t_box){vec2(10, 365), vec2(290, 390)},
+	create_button(blist[24], (t_box){vec2(10, 365), vec2(290, 390)},
 		(t_button_info){"Add lift button", 0, wall});
-	create_button(blist[24], (t_box){vec2(10, 395), vec2(290, 420)},
+	create_button(blist[25], (t_box){vec2(10, 395), vec2(290, 420)},
 		(t_button_info){"Cycle through portals", 0, wall});
 }
 
@@ -101,15 +103,15 @@ t_button	**create_button_list(t_button **blist)
 	buttons_create_general_layer(blist);
 	buttons_create_sector_layer(blist);
 	buttons_create_wall_layer(blist);
-	create_button(blist[25], (t_box){vec2(10, 50), vec2(290, 75)},
+	create_button(blist[26], (t_box){vec2(10, 50), vec2(290, 75)},
 		(t_button_info){"Index", 0, entity});
-	create_button(blist[26], (t_box){vec2(10, 80), vec2(290, 105)},
+	create_button(blist[27], (t_box){vec2(10, 80), vec2(290, 105)},
 		(t_button_info){"Type", 0, entity});
-	create_button(blist[27], (t_box){vec2(10, 225), vec2(290, 250)},
+	create_button(blist[28], (t_box){vec2(10, 225), vec2(290, 250)},
 		(t_button_info){"Light or sector link", 0, entity});
-	create_button(blist[28], (t_box){vec2(10, 255), vec2(290, 280)},
+	create_button(blist[29], (t_box){vec2(10, 255), vec2(290, 280)},
 		(t_button_info){"Alternative texture", 0, entity});
-	create_button(blist[29], (t_box){vec2(10, 285), vec2(290, 310)},
+	create_button(blist[30], (t_box){vec2(10, 285), vec2(290, 310)},
 		(t_button_info){"State", 0, entity});
 	return (blist);
 }

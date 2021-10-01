@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:12:08 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/29 12:24:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 12:15:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,4 +135,6 @@ void	editor_edit_sector(t_editor *editor)
 	if (editor->action.set_all_sector_ceiling_heights
 		|| editor->action.set_all_sector_floor_heights)
 		editor_edit_sector_ceiling_floor_heights(editor);
+	if (editor->action.set_gravity)
+		editor_edit_gravity(editor);
 }

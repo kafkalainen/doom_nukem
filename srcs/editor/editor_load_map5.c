@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/13 12:04:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:32:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	editor_get_sector_data(unsigned char *buf, unsigned int *pos,
 		return (1);
 	new->walls = NULL;
 	new->plot_line = NULL;
-	if (editor_parse_vertex_data(new, buf, pos, size))
+	if (editor_parse_sector_header_data(new, buf, pos, size))
 		return (1);
 	if (editor_add_points(new, buf, &pos, size))
 		return (1);

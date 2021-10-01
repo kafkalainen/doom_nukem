@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 17:58:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 12:31:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,15 @@ void	place_entity_to_ground(t_entity *entity, t_home *home)
 	t_surface		*ground;
 	t_xyz			pos;
 	t_xyz			isection;
+	int				idx;
 
 	i = 0;
 	pos = vec3(entity->pos.x, 100.0f, entity->pos.z);
-	ground = home->sectors[entity->sector_idx]->ground;
-	while (i < home->sectors[entity->sector_idx]->nb_of_ground)
+	idx = find_current_sector(home, pos);
+	if (idx == -1)
+		return ;
+	ground = home->sectors[idx]->ground;
+	while (i < home->sectors[idx]->nb_of_ground)
 	{
 		if (vec3_ray_triangle_intersect(&ground->tri, pos,
 				vec3(0.0f, -1.0f, 0.0f), &isection))
@@ -42,7 +46,8 @@ void	place_entity_to_ground(t_entity *entity, t_home *home)
 		ground = ground->next;
 		i++;
 	}
-	isection.y += entity->height;
+	entity->sector_idx = idx;
+	isection.y += entity->legs;
 	entity->pos = isection;
 }
 

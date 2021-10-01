@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 16:29:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:05:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,34 @@ static void	draw_and_manage_fade_in(t_frame *frame)
 	frame->buffer.lightness += 0.012f;
 }
 
+// Debugging utility function.
+static void	draw_coordinate(t_buffer *buffer, t_xyz pos, int sector)
+{
+	char	*pstr[3];
+	char	*sec;
+
+	ft_str_pxl(buffer, vec2(5.0f, 110.0f),
+	"sector", (t_plx_modifier){get_color(green), 2, 6});
+	sec = ft_itoa(sector);
+	ft_str_pxl(buffer, vec2(5.0f, 130.0f),
+	sec, (t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(buffer, vec2(5.0f, 150.0f),
+	"xyz", (t_plx_modifier){get_color(green), 2, 12});
+	pstr[0] = ft_ftoa(pos.x, 6);
+	pstr[1] = ft_ftoa(pos.y, 6);
+	pstr[2] = ft_ftoa(pos.z, 6);
+	ft_str_pxl(buffer, vec2(5.0f, 170.0f), pstr[0],
+		(t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(buffer, vec2(5.0f, 190.0f), pstr[1],
+		(t_plx_modifier){get_color(green), 2, 12});
+	ft_str_pxl(buffer, vec2(5.0f, 210.0f), pstr[2],
+		(t_plx_modifier){get_color(green), 2, 12});
+	free(pstr[0]);
+	free(pstr[1]);
+	free(pstr[2]);
+	free(sec);
+}
+
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
 	if (plr->plot_state == start_cutscene)
@@ -123,5 +151,6 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 		if (frame->buffer.lightness < 0.99f)
 			draw_and_manage_fade_in(frame);
 	}
+	draw_coordinate(&frame->buffer, home->entity_pool[0]->pos, home->entity_pool[0]->sector_idx);
 	return ;
 }

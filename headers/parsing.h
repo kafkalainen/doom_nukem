@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 15:44:19 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:32:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				parse_coordinates(t_point_data *data, unsigned int ***pos,
 					unsigned char **buf, ssize_t size);
 int				parse_entity_data(unsigned char *buf, t_home *home,
 					ssize_t size);
-int				parse_vertex_data(t_sector *new_sector, unsigned char *buf,
+int				parse_sector_header_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_light_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);

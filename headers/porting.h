@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/27 14:24:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:25:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ void			verify_hash(unsigned char *buf, ssize_t size);
 int				get_nbr_of_lines(unsigned char *plot);
 int				check_if_linked(unsigned char *linked_map);
 int				get_nbr_of_sectors(t_editor_sector **sectors);
-unsigned char	*get_writable_sector_data3(t_editor_sector *sector,
-					unsigned char *buf);
-unsigned char	*get_writable_sector_data2(t_editor_sector *sector,
-					unsigned char *buf);
-unsigned char	*get_sector_plot(unsigned char *plot);
-unsigned char	*write_plot_lines(unsigned char *plot);
-unsigned char	*get_writable_wall_data(t_editor_walls *wall);
-void			parse_map_data(unsigned char *buf, t_player *plr,
+t_uchar			*get_writable_light_data(t_editor_sector *sector,
+					t_uchar *buf);
+t_uchar			*get_writable_sector_header_data(t_editor_sector *sector,
+					t_uchar *buf);
+t_uchar			*get_sector_plot(t_uchar *plot);
+t_uchar			*write_plot_lines(t_uchar *plot);
+t_uchar			*get_writable_wall_data(t_editor_walls *wall);
+void			parse_map_data(t_uchar *buf, t_player *plr,
 					t_home *home, ssize_t size);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/29 12:24:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:50:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ static void	sector_button_actions_two(t_action *action, int i)
 	{
 		action->set_all_sector_floor_heights = true;
 		action->input_active = 1;
+	}
+	else if (i == button_set_gravity)
+	{
+		action->set_gravity = true;
 	}
 }
 

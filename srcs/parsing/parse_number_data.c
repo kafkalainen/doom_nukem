@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:23:28 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 16:45:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:42:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	parse_vertex_data(t_sector *new_sector, unsigned char *buf,
+int	parse_sector_header_data(t_sector *new_sector, unsigned char *buf,
 	unsigned int *pos, ssize_t size)
 {
 	new_sector->idx_sector = ft_atoi((const char *)buf + *pos);
@@ -23,6 +23,8 @@ int	parse_vertex_data(t_sector *new_sector, unsigned char *buf,
 	if (get_next_int_value(&new_sector->tex_ceil, buf, &pos, size))
 		return (1);
 	if (get_next_uint_value(&new_sector->is_lift, buf, &pos, size))
+		return (1);
+	if (get_next_float_value(&new_sector->gravity, buf, &pos, size))
 		return (1);
 	*pos += get_next_breaker(buf + *pos);
 	if (*pos > (unsigned int)size)

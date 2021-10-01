@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 13:22:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 13:34:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:54:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	editor_initialize_sector_values(t_editor_sector *new,
 	new->light.state = 0;
 	new->idx_sector = 0;
 	new->centroid = vec2(0.0f, 0.0f);
+	new->gravity = 2;
 	if (action->create_elev_button)
 		new->is_elevator = 1;
 	else

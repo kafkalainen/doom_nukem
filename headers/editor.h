@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/29 13:48:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 12:05:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ enum e_buttons
 	button_create_portal,
 	button_set_all_ceiling_heights,
 	button_set_all_floor_heights,
+	button_set_gravity,
 	button_wall_index,
 	button_change_wall_tex,
 	button_set_ceiling_height,
@@ -175,6 +176,7 @@ typedef struct s_action
 	t_bool			set_all_sector_ceiling_heights;
 	t_bool			set_all_sector_floor_heights;
 	t_bool			cycle_portal;
+	t_bool			set_gravity;
 }					t_action;
 
 typedef struct s_editor_xyz
@@ -212,6 +214,7 @@ typedef struct s_editor_sector
 	int						tex_floor;
 	int						tex_ceil;
 	int						is_elevator;
+	int						gravity;
 	struct s_editor_sector	*next;
 }					t_editor_sector;
 
@@ -457,7 +460,7 @@ int				editor_get_map_header(unsigned int *pos, unsigned char *buf,
 					t_editor *editor, ssize_t size);
 int				editor_get_player_position(unsigned int *pos,
 					unsigned char *buf, t_plr_pos *plr, ssize_t size);
-int				editor_parse_vertex_data(t_editor_sector *new,
+int				editor_parse_sector_header_data(t_editor_sector *new,
 					unsigned char *buf, unsigned int *pos, ssize_t size);
 t_editor_walls	*editor_new_point(t_point_data *data);
 int				editor_parse_coordinates(t_point_data *data,
@@ -525,6 +528,7 @@ t_bool			sectors_aligned(t_editor_sector *first, t_editor_sector *second,
 void			get_connecting_sectors(t_editor_walls *wall,
 					int *first_sector_idx, int *second_sector_idx,
 					int nbr_of_walls);
+void			editor_edit_gravity(t_editor *editor);
 void			editor_edit_sector(t_editor *editor);
 void			editor_edit_change_sector_ceiling_tex(t_editor *editor);
 void			editor_set_all_sector_ceiling_heights(t_editor_sector *sector,

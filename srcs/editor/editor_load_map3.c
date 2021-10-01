@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_load_map3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/16 18:10:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:57:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	editor_get_player_position(unsigned int *pos,
 	return (0);
 }
 
-int	editor_parse_vertex_data(t_editor_sector *new,
+int	editor_parse_sector_header_data(t_editor_sector *new,
 	unsigned char *buf, unsigned int *pos, ssize_t size)
 {
 	new->idx_sector = ft_atoi((const char *)buf + *pos);
@@ -67,6 +67,9 @@ int	editor_parse_vertex_data(t_editor_sector *new,
 		return (1);
 	if (get_next_int_value(&new->is_elevator, buf, &pos, size))
 		return (1);
+	if (get_next_int_value(&new->gravity, buf, &pos, size))
+		return (1);
+	new->gravity = 2.0f;
 	*pos += get_next_breaker(buf + *pos);
 	if (*pos > (unsigned int)size)
 		return (1);

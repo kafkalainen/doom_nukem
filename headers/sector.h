@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 10:17:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 11:34:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_sector
 	t_lighting		lights;
 	t_plgn			bounding_box;
 	float			velocity;
+	float			gravity;
 	Uint32			is_lift;
 	Uint32			lift_dir;
 	Uint32			moving_until;
