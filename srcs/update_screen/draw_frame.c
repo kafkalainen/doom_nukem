@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 13:48:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:18:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,20 @@ static void	fill_with_red(t_buffer *buffer, int take_damage)
 	}
 }
 
-static void	draw_and_manage_fade_in(t_frame *frame)
+static void	draw_and_manage_fade_in(t_frame *frame, int plr_is_dead)
 {
-	frame->buffer.lightness += 0.012f;
+	if (plr_is_dead)
+	{
+		frame->buffer.lightness -= 0.05f;
+		if (frame->buffer.lightness < 0.0f)
+			frame->buffer.lightness = 0.0f;
+	}
+	else
+	{
+		frame->buffer.lightness += 0.012f;
+		if (frame->buffer.lightness > 1.0f)
+			frame->buffer.lightness = 1.0f;
+	}
 }
 
 // Debugging utility function.
@@ -107,12 +118,12 @@ static void	draw_coordinate(t_buffer *buffer, t_xyz pos, int sector)
 	char	*sec;
 
 	ft_str_pxl(buffer, vec2(5.0f, 110.0f),
-	"sector", (t_plx_modifier){get_color(green), 2, 6});
+		"sector", (t_plx_modifier){get_color(green), 2, 6});
 	sec = ft_itoa(sector);
 	ft_str_pxl(buffer, vec2(5.0f, 130.0f),
-	sec, (t_plx_modifier){get_color(green), 2, 12});
+		sec, (t_plx_modifier){get_color(green), 2, 12});
 	ft_str_pxl(buffer, vec2(5.0f, 150.0f),
-	"xyz", (t_plx_modifier){get_color(green), 2, 12});
+		"xyz", (t_plx_modifier){get_color(green), 2, 12});
 	pstr[0] = ft_ftoa(pos.x, 6);
 	pstr[1] = ft_ftoa(pos.y, 6);
 	pstr[2] = ft_ftoa(pos.z, 6);
@@ -130,8 +141,6 @@ static void	draw_coordinate(t_buffer *buffer, t_xyz pos, int sector)
 
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
-	if (plr->dead)
-		frame->buffer.lightness = 0.2f;
 	if (plr->plot_state == start_cutscene)
 		draw_cutscene(&frame->buffer, plr, home->sectors[plr->start_sector]);
 	else if (plr->plot_state == end_cutscene)
@@ -150,9 +159,10 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 		draw_heads_up_display(home, frame, plr);
 		draw_plot_state(home, &frame->buffer, plr);
 		draw_object_data(&frame->buffer, plr);
-		if (frame->buffer.lightness < 0.99f)
-			draw_and_manage_fade_in(frame);
+		if (frame->buffer.lightness < 0.99f || plr->dead)
+			draw_and_manage_fade_in(frame, plr->dead);
 	}
-	draw_coordinate(&frame->buffer, home->entity_pool[0]->pos, home->entity_pool[0]->sector_idx);
+	draw_coordinate(&frame->buffer, home->entity_pool[0]->pos,
+		home->entity_pool[0]->sector_idx);
 	return ;
 }

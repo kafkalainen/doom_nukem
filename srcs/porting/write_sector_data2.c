@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_sector_data2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 17:56:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/01 11:51:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:02:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_uchar	*get_writable_wall_data(t_editor_walls *wall)
 t_uchar	*write_plot_lines(t_uchar *plot)
 {
 	char			**strings;
-	t_uchar	*buf;
+	t_uchar			*buf;
 	int				i;
 	int				lines;
 

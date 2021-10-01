@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_sector_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 16:47:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/01 11:40:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:02:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_uchar	*get_writable_sector_data(t_editor_sector *sector)
 {
-	t_uchar	*buf;
+	t_uchar			*buf;
 	int				i;
 	t_editor_walls	*wall;
 
@@ -80,7 +80,7 @@ void	write_sector_data(int *fd,
 {
 	int				nbr_of_sectors;
 	t_editor_sector	*temp;
-	t_uchar	*buf;
+	t_uchar			*buf;
 	int				i;
 
 	i = check_if_linked(editor->linked_mapname);

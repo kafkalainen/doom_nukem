@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_actions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 11:53:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:56:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ static void	initialize_menu_selections(t_action *action)
 	action->draw_depth = 0;
 	action->delete = 0;
 	action->edit_entity = 0;
+}
+
+static void	initialize_toggles_two(t_action *action)
+{
+	action->set_all_sector_floor_heights = false;
+	action->set_gravity = false;
+	action->cycle_portal = false;
 }
 
 static void	initialize_toggles(t_action *action)
@@ -57,9 +64,7 @@ static void	initialize_toggles(t_action *action)
 	action->create_light_source = 0;
 	action->add_wall_point = 0;
 	action->set_all_sector_ceiling_heights = false;
-	action->set_all_sector_floor_heights = false;
-	action->set_gravity = false;
-	action->cycle_portal = false;
+	initialize_toggles_two(action);
 }
 
 static void	initialize_input(t_action *action)
