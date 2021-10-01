@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 11:05:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:48:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ static void	draw_coordinate(t_buffer *buffer, t_xyz pos, int sector)
 
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
+	if (plr->dead)
+		frame->buffer.lightness = 0.2f;
 	if (plr->plot_state == start_cutscene)
 		draw_cutscene(&frame->buffer, plr, home->sectors[plr->start_sector]);
 	else if (plr->plot_state == end_cutscene)
