@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 11:32:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:54:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int				parse_coordinates(t_point_data *data, unsigned int ***pos,
 					unsigned char **buf, ssize_t size);
 int				parse_entity_data(unsigned char *buf, t_home *home,
 					ssize_t size);
-int				parse_sector_header_data(t_sector *new_sector, unsigned char *buf,
-					unsigned int *pos, ssize_t size);
+int				parse_sector_header_data(t_sector *new_sector,
+					unsigned char *buf, unsigned int *pos, ssize_t size);
 int				parse_light_data(t_sector *new_sector, unsigned char *buf,
 					unsigned int *pos, ssize_t size);
 int				parse_map_name(char **chosen_map, ssize_t size,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 13:36:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:25:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ t_bool				die(t_entity *entity, Uint32 t);
 t_bool				entity_move(t_entity *entity, t_home *home, Uint32 t);
 void				entity_chase(t_entity *entity, t_home *home, Uint32 t,
 						t_player *plr);
-void				entity_gravity(t_sector *sector, t_home *home, t_entity *entity,
-						Uint32 delta_time);
+void				entity_gravity(t_sector *sector, t_home *home,
+						t_entity *entity, Uint32 delta_time);
 void				face_entity_towards_player(t_entity *entity);
 float				get_distance_squared(t_xyz pt0, t_xyz pt1);
 t_bool				handle_activation(t_entity *entity, t_home *home,

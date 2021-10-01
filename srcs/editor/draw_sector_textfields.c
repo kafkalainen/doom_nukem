@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:06:36 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/01 14:45:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:47:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	draw_sector_textfield_textures(t_editor_sector *sector,
 static void	draw_gravity_choice(t_editor_sector *sector, t_buffer *buffer,
 	t_plx_modifier mod)
 {
-	t_xy			coord;
+	t_xy	coord;
 
 	coord.y = 591;
 	mod.len = 7;
@@ -43,17 +43,17 @@ static void	draw_gravity_choice(t_editor_sector *sector, t_buffer *buffer,
 		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
 		ft_str_pxl(buffer, coord, "lunar", mod);
 	}
-	else if (sector->gravity == 4)
+	if (sector->gravity == 4)
 	{
 		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
 		ft_str_pxl(buffer, coord, "martian", mod);
 	}
-	else if (sector->gravity == 10)
+	if (sector->gravity == 10)
 	{
 		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
 		ft_str_pxl(buffer, coord, "earth", mod);
 	}
-	else if (sector->gravity == 23)
+	if (sector->gravity == 23)
 	{
 		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
 		ft_str_pxl(buffer, coord, "jupiter", mod);
