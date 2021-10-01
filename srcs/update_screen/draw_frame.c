@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 13:18:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:56:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ static void	draw_and_manage_fade_in(t_frame *frame)
 // home->entity_pool[0]->sector_idx);
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
+	if (plr->dead)
+		frame->buffer.lightness = 0.2f;
 	if (plr->plot_state == start_cutscene)
 		draw_cutscene(&frame->buffer, plr, home->sectors[plr->start_sector]);
 	else if (plr->plot_state == end_cutscene)

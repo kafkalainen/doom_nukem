@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   porting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:55:49 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 11:25:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 13:15:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PORTING_H
 # define PORTING_H
 
+# define WRITE_BREAKER "#"
 # define READ_BREAKER '#'
 # define BUF_SIZE 30000
 # define XPM_BUF_SIZE 200000
@@ -57,9 +58,6 @@ int				create_temp_audio_file(unsigned char *buf,
 /*
 ** File creation, writing and reading functions
 */
-
-# define WRITE_BREAKER "#"
-# define READ_BREAKER '#'
 
 int				create_map_file(t_home *home, t_editor *editor);
 void			write_texture_data(int *fd, t_home *home);
