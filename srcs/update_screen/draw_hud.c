@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 14:02:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 15:27:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ static void	draw_power_bar(t_player *plr, t_buffer *buffer)
 	{
 		draw_rect(vec2(plr->hud.hud_hp_x + i * (wh.x + gap) - gap * 0.25,
 				plr->hud.hud_hp_y - gap * 0.25), vec2(wh.x + gap * 0.5,
-				wh.y + gap * 0.5), buffer, 0xFFFFFFFF);
+				wh.y + gap * 0.5), buffer,
+				colour_scale(0xFFFFFFFF, 1.0f, buffer->lightness));
 		draw_rect(vec2(plr->hud.hud_hp_x + i * (wh.x + gap), plr->hud.hud_hp_y),
-			vec2(wh.x, wh.y), buffer, 0xFFFFEA00);
+			vec2(wh.x, wh.y), buffer,
+			colour_scale(0xFFFFCC00, 1.0f, buffer->lightness));
 		i++;
 	}
 }
@@ -38,9 +40,11 @@ static void	draw_fuel_bar(t_player *plr, t_buffer *buffer)
 
 	wh = vec2(plr->fuel_points * 0.9, 6);
 	draw_rect(vec2(plr->hud.hud_fuel_x - 2, plr->hud.hud_fuel_y - 2),
-		vec2(wh.x + 4, wh.y + 4), buffer, 0xFFFFFFFF);
+		vec2(wh.x + 4, wh.y + 4), buffer,
+		colour_scale(0xFFFFFFFF, 1.0f, buffer->lightness));
 	draw_rect(vec2(plr->hud.hud_fuel_x, plr->hud.hud_fuel_y),
-		vec2(wh.x, wh.y), buffer, 0xFFFFEA00);
+		vec2(wh.x, wh.y), buffer,
+		colour_scale(0xFFFFCC00, 1.0f, buffer->lightness));
 }
 
 static void	draw_hud_image(t_home *home, t_buffer *buffer)
@@ -58,8 +62,8 @@ static void	draw_hud_image(t_home *home, t_buffer *buffer)
 		while (x < tex.width)
 		{
 			colour = (Uint32)tex.texels[(tex.width * y) + x];
-			put_pixel(buffer, (t_pxl_coords){x, y}, colour);
-				// colour_scale(colour, 1.0f, buffer->lightness));
+			put_pixel(buffer, (t_pxl_coords){x, y},
+				colour_scale(colour, 1.0f, buffer->lightness));
 			x++;
 		}
 		y++;

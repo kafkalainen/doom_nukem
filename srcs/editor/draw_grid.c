@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 09:16:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:59:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static void	draw_axes(t_buffer *buffer, t_action *action)
 {
 	t_xy				origo;
 	t_plx_modifier		mod;
+	t_box				box;
 
 	mod.size = 3;
 	mod.len = 1;
@@ -101,7 +102,9 @@ static void	draw_axes(t_buffer *buffer, t_action *action)
 	draw_line(origo, vec2(origo.x + 40, origo.y), mod.colour, buffer);
 	ft_str_pxl(buffer, vec2(origo.x + 30.0f, origo.y - 10.0f), "x", mod);
 	ft_str_pxl(buffer, vec2(origo.x - 5.0f, origo.y - 40.0f), "y", mod);
-	draw_rect(origo, vec2(4.0f, 4.0f), buffer, get_color(yellow));
+	box.start = origo;
+	box.end = vec2(origo.x + 4.0f, origo.y + 4.0f);
+	draw_box(box, buffer, get_color(yellow));
 }
 
 void	draw_grid(t_buffer *buffer, t_action *action)

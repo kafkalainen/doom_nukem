@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 14:27:55 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 16:10:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 15:32:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	draw_hud_ammo_left(t_buffer *buffer, t_player *plr)
 	char			*concatstr;
 	t_plx_modifier	mod;
 
-	mod.colour = get_color(white);
+	mod.colour = colour_scale(0xFFFFFFFF, 1.0f, buffer->lightness);
 	mod.size = 3;
 	str = ft_itoa(plr->wep[plr->active_wep].ammo);
 	concatstr = ft_strjoin("Ammo: ", str);
@@ -31,21 +31,31 @@ void	draw_hud_ammo_left(t_buffer *buffer, t_player *plr)
 
 void	draw_crosshair(t_buffer *buffer)
 {
-	t_xy	wh;
+	t_pxl_coords	start;
+	t_pxl_coords	end;
+	Uint32			colour;
 
-	wh = vec2(12, 12);
-	draw_line(vec2(SCREEN_WIDTH * 0.5 - wh.x * 0.5, SCREEN_HEIGHT * 0.5),
-		vec2(SCREEN_WIDTH * 0.5 + wh.x * 0.5, SCREEN_HEIGHT * 0.5),
-		0xFF00F180, buffer);
-	draw_line(vec2(SCREEN_WIDTH * 0.499, SCREEN_HEIGHT * 0.5 - wh.y * 0.5),
-		vec2(SCREEN_WIDTH * 0.499, SCREEN_HEIGHT * 0.5 + wh.y * 0.5),
-		0xFF00F180, buffer);
-	draw_line(vec2(SCREEN_WIDTH * 0.5 - wh.x * 0.5, SCREEN_HEIGHT * 0.499),
-		vec2(SCREEN_WIDTH * 0.5 + wh.x * 0.5, SCREEN_HEIGHT * 0.499),
-		0xFF00F180, buffer);
-	draw_line(vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5 - wh.y * 0.5),
-		vec2(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5 + wh.y * 0.5),
-		0xFF00F180, buffer);
+	start.y = SCREEN_HEIGHT * 0.5f - 8;
+	end.y = SCREEN_HEIGHT * 0.5f + 8;
+	start.x = SCREEN_WIDTH * 0.5f;
+	colour = colour_scale(0xFFFFCC00, 1.0f, buffer->lightness);
+	while (start.y < end.y)
+	{
+		put_pixel(buffer, start, colour);
+		put_pixel(buffer, (t_pxl_coords){start.x - 1, start.y}, colour);
+		put_pixel(buffer, (t_pxl_coords){start.x + 1, start.y}, colour);
+		start.y++;
+	}
+	start.x = SCREEN_WIDTH * 0.5f - 8;
+	end.x = SCREEN_WIDTH * 0.5f + 8;
+	start.y = SCREEN_HEIGHT * 0.5f;
+	while (start.x < end.x)
+	{
+		put_pixel(buffer, start, colour);
+		put_pixel(buffer, (t_pxl_coords){start.x, start.y - 1}, colour);
+		put_pixel(buffer, (t_pxl_coords){start.x, start.y + 1}, colour);
+		start.x++;
+	}
 }
 
 void	draw_weapon(t_home *home, t_buffer *buffer,
@@ -54,6 +64,7 @@ void	draw_weapon(t_home *home, t_buffer *buffer,
 	int		x;
 	int		y;
 	t_texel	tex;
+	Uint32	colour;
 
 	y = 0;
 	tex = home->textures[weapon0]->tex;
@@ -64,9 +75,10 @@ void	draw_weapon(t_home *home, t_buffer *buffer,
 		x = 0;
 		while (x < tex.width)
 		{
+			colour = (Uint32)tex.texels[(tex.width * y) + x];
 			put_pixel(buffer,
 				(t_pxl_coords){x + (int)offset.x, y + (int)offset.y},
-				(Uint32)tex.texels[(tex.width * y) + x]);
+				colour_scale(colour, 1.0f, buffer->lightness));
 			x++;
 		}
 		y++;
@@ -79,6 +91,7 @@ void	draw_muzzleflash(t_home *home, t_buffer *buffer,
 	int		x;
 	int		y;
 	t_texel	tex;
+	Uint32	colour;
 
 	y = 0;
 	tex = home->textures[muzzleflash]->tex;
@@ -89,9 +102,10 @@ void	draw_muzzleflash(t_home *home, t_buffer *buffer,
 		x = 0;
 		while (x < tex.width)
 		{
+			colour = (Uint32)tex.texels[(tex.width * y) + x];
 			put_pixel(buffer,
 				(t_pxl_coords){x + (int)offset.x, y + (int)offset.y},
-				(Uint32)tex.texels[(tex.width * y) + x]);
+				colour_scale(colour, 1.0f, buffer->lightness));
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/18 09:23:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 15:04:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,20 @@ int	draw_line(t_xy p0, t_xy p1, Uint32 colour, t_buffer *buffer)
 
 void	draw_rect(t_xy xy, t_xy wh, t_buffer *buffer, int color)
 {
-	float	j;
-	float	i;
+	t_pxl_coords	start;
+	t_pxl_coords	end;
 
-	i = xy.x;
-	j = xy.y;
-	while (j < wh.y + xy.y)
+	start = (t_pxl_coords){xy.x, xy.y};
+	end = (t_pxl_coords){start.x + wh.x, start.y + wh.y};
+	while (start.y < end.y)
 	{
-		draw_line(vec2(i, j), vec2(i + wh.x, j), color, buffer);
-		j++;
+		start.x = xy.x;
+		while (start.x < end.x)
+		{
+			put_pixel(buffer, start, color);
+			start.x++;
+		}
+		start.y++;
 	}
 }
 

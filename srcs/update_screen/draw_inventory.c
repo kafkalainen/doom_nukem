@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_inventory.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:38:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 09:28:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 15:12:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,16 @@ void	draw_inventory_slots(t_player *plr, t_buffer *buffer)
 		if (plr->active_inv == i + 2)
 			draw_rect(vec2(offset.x + i * (size.x + gap) - gap * 0.25,
 					offset.y - gap * 0.25), vec2(size.x + gap * 0.5,
-					size.y + gap * 0.5), buffer, 0xFFDDDD00);
+					size.y + gap * 0.5), buffer,
+					colour_scale(0xFFDDDD00, 1.0f, buffer->lightness));
 		else
 			draw_rect(vec2(offset.x + i * (size.x + gap) - gap * 0.25,
 					offset.y - gap * 0.25), vec2(size.x + gap * 0.5,
-					size.y + gap * 0.5), buffer, 0xFF202020);
+					size.y + gap * 0.5), buffer,
+					colour_scale(0xFF202020, 1.0f, buffer->lightness));
 		draw_rect(vec2(offset.x + i * (size.x + gap),
-				offset.y), vec2(size.x, size.y), buffer, 0xFF734D54);
+				offset.y), vec2(size.x, size.y), buffer,
+				colour_scale(0xFF734D54, 1.0f, buffer->lightness));
 		i++;
 	}
 }
@@ -44,6 +47,7 @@ void	draw_image(t_xy offset, t_texel *tex, t_buffer *buffer, float scale)
 {
 	t_screen_xy	current;
 	t_screen_xy	image;
+	Uint32		texel;
 
 	current.x = 0;
 	current.y = 0;
@@ -55,12 +59,13 @@ void	draw_image(t_xy offset, t_texel *tex, t_buffer *buffer, float scale)
 		current.x = 0;
 		while (current.x < image.x)
 		{
+			texel = (Uint32)tex->texels[(tex->width * current.y
+					* (int)scale) + current.x * (int)scale];
 			put_pixel(
 				buffer,
 				(t_pxl_coords){current.x + offset.x,
 				current.y + offset.y},
-				(Uint32)tex->texels[(tex->width * current.y
-					* (int)scale) + current.x * (int)scale]);
+				colour_scale(texel, 1.0f, buffer->lightness));
 			current.x++;
 		}
 		current.y++;
