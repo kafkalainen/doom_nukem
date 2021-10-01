@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 14:53:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 10:42:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ static void	update_entity(t_home *home, t_entity *cur_enemy,
 			t_player *plr, Uint32 t)
 {
 	entity_gravity(home, cur_enemy, t);
+	if (take_damage(cur_enemy, t))
+	{
+		sound_logic(cur_enemy, plr, 'd');
+		return ;
+	}
 	if (!cur_enemy->is_aggroed)
 		check_aggro(plr, cur_enemy, home);
 	if (!cur_enemy->is_aggroed)
@@ -62,7 +67,6 @@ static void	update_entity(t_home *home, t_entity *cur_enemy,
 		sound_logic(cur_enemy, plr, 'd');
 	if (cur_enemy->health > 0)
 		determine_angle_between_entity_and_plr(cur_enemy, plr);
-	set_entity_texels_for_frame(cur_enemy);
 }
 
 void	update_entities(t_home *home, t_player *plr, Uint32 delta_time)
@@ -84,6 +88,7 @@ void	update_entities(t_home *home, t_player *plr, Uint32 delta_time)
 				update_entity(home, cur_entity, plr, delta_time);
 			else
 				show_dead_entity(cur_entity, plr);
+			set_entity_texels_for_frame(cur_entity);
 		}
 		i++;
 	}

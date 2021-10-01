@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 19:08:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 10:52:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 t_bool	take_damage(t_entity *entity, Uint32 t)
 {
-	(void)t;
-	if (entity->take_damage == true)
+	if (entity->taking_damage > 0)
 	{
-		if (entity->is_aggroed == true)
+		if (entity->sprite_state == attack)
 			entity->sprite_state = in_front;
 		entity->anim_offset = 5;
-		entity->health--;
-		entity->take_damage = false;
-		return (true);
+		entity->taking_damage -= t;
+		if (entity->taking_damage <= 0)
+		{
+			entity->health--;
+			return (true);
+		}
 	}
 	return (false);
 }

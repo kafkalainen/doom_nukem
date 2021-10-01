@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 16:39:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 10:50:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,9 @@ static void	initialize_entity_values(t_entity *entity,
 	entity->dir = vec3_unit_vector(entity->dir);
 	entity->top.normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
 	entity->bot.normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
-	entity->take_damage = false;
+	entity->taking_damage = 0;
 	entity->cooldown = 0;
 	entity->making_noise = 0;
-	entity->die_animation = 0;
 	entity->is_aggroed = false;
 	entity->sprite_state = 0;
 	entity->anim_offset = 0;

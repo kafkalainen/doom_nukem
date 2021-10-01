@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 16:39:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 10:52:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ typedef struct s_entity
 	float		height;
 	float		width;
 	float		legs;
-	t_bool		take_damage;
 	t_bool		is_static;
 	t_bool		is_active;
 	t_uint		is_linked;
@@ -104,7 +103,7 @@ typedef struct s_entity
 	int			falling_total;
 	int			making_noise;
 	int			cooldown;
-	int			die_animation;
+	int			taking_damage;
 	int			sprite_index;
 	int			alt_sprite_index;
 	int			sprite_state;
