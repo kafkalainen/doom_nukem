@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 18:05:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:15:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,21 @@ t_wall	*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir)
 	return (NULL);
 }
 
-void	player_place_feet_to_ground(t_sector *sector, t_player *plr)
+void	player_place_feet_to_ground(t_player *plr, t_home *home)
 {
 	unsigned int	i;
-	float			dist;
 	t_surface		*ground;
 	t_xyz			pos;
 	t_xyz			isection;
+	int				idx;
 
 	i = 0;
-	dist = 0.0f;
-	if (check_distance_to_ground(sector, plr->height, plr->pos, &dist)
-		&& dist > 0)
-		return ;
 	pos = vec3(plr->pos.x, 100.0f, plr->pos.z);
-	ground = sector->ground;
-	while (i < sector->nb_of_ground)
+	idx = find_current_sector(home, pos);
+	if (idx == -1)
+		return ;
+	ground = home->sectors[idx]->ground;
+	while (i < home->sectors[idx]->nb_of_ground)
 	{
 		if (vec3_ray_triangle_intersect(&ground->tri, pos,
 				vec3(0.0f, -1.0f, 0.0f), &isection))
@@ -59,6 +58,7 @@ void	player_place_feet_to_ground(t_sector *sector, t_player *plr)
 	}
 	isection.y += plr->height;
 	plr->pos = isection;
+	plr->cur_sector = idx;
 }
 
 static void	viewmodel_motion(t_player *plr)
@@ -111,7 +111,7 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 		plr->steps += t * 0.005f;
 		viewmodel_motion(plr);
-		player_place_feet_to_ground(home->sectors[plr->cur_sector], plr);
+		// player_place_feet_to_ground(home->sectors[plr->cur_sector], plr);
 		return (true);
 	}
 	return (strafe_along_the_wall(wall, plr, home, t));

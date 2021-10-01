@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 13:23:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:06:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ t_triangle		apply_camera(t_player *plr, t_triangle *src);
 t_entity		*activate_object(t_home *home, t_player *plr);
 t_wall			*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir);
 t_bool			check_if_open_portal(t_wall *wall);
-void			player_place_feet_to_ground(t_sector *sector, t_player *plr);
+void			player_place_feet_to_ground(t_player *plr, t_home *home);
 t_bool			check_if_vertically_possible(t_home *home, t_xyz test_pos,
 					float height, int cur_sector);
 t_bool			check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);

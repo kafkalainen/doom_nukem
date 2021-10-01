@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 13:55:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:41:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,42 +18,49 @@
 **	v = g * t
 **
 */
+
+static float	calculate_speed(float g, float t, float speed)
+{
+	if (speed > 0.0f)
+		speed -= g * t;
+	else
+		speed = -g * t;
+	return (speed);
+}
+
 void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 {
 	float			drop;
-	float			drop_speed;
 	float			g;
+	t_xyz			pos;
 
-	drop_speed = 0.0f;
+	drop = -1.0f;
 	g = home->sectors[plr->cur_sector]->gravity;
+	pos = vec3(plr->pos.x, plr->pos.y - plr->height, plr->pos.z);
 	if (!check_distance_to_ground(home->sectors[plr->cur_sector],
-			plr->height, plr->pos, &drop)
-		&& find_current_sector(home, plr->pos) == -1)
-		drop = -1.0f;
+			1.5f, pos, &drop))
+	{
+		plr->drop_time = 0;
+		if (plr->speed.y < -20.0f)
+			plr->dead = 1;
+		plr->speed.y = 0.0f;
+		player_place_feet_to_ground(plr, home);
+	}
 	if (drop > 0.0f && !plr->input.jetpack)
 	{
 		plr->drop_time += delta_time;
-		drop_speed = g * plr->drop_time * 0.001f;
-		if (plr->speed.y < -20.0f)
-			plr->dead = 1;
-		if (plr->speed.y > 0.0f)
-			plr->speed.y -= drop_speed;
-		else
-			plr->speed.y = -drop_speed;
+		plr->speed.y = calculate_speed(g,
+			plr->drop_time * 0.001f, plr->speed.y);
 	}
-	else
-	{
-		if (drop < 0.0f)
-			plr->pos.y += ft_fabsf(drop);
+	if (plr->input.jetpack)
 		plr->drop_time = 0;
-		plr->speed.y = 0.0f;
-	}
 }
 
 /*
 **	t = sqrt(2sg / g)
 */
-void	entity_gravity(t_sector *sector, t_home *home, t_entity *entity, Uint32 delta_time)
+void	entity_gravity(t_sector *sector, t_home *home,
+		t_entity *entity, Uint32 delta_time)
 {
 	float			drop;
 
