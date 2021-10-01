@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:06:36 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/01 13:09:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 14:45:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static void	draw_gravity_choice(t_editor_sector *sector, t_buffer *buffer,
 		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
 		ft_str_pxl(buffer, coord, "martian", mod);
 	}
-	else if (sector->gravity == 6)
+	else if (sector->gravity == 10)
 	{
 		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
 		ft_str_pxl(buffer, coord, "earth", mod);
 	}
-	else if (sector->gravity == 10)
+	else if (sector->gravity == 23)
 	{
 		coord.x = center_text_x_axis(0, 295, mod.size, mod.len);
 		ft_str_pxl(buffer, coord, "jupiter", mod);
