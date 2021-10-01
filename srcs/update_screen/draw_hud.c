@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 15:27:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 16:13:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	draw_power_bar(t_player *plr, t_buffer *buffer)
 		draw_rect(vec2(plr->hud.hud_hp_x + i * (wh.x + gap) - gap * 0.25,
 				plr->hud.hud_hp_y - gap * 0.25), vec2(wh.x + gap * 0.5,
 				wh.y + gap * 0.5), buffer,
-				colour_scale(0xFFFFFFFF, 1.0f, buffer->lightness));
+			colour_scale(0xFFFFFFFF, 1.0f, buffer->lightness));
 		draw_rect(vec2(plr->hud.hud_hp_x + i * (wh.x + gap), plr->hud.hud_hp_y),
 			vec2(wh.x, wh.y), buffer,
 			colour_scale(0xFFFFCC00, 1.0f, buffer->lightness));

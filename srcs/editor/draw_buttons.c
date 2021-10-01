@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/17 13:26:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 16:45:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ static void	draw_map_list(t_buffer *buffer, t_action *action,
 	while (i <= action->end)
 	{
 		if (i == action->option)
-			mod->colour = get_color(red);
+			mod->colour = 0xFFFFCC00;
 		else
-			mod->colour = get_color(white);
+			mod->colour = 0xFFFFFFFF;
 		mod->len = ft_strlen(map_names[i]);
 		ft_str_pxl(buffer, vec2(310, 100 + y),
 			map_names[i], *mod);

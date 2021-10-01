@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 14:15:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 16:18:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 		plr->steps += t * 0.005f;
 		viewmodel_motion(plr);
-		// player_place_feet_to_ground(home->sectors[plr->cur_sector], plr);
 		return (true);
 	}
 	return (strafe_along_the_wall(wall, plr, home, t));

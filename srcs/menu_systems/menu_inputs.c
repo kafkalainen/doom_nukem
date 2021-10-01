@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_inputs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/29 18:06:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 16:45:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,24 @@
 void	update_main_menu(t_buffer *buffer, int *option)
 {
 	int					i;
-	int					y;
+	t_xy				coord;
 	t_plx_modifier		mod;
 	const char			*arr[] = {"Editor", "Load Map", "Settings", "Quit"};
+	const int			tab[] = {6, 8, 8, 4};
 
 	i = 0;
-	y = 0;
+	coord = vec2(0, SCREEN_HEIGHT * 0.5f - 45);
 	mod.size = MAIN_MENU_TEXT;
-	mod.len = 8;
 	while (i < 4)
 	{
 		if (i == *option)
-			mod.colour = get_color(red);
+			mod.colour = 0xFFFFCC00;
 		else
-			mod.colour = get_color(white);
-		ft_str_pxl(buffer, vec2((SCREEN_WIDTH * 0.5) - 75,
-				((SCREEN_HEIGHT * 0.5) - 45) + y), (char *)arr[i], mod);
-		y += 30;
+			mod.colour = 0xFFFFFFFF;
+		mod.len = tab[i];
+		coord.x = center_text_x_axis(0, SCREEN_WIDTH, mod.size, mod.len);
+		ft_str_pxl(buffer, coord, (char *)arr[i], mod);
+		coord.y += 30;
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 14:41:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 16:15:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 	{
 		plr->drop_time += delta_time;
 		plr->speed.y = calculate_speed(g,
-			plr->drop_time * 0.001f, plr->speed.y);
+				plr->drop_time * 0.001f, plr->speed.y);
 	}
 	if (plr->input.jetpack)
 		plr->drop_time = 0;

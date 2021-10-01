@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:18:54 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/09 23:39:16 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/01 16:51:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	get_menu_range_key_up(int *option, int *start,
 static Uint32	get_menu_color(int i, int option)
 {
 	if (i == option)
-		return (get_color(red));
+		return (0xFFFFCC00);
 	return (get_color(white));
 }
 
 void	update_load_menu(t_menu *menu, int sym)
 {
-	int				y;
+	t_xy			coord;
 	int				i;
 	t_plx_modifier	mod;
 
@@ -70,17 +70,16 @@ void	update_load_menu(t_menu *menu, int sym)
 		get_menu_range_key_up(&menu->option, &menu->start,
 			&menu->end, menu->nbr_of_maps);
 	i = menu->start;
-	y = 0;
+	coord = vec2(0, SCREEN_HEIGHT * 0.5f - 45);
 	mod.colour = 0;
 	mod.size = TEXT_SIZE;
 	while (i <= menu->end)
 	{
 		mod.colour = get_menu_color(i, menu->option);
 		mod.len = ft_strlen(menu->map_names[i]);
-		ft_str_pxl(&menu->buffer,
-			vec2((SCREEN_WIDTH * 0.5) - 200, 25 + y),
-			menu->map_names[i], mod);
-		y += 15;
+		coord.x = center_text_x_axis(0, SCREEN_WIDTH, mod.size, mod.len);
+		ft_str_pxl(&menu->buffer, coord, menu->map_names[i], mod);
+		coord.y += 15;
 		i++;
 	}
 }

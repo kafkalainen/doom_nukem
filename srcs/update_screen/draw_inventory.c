@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:38:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 15:12:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/01 16:21:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,24 @@ void	draw_inventory_slots(t_player *plr, t_buffer *buffer)
 	int			gap;
 	t_xy		size;
 	t_screen_xy	offset;
+	t_uint		colour;
 
 	i = -2;
 	gap = 12;
-	offset.x = SCREEN_WIDTH * 0.5f;
-	offset.y = 562;
+	offset = (t_screen_xy){SCREEN_WIDTH * 0.5f, 562};
 	size = vec2(32, 32);
 	while (i < 2)
 	{
 		if (plr->active_inv == i + 2)
-			draw_rect(vec2(offset.x + i * (size.x + gap) - gap * 0.25,
-					offset.y - gap * 0.25), vec2(size.x + gap * 0.5,
-					size.y + gap * 0.5), buffer,
-					colour_scale(0xFFDDDD00, 1.0f, buffer->lightness));
+			colour = colour_scale(0xFFDDDD00, 1.0f, buffer->lightness);
 		else
-			draw_rect(vec2(offset.x + i * (size.x + gap) - gap * 0.25,
+			colour = colour_scale(0xFF202020, 1.0f, buffer->lightness);
+		draw_rect(vec2(offset.x + i * (size.x + gap) - gap * 0.25,
 					offset.y - gap * 0.25), vec2(size.x + gap * 0.5,
-					size.y + gap * 0.5), buffer,
-					colour_scale(0xFF202020, 1.0f, buffer->lightness));
+					size.y + gap * 0.5), buffer, colour);
 		draw_rect(vec2(offset.x + i * (size.x + gap),
 				offset.y), vec2(size.x, size.y), buffer,
-				colour_scale(0xFF734D54, 1.0f, buffer->lightness));
+			colour_scale(0xFF734D54, 1.0f, buffer->lightness));
 		i++;
 	}
 }
