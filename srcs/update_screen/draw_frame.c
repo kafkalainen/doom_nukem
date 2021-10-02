@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 14:21:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/02 16:02:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ static void	draw_and_manage_fade_in(t_frame *frame, int plr_is_dead)
 // }
 
 // draw_coordinate(&frame->buffer, home->entity_pool[0]->pos,
-// home->entity_pool[0]->sector_idx);
+// 	home->entity_pool[0]->sector_idx);
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
 	if (plr->plot_state == start_cutscene)

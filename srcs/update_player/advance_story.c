@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 15:41:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 16:00:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,11 @@ void	free_story(char ***array, Uint32 nb_of_strings)
 	*array = NULL;
 }
 
-/*
-**	Here we can also implement player action that
-**	affects story items that are played
-**	based on world interaction.
-*/
-t_bool	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector)
+void	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector,
+		Uint32 delta_time)
 {
-	if (plr->message_time > plr->time)
-		return (false);
+	if (plr->msg_time > 0)
+		plr->msg_time -= delta_time;
 	else
 	{
 		if (plr->plot_state == sector_plot)
@@ -50,12 +46,12 @@ t_bool	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector)
 		{
 			plr->plot_state = sector_plot;
 			plr->msg_sector = plr->cur_sector;
-			plr->message_time = plr->time
-				+ ft_strlen(sector->story[sector->cur_msg])
-				* 50 + 5000;
-			play_sound(plr->audio.rahikainen_ramble[(int)plr->time % 3], 30);
+			plr->msg_time = ft_strlen(sector->story[sector->cur_msg]) * 150;
+			plr->total_msg_time = plr->msg_time;
+			play_sound_and_fadeout(
+				plr->audio.rahikainen_ramble[(int)plr->time % 3], 15,
+				plr->total_msg_time);
 		}
-		return (true);
 	}
 }
 
@@ -65,15 +61,13 @@ void	write_message(t_buffer *buffer, t_player *plr, char *msg,
 	float			percentage;
 	t_xy			offset;
 
-	percentage = 1.0f - ((plr->message_time - plr->time - 5000) * 0.0002f);
+	percentage = 1.0f - plr->msg_time / (float)plr->total_msg_time;
 	mod->len = (size_t)(ft_strlen(msg) * percentage);
 	if (mod->len > 90)
 		mod->len = 90;
 	if (mod->len > 0)
 	{
-		offset.x = 0.5f * (buffer->width - (mod->len * mod->size * 5));
-		if (mod->len % 2)
-			offset.x -= (mod->size * 5 * 0.5f);
+		offset.x = center_text_x_axis(0, buffer->width, mod->size, mod->len);
 		offset.y = SCREEN_HEIGHT - 100;
 		ft_str_pxl(buffer, offset, msg, *mod);
 	}
@@ -84,10 +78,10 @@ void	draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr)
 	Uint32			cur_story;
 	t_plx_modifier	mod;
 
-	mod.colour = get_color(white);
+	mod.colour = 0xFFFFFFFF;
 	mod.size = TEXT_SIZE;
 	cur_story = home->sectors[plr->msg_sector]->cur_msg;
-	if (plr->plot_state == sector_plot && plr->message_time > plr->time)
+	if (plr->plot_state == sector_plot && plr->msg_time > 0)
 		write_message(buffer, plr,
 			home->sectors[plr->msg_sector]->story[cur_story], &mod);
 }

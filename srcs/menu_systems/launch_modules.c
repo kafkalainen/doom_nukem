@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/22 09:41:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 15:59:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	process_inputs_game_loop(t_player *plr, int *game_state, SDL_Event *e)
 			break ;
 		}
 		key_input(plr, e, game_state);
-		if (plr->cutscene != start_cutscene || plr->cutscene != end_cutscene)
+		if (plr->plot_state != start_cutscene
+			|| plr->plot_state != end_cutscene)
 			mouse_handle(plr, e);
 	}
 }

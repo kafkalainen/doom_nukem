@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/28 16:03:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 16:01:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 {
 	if (sym == SDLK_ESCAPE)
 		*game_state = MAIN_MENU;
-	if (plr->cutscene != start_cutscene || plr->cutscene != end_cutscene)
+	if (sym == SDLK_SPACE && (plr->plot_state == start_cutscene
+			|| plr->plot_state == end_cutscene))
+		plr->input.skip = true;
+	if (plr->plot_state != start_cutscene || plr->plot_state != end_cutscene)
 	{
 		if (sym == SDLK_s)
 			plr->input.down = 1;
@@ -85,15 +88,15 @@ void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 			plr->input.rot_right = 1;
 		if (sym == SDLK_e)
 			plr->input.rot_left = 1;
-		action_keys(plr, &sym);
 		menu_keys(plr, &sym);
+		action_keys(plr, &sym);
 	}
 }
 
 // debug_keys(plr, &sym, state);
 void	keys_up(t_player *plr, SDL_KeyCode sym)
 {
-	if (plr->cutscene != start_cutscene || plr->cutscene != end_cutscene)
+	if (plr->plot_state != start_cutscene || plr->plot_state != end_cutscene)
 	{
 		if (sym == SDLK_s)
 			plr->input.down = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/01 13:10:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/02 13:36:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,6 +332,7 @@ int				editor_orientation_of_three_points(t_screen_xy a,
 void			editor_reset_wall_indexes(t_editor_walls **walls,
 					int nbr_of_walls);
 int				get_portal_idx(int idx);
+int				get_inflate_idx(int idx);
 void			snap_to_range(int *height);
 void			validate_door_size(t_editor *editor, float *height, int val);
 

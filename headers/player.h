@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 14:06:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 15:38:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_input
 	int				debug_down;
 	int				debug_left;
 	int				debug_right;
+	t_bool			skip;
 }					t_input;
 
 /*
@@ -163,7 +164,8 @@ typedef struct s_player
 	int				cutscene;
 	int				cutscene_total;
 	Uint32			time;
-	Uint32			message_time;
+	int				msg_time;
+	int				total_msg_time;
 	Uint32			display_object;
 	Uint32			reload;
 	Uint32			recharge;
@@ -199,8 +201,8 @@ void			crouch(t_player *plr, t_sector *sector);
 void			draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr);
 void			end_level(t_home *home, t_player *plr);
 void			end_logic(t_player *plr, t_home *home);
-t_bool			evolve_story(t_player *plr, t_sector *sector,
-					t_sector *msg_sector);
+void			evolve_story(t_player *plr, t_sector *sector,
+					t_sector *msg_sector, Uint32 delta_time);
 int				find_current_sector(t_home *home, t_xyz pos);
 void			free_story(char ***array, Uint32 nb_of_strings);
 float			get_wall_hit_point(t_home *home, t_ray *ray,

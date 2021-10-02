@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 09:40:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 15:51:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 15:51:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	draw_header(t_buffer *buffer, t_sector *sector)
 	char			*temp;
 
 	mod.size = 4;
-	mod.colour = get_color(limegreen);
+	mod.colour = 0xFFFFCC00;
 	temp = sector->story[0];
 	temp += 8;
 	mod.len = ft_strlen(temp);
@@ -39,7 +39,7 @@ static void	draw_previous_lines(t_buffer *buffer, t_sector *sector)
 	int				msgs;
 
 	mod.size = TEXT_SIZE;
-	mod.colour = get_color(limegreen);
+	mod.colour = 0xFFFFCC00;
 	msgs = sector->cur_msg;
 	while (msgs-- > 1)
 	{
@@ -61,7 +61,7 @@ static void	draw_current_line(t_buffer *buffer, t_player *plr, t_sector *sector)
 	t_plx_modifier	mod;
 
 	mod.size = TEXT_SIZE;
-	mod.colour = get_color(limegreen);
+	mod.colour = 0xFFFFCC00;
 	percentage = 1.0f - plr->cutscene / (float)plr->cutscene_total;
 	mod.len = (size_t)(ft_strlen(sector->story[sector->cur_msg]) * percentage);
 	if (mod.len > 90)
@@ -84,5 +84,7 @@ void	draw_cutscene(t_buffer *buffer, t_player *plr, t_sector *sector)
 	if (sector->nb_of_msgs > 2 && sector->cur_msg > 1)
 		draw_previous_lines(buffer, sector);
 	if (sector->nb_of_msgs > 1 && sector->cur_msg > 0)
+		draw_current_line(buffer, plr, sector);
+	else if (sector->nb_of_msgs == 1)
 		draw_current_line(buffer, plr, sector);
 }

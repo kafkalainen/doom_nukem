@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sector_actions2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 14:31:07 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/24 10:02:08 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/02 13:40:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	check_for_portals_and_set_defaults(t_editor_sector *sector,
 	{
 		if (wall->type >= 0)
 		{
-			temp = get_editor_sector_with_idx(head, wall->type);
+			temp = get_editor_sector_with_idx(head, get_portal_idx(wall->type));
 			if (temp)
 				reset_portals_to_default_walls(temp, sector->idx_sector);
 		}
@@ -75,6 +75,7 @@ void	loop_for_portals_and_set_them_to_new_idx(t_editor_sector *sector,
 	t_editor_walls	*temp_wall;
 	t_editor_sector	*temp;
 	int				i;
+	int				inflate_idx;
 
 	i = 0;
 	wall = sector->walls;
@@ -82,13 +83,14 @@ void	loop_for_portals_and_set_them_to_new_idx(t_editor_sector *sector,
 	{
 		if (wall->type >= 0)
 		{
-			temp = get_editor_sector_with_idx(head, wall->type);
+			inflate_idx = get_inflate_idx(wall->type);
+			temp = get_editor_sector_with_idx(head, get_portal_idx(wall->type));
 			if (temp)
 			{
 				temp_wall = get_editor_wall_with_type(&temp->walls,
 						temp->nb_of_walls, sector->idx_sector);
 				if (temp_wall)
-					temp_wall->type = new_idx;
+					temp_wall->type = new_idx + inflate_idx;
 			}
 		}
 		i++;
