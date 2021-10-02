@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 13:26:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 11:41:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ t_uvz			calculate_texel_offset(t_uvz from, t_uvz to, float t);
 void			calculate_triangle(t_frame *frame, t_triangle *tri,
 					t_texture *tex);
 t_xy			center_to_screen(t_xy loc);
-Uint32			colour_scale(Uint32 hex, float lumel, float lightness);
+t_bool			check_for_valid_draw_range(t_steps *step);
+Uint32			colour_scale(Uint32 hex, float lumel, float lightness,
+					float fog);
 t_triangle		create_projection(t_triangle *src);
 void			death_animation(t_home *home, t_player *plr, Uint32 t);
 void			draw_box(t_box box, t_buffer *buffer, Uint32 color);
@@ -106,7 +108,7 @@ void			draw_grid(t_buffer *buffer, t_action *action);
 void			draw_heads_up_display(t_home *home,
 					t_frame *frame, t_player *plr);
 void			draw_help_text(t_action *action, t_buffer *buffer);
-int				draw_horizontal_line(t_buffer *buffer, float *depth_buffer,
+void			draw_horizontal_line(t_buffer *buffer, float *depth_buffer,
 					t_texel *tex, t_steps *step);
 void			draw_hud_ammo_left(t_buffer *buffer, t_player *plr);
 void			draw_info(t_frame *frame, t_player *plr, int nb_fps);

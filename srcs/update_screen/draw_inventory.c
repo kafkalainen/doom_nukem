@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:38:15 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 16:56:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 09:42:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	draw_inventory_slots(t_player *plr, t_buffer *buffer)
 	while (i < 2)
 	{
 		if (plr->active_inv == i + 2)
-			colour = colour_scale(0xFFDDDD00, 1.0f, buffer->lightness);
+			colour = colour_scale(0xFFDDDD00, 1.0f, buffer->lightness, 1.0f);
 		else
-			colour = colour_scale(0xFF202020, 1.0f, buffer->lightness);
+			colour = colour_scale(0xFF202020, 1.0f, buffer->lightness, 1.0f);
 		draw_rect(vec2(offset.x + i * (size.x + gap) - gap * 0.25,
 				offset.y - gap * 0.25), vec2(size.x + gap * 0.5,
 				size.y + gap * 0.5), buffer, colour);
 		draw_rect(vec2(offset.x + i * (size.x + gap),
 				offset.y), vec2(size.x, size.y), buffer,
-			colour_scale(0xFF734D54, 1.0f, buffer->lightness));
+			colour_scale(0xFF734D54, 1.0f, buffer->lightness, 1.0f));
 		i++;
 	}
 }
@@ -62,7 +62,7 @@ void	draw_image(t_xy offset, t_texel *tex, t_buffer *buffer, float scale)
 				buffer,
 				(t_pxl_coords){current.x + offset.x,
 				current.y + offset.y},
-				colour_scale(texel, 1.0f, buffer->lightness));
+				colour_scale(texel, 1.0f, buffer->lightness, 1.0f));
 			current.x++;
 		}
 		current.y++;

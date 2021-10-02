@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:04:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/03 16:04:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 09:55:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_texel
 	unsigned int	*texels;
 	int				width;
 	int				height;
+	int				type;
 }				t_texel;
 
 typedef struct s_texture

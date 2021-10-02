@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 15:17:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 09:56:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_texel	*get_tex(int idx, t_texture	**textures)
 	if (idx >= 0)
 		error_output("idx larger or equal to zero\n");
 	idx = -idx;
+	textures[idx]->tex.type = idx;
 	return (&textures[idx]->tex);
 }
 

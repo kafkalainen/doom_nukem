@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 15:49:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 11:12:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,12 @@ typedef struct s_plane
 	t_xyz			normal;
 }					t_plane;
 
+typedef struct s_pxl_coords
+{
+	int				x;
+	int				y;
+}					t_pxl_coords;
+
 typedef struct s_deltas
 {
 	int			x;
@@ -179,33 +185,34 @@ typedef struct s_planes
 
 typedef struct s_steps
 {
-	float		denom_dy_a_side;
-	float		denom_dy_b_side;
-	t_uvz		tex_a_side;
-	t_uvz		tex_b_side;
-	t_xyz		screen_step_a_side;
-	t_xyz		screen_step_b_side;
-	float		lumel_step_a_side;
-	float		lumel_step_b_side;
-	t_uvz		start_uv;
-	t_uvz		end_uv;
-	int			start_x;
-	int			end_x;
-	t_uvz		cur_texel;
-	int			cur_y;
-	int			max_y;
-	char		current_triangle;
-	t_deltas	delta_p0p1;
-	t_deltas	delta_p0p2;
-	float		start_lu;
-	float		end_lu;
-	float		offset_step;
-	float		offset;
-	t_uvz		texel_inv;
-	t_uvz		texel_start;
-	t_uvz		texel_end;
-	t_uvz		delta;
-	int			sub_pixels;
+	float			denom_dy_a_side;
+	float			denom_dy_b_side;
+	t_uvz			tex_a_side;
+	t_uvz			tex_b_side;
+	t_xyz			screen_step_a_side;
+	t_xyz			screen_step_b_side;
+	float			lumel_step_a_side;
+	float			lumel_step_b_side;
+	t_uvz			start_uv;
+	t_uvz			end_uv;
+	t_pxl_coords	start;
+	t_pxl_coords	end;
+	t_uvz			cur_texel;
+	char			current_triangle;
+	t_deltas		delta_p0p1;
+	t_deltas		delta_p0p2;
+	float			start_lu;
+	float			end_lu;
+	float			offset_step;
+	float			offset;
+	t_uvz			texel_inv;
+	t_uvz			texel_start;
+	t_uvz			texel_end;
+	t_uvz			delta;
+	float			delta_lu;
+	float			lu_start;
+	float			lu_end;
+	int				sub_pixels;
 }				t_steps;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/06 15:57:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 11:11:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 	float		temp[2];
 
 	temp[0] = (float)(cur_y - (int)tri->p[0].y);
-	steps->start_x = tri->p[0].x + temp[0] * steps->screen_step_a_side.x;
-	steps->end_x = tri->p[0].x + temp[0] * steps->screen_step_b_side.x;
+	steps->start.x = tri->p[0].x + temp[0] * steps->screen_step_a_side.x;
+	steps->end.x = tri->p[0].x + temp[0] * steps->screen_step_b_side.x;
 	steps->start_uv = texel_lerp(&tri->uv[0], temp[0], &steps->tex_a_side);
 	steps->start_lu = tri->lu[0] + temp[0] * steps->lumel_step_a_side;
 	steps->end_uv = texel_lerp(&tri->uv[0], temp[0], &steps->tex_b_side);
@@ -75,7 +75,7 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 	if (steps->current_triangle != 'a')
 	{
 		temp[1] = (float)(cur_y - (int)tri->p[1].y);
-		steps->start_x = tri->p[1].x + temp[1]
+		steps->start.x = tri->p[1].x + temp[1]
 			* steps->screen_step_a_side.x;
 		steps->start_uv = texel_lerp(&tri->uv[1],
 				temp[1], &steps->tex_a_side);
@@ -91,26 +91,24 @@ static void	calc_current_step(t_triangle *tri, t_steps *steps, int cur_y)
 static void	draw_triangle(t_draw_data *data,
 	t_triangle *triangle, t_texel *tex, t_steps *step)
 {
-	int	max_y;
-
 	if (!step->delta_p0p1.y)
 		return ;
 	initialize_steps(step, step->denom_dy_a_side, step->denom_dy_b_side);
 	if (step->current_triangle == 'a')
 	{
-		step->cur_y = (int)triangle->p[0].y;
-		max_y = (int)triangle->p[1].y;
+		step->start.y = (int)triangle->p[0].y;
+		step->end.y = (int)triangle->p[1].y;
 	}
 	else
 	{
-		step->cur_y = (int)triangle->p[1].y;
-		max_y = (int)triangle->p[2].y;
+		step->start.y = (int)triangle->p[1].y;
+		step->end.y = (int)triangle->p[2].y;
 	}
-	while (step->cur_y <= max_y)
+	while (step->start.y <= step->end.y)
 	{
-		calc_current_step(triangle, step, step->cur_y);
+		calc_current_step(triangle, step, step->start.y);
 		draw_horizontal_line(data->buffer, data->depth_buffer, tex, step);
-		step->cur_y += 1;
+		step->start.y += 1;
 	}
 }
 

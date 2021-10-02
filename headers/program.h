@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 12:56:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 11:12:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ typedef struct s_buffer
 	Uint32			*pxl_buffer;
 }					t_buffer;
 
-typedef struct s_pxl_coords
-{
-	int				x;
-	int				y;
-}					t_pxl_coords;
 /*
 **	Entities are structures, that have necessary data to create
 **	enemy and objects to the level.
