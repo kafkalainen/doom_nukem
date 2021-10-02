@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:08:33 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/27 14:07:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 16:32:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ static void	display_door_tex(t_editor_walls *wall, t_buffer *buffer,
 		prev = wall;
 		while (prev->next->idx != wall->idx)
 			prev = prev->next;
-		tex = get_tex(prev->type, textures);
+		if (prev->type < 0)
+			tex = get_tex(prev->type, textures);
+		else
+			tex = get_tex(-2, textures);
 		draw_image_static(box->start, tex, buffer,
 			(float)(ft_fabsf(box->end.x - box->start.x) / tex->width));
 	}
