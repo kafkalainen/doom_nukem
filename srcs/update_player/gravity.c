@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/02 15:59:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/02 16:48:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	entity_gravity(t_sector *sector, t_home *home,
 
 	drop = -1.0f;
 	if (!check_distance_to_ground(sector, entity->legs, entity->pos, &drop)
-		|| drop < 0.0f)
+		|| drop <= 0.0f)
 	{
 		entity->falling = 0;
 		if (entity->drop_speed >= 5.0f)
