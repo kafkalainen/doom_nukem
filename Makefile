@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/02 13:41:48 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/03 19:00:50 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -315,7 +315,8 @@ HEADERS = \
 	headers$(SLASH)sector.h \
 	headers$(SLASH)syscalls_windows.h \
 	headers$(SLASH)vectors.h \
-	headers$(SLASH)menu_systems.h
+	headers$(SLASH)menu_systems.h \
+	headers$(SLASH)typewriter.h
 
 WIN_INCLUDE_PATHS = \
 	-ISDL2-2.0.14\i686-w64-mingw32\include\SDL2 \

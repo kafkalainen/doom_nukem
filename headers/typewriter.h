@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 09:46:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 13:08:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/03 18:59:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define TEXT_SIZE 2
 # define MAIN_MENU_TEXT 5
+# define MAIN_TITLE_LARGE 12
+# define MAIN_TITLE_SMALL 7
 
 typedef struct s_pxl_c
 {
