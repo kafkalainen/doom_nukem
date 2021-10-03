@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:08:33 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/02 16:32:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/03 19:25:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	display_door_tex(t_editor_walls *wall, t_buffer *buffer,
 		draw_image_static(box->start, tex, buffer,
 			(float)(ft_fabsf(box->end.x - box->start.x) / tex->width));
 	}
-	else if (wall->type < LARGE_WINDOW_INDEX)
+	else if (wall->type < (LARGE_WINDOW_INDEX + DOOR_INDEX))
 	{
 		tex = get_door_tex(wall, textures);
 		draw_image_static(box->start, tex, buffer,
