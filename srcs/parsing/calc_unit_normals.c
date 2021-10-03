@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:20:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 10:24:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/03 17:34:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static t_bool	check_if_inner_wall(t_wall *test, t_home *home)
 		tmp = home->sectors[i]->walls;
 		while (j++ < home->sectors[i]->nb_of_walls)
 		{
-			if (check_if_hull(test))
+			if (check_if_hull(test) && check_if_hull(tmp))
 			{
 				if (vec2_check_if_same_point(test->point, tmp->next->point)
 					&& vec2_check_if_same_point(test->next->point, tmp->point))
