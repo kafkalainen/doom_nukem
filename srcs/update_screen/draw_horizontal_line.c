@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/03 16:27:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/03 16:42:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static Uint32	set_colour(t_steps *step, t_buffer *buffer, t_texel *tex,
 	if (tex->type == space)
 		return (colour_scale(colour, step->lu_start, buffer->lightness, 1));
 	else
-		return (colour_scale(colour, step->lu_start, buffer->lightness, 1 / step->texel_start.w));
+		return (colour_scale(colour, step->lu_start, buffer->lightness,
+				1 / step->texel_start.w));
 }
 
 void	draw_segment(t_buffer *buffer, float *depth_buffer, t_texel *tex,
@@ -104,7 +105,6 @@ void	draw_horizontal_line(t_buffer *buffer, float *depth_buffer,
 	pixels = step->end.x - step->start.x;
 	calc_texel(&step->texel_inv, &step->start_uv, step->offset, &step->end_uv);
 	step->texel_start = texel_inv_z(step->texel_inv);
-	// step->delta_lu = (step->start_lu - step->end_lu) / (float)(step->end.x - step->start.x);
 	calc_lumel(&step->lu_start, &step->start_lu, step->offset, &step->end_lu);
 	while (pixels >= SUBDIV)
 	{
