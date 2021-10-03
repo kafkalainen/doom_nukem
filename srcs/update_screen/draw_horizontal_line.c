@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/02 11:39:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/03 16:27:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static Uint32	set_colour(t_steps *step, t_buffer *buffer, t_texel *tex,
 	if (tex->type == space)
 		return (colour_scale(colour, step->lu_start, buffer->lightness, 1));
 	else
-		return (colour_scale(colour, step->lu_start, buffer->lightness,
-				step->texel_inv.w + 0.2f));
+		return (colour_scale(colour, step->lu_start, buffer->lightness, 1 / step->texel_start.w));
 }
 
 void	draw_segment(t_buffer *buffer, float *depth_buffer, t_texel *tex,
@@ -65,6 +64,7 @@ static void	draw_remainder(t_buffer *buffer, float *depth_buffer, t_texel *tex,
 	calc_lumel(&step->lu_end, &step->start_lu, step->offset, &step->end_lu);
 	step->delta.u = (step->texel_end.u - step->texel_start.u) * denom_sub;
 	step->delta.v = (step->texel_end.v - step->texel_start.v) * denom_sub;
+	step->delta.w = (step->texel_end.w - step->texel_start.w) * denom_sub;
 	step->delta_lu = (step->lu_end - step->lu_start) * denom_sub;
 	step->texel_inv.w = (w + step->texel_inv.w) * 0.5f;
 	draw_segment(buffer, depth_buffer, tex, step);
@@ -83,6 +83,7 @@ static void	draw_subdiv(t_buffer *buffer, float *depth_buffer, t_texel *tex,
 	calc_lumel(&step->lu_end, &step->start_lu, step->offset, &step->end_lu);
 	step->delta.u = (step->texel_end.u - step->texel_start.u) * DENOMSUBDIV;
 	step->delta.v = (step->texel_end.v - step->texel_start.v) * DENOMSUBDIV;
+	step->delta.w = (step->texel_end.w - step->texel_start.w) * DENOMSUBDIV;
 	step->delta_lu = (step->lu_end - step->lu_start) * DENOMSUBDIV;
 	step->texel_inv.w = (w + step->texel_inv.w) * 0.5f;
 	step->sub_pixels = SUBDIV;
@@ -103,6 +104,7 @@ void	draw_horizontal_line(t_buffer *buffer, float *depth_buffer,
 	pixels = step->end.x - step->start.x;
 	calc_texel(&step->texel_inv, &step->start_uv, step->offset, &step->end_uv);
 	step->texel_start = texel_inv_z(step->texel_inv);
+	// step->delta_lu = (step->start_lu - step->end_lu) / (float)(step->end.x - step->start.x);
 	calc_lumel(&step->lu_start, &step->start_lu, step->offset, &step->end_lu);
 	while (pixels >= SUBDIV)
 	{
