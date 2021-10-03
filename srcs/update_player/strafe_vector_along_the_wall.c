@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strafe_vector_along_the_wall.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 09:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 17:05:55 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/03 20:25:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_bool	strafe_along_the_wall(t_wall *wall, t_player *plr,
 	if (!new_wall)
 	{
 		plr->pos = plr->test_pos;
-		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
+		check_if_moved_through_portal(&plr->cur_sector, plr->pos,
+			plr->height, home);
 		plr->steps += t * 0.005f;
 		return (true);
 	}

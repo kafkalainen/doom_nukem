@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 12:31:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/03 20:22:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ t_bool	entity_move(t_entity *entity, t_home *home, Uint32 t)
 	{
 		entity->pos = entity->test_pos;
 		pick_next_frame(entity, t, MOVE_COOLDOWN);
-		check_if_moved_through_portal(&entity->sector_idx, entity->pos, home);
+		check_if_moved_through_portal(&entity->sector_idx,
+			entity->pos, entity->height, home);
 		return (true);
 	}
 	entity->dir = wall->top.normal;

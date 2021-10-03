@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 16:18:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/03 20:20:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ static void	viewmodel_motion(t_player *plr)
 	plr->hud.vm_my = sin(plr->steps);
 }
 
-void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
+void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, float height,
+		t_home *home)
 {
 	Uint32	i;
 	t_wall	*portal;
@@ -79,7 +80,7 @@ void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
 	{
 		if (check_if_open_portal(portal)
 			&& check_distance_to_ground(home->sectors[portal->top.type],
-				1.5f, pos, &dist))
+				height, pos, &dist))
 		{
 			*cur_sector = portal->top.type;
 			if (home->sectors[*cur_sector]->lights.is_linked == 1)
@@ -108,7 +109,8 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 				home->entity_pool, home->nbr_of_entities))
 			return (false);
 		plr->pos = plr->test_pos;
-		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
+		check_if_moved_through_portal(&plr->cur_sector,
+			plr->pos, plr->height, home);
 		plr->steps += t * 0.005f;
 		viewmodel_motion(plr);
 		return (true);
