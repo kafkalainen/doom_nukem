@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/02 15:38:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 10:48:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,8 @@ t_entity		*activate_object(t_home *home, t_player *plr);
 t_wall			*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir);
 t_bool			check_if_open_portal(t_wall *wall);
 void			player_place_feet_to_ground(t_player *plr, t_home *home);
-t_bool			check_if_vertically_possible(t_home *home, t_xyz test_pos,
-					float height, int cur_sector);
+t_bool			check_if_vertically_possible(t_home *home, t_player *plr, t_xyz pos);
+t_bool			check_if_in_current_sector(t_sector *sector, t_xyz *pos);
 t_bool			check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
 t_bool			check_distance_to_ground(t_sector *sector, float height,
 					t_xyz pos, float *dist);
@@ -203,7 +203,8 @@ void			end_level(t_home *home, t_player *plr);
 void			end_logic(t_player *plr, t_home *home);
 void			evolve_story(t_player *plr, t_sector *sector,
 					t_sector *msg_sector, Uint32 delta_time);
-int				find_current_sector(t_home *home, t_xyz pos);
+int				find_current_sector(t_home *home, t_xyz pos, int cur_idx,
+					t_xyz *isection);
 void			free_story(char ***array, Uint32 nb_of_strings);
 float			get_wall_hit_point(t_home *home, t_ray *ray,
 					t_bullet_hole *hole, int bullet_sector);
@@ -211,6 +212,8 @@ t_bullet_hole	get_bullet_hit_point(t_home *home, t_ray *ray,
 					int bullet_sector);
 float			get_ceiling_hit_point(t_sector *sector, t_ray *ray,
 					t_bullet_hole *hole);
+t_bool			get_ceiling_intersection(t_sector *sector, t_xyz pos,
+					t_xyz *isection);
 float			get_entity_hit_point(t_home *home, t_ray *ray,
 					t_bullet_hole *hole, int bullet_sector);
 float			get_ground_hit_point(t_sector *sector, t_ray *ray,
