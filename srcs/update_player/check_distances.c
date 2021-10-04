@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 11:57:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/03 21:01:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_bool	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 		ceiling = ceiling->next;
 		i++;
 	}
+	if (state == false)
+		return (false);
 	if ((*new_loc).y < (isection.y - 0.35f))
 		return (false);
 	else
