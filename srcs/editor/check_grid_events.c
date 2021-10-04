@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_grid_events.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 10:26:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:03:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	reset_sector_light_info(t_entity_list **entities,
 
 static void	handle_delete(t_editor *editor)
 {
-	if (editor->action.selected_entity >= 0)
+	if (editor->action.selected_entity >= 0
+		&& editor->action.selected_sector >= 0)
 	{
 		if (editor->temp_entity->entity_type == lamp)
 			reset_sector_light_info(&editor->entity_list, &editor->sector_list,
@@ -47,6 +48,7 @@ static void	handle_delete(t_editor *editor)
 		delete_selected_entity(&editor->entity_list, &editor->action);
 		editor->action.selected_entity = -1;
 		editor->temp_entity = NULL;
+		editor->action.draw_depth = sector;
 		add_notification(editor, "Removed entity.", 2000);
 	}
 	else if (editor->action.selected_sector >= 0)
@@ -58,10 +60,14 @@ static void	handle_delete(t_editor *editor)
 			verify_plr_start_end_sector_coordinates(&editor->plr,
 				&editor->sector_list, &editor->end_sector);
 		add_notification(editor, "Removed sector.", 2000);
+		editor->action.selected_sector = -1;
+		editor->action.selected_entity = -1;
+		editor->action.selected_wall = -1;
+		editor->temp_sector = NULL;
+		editor->temp_entity = NULL;
+		editor->temp_wall = NULL;
+		editor->action.draw_depth = depth_zero;
 	}
-	editor->action.selected_sector = -1;
-	editor->temp_sector = NULL;
-	editor->action.draw_depth = depth_zero;
 	editor->action.delete = 0;
 }
 

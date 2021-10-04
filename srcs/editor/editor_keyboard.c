@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_keyboard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/29 14:23:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 18:18:53 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static	void	handle_hotkeys(SDL_Keycode keysym, t_action *action)
 		action->link_entity = 1;
 	if (keysym == SDLK_u && action->selected_entity >= 0)
 		action->unlink_entity = 1;
-	if (keysym == SDLK_r)
+	if (keysym == SDLK_r && action->delete == idle)
 		action->delete = 1;
 }
 
