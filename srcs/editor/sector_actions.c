@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sector_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:51:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 13:52:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 12:22:48 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	reset_sector_indexes(t_editor_sector **head,
 		temp = temp->next;
 		idx++;
 	}
+	reset_elevators(head, entity_head);
 }
 
 void	editor_free_sector_data(t_editor_sector **sector,

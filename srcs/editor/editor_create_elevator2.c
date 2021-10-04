@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 13:14:52 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/20 13:30:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 12:10:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,10 @@ void	get_connecting_sectors(t_editor_walls *wall, int *first_sector_idx,
 		}
 		i++;
 		wall = wall->next;
+	}
+	if (*first_sector_idx < 0 || *second_sector_idx < 0)
+	{
+		*first_sector_idx = -1;
+		*second_sector_idx = -1;
 	}
 }

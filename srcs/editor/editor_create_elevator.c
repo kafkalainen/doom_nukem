@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 13:11:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/20 13:29:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 12:09:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ t_bool	verify_connecting_sectors(t_editor_sector **sectors,
 	first_sector_idx = -1;
 	get_connecting_sectors(elev_sector->walls, &first_sector_idx,
 		&scdn_sector_idx, elev_sector->nb_of_walls);
+	if (first_sector_idx == -1 && scdn_sector_idx == -1)
+		return (false);
 	if (!compare_floors_to_ceilings(sectors, first_sector_idx,
 			scdn_sector_idx, elev_sector))
 		return (false);
