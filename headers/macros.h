@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/02 11:36:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 20:15:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@
 # define MAP_MENU 2
 # define MAIN_MENU 1
 # define QUIT -1
-# define MAX_THREADS 6
+# define MAX_THREADS 10
 # define SKYBOX_TEX -1
 # define DOOR_INDEX 3000
 # define CLEANING_INDEX 6000
