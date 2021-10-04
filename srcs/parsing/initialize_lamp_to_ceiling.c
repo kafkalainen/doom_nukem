@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_lamp_to_ceiling.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 10:11:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 15:02:20 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:00:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,9 @@ static void	set_lamp_position(t_sector *sector, t_entity *entity,
 
 	entity->pos.y = isection.y;
 	entity->dir = normal;
-	if (vec2_eucl_dist(sector->bounding_box.top_left,
-			sector->bounding_box.bottom_right) < 1.42f
-		|| vec2_eucl_dist(sector->bounding_box.top_left,
-			sector->bounding_box.bottom_left) < 1.42f
-		|| vec2_eucl_dist(sector->bounding_box.top_right,
-			sector->bounding_box.bottom_right) < 1.42f
-		|| vec2_eucl_dist(sector->bounding_box.top_right,
-			sector->bounding_box.top_left) < 1.42f
-		|| vec2_eucl_dist(sector->bounding_box.bottom_left,
-			sector->bounding_box.bottom_right) < 1.42f)
-	{
-		centroid = calculate_centroid(sector);
-		entity->pos.x = centroid.x;
-		entity->pos.z = centroid.y;
-	}
+	centroid = calculate_centroid(sector);
+	entity->pos.x = centroid.x;
+	entity->pos.z = centroid.y;
 }
 
 void	initialize_lamp_to_ceiling(t_entity *entity, t_home *home)

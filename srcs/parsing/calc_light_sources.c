@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_light_sources.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 13:39:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 15:07:06 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:03:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,8 @@ void	calc_light_sources(t_home *home)
 			&home->sectors[i]->lights.light_src.y);
 		if (home->sectors[i]->lights.light_src.y >= 1.0f)
 			home->sectors[i]->lights.light_src.y -= 0.5f;
-		if (vec2_eucl_dist(home->sectors[i]->bounding_box.top_left,
-				home->sectors[i]->bounding_box.bottom_right) < 1.42f
-			|| vec2_eucl_dist(home->sectors[i]->bounding_box.top_left,
-				home->sectors[i]->bounding_box.bottom_left) < 1.42f
-			|| vec2_eucl_dist(home->sectors[i]->bounding_box.top_right,
-				home->sectors[i]->bounding_box.bottom_right) < 1.42f
-			|| vec2_eucl_dist(home->sectors[i]->bounding_box.top_right,
-				home->sectors[i]->bounding_box.top_left) < 1.42f
-			|| vec2_eucl_dist(home->sectors[i]->bounding_box.bottom_left,
-				home->sectors[i]->bounding_box.bottom_right) < 1.42f)
-			set_new_position(home->sectors[i],
-				&home->sectors[i]->lights.light_src);
+		set_new_position(home->sectors[i],
+			&home->sectors[i]->lights.light_src);
 		i++;
 	}
 }
