@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/02 13:36:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 12:22:28 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -398,6 +398,8 @@ void			editor_free_walls(t_editor_walls **head, int nbr_of_walls);
 void			editor_free_sector(t_editor_sector **head);
 void			editor_free_selected_sector(t_editor_sector **head,
 					t_entity_list **entity_head, t_action *action);
+void			reset_elevators(t_editor_sector **head,
+					t_entity_list **entity_head);
 void			editor_remove_last_wall(t_editor_sector *sector_list);
 void			editor_reset_player_and_end(t_editor *editor, t_action *action);
 void			verify_plr_start_end_sector_coordinates(t_plr_pos *plr,
