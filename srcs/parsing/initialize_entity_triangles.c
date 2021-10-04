@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:41:54 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/03 20:30:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 09:29:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,5 @@ void	initialize_entity_triangles(t_entity *entity)
 		entity->height = size.y;
 		entity->legs = size.y * 0.5f;
 	}
-	entity->width = 0.4f;
+	entity->width = 0.3f;
 }
