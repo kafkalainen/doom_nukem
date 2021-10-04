@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/01 16:45:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 18:53:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	draw_buttons(t_editor *editor, t_texture **textures)
 			draw_button(editor, editor->button_list[i], i);
 		i++;
 	}
-	if (editor->action.draw_depth == entity)
+	if (editor->action.draw_depth == entity && editor->temp_entity)
 		draw_entity_textfields(editor->temp_entity, &editor->buffer, textures);
-	if (editor->action.draw_depth == sector)
+	if (editor->action.draw_depth == sector && editor->temp_sector)
 		draw_sector_textfields(editor->temp_sector, &editor->buffer, textures);
-	if (editor->action.draw_depth == wall)
+	if (editor->action.draw_depth == wall && editor->temp_wall)
 		draw_wall_textfields(editor->temp_wall, &editor->buffer, textures);
 }
 
