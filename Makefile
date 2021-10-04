@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/03 19:00:50 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/04 10:23:17 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -198,6 +198,7 @@ SRCS = \
 	update_player$(SLASH)check_sector_height.c \
 	update_player$(SLASH)check_for_matching_key.c \
 	update_player$(SLASH)check_if_open_portal.c \
+	update_player$(SLASH)check_if_inside.c \
 	update_player$(SLASH)get_bullet_hit_point.c \
 	update_player$(SLASH)get_ceiling_hit_point.c \
 	update_player$(SLASH)get_entity_hit_point.c \
