@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/04 13:29:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 14:32:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,7 +323,7 @@ t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,
 					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_if_another_sector_is_inside(t_editor_sector *tested,
 					t_editor_sector **head);
-int				check_if_non_convex(t_editor_sector *sector);
+t_bool			check_if_non_convex(t_editor_sector *sector);
 t_bool			check_if_completely_inside(t_editor_sector *tested,
 					t_editor_sector **head);
 t_bool			editor_check_if_same_point(t_screen_xy p0, t_screen_xy p1);

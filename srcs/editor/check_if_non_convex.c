@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_if_non_convex.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 09:05:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 14:34:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_xy	vec2_screen_dec(t_screen_xy a, t_screen_xy b)
 	return (vec2_dec(vec2(a.x, a.y), vec2(b.x, b.y)));
 }
 
-int	check_if_non_convex(t_editor_sector *sector)
+t_bool	check_if_non_convex(t_editor_sector *sector)
 {
 	int				i;
 	t_xy			dxy_1;
