@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:51:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 12:22:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:33:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ void	editor_free_sector_data(t_editor_sector **sector,
 	editor_free_walls(&temp->walls, temp->nb_of_walls);
 	if (temp->plot_line)
 		free(temp->plot_line);
+	temp->plot_line = NULL;
 	free(temp);
+	temp = NULL;
 }
 
 void	editor_free_selected_sector(t_editor_sector **head,
