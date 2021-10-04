@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sector_actions2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 14:31:07 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/02 13:40:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 13:45:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	check_for_portals_and_set_defaults(t_editor_sector *sector,
 
 	i = 0;
 	wall = sector->walls;
+	if (sector->is_elevator)
+		reset_connecting_sectors(sector, head, sector->idx_sector);
 	while (i < sector->nb_of_walls)
 	{
 		if (wall->type >= 0)
