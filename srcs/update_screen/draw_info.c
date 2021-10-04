@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 11:52:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 16:25:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 13:32:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	draw_info(t_frame *frame, t_player *plr, int nb_fps)
 	fps = ft_itoa(nb_fps);
 	ft_str_pxl(&frame->buffer, vec2(SCREEN_WIDTH * 0.5 - 15, 0), fps, mod);
 	compass_direction(&frame->buffer, &plr->dir, mod);
-	ft_str_pxl(&frame->buffer, vec2(10, 300), "1 2 3 4 to select item", mod);
+	ft_str_pxl(&frame->buffer, vec2(10, 280), "1 2 3 4 to select item", mod);
+	ft_str_pxl(&frame->buffer, vec2(10, 300), "f to use item", mod);
 	ft_str_pxl(&frame->buffer, vec2(10, 320), "c to close info", mod);
 	ft_str_pxl(&frame->buffer, vec2(10, 340), "z to pause music", mod);
 	ft_str_pxl(&frame->buffer, vec2(10, 360), "wasd, rotate with q and e.",

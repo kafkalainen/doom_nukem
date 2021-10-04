@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 08:29:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/02 15:56:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 14:22:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	update_cutscene(t_player *plr, t_home *home, Uint32 t)
 	else
 	{
 		temp->cur_msg++;
-		if (temp->cur_msg < temp->nb_of_msgs)
+		if (temp->cur_msg <= temp->nb_of_msgs)
 			initialize_cutscene(temp, plr, plr->plot_state);
 		else
 		{
@@ -47,14 +47,13 @@ void	update_cutscene(t_player *plr, t_home *home, Uint32 t)
 	}
 }
 
-void	initialize_cutscene(t_sector *cutscene_sector, t_player *plr, int type)
+void	initialize_cutscene(t_sector *sector, t_player *plr, int type)
 {
-	if (cutscene_sector->nb_of_msgs > 0
-		&& cutscene_sector->cur_msg < cutscene_sector->nb_of_msgs)
+	if (sector->nb_of_msgs > 0 && sector->cur_msg <= sector->nb_of_msgs)
 	{
 		if (plr->input.skip == true)
 		{
-			cutscene_sector->cur_msg = cutscene_sector->nb_of_msgs;
+			sector->cur_msg = sector->nb_of_msgs + 1;
 			plr->plot_state = no_plot;
 			plr->cutscene_total = 0;
 			plr->input.skip = false;
@@ -62,11 +61,13 @@ void	initialize_cutscene(t_sector *cutscene_sector, t_player *plr, int type)
 		else
 		{
 			plr->plot_state = type;
-			plr->cutscene_total = ft_strlen(
-					cutscene_sector->story[cutscene_sector->cur_msg]) * 100;
-			plr->cutscene = plr->cutscene_total;
+			if (sector->cur_msg == sector->nb_of_msgs)
+				plr->cutscene = 7000;
+			else
+				plr->cutscene = ft_strlen(sector->story[sector->cur_msg]) * 99;
+			plr->cutscene_total = plr->cutscene;
 			plr->ending_played = false;
-			if (cutscene_sector->cur_msg != 0)
+			if (sector->cur_msg != 0 && sector->cur_msg != sector->nb_of_msgs)
 				play_sound_and_fadeout(plr->audio.typing, 30,
 					plr->cutscene_total);
 		}
