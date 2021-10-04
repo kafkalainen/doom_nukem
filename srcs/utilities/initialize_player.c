@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 09:42:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 17:38:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	initialize_player_movement_vectors(t_player *plr)
 	plr->yaw = 0.0f;
 	plr->roll = 0.0f;
 	plr->height = 1.5f;
-	plr->width = 0.25f;
+	plr->width = 0.4f;
 	plr->speed = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 }
 
