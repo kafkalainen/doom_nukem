@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_map_properties.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 14:08:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 16:20:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	calc_map_properties(t_home *home, t_player *plr)
 	calc_unit_normals(home);
 	calc_light_sources(home);
 	calc_button_locations(home);
+	calc_entity_locations(home);
 	calc_plr_position(home->sectors[plr->cur_sector], plr);
 	player_place_feet_to_ground(plr, home);
 	assign_entity_properties(home, plr->pos);

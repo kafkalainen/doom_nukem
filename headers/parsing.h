@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 13:54:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 16:21:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_bool			calc_distance_to_ground(t_sector *sector, t_xyz *new_loc,
 					float *dist);
 void			calc_light_sources(t_home *home);
 void			calc_button_locations(t_home *home);
+void			calc_entity_locations(t_home *home);
 void			calc_plr_position(t_sector *sector, t_player *plr);
 void			calc_unit_normals(t_home *home);
 int				change_door_to_portal(int door);
