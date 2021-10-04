@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/03 17:28:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/03 22:49:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static Uint32	set_colour(t_steps *step, t_buffer *buffer, t_texel *tex,
 		return (colour_scale(colour, step->lu_start, buffer->lightness, 1));
 	else
 		return (colour_scale(colour, step->lu_start, buffer->lightness,
-				1 / step->texel_start.w + 0.2f));
+				1 / step->texel_start.w));
 }
 
 void	draw_segment(t_buffer *buffer, float *depth_buffer, t_texel *tex,
