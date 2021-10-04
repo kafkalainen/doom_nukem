@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 10:13:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 11:02:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void	place_entity_to_ground(t_entity *entity, t_home *home)
 
 	isection = vec3(0.0f, 0.0f, 0.0f);
 	pos = vec3(entity->pos.x, 100.0f, entity->pos.z);
-	idx = find_current_sector(home, pos, entity->sector_idx,
-		&isection);
+	idx = find_current_sector(home, pos, entity->sector_idx, &isection);
 	if (idx == -1)
 		return ;
 	entity->sector_idx = idx;
