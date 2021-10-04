@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/03 20:22:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 10:13:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,16 @@ void	pick_next_frame(t_entity *entity, Uint32 t, int cooldown)
 
 void	place_entity_to_ground(t_entity *entity, t_home *home)
 {
-	unsigned int	i;
-	t_surface		*ground;
 	t_xyz			pos;
 	t_xyz			isection;
 	int				idx;
 
-	i = 0;
+	isection = vec3(0.0f, 0.0f, 0.0f);
 	pos = vec3(entity->pos.x, 100.0f, entity->pos.z);
-	idx = find_current_sector(home, pos);
+	idx = find_current_sector(home, pos, entity->sector_idx,
+		&isection);
 	if (idx == -1)
 		return ;
-	ground = home->sectors[idx]->ground;
-	while (i < home->sectors[idx]->nb_of_ground)
-	{
-		if (vec3_ray_triangle_intersect(&ground->tri, pos,
-				vec3(0.0f, -1.0f, 0.0f), &isection))
-			break ;
-		ground = ground->next;
-		i++;
-	}
 	entity->sector_idx = idx;
 	isection.y += entity->legs;
 	entity->pos = isection;
