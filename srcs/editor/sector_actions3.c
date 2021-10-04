@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 12:13:03 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/04 14:30:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:50:58 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,15 @@ void	reset_elevators(t_editor_sector **head, t_entity_list **entity_head)
 		}
 		temp = temp->next;
 	}
+}
+
+void	sector_delete_helper(t_editor *editor)
+{
+	editor->action.selected_sector = -1;
+	editor->action.selected_entity = -1;
+	editor->action.selected_wall = -1;
+	editor->temp_sector = NULL;
+	editor->temp_entity = NULL;
+	editor->temp_wall = NULL;
+	editor->action.draw_depth = depth_zero;
 }

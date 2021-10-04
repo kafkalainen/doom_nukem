@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/04 14:32:40 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:47:36 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -404,6 +404,7 @@ void			reset_connecting_sectors(t_editor_sector *sector,
 					t_editor_sector **head, int sector_idx);
 void			editor_remove_last_wall(t_editor_sector *sector_list);
 void			editor_reset_player_and_end(t_editor *editor, t_action *action);
+void			sector_delete_helper(t_editor *editor);
 void			verify_plr_start_end_sector_coordinates(t_plr_pos *plr,
 					t_editor_sector **head, t_plr_pos *end);
 void			check_pos_coordinates_to_sectors(t_plr_pos *pos,

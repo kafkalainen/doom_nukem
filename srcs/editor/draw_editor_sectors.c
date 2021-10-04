@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:02:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 16:29:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:17:21 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	draw_wall_bbox(t_editor_walls *wall, t_editor_sector *cur_sector,
 static void	draw_line_to_mouse_cursor(int active, t_editor_walls *wall,
 			t_editor *editor)
 {
+	if (!wall)
+		return ;
 	if (editor->action.create_sector == user_input && active > 0)
 	{
 		draw_line(
