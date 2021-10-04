@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity_creation_helpers.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/29 12:14:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 15:06:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	init_static_shared_vals(t_entity_list *new, int sector_idx)
 static void	init_lamp_pos_dir(t_entity_list *new,
 	t_editor_sector *sector, t_xy pos)
 {
-	new->pos.x = pos.x;
-	new->pos.z = pos.y;
+	new->pos.x = ft_roundf_to_grid(pos.x, 0);
+	new->pos.z = ft_roundf_to_grid(pos.y, 0);
 	new->pos.y = get_lowest_ceiling_height(&sector->walls,
 			sector->nb_of_walls);
 	new->dir.x = 0;
