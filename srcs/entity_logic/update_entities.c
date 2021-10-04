@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 13:37:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 17:49:08 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	update_entity(t_home *home, t_entity *cur_enemy,
 	if (cur_enemy->health <= 0 && die(cur_enemy, t))
 		sound_logic(cur_enemy, plr, 'x');
 	else if (cur_enemy->health > 0 && !attack_player(home, cur_enemy, plr, t))
-		entity_move(cur_enemy, home, t);
+		entity_move(cur_enemy, plr->pos, home, t);
 	if (take_damage(cur_enemy, t))
 		sound_logic(cur_enemy, plr, 'd');
 	if (cur_enemy->health > 0)
