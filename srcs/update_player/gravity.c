@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 15:37:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 16:20:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,11 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 {
 	float			drop;
 	float			g;
-	t_xyz			pos;
 
 	drop = -1.0f;
 	g = home->sectors[plr->cur_sector]->gravity;
-	pos = vec3(plr->pos.x, plr->pos.y, plr->pos.z);
-	// pos = vec3(plr->pos.x, plr->pos.y - plr->height, plr->pos.z);
 	if (!check_distance_to_ground(home->sectors[plr->cur_sector],
-			plr->height, pos, &drop) || (drop <= 0.12f))
+			plr->height, plr->pos, &drop) || (drop <= 0.12f))
 	{
 		plr->drop_time = 0;
 		if (plr->speed.y < -10.0f)
@@ -47,7 +44,6 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 		plr->speed.y = 0.0f;
 		player_place_feet_to_ground(plr, home);
 	}
-
 	if (drop > 0.0f && !plr->input.jetpack)
 	{
 		plr->drop_time += delta_time;
