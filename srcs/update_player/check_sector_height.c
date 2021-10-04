@@ -6,37 +6,23 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 08:55:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 12:08:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 10:51:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_bool	check_if_vertically_possible(t_home *home, t_xyz test_pos, float height,
-		int cur_sector)
+t_bool	check_if_vertically_possible(t_home *home, t_player *plr, t_xyz pos)
 {
-	float	dist_to_ceiling;
-	float	dist_to_ground;
+	int		idx;
+	t_xyz	ceiling;
+	t_xyz	isection;
 
-	if (!calc_distance_to_ceiling(home->sectors[cur_sector],
-			&test_pos, &dist_to_ceiling))
-	{
-		cur_sector = find_current_sector(home, test_pos);
-		if (cur_sector == -1)
-			return (false);
-		calc_distance_to_ceiling(home->sectors[cur_sector],
-			&test_pos, &dist_to_ceiling);
-	}
-	if (!calc_distance_to_ground(home->sectors[cur_sector],
-			&test_pos, &dist_to_ground))
-	{
-		cur_sector = find_current_sector(home, test_pos);
-		if (cur_sector == -1)
-			return (false);
-		calc_distance_to_ground(home->sectors[cur_sector],
-			&test_pos, &dist_to_ground);
-	}
-	if (height <= (dist_to_ceiling + dist_to_ground))
+	idx = find_current_sector(home, pos, plr->cur_sector, &isection);
+	if (idx == -1)
+		return (false);
+	get_ceiling_intersection(home->sectors[idx], pos, &ceiling);
+	if (plr->height <= (ceiling.y - isection.y))
 		return (true);
 	return (false);
 }
