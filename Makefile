@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/04 16:20:27 by rzukale          ###   ########.fr        #
+#    Updated: 2021/10/04 19:29:21 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -221,7 +221,7 @@ SRCS = \
 	update_player$(SLASH)special_movement.c \
 	update_player$(SLASH)update_player.c \
 	update_player$(SLASH)shooting.c \
-	update_player$(SLASH)strafe_vector_along_the_wall.c \
+	update_player$(SLASH)bounce_off_the_wall.c \
 	update_player$(SLASH)player_take_damage.c \
 	update_player$(SLASH)reload_weapon.c \
 	update_player$(SLASH)recharge_suit.c \
