@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 15:59:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 16:03:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,5 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 		viewmodel_motion(plr);
 		return (true);
 	}
-	return (strafe_along_the_wall(wall, plr, home, t));
+	return (false);
 }
