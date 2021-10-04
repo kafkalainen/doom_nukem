@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 11:52:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 16:08:54 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 16:31:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static void	compass_direction(t_buffer *buffer, t_xy *dir, t_plx_modifier mod)
 // 	char	*sec;
 
 // 	ft_str_pxl(buffer, vec2(5.0f, 110.0f),
-// 	"sector", (t_plx_modifier){get_color(green), 2, 6});
+// 		"sector", (t_plx_modifier){get_color(green), 2, 6});
 // 	sec = ft_itoa(sector);
 // 	ft_str_pxl(buffer, vec2(5.0f, 130.0f),
-// 	sec, (t_plx_modifier){get_color(green), 2, 12});
+// 		sec, (t_plx_modifier){get_color(green), 2, 12});
 // 	ft_str_pxl(buffer, vec2(5.0f, 150.0f),
-// 	"xyz", (t_plx_modifier){get_color(green), 2, 12});
+// 		"xyz", (t_plx_modifier){get_color(green), 2, 12});
 // 	pstr[0] = ft_ftoa(pos.x, 6);
 // 	pstr[1] = ft_ftoa(pos.y, 6);
 // 	pstr[2] = ft_ftoa(pos.z, 6);

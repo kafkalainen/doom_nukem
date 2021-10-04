@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 09:05:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 16:27:43 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/04 16:31:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ t_bool	check_if_non_convex(t_editor_sector *sector)
 		dxy_2 = vec2_screen_dec(temp->next->next->x0, temp->next->x0);
 		if (i != 0 && is_negative(vec2_cross(dxy_1, dxy_2)) != sign)
 			return (true);
-		else if (sector->nb_of_walls == 3 && vec2_dot(
-				vec2_screen_dec(temp->next->x0, temp->next->next->x0),
-				vec2_screen_dec(temp->x0, temp->next->x0)) == 1)
+		else if (sector->nb_of_walls == 3 && vec2_dot(dxy_1,
+				vec2_screen_dec(temp->next->x0, temp->next->next->x0)) == 1)
 			return (true);
 		else
 			sign = is_negative(vec2_cross(dxy_1, dxy_2));
