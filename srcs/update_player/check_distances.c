@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/03 21:01:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 10:50:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,38 @@
 
 t_bool	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
 {
-	unsigned int	i;
-	t_surface		*ceiling;
 	t_xyz			isection;
 	t_bool			state;
 
-	i = 0;
 	isection = vec3(0, 0, 0);
-	ceiling = sector->ceiling;
-	while (i < sector->nb_of_ceil)
-	{
-		state = vec3_ray_triangle_intersect(&ceiling->tri, *new_loc,
-				vec3(0.0f, 1.0f, 0.0f), &isection);
-		if (state)
-			break ;
-		ceiling = ceiling->next;
-		i++;
-	}
+	state = get_ceiling_intersection(sector, *new_loc, &isection);
 	if (state == false)
 		return (false);
 	if ((*new_loc).y < (isection.y - 0.35f))
 		return (false);
 	else
 		return (true);
+}
+
+t_bool	get_ceiling_intersection(t_sector *sector, t_xyz pos, t_xyz *isection)
+{
+	t_uint			i;
+	t_surface		*ceiling;
+	t_bool			state;
+
+	i = 0;
+	*isection = vec3(0.0f, 0.0f, 0.0f);
+	ceiling = sector->ceiling;
+	while (i < sector->nb_of_ceil)
+	{
+		state = vec3_ray_triangle_intersect(&ceiling->tri, pos,
+				vec3(0.0f, 1.0f, 0.0f), isection);
+		if (state)
+			return (state);
+		ceiling = ceiling->next;
+		i++;
+	}
+	return (state);
 }
 
 t_bool	calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc,
@@ -120,29 +129,4 @@ t_bool	check_distance_to_ground(t_sector *sector, float height,
 		return (true);
 	}
 	return (false);
-}
-
-int	find_current_sector(t_home *home, t_xyz pos)
-{
-	t_uint			idx;
-	t_uint			j;
-	t_surface		*ground;
-	t_xyz			isection;
-
-	idx = 0;
-	while (idx < home->nbr_of_sectors)
-	{
-		j = 0;
-		ground = home->sectors[idx]->ground;
-		while (j < home->sectors[idx]->nb_of_ground)
-		{
-			if (vec3_ray_triangle_intersect(&ground->tri, pos,
-					vec3(0.0f, -1.0f, 0.0f), &isection))
-				return (idx);
-			ground = ground->next;
-			j++;
-		}
-		idx++;
-	}
-	return (-1);
 }
