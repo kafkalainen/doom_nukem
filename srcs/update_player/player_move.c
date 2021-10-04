@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 10:26:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 15:59:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	player_place_feet_to_ground(t_player *plr, t_home *home)
 		return ;
 	isection.y += plr->height;
 	plr->pos = isection;
-	plr->cur_sector = idx;
 }
 
 static void	viewmodel_motion(t_player *plr)
