@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/02 16:48:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/04 15:37:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,18 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 
 	drop = -1.0f;
 	g = home->sectors[plr->cur_sector]->gravity;
-	pos = vec3(plr->pos.x, plr->pos.y - plr->height, plr->pos.z);
+	pos = vec3(plr->pos.x, plr->pos.y, plr->pos.z);
+	// pos = vec3(plr->pos.x, plr->pos.y - plr->height, plr->pos.z);
 	if (!check_distance_to_ground(home->sectors[plr->cur_sector],
-			1.5f, pos, &drop))
+			plr->height, pos, &drop) || (drop <= 0.12f))
 	{
 		plr->drop_time = 0;
-		if (plr->speed.y < -20.0f)
-			plr->dead = 1;
+		if (plr->speed.y < -10.0f)
+			player_take_damage(plr, plr->speed.y / -10.0f, delta_time);
 		plr->speed.y = 0.0f;
 		player_place_feet_to_ground(plr, home);
 	}
+
 	if (drop > 0.0f && !plr->input.jetpack)
 	{
 		plr->drop_time += delta_time;
@@ -70,7 +72,7 @@ void	entity_gravity(t_sector *sector, t_home *home,
 	{
 		entity->falling = 0;
 		if (entity->drop_speed >= 5.0f)
-			entity->health = 0;
+			entity->health -= entity->drop_speed / 5.0f;
 		entity->drop_speed = 0;
 		place_entity_to_ground(entity, home);
 	}
