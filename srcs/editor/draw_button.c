@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_button.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:27:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 18:53:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 11:11:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ static void	draw_button_logic_two(t_editor *editor, t_button *button, int i)
 		else
 			button->is_active = false;
 	}
+	if (i == button_toggle_state && editor->temp_entity)
+	{
+		if (is_enemy(editor->temp_entity->entity_type))
+			button->is_active = false;
+		else
+			button->is_active = true;
+	}
+	if (i == button_toggle_entity_is_revealed && editor->temp_entity)
+		button->is_active = false;
 }
 
 static void	draw_button_logic(t_editor *editor, t_button *button, int i)

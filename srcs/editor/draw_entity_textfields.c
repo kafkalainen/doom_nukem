@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:07:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/29 14:28:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 10:57:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,24 @@ static void	draw_entity_textures(t_entity_list *entity,
 	}
 }
 
+static void	draw_light_modes(t_buffer *buffer, t_entity_list *entity,
+			t_plx_modifier *mod)
+{
+	if (entity->is_linked == 0)
+	{
+		mod->len = 4;
+		ft_str_pxl(buffer, vec2(245, 231), "none", *mod);
+	}
+	else if (entity->is_linked == 1)
+	{
+
+		mod->len = 4;
+		ft_str_pxl(buffer, vec2(245, 231), "auto", *mod);
+	}
+	else
+		ft_c_pxl(buffer, vec2(265, 231), '0' + entity->is_linked, *mod);
+}
+
 void	draw_entity_textfields(t_entity_list *entity,
 	t_buffer *buffer, t_texture **textures)
 {
@@ -105,7 +123,7 @@ void	draw_entity_textfields(t_entity_list *entity,
 	ft_str_pxl(buffer, vec2(265, 84), str, mod);
 	ft_strdel(&str);
 	mod.len = 1;
-	ft_c_pxl(buffer, vec2(265, 231), '0' + entity->is_linked, mod);
+	draw_light_modes(buffer, entity, &mod);
 	ft_c_pxl(buffer, vec2(265, 261), '0' + entity->is_revealed, mod);
 	ft_c_pxl(buffer, vec2(265, 291), '0' + entity->state, mod);
 	draw_entity_textures(entity, buffer, textures);

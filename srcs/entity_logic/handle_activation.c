@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 12:17:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 10:32:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	handle_button(t_entity *entity, t_home *home, t_player *plr)
 	play_sound(plr->audio.button, 20);
 }
 
-static void	change_texture(t_entity *entity)
+void	change_texture(t_entity *entity)
 {
 	if (entity->state)
 	{

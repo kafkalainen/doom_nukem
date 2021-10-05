@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 19:30:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 10:28:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, float height,
 				height, pos, &dist))
 		{
 			*cur_sector = portal->top.type;
-			if (home->sectors[*cur_sector]->lights.is_linked == 1)
-				home->sectors[*cur_sector]->lights.state = true;
+			automatic_lights(home->sectors[*cur_sector], home);
 			return ;
 		}
 		portal = portal->next;

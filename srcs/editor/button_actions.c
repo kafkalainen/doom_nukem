@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/01 11:50:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 11:04:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	entity_button_actions(t_action *action, int i)
 		action->change_entity_type = 1;
 	else if (i == button_toggle_entity_is_linked)
 		action->toggle_entity_is_linked = 1;
+	else if (i == button_toggle_entity_is_revealed)
+		action->toggle_is_revealed = 1;
 	else if (i == button_toggle_state)
 		action->toggle_state = 1;
 }
