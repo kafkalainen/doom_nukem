@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/05 12:38:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 15:07:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,5 +249,6 @@ void			update_damage_tick(Uint32 delta_time, int *take_damage);
 void			reload_weapon(t_player *plr, Uint32 t);
 void			recharge_suit(t_player *plr, Uint32 t);
 void			update_cutscene(t_player *plr, t_home *home, Uint32 t);
+t_xyz			vec3_normalize_move_dir(t_xyz dir);
 
 #endif

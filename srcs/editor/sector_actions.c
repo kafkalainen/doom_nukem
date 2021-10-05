@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sector_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:51:17 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 19:33:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 15:12:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	reset_sector_indexes(t_editor_sector **head,
 }
 
 void	editor_free_sector_data(t_editor_sector **sector,
-		t_entity_list **entity_head)
+	t_editor_sector **head, t_entity_list **entity_head)
 {
 	t_editor_sector	*temp;
 
@@ -81,6 +81,7 @@ void	editor_free_sector_data(t_editor_sector **sector,
 	temp->plot_line = NULL;
 	free(temp);
 	temp = NULL;
+	reset_sector_indexes(head, entity_head);
 }
 
 void	editor_free_selected_sector(t_editor_sector **head,
@@ -97,8 +98,7 @@ void	editor_free_selected_sector(t_editor_sector **head,
 	{
 		*head = temp->next;
 		check_for_portals_and_set_defaults(temp, head);
-		editor_free_sector_data(&temp, entity_head);
-		reset_sector_indexes(head, entity_head);
+		editor_free_sector_data(&temp, head, entity_head);
 		return ;
 	}
 	while (temp != NULL && temp->idx_sector != action->selected_sector)
@@ -110,6 +110,5 @@ void	editor_free_selected_sector(t_editor_sector **head,
 		return ;
 	prev->next = temp->next;
 	check_for_portals_and_set_defaults(temp, head);
-	editor_free_sector_data(&temp, entity_head);
-	reset_sector_indexes(head, entity_head);
+	editor_free_sector_data(&temp, head, entity_head);
 }
