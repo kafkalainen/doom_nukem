@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 14:53:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 11:14:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 13:59:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ void	automatic_lights(t_sector *sector, t_home *home)
 {
 	t_entity	*entity;
 
-	entity = get_entity_with_sector_and_type(sector->idx_sector, lamp, home);
-	if (entity != NULL)
-		change_texture(entity);
-	sector->lights.state = 1;
+	if (sector->lights.is_linked == 1 && sector->lights.state == 0)
+	{
+		entity = get_entity_with_sector_and_type(sector->idx_sector, lamp, home);
+		if (entity != NULL)
+			change_texture(entity);
+		sector->lights.state = 1;
+	}
 }

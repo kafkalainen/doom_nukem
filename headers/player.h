@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/04 19:31:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 12:38:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ char			**init_story(void);
 t_bool			jetpack(t_player *plr, t_home *home, Uint32 t);
 void			jump(t_player *plr, t_sector *cur_sector);
 t_bool			player_move(t_player *plr, t_home *home, Uint32 t);
-t_bool			walking_into_entity(t_xyz plr_pos, int cur_sector,
+t_entity		*walking_into_entity(t_xyz plr_pos, int cur_sector,
 					t_entity **entities, Uint32 nbr_of_entities);
 int				player_use(t_player *plr, t_home *home);
 t_bool			open_door(t_sector **sectors, t_player *plr, int active_item);
@@ -239,6 +239,8 @@ int				player_use_inventory_item(t_player *plr);
 void			update_player(t_player *plr, t_home *home, Uint32 delta_time);
 void			shooting_handle(t_home *home, t_ray *ray);
 t_bool			bounce_off_the_wall(t_wall *wall, t_player *plr,
+					t_home *home, Uint32 t);
+t_bool			bounce_off_entity(t_entity *entity, t_player *plr,
 					t_home *home, Uint32 t);
 t_bool			test_ray(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 					t_ray *ray);

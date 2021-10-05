@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/03 17:38:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 13:38:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr)
 	return (true);
 }
 
-static t_bool	skull_skulker_attack(t_entity *entity, t_player *plr, Uint32 t)
+static t_bool	skull_skulker_attack(t_entity *entity, t_home *home, t_player *plr, Uint32 t)
 {
-	if (get_distance_squared(plr->pos, entity->pos) < 2.00f)
+	float	dist;
+
+	dist = get_distance_squared(plr->pos, entity->pos);
+	if (dist < MAX_DAM_DIST && dist >= MIN_DAM_DIST)
 	{
 		entity->sprite_state = attack;
 		pick_next_frame(entity, t, ATTACK_COOLDOWN);
@@ -39,6 +42,8 @@ static t_bool	skull_skulker_attack(t_entity *entity, t_player *plr, Uint32 t)
 		}
 		return (true);
 	}
+	else if (dist < MIN_DAM_DIST)
+		entity_bounce_off_player(entity, home, t);
 	return (false);
 }
 
@@ -48,7 +53,7 @@ t_bool	attack_player(t_home *home, t_entity *entity, t_player *plr,
 	if (!entity->is_aggroed)
 		return (false);
 	if (entity->type == skull_skulker)
-		return (skull_skulker_attack(entity, plr, t));
+		return (skull_skulker_attack(entity, home, plr, t));
 	if (entity->type == thing)
 	{
 		entity->sprite_state = attack;

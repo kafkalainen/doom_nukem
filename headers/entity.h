@@ -6,13 +6,15 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/05 12:01:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 13:38:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENTITY_H
 # define ENTITY_H
 # define BACKGROUND 0xFFEE82EE
+# define MIN_DAM_DIST 1.0f
+# define MAX_DAM_DIST 1.5f
 # define AGGRO_RANGE_1 10
 # define AGGRO_RANGE_2 40
 # define ENTITY_VELOCITY_1 0.0005f
@@ -123,6 +125,8 @@ void				entity_chase(t_entity *entity, t_home *home, Uint32 t,
 						t_player *plr);
 void				entity_gravity(t_sector *sector, t_home *home,
 						t_entity *entity, Uint32 delta_time);
+t_bool				entity_bounce_off_player(t_entity *entity,
+						t_home *home, Uint32 t);
 t_bool				entity_bounce_off_the_wall(t_wall *wall, t_entity *entity,
 						t_home *home, Uint32 t);
 void				face_entity_towards_player(t_entity *entity);

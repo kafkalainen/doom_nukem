@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 16:20:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 13:56:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 	drop = -1.0f;
 	g = home->sectors[plr->cur_sector]->gravity;
 	if (!check_distance_to_ground(home->sectors[plr->cur_sector],
-			plr->height, plr->pos, &drop) || (drop <= 0.12f))
+			plr->height, plr->pos, &drop) || (drop <= 0.07f))
 	{
 		plr->drop_time = 0;
 		if (plr->speed.y < -10.0f)

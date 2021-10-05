@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 10:28:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 12:40:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, float height,
 t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 {
 	t_wall			*wall;
+	t_entity		*entity;
 
 	plr->move_dir.y = 0.0f;
 	plr->move_dir = vec3_unit_vector(plr->move_dir);
@@ -90,11 +91,10 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 		return (false);
 	wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
 			plr->width, plr->test_pos, plr->move_dir);
-	if (!wall)
+	entity = walking_into_entity(plr->test_pos, plr->cur_sector,
+			home->entity_pool, home->nbr_of_entities);
+	if (!wall && !entity)
 	{
-		if (walking_into_entity(plr->test_pos, plr->cur_sector,
-				home->entity_pool, home->nbr_of_entities))
-			return (false);
 		plr->pos = plr->test_pos;
 		check_if_moved_through_portal(&plr->cur_sector,
 			plr->pos, plr->height, home);
@@ -102,5 +102,9 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 		viewmodel_motion(plr);
 		return (true);
 	}
-	return (bounce_off_the_wall(wall, plr, home, t));
+	if (wall && !entity)
+		return (bounce_off_the_wall(wall, plr, home, t));
+	if (!wall && entity)
+		return (bounce_off_entity(entity, plr, home, t));
+	return (false);
 }
