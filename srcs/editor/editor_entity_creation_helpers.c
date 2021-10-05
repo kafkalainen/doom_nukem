@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity_creation_helpers.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/04 15:06:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	init_static_entity(t_entity_list *new, t_action *action,
 	t_editor_sector *sector, t_xy pos)
 {
 	if (action->create_elev_button)
-		new->entity_type = lift_button;
+		new->type = lift_button;
 	else if (action->create_light_button)
-		new->entity_type = light_button;
+		new->type = light_button;
 	else if (action->create_powerstation)
-		new->entity_type = powerstation;
+		new->type = powerstation;
 	else
-		new->entity_type = lamp;
+		new->type = lamp;
 	init_static_shared_vals(new, sector->idx_sector);
 	if (action->create_elev_button || action->create_light_button
 		|| action->create_powerstation)
@@ -55,6 +55,6 @@ void	init_static_entity(t_entity_list *new, t_action *action,
 				action->selected_wall) + 1;
 		get_direction_from_wall(new, sector, action->selected_wall);
 	}
-	else if (new->entity_type == lamp)
+	else if (new->type == lamp)
 		init_lamp_pos_dir(new, sector, pos);
 }

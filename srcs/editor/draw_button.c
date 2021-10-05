@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:27:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 11:11:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ static void	draw_button_logic_two(t_editor *editor, t_button *button, int i)
 	}
 	if (i == button_toggle_entity_is_linked)
 	{
-		if (editor->temp_entity->entity_type == light_button
-			|| editor->temp_entity->entity_type == lamp)
+		if (editor->temp_entity->type == light_button
+			|| editor->temp_entity->type == lamp)
 			button->is_active = true;
 		else
 			button->is_active = false;
 	}
 	if (i == button_toggle_state && editor->temp_entity)
 	{
-		if (is_enemy(editor->temp_entity->entity_type))
+		if (is_enemy(editor->temp_entity->type))
 			button->is_active = false;
 		else
 			button->is_active = true;

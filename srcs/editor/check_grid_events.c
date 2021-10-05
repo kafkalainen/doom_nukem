@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_grid_events.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 19:47:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	handle_delete(t_editor *editor)
 		&& editor->action.selected_sector >= 0
 		&& editor->temp_sector && editor->temp_entity)
 	{
-		if (editor->temp_entity->entity_type == lamp)
+		if (editor->temp_entity->type == lamp)
 			reset_sector_light_info(&editor->entity_list, &editor->sector_list,
 				editor->temp_entity, editor->temp_sector);
 		delete_selected_entity(&editor->entity_list, &editor->action);

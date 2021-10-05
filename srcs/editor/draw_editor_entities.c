@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 14:53:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 	t_texel			*tex;
 	t_xy			scale;
 
-	tex = get_tex(editor_select_entity_tex(entity->entity_type), textures);
+	tex = get_tex(editor_select_entity_tex(entity->type), textures);
 	box.start = world_to_screen(entity->bbox.start, editor->action.scalarf,
 			editor->action.offsetf, &editor->buffer);
 	box.end = world_to_screen(entity->bbox.end, editor->action.scalarf,
 			editor->action.offsetf, &editor->buffer);
 	colour = get_entity_colour(entity, editor->action.selected_entity);
 	draw_box(box, &editor->buffer, colour);
-	if (is_enemy(entity->entity_type))
+	if (is_enemy(entity->type))
 	{
 		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / SMALL_ENEMY);
 		scale.x = SMALL_ENEMY;

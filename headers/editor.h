@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/05 11:03:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ typedef struct s_entity_list
 	t_editor_xyz			pos;
 	t_editor_xyz			dir;
 	int						entity_idx;
-	int						entity_type;
+	int						type;
 	int						sector_idx;
 	int						is_static;
 	int						is_active;

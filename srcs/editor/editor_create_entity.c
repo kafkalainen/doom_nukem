@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:28:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/21 15:05:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	create_new_entity(t_entity_list **head, t_action *action,
 void	init_non_static_entity(t_entity_list *new,
 	t_editor_sector *sector, t_xy pos)
 {
-	new->entity_type = skull_skulker;
+	new->type = skull_skulker;
 	new->is_active = true;
 	new->is_linked = false;
 	new->is_revealed = false;

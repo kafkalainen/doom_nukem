@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 11:32:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ Uint32	editor_parse_coordinate(t_editor_xyz *coord, unsigned char *buf,
 int	editor_get_entity_data(unsigned char *buf, t_entity_list *entity,
 		unsigned int *pos, ssize_t size)
 {
-	if (get_next_int_value(&entity->entity_type, buf, &pos, size))
+	if (get_next_int_value(&entity->type, buf, &pos, size))
 		return (1);
 	if (get_next_int_value(&entity->sector_idx, buf, &pos, size))
 		return (1);

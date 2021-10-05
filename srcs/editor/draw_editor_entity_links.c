@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_entity_links.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 11:01:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/21 09:36:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	draw_editor_entity_links(t_entity_list *entity, t_editor *editor)
 {
 	t_entity_list	*linked_entity;
 
-	if (entity->is_linked > 1 && is_linkable_entity(entity->entity_type))
+	if (entity->is_linked > 1 && is_linkable_entity(entity->type))
 	{
 		linked_entity = get_linked_entity(&editor->entity_list,
 				entity->is_linked, entity->entity_idx);
-		if (linked_entity && is_linkable_entity(linked_entity->entity_type))
+		if (linked_entity && is_linkable_entity(linked_entity->type))
 		{
 			draw_line(
 				world_to_screen(vec2(linked_entity->pos.x,

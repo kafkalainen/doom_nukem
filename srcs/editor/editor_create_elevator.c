@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_create_elevator.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 13:11:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/04 12:09:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	convert_sector_to_lift(t_editor_sector *sector,
 	while (temp)
 	{
 		if (temp->sector_idx == sector->idx_sector
-			&& temp->entity_type == lift_button)
+			&& temp->type == lift_button)
 			break ;
 		temp = temp->next;
 	}

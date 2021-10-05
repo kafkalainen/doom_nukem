@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_through_entities.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 10:22:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 19:00:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,25 @@ static void	init_non_static_entity_values(t_entity_list *entity)
 
 void	rotate_through_entities(t_entity_list *entity, t_action *action)
 {
-	if (entity->entity_type == skull_skulker)
-		entity->entity_type = thing;
-	else if (entity->entity_type == thing)
-		entity->entity_type = ammo_pack;
-	else if (entity->entity_type == ammo_pack)
-		entity->entity_type = keycard_cleaning;
-	else if (entity->entity_type == keycard_cleaning)
-		entity->entity_type = keycard_engineering;
-	else if (entity->entity_type == keycard_engineering)
-		entity->entity_type = keycard_military;
-	else if (entity->entity_type == keycard_military)
-		entity->entity_type = skull_skulker;
-	if (entity->entity_type == skull_skulker || entity->entity_type == thing
-		|| entity->entity_type == drone || entity->entity_type == crewmember)
+	if (entity->type == skull_skulker)
+		entity->type = thing;
+	else if (entity->type == thing)
+		entity->type = ammo_pack;
+	else if (entity->type == ammo_pack)
+		entity->type = keycard_cleaning;
+	else if (entity->type == keycard_cleaning)
+		entity->type = keycard_engineering;
+	else if (entity->type == keycard_engineering)
+		entity->type = keycard_military;
+	else if (entity->type == keycard_military)
+		entity->type = skull_skulker;
+	if (entity->type == skull_skulker || entity->type == thing
+		|| entity->type == drone || entity->type == crewmember)
 		init_non_static_entity_values(entity);
-	else if (entity->entity_type == ammo_pack
-		|| entity->entity_type == keycard_cleaning
-		|| entity->entity_type == keycard_engineering
-		|| entity->entity_type == keycard_military)
+	else if (entity->type == ammo_pack
+		|| entity->type == keycard_cleaning
+		|| entity->type == keycard_engineering
+		|| entity->type == keycard_military)
 		init_static_entity_values(entity);
 	action->change_entity_type = 0;
 }

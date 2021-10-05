@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:07:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 14:54:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:58:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,22 @@ static void	draw_entity_textures(t_entity_list *entity,
 	t_xy			scale;
 	t_box			box;
 
-	box.start = vec2(100, 110);
-	box.end = vec2(200, 220);
+	box = (t_box){vec2(100, 110), vec2(200, 220)};
 	draw_box(box, buffer, get_color(black));
-	tex = get_tex(editor_select_entity_tex(entity->entity_type), textures);
-	if (is_enemy(entity->entity_type))
+	tex = get_tex(editor_select_entity_tex(entity->type), textures);
+	if (is_enemy(entity->type))
 	{
-		if (entity->entity_type == skull_skulker
-			|| entity->entity_type == drone)
+		if (entity->type == skull_skulker || entity->type == drone)
 			scale = (t_xy){SMALL_ENEMY, SMALL_ENEMY,
 				(float)(ft_fabsf(box.end.x - box.start.x) / SMALL_ENEMY)};
-		else if (entity->entity_type == thing
-			|| entity->entity_type == crewmember)
+		else if (entity->type == thing || entity->type == crewmember)
 			scale = (t_xy){LARGE_ENEMY, LARGE_ENEMY,
 				(float)(ft_fabsf(box.end.x - box.start.x) / LARGE_ENEMY)};
 		draw_multisprite_image(box.start, tex, buffer, scale);
 	}
 	else
 	{
-		if (entity->entity_type == powerstation)
+		if (entity->type == powerstation)
 			scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 		else
 			scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
@@ -120,7 +117,7 @@ void	draw_entity_textfields(t_entity_list *entity,
 	mod.len = ft_strlen(str) + 1;
 	ft_str_pxl(buffer, vec2(265, 56), str, mod);
 	ft_strdel(&str);
-	str = ft_itoa(entity->entity_type);
+	str = ft_itoa(entity->type);
 	mod.len = ft_strlen(str) + 1;
 	ft_str_pxl(buffer, vec2(265, 84), str, mod);
 	ft_strdel(&str);

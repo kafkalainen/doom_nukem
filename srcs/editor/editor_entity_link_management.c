@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity_link_management.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 10:19:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/16 12:33:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static t_bool	link_entity_sector(t_entity_list *clicked, t_entity_list *start,
 {
 	if (!clicked_sector || !start_sector)
 		return (false);
-	if (clicked->entity_type == lamp)
+	if (clicked->type == lamp)
 	{
 		clicked_sector->light.is_linked = start->is_linked;
 		clicked_sector->light.state = start->state;
 	}
-	if (start->entity_type == lamp)
+	if (start->type == lamp)
 	{
 		start_sector->light.is_linked = start->is_linked;
 		start_sector->light.state = clicked->state;
@@ -77,9 +77,9 @@ void	update_linked_light_states(t_entity_list **entities,
 		return ;
 	starting_link->state = state;
 	ending_link->state = state;
-	if (ending_link->entity_type == lamp)
+	if (ending_link->type == lamp)
 		ending_link_sector->light.state = state;
-	else if (starting_link->entity_type == lamp)
+	else if (starting_link->type == lamp)
 		starting_link_sector->light.state = state;
 }
 
@@ -104,8 +104,8 @@ void	unlink_linked_light_links(t_entity_list **entities,
 		return ;
 	starting_link->is_linked = 0;
 	ending_link->is_linked = 0;
-	if (ending_link->entity_type == lamp)
+	if (ending_link->type == lamp)
 		ending_link_sector->light.is_linked = 0;
-	else if (starting_link->entity_type == lamp)
+	else if (starting_link->type == lamp)
 		starting_link_sector->light.is_linked = 0;
 }

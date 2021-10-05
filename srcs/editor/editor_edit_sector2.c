@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:14:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/24 12:28:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	update_sector_light_values(t_editor_sector *sector,
 	temp = *head;
 	while (temp != NULL)
 	{
-		if (temp->sector_idx == sector->idx_sector && temp->entity_type == lamp)
+		if (temp->sector_idx == sector->idx_sector && temp->type == lamp)
 		{
 			sector->light.pos.x = temp->pos.x;
 			sector->light.pos.y = temp->pos.z;

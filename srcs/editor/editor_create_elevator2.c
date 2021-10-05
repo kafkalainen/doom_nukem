@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_create_elevator2.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 13:14:52 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/04 12:10:04 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_bool	check_for_elevator_button(t_entity_list **head, int sector_idx)
 	while (temp)
 	{
 		if (temp->sector_idx == sector_idx
-			&& temp->entity_type == lift_button)
+			&& temp->type == lift_button)
 			break ;
 		temp = temp->next;
 	}

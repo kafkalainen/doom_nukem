@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:43:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/22 09:57:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	calc_entities_in_sector_with_type(t_entity_list **head,
 	temp = *head;
 	while (temp != NULL)
 	{
-		if (temp->entity_type == entity_type
+		if (temp->type == entity_type
 			&& temp->sector_idx == sector_idx)
 			count++;
 		temp = temp->next;

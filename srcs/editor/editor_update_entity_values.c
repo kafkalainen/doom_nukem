@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_update_entity_values.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 17:31:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/22 18:02:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 static t_bool	entity_is_wall_bound(t_entity_list *entity)
 {
-	if (entity->entity_type == light_button
-		|| entity->entity_type == lift_button
-		|| entity->entity_type == powerstation)
+	if (entity->type == light_button
+		|| entity->type == lift_button
+		|| entity->type == powerstation)
 		return (true);
 	return (false);
 }
 
 static t_bool	entity_is_free_placed(t_entity_list *entity)
 {
-	if (entity->entity_type == skull_skulker
-		|| entity->entity_type == thing
-		|| entity->entity_type == drone
-		|| entity->entity_type == crewmember
-		|| entity->entity_type == ammo_pack
-		|| entity->entity_type == keycard_cleaning
-		|| entity->entity_type == keycard_engineering
-		|| entity->entity_type == keycard_military)
+	if (entity->type == skull_skulker
+		|| entity->type == thing
+		|| entity->type == drone
+		|| entity->type == crewmember
+		|| entity->type == ammo_pack
+		|| entity->type == keycard_cleaning
+		|| entity->type == keycard_engineering
+		|| entity->type == keycard_military)
 		return (true);
 	return (false);
 }
