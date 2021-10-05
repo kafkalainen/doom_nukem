@@ -92,6 +92,7 @@ void	editor_free_selected_sector(t_editor_sector **head,
 	if (!*head)
 		return ;
 	temp = *head;
+	prev = NULL;
 	if (temp != NULL && temp->idx_sector == action->selected_sector)
 	{
 		*head = temp->next;

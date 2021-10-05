@@ -37,6 +37,7 @@ void	initialize_lamp_to_ceiling(t_entity *entity, t_home *home)
 	entity->top.normal = (t_xyz){0.0f, -1.0f, 0.0f, 0.0f};
 	entity->bot.normal = (t_xyz){0.0f, -1.0f, 0.0f, 0.0f};
 	ceiling = home->sectors[entity->sector_idx]->ceiling;
+	state = false;
 	while (i < home->sectors[entity->sector_idx]->nb_of_ceil)
 	{
 		state = vec3_ray_triangle_intersect(&ceiling->tri, entity->pos,

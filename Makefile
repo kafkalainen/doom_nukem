@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/05 08:14:19 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/05 08:18:38 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -351,6 +351,8 @@ ifeq ($(TARGET_SYSTEM),Windows)
 	INCLUDES = $(WIN_INCLUDE_PATHS)
 	LIBS = $(WIN_LIBRARY_PATHS)
 	CFLAGS = $(WIN_CFLAGS)
+	DFLAGS = -O0 -ggdb3 -g
+	OFLAGS =
 	LDFLAGS = $(WIN_LFLAGS)
 	SDL_NEW = SDL2-2.0.14\i686-w64-mingw32
 	SDL_MIXER_NEW = SDL2_mixer-2.0.4\i686-w64-mingw32
