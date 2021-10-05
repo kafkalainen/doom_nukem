@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 19:58:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 12:02:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,5 @@ t_bool	entity_move(t_entity *entity, t_xyz plr_pos, t_home *home, Uint32 t)
 			entity->pos, entity->height, home);
 		return (true);
 	}
-	entity->dir = wall->top.normal;
-	entity->pos = vec3_add(entity->pos, vec3_mul(entity->dir,
-				t * entity->velocity));
-	return (false);
+	return (entity_bounce_off_the_wall(wall, entity, home, t));
 }

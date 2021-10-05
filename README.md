@@ -45,6 +45,7 @@ Final Project in the graphics branch of Hive Helsinki code school. Creating a ve
 - Subdivision of scanlines to smaller batches to improve calculation speed ie. Quake and demos used these in end of 1990s
 - Manipulation of direction and velocity of entities based on time.
 - Manipulation of direction of the sprites to create animations and perspective to an object.
+- Where void pointers and pointers to functions should be used.
 
 # TO-DO
 # Wolf3d features that you must include:

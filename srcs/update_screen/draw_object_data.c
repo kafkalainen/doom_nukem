@@ -6,75 +6,106 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 12:00:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 08:41:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 11:55:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	draw_object_data_pickable(t_buffer *buffer, t_player *plr,
+static void	draw_object_data_pickable(t_buffer *buffer, t_xy loc, t_player *plr,
 			t_plx_modifier mod)
 {
 	if (plr->display_object == keycard_cleaning)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
+	{
+		mod.len = 44;
+		loc.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
+		ft_str_pxl(buffer, loc,
 			"Keycard: Press F to pickup cleaning keycard.", mod);
+	}
 	else if (plr->display_object == keycard_engineering)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
+	{
+		mod.len = 47;
+		loc.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
+		ft_str_pxl(buffer, loc,
 			"Keycard: Press F to pickup engineering keycard.", mod);
+	}
 	else if (plr->display_object == keycard_military)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
+	{
+		mod.len = 44;
+		loc.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
+		ft_str_pxl(buffer, loc,
 			"Keycard: Press F to pickup military keycard.", mod);
-	else if (plr->display_object == ammo_pack)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
-			"Ammo pack: Press F to pickup plasma cartridge.", mod);
-	else
-		return ;
+	}
 }
 
-static void	draw_object_data_door(t_buffer *buffer, t_player *plr,
+static void	draw_object_data_buttons(t_buffer *buffer, t_xy loc, t_player *plr,
 			t_plx_modifier mod)
 {
-	if (plr->display_object == unlocked)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
-			"Door: Press F to open.", mod);
-	else if (plr->display_object == locked)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
-			"::LOCKED::", mod);
-	else if (plr->display_object == cleaning_lock)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
-			"::LOCKED Access authorized with cleaning keycard::", mod);
-	else if (plr->display_object == engineering_lock)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
-			"::LOCKED Access authorized with engineering keycard::", mod);
-	else if (plr->display_object == military_lock)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
-			"::LOCKED Access authorized with military keycard::", mod);
-	else
-		return ;
+	if (plr->display_object == light_button)
+	{
+		mod.len = 34;
+		loc.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
+		ft_str_pxl(buffer, loc, "Button: Press F to turn on lights.", mod);
+	}
+	else if (plr->display_object == lift_button)
+	{
+		mod.len = 37;
+		loc.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
+		ft_str_pxl(buffer, loc, "Button: Press F to activate the lift.", mod);
+	}
+	else if (plr->display_object == ammo_pack)
+	{
+		mod.len = 46;
+		loc.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
+		ft_str_pxl(buffer, loc,
+			"Ammo pack: Press F to pickup plasma cartridge.", mod);
+	}
+}
+
+static void	draw_object_data_door(t_buffer *buffer, t_xy loc, t_player *plr,
+			t_plx_modifier mod)
+{
+	int			idx;
+	const int	tab[] = {22, 10, 50, 53, 50};
+	const char	*messages[] = {"Door: Press F to open.", "::LOCKED::",
+		"::LOCKED Access authorized with cleaning keycard::",
+		"::LOCKED Access authorized with engineering keycard::",
+		"::LOCKED Access authorized with military keycard::"};
+
+	if (plr->display_object >= unlocked
+		&& plr->display_object <= military_lock)
+	{
+		idx = plr->display_object - 300;
+		mod.len = tab[idx];
+		loc.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
+		ft_str_pxl(buffer, loc, (char *)messages[idx], mod);
+	}
 }
 
 void	draw_object_data(t_buffer *buffer, t_player *plr)
 {
+	t_xy			loc;
 	t_plx_modifier	mod;
 
 	mod.colour = white;
-	mod.len = 100;
 	mod.size = TEXT_SIZE;
+	loc.y = buffer->height * 0.1f;
 	if (plr->display_object == powerstation)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
-			"Power station: Press F to charge.", mod);
-	else if (plr->display_object == light_button)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
-			"Button: Press F to turn on lights.", mod);
-	else if (plr->display_object == lift_button)
-		ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.2f, SCREEN_HEIGHT * 0.1f),
-			"Button: Press F to activate the lift.", mod);
-	else if (plr->display_object >= ammo_pack
+	{
+		mod.len = 33;
+		loc.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
+		ft_str_pxl(buffer, loc, "Power station: Press F to charge.", mod);
+	}
+	else if (plr->display_object == light_button
+		|| plr->display_object == lift_button
+		|| plr->display_object == ammo_pack)
+		draw_object_data_buttons(buffer, loc, plr, mod);
+	else if (plr->display_object >= keycard_cleaning
 		&& plr->display_object <= keycard_military)
-		draw_object_data_pickable(buffer, plr, mod);
+		draw_object_data_pickable(buffer, loc, plr, mod);
 	else if (plr->display_object >= unlocked
 		&& plr->display_object <= military_lock)
-		draw_object_data_door(buffer, plr, mod);
+		draw_object_data_door(buffer, loc, plr, mod);
 	else
 		return ;
 }

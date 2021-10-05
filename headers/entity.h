@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/05 10:33:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 12:01:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void				entity_chase(t_entity *entity, t_home *home, Uint32 t,
 						t_player *plr);
 void				entity_gravity(t_sector *sector, t_home *home,
 						t_entity *entity, Uint32 delta_time);
+t_bool				entity_bounce_off_the_wall(t_wall *wall, t_entity *entity,
+						t_home *home, Uint32 t);
 void				face_entity_towards_player(t_entity *entity);
 float				get_distance_squared(t_xyz pt0, t_xyz pt1);
 t_entity			*get_entity_with_sector_and_type(int sector_idx, t_uint type,

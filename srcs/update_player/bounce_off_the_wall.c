@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 09:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 19:31:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 12:06:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,28 @@ t_bool	bounce_off_the_wall(t_wall *wall, t_player *plr,
 		check_if_moved_through_portal(&plr->cur_sector, plr->pos,
 			plr->height, home);
 		plr->steps += t * 0.005f;
+		return (true);
+	}
+	else
+		return (false);
+}
+
+t_bool	entity_bounce_off_the_wall(t_wall *wall, t_entity *entity,
+		t_home *home, Uint32 t)
+{
+	t_xyz	wall_vector;
+	t_wall	*new_wall;
+
+	entity->test_pos = vec3_add(entity->pos, vec3_mul(wall->top.normal,
+				entity->velocity * t));
+	new_wall = check_if_too_close_to_walls(home->sectors[entity->sector_idx],
+			entity->width, entity->test_pos, wall_vector);
+	if (!new_wall)
+	{
+		entity->pos = entity->test_pos;
+		check_if_moved_through_portal(&entity->sector_idx, entity->pos,
+			entity->height, home);
+		entity->dir = wall->top.normal;
 		return (true);
 	}
 	else

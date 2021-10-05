@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:07:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 10:57:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 12:06:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ static void	draw_light_modes(t_buffer *buffer, t_entity_list *entity,
 	}
 	else if (entity->is_linked == 1)
 	{
-
 		mod->len = 4;
 		ft_str_pxl(buffer, vec2(245, 231), "auto", *mod);
 	}
