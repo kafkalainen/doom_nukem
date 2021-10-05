@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/05 08:18:38 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/05 10:24:34 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,6 +111,7 @@ SRCS = \
 	entity_logic$(SLASH)die.c \
 	entity_logic$(SLASH)entity_move.c \
 	entity_logic$(SLASH)face_entity_towards_player.c \
+	entity_logic$(SLASH)get_entity_with_sector_and_type.c \
 	entity_logic$(SLASH)handle_activation.c \
 	entity_logic$(SLASH)is_enemy.c \
 	entity_logic$(SLASH)lock_lift.c \
@@ -334,7 +335,7 @@ WIN_LIBRARY_PATHS = \
 LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 CC = gcc
-WIN_CFLAGS = -Wall -Wextra -Werror
+WIN_CFLAGS = -Wall -Wextra -Werror -O2
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 ifeq ($(OS),Windows_NT)
@@ -351,8 +352,6 @@ ifeq ($(TARGET_SYSTEM),Windows)
 	INCLUDES = $(WIN_INCLUDE_PATHS)
 	LIBS = $(WIN_LIBRARY_PATHS)
 	CFLAGS = $(WIN_CFLAGS)
-	DFLAGS = -O0 -ggdb3 -g
-	OFLAGS =
 	LDFLAGS = $(WIN_LFLAGS)
 	SDL_NEW = SDL2-2.0.14\i686-w64-mingw32
 	SDL_MIXER_NEW = SDL2_mixer-2.0.4\i686-w64-mingw32
@@ -371,9 +370,7 @@ else
 	ABS_DIR = $(shell pwd)
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
-	CFLAGS = -Wall -Wextra -Werror $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
-	DFLAGS = -O0 -ggdb3 -g
-	OFLAGS = -O3
+	CFLAGS = -Wall -Wextra -Werror $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags) -O3
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
 	MKDIR := mkdir -p
@@ -401,9 +398,13 @@ LIBFT = libft$(SLASH)libft.a
 SRC = $(addprefix $S$(SLASH), $(SRCS))
 OBJ = $(SRC:$S%=$O%.o)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug
 
+all: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
 all: $(NAME)
+
+#debug: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
+#debug: cleanobj cleanobjdir $(NAME)
 
 $(SDL_NEW):
 ifeq ($(TARGET_SYSTEM), Linux)
@@ -476,14 +477,8 @@ $(LIBFT):
 	make -C libft
 
 $(NAME): $(LIBFT) $(SDL_NEW) $(SDL_MIXER_NEW) $(OBJ)
-	$(CC) -o $@ $(INCLUDES) $(LIBS) $(CFLAGS) $(OFLAGS) $(OBJ) $(LDFLAGS)
+	$(CC) -o $@ $(INCLUDES) $(LIBS) $(CFLAGS) $(OBJ) $(LDFLAGS)
 	@echo $(GREEN)Compiled executable $(NAME).
-	@echo Run the map files $(NAME) map_files/map.TEST.
-	@echo Running tests.sh tests executable with invalid maps.$(RESET)
-
-debug: $(LIBFT) $(SDL_NEW) $(SDL_MIXER_NEW) $(OBJ)
-	$(CC) -o $@ $(INCLUDES) $(LIBS) $(CFLAGS) $(DFLAGS) $(OBJ) $(LDFLAGS)
-	@echo $(YELLOW)Compiled debuggable executable $(NAME).
 	@echo Run the map files $(NAME) map_files/map.TEST.
 	@echo Running tests.sh tests executable with invalid maps.$(RESET)
 

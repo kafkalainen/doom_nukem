@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/04 19:47:36 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 11:03:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ enum e_buttons
 	button_entity_index,
 	button_change_entity_type,
 	button_toggle_entity_is_linked,
-	button_toggle_is_static,
+	button_toggle_entity_is_revealed,
 	button_toggle_state,
 };
 

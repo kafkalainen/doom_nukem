@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/04 17:50:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 10:33:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,11 @@ void				activate_lift(t_home *home, t_entity *entity,
 						t_player *plr);
 t_bool				attack_player(t_home *home, t_entity *entity, t_player *plr,
 						Uint32 t);
+void				automatic_lights(t_sector *sector, t_home *home);
 void				bolt_lift_doors(t_sector *sector, Uint32 state);
 void				bolt_lift_door(t_sector *lift, t_sector **sectors,
 						Uint32 previous_floor, Uint32 state);
+void				change_texture(t_entity *entity);
 t_bool				check_aggro(t_player *plr, t_entity *entity, t_home *home);
 t_bool				check_if_entity_is_active(t_entity *entity);
 void				determine_angle_between_entity_and_plr(t_entity *entity,
@@ -123,6 +125,8 @@ void				entity_gravity(t_sector *sector, t_home *home,
 						t_entity *entity, Uint32 delta_time);
 void				face_entity_towards_player(t_entity *entity);
 float				get_distance_squared(t_xyz pt0, t_xyz pt1);
+t_entity			*get_entity_with_sector_and_type(int sector_idx, t_uint type,
+						t_home *home);
 t_bool				handle_activation(t_entity *entity, t_home *home,
 						t_player *plr);
 t_bool				handle_keycards(t_entity *keycard);

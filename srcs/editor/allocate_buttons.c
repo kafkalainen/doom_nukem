@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 11:43:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 10:39:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_button	**create_button_list(t_button **blist)
 	create_button(blist[27], (t_box){vec2(10, 80), vec2(290, 105)},
 		(t_button_info){"Type", 0, entity});
 	create_button(blist[28], (t_box){vec2(10, 225), vec2(290, 250)},
-		(t_button_info){"Light or sector link", 0, entity});
+		(t_button_info){"Light controls", 0, entity});
 	create_button(blist[29], (t_box){vec2(10, 255), vec2(290, 280)},
 		(t_button_info){"Alternative texture", 0, entity});
 	create_button(blist[30], (t_box){vec2(10, 285), vec2(290, 310)},
