@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:07:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 12:06:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:54:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ static void	draw_entity_textures(t_entity_list *entity,
 	}
 	else
 	{
-		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
+		if (entity->entity_type == powerstation)
+			scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
+		else
+			scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 		draw_image_static(box.start, tex, buffer, scale.w);
 	}
 }

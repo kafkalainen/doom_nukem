@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 09:55:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:53:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	draw_image_static(t_xy offset, t_texel *tex, t_buffer *buffer,
 	t_uv			cur_texel;
 
 	cur = (t_pxl_coords){0, 0};
-	image = (t_pxl_coords){tex->height * scale, tex->width * scale};
+	image = (t_pxl_coords){tex->width * scale, tex->height * scale};
 	txl = (t_uvz){0.0f, 0.0f, 1.0f};
-	scale = 1.0f / (tex->height * scale);
+	scale = 1.0f / (tex->width * scale);
 	while (cur.y < image.y)
 	{
 		cur.x = -1;
