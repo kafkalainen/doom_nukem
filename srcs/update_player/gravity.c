@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 13:56:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 18:15:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 			plr->height, plr->pos, &drop) || (drop <= 0.07f))
 	{
 		plr->drop_time = 0;
-		if (plr->speed.y < -10.0f)
-			player_take_damage(plr, plr->speed.y / -10.0f, delta_time);
+		if (plr->speed.y < -7.0f)
+			player_take_damage(plr, plr->speed.y / -7.0f, delta_time);
 		plr->speed.y = 0.0f;
 		player_place_feet_to_ground(plr, home);
 	}
