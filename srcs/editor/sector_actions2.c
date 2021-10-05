@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 14:31:07 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/04 13:45:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 15:40:17 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ void	reset_portals_to_default_walls(t_editor_sector *sector, int sector_idx)
 	wall = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
-		if (wall->type == sector_idx)
-			wall->type = -wall0;
+		if (wall->type >= 0)
+		{
+			if (get_portal_idx(wall->type) == sector_idx)
+				wall->type = -wall0;
+		}
 		wall = wall->next;
 		i++;
 	}
