@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/04 20:17:37 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/05 08:14:19 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -334,7 +334,7 @@ WIN_LIBRARY_PATHS = \
 LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 CC = gcc
-WIN_CFLAGS = -Wall -Wextra -O2
+WIN_CFLAGS = -Wall -Wextra -Werror
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 ifeq ($(OS),Windows_NT)
@@ -369,7 +369,9 @@ else
 	ABS_DIR = $(shell pwd)
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
-	CFLAGS = -Wall -Wextra -Werror -O2 -ggdb3 -g $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
+	CFLAGS = -Wall -Wextra -Werror $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
+	DFLAGS = -O0 -ggdb3 -g
+	OFLAGS = -O3
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
 	MKDIR := mkdir -p
@@ -472,8 +474,14 @@ $(LIBFT):
 	make -C libft
 
 $(NAME): $(LIBFT) $(SDL_NEW) $(SDL_MIXER_NEW) $(OBJ)
-	$(CC) -o $@ $(INCLUDES) $(LIBS) $(CFLAGS) $(OBJ) $(LDFLAGS)
+	$(CC) -o $@ $(INCLUDES) $(LIBS) $(CFLAGS) $(OFLAGS) $(OBJ) $(LDFLAGS)
 	@echo $(GREEN)Compiled executable $(NAME).
+	@echo Run the map files $(NAME) map_files/map.TEST.
+	@echo Running tests.sh tests executable with invalid maps.$(RESET)
+
+debug: $(LIBFT) $(SDL_NEW) $(SDL_MIXER_NEW) $(OBJ)
+	$(CC) -o $@ $(INCLUDES) $(LIBS) $(CFLAGS) $(DFLAGS) $(OBJ) $(LDFLAGS)
+	@echo $(YELLOW)Compiled debuggable executable $(NAME).
 	@echo Run the map files $(NAME) map_files/map.TEST.
 	@echo Running tests.sh tests executable with invalid maps.$(RESET)
 
