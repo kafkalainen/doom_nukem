@@ -20,6 +20,7 @@ void	delete_selected_entity(t_entity_list **head, t_action *action)
 	if (!*head)
 		return ;
 	temp = *head;
+	prev = NULL;
 	if (temp != NULL && temp->entity_idx == action->selected_entity)
 	{
 		*head = temp->next;
@@ -45,6 +46,7 @@ void	delete_entity_with_idx(t_entity_list **head, int idx)
 	t_entity_list	*prev;
 
 	temp = *head;
+	prev = NULL;
 	if (!temp)
 		return ;
 	if (temp != NULL && temp->entity_idx == idx)

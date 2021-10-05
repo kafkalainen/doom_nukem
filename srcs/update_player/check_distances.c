@@ -36,6 +36,7 @@ t_bool	get_ceiling_intersection(t_sector *sector, t_xyz pos, t_xyz *isection)
 	i = 0;
 	*isection = vec3(0.0f, 0.0f, 0.0f);
 	ceiling = sector->ceiling;
+	state = false;
 	while (i < sector->nb_of_ceil)
 	{
 		state = vec3_ray_triangle_intersect(&ceiling->tri, pos,
@@ -57,6 +58,7 @@ t_bool	calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc,
 	t_bool			state;
 
 	i = 0;
+	state = false;
 	ceiling = sector->ceiling;
 	while (i < sector->nb_of_ceil)
 	{
@@ -84,6 +86,7 @@ t_bool	calc_distance_to_ground(t_sector *sector, t_xyz *new_loc,
 	t_bool			state;
 
 	i = 0;
+	state = false;
 	ground = sector->ground;
 	while (i < sector->nb_of_ground)
 	{
@@ -112,6 +115,7 @@ t_bool	check_distance_to_ground(t_sector *sector, float height,
 	t_bool			state;
 
 	i = 0;
+	state = false;
 	ground = sector->ground;
 	while (i < sector->nb_of_ground)
 	{

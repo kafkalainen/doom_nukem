@@ -125,7 +125,6 @@ SRC_LIST = \
 	$(SLASH)ft_imax.c\
 	$(SLASH)ft_fabsf.c\
 	$(SLASH)ft_skipc.c\
-	$(SLASH)ft_fabsf.c\
 	$(SLASH)ft_signf.c\
 	$(SLASH)ft_swapf.c\
 	$(SLASH)ft_swapi.c\
@@ -134,7 +133,7 @@ SRC_LIST = \
 HEADERS = ./libft.h
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -O2
 SRC = $(addprefix $S, $(SRC_LIST))
 OBJ = $(SRC:$S%=$O%.o)
 
