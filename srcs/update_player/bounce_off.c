@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 09:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 13:40:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 15:07:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ t_bool	bounce_off_entity(t_entity *entity, t_player *plr,
 	t_wall		*new_wall;
 	t_entity	*new_entity;
 
-	plr->test_pos = vec3_add(plr->pos, vec3_mul(entity->top.normal, t * 0.0005f));
+	plr->test_pos = vec3_add(plr->pos, vec3_mul(entity->top.normal,
+				t * 0.0005f));
 	new_wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
 			plr->width, plr->test_pos, entity->top.normal);
 	new_entity = walking_into_entity(plr->test_pos, plr->cur_sector,
@@ -96,4 +97,11 @@ t_bool	entity_bounce_off_player(t_entity *entity, t_home *home, Uint32 t)
 	}
 	else
 		return (false);
+}
+
+t_xyz	vec3_normalize_move_dir(t_xyz dir)
+{
+	dir.y = 0.0f;
+	dir = vec3_unit_vector(dir);
+	return (dir);
 }

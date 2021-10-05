@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:54:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/21 15:04:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ unsigned char	*get_writable_entity_data2(t_entity_list *entity,
 	unsigned char *buf)
 {
 	buf = (unsigned char *)ft_strjoin_freeable(WRITE_BREAKER,
-			ft_itoa(entity->entity_type), 0, 1);
+			ft_itoa(entity->type), 0, 1);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,
 			WRITE_BREAKER, 1, 0);
 	buf = (unsigned char *)ft_strjoin_freeable((char *)buf,

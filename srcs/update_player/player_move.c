@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 12:40:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 15:08:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 	t_wall			*wall;
 	t_entity		*entity;
 
-	plr->move_dir.y = 0.0f;
-	plr->move_dir = vec3_unit_vector(plr->move_dir);
+	plr->move_dir = vec3_normalize_move_dir(plr->move_dir);
 	plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
 	if (!check_if_vertically_possible(home, plr, plr->test_pos))
 		return (false);
