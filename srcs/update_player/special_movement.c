@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 13:48:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 14:04:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,9 @@ void	jump(t_player *plr, t_sector *sector)
 	check_distance_to_ground(sector, plr->height, plr->pos, &dist);
 	if (plr->input.jump && dist <= 0.0f
 		&& !check_distance_to_ceiling(sector, &plr->pos))
-	{
 		plr->speed.y += 4.0f;
-		printf("jump\n");
-	}
 	if (check_distance_to_ceiling(sector, &plr->pos))
-	{
 		plr->speed.y -= 4.0f;
-		printf("cannot jump\n");
-	}
 	plr->input.jump = 0;
 }
 
