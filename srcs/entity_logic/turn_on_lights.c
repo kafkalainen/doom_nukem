@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 14:53:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 15:00:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 15:31:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	automatic_lights(t_sector *sector, t_home *home)
 	{
 		entity = get_entity_with_sector_and_type(sector->idx_sector,
 				lamp, home);
+		sector->lights.state = 1;
 		if (entity != NULL)
 			change_texture(entity);
-		sector->lights.state = 1;
 	}
 }
