@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 12:13:03 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/04 19:50:58 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 15:53:55 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_editor_sector	*check_for_neighboring_connections(t_editor_sector *sector,
 	wall = sector->walls;
 	while (i < sector->nb_of_walls)
 	{
-		if (wall->type >= 0 && wall->type != sector_idx)
+		if (wall->type >= 0 && get_portal_idx(wall->type) != sector_idx)
 		{
 			temp = get_editor_sector_with_idx(head, get_portal_idx(wall->type));
 			if (temp && temp->is_elevator)

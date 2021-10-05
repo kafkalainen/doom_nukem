@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/05 13:38:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 15:39:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ t_bool				entity_bounce_off_the_wall(t_wall *wall, t_entity *entity,
 						t_home *home, Uint32 t);
 void				face_entity_towards_player(t_entity *entity);
 float				get_distance_squared(t_xyz pt0, t_xyz pt1);
-t_entity			*get_entity_with_sector_and_type(int sector_idx, t_uint type,
-						t_home *home);
+t_entity			*get_entity_with_sector_and_type(int sector_idx,
+						t_uint type, t_home *home);
 t_bool				handle_activation(t_entity *entity, t_home *home,
 						t_player *plr);
 t_bool				handle_keycards(t_entity *keycard);
