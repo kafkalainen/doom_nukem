@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/05 15:07:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 13:43:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,6 @@ void			initialize_cutscene(t_sector *cutscene_sector,
 					t_player *plr, int type);
 void			initialize_player_target_triangles(t_player *plr);
 void			initialize_player(t_player *plr);
-char			**init_story(void);
 t_bool			jetpack(t_player *plr, t_home *home, Uint32 t);
 void			jump(t_player *plr, t_sector *cur_sector);
 t_bool			player_move(t_player *plr, t_home *home, Uint32 t);
@@ -245,6 +244,7 @@ t_bool			bounce_off_entity(t_entity *entity, t_player *plr,
 t_bool			test_ray(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 					t_ray *ray);
 void			player_take_damage(t_player *plr, Uint32 damage, Uint32 time);
+void			plot_twist(t_home *home, t_player *plr);
 void			update_damage_tick(Uint32 delta_time, int *take_damage);
 void			reload_weapon(t_player *plr, Uint32 t);
 void			recharge_suit(t_player *plr, Uint32 t);

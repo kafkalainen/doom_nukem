@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/05 08:17:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 13:44:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@
 # define MAP_MENU 2
 # define MAIN_MENU 1
 # define QUIT -1
-# define MAX_THREADS 10
-# define SKYBOX_TEX -1
+# define MAX_THREADS 6
 # define DOOR_INDEX 3000
 # define CLEANING_INDEX 6000
 # define ENGINEERING_INDEX 9000
@@ -75,7 +74,6 @@
 # define LARGE_WINDOW_INDEX 21000
 # define SUBDIV 16.0f
 # define DENOMSUBDIV 0.0625f
-# define STORY_STRINGS 30
 # define SMALL_ENEMY 80
 # define LARGE_ENEMY 64
 # define EASY 0.75f
