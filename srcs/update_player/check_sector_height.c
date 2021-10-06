@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 08:55:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 10:51:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 20:50:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ t_bool	check_if_vertically_possible(t_home *home, t_player *plr, t_xyz pos)
 	idx = find_current_sector(home, pos, plr->cur_sector, &isection);
 	if (idx == -1)
 		return (false);
-	get_ceiling_intersection(home->sectors[idx], pos, &ceiling);
+	pos = vec3(pos.x, pos.y + 0.3f, pos.z);
+	if (!get_ceiling_intersection(home->sectors[idx], pos, &ceiling))
+		return (false);
 	if (plr->height <= (ceiling.y - isection.y))
 		return (true);
 	return (false);
