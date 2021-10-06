@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/02 11:12:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 16:52:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ typedef struct s_steps
 	float			delta_lu;
 	float			lu_start;
 	float			lu_end;
+	float			delta_w;
 	int				sub_pixels;
 }				t_steps;
 

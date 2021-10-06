@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/06 14:28:47 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/06 17:22:43 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -399,11 +399,11 @@ OBJ = $(SRC:$S%=$O%.o)
 
 .PHONY: all clean fclean re debug
 
-all: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
-all: $(NAME)
-
-# all: CFLAGS += -O3
+# all: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
 # all: $(NAME)
+
+all: CFLAGS += -O3
+all: $(NAME)
 
 # debug: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
 # debug: cleanobj cleanobjdir $(NAME)
