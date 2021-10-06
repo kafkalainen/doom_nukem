@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:12:34 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/29 15:40:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 20:32:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rotate_projectile_based_on_axes(t_xyz normal, t_projectile *current)
 
 	angle[0] = vec3_ang_axis(current->normal, normal, 'x');
 	angle[1] = vec3_ang_axis(current->normal, normal, 'y');
-	angle[2] = vec3_ang_axis(current->normal, normal, 'z');
+	angle[2] = -vec3_ang_axis(current->normal, normal, 'z');
 	x = rotation_matrix_x(angle[0]);
 	y = rotation_matrix_y(angle[1]);
 	z = rotation_matrix_z(angle[2]);
@@ -36,11 +36,15 @@ void	rotate_projectile_based_on_axes(t_xyz normal, t_projectile *current)
 	current->bot.p[2] = multi_vec_matrix(&current->bot.p[2], &combined);
 }
 
+/*
+**	Set bullet hole rotates hole in the case it is horizontal.
+*/
 void	set_bullet_hole(t_bullet_hole *hole, t_projectile *current)
 {
 	if (hole->hole_type != nothing)
 	{
 		current->pos = hole->point;
+		current->normal = vec3(0.0f, 0.0f, -1.0f);
 		if (hole->hole_type == ceiling_hole || hole->hole_type == ground_hole)
 		{
 			initialize_top_triangle(-bullet_decal, &current->top,

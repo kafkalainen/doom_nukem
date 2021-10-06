@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 10:31:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 15:53:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 20:10:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	initialize_projectile_triangles(t_projectile *projectile)
 	projectile->bot.normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
 }
 
-static void	initialize_projectile(t_projectile *projectile)
+void	initialize_projectile(t_projectile *projectile)
 {
 	projectile->pos = (t_xyz){5001.0f, 5001.0f, -100.0f, 1.0f};
 	projectile->normal = (t_xyz){0.0f, 0.0f, -1.0f, 0.0f};
