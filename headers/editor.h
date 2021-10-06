@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/06 18:18:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 18:45:42 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,7 +317,7 @@ t_bool			check_for_last_point(t_editor_sector *sector, t_action *action);
 t_bool			check_for_intersecting_lines(t_editor_sector *sector,
 					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_for_valid_map_range(t_xy pos);
-t_bool			check_door_height(t_editor *editor, t_editor_walls *way,
+t_bool			check_if_valid_door(t_editor *editor, t_editor_walls *way,
 					t_editor_sector *current);
 t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,
 					t_screen_xy p0, t_screen_xy p1);

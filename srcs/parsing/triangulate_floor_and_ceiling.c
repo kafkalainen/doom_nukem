@@ -6,11 +6,32 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 08:19:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 17:57:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 17:14:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+// static void		move_towards_centroid(t_surface *surface, t_sector *sector)
+// {
+// 	t_xyz	unit_normal[3];
+
+// 	unit_normal[0] = vec3_unit_vector(vec3_dec(
+// 		vec3(sector->centroid.x, surface->tri.p[0].y, sector->centroid.y),
+// 		surface->tri.p[0]));
+// 	unit_normal[1] = vec3_unit_vector(vec3_dec(
+// 		vec3(sector->centroid.x, surface->tri.p[1].y, sector->centroid.y),
+// 		surface->tri.p[1]));
+// 	unit_normal[2] = vec3_unit_vector(vec3_dec(
+// 		vec3(sector->centroid.x, surface->tri.p[2].y, sector->centroid.y),
+// 		surface->tri.p[2]));
+// 	surface->tri.p[0]
+// 		= translate_point(&surface->tri.p[0], vec3_mul(unit_normal[0], 0.005f));
+// 	surface->tri.p[1]
+// 		= translate_point(&surface->tri.p[1], vec3_mul(unit_normal[1], 0.005f));
+// 	surface->tri.p[2]
+// 		= translate_point(&surface->tri.p[2], vec3_mul(unit_normal[2], 0.005f));
+// }
 
 static t_wall	*get_highest_ground(t_sector *sector)
 {

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 18:56:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/04/17 18:27:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 17:27:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,9 @@
 
 void	ft_putstr(char const *s)
 {
-	write(1, s, ft_strlen(s));
+	ssize_t	ret;
+
+	ret = write(1, s, ft_strlen(s));
+	(void)ret;
+	return ;
 }

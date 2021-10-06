@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/27 11:48:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 18:23:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	editor_edit_wall(t_editor *editor)
 		create_entities(editor);
 	if (editor->action.cycle_portal)
 	{
-		if (!check_door_height(editor, editor->temp_wall,
+		if (!check_if_valid_door(editor, editor->temp_wall,
 				editor->temp_sector))
 			editor->action.cycle_portal = false;
 		else

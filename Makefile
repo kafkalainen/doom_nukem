@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/06 16:58:36 by rzukale          ###   ########.fr        #
+#    Updated: 2021/10/06 18:24:32 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS = \
 	editor$(SLASH)check_for_intersecting_lines.c \
 	editor$(SLASH)check_grid_events.c \
 	editor$(SLASH)check_grid_events2.c \
-	editor$(SLASH)check_door_height.c \
+	editor$(SLASH)check_if_valid_door.c \
 	editor$(SLASH)check_if_another_sector_is_inside.c \
 	editor$(SLASH)create_portals.c \
 	editor$(SLASH)cycle_portal.c \
@@ -400,11 +400,11 @@ OBJ = $(SRC:$S%=$O%.o)
 
 .PHONY: all clean fclean re debug
 
-all: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
-all: $(NAME)
-
-# all: CFLAGS += -O3
+# all: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
 # all: $(NAME)
+
+all: CFLAGS += -O3
+all: $(NAME)
 
 # debug: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
 # debug: cleanobj cleanobjdir $(NAME)

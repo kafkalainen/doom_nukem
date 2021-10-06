@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:14:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 18:23:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	editor_set_all_sector_floor_heights(t_editor_sector *sector,
 		{
 			tmp = wall->height.ground;
 			wall->height.ground = floor_height;
-			if (wall->type > 2999 && !check_door_height(editor, wall, sector))
+			if (wall->type > 2999 && !check_if_valid_door(editor, wall, sector))
 			{
 				wall->height.ground = tmp;
 				floor_height = tmp;
@@ -89,7 +89,7 @@ void	editor_set_all_sector_ceiling_heights(t_editor_sector *sector,
 		{
 			tmp = wall->height.ceiling;
 			wall->height.ceiling = ceiling_height;
-			if (wall->type > 2999 && !check_door_height(editor, wall, sector))
+			if (wall->type > 2999 && !check_if_valid_door(editor, wall, sector))
 			{
 				wall->height.ceiling = tmp;
 				ceiling_height = tmp;
