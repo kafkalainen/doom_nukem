@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 11:35:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 21:28:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	play_sound_and_fadeout(Mix_Chunk *sound, int volume, Uint32 playtime)
 
 	if (!sound)
 		return (-1);
-	Mix_VolumeChunk(sound, volume);
 	channel = Mix_PlayChannel(-1, sound, 0);
-	Mix_FadeOutChannel(channel, ft_imin(playtime, playtime - 1000));
+	Mix_Volume(channel, volume);
+	Mix_FadeOutChannel(channel, ft_imin(playtime, playtime - 300));
 	return (channel);
 }

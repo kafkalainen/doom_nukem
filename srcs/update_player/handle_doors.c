@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 10:10:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 21:25:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ t_bool	open_door(t_sector **sectors, t_player *plr, int active_item)
 			check_for_matching_key(portal_behind, plr, active_item);
 			portal_behind->open_until = plr->time + 5000;
 			wall->open_until = plr->time + 5000;
-			play_sound(plr->audio.door, 15);
+			play_sound(plr->audio.door, 2);
 			return (true);
 		}
 		play_sound(plr->audio.error, 20);

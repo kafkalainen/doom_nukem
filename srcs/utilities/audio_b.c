@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:34:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 19:47:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 21:30:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	play_sound(Mix_Chunk *sound, int volume)
 
 	if (!sound)
 		return (-1);
-	Mix_VolumeChunk(sound, volume);
 	channel = Mix_PlayChannel(-1, sound, 0);
+	channel = Mix_Volume(channel, volume);
 	return (channel);
 }
 
