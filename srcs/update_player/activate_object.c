@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   activate_object.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:18:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/08/05 15:26:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 20:45:33 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_entity	*activate_object(t_home *home, t_player *plr)
 	entity_hit = 0;
 	while (i < home->nbr_of_entities)
 	{
-		if (home->entity_pool[i]->sector_idx == plr->cur_sector)
+		if (home->entity_pool[i]->sector_idx == plr->cur_sector
+			&& home->entity_pool[i]->is_active == true)
 		{
 			translate_entity(&tested[0], &tested[1], home->entity_pool[i]);
 			if (vec3_ray_triangle_intersect(&tested[0],
