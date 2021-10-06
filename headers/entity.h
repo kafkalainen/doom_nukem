@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/06 12:20:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 20:11:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ t_bool				handle_keycards(t_entity *keycard);
 void				initialize_triangle_index(t_triangle *tri,
 						t_entity *entity);
 void				initialize_entity_triangles(t_entity *entity);
+void				initialize_projectile(t_projectile *projectile);
 void				initialize_projectile_triangles(t_projectile *projectile);
 Uint32				initialize_entity_textures(t_entity *entity);
 t_bool				is_enemy(int type);
