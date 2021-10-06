@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_player.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 14:19:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 20:36:10 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static void	initialize_player_game_states(t_player *plr)
 	plr->fuel_points = 100.0f;
 	plr->active_inv = -1;
 	plr->active_wep = 0;
-	plr->inventory[0].in_use = 0;
-	plr->inventory[1].in_use = 0;
-	plr->inventory[2].in_use = 0;
-	plr->inventory[3].in_use = 0;
+	plr->inventory[0].in_use = false;
+	plr->inventory[1].in_use = false;
+	plr->inventory[2].in_use = false;
+	plr->inventory[3].in_use = false;
 	plr->steps = 0.0f;
 	plr->plot_state = no_plot;
 	plr->ending_played = false;
