@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_grid_events.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 16:25:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	check_grid_events(t_editor *editor)
 		if (editor->temp_sector && editor->action.prev_sector != -1)
 		{
 			if (create_portal_between_sectors(&editor->sector_list,
-					&editor->action))
+					&editor->action, &editor->entity_list))
 				add_notification(editor, "Created successfully", 3000);
 			else
 				add_notification(editor, "ERROR: Could not create", 3000);

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:16:04 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/04 14:31:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 16:35:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,23 @@ t_editor_walls	*get_matching_wall_coord(t_editor_sector *sector,
 	return (NULL);
 }
 
-t_bool	create_portal_between_sectors(t_editor_sector **head, t_action *action)
+t_bool	has_lift_button(int sector_idx, t_entity_list **head)
+{
+	t_entity_list	*temp;
+
+	temp = *head;
+	while (temp)
+	{
+		if (temp->sector_idx == sector_idx
+			&& temp->type == lift_button)
+			return (true);
+		temp = temp->next;
+	}
+	return (false);
+}
+
+t_bool	create_portal_between_sectors(t_editor_sector **head,
+	t_action *action, t_entity_list **entities)
 {
 	t_editor_sector	*link_from;
 	t_editor_sector	*link_to;
@@ -70,8 +86,10 @@ t_bool	create_portal_between_sectors(t_editor_sector **head, t_action *action)
 
 	link_from = get_editor_sector_with_idx(head, action->prev_sector);
 	link_to = get_editor_sector_with_idx(head, action->selected_sector);
-	if (!link_from || link_from->is_elevator
-		|| !link_to || link_to->is_elevator)
+	if (!link_from || (link_from->is_elevator
+			&& has_lift_button(link_from->idx_sector, entities))
+		|| !link_to || (link_to->is_elevator
+			&& has_lift_button(link_to->idx_sector, entities)))
 		return (false);
 	dir = vec2_add(link_from->centroid,
 			vec2_dec(action->world_pos, link_from->centroid));

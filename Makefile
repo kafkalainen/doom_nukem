@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/05 13:11:28 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/06 16:54:13 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCS = \
 	editor$(SLASH)editor_create_new_sector.c \
 	editor$(SLASH)editor_create_elevator.c \
 	editor$(SLASH)editor_create_elevator2.c \
+	editor$(SLASH)editor_create_elevator3.c \
 	editor$(SLASH)editor_delete_entity.c \
 	editor$(SLASH)editor_delete_wall.c \
 	editor$(SLASH)editor_load_map.c \

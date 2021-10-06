@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_door_height.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 11:10:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 20:37:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 17:44:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static t_bool	check_if_slanted_doorway(t_editor_walls *doorway,
+t_bool	check_if_slanted_doorway(t_editor_walls *doorway,
 				t_editor_walls *doorway_2)
 {
 	if (doorway->height.ceiling != doorway->next->height.ceiling
