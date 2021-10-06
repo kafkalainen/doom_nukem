@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 15:22:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/22 08:13:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 14:52:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	calc_sector_bounds(t_sector *sector)
 	sector->bounding_box.bottom_right = vec2(sector->walls->top.p[0].x,
 			sector->walls->top.p[0].z);
 	find_biggest_square(sector);
+	sector->centroid = calculate_centroid(sector);
 }
