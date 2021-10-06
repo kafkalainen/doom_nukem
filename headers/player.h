@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/06 13:43:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 14:55:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ t_bool			bounce_off_entity(t_entity *entity, t_player *plr,
 t_bool			test_ray(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 					t_ray *ray);
 void			player_take_damage(t_player *plr, Uint32 damage, Uint32 time);
-void			plot_twist(t_home *home, t_player *plr);
+void			plot_twist(t_home *home);
 void			update_damage_tick(Uint32 delta_time, int *take_damage);
 void			reload_weapon(t_player *plr, Uint32 t);
 void			recharge_suit(t_player *plr, Uint32 t);

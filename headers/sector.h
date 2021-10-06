@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 11:34:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 14:43:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_sector
 	t_surface		*ground;
 	t_surface		*ceiling;
 	t_lighting		lights;
+	t_xy			centroid;
 	t_plgn			bounding_box;
 	float			velocity;
 	float			gravity;
