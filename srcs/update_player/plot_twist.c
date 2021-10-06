@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:09:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 12:59:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 14:25:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	plot_twist(t_home *home, t_player *plr)
 	t_uint		i;
 
 	i = 0;
-	(void)plr;
 	while (i < home->nbr_of_entities)
 	{
 		if (is_enemy(home->entity_pool[i]->type))

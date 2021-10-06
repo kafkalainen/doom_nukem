@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/06 13:38:17 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/06 14:05:59 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -334,7 +334,7 @@ WIN_LIBRARY_PATHS = \
 LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 CC = gcc
-WIN_CFLAGS = -Wall -Wextra -Werror -O2
+WIN_CFLAGS = -Wall -Wextra -Werror
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 ifeq ($(OS),Windows_NT)
@@ -369,7 +369,7 @@ else
 	ABS_DIR = $(shell pwd)
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
-	CFLAGS = -Wall -Wextra -Werror $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags) -O3
+	CFLAGS = -Wall -Wextra -Werror $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
 	MKDIR := mkdir -p
@@ -399,8 +399,11 @@ OBJ = $(SRC:$S%=$O%.o)
 
 .PHONY: all clean fclean re debug
 
-all: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
+all: CFLAGS += -O3
 all: $(NAME)
+
+# all: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
+# all: $(NAME)
 
 #debug: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
 #debug: cleanobj cleanobjdir $(NAME)
