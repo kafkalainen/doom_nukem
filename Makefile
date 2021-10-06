@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/06 16:54:13 by rzukale          ###   ########.fr        #
+#    Updated: 2021/10/06 16:58:36 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -210,8 +210,6 @@ SRCS = \
 	update_player$(SLASH)get_player_hit_point.c \
 	update_player$(SLASH)gravity.c \
 	update_player$(SLASH)handle_doors.c \
-	update_player$(SLASH)init_story.c \
-	update_player$(SLASH)init_story_cutscene.c \
 	update_player$(SLASH)key_input.c \
 	update_player$(SLASH)key_input_toggle.c \
 	update_player$(SLASH)mouse_handle.c \
@@ -225,6 +223,7 @@ SRCS = \
 	update_player$(SLASH)shooting.c \
 	update_player$(SLASH)bounce_off.c \
 	update_player$(SLASH)player_take_damage.c \
+	update_player$(SLASH)plot_twist.c \
 	update_player$(SLASH)reload_weapon.c \
 	update_player$(SLASH)recharge_suit.c \
 	update_player$(SLASH)walk_into_entity.c \
@@ -336,7 +335,7 @@ WIN_LIBRARY_PATHS = \
 LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 CC = gcc
-WIN_CFLAGS = -Wall -Wextra -Werror -O2
+WIN_CFLAGS = -Wall -Wextra -Werror
 WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 ifeq ($(OS),Windows_NT)
@@ -371,7 +370,7 @@ else
 	ABS_DIR = $(shell pwd)
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
-	CFLAGS = -Wall -Wextra -Werror $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags) -O3
+	CFLAGS = -Wall -Wextra -Werror $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
 	MKDIR := mkdir -p
@@ -404,8 +403,11 @@ OBJ = $(SRC:$S%=$O%.o)
 all: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
 all: $(NAME)
 
-#debug: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
-#debug: cleanobj cleanobjdir $(NAME)
+# all: CFLAGS += -O3
+# all: $(NAME)
+
+# debug: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
+# debug: cleanobj cleanobjdir $(NAME)
 
 $(SDL_NEW):
 ifeq ($(TARGET_SYSTEM), Linux)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 09:55:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	editor_get_entity_data(unsigned char *buf, t_entity_list *entity,
 		return (1);
 	if (get_next_int_value(&entity->is_active, buf, &pos, size))
 		return (1);
-	if (get_next_int_value(&entity->is_revealed, buf, &pos, size))
+	if (get_next_int_value((int *)&entity->is_revealed, buf, &pos, size))
 		return (1);
 	if (get_next_int_value(&entity->state, buf, &pos, size))
 		return (1);

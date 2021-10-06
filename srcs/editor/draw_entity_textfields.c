@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:07:32 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 14:58:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 13:56:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static void	draw_entity_textures(t_entity_list *entity,
 
 	box = (t_box){vec2(100, 110), vec2(200, 220)};
 	draw_box(box, buffer, get_color(black));
-	tex = get_tex(editor_select_entity_tex(entity->type), textures);
+	tex = get_tex(editor_select_entity_tex(entity->type, entity->is_revealed),
+			textures);
 	if (is_enemy(entity->type))
 	{
 		if (entity->type == skull_skulker || entity->type == drone)
@@ -78,10 +79,7 @@ static void	draw_entity_textures(t_entity_list *entity,
 	}
 	else
 	{
-		if (entity->type == powerstation)
-			scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
-		else
-			scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
+		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / tex->width);
 		draw_image_static(box.start, tex, buffer, scale.w);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 10:32:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 14:55:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_bool	activate_power_station(t_entity *power_station, t_player *plr)
 	return (false);
 }
 
-t_bool	pick_up_item(t_entity *item, t_player *plr)
+t_bool	pick_up_item(t_entity *item, t_home *home, t_player *plr)
 {
 	int	i;
 
@@ -62,6 +62,12 @@ t_bool	pick_up_item(t_entity *item, t_player *plr)
 	plr->inventory[i].in_use = true;
 	plr->inventory[i].sprite_idx = -item->sprite_index;
 	item->is_active = false;
+	if (item->type == keycard_military
+		&& home->sectors[home->end_sector]->story
+		&& home->sectors[home->end_sector]->story[0]
+		&& ft_strnstr(home->sectors[home->end_sector]->story[0],
+			"header. the end", 15))
+		plot_twist(home);
 	return (true);
 }
 
@@ -83,7 +89,7 @@ t_bool	handle_activation(t_entity *entity, t_home *home, t_player *plr)
 		activate_power_station(entity, plr);
 	else if (entity->type >= ammo_pack
 		&& entity->type <= keycard_military)
-		pick_up_item(entity, plr);
+		pick_up_item(entity, home, plr);
 	else
 		return (0);
 	change_texture(entity);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 17:38:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 14:19:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	initialize_player_movement_vectors(t_player *plr)
 
 static void	initialize_player_game_states(t_player *plr)
 {
-	plr->power_points = 5.0f;
+	plr->power_points = 8.0f;
 	plr->fuel_points = 100.0f;
 	plr->active_inv = -1;
 	plr->active_wep = 0;

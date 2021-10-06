@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/05 15:39:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 12:20:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,16 +136,19 @@ t_entity			*get_entity_with_sector_and_type(int sector_idx,
 t_bool				handle_activation(t_entity *entity, t_home *home,
 						t_player *plr);
 t_bool				handle_keycards(t_entity *keycard);
+void				initialize_triangle_index(t_triangle *tri,
+						t_entity *entity);
 void				initialize_entity_triangles(t_entity *entity);
 void				initialize_projectile_triangles(t_projectile *projectile);
 Uint32				initialize_entity_textures(t_entity *entity);
 t_bool				is_enemy(int type);
+t_bool				is_enemy_sprite(int type);
 Uint32				lock_lift(t_home *home, t_sector *lift);
 void				lock_the_door(t_wall *dimensions, t_wall *door);
 void				make_noise(t_entity *entity, t_player *plr, Uint32 t);
 Uint32				other_dir(Uint32 dir);
 void				pick_next_frame(t_entity *entity, Uint32 t, int cooldown);
-t_bool				pick_up_item(t_entity *item, t_player *plr);
+t_bool				pick_up_item(t_entity *item, t_home *home, t_player *plr);
 void				place_entity_to_ground(t_entity *entity, t_home *home);
 void				rotate_entity_towards_player(t_entity *entity,
 						t_player *plr);

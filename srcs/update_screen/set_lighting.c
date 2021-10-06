@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 20:06:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 15:16:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 09:59:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	set_lighting(t_lighting *light, t_triangle *tri)
 	{
 		if (light->state == TRUE && light->diffuse_power > 0.0f)
 		{
-			if (tri->type == -enemy0 || tri->type == -enemy1)
+			if (is_enemy_sprite(tri->type))
 			{
 				tri->lu[0] = calculate_enemy_light_intensity(light, tri, 0);
 				tri->lu[1] = calculate_enemy_light_intensity(light, tri, 1);
@@ -101,7 +101,7 @@ void	set_lighting(t_lighting *light, t_triangle *tri)
 			}
 		}
 		else
-			initialize_lumels(&tri->lu[0], &tri->lu[1], &tri->lu[2], 0.1f);
+			initialize_lumels(&tri->lu[0], &tri->lu[1], &tri->lu[2], 0.2f);
 	}
 	else
 		initialize_lumels(&tri->lu[0], &tri->lu[1], &tri->lu[2], 1.0f);

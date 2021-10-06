@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:58:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 14:02:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 14:19:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	recharge_suit(t_player *plr, Uint32 t)
 		plr->recharge -= t;
 		if (plr->recharge <= t)
 		{
-			if (plr->power_points < 5)
+			if (plr->power_points < 8)
 				plr->power_points += 3;
-			if (plr->power_points > 5)
-				plr->power_points = 5;
+			if (plr->power_points > 8)
+				plr->power_points = 8;
 		}
 	}
 }

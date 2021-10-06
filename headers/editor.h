@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/06 16:52:15 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 16:58:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ typedef struct s_entity_list
 	int						sector_idx;
 	int						is_static;
 	int						is_active;
-	int						is_revealed;
+	t_bool					is_revealed;
 	int						state;
 	int						is_linked;
 	struct s_entity_list	*next;
@@ -454,7 +454,7 @@ t_xy			world_to_screen(t_xy x0, float scalarf, t_xy offsetf,
 					t_buffer *buffer);
 t_xy			ndc_to_world(t_xy ndc, t_xy offset, float scalar);
 float			ft_roundf_to_grid(float nb, int prec);
-int				editor_select_entity_tex(Uint32 type);
+int				editor_select_entity_tex(t_uint type, t_bool is_revealed);
 void			free_walls(t_editor_walls **head, int nbr_of_walls);
 void			free_editor_data(t_editor *editor);
 
