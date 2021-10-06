@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:27:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 09:52:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static void	draw_button_logic_two(t_editor *editor, t_button *button, int i)
 		else
 			button->is_active = true;
 	}
-	if (i == button_toggle_entity_is_revealed && editor->temp_entity)
-		button->is_active = false;
 }
 
 static void	draw_button_logic(t_editor *editor, t_button *button, int i)
@@ -67,6 +65,13 @@ static void	draw_button_logic(t_editor *editor, t_button *button, int i)
 		set_to_inactive(editor, button, lift_button);
 	if (i == button_create_light_button)
 		set_to_inactive(editor, button, light_button);
+	if (i == button_toggle_entity_is_revealed && editor->temp_entity)
+	{
+		if (!is_enemy(editor->temp_entity->type))
+			button->is_active = false;
+		else
+			button->is_active = true;
+	}
 	draw_button_logic_two(editor, button, i);
 }
 

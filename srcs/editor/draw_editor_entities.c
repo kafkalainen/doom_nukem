@@ -6,18 +6,22 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 18:03:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 09:49:31 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	editor_select_entity_tex(Uint32 type)
+int	editor_select_entity_tex(t_uint type, t_bool is_revealed)
 {
-	if (type == skull_skulker)
+	if (type == skull_skulker && is_revealed == false)
 		return (-enemy0);
-	else if (type == thing)
+	else if (type == skull_skulker && is_revealed == true)
+		return (-enemy0);
+	else if (type == thing && is_revealed == false)
 		return (-enemy1);
+	else if (type == thing && is_revealed == true)
+		return (-enemy3);
 	else if (type == lift_button)
 		return (-button_on);
 	else if (type == light_button)
@@ -75,7 +79,8 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 	t_texel			*tex;
 	t_xy			scale;
 
-	tex = get_tex(editor_select_entity_tex(entity->type), textures);
+	tex = get_tex(editor_select_entity_tex(entity->type, entity->is_revealed),
+		textures);
 	box.start = world_to_screen(entity->bbox.start, editor->action.scalarf,
 			editor->action.offsetf, &editor->buffer);
 	box.end = world_to_screen(entity->bbox.end, editor->action.scalarf,
@@ -84,9 +89,8 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 	draw_box(box, &editor->buffer, colour);
 	if (is_enemy(entity->type))
 	{
-		scale.w = (float)(ft_fabsf(box.end.x - box.start.x) / SMALL_ENEMY);
-		scale.x = SMALL_ENEMY;
-		scale.y = SMALL_ENEMY;
+		scale = (t_xy){SMALL_ENEMY, SMALL_ENEMY,
+			(float)(ft_fabsf(box.end.x - box.start.x) / SMALL_ENEMY)};
 		draw_multisprite_image(box.start, tex, &editor->buffer, scale);
 	}
 	else

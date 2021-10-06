@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:34:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/10 12:33:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/05 19:47:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	play_footsteps(t_audio *audio)
 	{
 		if (step)
 		{
-			Mix_PlayChannel(-1, audio->footstep1, 0);
+			play_sound(audio->footstep1, 30);
 			step = 0;
 		}
 		else
 		{
-			Mix_PlayChannel(-1, audio->footstep2, 0);
+			play_sound(audio->footstep2, 30);
 			step = 1;
 		}
 		last_time = current_time;

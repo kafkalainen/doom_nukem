@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 16:10:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 14:09:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 09:42:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	init_textures(t_home *home)
 	load_texture("textures/skull_skulker.png", home->textures, enemy0);
 	load_texture("textures/thing.png", home->textures, enemy1);
 	load_texture("textures/skull_skulker.png", home->textures, enemy2);
-	load_texture("textures/thing.png", home->textures, enemy3);
+	load_texture("textures/crewmember.png", home->textures, enemy3);
 	load_texture("textures/plasma_ball.png", home->textures, bullet);
 	load_texture("textures/muzzle.png", home->textures, muzzleflash);
 	load_texture("textures/hull_window_large.png", home->textures,

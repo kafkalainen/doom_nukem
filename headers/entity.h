@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/05 15:39:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 09:58:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ void				initialize_entity_triangles(t_entity *entity);
 void				initialize_projectile_triangles(t_projectile *projectile);
 Uint32				initialize_entity_textures(t_entity *entity);
 t_bool				is_enemy(int type);
+t_bool				is_enemy_sprite(int type);
 Uint32				lock_lift(t_home *home, t_sector *lift);
 void				lock_the_door(t_wall *dimensions, t_wall *door);
 void				make_noise(t_entity *entity, t_player *plr, Uint32 t);
