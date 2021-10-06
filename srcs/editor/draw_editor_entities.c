@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 09:49:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 13:55:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	draw_entity_bbox(t_entity_list *entity, t_editor *editor,
 	t_xy			scale;
 
 	tex = get_tex(editor_select_entity_tex(entity->type, entity->is_revealed),
-		textures);
+			textures);
 	box.start = world_to_screen(entity->bbox.start, editor->action.scalarf,
 			editor->action.offsetf, &editor->buffer);
 	box.end = world_to_screen(entity->bbox.end, editor->action.scalarf,

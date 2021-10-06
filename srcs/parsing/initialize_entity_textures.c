@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:21:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/09 11:38:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 13:10:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	initialize_moving_entity_textures(t_entity *entity)
 	if (entity->type == skull_skulker)
 	{
 		entity->sprite_index = -enemy0;
-		entity->alt_sprite_index = -enemy2;
+		entity->alt_sprite_index = -enemy3;
 	}
 	else if (entity->type == thing)
 	{
@@ -59,7 +59,7 @@ static void	initialize_moving_entity_textures(t_entity *entity)
 	}
 }
 
-static void	initialize_triangle_index(t_triangle *tri, t_entity *entity)
+void	initialize_triangle_index(t_triangle *tri, t_entity *entity)
 {
 	if (entity->is_static)
 	{
