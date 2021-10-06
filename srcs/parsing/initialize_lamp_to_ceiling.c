@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_lamp_to_ceiling.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 10:11:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 15:36:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 19:01:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ static void	set_lamp_position(t_sector *sector, t_entity *entity,
 	entity->pos.z = sector->centroid.y;
 }
 
+static void	init_lamp_values(unsigned int *i, t_xyz *isection, float *pos_y)
+{
+	*i = 0;
+	*isection = vec3(0, 0, 0);
+	*pos_y = -99.0f;
+}
+
 void	initialize_lamp_to_ceiling(t_entity *entity, t_home *home)
 {
 	unsigned int	i;
@@ -28,9 +35,7 @@ void	initialize_lamp_to_ceiling(t_entity *entity, t_home *home)
 	t_xyz			isection;
 	t_bool			state;
 
-	i = 0;
-	isection = vec3(0, 0, 0);
-	entity->pos.y = -99.0f;
+	init_lamp_values(&i, &isection, &entity->pos.y);
 	entity->top.normal = (t_xyz){0.0f, -1.0f, 0.0f, 0.0f};
 	entity->bot.normal = (t_xyz){0.0f, -1.0f, 0.0f, 0.0f};
 	ceiling = home->sectors[entity->sector_idx]->ceiling;

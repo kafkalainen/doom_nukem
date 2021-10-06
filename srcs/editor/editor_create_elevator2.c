@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 13:14:52 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/06 18:44:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 18:50:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,26 @@ t_bool	get_connecting_sectors(t_editor_sector *curr,
 	return (true);
 }
 
-// t_bool	evaluate_connecting_portals(t_editor_sector *next, )
+static t_bool	evaluate_connecting_portals(t_editor_sector *next,
+	t_editor_sector *curr, t_editor_walls *wall)
+{
+	t_editor_walls	*temp_wall;
+
+	temp_wall = get_editor_wall_with_type(&next->walls,
+			next->nb_of_walls, curr->idx_sector);
+	if (!temp_wall)
+		return (false);
+	if (check_if_slanted_doorway(wall, temp_wall)
+		|| !acceptable_height_diff(wall, temp_wall))
+		return (false);
+	return (true);
+}
 
 t_bool	check_portal_dimensions(t_editor *editor)
 {
 	int				i;
 	t_editor_walls	*wall;
 	t_editor_sector	*temp;
-	t_editor_walls	*temp_wall;
 
 	i = 0;
 	wall = editor->temp_sector->walls;
@@ -97,12 +109,7 @@ t_bool	check_portal_dimensions(t_editor *editor)
 					wall->type);
 			if (!temp)
 				return (false);
-			temp_wall = get_editor_wall_with_type(&temp->walls,
-					temp->nb_of_walls, editor->temp_sector->idx_sector);
-			if (!temp_wall)
-				return (false);
-			if (check_if_slanted_doorway(wall, temp_wall)
-				|| !acceptable_height_diff(wall, temp_wall))
+			if (!evaluate_connecting_portals(temp, editor->temp_sector, wall))
 				return (false);
 		}
 		wall = wall->next;
