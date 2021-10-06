@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 13:54:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 14:55:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_bool	pick_up_item(t_entity *item, t_home *home, t_player *plr)
 		&& home->sectors[home->end_sector]->story[0]
 		&& ft_strnstr(home->sectors[home->end_sector]->story[0],
 			"header. the end", 15))
-		plot_twist(home, plr);
+		plot_twist(home);
 	return (true);
 }
 

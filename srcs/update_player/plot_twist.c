@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:09:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 14:25:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 14:55:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-void	plot_twist(t_home *home, t_player *plr)
+void	plot_twist(t_home *home)
 {
 	t_uint		i;
 

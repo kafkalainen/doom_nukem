@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 10:11:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 19:00:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 15:36:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 static void	set_lamp_position(t_sector *sector, t_entity *entity,
 	t_xyz isection, t_xyz normal)
 {
-	t_xy	centroid;
-
-	entity->pos.y = isection.y;
 	entity->dir = normal;
-	centroid = calculate_centroid(sector);
-	entity->pos.x = centroid.x;
-	entity->pos.z = centroid.y;
+	entity->pos.x = sector->centroid.x;
+	entity->pos.y = isection.y;
+	entity->pos.z = sector->centroid.y;
 }
 
 void	initialize_lamp_to_ceiling(t_entity *entity, t_home *home)
@@ -48,6 +45,8 @@ void	initialize_lamp_to_ceiling(t_entity *entity, t_home *home)
 		i++;
 	}
 	if (state)
+	{
 		set_lamp_position(home->sectors[entity->sector_idx],
 			entity, isection, ceiling->tri.normal);
+	}
 }
