@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_door_height.c                                :+:      :+:    :+:   */
+/*   check_if_valid_door.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 11:10:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 17:44:47 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 18:39:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,21 @@ t_bool	check_if_slanted_doorway(t_editor_walls *doorway,
 	return (false);
 }
 
-t_bool	check_door_height(t_editor *editor, t_editor_walls *way,
+t_bool	check_that_if_part_of_lift(t_sector *sector1, t_sector *sector2)
+{
+	if (sector1->is_lift == lift && sector2->is_lift == upper)
+		return (true);
+	else if (sector1->is_lift == lift && sector2->is_lift == lower)
+		return (true);
+	else if (sector2->is_lift == lift && sector1->is_lift == upper)
+		return (true);
+	else if (sector2->is_lift == lift && sector1->is_lift == lower)
+		return (true);
+	else
+		return (false);
+}
+
+t_bool	check_if_valid_door(t_editor *editor, t_editor_walls *way,
 		t_editor_sector *current)
 {
 	t_editor_sector	*sector;
@@ -35,6 +49,12 @@ t_bool	check_door_height(t_editor *editor, t_editor_walls *way,
 			get_portal_idx(way->type));
 	way_2 = get_editor_wall_with_type(&sector->walls, sector->nb_of_walls,
 			current->idx_sector);
+	if (editor->temp_sector && sector
+		&& check_that_if_part_of_lift(editor->temp_sector, sector))
+	{
+		add_notification(editor, "This doorway is part of a lift.", 1500);
+		return (false);
+	}
 	if (way && way_2 && check_if_slanted_doorway(way, way_2))
 	{
 		add_notification(editor, "Doorway slanted, cannot change.", 1500);
@@ -56,9 +76,9 @@ void	validate_door_size(t_editor *editor, float *height, int val)
 		return ;
 	wall = get_previous_wall(editor->temp_wall, editor->temp_sector);
 	if (editor->temp_wall->type > 2999
-		&& !check_door_height(editor, editor->temp_wall, editor->temp_sector))
+		&& !check_if_valid_door(editor, editor->temp_wall, editor->temp_sector))
 		*height = val;
 	if (wall && wall->type > 2999
-		&& !check_door_height(editor, wall, editor->temp_sector))
+		&& !check_if_valid_door(editor, wall, editor->temp_sector))
 		*height = val;
 }
