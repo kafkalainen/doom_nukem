@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 11:10:25 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 18:39:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 18:44:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@ t_bool	check_if_slanted_doorway(t_editor_walls *doorway,
 	return (false);
 }
 
-t_bool	check_that_if_part_of_lift(t_sector *sector1, t_sector *sector2)
+t_bool	check_that_if_part_of_lift(t_editor_sector *sector1,
+		t_editor_sector *sector2)
 {
-	if (sector1->is_lift == lift && sector2->is_lift == upper)
+	if (sector1->is_elevator == lift && sector2->is_elevator == upper)
 		return (true);
-	else if (sector1->is_lift == lift && sector2->is_lift == lower)
+	else if (sector1->is_elevator == lift && sector2->is_elevator == lower)
 		return (true);
-	else if (sector2->is_lift == lift && sector1->is_lift == upper)
+	else if (sector2->is_elevator == lift && sector1->is_elevator == upper)
 		return (true);
-	else if (sector2->is_lift == lift && sector1->is_lift == lower)
+	else if (sector2->is_elevator == lift && sector1->is_elevator == lower)
 		return (true);
 	else
 		return (false);
