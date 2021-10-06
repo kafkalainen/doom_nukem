@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 13:11:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/06 16:42:29 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 18:18:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_bool	compare_floors_to_ceilings(t_editor_sector *first,
 {
 	t_editor_walls	*first_wall;
 	t_editor_walls	*second_wall;
-	t_screen_xy		heights;
 
 	if (!first || !second || !elev_sector)
 		return (false);
@@ -28,9 +27,9 @@ t_bool	compare_floors_to_ceilings(t_editor_sector *first,
 	if (!first_wall || !second_wall)
 		return (false);
 	if (!lower_portal_at_correct_floor_height(first_wall,
-			second_wall, elev_sector, &heights))
+			second_wall, elev_sector))
 		return (false);
-	return (sectors_aligned(first, second, elev_sector, heights));
+	return (sectors_aligned(first, second, elev_sector));
 }
 
 t_bool	verify_connecting_sectors(t_editor_sector **sectors,
@@ -58,7 +57,8 @@ t_bool	acceptable_height_diff(t_editor_walls *wall_one,
 
 	height = ft_abs(wall_one->height.ceiling - wall_one->height.ground);
 	height_two = ft_abs(wall_two->height.ceiling - wall_two->height.ground);
-	if (height > 4 || height_two > 4)
+	if (height > 4 || height_two > 4
+		|| height < 2 || height_two < 2)
 		return (false);
 	if (height != height_two)
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/06 16:58:18 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 18:18:29 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -526,10 +526,7 @@ void			convert_sector_to_lift(t_editor_sector *sector,
 t_bool			acceptable_height_diff(t_editor_walls *wall_one,
 					t_editor_walls *wall_two);
 t_bool			lower_portal_at_correct_floor_height(t_editor_walls *first,
-					t_editor_walls *second, t_editor_sector *sector,
-					t_screen_xy *heights);
-t_bool			sectors_aligned(t_editor_sector *first, t_editor_sector *second,
-					t_editor_sector *lift, t_screen_xy heights);
+					t_editor_walls *second, t_editor_sector *sector);
 t_bool			check_lift_conditions(t_editor *editor);
 t_bool			check_portal_dimensions(t_editor *editor);
 t_bool			verify_connecting_sectors(t_editor_sector **sectors,
@@ -537,7 +534,7 @@ t_bool			verify_connecting_sectors(t_editor_sector **sectors,
 t_bool			compare_floors_to_ceilings(t_editor_sector *first,
 					t_editor_sector *second, t_editor_sector *elev_sector);
 t_bool			sectors_aligned(t_editor_sector *first, t_editor_sector *second,
-					t_editor_sector *elev_sector, t_screen_xy heights);
+					t_editor_sector *elev_sector);
 t_bool			get_connecting_sectors(t_editor_sector *curr,
 					t_editor_sector **first, t_editor_sector **second,
 					t_editor_sector **head);

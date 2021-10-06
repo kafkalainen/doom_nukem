@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 13:14:52 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/06 16:39:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 18:44:48 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,9 @@ t_bool	get_connecting_sectors(t_editor_sector *curr,
 		{
 			nbr_of_portals++;
 			if (nbr_of_portals == 1)
-				*first = get_editor_sector_with_idx(head,
-						get_portal_idx(wall->type));
+				*first = get_editor_sector_with_idx(head, wall->type);
 			else
-				*second = get_editor_sector_with_idx(head,
-						get_portal_idx(wall->type));
+				*second = get_editor_sector_with_idx(head, wall->type);
 		}
 		i++;
 		wall = wall->next;
@@ -79,6 +77,8 @@ t_bool	get_connecting_sectors(t_editor_sector *curr,
 		return (false);
 	return (true);
 }
+
+// t_bool	evaluate_connecting_portals(t_editor_sector *next, )
 
 t_bool	check_portal_dimensions(t_editor *editor)
 {
@@ -94,14 +94,16 @@ t_bool	check_portal_dimensions(t_editor *editor)
 		if (wall->type >= 0)
 		{
 			temp = get_editor_sector_with_idx(&editor->sector_list,
-					get_portal_idx(wall->type));
-			if (temp)
-				temp_wall = get_editor_wall_with_type(&temp->walls,
-						temp->nb_of_walls, editor->temp_sector->idx_sector);
-			if (temp_wall)
-				if (check_if_slanted_doorway(wall, temp_wall)
-					|| !acceptable_height_diff(wall, temp_wall))
-					return (false);
+					wall->type);
+			if (!temp)
+				return (false);
+			temp_wall = get_editor_wall_with_type(&temp->walls,
+					temp->nb_of_walls, editor->temp_sector->idx_sector);
+			if (!temp_wall)
+				return (false);
+			if (check_if_slanted_doorway(wall, temp_wall)
+				|| !acceptable_height_diff(wall, temp_wall))
+				return (false);
 		}
 		wall = wall->next;
 		i++;
