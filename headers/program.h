@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/02 11:12:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 19:03:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_buffer
 {
 	int				width;
 	int				height;
+	t_screen_xy		middle;
 	float			lightness;
 	Uint32			*pxl_buffer;
 }					t_buffer;
@@ -159,7 +160,6 @@ typedef struct s_home
 	t_entity		**entity_pool;
 	t_projectile	**projectile_pool;
 	t_time			t;
-	t_xy			offset;
 	char			**story;
 	char			*map;
 	Uint32			linked_map;

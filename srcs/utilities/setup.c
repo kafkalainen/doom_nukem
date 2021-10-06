@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 15:59:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/06 19:03:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
-	home->offset = vec2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 	frame->buffer.pxl_buffer = (Uint32 *)malloc(sizeof(Uint32)
 			* (Uint32)SCREEN_WIDTH * (Uint32)SCREEN_HEIGHT);
 	if (!frame->buffer.pxl_buffer)
@@ -68,6 +67,8 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 	frame->buffer.width = SCREEN_WIDTH;
 	frame->buffer.height = SCREEN_HEIGHT;
 	frame->buffer.lightness = 0.0f;
+	frame->buffer.middle = (t_screen_xy){frame->buffer.width * 0.5f,
+		frame->buffer.height * 0.5f};
 	frame->depth_buffer = (float *)malloc(sizeof(float)
 			* (SCREEN_WIDTH * SCREEN_HEIGHT + 1));
 	if (!frame->depth_buffer)
