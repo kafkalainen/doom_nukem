@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_light_sources.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 13:39:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 15:07:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 19:01:36 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	calc_light_sources(t_home *home)
 	while (i < home->nbr_of_sectors)
 	{
 		state = get_ceiling_intersection(home->sectors[i],
-			home->sectors[i]->lights.light_src,
-			&isection);
+				home->sectors[i]->lights.light_src,
+				&isection);
 		if (state)
 		{
 			set_new_position(home->sectors[i],
