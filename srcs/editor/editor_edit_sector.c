@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:12:08 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/04 14:22:08 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/05 16:12:14 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,13 @@ void	editor_edit_sector(t_editor *editor)
 		editor_sector_story_and_light(editor);
 	if (editor->action.create_elevator)
 	{
-		if (check_elevator_prerequisites(&editor->entity_list,
-				&editor->sector_list, &editor->action))
+		if (check_lift_conditions(editor))
 		{
 			convert_sector_to_lift(editor->temp_sector, &editor->entity_list);
 			add_notification(editor, "Converted to lift", 3000);
 		}
+		else
+			add_notification(editor, "ERROR: lift creation failed", 3000);
 		editor->action.create_elevator = 0;
 		editor->action.edit_sector = 0;
 	}

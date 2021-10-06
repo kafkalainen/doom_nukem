@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/06 09:47:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 16:58:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,6 +335,8 @@ int				get_portal_idx(int idx);
 int				get_inflate_idx(int idx);
 void			snap_to_range(int *height);
 void			validate_door_size(t_editor *editor, float *height, int val);
+t_bool			check_if_slanted_doorway(t_editor_walls *doorway,
+					t_editor_walls *doorway_2);
 
 /*
 ** Entities
@@ -487,7 +489,9 @@ int				editor_get_entity_data(unsigned char *buf,
 t_bool			editor_point_is_on_the_lseg(t_screen_xy a,
 					t_screen_xy c, t_screen_xy b);
 t_bool			create_portal_between_sectors(t_editor_sector **head,
-					t_action *action);
+					t_action *action, t_entity_list **entities);
+t_editor_walls	*get_matching_wall_coord(t_editor_sector *sector,
+					t_screen_xy x0, t_screen_xy x1);
 void			notify_user(char **str, t_buffer *buffer, Uint32 delta_time,
 					int *notify_time);
 void			add_notification(t_editor *editor, char *message, int amount);
@@ -515,24 +519,28 @@ int				get_selected_floor_height(t_editor_sector *sector,
 					int wall_idx);
 t_editor_walls	*get_previous_wall(t_editor_walls *wall,
 					t_editor_sector *sector);
-
-void			get_lowest_floor(t_editor_sector *sector, int *height);
 t_bool			check_for_elevator_button(t_entity_list **head, int sector_idx);
 t_bool			check_nbr_of_portals(t_editor_walls **walls, int nbr_of_walls);
 void			convert_sector_to_lift(t_editor_sector *sector,
 					t_entity_list **head);
-t_bool			check_elevator_prerequisites(t_entity_list **head,
-					t_editor_sector **sectors, t_action *action);
+t_bool			acceptable_height_diff(t_editor_walls *wall_one,
+					t_editor_walls *wall_two);
+t_bool			lower_portal_at_correct_floor_height(t_editor_walls *first,
+					t_editor_walls *second, t_editor_sector *sector,
+					t_screen_xy *heights);
+t_bool			sectors_aligned(t_editor_sector *first, t_editor_sector *second,
+					t_editor_sector *lift, t_screen_xy heights);
+t_bool			check_lift_conditions(t_editor *editor);
+t_bool			check_portal_dimensions(t_editor *editor);
 t_bool			verify_connecting_sectors(t_editor_sector **sectors,
 					t_editor_sector *elev_sector);
-t_bool			compare_floors_to_ceilings(t_editor_sector **sectors,
-					int first_idx, int second_idx,
-					t_editor_sector *elev_sector);
+t_bool			compare_floors_to_ceilings(t_editor_sector *first,
+					t_editor_sector *second, t_editor_sector *elev_sector);
 t_bool			sectors_aligned(t_editor_sector *first, t_editor_sector *second,
-					t_screen_xy heights, t_editor_sector *elev_sector);
-void			get_connecting_sectors(t_editor_walls *wall,
-					int *first_sector_idx, int *second_sector_idx,
-					int nbr_of_walls);
+					t_editor_sector *elev_sector, t_screen_xy heights);
+t_bool			get_connecting_sectors(t_editor_sector *curr,
+					t_editor_sector **first, t_editor_sector **second,
+					t_editor_sector **head);
 void			editor_edit_gravity(t_editor *editor);
 void			editor_edit_sector(t_editor *editor);
 void			editor_edit_change_sector_ceiling_tex(t_editor *editor);

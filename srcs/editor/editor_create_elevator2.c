@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_create_elevator2.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 13:14:52 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/06 16:39:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,47 +50,61 @@ t_bool	check_for_elevator_button(t_entity_list **head, int sector_idx)
 	return (true);
 }
 
-void	get_lowest_floor(t_editor_sector *sector, int *height)
+t_bool	get_connecting_sectors(t_editor_sector *curr,
+	t_editor_sector **first, t_editor_sector **second, t_editor_sector **head)
 {
 	t_editor_walls	*wall;
 	int				i;
-
-	i = 0;
-	wall = sector->walls;
-	*height = wall->height.ground;
-	while (i < sector->nb_of_walls)
-	{
-		if (wall->height.ground < *height)
-			*height = wall->height.ground;
-		i++;
-		wall = wall->next;
-	}
-}
-
-void	get_connecting_sectors(t_editor_walls *wall, int *first_sector_idx,
-	int *second_sector_idx, int nbr_of_walls)
-{
-	int	i;
-	int	nbr_of_portals;
+	int				nbr_of_portals;
 
 	i = 0;
 	nbr_of_portals = 0;
-	while (i < nbr_of_walls)
+	wall = curr->walls;
+	while (i < curr->nb_of_walls)
 	{
 		if (wall->type >= 0)
 		{
 			nbr_of_portals++;
 			if (nbr_of_portals == 1)
-				*first_sector_idx = wall->type;
+				*first = get_editor_sector_with_idx(head,
+						get_portal_idx(wall->type));
 			else
-				*second_sector_idx = wall->type;
+				*second = get_editor_sector_with_idx(head,
+						get_portal_idx(wall->type));
 		}
 		i++;
 		wall = wall->next;
 	}
-	if (*first_sector_idx < 0 || *second_sector_idx < 0)
+	if (!(*first) || !(*second))
+		return (false);
+	return (true);
+}
+
+t_bool	check_portal_dimensions(t_editor *editor)
+{
+	int				i;
+	t_editor_walls	*wall;
+	t_editor_sector	*temp;
+	t_editor_walls	*temp_wall;
+
+	i = 0;
+	wall = editor->temp_sector->walls;
+	while (i < editor->temp_sector->nb_of_walls)
 	{
-		*first_sector_idx = -1;
-		*second_sector_idx = -1;
+		if (wall->type >= 0)
+		{
+			temp = get_editor_sector_with_idx(&editor->sector_list,
+					get_portal_idx(wall->type));
+			if (temp)
+				temp_wall = get_editor_wall_with_type(&temp->walls,
+						temp->nb_of_walls, editor->temp_sector->idx_sector);
+			if (temp_wall)
+				if (check_if_slanted_doorway(wall, temp_wall)
+					|| !acceptable_height_diff(wall, temp_wall))
+					return (false);
+		}
+		wall = wall->next;
+		i++;
 	}
+	return (true);
 }
