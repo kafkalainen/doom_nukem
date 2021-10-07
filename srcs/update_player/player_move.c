@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 18:57:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 21:51:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ void	player_place_feet_to_ground(t_player *plr, t_home *home)
 	idx = find_current_sector(home, pos, plr->cur_sector, &isection);
 	if (idx != plr->cur_sector)
 	{
-		ft_putendl("Error when finding player in current sector.");
+		ft_putendl("Moving player to current sector.");
 		check_if_moved_through_portal(&plr->cur_sector,
 			plr->pos, plr->height, home);
 		if (idx != plr->cur_sector)
-			ft_putendl("Still not found.");
+			idx = -1;
 	}
 	if (idx == -1)
 	{
-		ft_putendl("Player out of bounds, moving to last known sector");
+		ft_putendl("Risk of moving out of bounds, move to centroid.");
 		plr->pos = vec3(home->sectors[plr->cur_sector]->centroid.x, 100.0f,
 				home->sectors[plr->cur_sector]->centroid.y);
 		find_current_sector(home, plr->pos, plr->cur_sector, &isection);
