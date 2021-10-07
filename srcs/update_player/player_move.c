@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 16:04:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 16:24:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,13 @@ void	player_place_feet_to_ground(t_player *plr, t_home *home)
 	pos = vec3(plr->pos.x, 100.0f, plr->pos.z);
 	idx = find_current_sector(home, pos, plr->cur_sector, &isection);
 	if (idx != plr->cur_sector)
+	{
 		ft_putendl("Error when finding player in current sector.");
+		check_if_moved_through_portal(&plr->cur_sector,
+			plr->pos, plr->height, home);
+		if (idx != plr->cur_sector)
+			ft_putendl("Still not found.");
+	}
 	if (idx == -1)
 	{
 		ft_putendl("Player out of bounds, moving to last known sector");
