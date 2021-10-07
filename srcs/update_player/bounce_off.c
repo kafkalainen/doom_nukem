@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 09:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 20:45:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 20:47:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ t_bool	entity_bounce_off_the_wall(t_wall *wall, t_entity *entity,
 		return (true);
 	}
 	else
-	{
-		if (!vec2_check_if_same_point(wall->point, new_wall->point))
-			return (entity_bounce_off_the_wall(new_wall, entity, home, t));
-	}
-	return (false);
+		return (false);
 }
 
 t_bool	entity_bounce_off_player(t_entity *entity, t_home *home, Uint32 t)
@@ -103,11 +99,7 @@ t_bool	entity_bounce_off_player(t_entity *entity, t_home *home, Uint32 t)
 		return (true);
 	}
 	else
-	{
-		if (!vec2_check_if_same_point(new_wall->point, new_wall->point))
-			return (entity_bounce_off_the_wall(new_wall, entity, home, t));
-	}
-	return (false);
+		return (entity_bounce_off_the_wall(new_wall, entity, home, t));
 }
 
 void	unstuck(t_player *plr, t_home *home)
