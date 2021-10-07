@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:11:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 09:37:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 09:49:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	noise_logic(float dist)
 		volume = 40;
 	else
 		volume = 0;
+	return (volume);
 }
 
 void	make_noise(t_entity *entity, t_player *plr, Uint32 t)
@@ -45,9 +46,9 @@ void	make_noise(t_entity *entity, t_player *plr, Uint32 t)
 		entity->making_noise = 5000;
 		volume = noise_logic(dist);
 		if (entity->type == skull_skulker)
-			play_sound(plr->audio.skull_skulker_lulling, dist);
+			play_sound(plr->audio.skull_skulker_lulling, volume);
 		else
-			play_sound(plr->audio.thing_lulling, dist);
+			play_sound(plr->audio.thing_lulling, volume);
 	}
 	else
 		entity->making_noise -= t;
