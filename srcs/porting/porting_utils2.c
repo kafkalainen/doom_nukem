@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   porting_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 16:44:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 10:56:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 15:17:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ char	*ft_strjoin_freeable(char *s1, char *s2, int free_one, int free_two)
 		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	concat_str = (char *)malloc(sizeof(*concat_str) * (s1_len + s2_len + 1));
+	concat_str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!concat_str)
+		error_output("Memory allocation of concat string failed\n");
 	if (concat_str != NULL)
 	{
 		ft_strcpy(concat_str, s1);

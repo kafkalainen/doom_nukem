@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/15 16:27:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 15:13:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	parse_audio_data(unsigned char *buf, unsigned int *pos,
 	if (*pos > (unsigned int)size)
 		error_output("Pointer points outside memory address\n");
 	asset.size = ft_atoi((char *)buf + *pos);
-	asset.buf = malloc(sizeof(unsigned char *) * asset.size);
+	asset.buf = (unsigned char *)malloc(sizeof(unsigned char) * asset.size);
 	if (!asset.buf)
 		error_output("failed to allocate memory to music buffer\n");
 	*pos += get_next_breaker(buf + *pos) + 1;
