@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:28:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/23 15:14:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 15:11:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	parse_sector_data(unsigned char *buf, t_player *plr,
 	pos = 0;
 	if (get_map_header(&pos, &buf, home, size) || get_plr(&pos, buf, plr, size))
 		return (1);
-	home->sectors = (t_sector **)malloc(sizeof(t_sector)
+	home->sectors = (t_sector **)malloc(sizeof(t_sector *)
 			* (home->nbr_of_sectors + 1));
 	if (!home->sectors)
 		return (1);
