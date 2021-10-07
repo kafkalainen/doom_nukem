@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/30 15:02:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:41:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	free_all(t_frame *frame, t_audio *audio, Uint32 *buffer,
 	ft_strdel(chosen_map);
 	cleanup_audio_source(audio);
 	ft_putendl("User closed the window");
+	Mix_CloseAudio();
 	SDL_Quit();
 	return (EXIT_SUCCESS);
 }
