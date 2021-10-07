@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 13:15:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:35:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,6 @@ enum e_plot_states
 	sector_plot,
 	start_cutscene,
 	end_cutscene,
-	beginning1,
-	beginning2,
-	beginning3,
-	beginning4,
-	beginning5,
-	talk1,
-	talk2,
-	talk3,
-	talk4,
-	talk5,
-	talk6,
-	talk7,
-	talk8,
-	ending1,
-	ending2,
-	ending3,
-	ending4,
-	ending5,
-	ending6,
-	ending7,
-	ending8,
-	ending9,
-	cutscene1,
-	cutscene2,
-	enemy_sighted,
-	enemy_noise_before,
-	enemy_noise_after,
-	power_on,
-	first_blood,
-	health_low,
 };
 
 typedef struct s_input
@@ -184,6 +154,10 @@ enum e_movement
 
 t_triangle		apply_camera(t_player *plr, t_triangle *src);
 t_entity		*activate_object(t_home *home, t_player *plr);
+t_bool			bounce_off_the_wall(t_wall *wall, t_player *plr,
+					t_home *home, Uint32 t);
+t_bool			bounce_off_entity(t_entity *entity, t_player *plr,
+					t_home *home, Uint32 t);
 t_wall			*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir);
 t_bool			check_if_open_portal(t_wall *wall);
 void			player_place_feet_to_ground(t_player *plr, t_home *home);
@@ -195,9 +169,6 @@ t_bool			check_distance_to_ground(t_sector *sector, float height,
 					t_xyz pos, float *dist);
 t_bool			check_for_matching_key(t_wall *wall, t_player *plr,
 					int keycard);
-void			unstuck(t_player *plr, t_home *home);
-Uint32			update_doors(t_sector **sectors, Uint32 nb_of_sectors,
-					Uint32 current_time, Uint32 delta_time);
 void			create_target_vector(t_player *plr);
 void			crouch(t_player *plr, t_sector *sector);
 void			draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr);
@@ -230,26 +201,25 @@ void			initialize_player(t_player *plr);
 t_bool			jetpack(t_player *plr, t_home *home, Uint32 t);
 void			jump(t_player *plr, t_sector *cur_sector);
 t_bool			player_move(t_player *plr, t_home *home, Uint32 t);
-t_entity		*walking_into_entity(t_xyz test, t_player *plr,
-					t_entity **entities, Uint32 nbr_of_entities);
-t_bool			player_use(t_player *plr, t_home *home);
 t_bool			open_door(t_sector **sectors, t_player *plr, int active_item);
 t_bool			player_look(t_home *home, t_player *plr);
+t_bool			player_use(t_player *plr, t_home *home);
 int				player_use_inventory_item(t_player *plr);
-void			update_player(t_player *plr, t_home *home, Uint32 delta_time);
-void			shooting_handle(t_home *home, t_ray *ray);
-t_bool			bounce_off_the_wall(t_wall *wall, t_player *plr,
-					t_home *home, Uint32 t);
-t_bool			bounce_off_entity(t_entity *entity, t_player *plr,
-					t_home *home, Uint32 t);
-t_bool			test_ray(t_triangle *tri, t_bullet_hole *hole_2, float *d,
-					t_ray *ray);
 void			player_take_damage(t_player *plr, Uint32 damage, Uint32 time);
 void			plot_twist(t_home *home);
-void			update_damage_tick(Uint32 delta_time, int *take_damage);
 void			reload_weapon(t_player *plr, Uint32 t);
 void			recharge_suit(t_player *plr, Uint32 t);
+void			shooting_handle(t_home *home, t_ray *ray);
+t_bool			test_ray(t_triangle *tri, t_bullet_hole *hole_2, float *d,
+					t_ray *ray);
+void			unstuck(t_player *plr, t_home *home);
+void			update_player(t_player *plr, t_home *home, Uint32 delta_time);
 void			update_cutscene(t_player *plr, t_home *home, Uint32 t);
+void			update_damage_tick(Uint32 delta_time, int *take_damage);
+void			update_doors(t_sector **sectors, Uint32 nb_of_sectors,
+					Uint32 current_time, Uint32 delta_time);
 t_xyz			vec3_normalize_move_dir(t_xyz dir);
+t_entity		*walking_into_entity(t_xyz test, t_player *plr,
+					t_entity **entities, Uint32 nbr_of_entities);
 
 #endif

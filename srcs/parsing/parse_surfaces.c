@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:56:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/24 17:58:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:27:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void	close_surface_list(t_surface **head)
 	temp->next = *head;
 }
 
-int	free_surfaces(t_surface **head, unsigned int nbr_of_surfaces)
+void	free_surfaces(t_surface **head, unsigned int nbr_of_surfaces)
 {
 	t_surface	*item;
 
 	if (*head == NULL)
-		return (0);
+		return ;
 	while (nbr_of_surfaces--)
 	{
 		item = *head;
@@ -84,5 +84,4 @@ int	free_surfaces(t_surface **head, unsigned int nbr_of_surfaces)
 		free(item);
 		item = NULL;
 	}
-	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 16:52:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:57:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,6 @@ typedef struct s_point_location
 	int			outside;
 	float		texel_offset;
 }					t_point_location;
-
-typedef struct s_intersection
-{
-	float	x1;
-	float	x2;
-	float	y1;
-	float	y2;
-	float	den;
-	float	neg;
-	float	pos;
-}			t_intersection;
 
 typedef struct s_triangle
 {
@@ -210,8 +199,8 @@ typedef struct s_steps
 	t_uvz			texel_end;
 	t_uvz			delta;
 	float			delta_lu;
-	float			lu_start;
-	float			lu_end;
+	float			sub_lu_start;
+	float			sub_lu_end;
 	float			delta_w;
 	int				sub_pixels;
 }				t_steps;

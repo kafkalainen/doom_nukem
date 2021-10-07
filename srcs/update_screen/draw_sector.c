@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 13:06:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:41:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static void	initialize_thread(t_arg *arg, t_frame *frame, t_home *home,
 	arg->view_list = frame->triangles_in_view;
 	arg->raster_queue = frame->raster_queue;
 	arg->viewport = &frame->viewport;
-	arg->last_frame = home->t.frame_time_last;
 	arg->thread_index = idx;
 }
 

@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/07 11:23:23 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/07 14:02:09 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -176,7 +176,6 @@ SRCS = \
 	porting$(SLASH)parse_all_audio_data.c \
 	porting$(SLASH)porting_utils.c \
 	porting$(SLASH)porting_utils2.c \
-	porting$(SLASH)validate_sectors_data_b.c \
 	porting$(SLASH)verify_hash.c \
 	porting$(SLASH)write_sector_data.c \
 	porting$(SLASH)write_sector_data2.c \
@@ -478,8 +477,7 @@ $(LIBFT):
 $(NAME): $(LIBFT) $(SDL_NEW) $(SDL_MIXER_NEW) $(OBJ)
 	$(CC) -o $@ $(INCLUDES) $(LIBS) $(CFLAGS) $(OBJ) $(LDFLAGS)
 	@echo $(GREEN)Compiled executable $(NAME).
-	@echo Run the map files $(NAME) map_files/map.TEST.
-	@echo Running tests.sh tests executable with invalid maps.$(RESET)
+	@echo Run the map files $(NAME) map_files/map.DN or run them by starting executable.
 
 cleanobj:
 ifneq ($(wildcard $(OBJ)),)

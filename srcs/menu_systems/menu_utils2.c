@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:44:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/07 13:06:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:44:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ void	update_option_load_menu(int *game_state, t_menu *menu, int sym)
 	}
 }
 
-// REVISIT ADD STORY STRING MANAGEMENT
-// free_story(&home->story);
 void	free_game_assets(t_home *home, t_audio *audio)
 {
 	if (home->t.frame_times)

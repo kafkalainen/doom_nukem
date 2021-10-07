@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 11:18:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:53:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,11 @@ typedef struct s_sector
 	Uint32			is_lift;
 	Uint32			lift_dir;
 	Uint32			moving_until;
-	Uint32			nb_of_msgs;
-	unsigned int	nb_of_walls;
-	unsigned int	nb_of_ceil;
-	unsigned int	nb_of_ground;
-	unsigned int	cur_msg;
+	t_uint			nb_of_msgs;
+	t_uint			nb_of_walls;
+	t_uint			nb_of_ceil;
+	t_uint			nb_of_ground;
+	t_uint			cur_msg;
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;
