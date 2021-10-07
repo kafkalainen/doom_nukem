@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/02 16:00:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:51:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	evolve_story(t_player *plr, t_sector *sector, t_sector *msg_sector,
 		{
 			plr->plot_state = sector_plot;
 			plr->msg_sector = plr->cur_sector;
-			plr->msg_time = ft_strlen(sector->story[sector->cur_msg]) * 150;
+			plr->msg_time = ft_strlen(sector->story[sector->cur_msg]) * 170;
 			plr->total_msg_time = plr->msg_time;
 			play_sound_and_fadeout(
 				plr->audio.rahikainen_ramble[(int)plr->time % 3], 15,
