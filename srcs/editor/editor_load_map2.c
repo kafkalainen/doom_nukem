@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/13 12:53:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:40:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void	reload_editor_with_defaults(t_editor *editor, char *path)
 	editor->mouse_data.selected = -1;
 	editor->mouse_data.x = 0;
 	editor->mouse_data.y = 0;
-	editor->mouse_data.x_rel = 0;
-	editor->mouse_data.y_rel = 0;
 	editor->mapname = (unsigned char *)ft_strnew(sizeof(unsigned char)
 			* (ft_strlen((const char *)path) + 1));
 	editor->mapname = (unsigned char *)ft_strcpy((char *)editor->mapname,

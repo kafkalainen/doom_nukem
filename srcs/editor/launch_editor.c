@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_editor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/04 18:54:09 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:39:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	init_mouse_data(t_mouse_data *mouse_data)
 	mouse_data->selected = -1;
 	mouse_data->x = 0;
 	mouse_data->y = 0;
-	mouse_data->x_rel = 0;
-	mouse_data->y_rel = 0;
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/01 15:04:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:03:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,6 @@ void	draw_rect(t_xy xy, t_xy wh, t_buffer *buffer, int color)
 			start.x++;
 		}
 		start.y++;
-	}
-}
-
-void	draw_rect_center(t_xy xy, t_xy wh, t_frame *frame)
-{
-	float	j;
-	float	i;
-
-	i = -wh.x / 2;
-	j = -wh.y / 2;
-	while (j < wh.y / 2 && i < SCREEN_WIDTH && j < SCREEN_HEIGHT)
-	{
-		draw_line(vec2(xy.x + i, xy.y + j),
-			vec2(xy.x + fabs(i), xy.y + j), 0x00A000, &frame->buffer);
-		j++;
 	}
 }
 

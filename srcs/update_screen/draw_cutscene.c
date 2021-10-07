@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 09:40:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 19:59:45 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 10:43:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	draw_cutscene(t_buffer *buffer, t_player *plr, t_sector *sector)
 	t_plx_modifier	mod;
 	t_xy			offset;
 
-	mod.size = TEXT_SIZE;
-	mod.colour = 0xFFFFCC00;
 	if (sector->story
 		&& ft_strnstr(sector->story[0], "header. ", 8))
 		draw_header(buffer, sector);
@@ -90,6 +88,9 @@ void	draw_cutscene(t_buffer *buffer, t_player *plr, t_sector *sector)
 		draw_current_line(buffer, plr, sector);
 	else if (sector->nb_of_msgs == 1)
 		draw_current_line(buffer, plr, sector);
+	mod.size = TEXT_SIZE;
+	mod.colour = 0xFFFFCC00;
+	mod.len = 28;
 	offset.x = center_text_x_axis(0, buffer->width, mod.size, 28);
 	offset.y = 570;
 	ft_str_pxl(buffer, offset, "Press space to skip cutscene", mod);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 10:23:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 11:29:34 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:34:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	update_heights(t_home *home, t_sector *lift,
 	translate_sector(lift, height_diff);
 }
 
-Uint32	lock_lift(t_home *home, t_sector *lift)
+void	lock_lift(t_home *home, t_sector *lift)
 {
-	Uint32	i;
+	t_uint	i;
 	t_wall	*cur_wall;
 	t_wall	*portal;
 
@@ -48,5 +48,4 @@ Uint32	lock_lift(t_home *home, t_sector *lift)
 	}
 	bolt_lift_door(lift, home->sectors, lift->lift_dir, unlocked);
 	bolt_lift_door(lift, home->sectors, other_dir(lift->lift_dir), locked);
-	return (1);
 }

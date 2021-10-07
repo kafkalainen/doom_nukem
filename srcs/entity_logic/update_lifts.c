@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 14:52:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 11:26:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:36:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,17 @@ static void	translate_ceiling_and_ground(t_sector *sector,
 	}
 }
 
-Uint32	translate_sector(t_sector *sector, float distance)
+void	translate_sector(t_sector *sector, float distance)
 {
 	t_xyz	translation;
 
+	if (!sector)
+		return ;
 	translation = (t_xyz){0.0f, distance, 0.0f, 0.0f};
 	translate_walls(sector, translation);
 	translate_ceiling_and_ground(sector, translation);
 	sector->lights.light_src
 		= translate_point(&sector->lights.light_src, translation);
-	return (0);
 }
 
 void	translate_entities(t_home *home, float distance, int sector_idx)

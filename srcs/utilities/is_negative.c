@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 13:04:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/06/14 12:50:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 10:48:34 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,4 @@ int	is_negative(float z)
 		return (1);
 	else
 		return (0);
-}
-
-int	give_sign(float number)
-{
-	if (number < 0)
-		return (-1);
-	else if (number == 0)
-		return (0);
-	else
-		return (1);
 }

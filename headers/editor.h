@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/06 18:45:42 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:39:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ typedef struct s_mouse_data
 {
 	int						x;
 	int						y;
-	float					x_rel;
-	float					y_rel;
 	int						selected;
 	int						i_mbleft;
 	int						i_mbright;
@@ -272,6 +270,8 @@ void			check_event(t_mouse_data *mouse_data, t_button **list,
 void			display_door_tex_string(t_editor_walls *wall,
 					t_buffer *buffer);
 void			editor_events(SDL_Event *e, t_home *home, t_editor *editor);
+t_bool			entity_creation_is_allowed(t_entity_list **head,
+					t_editor_sector *sector, t_action *action);
 void			mouse_zoom(t_action *action, int zoom);
 void			handle_events(t_editor *editor, t_home *home);
 void			reset_actions(t_action *action);

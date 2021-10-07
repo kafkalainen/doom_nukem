@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/02 16:02:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:18:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 	else
 	{
 		frame->idx = plr->cur_sector;
-		frame->old_idx = old_sector;
 		reset_depth_buffer(frame->depth_buffer);
 		draw_game(home, frame, plr);
 		if (plr->input.info)

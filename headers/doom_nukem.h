@@ -12,11 +12,10 @@
 
 #ifndef DOOM_NUKEM_H
 # define DOOM_NUKEM_H
-
-# include <fcntl.h>
 # include <dirent.h>
-# include <time.h>
 # include <math.h>
+# include <stdlib.h>
+# include <pthread.h>
 # ifdef __unix__
 #  define OS_WINDOWS 0
 #  define READ_ONLY O_RDONLY
@@ -25,9 +24,8 @@
 #  define CHECK_EXIST O_EXCL
 #  define CREATE_FILE O_CREAT
 #  define TRUNCATE O_TRUNC
-#  include <string.h>
 #  include <unistd.h>
-#  include <pthread.h>
+#  include <fcntl.h>
 #  include "../SDL2/include/SDL2/SDL.h"
 #  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include "../headers/syscalls_windows.h"
@@ -40,9 +38,6 @@
 #  define CREATE_FILE _O_CREAT
 #  define TRUNCATE _O_TRUNC
 #  include <io.h>
-#  include <stdio.h>
-#  include <stdlib.h>
-#  include <pthread.h>
 #  include "../SDL2-2.0.14/i686-w64-mingw32/include/SDL2/SDL.h"
 #  include "../SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2/SDL_mixer.h"
 
@@ -80,7 +75,6 @@ void		doom_open(int *fd, const char **path, int mode, mode_t rights);
 void		doom_read(ssize_t *read_bytes, int *fd,
 				void **buf, size_t nb_of_bytes);
 int			doom_mkdir(void);
-void		draw_text(t_home *home, char *text, t_frame *frame, t_xy pos);
 void		error_output(char *msg);
 void		error_output_sdl(char *msg, t_home *home, t_frame *frame);
 int			free_all(t_frame *frame, t_audio *audio, Uint32 *buffer,
@@ -88,7 +82,6 @@ int			free_all(t_frame *frame, t_audio *audio, Uint32 *buffer,
 void		fps_timer(t_time *t);
 void		get_map_maximum_values(float *max, t_sector **sectors,
 				t_uint nb_of_sectors);
-int			give_sign(float number);
 int			initialize_rasterization_queues(t_frame *frame);
 int			initialize_skybox(t_skybox *skybox, t_sector **sectors,
 				t_uint nb_of_sectors);
@@ -99,8 +92,6 @@ t_screen_xy	round_coordinates(t_xy	coord);
 float		set_valid(float angle);
 void		setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu);
 int			setup_fps(t_time *time);
-void		translate_world_view(t_home *home, t_xy step);
-void		transform_world_view(t_home *home, float delta_dir);
 void		update_screen(t_home *home, t_frame *frame, t_player *plr);
 void		swap_node_data(t_editor_walls *data_0, t_editor_walls *data_1);
 void		swap_sides(t_steps *steps);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 14:43:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:18:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,6 @@ typedef struct s_sector
 	int				tex_ceil;
 	char			**story;
 }					t_sector;
-
-enum e_sector_info
-{
-	old_sector = -6666
-};
 
 t_wall			*new_point(t_point_data *left, t_point_data *right);
 void			add_point(t_wall **point, t_wall *new);
