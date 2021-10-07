@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:46:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 11:05:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 14:47:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int	parse_entity_data(unsigned char *buf, t_home *home, ssize_t size)
 	while (i < home->nbr_of_entities)
 	{
 		home->entity_pool[i] = (t_entity *)ft_memalloc(sizeof(t_entity));
-		home->entity_pool[i]->entity_index = i;
 		if (home->entity_pool[i] == NULL)
 			error_output("ERROR: Memory allocation for an entity failed.");
+		home->entity_pool[i]->entity_index = i;
 		home->entity_pool[i] = get_entity_data(buf,
 				home->entity_pool[i], &pos, size);
 		if (home->entity_pool[i] == NULL)

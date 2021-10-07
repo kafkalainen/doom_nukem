@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/05 10:39:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 14:44:40 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,12 @@ t_button	**create_button_list(t_button **blist)
 
 	i = 0;
 	while (i < NBR_BUTTONS)
-		blist[i++] = (t_button *)malloc(sizeof(t_button));
+	{
+		blist[i] = (t_button *)malloc(sizeof(t_button));
+		if (!blist[i])
+			error_output("Error when output allocating buttons.");
+		i++;
+	}
 	buttons_create_general_layer(blist);
 	buttons_create_sector_layer(blist);
 	buttons_create_wall_layer(blist);

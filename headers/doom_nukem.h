@@ -16,6 +16,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <fcntl.h>
 # ifdef __unix__
 #  define OS_WINDOWS 0
 #  define READ_ONLY O_RDONLY
@@ -25,11 +26,11 @@
 #  define CREATE_FILE O_CREAT
 #  define TRUNCATE O_TRUNC
 #  include <unistd.h>
-#  include <fcntl.h>
 #  include "../SDL2/include/SDL2/SDL.h"
 #  include "../SDL2_mixer/include/SDL2/SDL_mixer.h"
 #  include "../headers/syscalls_windows.h"
 # elif defined(_WIN32) || defined(WIN32)
+#  include <io.h>
 #  define OS_WINDOWS 1
 #  define READ_ONLY _O_BINARY
 #  define WRITE_ONLY _O_WRONLY
@@ -37,7 +38,6 @@
 #  define APPEND_FILE _O_APPEND
 #  define CREATE_FILE _O_CREAT
 #  define TRUNCATE _O_TRUNC
-#  include <io.h>
 #  include "../SDL2-2.0.14/i686-w64-mingw32/include/SDL2/SDL.h"
 #  include "../SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2/SDL_mixer.h"
 
