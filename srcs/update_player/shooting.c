@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:12:34 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/06 20:32:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 15:09:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	set_bullet_hole(t_bullet_hole *hole, t_projectile *current)
 		current->sector_idx = hole->sector_idx;
 	}
 	else
-		current->pos = vec3(5001.0f, 5001.0f, -100.0f);
+		initialize_projectile(current);
 }
 
 void	shooting_handle(t_home *home, t_ray *ray)
