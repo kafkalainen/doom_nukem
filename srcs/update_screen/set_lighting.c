@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 20:06:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 09:59:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:08:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	set_lighting(t_lighting *light, t_triangle *tri)
 {
 	if (light && tri->type != -space)
 	{
-		if (light->state == TRUE && light->diffuse_power > 0.0f)
+		if (light->state == true && light->diffuse_power > 0.0f)
 		{
 			if (is_enemy_sprite(tri->type))
 			{

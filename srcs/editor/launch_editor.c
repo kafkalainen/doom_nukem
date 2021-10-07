@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/07 11:39:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:53:02 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	reset_actions(t_action *action)
 	action->selected_wall = -1;
 	action->prev_entity = -1;
 	action->draw_depth = 0;
-	action->delete = 0;
+	action->delete = false;
 }
 
 static void	setup_editor(t_editor *editor, t_home *home)

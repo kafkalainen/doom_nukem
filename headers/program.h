@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/06 19:03:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:41:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,15 +162,15 @@ typedef struct s_home
 	t_time			t;
 	char			**story;
 	char			*map;
-	Uint32			linked_map;
-	Uint32			nbr_of_entities;
-	Uint32			nbr_of_projectiles;
+	float			difficulty;
+	t_bool			linked_map;
+	t_uint			nbr_of_entities;
+	t_uint			nbr_of_projectiles;
+	t_uint			nbr_of_sectors;
 	int				projectile_idx;
-	unsigned int	nbr_of_sectors;
 	int				nbr_of_textures;
 	int				end_sector;
 	int				game_state;
-	float			difficulty;
 }					t_home;
 
 typedef struct s_arg
@@ -181,7 +181,6 @@ typedef struct s_arg
 	t_raster_queue	*view_list;
 	t_raster_queue	**raster_queue;
 	t_sides			*viewport;
-	Uint32			last_frame;
 	int				thread_index;
 }				t_arg;
 

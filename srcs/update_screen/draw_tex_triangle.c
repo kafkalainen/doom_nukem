@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:25:51 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/02 11:11:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:08:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static void	draw_triangle(t_draw_data *data,
 	}
 }
 
-int	draw_tex_triangle(t_buffer *buffer, float *depth_buffer,
+void	draw_tex_triangle(t_buffer *buffer, float *depth_buffer,
 	t_triangle *triangle, t_texel *tex)
 {
 	t_steps		step;
@@ -126,7 +126,7 @@ int	draw_tex_triangle(t_buffer *buffer, float *depth_buffer,
 	step.denom_dy_b_side = 0;
 	if ((step.delta_p0p1.y == 0 && step.delta_p0p2.y == 0)
 		|| (step.delta_p0p1.x == 0 && step.delta_p0p2.x == 0))
-		return (FALSE);
+		return ;
 	if (step.delta_p0p1.y)
 		step.denom_dy_a_side = (float)fabsf(1.0f / step.delta_p0p1.y);
 	if (step.delta_p0p2.y)
@@ -139,5 +139,4 @@ int	draw_tex_triangle(t_buffer *buffer, float *depth_buffer,
 		step.denom_dy_a_side = (float)fabsf(1.0f / step.delta_p0p1.y);
 	step.current_triangle = 'b';
 	draw_triangle(&data, triangle, tex, &step);
-	return (TRUE);
 }

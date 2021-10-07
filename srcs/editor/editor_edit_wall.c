@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/06 18:23:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:11:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static void	handle_wall_height(t_editor *editor)
 	if (editor->int_string)
 		free(editor->int_string);
 	editor->int_string = NULL;
-	editor->action.edit_wall = 0;
-	editor->action.edit_ceiling_height = 0;
-	editor->action.edit_floor_height = 0;
+	editor->action.edit_wall = false;
+	editor->action.edit_ceiling_height = false;
+	editor->action.edit_floor_height = false;
 }
 
 static void	create_entities(t_editor *editor)
@@ -61,7 +61,7 @@ static void	create_entities(t_editor *editor)
 				editor->temp_sector, &editor->action))
 			create_new_entity(&editor->entity_list, &editor->action,
 				editor->temp_sector, editor->temp_sector->centroid);
-		editor->action.create_light_button = 0;
+		editor->action.create_light_button = false;
 	}
 	if (editor->action.create_powerstation)
 	{
@@ -69,7 +69,7 @@ static void	create_entities(t_editor *editor)
 				editor->temp_sector, &editor->action))
 			create_new_entity(&editor->entity_list, &editor->action,
 				editor->temp_sector, editor->temp_sector->centroid);
-		editor->action.create_powerstation = 0;
+		editor->action.create_powerstation = false;
 	}
 	if (editor->action.create_elev_button)
 	{
@@ -77,9 +77,9 @@ static void	create_entities(t_editor *editor)
 				editor->temp_sector, &editor->action))
 			create_new_entity(&editor->entity_list, &editor->action,
 				editor->temp_sector, editor->temp_sector->centroid);
-		editor->action.create_elev_button = 0;
+		editor->action.create_elev_button = false;
 	}
-	editor->action.edit_wall = 0;
+	editor->action.edit_wall = false;
 }
 
 void	editor_edit_wall(t_editor *editor)

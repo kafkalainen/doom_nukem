@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 21:25:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:35:39 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	translate_door(t_wall *door, float speed, float time)
 	door->bot.p[2] = translate_point(&door->bot.p[2], translation_bottom);
 }
 
-static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
+static void	handle_door_logic(t_wall *wall, Uint32 current_time,
 			Uint32 delta_time)
 {
 	float	current_height;
@@ -65,7 +65,7 @@ static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
 			lock_the_door(wall, wall->next);
 			wall->is_closed = true;
 		}
-		return (1);
+		return ;
 	}
 	else
 	{
@@ -78,19 +78,16 @@ static Uint32	handle_door_logic(t_wall *wall, Uint32 current_time,
 			translate_door(wall->next, -wall->height * 0.4f,
 				delta_time * 0.001f);
 	}
-	return (0);
 }
 
-Uint32	update_doors(t_sector **sectors, Uint32 nb_of_sectors,
+void	update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 		Uint32 current_time, Uint32 delta_time)
 {
 	Uint32	i;
 	Uint32	walls;
 	t_wall	*wall;
-	Uint32	volume;
 
 	i = 0;
-	volume = 0;
 	while (i < nb_of_sectors)
 	{
 		walls = sectors[i]->nb_of_walls;
@@ -98,13 +95,12 @@ Uint32	update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 		while (walls)
 		{
 			if (wall->is_door)
-				volume += handle_door_logic(wall, current_time, delta_time);
+				handle_door_logic(wall, current_time, delta_time);
 			wall = wall->next;
 			walls--;
 		}
 		i++;
 	}
-	return (volume);
 }
 
 t_bool	open_door(t_sector **sectors, t_player *plr, int active_item)

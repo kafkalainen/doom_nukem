@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 11:03:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:09:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-int	draw_line(t_xy p0, t_xy p1, Uint32 colour, t_buffer *buffer)
+void	draw_line(t_xy p0, t_xy p1, Uint32 colour, t_buffer *buffer)
 {
 	t_xy			delta;
 	t_xy			pixel;
@@ -23,7 +23,7 @@ int	draw_line(t_xy p0, t_xy p1, Uint32 colour, t_buffer *buffer)
 	delta.y = p1.y - p0.y;
 	pixels = sqrt((delta.x * delta.x) + (delta.y * delta.y));
 	if (!pixels)
-		return (FALSE);
+		return ;
 	delta.x /= pixels;
 	delta.y /= pixels;
 	pixel.x = p0.x;
@@ -35,7 +35,6 @@ int	draw_line(t_xy p0, t_xy p1, Uint32 colour, t_buffer *buffer)
 		pixel = vec2_add(pixel, delta);
 		--pixels;
 	}
-	return (TRUE);
 }
 
 void	draw_rect(t_xy xy, t_xy wh, t_buffer *buffer, int color)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:35:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 16:00:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:41:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,10 @@ static void	initialize_thread(t_arg *arg, t_frame *frame, t_home *home,
 	arg->view_list = frame->triangles_in_view;
 	arg->raster_queue = frame->raster_queue;
 	arg->viewport = &frame->viewport;
-	arg->last_frame = home->t.frame_time_last;
 	arg->thread_index = idx;
 }
 
-int	draw_sector(t_frame *frame, t_home *home, t_player *plr, int sector_idx)
+void	draw_sector(t_frame *frame, t_home *home, t_player *plr, int sector_idx)
 {
 	t_arg			args[MAX_THREADS];
 	pthread_t		tid[MAX_THREADS];
@@ -115,5 +114,4 @@ int	draw_sector(t_frame *frame, t_home *home, t_player *plr, int sector_idx)
 	}
 	while (i--)
 		pthread_join(tid[i], NULL);
-	return (TRUE);
 }

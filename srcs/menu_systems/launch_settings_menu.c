@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:16:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/01 16:47:31 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:48:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	update_option_settings_menu(int *game_state, int sym,
 	if (sym == SDLK_RETURN || sym == SDLK_KP_ENTER)
 	{
 		*game_state = MAIN_MENU;
-		*selected = TRUE;
+		*selected = 1;
 	}
 }
 

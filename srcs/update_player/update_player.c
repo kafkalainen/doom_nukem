@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 10:33:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:18:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ static void	check_player_dir(t_player *plr)
 	if (plr->input.up == 1)
 	{
 		if (plr->input.left == 1)
-			matrix = rotation_matrix_y(0.7853982);
+			matrix = rotation_matrix_y(0.7853982f);
 		else if (plr->input.right == 1)
-			matrix = rotation_matrix_y(-0.7853982);
+			matrix = rotation_matrix_y(-0.7853982f);
 		else
 			matrix = rotation_matrix_y(0);
 	}
 	if (plr->input.down == 1)
 	{
 		if (plr->input.left == 1)
-			matrix = rotation_matrix_y(2.356194);
+			matrix = rotation_matrix_y(2.356194f);
 		else if (plr->input.right == 1)
-			matrix = rotation_matrix_y(-2.356194);
+			matrix = rotation_matrix_y(-2.356194f);
 		else
 			matrix = rotation_matrix_y(PI);
 	}

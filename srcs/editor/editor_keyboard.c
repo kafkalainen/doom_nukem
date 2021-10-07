@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_keyboard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/04 18:18:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:53:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ static	void	handle_hotkeys(SDL_Keycode keysym, t_action *action)
 		if (action->create_sector == idle)
 			action->create_sector = allocate;
 	}
-	if (keysym == SDLK_g && action->grid == 0)
-		action->grid = 1;
-	else if (keysym == SDLK_g && action->grid == 1)
-		action->grid = 0;
+	if (keysym == SDLK_g && action->grid == false)
+		action->grid = true;
+	else if (keysym == SDLK_g && action->grid == true)
+		action->grid = false;
 	if (keysym == SDLK_e && action->create_entity == idle)
 		action->create_entity = allocate;
 	if (keysym == SDLK_l && action->selected_entity >= 0)
 		action->link_entity = 1;
 	if (keysym == SDLK_u && action->selected_entity >= 0)
 		action->unlink_entity = 1;
-	if (keysym == SDLK_r && action->delete == idle)
-		action->delete = 1;
+	if (keysym == SDLK_r && action->delete == false)
+		action->delete = true;
 }
 
 static	void	handle_menukeys1(SDL_Keycode keysym, t_action *action)
@@ -88,7 +88,7 @@ void	editor_keyboard(SDL_Keycode keysym, t_action *action)
 	{
 		if (keysym == SDLK_RETURN)
 		{
-			action->input_active = 0;
+			action->input_active = false;
 			action->keysym = -1;
 		}
 		else

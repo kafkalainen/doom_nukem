@@ -6,16 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:34:26 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/06 16:11:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:20:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-t_xy	scale(t_xy a)
-{
-	return (vec2(a.x * MINIMAP_SIZE, a.y * MINIMAP_SIZE));
-}
 
 void	put_pixel(t_buffer *buffer, t_pxl_coords xy, Uint32 color)
 {

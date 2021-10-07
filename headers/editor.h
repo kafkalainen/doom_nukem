@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/07 11:39:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:13:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,10 @@ typedef struct s_action
 	t_xy			offsetf;
 	t_xy			mouse_pos;
 	t_xy			world_pos;
-	int				grid;
+	t_bool			grid;
 	int				selected_sector;
 	int				selected_entity;
 	int				selected_wall;
-	int				scalar;
 	float			scalarf;
 	int				create_sector;
 	int				create_entity;
@@ -133,44 +132,42 @@ typedef struct s_action
 	int				prev_wall;
 	int				prev_sector;
 	int				edit_sector;
-	int				input_active;
+	t_bool			input_active;
 	int				keysym;
 	int				prev_keysym;
-	int				move;
 	int				open_file;
 	int				link_maps;
 	int				unlink_maps;
-	int				save_file;
+	t_bool			save_file;
 	int				draw_depth;
-	int				delete;
+	t_bool			delete;
 	int				edit_entity;
-	int				change_entity_type;
-	int				toggle_entity_is_linked;
-	int				toggle_is_revealed;
-	int				toggle_state;
-	int				create_elevator;
-	int				create_elev_button;
-	int				create_light_button;
-	int				create_powerstation;
+	t_bool			change_entity_type;
+	t_bool			toggle_entity_is_linked;
+	t_bool			toggle_is_revealed;
+	t_bool			toggle_state;
+	t_bool			create_elevator;
+	t_bool			create_elev_button;
+	t_bool			create_light_button;
+	t_bool			create_powerstation;
 	int				assign_end_sector;
 	int				assign_player_start;
-	int				map_name_set;
-	int				player_start_assigned;
+	t_bool			map_name_set;
+	t_bool			player_start_assigned;
 	int				option;
 	int				nbr_of_maps;
 	int				start;
 	int				end;
-	int				edit_wall;
-	int				change_wall_texture;
-	int				change_floor_texture;
-	int				change_ceiling_texture;
+	t_bool			edit_wall;
+	t_bool			change_ceiling_texture;
+	t_bool			change_floor_texture;
+	t_bool			change_wall_texture;
 	int				convert_to_portal;
-	int				edit_ceiling_height;
-	int				edit_floor_height;
-	int				set_light_intensity;
-	int				create_light_source;
-	int				add_wall_point;
-	int				write_sector_story;
+	t_bool			edit_ceiling_height;
+	t_bool			edit_floor_height;
+	t_bool			set_light_intensity;
+	t_bool			create_light_source;
+	t_bool			write_sector_story;
 	t_bool			set_all_sector_ceiling_heights;
 	t_bool			set_all_sector_floor_heights;
 	t_bool			cycle_portal;
@@ -238,16 +235,10 @@ typedef struct s_editor
 	t_action				action;
 	t_plr_pos				plr;
 	t_plr_pos				end_sector;
-	int						grid_size;
 }					t_editor;
 
 void			launch_editor(t_home *home, SDL_Event *e);
 
-/*
-** Rendering/drawing
-*/
-
-void			draw_ui(t_editor *editor, t_texture **textures);
 
 /*
 ** Buttons
@@ -258,42 +249,39 @@ void			main_button_actions(t_action *action, int i);
 void			entity_button_actions(t_action *action, int i);
 void			wall_button_actions(t_action *action, int i);
 void			sector_button_actions(t_action *action, int i);
-t_bool			check_bbox(t_xy start, t_xy end, t_xy click);
-t_bool			check_bbox_ui(t_xy start, t_xy end, t_xy click);
 
 /*
 ** Event handler and event related
 */
 
-void			check_event(t_mouse_data *mouse_data, t_button **list,
+void			assign_end_sector(t_editor_sector **list, t_xy *click,
+					t_plr_pos *end_sector, int *sector_assigned);
+t_bool			assign_player_start(t_editor_sector **list, t_xy *click,
+					t_plr_pos *plr, int *assign_player_start);
+t_bool			check_bbox(t_xy start, t_xy end, t_xy click);
+t_bool			check_bbox_ui(t_xy start, t_xy end, t_xy click);
+void			check_for_objects_inside_sector_bbox(t_editor *editor);
+void			check_grid_events(t_editor *editor);
+t_bool			check_plr_start_and_end_sector_exists(
+					t_editor_sector **list, t_plr_pos plr, int end_sector);
+void			check_ui_events(int x, int y, t_button ***blist,
 					t_action *action);
+t_bool			clicked_inside_grid(int x, int y, int height, int width);
+t_bool			clicked_inside_ui(int x, int y, int height, int width);
 void			display_door_tex_string(t_editor_walls *wall,
 					t_buffer *buffer);
 void			editor_events(SDL_Event *e, t_home *home, t_editor *editor);
 t_bool			entity_creation_is_allowed(t_entity_list **head,
 					t_editor_sector *sector, t_action *action);
-void			mouse_zoom(t_action *action, int zoom);
-void			handle_events(t_editor *editor, t_home *home);
-void			reset_actions(t_action *action);
-void			new_check_event(t_editor *editor);
-void			check_ui_events(int x, int y, t_button ***blist,
-					t_action *action);
-int				clicked_inside_grid(int x, int y, int height, int width);
-int				check_plr_start_and_end_sector_exists(
-					t_editor_sector **list, t_plr_pos plr, int end_sector);
-void			assign_end_sector(t_editor_sector **list, t_xy *click,
-					t_plr_pos *end_sector, int *sector_assigned);
-int				assign_player_start(t_editor_sector **list, t_xy *click,
-					t_plr_pos *plr, int *assign_player_start);
 t_editor_sector	*get_clicked_sector(t_editor_sector **list,
 					t_xy click, int *selected_sector);
 t_editor_walls	*get_clicked_wall(t_editor_walls **walls, t_xy click,
 					int *selected_wall, int nbr_of_walls);
-void			check_grid_events(t_editor *editor);
-void			check_for_objects_inside_sector_bbox(t_editor *editor);
+void			handle_events(t_editor *editor, t_home *home);
 void			link_maps(t_action *action, unsigned char **linked_mapname,
 					char **map_names);
-int				clicked_inside_ui(int x, int y, int height, int width);
+void			mouse_zoom(t_action *action, int zoom);
+void			reset_actions(t_action *action);
 
 /*
 **				Wall creation.
@@ -307,36 +295,35 @@ void			editor_edit_wall(t_editor *editor);
 t_bool			cycle_portal(t_editor_sector **sector_list,
 					t_editor_walls *selected, int opposite);
 t_bool			change_wall_texture(int	*wall_type, t_action *action);
+int				get_portal_idx(int idx);
+int				get_inflate_idx(int idx);
 
 /*
 **				Validity checks
 */
-void			close_editor_wall_list(t_editor_walls **head);
-void			remove_last_point(t_editor_walls **walls, int *nb_of_walls);
+t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,
+					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_for_last_point(t_editor_sector *sector, t_action *action);
 t_bool			check_for_intersecting_lines(t_editor_sector *sector,
 					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_for_valid_map_range(t_xy pos);
-t_bool			check_if_valid_door(t_editor *editor, t_editor_walls *way,
-					t_editor_sector *current);
-t_bool			check_all_sectors_for_intersecting_lines(t_editor_sector **head,
-					t_screen_xy p0, t_screen_xy p1);
 t_bool			check_if_another_sector_is_inside(t_editor_sector *tested,
 					t_editor_sector **head);
-t_bool			check_if_non_convex(t_editor_sector *sector);
 t_bool			check_if_completely_inside(t_editor_sector *tested,
 					t_editor_sector **head);
+t_bool			check_if_non_convex(t_editor_sector *sector);
+t_bool			check_if_slanted_doorway(t_editor_walls *doorway,
+					t_editor_walls *doorway_2);
+t_bool			check_if_valid_door(t_editor *editor, t_editor_walls *way,
+					t_editor_sector *current);
 t_bool			editor_check_if_same_point(t_screen_xy p0, t_screen_xy p1);
 int				editor_orientation_of_three_points(t_screen_xy a,
 					t_screen_xy b, t_screen_xy c);
 void			editor_reset_wall_indexes(t_editor_walls **walls,
 					int nbr_of_walls);
-int				get_portal_idx(int idx);
-int				get_inflate_idx(int idx);
+void			remove_last_point(t_editor_walls **walls, int *nb_of_walls);
 void			snap_to_range(int *height);
 void			validate_door_size(t_editor *editor, float *height, int val);
-t_bool			check_if_slanted_doorway(t_editor_walls *doorway,
-					t_editor_walls *doorway_2);
 
 /*
 ** Entities
@@ -348,12 +335,17 @@ int				calc_entities_in_sector_with_type(t_entity_list **head,
 					int sector_idx, int entity_type);
 void			create_new_entity(t_entity_list **head,
 					t_action *action, t_editor_sector *sector, t_xy pos);
-int				editor_parse_entity_data(t_editor *editor, unsigned char *buf,
-					ssize_t size);
 void			delete_selected_entity(t_entity_list **head, t_action *action);
 void			delete_entity_with_idx(t_entity_list **head, int idx);
 void			delete_entities_from_sector(t_entity_list **entity_head,
 					int sector_idx);
+void			edit_entity(t_action *action, t_entity_list *entity,
+					t_editor *editor);
+int				editor_calc_active_portals(t_editor_sector *sector,
+					int selected_wall);
+int				editor_parse_entity_data(t_editor *editor, unsigned char *buf,
+					ssize_t size);
+void			free_all_entities(t_entity_list **head);
 unsigned int	get_entity_count(t_entity_list **list);
 t_uint			get_entity_colour(t_entity_list *entity, int selected_entity);
 t_editor_walls	*get_editor_wall_with_type(t_editor_walls **list,
@@ -362,16 +354,13 @@ t_entity_list	*get_selected_entity(t_entity_list **head, t_mouse_data	mdata);
 t_entity_list	*get_clicked_entity(t_entity_list **list, t_xy click,
 					int *selected_entity);
 t_entity_list	*get_entity_with_idx(t_entity_list **list, int idx);
-t_bool			link_entities(t_entity_list **list,
-					t_editor_sector **sector_list,
-					t_xy click, int current_entity);
 t_entity_list	*get_linked_entity(t_entity_list **list, int link, int cur_idx);
 t_bool			is_linkable_entity(int entity_type);
 t_bool			link_allowed(t_entity_list *from, t_entity_list *to,
 					t_entity_list **entities, t_editor_sector **sectors);
-void			edit_entity(t_action *action, t_entity_list *entity,
-					t_editor *editor);
-void			free_all_entities(t_entity_list **head);
+t_bool			link_entities(t_entity_list **list,
+					t_editor_sector **sector_list,
+					t_xy click, int current_entity);
 void			reset_list_indexes(t_entity_list **head);
 void			rotate_through_entities(t_entity_list *entity,
 					t_action *action);
@@ -380,8 +369,6 @@ void			update_linked_light_states(t_entity_list **entities,
 					int state);
 void			unlink_linked_light_links(t_entity_list **entities,
 					t_editor_sector **sectors, t_entity_list *starting_link);
-int				editor_calc_active_portals(t_editor_sector *sector,
-					int selected_wall);
 
 /*
 ** Sector creation and manipulation

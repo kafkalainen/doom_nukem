@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:01:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/30 13:29:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:44:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	initialize_editor_values(t_editor *editor)
 {
-	editor->buffer.width = 0;
-	editor->buffer.height = 0;
-	editor->grid_size = 32;
 	editor->buffer.width = 1200;
 	editor->buffer.height = 900;
 	editor->buffer.lightness = 1.0f;
