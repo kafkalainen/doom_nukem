@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:44:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/07 13:44:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 21:39:48 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,11 @@ void	free_game_assets(t_home *home, t_audio *audio)
 	free_entities(home);
 	free_projectiles(home);
 	cleanup_audio_source(audio);
+	if (home->game_state != GAME_CONTINUE
+		&& home->map)
+	{
+		free(home->map);
+		home->map = NULL;
+	}
+		
 }
