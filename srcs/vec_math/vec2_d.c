@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 11:36:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 11:22:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 15:42:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,10 @@ t_bool	point_inside_fov(t_xy p0, t_xy p1, t_xy p2, t_xy p)
 		return (true);
 	else
 		return (false);
+}
+
+float	vec2_get_distance_squared(t_xy pt0, t_xy pt1)
+{
+	return (((pt1.x - pt0.x) * (pt1.x - pt0.x)
+			+ (pt1.y - pt0.y) * (pt1.y - pt0.y)));
 }

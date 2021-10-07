@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 13:57:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 15:43:07 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,4 +293,5 @@ t_m3x3		multiply_2d_matrix_with_2d_matrix(t_m3x3 *m1, t_m3x3 *m2);
 t_xy		multiply_vec2_with_2d_matrix(t_xy *src, t_m3x3 *x);
 t_bool		point_inside_fov(t_xy p0, t_xy p1, t_xy p2, t_xy p);
 void		triangle_div(t_triangle *projected);
+float		vec2_get_distance_squared(t_xy pt0, t_xy pt1);
 #endif
