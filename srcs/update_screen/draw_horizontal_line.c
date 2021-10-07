@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_horizontal_line.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 13:58:53 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 14:28:01 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ void	draw_horizontal_line(t_buffer *buffer, float *depth_buffer,
 	pixels = step->end.x - step->start.x;
 	calc_texel(&step->texel_inv, &step->start_uv, step->offset, &step->end_uv);
 	step->texel_start = texel_inv_z(step->texel_inv);
-	calc_lumel(&step->sub_lu_start, &step->start_lu, step->offset, &step->end_lu);
+	calc_lumel(&step->sub_lu_start, &step->start_lu,
+		step->offset, &step->end_lu);
 	while (pixels >= SUBDIV)
 	{
 		draw_subdiv(buffer, depth_buffer, tex, step);

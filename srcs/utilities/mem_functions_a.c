@@ -1,21 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem_functions.c                                    :+:      :+:    :+:   */
+/*   mem_functions_a.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:50:27 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/03 11:37:56 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 14:43:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-/*
-**		Line 31 nulling:
-**		might be inefficient
-*/
 void	*optimized_memcpy(void *pixels, void *src, size_t size)
 {
 	size_t	i;
@@ -34,10 +30,6 @@ void	*optimized_memcpy(void *pixels, void *src, size_t size)
 	return (d);
 }
 
-/*
-** 1st pass at loading char* and converting back to t_texture.
-** Need to see text output before making further changes
-*/
 void	free_array(unsigned char **array)
 {
 	int	i;
@@ -63,6 +55,8 @@ t_raster_queue	*create_raster_queue(size_t capacity)
 	queue->size = 0;
 	queue->rear = -1;
 	queue->array = (t_triangle *)malloc(queue->capacity * sizeof(t_triangle));
+	if (!queue->array)
+		error_output("Memory allocation of raster array failed\n");
 	return (queue);
 }
 

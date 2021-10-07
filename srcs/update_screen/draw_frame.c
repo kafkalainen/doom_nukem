@@ -3,68 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 11:18:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 14:26:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-// static void	draw_minimap(t_home *home, t_frame *frame)
-// {
-// 	unsigned int	i;
-// 	unsigned int	j;
-// 	t_wall			*temp;
-
-// 	i = 0;
-// 	while (i < home->nbr_of_sectors)
-// 	{
-// 		j = 0;
-// 		temp = home->sectors[i]->walls;
-// 		while (j < home->sectors[i]->nb_of_walls)
-// 		{
-// 			if (temp->top.type < 0)
-// 			{
-// 				draw_line(center_to_screen(temp->point),
-// 					center_to_screen(temp->next->point),
-// 					get_color(greenyellow), &frame->buffer);
-// 			}
-// 			else
-// 			{
-// 				draw_line(center_to_screen(temp->point),
-// 					center_to_screen(temp->next->point),
-// 					get_color(red), &frame->buffer);
-// 			}
-// 			temp = temp->next;
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-// static void	draw_player(t_frame *frame, t_player *plr)
-// {
-// 	t_xy	offsetpos;
-
-// 	offsetpos = center_to_screen(vec2(plr->pos.x, plr->pos.z));
-// 	offsetpos.x -= 5;
-// 	offsetpos.y -= 5;
-// 	draw_square(&frame->buffer, offsetpos,
-// 		get_color(yellow), 10);
-// }
-
-// static void	draw_left_right(t_frame *frame,
-// t_xy pos, t_xy left, t_xy right, t_uint c)
-// {
-// 	draw_line(center_to_screen(pos),
-// 		center_to_screen(left),
-// 		c, &frame->buffer);
-// 	draw_line(center_to_screen(pos),
-// 		center_to_screen(right),
-// 		c, &frame->buffer);
-// }
 
 static Uint32	blueshift_color(int take_damage)
 {
@@ -111,36 +57,6 @@ static void	draw_and_manage_fade_in(t_frame *frame, int plr_is_dead)
 	}
 }
 
-// Debugging utility function.
-// static void	draw_coordinate(t_buffer *buffer, t_xyz pos, int sector)
-// {
-// 	char	*pstr[3];
-// 	char	*sec;
-
-// 	ft_str_pxl(buffer, vec2(5.0f, 110.0f),
-// 		"sector", (t_plx_modifier){get_color(green), 2, 6});
-// 	sec = ft_itoa(sector);
-// 	ft_str_pxl(buffer, vec2(5.0f, 130.0f),
-// 		sec, (t_plx_modifier){get_color(green), 2, 12});
-// 	ft_str_pxl(buffer, vec2(5.0f, 150.0f),
-// 		"xyz", (t_plx_modifier){get_color(green), 2, 12});
-// 	pstr[0] = ft_ftoa(pos.x, 6);
-// 	pstr[1] = ft_ftoa(pos.y, 6);
-// 	pstr[2] = ft_ftoa(pos.z, 6);
-// 	ft_str_pxl(buffer, vec2(5.0f, 170.0f), pstr[0],
-// 		(t_plx_modifier){get_color(green), 2, 12});
-// 	ft_str_pxl(buffer, vec2(5.0f, 190.0f), pstr[1],
-// 		(t_plx_modifier){get_color(green), 2, 12});
-// 	ft_str_pxl(buffer, vec2(5.0f, 210.0f), pstr[2],
-// 		(t_plx_modifier){get_color(green), 2, 12});
-// 	free(pstr[0]);
-// 	free(pstr[1]);
-// 	free(pstr[2]);
-// 	free(sec);
-// }
-
-// draw_coordinate(&frame->buffer, home->entity_pool[0]->pos,
-// 	home->entity_pool[0]->sector_idx);
 void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 {
 	if (plr->plot_state == start_cutscene)

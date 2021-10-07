@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio_b.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:34:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 21:30:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 14:38:51 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,28 +83,4 @@ int	load_audio(t_audio *audio)
 		return (773);
 	}
 	return (0);
-}
-
-/*
-**	Should FreeWAV(t_chunk*) be used here?
-*/
-
-void	cleanup_audio(t_audio *audio)
-{
-	if (audio->footstep1 != NULL)
-	{
-		Mix_FreeChunk(audio->footstep1);
-		audio->footstep1 = NULL;
-	}
-	if (audio->footstep2 != NULL)
-	{
-		Mix_FreeChunk(audio->footstep2);
-		audio->footstep2 = NULL;
-	}
-	if (audio->music != NULL)
-	{
-		Mix_FreeMusic(audio->music);
-		audio->music = NULL;
-	}
-	Mix_CloseAudio();
 }
