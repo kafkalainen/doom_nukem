@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/06 14:55:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 09:25:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ t_bool			check_distance_to_ground(t_sector *sector, float height,
 					t_xyz pos, float *dist);
 t_bool			check_for_matching_key(t_wall *wall, t_player *plr,
 					int keycard);
+t_bool			check_if_stuck(t_player *plr, t_home *home);
 Uint32			update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 					Uint32 current_time, Uint32 delta_time);
 void			create_target_vector(t_player *plr);
@@ -229,7 +230,7 @@ void			initialize_player(t_player *plr);
 t_bool			jetpack(t_player *plr, t_home *home, Uint32 t);
 void			jump(t_player *plr, t_sector *cur_sector);
 t_bool			player_move(t_player *plr, t_home *home, Uint32 t);
-t_entity		*walking_into_entity(t_xyz plr_pos, int cur_sector,
+t_entity		*walking_into_entity(t_xyz test, t_player *plr,
 					t_entity **entities, Uint32 nbr_of_entities);
 int				player_use(t_player *plr, t_home *home);
 t_bool			open_door(t_sector **sectors, t_player *plr, int active_item);
