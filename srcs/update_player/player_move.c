@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 10:35:06 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 15:19:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	player_place_feet_to_ground(t_player *plr, t_home *home)
 	isection = vec3(0.0f, 0.0f, 0.0f);
 	pos = vec3(plr->pos.x, 100.0f, plr->pos.z);
 	idx = find_current_sector(home, pos, plr->cur_sector, &isection);
+	if (idx != plr->cur_sector)
+		ft_putendl("Error when finding player in current sector.");
 	if (idx == -1)
 		return ;
 	isection.y += plr->height;
