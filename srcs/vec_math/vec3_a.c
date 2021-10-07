@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 14:39:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/08 08:43:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 10:36:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,11 @@ t_xy	vec3_to_vec2(t_xyz a)
 float	vec3_eucl_dist(t_xyz a)
 {
 	return (sqrtf(a.x * a.x + a.y * a.y + a.z * a.z));
+}
+
+t_xyz	vec3_normalize_move_dir(t_xyz dir)
+{
+	dir.y = 0.0f;
+	dir = vec3_unit_vector(dir);
+	return (dir);
 }

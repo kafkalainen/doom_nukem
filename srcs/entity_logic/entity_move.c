@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 13:43:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 10:24:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_bool	entity_move(t_entity *entity, t_xyz plr_pos, t_home *home, Uint32 t)
 	entity->test_pos = vec3_add(entity->pos,
 			vec3_mul(entity->dir, t * entity->velocity));
 	if (!entity->is_aggroed && get_distance_squared(entity->pos, plr_pos)
-		< MAX_DAM_DIST)
+		< MIN_RANGE)
 		return (false);
 	if (check_distance_to_ceiling(home->sectors[entity->sector_idx],
 			&entity->test_pos))

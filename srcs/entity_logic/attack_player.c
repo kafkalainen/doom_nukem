@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 15:55:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 10:30:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_bool	skull_skulker_attack(t_entity *entity, t_home *home,
 
 	plr_feet = vec3(plr->pos.x, plr->pos.y - plr->height, plr->pos.z);
 	dist = get_distance_squared(plr_feet, entity->pos);
-	if (dist < MAX_DAM_DIST && dist >= MIN_DAM_DIST)
+	if (dist < MAX_RANGE && dist >= MIN_RANGE)
 	{
 		entity->sprite_state = attack;
 		pick_next_frame(entity, t, ATTACK_COOLDOWN);
@@ -45,9 +45,9 @@ static t_bool	skull_skulker_attack(t_entity *entity, t_home *home,
 		}
 		return (true);
 	}
-	else if (dist < MIN_DAM_DIST && dist < MAX_DAM_DIST)
+	else if (dist < MIN_RANGE && dist >= STOMP_RANGE)
 		entity_bounce_off_player(entity, home, t);
-	else if (dist < 0.8f)
+	else if (dist < STOMP_RANGE)
 		entity->health = 0;
 	return (false);
 }

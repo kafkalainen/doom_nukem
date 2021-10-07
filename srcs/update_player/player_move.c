@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 09:34:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 10:35:06 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,32 +78,6 @@ void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, float height,
 		i++;
 	}
 }
-
-t_bool	check_if_stuck(t_player *plr, t_home *home)
-{
-	t_wall			*wall;
-	// t_entity		*entity;
-
-	wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
-			plr->width, plr->pos, plr->move_dir);
-	// entity = walking_into_entity(plr->pos, plr, home->entity_pool,
-	// 		home->nbr_of_entities);
-	if (wall)
-	{
-		plr->pos = vec3_add(plr->pos, vec3_mul(wall->top.normal, 0.06f));
-		check_if_moved_through_portal(&plr->cur_sector, plr->pos,
-			plr->height, home);
-		return (true);
-	}
-	// if (entity)
-	// {
-	// 	entity->pos = vec3_add(plr->pos, vec3_mul(
-	// 	return (true);
-	// }
-	else
-		return (false);
-}
-
 
 t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 {

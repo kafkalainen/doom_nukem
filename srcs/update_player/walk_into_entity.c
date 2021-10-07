@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:57:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/07 09:28:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 10:30:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_entity	*walking_into_entity(t_xyz test, t_player *plr,
 		if (is_enemy(entities[i]->type) && entities[i]->is_active
 			&& entities[i]->sector_idx == plr->cur_sector)
 		{
-			if (get_distance_squared(test, entities[i]->pos) < MIN_DAM_DIST)
+			if (get_distance_squared(test, entities[i]->pos) < SNEAK_RANGE)
 			{
 				entities[i]->is_aggroed = true;
 				entities[i]->velocity = 0.0025f;

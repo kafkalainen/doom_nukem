@@ -6,15 +6,17 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/06 20:11:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 10:30:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENTITY_H
 # define ENTITY_H
 # define BACKGROUND 0xFFEE82EE
-# define MIN_DAM_DIST 1.0f
-# define MAX_DAM_DIST 1.5f
+# define MIN_RANGE 1.42f
+# define MAX_RANGE 2.0f
+# define STOMP_RANGE 0.2f
+# define SNEAK_RANGE 0.5f
 # define AGGRO_RANGE_1 10
 # define AGGRO_RANGE_2 40
 # define ENTITY_VELOCITY_1 0.0005f
