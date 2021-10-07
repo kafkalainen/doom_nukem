@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_doors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 13:35:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 20:27:26 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_bool	open_door(t_sector **sectors, t_player *plr, int active_item)
 
 	wall = check_if_crossing(sectors[plr->cur_sector],
 			plr->pos, plr->look_dir);
-	if (wall && wall->is_door)
+	if (wall && wall->is_door && wall->open_until < plr->time)
 	{
 		if (check_for_matching_key(wall, plr, active_item))
 		{
