@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_player.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 09:08:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:04:20 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	initialize_player_movement_vectors(t_player *plr)
 	plr->height = 1.5f;
 	plr->width = 0.35f;
 	plr->speed = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
+	plr->test_pos = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
+	plr->move_dir = (t_xyz){0.0f, 0.0f, 0.0f, 1.0f};
 }
 
 static void	initialize_player_game_states(t_player *plr)

@@ -3,55 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   calc_extra_walls.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 12:05:11 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/27 14:15:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 14:22:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-// static void	debug_original_walls(t_wall *portal, t_wall *portal_behind)
-// {
-// 	printf("LOWER WALL\n");
-// 	printf("==================================\n");
-// 	printf("ORIGINAL PORTAL\n");
-// 	printf("left.x %f left.z %f left.ground %f left.ceil %f\n",
-// 		portal->top.p[1].x, portal->top.p[1].z,
-// 		portal->bottom.p[0].y, portal->top.p[1].y);
-// 	printf("right.x %f right.z %f right.ground %f right.ceil %f\n",
-// 		portal->top.p[2].x, portal->top.p[2].z,
-// 		portal->bottom.p[2].y, portal->top.p[2].y);
-// 	printf("ORIGINAL PORTAL BEHIND\n");
-// 	printf("left.x %f left.z %f left.ground %f left.ceil %f\n",
-// 		portal_behind->top.p[1].x, portal_behind->top.p[1].z,
-// 		portal_behind->bottom.p[0].y, portal_behind->top.p[1].y);
-// 	printf("right.x %f right.z %f right.ground %f right.ceil %f\n",
-// 		portal_behind->top.p[2].x, portal_behind->top.p[2].z,
-// 		portal_behind->bottom.p[2].y, portal_behind->top.p[2].y);
-// }
-
-// static void	debug_new_walls(t_wall *new_wall, t_wall *portal_behind)
-// {
-// 	printf("NEW WALL BEHIND\n");
-// 	printf("left.x %f left.z %f left.ground %f left.ceil %f\n",
-// 		new_wall->top.p[1].x, new_wall->top.p[1].z,
-// 		new_wall->bottom.p[0].y, new_wall->top.p[1].y);
-// 	printf("right.x %f right.z %f right.ground %f right.ceil %f\n",
-// 		new_wall->top.p[2].x, new_wall->top.p[2].z,
-// 		new_wall->bottom.p[2].y, new_wall->top.p[2].y);
-// 	if (!new_wall)
-// 		return (0);
-// 	printf("NEW PORTAL SIZE BEHIND\n");
-// 	printf("left.x %f left.z %f left.ground %f left.ceil %f\n",
-// 		portal_behind->top.p[1].x, portal_behind->top.p[1].z,
-// 		portal_behind->bottom.p[0].y, portal_behind->top.p[1].y);
-// 	printf("right.x %f right.z %f right.ground %f right.ceil %f\n",
-// 		portal_behind->top.p[2].x, portal_behind->top.p[2].z,
-// 		portal_behind->bottom.p[2].y, portal_behind->top.p[2].y);
-// 	printf("----------------------------\n");
-// }
 
 static float	calc_new_height(t_wall *current_portal,
 				t_wall *portal_behind)

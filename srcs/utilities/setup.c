@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 19:03:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 14:47:06 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,6 @@ int	setup_fps(t_time *time)
 	return (0);
 }
 
-/* ADD MENU AUDIO!!
-** ret = load_audio(&plr->audio);
-** if (ret)
-** {
-** 	cleanup_audio_source(&plr->audio);
-** 	ft_putendl_fd("Failed to load audio files from source,
-	proceeding without menu music\n", 2);
-** }
-** else
-** 	if (Mix_PlayingMusic() == 0)
-** 		Mix_PlayMusic(plr->audio.music, -1);
-*/
 void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 {
 	home->win.width = SCREEN_WIDTH;

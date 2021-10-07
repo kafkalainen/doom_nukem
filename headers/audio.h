@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 11:28:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 14:38:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_audio_asset
 	t_uchar			*buf;
 }				t_audio_asset;
 
-void	cleanup_audio(t_audio *audio);
 void	cleanup_audio_source(t_audio *audio);
 void	initialize_audio_to_null(t_audio *audio);
 int		load_audio(t_audio *audio);
