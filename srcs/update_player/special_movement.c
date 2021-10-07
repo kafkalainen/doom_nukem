@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 14:04:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 21:18:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_bool	jetpack(t_player *plr, t_home *home, Uint32 t)
 	{
 		plr->fuel_points -= t * 0.05f;
 		plr->move_dir = vec3_unit_vector(plr->look_dir);
-		plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.003f));
+		plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.004f));
 		if (check_distance_to_ceiling(home->sectors[plr->cur_sector],
 				&plr->test_pos))
 			return (false);
