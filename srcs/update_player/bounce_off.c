@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 09:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 15:07:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 09:26:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_bool	bounce_off_the_wall(t_wall *wall, t_player *plr,
 	plr->test_pos = vec3_add(plr->pos, vec3_mul(wall->top.normal, t * 0.0005f));
 	new_wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
 			plr->width, plr->test_pos, wall->top.normal);
-	new_entity = walking_into_entity(plr->test_pos, plr->cur_sector,
+	new_entity = walking_into_entity(plr->test_pos, plr,
 			home->entity_pool, home->nbr_of_entities);
 	if (!new_wall && !new_entity)
 	{
@@ -45,7 +45,7 @@ t_bool	bounce_off_entity(t_entity *entity, t_player *plr,
 				t * 0.0005f));
 	new_wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
 			plr->width, plr->test_pos, entity->top.normal);
-	new_entity = walking_into_entity(plr->test_pos, plr->cur_sector,
+	new_entity = walking_into_entity(plr->test_pos, plr,
 			home->entity_pool, home->nbr_of_entities);
 	if (!new_wall && !new_entity)
 	{
