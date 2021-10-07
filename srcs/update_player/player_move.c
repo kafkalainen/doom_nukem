@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 16:24:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 18:57:48 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	player_place_feet_to_ground(t_player *plr, t_home *home)
 	{
 		ft_putendl("Player out of bounds, moving to last known sector");
 		plr->pos = vec3(home->sectors[plr->cur_sector]->centroid.x, 100.0f,
-			 home->sectors[plr->cur_sector]->centroid.y);
+				home->sectors[plr->cur_sector]->centroid.y);
 		find_current_sector(home, plr->pos, plr->cur_sector, &isection);
 	}
 	isection.y += plr->height;
