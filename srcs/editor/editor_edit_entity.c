@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:57:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	toggle_links(t_action *action, t_entity_list *entity,
 	else if (is_linkable_entity(entity->type) && entity->is_linked > 1)
 		unlink_linked_light_links(&editor->entity_list, &editor->sector_list,
 			entity);
-	action->toggle_entity_is_linked = 0;
+	action->toggle_entity_is_linked = false;
 }
 
 static void	toggle_states(t_action *action, t_entity_list *entity,
@@ -71,7 +71,7 @@ static void	toggle_states(t_action *action, t_entity_list *entity,
 	if (is_linkable_entity(entity->type) && entity->is_linked > 1)
 		update_linked_light_states(&editor->entity_list, &editor->sector_list,
 			entity, entity->state);
-	action->toggle_state = 0;
+	action->toggle_state = false;
 }
 
 void	edit_entity(t_action *action, t_entity_list *entity, t_editor *editor)

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 11:08:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:22:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void			draw_tex_pixel(t_texture *tex, t_xyz texel,
 					t_xy pixel, t_frame *frame);
 int				draw_tex_triangle(t_buffer *buffer, float *depth_buffer,
 					t_triangle *triangle, t_texel *tex);
+void			draw_ui(t_editor *editor, t_texture **textures);
 void			draw_wall_textfields(t_editor_walls *wall,
 					t_buffer *buffer, t_texture **textures);
 void			draw_weapon(t_home *home, t_buffer *buffer,

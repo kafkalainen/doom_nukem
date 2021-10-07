@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 11:40:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:06:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	reload_editor_with_defaults(t_editor *editor, char *path)
 			* (ft_strlen((const char *)path) + 1));
 	editor->mapname = (unsigned char *)ft_strcpy((char *)editor->mapname,
 			(const char *)path);
-	editor->action.map_name_set = 1;
+	editor->action.map_name_set = true;
 }
 
 int	editor_parse_map_name(t_editor *editor, ssize_t size,

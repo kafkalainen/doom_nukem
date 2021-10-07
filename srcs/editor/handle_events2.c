@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:09:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/16 18:21:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:05:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ int	assign_player_start(t_editor_sector **list, t_xy *click, t_plr_pos *plr,
 	plr->sector = temp->idx_sector;
 	plr->x = temp->centroid.x;
 	plr->z = temp->centroid.y;
-	*assign_player_start = 0;
+	*assign_player_start = idle;
 	return (TRUE);
 }

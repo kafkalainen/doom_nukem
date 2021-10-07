@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_save_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:49:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/24 10:09:34 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:06:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	save_editor_map(t_editor *editor, t_home *home)
 					(char *)editor->mapname, ".DN", 1, 0);
 			editor->mapname = (t_uchar *)ft_strjoin_freeable("./map_files/",
 					(char *)editor->mapname, 0, 1);
-			editor->action.map_name_set = 1;
+			editor->action.map_name_set = true;
 		}
 		if (check_saving_prerequisites(editor))
 		{
@@ -62,6 +62,6 @@ void	save_editor_map(t_editor *editor, t_home *home)
 			else
 				add_notification(editor, "Error: Map saving failed", 3000);
 		}
-		editor->action.save_file = 0;
+		editor->action.save_file = false;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:03:15 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 11:00:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:20:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	draw_input_string(unsigned char *string, t_buffer *buffer,
 		show_user_help(
 			"Please input text string:", buffer, 0, get_color(orange));
 		if (string != NULL)
-			show_user_help((char *)string, buffer, 1, get_color(orange));
+			show_user_help((char *)string, buffer, 1, get_color(white));
 	}
 	if (help_text == story_string)
 	{

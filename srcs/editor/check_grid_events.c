@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_grid_events.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 12:44:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 16:25:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:52:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	handle_delete(t_editor *editor)
 		add_notification(editor, "Removed sector.", 2000);
 		sector_delete_helper(editor);
 	}
-	editor->action.delete = 0;
+	editor->action.delete = false;
 }
 
 static void	check_grind_events_two(t_editor *editor)

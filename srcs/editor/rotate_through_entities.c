@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 10:22:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 11:55:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void	rotate_through_entities(t_entity_list *entity, t_action *action)
 		|| entity->type == keycard_engineering
 		|| entity->type == keycard_military)
 		init_static_entity_values(entity);
-	action->change_entity_type = 0;
+	action->change_entity_type = false;
 }

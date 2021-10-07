@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_edit_sector.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:12:08 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 16:12:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:13:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	editor_edit_change_sector_floor_tex(t_editor *editor)
 		editor->temp_sector->tex_floor = -surf9;
 	else if (editor->temp_sector->tex_floor == -surf9)
 		editor->temp_sector->tex_floor = -surf0;
-	editor->action.change_floor_texture = 0;
+	editor->action.change_floor_texture = false;
 	editor->action.edit_sector = 0;
 }
 
@@ -54,7 +54,7 @@ static void	editor_edit_sector_light_intensity(t_editor *editor)
 			free(editor->int_string);
 			editor->int_string = NULL;
 		}
-		editor->action.set_light_intensity = 0;
+		editor->action.set_light_intensity = false;
 		editor->action.edit_sector = 0;
 	}
 }
@@ -80,7 +80,7 @@ static void	editor_sector_story_and_light(t_editor *editor)
 			update_sector_light_values(editor->temp_sector,
 				&editor->entity_list);
 		}
-		editor->action.create_light_source = 0;
+		editor->action.create_light_source = false;
 		editor->action.edit_sector = 0;
 	}
 }
@@ -132,7 +132,7 @@ void	editor_edit_sector(t_editor *editor)
 		}
 		else
 			add_notification(editor, "ERROR: lift creation failed", 3000);
-		editor->action.create_elevator = 0;
+		editor->action.create_elevator = false;
 		editor->action.edit_sector = 0;
 	}
 	if (editor->action.set_all_sector_ceiling_heights

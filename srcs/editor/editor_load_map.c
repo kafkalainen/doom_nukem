@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_load_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 19:10:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/17 17:32:00 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:07:09 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	read_map_data(t_editor *editor, unsigned char *buf, ssize_t size)
 	ret = editor_parse_sector_data(editor, buf, size);
 	if (ret)
 		error_output("Something went horribly wrong\n");
-	editor->action.player_start_assigned = 1;
+	editor->action.player_start_assigned = true;
 	ret = editor_parse_entity_data(editor, buf, size);
 	if (ret)
 		error_output("something went horribly wrong\n");

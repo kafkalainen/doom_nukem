@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:14:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/06 18:23:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:10:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,6 @@ void	editor_edit_change_sector_ceiling_tex(t_editor *editor)
 		editor->temp_sector->tex_ceil = -surf9;
 	else if (editor->temp_sector->tex_ceil == -surf9)
 		editor->temp_sector->tex_ceil = -surf0;
-	editor->action.change_ceiling_texture = 0;
+	editor->action.change_ceiling_texture = false;
 	editor->action.edit_sector = 0;
 }
