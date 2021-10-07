@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 08:29:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 14:22:59 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 21:29:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	initialize_cutscene(t_sector *sector, t_player *plr, int type)
 	{
 		if (plr->input.skip == true)
 		{
-			sector->cur_msg = sector->nb_of_msgs + 1;
-			plr->plot_state = no_plot;
+			sector->cur_msg = sector->nb_of_msgs;
 			plr->cutscene_total = 0;
 			plr->input.skip = false;
 		}
