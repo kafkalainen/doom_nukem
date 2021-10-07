@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_player.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 20:36:10 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 09:08:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	initialize_player_movement_vectors(t_player *plr)
 	plr->yaw = 0.0f;
 	plr->roll = 0.0f;
 	plr->height = 1.5f;
-	plr->width = 0.4f;
+	plr->width = 0.35f;
 	plr->speed = (t_xyz){0.0f, 0.0f, 0.0f, 0.0f};
 }
 
