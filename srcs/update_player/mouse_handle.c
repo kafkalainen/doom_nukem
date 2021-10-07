@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 14:55:46 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/27 08:58:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:02:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	mouse_handle(t_player *plr, SDL_Event *e)
 {
 	if (plr->input.mouse && e->type == SDL_MOUSEMOTION && plr->dead == 0)
 	{
-		plr->dir.x += -e->motion.xrel * DEG_TO_RAD * 0.1;
-		plr->dir.y += -e->motion.xrel * DEG_TO_RAD * 0.1;
-		plr->hud.vm_rx += -e->motion.xrel * DEG_TO_RAD * 3;
+		plr->dir.x += -e->motion.xrel * 0.00174532925f;
+		plr->dir.y += -e->motion.xrel *  0.00174532925f;
+		plr->hud.vm_rx += -e->motion.xrel * 0.005235988f;
 		plr->yaw += -e->motion.xrel * 0.01f;
 		if (plr->yaw > TWO_PI)
 			plr->yaw = 0.0f;
@@ -41,7 +41,7 @@ void	mouse_handle(t_player *plr, SDL_Event *e)
 		if (plr->dir.x > TWO_PI)
 			plr->dir = vec2(TWO_PI, TWO_PI);
 		plr->pitch += -e->motion.yrel * 0.01f;
-		plr->hud.vm_ry += -e->motion.yrel * DEG_TO_RAD * 3;
+		plr->hud.vm_ry += -e->motion.yrel * 0.005235988f;
 		if (plr->pitch < -1.4)
 			plr->pitch = -1.4;
 		if (plr->pitch > 1.553343)

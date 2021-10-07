@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 10:32:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:15:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,7 @@ void			jump(t_player *plr, t_sector *cur_sector);
 t_bool			player_move(t_player *plr, t_home *home, Uint32 t);
 t_entity		*walking_into_entity(t_xyz test, t_player *plr,
 					t_entity **entities, Uint32 nbr_of_entities);
-int				player_use(t_player *plr, t_home *home);
+t_bool			player_use(t_player *plr, t_home *home);
 t_bool			open_door(t_sector **sectors, t_player *plr, int active_item);
 t_bool			player_look(t_home *home, t_player *plr);
 int				player_use_inventory_item(t_player *plr);

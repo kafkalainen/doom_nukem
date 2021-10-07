@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/07 12:35:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:13:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,18 +256,18 @@ void			sector_button_actions(t_action *action, int i);
 
 void			assign_end_sector(t_editor_sector **list, t_xy *click,
 					t_plr_pos *end_sector, int *sector_assigned);
-int				assign_player_start(t_editor_sector **list, t_xy *click,
+t_bool			assign_player_start(t_editor_sector **list, t_xy *click,
 					t_plr_pos *plr, int *assign_player_start);
 t_bool			check_bbox(t_xy start, t_xy end, t_xy click);
 t_bool			check_bbox_ui(t_xy start, t_xy end, t_xy click);
 void			check_for_objects_inside_sector_bbox(t_editor *editor);
 void			check_grid_events(t_editor *editor);
-int				check_plr_start_and_end_sector_exists(
+t_bool			check_plr_start_and_end_sector_exists(
 					t_editor_sector **list, t_plr_pos plr, int end_sector);
 void			check_ui_events(int x, int y, t_button ***blist,
 					t_action *action);
-int				clicked_inside_grid(int x, int y, int height, int width);
-int				clicked_inside_ui(int x, int y, int height, int width);
+t_bool			clicked_inside_grid(int x, int y, int height, int width);
+t_bool			clicked_inside_ui(int x, int y, int height, int width);
 void			display_door_tex_string(t_editor_walls *wall,
 					t_buffer *buffer);
 void			editor_events(SDL_Event *e, t_home *home, t_editor *editor);

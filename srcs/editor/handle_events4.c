@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:25:29 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/09/17 15:14:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:14:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ void	check_ui_events(int x, int y, t_button ***blist, t_action *action)
 		reset_actions(action);
 }
 
-int	clicked_inside_grid(int x, int y, int height, int width)
+t_bool	clicked_inside_grid(int x, int y, int height, int width)
 {
 	if (x > 300 && x < width && y > 0 && y < height)
-		return (TRUE);
-	return (FALSE);
+		return (true);
+	return (false);
 }
 
-int	clicked_inside_ui(int x, int y, int height, int width)
+t_bool	clicked_inside_ui(int x, int y, int height, int width)
 {
 	if (x > 0 && x < 300 && x < width && y > 0 && y < height)
-		return (TRUE);
-	return (FALSE);
+		return (true);
+	return (false);
 }

@@ -6,25 +6,20 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/06 19:22:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:18:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 # define MACROS_H
 
-# define BUFF_SIZE 16
 # define NBR_BUTTONS 31
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 
-# define TEX_SIZE 128
 # define FOV 1.57079616f
-# define MAP_MAX_LINES 128
-# define MINIMAP_SIZE 10
 # define ZOOM_OUT_MAX 0.015625f
 # define ZOOM_IN_MAX 0.25f
-# define PORTAL_HEIGHT 5
 
 /*
 **  Number of textures has been counted as follows:
@@ -42,21 +37,13 @@
 # define NUM_TEX 46
 # define MAX_FILE_NAME_LENGTH 50
 # define MAX_INT 2147483647
-# define PLR_DIR 0.785398163f
-# define INV_PI_BY_TWO 0.1591549367f
-# define PI 3.1415926535f
 # define PI_BY_TWO 1.570796326f
+# define PI 3.1415926535f
 # define TWO_PI 6.283185307f
-# define RAD_TO_DEG 57.29577951f
-# define DEG_TO_RAD 0.0174532925f
 # define SQR2 0.7071067812f
 # define Z_NEAR 0.1f
 # define Z_FAR 1000.0f
 # define OPEN_DOOR_DISTANCE 3.25f
-# define TRUE 1
-# define FALSE 0
-# define AND &&
-# define OR ||
 # define MAIN_SETTINGS 6
 # define GAME_CONTINUE 5
 # define EDITOR 4

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:44:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/09/29 18:12:51 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:06:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	update_option_load_menu(int *game_state, t_menu *menu, int sym)
 	if (sym == SDLK_RETURN || sym == SDLK_KP_ENTER)
 	{
 		*game_state = GAME_LOOP;
-		menu->selected = TRUE;
+		menu->selected = true;
 	}
 }
 

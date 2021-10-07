@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 10:19:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/28 14:38:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:05:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	viewport_logic(t_plane *plane, char choice, t_planes planes)
 	}
 }
 
-static int	draw_polygon(t_buffer *buffer, float *depth_buffer,
+static void	draw_polygon(t_buffer *buffer, float *depth_buffer,
 	t_raster_queue *tri, t_texel *tex)
 {
 	int		i;
@@ -47,7 +47,6 @@ static int	draw_polygon(t_buffer *buffer, float *depth_buffer,
 		draw_tex_triangle(buffer, depth_buffer, &tri->array[i], tex);
 		i++;
 	}
-	return (TRUE);
 }
 
 static int	clip_to_an_edge(t_raster_queue *raster_list,

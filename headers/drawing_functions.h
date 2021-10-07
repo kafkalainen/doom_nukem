@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 12:22:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:08:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,12 @@ void			draw_int_string_input(t_buffer *buffer, t_action *action,
 void			draw_inventory_images(t_home *home,
 					t_player *plr, t_buffer *buffer);
 void			draw_inventory_slots(t_player *plr, t_buffer *buffer);
-int				draw_line(t_xy p0, t_xy p1, Uint32 colour, t_buffer *buffer);
+void			draw_line(t_xy p0, t_xy p1, Uint32 colour, t_buffer *buffer);
 void			draw_muzzleflash(t_home *home, t_buffer *buffer,
 					t_player *plr, t_xy offset);
 void			draw_object_data(t_buffer *buffer, t_player *plr);
 void			draw_rect(t_xy xy, t_xy wh, t_buffer *buffer, int color);
-int				draw_sector(t_frame *frame, t_home *home, t_player *plr,
+void			draw_sector(t_frame *frame, t_home *home, t_player *plr,
 					int sector_idx);
 void			draw_sector_special_info(t_editor *editor);
 void			draw_sector_textfields(t_editor_sector *sector,
@@ -127,7 +127,7 @@ void			draw_segment(t_buffer *buffer, float *depth_buffer,
 void			draw_square(t_buffer *buffer, t_xy offset, int c, int s);
 void			draw_tex_pixel(t_texture *tex, t_xyz texel,
 					t_xy pixel, t_frame *frame);
-int				draw_tex_triangle(t_buffer *buffer, float *depth_buffer,
+void			draw_tex_triangle(t_buffer *buffer, float *depth_buffer,
 					t_triangle *triangle, t_texel *tex);
 void			draw_ui(t_editor *editor, t_texture **textures);
 void			draw_wall_textfields(t_editor_walls *wall,
