@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 11:43:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:42:24 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ t_bool			check_distance_to_ground(t_sector *sector, float height,
 t_bool			check_for_matching_key(t_wall *wall, t_player *plr,
 					int keycard);
 void			create_target_vector(t_player *plr);
-void			crouch(t_player *plr, t_sector *sector);
+void			crouch(t_player *plr, t_sector *sector, Uint32 delta_time);
 void			draw_plot_state(t_home *home, t_buffer *buffer, t_player *plr);
 void			end_level(t_home *home, t_player *plr);
 void			end_logic(t_player *plr, t_home *home);

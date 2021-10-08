@@ -6,23 +6,22 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 21:18:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:39:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-static void	set_animation_on(Uint32 *start, Uint32 *end_time,
-	Uint32 *current, Uint32 duration)
+static void	set_animation_on(Uint32 *start, Uint32 *end_time, Uint32 duration)
 {
 	if (!*start)
 	{
 		*start = 1;
-		*end_time = *current + duration;
+		*end_time = duration;
 	}
 }
 
-static void	set_height(t_player *plr, char direction)
+static void	set_height(t_player *plr, Uint32 t, char direction)
 {
 	if (direction == 'u')
 	{
@@ -30,7 +29,7 @@ static void	set_height(t_player *plr, char direction)
 		if (plr->height > 1.5f)
 			plr->height = 1.5f;
 		else
-			plr->pos.y += 0.1f;
+			plr->pos.y += 0.005f * t;
 	}
 	else if (direction == 'd')
 	{
@@ -38,31 +37,33 @@ static void	set_height(t_player *plr, char direction)
 		if (plr->height <= 0.6f)
 			plr->height = 0.6f;
 		else
-			plr->pos.y -= 0.1f;
+			plr->pos.y -= 0.005f * t;
 	}
 	else
 		return ;
 }
 
-void	crouch(t_player *plr, t_sector *sector)
+void	crouch(t_player *plr, t_sector *sector, Uint32 delta_time)
 {
 	static Uint32	animation_start = 0;
 	static Uint32	animation_end = 0;
 
 	if (plr->input.crouch == 1)
 	{
-		set_animation_on(&animation_start, &animation_end, &plr->time, 100);
-		if (plr->time <= animation_end)
-			set_height(plr, 'd');
+		set_animation_on(&animation_start, &animation_end, 100);
+		animation_start += delta_time;
+		if (animation_start <= animation_end)
+			set_height(plr, delta_time, 'd');
 		else
 			animation_start = 0;
 	}
 	else if (plr->input.crouch == 0
 		&& !check_distance_to_ceiling(sector, &plr->pos))
 	{
-		set_animation_on(&animation_start, &animation_end, &plr->time, 100);
-		if (plr->time <= animation_end)
-			set_height(plr, 'u');
+		set_animation_on(&animation_start, &animation_end, 100);
+		animation_start += delta_time;
+		if (animation_start <= animation_end)
+			set_height(plr, delta_time, 'u');
 		else
 			animation_start = 0;
 	}
