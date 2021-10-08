@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/02 09:56:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 17:25:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,32 +78,6 @@ int	scan_fov(t_home *home, t_fov fov, int sector_count, int **list)
 	return (sector_count);
 }
 
-// //TESTING
-// draw_minimap(home, frame);
-// draw_player(frame, plr);
-// nb_of_sectors = 0;
-// frame->fov.pos = vec3_to_vec2(plr->pos);
-// // frame->fov.right = vec2_add(frame->fov.pos,
-// // vec2_mul(vec2_rot(plr->look2_dir, 1.0472f
-// // + ft_fabsf(plr->pitch)), 2000.0f));
-// // frame->fov.left = vec2_add(frame->fov.pos,
-// // vec2_mul(vec2_rot(plr->look2_dir, -1.0472f
-// // - ft_fabsf(plr->pitch)), 2000.0f));
-// // frame->fov.right = vec2_add(frame->fov.pos,
-// vec2_mul(vec2_rot(plr->look2_dir, 1.0472f), 2000.0f));
-// // frame->fov.left = vec2_add(frame->fov.pos,
-// vec2_mul(vec2_rot(plr->look2_dir, -1.0472f), 2000.0f));
-// frame->fov.right = vec2_add(frame->fov.pos,
-// vec2_mul(vec2_rot(plr->look2_dir, FOV), 2000.0f));
-// frame->fov.left = vec2_add(frame->fov.pos,
-// vec2_mul(vec2_rot(plr->look2_dir, -FOV), 2000.0f));
-// draw_left_right(frame, frame->fov.pos,
-// frame->fov.left, frame->fov.right, get_color(white));
-// // ft_str_pxl(&frame->buffer, vec2(200, 100),
-// ft_ftoa(frame->fov.angle, 6), (t_plx_modifier){get_color(white), 2, 10});
-// frame->fov.cur_sector = plr->cur_sector;
-// nb_of_sectors = scan_fov(home, frame, frame->fov,
-// nb_of_sectors, &frame->sector_buffer);
 void	draw_game(t_home *home, t_frame *frame, t_player *plr)
 {
 	int	nb_of_sectors;

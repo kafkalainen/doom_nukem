@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:40:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 11:36:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 17:18:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	parse_rahikainen(unsigned char *buf, unsigned int *pos,
 	parse_audio_data(buf, pos, "./temp/rahikainen_ugh_3.wav", size);
 	parse_audio_data(buf, pos, "./temp/rahikainen_damage.wav", size);
 	parse_audio_data(buf, pos, "./temp/rahikainen_die.wav", size);
+	parse_audio_data(buf, pos, "./temp/rahikainen_hits.wav", size);
 	parse_audio_data(buf, pos, "./temp/typing.wav", size);
 }
 

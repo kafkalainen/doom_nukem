@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:07:50 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 11:34:05 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 17:21:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	cleanup_rahikainen_audio_sources(t_audio *audio)
 	free_sound(&audio->rahikainen_damage[3]);
 	free_sound(&audio->rahikainen_damage[4]);
 	free_sound(&audio->rahikainen_die);
+	free_sound(&audio->rahikainen_hits);
 }
 
 void	cleanup_audio_source(t_audio *audio)

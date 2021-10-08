@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:35:03 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 14:38:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/08 17:19:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_audio
 	Mix_Chunk	*rahikainen_die;
 	Mix_Chunk	*rahikainen_ramble[4];
 	Mix_Chunk	*rahikainen_damage[5];
+	Mix_Chunk	*rahikainen_hits;
 	Mix_Chunk	*reload;
 	Mix_Chunk	*recharge;
 	Mix_Chunk	*skull_skulker_lulling;

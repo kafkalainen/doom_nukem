@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:23:12 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 11:33:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 17:28:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	load_rahikainen(t_audio *audio)
 	audio->rahikainen_damage[3] = Mix_LoadWAV("temp/rahikainen_ugh_3.wav");
 	audio->rahikainen_damage[4] = Mix_LoadWAV("temp/rahikainen_damage.wav");
 	audio->rahikainen_die = Mix_LoadWAV("temp/rahikainen_die.wav");
+	audio->rahikainen_hits = Mix_LoadWAV("temp/rahikainen_hits.wav");
 	audio->typing = Mix_LoadWAV("temp/typing.wav");
 }
 
@@ -60,7 +61,7 @@ static t_bool	check_invalid_pointers(t_audio *audio)
 		|| !audio->rahikainen_ramble[3] || !audio->rahikainen_damage[0]
 		|| !audio->rahikainen_damage[1] || !audio->rahikainen_damage[2]
 		|| !audio->rahikainen_damage[3] || !audio->rahikainen_damage[4]
-		|| !audio->rahikainen_die || !audio->typing)
+		|| !audio->rahikainen_die || !audio->rahikainen_hits || !audio->typing)
 		return (true);
 	else
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 17:49:08 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 17:12:37 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,23 @@ static void	sound_logic(t_entity *enemy, t_player *plr, char sound)
 {
 	if (sound == 'd')
 	{
-		if (enemy->type == skull_skulker)
-			play_sound(plr->audio.skull_skulker_damage, 40);
-		else if (enemy->type == thing)
-			play_sound(plr->audio.thing_damage, 30);
+		if (enemy->type == skull_skulker && !enemy->is_revealed)
+			play_sound(plr->audio.skull_skulker_damage, 20);
+		else if (enemy->type == thing && !enemy->is_revealed)
+			play_sound(plr->audio.thing_damage, 15);
+		else if ((enemy->type == thing || enemy->type == thing)
+			&& enemy->is_revealed)
+			play_sound(plr->audio.rahikainen_damage[0], 15);
 	}
 	else if (sound == 'x')
 	{
-		if (enemy->type == skull_skulker)
-			play_sound(plr->audio.skull_skulker_death, 40);
-		else if (enemy->type == thing)
-			play_sound(plr->audio.thing_death, 30);
+		if (enemy->type == skull_skulker && !enemy->is_revealed)
+			play_sound(plr->audio.skull_skulker_death, 20);
+		else if (enemy->type == thing && !enemy->is_revealed)
+			play_sound(plr->audio.thing_death, 15);
+		else if ((enemy->type == thing || enemy->type == thing)
+			&& enemy->is_revealed)
+			play_sound(plr->audio.rahikainen_die, 15);
 	}
 }
 

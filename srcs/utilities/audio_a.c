@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:41:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 21:28:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 17:20:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	initialize_player_audio_to_null(t_audio *audio)
 	audio->rahikainen_damage[3] = NULL;
 	audio->rahikainen_damage[4] = NULL;
 	audio->rahikainen_die = NULL;
+	audio->rahikainen_hits = NULL;
 	audio->typing = NULL;
 }
 
