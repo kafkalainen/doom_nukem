@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 14:51:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 15:55:59 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,12 @@ typedef struct s_sector
 	float			gravity;
 	Uint32			is_lift;
 	Uint32			lift_dir;
-	Uint32			moving_until;
 	t_uint			nb_of_msgs;
 	t_uint			nb_of_walls;
 	t_uint			nb_of_ceil;
 	t_uint			nb_of_ground;
 	t_uint			cur_msg;
+	int				moving_until;
 	int				idx_sector;
 	int				tex_floor;
 	int				tex_ceil;

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 13:50:13 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 21:11:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 15:56:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	activate_lift(t_home *home, t_entity *entity, t_player *plr)
 
 	if (entity->is_linked > 1)
 	{
-		if (home->sectors[entity->is_linked - 2]->moving_until < plr->time)
+		if (home->sectors[entity->is_linked - 2]->moving_until > 0)
 		{
 			if (!entity->state)
 			{
@@ -115,8 +115,7 @@ void	activate_lift(t_home *home, t_entity *entity, t_player *plr)
 				height
 					= get_floor_height_diff(home, entity->is_linked - 2, lower);
 			}
-			home->sectors[entity->is_linked - 2]->moving_until
-				= plr->time + 10000;
+			home->sectors[entity->is_linked - 2]->moving_until = 10000;
 			home->sectors[entity->is_linked - 2]->velocity = height * 0.1f;
 			bolt_lift_doors(home->sectors[entity->is_linked - 2], locked);
 			play_sound(plr->audio.lift, 10);

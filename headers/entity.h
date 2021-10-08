@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 11:36:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 15:59:26 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void				rotate_projectile_based_on_axes(t_xyz normal,
 void				set_bullet_hole(t_bullet_hole *hole, t_projectile *current);
 void				set_entity_texels_for_frame(t_entity *entity);
 void				update_lifts(t_home *home, t_player *plr,
-						Uint32 current_time, Uint32 delta_time);
+						Uint32 delta_time);
 void				update_entities(t_home *home, t_player *plr,
 						Uint32 delta_time);
 void				update_projectiles(t_home *home, t_player *plr, Uint32 t);

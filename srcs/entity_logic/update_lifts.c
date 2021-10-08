@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 14:52:09 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 11:36:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 15:58:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ void	translate_entities(t_home *home, float distance, int sector_idx)
 	}
 }
 
-void	update_lifts(t_home *home, t_player *plr,
-			Uint32 current_time, Uint32 delta_time)
+void	update_lifts(t_home *home, t_player *plr, Uint32 delta_time)
 {
 	Uint32	i;
 
@@ -93,7 +92,7 @@ void	update_lifts(t_home *home, t_player *plr,
 	{
 		if (home->sectors[i]->is_lift == lift)
 		{
-			if (home->sectors[i]->moving_until > current_time)
+			if (home->sectors[i]->moving_until > 0)
 			{
 				translate_sector(home->sectors[i],
 					home->sectors[i]->velocity * delta_time * 0.001f);
@@ -102,6 +101,7 @@ void	update_lifts(t_home *home, t_player *plr,
 				translate_projectiles(home,
 					home->sectors[i]->velocity * delta_time * 0.001f, i);
 				plr->pos.y += home->sectors[i]->velocity * delta_time * 0.001f;
+				home->sectors[i]->moving_until -= delta_time;
 			}
 			else
 				lock_lift(home, home->sectors[i]);
