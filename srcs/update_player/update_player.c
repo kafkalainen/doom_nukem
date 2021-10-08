@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 14:19:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 19:37:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ void	update_player(t_player *plr, t_home *home, Uint32 delta_time)
 		plr->pos.y += plr->speed.y * delta_time * 0.001f;
 	if (plr->input.jetpack)
 		jetpack(plr, home, delta_time);
-	gravity(home, plr, delta_time);
 	if (!plr->input.jetpack)
 		movement(plr, home, delta_time);
+	gravity(home, plr, delta_time);
 	unstuck(plr, home);
 	player_use(plr, home);
 	player_look(home, plr);

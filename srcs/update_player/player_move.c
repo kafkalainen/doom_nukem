@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 11:11:22 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 19:45:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,8 @@ void	player_place_feet_to_ground(t_player *plr, t_home *home)
 	pos = vec3(plr->pos.x, 100.0f, plr->pos.z);
 	idx = find_current_sector(home, pos, plr->cur_sector, &isection);
 	if (idx != plr->cur_sector)
-	{
-		ft_putendl("Moving player to current sector.");
 		check_if_moved_through_portal(&plr->cur_sector,
 			plr->pos, plr->height, home);
-		if (idx != plr->cur_sector)
-			idx = -1;
-	}
 	if (idx == -1)
 	{
 		ft_putendl("Risk of moving out of bounds, move to centroid.");
@@ -85,6 +80,7 @@ void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, float height,
 				|| point_is_on_the_lseg(portal->point,
 					vec2(pos.x, pos.z), portal->next->point)))
 		{
+			ft_putendl("UPDATED SECTOR");
 			*cur_sector = portal->top.type;
 			automatic_lights(home->sectors[*cur_sector], home);
 			return ;

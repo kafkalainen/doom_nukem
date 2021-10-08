@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 14:46:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 18:52:58 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ void	crouch(t_player *plr, t_sector *sector, Uint32 delta_time)
 	if (plr->input.crouch == 1)
 	{
 		set_animation_on(&animation_start, &animation_end, 100);
-		animation_start += delta_time;
-		if (animation_start <= animation_end)
+		if (animation_start < animation_end)
+		{
 			set_height(plr, delta_time, 'd');
+			animation_start += delta_time;
+		}
 		else
 			animation_start = 0;
 	}
@@ -61,9 +63,11 @@ void	crouch(t_player *plr, t_sector *sector, Uint32 delta_time)
 		&& !check_distance_to_ceiling(sector, &plr->pos))
 	{
 		set_animation_on(&animation_start, &animation_end, 100);
-		animation_start += delta_time;
-		if (animation_start <= animation_end)
+		if (animation_start < animation_end)
+		{
 			set_height(plr, delta_time, 'u');
+			animation_start += delta_time;
+		}
 		else
 			animation_start = 0;
 	}
