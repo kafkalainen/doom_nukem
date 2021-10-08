@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:45:01 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/14 18:03:14 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/08 17:08:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	verify_hash(unsigned char *buf, ssize_t size)
 	if (orig_hash != new_hash)
 		error_output("Hash verification failed\n");
 	else
-		ft_putstr("Verification successfull\n");
+		ft_putstr("Verification successful\n");
 }
