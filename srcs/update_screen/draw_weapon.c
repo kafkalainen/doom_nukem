@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 14:27:55 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/02 09:42:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 15:14:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	draw_hud_ammo_left(t_buffer *buffer, t_player *plr)
 	char			*concatstr;
 	t_plx_modifier	mod;
 
-	mod.colour = colour_scale(0xFFFFFFFF, 1.0f, buffer->lightness, 1.0f);
+	if (buffer->lightness < 1.0f)
+		mod.colour = colour_scale(0xFFFFFFFF, 1.0f, buffer->lightness, 1.0f);
+	else
+		mod.colour = 0xFFFFFFFF;
 	mod.size = 3;
 	str = ft_itoa(plr->wep[plr->active_wep].ammo);
 	concatstr = ft_strjoin("Ammo: ", str);
@@ -38,7 +41,10 @@ void	draw_crosshair(t_buffer *buffer)
 	start.y = SCREEN_HEIGHT * 0.5f - 8;
 	end.y = SCREEN_HEIGHT * 0.5f + 8;
 	start.x = SCREEN_WIDTH * 0.5f;
-	colour = colour_scale(0xFFFFCC00, 1.0f, buffer->lightness, 1.0f);
+	if (buffer->lightness < 1.0f)
+		colour = colour_scale(0xFFFFCC00, 1.0f, buffer->lightness, 1.0f);
+	else
+		colour = 0xFFFFCC00;
 	while (start.y < end.y)
 	{
 		put_pixel(buffer, start, colour);
@@ -76,9 +82,11 @@ void	draw_weapon(t_home *home, t_buffer *buffer,
 		while (x < tex.width)
 		{
 			colour = (Uint32)tex.texels[(tex.width * y) + x];
+			if (buffer->lightness < 1.0f)
+				colour = colour_scale(colour, 1.0f, buffer->lightness, 1.0f);
 			put_pixel(buffer,
 				(t_pxl_coords){x + (int)offset.x, y + (int)offset.y},
-				colour_scale(colour, 1.0f, buffer->lightness, 1.0f));
+				colour);
 			x++;
 		}
 		y++;
@@ -103,9 +111,11 @@ void	draw_muzzleflash(t_home *home, t_buffer *buffer,
 		while (x < tex.width)
 		{
 			colour = (Uint32)tex.texels[(tex.width * y) + x];
+			if (buffer->lightness < 1.0f)
+				colour = colour_scale(colour, 1.0f, buffer->lightness, 1.0f);
 			put_pixel(buffer,
 				(t_pxl_coords){x + (int)offset.x, y + (int)offset.y},
-				colour_scale(colour, 1.0f, buffer->lightness, 1.0f));
+				colour);
 			x++;
 		}
 		y++;
