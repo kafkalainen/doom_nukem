@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 10:41:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 13:29:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 **
 */
 
-static float	calculate_speed(float g, float t, float speed)
+static float	calc_speed(float g, float t, float speed)
 {
 	if (speed > 0.0f)
 		speed -= g * t;
@@ -47,8 +47,8 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 	if (drop > 0.0f && !plr->input.jetpack)
 	{
 		plr->drop_time += delta_time;
-		plr->speed.y = calculate_speed(g,
-				plr->drop_time * 0.001f, plr->speed.y);
+		plr->speed.y = calc_speed(g, plr->drop_time * 0.001f, plr->speed.y);
+		plr->speed.y = ft_fmin(plr->speed.y, -62.13f);
 	}
 	if (plr->input.jetpack)
 		plr->drop_time = 0;
