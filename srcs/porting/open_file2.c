@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:02:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/07 15:13:18 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/08 11:13:09 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,15 @@ void	parse_map_data(unsigned char *buf, t_player *plr,
 	int	ret;
 
 	ret = parse_sector_data(buf, plr, home, size);
+	if (ret)
+		error_output("ERROR: Failed to read map.");
 	ret = parse_entity_data(buf, home, size);
+	if (ret)
+		error_output("ERROR: Failed to read map.");
 	parse_texture_data(buf, home, size);
 	if (doom_mkdir() == -1)
 		ft_putstr("ERROR: Failed to create temporary directory.\n");
 	parse_all_audio_data(buf, size);
 	free(buf);
 	buf = NULL;
-	if (ret)
-		error_output("ERROR: Failed to read map.");
 }
