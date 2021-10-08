@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 11:40:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 12:35:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 12:57:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@ static void	set_hole_properties(t_wall *wall, int *hole_type, int *sector_idx,
 			int cur_sector)
 {
 	if (wall->is_door)
+	{
+		ft_putendl("Nothing");
 		*hole_type = nothing;
+	}
 	else
+	{
+		ft_putendl("Wall hole");
 		*hole_type = wall_hole;
+	}
 	*sector_idx = cur_sector;
 }
 
