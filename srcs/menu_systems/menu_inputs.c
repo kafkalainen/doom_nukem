@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_inputs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 13:55:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/03 19:07:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:51:12 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	process_inputs_main_menu(int *game_state, SDL_Event *e, int *option)
 {
 	while (SDL_PollEvent(e) != 0)
 	{
+		if (e->type == SDL_QUIT)
+			*game_state = QUIT;
 		if (e->type == SDL_KEYDOWN)
 		{
-			if (e->type == SDL_QUIT)
-				*game_state = QUIT;
 			if (e->key.keysym.sym == SDLK_ESCAPE)
 				*game_state = QUIT;
 			update_option_main_menu(game_state, e->key.keysym.sym, option);
@@ -72,10 +72,10 @@ void	process_inputs_load_menu(int *game_state, SDL_Event *e, t_menu *menu)
 {
 	while (SDL_PollEvent(e) != 0)
 	{
+		if (e->type == SDL_QUIT)
+			*game_state = QUIT;
 		if (e->type == SDL_KEYDOWN)
 		{
-			if (e->type == SDL_QUIT)
-				*game_state = QUIT;
 			if (e->key.keysym.sym == SDLK_ESCAPE)
 				*game_state = MAIN_MENU;
 			update_option_load_menu(game_state, menu, e->key.keysym.sym);

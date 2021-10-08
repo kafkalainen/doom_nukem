@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_settings_menu.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:16:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/07 13:48:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:52:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void	process_inputs_settings_menu(int *game_state, SDL_Event *e,
 {
 	while (SDL_PollEvent(e) != 0)
 	{
+		if (e->type == SDL_QUIT)
+			*game_state = QUIT;
 		if (e->type == SDL_KEYDOWN)
 		{
-			if (e->type == SDL_QUIT)
-				*game_state = QUIT;
 			if (e->key.keysym.sym == SDLK_ESCAPE)
 				*game_state = MAIN_MENU;
 			update_option_settings_menu(game_state, e->key.keysym.sym,
