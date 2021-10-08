@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_setups.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 10:17:34 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/08 09:09:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 16:29:04 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,17 @@ void	setup_menu(t_menu *menu, int *game_state)
 	if (!menu->buffer.pxl_buffer)
 		error_output("Failed to allocate memory to menu buffer\n");
 	menu->option = 0;
+	menu->start = 0;
+	menu->end = 0;
+	menu->chosen_map = NULL;
+	menu->map_names = NULL;
+	menu->selected = 0;
 	menu->buffer.width = SCREEN_WIDTH;
 	menu->buffer.height = SCREEN_HEIGHT;
 	menu->buffer.lightness = 1.0f;
 	*game_state = MAIN_MENU;
+	menu->buffer.middle = (t_screen_xy){menu->buffer.width * 0.5f,
+		menu->buffer.height * 0.5f};
 }
 
 void	setup_game_loop(t_home *home, t_player *plr, int *menu_option)
