@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_hud.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 15:18:32 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 15:38:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	draw_power_bar(t_player *plr, t_buffer *buffer, int bg_colour,
 	i = 0;
 	gap = 4;
 	wh = vec2(12, 21);
-
 	while (i < (int)(plr->power_points + 0.99))
 	{
 		draw_rect(vec2(plr->hud.hud_hp_x + i * (wh.x + gap) - gap * 0.25,
@@ -41,7 +40,7 @@ static void	draw_fuel_bar(t_player *plr, t_buffer *buffer, int bg_colour,
 
 	wh = vec2(plr->fuel_points * 0.9, 6);
 	draw_rect(vec2(plr->hud.hud_fuel_x - 2, plr->hud.hud_fuel_y - 2),
-		vec2(wh.x + 4, wh.y + 4), buffer,  bg_colour);
+		vec2(wh.x + 4, wh.y + 4), buffer, bg_colour);
 	draw_rect(vec2(plr->hud.hud_fuel_x, plr->hud.hud_fuel_y),
 		vec2(wh.x, wh.y), buffer, fg_colour);
 }
@@ -88,13 +87,15 @@ void	draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 
 	bg_colour = 0xFFFFFFFF;
 	if (frame->buffer.lightness < 1.0f)
-		bg_colour = colour_scale(0xFFFFFFFF, 1.0f, frame->buffer.lightness, 1.0f);
+		bg_colour = colour_scale(0xFFFFFFFF, 1.0f,
+				frame->buffer.lightness, 1.0f);
 	fg_colour = 0xFFFFCC00;
 	if (frame->buffer.lightness < 1.0f)
-		fg_colour = colour_scale(0xFFFFCC00, 1.0f, frame->buffer.lightness, 1.0f);
+		fg_colour = colour_scale(0xFFFFCC00, 1.0f,
+				frame->buffer.lightness, 1.0f);
 	if (plr->wep[plr->active_wep].fire_rate > 0.45)
-	draw_muzzleflash(home, &frame->buffer, plr,
-		vec2(plr->hud.vm_x, plr->hud.vm_y + 32));
+		draw_muzzleflash(home, &frame->buffer, plr,
+			vec2(plr->hud.vm_x, plr->hud.vm_y + 32));
 	draw_weapon(home, &frame->buffer, plr,
 		vec2(plr->hud.vm_x, plr->hud.vm_y));
 	draw_hud_image(home, &frame->buffer);

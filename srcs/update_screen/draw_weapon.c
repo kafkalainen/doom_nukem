@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_weapon.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 14:27:55 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 15:14:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 15:43:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ void	draw_hud_ammo_left(t_buffer *buffer, t_player *plr)
 	free(concatstr);
 }
 
+static Uint32	get_crosshair_colour(t_buffer *buffer)
+{
+	if (buffer->lightness < 1.0f)
+		return (colour_scale(0xFFFFCC00, 1.0f, buffer->lightness, 1.0f));
+	return (0xFFFFCC00);
+}
+
 void	draw_crosshair(t_buffer *buffer)
 {
 	t_pxl_coords	start;
@@ -41,10 +48,7 @@ void	draw_crosshair(t_buffer *buffer)
 	start.y = SCREEN_HEIGHT * 0.5f - 8;
 	end.y = SCREEN_HEIGHT * 0.5f + 8;
 	start.x = SCREEN_WIDTH * 0.5f;
-	if (buffer->lightness < 1.0f)
-		colour = colour_scale(0xFFFFCC00, 1.0f, buffer->lightness, 1.0f);
-	else
-		colour = 0xFFFFCC00;
+	colour = get_crosshair_colour(buffer);
 	while (start.y < end.y)
 	{
 		put_pixel(buffer, start, colour);
