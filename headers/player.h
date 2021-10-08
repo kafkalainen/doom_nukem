@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 14:42:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:53:04 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ void			update_player(t_player *plr, t_home *home, Uint32 delta_time);
 void			update_cutscene(t_player *plr, t_home *home, Uint32 t);
 void			update_damage_tick(Uint32 delta_time, int *take_damage);
 void			update_doors(t_sector **sectors, Uint32 nb_of_sectors,
-					Uint32 current_time, Uint32 delta_time);
+					Uint32 delta_time);
 t_xyz			vec3_normalize_move_dir(t_xyz dir);
 t_entity		*walking_into_entity(t_xyz test, t_player *plr,
 					t_entity **entities, Uint32 nbr_of_entities);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:08:38 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 13:53:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:51:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_wall
 	t_uint				is_window;
 	t_bool				is_closed;
 	t_uint				is_locked;
-	Uint32				open_until;
+	int					open_until;
 	float				height;
 	struct s_wall		*next;
 }						t_wall;

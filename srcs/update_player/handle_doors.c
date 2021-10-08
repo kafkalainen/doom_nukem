@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_doors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 20:27:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:58:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,39 +52,38 @@ static void	translate_door(t_wall *door, float speed, float time)
 	door->bot.p[2] = translate_point(&door->bot.p[2], translation_bottom);
 }
 
-static void	handle_door_logic(t_wall *wall, Uint32 current_time,
-			Uint32 delta_time)
+static void	handle_door_logic(t_wall *wall, Uint32 delta_time)
 {
 	float	current_height;
 
 	current_height = wall->next->top.p[2].y - wall->next->top.p[0].y;
-	if (wall->open_until < current_time)
+	if (wall->open_until <= 0)
 	{
 		if (!wall->is_closed)
 		{
 			lock_the_door(wall, wall->next);
 			wall->is_closed = true;
 		}
-		return ;
 	}
 	else
 	{
 		if (wall->next->height - current_height > 1.5f)
 			wall->is_closed = false;
-		if (wall->open_until - 2500 > current_time)
+		if (wall->open_until - 2500 > 0)
 			translate_door(wall->next, wall->height * 0.4f,
 				delta_time * 0.001f);
 		else
 			translate_door(wall->next, -wall->height * 0.4f,
 				delta_time * 0.001f);
+		wall->open_until -= delta_time;
 	}
 }
 
 void	update_doors(t_sector **sectors, Uint32 nb_of_sectors,
-		Uint32 current_time, Uint32 delta_time)
+		Uint32 delta_time)
 {
-	Uint32	i;
-	Uint32	walls;
+	t_uint	i;
+	t_uint	walls;
 	t_wall	*wall;
 
 	i = 0;
@@ -95,7 +94,7 @@ void	update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 		while (walls)
 		{
 			if (wall->is_door)
-				handle_door_logic(wall, current_time, delta_time);
+				handle_door_logic(wall, delta_time);
 			wall = wall->next;
 			walls--;
 		}
@@ -110,15 +109,15 @@ t_bool	open_door(t_sector **sectors, t_player *plr, int active_item)
 
 	wall = check_if_crossing(sectors[plr->cur_sector],
 			plr->pos, plr->look_dir);
-	if (wall && wall->is_door && wall->open_until < plr->time)
+	if (wall && wall->is_door && wall->open_until <= 0)
 	{
 		if (check_for_matching_key(wall, plr, active_item))
 		{
 			portal_behind = get_portal_by_idx(plr->cur_sector,
 					sectors[wall->top.type]);
 			check_for_matching_key(portal_behind, plr, active_item);
-			portal_behind->open_until = plr->time + 5000;
-			wall->open_until = plr->time + 5000;
+			portal_behind->open_until = 5000;
+			wall->open_until = 5000;
 			play_sound(plr->audio.door, 2);
 			return (true);
 		}

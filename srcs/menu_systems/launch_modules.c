@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/08 13:53:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:53:16 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	update_world(t_player *plr, t_home *home, Uint32 delta_time)
 	update_entities(home, plr, delta_time);
 	update_projectiles(home, plr, delta_time);
 	update_lifts(home, plr, plr->time, delta_time);
-	update_doors(home->sectors, home->nbr_of_sectors, plr->time, delta_time);
+	update_doors(home->sectors, home->nbr_of_sectors, delta_time);
 }
 
 void	launch_game_loop(t_home *home, t_player *plr,
