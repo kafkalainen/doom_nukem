@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 09:40:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 10:43:51 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 15:45:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	draw_header(t_buffer *buffer, t_sector *sector)
 	if (mod.len > 90)
 		mod.len = 90;
 	offset.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
-	offset.y = 100;
+	offset.y = 40;
 	ft_str_pxl(buffer, offset, temp, mod);
 }
 
@@ -45,7 +45,7 @@ static void	draw_previous_lines(t_buffer *buffer, t_sector *sector)
 		if (mod.len > 90)
 			mod.len = 90;
 		offset.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
-		offset.y = 150 + msgs * 7 * mod.size;
+		offset.y = 70 + msgs * 7 * mod.size;
 		ft_str_pxl(buffer, offset, sector->story[msgs], mod);
 	}
 }
@@ -68,7 +68,7 @@ static void	draw_current_line(t_buffer *buffer, t_player *plr, t_sector *sector)
 		if (mod.len > 0 && sector->cur_msg != 0)
 		{
 			offset.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
-			offset.y = 150 + sector->cur_msg * 7 * mod.size;
+			offset.y = 70 + sector->cur_msg * 7 * mod.size;
 			ft_str_pxl(buffer, offset, sector->story[sector->cur_msg], mod);
 		}
 	}
