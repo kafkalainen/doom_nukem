@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_activation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 15:38:44 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 20:46:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/08 10:10:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	change_texture(t_entity *entity)
 
 t_bool	activate_power_station(t_entity *power_station, t_player *plr)
 {
-	if (power_station->state)
+	if (power_station->state && plr->recharge <= 0)
 	{
 		power_station->state = false;
 		plr->recharge = 5000;

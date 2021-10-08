@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 13:35:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 10:09:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ typedef struct s_player
 	int				msg_time;
 	int				total_msg_time;
 	Uint32			display_object;
-	Uint32			reload;
-	Uint32			recharge;
+	int				reload;
+	int				recharge;
 	unsigned int	active_wep;
 	int				take_damage;
 }					t_player;
