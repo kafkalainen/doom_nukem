@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 11:52:05 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 09:17:46 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:37:30 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	draw_fps(t_buffer *buffer, int nb_fps)
 	char			*fps;
 	t_plx_modifier	mod;
 
-	mod.colour = get_color(white);
+	mod.colour = 0xFFFFFFFF;
 	mod.size = TEXT_SIZE;
 	fps = ft_itoa(nb_fps);
 	mod.len = ft_strlen(fps);
@@ -50,7 +50,7 @@ void	draw_compass_direction(t_buffer *buffer, t_xy *dir)
 								"::East::", "::No dir::"};
 	const int		tab[] = {9, 8, 9, 8, 10};
 
-	mod.colour = get_color(white);
+	mod.colour = 0xFFFFFFFF;
 	mod.size = TEXT_SIZE;
 	mod.len = 0;
 	loc = vec2(0.0f, buffer->height * 0.05f);

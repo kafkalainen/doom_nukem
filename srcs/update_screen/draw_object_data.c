@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_object_data.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 12:00:10 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 11:55:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:38:59 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	draw_object_data(t_buffer *buffer, t_player *plr)
 	t_xy			loc;
 	t_plx_modifier	mod;
 
-	mod.colour = white;
+	mod.colour = 0xFFFFFFFF;
 	mod.size = TEXT_SIZE;
 	loc.y = buffer->height * 0.1f;
 	if (plr->display_object == powerstation)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_hud.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/02 09:42:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:43:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	draw_mission_failed(t_buffer *buffer)
 {
 	t_plx_modifier	mod;
 
-	mod.colour = white;
+	mod.colour = 0xFFFFFFFF;
 	mod.len = 100;
 	mod.size = 4;
 	ft_str_pxl(buffer, vec2(SCREEN_WIDTH * 0.3f, SCREEN_HEIGHT * 0.4f),
