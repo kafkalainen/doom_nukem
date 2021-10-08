@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 14:39:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:46:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	set_height(t_player *plr, Uint32 t, char direction)
 {
 	if (direction == 'u')
 	{
-		plr->height += 0.1f;
+		plr->height += 0.005f * t;
 		if (plr->height > 1.5f)
 			plr->height = 1.5f;
 		else
@@ -33,7 +33,7 @@ static void	set_height(t_player *plr, Uint32 t, char direction)
 	}
 	else if (direction == 'd')
 	{
-		plr->height -= 0.1f;
+		plr->height -= 0.005f * t;
 		if (plr->height <= 0.6f)
 			plr->height = 0.6f;
 		else
