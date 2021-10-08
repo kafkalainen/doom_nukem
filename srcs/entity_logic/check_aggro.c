@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:14:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 12:15:43 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 10:04:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ t_bool	check_aggro(t_player *plr, t_entity *entity, t_home *home)
 		&& check_for_close_range(distance_squared, plr, entity))
 	{
 		if (entity->type == skull_skulker)
-			play_sound(plr->audio.skull_skulker_aggro, 20);
+			play_sound(plr->audio.skull_skulker_aggro, 15);
 		else if (entity->type == thing)
-			play_sound(plr->audio.thing_aggro, 20);
+			play_sound(plr->audio.thing_aggro, 10);
 		entity->velocity = 0.0025f;
 		return (true);
 	}
@@ -77,9 +77,9 @@ t_bool	check_aggro(t_player *plr, t_entity *entity, t_home *home)
 		&& check_if_in_next_sector(home, plr, entity, entity->sector_idx))
 	{
 		if (entity->type == skull_skulker)
-			play_sound(plr->audio.skull_skulker_aggro, 20);
+			play_sound(plr->audio.skull_skulker_aggro, 15);
 		else if (entity->type == thing)
-			play_sound(plr->audio.thing_aggro, 20);
+			play_sound(plr->audio.thing_aggro, 10);
 		entity->velocity = 0.0025f;
 		return (true);
 	}
