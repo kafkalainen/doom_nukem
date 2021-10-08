@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 10:52:14 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 11:11:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, float height,
 	{
 		if (check_if_open_portal(portal)
 			&& (check_distance_to_ground(home->sectors[portal->top.type],
-				height, pos, &dist)
+					height, pos, &dist)
 				|| point_is_on_the_lseg(portal->point,
 					vec2(pos.x, pos.z), portal->next->point)))
 		{
