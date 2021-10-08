@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 10:09:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 11:43:41 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,8 @@ float			get_ground_hit_point(t_sector *sector, t_ray *ray,
 					t_bullet_hole *hole);
 float			get_player_hit_point(t_ray *ray, t_bullet_hole *hole,
 					int bullet_sector);
+float			get_wall_hit_point(t_home *home, t_ray *ray,
+					t_bullet_hole *hole, int bullet_sector);
 void			gravity(t_home *home, t_player *plr, Uint32 delta_time);
 void			initialize_cutscene(t_sector *cutscene_sector,
 					t_player *plr, int type);
@@ -200,6 +202,8 @@ void			initialize_player_target_triangles(t_player *plr);
 void			initialize_player(t_player *plr);
 t_bool			jetpack(t_player *plr, t_home *home, Uint32 t);
 void			jump(t_player *plr, t_sector *cur_sector);
+t_bullet_hole	loop_through_sector(t_home *home, t_ray *ray,
+					int bullet_sector);
 t_bool			player_move(t_player *plr, t_home *home, Uint32 t);
 t_bool			open_door(t_sector **sectors, t_player *plr, int active_item);
 t_bool			player_look(t_home *home, t_player *plr);

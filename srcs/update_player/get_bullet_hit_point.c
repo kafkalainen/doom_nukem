@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 11:15:55 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 11:42:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ t_bool	test_ray(t_triangle *tri, t_bullet_hole *hole_2, float *d,
 	return (false);
 }
 
-static t_bullet_hole	loop_through_sector(t_home *home, t_ray *ray,
-		int bullet_sector)
+t_bullet_hole	loop_through_sector(t_home *home, t_ray *ray, int bullet_sector)
 {
 	float			d[4];
 	t_bullet_hole	hitpoints[4];
@@ -67,49 +66,6 @@ static t_bullet_hole	loop_through_sector(t_home *home, t_ray *ray,
 	if (d[3] != 400000000.0f && d[3] <= d[1] && d[3] <= d[0] && d[3] <= d[2])
 		return (hitpoints[3]);
 	return (hitpoints[0]);
-}
-
-static void	set_hole_properties(t_wall *wall, int *hole_type, int *sector_idx,
-			int cur_sector)
-{
-	if (wall->is_door)
-	{
-		ft_putendl("Hole is in nothing");
-		*hole_type = nothing;
-	}
-	else
-		*hole_type = wall_hole;
-	*sector_idx = cur_sector;
-}
-
-float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
-		int bullet_sector)
-{
-	t_uint		i;
-	t_wall		*wall;
-	float		d;
-
-	i = 0;
-	d = 400000000.0f;
-	hole->hole_type = nothing;
-	wall = home->sectors[bullet_sector]->walls;
-	while (i++ < home->sectors[bullet_sector]->nb_of_walls)
-	{
-		if (test_ray(&wall->top, hole, &d, ray)
-			|| test_ray(&wall->bot, hole, &d, ray))
-		{
-			if (check_if_open_portal(wall))
-			{
-				*hole = loop_through_sector(home, ray, wall->top.type);
-				break ;
-			}
-			else
-				set_hole_properties(wall, &hole->hole_type, &hole->sector_idx,
-					bullet_sector);
-		}
-		wall = wall->next;
-	}
-	return (d);
 }
 
 t_bullet_hole	get_bullet_hit_point(t_home *home, t_ray *ray,
