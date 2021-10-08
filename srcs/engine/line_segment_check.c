@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:03:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/04 11:51:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 10:49:56 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	point_is_on_the_lseg(t_xy a, t_xy c, t_xy b)
 
 	vec_ab = vec2_dec(b, a);
 	vec_ac = vec2_dec(c, a);
-	if (vec2_cross(vec_ab, vec_ac) != 0)
+	if (ft_fabsf(vec2_cross(vec_ab, vec_ac)) > 0.00001f)
 		return (0);
 	dot_ab_ab = vec2_dot(vec_ab, vec_ab);
 	dot_ab_ac = vec2_dot(vec_ab, vec_ac);
