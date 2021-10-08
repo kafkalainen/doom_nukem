@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:04:51 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/02 15:59:10 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 13:53:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	launch_game_loop(t_home *home, t_player *plr,
 	{
 		fps_timer(&home->t);
 		delta_time = home->t.frame_time_last - plr->time;
+		if (delta_time > 60)
+			delta_time = 60;
 		plr->time = home->t.frame_time_last;
 		if (plr->plot_state == start_cutscene
 			|| plr->plot_state == end_cutscene)

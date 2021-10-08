@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 13:44:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 13:57:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 static float	calc_speed(float g, float t, float speed)
 {
 	if (speed > 0.0f)
-		speed -= ft_fmin(g * t, 62.0f);
+		speed -= g * t;
 	else
-		speed = ft_fmax(-g * t, -62.0f);
+		speed = -g * t;
 	return (speed);
 }
 
@@ -39,7 +39,7 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 			plr->height, plr->pos, &drop) || (drop <= 0.07f))
 	{
 		plr->drop_time = 0;
-		if (plr->speed.y < -7.0f)
+		if (plr->speed.y < -10.0f)
 			player_take_damage(plr, plr->speed.y / -5.5f, delta_time);
 		plr->speed.y = 0.0f;
 		player_place_feet_to_ground(plr, home);
