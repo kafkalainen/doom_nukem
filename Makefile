@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/08 11:44:37 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/08 14:00:10 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -334,8 +334,6 @@ WIN_LIBRARY_PATHS = \
 LINUX_LINK_FLAGS = -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 CC = gcc
-WIN_CFLAGS = -Wall -Wextra -Werror
-WIN_LFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 
 ifeq ($(OS),Windows_NT)
 	TARGET_SYSTEM := Windows
@@ -350,8 +348,8 @@ ifeq ($(TARGET_SYSTEM),Windows)
 	NAME = doom-nukem.exe
 	INCLUDES = $(WIN_INCLUDE_PATHS)
 	LIBS = $(WIN_LIBRARY_PATHS)
-	CFLAGS = $(WIN_CFLAGS)
-	LDFLAGS = $(WIN_LFLAGS)
+	CFLAGS = -Wall -Wextra -Werror -O1
+	LDFLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lft -lpthread -lm
 	SDL_NEW = SDL2-2.0.14\i686-w64-mingw32
 	SDL_MIXER_NEW = SDL2_mixer-2.0.4\i686-w64-mingw32
 	SLASH = \\
@@ -369,7 +367,7 @@ else
 	ABS_DIR = $(shell pwd)
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
-	CFLAGS = -Wall -Wextra -Werror $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags)
+	CFLAGS = -Wall -Wextra -Werror $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags) -O3
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
 	MKDIR := mkdir -p
@@ -399,7 +397,6 @@ OBJ = $(SRC:$S%=$O%.o)
 
 .PHONY: all clean fclean re debug
 
-all: CFLAGS += -O3
 all: $(NAME)
 
 debug: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
