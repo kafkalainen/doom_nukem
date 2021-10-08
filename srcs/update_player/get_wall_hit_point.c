@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 11:40:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 13:01:50 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 13:05:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 		else if (test[0] || test[1])
 		{
 			set_hole_properties(wall, &hole->type, &hole->sector_idx, sector);
-			break ;
+			return (ft_fmin(d[0], d[1]));
 		}
 		wall = wall->next;
 	}
-	return (ft_fmin(d[0], d[1]));
+	return (400000000.0f);
 }
