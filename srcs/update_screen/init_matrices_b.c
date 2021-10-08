@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 09:07:16 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 14:38:36 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 18:16:03 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ t_m4x4	identity_matrix(void)
 }
 
 /*
-**	Precalculated values, when Z_FAR and Z_NEAR are fixed at 0.1f and 1000.0f
-**	Z_FAR / (Z_FAR - Z_NEAR) = 1.00010001f
-**	1.001001001f
-**	-0.1001001f
-**	(-Z_FAR * Z_NEAR) / (Z_FAR - Z_NEAR) = -100 / 999.9 = -0.100010001f
+**	Precalculated values, when Z_FAR and Z_NEAR are fixed at 0.1f and 100.0f
+**	Z_FAR / (Z_FAR - Z_NEAR) = 1.001001001f
+**	(-Z_FAR * Z_NEAR) / (Z_FAR - Z_NEAR) = -100 / 99.9 = -0.1001001f
 */
 
 t_m4x4	projection_matrix(void)

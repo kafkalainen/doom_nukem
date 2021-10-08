@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 13:18:03 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 18:14:44 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@
 # define PI 3.1415926535f
 # define TWO_PI 6.283185307f
 # define SQR2 0.7071067812f
-# define Z_NEAR 0.1f
-# define Z_FAR 1000.0f
 # define OPEN_DOOR_DISTANCE 3.25f
 # define MAIN_SETTINGS 6
 # define GAME_CONTINUE 5
