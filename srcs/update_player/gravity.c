@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 13:30:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 13:38:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 static float	calc_speed(float g, float t, float speed)
 {
 	if (speed > 0.0f)
-		speed -= g * t;
+		speed -= ft_fmax(g * t, 62.13f);
 	else
 		speed = -g * t;
 	return (speed);
