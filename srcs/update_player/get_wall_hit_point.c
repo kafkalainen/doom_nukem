@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 11:40:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 12:21:17 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 12:35:27 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	set_hole_properties(t_wall *wall, int *hole_type, int *sector_idx,
 }
 
 float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
-		int bullet_sector)
+		int sector)
 {
 	t_uint			i;
 	t_wall			*wall;
@@ -33,8 +33,9 @@ float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 	i = 0;
 	d[0] = 400000000.0f;
 	d[1] = 400000000.0f;
-	wall = home->sectors[bullet_sector]->walls;
-	while (i++ < home->sectors[bullet_sector]->nb_of_walls)
+	hole->type = nothing;
+	wall = home->sectors[sector]->walls;
+	while (i++ < home->sectors[sector]->nb_of_walls)
 	{
 		test[0] = test_ray(&wall->top, hole, &d[0], ray);
 		test[1] = test_ray(&wall->bot, hole, &d[1], ray);
@@ -45,8 +46,7 @@ float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 			break ;
 		}
 		else if (test[0] || test[1])
-			set_hole_properties(wall, &hole->hole_type, &hole->sector_idx,
-				bullet_sector);
+			set_hole_properties(wall, &hole->type, &hole->sector_idx, sector);
 		wall = wall->next;
 	}
 	return (ft_fmin(d[0], d[1]));

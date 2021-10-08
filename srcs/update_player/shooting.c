@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:12:34 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 15:09:33 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 12:36:15 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	rotate_projectile_based_on_axes(t_xyz normal, t_projectile *current)
 */
 void	set_bullet_hole(t_bullet_hole *hole, t_projectile *current)
 {
-	if (hole->hole_type != nothing)
+	if (hole->type != nothing)
 	{
 		current->pos = hole->point;
 		current->normal = vec3(0.0f, 0.0f, -1.0f);
-		if (hole->hole_type == ceiling_hole || hole->hole_type == ground_hole)
+		if (hole->type == ceiling_hole || hole->type == ground_hole)
 		{
 			initialize_top_triangle(-bullet_decal, &current->top,
 				vec2(0.25f, 0.25f));

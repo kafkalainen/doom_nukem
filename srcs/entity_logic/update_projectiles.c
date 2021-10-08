@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 10:07:21 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 20:17:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 12:35:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	update_projectile(t_projectile *current, t_home *home,
 		initialize_trajectory(&trajectory, current, plr);
 		hole = get_bullet_hit_point(home, &trajectory,
 				trajectory.start_sector);
-		if (hole.hole_type == player)
+		if (hole.type == player)
 			player_take_damage(plr, 2, t);
 		current->is_active = false;
 		initialize_projectile_triangles(current);

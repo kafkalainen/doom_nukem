@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 09:27:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/01 10:51:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 12:35:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ float	get_entity_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 
 	i = 0;
 	distance = 400000000.0f;
-	hole->hole_type = nothing;
+	hole->type = nothing;
 	while (i < home->nbr_of_entities)
 	{
 		if (home->entity_pool[i]->is_active
@@ -31,7 +31,7 @@ float	get_entity_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 			if (test_ray(&tested[0], hole, &distance, ray)
 				|| test_ray(&tested[1], hole, &distance, ray))
 			{
-				hole->hole_type = nothing;
+				hole->type = nothing;
 				hole->sector_idx = bullet_sector;
 				home->entity_pool[i]->taking_damage = 500;
 				home->entity_pool[i]->is_aggroed = true;

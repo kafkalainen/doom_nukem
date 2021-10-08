@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 13:41:09 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 12:35:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ typedef struct s_bullet_hole
 	t_xyz			point;
 	t_xyz			normal;
 	int				sector_idx;
-	int				hole_type;
+	int				type;
 }					t_bullet_hole;
 
 typedef struct s_home
