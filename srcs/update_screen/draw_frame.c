@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 13:27:48 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 14:26:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/08 09:15:10 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ void	draw_frame(t_home *home, t_frame *frame, t_player *plr)
 		reset_depth_buffer(frame->depth_buffer);
 		draw_game(home, frame, plr);
 		if (plr->input.info)
-			draw_info(frame, plr, (int)home->t.fps);
+			draw_info(&frame->buffer);
 		if (plr->take_damage)
 			fill_with_red(&frame->buffer, plr->take_damage);
 		draw_heads_up_display(home, frame, plr);
+		draw_compass_direction(&frame->buffer, &plr->look2_dir);
+		draw_fps(&frame->buffer, (int)home->t.fps);
 		draw_plot_state(home, &frame->buffer, plr);
 		draw_object_data(&frame->buffer, plr);
 		if (frame->buffer.lightness < 0.99f || plr->dead)

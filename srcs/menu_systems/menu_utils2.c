@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:44:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/07 21:39:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/08 09:13:28 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,4 @@ void	free_game_assets(t_home *home, t_audio *audio)
 		free(home->map);
 		home->map = NULL;
 	}
-		
 }

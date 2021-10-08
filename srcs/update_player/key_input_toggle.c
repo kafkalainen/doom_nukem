@@ -6,23 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 16:07:42 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/02 16:01:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 08:27:17 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-
-// static void	debug_keys(t_player *plr, SDL_KeyCode *sym, int nb)
-// {
-// 	if (*sym == SDLK_UP)
-// 		plr->input.debug_up = nb;
-// 	if (*sym == SDLK_DOWN)
-// 		plr->input.debug_down = nb;
-// 	if (*sym == SDLK_LEFT)
-// 		plr->input.debug_left = nb;
-// 	if (*sym == SDLK_RIGHT)
-// 		plr->input.debug_right = nb;
-// }
 
 static void	menu_keys(t_player *plr, SDL_KeyCode *sym)
 {
@@ -66,7 +54,6 @@ static void	action_keys(t_player *plr, SDL_KeyCode *sym)
 		plr->active_inv = 3;
 }
 
-//debug_keys(plr, &sym, state);
 void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 {
 	if (sym == SDLK_ESCAPE)
@@ -93,7 +80,6 @@ void	keys_down(t_player *plr, SDL_KeyCode sym, int *game_state)
 	}
 }
 
-// debug_keys(plr, &sym, state);
 void	keys_up(t_player *plr, SDL_KeyCode sym)
 {
 	if (plr->plot_state != start_cutscene || plr->plot_state != end_cutscene)

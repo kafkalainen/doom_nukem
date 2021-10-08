@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 13:08:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 09:12:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void			draw_bbox_sector(t_editor_sector *sector, t_buffer *buffer,
 					t_action *action);
 void			draw_buttons(t_editor *editor, t_texture **textures);
 void			draw_button(t_editor *editor, t_button *button, int i);
+void			draw_compass_direction(t_buffer *buffer, t_xy *dir);
 void			draw_convert_to_portal_line(t_editor *editor);
 void			draw_crosshair(t_buffer *buffer);
 void			draw_cutscene(t_buffer *buffer, t_player *plr,
@@ -89,6 +90,7 @@ void			draw_editor_entity_links(t_entity_list *entity,
 void			draw_entity_textfields(t_entity_list *entity, t_buffer *buffer,
 					t_texture **textures);
 void			draw_entity_link_line(t_editor *editor);
+void			draw_fps(t_buffer *buffer, int nb_fps);
 void			draw_frame(t_home *home, t_frame *frame, t_player *plr);
 void			draw_game(t_home *home, t_frame *frame, t_player *plr);
 void			draw_image(t_xy offset, t_texel *tex, t_buffer *buffer,
@@ -106,7 +108,7 @@ void			draw_help_text(t_action *action, t_buffer *buffer);
 void			draw_horizontal_line(t_buffer *buffer, float *depth_buffer,
 					t_texel *tex, t_steps *step);
 void			draw_hud_ammo_left(t_buffer *buffer, t_player *plr);
-void			draw_info(t_frame *frame, t_player *plr, int nb_fps);
+void			draw_info(t_buffer *buffer);
 void			draw_int_string_input(t_buffer *buffer, t_action *action,
 					unsigned char **int_string);
 void			draw_inventory_images(t_home *home,

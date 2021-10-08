@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 14:59:56 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 12:51:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 08:36:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ void	end_level(t_home *home, t_player *plr)
 		end_logic(plr, home);
 	else if (plr->cur_sector == home->end_sector
 		&& home->sectors[home->end_sector]->nb_of_msgs)
+	{
+		plr->input.skip = false;
 		initialize_cutscene(home->sectors[home->end_sector], plr, end_cutscene);
+	}
 	if (plr->power_points <= 0 && plr->dead == 0)
 	{
 		play_sound(plr->audio.rahikainen_die, 30);
