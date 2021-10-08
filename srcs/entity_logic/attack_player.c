@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 10:30:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 18:00:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr)
 	ray.dir = entity->dir;
 	ray.start_sector = entity->sector_idx;
 	shooting_handle(home, &ray);
-	play_sound(plr->audio.thing_attack, 30);
+	if (!entity->is_revealed)
+		play_sound(plr->audio.thing_attack, 15);
 	return (true);
 }
 
@@ -41,7 +42,10 @@ static t_bool	skull_skulker_attack(t_entity *entity, t_home *home,
 			&& (int)(entity->cooldown - t) < 0)
 		{
 			player_take_damage(plr, 1, t);
-			play_sound(plr->audio.skull_skulker_attack, 30);
+			if (!entity->is_revealed)
+				play_sound(plr->audio.skull_skulker_attack, 15);
+			else
+				play_sound(plr->audio.rahikainen_hits, 15);
 		}
 		return (true);
 	}

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:11:42 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 17:32:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 18:04:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	make_noise(t_entity *entity, t_player *plr, Uint32 t)
 		dist = get_distance_squared(plr->pos, entity->pos);
 		if (dist >= 49.0f || dist <= 1.0f)
 			return ;
-		entity->making_noise = 5000;
+		entity->making_noise = 10000;
 		volume = noise_logic(dist);
 		if (entity->type == skull_skulker && !entity->is_revealed)
 			play_sound(plr->audio.skull_skulker_lulling, volume);
