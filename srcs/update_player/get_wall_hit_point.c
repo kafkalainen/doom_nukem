@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 11:40:59 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 12:57:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/08 13:01:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	set_hole_properties(t_wall *wall, int *hole_type, int *sector_idx,
 			int cur_sector)
 {
-	if (wall->is_door)
+	if (wall->is_door || wall->top.type == -door)
 	{
 		ft_putendl("Nothing");
 		*hole_type = nothing;
@@ -52,7 +52,10 @@ float	get_wall_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 			break ;
 		}
 		else if (test[0] || test[1])
+		{
 			set_hole_properties(wall, &hole->type, &hole->sector_idx, sector);
+			break ;
+		}
 		wall = wall->next;
 	}
 	return (ft_fmin(d[0], d[1]));
