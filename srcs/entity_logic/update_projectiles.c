@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 10:07:21 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 12:35:19 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 08:02:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ t_bool	projectile_movement(t_home *home, t_player *plr, t_projectile *current,
 	if (!wall)
 	{
 		current->pos = test_pos;
-		check_if_moved_through_portal(&current->sector_idx, current->pos,
-			1.0f, home);
+		check_if_moved_through_portal(&current->sector_idx, current->pos, home);
 		check_distance_to_ground(home->sectors[current->sector_idx],
 			0.1f, current->pos, &dist);
 		if (dist > 0.1f)

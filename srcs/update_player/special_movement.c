@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 18:52:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 08:06:12 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,7 @@ t_bool	jetpack(t_player *plr, t_home *home, Uint32 t)
 		if (!wall)
 		{
 			plr->pos = plr->test_pos;
-			check_if_moved_through_portal(&plr->cur_sector, plr->pos,
-				plr->height, home);
+			check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 			return (true);
 		}
 		plr->look_dir = wall->top.normal;

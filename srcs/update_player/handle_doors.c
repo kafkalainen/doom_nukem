@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:18:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 14:58:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 08:34:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,34 +52,34 @@ static void	translate_door(t_wall *door, float speed, float time)
 	door->bot.p[2] = translate_point(&door->bot.p[2], translation_bottom);
 }
 
-static void	handle_door_logic(t_wall *wall, Uint32 delta_time)
+static void	handle_door_logic(t_wall *door, t_player *plr, Uint32 delta_time)
 {
 	float	current_height;
 
-	current_height = wall->next->top.p[2].y - wall->next->top.p[0].y;
-	if (wall->open_until <= 0)
+	current_height = door->next->top.p[2].y - door->next->top.p[0].y;
+	if (door->open_until <= 0)
 	{
-		if (!wall->is_closed)
+		if (!door->is_closed)
 		{
-			lock_the_door(wall, wall->next);
-			wall->is_closed = true;
+			lock_the_door(door, door->next);
+			door->is_closed = true;
 		}
 	}
 	else
 	{
-		if (wall->next->height - current_height > 1.5f)
-			wall->is_closed = false;
-		if (wall->open_until - 2500 > 0)
-			translate_door(wall->next, wall->height * 0.4f,
+		if (door->next->height - current_height > plr->height + 0.3f)
+			door->is_closed = false;
+		if (door->open_until - 2500 > 0)
+			translate_door(door->next, door->height * 0.4f,
 				delta_time * 0.001f);
 		else
-			translate_door(wall->next, -wall->height * 0.4f,
+			translate_door(door->next, -door->height * 0.4f,
 				delta_time * 0.001f);
-		wall->open_until -= delta_time;
+		door->open_until -= delta_time;
 	}
 }
 
-void	update_doors(t_sector **sectors, Uint32 nb_of_sectors,
+void	update_doors(t_sector **sectors, t_player *plr, t_uint nb_of_sectors,
 		Uint32 delta_time)
 {
 	t_uint	i;
@@ -94,7 +94,7 @@ void	update_doors(t_sector **sectors, Uint32 nb_of_sectors,
 		while (walls)
 		{
 			if (wall->is_door)
-				handle_door_logic(wall, delta_time);
+				handle_door_logic(wall, plr, delta_time);
 			wall = wall->next;
 			walls--;
 		}

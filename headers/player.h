@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 14:53:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 08:18:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_player
 	t_inventory		inventory[4];
 	t_xyz			pos;
 	t_xyz			test_pos;
+	t_xyz			prev_pos;
 	t_xyz			look_dir;
 	t_xyz			move_dir;
 	t_xyz			target;
@@ -220,8 +221,8 @@ void			unstuck(t_player *plr, t_home *home);
 void			update_player(t_player *plr, t_home *home, Uint32 delta_time);
 void			update_cutscene(t_player *plr, t_home *home, Uint32 t);
 void			update_damage_tick(Uint32 delta_time, int *take_damage);
-void			update_doors(t_sector **sectors, Uint32 nb_of_sectors,
-					Uint32 delta_time);
+void			update_doors(t_sector **sectors, t_player *plr,
+					t_uint nb_of_sectors, Uint32 delta_time);
 t_xyz			vec3_normalize_move_dir(t_xyz dir);
 t_entity		*walking_into_entity(t_xyz test, t_player *plr,
 					t_entity **entities, Uint32 nbr_of_entities);

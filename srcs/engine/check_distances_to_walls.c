@@ -6,13 +6,13 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 11:37:18 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 20:18:11 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 08:30:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../../headers/doom_nukem.h"
 
-static t_bool	check_if_too_close_to_a_wall(t_wall *wall, float width,
+t_bool	check_if_too_close_to_a_wall(t_wall *wall, float width,
 	t_xyz pos, t_xyz dir)
 {
 	t_xyz	isection;
@@ -20,7 +20,7 @@ static t_bool	check_if_too_close_to_a_wall(t_wall *wall, float width,
 
 	isection = vec3(0.0f, 0.0f, 0.0f);
 	pow_width = width * width;
-	if (wall->top.type < 0)
+	if (!check_if_open_portal(wall))
 	{
 		if (vec3_ray_triangle_intersect(&wall->top, pos, dir, &isection)
 			&& get_distance_squared(isection, pos) < pow_width)
@@ -68,4 +68,25 @@ t_wall	*check_if_too_close_to_walls(t_sector *sector, float width,
 		i++;
 	}
 	return (NULL);
+}
+
+t_bool	check_if_too_close_to_a_door(t_wall *door, float width,
+		t_xyz pos, t_xyz dir)
+{
+	t_xyz	left;
+	t_xyz	right;
+	t_xyz	behind;
+
+	left = (t_xyz){-dir.z, dir.y, dir.x, 0.0f};
+	right = (t_xyz){dir.z, dir.y, -dir.x, 0.0f};
+	behind = vec3_mul(dir, -1.0f);
+	if (check_if_too_close_to_a_wall(door, width, pos, dir))
+		return (true);
+	if (check_if_too_close_to_a_wall(door, width, pos, behind))
+		return (true);
+	if (check_if_too_close_to_a_wall(door, width, pos, left))
+		return (true);
+	if (check_if_too_close_to_a_wall(door, width, pos, right))
+		return (true);
+	return (false);
 }

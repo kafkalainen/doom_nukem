@@ -6,11 +6,12 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 19:45:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 08:13:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+#include <stdio.h>
 
 t_wall	*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir)
 {
@@ -43,16 +44,27 @@ void	player_place_feet_to_ground(t_player *plr, t_home *home)
 	isection = vec3(0.0f, 0.0f, 0.0f);
 	pos = vec3(plr->pos.x, 100.0f, plr->pos.z);
 	idx = find_current_sector(home, pos, plr->cur_sector, &isection);
-	if (idx != plr->cur_sector)
-		check_if_moved_through_portal(&plr->cur_sector,
-			plr->pos, plr->height, home);
+	if (idx != plr->cur_sector && idx != -1)
+	{
+		ft_putendl("Moving player to current sector.");
+		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
+		printf("idx: %d, cur_sector: %d\n", idx, plr->cur_sector);
+		printf("idx nbr_of_walls: %d\n", home->sectors[idx]->nb_of_walls);
+		printf("idx nbr_of_ground: %d\n", home->sectors[idx]->nb_of_ground);
+		printf("cur_sector nbr_of_walls: %d\n", home->sectors[plr->cur_sector]->nb_of_walls);
+		printf("cur_sector nbr_of_ground: %d\n", home->sectors[plr->cur_sector]->nb_of_ground);
+		if (idx != plr->cur_sector)
+			idx = -1;
+	}
 	if (idx == -1)
 	{
 		ft_putendl("Risk of moving out of bounds, move to centroid.");
+		printf("x: %f, y: %f, z: %f\n", plr->pos.x, plr->pos.y, plr->pos.z);
 		plr->pos = vec3(home->sectors[plr->cur_sector]->centroid.x, 100.0f,
 				home->sectors[plr->cur_sector]->centroid.y);
 		find_current_sector(home, plr->pos, plr->cur_sector, &isection);
 	}
+	// ft_putendl("Player in correct sector");
 	isection.y += plr->height;
 	plr->pos = isection;
 }
@@ -63,31 +75,28 @@ static void	viewmodel_motion(t_player *plr)
 	plr->hud.vm_my = sin(plr->steps);
 }
 
-void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, float height,
-		t_home *home)
+void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
 {
 	Uint32	i;
 	t_wall	*portal;
-	float	dist;
 
 	i = 0;
 	portal = home->sectors[*cur_sector]->walls;
 	while (i < home->sectors[*cur_sector]->nb_of_walls)
 	{
-		if (check_if_open_portal(portal)
-			&& (check_distance_to_ground(home->sectors[portal->top.type],
-					height, pos, &dist)
-				|| point_is_on_the_lseg(portal->point,
-					vec2(pos.x, pos.z), portal->next->point)))
+		if (check_if_open_portal(portal))
 		{
-			ft_putendl("UPDATED SECTOR");
-			*cur_sector = portal->top.type;
-			automatic_lights(home->sectors[*cur_sector], home);
-			return ;
+			if (check_if_in_current_sector(home->sectors[portal->top.type], &pos))
+			{
+				*cur_sector = portal->top.type;
+				automatic_lights(home->sectors[*cur_sector], home);
+				return ;
+			}
 		}
 		portal = portal->next;
 		i++;
 	}
+	// printf("not found in next sector, check if moved through portal\n");
 }
 
 t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
@@ -106,8 +115,7 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 	if (!wall && !entity)
 	{
 		plr->pos = plr->test_pos;
-		check_if_moved_through_portal(&plr->cur_sector,
-			plr->pos, plr->height, home);
+		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 		plr->steps += t * 0.005f;
 		viewmodel_motion(plr);
 		return (true);

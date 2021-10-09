@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 09:54:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 20:47:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 08:03:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ t_bool	bounce_off_the_wall(t_wall *wall, t_player *plr,
 	if (!new_wall && !new_entity)
 	{
 		plr->pos = plr->test_pos;
-		check_if_moved_through_portal(&plr->cur_sector, plr->pos,
-			plr->height, home);
+		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 		plr->steps += t * 0.005f;
 		return (true);
 	}
@@ -50,8 +49,7 @@ t_bool	bounce_off_entity(t_entity *entity, t_player *plr,
 	if (!new_wall && !new_entity)
 	{
 		plr->pos = plr->test_pos;
-		check_if_moved_through_portal(&plr->cur_sector, plr->pos,
-			plr->height, home);
+		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 		plr->steps += t * 0.005f;
 		return (true);
 	}
@@ -71,8 +69,7 @@ t_bool	entity_bounce_off_the_wall(t_wall *wall, t_entity *entity,
 	if (!new_wall)
 	{
 		entity->pos = entity->test_pos;
-		check_if_moved_through_portal(&entity->sector_idx, entity->pos,
-			entity->height, home);
+		check_if_moved_through_portal(&entity->sector_idx, entity->pos, home);
 		entity->dir = wall->top.normal;
 		return (true);
 	}
@@ -94,8 +91,7 @@ t_bool	entity_bounce_off_player(t_entity *entity, t_home *home, Uint32 t)
 	if (!new_wall)
 	{
 		entity->pos = entity->test_pos;
-		check_if_moved_through_portal(&entity->sector_idx, entity->pos,
-			entity->height, home);
+		check_if_moved_through_portal(&entity->sector_idx, entity->pos, home);
 		return (true);
 	}
 	else
@@ -111,7 +107,6 @@ void	unstuck(t_player *plr, t_home *home)
 	if (wall)
 	{
 		plr->pos = vec3_add(plr->pos, vec3_mul(wall->top.normal, 0.06f));
-		check_if_moved_through_portal(&plr->cur_sector, plr->pos,
-			plr->height, home);
+		check_if_moved_through_portal(&plr->cur_sector, plr->pos, home);
 	}
 }

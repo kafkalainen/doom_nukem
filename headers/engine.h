@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 11:26:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 08:26:49 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,9 @@ t_bool			check_if_already_been_in_this_sector(int cur_sector,
 					int *sector_list, int nb_of_sectors);
 t_bool			check_if_facing_player(t_bool left, t_bool right, t_wall *wall,
 					t_fov fov);
-void			check_if_moved_through_portal(int *cur_sector, t_xyz pos,
-					float height, t_home *home);
+void			check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home);
+t_bool			check_if_too_close_to_a_door(t_wall *door, float width,
+					t_xyz pos, t_xyz dir);
 t_wall			*check_if_too_close_to_walls(t_sector *sector, float width,
 					t_xyz pos, t_xyz dir);
 int				check_intersection(t_wall *p0, t_xy pos, t_xy dir);
