@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_projectiles.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 10:07:21 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 08:02:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:39:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_bool	projectile_movement(t_home *home, t_player *plr, t_projectile *current,
 				t * current->velocity));
 	if (get_distance_squared(current->pos, plr->pos) < 0.1f * 0.1f)
 		return (false);
-	if (check_distance_to_ceiling(home->sectors[current->sector_idx],
+	if (check_dist_to_ceiling(home->sectors[current->sector_idx],
 			&test_pos))
 		return (false);
 	wall = check_if_too_close_to_walls(home->sectors[current->sector_idx],
@@ -54,7 +54,7 @@ t_bool	projectile_movement(t_home *home, t_player *plr, t_projectile *current,
 	{
 		current->pos = test_pos;
 		check_if_moved_through_portal(&current->sector_idx, current->pos, home);
-		check_distance_to_ground(home->sectors[current->sector_idx],
+		check_dist_to_ground(home->sectors[current->sector_idx],
 			0.1f, current->pos, &dist);
 		if (dist > 0.1f)
 			return (true);

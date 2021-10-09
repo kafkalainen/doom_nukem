@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   attack_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 13:48:43 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 18:00:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:48:43 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr)
 {
 	t_ray	ray;
+	int		volume;
 
 	ray.side = ENEMY;
 	ray.pos = entity->pos;
+	volume = (int)(ft_fmax(0,
+				15 - (get_distance_squared(ray.pos, plr->pos) * 0.25)));
 	ray.dir = entity->dir;
 	ray.start_sector = entity->sector_idx;
 	shooting_handle(home, &ray);
 	if (!entity->is_revealed)
-		play_sound(plr->audio.thing_attack, 15);
+		play_sound(plr->audio.thing_attack, volume);
 	return (true);
 }
 

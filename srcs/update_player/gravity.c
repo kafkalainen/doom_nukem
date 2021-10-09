@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gravity.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:13:41 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 13:57:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:39:39 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	gravity(t_home *home, t_player *plr, Uint32 delta_time)
 
 	drop = -1.0f;
 	g = home->sectors[plr->cur_sector]->gravity;
-	if (!check_distance_to_ground(home->sectors[plr->cur_sector],
+	if (!check_dist_to_ground(home->sectors[plr->cur_sector],
 			plr->height, plr->pos, &drop) || (drop <= 0.07f))
 	{
 		plr->drop_time = 0;
@@ -62,7 +62,7 @@ void	entity_gravity(t_sector *sector, t_home *home,
 	float			drop;
 
 	drop = -1.0f;
-	if (!check_distance_to_ground(sector, entity->legs, entity->pos, &drop)
+	if (!check_dist_to_ground(sector, entity->legs, entity->pos, &drop)
 		|| drop <= 0.0f)
 	{
 		entity->falling = 0;

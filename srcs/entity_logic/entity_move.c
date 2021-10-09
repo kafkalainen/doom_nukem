@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 15:19:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 08:01:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:37:19 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_bool	entity_move(t_entity *entity, t_xyz plr_pos, t_home *home, Uint32 t)
 	if (!entity->is_aggroed && get_distance_squared(entity->pos, plr_pos)
 		< MIN_RANGE)
 		return (false);
-	if (check_distance_to_ceiling(home->sectors[entity->sector_idx],
+	if (check_dist_to_ceiling(home->sectors[entity->sector_idx],
 			&entity->test_pos))
 		return (false);
 	wall = check_if_too_close_to_walls(home->sectors[entity->sector_idx],
