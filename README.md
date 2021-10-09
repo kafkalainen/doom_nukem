@@ -1,5 +1,5 @@
 # Doom-Nukem
-Final Project in the graphics branch of Hive Helsinki code school. Creating a very low level raycaster and a game with it.
+Final Project in the graphics branch of Hive Helsinki code school. Idea of the projects is to extend wolf3d project, and make it a full blown game, with animations, collisions, sprites, sounds, music and a map editor.
 
 ## Usage
 - In Windows environment, you have to install MingW gcc compiler for Windows.
