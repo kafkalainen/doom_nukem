@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 17:25:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 12:24:01 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ void	draw_game(t_home *home, t_frame *frame, t_player *plr)
 			vec2_mul(vec2_rot(plr->look2_dir, -FOV), 2000.0f));
 	frame->fov.cur_sector = plr->cur_sector;
 	nb_of_sectors = scan_fov(home, frame->fov, nb_of_sectors,
-			&frame->sector_buffer);
+			&home->sector_buffer);
 	add_skybox(frame, home, plr, &home->skybox);
 	while (nb_of_sectors--)
 	{
-		frame->idx = frame->sector_buffer[nb_of_sectors];
+		frame->idx = home->sector_buffer[nb_of_sectors];
 		fill_rasterqueue(home, frame, plr);
 		if (frame->transformed->size > 0)
 			draw_sector(frame, home, plr, frame->idx);
