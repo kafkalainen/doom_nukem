@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_g.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 11:39:30 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 12:53:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:23:07 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ t_bool	vec3_ray_triangle_intersect(t_triangle *tri, t_xyz pos, t_xyz dir,
 // 	return (true);
 // }
 
-// t_bool	vec3_ray_intersects_triangle(t_triangle *inTriangle, t_xyz ray_origin,
-// 		t_xyz ray_vector, t_xyz	*isection)
+// t_bool	vec3_ray_intersects_triangle(t_triangle *inTriangle,
+//	t_xyz ray_origin, t_xyz ray_vector, t_xyz *isection)
 // {
 // 	const float	epsilon = 0.0000001f;
 // 	t_xyz		p[3];

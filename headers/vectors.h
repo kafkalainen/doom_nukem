@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 09:37:04 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:21:53 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,6 @@ t_xy		multiply_vec2_with_2d_matrix(t_xy *src, t_m3x3 *x);
 t_bool		point_inside_fov(t_xy p0, t_xy p1, t_xy p2, t_xy p);
 void		triangle_div(t_triangle *projected);
 float		vec2_get_distance_squared(t_xy pt0, t_xy pt1);
-t_bool		vec3_ray_intersects_triangle(t_triangle *inTriangle, t_xyz ray_origin,
-			t_xyz ray_vector, t_xyz	*isection);
+t_bool		vec3_ray_intersects_triangle(t_triangle *inTriangle,
+				t_xyz ray_origin, t_xyz ray_vector, t_xyz *isection);
 #endif

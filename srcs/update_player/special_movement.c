@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_movement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 08:06:12 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:24:13 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ void	crouch(t_player *plr, t_sector *sector, Uint32 delta_time)
 		else
 			animation_start = 0;
 	}
-	else
-		return ;
 }
 
 void	jump(t_player *plr, t_sector *sector)
