@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:40 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 12:06:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 07:21:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	reload_editor_with_defaults(t_editor *editor, char *path)
 		free(editor->linked_mapname);
 	editor->mapname = NULL;
 	editor->linked_mapname = NULL;
-	initialize_actions(&editor->action);
+	initialize_actions(&editor->action, &editor->buffer);
 	editor->mouse_data.i_mbleft = 0;
 	editor->mouse_data.i_mbright = 0;
 	editor->mouse_data.selected = -1;

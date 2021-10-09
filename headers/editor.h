@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/07 14:13:31 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/09 07:21:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,7 @@ int				calc_entities_in_sector_with_type(t_entity_list **head,
 					int sector_idx, int entity_type);
 void			create_new_entity(t_entity_list **head,
 					t_action *action, t_editor_sector *sector, t_xy pos);
+void			draw_world_pos(t_buffer *buffer, t_xy world_pos);
 void			delete_selected_entity(t_entity_list **head, t_action *action);
 void			delete_entity_with_idx(t_entity_list **head, int idx);
 void			delete_entities_from_sector(t_entity_list **entity_head,
@@ -423,7 +424,7 @@ void			reset_portals_to_default_walls(t_editor_sector *sector,
 
 t_xy			get_ndc(t_buffer *buffer, t_screen_xy coord);
 void			initialize_editor_values(t_editor *editor);
-void			initialize_actions(t_action *action);
+void			initialize_actions(t_action *action, t_buffer *buffer);
 void			init_mouse_data(t_mouse_data *mouse_data);
 
 void			editor_load_map(t_editor *editor);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/07 11:53:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 07:22:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	setup_editor(t_editor *editor, t_home *home)
 	home->win.screen = SDL_GetWindowSurface(home->win.window);
 	init_textures(home);
 	init_mouse_data(&editor->mouse_data);
-	initialize_actions(&editor->action);
+	initialize_actions(&editor->action, &editor->buffer);
 	load_map_names_to_memory(editor);
 }
 

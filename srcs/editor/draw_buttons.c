@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:47:35 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/04 18:53:52 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/09 07:28:36 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@ int	get_color_from_action_data(int i, t_action *action, int end_sector)
 			&& end_sector < 0))
 		return (get_color(red));
 	return (get_color(white));
+}
+
+void	draw_world_pos(t_buffer *buffer, t_xy world_pos)
+{
+	t_plx_modifier	mod;
+	char			*x;
+	char			*y;
+
+	mod = (t_plx_modifier){0xFFFFFFFF, TEXT_SIZE, 8};
+	x = ft_ftoa(world_pos.x, 6);
+	y = ft_ftoa(world_pos.y, 6);
+	ft_str_pxl(buffer, vec2(1050, 860), x, mod);
+	ft_str_pxl(buffer, vec2(1050, 880), y, mod);
+	ft_strdel(&x);
+	ft_strdel(&y);
 }
 
 void	draw_buttons(t_editor *editor, t_texture **textures)
@@ -45,6 +60,7 @@ void	draw_buttons(t_editor *editor, t_texture **textures)
 		draw_sector_textfields(editor->temp_sector, &editor->buffer, textures);
 	if (editor->action.draw_depth == wall && editor->temp_wall)
 		draw_wall_textfields(editor->temp_wall, &editor->buffer, textures);
+	draw_world_pos(&editor->buffer, editor->action.world_pos);
 }
 
 static void	draw_map_list(t_buffer *buffer, t_action *action,

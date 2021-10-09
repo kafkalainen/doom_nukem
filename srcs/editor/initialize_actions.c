@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 12:13:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 07:32:42 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,18 @@ static void	initialize_input(t_action *action)
 	action->keysym = -1;
 }
 
-void	initialize_actions(t_action *action)
+void	initialize_actions(t_action *action, t_buffer *buffer)
 {
+	t_screen_xy	pos;
+
+	pos.x = 0;
+	pos.y = 0;
 	action->offsetf = vec2(0.0f, 0.0f);
 	action->scalarf = 0.125f;
+	SDL_GetMouseState(&pos.x, &pos.y);
+	action->mouse_pos = get_ndc(buffer, pos);
+	action->world_pos = ndc_to_world(action->mouse_pos, action->offsetf,
+		action->scalarf);
 	action->write_sector_story = false;
 	action->prev_sector = -1;
 	action->prev_wall = -1;
