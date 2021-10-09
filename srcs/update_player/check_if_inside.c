@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 10:04:32 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 10:38:27 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 12:52:23 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ t_bool	check_if_in_current_sector(t_sector *sector, t_xyz *pos)
 	while (j < sector->nb_of_ground)
 	{
 		if (vec3_ray_triangle_intersect(&ground->tri, *pos,
-				vec3(0.0f, -1.0f, 0.0f), &isection))
+				vec3(0.0f, -1.0f, 0.0f), &isection)) //OK
+		// if (vec3_ray_intersects_triangle(&ground->tri, *pos,
+		// 		vec3(0.0f, -1.0f, 0.0f), &isection))
 		{
 			*pos = isection;
 			return (true);

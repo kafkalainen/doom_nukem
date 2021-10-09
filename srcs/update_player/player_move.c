@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 08:13:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 12:49:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	player_place_feet_to_ground(t_player *plr, t_home *home)
 				home->sectors[plr->cur_sector]->centroid.y);
 		find_current_sector(home, plr->pos, plr->cur_sector, &isection);
 	}
-	// ft_putendl("Player in correct sector");
 	isection.y += plr->height;
 	plr->pos = isection;
 }
@@ -75,28 +74,76 @@ static void	viewmodel_motion(t_player *plr)
 	plr->hud.vm_my = sin(plr->steps);
 }
 
-void	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
+// t_bool	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
+// {
+// 	Uint32	i;
+// 	t_wall	*portal;
+
+// 	i = 0;
+// 	portal = home->sectors[*cur_sector]->walls;
+// 	while (i < home->sectors[*cur_sector]->nb_of_walls)
+// 	{
+// 		if (check_if_open_portal(portal))
+// 		{
+// 			if (check_if_in_current_sector(home->sectors[portal->top.type], &pos))
+// 			{
+// 				*cur_sector = portal->top.type;
+// 				automatic_lights(home->sectors[*cur_sector], home);
+// 				return (true);
+// 			}
+// 		}
+// 		portal = portal->next;
+// 		i++;
+// 	}
+// 	return (false);
+// }
+
+t_bool	find_path(t_home *home, int cur, int dest, int *sector_count)
 {
-	Uint32	i;
+	t_uint	i;
 	t_wall	*portal;
 
 	i = 0;
-	portal = home->sectors[*cur_sector]->walls;
-	while (i < home->sectors[*cur_sector]->nb_of_walls)
+	portal = home->sectors[cur]->walls;
+	*(home->sector_buffer + *sector_count) = cur;
+	*sector_count += 1;
+	while (i < home->sectors[cur]->nb_of_walls)
 	{
-		if (check_if_open_portal(portal))
+		if (check_if_open_portal(portal) && !check_if_already_been_in_this_sector(
+				portal->top.type, home->sector_buffer, *sector_count))
 		{
-			if (check_if_in_current_sector(home->sectors[portal->top.type], &pos))
+			if (portal->top.type == dest)
+				return (true);
+			else
 			{
-				*cur_sector = portal->top.type;
-				automatic_lights(home->sectors[*cur_sector], home);
-				return ;
+				if (find_path(home, portal->top.type, dest, sector_count))
+					return (true);
 			}
 		}
 		portal = portal->next;
 		i++;
 	}
-	// printf("not found in next sector, check if moved through portal\n");
+	return (false);
+}
+
+t_bool	check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home)
+{
+	t_xyz	isection;
+	int		idx;
+	int		sector_count;
+
+	sector_count = 0;
+	idx = find_current_sector(home, pos, *cur_sector, &isection);
+	if (idx != -1 && *cur_sector != idx)
+	{
+		if (find_path(home, *cur_sector, idx, &sector_count))
+		{
+			*cur_sector = idx;
+			automatic_lights(home->sectors[*cur_sector], home);
+			return (true);
+		}
+	}
+	return (false);
 }
 
 t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
@@ -106,7 +153,7 @@ t_bool	player_move(t_player *plr, t_home *home, Uint32 t)
 
 	plr->move_dir = vec3_normalize_move_dir(plr->move_dir);
 	plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->move_dir, t * 0.005f));
-	if (!check_if_vertically_possible(home, plr, plr->test_pos))
+	if (!check_if_vertically_possible(home, plr, plr->test_pos)) // OK
 		return (false);
 	wall = check_if_too_close_to_walls(home->sectors[plr->cur_sector],
 			plr->width, plr->test_pos, plr->move_dir);
