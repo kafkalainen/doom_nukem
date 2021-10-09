@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 14:35:57 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/07 16:03:29 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 07:53:19 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char				*ft_memstr(const char *haystack, const char *needle,
 						size_t size);
 int					ft_nb_len(int value, int base);
 double				ft_pow_of_2(double base, double exponent);
+void				ft_putbool(unsigned int boolean);
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl(char const *s);

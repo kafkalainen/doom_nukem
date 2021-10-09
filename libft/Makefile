@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 13:08:18 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/06 17:42:53 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/09 07:54:00 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ SRC_LIST = \
 	$(SLASH)ft_strjoin.c \
 	$(SLASH)ft_strsplit.c \
 	$(SLASH)ft_itoa.c \
+	$(SLASH)ft_putbool.c \
 	$(SLASH)ft_putchar.c \
 	$(SLASH)ft_putstr.c \
 	$(SLASH)ft_putendl.c \
