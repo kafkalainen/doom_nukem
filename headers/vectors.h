@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 13:21:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/09 14:13:00 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ typedef struct s_ray
 {
 	t_xyz			pos;
 	t_xyz			dir;
-	t_xyz			cutpoint;
 	t_xyz			plr_pos;
 	int				side;
 	int				start_sector;

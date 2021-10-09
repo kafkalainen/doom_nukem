@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 09:12:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 14:07:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ enum			e_texture_idx
 ** Drawing functions
 */
 
+void			calc_colours(Uint32 *bg, Uint32 *fg, float *lightness);
 t_bool			check_for_valid_draw_range(t_steps *step);
 t_triangle		create_projection(t_triangle *src);
 void			death_animation(t_home *home, t_player *plr, Uint32 t);

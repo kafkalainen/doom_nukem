@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 13:31:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 14:00:35 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
 	t_ray	ray;
 
 	if (plr->wep[plr->active_wep].fire_rate > 0)
-		plr->wep[plr->active_wep].fire_rate -= t * 0.001;
+		plr->wep[plr->active_wep].fire_rate -= t;
 	else
 		plr->wep[plr->active_wep].fire_rate = 0;
 	if (!plr->input.shoot)
@@ -73,18 +73,20 @@ static void	plr_shoot_handle(t_home *home, t_player *plr, Uint32 t)
 	if (plr->wep[plr->active_wep].ammo > 0
 		&& plr->wep[plr->active_wep].fire_rate <= 0)
 	{
-		plr->wep[plr->active_wep].fire_rate = 1.0f;
+		plr->wep[plr->active_wep].fire_rate = 1000;
 		plr->hud.vm_ry = -20;
-		ray.pos = plr->pos;
-		ray.dir = plr->look_dir;
-		ray.side = PLAYER;
-		ray.start_sector = plr->cur_sector;
+		ray.side = init_player_shoot(&ray, plr->pos, plr->look_dir,
+				plr->cur_sector);
 		shooting_handle(home, &ray);
 		plr->wep[plr->active_wep].ammo--;
 		play_sound(plr->audio.plasma_gun, 15);
 	}
-	else if (plr->wep[plr->active_wep].ammo == 0)
+	else if (plr->wep[plr->active_wep].ammo == 0
+		&& plr->wep[plr->active_wep].fire_rate <= 0)
+	{
+		plr->wep[plr->active_wep].fire_rate = 1000;
 		play_sound(plr->audio.plasma_gun_no_ammo, 15);
+	}
 }
 
 static void	update_player_values(t_player *plr, Uint32 delta_time)

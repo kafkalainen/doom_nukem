@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 11:10:49 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 08:35:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:34:50 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	initialize_player_game_states(t_player *plr)
 	plr->plot_state = no_plot;
 	plr->ending_played = false;
 	plr->wep[0].ammo = 0;
-	plr->wep[0].fire_rate = 1.0f;
+	plr->wep[0].fire_rate = 1000;
 	plr->wep[0].type = 0;
 	plr->display_object = 0;
 	plr->dead = 0;

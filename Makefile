@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/09 13:28:26 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/09 14:08:55 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -210,6 +210,7 @@ SRCS = \
 	update_player$(SLASH)get_wall_hit_point.c \
 	update_player$(SLASH)gravity.c \
 	update_player$(SLASH)handle_doors.c \
+	update_player$(SLASH)init_player_shoot.c \
 	update_player$(SLASH)key_input.c \
 	update_player$(SLASH)key_input_toggle.c \
 	update_player$(SLASH)mouse_handle.c \
@@ -259,6 +260,7 @@ SRCS = \
 	utilities$(SLASH)audio_b.c 	\
 	utilities$(SLASH)audio_c.c 	\
 	utilities$(SLASH)audio_cleanup.c \
+	utilities$(SLASH)calc_colours.c \
 	utilities$(SLASH)error_output.c \
 	utilities$(SLASH)fps_timer.c \
 	utilities$(SLASH)ft_roundf_to_grid.c \

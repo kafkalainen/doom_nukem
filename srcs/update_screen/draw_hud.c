@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_hud.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 18:44:14 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 15:38:22 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/09 14:12:22 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,11 @@ void	draw_heads_up_display(t_home *home, t_frame *frame, t_player *plr)
 	Uint32			bg_colour;
 	Uint32			fg_colour;
 
-	bg_colour = 0xFFFFFFFF;
-	if (frame->buffer.lightness < 1.0f)
-		bg_colour = colour_scale(0xFFFFFFFF, 1.0f,
-				frame->buffer.lightness, 1.0f);
-	fg_colour = 0xFFFFCC00;
-	if (frame->buffer.lightness < 1.0f)
-		fg_colour = colour_scale(0xFFFFCC00, 1.0f,
-				frame->buffer.lightness, 1.0f);
-	if (plr->wep[plr->active_wep].fire_rate > 0.45)
+	bg_colour = 0;
+	fg_colour = 0;
+	calc_colours(&bg_colour, &fg_colour, &frame->buffer.lightness);
+	if (plr->wep[plr->active_wep].ammo > 0
+		&& plr->wep[plr->active_wep].fire_rate > 450)
 		draw_muzzleflash(home, &frame->buffer, plr,
 			vec2(plr->hud.vm_x, plr->hud.vm_y + 32));
 	draw_weapon(home, &frame->buffer, plr,

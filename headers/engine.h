@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 13:29:47 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:56:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ t_texel			*get_tex(int idx, t_texture	**textures);
 float			get_wall_height(float left_ground, float right_ground,
 					float left_ceiling, float right_ceiling);
 t_wall			*get_portal_by_idx(int idx, t_sector *sector);
+int				init_player_shoot(t_ray *ray, t_xyz pos, t_xyz dir,
+					int sector);
 t_bool			is_triangle_visible(t_triangle *viewed_tri, t_xyz pos);
 int				orientation_of_three_points(t_xy a, t_xy b, t_xy c);
 int				point_is_on_the_lseg(t_xy a, t_xy c, t_xy b);
