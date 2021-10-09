@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:44:14 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/08 09:13:28 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 12:25:54 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	free_game_assets(t_home *home, t_audio *audio)
 	if (home->t.frame_times)
 		free(home->t.frame_times);
 	free_sectors(home);
+	free(home->sector_buffer);
 	free_all_textures(home->textures, NUM_TEX);
 	free_entities(home);
 	free_projectiles(home);
