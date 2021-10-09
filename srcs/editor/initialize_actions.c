@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 07:32:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:17:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	initialize_actions(t_action *action, t_buffer *buffer)
 	SDL_GetMouseState(&pos.x, &pos.y);
 	action->mouse_pos = get_ndc(buffer, pos);
 	action->world_pos = ndc_to_world(action->mouse_pos, action->offsetf,
-		action->scalarf);
+			action->scalarf);
 	action->write_sector_story = false;
 	action->prev_sector = -1;
 	action->prev_wall = -1;
