@@ -58,6 +58,7 @@ This project assumes that it is installed to C:\MinGW
 - Manipulation of direction and velocity of entities based on time.
 - Manipulation of direction of the sprites to create animations and perspective to an object.
 - Where void pointers and pointers to functions should be used.
+- Möller–Trumbore ray-triangle intersection algorithm
 - Game design.
 - Level design.
 
