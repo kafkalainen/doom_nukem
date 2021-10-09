@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/09 12:24:57 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:12:50 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/doom_nukem.h"
 
 int	free_all(t_frame *frame, t_audio *audio, Uint32 *buffer,
-		char **chosen_map)
+		t_home *home)
 {
 	free_queues(frame);
 	free(frame->buffer.pxl_buffer);
 	free(buffer);
-	ft_strdel(chosen_map);
+	free(home->map);
+	free(home->sector_buffer);
 	cleanup_audio_source(audio);
 	ft_putendl("User closed the window");
 	Mix_CloseAudio();
@@ -81,5 +82,5 @@ int	main(int argc, char **argv)
 		render_buffer(menu.buffer.pxl_buffer, home.win.screen);
 		SDL_UpdateWindowSurface(home.win.window);
 	}
-	return (free_all(&frame, &plr.audio, menu.buffer.pxl_buffer, &home.map));
+	return (free_all(&frame, &plr.audio, menu.buffer.pxl_buffer, &home));
 }

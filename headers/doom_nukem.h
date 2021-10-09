@@ -78,7 +78,7 @@ int			doom_mkdir(void);
 void		error_output(char *msg);
 void		error_output_sdl(char *msg, t_home *home, t_frame *frame);
 int			free_all(t_frame *frame, t_audio *audio, Uint32 *buffer,
-				char **chosen_map);
+				t_home *home);
 void		fps_timer(t_time *t);
 void		get_map_maximum_values(float *max, t_sector **sectors,
 				t_uint nb_of_sectors);
