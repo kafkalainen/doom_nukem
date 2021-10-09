@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_distances.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:16:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 10:50:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:39:31 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
 
-t_bool	check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc)
+t_bool	check_dist_to_ceiling(t_sector *sector, t_xyz *new_loc)
 {
 	t_xyz			isection;
 	t_bool			state;
@@ -105,7 +105,7 @@ t_bool	calc_distance_to_ground(t_sector *sector, t_xyz *new_loc,
 	return (state);
 }
 
-t_bool	check_distance_to_ground(t_sector *sector, float height,
+t_bool	check_dist_to_ground(t_sector *sector, float height,
 		t_xyz pos, float *dist)
 {
 	unsigned int	i;

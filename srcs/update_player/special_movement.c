@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 16:02:45 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 13:24:13 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:39:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ void	crouch(t_player *plr, t_sector *sector, Uint32 delta_time)
 		else
 			animation_start = 0;
 	}
-	else if (plr->input.crouch == 0
-		&& !check_distance_to_ceiling(sector, &plr->pos))
+	else if (!plr->input.crouch && !check_dist_to_ceiling(sector, &plr->pos))
 	{
 		set_animation_on(&animation_start, &animation_end, 100);
 		if (animation_start < animation_end)
@@ -78,11 +77,11 @@ void	jump(t_player *plr, t_sector *sector)
 	float	dist;
 
 	dist = 0.0f;
-	check_distance_to_ground(sector, plr->height, plr->pos, &dist);
+	check_dist_to_ground(sector, plr->height, plr->pos, &dist);
 	if (plr->input.jump && dist <= 0.0f
-		&& !check_distance_to_ceiling(sector, &plr->pos))
+		&& !check_dist_to_ceiling(sector, &plr->pos))
 		plr->speed.y += 4.0f;
-	if (check_distance_to_ceiling(sector, &plr->pos))
+	if (check_dist_to_ceiling(sector, &plr->pos))
 		plr->speed.y -= 4.0f;
 	plr->input.jump = 0;
 }
@@ -96,7 +95,7 @@ t_bool	jetpack(t_player *plr, t_home *home, Uint32 t)
 		plr->fuel_points -= t * 0.05f;
 		plr->move_dir = vec3_unit_vector(plr->look_dir);
 		plr->test_pos = vec3_add(plr->pos, vec3_mul(plr->look_dir, t * 0.004f));
-		if (check_distance_to_ceiling(home->sectors[plr->cur_sector],
+		if (check_dist_to_ceiling(home->sectors[plr->cur_sector],
 				&plr->test_pos))
 			return (false);
 		plr->move_dir = vec3_unit_vector(vec3(plr->look_dir.x,

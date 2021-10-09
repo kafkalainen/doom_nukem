@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/09 08:18:20 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:37:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,8 +165,8 @@ void			player_place_feet_to_ground(t_player *plr, t_home *home);
 t_bool			check_if_vertically_possible(t_home *home,
 					t_player *plr, t_xyz pos);
 t_bool			check_if_in_current_sector(t_sector *sector, t_xyz *pos);
-t_bool			check_distance_to_ceiling(t_sector *sector, t_xyz *new_loc);
-t_bool			check_distance_to_ground(t_sector *sector, float height,
+t_bool			check_dist_to_ceiling(t_sector *sector, t_xyz *new_loc);
+t_bool			check_dist_to_ground(t_sector *sector, float height,
 					t_xyz pos, float *dist);
 t_bool			check_for_matching_key(t_wall *wall, t_player *plr,
 					int keycard);
