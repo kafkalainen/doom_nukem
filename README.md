@@ -1,6 +1,9 @@
 # Doom-Nukem
 Final Project in the graphics branch of Hive Helsinki code school. Idea of the projects is to extend wolf3d project, and make it a full blown game, with animations, collisions, sprites, sounds, music and a map editor.
 
+## Link to video of the game
+https://raw.githubusercontent.com/kafkalainen/doom_nukem/main/.github/images/inside_the_game.mp4
+
 ## Usage
 - In Windows environment, you have to install MingW gcc compiler for Windows.
 Download the installer from https://sourceforge.net/projects/mingw/files/Installer/
