@@ -6,7 +6,7 @@
 #    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/08 14:00:10 by jnivala          ###   ########.fr        #
+#    Updated: 2021/10/09 13:28:26 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -183,6 +183,7 @@ SRCS = \
 	porting$(SLASH)write_all_audio_data.c \
 	engine$(SLASH)calc_sector_bounds.c \
 	engine$(SLASH)colour_scale.c \
+	engine$(SLASH)find_path.c \
 	engine$(SLASH)get_next_wall_tex.c \
 	engine$(SLASH)get_portal_by_idx.c \
 	engine$(SLASH)get_wall_height.c \
