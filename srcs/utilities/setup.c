@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 14:47:06 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/09 12:22:52 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	setup(t_home *home, t_player *plr, t_frame *frame, t_menu *menu)
 		error_output("Memory allocation failed for depth buffer!");
 	if (initialize_rasterization_queues(frame))
 		error_output("Memory allocation failed for rasterizer.");
-	frame->sector_buffer = (int *)malloc(sizeof(int) * (3000));
-	if (!frame->sector_buffer)
+	home->sector_buffer = (int *)malloc(sizeof(int) * (3000));
+	if (!home->sector_buffer)
 		error_output("Memory allocation failed for sector buffer.");
 	home = init_sdl(home, frame);
 	initialize_audio_to_null(&plr->audio);
