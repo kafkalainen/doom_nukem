@@ -15,14 +15,17 @@
 static t_bool	shoot_player(t_home *home, t_entity *entity, t_player *plr)
 {
 	t_ray	ray;
+	int		volume;
 
 	ray.side = ENEMY;
 	ray.pos = entity->pos;
+	volume = (int)(fmax(0,
+		15 - (get_distance_squared(ray.pos, plr->pos) * 0.25)));
 	ray.dir = entity->dir;
 	ray.start_sector = entity->sector_idx;
 	shooting_handle(home, &ray);
 	if (!entity->is_revealed)
-		play_sound(plr->audio.thing_attack, 15);
+		play_sound(plr->audio.thing_attack, volume);
 	return (true);
 }
 

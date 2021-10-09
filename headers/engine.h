@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 13:21:26 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/09 13:29:47 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int				dequeue(t_raster_queue *queue);
 void			draw_queue_empty(t_frame *frame, t_home *home,
 					t_player *plr, int *idx);
 int				enqueue_to_raster(t_raster_queue *queue, t_triangle *item);
+t_bool			find_path(t_home *home, int cur, int dest, int *sector_count);
 void			free_queues(t_frame *frame);
 int				front(t_raster_queue *queue, t_triangle *triangle);
 int				get_next_wall_tex(t_wall **current_head, int nbr_of_walls);
