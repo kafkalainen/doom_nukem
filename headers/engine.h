@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:58:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 08:26:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 12:23:05 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_frame
 	t_raster_queue	*transformed;
 	t_buffer		buffer;
 	float			*depth_buffer;
-	int				*sector_buffer;
 	t_fov			fov;
 	t_sides			viewport;
 	int				idx;
@@ -82,7 +81,7 @@ t_bool			check_if_already_been_in_this_sector(int cur_sector,
 					int *sector_list, int nb_of_sectors);
 t_bool			check_if_facing_player(t_bool left, t_bool right, t_wall *wall,
 					t_fov fov);
-void			check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home);
+t_bool			check_if_moved_through_portal(int *cur_sector, t_xyz pos, t_home *home);
 t_bool			check_if_too_close_to_a_door(t_wall *door, float width,
 					t_xyz pos, t_xyz dir);
 t_wall			*check_if_too_close_to_walls(t_sector *sector, float width,
@@ -113,6 +112,7 @@ void			quick_reset_queue(t_raster_queue *queue);
 int				raster_queue_is_full(t_raster_queue *queue);
 int				raster_queue_is_empty(t_raster_queue *queue);
 t_triangle		rotate_triangle(t_triangle *src, float angle, char dir);
+t_bool			run_tests(t_home *home);
 t_triangle		scale_triangle(t_triangle *src, t_xyz scale);
 int				scan_fov(t_home *home, t_fov fov, int nb_of_sectors,
 					int **sector_list);

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:39:02 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 12:35:18 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/09 12:24:33 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ typedef struct s_home
 	t_time			t;
 	char			**story;
 	char			*map;
+	int				*sector_buffer;
 	float			difficulty;
 	t_bool			linked_map;
 	t_uint			nbr_of_entities;
