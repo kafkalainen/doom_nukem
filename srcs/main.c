@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 19:13:54 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 13:41:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/09 12:24:57 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	free_all(t_frame *frame, t_audio *audio, Uint32 *buffer,
 {
 	free_queues(frame);
 	free(frame->buffer.pxl_buffer);
-	free(frame->sector_buffer);
 	free(buffer);
 	ft_strdel(chosen_map);
 	cleanup_audio_source(audio);
