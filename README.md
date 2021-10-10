@@ -20,9 +20,7 @@ This project assumes that it is installed to C:\MinGW
 	`./doom-nukem map_files/test.DN2`
 
 ## Design Reasonings
-- We decided to pursue a track of creating Duke Nukem-like engine.
-- Player field of vision was first calculated as radians, and are then translated to pixels using how much they use screen space.
-- Eventually we switched from Build engine to complete 3D engine using matrices and meshes, but the whole engine is running reverse, which causes objects have no depth.
+We decided to pursue a track of creating Duke Nukem-like engine, and to expand the one that I have in project `wolf3d`. Eventually we switched from Build engine to complete 3D engine using matrices and meshes. The whole engine is running reverse, which causes objects to have no depth. Render list is handled in 2d. Possible visible sectors are added to a sector buffer, and that is passed to the renderer.
 
 ## Biggest blocks throughout project
 - Making linked list to cycle list due to traversing walls in a sector.
