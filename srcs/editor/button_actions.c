@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:11:16 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/07 12:13:21 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:13:21 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,6 @@ void	wall_button_actions(t_action *action, int i)
 		action->create_elev_button = true;
 	if (i == button_change_to_door)
 		action->cycle_portal = true;
+	if (i == button_add_poster)
+		action->add_poster = true;
 }

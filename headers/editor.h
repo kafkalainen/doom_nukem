@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/09 07:21:42 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:14:01 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ enum e_buttons
 	button_create_powerstation,
 	button_create_elevator_button,
 	button_change_to_door,
+	button_add_poster,
 	button_entity_index,
 	button_change_entity_type,
 	button_toggle_entity_is_linked,
@@ -172,6 +173,7 @@ typedef struct s_action
 	t_bool			set_all_sector_floor_heights;
 	t_bool			cycle_portal;
 	t_bool			set_gravity;
+	t_bool			add_poster;
 }					t_action;
 
 typedef struct s_editor_xyz

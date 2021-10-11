@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_entity_textures.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:21:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 11:33:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:42:16 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ static void	initialize_static_entity(t_entity *entity)
 		entity->sprite_index = -cleaning_keycard_sprite;
 	else if (entity->type == keycard_military)
 		entity->sprite_index = -military_keycard_sprite;
+	else if (entity->type == poster)
+	{
+		entity->sprite_index = -poster_whole;
+		// entity->alt_sprite_index = -poster_broken;
+	}
 }
 
 static void	initialize_moving_entity_textures(t_entity *entity)

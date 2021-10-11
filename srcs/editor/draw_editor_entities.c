@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_editor_entities.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 13:55:25 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:31:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	editor_select_entity_tex(t_uint type, t_bool is_revealed)
 		return (-cleaning_keycard_sprite);
 	else if (type == keycard_military)
 		return (-military_keycard_sprite);
+	else if (type == poster)
+		return (-poster_whole);
 	return (-enemy0);
 }
 

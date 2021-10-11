@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 13:30:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:39:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_bool			calc_distance_to_ceiling(t_sector *sector, t_xyz *new_loc,
 t_bool			calc_distance_to_ground(t_sector *sector, t_xyz *new_loc,
 					float *dist);
 void			calc_light_sources(t_home *home);
-void			calc_button_locations(t_home *home);
+void			calc_wall_asset_locations(t_home *home);
 void			calc_entity_locations(t_home *home);
 void			calc_plr_position(t_sector *sector, t_player *plr);
 void			calc_unit_normals(t_home *home);

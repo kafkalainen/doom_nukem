@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_create_entity.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:28:41 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:22:40 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	initialize_entity_data(t_entity_list *new, t_action *action,
 	t_editor_sector *sector, t_xy pos)
 {
 	if (action->create_elev_button || action->create_light_button
-		|| action->create_powerstation || action->create_light_source)
+		|| action->create_powerstation || action->create_light_source
+		|| action->add_poster)
 		init_static_entity(new, action, sector, pos);
 	else
 		init_non_static_entity(new, sector, pos);

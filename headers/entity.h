@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 15:59:26 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:23:20 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ enum e_entities
 	keycard_cleaning,
 	keycard_engineering,
 	keycard_military,
+	poster
 };
 
 enum e_floors

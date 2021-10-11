@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_edit_wall.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/07 12:11:39 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:22:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,19 @@ static void	handle_wall_height(t_editor *editor)
 	editor->action.edit_floor_height = false;
 }
 
+static void	create_entities_two(t_editor *editor)
+{
+	if (editor->action.add_poster)
+	{
+		if (entity_creation_is_allowed(&editor->entity_list,
+				editor->temp_sector, &editor->action))
+			create_new_entity(&editor->entity_list, &editor->action,
+				editor->temp_sector, editor->temp_sector->centroid);
+		editor->action.add_poster = false;
+	}
+	editor->action.edit_wall = false;
+}
+
 static void	create_entities(t_editor *editor)
 {
 	if (editor->action.create_light_button)
@@ -79,7 +92,7 @@ static void	create_entities(t_editor *editor)
 				editor->temp_sector, editor->temp_sector->centroid);
 		editor->action.create_elev_button = false;
 	}
-	editor->action.edit_wall = false;
+	create_entities_two(editor);
 }
 
 void	editor_edit_wall(t_editor *editor)
@@ -94,7 +107,7 @@ void	editor_edit_wall(t_editor *editor)
 		editor->action.edit_wall = change_wall_texture(&editor->temp_wall->type,
 				&editor->action);
 	if (editor->action.create_light_button || editor->action.create_powerstation
-		|| editor->action.create_elev_button)
+		|| editor->action.create_elev_button || editor->action.add_poster)
 		create_entities(editor);
 	if (editor->action.cycle_portal)
 	{

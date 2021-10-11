@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity_creation_is_allowed.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:43:46 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:52:19 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ static	t_bool	entity_creation_is_allowed_two(t_entity_list **head,
 		t_editor_sector *sector, t_action *action)
 {
 	if (action->create_light_button || action->create_powerstation
-		|| action->create_elev_button || action->create_light_source)
+		|| action->create_elev_button || action->create_light_source
+		|| action->add_poster)
 		if (!check_static_entities_for_overlap(head, sector,
 				action->selected_wall, action->create_light_source))
 			return (false);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 18:14:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:32:35 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 # define MACROS_H
 
-# define NBR_BUTTONS 31
+# define NBR_BUTTONS 32
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 
@@ -34,7 +34,7 @@
 **  - Door
 **  - Lamp on / off
 */
-# define NUM_TEX 46
+# define NUM_TEX 47 // need to add 1 more
 # define MAX_FILE_NAME_LENGTH 50
 # define MAX_INT 2147483647
 # define PI_BY_TWO 1.570796326f

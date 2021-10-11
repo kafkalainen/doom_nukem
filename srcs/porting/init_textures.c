@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 16:10:00 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 09:42:02 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:32:57 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	init_asset_textures(t_home *home)
 	load_texture("textures/lamp_on.png", home->textures, lamp_on);
 	load_texture("textures/lamp_off.png", home->textures, lamp_off);
 	load_texture("textures/bullet_decal.png", home->textures, bullet_decal);
+	load_texture("textures/eagle.png", home->textures, poster_whole); // temp
 }
 
 static void	init_wall_and_floor_textures(t_home *home)

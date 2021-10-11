@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_entity_properties.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 15:40:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:40:53 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ static void	initialize_entity_values(t_entity *entity,
 		entity->health = set_entity_health(entity->type, difficulty);
 	else if (entity->type == crewmember || entity->type == thing)
 		entity->health = set_entity_health(entity->type, difficulty);
+	else if (entity->type == poster)
+		entity->health = 1;
 	else
 		entity->health = 999;
 	if (entity->type >= ammo_pack && entity->type <= keycard_military)
