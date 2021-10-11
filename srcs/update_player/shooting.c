@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:12:34 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/08 12:36:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 13:33:18 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rotate_projectile_based_on_axes(t_xyz normal, t_projectile *current)
 
 	angle[0] = vec3_ang_axis(current->normal, normal, 'x');
 	angle[1] = vec3_ang_axis(current->normal, normal, 'y');
-	angle[2] = -vec3_ang_axis(current->normal, normal, 'z');
+	angle[2] = vec3_ang_axis(current->normal, normal, 'z');
 	x = rotation_matrix_x(angle[0]);
 	y = rotation_matrix_y(angle[1]);
 	z = rotation_matrix_z(angle[2]);
