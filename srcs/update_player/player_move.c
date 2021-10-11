@@ -6,12 +6,11 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:24:26 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 13:25:58 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:55:32 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
-#include <stdio.h>
 
 t_wall	*check_if_crossing(t_sector *sector, t_xyz pos, t_xyz dir)
 {
