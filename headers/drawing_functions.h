@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/11 08:28:48 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 09:36:51 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ enum			e_texture_idx
 	military_keycard_sprite,
 	hull_small_window,
 	hull_large_window,
-	poster_whole
+	poster_whole,
+	poster_broken
 };
 
 /*

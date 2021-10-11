@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:21:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 09:33:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 09:37:49 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	initialize_static_entity(t_entity *entity)
 	else if (entity->type == poster)
 	{
 		entity->sprite_index = -poster_whole;
-		entity->alt_sprite_index = -button_off; // temp
+		entity->alt_sprite_index = -poster_broken;
 	}
 }
 

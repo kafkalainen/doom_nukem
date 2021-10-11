@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:45:17 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/11 08:32:35 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 09:38:25 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 **  - Door
 **  - Lamp on / off
 */
-# define NUM_TEX 47 // need to add 1 more
+# define NUM_TEX 48
 # define MAX_FILE_NAME_LENGTH 50
 # define MAX_INT 2147483647
 # define PI_BY_TWO 1.570796326f
