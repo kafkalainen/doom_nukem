@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:16:04 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/06 16:35:59 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 11:35:16 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,31 @@ t_bool	has_lift_button(int sector_idx, t_entity_list **head)
 	return (false);
 }
 
+t_bool	wall_has_entity(t_editor_walls *wall, t_editor_sector *sector,
+	t_entity_list **head)
+{
+	t_entity_list	*temp;
+	t_screen_xy		midpoint;
+
+	midpoint = (t_screen_xy){0, 0};
+	get_midpoint_of_walls(sector, wall->idx, &midpoint.x, &midpoint.y);
+	temp = *head;
+	while (temp)
+	{
+		if (temp->type == light_button
+			|| temp->type == lift_button
+			|| temp->type == powerstation
+			|| temp->type == poster)
+		{
+			if (temp->pos.x == midpoint.x
+				&& temp->pos.z == midpoint.y)
+				return (true);
+		}
+		temp = temp->next;
+	}
+	return (false);
+}
+
 t_bool	create_portal_between_sectors(t_editor_sector **head,
 	t_action *action, t_entity_list **entities)
 {
@@ -95,10 +120,10 @@ t_bool	create_portal_between_sectors(t_editor_sector **head,
 			vec2_dec(action->world_pos, link_from->centroid));
 	wall = get_intersecting_wall(link_from, link_from->nb_of_walls,
 			dir, link_from->centroid);
-	if (!wall)
+	if (!wall || wall_has_entity(wall, link_from, entities))
 		return (false);
 	wall_two = get_matching_wall_coord(link_to, wall->x0, wall->next->x0);
-	if (!wall_two)
+	if (!wall_two || wall_has_entity(wall_two, link_to, entities))
 		return (false);
 	wall->type = link_to->idx_sector;
 	wall_two->type = link_from->idx_sector;
