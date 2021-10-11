@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:44:29 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 14:48:13 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:54:14 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ float	get_poster_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 			if (test_ray(&tested[0], hole, &distance, ray)
 				|| test_ray(&tested[1], hole, &distance, ray))
 			{
-				ft_putendl("hit poster");
 				hole->type = nothing;
 				hole->sector_idx = bullet_sector;
 				home->entity_pool[i]->health--;
