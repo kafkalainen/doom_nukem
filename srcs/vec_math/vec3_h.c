@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:40:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 12:39:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 13:24:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ float	vec3_ang_axis(t_xyz to_be_turned, t_xyz compared, char axis)
 	}
 	else if (axis == 'z')
 	{
-		v[0] = vec2(to_be_turned.x, to_be_turned.y);
-		v[1] = vec2(compared.x, compared.y);
+		v[0] = vec2(-to_be_turned.x, to_be_turned.y);
+		v[1] = vec2(-compared.x, compared.y);
 	}
 	rotation = vec2_determine_rotation(v[0], v[1], axis);
 	if (rotation == 0.0f || rotation == PI)
