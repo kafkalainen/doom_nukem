@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 08:40:53 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 09:18:05 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	initialize_entity_movement(t_entity *entity, t_home *home)
 	if (entity->is_static == true)
 	{
 		if (entity->type >= light_button
-			&& entity->type <= keycard_military)
+			&& entity->type <= poster)
 		{
 			if (entity->type == lamp)
 				initialize_lamp_to_ceiling(entity, home);
