@@ -6,11 +6,22 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:21:04 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 09:37:49 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 10:07:02 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+static void	initialize_static_entity_two(t_entity *entity)
+{
+	if (entity->type == keycard_military)
+		entity->sprite_index = -military_keycard_sprite;
+	else if (entity->type == poster)
+	{
+		entity->sprite_index = -poster_whole;
+		entity->alt_sprite_index = -poster_broken;
+	}
+}
 
 static void	initialize_static_entity(t_entity *entity)
 {
@@ -37,13 +48,7 @@ static void	initialize_static_entity(t_entity *entity)
 		entity->sprite_index = -engineering_keycard_sprite;
 	else if (entity->type == keycard_cleaning)
 		entity->sprite_index = -cleaning_keycard_sprite;
-	else if (entity->type == keycard_military)
-		entity->sprite_index = -military_keycard_sprite;
-	else if (entity->type == poster)
-	{
-		entity->sprite_index = -poster_whole;
-		entity->alt_sprite_index = -poster_broken;
-	}
+	initialize_static_entity_two(entity);
 }
 
 static void	initialize_moving_entity_textures(t_entity *entity)

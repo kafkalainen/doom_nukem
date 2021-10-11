@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_update_entity_values.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 17:31:59 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 10:02:15 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static t_bool	entity_is_wall_bound(t_entity_list *entity)
 {
 	if (entity->type == light_button
 		|| entity->type == lift_button
-		|| entity->type == powerstation)
+		|| entity->type == powerstation
+		|| entity->type == poster)
 		return (true);
 	return (false);
 }
