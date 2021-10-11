@@ -14,6 +14,14 @@ This project assumes that it is installed to C:\MinGW
 - Run maps by piping them to program. ie.
 	`./doom-nukem map_files/test.DN2`
 
+## Additional Project bonuses
+- Menu.
+- Secret rooms.
+- Destroyable objects (enemies, and player)
+- Gravitational variances between sectors.
+- Story affects to the characters outlook.
+- Hashing to verify mapfile integrity.
+
 ## Design Reasonings
 - We decided to pursue a track of creating Duke Nukem-like engine.
 - Player field of vision was first calculated as radians, and are then translated to pixels using how much they use screen space.
