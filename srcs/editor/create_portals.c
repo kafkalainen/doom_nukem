@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:16:04 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/11 11:35:16 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 11:36:46 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_bool	has_lift_button(int sector_idx, t_entity_list **head)
 	return (false);
 }
 
-t_bool	wall_has_entity(t_editor_walls *wall, t_editor_sector *sector,
+static t_bool	wall_has_entity(t_editor_walls *wall, t_editor_sector *sector,
 	t_entity_list **head)
 {
 	t_entity_list	*temp;
