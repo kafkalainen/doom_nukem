@@ -6,11 +6,18 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:28:47 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 08:31:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 10:13:34 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+static int	editor_select_entity_tex_two(t_uint type)
+{
+	if (type == poster)
+		return (-poster_whole);
+	return (-enemy0);
+}
 
 int	editor_select_entity_tex(t_uint type, t_bool is_revealed)
 {
@@ -38,9 +45,7 @@ int	editor_select_entity_tex(t_uint type, t_bool is_revealed)
 		return (-cleaning_keycard_sprite);
 	else if (type == keycard_military)
 		return (-military_keycard_sprite);
-	else if (type == poster)
-		return (-poster_whole);
-	return (-enemy0);
+	return (editor_select_entity_tex_two(type));
 }
 
 void	draw_image_static(t_xy offset, t_texel *tex, t_buffer *buffer,

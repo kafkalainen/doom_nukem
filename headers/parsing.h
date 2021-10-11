@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:10:02 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 08:39:18 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 10:11:21 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int				add_points(t_sector *sector, unsigned char *buf,
 void			add_surface(t_surface **point, t_surface *new);
 void			add_to_middle(t_wall **current_wall, t_wall *new_wall);
 Uint32			assign_entity_properties(t_home *home, t_xyz plr_pos);
+void			is_pickupable(t_entity *entity);
 int				set_entity_health(t_uint type, float difficulty);
 void			assign_projectiles(t_home *home);
 void			calc_lift_doors(t_home *home);

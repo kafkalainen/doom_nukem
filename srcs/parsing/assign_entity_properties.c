@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 09:18:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 10:10:36 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,7 @@ static void	initialize_entity_values(t_entity *entity,
 		entity->health = 1;
 	else
 		entity->health = 999;
-	if (entity->type >= ammo_pack && entity->type <= keycard_military)
-		entity->is_pickupable = true;
-	else
-		entity->is_pickupable = false;
+	is_pickupable(entity);
 	entity->ammo = 3;
 }
 
