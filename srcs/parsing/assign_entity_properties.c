@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 12:55:44 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 13:29:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	initialize_static_entity(t_entity *current)
 
 	angle[0] = vec3_ang_axis(current->top.normal, current->dir, 'x');
 	angle[1] = vec3_ang_axis(current->top.normal, current->dir, 'y');
-	angle[2] = -vec3_ang_axis(current->top.normal, current->dir, 'z');
+	angle[2] = vec3_ang_axis(current->top.normal, current->dir, 'z');
 	x = rotation_matrix_x(angle[0]);
 	y = rotation_matrix_y(angle[1]);
 	z = rotation_matrix_z(angle[2]);
