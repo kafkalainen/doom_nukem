@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/11 08:12:28 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 10:17:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ static void	buttons_create_wall_layer(t_button **blist)
 	create_button(blist[24], (t_box){vec2(10, 365), vec2(290, 390)},
 		(t_button_info){"Add lift button", 0, wall});
 	create_button(blist[25], (t_box){vec2(10, 395), vec2(290, 420)},
-		(t_button_info){"Cycle through portals", 0, wall});
-	create_button(blist[26], (t_box){vec2(10, 425), vec2(290, 450)},
 		(t_button_info){"Add Poster", 0, wall});
+	create_button(blist[26], (t_box){vec2(10, 425), vec2(290, 450)},
+		(t_button_info){"Cycle through portals", 0, wall});
 }
 
 t_button	**create_button_list(t_button **blist)

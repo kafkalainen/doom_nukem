@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 12:29:25 by eparviai          #+#    #+#             */
-/*   Updated: 2021/10/11 08:14:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 10:18:22 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ enum e_buttons
 	button_create_light_button,
 	button_create_powerstation,
 	button_create_elevator_button,
-	button_change_to_door,
 	button_add_poster,
+	button_change_to_door,
 	button_entity_index,
 	button_change_entity_type,
 	button_toggle_entity_is_linked,
