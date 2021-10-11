@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entity.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 13:51:11 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/11 08:23:20 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:20:30 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ t_bool				check_aggro(t_player *plr, t_entity *entity, t_home *home);
 t_bool				check_if_entity_is_active(t_entity *entity);
 void				determine_angle_between_entity_and_plr(t_entity *entity,
 						t_player *plr);
+void				destroy_entity(t_entity *entity);
 t_bool				die(t_entity *entity, Uint32 t);
 t_bool				entity_move(t_entity *entity, t_xyz plr_pos,
 						t_home *home, Uint32 t);

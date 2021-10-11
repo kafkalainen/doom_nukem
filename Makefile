@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/11 10:12:10 by rzukale          ###   ########.fr        #
+#    Updated: 2021/10/11 14:24:33 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,7 @@ SRCS = \
 	entity_logic$(SLASH)activate_lift.c \
 	entity_logic$(SLASH)attack_player.c \
 	entity_logic$(SLASH)check_aggro.c \
+	entity_logic$(SLASH)destroy_entity.c \
 	entity_logic$(SLASH)determine_entity_angle.c \
 	entity_logic$(SLASH)die.c \
 	entity_logic$(SLASH)entity_move.c \
@@ -208,6 +209,7 @@ SRCS = \
 	update_player$(SLASH)get_entity_hit_point.c \
 	update_player$(SLASH)get_ground_hit_point.c \
 	update_player$(SLASH)get_player_hit_point.c \
+	update_player$(SLASH)get_poster_hit_point.c \
 	update_player$(SLASH)get_wall_hit_point.c \
 	update_player$(SLASH)gravity.c \
 	update_player$(SLASH)handle_doors.c \

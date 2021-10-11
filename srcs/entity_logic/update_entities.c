@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 10:36:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 17:12:37 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:17:53 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	update_entities(t_home *home, t_player *plr, Uint32 delta_time)
 			= vec3_unit_vector(vec3_dec(plr->pos, cur_entity->pos));
 		if (cur_entity->is_pickupable)
 			show_pickupables(cur_entity, home, delta_time);
+		else if (cur_entity->is_static && cur_entity->health <= 0)
+			destroy_entity(cur_entity);
 		if (is_enemy(cur_entity->type))
 		{
 			if (cur_entity->is_active == true)
