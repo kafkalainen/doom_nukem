@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_entity_triangles.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:41:54 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 09:30:30 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 10:01:21 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ static t_xy	size_logic(t_entity *entity)
 	else if (entity->type == lift_button
 		|| entity->type == light_button
 		|| (entity->type >= lamp
-			&& entity->type <= poster))
+			&& entity->type <= keycard_military))
 		size = vec2(0.5f, 0.5f);
+	else if (entity->type == poster)
+		size = vec2(0.6f, 0.8f);
 	else if (entity->type == skull_skulker || entity->type == drone)
 		size = vec2(1.25f, 1.25f);
 	return (size);

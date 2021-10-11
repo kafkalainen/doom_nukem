@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:23:36 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 14:13:00 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 12:39:13 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,4 +295,5 @@ void		triangle_div(t_triangle *projected);
 float		vec2_get_distance_squared(t_xy pt0, t_xy pt1);
 t_bool		vec3_ray_intersects_triangle(t_triangle *inTriangle,
 				t_xyz ray_origin, t_xyz ray_vector, t_xyz *isection);
+float		vec2_determine_rotation(t_xy v0, t_xy v1, char axis);
 #endif

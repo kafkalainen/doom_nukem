@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_entity_properties.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/11 09:18:05 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 12:12:51 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,37 @@ static void	initialize_static_entity(t_entity *current)
 	t_m4x4	z;
 	t_m4x4	combined;
 
+	if (current->type == poster)
+	{
+		if (current->entity_index == 1)
+			ft_putendl("north:");
+		else if (current->entity_index == 5)
+			ft_putendl("south:");
+	}
 	angle[0] = vec3_ang_axis(current->top.normal, current->dir, 'x');
 	angle[1] = vec3_ang_axis(current->top.normal, current->dir, 'y');
 	angle[2] = -vec3_ang_axis(current->top.normal, current->dir, 'z');
+	if (current->type == poster)
+	{
+		if (current->entity_index == 1)
+		{
+			ft_putendl("x:");
+			ft_putendl(ft_ftoa(angle[0], 6));
+			ft_putendl("y:");
+			ft_putendl(ft_ftoa(angle[1], 6));
+			ft_putendl("z:");
+			ft_putendl(ft_ftoa(angle[2], 6));
+		}
+		else if (current->entity_index == 5)
+		{
+			ft_putendl("x:");
+			ft_putendl(ft_ftoa(angle[0], 6));
+			ft_putendl("y:");
+			ft_putendl(ft_ftoa(angle[1], 6));
+			ft_putendl("z:");
+			ft_putendl(ft_ftoa(angle[2], 6));
+		}
+	}
 	x = rotation_matrix_x(angle[0]);
 	y = rotation_matrix_y(angle[1]);
 	z = rotation_matrix_z(angle[2]);
