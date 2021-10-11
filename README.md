@@ -17,7 +17,7 @@ This project assumes that it is installed to C:\MinGW
 ## Additional Project bonuses
 - Menu.
 - Secret rooms.
-- Destroyable objects (enemies, and player)
+- Destroyable poster objects (enemies and player)
 - Gravitational variances between sectors.
 - Story affects to the characters outlook.
 - Hashing to verify mapfile integrity.
