@@ -21,6 +21,9 @@ This project assumes that it is installed to C:\MinGW
 - Gravitational variances between sectors.
 - Story affects to the characters outlook.
 - Hashing to verify mapfile integrity.
+- Writing animations.
+- Hurt animations.
+- Multiplatform.
 
 ## Design Reasonings
 - We decided to pursue a track of creating Duke Nukem-like engine.

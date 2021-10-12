@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 09:40:14 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 15:45:41 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/12 09:38:43 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	draw_header(t_buffer *buffer, t_sector *sector)
 	ft_str_pxl(buffer, offset, temp, mod);
 }
 
-static void	draw_previous_lines(t_buffer *buffer, t_sector *sector)
+static void	draw_previous_lines(t_buffer *buffer, t_sector *sector,
+			int start)
 {
 	t_plx_modifier	mod;
 	t_xy			offset;
@@ -39,7 +40,7 @@ static void	draw_previous_lines(t_buffer *buffer, t_sector *sector)
 	mod.size = TEXT_SIZE;
 	mod.colour = 0xFFFFCC00;
 	msgs = sector->cur_msg;
-	while (msgs-- > 1)
+	while (msgs-- > start)
 	{
 		mod.len = ft_strlen(sector->story[msgs]);
 		if (mod.len > 90)
@@ -50,7 +51,8 @@ static void	draw_previous_lines(t_buffer *buffer, t_sector *sector)
 	}
 }
 
-static void	draw_current_line(t_buffer *buffer, t_player *plr, t_sector *sector)
+static void	draw_current_line(t_buffer *buffer, t_player *plr, t_sector *sector,
+								t_bool header)
 {
 	t_plx_modifier	mod;
 	t_xy			offset;
@@ -65,7 +67,8 @@ static void	draw_current_line(t_buffer *buffer, t_player *plr, t_sector *sector)
 				* percentage);
 		if (mod.len > 90)
 			mod.len = 90;
-		if (mod.len > 0 && sector->cur_msg != 0)
+		if (mod.len > 0 && ((sector->cur_msg == 0 && !header)
+				|| sector->cur_msg != 0))
 		{
 			offset.x = center_text_x_axis(0, buffer->width, mod.size, mod.len);
 			offset.y = 70 + sector->cur_msg * 7 * mod.size;
@@ -78,16 +81,21 @@ void	draw_cutscene(t_buffer *buffer, t_player *plr, t_sector *sector)
 {
 	t_plx_modifier	mod;
 	t_xy			offset;
+	t_bool			header;
 
+	header = false;
 	if (sector->story
+		&& sector->nb_of_msgs > 0
 		&& ft_strnstr(sector->story[0], "header. ", 8))
+		header = true;
+	if (header)
 		draw_header(buffer, sector);
-	if (sector->nb_of_msgs > 2 && sector->cur_msg > 1)
-		draw_previous_lines(buffer, sector);
-	if (sector->nb_of_msgs > 1 && sector->cur_msg > 0)
-		draw_current_line(buffer, plr, sector);
-	else if (sector->nb_of_msgs == 1)
-		draw_current_line(buffer, plr, sector);
+	if (sector->nb_of_msgs > 1 && header && sector->cur_msg > 1)
+		draw_previous_lines(buffer, sector, 1);
+	if (sector->nb_of_msgs > 1 && !header && sector->cur_msg > 0)
+		draw_previous_lines(buffer, sector, 0);
+	if (sector->nb_of_msgs > 0)
+		draw_current_line(buffer, plr, sector, header);
 	mod.size = TEXT_SIZE;
 	mod.colour = 0xFFFFCC00;
 	mod.len = 28;
