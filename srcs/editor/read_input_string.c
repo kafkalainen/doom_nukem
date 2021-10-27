@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input_string.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 11:24:38 by eparviai          #+#    #+#             */
-/*   Updated: 2021/09/15 15:39:41 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/27 11:25:25 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	save_mapname_ruleset(int keysym, unsigned char **string)
 	if (!ft_isalnum(keysym))
 		return (false);
 	if (*string != NULL && ft_strlen((const char *)*string)
-		 > MAX_FILE_NAME_LENGTH)
+		> MAX_FILE_NAME_LENGTH)
 		return (false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:37:06 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 12:24:01 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/27 11:29:45 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_texel	*get_tex(int idx, t_texture	**textures)
 }
 
 void	add_skybox(t_frame *frame, t_home *home, t_player *plr,
-	 t_skybox *skybox)
+	t_skybox *skybox)
 {
 	Uint32	i;
 
