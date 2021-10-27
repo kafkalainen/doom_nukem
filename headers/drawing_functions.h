@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_functions.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 13:49:25 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/09 14:07:54 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 09:36:51 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ enum			e_texture_idx
 	engineering_keycard_sprite,
 	military_keycard_sprite,
 	hull_small_window,
-	hull_large_window
+	hull_large_window,
+	poster_whole,
+	poster_broken
 };
 
 /*

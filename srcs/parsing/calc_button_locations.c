@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_button_locations.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:13:05 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 19:40:38 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:39:06 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static t_bool	get_exact_location(t_sector *sector, t_entity *entity)
 	return (false);
 }
 
-void	calc_button_locations(t_home *home)
+void	calc_wall_asset_locations(t_home *home)
 {
 	t_uint		i;
 
@@ -102,7 +102,8 @@ void	calc_button_locations(t_home *home)
 	{
 		if (home->entity_pool[i]->type == light_button
 			|| home->entity_pool[i]->type == lift_button
-			|| home->entity_pool[i]->type == powerstation)
+			|| home->entity_pool[i]->type == powerstation
+			|| home->entity_pool[i]->type == poster)
 		{
 			if (!get_exact_location(
 					home->sectors[home->entity_pool[i]->sector_idx],

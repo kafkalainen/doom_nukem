@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_projectiles.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 10:07:21 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 13:39:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:44:46 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ static void	update_projectile(t_projectile *current, t_home *home,
 		hole = get_bullet_hit_point(home, &trajectory,
 				trajectory.start_sector);
 		if (hole.type == player)
+		{
 			player_take_damage(plr, 2, t);
+			hole.type = nothing;
+		}
 		current->is_active = false;
 		initialize_projectile_triangles(current);
 		set_bullet_hole(&hole, current);

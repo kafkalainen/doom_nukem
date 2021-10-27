@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_horizontal_line.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:56:39 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 14:28:01 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/27 11:28:38 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_segment(t_buffer *buffer, float *depth_buffer, t_texel *tex,
 	while (step->sub_pixels--)
 	{
 		if (step->texel_inv.w > depth_buffer[step->start.x + step->start.y
-				 * buffer->width])
+				* buffer->width])
 		{
 			c = get_texel(&(t_uv){step->texel_start.u * tex->width - 1,
 					step->texel_start.v * tex->height - 1},

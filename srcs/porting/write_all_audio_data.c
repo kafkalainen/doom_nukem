@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:15:40 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 17:20:15 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/27 11:23:29 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	write_rahikainen(int *fd)
 	write_audio_data(fd, "./audio/rahikainen_3.wav", "doom_rahikainen_3 #");
 	write_audio_data(fd, "./audio/rahikainen_4.wav", "doom_rahikainen_4 #");
 	write_audio_data(fd, "./audio/rahikainen_aah_1.wav",
-		 "doom_rahikainen_aah_1 #");
+		"doom_rahikainen_aah_1 #");
 	write_audio_data(fd, "./audio/rahikainen_ugh.wav",
 		"doom_rahikainen_ugh #");
 	write_audio_data(fd, "./audio/rahikainen_ugh_2.wav",

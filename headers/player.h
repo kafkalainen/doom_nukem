@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:36:51 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/09 13:37:27 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:59:18 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,8 +192,10 @@ float			get_entity_hit_point(t_home *home, t_ray *ray,
 					t_bullet_hole *hole, int bullet_sector);
 float			get_ground_hit_point(t_sector *sector, t_ray *ray,
 					t_bullet_hole *hole);
-float			get_player_hit_point(t_ray *ray, t_bullet_hole *hole,
-					int bullet_sector);
+float			get_player_hit_point(t_home *home, t_ray *ray,
+					t_bullet_hole *hole, int bullet_sector);
+float			get_poster_hit_point(t_home *home, t_ray *ray,
+					t_bullet_hole *hole, int bullet_sector);
 float			get_wall_hit_point(t_home *home, t_ray *ray,
 					t_bullet_hole *hole, int bullet_sector);
 void			gravity(t_home *home, t_player *plr, Uint32 delta_time);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_actions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 11:02:20 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 13:29:16 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:15:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	initialize_toggles_two(t_action *action)
 	action->set_all_sector_floor_heights = false;
 	action->set_gravity = false;
 	action->cycle_portal = false;
+	action->add_poster = false;
 }
 
 static void	initialize_toggles(t_action *action)

@@ -6,11 +6,22 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 09:27:48 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 12:35:35 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:52:20 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/doom_nukem.h"
+
+static void	handle_damage(t_entity *entity)
+{
+	if (is_enemy(entity->type))
+	{
+		entity->taking_damage = 500;
+		entity->is_aggroed = true;
+	}
+	else if (entity->type == poster)
+		entity->health--;
+}
 
 float	get_entity_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 		int bullet_sector)
@@ -33,8 +44,7 @@ float	get_entity_hit_point(t_home *home, t_ray *ray, t_bullet_hole *hole,
 			{
 				hole->type = nothing;
 				hole->sector_idx = bullet_sector;
-				home->entity_pool[i]->taking_damage = 500;
-				home->entity_pool[i]->is_aggroed = true;
+				handle_damage(home->entity_pool[i]);
 			}
 		}
 		i++;

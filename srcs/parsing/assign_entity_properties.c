@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 11:27:58 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/06 15:40:48 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 13:29:11 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	initialize_static_entity(t_entity *current)
 
 	angle[0] = vec3_ang_axis(current->top.normal, current->dir, 'x');
 	angle[1] = vec3_ang_axis(current->top.normal, current->dir, 'y');
-	angle[2] = -vec3_ang_axis(current->top.normal, current->dir, 'z');
+	angle[2] = vec3_ang_axis(current->top.normal, current->dir, 'z');
 	x = rotation_matrix_x(angle[0]);
 	y = rotation_matrix_y(angle[1]);
 	z = rotation_matrix_z(angle[2]);
@@ -82,7 +82,7 @@ static void	initialize_entity_movement(t_entity *entity, t_home *home)
 	if (entity->is_static == true)
 	{
 		if (entity->type >= light_button
-			&& entity->type <= keycard_military)
+			&& entity->type <= poster)
 		{
 			if (entity->type == lamp)
 				initialize_lamp_to_ceiling(entity, home);
@@ -125,12 +125,11 @@ static void	initialize_entity_values(t_entity *entity,
 		entity->health = set_entity_health(entity->type, difficulty);
 	else if (entity->type == crewmember || entity->type == thing)
 		entity->health = set_entity_health(entity->type, difficulty);
+	else if (entity->type == poster)
+		entity->health = 1;
 	else
 		entity->health = 999;
-	if (entity->type >= ammo_pack && entity->type <= keycard_military)
-		entity->is_pickupable = true;
-	else
-		entity->is_pickupable = false;
+	is_pickupable(entity);
 	entity->ammo = 3;
 }
 

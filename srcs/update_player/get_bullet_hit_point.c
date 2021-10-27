@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:08:07 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/08 11:42:30 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:20:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_bullet_hole	loop_through_sector(t_home *home, t_ray *ray, int bullet_sector)
 	d[1] = get_ceiling_hit_point(home->sectors[bullet_sector], ray,
 			&hitpoints[1]);
 	if (ray->side == ENEMY)
-		d[3] = get_player_hit_point(ray, &hitpoints[3], bullet_sector);
+		d[3] = get_player_hit_point(home, ray, &hitpoints[3], bullet_sector);
 	else if (ray->side == PLAYER)
 		d[3] = get_entity_hit_point(home, ray, &hitpoints[3], bullet_sector);
 	else

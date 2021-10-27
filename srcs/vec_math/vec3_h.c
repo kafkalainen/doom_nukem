@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:40:24 by jnivala           #+#    #+#             */
-/*   Updated: 2021/09/29 18:24:24 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 13:24:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	initialize_lumels(float *p0, float *p1, float *p2, float init)
 
 float	vec3_ang_axis(t_xyz to_be_turned, t_xyz compared, char axis)
 {
-	float	sign;
+	float	rotation;
 	float	angle;
 	t_xy	v[2];
 
@@ -86,13 +86,13 @@ float	vec3_ang_axis(t_xyz to_be_turned, t_xyz compared, char axis)
 	}
 	else if (axis == 'z')
 	{
-		v[0] = vec2(to_be_turned.x, to_be_turned.y);
-		v[1] = vec2(compared.x, compared.y);
+		v[0] = vec2(-to_be_turned.x, to_be_turned.y);
+		v[1] = vec2(-compared.x, compared.y);
 	}
-	sign = -v[0].y * v[1].x + v[0].x * v[1].y;
-	if (sign == 0.0f)
-		return (0.0f);
-	sign = ft_signf(sign);
+	rotation = vec2_determine_rotation(v[0], v[1], axis);
+	if (rotation == 0.0f || rotation == PI)
+		return (rotation);
+	rotation = ft_signf(rotation);
 	angle = set_valid(vec2_dot(v[0], v[1]) / (vec2_mag(v[0]) * vec2_mag(v[1])));
-	return (sign * acosf(angle));
+	return (rotation * acosf(angle));
 }

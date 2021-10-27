@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocate_buttons.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 15:54:30 by tmaarela          #+#    #+#             */
-/*   Updated: 2021/10/07 14:44:40 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 10:17:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ static void	buttons_create_wall_layer(t_button **blist)
 	create_button(blist[24], (t_box){vec2(10, 365), vec2(290, 390)},
 		(t_button_info){"Add lift button", 0, wall});
 	create_button(blist[25], (t_box){vec2(10, 395), vec2(290, 420)},
+		(t_button_info){"Add Poster", 0, wall});
+	create_button(blist[26], (t_box){vec2(10, 425), vec2(290, 450)},
 		(t_button_info){"Cycle through portals", 0, wall});
 }
 
@@ -108,15 +110,15 @@ t_button	**create_button_list(t_button **blist)
 	buttons_create_general_layer(blist);
 	buttons_create_sector_layer(blist);
 	buttons_create_wall_layer(blist);
-	create_button(blist[26], (t_box){vec2(10, 50), vec2(290, 75)},
+	create_button(blist[27], (t_box){vec2(10, 50), vec2(290, 75)},
 		(t_button_info){"Index", 0, entity});
-	create_button(blist[27], (t_box){vec2(10, 80), vec2(290, 105)},
+	create_button(blist[28], (t_box){vec2(10, 80), vec2(290, 105)},
 		(t_button_info){"Type", 0, entity});
-	create_button(blist[28], (t_box){vec2(10, 225), vec2(290, 250)},
+	create_button(blist[29], (t_box){vec2(10, 225), vec2(290, 250)},
 		(t_button_info){"Light controls", 0, entity});
-	create_button(blist[29], (t_box){vec2(10, 255), vec2(290, 280)},
+	create_button(blist[30], (t_box){vec2(10, 255), vec2(290, 280)},
 		(t_button_info){"Alternative texture", 0, entity});
-	create_button(blist[30], (t_box){vec2(10, 285), vec2(290, 310)},
+	create_button(blist[31], (t_box){vec2(10, 285), vec2(290, 310)},
 		(t_button_info){"State", 0, entity});
 	return (blist);
 }

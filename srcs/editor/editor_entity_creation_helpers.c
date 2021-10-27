@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_entity_creation_helpers.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:31:05 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/05 14:57:07 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:23:48 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ void	init_static_entity(t_entity_list *new, t_action *action,
 		new->type = light_button;
 	else if (action->create_powerstation)
 		new->type = powerstation;
+	else if (action->add_poster)
+		new->type = poster;
 	else
 		new->type = lamp;
 	init_static_shared_vals(new, sector->idx_sector);
 	if (action->create_elev_button || action->create_light_button
-		|| action->create_powerstation)
+		|| action->create_powerstation || action->add_poster)
 	{
 		get_midpoint_of_walls(sector, action->selected_wall,
 			&new->pos.x, &new->pos.z);

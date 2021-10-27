@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 11:36:35 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/07 15:42:23 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 13:32:55 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,20 @@ float	vec2_get_distance_squared(t_xy pt0, t_xy pt1)
 {
 	return (((pt1.x - pt0.x) * (pt1.x - pt0.x)
 			+ (pt1.y - pt0.y) * (pt1.y - pt0.y)));
+}
+
+float	vec2_determine_rotation(t_xy v0, t_xy v1, char axis)
+{
+	float	rotation;
+
+	rotation = -v0.y * v1.x + v0.x * v1.y;
+	if (rotation == 0.0f)
+	{
+		if (vec2_check_if_same_point(vec2_add(v0, v1), vec2(0.0f, 0.0f))
+			&& axis == 'y')
+			return (PI);
+		return (0.0f);
+	}
+	else
+		return (rotation);
 }

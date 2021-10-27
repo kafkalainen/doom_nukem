@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:13:37 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 16:20:02 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/11 08:39:24 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	calc_map_properties(t_home *home, t_player *plr)
 	calc_lift_doors(home);
 	calc_unit_normals(home);
 	calc_light_sources(home);
-	calc_button_locations(home);
+	calc_wall_asset_locations(home);
 	calc_entity_locations(home);
 	calc_plr_position(home->sectors[plr->cur_sector], plr);
 	player_place_feet_to_ground(plr, home);

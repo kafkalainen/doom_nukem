@@ -6,7 +6,7 @@
 /*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 11:41:54 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/04 09:29:49 by jnivala          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:37:48 by jnivala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static t_xy	size_logic(t_entity *entity)
 		|| (entity->type >= lamp
 			&& entity->type <= keycard_military))
 		size = vec2(0.5f, 0.5f);
+	else if (entity->type == poster)
+		size = vec2(1.125f, 1.5f);
 	else if (entity->type == skull_skulker || entity->type == drone)
 		size = vec2(1.25f, 1.25f);
 	return (size);
