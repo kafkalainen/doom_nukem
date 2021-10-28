@@ -1,6 +1,9 @@
 # Doom-Nukem
 Final Project in the graphics branch of Hive Helsinki code school. Idea of the projects is to extend wolf3d project, and make it a full blown game, with animations, collisions, sprites, sounds, music and a map editor.
 
+## Final score
+![Finalscore](assets/score.png) 
+
 ## In-game video
 [![Youtube link to in-game video](https://img.youtube.com/vi/GmCefGt9kqA/0.jpg)](https://www.youtube.com/watch?v=GmCefGt9kqA)
 
