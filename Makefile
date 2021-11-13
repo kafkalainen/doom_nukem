@@ -6,7 +6,7 @@
 #    By: jnivala <joonas.nivala@student.hive.fi>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/11/13 11:41:40 by jnivala          ###   ########.fr        #
+#    Updated: 2021/11/13 16:30:31 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -373,7 +373,7 @@ else
 	ABS_DIR = $(shell pwd)
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
 	SDL2_CONFIG =  $(ABS_DIR)/SDL2/bin/sdl2-config
-	LIBS = $(shell $(SDL2_CONFIG) --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
+	LIBS = $(shell $(SDL2_CONFIG) --libs) -L$(SDL_MIXER_NEW)lib -Wl,-rpath,$(SDL_MIXER_NEW)lib -Llibft/
 	CFLAGS = -Wall -Wextra -Werror $(shell $(SDL2_CONFIG) --cflags) -O3
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
