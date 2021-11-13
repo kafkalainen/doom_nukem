@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+         #
+#    By: jnivala <joonas.nivala@student.hive.fi>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/20 14:21:37 by jnivala           #+#    #+#              #
-#    Updated: 2021/10/11 14:24:33 by jnivala          ###   ########.fr        #
+#    Updated: 2021/11/13 11:41:40 by jnivala          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -372,8 +372,9 @@ ifeq ($(TARGET_SYSTEM),Windows)
 else
 	ABS_DIR = $(shell pwd)
 	INCLUDES = $(LINUX_INCLUDE_PATHS)
-	LIBS = $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
-	CFLAGS = -Wall -Wextra -Werror $(shell $(ABS_DIR)/SDL2/bin/sdl2-config --cflags) -O3
+	SDL2_CONFIG =  $(ABS_DIR)/SDL2/bin/sdl2-config
+	LIBS = $(shell $(SDL2_CONFIG) --libs) -L$(SDL_MIXER_NEW)lib -Llibft/
+	CFLAGS = -Wall -Wextra -Werror $(shell $(SDL2_CONFIG) --cflags) -O3
 	LDFLAGS = $(LINUX_LINK_FLAGS)
 	SLASH = /
 	MKDIR := mkdir -p
@@ -446,6 +447,7 @@ ifeq ($(TARGET_SYSTEM), Linux)
 	@if [ ! -d "$(SDL_MIXER_NEW)" ] ; then \
 	mkdir -p $(SDL_MIXER_NEW); \
 	cd $(SDL_MIXER_NEW) && \
+	export SDL2_CONFIG=$(SDL2_CONFIG) && \
 	$(SDL_MIXER_ORIG)./configure --prefix $(SDL_MIXER_NEW) && \
 	make -j$(CORES) && make install; \
 	else \
