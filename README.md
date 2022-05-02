@@ -16,7 +16,7 @@ This project assumes that it is installed to C:\MinGW
 - In Linux environment you will need `gcc` compiler to be installed.
 
 	sudo apt-get update
-	sudo apt-get install build-essential
+	sudo apt-get install build-essential libasound2-dev libpulse-dev
 
 - Run `make` in the root of the project to compile the program.
 - Run maps by piping them to program. ie.
