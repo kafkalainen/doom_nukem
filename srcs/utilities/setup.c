@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnivala <jnivala@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: jvalamak <joonas.valamaki@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:17:33 by jnivala           #+#    #+#             */
-/*   Updated: 2021/10/09 12:22:52 by jnivala          ###   ########.fr       */
+/*   Updated: 2022/09/23 12:34:45 by jvalamak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ static t_home	*init_sdl(t_home *home, t_frame *frame)
 	home->map = NULL;
 	home->win.width = SCREEN_WIDTH;
 	home->win.height = SCREEN_HEIGHT;
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) < 0)
+	if ((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS)) < 0)
+	{
+		ft_putendl(SDL_GetError());
 		error_output_sdl("Fatal: SDL Initalization failed.", home, frame);
+	}
 	home->win.window = SDL_CreateWindow("Doom-Nukem", 100, 100,
 			home->win.width, home->win.height, 0);
 	if (home->win.window == NULL)

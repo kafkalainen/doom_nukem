@@ -409,6 +409,18 @@ all: $(NAME)
 debug: CFLAGS = -Wall -Wextra -Werror -O0 -g -ggdb3
 debug: cleanobj cleanobjdir $(NAME)
 
+#Install dependencies to get full SDL2 support.
+dependencies:
+	sudo apt-get update && \
+	sudo apt-get install build-essential git make autoconf automake libtool \
+	pkg-config cmake ninja-build gnome-desktop-testing libasound2-dev libpulse-dev \
+	libaudio-dev libjack-dev libsndio-dev libsamplerate0-dev libx11-dev libxext-dev \
+	libxrandr-dev libxcursor-dev libxfixes-dev libxi-dev libxss-dev libwayland-dev \
+	libxkbcommon-dev libdrm-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev \
+	libegl1-mesa-dev libdbus-1-dev libibus-1.0-dev libudev-dev fcitx-libs-dev \
+	libpipewire-0.3-dev libdecor-0-dev
+
+# Notice: Wayland shared has been only temporarily disabled.
 $(SDL_NEW):
 ifeq ($(TARGET_SYSTEM), Linux)
 	@if [ ! $(shell command -v wget 2> /dev/null) ]; then \
@@ -423,7 +435,7 @@ ifeq ($(TARGET_SYSTEM), Linux)
 	@if [ ! -d "$(SDL_NEW)" ] ; then \
 	mkdir -p $(SDL_NEW); \
 	cd $(SDL_NEW) && \
-	$(SDL_ORIG)./configure --prefix=$(SDL_NEW) && \
+	$(SDL_ORIG)./configure --disable-wayland-shared --prefix=$(SDL_NEW) && \
 	make -j$(CORES) && make install ; \
 	else    \
 	make -j$(CORES) -C $(SDL_NEW) ; \
